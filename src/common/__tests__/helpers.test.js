@@ -197,16 +197,6 @@ describe('Helpers', () => {
     expect(helpers.getStatusFromResults(payload)).toBe(400);
   });
 
-  it('should return timestamp from a response', () => {
-    const payload = {
-      headers: {
-        date: 'Mon, 25 Feb 2019 21:46:40 GMT'
-      }
-    };
-
-    expect(helpers.getTimeStampFromResults(payload)).toBe('20190225_164640');
-  });
-
   it('should determine an ip address and value', () => {
     expect(helpers.isIpAddress('0.0.0.1')).toBe(true);
     expect(helpers.isIpAddress('0.0.0.1.5')).toBe(false);

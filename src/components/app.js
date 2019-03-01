@@ -15,7 +15,7 @@ import ToastNotificationsList from './toastNotificationsList/toastNotificationsL
 import ConfirmationModal from './confirmationModal/confirmationModal';
 import MastheadOptions from './mastheadOptions/mastheadOptions';
 import productTitle from '../styles/images/title.svg';
-import rhProductTitle from '../styles/images/brand/title.svg';
+import rhProductTitle from '../styles/images/title-brand.svg';
 
 class App extends React.Component {
   constructor() {

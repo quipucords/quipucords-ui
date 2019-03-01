@@ -1,48 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`0 message 1`] = `"ERROR"`;
+exports[`Helpers should handle an undefined http status: 0 message 1`] = `"ERROR"`;
 
-exports[`200 message 1`] = `"Request success XXX"`;
+exports[`Helpers should handle an undefined http status: undefined message 1`] = `"ERROR"`;
 
-exports[`399 message 1`] = `"Request success XXX"`;
+exports[`Helpers should handle basic object updates: setPropIfDefined 1`] = `
+Object {
+  "lorem": "ipsum",
+}
+`;
 
-exports[`400 error message 1`] = `"Lorem ipsum dolor sit"`;
+exports[`Helpers should handle basic object updates: setPropIfDefined undefined 1`] = `Object {}`;
 
-exports[`400 fallback again error message 1`] = `"Request failed with status code XXX"`;
+exports[`Helpers should handle basic object updates: setPropIfTruthy bool 1`] = `
+Object {
+  "lorem": true,
+}
+`;
 
-exports[`400 fallback error message 1`] = `""`;
+exports[`Helpers should handle basic object updates: setPropIfTruthy number 1`] = `Object {}`;
 
-exports[`400 fallback yet again error message 1`] = `"XXX Request failed"`;
+exports[`Helpers should handle basic object updates: setPropIfTruthy string 1`] = `
+Object {
+  "lorem": true,
+}
+`;
 
-exports[`400 filtered blank message 1`] = `""`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 error message 1`] = `"Lorem ipsum dolor sit"`;
 
-exports[`400 filtered message 1`] = `"Lorem ipsum dolor sit"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 fallback again error message 1`] = `"Request failed with status code XXX"`;
 
-exports[`400 message 1`] = `"Request success XXX"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 fallback error message 1`] = `""`;
 
-exports[`500 level error message 1`] = `"500 Lorem ipsum dolor sit"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 fallback yet again error message 1`] = `"XXX Request failed"`;
 
-exports[`500 level fallback again error message 1`] = `"500 Request failed with status code XXX"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 filtered blank message 1`] = `""`;
 
-exports[`500 level fallback error message 1`] = `"500 "`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 filtered message 1`] = `"Lorem ipsum dolor sit"`;
 
-exports[`500 level fallback yet again error message 1`] = `"500 XXX Request failed"`;
+exports[`Helpers should handle http status 500 level error messages from response: 500 level error message 1`] = `"500 Lorem ipsum dolor sit"`;
 
-exports[`createViewQueryObject 1`] = `
+exports[`Helpers should handle http status 500 level error messages from response: 500 level fallback again error message 1`] = `"500 Request failed with status code XXX"`;
+
+exports[`Helpers should handle http status 500 level error messages from response: 500 level fallback error message 1`] = `"500 "`;
+
+exports[`Helpers should handle http status 500 level error messages from response: 500 level fallback yet again error message 1`] = `"500 XXX Request failed"`;
+
+exports[`Helpers should handle http status less than 400 message from response: 200 message 1`] = `"Request success XXX"`;
+
+exports[`Helpers should handle http status less than 400 message from response: 399 message 1`] = `"Request success XXX"`;
+
+exports[`Helpers should handle http status less than 400 message from response: 400 message 1`] = `"Request success XXX"`;
+
+exports[`Helpers should handle view related selectors and props updates: createViewQueryObject 1`] = `
 Object {
   "page": 1,
   "page_size": 10,
 }
 `;
 
-exports[`dont reset state object 1`] = `
-Object {
-  "ipsum": false,
-  "lorem": true,
-}
-`;
-
-exports[`helpers 1`] = `
+exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
   "FULFILLED_ACTION": [Function],
@@ -70,14 +87,7 @@ Object {
 }
 `;
 
-exports[`reset state object 1`] = `
-Object {
-  "ipsum": true,
-  "lorem": true,
-}
-`;
-
-exports[`scanStatusIcon 1`] = `
+exports[`Helpers should support icon references: scanStatusIcon 1`] = `
 Object {
   "classNames": Array [],
   "name": "ok",
@@ -85,40 +95,30 @@ Object {
 }
 `;
 
-exports[`scanTypeIcon 1`] = `
+exports[`Helpers should support icon references: scanTypeIcon 1`] = `
 Object {
   "name": "connected",
   "type": "pf",
 }
 `;
 
-exports[`setPropIfDefined 1`] = `
-Object {
-  "lorem": "ipsum",
-}
-`;
-
-exports[`setPropIfDefined undefined 1`] = `Object {}`;
-
-exports[`setPropIfTruthy bool 1`] = `
-Object {
-  "lorem": true,
-}
-`;
-
-exports[`setPropIfTruthy number 1`] = `Object {}`;
-
-exports[`setPropIfTruthy string 1`] = `
-Object {
-  "lorem": true,
-}
-`;
-
-exports[`sourceTypeIcon 1`] = `
+exports[`Helpers should support icon references: sourceTypeIcon 1`] = `
 Object {
   "name": "vcenter",
   "type": "pf",
 }
 `;
 
-exports[`undefined message 1`] = `"ERROR"`;
+exports[`Helpers should update a state object: dont reset state object 1`] = `
+Object {
+  "ipsum": false,
+  "lorem": true,
+}
+`;
+
+exports[`Helpers should update a state object: reset state object 1`] = `
+Object {
+  "ipsum": true,
+  "lorem": true,
+}
+`;

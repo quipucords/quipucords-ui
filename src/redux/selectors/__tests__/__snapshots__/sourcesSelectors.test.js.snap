@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`selectors 1`] = `
-Object {
-  "makeSourceDetail": [Function],
-  "sourceDetail": [Function],
-}
-`;
-
-exports[`sourceDetail 1`] = `
+exports[`SourcesSelectors Should map a source to consumable props: sourceDetail 1`] = `
 Object {
   "credentials": Array [
     15,
@@ -28,19 +21,7 @@ Object {
 }
 `;
 
-exports[`sourceDetail properties undefined 1`] = `
-Object {
-  "credentials": Array [],
-}
-`;
-
-exports[`sourceDetail undefined 1`] = `
-Object {
-  "credentials": Array [],
-}
-`;
-
-exports[`sourceDetail updated 1`] = `
+exports[`SourcesSelectors Should map a source to consumable props: sourceDetail updated 1`] = `
 Object {
   "credentials": Array [
     10,
@@ -58,5 +39,24 @@ Object {
   "optionSslProtocol": false,
   "port": 22,
   "type": "network",
+}
+`;
+
+exports[`SourcesSelectors Should minimally map an undefined source or properties: sourceDetail properties undefined 1`] = `
+Object {
+  "credentials": Array [],
+}
+`;
+
+exports[`SourcesSelectors Should minimally map an undefined source or properties: sourceDetail undefined 1`] = `
+Object {
+  "credentials": Array [],
+}
+`;
+
+exports[`SourcesSelectors Should return specific selectors: selectors 1`] = `
+Object {
+  "makeSourceDetail": [Function],
+  "sourceDetail": [Function],
 }
 `;

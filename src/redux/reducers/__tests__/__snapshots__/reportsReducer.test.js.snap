@@ -1,6 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fulfilled types GET_MERGE_REPORT 1`] = `
+exports[`ReportsReducer should handle all defined error types: rejected types GET_MERGE_REPORT 1`] = `
+Object {
+  "result": Object {
+    "merge": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "pending": false,
+    },
+    "report": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "reports": Array [],
+    },
+  },
+  "type": "GET_MERGE_REPORT_REJECTED",
+}
+`;
+
+exports[`ReportsReducer should handle all defined error types: rejected types GET_REPORT 1`] = `
+Object {
+  "result": Object {
+    "merge": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+    "report": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "pending": false,
+      "reports": Array [],
+    },
+  },
+  "type": "GET_REPORT_REJECTED",
+}
+`;
+
+exports[`ReportsReducer should handle all defined fulfilled types: fulfilled types GET_MERGE_REPORT 1`] = `
 Object {
   "result": Object {
     "merge": Object {
@@ -21,7 +63,7 @@ Object {
 }
 `;
 
-exports[`fulfilled types GET_REPORT 1`] = `
+exports[`ReportsReducer should handle all defined fulfilled types: fulfilled types GET_REPORT 1`] = `
 Object {
   "result": Object {
     "merge": Object {
@@ -44,7 +86,7 @@ Object {
 }
 `;
 
-exports[`pending types GET_MERGE_REPORT 1`] = `
+exports[`ReportsReducer should handle all defined pending types: pending types GET_MERGE_REPORT 1`] = `
 Object {
   "result": Object {
     "merge": Object {
@@ -65,7 +107,7 @@ Object {
 }
 `;
 
-exports[`pending types GET_REPORT 1`] = `
+exports[`ReportsReducer should handle all defined pending types: pending types GET_REPORT 1`] = `
 Object {
   "result": Object {
     "merge": Object {
@@ -83,47 +125,5 @@ Object {
     },
   },
   "type": "GET_REPORT_PENDING",
-}
-`;
-
-exports[`rejected types GET_MERGE_REPORT 1`] = `
-Object {
-  "result": Object {
-    "merge": Object {
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "pending": false,
-    },
-    "report": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "reports": Array [],
-    },
-  },
-  "type": "GET_MERGE_REPORT_REJECTED",
-}
-`;
-
-exports[`rejected types GET_REPORT 1`] = `
-Object {
-  "result": Object {
-    "merge": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-    },
-    "report": Object {
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "pending": false,
-      "reports": Array [],
-    },
-  },
-  "type": "GET_REPORT_REJECTED",
 }
 `;

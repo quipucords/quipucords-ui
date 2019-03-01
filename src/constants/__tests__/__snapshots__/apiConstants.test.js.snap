@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`all exports 1`] = `
+exports[`ApiTypes Should have specific API properties: all exports 1`] = `
 Object {
   "API_RESPONSE_CREDENTIALS_COUNT": "count",
   "API_RESPONSE_CREDENTIALS_RESULTS": "results",
@@ -108,7 +108,7 @@ Object {
 }
 `;
 
-exports[`default export 1`] = `
+exports[`ApiTypes Should have specific API properties: default export 1`] = `
 Object {
   "API_RESPONSE_CREDENTIALS_COUNT": "count",
   "API_RESPONSE_CREDENTIALS_RESULTS": "results",

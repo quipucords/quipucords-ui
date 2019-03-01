@@ -1,34 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic formfield 1`] = `
-<div
-  class="form-group"
->
-  <label
-    class="col-sm-3 control-label"
-    for="test"
-  />
-  <div
-    class="col-sm-9"
-  >
-    <input
-      id="test"
-      readonly=""
-      type="text"
-      value=""
-    />
-  </div>
-</div>
-`;
-
-exports[`basic label 1`] = `
-<label
-  class="col-sm-3 control-label"
-  for="test"
-/>
-`;
-
-exports[`boolean error message 1`] = `
+exports[`FormField Component should handle multiple error message types: boolean error message 1`] = `
 <div
   class="form-group has-error"
 >
@@ -54,7 +26,7 @@ exports[`boolean error message 1`] = `
 </div>
 `;
 
-exports[`node error message 1`] = `
+exports[`FormField Component should handle multiple error message types: node error message 1`] = `
 <div
   class="form-group has-error"
 >
@@ -82,7 +54,7 @@ exports[`node error message 1`] = `
 </div>
 `;
 
-exports[`string error message 1`] = `
+exports[`FormField Component should handle multiple error message types: string error message 1`] = `
 <div
   class="form-group has-error"
 >
@@ -106,4 +78,32 @@ exports[`string error message 1`] = `
     </span>
   </div>
 </div>
+`;
+
+exports[`FormField Component should render a basic component: basic formfield 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    class="col-sm-3 control-label"
+    for="test"
+  />
+  <div
+    class="col-sm-9"
+  >
+    <input
+      id="test"
+      readonly=""
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`FormField Component should render a basic component: basic label 1`] = `
+<label
+  class="col-sm-3 control-label"
+  for="test"
+/>
 `;

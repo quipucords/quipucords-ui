@@ -1,344 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`network 1`] = `
-<form
-  class="form-horizontal"
->
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Name
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <input
-        class="form-control"
-        id="generatedid-"
-        name="name"
-        placeholder="Enter a name for the Network source"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Search addresses
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <textarea
-        class="form-control"
-        id="generatedid-"
-        name="hostsMultiple"
-        placeholder="Enter values separated by commas"
-        rows="5"
-      />
-      <span
-        class="help-block"
-      >
-        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
-      </span>
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Port
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <input
-        class="form-control"
-        id="generatedid-"
-        maxlength="5"
-        name="port"
-        placeholder="Default port is 22"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Credentials
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <span
-        class="input-group"
-      >
-        <div
-          class="quipucords-dropdownselect  dropdown disabled btn-group"
-          name="credentials"
-        >
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            class="form-control dropdown-toggle btn btn-default"
-            disabled=""
-            id="credentials"
-            role="button"
-            type="button"
-          >
-            <span>
-              Add one or more credentials
-            </span>
-             
-            <span
-              class="caret"
-            />
-          </button>
-          <ul
-            aria-labelledby="credentials"
-            class="dropdown-menu"
-            role="menu"
-          />
-        </div>
-        <span
-          class="input-group-btn"
-        >
-          <button
-            class="form-control btn btn-default"
-            title="Add a credential"
-            type="button"
-          >
-            <span
-              class="sr-only"
-            >
-              Add
-            </span>
-            <span
-              aria-hidden="true"
-              class="fa fa-plus"
-            />
-          </button>
-        </span>
-      </span>
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    />
-    <div
-      class="col-sm-9"
-    >
-      <label
-        class="checkbox-inline"
-        title=""
-      >
-        <input
-          name="optionParamiko"
-          type="checkbox"
-        />
-        Connect using Paramiko instead of Open 
-        <abbr
-          title="Secure Shell"
-        >
-          SSH
-        </abbr>
-      </label>
-    </div>
-  </div>
-</form>
-`;
-
-exports[`non-connected 1`] = `
-<form
-  class="form-horizontal"
->
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Name
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <input
-        class="form-control"
-        id="generatedid-"
-        name="name"
-        placeholder="Enter a name for the Network source"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Search addresses
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <textarea
-        class="form-control"
-        id="generatedid-"
-        name="hostsMultiple"
-        placeholder="Enter values separated by commas"
-        rows="5"
-      />
-      <span
-        class="help-block"
-      >
-        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
-      </span>
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Port
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <input
-        class="form-control"
-        id="generatedid-"
-        maxlength="5"
-        name="port"
-        placeholder="Default port is 22"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Credentials
-    </label>
-    <div
-      class="col-sm-9"
-    >
-      <span
-        class="input-group"
-      >
-        <div
-          class="quipucords-dropdownselect  dropdown disabled btn-group"
-          name="credentials"
-        >
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            class="form-control dropdown-toggle btn btn-default"
-            disabled=""
-            id="credentials"
-            role="button"
-            type="button"
-          >
-            <span>
-              Add one or more credentials
-            </span>
-             
-            <span
-              class="caret"
-            />
-          </button>
-          <ul
-            aria-labelledby="credentials"
-            class="dropdown-menu"
-            role="menu"
-          />
-        </div>
-        <span
-          class="input-group-btn"
-        >
-          <button
-            class="form-control btn btn-default"
-            title="Add a credential"
-            type="button"
-          >
-            <span
-              class="sr-only"
-            >
-              Add
-            </span>
-            <span
-              aria-hidden="true"
-              class="fa fa-plus"
-            />
-          </button>
-        </span>
-      </span>
-    </div>
-  </div>
-  <div
-    class="form-group"
-  >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    />
-    <div
-      class="col-sm-9"
-    >
-      <label
-        class="checkbox-inline"
-        title=""
-      >
-        <input
-          name="optionParamiko"
-          type="checkbox"
-        />
-        Connect using Paramiko instead of Open 
-        <abbr
-          title="Secure Shell"
-        >
-          SSH
-        </abbr>
-      </label>
-    </div>
-  </div>
-</form>
-`;
-
-exports[`step invalid 1`] = `
+exports[`AddSourceWizardStepTwo Component should correctly validate and submit data for sources: step invalid 1`] = `
 Object {
   "credentials": true,
   "hosts": true,
@@ -347,7 +9,7 @@ Object {
 }
 `;
 
-exports[`step valid 1`] = `
+exports[`AddSourceWizardStepTwo Component should correctly validate and submit data for sources: step valid 1`] = `
 Object {
   "credentials": false,
   "hosts": false,
@@ -356,7 +18,176 @@ Object {
 }
 `;
 
-exports[`vcenter 1`] = `
+exports[`AddSourceWizardStepTwo Component should display different forms for source types: network 1`] = `
+<form
+  class="form-horizontal"
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Name
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <input
+        class="form-control"
+        id="generatedid-"
+        name="name"
+        placeholder="Enter a name for the Network source"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Search addresses
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <textarea
+        class="form-control"
+        id="generatedid-"
+        name="hostsMultiple"
+        placeholder="Enter values separated by commas"
+        rows="5"
+      />
+      <span
+        class="help-block"
+      >
+        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
+      </span>
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Port
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <input
+        class="form-control"
+        id="generatedid-"
+        maxlength="5"
+        name="port"
+        placeholder="Default port is 22"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Credentials
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <span
+        class="input-group"
+      >
+        <div
+          class="quipucords-dropdownselect  dropdown disabled btn-group"
+          name="credentials"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="form-control dropdown-toggle btn btn-default"
+            disabled=""
+            id="credentials"
+            role="button"
+            type="button"
+          >
+            <span>
+              Add one or more credentials
+            </span>
+             
+            <span
+              class="caret"
+            />
+          </button>
+          <ul
+            aria-labelledby="credentials"
+            class="dropdown-menu"
+            role="menu"
+          />
+        </div>
+        <span
+          class="input-group-btn"
+        >
+          <button
+            class="form-control btn btn-default"
+            title="Add a credential"
+            type="button"
+          >
+            <span
+              class="sr-only"
+            >
+              Add
+            </span>
+            <span
+              aria-hidden="true"
+              class="fa fa-plus"
+            />
+          </button>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    />
+    <div
+      class="col-sm-9"
+    >
+      <label
+        class="checkbox-inline"
+        title=""
+      >
+        <input
+          name="optionParamiko"
+          type="checkbox"
+        />
+        Connect using Paramiko instead of Open 
+        <abbr
+          title="Secure Shell"
+        >
+          SSH
+        </abbr>
+      </label>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`AddSourceWizardStepTwo Component should display different forms for source types: vcenter 1`] = `
 <form
   class="form-horizontal"
 >
@@ -588,6 +419,175 @@ exports[`vcenter 1`] = `
           type="checkbox"
         />
         Verify SSL Certificate
+      </label>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`AddSourceWizardStepTwo Component should render a non-connected component: non-connected 1`] = `
+<form
+  class="form-horizontal"
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Name
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <input
+        class="form-control"
+        id="generatedid-"
+        name="name"
+        placeholder="Enter a name for the Network source"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Search addresses
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <textarea
+        class="form-control"
+        id="generatedid-"
+        name="hostsMultiple"
+        placeholder="Enter values separated by commas"
+        rows="5"
+      />
+      <span
+        class="help-block"
+      >
+        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
+      </span>
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Port
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <input
+        class="form-control"
+        id="generatedid-"
+        maxlength="5"
+        name="port"
+        placeholder="Default port is 22"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    >
+      Credentials
+    </label>
+    <div
+      class="col-sm-9"
+    >
+      <span
+        class="input-group"
+      >
+        <div
+          class="quipucords-dropdownselect  dropdown disabled btn-group"
+          name="credentials"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="form-control dropdown-toggle btn btn-default"
+            disabled=""
+            id="credentials"
+            role="button"
+            type="button"
+          >
+            <span>
+              Add one or more credentials
+            </span>
+             
+            <span
+              class="caret"
+            />
+          </button>
+          <ul
+            aria-labelledby="credentials"
+            class="dropdown-menu"
+            role="menu"
+          />
+        </div>
+        <span
+          class="input-group-btn"
+        >
+          <button
+            class="form-control btn btn-default"
+            title="Add a credential"
+            type="button"
+          >
+            <span
+              class="sr-only"
+            >
+              Add
+            </span>
+            <span
+              aria-hidden="true"
+              class="fa fa-plus"
+            />
+          </button>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
+    />
+    <div
+      class="col-sm-9"
+    >
+      <label
+        class="checkbox-inline"
+        title=""
+      >
+        <input
+          name="optionParamiko"
+          type="checkbox"
+        />
+        Connect using Paramiko instead of Open 
+        <abbr
+          title="Secure Shell"
+        >
+          SSH
+        </abbr>
       </label>
     </div>
   </div>

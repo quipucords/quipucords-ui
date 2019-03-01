@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`connected 1`] = `
+exports[`AddSourceWizardStepOne Component should render a connected component: connected 1`] = `
 <FormState
   onReset={[Function]}
   onSubmit={[Function]}
@@ -20,7 +20,7 @@ exports[`connected 1`] = `
 </FormState>
 `;
 
-exports[`non-connected 1`] = `
+exports[`AddSourceWizardStepOne Component should render a non-connected component: non-connected 1`] = `
 <form
   class="form-horizontal"
 >

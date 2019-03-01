@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`all exports 1`] = `
+exports[`DictionaryTypes Should have specific Dictionary properties: all exports 1`] = `
 Object {
   "authDictionary": Object {
     "sshKey": "SSH Key",
@@ -68,7 +68,7 @@ Object {
 }
 `;
 
-exports[`default export 1`] = `
+exports[`DictionaryTypes Should have specific Dictionary properties: default export 1`] = `
 Object {
   "SSLv23": "SSLv23",
   "TLSv1": "TLSv1",

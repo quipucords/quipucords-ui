@@ -1,150 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fulfilled types DELETE_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": true,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "pending": false,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "DELETE_SOURCE_FULFILLED",
-}
-`;
-
-exports[`fulfilled types DELETES_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": true,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "pending": false,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "DELETES_SOURCE_FULFILLED",
-}
-`;
-
-exports[`fulfilled types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": false,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "GET_SOURCES_FULFILLED",
-}
-`;
-
-exports[`pending types DELETE_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": true,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": true,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "DELETE_SOURCE_PENDING",
-}
-`;
-
-exports[`pending types DELETES_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": true,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": true,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "DELETES_SOURCE_PENDING",
-}
-`;
-
-exports[`pending types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "delete": false,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-      "sourceId": "",
-    },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": true,
-      "sources": Array [],
-      "updateSources": false,
-    },
-  },
-  "type": "GET_SOURCES_PENDING",
-}
-`;
-
-exports[`rejected types DELETE_SOURCE 1`] = `
+exports[`SourcesReducer should handle all defined error types: rejected types DELETE_SOURCE 1`] = `
 Object {
   "result": Object {
     "update": Object {
@@ -168,7 +24,7 @@ Object {
 }
 `;
 
-exports[`rejected types DELETES_SOURCE 1`] = `
+exports[`SourcesReducer should handle all defined error types: rejected types DELETES_SOURCE 1`] = `
 Object {
   "result": Object {
     "update": Object {
@@ -192,7 +48,7 @@ Object {
 }
 `;
 
-exports[`rejected types GET_SOURCES 1`] = `
+exports[`SourcesReducer should handle all defined error types: rejected types GET_SOURCES 1`] = `
 Object {
   "result": Object {
     "update": Object {
@@ -213,5 +69,149 @@ Object {
     },
   },
   "type": "GET_SOURCES_REJECTED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": true,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "pending": false,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "DELETE_SOURCE_FULFILLED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types DELETES_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": true,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "pending": false,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "DELETES_SOURCE_FULFILLED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types GET_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": false,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "pending": false,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "GET_SOURCES_FULFILLED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined pending types: pending types DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": true,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": true,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "DELETE_SOURCE_PENDING",
+}
+`;
+
+exports[`SourcesReducer should handle all defined pending types: pending types DELETES_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": true,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": true,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "DELETES_SOURCE_PENDING",
+}
+`;
+
+exports[`SourcesReducer should handle all defined pending types: pending types GET_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "delete": false,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "sourceId": "",
+    },
+    "view": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": true,
+      "sources": Array [],
+      "updateSources": false,
+    },
+  },
+  "type": "GET_SOURCES_PENDING",
 }
 `;

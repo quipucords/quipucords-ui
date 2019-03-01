@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import 'rcue/dist/css/rcue.css';
-import 'rcue/dist/css/rcue-additions.css';
-import './styles/css/entitlements.css';
+import 'patternfly/dist/css/rcue.css';
+import 'patternfly/dist/css/rcue-additions.css';
+import './styles/.css/index.css'; // eslint-disable-line import/no-unresolved
 
 import App from './components/app';
 import { baseName } from './routes';

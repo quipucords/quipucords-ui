@@ -1,6 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic render 1`] = `
+exports[`FormState Component should clone returned values to avoid mutation by consumer: not mutated 1`] = `
+Object {
+  "lorem": "ipsum",
+}
+`;
+
+exports[`FormState Component should do a basic validation check: basic validation 1`] = `
+Object {
+  "lorem": "required",
+}
+`;
+
+exports[`FormState Component should do a basic validation check: initial errors 1`] = `Object {}`;
+
+exports[`FormState Component should handle custom events: multiple custom events 1`] = `
+Object {
+  "dolor": "sit",
+  "lorem": "woot again",
+}
+`;
+
+exports[`FormState Component should handle custom events: single custom event 1`] = `
+Object {
+  "dolor": "",
+  "lorem": "woot",
+}
+`;
+
+exports[`FormState Component should render a basic component: basic render 1`] = `
 <form>
   <label>
     Lorem
@@ -14,15 +42,7 @@ exports[`basic render 1`] = `
 </form>
 `;
 
-exports[`basic validation 1`] = `
-Object {
-  "lorem": "required",
-}
-`;
-
-exports[`initial errors 1`] = `Object {}`;
-
-exports[`initial props 1`] = `
+exports[`FormState Component should render a basic component: initial props 1`] = `
 Object {
   "children": [Function],
   "onReset": [Function],
@@ -39,7 +59,7 @@ Object {
 }
 `;
 
-exports[`initial state 1`] = `
+exports[`FormState Component should render a basic component: initial state 1`] = `
 Object {
   "isSubmitting": false,
   "isUpdating": false,
@@ -49,20 +69,7 @@ Object {
 }
 `;
 
-exports[`multiple custom events 1`] = `
-Object {
-  "dolor": "sit",
-  "lorem": "woot again",
-}
-`;
-
-exports[`not mutated 1`] = `
-Object {
-  "lorem": "ipsum",
-}
-`;
-
-exports[`onevent 1`] = `
+exports[`FormState Component should update handle reset, changes, and submit events while updating state: onevent 1`] = `
 Object {
   "isSubmitting": false,
   "isUpdating": false,
@@ -72,13 +79,13 @@ Object {
 }
 `;
 
-exports[`onevent values updated 1`] = `
+exports[`FormState Component should update handle reset, changes, and submit events while updating state: onevent values updated 1`] = `
 Object {
   "lorem": "dolor",
 }
 `;
 
-exports[`onreset 1`] = `
+exports[`FormState Component should update handle reset, changes, and submit events while updating state: onreset 1`] = `
 Object {
   "isSubmitting": false,
   "isUpdating": false,
@@ -88,7 +95,7 @@ Object {
 }
 `;
 
-exports[`onsubmit 1`] = `
+exports[`FormState Component should update handle reset, changes, and submit events while updating state: onsubmit 1`] = `
 Object {
   "isSubmitting": false,
   "isUpdating": false,
@@ -98,15 +105,8 @@ Object {
 }
 `;
 
-exports[`reset values updated 1`] = `
+exports[`FormState Component should update handle reset, changes, and submit events while updating state: reset values updated 1`] = `
 Object {
   "lorem": "ipsum",
-}
-`;
-
-exports[`single custom event 1`] = `
-Object {
-  "dolor": "",
-  "lorem": "woot",
 }
 `;

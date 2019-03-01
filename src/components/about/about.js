@@ -6,8 +6,8 @@ import _ from 'lodash';
 import helpers from '../../common/helpers';
 import logo from '../../styles/images/logo.svg';
 import productTitle from '../../styles/images/title.svg';
-import rhLogo from '../../styles/images/brand/logo.svg';
-import rhProductTitle from '../../styles/images/brand/title.svg';
+import rhLogo from '../../styles/images/logo-brand.svg';
+import rhProductTitle from '../../styles/images/title-brand.svg';
 
 const About = ({ user, status, shown, onClose }) => {
   const versionText = `${_.get(status, 'api_version', 'unknown')} (Build: ${_.get(status, 'build', 'unknown')})`;

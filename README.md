@@ -1,6 +1,7 @@
 # Quipucords UI
+[![Build Status](https://travis-ci.org/quipucords/quipucords-ui.svg?branch=master)](https://travis-ci.org/quipucords/quipucords-ui)
+[![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
 [![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/master/LICENSE)
-[![codecov](https://codecov.io/gl/quipucords/quipucords-ui/branch/master/graph/badge.svg)](https://codecov.io/gl/quipucords/quipucords-ui)
 
 Web user interface for [Quipucords](https://github.com/quipucords/quipucords), based on [Patternfly <img src="https://www.patternfly.org/assets/img/logo.svg" height="30" />](https://www.patternfly.org/)
 

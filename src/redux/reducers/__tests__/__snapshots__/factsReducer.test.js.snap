@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fulfilled types ADD_FACTS 1`] = `
+exports[`factsReducer should handle all defined error types: rejected types ADD_FACTS 1`] = `
+Object {
+  "result": Object {
+    "update": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "facts": Object {},
+      "fulfilled": false,
+      "pending": false,
+    },
+  },
+  "type": "ADD_FACTS_REJECTED",
+}
+`;
+
+exports[`factsReducer should handle all defined fulfilled types: fulfilled types ADD_FACTS 1`] = `
 Object {
   "result": Object {
     "update": Object {
@@ -17,7 +32,7 @@ Object {
 }
 `;
 
-exports[`pending types ADD_FACTS 1`] = `
+exports[`factsReducer should handle all defined pending types: pending types ADD_FACTS 1`] = `
 Object {
   "result": Object {
     "update": Object {
@@ -29,20 +44,5 @@ Object {
     },
   },
   "type": "ADD_FACTS_PENDING",
-}
-`;
-
-exports[`rejected types ADD_FACTS 1`] = `
-Object {
-  "result": Object {
-    "update": Object {
-      "error": true,
-      "errorMessage": "ERROR",
-      "facts": Object {},
-      "fulfilled": false,
-      "pending": false,
-    },
-  },
-  "type": "ADD_FACTS_REJECTED",
 }
 `;

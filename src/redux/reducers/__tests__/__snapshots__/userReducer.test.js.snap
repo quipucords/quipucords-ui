@@ -1,6 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fulfilled types USER_AUTH 1`] = `
+exports[`userReducer should handle all defined error types: rejected types USER_AUTH 1`] = `
+Object {
+  "result": Object {
+    "session": Object {
+      "authToken": null,
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "loggedIn": false,
+      "pending": false,
+      "wasLoggedIn": false,
+    },
+    "user": Object {
+      "currentUser": Object {},
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+  },
+  "type": "USER_AUTH_REJECTED",
+}
+`;
+
+exports[`userReducer should handle all defined error types: rejected types USER_INFO 1`] = `
+Object {
+  "result": Object {
+    "session": Object {
+      "authToken": null,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "loggedIn": false,
+      "pending": false,
+      "wasLoggedIn": false,
+    },
+    "user": Object {
+      "currentUser": Object {},
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "pending": false,
+    },
+  },
+  "type": "USER_INFO_REJECTED",
+}
+`;
+
+exports[`userReducer should handle all defined error types: rejected types USER_LOGOUT 1`] = `
+Object {
+  "result": Object {
+    "session": Object {
+      "authToken": null,
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "loggedIn": false,
+      "pending": false,
+      "wasLoggedIn": false,
+    },
+    "user": Object {
+      "currentUser": Object {},
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+  },
+  "type": "USER_LOGOUT_REJECTED",
+}
+`;
+
+exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_AUTH 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -24,7 +96,7 @@ Object {
 }
 `;
 
-exports[`fulfilled types USER_INFO 1`] = `
+exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_INFO 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -50,7 +122,7 @@ Object {
 }
 `;
 
-exports[`fulfilled types USER_LOGOUT 1`] = `
+exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_LOGOUT 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -74,7 +146,7 @@ Object {
 }
 `;
 
-exports[`pending types USER_AUTH 1`] = `
+exports[`userReducer should handle all defined pending types: pending types USER_AUTH 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -98,7 +170,7 @@ Object {
 }
 `;
 
-exports[`pending types USER_INFO 1`] = `
+exports[`userReducer should handle all defined pending types: pending types USER_INFO 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -122,7 +194,7 @@ Object {
 }
 `;
 
-exports[`pending types USER_LOGOUT 1`] = `
+exports[`userReducer should handle all defined pending types: pending types USER_LOGOUT 1`] = `
 Object {
   "result": Object {
     "session": Object {
@@ -143,77 +215,5 @@ Object {
     },
   },
   "type": "USER_LOGOUT_PENDING",
-}
-`;
-
-exports[`rejected types USER_AUTH 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
-      "authToken": null,
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "loggedIn": false,
-      "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-    },
-  },
-  "type": "USER_AUTH_REJECTED",
-}
-`;
-
-exports[`rejected types USER_INFO 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
-      "authToken": null,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "loggedIn": false,
-      "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "pending": false,
-    },
-  },
-  "type": "USER_INFO_REJECTED",
-}
-`;
-
-exports[`rejected types USER_LOGOUT 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
-      "authToken": null,
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "loggedIn": false,
-      "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
-    },
-  },
-  "type": "USER_LOGOUT_REJECTED",
 }
 `;

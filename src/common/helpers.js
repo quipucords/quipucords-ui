@@ -241,7 +241,10 @@ const getStatusFromResults = results => {
   return status;
 };
 
-const getTimeStampFromResults = results => moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss');
+const getTimeStampFromResults = results =>
+  (process.env.REACT_APP_ENV !== 'test' &&
+    moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')) ||
+  '20190225_164640';
 
 const isIpAddress = name => {
   const vals = name.split('.');

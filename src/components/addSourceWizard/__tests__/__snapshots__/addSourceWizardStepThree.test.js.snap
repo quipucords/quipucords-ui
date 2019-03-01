@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`connected 1`] = `
+exports[`AccountWizardStepResults Component should render a connected component with error: connected 1`] = `
 <AddSourceWizardStepThree
   add={false}
   credentials={Array []}
@@ -13,7 +13,7 @@ exports[`connected 1`] = `
 />
 `;
 
-exports[`error created 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with error: error created 1`] = `
 <AddSourceWizardStepThree
   add={true}
   error={true}
@@ -59,7 +59,7 @@ exports[`error created 1`] = `
 </AddSourceWizardStepThree>
 `;
 
-exports[`error updated 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with error: error updated 1`] = `
 <AddSourceWizardStepThree
   add={false}
   error={true}
@@ -105,7 +105,7 @@ exports[`error updated 1`] = `
 </AddSourceWizardStepThree>
 `;
 
-exports[`fulfilled created 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with fulfilled: fulfilled created 1`] = `
 <AddSourceWizardStepThree
   add={true}
   error={false}
@@ -148,7 +148,7 @@ exports[`fulfilled created 1`] = `
 </AddSourceWizardStepThree>
 `;
 
-exports[`fulfilled updated 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with fulfilled: fulfilled updated 1`] = `
 <AddSourceWizardStepThree
   add={false}
   error={false}
@@ -191,7 +191,7 @@ exports[`fulfilled updated 1`] = `
 </AddSourceWizardStepThree>
 `;
 
-exports[`pending created 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with pending: pending created 1`] = `
 <AddSourceWizardStepThree
   add={true}
   error={false}
@@ -234,7 +234,7 @@ exports[`pending created 1`] = `
 </AddSourceWizardStepThree>
 `;
 
-exports[`pending updated 1`] = `
+exports[`AccountWizardStepResults Component should render a wizard results step with pending: pending updated 1`] = `
 <AddSourceWizardStepThree
   add={false}
   error={false}

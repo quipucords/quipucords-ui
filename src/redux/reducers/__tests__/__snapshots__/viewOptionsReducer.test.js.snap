@@ -1,6 +1,156 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`defined type ADD_FILTER 1`] = `
+exports[`viewOptionsReducer should handle all defined fulfilled types: fulfilled types GET_CREDENTIALS 1`] = `
+Object {
+  "result": Object {
+    "CREDENTIALS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": undefined,
+      "totalPages": NaN,
+    },
+    "SCANS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+    "SOURCES_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+  },
+  "type": "GET_CREDENTIALS_FULFILLED",
+}
+`;
+
+exports[`viewOptionsReducer should handle all defined fulfilled types: fulfilled types GET_SCANS 1`] = `
+Object {
+  "result": Object {
+    "CREDENTIALS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+    "SCANS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": undefined,
+      "totalPages": NaN,
+    },
+    "SOURCES_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+  },
+  "type": "GET_SCANS_FULFILLED",
+}
+`;
+
+exports[`viewOptionsReducer should handle all defined fulfilled types: fulfilled types GET_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "CREDENTIALS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+    "SCANS_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": 0,
+      "totalPages": 0,
+    },
+    "SOURCES_VIEW": Object {
+      "activeFilters": Array [],
+      "currentPage": 1,
+      "expandedItems": Array [],
+      "filterType": null,
+      "filterValue": "",
+      "pageSize": 15,
+      "selectedItems": Array [],
+      "sortAscending": true,
+      "sortField": "name",
+      "sortType": null,
+      "totalCount": undefined,
+      "totalPages": NaN,
+    },
+  },
+  "type": "GET_SOURCES_FULFILLED",
+}
+`;
+
+exports[`viewOptionsReducer should handle specific defined types: defined type ADD_FILTER 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -52,7 +202,7 @@ Object {
 }
 `;
 
-exports[`defined type CLEAR_FILTERS 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type CLEAR_FILTERS 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -102,7 +252,7 @@ Object {
 }
 `;
 
-exports[`defined type DESELECT_ITEM 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type DESELECT_ITEM 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -152,7 +302,7 @@ Object {
 }
 `;
 
-exports[`defined type EXPAND_ITEM 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type EXPAND_ITEM 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -202,7 +352,7 @@ Object {
 }
 `;
 
-exports[`defined type REMOVE_FILTER 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type REMOVE_FILTER 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -252,7 +402,7 @@ Object {
 }
 `;
 
-exports[`defined type SELECT_ITEM 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type SELECT_ITEM 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -304,7 +454,7 @@ Object {
 }
 `;
 
-exports[`defined type SET_FILTER_TYPE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type SET_FILTER_TYPE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -354,7 +504,7 @@ Object {
 }
 `;
 
-exports[`defined type SET_FILTER_VALUE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type SET_FILTER_VALUE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -404,7 +554,7 @@ Object {
 }
 `;
 
-exports[`defined type SET_PER_PAGE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type SET_PER_PAGE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -454,7 +604,7 @@ Object {
 }
 `;
 
-exports[`defined type SET_SORT_TYPE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type SET_SORT_TYPE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -504,7 +654,7 @@ Object {
 }
 `;
 
-exports[`defined type TOGGLE_SORT_ASCENDING 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type TOGGLE_SORT_ASCENDING 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -554,7 +704,7 @@ Object {
 }
 `;
 
-exports[`defined type VIEW_FIRST_PAGE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type VIEW_FIRST_PAGE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -604,7 +754,7 @@ Object {
 }
 `;
 
-exports[`defined type VIEW_LAST_PAGE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type VIEW_LAST_PAGE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -654,7 +804,7 @@ Object {
 }
 `;
 
-exports[`defined type VIEW_NEXT_PAGE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type VIEW_NEXT_PAGE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -704,7 +854,7 @@ Object {
 }
 `;
 
-exports[`defined type VIEW_PAGE_NUMBER 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type VIEW_PAGE_NUMBER 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -754,7 +904,7 @@ Object {
 }
 `;
 
-exports[`defined type VIEW_PREVIOUS_PAGE 1`] = `
+exports[`viewOptionsReducer should handle specific defined types: defined type VIEW_PREVIOUS_PAGE 1`] = `
 Object {
   "result": Object {
     "CREDENTIALS_VIEW": Object {
@@ -801,155 +951,5 @@ Object {
     },
   },
   "type": "VIEW_PREVIOUS_PAGE",
-}
-`;
-
-exports[`fulfilled types GET_CREDENTIALS 1`] = `
-Object {
-  "result": Object {
-    "CREDENTIALS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": undefined,
-      "totalPages": NaN,
-    },
-    "SCANS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-    "SOURCES_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-  },
-  "type": "GET_CREDENTIALS_FULFILLED",
-}
-`;
-
-exports[`fulfilled types GET_SCANS 1`] = `
-Object {
-  "result": Object {
-    "CREDENTIALS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-    "SCANS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": undefined,
-      "totalPages": NaN,
-    },
-    "SOURCES_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-  },
-  "type": "GET_SCANS_FULFILLED",
-}
-`;
-
-exports[`fulfilled types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "CREDENTIALS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-    "SCANS_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": 0,
-      "totalPages": 0,
-    },
-    "SOURCES_VIEW": Object {
-      "activeFilters": Array [],
-      "currentPage": 1,
-      "expandedItems": Array [],
-      "filterType": null,
-      "filterValue": "",
-      "pageSize": 15,
-      "selectedItems": Array [],
-      "sortAscending": true,
-      "sortField": "name",
-      "sortType": null,
-      "totalCount": undefined,
-      "totalPages": NaN,
-    },
-  },
-  "type": "GET_SOURCES_FULFILLED",
 }
 `;

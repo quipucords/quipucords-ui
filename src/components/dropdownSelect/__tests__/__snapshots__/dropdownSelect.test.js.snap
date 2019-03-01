@@ -1,6 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic dropdown 1`] = `
+exports[`DropdownSelect Component should allow a alternate array and object options: key value object 1`] = `
+<div
+  class="quipucords-dropdownselect  dropdown btn-group"
+  name="test"
+>
+  <button
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-toggle btn btn-default"
+    id="test"
+    role="button"
+    type="button"
+  >
+    <span>
+      Select option
+    </span>
+     
+    <span
+      class="caret"
+    />
+  </button>
+  <ul
+    aria-labelledby="test"
+    class="dropdown-menu"
+    role="menu"
+  >
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        ipsum
+      </a>
+    </li>
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        world
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`DropdownSelect Component should allow a alternate array and object options: string array 1`] = `
+<div
+  class="quipucords-dropdownselect  dropdown btn-group"
+  name="test"
+>
+  <button
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-toggle btn btn-default"
+    id="test"
+    role="button"
+    type="button"
+  >
+    <span>
+      ipsum
+    </span>
+     
+    <span
+      class="caret"
+    />
+  </button>
+  <ul
+    aria-labelledby="test"
+    class="dropdown-menu"
+    role="menu"
+  >
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        lorem
+      </a>
+    </li>
+    <li
+      class="active"
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        ipsum
+      </a>
+    </li>
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        hello
+      </a>
+    </li>
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        world
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`DropdownSelect Component should render a basic component: basic dropdown 1`] = `
 <div
   class="quipucords-dropdownselect  dropdown btn-group"
   name="test"
@@ -54,7 +186,93 @@ exports[`basic dropdown 1`] = `
 </div>
 `;
 
-exports[`emulated event 1`] = `
+exports[`DropdownSelect Component should render a basic component: multiselect dropdown 1`] = `
+<div
+  class="quipucords-dropdownselect  dropdown btn-group"
+  name="test"
+>
+  <button
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-toggle btn btn-default"
+    id="test"
+    role="button"
+    type="button"
+  >
+    <span>
+      lorem,hello
+    </span>
+     
+    <span
+      class="caret"
+    />
+  </button>
+  <ul
+    aria-labelledby="test"
+    class="dropdown-menu"
+    role="menu"
+  >
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        <div
+          class="quipucords-dropdownselect-menuitem row"
+        >
+          <div
+            class="quipucords-dropdownselect-menuitemname col-xs-10"
+          >
+            lorem
+          </div>
+          <div
+            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
+          >
+            <span
+              aria-hidden="true"
+              class="fa fa-check"
+            />
+          </div>
+        </div>
+      </a>
+    </li>
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        <div
+          class="quipucords-dropdownselect-menuitem row"
+        >
+          <div
+            class="quipucords-dropdownselect-menuitemname col-xs-10"
+          >
+            hello
+          </div>
+          <div
+            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
+          >
+            <span
+              aria-hidden="true"
+              class="fa fa-check"
+            />
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`DropdownSelect Component should return an emulated onchange event: emulated event 1`] = `
 Object {
   "currentTarget": Object {
     "id": "test",
@@ -181,7 +399,7 @@ Object {
 }
 `;
 
-exports[`key value object 1`] = `
+exports[`DropdownSelect Component should return an emulated onchange event: key value object 1`] = `
 <div
   class="quipucords-dropdownselect  dropdown btn-group"
   name="test"
@@ -235,225 +453,7 @@ exports[`key value object 1`] = `
 </div>
 `;
 
-exports[`key value object 2`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      Select option
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`multiselect dropdown 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      lorem,hello
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        <div
-          class="quipucords-dropdownselect-menuitem row"
-        >
-          <div
-            class="quipucords-dropdownselect-menuitemname col-xs-10"
-          >
-            lorem
-          </div>
-          <div
-            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
-          >
-            <span
-              aria-hidden="true"
-              class="fa fa-check"
-            />
-          </div>
-        </div>
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        <div
-          class="quipucords-dropdownselect-menuitem row"
-        >
-          <div
-            class="quipucords-dropdownselect-menuitemname col-xs-10"
-          >
-            hello
-          </div>
-          <div
-            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
-          >
-            <span
-              aria-hidden="true"
-              class="fa fa-check"
-            />
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`string array 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      ipsum
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        lorem
-      </a>
-    </li>
-    <li
-      class="active"
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        hello
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`string array 2`] = `
+exports[`DropdownSelect Component should return an emulated onchange event: string array 1`] = `
 <div
   class="quipucords-dropdownselect  dropdown btn-group"
   name="test"

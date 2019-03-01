@@ -15,12 +15,14 @@ coverage
 
 # build & production
 build
+dist/
 public/assets
 translations
 .css
-
+templates/client
 styles/*.css
 src/styles/css
+src/styles/.css
 public/locales/*.json
 !public/locales/locales.json
 !public/locales/en.json

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`all redux types 1`] = `
+exports[`ReduxTypes should have specific type properties: all redux types 1`] = `
 Object {
   "confirmationModalTypes": Object {
     "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
@@ -309,7 +309,7 @@ Object {
 }
 `;
 
-exports[`specific types 1`] = `
+exports[`ReduxTypes should have specific type properties: specific types 1`] = `
 Object {
   "confirmationModal": Object {
     "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
