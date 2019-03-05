@@ -1,32 +1,11 @@
 #!/usr/bin/env bash
 #
 #
-# Clone Quipucords, build for local development
-#
-gitApi()
-{
-  rm -rf -- $DATADIR
-  mkdir -p $DATADIR
-  (cd $DATADIR && git clone --depth=1 https://github.com/quipucords/quipucords.git)
-  rm -rf $DATADIR_REPO/.git
-}
-#
-#
-# Run swagger documentation
-#
-runDocs()
-{
-  node "./scripts/swagger.js"
-}
-#
-#
-# Check if a container is running. Currently supporting the mockApi container
+# Quick check to see if a container is running
 #
 checkContainerRunning()
 {
-  local NAME=$1
-  local CONTAINER=$2
-  local FILE=$3
+  local CHECKONE=$1
   local COUNT=1
   local DURATION=10
   local DELAY=0.1
@@ -36,70 +15,62 @@ checkContainerRunning()
   while [ $COUNT -le $DURATION ]; do
     sleep $DELAY
     (( COUNT++ ))
-    if [ -z "$(docker ps | grep $CONTAINER)" ]; then
+    if [ -z "$(docker ps | grep $CHECKONE)" ]; then
       break
     fi
   done
 
-  if [ ! -z "$(docker ps | grep $CONTAINER)" ] && [ ! -z "$(docker ps | grep $NAME)" ]; then
+  if [ ! -z "$(docker ps | grep $CHECKONE)" ]; then
     printf "${GREEN}Container SUCCESS"
     printf "\n\n${NOCOLOR}"
-  elif [ ! -z "$FILE" ]; then
-    local HASH=$(git rev-list -1 --all --abbrev-commit $FILE)
-    local COMMIT=$(git rev-list -1 --all --oneline $FILE)
-    local BLAME=$(git blame $FILE | grep $HASH | sed 's/^/  /')
-    local GITHUB="https://github.com/quipucords/quipucords/commit/$HASH"
-
-    echo "Last Commit:\n\n  ${COMMIT}\n\nVisit:\n\n  ${GITHUB}\n\nAssigning Blame:\n\n${BLAME}"  > api-debug.txt
-
-    printf "${RED}Container ERROR"
-    printf "\n${RED}  Review the Swagger doc for errors."
-    printf "\n${RED}  Last commit: ${COMMIT}"
-    printf "\n${RED}  See api-debug.txt for details."
-    printf "\n${RED}  Visit: ${GITHUB}"
-    printf "${NOCOLOR}\n"
   else
     printf "${RED}Container ERROR"
-    printf "\n\n  Error: ${RED}Check \"${NAME}\" with \"${CONTAINER}\""
+    printf "\n\n  Error: ${RED}Check container \"${CHECKONE}\""
     printf "${NOCOLOR}\n"
   fi
 }
 #
 #
-# Install & Run Quipucords API Mock Container
+# Clone Quipucords, build for local development
 #
-devApi()
+gitApi()
 {
-  local CONTAINER="palo/swagger-api-mock"
-  local NAME="qpc-dev"
-  local PORT=$1
-  local FILE=$2
-  local UPDATE=$3
+  local REPO=$QPC_REPO
+  local QPCDIR=$DATADIR
+  local QPCDIR_REPO=$DATADIR_REPO
 
-  docker stop -t 0 $NAME >/dev/null
+  rm -rf -- $QPCDIR/temp
+  (cd $QPCDIR && git clone --depth=1 $QPC_REPO temp > /dev/null 2>&1)
 
-  gitApi
+  if [ $? -eq 0 ]; then
+    printf "\n${GREEN}Cloning QPC...${NOCOLOR}\n"
 
-  if [ -z "$(docker images -q $CONTAINER)" ] || [ "$UPDATE" = true ]; then
-    echo "Setting up development Docker API container"
-    docker pull $CONTAINER
+    rm -rf -- $DATADIR_REPO
+    mkdir -p $DATADIR_REPO
+    cp -R  $QPCDIR/temp/ $QPCDIR_REPO
+    rm -rf -- $QPCDIR/temp
+    rm -rf $QPCDIR_REPO/.git
+
+  elif [ -d $DATADIR_REPO ]; then
+    printf "${GREEN}Cloning, using cached QPC...${NOCOLOR}\n"
+  else
+    printf "${RED}Build Error, cloning QPC, unable to setup Docker${NOCOLOR}\n"
+    exit 1
   fi
-
-  if [ -z "$(docker ps | grep $CONTAINER)" ] && [ "$UPDATE" = false ]; then
-    echo "Starting development API..."
-    docker run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml" --name $NAME $CONTAINER >/dev/null
-  fi
-
-  if [ "$UPDATE" = false ]; then
-    checkContainerRunning $NAME $CONTAINER $FILE
-  fi
-
-  if [ ! -z "$(docker ps | grep $CONTAINER)" ] && [ "$UPDATE" = false ]; then
-    echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
-    echo "  QPC Development API running: http://localhost:$PORT/"
-    printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
-
-    runDocs
+}
+#
+#
+# Confirm resources exist for build
+#
+checkBuildFilesExist()
+{
+  if [ ! -d $DATADIR_REPO ] || [ ! -d $DISTDIR_CLIENT ] || [ ! -d $DISTDIR_TEMPLATES ]; then
+    printf "${RED}Build error, missing directories...\n"
+    [ ! -d $DATADIR_REPO ] && echo "- $DATADIR_REPO"
+    [ ! -d $DISTDIR_CLIENT ] && echo "- $DISTDIR_CLIENT"
+    [ ! -d $DISTDIR_TEMPLATES ] && echo "- $DISTDIR_TEMPLATES"
+    printf "${NOCOLOR}\n"
+    exit 1
   fi
 }
 #
@@ -109,10 +80,10 @@ devApi()
 startDB()
 {
   local CONTAINER="postgres:9.6.10"
-  local NAME="qpc-db"
+  local NAME=$1
   local DATA="$(pwd)/.container"
   local DATA_VOLUME="/var/lib/postgresql/data"
-  local QE=$1
+  local STORE_DATA=$2
 
   docker stop -t 0 $NAME >/dev/null
 
@@ -125,13 +96,13 @@ startDB()
     fi
   fi
 
-  if [ "$QE" = true ]; then
-    docker run -d --rm -e POSTGRES_PASSWORD=password --name $NAME $CONTAINER >/dev/null
-  else
+  if [ "$STORE_DATA" = true ]; then
     docker run -d --rm -v $DATA:$DATA_VOLUME -e POSTGRES_PASSWORD=password --name $NAME $CONTAINER >/dev/null
+  else
+    docker run -d --rm -e POSTGRES_PASSWORD=password --name $NAME $CONTAINER >/dev/null
   fi
 
-  checkContainerRunning $NAME $CONTAINER
+  checkContainerRunning $NAME
 
   if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
     echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
@@ -141,118 +112,149 @@ startDB()
 }
 #
 #
+# Install & build Quipucords app
 #
-# Install & Run Quipucords API Container
+buildApp()
+{
+  local REPO=$DATADIR_REPO
+  local REPO_QPC=$DATADIR_REPO_QPC
+  local REPO_QPC_TEMPLATES=$DATADIR_REPO_QPC_TEMPLATES
+  local DIR_CLIENT=$DISTDIR_CLIENT
+  local DIR_TEMPLATES=$DISTDIR_TEMPLATES
+  local CONTAINER=$1
+
+  gitApi
+  checkBuildFilesExist
+
+  docker stop -t 0 $CONTAINER >/dev/null
+
+  echo "Setting up QPC container"
+
+  cp -rf $DIR_TEMPLATES $REPO_QPC_TEMPLATES
+  cp -rf $DIR_CLIENT $REPO_QPC
+  docker build -t $CONTAINER $REPO/.
+}
+#
+#
+# Run review/stage setup, used for GUI against the latest API for confirmation
+#
+reviewApi()
+{
+  local CONTAINER="qpc-review"
+  local DB_NAME="qpc-db"
+  local PORT=$1
+
+  buildApp $CONTAINER
+  startDB $DB_NAME
+
+  if [ -z "$(docker ps | grep $CONTAINER)" ]; then
+    printf "\n"
+    echo "Starting API..."
+    docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $CONTAINER $CONTAINER >/dev/null
+  fi
+
+  checkContainerRunning $CONTAINER
+
+  if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
+    echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
+    echo "  QPC API running: https://localhost:${PORT}/"
+    printf "  To stop: $ ${GREEN}docker stop ${CONTAINER}${NOCOLOR}\n"
+  fi
+}
+#
+#
+# Run stage/dev setup, used for local development against the latest API, partially working login
 #
 stageApi()
 {
   local CONTAINER="qpc-stage"
-  local NAME="qpc-stage"
   local DB_NAME="qpc-db"
+  local PORT=$1
+  local UPDATE=$2
+
   local BUILD_DIR="$(pwd)/build"
   local CLIENT_VOLUME="/app/quipucords/client"
   local TEMPLATE_CLIENT_VOLUME="/app/quipucords/quipucords/templates/client"
-  local PORT=$1
-  local UPDATE=$2
 
-  docker stop -t 0 $NAME >/dev/null
+  local TEMPLATE_DIR="$(pwd)/templates/registration"
+  local TEMPLATE_REGISTRATION_VOLUME="/app/quipucords/quipucords/templates/registration"
 
-  gitApi
+  local DIST_CLIENT_ASSETS="$(pwd)/dist/client/assets"
+  local CLIENT_ASSETS_VOLUME="/app/quipucords/client/assets"
 
-  if [ -z "$(docker images -q $CONTAINER)" ] || [ "$UPDATE" = true ]; then
-    echo "Setting up staging Docker API container"
-    docker build -t $CONTAINER $DATADIR_REPO/.
-  fi
+  buildApp $CONTAINER
 
-  if [ "$UPDATE" = false ]; then
+  if [ ! "$UPDATE" = true ]; then
+    startDB $DB_NAME true
+
     if [ -z "$(docker ps | grep $CONTAINER)" ]; then
-      startDB
       printf "\n"
-      echo "Starting staging API..."
-      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+      echo "Starting API..."
+      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $CONTAINER $CONTAINER >/dev/null
     fi
 
-    checkContainerRunning $NAME $CONTAINER
+    checkContainerRunning $CONTAINER
 
     if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
       echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
-      echo "  QPC Stage API running: https://localhost:${PORT}/"
-      echo "  Connected to local directory: $(basename $BUILD_DIR | cut -c 1-80)"
-      printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
+      echo "  QPC API running: https://localhost:${PORT}/"
+      printf "  To stop: $ ${GREEN}docker stop ${CONTAINER}${NOCOLOR}\n"
     fi
+
+    runDocs
   fi
 }
 #
 #
-# Install & Run Quipucords API Container
+# Run dev setup, used for local development against mock data
 #
-prodApi()
+devApi()
 {
-  local CONTAINER="qpc-latest"
-  local NAME="qpc"
-  local DB_NAME="qpc-db"
+  local CONTAINER="palo/swagger-api-mock"
+  local NAME="qpc-dev"
   local PORT=$1
-  local UPDATE=$2
+  local FILE=$2
+  local UPDATE=$3
 
   docker stop -t 0 $NAME >/dev/null
 
-  gitApi
-
   if [ -z "$(docker images -q $CONTAINER)" ] || [ "$UPDATE" = true ]; then
-    echo "Setting up QPC Production container"
-    docker build -t $CONTAINER $DATADIR_REPO/.
+    echo "Setting up development Docker API container"
+    docker pull $CONTAINER
   fi
 
-  if [ "$UPDATE" = false ]; then
+  if [ ! "$UPDATE" = true ]; then
+    gitApi
+
     if [ -z "$(docker ps | grep $CONTAINER)" ]; then
-      startDB
-      printf "\n"
-      echo "Starting QPC production API..."
-      docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+      echo "Starting development API..."
+      docker run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml" --name $NAME $CONTAINER >/dev/null
     fi
 
-    checkContainerRunning $NAME $CONTAINER
+    checkContainerRunning $NAME
 
     if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
       echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
-      echo "  QPC Production API running: https://localhost:${PORT}/"
+      echo "  QPC Development API running: http://localhost:$PORT/"
       printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
     fi
+
+    runDocs
   fi
 }
 #
 #
-# Install & Run Quipucords API Container
+# Serve swagger spec
 #
-qeApi()
+runDocs()
 {
-  local CONTAINER="qpc-qe"
-  local NAME="qpc-qe"
-  local DB_NAME="qpc-db"
-  local PORT=$1
+  local GITREPO=$1
 
-  docker stop -t 0 $NAME >/dev/null
-
-  gitApi
-
-  echo "Setting up QPC QE container"
-
-  docker build -t $CONTAINER $DATADIR_REPO/.
-
-  if [ -z "$(docker ps | grep $CONTAINER)" ]; then
-    startDB true
-    printf "\n"
-    echo "Starting QE API..."
-    docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+  if [ "$GITREPO" = true ]; then
+    gitApi
   fi
 
-  checkContainerRunning $NAME $CONTAINER
-
-  if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
-    echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
-    echo "  QPC QE API running: https://localhost:${PORT}/"
-    printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
-  fi
+  node "./scripts/swagger.js"
 }
 #
 #
@@ -262,10 +264,20 @@ qeApi()
   RED="\e[31m"
   GREEN="\e[32m"
   NOCOLOR="\e[39m"
-  PORT=8080
+
+  PORT=5001
+  FILE="$(pwd)/.qpc/quipucords/docs/swagger.yml"
+
+  QPC_REPO="https://github.com/quipucords/quipucords.git"
   DATADIR="$(pwd)/.qpc"
   DATADIR_REPO="$(pwd)/.qpc/quipucords"
-  FILE="$(pwd)/.qpc/quipucords/docs/swagger.yml"
+  DATADIR_REPO_QPC="$(pwd)/.qpc/quipucords/quipucords"
+  DATADIR_REPO_QPC_TEMPLATES="$(pwd)/.qpc/quipucords/quipucords/quipucords"
+
+  DISTDIR="$(pwd)/dist"
+  DISTDIR_CLIENT="$(pwd)/dist/client"
+  DISTDIR_TEMPLATES="$(pwd)/dist/templates"
+
   UPDATE=false
   CLEAN=false
 
@@ -284,25 +296,28 @@ qeApi()
     exit 1
   fi
 
-  if [ "$TYPE" != dev ] && [ "$CLEAN" = true ]; then
-    echo "Cleaning Docker and data..."
+  if [ "$CLEAN" = true ]; then
+    echo "Cleaning everything, Docker and data..."
     printf "${RED}\n"
     docker system prune -f
     printf "${GREEN}Docker cleaning success.${NOCOLOR}\n"
   fi
 
   case $TYPE in
-    qe )
-      qeApi $PORT;;
-    prod )
-      prodApi $PORT $UPDATE;;
+    review )
+      reviewApi $PORT;;
     stage )
       stageApi $PORT $UPDATE;;
     dev )
       devApi $PORT "$FILE" $UPDATE;;
-    * )
-      gitApi
-      runDocs;;
+    docs )
+      runDocs true;;
+    gitApi )
+      gitApi;;
+    update )
+      devApi $PORT "$FILE" true
+      stageApi $PORT true
+      ;;
   esac
 
   echo ""
