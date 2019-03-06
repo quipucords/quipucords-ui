@@ -51,7 +51,7 @@
     "api:docs": "sh ./scripts/api.sh -t docs",
     "api:review": "sh ./scripts/api.sh -p 9443 -t review",
     "api:stage": "sh ./scripts/api.sh -p 5001 -t stage",
-    "api:update": "sh ./scripts/api.sh -t update",
+    "api:update": "npm run build; sh ./scripts/api.sh -t update",
     "build": "run-s -l build:clean build:css build:js build:finish",
     "build:clean": "rm -rf -- \"$(pwd)\"/build",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/styles/index.scss -o src/styles/.css",
