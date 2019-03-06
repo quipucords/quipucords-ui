@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Modal, Button, Icon } from 'patternfly-react';
-import Store from '../../redux/store';
-import { confirmationModalTypes } from '../../redux/constants';
+import { connect, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 
 class ConfirmationModal extends React.Component {
@@ -13,8 +11,8 @@ class ConfirmationModal extends React.Component {
     if (onCancel) {
       onCancel();
     } else {
-      Store.dispatch({
-        type: confirmationModalTypes.CONFIRMATION_MODAL_HIDE
+      store.dispatch({
+        type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_HIDE
       });
     }
   };

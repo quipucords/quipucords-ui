@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Alert, Button, DropdownButton, EmptyState, Grid, Form, ListView, MenuItem, Modal } from 'patternfly-react';
-import _ from 'lodash';
+import _get from 'lodash/get';
+import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
@@ -56,7 +57,7 @@ class Scans extends React.Component {
       this.onRefresh();
     }
 
-    if (_.get(update, 'delete')) {
+    if (_get(update, 'delete')) {
       if (previousProps.update.fulfilled && !update.fulfilled) {
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
@@ -184,11 +185,11 @@ class Scans extends React.Component {
   onDeleteScans = () => {
     const { viewOptions } = this.props;
 
-    if (_.size(viewOptions.selectedItems) === 0) {
+    if (_size(viewOptions.selectedItems) === 0) {
       return;
     }
 
-    if (_.size(viewOptions.selectedItems) === 1) {
+    if (_size(viewOptions.selectedItems) === 1) {
       this.handleDeleteScan(viewOptions.selectedItems[0]);
       return;
     }
@@ -325,13 +326,13 @@ class Scans extends React.Component {
 
   renderScansActions() {
     const { viewOptions } = this.props;
-    const mergeAllowed = _.size(viewOptions.selectedItems) > 1;
+    const mergeAllowed = _size(viewOptions.selectedItems) > 1;
 
     // FUTURE: deletion is not currently enabled
     let deleteAction = null;
     if (this.okToDelete) {
       deleteAction = (
-        <Button disabled={_.size(viewOptions.selectedItems) === 0} onClick={this.onDeleteScans}>
+        <Button disabled={_size(viewOptions.selectedItems) === 0} onClick={this.onDeleteScans}>
           Delete
         </Button>
       );
@@ -357,7 +358,7 @@ class Scans extends React.Component {
   renderScansList(items) {
     const { lastRefresh } = this.props;
 
-    if (_.size(items)) {
+    if (_size(items)) {
       return (
         <ListView className="quipicords-list-view">
           {items.map(item => (
@@ -409,7 +410,7 @@ class Scans extends React.Component {
       return <Redirect to={redirectTo} push />;
     }
 
-    if (_.size(scans) || _.size(viewOptions.activeFilters)) {
+    if (_size(scans) || _size(viewOptions.activeFilters)) {
       return (
         <React.Fragment>
           <div className="quipucords-view-container">

@@ -2,25 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Dropdown, EmptyState, Grid, Icon, MenuItem, Pager } from 'patternfly-react';
-import _ from 'lodash';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
 import * as moment from 'moment/moment';
 import { connect, reduxActions } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
 
 class ScanJobsList extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      scanJobs: [],
-      scanJobsError: false,
-      scanJobsPending: false,
-      page: 1,
-      disableNext: true,
-      disablePrevious: true
-    };
-  }
+  state = {
+    scanJobs: [],
+    scanJobsError: false,
+    scanJobsPending: false,
+    page: 1,
+    disableNext: true,
+    disablePrevious: true
+  };
 
   componentDidMount() {
     this.refresh();
@@ -29,7 +26,7 @@ class ScanJobsList extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { lastRefresh } = this.props;
     // Check for changes resulting in a fetch
-    if (!_.isEqual(nextProps.lastRefresh, lastRefresh)) {
+    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
       this.refresh();
     }
   }
@@ -64,12 +61,12 @@ class ScanJobsList extends React.Component {
       ordering: 'name'
     };
 
-    if (_.get(scan, 'id')) {
+    if (_get(scan, 'id')) {
       getScanJobs(scan.id, queryObject)
         .then(results => {
           this.setState({
             scanJobsPending: false,
-            scanJobs: _.get(results.value, 'data.results')
+            scanJobs: _get(results.value, 'data.results')
           });
         })
         .catch(error => {
@@ -84,19 +81,24 @@ class ScanJobsList extends React.Component {
   renderJob(job) {
     const { scan, onSummaryDownload, onDetailedDownload } = this.props;
 
-    if (job.id === _.get(scan, 'most_recent.id')) {
+    if (job.id === _get(scan, 'most_recent.id')) {
       return null;
     }
 
     const scanDescription = dictionary[job.status] || '';
     const statusIconInfo = helpers.scanStatusIcon(job.status);
-    const classes = cx('scan-job-status-icon', ...statusIconInfo.classNames);
-    const icon = <Icon className={classes} type={statusIconInfo.type} name={statusIconInfo.name} />;
+    const icon = (
+      <Icon
+        className={cx('scan-job-status-icon', ...statusIconInfo.classNames)}
+        type={statusIconInfo.type}
+        name={statusIconInfo.name}
+      />
+    );
 
-    let scanTime = _.get(job, 'end_time');
+    let scanTime = _get(job, 'end_time');
 
     if (job.status === 'pending' || job.status === 'running') {
-      scanTime = _.get(job, 'start_time');
+      scanTime = _get(job, 'start_time');
     }
 
     return (

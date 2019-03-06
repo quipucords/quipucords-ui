@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
-import { connect } from 'react-redux';
 import { EmptyState, Grid } from 'patternfly-react';
-import _ from 'lodash';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
+import _size from 'lodash/size';
+import { connect, reduxActions } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
-import { reduxActions } from '../../redux/actions';
 
 class ScanHostList extends React.Component {
   constructor() {
@@ -32,7 +33,7 @@ class ScanHostList extends React.Component {
     const { lastRefresh, status, useConnectionResults, useInspectionResults } = this.props;
     // Check for changes resulting in a fetch
     if (
-      !_.isEqual(nextProps.lastRefresh, lastRefresh) ||
+      !_isEqual(nextProps.lastRefresh, lastRefresh) ||
       nextProps.status !== status ||
       nextProps.useConnectionResults !== useConnectionResults ||
       nextProps.useInspectionResults !== useInspectionResults
@@ -68,7 +69,7 @@ class ScanHostList extends React.Component {
 
     getInspectionScanResults(scanId, queryObject)
       .then(results => {
-        const morePages = fetchAll && _.get(results.value, 'data.next') !== null;
+        const morePages = fetchAll && _get(results.value, 'data.next') !== null;
 
         this.setState({
           inspectionScanResultsPending: morePages,
@@ -108,7 +109,7 @@ class ScanHostList extends React.Component {
     getConnectionScanResults(scanId, queryObject)
       .then(results => {
         const allResults = this.addResults(results);
-        const morePages = _.get(results.value, 'data.next') !== null;
+        const morePages = _get(results.value, 'data.next') !== null;
 
         this.setState({
           moreResults: morePages,
@@ -134,7 +135,7 @@ class ScanHostList extends React.Component {
     const { scanResults } = this.state;
     const { useConnectionResults, useInspectionResults } = this.props;
 
-    const newResults = _.get(results, 'value.data.results', []);
+    const newResults = _get(results, 'value.data.results', []);
     const allResults = [...scanResults, ...newResults];
 
     if (useConnectionResults && useInspectionResults) {
@@ -179,7 +180,7 @@ class ScanHostList extends React.Component {
     const { renderHostRow } = this.props;
     const { moreResults } = this.state;
 
-    if (_.size(results) === 0) {
+    if (_size(results) === 0) {
       return null;
     }
 
@@ -221,7 +222,7 @@ class ScanHostList extends React.Component {
     } = this.state;
     const usePaging = !useConnectionResults || !useInspectionResults;
 
-    if ((!_.size(scanResults) || !usePaging) && (inspectionScanResultsPending || connectionScanResultsPending)) {
+    if ((!_size(scanResults) || !usePaging) && (inspectionScanResultsPending || connectionScanResultsPending)) {
       return (
         <React.Fragment>
           <EmptyState>
@@ -243,7 +244,7 @@ class ScanHostList extends React.Component {
       );
     }
 
-    if (_.size(scanResults) === 0) {
+    if (_size(scanResults) === 0) {
       return (
         <EmptyState>
           <EmptyState.Icon name="warning-triangle-o" />

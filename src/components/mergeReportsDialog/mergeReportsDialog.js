@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Icon } from 'patternfly-react';
-import _ from 'lodash';
+import _get from 'lodash/get';
+import _filter from 'lodash/filter';
+import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 
@@ -19,12 +21,12 @@ class MergeReportsDialog extends React.Component {
     mergeScans(data).then(
       response => {
         if (details) {
-          getMergedScanReportDetailsCsv(_.get(response, 'value.data.report_id')).then(
+          getMergedScanReportDetailsCsv(_get(response, 'value.data.report_id')).then(
             () => this.notifyDownloadStatus(false),
             error => this.notifyDownloadStatus(true, error)
           );
         } else {
-          getMergedScanReportSummaryCsv(_.get(response, 'value.data.report_id')).then(
+          getMergedScanReportSummaryCsv(_get(response, 'value.data.report_id')).then(
             () => this.notifyDownloadStatus(false),
             error => this.notifyDownloadStatus(true, error)
           );
@@ -36,12 +38,12 @@ class MergeReportsDialog extends React.Component {
 
   getValidScans() {
     const { scans } = this.props;
-    return _.filter(scans, scan => _.get(scan, 'most_recent.status') === 'completed');
+    return _filter(scans, scan => _get(scan, 'most_recent.status') === 'completed');
   }
 
   getInvalidScans() {
     const { scans } = this.props;
-    return _.filter(scans, scan => _.get(scan, 'most_recent.status') !== 'completed');
+    return _filter(scans, scan => _get(scan, 'most_recent.status') !== 'completed');
   }
 
   getValidReportId() {
@@ -70,7 +72,7 @@ class MergeReportsDialog extends React.Component {
   renderValidScans() {
     const validScans = this.getValidScans();
 
-    if (_.size(validScans)) {
+    if (_size(validScans)) {
       return (
         <div>
           <span>Scans to be included in the merged report:</span>
@@ -89,7 +91,7 @@ class MergeReportsDialog extends React.Component {
   renderInvalidScans() {
     const invalidScans = this.getInvalidScans();
 
-    if (_.size(invalidScans)) {
+    if (_size(invalidScans)) {
       return (
         <div>
           <span>Failed scans that cannot be included in the merged report:</span>
@@ -106,7 +108,7 @@ class MergeReportsDialog extends React.Component {
   }
 
   renderButtons() {
-    const validCount = _.size(this.getValidScans());
+    const validCount = _size(this.getValidScans());
 
     if (validCount === 0) {
       return (
@@ -135,8 +137,8 @@ class MergeReportsDialog extends React.Component {
       return null;
     }
 
-    const validCount = _.size(this.getValidScans());
-    const invalidCount = _.size(this.getInvalidScans());
+    const validCount = _size(this.getValidScans());
+    const invalidCount = _size(this.getInvalidScans());
 
     let icon;
     let heading;
