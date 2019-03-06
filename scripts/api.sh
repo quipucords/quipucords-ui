@@ -39,19 +39,20 @@ gitApi()
   local QPCDIR=$DATADIR
   local QPCDIR_REPO=$DATADIR_REPO
 
+  mkdir -p $QPCDIR
   rm -rf -- $QPCDIR/temp
   (cd $QPCDIR && git clone --depth=1 $QPC_REPO temp > /dev/null 2>&1)
 
   if [ $? -eq 0 ]; then
     printf "\n${GREEN}Cloning QPC...${NOCOLOR}\n"
 
-    rm -rf -- $DATADIR_REPO
-    mkdir -p $DATADIR_REPO
+    rm -rf -- $QPCDIR_REPO
+    mkdir -p $QPCDIR_REPO
     cp -R  $QPCDIR/temp/ $QPCDIR_REPO
     rm -rf -- $QPCDIR/temp
     rm -rf $QPCDIR_REPO/.git
 
-  elif [ -d $DATADIR_REPO ]; then
+  elif [ -d $QPCDIR_REPO ]; then
     printf "${GREEN}Cloning, using cached QPC...${NOCOLOR}\n"
   else
     printf "${RED}Build Error, cloning QPC, unable to setup Docker${NOCOLOR}\n"
@@ -64,12 +65,17 @@ gitApi()
 #
 checkBuildFilesExist()
 {
-  if [ ! -d $DATADIR_REPO ] || [ ! -d $DISTDIR_CLIENT ] || [ ! -d $DISTDIR_TEMPLATES ]; then
-    printf "${RED}Build error, missing directories...\n"
-    [ ! -d $DATADIR_REPO ] && echo "- $DATADIR_REPO"
-    [ ! -d $DISTDIR_CLIENT ] && echo "- $DISTDIR_CLIENT"
-    [ ! -d $DISTDIR_TEMPLATES ] && echo "- $DISTDIR_TEMPLATES"
-    printf "${NOCOLOR}\n"
+  local REPO=$DATADIR_REPO
+  local DIR_CLIENT=$DISTDIR_CLIENT
+  local DIR_TEMPLATES=$DISTDIR_TEMPLATES
+
+  if [ ! -d $REPO ] || [ ! -d $DIR_CLIENT ] || [ ! -d $DIR_TEMPLATES ]; then
+    printf "\n\n${RED}Build error, missing directories...\n"
+    [ ! -d $REPO ] && printf "${RED}  - $REPO\n"
+    [ ! -d $DIR_CLIENT ] && printf "${RED}  - $DIR_CLIENT\n"
+    [ ! -d $DIR_TEMPLATES ] && printf "${RED}  - $DIR_TEMPLATES\n"
+    printf "${NOCOLOR}\n\n"
+
     exit 1
   fi
 }
@@ -160,6 +166,8 @@ reviewApi()
     echo "  QPC API running: https://localhost:${PORT}/"
     printf "  To stop: $ ${GREEN}docker stop ${CONTAINER}${NOCOLOR}\n"
   fi
+
+  exit 0
 }
 #
 #
@@ -202,6 +210,7 @@ stageApi()
     fi
 
     runDocs
+    exit 0
   fi
 }
 #
@@ -240,6 +249,7 @@ devApi()
     fi
 
     runDocs
+    exit 0
   fi
 }
 #
