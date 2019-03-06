@@ -9,17 +9,23 @@ node('f28-os') {
         checkout scm
         sh "sudo setenforce 0"
     }
-    stage('Build Client') {
+    stage('Client Build Setup') {
         sh "node -v"
         sh "npm -v"
         sh "sudo npm install -g n"
         sh "sudo n lts"
         sh "node -v"
         sh "npm -v"
-        sh "npm install"
-        sh "npm rebuild node-sass --force"
-        sh "npm run build"
-
+        sh "sudo npm install yarn -g"
+        sh "yarn --non-interactive"
+    }
+    stage ('Test Client') {
+        sh "yarn test"
+    }
+    stage('Build Client') {
+        sh "yarn build"
+    }
+    stage('Distribute Client Build') {
         sh "sudo tar -cvf $tarfile dist/*"
         sh "sudo chmod 755 $tarfile"
         sh "sudo gzip -f --best $tarfile"
