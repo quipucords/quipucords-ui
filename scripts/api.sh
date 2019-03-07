@@ -40,20 +40,20 @@ gitApi()
   local QPCDIR_REPO=$DATADIR_REPO
 
   mkdir -p $QPCDIR
-  rm -rf -- $QPCDIR/temp
-  (cd $QPCDIR && git clone --depth=1 $QPC_REPO temp > /dev/null 2>&1)
+  rm -rf $QPCDIR/temp
+  (cd $QPCDIR && git clone --depth=1 $REPO temp > /dev/null 2>&1)
 
   if [ $? -eq 0 ]; then
     printf "\n${GREEN}Cloning QPC...${NOCOLOR}\n"
 
-    rm -rf -- $QPCDIR_REPO
-    mkdir -p $QPCDIR_REPO
-    cp -R  $QPCDIR/temp/ $QPCDIR_REPO
-    rm -rf -- $QPCDIR/temp
+    rm -rf $QPCDIR_REPO
+    cp -R  $QPCDIR/temp $QPCDIR_REPO
+
+    rm -rf $QPCDIR/temp
     rm -rf $QPCDIR_REPO/.git
 
   elif [ -d $QPCDIR_REPO ]; then
-    printf "${GREEN}Cloning, using cached QPC...${NOCOLOR}\n"
+    printf "${GREEN}Unable to connect, using cached QPC...${NOCOLOR}\n"
   else
     printf "${RED}Build Error, cloning QPC, unable to setup Docker${NOCOLOR}\n"
     exit 1
@@ -302,7 +302,8 @@ runDocs()
       esac
   done
 
-  if [ -z "$(docker info | grep Containers)" ]; then
+  if [ -z "$(docker -v)" ]; then
+    printf "\n${RED}Docker missing, confirm installation and running.${NOCOLOR}\n"
     exit 1
   fi
 
