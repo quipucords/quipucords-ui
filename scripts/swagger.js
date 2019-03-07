@@ -22,14 +22,12 @@ const serveDocs = (yamlFile = `${process.cwd()}/.qpc/quipucords/docs/swagger.yml
         }
       });
     });
-
   } else if (cache.tryAgainCount < 10) {
     setTimeout(() => {
       console.info(`Locating swagger.yml...`);
       cache.tryAgainCount += 1;
       serveDocs();
     }, 1000);
-
   } else {
     console.info(`Swagger.yml doesn't exist`);
     process.exit();

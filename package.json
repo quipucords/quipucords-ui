@@ -40,32 +40,37 @@
       "enzyme-to-json/serializer"
     ]
   },
+  "standard-version": {
+    "skip": {
+      "commit": true,
+      "tag": true
+    }
+  },
   "scripts": {
-    "api:clean": "npm run api:dev -- -u; npm run api:stage -- -uc; npm run api:prod -- -uc",
     "api:dev": "sh ./scripts/api.sh -p 5000 -t dev",
+    "api:docs": "sh ./scripts/api.sh -t docs",
+    "api:review": "sh ./scripts/api.sh -p 9443 -t review",
     "api:stage": "sh ./scripts/api.sh -p 5001 -t stage",
-    "api:prod": "sh ./scripts/api.sh -p 9443 -t prod",
-    "api:qe": "sh ./scripts/api.sh -p 9443 -t qe",
-    "api:update": "npm run api:dev -- -u; npm run api:stage -- -u; npm run api:prod -- -u",
-    "api:doc": "sh ./scripts/api.sh",
+    "api:update": "npm run build; sh ./scripts/api.sh -t update",
+    "build": "run-s -l build:clean build:css build:js build:finish",
     "build:clean": "rm -rf -- \"$(pwd)\"/build",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/styles/index.scss -o src/styles/.css",
     "build:finish": "sh ./scripts/build.sh",
     "build:js": "react-scripts build",
     "build:rh": "sh -ac 'export REACT_APP_RH_BRAND=true && run-s -l build:clean build:css build:js build:finish'",
-    "build": "run-s -l build:clean build:css build:js build:finish",
-    "start:js": "react-scripts start",
-    "start:ui-stage": "sh -ac '. ./.env.staging; react-app-rewired start'",
+    "release": "> ./CHANGELOG.md && standard-version",
     "start": "open http://localhost:5050/docs/api; run-p -l api:dev watch:css start:js",
-    "start:stage": "open https://localhost:5001/login/; npm run build; run-p -l api:stage watch:css start:ui-stage",
-    "start:prod": "npm run api:prod; open https://localhost:9443/login/",
-    "start:qe": "npm run build; npm run api:qe;",
+    "start:js": "react-scripts start",
+    "start:dev": "npm start",
+    "start:review": "open https://localhost:9443/login/; npm run build && run-s -l api:review;",
+    "start:stage": "open https://localhost:5001/login/; npm run build && run-p -l api:stage watch:css start:ui-stage",
+    "start:ui-stage": "sh -ac '. ./.env.staging; react-app-rewired start'",
     "test": "run-s test:lint-js test:ci",
     "test:ci": "CI=true; react-scripts test --env=jsdom --coverage",
     "test:clearCache": "react-scripts test -- --clearCache",
     "test:dev": "run-s test:lint-js test:unit",
     "test:lint-js": "eslint --ext=js --ext=jsx src",
-    "test:unit": "sh -ac '. ./.env.test; react-scripts test --env=jsdom'",
+    "test:unit": "react-scripts test --env=jsdom",
     "watch:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/styles/index.scss -o src/styles/.css --watch --recursive"
   },
   "dependencies": {
@@ -113,6 +118,7 @@
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "moxios": "^0.4.0",
+    "standard-version": "^5.0.1",
     "prettier": "^1.14.2",
     "react-app-rewired": "^1.5.0",
     "redux-mock-store": "^1.5.3",
