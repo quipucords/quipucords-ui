@@ -6,6 +6,7 @@ describe('Distribution', () => {
 
     const replacedGeneratedFilesMinsHash = output
       .toString()
+      .replace(/^\s+|\s+|\n+|\r+$/g, '')
       .replace(/\.\/dist/gi, '~./dist')
       .replace(/\.([a-z0-9]+)\./gi, '*')
       .split('~')
