@@ -8,9 +8,7 @@ describe('Distribution', () => {
       .toString()
       .replace(/\.\/dist/gi, '~./dist')
       .replace(/\.([a-z0-9]+)\./gi, '*')
-      .split('~')
-      .sort()
-      .join('\n');
+      .split('~');
 
     expect(replacedGeneratedFilesMinsHash).toMatchSnapshot('dist-output');
   });
