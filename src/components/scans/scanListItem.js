@@ -6,7 +6,7 @@ import _ from 'lodash';
 import * as moment from 'moment';
 import { connect, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import ScanSourceList from './scanSourceList';
 import ScanHostList from '../scanHostList/scanHostList';
 import ScanJobsList from './scanJobsList';
@@ -197,69 +197,69 @@ class ScanListItem extends React.Component {
       case 'completed':
         return (
           <React.Fragment>
-            <SimpleTooltip key="startTip" id="startTip" tooltip="Run Scan">
+            <Tooltip key="startTip" tooltip="Run Scan">
               <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
                 <Icon type="pf" name="spinner2" aria-label="Start" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       case 'failed':
       case 'canceled':
         return (
-          <SimpleTooltip id="restartTip" tooltip="Retry Scan">
+          <Tooltip tooltip="Retry Scan">
             <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
               <Icon type="pf" name="spinner2" aria-label="Start" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
       case 'created':
       case 'running':
         return (
           <React.Fragment>
-            <SimpleTooltip key="pauseButton" id="pauseTip" tooltip="Pause Scan">
+            <Tooltip key="pauseButton" tooltip="Pause Scan">
               <Button onClick={() => onPause(item)} bsStyle="link">
                 <Icon type="fa" name="pause" aria-label="Pause" />
               </Button>
-            </SimpleTooltip>
-            <SimpleTooltip key="stop" id="stopTip" tooltip="Cancel Scan">
+            </Tooltip>
+            <Tooltip key="stop" tooltip="Cancel Scan">
               <Button onClick={() => onCancel(item)} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       case 'paused':
         return (
-          <SimpleTooltip id="resumeTip" tooltip="Resume Scan">
+          <Tooltip tooltip="Resume Scan">
             <Button key="resumeButton" onClick={() => onResume(item)} bsStyle="link">
               <Icon type="fa" name="play" aria-label="Resume" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
       case 'pending':
         return (
           <React.Fragment>
-            <SimpleTooltip key="stop" id="stopTip" tooltip="Cancel Scan">
+            <Tooltip key="stop" tooltip="Cancel Scan">
               <Button onClick={() => onCancel(item)} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       default:
         return (
-          <SimpleTooltip id="startTip" tooltip="Start Scan">
+          <Tooltip tooltip="Start Scan">
             <Button onClick={() => onStart(item)} bsStyle="link">
               <Icon type="fa" name="play" aria-label="Start" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
     }
   }

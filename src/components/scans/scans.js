@@ -10,7 +10,7 @@ import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import ScansEmptyState from './scansEmptyState';
 import ScanListItem from './scanListItem';
 import { ScanFilterFields, ScanSortFields } from './scanConstants';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import MergeReportsDialog from '../mergeReportsDialog/mergeReportsDialog';
 
 class Scans extends React.Component {
@@ -339,11 +339,7 @@ class Scans extends React.Component {
 
     return (
       <div className="form-group">
-        <SimpleTooltip
-          key="mergeButtonTip"
-          id="mergeButtonTip"
-          tooltip="Merge selected scan results into a single report"
-        >
+        <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
           <DropdownButton key="mergeButton" title="Merge Report" id="merge-reports-dropdown" disabled={!mergeAllowed}>
             <MenuItem eventKey="1" onClick={() => this.onMergeScanResults(false)}>
               Summary Report
@@ -352,7 +348,7 @@ class Scans extends React.Component {
               Detailed Report
             </MenuItem>
           </DropdownButton>
-        </SimpleTooltip>
+        </Tooltip>
         {deleteAction}
       </div>
     );

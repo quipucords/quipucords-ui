@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Component should render a popover: popover 1`] = `
+<Tooltip
+  delayShow={500}
+  id="test"
+  placement="top"
+  popover="hello world"
+  rootClose={true}
+  tooltip={null}
+  trigger={
+    Array [
+      "hover",
+    ]
+  }
+>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    delayShow={500}
+    overlay={
+      <Popover
+        bsClass="popover"
+        id="test"
+        placement="right"
+      >
+        hello world
+      </Popover>
+    }
+    placement="top"
+    rootClose={true}
+    trigger={
+      Array [
+        "hover",
+      ]
+    }
+  >
+    <span
+      onClick={null}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      Test popover
+    </span>
+  </OverlayTrigger>
+</Tooltip>
+`;
+
+exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
+<Tooltip
+  delayShow={500}
+  id="test"
+  placement="top"
+  popover={null}
+  rootClose={true}
+  tooltip="hello world"
+  trigger={
+    Array [
+      "hover",
+    ]
+  }
+>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    delayShow={500}
+    overlay={
+      <Tooltip
+        bsClass="tooltip"
+        id="test"
+        placement="right"
+      >
+        hello world
+      </Tooltip>
+    }
+    placement="top"
+    rootClose={true}
+    trigger={
+      Array [
+        "hover",
+      ]
+    }
+  >
+    <span
+      onClick={null}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      Test tooltip
+    </span>
+  </OverlayTrigger>
+</Tooltip>
+`;

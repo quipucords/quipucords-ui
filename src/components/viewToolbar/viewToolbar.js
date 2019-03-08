@@ -4,7 +4,7 @@ import { Button, Filter, Sort, Toolbar } from 'patternfly-react';
 import _ from 'lodash';
 import Store from '../../redux/store';
 import { viewToolbarTypes } from '../../redux/constants';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import RefreshTimeButton from '../refreshTimeButton/refreshTimeButton';
 import helpers from '../../common/helpers';
 
@@ -184,13 +184,13 @@ class ViewToolbar extends React.Component {
             currentSortType={sortType}
             onSortTypeSelected={this.onUpdateCurrentSortType}
           />
-          <SimpleTooltip id="sortTip" tooltip={`Sort by ${sortType.title}`}>
+          <Tooltip tooltip={`Sort by ${sortType.title}`}>
             <Sort.DirectionSelector
               isNumeric={sortType.isNumeric}
               isAscending={sortAscending}
               onClick={() => this.onToggleCurrentSortDirection()}
             />
-          </SimpleTooltip>
+          </Tooltip>
         </Sort>
       );
     }

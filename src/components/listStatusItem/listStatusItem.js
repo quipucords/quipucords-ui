@@ -3,20 +3,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon, ListView } from 'patternfly-react';
 import _ from 'lodash';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import helpers from '../../common/helpers';
 
-const ListStatusItem = ({
-  id,
-  count,
-  emptyText,
-  tipSingular,
-  tipPlural,
-  expanded,
-  expandType,
-  toggleExpand,
-  iconInfo
-}) => {
+const ListStatusItem = ({ count, emptyText, tipSingular, tipPlural, expanded, expandType, toggleExpand, iconInfo }) => {
   const renderExpandContent = (displayIconInfo, displayCount, text) => {
     if (displayIconInfo) {
       const classes = cx('list-view-compound-item-icon', ..._.get(displayIconInfo, 'classNames', []));
@@ -39,7 +29,7 @@ const ListStatusItem = ({
   if (count > 0) {
     return (
       <ListView.InfoItem className="list-view-info-item-icon-count">
-        <SimpleTooltip id={`${id}_tip`} tooltip={`${count}  ${count === 1 ? tipSingular : tipPlural}`}>
+        <Tooltip tooltip={`${count}  ${count === 1 ? tipSingular : tipPlural}`}>
           <ListView.Expand
             expanded={expanded}
             toggleExpanded={() => {
@@ -48,22 +38,21 @@ const ListStatusItem = ({
           >
             {renderExpandContent(iconInfo, count, tipPlural)}
           </ListView.Expand>
-        </SimpleTooltip>
+        </Tooltip>
       </ListView.InfoItem>
     );
   }
 
   return (
     <ListView.InfoItem className="list-view-info-item-icon-count empty-count">
-      <SimpleTooltip id={`${id}_tip`} tooltip={`0 ${tipPlural}`}>
+      <Tooltip tooltip={`0 ${tipPlural}`}>
         <span>{emptyText}</span>
-      </SimpleTooltip>
+      </Tooltip>
     </ListView.InfoItem>
   );
 };
 
 ListStatusItem.propTypes = {
-  id: PropTypes.string,
   count: PropTypes.number,
   emptyText: PropTypes.string,
   tipSingular: PropTypes.string,
@@ -75,7 +64,6 @@ ListStatusItem.propTypes = {
 };
 
 ListStatusItem.defaultProps = {
-  id: null,
   count: 0,
   emptyText: null,
   tipSingular: null,

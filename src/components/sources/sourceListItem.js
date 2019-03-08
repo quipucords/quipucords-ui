@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { connect } from 'react-redux';
-import { Button, Checkbox, Grid, Icon, ListView, OverlayTrigger, Popover } from 'patternfly-react';
+import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
 import _ from 'lodash';
 import * as moment from 'moment';
 import { helpers } from '../../common/helpers';
@@ -11,7 +11,7 @@ import Store from '../../redux/store';
 import { viewTypes } from '../../redux/constants';
 import SourceCredentialsList from './sourceCredentialsList';
 import ScanHostList from '../scanHostList/scanHostList';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import ToolTip from '../tooltip/tooltip';
 import ListStatusItem from '../listStatusItem/listStatusItem';
 
 class SourceListItem extends React.Component {
@@ -89,9 +89,9 @@ class SourceListItem extends React.Component {
     const typeIcon = helpers.sourceTypeIcon(item.source_type);
 
     return (
-      <SimpleTooltip id="sourceTypeTip" tooltip={dictionary[item.source_type]}>
+      <ToolTip tooltip={dictionary[item.source_type]}>
         <ListView.Icon type={typeIcon.type} name={typeIcon.name} />
-      </SimpleTooltip>
+      </ToolTip>
     );
   }
 
@@ -100,16 +100,16 @@ class SourceListItem extends React.Component {
 
     return (
       <span>
-        <SimpleTooltip id="editTip" tooltip="Edit">
+        <ToolTip tooltip="Edit">
           <Button onClick={() => onEdit(item)} bsStyle="link" key="editButton">
             <Icon type="pf" name="edit" aria-label="Edit" />
           </Button>
-        </SimpleTooltip>
-        <SimpleTooltip id="deleteTip" tooltip="Delete">
+        </ToolTip>
+        <ToolTip tooltip="Delete">
           <Button onClick={() => onDelete(item)} bsStyle="link" key="removeButton">
             <Icon type="pf" name="delete" aria-label="Delete" />
           </Button>
-        </SimpleTooltip>
+        </ToolTip>
         <Button onClick={() => onScan(item)} key="scanButton">
           Scan
         </Button>
@@ -255,7 +255,7 @@ class SourceListItem extends React.Component {
     const { item } = this.props;
 
     const itemHostsPopover = (
-      <Popover id={helpers.generateId()} className="quipucords-sources-popover-scroll">
+      <div className="quipucords-sources-popover-scroll">
         {item.hosts && item.hosts.length > 1 && (
           <ul className="quipucords-popover-list">
             {item.hosts.map(host => (
@@ -264,7 +264,7 @@ class SourceListItem extends React.Component {
           </ul>
         )}
         {item.hosts && item.hosts.length === 1 && <div>{item.hosts[0]}</div>}
-      </Popover>
+      </div>
     );
 
     let itemDescription;
@@ -273,11 +273,11 @@ class SourceListItem extends React.Component {
       if (item.source_type === 'network') {
         itemDescription = (
           <ListView.DescriptionText>
-            <OverlayTrigger trigger="click" rootClose placement="left" overlay={itemHostsPopover}>
+            <ToolTip delayShow={100} popover={itemHostsPopover} trigger="click" placement="left">
               <Button bsStyle="link" className="quipucords-sources-network-button">
                 Network Range
               </Button>
-            </OverlayTrigger>
+            </ToolTip>
           </ListView.DescriptionText>
         );
       } else {

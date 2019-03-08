@@ -6,7 +6,7 @@ import { ListView, Button, Grid, Icon, Checkbox } from 'patternfly-react';
 import _ from 'lodash';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import Store from '../../redux/store';
 import { viewTypes } from '../../redux/constants';
 
@@ -69,7 +69,7 @@ class CredentialListItem extends React.Component {
     const { item, onEdit, onDelete } = this.props;
 
     return [
-      <SimpleTooltip key="editButton" id="editTip" tooltip="Edit Credential">
+      <Tooltip key="editButton" tooltip="Edit Credential">
         <Button
           onClick={() => {
             onEdit(item);
@@ -79,8 +79,8 @@ class CredentialListItem extends React.Component {
         >
           <Icon type="pf" name="edit" />
         </Button>
-      </SimpleTooltip>,
-      <SimpleTooltip key="deleteButton" id="deleteTip" tooltip="Delete Credential">
+      </Tooltip>,
+      <Tooltip key="deleteButton" tooltip="Delete Credential">
         <Button
           onClick={() => {
             onDelete(item);
@@ -90,7 +90,7 @@ class CredentialListItem extends React.Component {
         >
           <Icon type="pf" name="delete" />
         </Button>
-      </SimpleTooltip>
+      </Tooltip>
     ];
   }
 
@@ -131,9 +131,9 @@ class CredentialListItem extends React.Component {
                 <Grid.Row key={source.name}>
                   <Grid.Col xs={12} sm={4}>
                     <span>
-                      <SimpleTooltip id="sourceTypeTip" tooltip={dictionary[source.source_type]}>
+                      <Tooltip tooltip={dictionary[source.source_type]}>
                         <Icon type={typeIcon.type} name={typeIcon.name} />
-                      </SimpleTooltip>
+                      </Tooltip>
                       &nbsp; {source.name}
                     </span>
                   </Grid.Col>
@@ -157,9 +157,9 @@ class CredentialListItem extends React.Component {
     });
 
     const leftContent = (
-      <SimpleTooltip id="credentialTypeTip" tooltip={dictionary[item.cred_type]}>
+      <Tooltip tooltip={dictionary[item.cred_type]}>
         <ListView.Icon type={sourceTypeIcon.type} name={sourceTypeIcon.name} />
-      </SimpleTooltip>
+      </Tooltip>
     );
 
     const description = (
@@ -168,9 +168,7 @@ class CredentialListItem extends React.Component {
           <ListView.DescriptionHeading>{item.name}</ListView.DescriptionHeading>
         </span>
         <span className="quipucords-description-right">
-          <SimpleTooltip id="methodTip" tooltip="Authorization Type">
-            {dictionary[CredentialListItem.authType(item)]}
-          </SimpleTooltip>
+          <Tooltip tooltip="Authorization Type">{dictionary[CredentialListItem.authType(item)]}</Tooltip>
         </span>
       </div>
     );
