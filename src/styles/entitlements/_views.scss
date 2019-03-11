@@ -288,46 +288,6 @@
   margin-left: 10px;
 }
 
-.form-split-button {
-  .dropdown {
-    display: flex;
-    width: 100%;
-    .form-control.btn {
-      text-align: left;
-    }
-    ul {
-      min-width: 100%;
-    }
-  }
-}
-
-.confirm-modal-body {
-  display: flex;
-  font-size: 16px;
-
-  .confirm-modal-icon {
-    font-size: 3em;
-    margin-right: 20px;
-  }
-
-  .confirm-modal-content {
-    display: flex;
-    flex-direction: column;
-
-    .spacer {
-      flex: 1;
-    }
-
-    p:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-
-  .confirm-modal-content-heading {
-    margin-bottom: 10px;
-  }
-}
-
 .pficon.pficon-disconnected.is-error::before {
   color: $color-pf-red-100;
 }
