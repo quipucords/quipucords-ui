@@ -46,10 +46,14 @@ describe('CredentialsActions', () => {
     });
   });
 
-  it('Should return response content for getCredential method', () => {
+  it('Should return response content for getCredential method', done => {
+    const store = generateStore();
     const dispatcher = credentialsActions.getCredential();
 
-    expect(dispatcher).toBeDefined();
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('getCredential');
+      done();
+    });
   });
 
   it('Should return response content for getCredentials method', done => {

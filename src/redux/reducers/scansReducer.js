@@ -273,62 +273,6 @@ const scansReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(scansTypes.ADD_SCAN):
-      return helpers.setStateProp(
-        'action',
-        {
-          pending: false,
-          add: true,
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case helpers.PENDING_ACTION(scansTypes.ADD_SCAN):
-      return helpers.setStateProp(
-        'action',
-        {
-          add: true,
-          pending: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case helpers.FULFILLED_ACTION(scansTypes.ADD_SCAN):
-      return helpers.setStateProp(
-        'action',
-        {
-          add: true,
-          pending: false,
-          fulfilled: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case scansTypes.RESET_SCAN_ADD_STATUS:
-      return helpers.setStateProp(
-        'action',
-        {
-          error: false,
-          errorMessage: '',
-          fulfilled: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
     case helpers.REJECTED_ACTION(scansTypes.START_SCAN):
       return helpers.setStateProp(
         'action',

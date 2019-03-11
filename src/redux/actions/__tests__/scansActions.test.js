@@ -1,7 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import moxios from 'moxios';
-import { scansReducer } from '../../reducers';
+import { scansReducer, scansEditReducer } from '../../reducers';
 import { scansActions } from '..';
 
 describe('ScansActions', () => {
@@ -9,7 +9,8 @@ describe('ScansActions', () => {
   const generateStore = () =>
     createStore(
       combineReducers({
-        scans: scansReducer
+        scans: scansReducer,
+        scansEdit: scansEditReducer
       }),
       applyMiddleware(...middleware)
     );
@@ -37,9 +38,19 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.addScan();
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansEdit;
 
-      expect(response.action.add).toEqual(true);
+      expect(response.add).toEqual(true);
+      done();
+    });
+  });
+
+  it('Should return response content for addStartScan method', done => {
+    const store = generateStore();
+    const dispatcher = scansActions.addStartScan();
+
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('addStartScan');
       done();
     });
   });
@@ -68,16 +79,24 @@ describe('ScansActions', () => {
     });
   });
 
-  it('Should return response content for updateScan method', () => {
+  it('Should return response content for updateScan method', done => {
+    const store = generateStore();
     const dispatcher = scansActions.updateScan();
 
-    expect(dispatcher).toBeDefined();
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('updateScan');
+      done();
+    });
   });
 
-  it('Should return response content for updatePartialScan method', () => {
+  it('Should return response content for updatePartialScan method', done => {
+    const store = generateStore();
     const dispatcher = scansActions.updatePartialScan();
 
-    expect(dispatcher).toBeDefined();
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('updatePartialScan');
+      done();
+    });
   });
 
   it('Should return response content for deleteScan method', done => {
@@ -116,10 +135,14 @@ describe('ScansActions', () => {
     });
   });
 
-  it('Should return response content for getScanJob method', () => {
+  it('Should return response content for getScanJob method', done => {
+    const store = generateStore();
     const dispatcher = scansActions.getScanJob();
 
-    expect(dispatcher).toBeDefined();
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('getScanJob');
+      done();
+    });
   });
 
   it('Should return response content for getConnectionScanResults method', done => {
