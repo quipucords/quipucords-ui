@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Alert, EmptyState, Modal, VerticalNav } from 'patternfly-react';
-import _ from 'lodash';
+import _get from 'lodash/get';
+import _startsWith from 'lodash/startsWith';
 import { routes } from '../routes';
-import { reduxActions } from '../redux/actions';
+import { connect, reduxActions } from '../redux';
 import helpers from '../common/helpers';
 import About from './about/about';
 import AddSourceWizard from './addSourceWizard/addSourceWizard';
@@ -37,7 +37,7 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { getUser } = this.props;
 
-    if (_.get(nextProps, 'session.loggedIn') && !_.get(this.props, 'session.loggedIn')) {
+    if (_get(nextProps, 'session.loggedIn') && !_get(this.props, 'session.loggedIn')) {
       getUser();
     }
   }
@@ -58,7 +58,7 @@ class App extends React.Component {
   renderMenuItems() {
     const { location } = this.props;
 
-    const activeItem = this.menu.find(item => _.startsWith(location.pathname, item.to));
+    const activeItem = this.menu.find(item => _startsWith(location.pathname, item.to));
 
     return this.menu.map(item => (
       <VerticalNav.Item

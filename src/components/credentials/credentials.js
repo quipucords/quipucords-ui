@@ -1,18 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Alert, Button, DropdownButton, EmptyState, Form, Grid, ListView, MenuItem, Modal } from 'patternfly-react';
-import _ from 'lodash';
-import { reduxActions } from '../../redux/actions';
-import {
-  confirmationModalTypes,
-  credentialsTypes,
-  sourcesTypes,
-  toastNotificationTypes,
-  viewToolbarTypes,
-  viewTypes
-} from '../../redux/constants';
-import Store from '../../redux/store';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
+import _size from 'lodash/size';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
@@ -39,7 +31,7 @@ class Credentials extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { credentials, fulfilled, update, viewOptions } = this.props;
 
-    if (!_.isEqual(nextProps.credentials, credentials) && nextProps.fulfilled && !fulfilled) {
+    if (!_isEqual(nextProps.credentials, credentials) && nextProps.fulfilled && !fulfilled) {
       this.setState({ lastRefresh: Date.now() });
     }
 
@@ -48,10 +40,10 @@ class Credentials extends React.Component {
       this.onRefresh(nextProps);
     }
 
-    if (_.get(nextProps, 'update.delete')) {
+    if (_get(nextProps, 'update.delete')) {
       if (nextProps.update.fulfilled && !update.fulfilled) {
-        Store.dispatch({
-          type: toastNotificationTypes.TOAST_ADD,
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: 'success',
           message: (
             <span>
@@ -61,9 +53,9 @@ class Credentials extends React.Component {
         });
         this.onRefresh(nextProps);
 
-        Store.dispatch({
-          type: viewTypes.DESELECT_ITEM,
-          viewType: viewTypes.CREDENTIALS_VIEW,
+        store.dispatch({
+          type: reduxTypes.view.DESELECT_ITEM,
+          viewType: reduxTypes.view.CREDENTIALS_VIEW,
           item: this.deletingCredential
         });
 
@@ -71,8 +63,8 @@ class Credentials extends React.Component {
       }
 
       if (nextProps.update.error && !update.error) {
-        Store.dispatch({
-          type: toastNotificationTypes.TOAST_ADD,
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: 'error',
           header: 'Error',
           message: (
@@ -89,8 +81,8 @@ class Credentials extends React.Component {
   }
 
   onAddCredential = credentialType => {
-    Store.dispatch({
-      type: credentialsTypes.CREATE_CREDENTIAL_SHOW,
+    store.dispatch({
+      type: reduxTypes.credentials.CREATE_CREDENTIAL_SHOW,
       credentialType
     });
   };
@@ -125,8 +117,8 @@ class Credentials extends React.Component {
 
     const onConfirm = () => this.doDeleteCredentials(viewOptions.selectedItems);
 
-    Store.dispatch({
-      type: confirmationModalTypes.CONFIRMATION_MODAL_SHOW,
+    store.dispatch({
+      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
       title: 'Delete Credentials',
       heading,
       body,
@@ -136,8 +128,8 @@ class Credentials extends React.Component {
   };
 
   onEditCredential = item => {
-    Store.dispatch({
-      type: credentialsTypes.EDIT_CREDENTIAL_SHOW,
+    store.dispatch({
+      type: reduxTypes.credentials.EDIT_CREDENTIAL_SHOW,
       credential: item
     });
   };
@@ -151,8 +143,8 @@ class Credentials extends React.Component {
 
     const onConfirm = () => this.doDeleteCredentials([item]);
 
-    Store.dispatch({
-      type: confirmationModalTypes.CONFIRMATION_MODAL_SHOW,
+    store.dispatch({
+      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
       title: 'Delete Credential',
       heading,
       confirmButtonText: 'Delete',
@@ -161,22 +153,22 @@ class Credentials extends React.Component {
   };
 
   onAddSource = () => {
-    Store.dispatch({
-      type: sourcesTypes.CREATE_SOURCE_SHOW
+    store.dispatch({
+      type: reduxTypes.sources.CREATE_SOURCE_SHOW
     });
   };
 
   onRefresh = props => {
     const { getCredentials, viewOptions } = this.props;
-    const options = _.get(props, 'viewOptions') || viewOptions;
+    const options = _get(props, 'viewOptions') || viewOptions;
 
     getCredentials(helpers.createViewQueryObject(options));
   };
 
   onClearFilters = () => {
-    Store.dispatch({
-      type: viewToolbarTypes.CLEAR_FILTERS,
-      viewType: viewTypes.CREDENTIALS_VIEW
+    store.dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
+      viewType: reduxTypes.view.CREDENTIALS_VIEW
     });
   };
 
@@ -194,8 +186,8 @@ class Credentials extends React.Component {
   doDeleteCredentials(items) {
     this.credentialsToDelete = [...items];
 
-    Store.dispatch({
-      type: confirmationModalTypes.CONFIRMATION_MODAL_HIDE
+    store.dispatch({
+      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_HIDE
     });
 
     this.deleteNextCredential();
@@ -245,7 +237,7 @@ class Credentials extends React.Component {
   }
 
   renderCredentialsList(items) {
-    if (_.size(items)) {
+    if (_size(items)) {
       return (
         <ListView className="quipicords-list-view">
           {items.map(item => (
@@ -288,12 +280,12 @@ class Credentials extends React.Component {
       );
     }
 
-    if (_.size(credentials) || _.size(viewOptions.activeFilters)) {
+    if (_size(credentials) || _size(viewOptions.activeFilters)) {
       return (
         <React.Fragment>
           <div className="quipucords-view-container">
             <ViewToolbar
-              viewType={viewTypes.CREDENTIALS_VIEW}
+              viewType={reduxTypes.view.CREDENTIALS_VIEW}
               filterFields={CredentialFilterFields}
               sortFields={CredentialSortFields}
               onRefresh={this.onRefresh}
@@ -304,7 +296,7 @@ class Credentials extends React.Component {
               selectedCount={viewOptions.selectedItems.length}
               {...viewOptions}
             />
-            <ViewPaginationRow viewType={viewTypes.CREDENTIALS_VIEW} {...viewOptions} />
+            <ViewPaginationRow viewType={reduxTypes.view.CREDENTIALS_VIEW} {...viewOptions} />
             <div className="quipucords-list-container">{this.renderCredentialsList(credentials)}</div>
           </div>
           {this.renderPendingMessage()}
@@ -352,7 +344,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state =>
   Object.assign({}, state.credentials.view, {
-    viewOptions: state.viewOptions[viewTypes.CREDENTIALS_VIEW],
+    viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW],
     update: state.credentials.update
   });
 

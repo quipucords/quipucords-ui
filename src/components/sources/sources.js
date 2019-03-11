@@ -1,49 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Alert, Button, EmptyState, ListView, Modal } from 'patternfly-react';
-import _ from 'lodash';
-import { reduxActions } from '../../redux/actions';
-import {
-  sourcesTypes,
-  toastNotificationTypes,
-  confirmationModalTypes,
-  viewTypes,
-  viewToolbarTypes
-} from '../../redux/constants';
-import Store from '../../redux/store';
+import _get from 'lodash/get';
+import _size from 'lodash/size';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import SourcesEmptyState from './sourcesEmptyState';
 import SourceListItem from './sourceListItem';
-import CreateScanDialog from './createScanDialog';
+import CreateScanDialog from '../createScanDialog/createScanDialog';
 import { SourceFilterFields, SourceSortFields } from './sourceConstants';
 
 class Sources extends React.Component {
   static notifyDeleteStatus(item, error, results) {
     try {
       if (error) {
-        Store.dispatch({
-          type: toastNotificationTypes.TOAST_ADD,
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: 'error',
           header: 'Error',
           message: helpers.getMessageFromResults(results).message
         });
       } else {
-        Store.dispatch({
-          type: toastNotificationTypes.TOAST_ADD,
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: 'success',
           message: (
             <span>
-              Deleted source <strong>{_.get(item, 'name')}</strong>.
+              Deleted source <strong>{_get(item, 'name')}</strong>.
             </span>
           )
         });
 
-        Store.dispatch({
-          type: viewTypes.DESELECT_ITEM,
-          viewType: viewTypes.SOURCES_VIEW,
+        store.dispatch({
+          type: reduxTypes.view.DESELECT_ITEM,
+          viewType: reduxTypes.view.SOURCES_VIEW,
           item
         });
       }
@@ -52,16 +44,12 @@ class Sources extends React.Component {
     }
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      scanDialogShown: false,
-      multiSourceScan: false,
-      currentScanSource: null,
-      lastRefresh: null
-    };
-  }
+  state = {
+    scanDialogShown: false,
+    multiSourceScan: false,
+    currentScanSource: null,
+    lastRefresh: null
+  };
 
   componentDidMount() {
     this.onRefresh();
@@ -85,14 +73,14 @@ class Sources extends React.Component {
   }
 
   onShowAddSourceWizard = () => {
-    Store.dispatch({
-      type: sourcesTypes.CREATE_SOURCE_SHOW
+    store.dispatch({
+      type: reduxTypes.sources.CREATE_SOURCE_SHOW
     });
   };
 
   onEditSource = item => {
-    Store.dispatch({
-      type: sourcesTypes.EDIT_SOURCE_SHOW,
+    store.dispatch({
+      type: reduxTypes.sources.EDIT_SOURCE_SHOW,
       source: item
     });
   };
@@ -126,8 +114,8 @@ class Sources extends React.Component {
 
     const onConfirm = () => this.doDeleteSource(item);
 
-    Store.dispatch({
-      type: confirmationModalTypes.CONFIRMATION_MODAL_SHOW,
+    store.dispatch({
+      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
       title: 'Delete Source',
       heading,
       confirmButtonText: 'Delete',
@@ -137,23 +125,23 @@ class Sources extends React.Component {
 
   onRefresh = props => {
     const { getSources, viewOptions } = this.props;
-    const options = _.get(props, 'viewOptions') || viewOptions;
+    const options = _get(props, 'viewOptions') || viewOptions;
 
     getSources(helpers.createViewQueryObject(options));
   };
 
   onClearFilters = () => {
-    Store.dispatch({
-      type: viewToolbarTypes.CLEAR_FILTERS,
-      viewType: viewTypes.SOURCES_VIEW
+    store.dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
+      viewType: reduxTypes.view.SOURCES_VIEW
     });
   };
 
   doDeleteSource(item) {
     const { deleteSource } = this.props;
 
-    Store.dispatch({
-      type: confirmationModalTypes.CONFIRMATION_MODAL_HIDE
+    store.dispatch({
+      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_HIDE
     });
 
     deleteSource(item.id).then(
@@ -200,7 +188,7 @@ class Sources extends React.Component {
   renderSourcesList(items) {
     const { lastRefresh } = this.state;
 
-    if (_.size(items)) {
+    if (_size(items)) {
       return (
         <ListView className="quipicords-list-view">
           {items.map(item => (
@@ -245,12 +233,12 @@ class Sources extends React.Component {
       );
     }
 
-    if (_.size(sources) || _.size(viewOptions.activeFilters)) {
+    if (_size(sources) || _size(viewOptions.activeFilters)) {
       return (
         <React.Fragment>
           <div className="quipucords-view-container">
             <ViewToolbar
-              viewType={viewTypes.SOURCES_VIEW}
+              viewType={reduxTypes.view.SOURCES_VIEW}
               filterFields={SourceFilterFields}
               sortFields={SourceSortFields}
               onRefresh={this.onRefresh}
@@ -261,7 +249,7 @@ class Sources extends React.Component {
               selectedCount={viewOptions.selectedItems.length}
               {...viewOptions}
             />
-            <ViewPaginationRow viewType={viewTypes.SOURCES_VIEW} {...viewOptions} />
+            <ViewPaginationRow viewType={reduxTypes.view.SOURCES_VIEW} {...viewOptions} />
             <div className="quipucords-list-container">{this.renderSourcesList(sources)}</div>
           </div>
           {this.renderPendingMessage()}
@@ -320,7 +308,7 @@ const mapStateToProps = state =>
   Object.assign(
     {},
     state.sources.view,
-    { viewOptions: state.viewOptions[viewTypes.SOURCES_VIEW] },
+    { viewOptions: state.viewOptions[reduxTypes.view.SOURCES_VIEW] },
     { deleted: state.sources.update.fulfilled }
   );
 

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Filter, Sort, Toolbar } from 'patternfly-react';
-import _ from 'lodash';
-import Store from '../../redux/store';
-import { viewToolbarTypes } from '../../redux/constants';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import _size from 'lodash/size';
+import { reduxTypes, store } from '../../redux';
+import Tooltip from '../tooltip/tooltip';
 import RefreshTimeButton from '../refreshTimeButton/refreshTimeButton';
 import helpers from '../../common/helpers';
 
@@ -39,8 +38,8 @@ class ViewToolbar extends React.Component {
     }
 
     const filter = { field, value, label: filterText };
-    Store.dispatch({
-      type: viewToolbarTypes.ADD_FILTER,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.ADD_FILTER,
       viewType,
       filter
     });
@@ -48,8 +47,8 @@ class ViewToolbar extends React.Component {
 
   onSelectFilterType = filterType => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewToolbarTypes.SET_FILTER_TYPE,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.SET_FILTER_TYPE,
       viewType,
       filterType
     });
@@ -58,8 +57,8 @@ class ViewToolbar extends React.Component {
   onFilterValueSelected = newFilterValue => {
     const { filterType, viewType } = this.props;
 
-    Store.dispatch({
-      type: viewToolbarTypes.SET_FILTER_VALUE,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.SET_FILTER_VALUE,
       viewType,
       filterValue: newFilterValue
     });
@@ -73,8 +72,8 @@ class ViewToolbar extends React.Component {
     const { viewType } = this.props;
     const filterValue = event.target.value;
 
-    Store.dispatch({
-      type: viewToolbarTypes.SET_FILTER_VALUE,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.SET_FILTER_VALUE,
       viewType,
       filterValue
     });
@@ -92,8 +91,8 @@ class ViewToolbar extends React.Component {
 
   onRemoveFilter = filter => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewToolbarTypes.REMOVE_FILTER,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.REMOVE_FILTER,
       viewType,
       filter
     });
@@ -101,16 +100,16 @@ class ViewToolbar extends React.Component {
 
   onClearFilters = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewToolbarTypes.CLEAR_FILTERS,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
       viewType
     });
   };
 
   onUpdateCurrentSortType = sortType => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewToolbarTypes.SET_SORT_TYPE,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.SET_SORT_TYPE,
       viewType,
       sortType
     });
@@ -118,8 +117,8 @@ class ViewToolbar extends React.Component {
 
   onToggleCurrentSortDirection = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewToolbarTypes.TOGGLE_SORT_ASCENDING,
+    store.dispatch({
+      type: reduxTypes.viewToolbar.TOGGLE_SORT_ASCENDING,
       viewType
     });
   };
@@ -157,7 +156,7 @@ class ViewToolbar extends React.Component {
   renderFilter() {
     const { filterType, filterFields } = this.props;
 
-    if (_.size(filterFields)) {
+    if (_size(filterFields)) {
       return (
         <Filter>
           <Filter.TypeSelector
@@ -184,13 +183,13 @@ class ViewToolbar extends React.Component {
             currentSortType={sortType}
             onSortTypeSelected={this.onUpdateCurrentSortType}
           />
-          <SimpleTooltip id="sortTip" tooltip={`Sort by ${sortType.title}`}>
+          <Tooltip tooltip={`Sort by ${sortType.title}`}>
             <Sort.DirectionSelector
               isNumeric={sortType.isNumeric}
               isAscending={sortAscending}
               onClick={() => this.onToggleCurrentSortDirection()}
             />
-          </SimpleTooltip>
+          </Tooltip>
         </Sort>
       );
     }
@@ -223,7 +222,7 @@ class ViewToolbar extends React.Component {
   renderActiveFilters() {
     const { activeFilters } = this.props;
 
-    if (_.size(activeFilters)) {
+    if (_size(activeFilters)) {
       return [
         <Filter.ActiveLabel key="label">Active Filters:</Filter.ActiveLabel>,
         <Filter.List key="list">

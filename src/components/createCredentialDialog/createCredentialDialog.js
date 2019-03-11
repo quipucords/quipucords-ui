@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Modal, Alert, Button, Icon, Form, Grid } from 'patternfly-react';
-import Store from '../../redux/store';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { authDictionary, dictionary } from '../../constants/dictionaryConstants';
-import { credentialsTypes, toastNotificationTypes, viewTypes } from '../../redux/constants';
-import { reduxActions } from '../../redux/actions';
 import DropdownSelect from '../dropdownSelect/dropdownSelect';
 
 class CreateCredentialDialog extends React.Component {
@@ -83,8 +80,8 @@ class CreateCredentialDialog extends React.Component {
     }
 
     if (show && nextProps.fulfilled && !fulfilled) {
-      Store.dispatch({
-        type: toastNotificationTypes.TOAST_ADD,
+      store.dispatch({
+        type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'success',
         message: (
           <span>
@@ -100,8 +97,8 @@ class CreateCredentialDialog extends React.Component {
   }
 
   onCancel = () => {
-    Store.dispatch({
-      type: credentialsTypes.UPDATE_CREDENTIAL_HIDE
+    store.dispatch({
+      type: reduxTypes.credentials.UPDATE_CREDENTIAL_HIDE
     });
   };
 
@@ -212,8 +209,8 @@ class CreateCredentialDialog extends React.Component {
   };
 
   onErrorDismissed = () => {
-    Store.dispatch({
-      type: credentialsTypes.RESET_CREDENTIAL_UPDATE_STATUS
+    store.dispatch({
+      type: reduxTypes.credentials.RESET_CREDENTIAL_UPDATE_STATUS
     });
   };
 
@@ -537,9 +534,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state =>
-  Object.assign({}, state.credentials.update, {
-    viewOptions: state.viewOptions[viewTypes.CREDENTIALS_VIEW]
-  });
+  Object.assign({}, state.credentials.update, { viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW] });
 
 const ConnectedCreateCredentialDialog = connect(
   mapStateToProps,

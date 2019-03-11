@@ -1,46 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PaginationRow, PAGINATION_VIEW } from 'patternfly-react';
-import Store from '../../redux/store';
-import { viewPaginationTypes } from '../../redux/constants';
+import { reduxTypes, store } from '../../redux';
 
 class ViewPaginationRow extends React.Component {
   onFirstPage = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.VIEW_FIRST_PAGE,
+    store.dispatch({
+      type: reduxTypes.viewPagination.VIEW_FIRST_PAGE,
       viewType
     });
   };
 
   onLastPage = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.VIEW_LAST_PAGE,
+    store.dispatch({
+      type: reduxTypes.viewPagination.VIEW_LAST_PAGE,
       viewType
     });
   };
 
   onPreviousPage = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.VIEW_PREVIOUS_PAGE,
+    store.dispatch({
+      type: reduxTypes.viewPagination.VIEW_PREVIOUS_PAGE,
       viewType
     });
   };
 
   onNextPage = () => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.VIEW_NEXT_PAGE,
+    store.dispatch({
+      type: reduxTypes.viewPagination.VIEW_NEXT_PAGE,
       viewType
     });
   };
 
   onPageInput = e => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.VIEW_PAGE_NUMBER,
+    store.dispatch({
+      type: reduxTypes.viewPagination.VIEW_PAGE_NUMBER,
       viewType,
       pageNumber: parseInt(e.target.value, 10)
     });
@@ -48,8 +47,8 @@ class ViewPaginationRow extends React.Component {
 
   onPerPageSelect = eventKey => {
     const { viewType } = this.props;
-    Store.dispatch({
-      type: viewPaginationTypes.SET_PER_PAGE,
+    store.dispatch({
+      type: reduxTypes.viewPagination.SET_PER_PAGE,
       viewType,
       pageSize: eventKey
     });

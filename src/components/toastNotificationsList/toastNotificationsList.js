@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ToastNotificationList, TimedToastNotification } from 'patternfly-react';
-import { connect } from 'react-redux';
-import Store from '../../redux/store';
-import { toastNotificationTypes } from '../../redux/constants';
+import { connect, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 
 class ToastNotificationsList extends React.Component {
   onHover = () => {
-    Store.dispatch({ type: toastNotificationTypes.TOAST_PAUSE });
+    store.dispatch({ type: reduxTypes.toastNotifications.TOAST_PAUSE });
   };
 
   onLeave = () => {
-    Store.dispatch({ type: toastNotificationTypes.TOAST_RESUME });
+    store.dispatch({ type: reduxTypes.toastNotifications.TOAST_RESUME });
   };
 
   onDismiss = toast => {
-    Store.dispatch({
-      type: toastNotificationTypes.TOAST_REMOVE,
+    store.dispatch({
+      type: reduxTypes.toastNotifications.TOAST_REMOVE,
       toast
     });
   };

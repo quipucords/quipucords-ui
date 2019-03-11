@@ -1,28 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { connect } from 'react-redux';
-import { Button, Checkbox, Grid, Icon, ListView, OverlayTrigger, Popover } from 'patternfly-react';
-import _ from 'lodash';
+import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
+import _find from 'lodash/find';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
+import _size from 'lodash/size';
 import * as moment from 'moment';
+import { connect, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
-import Store from '../../redux/store';
-import { viewTypes } from '../../redux/constants';
 import SourceCredentialsList from './sourceCredentialsList';
 import ScanHostList from '../scanHostList/scanHostList';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import ToolTip from '../tooltip/tooltip';
 import ListStatusItem from '../listStatusItem/listStatusItem';
 
 class SourceListItem extends React.Component {
   static isSelected(item, selectedSources) {
-    return _.find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
+    return _find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
   }
 
   componentWillReceiveProps(nextProps) {
     const { lastRefresh } = this.props;
     // Check for changes resulting in a fetch
-    if (!_.isEqual(nextProps.lastRefresh, lastRefresh)) {
+    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
       this.closeExpandIfNoData(this.expandType());
     }
   }
@@ -30,9 +31,11 @@ class SourceListItem extends React.Component {
   onItemSelectChange = () => {
     const { item, selectedSources } = this.props;
 
-    Store.dispatch({
-      type: SourceListItem.isSelected(item, selectedSources) ? viewTypes.DESELECT_ITEM : viewTypes.SELECT_ITEM,
-      viewType: viewTypes.SOURCES_VIEW,
+    store.dispatch({
+      type: SourceListItem.isSelected(item, selectedSources)
+        ? reduxTypes.view.DESELECT_ITEM
+        : reduxTypes.view.SELECT_ITEM,
+      viewType: reduxTypes.view.SOURCES_VIEW,
       item
     });
   };
@@ -41,15 +44,15 @@ class SourceListItem extends React.Component {
     const { item } = this.props;
 
     if (expandType === this.expandType()) {
-      Store.dispatch({
-        type: viewTypes.EXPAND_ITEM,
-        viewType: viewTypes.SOURCES_VIEW,
+      store.dispatch({
+        type: reduxTypes.view.EXPAND_ITEM,
+        viewType: reduxTypes.view.SOURCES_VIEW,
         item
       });
     } else {
-      Store.dispatch({
-        type: viewTypes.EXPAND_ITEM,
-        viewType: viewTypes.SOURCES_VIEW,
+      store.dispatch({
+        type: reduxTypes.view.EXPAND_ITEM,
+        viewType: reduxTypes.view.SOURCES_VIEW,
         item,
         expandType
       });
@@ -58,9 +61,9 @@ class SourceListItem extends React.Component {
 
   onCloseExpand = () => {
     const { item } = this.props;
-    Store.dispatch({
-      type: viewTypes.EXPAND_ITEM,
-      viewType: viewTypes.SOURCES_VIEW,
+    store.dispatch({
+      type: reduxTypes.view.EXPAND_ITEM,
+      viewType: reduxTypes.view.SOURCES_VIEW,
       item
     });
   };
@@ -68,15 +71,15 @@ class SourceListItem extends React.Component {
   expandType() {
     const { item, expandedSources } = this.props;
 
-    return _.get(_.find(expandedSources, nextExpanded => nextExpanded.id === item.id), 'expandType');
+    return _get(_find(expandedSources, nextExpanded => nextExpanded.id === item.id), 'expandType');
   }
 
   closeExpandIfNoData(expandType) {
     const { item } = this.props;
 
     if (expandType === 'okHosts' || expandType === 'failedHosts') {
-      const okHostCount = _.get(item, 'connection.source_systems_scanned', 0);
-      const failedHostCount = _.get(item, 'connection.source_systems_failed', 0);
+      const okHostCount = _get(item, 'connection.source_systems_scanned', 0);
+      const failedHostCount = _get(item, 'connection.source_systems_failed', 0);
 
       if ((expandType === 'okHosts' && okHostCount === 0) || (expandType === 'failedHosts' && failedHostCount === 0)) {
         this.onCloseExpand();
@@ -89,9 +92,9 @@ class SourceListItem extends React.Component {
     const typeIcon = helpers.sourceTypeIcon(item.source_type);
 
     return (
-      <SimpleTooltip id="sourceTypeTip" tooltip={dictionary[item.source_type]}>
+      <ToolTip tooltip={dictionary[item.source_type]}>
         <ListView.Icon type={typeIcon.type} name={typeIcon.name} />
-      </SimpleTooltip>
+      </ToolTip>
     );
   }
 
@@ -100,16 +103,16 @@ class SourceListItem extends React.Component {
 
     return (
       <span>
-        <SimpleTooltip id="editTip" tooltip="Edit">
+        <ToolTip tooltip="Edit">
           <Button onClick={() => onEdit(item)} bsStyle="link" key="editButton">
             <Icon type="pf" name="edit" aria-label="Edit" />
           </Button>
-        </SimpleTooltip>
-        <SimpleTooltip id="deleteTip" tooltip="Delete">
+        </ToolTip>
+        <ToolTip tooltip="Delete">
           <Button onClick={() => onDelete(item)} bsStyle="link" key="removeButton">
             <Icon type="pf" name="delete" aria-label="Delete" />
           </Button>
-        </SimpleTooltip>
+        </ToolTip>
         <Button onClick={() => onScan(item)} key="scanButton">
           Scan
         </Button>
@@ -121,10 +124,10 @@ class SourceListItem extends React.Component {
     const { item } = this.props;
 
     const expandType = this.expandType();
-    const credentialCount = _.size(_.get(item, 'credentials', []));
-    let okHostCount = _.get(item, 'connection.source_systems_scanned', 0);
-    let failedHostCount = _.get(item, 'connection.source_systems_failed', 0);
-    const unreachableHostCount = _.get(item, 'connection.source_systems_unreachable', 0);
+    const credentialCount = _size(_get(item, 'credentials', []));
+    let okHostCount = _get(item, 'connection.source_systems_scanned', 0);
+    let failedHostCount = _get(item, 'connection.source_systems_failed', 0);
+    const unreachableHostCount = _get(item, 'connection.source_systems_unreachable', 0);
 
     if (helpers.DEV_MODE) {
       okHostCount = helpers.devModeNormalizeCount(okHostCount);
@@ -185,13 +188,12 @@ class SourceListItem extends React.Component {
 
   static renderHostRow(host) {
     const iconInfo = helpers.scanStatusIcon(host.status);
-    const classes = cx(...iconInfo.classNames);
 
     return (
       <React.Fragment>
         <Grid.Col xs={host.status === 'success' ? 6 : 12} sm={4}>
           <span>
-            <Icon type={iconInfo.type} name={iconInfo.name} className={classes} />
+            <Icon type={iconInfo.type} name={iconInfo.name} className={cx(...iconInfo.classNames)} />
             &nbsp; {host.name}
           </span>
         </Grid.Col>
@@ -255,7 +257,7 @@ class SourceListItem extends React.Component {
     const { item } = this.props;
 
     const itemHostsPopover = (
-      <Popover id={helpers.generateId()} className="quipucords-sources-popover-scroll">
+      <div className="quipucords-sources-popover-scroll">
         {item.hosts && item.hosts.length > 1 && (
           <ul className="quipucords-popover-list">
             {item.hosts.map(host => (
@@ -264,20 +266,20 @@ class SourceListItem extends React.Component {
           </ul>
         )}
         {item.hosts && item.hosts.length === 1 && <div>{item.hosts[0]}</div>}
-      </Popover>
+      </div>
     );
 
     let itemDescription;
 
-    if (_.size(item.hosts)) {
+    if (_size(item.hosts)) {
       if (item.source_type === 'network') {
         itemDescription = (
           <ListView.DescriptionText>
-            <OverlayTrigger trigger="click" rootClose placement="left" overlay={itemHostsPopover}>
+            <ToolTip delayShow={100} popover={itemHostsPopover} trigger="click" placement="left">
               <Button bsStyle="link" className="quipucords-sources-network-button">
                 Network Range
               </Button>
-            </OverlayTrigger>
+            </ToolTip>
           </ListView.DescriptionText>
         );
       } else {
@@ -299,12 +301,12 @@ class SourceListItem extends React.Component {
   renderScanStatus() {
     const { item } = this.props;
 
-    const scan = _.get(item, 'connection');
+    const scan = _get(item, 'connection');
     let scanDescription = '';
-    let scanTime = _.get(scan, 'end_time');
+    let scanTime = _get(scan, 'end_time');
     let icon = null;
 
-    switch (_.get(scan, 'status')) {
+    switch (_get(scan, 'status')) {
       case 'completed':
         scanDescription = 'Last Connected';
         icon = <Icon className="scan-status-icon" type="pf" name="ok" />;
@@ -320,7 +322,7 @@ class SourceListItem extends React.Component {
       case 'created':
       case 'pending':
       case 'running':
-        scanTime = _.get(scan, 'start_time');
+        scanTime = _get(scan, 'start_time');
         scanDescription = 'Connection in Progress';
         icon = <Icon className="scan-status-icon fa-spin" type="fa" name="spinner" />;
         break;
@@ -352,16 +354,14 @@ class SourceListItem extends React.Component {
     const { item, selectedSources } = this.props;
     const selected = SourceListItem.isSelected(item, selectedSources);
 
-    const classes = cx({
-      'list-view-pf-top-align': true,
-      active: selected
-    });
-
     return (
       <ListView.Item
         key={item.id}
         stacked
-        className={classes}
+        className={cx({
+          'list-view-pf-top-align': true,
+          active: selected
+        })}
         checkboxInput={<Checkbox checked={selected} bsClass="" onChange={this.onItemSelectChange} />}
         actions={this.renderActions()}
         leftContent={this.renderSourceType()}
@@ -398,8 +398,8 @@ SourceListItem.defaultProps = {
 
 const mapStateToProps = state =>
   Object.assign({
-    selectedSources: state.viewOptions[viewTypes.SOURCES_VIEW].selectedItems,
-    expandedSources: state.viewOptions[viewTypes.SOURCES_VIEW].expandedItems
+    selectedSources: state.viewOptions[reduxTypes.view.SOURCES_VIEW].selectedItems,
+    expandedSources: state.viewOptions[reduxTypes.view.SOURCES_VIEW].expandedItems
   });
 
 const ConnectedSourceListItem = connect(mapStateToProps)(SourceListItem);

@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Checkbox, DropdownButton, Grid, Icon, ListView, MenuItem } from 'patternfly-react';
-import _ from 'lodash';
+import _find from 'lodash/find';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
 import * as moment from 'moment';
 import { connect, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
-import SimpleTooltip from '../simpleTooltIp/simpleTooltip';
+import Tooltip from '../tooltip/tooltip';
 import ScanSourceList from './scanSourceList';
 import ScanHostList from '../scanHostList/scanHostList';
 import ScanJobsList from './scanJobsList';
@@ -14,13 +16,13 @@ import ListStatusItem from '../listStatusItem/listStatusItem';
 
 class ScanListItem extends React.Component {
   static isSelected(item, selectedSources) {
-    return _.find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
+    return _find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
   }
 
   componentWillReceiveProps(nextProps) {
     const { lastRefresh } = this.props;
     // Check for changes resulting in a fetch
-    if (!_.isEqual(nextProps.lastRefresh, lastRefresh)) {
+    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
       this.closeExpandIfNoData(this.expandType());
     }
   }
@@ -66,15 +68,15 @@ class ScanListItem extends React.Component {
   expandType() {
     const { item, expandedScans } = this.props;
 
-    return _.get(_.find(expandedScans, nextExpanded => nextExpanded.id === item.id), 'expandType');
+    return _get(_find(expandedScans, nextExpanded => nextExpanded.id === item.id), 'expandType');
   }
 
   closeExpandIfNoData(expandType) {
     const { item } = this.props;
 
-    const successHosts = _.get(item, 'most_recent.systems_scanned', 0);
-    const failedHosts = _.get(item, 'most_recent.systems_failed', 0);
-    const prevCount = Math.max(_.get(item, 'jobs', []).length - 1, 0);
+    const successHosts = _get(item, 'most_recent.systems_scanned', 0);
+    const failedHosts = _get(item, 'most_recent.systems_failed', 0);
+    const prevCount = Math.max(_get(item, 'jobs', []).length - 1, 0);
 
     if (
       (expandType === 'systemsScanned' && successHosts === 0) ||
@@ -87,24 +89,27 @@ class ScanListItem extends React.Component {
 
   renderDescription() {
     const { item } = this.props;
-    const scanStatus = _.get(item, 'most_recent.status');
+    const scanStatus = _get(item, 'most_recent.status');
     const statusIconInfo = helpers.scanStatusIcon(scanStatus);
-    const classes = cx('scan-status-icon', ...statusIconInfo.classNames);
     const icon = statusIconInfo ? (
-      <Icon className={classes} type={statusIconInfo.type} name={statusIconInfo.name} />
+      <Icon
+        className={cx('scan-status-icon', ...statusIconInfo.classNames)}
+        type={statusIconInfo.type}
+        name={statusIconInfo.name}
+      />
     ) : null;
 
-    let scanTime = _.get(item, 'most_recent.end_time');
+    let scanTime = _get(item, 'most_recent.end_time');
 
     if (scanStatus === 'pending' || scanStatus === 'running') {
-      scanTime = _.get(item, 'most_recent.start_time');
+      scanTime = _get(item, 'most_recent.start_time');
     }
 
     return (
       <div className="scan-description">
         {icon}
         <div className="scan-status-text">
-          <div>{_.get(item, 'most_recent.status_details.job_status_message', 'Scan created')}</div>
+          <div>{_get(item, 'most_recent.status_details.job_status_message', 'Scan created')}</div>
           <div className="text-muted">
             {scanTime &&
               moment
@@ -122,9 +127,9 @@ class ScanListItem extends React.Component {
 
     const expandType = this.expandType();
     const sourcesCount = item.sources ? item.sources.length : 0;
-    const prevCount = Math.max(_.get(item, 'jobs', []).length - 1, 0);
-    const successHosts = _.get(item, 'most_recent.systems_scanned', 0);
-    const failedHosts = _.get(item, 'most_recent.systems_failed', 0);
+    const prevCount = Math.max(_get(item, 'jobs', []).length - 1, 0);
+    const successHosts = _get(item, 'most_recent.systems_scanned', 0);
+    const failedHosts = _get(item, 'most_recent.systems_failed', 0);
 
     return [
       <ListStatusItem
@@ -180,86 +185,86 @@ class ScanListItem extends React.Component {
     const { item, onSummaryDownload, onDetailedDownload, onPause, onCancel, onStart, onResume } = this.props;
 
     let downloadActions = null;
-    if (_.get(item, 'most_recent.report_id')) {
+    if (_get(item, 'most_recent.report_id')) {
       downloadActions = (
         <DropdownButton key="downLoadButton" title="Download" pullRight id={`downloadButton_${item.id}`}>
-          <MenuItem eventKey="1" onClick={() => onSummaryDownload(_.get(item, 'most_recent.report_id'))}>
+          <MenuItem eventKey="1" onClick={() => onSummaryDownload(_get(item, 'most_recent.report_id'))}>
             Summary Report
           </MenuItem>
-          <MenuItem eventKey="2" onClick={() => onDetailedDownload(_.get(item, 'most_recent.report_id'))}>
+          <MenuItem eventKey="2" onClick={() => onDetailedDownload(_get(item, 'most_recent.report_id'))}>
             Detailed Report
           </MenuItem>
         </DropdownButton>
       );
     }
 
-    switch (_.get(item, 'most_recent.status')) {
+    switch (_get(item, 'most_recent.status')) {
       case 'completed':
         return (
           <React.Fragment>
-            <SimpleTooltip key="startTip" id="startTip" tooltip="Run Scan">
+            <Tooltip key="startTip" tooltip="Run Scan">
               <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
                 <Icon type="pf" name="spinner2" aria-label="Start" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       case 'failed':
       case 'canceled':
         return (
-          <SimpleTooltip id="restartTip" tooltip="Retry Scan">
+          <Tooltip tooltip="Retry Scan">
             <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
               <Icon type="pf" name="spinner2" aria-label="Start" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
       case 'created':
       case 'running':
         return (
           <React.Fragment>
-            <SimpleTooltip key="pauseButton" id="pauseTip" tooltip="Pause Scan">
+            <Tooltip key="pauseButton" tooltip="Pause Scan">
               <Button onClick={() => onPause(item)} bsStyle="link">
                 <Icon type="fa" name="pause" aria-label="Pause" />
               </Button>
-            </SimpleTooltip>
-            <SimpleTooltip key="stop" id="stopTip" tooltip="Cancel Scan">
+            </Tooltip>
+            <Tooltip key="stop" tooltip="Cancel Scan">
               <Button onClick={() => onCancel(item)} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       case 'paused':
         return (
-          <SimpleTooltip id="resumeTip" tooltip="Resume Scan">
+          <Tooltip tooltip="Resume Scan">
             <Button key="resumeButton" onClick={() => onResume(item)} bsStyle="link">
               <Icon type="fa" name="play" aria-label="Resume" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
       case 'pending':
         return (
           <React.Fragment>
-            <SimpleTooltip key="stop" id="stopTip" tooltip="Cancel Scan">
+            <Tooltip key="stop" tooltip="Cancel Scan">
               <Button onClick={() => onCancel(item)} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
-            </SimpleTooltip>
+            </Tooltip>
             {downloadActions}
           </React.Fragment>
         );
       default:
         return (
-          <SimpleTooltip id="startTip" tooltip="Start Scan">
+          <Tooltip tooltip="Start Scan">
             <Button onClick={() => onStart(item)} bsStyle="link">
               <Icon type="fa" name="play" aria-label="Start" />
             </Button>
             {downloadActions}
-          </SimpleTooltip>
+          </Tooltip>
         );
     }
   }
@@ -274,7 +279,7 @@ class ScanListItem extends React.Component {
           </span>
         </Grid.Col>
         <Grid.Col xs={6} sm={8} md={9}>
-          {_.get(host, 'source.name')}
+          {_get(host, 'source.name')}
         </Grid.Col>
       </React.Fragment>
     );

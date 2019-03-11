@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Icon } from 'patternfly-react';
-import _ from 'lodash';
 
 const SourceCredentialsList = ({ source }) => {
-  const credentials = [..._.get(source, 'credentials', [])];
+  const credentials = (source.credentials && [...source.credentials]) || [];
 
   credentials.sort((item1, item2) => item1.name.localeCompare(item2.name));
 
@@ -25,11 +24,9 @@ const SourceCredentialsList = ({ source }) => {
 };
 
 SourceCredentialsList.propTypes = {
-  source: PropTypes.object
-};
-
-SourceCredentialsList.defaultProps = {
-  source: {}
+  source: PropTypes.shape({
+    credentials: PropTypes.array
+  }).isRequired
 };
 
 export { SourceCredentialsList as default, SourceCredentialsList };

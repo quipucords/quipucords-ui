@@ -1,33 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Alert, Modal, Button, Form, Grid, Icon } from 'patternfly-react';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
-import Store from '../../redux/store';
-import { reduxActions } from '../../redux/actions';
-import { scansTypes, toastNotificationTypes } from '../../redux/constants';
 
 class CreateScanDialog extends React.Component {
   static validateScanName(scanName) {
     return scanName && scanName.length > 0;
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      scanName: '',
-      validScanName: false
-    };
-  }
+  state = {
+    scanName: '',
+    validScanName: false
+  };
 
   componentWillReceiveProps(nextProps) {
     const { show } = this.props;
 
     if (nextProps.show && !show) {
       this.setState({ scanName: '', validScanName: false });
-      Store.dispatch({
-        type: scansTypes.RESET_SCAN_ADD_STATUS
+      store.dispatch({
+        type: reduxTypes.scans.RESET_SCAN_ADD_STATUS
       });
     }
   }
@@ -65,8 +58,8 @@ class CreateScanDialog extends React.Component {
   };
 
   onErrorDismissed = () => {
-    Store.dispatch({
-      type: scansTypes.RESET_SCAN_ADD_STATUS
+    store.dispatch({
+      type: reduxTypes.scans.RESET_SCAN_ADD_STATUS
     });
   };
 
@@ -75,15 +68,15 @@ class CreateScanDialog extends React.Component {
     const { scanName } = this.state;
 
     if (error) {
-      Store.dispatch({
-        type: toastNotificationTypes.TOAST_ADD,
+      store.dispatch({
+        type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'error',
         header: 'Error',
         message: helpers.getMessageFromResults(results).message
       });
     } else {
-      Store.dispatch({
-        type: toastNotificationTypes.TOAST_ADD,
+      store.dispatch({
+        type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'success',
         message: (
           <span>
@@ -108,15 +101,15 @@ class CreateScanDialog extends React.Component {
     const { scanName } = this.state;
 
     if (error) {
-      Store.dispatch({
-        type: toastNotificationTypes.TOAST_ADD,
+      store.dispatch({
+        type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'error',
         header: 'Error',
         message: helpers.getMessageFromResults(results).message
       });
     } else {
-      Store.dispatch({
-        type: toastNotificationTypes.TOAST_ADD,
+      store.dispatch({
+        type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'success',
         message: (
           <span>
