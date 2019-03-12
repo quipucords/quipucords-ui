@@ -3,6 +3,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import moxios from 'moxios';
 import { statusReducer } from '../../reducers';
 import { statusActions } from '..';
+import apiTypes from '../../../constants/apiConstants';
 
 describe('StatusActions', () => {
   const middleware = [promiseMiddleware()];
@@ -22,7 +23,7 @@ describe('StatusActions', () => {
       request.respondWith({
         status: 200,
         response: {
-          test: 'success'
+          [apiTypes.API_RESPONSE_STATUS_API_VERSION]: 'success'
         }
       });
     });
@@ -39,7 +40,7 @@ describe('StatusActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().status;
 
-      expect(response.currentStatus.test).toEqual('success');
+      expect(response.apiVersion).toEqual('success');
       done();
     });
   });

@@ -2,59 +2,94 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { detect } from 'detect-browser';
 import { AboutModal as PfAboutModal } from 'patternfly-react';
-import _get from 'lodash/get';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
-import logo from '../../styles/images/logo.svg';
-import productTitle from '../../styles/images/title.svg';
-import rhLogo from '../../styles/images/logo-brand.svg';
-import rhProductTitle from '../../styles/images/title-brand.svg';
+import logoImg from '../../styles/images/logo.svg';
+import titleImg from '../../styles/images/title.svg';
+import logoImgBrand from '../../styles/images/logo-brand.svg';
+import titleImgBrand from '../../styles/images/title-brand.svg';
 
-const AboutModal = ({ user, status, shown, onClose }) => {
-  const versionText = `${_get(status, 'api_version', 'unknown')} (Build: ${_get(status, 'build', 'unknown')})`;
-  const browser = detect();
+class AboutModal extends React.Component {
+  componentDidUpdate() {
+    const { apiVersion, getStatus, show } = this.props;
 
-  const props = {
-    show: shown,
-    onHide: onClose,
-    logo,
-    productTitle: <img src={productTitle} alt="Entitlements Reporting" />,
-    altLogo: 'ER'
-  };
-
-  if (helpers.RH_BRAND) {
-    props.logo = rhLogo;
-    props.productTitle = <img src={rhProductTitle} alt="Red Hat Entitlements Reporting" />;
-    props.altLogo = 'RH ER';
-    props.trademarkText = 'Copyright (c) 2018 Red Hat Inc.';
+    if (show && apiVersion === null) {
+      getStatus();
+    }
   }
 
-  return (
-    <PfAboutModal {...props}>
-      <PfAboutModal.Versions>
-        <PfAboutModal.VersionItem label="Version" versionText={versionText} />
-        <PfAboutModal.VersionItem label="Username" versionText={_get(user, 'currentUser.username', '')} />
-        <PfAboutModal.VersionItem
-          label="Browser Version"
-          versionText={`${_get(browser, 'name', '')} ${_get(browser, 'version', '')}`}
-        />
-        <PfAboutModal.VersionItem label="Browser OS" versionText={_get(browser, 'os', '')} />
-      </PfAboutModal.Versions>
-    </PfAboutModal>
-  );
-};
+  onClose = () => {
+    store.dispatch({
+      type: reduxTypes.aboutModal.ABOUT_MODAL_HIDE
+    });
+  };
+
+  render() {
+    const { apiVersion, brand, build, show, username } = this.props;
+    const versionText = `${apiVersion || 'unknown'} (Build: ${build || 'unknown'})`;
+    const browser = detect();
+
+    const props = {
+      logo: logoImg,
+      productTitle: <img src={titleImg} alt="Entitlements Reporting" />,
+      altLogo: 'ER'
+    };
+
+    if (brand) {
+      props.logo = logoImgBrand;
+      props.productTitle = <img src={titleImgBrand} alt="Red Hat Entitlements Reporting" />;
+      props.altLogo = 'RH ER';
+      props.trademarkText = 'Copyright (c) 2019 Red Hat Inc.';
+    }
+
+    return (
+      <PfAboutModal show={show} onHide={this.onClose} {...props}>
+        <PfAboutModal.Versions>
+          <PfAboutModal.VersionItem label="Version" versionText={versionText} />
+          {username && <PfAboutModal.VersionItem label="Username" versionText={username || ''} />}
+          {browser && (
+            <PfAboutModal.VersionItem label="Browser Version" versionText={`${browser.name} ${browser.version}`} />
+          )}
+          {browser && <PfAboutModal.VersionItem label="Browser OS" versionText={browser.os || ''} />}
+        </PfAboutModal.Versions>
+      </PfAboutModal>
+    );
+  }
+}
 
 AboutModal.propTypes = {
-  user: PropTypes.object,
-  status: PropTypes.object,
-  shown: PropTypes.bool,
-  onClose: PropTypes.func
+  apiVersion: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  brand: PropTypes.bool,
+  build: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  getStatus: PropTypes.func,
+  getUser: PropTypes.func,
+  show: PropTypes.bool.isRequired,
+  username: PropTypes.string
 };
 
 AboutModal.defaultProps = {
-  user: {},
-  status: {},
-  shown: false,
-  onClose: helpers.noop
+  apiVersion: null,
+  brand: helpers.RH_BRAND,
+  build: null,
+  getStatus: helpers.noop,
+  getUser: helpers.noop,
+  username: null
 };
 
-export { AboutModal as default, AboutModal };
+const mapDispatchToProps = dispatch => ({
+  getStatus: () => dispatch(reduxActions.status.getStatus())
+});
+
+const mapStateToProps = state => ({
+  apiVersion: state.status.apiVersion,
+  build: state.status.build,
+  show: state.aboutModal.show,
+  username: state.user.session.username
+});
+
+const ConnectedAboutModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AboutModal);
+
+export { ConnectedAboutModal as default, ConnectedAboutModal, AboutModal };

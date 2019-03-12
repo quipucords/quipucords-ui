@@ -1,106 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`About Component should render a basic display 1`] = `
-<div
-  role="dialog"
+exports[`AboutModal Component should contain brand: brand 1`] = `
+<AboutModal
+  altLogo="RH ER"
+  className=""
+  logo="logo-brand.svg"
+  onHide={[Function]}
+  productTitle={
+    <img
+      alt="Red Hat Entitlements Reporting"
+      src="title-brand.svg"
+    />
+  }
+  show={true}
+  trademarkText="Copyright (c) 2019 Red Hat Inc."
 >
-  <div
-    class="fade modal-backdrop in"
-  />
-  <div
-    class="fade in modal"
-    role="dialog"
-    style="display: block; padding-right: 0px;"
-    tabindex="-1"
+  <AboutModalVersions
+    className=""
   >
-    <div
-      class="modal-dialog"
+    <AboutModalVersionItem
+      className=""
+      label="Version"
+      versionText="unknown (Build: unknown)"
+    />
+  </AboutModalVersions>
+</AboutModal>
+`;
+
+exports[`AboutModal Component should render a connected component with default props: connected 1`] = `
+<AboutModal
+  apiVersion={1}
+  brand={false}
+  build={null}
+  getStatus={[Function]}
+  getUser={[Function]}
+  show={true}
+  username="lorem"
+/>
+`;
+
+exports[`AboutModal Component should render a non-connected component: hidden modal 1`] = `
+<AboutModal
+  apiVersion={1}
+  brand={false}
+  build={null}
+  getStatus={[Function]}
+  getUser={[Function]}
+  show={false}
+  username="admin"
+>
+  <AboutModal
+    altLogo="ER"
+    className=""
+    logo="logo.svg"
+    onHide={[Function]}
+    productTitle={
+      <img
+        alt="Entitlements Reporting"
+        src="title.svg"
+      />
+    }
+    show={false}
+    trademarkText=""
+  >
+    <Modal
+      animation={true}
+      autoFocus={true}
+      backdrop={true}
+      bsClass="modal"
+      className=""
+      contentClassName="about-modal-pf"
+      dialogComponentClass={[Function]}
+      enforceFocus={true}
+      keyboard={true}
+      manager={
+        ModalManager {
+          "add": [Function],
+          "containers": Array [],
+          "data": Array [],
+          "handleContainerOverflow": true,
+          "hideSiblingNodes": true,
+          "isTopModal": [Function],
+          "modals": Array [],
+          "remove": [Function],
+        }
+      }
+      onHide={[Function]}
+      renderBackdrop={[Function]}
+      restoreFocus={true}
+      show={false}
     >
-      <div
-        class="modal-content about-modal-pf"
-        role="document"
-      >
-        <div
-          class="modal-header"
-        >
-          <button
-            class="close"
-          >
-            <span
-              aria-hidden="true"
-              class="pficon pficon-close"
-              title="Close"
-            />
-            <span
-              class="sr-only"
-            >
-              Close
-            </span>
-          </button>
-        </div>
-        <div
-          class="modal-body"
-        >
-          <h1>
-            <img
-              alt="Entitlements Reporting"
-              src="title.svg"
-            />
-          </h1>
-          <div
-            class="product-versions-pf"
-          >
-            <ul
-              class="list-unstyled"
-            >
-              <li
-                class=""
-              >
-                <strong>
-                  Version
-                </strong>
-                 unknown (Build: unknown)
-              </li>
-              <li
-                class=""
-              >
-                <strong>
-                  Username
-                </strong>
-                 admin
-              </li>
-              <li
-                class=""
-              >
-                <strong>
-                  Browser Version
-                </strong>
-                  
-              </li>
-              <li
-                class=""
-              >
-                <strong>
-                  Browser OS
-                </strong>
-                 
-              </li>
-            </ul>
-          </div>
-          <div
-            class="trademark-pf"
-          />
-        </div>
-        <div
-          class="modal-footer"
-        >
-          <img
-            alt="ER"
-            src="logo.svg"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      <Modal
+        autoFocus={true}
+        backdrop={true}
+        backdropClassName="modal-backdrop"
+        backdropTransition={[Function]}
+        containerClassName="modal-open"
+        enforceFocus={true}
+        keyboard={true}
+        manager={
+          ModalManager {
+            "add": [Function],
+            "containers": Array [],
+            "data": Array [],
+            "handleContainerOverflow": true,
+            "hideSiblingNodes": true,
+            "isTopModal": [Function],
+            "modals": Array [],
+            "remove": [Function],
+          }
+        }
+        onEntering={[Function]}
+        onExited={[Function]}
+        onHide={[Function]}
+        renderBackdrop={[Function]}
+        restoreFocus={true}
+        show={false}
+        transition={[Function]}
+      />
+    </Modal>
+  </AboutModal>
+</AboutModal>
 `;

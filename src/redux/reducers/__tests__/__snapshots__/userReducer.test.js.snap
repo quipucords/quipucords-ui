@@ -4,20 +4,12 @@ exports[`userReducer should handle all defined error types: rejected types USER_
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": true,
       "errorMessage": "ERROR",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_AUTH_REJECTED",
@@ -28,20 +20,12 @@ exports[`userReducer should handle all defined error types: rejected types USER_
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": true,
-      "errorMessage": "ERROR",
-      "fulfilled": false,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_INFO_REJECTED",
@@ -52,20 +36,12 @@ exports[`userReducer should handle all defined error types: rejected types USER_
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": true,
       "errorMessage": "ERROR",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_LOGOUT_REJECTED",
@@ -76,20 +52,12 @@ exports[`userReducer should handle all defined fulfilled types: fulfilled types 
 Object {
   "result": Object {
     "session": Object {
-      "authToken": undefined,
+      "authorized": true,
       "error": false,
       "errorMessage": "",
       "fulfilled": true,
-      "loggedIn": true,
       "pending": false,
-      "wasLoggedIn": true,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
+      "username": undefined,
     },
   },
   "type": "USER_AUTH_FULFILLED",
@@ -100,22 +68,12 @@ exports[`userReducer should handle all defined fulfilled types: fulfilled types 
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {
-        "test": "success",
-      },
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_INFO_FULFILLED",
@@ -126,20 +84,12 @@ exports[`userReducer should handle all defined fulfilled types: fulfilled types 
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "loggedIn": false,
-      "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
       "pending": false,
+      "username": null,
     },
   },
   "type": "USER_LOGOUT_FULFILLED",
@@ -150,20 +100,12 @@ exports[`userReducer should handle all defined pending types: pending types USER
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": true,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_AUTH_PENDING",
@@ -174,20 +116,12 @@ exports[`userReducer should handle all defined pending types: pending types USER
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": false,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": true,
+      "username": null,
     },
   },
   "type": "USER_INFO_PENDING",
@@ -198,20 +132,12 @@ exports[`userReducer should handle all defined pending types: pending types USER
 Object {
   "result": Object {
     "session": Object {
-      "authToken": null,
+      "authorized": false,
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "loggedIn": false,
       "pending": true,
-      "wasLoggedIn": false,
-    },
-    "user": Object {
-      "currentUser": Object {},
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "pending": false,
+      "username": null,
     },
   },
   "type": "USER_LOGOUT_PENDING",

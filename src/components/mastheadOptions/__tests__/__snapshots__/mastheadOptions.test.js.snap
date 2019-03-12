@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MastheadOptions Component should render 1`] = `
+exports[`MastheadOptions Component should render a basic component 1`] = `
 <nav
   class="collapse navbar-collapse"
 >

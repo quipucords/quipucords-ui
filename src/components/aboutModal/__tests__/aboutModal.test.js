@@ -1,18 +1,40 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import About from '../aboutModal';
+import configureMockStore from 'redux-mock-store';
+import { mount, shallow } from 'enzyme';
+import { ConnectedAboutModal, AboutModal } from '../aboutModal';
 
-describe('About Component', () => {
-  it('should render a basic display', () => {
+describe('AboutModal Component', () => {
+  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
+
+  it('should render a connected component with default props', () => {
+    const store = generateEmptyStore({
+      aboutModal: { show: true },
+      user: { session: { username: 'lorem' } },
+      status: { apiVersion: 1 }
+    });
+    const component = shallow(<ConnectedAboutModal />, { context: { store } });
+
+    expect(component).toMatchSnapshot('connected');
+  });
+
+  it('should render a non-connected component', () => {
     const props = {
-      user: { currentUser: { username: 'admin' } },
-      status: {},
-      shown: true,
-      onClose: jest.fn()
+      show: false,
+      apiVersion: 1,
+      username: 'admin'
     };
 
-    const component = mount(<About {...props} />);
+    const component = mount(<AboutModal {...props} />);
+    expect(component).toMatchSnapshot('hidden modal');
+  });
 
-    expect(component.render()).toMatchSnapshot();
+  it('should contain brand', () => {
+    const props = {
+      show: true,
+      brand: true
+    };
+
+    const component = shallow(<AboutModal {...props} />);
+    expect(component).toMatchSnapshot('brand');
   });
 });
