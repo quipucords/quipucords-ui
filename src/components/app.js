@@ -7,7 +7,7 @@ import _startsWith from 'lodash/startsWith';
 import { routes } from '../routes';
 import { connect, reduxActions } from '../redux';
 import helpers from '../common/helpers';
-import About from './about/about';
+import AboutModal from './aboutModal/aboutModal';
 import AddSourceWizard from './addSourceWizard/addSourceWizard';
 import CreateCredentialDialog from './createCredentialDialog/createCredentialDialog';
 import Content from './content/content';
@@ -122,7 +122,7 @@ class App extends React.Component {
         <Content />
         <ToastNotificationsList key="toastList" />
         <ConfirmationModal key="confirmationModal" />
-        <About user={user} status={status} shown={aboutShown} onClose={this.onCloseAbout} />
+        <AboutModal user={user} status={status} shown={aboutShown} onClose={this.onCloseAbout} />
         <AddSourceWizard />
         <CreateCredentialDialog />
       </React.Fragment>

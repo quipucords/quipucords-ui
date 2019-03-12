@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { detect } from 'detect-browser';
-import { AboutModal } from 'patternfly-react';
+import { AboutModal as PfAboutModal } from 'patternfly-react';
 import _get from 'lodash/get';
 import helpers from '../../common/helpers';
 import logo from '../../styles/images/logo.svg';
@@ -9,7 +9,7 @@ import productTitle from '../../styles/images/title.svg';
 import rhLogo from '../../styles/images/logo-brand.svg';
 import rhProductTitle from '../../styles/images/title-brand.svg';
 
-const About = ({ user, status, shown, onClose }) => {
+const AboutModal = ({ user, status, shown, onClose }) => {
   const versionText = `${_get(status, 'api_version', 'unknown')} (Build: ${_get(status, 'build', 'unknown')})`;
   const browser = detect();
 
@@ -29,32 +29,32 @@ const About = ({ user, status, shown, onClose }) => {
   }
 
   return (
-    <AboutModal {...props}>
-      <AboutModal.Versions>
-        <AboutModal.VersionItem label="Version" versionText={versionText} />
-        <AboutModal.VersionItem label="Username" versionText={_get(user, 'currentUser.username', '')} />
-        <AboutModal.VersionItem
+    <PfAboutModal {...props}>
+      <PfAboutModal.Versions>
+        <PfAboutModal.VersionItem label="Version" versionText={versionText} />
+        <PfAboutModal.VersionItem label="Username" versionText={_get(user, 'currentUser.username', '')} />
+        <PfAboutModal.VersionItem
           label="Browser Version"
           versionText={`${_get(browser, 'name', '')} ${_get(browser, 'version', '')}`}
         />
-        <AboutModal.VersionItem label="Browser OS" versionText={_get(browser, 'os', '')} />
-      </AboutModal.Versions>
-    </AboutModal>
+        <PfAboutModal.VersionItem label="Browser OS" versionText={_get(browser, 'os', '')} />
+      </PfAboutModal.Versions>
+    </PfAboutModal>
   );
 };
 
-About.propTypes = {
+AboutModal.propTypes = {
   user: PropTypes.object,
   status: PropTypes.object,
   shown: PropTypes.bool,
   onClose: PropTypes.func
 };
 
-About.defaultProps = {
+AboutModal.defaultProps = {
   user: {},
   status: {},
   shown: false,
   onClose: helpers.noop
 };
 
-export { About as default, About };
+export { AboutModal as default, AboutModal };

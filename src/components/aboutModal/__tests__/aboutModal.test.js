@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import About from '../about';
+import About from '../aboutModal';
 
 describe('About Component', () => {
   it('should render a basic display', () => {
