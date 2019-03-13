@@ -17,17 +17,19 @@ import titleImg from '../styles/images/title.svg';
 import titleImgBrand from '../styles/images/title-brand.svg';
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.menu = routes();
-  }
-
   componentDidMount() {
     const { authorizeUser } = this.props;
 
     authorizeUser();
   }
+
+  onLogout = () => {
+    const { logoutUser } = this.props;
+
+    logoutUser().finally(() => {
+      window.location = '/logout';
+    });
+  };
 
   onNavigateTo = path => {
     const { history } = this.props;
@@ -41,11 +43,10 @@ class App extends React.Component {
   };
 
   renderMenuItems() {
-    const { location } = this.props;
+    const { location, menu } = this.props;
+    const activeItem = menu.find(item => _startsWith(location.pathname, item.to));
 
-    const activeItem = this.menu.find(item => _startsWith(location.pathname, item.to));
-
-    return this.menu.map(item => (
+    return menu.map(item => (
       <VerticalNav.Item
         key={item.to}
         title={item.title}
@@ -66,7 +67,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { session, logoutUser } = this.props;
+    const { session } = this.props;
     const productTitleImg = helpers.RH_BRAND ? titleImgBrand : titleImg;
 
     if (session.pending) {
@@ -94,7 +95,8 @@ class App extends React.Component {
             <EmptyState className="full-page-blank-slate">
               <Alert type="error">
                 <span>
-                  Login error: {session.errorMessage.replace(/\.$/, '')}.{' '}
+                  Login error: {session.errorMessage.replace(/\.$/, '')}
+                  {session.errorMessage && '.'}
                   {!session.authorized && (
                     <React.Fragment>
                       Please <a href="/login">login</a> to continue.
@@ -113,7 +115,7 @@ class App extends React.Component {
         <VerticalNav persistentSecondary={false}>
           <VerticalNav.Masthead>
             <VerticalNav.Brand titleImg={productTitleImg} />
-            <MastheadOptions username={session.username} showAboutModal={this.onShowAbout} logoutUser={logoutUser} />
+            <MastheadOptions username={session.username} showAboutModal={this.onShowAbout} logoutUser={this.onLogout} />
           </VerticalNav.Masthead>
           {this.renderMenuItems()}
           {this.renderMenuActions()}
@@ -136,6 +138,7 @@ App.propTypes = {
   logoutUser: PropTypes.func,
   session: PropTypes.object,
   location: PropTypes.object,
+  menu: PropTypes.array,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
@@ -144,6 +147,7 @@ App.propTypes = {
 App.defaultProps = {
   authorizeUser: helpers.noop,
   logoutUser: helpers.noop,
+  menu: routes(),
   session: {},
   location: {}
 };
