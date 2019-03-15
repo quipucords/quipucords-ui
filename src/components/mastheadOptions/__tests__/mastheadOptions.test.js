@@ -3,9 +3,9 @@ import { mount } from 'enzyme';
 import MastheadOptions from '../mastheadOptions';
 
 describe('MastheadOptions Component', () => {
-  it('should render', () => {
+  it('should render a basic component', () => {
     const props = {
-      user: { currentUser: { username: 'Admin' } }
+      username: 'Admin'
     };
 
     const component = mount(<MastheadOptions {...props} />);

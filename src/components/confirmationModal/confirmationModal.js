@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Icon } from 'patternfly-react';
-import { connect, reduxTypes, store } from '../../redux';
+import { MessageDialog, Icon } from 'patternfly-react';
+import { connect, store, reduxTypes } from '../../redux';
 import helpers from '../../common/helpers';
 
-class ConfirmationModal extends React.Component {
-  onClose = () => {
-    const { onCancel } = this.props;
-
+const ConfirmationModal = ({
+  show,
+  title,
+  heading,
+  body,
+  icon,
+  confirmButtonText,
+  cancelButtonText,
+  onConfirm,
+  onCancel
+}) => {
+  const cancel = () => {
     if (onCancel) {
       onCancel();
     } else {
@@ -17,40 +25,21 @@ class ConfirmationModal extends React.Component {
     }
   };
 
-  render() {
-    const { show, title, heading, body, icon, confirmButtonText, cancelButtonText, onConfirm } = this.props;
-
-    return (
-      <Modal show={show} onHide={this.onClose}>
-        <Modal.Header>
-          <button type="button" className="close" onClick={this.onClose} aria-hidden="true" aria-label="Close">
-            <Icon type="pf" name="close" />
-          </button>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="confirm-modal-body">
-            {icon && <span className="confirm-modal-icon">{icon}</span>}
-            <span className="confirm-modal-content">
-              <span className="spacer" />
-              <div className="confirm-modal-content-heading">{heading}</div>
-              <div>{body}</div>
-              <span className="spacer" />
-            </span>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button autoFocus bsStyle="default" className="btn-cancel" onClick={this.onClose}>
-            {cancelButtonText}
-          </Button>
-          <Button bsStyle="primary" onClick={onConfirm}>
-            {confirmButtonText}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-}
+  return (
+    <MessageDialog
+      primaryAction={onConfirm}
+      secondaryAction={cancel}
+      onHide={cancel}
+      icon={icon}
+      show={show}
+      title={title}
+      primaryActionButtonContent={confirmButtonText}
+      secondaryActionButtonContent={cancelButtonText}
+      primaryContent={<p>{heading}</p>}
+      secondaryContent={<p>{body}</p>}
+    />
+  );
+};
 
 ConfirmationModal.propTypes = {
   show: PropTypes.bool.isRequired,

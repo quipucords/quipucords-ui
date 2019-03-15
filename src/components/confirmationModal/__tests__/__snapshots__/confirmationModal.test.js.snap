@@ -1,110 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ConfirmationModal Component should shallow render a basic component 1`] = `
-<Modal
-  animation={true}
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
-  onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={true}
+exports[`Confirmation Modal Component should NOT display a confirmation modal: hidden 1`] = `null`;
+
+exports[`Confirmation Modal Component should display a confirmation modal: show 1`] = `
+<div
+  role="dialog"
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={false}
-    closeLabel="Close"
-  >
-    <button
-      aria-hidden="true"
-      aria-label="Close"
-      className="close"
-      onClick={[Function]}
-      type="button"
-    >
-      <Icon
-        name="close"
-        type="pf"
-      />
-    </button>
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-    >
-      Confirm
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+  <div
+    class="fade modal-backdrop in"
+  />
+  <div
+    aria-describedby=""
+    aria-labelledby=""
+    aria-modal="true"
+    class="fade message-dialog-pf in modal"
+    role="dialog"
+    style="display: block; padding-right: 0px;"
+    tabindex="-1"
   >
     <div
-      className="confirm-modal-body"
+      class="modal-dialog"
     >
-      <span
-        className="confirm-modal-icon"
+      <div
+        class="modal-content"
+        role="document"
       >
-        <Icon
-          name="warning-triangle-o"
-          type="pf"
-        />
-      </span>
-      <span
-        className="confirm-modal-content"
-      >
-        <span
-          className="spacer"
-        />
         <div
-          className="confirm-modal-content-heading"
-        />
-        <div />
-        <span
-          className="spacer"
-        />
-      </span>
+          class="modal-header"
+        >
+          <button
+            class="close"
+          >
+            <span
+              aria-hidden="true"
+              class="pficon pficon-close"
+              title="Close"
+            />
+            <span
+              class="sr-only"
+            >
+              Close
+            </span>
+          </button>
+          <h4
+            class="modal-title"
+            id=""
+          >
+            Confirm
+          </h4>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            id=""
+          >
+            <p>
+              test
+            </p>
+            <p>
+              Test body
+            </p>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="btn btn-default"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
     </div>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <Button
-      active={false}
-      autoFocus={true}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="btn-cancel"
-      disabled={false}
-      onClick={[Function]}
-    />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Confirm
-    </Button>
-  </ModalFooter>
-</Modal>
+  </div>
+</div>
+`;
+
+exports[`Confirmation Modal Component should render a connected component: connected 1`] = `
+<MessageDialog
+  accessibleDescription=""
+  accessibleName=""
+  className=""
+  enforceFocus={true}
+  footer={null}
+  icon={null}
+  onHide={[Function]}
+  primaryAction={[Function]}
+  primaryActionButtonBsStyle="primary"
+  primaryActionButtonContent="Confirm"
+  primaryContent={
+    <p>
+      test
+    </p>
+  }
+  secondaryAction={[Function]}
+  secondaryActionButtonBsStyle="default"
+  secondaryActionButtonContent="Cancel"
+  secondaryContent={
+    <p>
+      Test body
+    </p>
+  }
+  show={true}
+  title="Confirm"
+/>
 `;

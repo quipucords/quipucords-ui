@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import aboutModalReducer from './aboutModalReducer';
 import addSourceWizardReducer from './addSourceWizardReducer';
 import confirmationModalReducer from './confirmationModalReducer';
 import credentialsReducer from './credentialsReducer';
@@ -13,6 +14,7 @@ import userReducer from './userReducer';
 import viewOptionsReducer from './viewOptionsReducer';
 
 const reducers = {
+  aboutModal: aboutModalReducer,
   addSourceWizard: addSourceWizardReducer,
   confirmationModal: confirmationModalReducer,
   credentials: credentialsReducer,
@@ -31,6 +33,7 @@ const reduxReducers = combineReducers(reducers);
 export {
   reduxReducers as default,
   reduxReducers,
+  aboutModalReducer,
   addSourceWizardReducer,
   confirmationModalReducer,
   credentialsReducer,

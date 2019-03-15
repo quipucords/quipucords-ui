@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dropdown, Icon, MenuItem } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
-const MastheadOptions = ({ user, logoutUser, showAboutModal }) => (
+const MastheadOptions = ({ username, logoutUser, showAboutModal }) => (
   <nav className="collapse navbar-collapse">
     <ul className="navbar-iconic nav navbar-nav navbar-right">
       <Dropdown componentClass="li" id="help">
@@ -16,7 +16,7 @@ const MastheadOptions = ({ user, logoutUser, showAboutModal }) => (
       </Dropdown>
       <Dropdown componentClass="li" id="user">
         <Dropdown.Toggle useAnchor className="nav-item-iconic">
-          <Icon type="pf" name="user" /> {user.currentUser && user.currentUser.username}
+          <Icon type="pf" name="user" /> {username}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <MenuItem onClick={logoutUser}>Log out</MenuItem>
@@ -27,13 +27,13 @@ const MastheadOptions = ({ user, logoutUser, showAboutModal }) => (
 );
 
 MastheadOptions.propTypes = {
-  user: PropTypes.object,
+  username: PropTypes.string,
   logoutUser: PropTypes.func,
   showAboutModal: PropTypes.func
 };
 
 MastheadOptions.defaultProps = {
-  user: {},
+  username: '',
   logoutUser: helpers.noop,
   showAboutModal: helpers.noop
 };

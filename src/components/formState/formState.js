@@ -101,7 +101,7 @@ class FormState extends React.Component {
       () =>
         this.validate(event).then(updatedErrors => {
           const setUpdateErrors = { ...((updatedErrors && updatedErrors[0]) || updatedErrors || {}) };
-          const checkIsValid = !Object.keys(setUpdateErrors).length;
+          const checkIsValid = !Object.values(setUpdateErrors).filter(val => val === true).length;
 
           this.errors = setUpdateErrors;
 
@@ -158,7 +158,7 @@ class FormState extends React.Component {
       () =>
         this.validate(event).then(updatedErrors => {
           const setUpdateErrors = { ...((updatedErrors && updatedErrors[0]) || updatedErrors || {}) };
-          const checkIsValid = !Object.keys(setUpdateErrors).length;
+          const checkIsValid = !Object.values(setUpdateErrors).filter(val => val === true).length;
 
           this.errors = setUpdateErrors;
           this.touched = {};
@@ -230,7 +230,7 @@ class FormState extends React.Component {
       () =>
         this.validate(event).then(updatedErrors => {
           const setUpdateErrors = { ...((updatedErrors && updatedErrors[0]) || updatedErrors || {}) };
-          const checkIsValid = !Object.keys(setUpdateErrors).length;
+          const checkIsValid = !Object.values(setUpdateErrors).filter(val => val === true).length;
 
           this.errors = setUpdateErrors;
 

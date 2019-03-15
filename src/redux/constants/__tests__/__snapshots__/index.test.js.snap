@@ -2,6 +2,10 @@
 
 exports[`ReduxTypes should have specific type properties: all redux types 1`] = `
 Object {
+  "aboutModalTypes": Object {
+    "ABOUT_MODAL_HIDE": "ABOUT_MODAL_HIDE",
+    "ABOUT_MODAL_SHOW": "ABOUT_MODAL_SHOW",
+  },
   "confirmationModalTypes": Object {
     "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
     "CONFIRMATION_MODAL_SHOW": "CONFIRMATION_MODAL_SHOW",
@@ -20,6 +24,10 @@ Object {
     "UPDATE_CREDENTIAL_HIDE": "UPDATE_CREDENTIAL_HIDE",
   },
   "default": Object {
+    "aboutModal": Object {
+      "ABOUT_MODAL_HIDE": "ABOUT_MODAL_HIDE",
+      "ABOUT_MODAL_SHOW": "ABOUT_MODAL_SHOW",
+    },
     "confirmationModal": Object {
       "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
       "CONFIRMATION_MODAL_SHOW": "CONFIRMATION_MODAL_SHOW",
@@ -126,6 +134,10 @@ Object {
     "default": "ADD_FACTS",
   },
   "reduxTypes": Object {
+    "aboutModal": Object {
+      "ABOUT_MODAL_HIDE": "ABOUT_MODAL_HIDE",
+      "ABOUT_MODAL_SHOW": "ABOUT_MODAL_SHOW",
+    },
     "confirmationModal": Object {
       "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
       "CONFIRMATION_MODAL_SHOW": "CONFIRMATION_MODAL_SHOW",
@@ -311,6 +323,10 @@ Object {
 
 exports[`ReduxTypes should have specific type properties: specific types 1`] = `
 Object {
+  "aboutModal": Object {
+    "ABOUT_MODAL_HIDE": "ABOUT_MODAL_HIDE",
+    "ABOUT_MODAL_SHOW": "ABOUT_MODAL_SHOW",
+  },
   "confirmationModal": Object {
     "CONFIRMATION_MODAL_HIDE": "CONFIRMATION_MODAL_HIDE",
     "CONFIRMATION_MODAL_SHOW": "CONFIRMATION_MODAL_SHOW",

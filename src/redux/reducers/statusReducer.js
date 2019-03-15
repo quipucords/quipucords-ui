@@ -1,35 +1,58 @@
 import { statusTypes } from '../constants';
 import helpers from '../../common/helpers';
+import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
+  apiVersion: null,
+  build: null,
   error: false,
   errorMessage: '',
-  pending: false,
   fulfilled: false,
-  currentStatus: {}
+  pending: false,
+  serverVersion: null
 };
 
 const statusReducer = (state = initialState, action) => {
   switch (action.type) {
     case helpers.REJECTED_ACTION(statusTypes.STATUS_INFO):
-      return {
-        ...initialState,
-        error: action.error,
-        errorMessage: helpers.getMessageFromResults(action.payload).message
-      };
+      return helpers.setStateProp(
+        null,
+        {
+          error: action.error,
+          errorMessage: helpers.getMessageFromResults(action.payload).message
+        },
+        {
+          state,
+          initialState
+        }
+      );
 
     case helpers.PENDING_ACTION(statusTypes.STATUS_INFO):
-      return {
-        ...initialState,
-        pending: true
-      };
+      return helpers.setStateProp(
+        null,
+        {
+          pending: true
+        },
+        {
+          state,
+          initialState
+        }
+      );
 
     case helpers.FULFILLED_ACTION(statusTypes.STATUS_INFO):
-      return {
-        ...initialState,
-        currentStatus: action.payload.data,
-        fulfilled: true
-      };
+      return helpers.setStateProp(
+        null,
+        {
+          apiVersion: action.payload.data[apiTypes.API_RESPONSE_STATUS_API_VERSION],
+          build: action.payload.data[apiTypes.API_RESPONSE_STATUS_BUILD],
+          serverVersion: action.payload.data[apiTypes.API_RESPONSE_STATUS_SERVER_VERSION],
+          fulfilled: true
+        },
+        {
+          state,
+          initialState
+        }
+      );
 
     default:
       return state;
