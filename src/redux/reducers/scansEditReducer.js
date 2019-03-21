@@ -1,5 +1,6 @@
 import helpers from '../../common/helpers';
 import { scansTypes } from '../constants';
+import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
   add: false,
@@ -9,7 +10,8 @@ const initialState = {
   pending: false,
   show: false,
   sources: [],
-  start: false
+  start: false,
+  submitErrorMessages: {}
 };
 
 const scansEditReducer = (state = initialState, action) => {
@@ -40,13 +42,42 @@ const scansEditReducer = (state = initialState, action) => {
       );
 
     case helpers.REJECTED_ACTION(scansTypes.ADD_SCAN):
+      const filterProperties = [
+        apiTypes.API_SUBMIT_SCAN_NAME,
+        apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH_DIRS,
+        apiTypes.API_SUBMIT_SCAN_OPTIONS_MAX_CONCURRENCY,
+        apiTypes.API_SUBMIT_SCAN_SOURCES
+      ];
+
+      const rejectedErrors = helpers.getMessageFromResults(action.payload, filterProperties);
+      const messages = {};
+
+      Object.keys(rejectedErrors.messages || {}).forEach(key => {
+        if (apiTypes.API_SUBMIT_SCAN_NAME === key) {
+          messages.scanName = rejectedErrors.messages[key];
+        }
+
+        if (apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH_DIRS === key) {
+          messages.scanDirectories = rejectedErrors.messages[key];
+        }
+
+        if (apiTypes.API_SUBMIT_SCAN_OPTIONS_MAX_CONCURRENCY === key) {
+          messages.scanConcurrency = rejectedErrors.messages[key];
+        }
+
+        if (apiTypes.API_SUBMIT_SCAN_SOURCES === key) {
+          messages.scanSources = rejectedErrors.messages[key];
+        }
+      });
+
       return helpers.setStateProp(
         null,
         {
           pending: false,
           add: true,
           error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
+          errorMessage: helpers.getMessageFromResults(action.payload).message,
+          submitErrorMessages: messages
         },
         {
           state,

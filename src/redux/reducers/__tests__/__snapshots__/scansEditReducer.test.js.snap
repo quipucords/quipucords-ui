@@ -11,6 +11,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": false,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_SCAN_REJECTED",
 }
@@ -27,6 +28,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": true,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_START_SCAN_REJECTED",
 }
@@ -43,6 +45,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": false,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_SCAN_FULFILLED",
 }
@@ -59,6 +62,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": true,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_START_SCAN_FULFILLED",
 }
@@ -75,6 +79,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": false,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_SCAN_PENDING",
 }
@@ -91,6 +96,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": true,
+    "submitErrorMessages": Object {},
   },
   "type": "ADD_START_SCAN_PENDING",
 }
@@ -107,6 +113,7 @@ Object {
     "show": false,
     "sources": Array [],
     "start": false,
+    "submitErrorMessages": Object {},
   },
   "type": "EDIT_SCAN_HIDE",
 }
@@ -123,6 +130,7 @@ Object {
     "show": true,
     "sources": undefined,
     "start": false,
+    "submitErrorMessages": Object {},
   },
   "type": "EDIT_SCAN_SHOW",
 }
