@@ -8,7 +8,7 @@ const SourcesEmptyState = ({ onAddSource }) => (
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat'} Entitlements Reporting</EmptyState.Title>
+        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat'} product discovery</EmptyState.Title>
         <EmptyState.Info>
           Begin by adding one or more sources. A source contains a collection of network information, <br />
           including systems management solution information, IP addresses, or host names, in addition to <br />

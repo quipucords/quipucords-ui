@@ -8,11 +8,11 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource }) => (
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat'} Entitlements Reporting</EmptyState.Title>
+        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat'} product discovery</EmptyState.Title>
         <EmptyState.Info>
           Credentials contain authentication information needed to scan a source. A credential includes <br />a username
-          and a password or SSH key. Entitlements Reporting uses SSH to connect to servers <br /> on the network and
-          uses credentials to access those servers.
+          and a password or SSH key. product discovery uses SSH to connect to servers <br /> on the network and uses
+          credentials to access those servers.
         </EmptyState.Info>
         <EmptyState.Action>
           <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
