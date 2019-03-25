@@ -302,7 +302,7 @@ class CreateScanDialog extends React.Component {
                 </button>
                 <Modal.Title>Scan</Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body aria-live="polite">
                 {pending && (
                   <React.Fragment>
                     <Spinner loading size="lg" className="blank-slate-pf-icon" />

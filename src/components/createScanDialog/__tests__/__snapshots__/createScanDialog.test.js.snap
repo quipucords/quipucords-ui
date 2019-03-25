@@ -44,6 +44,7 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
             </h4>
           </div>
           <div
+            aria-live="polite"
             class="modal-body"
           >
             <div
