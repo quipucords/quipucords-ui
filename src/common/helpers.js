@@ -2,6 +2,41 @@ import moment from 'moment';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
 
+const copyClipboard = text => {
+  let successful;
+
+  try {
+    window.getSelection().removeAllRanges();
+
+    const newTextarea = window.document.createElement('pre');
+    newTextarea.appendChild(window.document.createTextNode(text));
+
+    newTextarea.style.position = 'absolute';
+    newTextarea.style.top = '-9999px';
+    newTextarea.style.left = '-9999px';
+
+    const range = window.document.createRange();
+    window.document.body.appendChild(newTextarea);
+
+    range.selectNode(newTextarea);
+
+    window.getSelection().addRange(range);
+
+    successful = window.document.execCommand('copy');
+
+    window.document.body.removeChild(newTextarea);
+    window.getSelection().removeAllRanges();
+  } catch (e) {
+    successful = null;
+
+    if (process.env.REACT_APP_ENV !== 'test') {
+      console.warn('Copy to clipboard failed.', e.message);
+    }
+  }
+
+  return successful;
+};
+
 const devModeNormalizeCount = (count, modulus = 100) => Math.abs(count) % modulus;
 
 const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/plain') =>
@@ -299,6 +334,8 @@ const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 
 const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
 
+const UI_VERSION = process.env.REACT_APP_UI_VERSION;
+
 const FULFILLED_ACTION = base => `${base}_FULFILLED`;
 
 const PENDING_ACTION = base => `${base}_PENDING`;
@@ -306,6 +343,7 @@ const PENDING_ACTION = base => `${base}_PENDING`;
 const REJECTED_ACTION = base => `${base}_REJECTED`;
 
 const helpers = {
+  copyClipboard,
   devModeNormalizeCount,
   downloadData,
   generateId,
@@ -326,6 +364,7 @@ const helpers = {
   DEV_MODE,
   TEST_MODE,
   RH_BRAND,
+  UI_VERSION,
   FULFILLED_ACTION,
   PENDING_ACTION,
   REJECTED_ACTION

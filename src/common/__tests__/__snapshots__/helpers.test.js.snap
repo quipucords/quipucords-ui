@@ -67,6 +67,8 @@ Object {
   "REJECTED_ACTION": [Function],
   "RH_BRAND": false,
   "TEST_MODE": true,
+  "UI_VERSION": "0.0.0.0000000",
+  "copyClipboard": [Function],
   "createViewQueryObject": [Function],
   "devModeNormalizeCount": [Function],
   "downloadData": [Function],
@@ -86,6 +88,8 @@ Object {
   "viewPropsChanged": [Function],
 }
 `;
+
+exports[`Helpers should support displaying the ui version: ui version 1`] = `"0.0.0.0000000"`;
 
 exports[`Helpers should support icon references: scanStatusIcon 1`] = `
 Object {

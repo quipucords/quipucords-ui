@@ -15,38 +15,128 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
   show={true}
   trademarkText="Copyright (c) 2019 Red Hat Inc."
 >
-  <AboutModalVersions
-    className=""
+  <div
+    aria-label="Application information copied"
+    aria-live="polite"
+    tabIndex={-1}
   >
-    <AboutModalVersionItem
-      className=""
-      label="Version"
-      versionText="unknown (Build: unknown)"
-    />
-  </AboutModalVersions>
+    <AboutModalVersions
+      className="quipucords-about-modal-list"
+    >
+      <AboutModalVersionItem
+        className=""
+        label="UI Version"
+        versionText="0.0.0.0000000"
+      />
+    </AboutModalVersions>
+  </div>
+  <div
+    className="quipucords-about-modal-copy-footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="quipucords-about-modal-copy-button"
+      disabled={false}
+      onClick={[Function]}
+      title="Copy application information"
+    >
+      <Icon
+        name="paste"
+        type="fa"
+      />
+    </Button>
+  </div>
 </AboutModal>
+`;
+
+exports[`AboutModal Component should have a copy event that updates state: post copy event 1`] = `
+Object {
+  "copied": null,
+  "timer": 11,
+}
+`;
+
+exports[`AboutModal Component should have a copy event that updates state: pre copy event 1`] = `
+Object {
+  "copied": null,
+  "timer": null,
+}
 `;
 
 exports[`AboutModal Component should render a connected component with default props: connected 1`] = `
 <AboutModal
-  apiVersion={1}
-  brand={false}
-  build={null}
-  getStatus={[Function]}
-  getUser={[Function]}
+  altLogo="ER"
+  className=""
+  logo="logo.svg"
+  onHide={[Function]}
+  productTitle={
+    <img
+      alt="product discovery"
+      src="title.svg"
+    />
+  }
   show={true}
-  username="lorem"
-/>
+  trademarkText=""
+>
+  <div
+    aria-label="Application information copied"
+    aria-live="polite"
+    tabIndex={-1}
+  >
+    <AboutModalVersions
+      className="quipucords-about-modal-list"
+    >
+      <AboutModalVersionItem
+        className=""
+        label="Username"
+        versionText="lorem"
+      />
+      <AboutModalVersionItem
+        className=""
+        label="Server Version"
+        versionText="0.0.0.0000000"
+      />
+      <AboutModalVersionItem
+        className=""
+        label="UI Version"
+        versionText="0.0.0.0000000"
+      />
+    </AboutModalVersions>
+  </div>
+  <div
+    className="quipucords-about-modal-copy-footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="quipucords-about-modal-copy-button"
+      disabled={false}
+      onClick={[Function]}
+      title="Copy application information"
+    >
+      <Icon
+        name="paste"
+        type="fa"
+      />
+    </Button>
+  </div>
+</AboutModal>
 `;
 
 exports[`AboutModal Component should render a non-connected component: hidden modal 1`] = `
 <AboutModal
-  apiVersion={1}
   brand={false}
-  build={null}
   getStatus={[Function]}
   getUser={[Function]}
+  resetTimer={3000}
+  serverVersion="0.0.0.0000000"
   show={false}
+  uiVersion="0.0.0.0000000"
   username="admin"
 >
   <AboutModal
