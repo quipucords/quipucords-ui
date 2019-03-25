@@ -11,7 +11,9 @@ const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name }) => (
           <Icon type="pf" name="error-circle-o" />
         </div>
         <h3 className="blank-slate-pf-main-action">Error {add ? 'Creating' : 'Updating'} Source</h3>
-        <p className="blank-slate-pf-secondary-action">There are errors on the previous step</p>
+        <p className="blank-slate-pf-secondary-action">
+          There are errors on a previous step. Use the Back button to review your settings and try again.
+        </p>
       </div>
     )}
     {fulfilled && (

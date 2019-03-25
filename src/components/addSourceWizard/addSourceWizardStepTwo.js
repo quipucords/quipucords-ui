@@ -137,7 +137,7 @@ class AddSourceWizardStepTwo extends React.Component {
       <FormField
         label="Name"
         error={(touched.name && errors.name) || stepTwoErrorMessages.name}
-        errorMessage={stepTwoErrorMessages.name || 'You must enter a source name '}
+        errorMessage={stepTwoErrorMessages.name || 'A source name is required'}
       >
         <Form.FormControl
           type="text"
@@ -201,7 +201,7 @@ class AddSourceWizardStepTwo extends React.Component {
             <FormField
               label="Search addresses"
               error={(touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts}
-              errorMessage="You must enter a valid IP address or hostname"
+              errorMessage="A valid IP address or hostname is required"
             >
               <Form.FormControl
                 componentClass="textarea"
@@ -237,7 +237,7 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'satellite':
         const hostPortError = (
           <React.Fragment>
-            {touched.hostsSingle && errors.hosts && 'You must enter a valid IP address or hostname '}
+            {touched.hostsSingle && errors.hosts && 'A valid IP address or hostname is required '}
             {errors.port && 'Port must be valid'}
           </React.Fragment>
         );
@@ -253,7 +253,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 stepTwoErrorMessages.port
               }
               errorMessage={
-                (stepTwoErrorMessages.hosts && 'You must enter a valid IP address or hostname') ||
+                (stepTwoErrorMessages.hosts && 'A valid IP address or hostname is required') ||
                 (stepTwoErrorMessages.port && 'Port must be valid') ||
                 hostPortError
               }
@@ -296,7 +296,7 @@ class AddSourceWizardStepTwo extends React.Component {
       <FormField
         label="Credentials"
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
-        errorMessage={stepTwoErrorMessages.credentials || 'You must add a credential'}
+        errorMessage={stepTwoErrorMessages.credentials || 'A credential is required'}
       >
         <Form.InputGroup>
           <DropdownSelect

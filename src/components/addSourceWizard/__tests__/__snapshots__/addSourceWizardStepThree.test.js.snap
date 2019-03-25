@@ -53,7 +53,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
     <p
       className="blank-slate-pf-secondary-action"
     >
-      There are errors on the previous step
+      There are errors on a previous step. Use the Back button to review your settings and try again.
     </p>
   </div>
 </AddSourceWizardStepThree>
@@ -99,7 +99,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
     <p
       className="blank-slate-pf-secondary-action"
     >
-      There are errors on the previous step
+      There are errors on a previous step. Use the Back button to review your settings and try again.
     </p>
   </div>
 </AddSourceWizardStepThree>
