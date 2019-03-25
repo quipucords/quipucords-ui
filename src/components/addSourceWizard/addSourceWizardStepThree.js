@@ -12,7 +12,7 @@ const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name }) => (
         </div>
         <h3 className="blank-slate-pf-main-action">Error {add ? 'Creating' : 'Updating'} Source</h3>
         <p className="blank-slate-pf-secondary-action">
-          There are errors on a previous step. Use Back to review your settings and try again.
+          There are errors on a previous step. Use the Back button to review your settings and try again.
         </p>
       </div>
     )}
