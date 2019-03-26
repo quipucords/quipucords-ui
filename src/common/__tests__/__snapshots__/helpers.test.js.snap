@@ -30,13 +30,13 @@ exports[`Helpers should handle http status 400 level error messages from respons
 
 exports[`Helpers should handle http status 400 level error messages from response: 400 fallback again error message 1`] = `"Request failed with status code XXX"`;
 
-exports[`Helpers should handle http status 400 level error messages from response: 400 fallback error message 1`] = `""`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 fallback error message 1`] = `"{\\"ipsum\\":{\\"sed\\":\\"nulla sed consequat urna\\",\\"dolor\\":{\\"sit\\":\\"sit dolor\\\\nconsequat urna\\",\\"placerat\\":\\"\\"}}}"`;
 
 exports[`Helpers should handle http status 400 level error messages from response: 400 fallback yet again error message 1`] = `"XXX Request failed"`;
 
-exports[`Helpers should handle http status 400 level error messages from response: 400 filtered blank message 1`] = `""`;
-
 exports[`Helpers should handle http status 400 level error messages from response: 400 filtered message 1`] = `"Lorem ipsum dolor sit"`;
+
+exports[`Helpers should handle http status 400 level error messages from response: 400 filtered object message 1`] = `"{\\"sit\\":[\\"sit dolor\\",\\"consequat urna\\"],\\"placerat\\":[{\\"ante\\":\\"sed placerat ante\\"}]"`;
 
 exports[`Helpers should handle http status 500 level error messages from response: 500 level error message 1`] = `"500 Lorem ipsum dolor sit"`;
 

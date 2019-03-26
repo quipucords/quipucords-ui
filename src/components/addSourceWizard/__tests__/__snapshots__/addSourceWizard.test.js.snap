@@ -13,6 +13,7 @@ exports[`AddSourceWizard Component should display update steps: connected update
     title="Edit Source"
   />
   <WizardBody
+    aria-live="polite"
     className=""
   >
     <WizardSteps
@@ -130,6 +131,7 @@ exports[`AddSourceWizard Component should render a connected component: connecte
     title="Add Source"
   />
   <WizardBody
+    aria-live="polite"
     className=""
   >
     <WizardSteps

@@ -48,26 +48,22 @@ describe('SourcesActions', () => {
     });
   });
 
-  it('Should return response content for deleteSource method', done => {
+  it('Should have a defined deleteSource method', done => {
     const store = generateStore();
     const dispatcher = sourcesActions.deleteSource();
 
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().sources;
-
-      expect(response.update.delete).toEqual(true);
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('deleteSource');
       done();
     });
   });
 
-  it('Should return response content for deleteSources method', done => {
+  it('Should have a defined deleteSources method', done => {
     const store = generateStore();
     const dispatcher = sourcesActions.deleteSources();
 
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().sources;
-
-      expect(response.update.delete).toEqual(true);
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('deleteSources');
       done();
     });
   });
@@ -84,10 +80,14 @@ describe('SourcesActions', () => {
     });
   });
 
-  it('Should return response content for getSource method', () => {
+  it('Should return response content for getSource method', done => {
+    const store = generateStore();
     const dispatcher = sourcesActions.getSource();
 
-    expect(dispatcher).toBeDefined();
+    dispatcher(store.dispatch).then(value => {
+      expect(value.action.type).toMatchSnapshot('getSource');
+      done();
+    });
   });
 
   it('Should return response content for getSources method', done => {

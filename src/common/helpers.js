@@ -199,13 +199,11 @@ const getMessageFromResults = (results, filter = null) => {
     return messages;
   }
 
-  const getMessages = (messageObjectArrayString, filterField) => {
+  const getMessages = messageObjectArrayString => {
     const parsed = {};
-    const parsedFiltered = {};
-    const filterFields = (Array.isArray(filterField) && filterField) || (filterField && [filterField]) || [];
 
     if (messageObjectArrayString && typeof messageObjectArrayString === 'string') {
-      return messageObjectArrayString.replace(/\[object\sObject\]/g, '');
+      return messageObjectArrayString.replace(/\[object\sObject]/g, '');
     }
 
     if (Array.isArray(messageObjectArrayString)) {
@@ -213,20 +211,49 @@ const getMessageFromResults = (results, filter = null) => {
     }
 
     Object.keys(messageObjectArrayString).forEach(key => {
-      const message = getMessages(messageObjectArrayString[key]);
-
-      if (filterFields.length && filterFields.includes(key)) {
-        parsedFiltered[key] = message;
-      }
-
-      parsed[key] = message;
+      parsed[key] = getMessages(messageObjectArrayString[key]);
     });
 
-    return filterFields.length ? parsedFiltered : parsed;
+    return parsed;
   };
 
-  messages.messages = getMessages(messageResponse || detailResponse, filter);
+  const filtered = (messageObjectArrayString, filterField) => {
+    const parsed = {};
+    const str = JSON.stringify(messageObjectArrayString);
+    const filterFields = (Array.isArray(filterField) && filterField) || (filterField && [filterField]) || [];
+
+    filterFields.forEach(val => {
+      const match = str.match(new RegExp(`"${val}":(\\[(.*?)]]?|{(.*?)}]?|"(.*?)"),?`));
+
+      if (match && match[1]) {
+        parsed[val] = match[1]; // eslint-disable-line
+
+        if (match && match[2]) {
+          parsed[val] = JSON.parse(match[1]);
+
+          if (Array.isArray(parsed[val])) {
+            parsed[val] = parsed[val].join(', ');
+          } else if (typeof parsed[val] !== 'string') {
+            parsed[val] = Object.values(parsed[val]).join(', ');
+          }
+
+          parsed[val] = parsed[val].replace(/,?\s?\[object\sObject]/, '');
+        }
+      }
+    });
+
+    return parsed;
+  };
+
+  messages.messages =
+    (filter && filtered(messageResponse || detailResponse, filter)) || getMessages(messageResponse || detailResponse);
   messages.message = `${displayStatus}${Object.values(messages.messages).join('\n')}`;
+
+  if (messages.message === '[object Object]') {
+    messages.message = JSON.stringify(messages.messages);
+  } else {
+    messages.message = messages.message.replace(/\n?\[object\sObject]/g, '');
+  }
 
   return messages;
 };

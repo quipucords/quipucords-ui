@@ -7,6 +7,12 @@ const addScan = data => dispatch =>
     payload: scansService.addScan(data)
   });
 
+const addStartScan = id => dispatch =>
+  dispatch({
+    type: scansTypes.ADD_START_SCAN,
+    payload: scansService.startScan(id)
+  });
+
 const getScan = id => dispatch =>
   dispatch({
     type: scansTypes.GET_SCAN,
@@ -87,6 +93,7 @@ const restartScan = id => dispatch =>
 
 export {
   addScan,
+  addStartScan,
   getScan,
   getScans,
   updateScan,

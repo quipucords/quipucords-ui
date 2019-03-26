@@ -127,7 +127,14 @@ describe('Helpers', () => {
     const payload = {
       response: {
         data: {
-          lorem: ['Lorem ipsum dolor sit']
+          lorem: ['Lorem ipsum dolor sit'],
+          ipsum: {
+            sed: 'nulla sed consequat urna',
+            dolor: {
+              sit: ['sit dolor', 'consequat urna'],
+              placerat: [{ ante: 'sed placerat ante' }]
+            }
+          }
         },
         status: 400,
         statusText: 'Bad Request',
@@ -143,7 +150,7 @@ describe('Helpers', () => {
 
     expect(helpers.getMessageFromResults(payload, 'lorem').message).toMatchSnapshot('400 filtered message');
 
-    expect(helpers.getMessageFromResults(payload, 'dolor').message).toMatchSnapshot('400 filtered blank message');
+    expect(helpers.getMessageFromResults(payload, 'dolor').message).toMatchSnapshot('400 filtered object message');
 
     delete payload.response.data.lorem;
     expect(helpers.getMessageFromResults(payload).message).toMatchSnapshot('400 fallback error message');

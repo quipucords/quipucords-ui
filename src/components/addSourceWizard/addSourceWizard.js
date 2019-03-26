@@ -163,7 +163,7 @@ class AddSourceWizard extends React.Component {
     return (
       <Wizard show={show}>
         <Wizard.Header onClose={this.onCancel} title={edit ? 'Edit Source' : 'Add Source'} />
-        <Wizard.Body>
+        <Wizard.Body aria-live="polite">
           <Wizard.Steps steps={this.renderWizardSteps()} />
           <Wizard.Row>
             <Wizard.Main>
