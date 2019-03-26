@@ -189,7 +189,7 @@ exports[`Sources Component should render a non-connected component with empty st
       <h4
         class="h1 blank-slate-pf-title"
       >
-        Welcome to  Entitlements Reporting
+        Welcome to  product discovery
       </h4>
       <p
         class="blank-slate-pf-info"
