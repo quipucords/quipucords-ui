@@ -20,41 +20,39 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
         class="modal-content"
         role="document"
       >
-        <div
-          class="modal-header"
+        <form
+          class="form-horizontal"
         >
-          <button
-            aria-hidden="true"
-            aria-label="Close"
-            class="close"
-            type="button"
+          <div
+            class="modal-header"
           >
-            <span
+            <button
               aria-hidden="true"
-              class="pficon pficon-close"
-            />
-          </button>
-          <h4
-            class="modal-title"
-          >
-            Scan
-          </h4>
-        </div>
-        <div
-          class="modal-body"
-        />
-        <div
-          class="container-fluid"
-        >
-          <form
-            class="form-horizontal"
+              aria-label="Close"
+              class="close"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+                class="pficon pficon-close"
+              />
+            </button>
+            <h4
+              class="modal-title"
+            >
+              Scan
+            </h4>
+          </div>
+          <div
+            aria-live="polite"
+            class="modal-body"
           >
             <div
               class="form-group"
             >
               <label
                 class="col-sm-3 control-label"
-                for="scanName"
+                for="generatedid-"
               >
                 Name
               </label>
@@ -63,7 +61,8 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
               >
                 <input
                   class="form-control"
-                  id="scanName"
+                  id="generatedid-"
+                  maxlength="256"
                   name="scanName"
                   placeholder="Enter a name for the scan"
                   type="text"
@@ -76,6 +75,7 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
             >
               <label
                 class="col-sm-3 control-label"
+                for="generatedid-"
               >
                 Sources
               </label>
@@ -84,33 +84,205 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
               >
                 <textarea
                   class="quipucords-form-control form-control"
+                  id="generatedid-"
+                  name="displayScanSources"
                   readonly=""
-                  rows="1"
-                  type="textarea"
+                  rows="2"
                 >
                   test name
                 </textarea>
               </div>
             </div>
-          </form>
-        </div>
-        <div
-          class="modal-footer"
-        >
-          <button
-            class="btn-cancel btn btn-default"
-            type="button"
+            <div
+              class="form-group"
+            >
+              <label
+                class="col-sm-3 control-label"
+                for="scanConcurrency"
+              >
+                Maximum concurrent scans
+              </label>
+              <div
+                class="col-sm-9"
+              >
+                <span
+                  class="cloudmeter-touchspin cloudmeter-scan-dialog-touchspin input-group"
+                >
+                  <span
+                    class="input-group-btn"
+                  >
+                    <button
+                      aria-hidden="true"
+                      class="cloudmeter-touchspin-min-button form-control btn btn-default"
+                      tabindex="-1"
+                      title="Decrease number input"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="fa fa-minus"
+                      />
+                    </button>
+                  </span>
+                  <input
+                    class="cloudmeter-touchspin-input form-control"
+                    id="scanConcurrency"
+                    name="scanConcurrency"
+                    type="text"
+                    value="50"
+                  />
+                  <span
+                    class="input-group-btn"
+                  >
+                    <button
+                      aria-hidden="true"
+                      class="cloudmeter-touchspin-max-button form-control btn btn-default"
+                      tabindex="-1"
+                      title="Increase number input"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="fa fa-plus"
+                      />
+                    </button>
+                  </span>
+                </span>
+                <span
+                  class="help-block"
+                >
+                  Minimum is 1, maximum is 200
+                </span>
+              </div>
+            </div>
+            <div
+              class="form-group"
+            >
+              <label
+                class="col-sm-3 control-label"
+                for="generatedid-"
+              >
+                Additional products to scan for
+              </label>
+              <div
+                class="col-sm-9"
+              >
+                <div
+                  class="checkbox"
+                >
+                  <label
+                    title=""
+                  >
+                    <input
+                      name="jbossEap"
+                      type="checkbox"
+                    />
+                    <abbr
+                      title="Red Hat JBoss Enterprise Application Platform"
+                    >
+                      JBoss EAP
+                    </abbr>
+                  </label>
+                </div>
+                <div
+                  class="checkbox"
+                >
+                  <label
+                    title=""
+                  >
+                    <input
+                      name="jbossFuse"
+                      type="checkbox"
+                    />
+                    <abbr
+                      title="Red Hat Fuse"
+                    >
+                      Fuse
+                    </abbr>
+                  </label>
+                </div>
+                <div
+                  class="checkbox"
+                >
+                  <label
+                    title=""
+                  >
+                    <input
+                      name="jbossWs"
+                      type="checkbox"
+                    />
+                    <abbr
+                      title="Red Hat JBoss Web Server"
+                    >
+                      JBoss Web Server
+                    </abbr>
+                  </label>
+                </div>
+                <div
+                  class="checkbox"
+                >
+                  <label
+                    title=""
+                  >
+                    <input
+                      name="jbossBrms"
+                      type="checkbox"
+                    />
+                    <abbr
+                      title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+                    >
+                      Decision Manager
+                    </abbr>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="form-group"
+            >
+              <label
+                class="col-sm-3 control-label"
+                for="generatedid-"
+              >
+                Scan alternate directories
+              </label>
+              <div
+                class="col-sm-9"
+              >
+                <textarea
+                  class="vertical-scroll form-control"
+                  disabled=""
+                  id="generatedid-"
+                  name="displayScanDirectories"
+                  placeholder="Optional. Enter values separated by commas"
+                  rows="4"
+                />
+                <span
+                  class="help-block"
+                >
+                  Default directories are /, /opt, /app, /home, /usr
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal-footer"
           >
-            Cancel
-          </button>
-          <button
-            class="btn btn-primary"
-            disabled=""
-            type="submit"
-          >
-            Scan
-          </button>
-        </div>
+            <button
+              class="btn-cancel btn btn-default"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              disabled=""
+              type="submit"
+            >
+              Scan
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

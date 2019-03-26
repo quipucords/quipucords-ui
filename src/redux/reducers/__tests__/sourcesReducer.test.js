@@ -7,8 +7,22 @@ describe('SourcesReducer', () => {
     expect(sourcesReducer.initialState).toBeDefined();
   });
 
+  it('should handle specific defined types', () => {
+    const specificTypes = [types.UPDATE_SOURCES];
+
+    specificTypes.forEach(value => {
+      const dispatched = {
+        type: value
+      };
+
+      const resultState = sourcesReducer(undefined, dispatched);
+
+      expect({ type: value, result: resultState }).toMatchSnapshot(`defined type ${value}`);
+    });
+  });
+
   it('should handle all defined error types', () => {
-    const specificTypes = [types.DELETE_SOURCE, types.DELETE_SOURCES, types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -33,7 +47,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.DELETE_SOURCE, types.DELETE_SOURCES, types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -47,7 +61,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.DELETE_SOURCE, types.DELETE_SOURCES, types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {

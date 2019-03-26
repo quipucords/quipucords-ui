@@ -7,6 +7,7 @@ import credentialsReducer from './credentialsReducer';
 import factsReducer from './factsReducer';
 import reportsReducer from './reportsReducer';
 import scansReducer from './scansReducer';
+import scansEditReducer from './scansEditReducer';
 import sourcesReducer from './sourcesReducer';
 import statusReducer from './statusReducer';
 import toastNotificationsReducer from './toastNotificationsReducer';
@@ -21,6 +22,7 @@ const reducers = {
   facts: factsReducer,
   reports: reportsReducer,
   scans: scansReducer,
+  scansEdit: scansEditReducer,
   sources: sourcesReducer,
   status: statusReducer,
   toastNotifications: toastNotificationsReducer,
@@ -40,6 +42,7 @@ export {
   factsReducer,
   reportsReducer,
   scansReducer,
+  scansEditReducer,
   sourcesReducer,
   statusReducer,
   toastNotificationsReducer,

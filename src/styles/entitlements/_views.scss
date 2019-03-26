@@ -252,16 +252,6 @@
   }
 }
 
-.quipucords-form-control.form-control[readonly] {
-  background-color: $color-pf-white;
-  border: 0;
-  color: inherit;
-  font-weight: 700;
-  &[type=textarea] {
-    resize: none;
-  }
-}
-
 .quipucords-scan-list-item .list-view-pf-left {
   overflow: hidden;
   padding-top: 6px;

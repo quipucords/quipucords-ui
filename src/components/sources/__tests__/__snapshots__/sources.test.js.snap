@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sources Component should render a connected component with default props: connected 1`] = `
+<Sources
+  error={false}
+  errorMessage={null}
+  fulfilled={false}
+  getSources={[Function]}
+  lastRefresh={0}
+  pending={false}
+  sources={Array []}
+  updateSources={false}
+  viewOptions={Object {}}
+/>
+`;
+
+exports[`Sources Component should render a non-connected component in error state: error 1`] = `
+<div
+  class="blank-slate-pf"
+>
+  <div
+    class="alert alert-danger"
+  >
+    <span
+      aria-hidden="true"
+      class="pficon pficon-error-circle-o"
+    />
+    <span>
+      Error retrieving sources: 
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Sources Component should render a non-connected component in fulfilled state: fulfilled 1`] = `
+<div
+  className="quipucords-view-container"
+>
+  <ViewToolbar
+    actions={
+      <div
+        className="form-group"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Add
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Scan
+        </Button>
+      </div>
+    }
+    activeFilters={Array []}
+    filterFields={
+      Array [
+        Object {
+          "filterType": "text",
+          "id": "search_by_name",
+          "placeholder": "Filter by Name",
+          "title": "Name",
+        },
+        Object {
+          "filterType": "text",
+          "id": "search_credentials_by_name",
+          "placeholder": "Filter by Credential Name",
+          "title": "Credential",
+        },
+        Object {
+          "filterType": "select",
+          "filterValues": Array [
+            Object {
+              "id": "network",
+              "title": "Network",
+            },
+            Object {
+              "id": "satellite",
+              "title": "Satellite",
+            },
+            Object {
+              "id": "vcenter",
+              "title": "VCenter",
+            },
+          ],
+          "id": "source_type",
+          "placeholder": "Filter by Source Type",
+          "title": "Source Type",
+        },
+      ]
+    }
+    filterType={Object {}}
+    filterValue=""
+    itemsType="Source"
+    itemsTypePlural="Sources"
+    lastRefresh={0}
+    onRefresh={[Function]}
+    selectedCount={0}
+    selectedItems={Array []}
+    sortAscending={true}
+    sortFields={
+      Array [
+        Object {
+          "id": "name",
+          "isNumeric": false,
+          "title": "Name",
+        },
+        Object {
+          "id": "source_type",
+          "isNumeric": false,
+          "title": "Source Type",
+        },
+        Object {
+          "id": "most_recent_connect_scan__start_time",
+          "isNumeric": true,
+          "sortAscending": false,
+          "title": "Most Recent",
+        },
+      ]
+    }
+    sortType={Object {}}
+    totalCount={0}
+    viewType="SOURCES_VIEW"
+  />
+  <ViewPaginationRow
+    currentPage={0}
+    pageSize={0}
+    selectedItems={Array []}
+    totalCount={0}
+    totalPages={0}
+    viewType="SOURCES_VIEW"
+  />
+  <div
+    className="quipucords-list-container"
+  >
+    <ListView
+      className="quipicords-list-view"
+    >
+      <Connect(SourceListItem)
+        item={
+          Object {
+            "id": "1",
+            "name": "lorem",
+          }
+        }
+        key="1"
+        lastRefresh={0}
+      />
+    </ListView>
+  </div>
+</div>
+`;
+
+exports[`Sources Component should render a non-connected component in pending state: pending 1`] = `
+<div
+  class="quipucords-view-container"
+/>
+`;
+
+exports[`Sources Component should render a non-connected component with empty state: empty state 1`] = `
+<div
+  class="container-fluid"
+>
+  <div
+    class="row"
+  >
+    <div
+      class="blank-slate-pf full-page-blank-slate"
+    >
+      <div
+        class="blank-slate-pf-icon"
+      >
+        <span
+          aria-hidden="true"
+          class="pficon pficon-add-circle-o"
+        />
+      </div>
+      <h4
+        class="h1 blank-slate-pf-title"
+      >
+        Welcome to  Entitlements Reporting
+      </h4>
+      <p
+        class="blank-slate-pf-info"
+      >
+        Begin by adding one or more sources. A source contains a collection of network information, 
+        <br />
+        including systems management solution information, IP addresses, or host names, in addition to 
+        <br />
+        SSH ports and credentials.
+      </p>
+      <div
+        class="blank-slate-pf-main-action"
+      >
+        <button
+          class="btn btn-lg btn-primary"
+          type="button"
+        >
+          Add Source
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

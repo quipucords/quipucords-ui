@@ -5,6 +5,10 @@
   }
 }
 
+textarea.vertical-scroll {
+  resize: vertical;
+}
+
 .quipucords-dropdownselect {
   &.dropdown {
     width:100%;
@@ -45,4 +49,35 @@
       text-align: right;
     }
   }
+}
+
+.cloudmeter-touchspin {
+  &.cloudmeter-scan-dialog-touchspin {
+    width: 30%;
+  }
+
+  &.form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cloudmeter-touchspin-input,
+  .cloudmeter-touchspin-max-button {
+    left: -1px;
+  }
+}
+
+.quipucords-form-control.form-control[readonly] {
+  background-color: $color-pf-white;
+  border: 0;
+  color: inherit;
+  font-weight: 700;
+
+  &[type=textarea] {
+    resize: none;
+  }
+}
+
+textarea.quipucords-form-control.form-control[readonly] {
+  resize: none;
 }

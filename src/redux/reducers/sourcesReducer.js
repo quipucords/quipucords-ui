@@ -8,17 +8,9 @@ const initialState = {
     errorMessage: '',
     pending: false,
     fulfilled: false,
+    lastRefresh: 0,
     sources: [],
     updateSources: false
-  },
-
-  update: {
-    error: false,
-    errorMessage: '',
-    pending: false,
-    fulfilled: false,
-    sourceId: '',
-    delete: false
   }
 };
 
@@ -33,49 +25,6 @@ const sourcesReducer = (state = initialState, action) => {
         {
           state,
           reset: false
-        }
-      );
-
-    case helpers.REJECTED_ACTION(sourcesTypes.DELETE_SOURCE):
-    case helpers.REJECTED_ACTION(sourcesTypes.DELETE_SOURCES):
-      return helpers.setStateProp(
-        'update',
-        {
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message,
-          delete: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case helpers.PENDING_ACTION(sourcesTypes.DELETE_SOURCE):
-    case helpers.PENDING_ACTION(sourcesTypes.DELETE_SOURCES):
-      return helpers.setStateProp(
-        'update',
-        {
-          pending: true,
-          delete: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case helpers.FULFILLED_ACTION(sourcesTypes.DELETE_SOURCE):
-    case helpers.FULFILLED_ACTION(sourcesTypes.DELETE_SOURCES):
-      return helpers.setStateProp(
-        'update',
-        {
-          fulfilled: true,
-          delete: true
-        },
-        {
-          state,
-          initialState
         }
       );
 
@@ -109,8 +58,9 @@ const sourcesReducer = (state = initialState, action) => {
       return helpers.setStateProp(
         'view',
         {
-          sources: (action.payload.data && action.payload.data[apiTypes.API_RESPONSE_SOURCES_RESULTS]) || [],
-          fulfilled: true
+          fulfilled: true,
+          lastRefresh: (action.payload.headers && new Date(action.payload.headers.date).getTime()) || 0,
+          sources: (action.payload.data && action.payload.data[apiTypes.API_RESPONSE_SOURCES_RESULTS]) || []
         },
         {
           state,

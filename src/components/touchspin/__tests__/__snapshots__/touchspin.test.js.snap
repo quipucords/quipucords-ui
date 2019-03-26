@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TouchSpin Component should render a basic component: basic render 1`] = `
+<span
+  class="cloudmeter-touchspin  input-group"
+>
+  <span
+    class="input-group-btn"
+  >
+    <button
+      aria-hidden="true"
+      class="cloudmeter-touchspin-min-button form-control btn btn-default"
+      tabindex="-1"
+      title="Decrease number input"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="fa fa-minus"
+      />
+    </button>
+  </span>
+  <input
+    class="cloudmeter-touchspin-input form-control"
+    name="lorem"
+    type="text"
+    value="50"
+  />
+  <span
+    class="input-group-btn"
+  >
+    <button
+      aria-hidden="true"
+      class="cloudmeter-touchspin-max-button form-control btn btn-default"
+      tabindex="-1"
+      title="Increase number input"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="fa fa-plus"
+      />
+    </button>
+  </span>
+</span>
+`;
+
+exports[`TouchSpin Component should render a basic component: initial props 1`] = `
+Object {
+  "className": "",
+  "labelMax": <Icon
+    name="plus"
+    type="fa"
+  />,
+  "labelMaxDescription": "Increase number input",
+  "labelMin": <Icon
+    name="minus"
+    type="fa"
+  />,
+  "labelMinDescription": "Decrease number input",
+  "maxValue": 100,
+  "minValue": 0,
+  "name": "lorem",
+  "onChange": [Function],
+  "value": 50,
+}
+`;
+
+exports[`TouchSpin Component should render a basic component: initial state 1`] = `
+Object {
+  "displayValue": 50,
+  "maxValue": 100,
+  "minValue": 0,
+  "value": 50,
+}
+`;

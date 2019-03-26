@@ -9,6 +9,7 @@ import helpers from '../common/helpers';
 import AboutModal from './aboutModal/aboutModal';
 import AddSourceWizard from './addSourceWizard/addSourceWizard';
 import CreateCredentialDialog from './createCredentialDialog/createCredentialDialog';
+import CreateScanDialog from './createScanDialog/createScanDialog';
 import Content from './content/content';
 import ToastNotificationsList from './toastNotificationsList/toastNotificationsList';
 import ConfirmationModal from './confirmationModal/confirmationModal';
@@ -127,6 +128,7 @@ class App extends React.Component {
           <AboutModal />
           <AddSourceWizard />
           <CreateCredentialDialog />
+          <CreateScanDialog />
         </div>
       </div>
     );
