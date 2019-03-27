@@ -8,7 +8,7 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource }) => (
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat'} discovery</EmptyState.Title>
+        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat '}discovery</EmptyState.Title>
         <EmptyState.Info>
           Credentials contain authentication information needed to scan a source. A credential includes <br />a username
           and a password or SSH key. Discovery uses SSH to connect to servers <br /> on the network and uses credentials
