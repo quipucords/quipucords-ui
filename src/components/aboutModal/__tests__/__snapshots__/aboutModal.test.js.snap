@@ -8,7 +8,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
   onHide={[Function]}
   productTitle={
     <img
-      alt="Red Hat Entitlements Reporting"
+      alt="Red Hat product discovery"
       src="title-brand.svg"
     />
   }
@@ -56,7 +56,7 @@ exports[`AboutModal Component should render a non-connected component: hidden mo
     onHide={[Function]}
     productTitle={
       <img
-        alt="Entitlements Reporting"
+        alt="product discovery"
         src="title.svg"
       />
     }

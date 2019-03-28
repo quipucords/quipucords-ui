@@ -31,13 +31,13 @@ class AboutModal extends React.Component {
 
     const props = {
       logo: logoImg,
-      productTitle: <img src={titleImg} alt="Entitlements Reporting" />,
+      productTitle: <img src={titleImg} alt="product discovery" />,
       altLogo: 'ER'
     };
 
     if (brand) {
       props.logo = logoImgBrand;
-      props.productTitle = <img src={titleImgBrand} alt="Red Hat Entitlements Reporting" />;
+      props.productTitle = <img src={titleImgBrand} alt="Red Hat product discovery" />;
       props.altLogo = 'RH ER';
       props.trademarkText = 'Copyright (c) 2019 Red Hat Inc.';
     }
