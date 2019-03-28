@@ -1,6 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateScanDialog Component should render a basic component 1`] = `
+exports[`CreateScanDialog Component should correctly validate data: form invalid 1`] = `
+Object {
+  "scanDirectories": true,
+  "scanName": true,
+}
+`;
+
+exports[`CreateScanDialog Component should correctly validate data: form valid 1`] = `
+Object {
+  "scanDirectories": false,
+  "scanName": false,
+}
+`;
+
+exports[`CreateScanDialog Component should handle multiple error responses: basic error 1`] = `
+<div
+  class="alert alert-danger"
+>
+  <span
+    aria-hidden="true"
+    class="pficon pficon-error-circle-o"
+  />
+  <strong>
+    Error
+  </strong>
+   lorem ipsum
+</div>
+`;
+
+exports[`CreateScanDialog Component should handle multiple error responses: named error 1`] = `
+<div
+  class="form-group has-error"
+>
+  <label
+    class="col-sm-3 control-label"
+    for="generatedid-"
+  >
+    Name
+  </label>
+  <div
+    class="col-sm-9"
+  >
+    <input
+      class="form-control"
+      id="generatedid-"
+      maxlength="256"
+      name="scanName"
+      placeholder="Enter a name for the scan"
+      type="text"
+      value=""
+    />
+    <span
+      class="help-block"
+    >
+      lorem ipsum
+    </span>
+  </div>
+</div>
+`;
+
+exports[`CreateScanDialog Component should render a connected component with default props: connected 1`] = `
+<CreateScanDialog
+  addScan={[Function]}
+  error={false}
+  errorMessage={null}
+  fulfilled={false}
+  pending={false}
+  show={true}
+  sources={
+    Array [
+      Object {
+        "name": "test name",
+      },
+    ]
+  }
+  startScan={[Function]}
+  submitErrorMessages={Object {}}
+/>
+`;
+
+exports[`CreateScanDialog Component should render a non-connected component: non-connected 1`] = `
 <div
   role="dialog"
 >
@@ -151,7 +231,11 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
                 <span
                   class="help-block"
                 >
-                  Minimum is 1, maximum is 200
+                  <abbr
+                    title="Minimum value 1, maximum value 200"
+                  >
+                    1 - 200
+                  </abbr>
                 </span>
               </div>
             </div>
@@ -162,7 +246,22 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
                 class="col-sm-3 control-label"
                 for="generatedid-"
               >
-                Additional products to scan for
+                <div>
+                  Deep scan
+                  <br />
+                  for these
+                  <br />
+                  products
+                  <button
+                    class="popover-pf-info btn btn-link"
+                    type="button"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="pficon pficon-info"
+                    />
+                  </button>
+                </div>
               </label>
               <div
                 class="col-sm-9"
@@ -288,3 +387,5 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
   </div>
 </div>
 `;
+
+exports[`CreateScanDialog Component should render nothing if sources are not provided: empty 1`] = `null`;
