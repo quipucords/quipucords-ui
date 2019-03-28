@@ -72,6 +72,10 @@ class SourceListItem extends React.Component {
             viewType: reduxTypes.view.SOURCES_VIEW,
             item: source
           });
+
+          store.dispatch({
+            type: reduxTypes.sources.UPDATE_SOURCES
+          });
         },
         error => {
           store.dispatch({
