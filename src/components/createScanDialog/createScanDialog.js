@@ -254,7 +254,7 @@ class CreateScanDialog extends React.Component {
       ]);
     };
 
-    const popover = <p>Deep scanning provides more accurate detection but will take significantly longer.</p>;
+    const popover = <p>Deep scanning provides more accurate detection, but will take longer.</p>;
 
     const scanProductsLabel = (
       <div>
@@ -263,7 +263,7 @@ class CreateScanDialog extends React.Component {
         for these
         <br />
         products
-        <FieldLevelHelp content={popover} close placement="right" />
+        <FieldLevelHelp content={popover} close placement="top" />
       </div>
     );
 
