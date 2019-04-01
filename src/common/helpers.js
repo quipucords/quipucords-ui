@@ -163,11 +163,13 @@ const getMessageFromResults = (results, filter = null) => {
   const statusResponse = _get(results, 'response.statusText', results.statusText);
   const messageResponse = _get(results, 'response.data', results.message);
   const detailResponse = _get(results, 'response.data', results.detail);
+  const requestUrl = _get(results, 'config.url', null);
 
   const messages = {
-    status: status || 0,
     messages: {},
-    message: null
+    message: null,
+    status: status || 0,
+    url: requestUrl
   };
 
   const displayStatus = status >= 500 ? `${status} ` : '';
@@ -186,6 +188,11 @@ const getMessageFromResults = (results, filter = null) => {
 
   if (status >= 500 && /Request\sURL:/.test(messageResponse)) {
     messages.message = `${status} ${messageResponse.split(/Request\sURL:/)[0]}`;
+    return messages;
+  }
+
+  if (status === 404) {
+    messages.message = `404 Not Found`;
     return messages;
   }
 
