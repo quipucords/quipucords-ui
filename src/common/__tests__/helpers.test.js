@@ -14,6 +14,10 @@ describe('Helpers', () => {
     expect(helpers.REJECTED_ACTION('lorem')).toBe(`lorem_REJECTED`);
   });
 
+  it('should support displaying the ui version', () => {
+    expect(helpers.UI_VERSION).toMatchSnapshot('ui version');
+  });
+
   it('should support icon references', () => {
     expect(helpers.sourceTypeIcon('vcenter')).toMatchSnapshot('sourceTypeIcon');
     expect(helpers.scanTypeIcon('connect')).toMatchSnapshot('scanTypeIcon');

@@ -10,17 +10,17 @@ describe('AboutModal Component', () => {
     const store = generateEmptyStore({
       aboutModal: { show: true },
       user: { session: { username: 'lorem' } },
-      status: { apiVersion: 1 }
+      status: { serverVersion: '0.0.0.0000000' }
     });
-    const component = shallow(<ConnectedAboutModal />, { context: { store } });
 
-    expect(component).toMatchSnapshot('connected');
+    const component = shallow(<ConnectedAboutModal />, { context: { store } });
+    expect(component.dive()).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {
     const props = {
       show: false,
-      apiVersion: 1,
+      serverVersion: '0.0.0.0000000',
       username: 'admin'
     };
 
@@ -36,5 +36,21 @@ describe('AboutModal Component', () => {
 
     const component = shallow(<AboutModal {...props} />);
     expect(component).toMatchSnapshot('brand');
+  });
+
+  it('should have a copy event that updates state', () => {
+    const props = {
+      show: true,
+      serverVersion: '0.0.0.0000000',
+      brand: true,
+      reset: 100
+    };
+
+    const component = mount(<AboutModal {...props} />);
+    expect(component.state()).toMatchSnapshot('pre copy event');
+
+    component.find('button[className~="quipucords-about-modal-copy-button"]').simulate('click');
+
+    expect(component.state()).toMatchSnapshot('post copy event');
   });
 });

@@ -1,0 +1,26 @@
+.quipucords-about-modal-copy-footer {
+  margin-top: -28px;
+  text-align: right;
+}
+
+.quipucords-about-modal-copy-button {
+  box-shadow: 0 0 3px $color-pf-black-300;
+}
+
+.quipucords-about-modal-list {
+  box-shadow: 0 0 2px $color-pf-black-300;
+  padding: 10px;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 5px $color-pf-black-100;
+  }
+
+  .list-unstyled li {
+    display: flex;
+
+    strong {
+      white-space: nowrap;
+    }
+  }
+}
