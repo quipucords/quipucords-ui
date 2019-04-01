@@ -1,16 +1,24 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import { shallow } from 'enzyme';
-import CreateCredentialDialog from '../createCredentialDialog';
+import { mount, shallow } from 'enzyme';
+import { ConnectedCreateCredentialDialog, CreateCredentialDialog } from '../createCredentialDialog';
 
 describe('CreateCredentialDialog Component', () => {
-  const generateEmptyStore = () => configureMockStore()({ credentials: {}, viewOptions: {} });
+  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
-  it('should shallow render a basic component', () => {
-    const store = generateEmptyStore();
-    const props = { show: true };
-    const wrapper = shallow(<CreateCredentialDialog {...props} />, { context: { store } });
+  it('should render a connected component', () => {
+    const store = generateEmptyStore({ credentials: { update: { show: true } }, viewOptions: {} });
 
-    expect(wrapper.dive()).toMatchSnapshot();
+    const component = shallow(<ConnectedCreateCredentialDialog />, { context: { store } });
+    expect(component.dive()).toMatchSnapshot('connected');
+  });
+
+  it('should render a non-connected component', () => {
+    const props = {
+      show: false
+    };
+
+    const component = mount(<CreateCredentialDialog {...props} />);
+    expect(component).toMatchSnapshot('non-connected');
   });
 });

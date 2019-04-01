@@ -68,7 +68,7 @@ class CredentialListItem extends React.Component {
     const { item, onEdit, onDelete } = this.props;
 
     return [
-      <Tooltip key="editButton" tooltip="Edit Credential">
+      <Tooltip key="editButton" tooltip="View Credential">
         <Button
           onClick={() => {
             onEdit(item);
@@ -76,7 +76,7 @@ class CredentialListItem extends React.Component {
           bsStyle="link"
           key="editButton"
         >
-          <Icon type="pf" name="edit" />
+          <Icon type="fa" name="eye" />
         </Button>
       </Tooltip>,
       <Tooltip key="deleteButton" tooltip="Delete Credential">

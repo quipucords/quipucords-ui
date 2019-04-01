@@ -10,7 +10,7 @@ import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import CredentialsEmptyState from './credentialsEmptyState';
 import CredentialListItem from './credentialListItem';
-import { CredentialFilterFields, CredentialSortFields } from './crendentialConstants';
+import { CredentialFilterFields, CredentialSortFields } from './credentialConstants';
 
 class Credentials extends React.Component {
   constructor() {
