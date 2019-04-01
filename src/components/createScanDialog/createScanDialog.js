@@ -282,7 +282,7 @@ class CreateScanDialog extends React.Component {
           setValues={{
             displayScanDirectories: '',
             displayScanSources: sources.map(item => item.name).join(', '),
-            scanConcurrency: 50,
+            scanConcurrency: 25,
             scanDirectories: [],
             jbossEap: false,
             jbossFuse: false,

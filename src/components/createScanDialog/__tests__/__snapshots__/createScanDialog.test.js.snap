@@ -129,7 +129,7 @@ exports[`CreateScanDialog Component should render a basic component 1`] = `
                     id="scanConcurrency"
                     name="scanConcurrency"
                     type="text"
-                    value="50"
+                    value="25"
                   />
                   <span
                     class="input-group-btn"
