@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RouterTypes should return specific properties: baseName 1`] = `"/client"`;
+
+exports[`RouterTypes should return specific properties: routes 1`] = `
+Array [
+  Object {
+    "component": [Function],
+    "iconClass": "fa fa-crosshairs",
+    "redirect": true,
+    "title": "Sources",
+    "to": "/sources",
+  },
+  Object {
+    "component": [Function],
+    "iconClass": "pficon pficon-orders",
+    "title": "Scans",
+    "to": "/scans",
+  },
+  Object {
+    "component": [Function],
+    "iconClass": "fa fa-id-card",
+    "title": "Credentials",
+    "to": "/credentials",
+  },
+]
+`;

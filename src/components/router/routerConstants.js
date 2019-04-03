@@ -1,14 +1,18 @@
-import Scans from './components/scans/scans';
-import Sources from './components/sources/sources';
-import Credentials from './components/credentials/credentials';
+import Scans from '../scans/scans';
+import Sources from '../sources/sources';
+import Credentials from '../credentials/credentials';
 
+/**
+ * Return the application base directory.
+ * @type {string}
+ */
 const baseName = '/client';
 
 /**
- * Return array of objects that describe vertical menu
+ * Return array of objects that describe navigation
  * @return {array}
  */
-const routes = () => [
+const routes = [
   {
     iconClass: 'fa fa-crosshairs',
     title: 'Sources',
@@ -30,4 +34,4 @@ const routes = () => [
   }
 ];
 
-export { baseName, routes };
+export { routes as default, baseName, routes };

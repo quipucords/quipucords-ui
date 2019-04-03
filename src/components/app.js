@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Alert, EmptyState, Modal, VerticalNav } from 'patternfly-react';
 import _startsWith from 'lodash/startsWith';
-import { routes } from '../routes';
 import { connect, reduxActions, reduxTypes, store } from '../redux';
 import helpers from '../common/helpers';
+import { Router, routes } from './router/router';
 import AboutModal from './aboutModal/aboutModal';
 import AddSourceWizard from './addSourceWizard/addSourceWizard';
 import CreateCredentialDialog from './createCredentialDialog/createCredentialDialog';
 import CreateScanDialog from './createScanDialog/createScanDialog';
-import Content from './content/content';
 import ToastNotificationsList from './toastNotificationsList/toastNotificationsList';
 import ConfirmationModal from './confirmationModal/confirmationModal';
 import MastheadOptions from './mastheadOptions/mastheadOptions';
@@ -122,7 +121,7 @@ class App extends React.Component {
           {this.renderMenuActions()}
         </VerticalNav>
         <div className="container-pf-nav-pf-vertical">
-          <Content />
+          <Router />
           <ToastNotificationsList key="toastList" />
           <ConfirmationModal key="confirmationModal" />
           <AboutModal />
@@ -149,7 +148,7 @@ App.propTypes = {
 App.defaultProps = {
   authorizeUser: helpers.noop,
   logoutUser: helpers.noop,
-  menu: routes(),
+  menu: routes,
   session: {},
   location: {}
 };

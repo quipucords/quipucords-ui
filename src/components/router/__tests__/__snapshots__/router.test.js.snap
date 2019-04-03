@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ConfirmationModal Component should shallow render a basic component 1`] = `
+exports[`Router Component should shallow render a basic component 1`] = `
 <div
   className="quipucords-content"
 >
