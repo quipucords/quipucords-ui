@@ -223,7 +223,13 @@
 }
 
 .quipucords-popover-list {
-  padding-left: inherit;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    word-wrap: break-word;
+  }
 }
 
 .quipucords-sources-network-button {
