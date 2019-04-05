@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Templates should contain templates with a specific output: base 1`] = `
+"<!DOCTYPE html>
+<!--[if IE 9]><html lang=\\"en-us\\" class=\\"ie9 login-pf\\"><![endif]-->
+<!--[if gt IE 9]><!--><html lang=\\"en-us\\" class=\\"login-pf\\"><!--<![endif]-->
+  <head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"ie=edge\\">
+    <title>{% block pagetitle %}Patternfly Enterprise Application{% endblock %}</title>
+    <meta name=\\"description\\" content=\\"\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"shortcut icon\\" href=\\"../client/favicon.ico\\">
+    {% block includes %}
+    <link rel=\\"stylesheet\\" href=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/css/patternfly.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/css/patternfly-additions.min.css\\">
+
+    <script src=\\"//code.jquery.com/jquery-3.2.1.min.js\\"></script>
+    <script src=\\"//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\\"></script>
+
+    <script src=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/js/patternfly.min.js\\"></script>
+    {% endblock %}
+  </head>
+  <body>
+    <span id=\\"badge\\" class=\\"login-logo\\">
+      {% block pagelogo %}
+      <img src=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/img/logo.svg\\" alt=\\"PatternFly logo\\"/>
+      {% endblock %}
+    </span>
+
+    <div class=\\"container\\">
+      <div class=\\"row\\">
+        <div class=\\"col-sm-12\\">
+          <div id=\\"brand\\" class=\\"login-title\\">
+            {% block title %}
+            <img src=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/img/brand.svg\\" alt=\\"PatternFly Enterprise Application\\">
+            {% endblock %}
+          </div>
+        </div>
+
+        <div class=\\"col-sm-7 col-md-6 col-lg-5 login\\">
+          {% block content %}
+          <form class=\\"form-horizontal\\" role=\\"form\\">
+            <div class=\\"form-group\\">
+              <label for=\\"inputUsername\\" class=\\"col-sm-2 col-md-2 control-label\\">Username</label>
+              <div class=\\"col-sm-10 col-md-10\\">
+                <input type=\\"text\\" class=\\"form-control\\" id=\\"inputUsername\\" placeholder=\\"\\" tabindex=\\"1\\">
+              </div>
+            </div>
+            <div class=\\"form-group\\">
+              <label for=\\"inputPassword\\" class=\\"col-sm-2 col-md-2 control-label\\">Password</label>
+              <div class=\\"col-sm-10 col-md-10\\">
+                <input type=\\"password\\" class=\\"form-control\\" id=\\"inputPassword\\" placeholder=\\"\\" tabindex=\\"2\\">
+              </div>
+            </div>
+            <div class=\\"form-group\\">
+              <div class=\\"col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6\\">
+                <div class=\\"checkbox\\">
+                  <label>
+                    <input type=\\"checkbox\\" tabindex=\\"3\\"> Remember username
+                  </label>
+                </div>
+                <span class=\\"help-block\\"> Forgot <a href=\\"#\\" tabindex=\\"5\\">username</a> or <a href=\\"#\\" tabindex=\\"6\\">password</a>?</span>
+              </div>
+              <div class=\\"col-xs-4 col-sm-4 col-md-4 submit\\">
+                <button type=\\"submit\\" class=\\"btn btn-primary btn-lg\\" tabindex=\\"4\\">Log In</button>
+              </div>
+            </div>
+          </form>
+          {% endblock %}
+        </div>
+
+        <div class=\\"col-sm-5 col-md-6 col-lg-7 details\\">
+          {% block description %}
+          <p>
+            <strong>Welcome to PatternFly!</strong>
+            This is placeholder text, only. Use this area to place any information
+            or introductory
+            message about your application that may be relevant for users. For
+            example, you might
+            include news or information about the latest release of your product
+            here&mdash;such
+            as a version number.
+          </p>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+"
+`;
+
+exports[`Templates should contain templates with a specific output: login 1`] = `
+"{% extends \\"base.html\\" %}
+{% load i18n %}
+
+{% load static %}
+
+{% block includes %}
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/rcue/css/rcue.css' %}\\">
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/rcue/css/rcue-additions.css' %}\\">
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/css/index.css' %}\\">
+{% endblock %}
+
+{% block pagetitle %}
+{% trans \\"product discovery\\" %}
+{% endblock %}
+
+{% block pagelogo %}
+<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\"/>
+{% endblock %}
+
+{% block title %}
+<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\">
+{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<div class=\\"alert alert-danger\\">
+  <span class=\\"pficon pficon-error-circle-o\\"></span>
+  {% trans \\"The username or password you entered is incorrect.\\" %}
+</div>
+{% endif %}
+
+<form class=\\"form-horizontal\\" role=\\"form\\" method=\\"post\\">
+  <div class=\\"form-group\\">
+    {% csrf_token %}
+    <label for=\\"id_username\\" class=\\"col-sm-2 col-md-2 control-label\\">{% trans \\"Username\\" %}</label>
+    <div class=\\"col-sm-10 col-md-10\\">
+      <input type=\\"text\\" class=\\"form-control\\" placeholder=\\"\\" tabindex=\\"1\\" maxlength=\\"254\\" id=\\"id_username\\" name=\\"username\\" required autofocus>
+    </div>
+  </div>
+  <div class=\\"form-group\\">
+    <label for=\\"id_password\\" class=\\"col-sm-2 col-md-2 control-label\\">{% trans \\"Password\\" %}</label>
+    <div class=\\"col-sm-10 col-md-10\\">
+      <input type=\\"password\\" class=\\"form-control\\" placeholder=\\"\\" tabindex=\\"2\\" id=\\"id_password\\" name=\\"password\\" required>
+    </div>
+  </div>
+  <div class=\\"form-group\\">
+    <div class=\\"col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6\\">
+      <!--
+      <div class=\\"checkbox\\">
+        <label>
+          <input type=\\"checkbox\\" tabindex=\\"3\\"> Remember username
+        </label>
+      </div>
+      <span class=\\"help-block\\"> Forgot <a href=\\"javascript:void(0)\\" tabindex=\\"5\\">username</a> or <a href=\\"javascript:void(0)\\" tabindex=\\"6\\">password</a>?</span>
+      -->
+    </div>
+    <div class=\\"col-xs-4 col-sm-4 col-md-4 submit\\">
+      <button type=\\"submit\\" class=\\"btn btn-primary btn-lg\\" tabindex=\\"4\\">{% trans \\"Log In\\" %}</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block description %}
+<p>
+  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  This is an inspection and reporting tool. It is designed to identify and report environment
+  data, <em>or facts</em>, such as the number of physical and virtual systems on a network, their operating systems,
+  and other configuration data.
+</p>
+
+{% endblock %}
+"
+`;
+
+exports[`Templates should contain templates with a specific output: logout 1`] = `
+"{% extends \\"base.html\\" %}
+{% load i18n %}
+
+{% load static %}
+
+{% block includes %}
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/rcue/css/rcue.css' %}\\">
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/rcue/css/rcue-additions.css' %}\\">
+  <link rel=\\"stylesheet\\" href=\\"{% static '/assets/css/index.css' %}\\">
+{% endblock %}
+
+{% block pagetitle %}
+{% trans \\"product discovery\\" %}
+{% endblock %}
+
+{% block pagelogo %}
+<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\" />
+{% endblock %}
+
+{% block title %}
+<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\" />
+{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<div class=\\"alert alert-danger\\">
+  <span class=\\"pficon pficon-error-circle-o\\"></span>
+  {% trans \\"The username or password you entered is incorrect.\\" %}
+</div>
+{% else %}
+<div class=\\"alert alert-info\\">
+  <span class=\\"pficon pficon-info\\"></span>
+  {% trans \\"You have been logged out. Please log in again.\\" %}
+</div>
+{% endif %}
+
+<form class=\\"form-horizontal\\" role=\\"form\\" method=\\"post\\" action=\\"{% url 'login' %}\\">
+  <div class=\\"form-group\\">
+    {% csrf_token %}
+    <label for=\\"id_username\\" class=\\"col-sm-2 col-md-2 control-label\\">{% trans \\"Username\\" %}</label>
+    <div class=\\"col-sm-10 col-md-10\\">
+      <input type=\\"text\\" class=\\"form-control\\" placeholder=\\"\\" tabindex=\\"1\\" maxlength=\\"254\\" id=\\"id_username\\" name=\\"username\\" required autofocus>
+    </div>
+  </div>
+  <div class=\\"form-group\\">
+    <label for=\\"id_password\\" class=\\"col-sm-2 col-md-2 control-label\\">{% trans \\"Password\\" %}</label>
+    <div class=\\"col-sm-10 col-md-10\\">
+      <input type=\\"password\\" class=\\"form-control\\" placeholder=\\"\\" tabindex=\\"2\\" id=\\"id_password\\" name=\\"password\\" required>
+    </div>
+  </div>
+  <div class=\\"form-group\\">
+    <div class=\\"col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6\\">
+    </div>
+    <div class=\\"col-xs-4 col-sm-4 col-md-4 submit\\">
+      <button type=\\"submit\\" class=\\"btn btn-primary btn-lg\\" tabindex=\\"4\\">{% trans \\"Log In\\" %}</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block description %}
+<p>
+  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  This is an inspection and reporting tool. It is designed to identify and report environment
+  data, <em>or facts</em>, such as the number of physical and virtual systems on a network, their operating systems,
+  and other configuration data.
+</p>
+
+{% endblock %}
+"
+`;
