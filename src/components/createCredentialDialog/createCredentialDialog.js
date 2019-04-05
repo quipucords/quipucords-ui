@@ -425,7 +425,7 @@ class CreateCredentialDialog extends React.Component {
           <Button className="close" onClick={this.onCancel} aria-hidden="true" aria-label="Close">
             <Icon type="pf" name="close" />
           </Button>
-          <Modal.Title>{edit ? `Edit Credential - ${credentialName}` : 'Add Credential'}</Modal.Title>
+          <Modal.Title>{edit ? `View Credential - ${credentialName}` : 'Add Credential'}</Modal.Title>
         </Modal.Header>
         <Modal.Body />
         <Grid fluid>
