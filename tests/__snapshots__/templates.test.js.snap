@@ -160,8 +160,8 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 {% block description %}
 <p>
   <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
-  This is an inspection and reporting tool. It is designed to identify and report environment
-  data, <em>or facts</em>, such as the number of physical and virtual systems on a network, their operating systems,
+  This inspection and reporting tool is designed to identify and report environment
+  data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.
 </p>
 
@@ -203,7 +203,7 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% else %}
 <div class=\\"alert alert-info\\">
   <span class=\\"pficon pficon-info\\"></span>
-  {% trans \\"You have been logged out. Please log in again.\\" %}
+  {% trans \\"You are logged out. Please log in again.\\" %}
 </div>
 {% endif %}
 
@@ -234,8 +234,8 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% block description %}
 <p>
   <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
-  This is an inspection and reporting tool. It is designed to identify and report environment
-  data, <em>or facts</em>, such as the number of physical and virtual systems on a network, their operating systems,
+  This inspection and reporting tool is designed to identify and report environment
+  data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.
 </p>
 
