@@ -1,0 +1,54 @@
+import React from 'react';
+import configureMockStore from 'redux-mock-store';
+import { shallow, mount } from 'enzyme';
+import { ConnectedPageLayout, PageLayout } from '../pageLayout';
+
+describe('PageLayout Component', () => {
+  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
+
+  it('should render a connected component', () => {
+    const store = generateEmptyStore({
+      user: { session: { authorized: false, username: 'lorem' } }
+    });
+    const component = shallow(
+      <ConnectedPageLayout>
+        <span className="test">lorem</span>
+      </ConnectedPageLayout>,
+      { context: { store } }
+    );
+
+    expect(component).toMatchSnapshot('connected');
+  });
+
+  it('should render a non-connected component unauthorized', () => {
+    const props = {
+      session: {
+        authorized: false,
+        username: 'lorem'
+      }
+    };
+    const component = mount(
+      <PageLayout {...props}>
+        <span className="test">lorem</span>
+      </PageLayout>
+    );
+
+    expect(component).toMatchSnapshot('non-connected unauthorized');
+  });
+
+  it('should render a non-connected component authorized', () => {
+    const props = {
+      session: {
+        authorized: true,
+        username: 'lorem'
+      }
+    };
+    const component = shallow(
+      <PageLayout {...props}>
+        <span className="test">lorem</span>
+      </PageLayout>
+    );
+
+    expect(component).toMatchSnapshot('non-connected authorized');
+  });
+});

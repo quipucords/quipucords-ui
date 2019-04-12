@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authentication Component should render a connected component: connected 1`] = `
+<Authentication
+  authorizeUser={[Function]}
+  session={
+    Object {
+      "authorized": false,
+      "error": false,
+      "errorMessage": "",
+      "pending": false,
+    }
+  }
+>
+  <span
+    className="test"
+  >
+    lorem
+  </span>
+</Authentication>
+`;
+
+exports[`Authentication Component should render a non-connected component authorized: non-connected authorized 1`] = `
+<Authentication
+  authorizeUser={[Function]}
+  session={
+    Object {
+      "authorized": true,
+      "error": false,
+      "errorMessage": "",
+      "pending": false,
+    }
+  }
+>
+  <span
+    className="test"
+  >
+    lorem
+  </span>
+</Authentication>
+`;
+
+exports[`Authentication Component should render a non-connected component error: non-connected error 1`] = `
+<Authentication
+  authorizeUser={[Function]}
+  session={
+    Object {
+      "authorized": false,
+      "error": true,
+      "errorMessage": "Authentication credentials were not provided.",
+      "pending": false,
+    }
+  }
+>
+  <PageLayout
+    brand={false}
+    history={Object {}}
+    isFullPage={false}
+    location={Object {}}
+    logoutUser={[Function]}
+    menu={
+      Array [
+        Object {
+          "component": [Function],
+          "iconClass": "fa fa-crosshairs",
+          "redirect": true,
+          "title": "Sources",
+          "to": "/sources",
+        },
+        Object {
+          "component": [Function],
+          "iconClass": "pficon pficon-orders",
+          "title": "Scans",
+          "to": "/scans",
+        },
+        Object {
+          "component": [Function],
+          "iconClass": "fa fa-id-card",
+          "title": "Credentials",
+          "to": "/credentials",
+        },
+      ]
+    }
+    session={
+      Object {
+        "authorized": false,
+        "username": "",
+      }
+    }
+  >
+    <div
+      className="layout-pf layout-pf-fixed fadein"
+    >
+      <Masthead
+        className=""
+        href="#"
+        iconImg=""
+        middleContent={null}
+        navToggle={false}
+        onNavToggleClick={[Function]}
+        onTitleClick={[Function]}
+        thin={false}
+        title="product discovery"
+        titleImg="title.svg"
+      >
+        <nav
+          className="navbar navbar-pf-vertical"
+        >
+          <div
+            className="navbar-header"
+          >
+            <a
+              className="navbar-brand"
+              href="#"
+              onClick={[Function]}
+              role="button"
+            >
+              <img
+                alt="product discovery"
+                className="navbar-brand-name"
+                src="title.svg"
+              />
+            </a>
+          </div>
+        </nav>
+      </Masthead>
+      <div>
+        <EmptyState
+          className="full-page-blank-slate"
+        >
+          <div
+            className="blank-slate-pf full-page-blank-slate"
+          >
+            <Alert
+              className=""
+              onDismiss={null}
+              type="error"
+            >
+              <div
+                className="alert alert-danger"
+              >
+                <Icon
+                  name="error-circle-o"
+                  type="pf"
+                >
+                  <PatternflyIcon
+                    className=""
+                    name="error-circle-o"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="pficon pficon-error-circle-o"
+                    />
+                  </PatternflyIcon>
+                </Icon>
+                <span>
+                  Login error: 
+                  Authentication credentials were not provided
+                  .
+                  Please 
+                  <a
+                    href="/login"
+                  >
+                    login
+                  </a>
+                   to continue.
+                </span>
+              </div>
+            </Alert>
+          </div>
+        </EmptyState>
+      </div>
+    </div>
+  </PageLayout>
+</Authentication>
+`;
+
+exports[`Authentication Component should render a non-connected component pending: non-connected pending 1`] = `
+<Modal
+  animation={false}
+  autoFocus={true}
+  backdrop={false}
+  bsClass="modal"
+  bsSize="lg"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <div
+      className="spinner spinner-xl"
+    />
+    <div
+      className="text-center"
+    >
+      Logging in...
+    </div>
+  </ModalBody>
+</Modal>
+`;

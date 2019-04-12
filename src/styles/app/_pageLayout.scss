@@ -1,0 +1,10 @@
+/* _pageLayout.scss */
+.navbar-pf-vertical .nav .nav-item-iconic {
+  line-height: inherit;
+}
+
+.nav-pf-vertical .list-group-item.collapsed-nav-item {
+  @media (min-width: $screen-sm-min) {
+    display: none;
+  }
+}
