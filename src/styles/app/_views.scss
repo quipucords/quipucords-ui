@@ -1,6 +1,7 @@
 /* _views.scss */
 
 // Setup for internal vertical scroll
+
 .quipucords-content {
   bottom: 0;
   top: $navbar-pf-vertical-height;
@@ -12,25 +13,6 @@
   }
   .hidden-nav & {
     left: 0;
-  }
-}
-
-.layout-pf.hidden-nav-menu {
-  .nav-pf-vertical {
-    border: 0;
-    width: 0;
-  }
-  .container-pf-nav-pf-vertical {
-    margin-left: 0;
-  }
-  .navbar-toggle {
-    visibility: hidden;
-  }
-}
-
-.nav-pf-vertical .list-group-item.collapsed-nav-item {
-  @media (min-width: $screen-sm-min) {
-    display: none;
   }
 }
 
