@@ -52,6 +52,7 @@ Object {
     "reports": Object {
       "GET_MERGE_REPORT": "GET_MERGE_REPORT",
       "GET_REPORT": "GET_REPORT",
+      "GET_REPORTS": "GET_REPORTS",
     },
     "scans": Object {
       "ADD_SCAN": "ADD_SCAN",
@@ -161,6 +162,7 @@ Object {
     "reports": Object {
       "GET_MERGE_REPORT": "GET_MERGE_REPORT",
       "GET_REPORT": "GET_REPORT",
+      "GET_REPORTS": "GET_REPORTS",
     },
     "scans": Object {
       "ADD_SCAN": "ADD_SCAN",
@@ -240,6 +242,7 @@ Object {
   "reportsTypes": Object {
     "GET_MERGE_REPORT": "GET_MERGE_REPORT",
     "GET_REPORT": "GET_REPORT",
+    "GET_REPORTS": "GET_REPORTS",
   },
   "scansTypes": Object {
     "ADD_SCAN": "ADD_SCAN",
@@ -348,6 +351,7 @@ Object {
   "reports": Object {
     "GET_MERGE_REPORT": "GET_MERGE_REPORT",
     "GET_REPORT": "GET_REPORT",
+    "GET_REPORTS": "GET_REPORTS",
   },
   "scans": Object {
     "ADD_SCAN": "ADD_SCAN",

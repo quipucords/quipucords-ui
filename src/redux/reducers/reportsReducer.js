@@ -10,6 +10,13 @@ const initialState = {
     reports: []
   },
 
+  reports: {
+    error: false,
+    errorMessage: '',
+    pending: false,
+    fulfilled: false
+  },
+
   merge: {
     error: false,
     errorMessage: '',
@@ -23,6 +30,19 @@ const reportsReducer = (state = initialState, action) => {
     case helpers.REJECTED_ACTION(reportsTypes.GET_REPORT):
       return helpers.setStateProp(
         'report',
+        {
+          error: action.error,
+          errorMessage: helpers.getMessageFromResults(action.payload).message
+        },
+        {
+          state,
+          initialState
+        }
+      );
+
+    case helpers.REJECTED_ACTION(reportsTypes.GET_REPORTS):
+      return helpers.setStateProp(
+        'reports',
         {
           error: action.error,
           errorMessage: helpers.getMessageFromResults(action.payload).message
@@ -58,6 +78,18 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
+    case helpers.PENDING_ACTION(reportsTypes.GET_REPORTS):
+      return helpers.setStateProp(
+        'reports',
+        {
+          pending: true
+        },
+        {
+          state,
+          initialState
+        }
+      );
+
     case helpers.PENDING_ACTION(reportsTypes.GET_MERGE_REPORT):
       return helpers.setStateProp(
         'merge',
@@ -76,6 +108,18 @@ const reportsReducer = (state = initialState, action) => {
         {
           fulfilled: true,
           reports: action.payload.data
+        },
+        {
+          state,
+          initialState
+        }
+      );
+
+    case helpers.FULFILLED_ACTION(reportsTypes.GET_REPORTS):
+      return helpers.setStateProp(
+        'reports',
+        {
+          fulfilled: true
         },
         {
           state,

@@ -2,6 +2,16 @@ import axios from 'axios';
 import serviceConfig from './config';
 import helpers from '../common/helpers';
 
+const getReports = id =>
+  axios(
+    serviceConfig(
+      {
+        url: `${process.env.REACT_APP_REPORTS_SERVICE}${id}/`
+      },
+      false
+    )
+  );
+
 const getReportDetails = (id, params = {}) =>
   axios(
     serviceConfig(
@@ -78,6 +88,7 @@ const mergeScanReports = (data = {}) =>
   );
 
 const reportsService = {
+  getReports,
   getReportDetails,
   getReportDetailsCsv,
   getReportSummary,
@@ -90,6 +101,7 @@ const reportsService = {
 export {
   reportsService as default,
   reportsService,
+  getReports,
   getReportDetails,
   getReportDetailsCsv,
   getReportSummary,
