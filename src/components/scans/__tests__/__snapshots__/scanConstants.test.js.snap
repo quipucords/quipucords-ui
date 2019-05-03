@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScanTypes Should have specific scanFilterFields properties: scanFilterFields 1`] = `
+Array [
+  Object {
+    "filterType": "text",
+    "id": "search_by_name",
+    "placeholder": "Filter by Name",
+    "title": "Name",
+  },
+  Object {
+    "filterType": "text",
+    "id": "search_sources_by_name",
+    "placeholder": "Filter by Source Name",
+    "title": "Source",
+  },
+]
+`;
+
+exports[`ScanTypes Should have specific scanSortFields properties: scanSortFields 1`] = `
+Array [
+  Object {
+    "id": "name",
+    "isNumeric": false,
+    "title": "Name",
+  },
+  Object {
+    "id": "most_recent_scanjob__start_time",
+    "isNumeric": true,
+    "sortAscending": false,
+    "title": "Most Recent",
+  },
+]
+`;

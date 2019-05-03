@@ -4,7 +4,6 @@ exports[`Sources Component should render a connected component with default prop
 <Sources
   error={false}
   errorMessage={null}
-  fulfilled={false}
   getSources={[Function]}
   lastRefresh={0}
   pending={false}
@@ -14,7 +13,7 @@ exports[`Sources Component should render a connected component with default prop
 />
 `;
 
-exports[`Sources Component should render a non-connected component in error state: error 1`] = `
+exports[`Sources Component should render a non-connected component error: error 1`] = `
 <div
   class="blank-slate-pf"
 >
@@ -32,7 +31,60 @@ exports[`Sources Component should render a non-connected component in error stat
 </div>
 `;
 
-exports[`Sources Component should render a non-connected component in fulfilled state: fulfilled 1`] = `
+exports[`Sources Component should render a non-connected component pending: pending 1`] = `
+<div
+  class="quipucords-view-container"
+/>
+`;
+
+exports[`Sources Component should render a non-connected component with empty state: empty state 1`] = `
+<div
+  class="fadein container-fluid"
+>
+  <div
+    class="row"
+  >
+    <div
+      class="blank-slate-pf full-page-blank-slate"
+    >
+      <div
+        class="blank-slate-pf-icon"
+      >
+        <span
+          aria-hidden="true"
+          class="pficon pficon-add-circle-o"
+        />
+      </div>
+      <h4
+        class="h1 blank-slate-pf-title"
+      >
+        Welcome to discovery
+      </h4>
+      <p
+        class="blank-slate-pf-info"
+      >
+        Begin by adding one or more sources. A source contains a collection of network information, 
+        <br />
+        including systems management solution information, IP addresses, or host names, in addition to 
+        <br />
+        SSH ports and credentials.
+      </p>
+      <div
+        class="blank-slate-pf-main-action"
+      >
+        <button
+          class="btn btn-lg btn-primary"
+          type="button"
+        >
+          Add Source
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Sources Component should render a non-connected component: non-connected 1`] = `
 <div
   className="quipucords-view-container"
 >
@@ -158,59 +210,6 @@ exports[`Sources Component should render a non-connected component in fulfilled 
         lastRefresh={0}
       />
     </ListView>
-  </div>
-</div>
-`;
-
-exports[`Sources Component should render a non-connected component in pending state: pending 1`] = `
-<div
-  class="quipucords-view-container"
-/>
-`;
-
-exports[`Sources Component should render a non-connected component with empty state: empty state 1`] = `
-<div
-  class="container-fluid"
->
-  <div
-    class="row"
-  >
-    <div
-      class="blank-slate-pf full-page-blank-slate"
-    >
-      <div
-        class="blank-slate-pf-icon"
-      >
-        <span
-          aria-hidden="true"
-          class="pficon pficon-add-circle-o"
-        />
-      </div>
-      <h4
-        class="h1 blank-slate-pf-title"
-      >
-        Welcome to discovery
-      </h4>
-      <p
-        class="blank-slate-pf-info"
-      >
-        Begin by adding one or more sources. A source contains a collection of network information, 
-        <br />
-        including systems management solution information, IP addresses, or host names, in addition to 
-        <br />
-        SSH ports and credentials.
-      </p>
-      <div
-        class="blank-slate-pf-main-action"
-      >
-        <button
-          class="btn btn-lg btn-primary"
-          type="button"
-        >
-          Add Source
-        </button>
-      </div>
-    </div>
   </div>
 </div>
 `;

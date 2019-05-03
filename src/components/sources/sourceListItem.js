@@ -5,7 +5,7 @@ import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
 import _size from 'lodash/size';
-import * as moment from 'moment';
+import moment from 'moment';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
@@ -216,7 +216,7 @@ class SourceListItem extends React.Component {
     const iconInfo = helpers.scanStatusIcon(host.status);
 
     return (
-      <React.Fragment>
+      <Grid.Row key={`${host.name}-${host.sourceId}`}>
         <Grid.Col xs={host.status === 'success' ? 6 : 12} sm={4}>
           <span>
             <Icon type={iconInfo.type} name={iconInfo.name} className={cx(...iconInfo.classNames)} />
@@ -227,11 +227,11 @@ class SourceListItem extends React.Component {
           <Grid.Col xs={6} sm={4}>
             <span>
               <Icon type="fa" name="id-card" />
-              &nbsp; {host.credential.name}
+              &nbsp; {host.credentialName}
             </span>
           </Grid.Col>
         )}
-      </React.Fragment>
+      </Grid.Row>
     );
   }
 
@@ -243,35 +243,35 @@ class SourceListItem extends React.Component {
       case 'okHosts':
         return (
           <ScanHostList
-            scanId={item.connection.id}
-            sourceId={item.id}
-            lastRefresh={lastRefresh}
-            status="success"
-            renderHostRow={SourceListItem.renderHostRow}
+            key={`systemsScanned-${lastRefresh}`}
+            id={item.connection.id}
+            filter={{ [apiTypes.API_QUERY_SOURCE_TYPE]: item.id, [apiTypes.API_QUERY_STATUS]: 'success' }}
             useConnectionResults
-          />
+          >
+            {({ host }) => SourceListItem.renderHostRow(host)}
+          </ScanHostList>
         );
       case 'failedHosts':
         return (
           <ScanHostList
-            scanId={item.connection.id}
-            sourceId={item.id}
-            lastRefresh={lastRefresh}
-            status="failed"
-            renderHostRow={SourceListItem.renderHostRow}
+            key={`systemsFailed-${lastRefresh}`}
+            id={item.connection.id}
+            filter={{ [apiTypes.API_QUERY_SOURCE_TYPE]: item.id, [apiTypes.API_QUERY_STATUS]: 'failed' }}
             useConnectionResults
-          />
+          >
+            {({ host }) => SourceListItem.renderHostRow(host)}
+          </ScanHostList>
         );
       case 'unreachableHosts':
         return (
           <ScanHostList
-            scanId={item.connection.id}
-            sourceId={item.id}
-            lastRefresh={lastRefresh}
-            status="unreachable"
-            renderHostRow={SourceListItem.renderHostRow}
+            key={`systemsUnreachable-${lastRefresh}`}
+            id={item.connection.id}
+            filter={{ [apiTypes.API_QUERY_SOURCE_TYPE]: item.id, [apiTypes.API_QUERY_STATUS]: 'unreachable' }}
             useConnectionResults
-          />
+          >
+            {({ host }) => SourceListItem.renderHostRow(host)}
+          </ScanHostList>
         );
       case 'credentials':
         return <SourceCredentialsList source={item} />;

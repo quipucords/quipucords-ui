@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import { Alert, Button, DropdownButton, EmptyState, Grid, Form, ListView, MenuItem, Modal } from 'patternfly-react';
-import _get from 'lodash/get';
+import { Alert, Button, DropdownButton, EmptyState, ListView, MenuItem, Modal, Spinner } from 'patternfly-react';
 import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -10,111 +8,24 @@ import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import ScansEmptyState from './scansEmptyState';
 import ScanListItem from './scanListItem';
-import { ScanFilterFields, ScanSortFields } from './scanConstants';
 import Tooltip from '../tooltip/tooltip';
-import MergeReportsDialog from '../mergeReportsDialog/mergeReportsDialog';
+import { ScanFilterFields, ScanSortFields } from './scanConstants';
+import { apiTypes } from '../../constants/apiConstants';
 
 class Scans extends React.Component {
-  static notifyDownloadStatus(error, results) {
-    if (error) {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'error',
-        header: 'Error',
-        message: helpers.getMessageFromResults(results).message
-      });
-    } else {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'success',
-        message: <span>Report downloaded.</span>
-      });
-    }
-  }
-
-  /**
-   * FixMe: Deletions of scans is not currently desired. This is here in case it ever gets added.
-   * FUTURE: Delete is fully functional by setting okToDelete to true.
-   */
-  okToDelete = false;
-
-  state = {
-    scansToDelete: [],
-    deletingScan: null,
-    redirectTo: null
-  };
-
   componentDidMount() {
-    this.onRefresh();
+    const { getScans, viewOptions } = this.props;
+
+    getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
   }
 
-  componentDidUpdate(previousProps) {
-    const { update, viewOptions } = this.props;
-    const { deletingScan } = this.state;
+  componentDidUpdate() {
+    const { getScans, updateScans, viewOptions } = this.props;
 
-    // Check for changes resulting in a fetch
-    if (helpers.viewPropsChanged(previousProps.viewOptions, viewOptions)) {
-      this.onRefresh();
-    }
-
-    if (_get(update, 'delete')) {
-      if (previousProps.update.fulfilled && !update.fulfilled) {
-        store.dispatch({
-          type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'success',
-          message: (
-            <span>
-              Scan <strong>{deletingScan.name}</strong> successfully deleted.
-            </span>
-          )
-        });
-
-        this.onRefresh();
-
-        store.dispatch({
-          type: reduxTypes.view.DESELECT_ITEM,
-          viewType: reduxTypes.view.SCANS_VIEW,
-          item: deletingScan
-        });
-
-        this.deleteNextScan();
-      }
-
-      if (previousProps.update.error && !update.error) {
-        store.dispatch({
-          type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'error',
-          header: 'Error',
-          message: (
-            <span>
-              Error removing scan <strong>{deletingScan.name}</strong>
-              <p>{update.errorMessage}</p>
-            </span>
-          )
-        });
-
-        this.deleteNextScan();
-      }
+    if (updateScans) {
+      getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
     }
   }
-
-  onDownloadSummaryReport = reportId => {
-    const { getReportSummaryCsv } = this.props;
-
-    getReportSummaryCsv(reportId).then(
-      () => Scans.notifyDownloadStatus(false),
-      error => Scans.notifyDownloadStatus(true, error.message)
-    );
-  };
-
-  onDownloadDetailedReport = reportId => {
-    const { getReportDetailsCsv } = this.props;
-
-    getReportDetailsCsv(reportId).then(
-      () => Scans.notifyDownloadStatus(false),
-      error => Scans.notifyDownloadStatus(true, error.message)
-    );
-  };
 
   onMergeScanResults = details => {
     const { viewOptions } = this.props;
@@ -127,102 +38,9 @@ class Scans extends React.Component {
     });
   };
 
-  onDoStartScan = item => {
-    const { startScan } = this.props;
-
-    startScan(item.id).then(
-      response => this.notifyActionStatus(item, 'started', false, response.value),
-      error => this.notifyActionStatus(item, 'started', true, error)
-    );
-  };
-
-  onDoPauseScan = item => {
-    const { pauseScan } = this.props;
-
-    pauseScan(item.most_recent.id).then(
-      response => this.notifyActionStatus(item, 'paused', false, response.value),
-      error => this.notifyActionStatus(item, 'paused', true, error)
-    );
-  };
-
-  onDoResumeScan = item => {
-    const { restartScan } = this.props;
-
-    restartScan(item.most_recent.id).then(
-      response => this.notifyActionStatus(item, 'resumed', false, response.value),
-      error => this.notifyActionStatus(item, 'resumed', true, error)
-    );
-  };
-
-  onDoCancelScan = item => {
-    const { cancelScan } = this.props;
-
-    cancelScan(item.most_recent.id).then(
-      response => this.notifyActionStatus(item, 'canceled', false, response.value),
-      error => this.notifyActionStatus(item, 'canceled', true, error)
-    );
-  };
-
-  onAddSource = () => {
-    const { sourcesCount } = this.props;
-
-    if (sourcesCount) {
-      this.setState({ redirectTo: '/sources' });
-    } else {
-      store.dispatch({
-        type: reduxTypes.sources.CREATE_SOURCE_SHOW
-      });
-    }
-  };
-
   onRefresh = () => {
-    const { getScans, getScansSources, viewOptions } = this.props;
-
-    getScansSources();
-    getScans(helpers.createViewQueryObject(viewOptions, { scan_type: 'inspect' }));
-  };
-
-  onDeleteScans = () => {
-    const { viewOptions } = this.props;
-
-    if (_size(viewOptions.selectedItems) === 0) {
-      return;
-    }
-
-    if (_size(viewOptions.selectedItems) === 1) {
-      this.handleDeleteScan(viewOptions.selectedItems[0]);
-      return;
-    }
-
-    const heading = <span>Are you sure you want to delete the following scans?</span>;
-
-    let scansList = '';
-    viewOptions.selectedItems.forEach((item, index) => {
-      scansList += (index > 0 ? '\n' : '') + item.name;
-    });
-
-    const body = (
-      <Grid.Col sm={12}>
-        <Form.FormControl
-          className="quipucords-form-control"
-          componentClass="textarea"
-          type="textarea"
-          readOnly
-          rows={viewOptions.selectedItems.length}
-          value={scansList}
-        />
-      </Grid.Col>
-    );
-
-    const onConfirm = () => this.doDeleteScans(viewOptions.selectedItems);
-
     store.dispatch({
-      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
-      title: 'Delete Scans',
-      heading,
-      body,
-      confirmButtonText: 'Delete',
-      onConfirm
+      type: reduxTypes.scans.UPDATE_SCANS
     });
   };
 
@@ -233,78 +51,28 @@ class Scans extends React.Component {
     });
   };
 
-  notifyActionStatus(scan, actionText, error, results) {
-    if (error) {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'error',
-        header: 'Error',
-        message: helpers.getMessageFromResults(results).message
-      });
-    } else {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'success',
-        message: (
-          <span>
-            Scan <strong>{scan.name}</strong> {actionText}.
-          </span>
-        )
-      });
+  renderScansActions() {
+    const { viewOptions } = this.props;
 
-      this.onRefresh();
-    }
-  }
-
-  deleteNextScan() {
-    const { deleteScan } = this.props;
-    const { scansToDelete } = this.state;
-
-    if (scansToDelete.length > 0) {
-      const nextDeletingScan = scansToDelete.pop();
-
-      this.setState(
-        {
-          deletingScan: nextDeletingScan
-        },
-        () => {
-          if (nextDeletingScan) {
-            deleteScan(nextDeletingScan.id);
-          }
-        }
-      );
-    }
-  }
-
-  doDeleteScans(items) {
-    this.setState(
-      {
-        scansToDelete: [...items]
-      },
-      () => this.deleteNextScan()
+    return (
+      <div className="form-group">
+        <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
+          <DropdownButton
+            key="mergeButton"
+            title="Merge Report"
+            id="merge-reports-dropdown"
+            disabled={viewOptions.selectedItems.length <= 1}
+          >
+            <MenuItem eventKey="1" onClick={() => this.onMergeScanResults(false)}>
+              Summary Report
+            </MenuItem>
+            <MenuItem eventKey="2" onClick={() => this.onMergeScanResults(true)}>
+              Detailed Report
+            </MenuItem>
+          </DropdownButton>
+        </Tooltip>
+      </div>
     );
-
-    store.dispatch({
-      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_HIDE
-    });
-  }
-
-  handleDeleteScan(item) {
-    const heading = (
-      <span>
-        Are you sure you want to delete the scan <strong>{item.name}</strong>?
-      </span>
-    );
-
-    const onConfirm = () => this.doDeleteScans([item]);
-
-    store.dispatch({
-      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
-      title: 'Delete Scan',
-      heading,
-      confirmButtonText: 'Delete',
-      onConfirm
-    });
   }
 
   renderPendingMessage() {
@@ -314,8 +82,8 @@ class Scans extends React.Component {
       return (
         <Modal bsSize="lg" backdrop={false} show animation={false}>
           <Modal.Body>
-            <div className="spinner spinner-xl" />
-            <div className="text-center">Loading scans...</div>
+            <Spinner loading size="lg" className="blank-slate-pf-icon" />
+            <div className="text-center">Loading...</div>
           </Modal.Body>
         </Modal>
       );
@@ -324,55 +92,14 @@ class Scans extends React.Component {
     return null;
   }
 
-  renderScansActions() {
-    const { viewOptions } = this.props;
-    const mergeAllowed = _size(viewOptions.selectedItems) > 1;
-
-    // FUTURE: deletion is not currently enabled
-    let deleteAction = null;
-    if (this.okToDelete) {
-      deleteAction = (
-        <Button disabled={_size(viewOptions.selectedItems) === 0} onClick={this.onDeleteScans}>
-          Delete
-        </Button>
-      );
-    }
-
-    return (
-      <div className="form-group">
-        <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
-          <DropdownButton key="mergeButton" title="Merge Report" id="merge-reports-dropdown" disabled={!mergeAllowed}>
-            <MenuItem eventKey="1" onClick={() => this.onMergeScanResults(false)}>
-              Summary Report
-            </MenuItem>
-            <MenuItem eventKey="2" onClick={() => this.onMergeScanResults(true)}>
-              Detailed Report
-            </MenuItem>
-          </DropdownButton>
-        </Tooltip>
-        {deleteAction}
-      </div>
-    );
-  }
-
-  renderScansList(items) {
+  renderScansList(scans) {
     const { lastRefresh } = this.props;
 
-    if (_size(items)) {
+    if (scans.length) {
       return (
         <ListView className="quipicords-list-view">
-          {items.map(item => (
-            <ScanListItem
-              item={item}
-              key={item.id}
-              lastRefresh={lastRefresh}
-              onSummaryDownload={this.onDownloadSummaryReport}
-              onDetailedDownload={this.onDownloadDetailedReport}
-              onStart={this.onDoStartScan}
-              onPause={this.onDoPauseScan}
-              onResume={this.onDoResumeScan}
-              onCancel={this.onDoCancelScan}
-            />
+          {scans.map(scan => (
+            <ScanListItem scan={scan} key={scan[apiTypes.API_RESPONSE_SCAN_ID]} lastRefresh={lastRefresh} />
           ))}
         </ListView>
       );
@@ -392,8 +119,7 @@ class Scans extends React.Component {
   }
 
   render() {
-    const { lastRefresh, error, errorMessage, scans, sourcesCount, viewOptions } = this.props;
-    const { redirectTo } = this.state;
+    const { error, errorMessage, lastRefresh, pending, scans, viewOptions } = this.props;
 
     if (error) {
       return (
@@ -406,102 +132,65 @@ class Scans extends React.Component {
       );
     }
 
-    if (redirectTo) {
-      return <Redirect to={redirectTo} push />;
+    if (pending && !scans.length) {
+      return <div className="quipucords-view-container">{this.renderPendingMessage()}</div>;
     }
 
-    if (_size(scans) || _size(viewOptions.activeFilters)) {
+    if (scans.length || _size(viewOptions.activeFilters)) {
       return (
-        <React.Fragment>
-          <div className="quipucords-view-container">
-            <ViewToolbar
-              viewType={reduxTypes.view.SCANS_VIEW}
-              filterFields={ScanFilterFields}
-              sortFields={ScanSortFields}
-              onRefresh={this.onRefresh}
-              lastRefresh={lastRefresh}
-              actions={this.renderScansActions()}
-              itemsType="Scan"
-              itemsTypePlural="Scans"
-              selectedCount={viewOptions.selectedItems.length}
-              {...viewOptions}
-            />
-            <ViewPaginationRow viewType={reduxTypes.view.SCANS_VIEW} {...viewOptions} />
-            <div className="quipucords-list-container">{this.renderScansList(scans)}</div>
-          </div>
+        <div className="quipucords-view-container">
+          <ViewToolbar
+            viewType={reduxTypes.view.SCANS_VIEW}
+            filterFields={ScanFilterFields}
+            sortFields={ScanSortFields}
+            onRefresh={this.onRefresh}
+            lastRefresh={lastRefresh}
+            actions={this.renderScansActions()}
+            itemsType="Scan"
+            itemsTypePlural="Scans"
+            selectedCount={viewOptions.selectedItems.length}
+            {...viewOptions}
+          />
+          <ViewPaginationRow viewType={reduxTypes.view.SCANS_VIEW} {...viewOptions} />
+          <div className="quipucords-list-container">{this.renderScansList(scans)}</div>
           {this.renderPendingMessage()}
-          <MergeReportsDialog />
-        </React.Fragment>
+        </div>
       );
     }
 
-    return (
-      <React.Fragment>
-        <ScansEmptyState onAddSource={this.onAddSource} sourcesExist={!!sourcesCount} />
-        {this.renderPendingMessage()}
-      </React.Fragment>
-    );
+    return <ScansEmptyState />;
   }
 }
 
 Scans.propTypes = {
-  getScans: PropTypes.func,
-  startScan: PropTypes.func,
-  pauseScan: PropTypes.func,
-  cancelScan: PropTypes.func,
-  restartScan: PropTypes.func,
-  deleteScan: PropTypes.func,
-  getScansSources: PropTypes.func,
-  getReportSummaryCsv: PropTypes.func,
-  getReportDetailsCsv: PropTypes.func,
-  fulfilled: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  getScans: PropTypes.func,
+  lastRefresh: PropTypes.number,
   pending: PropTypes.bool,
   scans: PropTypes.array,
-  lastRefresh: PropTypes.number,
-  sourcesCount: PropTypes.number,
-  viewOptions: PropTypes.object,
-  update: PropTypes.object
+  updateScans: PropTypes.bool,
+  viewOptions: PropTypes.object
 };
 
 Scans.defaultProps = {
-  getScans: helpers.noop,
-  startScan: helpers.noop,
-  pauseScan: helpers.noop,
-  cancelScan: helpers.noop,
-  restartScan: helpers.noop,
-  deleteScan: helpers.noop,
-  getScansSources: helpers.noop,
-  getReportSummaryCsv: helpers.noop,
-  getReportDetailsCsv: helpers.noop,
-  fulfilled: false,
   error: false,
   errorMessage: null,
+  getScans: helpers.noop,
+  lastRefresh: 0,
   pending: false,
   scans: [],
-  lastRefresh: 0,
-  sourcesCount: 0,
-  viewOptions: {},
-  update: {}
+  updateScans: false,
+  viewOptions: {}
 };
 
 const mapDispatchToProps = dispatch => ({
-  getScans: queryObj => dispatch(reduxActions.scans.getScans(queryObj)),
-  startScan: id => dispatch(reduxActions.scans.startScan(id)),
-  pauseScan: id => dispatch(reduxActions.scans.pauseScan(id)),
-  restartScan: id => dispatch(reduxActions.scans.restartScan(id)),
-  cancelScan: id => dispatch(reduxActions.scans.cancelScan(id)),
-  deleteScan: id => dispatch(reduxActions.scans.deleteScan(id)),
-  getScansSources: queryObj => dispatch(reduxActions.sources.getScansSources(queryObj)),
-  getReportSummaryCsv: (id, query) => dispatch(reduxActions.reports.getReportSummaryCsv(id, query)),
-  getReportDetailsCsv: id => dispatch(reduxActions.reports.getReportDetailsCsv(id))
+  getScans: queryObj => dispatch(reduxActions.scans.getScans(queryObj))
 });
 
 const mapStateToProps = state =>
   Object.assign({}, state.scans.view, {
-    viewOptions: state.viewOptions[reduxTypes.view.SCANS_VIEW],
-    update: state.scans.update
+    viewOptions: state.viewOptions[reduxTypes.view.SCANS_VIEW]
   });
 
 const ConnectedScans = connect(

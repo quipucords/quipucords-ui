@@ -9,6 +9,7 @@ import AboutModal from './aboutModal/aboutModal';
 import AddSourceWizard from './addSourceWizard/addSourceWizard';
 import CreateCredentialDialog from './createCredentialDialog/createCredentialDialog';
 import CreateScanDialog from './createScanDialog/createScanDialog';
+import MergeReportsDialog from './mergeReportsDialog/mergeReportsDialog';
 
 const App = () => (
   <Authentication>
@@ -20,6 +21,7 @@ const App = () => (
       <AddSourceWizard />
       <CreateCredentialDialog />
       <CreateScanDialog />
+      <MergeReportsDialog />
     </ConnectedPageLayout>
   </Authentication>
 );

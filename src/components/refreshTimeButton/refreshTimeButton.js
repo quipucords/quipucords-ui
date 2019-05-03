@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'patternfly-react';
-import * as moment from 'moment';
+import moment from 'moment';
 
 class RefreshTimeButton extends React.Component {
   constructor(props) {

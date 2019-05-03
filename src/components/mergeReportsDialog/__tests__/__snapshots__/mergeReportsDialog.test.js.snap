@@ -1,108 +1,135 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ToastNotificationsList Component should shallow render a basic component 1`] = `
-<Modal
-  animation={true}
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
+exports[`MergeReportsDialog Component should render a connected component: connected 1`] = `
+<MergeReportsDialog
+  details={false}
+  getMergedScanReportDetailsCsv={[Function]}
+  getMergedScanReportSummaryCsv={[Function]}
+  mergeScans={[Function]}
+  scans={
+    Array [
+      Object {
+        "id": 1,
+        "mostRecentReportId": 2,
+        "mostRecentStatus": "completed",
+        "name": "lorem",
+      },
+      Object {
+        "id": 2,
+        "mostRecentReportId": 2,
+        "mostRecentStatus": "pending",
+        "name": "ipsum",
+      },
+    ]
   }
-  onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
+/>
+`;
+
+exports[`MergeReportsDialog Component should render a non-connected component, failure and success: non-connected 1`] = `
+<div
+  role="dialog"
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={false}
-    closeLabel="Close"
-  >
-    <button
-      aria-hidden="true"
-      aria-label="Close"
-      className="close"
-      onClick={[Function]}
-      type="button"
-    >
-      <Icon
-        name="close"
-        type="pf"
-      />
-    </button>
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-    >
-      Summary Merge Report
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+  <div
+    class="fade modal-backdrop in"
+  />
+  <div
+    class="fade in modal"
+    role="dialog"
+    style="display: block; padding-right: 0px;"
+    tabindex="-1"
   >
     <div
-      className="merge-reports-body"
+      class="modal-dialog"
     >
-      <span
-        className="merge-reports-icon"
+      <div
+        class="modal-content"
+        role="document"
       >
-        <Icon
-          name="error-circle-o"
-          type="pf"
-        />
-      </span>
-      <span>
-        <h3
-          className="merge-reports-heading"
+        <div
+          class="modal-header"
         >
-          This action is invalid. You must select at least two scans with successful most recent scans.
-        </h3>
-        <div>
-          <div>
-            <span>
-              Failed scans that cannot be included in the merged report:
+          <button
+            aria-hidden="true"
+            aria-label="Close"
+            class="close"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="pficon pficon-close"
+            />
+          </button>
+          <h4
+            class="modal-title"
+          >
+            Detailed Merge Report
+          </h4>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="merge-reports-body"
+          >
+            <span
+              class="merge-reports-icon"
+            >
+              <span
+                aria-hidden="true"
+                class="pficon pficon-error-circle-o"
+              />
             </span>
-            <ul>
-              <li
-                key="1"
+            <span>
+              <h3
+                class="merge-reports-heading"
               >
-                test
-              </li>
-            </ul>
+                This action is invalid. You must select at least two scans with successful most recent scans.
+              </h3>
+              <div>
+                <div>
+                  <span>
+                    Scans to be included in the merged report:
+                  </span>
+                  <ul>
+                    <li>
+                      lorem
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <span>
+                    Failed scans that cannot be included in the merged report:
+                  </span>
+                  <ul>
+                    <li>
+                      ipsum
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </span>
           </div>
         </div>
-      </span>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="btn-cancel btn btn-default"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-primary"
+            disabled=""
+            type="submit"
+          >
+            Merge
+          </button>
+        </div>
+      </div>
     </div>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="btn-cancel"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Close
-    </Button>
-  </ModalFooter>
-</Modal>
+  </div>
+</div>
 `;

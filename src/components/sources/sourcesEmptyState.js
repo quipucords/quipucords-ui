@@ -4,7 +4,7 @@ import { Button, EmptyState, Grid, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
 const SourcesEmptyState = ({ onAddSource }) => (
-  <Grid fluid>
+  <Grid fluid className="fadein">
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />

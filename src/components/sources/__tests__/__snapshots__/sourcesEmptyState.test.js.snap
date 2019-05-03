@@ -2,7 +2,7 @@
 
 exports[`SourcesEmptyState Component should render a basic component 1`] = `
 <div
-  class="container-fluid"
+  class="fadein container-fluid"
 >
   <div
     class="row"

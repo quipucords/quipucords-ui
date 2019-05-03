@@ -1,7 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import moxios from 'moxios';
-import { scansReducer, scansEditReducer } from '../../reducers';
+import { scansReducer, scansActionReducer, scansEditReducer } from '../../reducers';
 import { scansActions } from '..';
 
 describe('ScansActions', () => {
@@ -10,6 +10,7 @@ describe('ScansActions', () => {
     createStore(
       combineReducers({
         scans: scansReducer,
+        scansAction: scansActionReducer,
         scansEdit: scansEditReducer
       }),
       applyMiddleware(...middleware)
@@ -55,18 +56,6 @@ describe('ScansActions', () => {
     });
   });
 
-  it('Should return response content for getScan method', done => {
-    const store = generateStore();
-    const dispatcher = scansActions.getScan();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
-
-      expect(response.detail.scan.test).toEqual('success');
-      done();
-    });
-  });
-
   it('Should return response content for getScans method', done => {
     const store = generateStore();
     const dispatcher = scansActions.getScans();
@@ -79,128 +68,98 @@ describe('ScansActions', () => {
     });
   });
 
-  it('Should return response content for updateScan method', done => {
-    const store = generateStore();
-    const dispatcher = scansActions.updateScan();
-
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('updateScan');
-      done();
-    });
-  });
-
-  it('Should return response content for updatePartialScan method', done => {
-    const store = generateStore();
-    const dispatcher = scansActions.updatePartialScan();
-
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('updatePartialScan');
-      done();
-    });
-  });
-
-  it('Should return response content for deleteScan method', done => {
-    const store = generateStore();
-    const dispatcher = scansActions.deleteScan();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
-
-      expect(response.update.delete).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for startScan method', done => {
-    const store = generateStore();
-    const dispatcher = scansActions.startScan();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
-
-      expect(response.action.start).toEqual(true);
-      done();
-    });
-  });
-
   it('Should return response content for getScanJobs method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.getScanJobs();
+    const dispatcher = scansActions.getScanJobs('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.jobs.fulfilled).toEqual(true);
+      expect(response.jobs.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for getScanJob method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.getScanJob();
+    const dispatcher = scansActions.getScanJob('lorem');
 
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('getScanJob');
+    dispatcher(store.dispatch).then(() => {
+      const response = store.getState().scansAction;
+
+      expect(response.job.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for getConnectionScanResults method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.getConnectionScanResults();
+    const dispatcher = scansActions.getConnectionScanResults('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.connectionResults.fulfilled).toEqual(true);
+      expect(response.connection.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for getInspectionScanResults method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.getInspectionScanResults();
+    const dispatcher = scansActions.getInspectionScanResults('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.inspectionResults.fulfilled).toEqual(true);
+      expect(response.inspection.lorem.fulfilled).toEqual(true);
+      done();
+    });
+  });
+
+  it('Should return response content for startScan method', done => {
+    const store = generateStore();
+    const dispatcher = scansActions.startScan('lorem');
+
+    dispatcher(store.dispatch).then(() => {
+      const response = store.getState().scansAction;
+
+      expect(response.start.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for pauseScan method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.pauseScan();
+    const dispatcher = scansActions.pauseScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.action.pause).toEqual(true);
+      expect(response.pause.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for cancelScan method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.cancelScan();
+    const dispatcher = scansActions.cancelScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.action.cancel).toEqual(true);
+      expect(response.cancel.lorem.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for restartScan method', done => {
     const store = generateStore();
-    const dispatcher = scansActions.restartScan();
+    const dispatcher = scansActions.restartScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
+      const response = store.getState().scansAction;
 
-      expect(response.action.restart).toEqual(true);
+      expect(response.restart.lorem.fulfilled).toEqual(true);
       done();
     });
   });

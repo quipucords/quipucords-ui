@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScanJobsList Component should shallow render a basic component with an empty state status 1`] = `
+exports[`ScanJobsList Component should render a connected component: connected 1`] = `
+<ScanJobsList
+  error={false}
+  errorMessage={null}
+  getScanJobs={[Function]}
+  id={1}
+  isMoreResults={true}
+  pending={false}
+  scanJobsList={Array []}
+/>
+`;
+
+exports[`ScanJobsList Component should render a non-connected component error: error 1`] = `
+<EmptyState
+  className=""
+>
+  <EmptyStateIcon
+    className=""
+    name="error-circle-o"
+    type="pf"
+  />
+  <EmptyStateTitle
+    className=""
+  >
+    Error retrieving scan jobs
+  </EmptyStateTitle>
+  <EmptyStateInfo
+    className=""
+  >
+    Lorem Ipsum.
+  </EmptyStateInfo>
+</EmptyState>
+`;
+
+exports[`ScanJobsList Component should render a non-connected component pending: pending 1`] = `
 <EmptyState
   className=""
 >
@@ -15,4 +49,84 @@ exports[`ScanJobsList Component should shallow render a basic component with an 
     Loading scan jobs...
   </EmptyStateTitle>
 </EmptyState>
+`;
+
+exports[`ScanJobsList Component should render a non-connected component: non-connected 1`] = `
+<div
+  className="quipucords-infinite-results"
+>
+  <Grid
+    bsClass="container"
+    className="quipucords-infinite-list"
+    componentClass="div"
+    fluid={true}
+    onScroll={[Function]}
+  >
+    <Row
+      bsClass="row"
+      className="fadein"
+      componentClass="div"
+      key="14"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={3}
+        xs={6}
+      >
+        <Icon
+          className="scan-job-status-icon"
+          name="ok"
+          type="pf"
+        />
+        Completed
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={3}
+        xs={6}
+      >
+        a day ago
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={2}
+        xs={3}
+      >
+        <Icon
+          className="scan-job-status-icon systems"
+          name="ok"
+          type="pf"
+        />
+        10
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={2}
+        xs={3}
+      >
+        <Icon
+          className="scan-job-status-icon systems"
+          name="error-circle-o"
+          type="pf"
+        />
+        10
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={2}
+        xs={3}
+      >
+        <Connect(ScanDownload)
+          downloadId={15}
+          pullRight={true}
+        />
+      </Col>
+    </Row>
+  </Grid>
+</div>
 `;

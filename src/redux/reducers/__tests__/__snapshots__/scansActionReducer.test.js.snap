@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScansActionReducer should handle all defined error types: rejected types CANCEL_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "CANCEL_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOB_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOBS_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "PAUSE_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "start": Object {},
+  },
+  "type": "RESTART_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined error types: rejected types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "1": Object {
+        "error": true,
+        "errorMessage": "ERROR",
+        "errorStatus": 0,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+  },
+  "type": "START_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types CANCEL_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "CANCEL_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOB_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOBS_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "PAUSE_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+    "start": Object {},
+  },
+  "type": "RESTART_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined fulfilled types: fulfilled types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "1": Object {
+        "data": Object {
+          "test": "success",
+        },
+        "fulfilled": true,
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+      },
+    },
+  },
+  "type": "START_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types CANCEL_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "CANCEL_SCAN_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOB_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "GET_SCAN_JOBS_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "restart": Object {},
+    "start": Object {},
+  },
+  "type": "PAUSE_SCAN_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+    "start": Object {},
+  },
+  "type": "RESTART_SCAN_PENDING",
+}
+`;
+
+exports[`ScansActionReducer should handle all defined pending types: pending types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "1": Object {
+        "metaData": Object {},
+        "metaId": 1,
+        "metaQuery": Object {},
+        "pending": true,
+      },
+    },
+  },
+  "type": "START_SCAN_PENDING",
+}
+`;

@@ -1,28 +1,14 @@
-import { scansReducer } from '../scansReducer';
-import { scansTypes as types } from '../../constants';
+import { scansEmptyStateReducer } from '../scansEmptyStateReducer';
+import { sourcesTypes as types } from '../../constants';
 import helpers from '../../../common/helpers';
 
-describe('ScansReducer', () => {
+describe('ScansEmptyStateReducer', () => {
   it('should return the initial state', () => {
-    expect(scansReducer.initialState).toBeDefined();
-  });
-
-  it('should handle specific defined types', () => {
-    const specificTypes = [types.MERGE_SCAN_DIALOG_SHOW, types.MERGE_SCAN_DIALOG_HIDE];
-
-    specificTypes.forEach(value => {
-      const dispatched = {
-        type: value
-      };
-
-      const resultState = scansReducer(undefined, dispatched);
-
-      expect({ type: value, result: resultState }).toMatchSnapshot(`defined type ${value}`);
-    });
+    expect(scansEmptyStateReducer.initialState).toBeDefined();
   });
 
   it('should handle all defined error types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [types.GET_SCANS_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -40,28 +26,28 @@ describe('ScansReducer', () => {
         }
       };
 
-      const resultState = scansReducer(undefined, dispatched);
+      const resultState = scansEmptyStateReducer(undefined, dispatched);
 
       expect({ type: helpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(`rejected types ${value}`);
     });
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [types.GET_SCANS_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
         type: helpers.PENDING_ACTION(value)
       };
 
-      const resultState = scansReducer(undefined, dispatched);
+      const resultState = scansEmptyStateReducer(undefined, dispatched);
 
       expect({ type: helpers.PENDING_ACTION(value), result: resultState }).toMatchSnapshot(`pending types ${value}`);
     });
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [types.GET_SCANS_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -73,7 +59,7 @@ describe('ScansReducer', () => {
         }
       };
 
-      const resultState = scansReducer(undefined, dispatched);
+      const resultState = scansEmptyStateReducer(undefined, dispatched);
 
       expect({ type: helpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
         `fulfilled types ${value}`

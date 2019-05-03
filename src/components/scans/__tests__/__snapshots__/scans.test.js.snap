@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scans Component should render a connected component with default props: connected 1`] = `
+<Scans
+  error={false}
+  errorMessage={null}
+  getScans={[Function]}
+  lastRefresh={0}
+  pending={false}
+  scans={Array []}
+  updateScans={false}
+  viewOptions={Object {}}
+/>
+`;
+
+exports[`Scans Component should render a non-connected component error: error 1`] = `
+<EmptyState
+  className=""
+>
+  <Alert
+    className=""
+    onDismiss={null}
+    type="error"
+  >
+    <span>
+      Error retrieving scans: 
+    </span>
+  </Alert>
+</EmptyState>
+`;
+
+exports[`Scans Component should render a non-connected component pending: pending 1`] = `
+<div
+  className="quipucords-view-container"
+>
+  <Modal
+    animation={false}
+    autoFocus={true}
+    backdrop={false}
+    bsClass="modal"
+    bsSize="lg"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Spinner
+        className="blank-slate-pf-icon"
+        inline={false}
+        inverse={false}
+        loading={true}
+        size="lg"
+      />
+      <div
+        className="text-center"
+      >
+        Loading...
+      </div>
+    </ModalBody>
+  </Modal>
+</div>
+`;
+
+exports[`Scans Component should render a non-connected component with empty state: empty state 1`] = `<withRouter(Connect(ScansEmptyState)) />`;
+
+exports[`Scans Component should render a non-connected component: non-connected 1`] = `
+<div
+  className="quipucords-view-container"
+>
+  <ViewToolbar
+    actions={
+      <div
+        className="form-group"
+      >
+        <Tooltip
+          delayShow={500}
+          id={null}
+          placement="top"
+          popover={null}
+          rootClose={true}
+          tooltip="Merge selected scan results into a single report"
+          trigger={
+            Array [
+              "hover",
+            ]
+          }
+        >
+          <DropdownButton
+            disabled={true}
+            id="merge-reports-dropdown"
+            title="Merge Report"
+          >
+            <MenuItem
+              bsClass="dropdown"
+              disabled={false}
+              divider={false}
+              eventKey="1"
+              header={false}
+              onClick={[Function]}
+            >
+              Summary Report
+            </MenuItem>
+            <MenuItem
+              bsClass="dropdown"
+              disabled={false}
+              divider={false}
+              eventKey="2"
+              header={false}
+              onClick={[Function]}
+            >
+              Detailed Report
+            </MenuItem>
+          </DropdownButton>
+        </Tooltip>
+      </div>
+    }
+    activeFilters={Array []}
+    filterFields={
+      Array [
+        Object {
+          "filterType": "text",
+          "id": "search_by_name",
+          "placeholder": "Filter by Name",
+          "title": "Name",
+        },
+        Object {
+          "filterType": "text",
+          "id": "search_sources_by_name",
+          "placeholder": "Filter by Source Name",
+          "title": "Source",
+        },
+      ]
+    }
+    filterType={Object {}}
+    filterValue=""
+    itemsType="Scan"
+    itemsTypePlural="Scans"
+    lastRefresh={0}
+    onRefresh={[Function]}
+    selectedCount={0}
+    selectedItems={Array []}
+    sortAscending={true}
+    sortFields={
+      Array [
+        Object {
+          "id": "name",
+          "isNumeric": false,
+          "title": "Name",
+        },
+        Object {
+          "id": "most_recent_scanjob__start_time",
+          "isNumeric": true,
+          "sortAscending": false,
+          "title": "Most Recent",
+        },
+      ]
+    }
+    sortType={Object {}}
+    totalCount={0}
+    viewType="SCANS_VIEW"
+  />
+  <ViewPaginationRow
+    currentPage={0}
+    pageSize={0}
+    selectedItems={Array []}
+    totalCount={0}
+    totalPages={0}
+    viewType="SCANS_VIEW"
+  />
+  <div
+    className="quipucords-list-container"
+  >
+    <ListView
+      className="quipicords-list-view"
+    >
+      <Connect(ScanListItem)
+        key="1"
+        lastRefresh={0}
+        scan={
+          Object {
+            "id": 1,
+          }
+        }
+      />
+    </ListView>
+  </div>
+</div>
+`;

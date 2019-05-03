@@ -26,12 +26,12 @@ describe('ScansService', () => {
     expect(scansService.getScan).toBeDefined();
     expect(scansService.updateScan).toBeDefined();
     expect(scansService.updatePartialScan).toBeDefined();
-    expect(scansService.deleteScan).toBeDefined();
-    expect(scansService.startScan).toBeDefined();
     expect(scansService.getScanJobs).toBeDefined();
     expect(scansService.getScanJob).toBeDefined();
     expect(scansService.getConnectionScanResults).toBeDefined();
     expect(scansService.getInspectionScanResults).toBeDefined();
+    expect(scansService.deleteScan).toBeDefined();
+    expect(scansService.startScan).toBeDefined();
     expect(scansService.pauseScan).toBeDefined();
     expect(scansService.cancelScan).toBeDefined();
     expect(scansService.restartScan).toBeDefined();

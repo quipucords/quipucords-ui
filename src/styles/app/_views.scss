@@ -109,10 +109,6 @@
       margin-bottom: 10px;
     }
 
-    .host-results {
-      width: 100%;
-    }
-
     .hidden-results {
       opacity: 0;
       span {
@@ -120,7 +116,11 @@
       }
     }
 
-    .host-list {
+    .quipucords-infinite-results {
+      width: 100%;
+    }
+
+    .quipucords-infinite-list {
       overflow-y: auto;
       max-height: 300px;
       border: solid 1px $list-view-divider;
