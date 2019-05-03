@@ -1,6 +1,6 @@
 import { scansActionReducer } from '../scansActionReducer';
 import { scansTypes as types } from '../../constants';
-import helpers from '../../../common/helpers';
+import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('ScansActionReducer', () => {
   it('should return the initial state', () => {
@@ -26,7 +26,7 @@ describe('ScansActionReducer', () => {
           data: {},
           query: {}
         },
-        type: helpers.REJECTED_ACTION(value),
+        type: reduxHelpers.REJECTED_ACTION(value),
         error: true,
         payload: {
           message: 'MESSAGE',
@@ -42,7 +42,9 @@ describe('ScansActionReducer', () => {
 
       const resultState = scansActionReducer(undefined, dispatched);
 
-      expect({ type: helpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(`rejected types ${value}`);
+      expect({ type: reduxHelpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(
+        `rejected types ${value}`
+      );
     });
   });
 
@@ -65,12 +67,14 @@ describe('ScansActionReducer', () => {
           data: {},
           query: {}
         },
-        type: helpers.PENDING_ACTION(value)
+        type: reduxHelpers.PENDING_ACTION(value)
       };
 
       const resultState = scansActionReducer(undefined, dispatched);
 
-      expect({ type: helpers.PENDING_ACTION(value), result: resultState }).toMatchSnapshot(`pending types ${value}`);
+      expect({ type: reduxHelpers.PENDING_ACTION(value), result: resultState }).toMatchSnapshot(
+        `pending types ${value}`
+      );
     });
   });
 
@@ -93,7 +97,7 @@ describe('ScansActionReducer', () => {
           data: {},
           query: {}
         },
-        type: helpers.FULFILLED_ACTION(value),
+        type: reduxHelpers.FULFILLED_ACTION(value),
         payload: {
           data: {
             test: 'success'
@@ -103,7 +107,7 @@ describe('ScansActionReducer', () => {
 
       const resultState = scansActionReducer(undefined, dispatched);
 
-      expect({ type: helpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
+      expect({ type: reduxHelpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
         `fulfilled types ${value}`
       );
     });

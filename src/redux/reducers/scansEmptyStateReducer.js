@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { sourcesTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -12,8 +13,8 @@ const initialState = {
 
 const scansEmptyStateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case helpers.REJECTED_ACTION(sourcesTypes.GET_SCANS_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(sourcesTypes.GET_SCANS_SOURCES):
+      return reduxHelpers.setStateProp(
         null,
         {
           error: action.error,
@@ -25,8 +26,8 @@ const scansEmptyStateReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(sourcesTypes.GET_SCANS_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(sourcesTypes.GET_SCANS_SOURCES):
+      return reduxHelpers.setStateProp(
         null,
         {
           pending: true
@@ -37,8 +38,8 @@ const scansEmptyStateReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(sourcesTypes.GET_SCANS_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(sourcesTypes.GET_SCANS_SOURCES):
+      return reduxHelpers.setStateProp(
         null,
         {
           fulfilled: true,

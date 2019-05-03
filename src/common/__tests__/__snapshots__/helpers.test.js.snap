@@ -62,9 +62,6 @@ Object {
 exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
-  "FULFILLED_ACTION": [Function],
-  "PENDING_ACTION": [Function],
-  "REJECTED_ACTION": [Function],
   "RH_BRAND": false,
   "TEST_MODE": true,
   "UI_VERSION": "0.0.0.0000000",
@@ -83,7 +80,6 @@ Object {
   "scanTypeIcon": [Function],
   "setPropIfDefined": [Function],
   "setPropIfTruthy": [Function],
-  "setStateProp": [Function],
   "sourceTypeIcon": [Function],
   "viewPropsChanged": [Function],
 }
@@ -110,19 +106,5 @@ exports[`Helpers should support icon references: sourceTypeIcon 1`] = `
 Object {
   "name": "vcenter",
   "type": "pf",
-}
-`;
-
-exports[`Helpers should update a state object: dont reset state object 1`] = `
-Object {
-  "ipsum": false,
-  "lorem": true,
-}
-`;
-
-exports[`Helpers should update a state object: reset state object 1`] = `
-Object {
-  "ipsum": true,
-  "lorem": true,
 }
 `;

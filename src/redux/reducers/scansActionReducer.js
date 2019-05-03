@@ -1,5 +1,5 @@
-import reduxHelpers from '../../common/reduxHelpers';
 import { scansTypes } from '../constants';
+import { reduxHelpers } from '../common/reduxHelpers';
 
 const initialState = {
   connection: {},

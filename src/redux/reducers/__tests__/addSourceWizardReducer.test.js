@@ -1,6 +1,6 @@
 import addSourceWizardReducer from '../addSourceWizardReducer';
 import { sourcesTypes as types, credentialsTypes } from '../../constants';
-import helpers from '../../../common/helpers';
+import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('AddSourceWizardReducer', () => {
   it('should return the initial state', () => {
@@ -33,7 +33,7 @@ describe('AddSourceWizardReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.REJECTED_ACTION(value),
+        type: reduxHelpers.REJECTED_ACTION(value),
         error: true,
         payload: {
           message: 'MESSAGE',
@@ -49,7 +49,9 @@ describe('AddSourceWizardReducer', () => {
 
       const resultState = addSourceWizardReducer(undefined, dispatched);
 
-      expect({ type: helpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(`rejected types ${value}`);
+      expect({ type: reduxHelpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(
+        `rejected types ${value}`
+      );
     });
   });
 
@@ -58,7 +60,7 @@ describe('AddSourceWizardReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.FULFILLED_ACTION(value),
+        type: reduxHelpers.FULFILLED_ACTION(value),
         payload: {
           data: {
             test: 'success'
@@ -68,7 +70,7 @@ describe('AddSourceWizardReducer', () => {
 
       const resultState = addSourceWizardReducer(undefined, dispatched);
 
-      expect({ type: helpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
+      expect({ type: reduxHelpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
         `fulfilled types ${value}`
       );
     });

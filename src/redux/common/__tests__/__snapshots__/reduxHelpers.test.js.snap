@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReduxHelpers should combine multiple reducer action types: combined fulfilled 1`] = `
+Object {
+  "ipsum": Object {},
+  "loremIpsum": Object {
+    "lorem-id": Object {
+      "data": Object {
+        "test": "test",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should combine multiple reducer action types: combined pending 1`] = `
+Object {
+  "ipsum": Object {},
+  "loremIpsum": Object {
+    "lorem-id": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should combine multiple reducer action types: combined rejected 1`] = `
+Object {
+  "ipsum": Object {},
+  "loremIpsum": Object {
+    "lorem-id": Object {
+      "error": true,
+      "errorMessage": " Server is currently unable to handle this request.",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer fulfilled 1`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "lorem-id": Object {
+      "data": Object {
+        "test": "test",
+      },
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer rejected 1`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "lorem-id": Object {
+      "error": undefined,
+      "errorMessage": " Server is currently unable to handle this request.",
+      "errorStatus": 0,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer rejected 2`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "lorem-id": Object {
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+      "pending": true,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should have specific functions: reduxHelpers 1`] = `
+Object {
+  "FULFILLED_ACTION": [Function],
+  "PENDING_ACTION": [Function],
+  "REJECTED_ACTION": [Function],
+  "generatedPromiseActionReducer": [Function],
+  "setStateProp": [Function],
+}
+`;
+
+exports[`ReduxHelpers should update a state object: dont reset state object 1`] = `
+Object {
+  "ipsum": false,
+  "lorem": true,
+}
+`;
+
+exports[`ReduxHelpers should update a state object: reset state object 1`] = `
+Object {
+  "ipsum": true,
+  "lorem": true,
+}
+`;

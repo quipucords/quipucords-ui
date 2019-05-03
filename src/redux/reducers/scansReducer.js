@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { scansTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -23,7 +24,7 @@ const initialState = {
 const scansReducer = (state = initialState, action) => {
   switch (action.type) {
     case scansTypes.UPDATE_SCANS:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'view',
         {
           updateScans: true
@@ -34,8 +35,8 @@ const scansReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(scansTypes.GET_SCANS):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(scansTypes.GET_SCANS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           error: action.error,
@@ -47,8 +48,8 @@ const scansReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(scansTypes.GET_SCANS):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(scansTypes.GET_SCANS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           pending: true,
@@ -60,8 +61,8 @@ const scansReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           fulfilled: true,
@@ -75,7 +76,7 @@ const scansReducer = (state = initialState, action) => {
       );
 
     case scansTypes.MERGE_SCAN_DIALOG_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'mergeDialog',
         {
           show: true,
@@ -89,7 +90,7 @@ const scansReducer = (state = initialState, action) => {
       );
 
     case scansTypes.MERGE_SCAN_DIALOG_HIDE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'mergeDialog',
         {
           show: false

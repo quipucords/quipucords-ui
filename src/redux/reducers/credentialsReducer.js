@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { credentialsTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -27,7 +28,7 @@ const initialState = {
 const credentialsReducer = (state = initialState, action) => {
   switch (action.type) {
     case credentialsTypes.CREATE_CREDENTIAL_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'update',
         {
           show: true,
@@ -41,7 +42,7 @@ const credentialsReducer = (state = initialState, action) => {
       );
 
     case credentialsTypes.EDIT_CREDENTIAL_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'update',
         {
           show: true,
@@ -55,7 +56,7 @@ const credentialsReducer = (state = initialState, action) => {
       );
 
     case credentialsTypes.UPDATE_CREDENTIAL_HIDE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'update',
         {
           show: false
@@ -66,8 +67,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(credentialsTypes.ADD_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           add: true,
@@ -81,9 +82,9 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case helpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
+    case reduxHelpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           error: action.error,
@@ -97,8 +98,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           error: action.error,
@@ -112,8 +113,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(credentialsTypes.GET_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           error: action.error,
@@ -125,8 +126,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(credentialsTypes.ADD_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           pending: true,
@@ -139,9 +140,9 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case helpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIAL):
+    case reduxHelpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           pending: true,
@@ -155,8 +156,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           pending: true,
@@ -169,8 +170,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(credentialsTypes.GET_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           pending: true,
@@ -182,8 +183,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.ADD_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           add: true,
@@ -196,9 +197,9 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case helpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           delete: true,
@@ -210,8 +211,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
+      return reduxHelpers.setStateProp(
         'update',
         {
           credential: action.payload.data || {},
@@ -224,8 +225,8 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
+      return reduxHelpers.setStateProp(
         'view',
         {
           credentials: (action.payload.data && action.payload.data[apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]) || [],

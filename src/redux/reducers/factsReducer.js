@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { factsTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 
 const initialState = {
   update: {
@@ -13,8 +14,8 @@ const initialState = {
 
 const factsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case helpers.REJECTED_ACTION(factsTypes.ADD_FACTS):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(factsTypes.ADD_FACTS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           error: action.error,
@@ -26,8 +27,8 @@ const factsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(factsTypes.ADD_FACTS):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(factsTypes.ADD_FACTS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           pending: true
@@ -38,8 +39,8 @@ const factsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(factsTypes.ADD_FACTS):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(factsTypes.ADD_FACTS):
+      return reduxHelpers.setStateProp(
         'update',
         {
           facts: action.payload.data,

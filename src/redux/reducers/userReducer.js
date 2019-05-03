@@ -1,5 +1,6 @@
 import { userTypes } from '../constants';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -15,8 +16,8 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case helpers.REJECTED_ACTION(userTypes.USER_AUTH):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(userTypes.USER_AUTH):
+      return reduxHelpers.setStateProp(
         'session',
         {
           error: action.error,
@@ -28,8 +29,8 @@ const userReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(userTypes.USER_AUTH):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(userTypes.USER_AUTH):
+      return reduxHelpers.setStateProp(
         'session',
         {
           pending: true
@@ -40,8 +41,8 @@ const userReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(userTypes.USER_AUTH):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(userTypes.USER_AUTH):
+      return reduxHelpers.setStateProp(
         'session',
         {
           authorized: true,
@@ -54,8 +55,8 @@ const userReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(userTypes.USER_LOGOUT):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(userTypes.USER_LOGOUT):
+      return reduxHelpers.setStateProp(
         'session',
         {
           error: action.error,
@@ -67,8 +68,8 @@ const userReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(userTypes.USER_LOGOUT):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(userTypes.USER_LOGOUT):
+      return reduxHelpers.setStateProp(
         'session',
         {
           pending: true
@@ -79,8 +80,8 @@ const userReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(userTypes.USER_LOGOUT):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(userTypes.USER_LOGOUT):
+      return reduxHelpers.setStateProp(
         'session',
         {
           authorized: false

@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { reportsTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 
 const initialState = {
   report: {
@@ -27,8 +28,8 @@ const initialState = {
 
 const reportsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case helpers.REJECTED_ACTION(reportsTypes.GET_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(reportsTypes.GET_REPORT):
+      return reduxHelpers.setStateProp(
         'report',
         {
           error: action.error,
@@ -40,8 +41,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(reportsTypes.GET_REPORTS):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(reportsTypes.GET_REPORTS):
+      return reduxHelpers.setStateProp(
         'reports',
         {
           error: action.error,
@@ -53,8 +54,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(reportsTypes.GET_MERGE_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(reportsTypes.GET_MERGE_REPORT):
+      return reduxHelpers.setStateProp(
         'merge',
         {
           error: action.error,
@@ -66,8 +67,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(reportsTypes.GET_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(reportsTypes.GET_REPORT):
+      return reduxHelpers.setStateProp(
         'report',
         {
           pending: true
@@ -78,8 +79,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(reportsTypes.GET_REPORTS):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(reportsTypes.GET_REPORTS):
+      return reduxHelpers.setStateProp(
         'reports',
         {
           pending: true
@@ -90,8 +91,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(reportsTypes.GET_MERGE_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(reportsTypes.GET_MERGE_REPORT):
+      return reduxHelpers.setStateProp(
         'merge',
         {
           pending: true
@@ -102,8 +103,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(reportsTypes.GET_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(reportsTypes.GET_REPORT):
+      return reduxHelpers.setStateProp(
         'report',
         {
           fulfilled: true,
@@ -115,8 +116,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(reportsTypes.GET_REPORTS):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(reportsTypes.GET_REPORTS):
+      return reduxHelpers.setStateProp(
         'reports',
         {
           fulfilled: true
@@ -127,8 +128,8 @@ const reportsReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(reportsTypes.GET_MERGE_REPORT):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(reportsTypes.GET_MERGE_REPORT):
+      return reduxHelpers.setStateProp(
         'merge',
         {
           fulfilled: true

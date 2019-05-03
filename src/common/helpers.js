@@ -124,45 +124,6 @@ const setPropIfDefined = (obj, props, value) => (obj && value !== undefined ? _s
 
 const setPropIfTruthy = (obj, props, value) => (obj && value ? _set(obj, props, value) : obj);
 
-const setStateProp = (prop, data, options) => {
-  const { state = {}, initialState = {}, reset = true } = options;
-  let obj = { ...state };
-
-  if (prop && !state[prop]) {
-    console.error(`Error: Property ${prop} does not exist within the passed state.`, state);
-  }
-
-  if (reset && prop && !initialState[prop]) {
-    console.warn(`Warning: Property ${prop} does not exist within the passed initialState.`, initialState);
-  }
-
-  if (reset && prop) {
-    obj[prop] = {
-      ...state[prop],
-      ...initialState[prop],
-      ...data
-    };
-  } else if (reset && !prop) {
-    obj = {
-      ...state,
-      ...initialState,
-      ...data
-    };
-  } else if (prop) {
-    obj[prop] = {
-      ...state[prop],
-      ...data
-    };
-  } else {
-    obj = {
-      ...state,
-      ...data
-    };
-  }
-
-  return obj;
-};
-
 const viewPropsChanged = (nextViewOptions, currentViewOptions) =>
   nextViewOptions.currentPage !== currentViewOptions.currentPage ||
   nextViewOptions.pageSize !== currentViewOptions.pageSize ||
@@ -336,12 +297,6 @@ const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
 
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
-const FULFILLED_ACTION = base => `${base}_FULFILLED`;
-
-const PENDING_ACTION = base => `${base}_PENDING`;
-
-const REJECTED_ACTION = base => `${base}_REJECTED`;
-
 const helpers = {
   copyClipboard,
   devModeNormalizeCount,
@@ -353,7 +308,6 @@ const helpers = {
   scanStatusIcon,
   setPropIfDefined,
   setPropIfTruthy,
-  setStateProp,
   viewPropsChanged,
   createViewQueryObject,
   getMessageFromResults,
@@ -364,10 +318,7 @@ const helpers = {
   DEV_MODE,
   TEST_MODE,
   RH_BRAND,
-  UI_VERSION,
-  FULFILLED_ACTION,
-  PENDING_ACTION,
-  REJECTED_ACTION
+  UI_VERSION
 };
 
 export { helpers as default, helpers };
