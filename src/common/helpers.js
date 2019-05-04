@@ -276,6 +276,14 @@ const getTimeStampFromResults = results =>
     moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')) ||
   '20190225_164640';
 
+const getTimeDisplayHowLongAgo = timestamp =>
+  (process.env.REACT_APP_ENV !== 'test' &&
+    moment
+      .utc(timestamp)
+      .utcOffset(moment().utcOffset())
+      .fromNow()) ||
+  'a day ago';
+
 const isIpAddress = name => {
   const vals = name.split('.');
   if (vals.length === 4) {
@@ -313,6 +321,7 @@ const helpers = {
   getMessageFromResults,
   getStatusFromResults,
   getTimeStampFromResults,
+  getTimeDisplayHowLongAgo,
   isIpAddress,
   ipAddressValue,
   DEV_MODE,

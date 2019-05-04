@@ -67,11 +67,70 @@ Object {
       "data": Object {
         "test": "test",
       },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
       "fulfilled": true,
       "metaData": undefined,
       "metaId": "lorem-id",
       "metaQuery": undefined,
+      "pending": false,
+      "update": false,
     },
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer fulfilled no meta data 1`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "data": Object {
+      "test": "test",
+    },
+    "date": undefined,
+    "error": false,
+    "errorMessage": "",
+    "fulfilled": true,
+    "metaData": undefined,
+    "metaId": undefined,
+    "metaQuery": undefined,
+    "pending": false,
+    "update": false,
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer pending 1`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "lorem-id": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": "lorem-id",
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+  },
+}
+`;
+
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer pending no meta data 1`] = `
+Object {
+  "ipsum": Object {},
+  "lorem": Object {
+    "error": false,
+    "errorMessage": "",
+    "fulfilled": false,
+    "metaData": undefined,
+    "metaId": undefined,
+    "metaQuery": undefined,
+    "pending": true,
+    "update": false,
   },
 }
 `;
@@ -81,27 +140,33 @@ Object {
   "ipsum": Object {},
   "lorem": Object {
     "lorem-id": Object {
-      "error": undefined,
+      "error": true,
       "errorMessage": " Server is currently unable to handle this request.",
       "errorStatus": 0,
+      "fulfilled": false,
       "metaData": undefined,
       "metaId": "lorem-id",
       "metaQuery": undefined,
+      "pending": false,
+      "update": false,
     },
   },
 }
 `;
 
-exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer rejected 2`] = `
+exports[`ReduxHelpers should generate a standard reducer from promise actions: generatedPromiseActionReducer rejected no meta data 1`] = `
 Object {
   "ipsum": Object {},
   "lorem": Object {
-    "lorem-id": Object {
-      "metaData": undefined,
-      "metaId": "lorem-id",
-      "metaQuery": undefined,
-      "pending": true,
-    },
+    "error": true,
+    "errorMessage": " Server is currently unable to handle this request.",
+    "errorStatus": 0,
+    "fulfilled": false,
+    "metaData": undefined,
+    "metaId": undefined,
+    "metaQuery": undefined,
+    "pending": false,
+    "update": false,
   },
 }
 `;

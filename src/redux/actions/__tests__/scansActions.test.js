@@ -1,7 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import moxios from 'moxios';
-import { scansReducer, scansActionReducer, scansEditReducer } from '../../reducers';
+import { scansReducer, scansEditReducer } from '../../reducers';
 import { scansActions } from '..';
 
 describe('ScansActions', () => {
@@ -10,7 +10,6 @@ describe('ScansActions', () => {
     createStore(
       combineReducers({
         scans: scansReducer,
-        scansAction: scansActionReducer,
         scansEdit: scansEditReducer
       }),
       applyMiddleware(...middleware)
@@ -73,7 +72,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.getScanJobs('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.jobs.lorem.fulfilled).toEqual(true);
       done();
@@ -85,7 +84,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.getScanJob('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.job.lorem.fulfilled).toEqual(true);
       done();
@@ -97,7 +96,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.getConnectionScanResults('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.connection.lorem.fulfilled).toEqual(true);
       done();
@@ -109,7 +108,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.getInspectionScanResults('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.inspection.lorem.fulfilled).toEqual(true);
       done();
@@ -121,7 +120,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.startScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.start.lorem.fulfilled).toEqual(true);
       done();
@@ -133,7 +132,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.pauseScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.pause.lorem.fulfilled).toEqual(true);
       done();
@@ -145,7 +144,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.cancelScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.cancel.lorem.fulfilled).toEqual(true);
       done();
@@ -157,7 +156,7 @@ describe('ScansActions', () => {
     const dispatcher = scansActions.restartScan('lorem');
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansAction;
+      const response = store.getState().scans;
 
       expect(response.restart.lorem.fulfilled).toEqual(true);
       done();

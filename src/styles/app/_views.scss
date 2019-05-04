@@ -122,6 +122,7 @@
 
     .quipucords-infinite-list {
       overflow-y: auto;
+      min-height: 70px;
       max-height: 300px;
       border: solid 1px $list-view-divider;
       border-left: 0;

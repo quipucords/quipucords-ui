@@ -8,7 +8,7 @@ exports[`Scans Component should render a connected component with default props:
   lastRefresh={0}
   pending={false}
   scans={Array []}
-  updateScans={false}
+  update={false}
   viewOptions={Object {}}
 />
 `;

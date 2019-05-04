@@ -148,15 +148,17 @@ exports[`ScanSourceList Component should render a non-connected component pendin
 <EmptyState
   className=""
 >
-  <EmptyStateIcon
-    className=""
-    name="spinner spinner-xl"
-    type="pf"
+  <Spinner
+    className="blank-slate-pf-icon"
+    inline={false}
+    inverse={false}
+    loading={true}
+    size="sm"
   />
   <EmptyStateTitle
     className=""
   >
-    Loading scan jobs...
+    Loading...
   </EmptyStateTitle>
 </EmptyState>
 `;

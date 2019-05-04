@@ -1,24 +1,23 @@
-import { scansTypes } from '../constants';
-import { helpers } from '../../common/helpers';
+import { scansTypes, sourcesTypes } from '../constants';
 import { reduxHelpers } from '../common/reduxHelpers';
-import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
-  view: {
-    error: false,
-    errorMessage: '',
-    pending: false,
-    fulfilled: false,
-    lastRefresh: 0,
-    scans: [],
-    updateScans: false
-  },
-
   mergeDialog: {
     show: false,
     scans: [],
     details: false
-  }
+  },
+
+  empty: {},
+  connection: {},
+  inspection: {},
+  job: {},
+  jobs: {},
+  cancel: {},
+  pause: {},
+  restart: {},
+  start: {},
+  view: {}
 };
 
 const scansReducer = (state = initialState, action) => {
@@ -27,51 +26,11 @@ const scansReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'view',
         {
-          updateScans: true
+          update: true
         },
         {
           state,
           reset: false
-        }
-      );
-
-    case reduxHelpers.REJECTED_ACTION(scansTypes.GET_SCANS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.PENDING_ACTION(scansTypes.GET_SCANS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          pending: true,
-          scans: state.view.scans
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          fulfilled: true,
-          lastRefresh: (action.payload.headers && new Date(action.payload.headers.date).getTime()) || 0,
-          scans: (action.payload.data && action.payload.data[apiTypes.API_RESPONSE_SCANS_RESULTS]) || []
-        },
-        {
-          state,
-          initialState
         }
       );
 
@@ -102,7 +61,22 @@ const scansReducer = (state = initialState, action) => {
       );
 
     default:
-      return state;
+      return reduxHelpers.generatedPromiseActionReducer(
+        [
+          { ref: 'empty', type: sourcesTypes.GET_SCANS_SOURCES },
+          { ref: 'connection', type: scansTypes.GET_SCAN_CONNECTION_RESULTS },
+          { ref: 'inspection', type: scansTypes.GET_SCAN_INSPECTION_RESULTS },
+          { ref: 'job', type: scansTypes.GET_SCAN_JOB },
+          { ref: 'jobs', type: scansTypes.GET_SCAN_JOBS },
+          { ref: 'cancel', type: scansTypes.CANCEL_SCAN },
+          { ref: 'pause', type: scansTypes.PAUSE_SCAN },
+          { ref: 'restart', type: scansTypes.RESTART_SCAN },
+          { ref: 'start', type: scansTypes.START_SCAN },
+          { ref: 'view', type: scansTypes.GET_SCANS }
+        ],
+        state,
+        action
+      );
   }
 };
 

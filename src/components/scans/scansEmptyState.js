@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, EmptyState, Grid, Row } from 'patternfly-react';
 import SourcesEmptyState from '../sources/sourcesEmptyState';
 import helpers from '../../common/helpers';
-import { connectRouter, reduxActions, reduxTypes, store } from '../../redux';
+import { connectRouter, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 
 class ScansEmptyState extends React.Component {
   componentDidMount() {
@@ -68,8 +68,14 @@ const mapDispatchToProps = dispatch => ({
   getScansSources: queryObj => dispatch(reduxActions.sources.getScansSources(queryObj))
 });
 
-const mapStateToProps = state => Object.assign({}, state.scansEmptyState);
+const makeMapStateToProps = () => {
+  const scansEmptyState = reduxSelectors.scans.makeScansEmptyState();
 
-const ConnectedScansEmptyState = connectRouter(mapStateToProps, mapDispatchToProps)(ScansEmptyState);
+  return (state, props) => ({
+    ...scansEmptyState(state, props)
+  });
+};
+
+const ConnectedScansEmptyState = connectRouter(makeMapStateToProps, mapDispatchToProps)(ScansEmptyState);
 
 export { ConnectedScansEmptyState as default, ConnectedScansEmptyState, ScansEmptyState };

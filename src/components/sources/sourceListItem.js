@@ -5,7 +5,6 @@ import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
 import _size from 'lodash/size';
-import moment from 'moment';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
@@ -366,12 +365,7 @@ class SourceListItem extends React.Component {
         {icon}
         <div className="scan-status-text">
           <div>{scanDescription}</div>
-          <div>
-            {moment
-              .utc(scanTime)
-              .utcOffset(moment().utcOffset())
-              .fromNow()}
-          </div>
+          <div>{helpers.getTimeDisplayHowLongAgo(scanTime)}</div>
         </div>
       </div>
     );

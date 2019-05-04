@@ -7,7 +7,7 @@ describe('ScanJobsList Component', () => {
   const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
   it('should render a connected component', () => {
-    const store = generateEmptyStore({ scansAction: { jobs: {} } });
+    const store = generateEmptyStore({ scans: { jobs: {} } });
 
     const props = {
       id: 1

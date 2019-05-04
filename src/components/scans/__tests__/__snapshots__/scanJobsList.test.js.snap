@@ -7,6 +7,7 @@ exports[`ScanJobsList Component should render a connected component: connected 1
   getScanJobs={[Function]}
   id={1}
   isMoreResults={true}
+  mostRecentId={null}
   pending={false}
   scanJobsList={Array []}
 />
@@ -38,15 +39,17 @@ exports[`ScanJobsList Component should render a non-connected component pending:
 <EmptyState
   className=""
 >
-  <EmptyStateIcon
-    className=""
-    name="spinner spinner-xl"
-    type="pf"
+  <Spinner
+    className="blank-slate-pf-icon"
+    inline={false}
+    inverse={false}
+    loading={true}
+    size="sm"
   />
   <EmptyStateTitle
     className=""
   >
-    Loading scan jobs...
+    Loading...
   </EmptyStateTitle>
 </EmptyState>
 `;
@@ -122,6 +125,7 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
         xs={3}
       >
         <Connect(ScanDownload)
+          className="pull-right"
           downloadId={15}
           pullRight={true}
         />

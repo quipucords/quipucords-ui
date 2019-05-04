@@ -1,88 +1,1033 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScansReducer should handle all defined error types: rejected types GET_SCANS 1`] = `
+exports[`ScansReducer should handle all defined error types: rejected types CANCEL_SCAN 1`] = `
 Object {
   "result": Object {
+    "cancel": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
     "mergeDialog": Object {
       "details": false,
       "scans": Array [],
       "show": false,
     },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "CANCEL_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOB_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOBS_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCANS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
     "view": Object {
       "error": true,
       "errorMessage": "ERROR",
+      "errorStatus": 0,
       "fulfilled": false,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": false,
-      "scans": Array [],
-      "updateScans": false,
+      "update": false,
     },
   },
   "type": "GET_SCANS_REJECTED",
 }
 `;
 
-exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCANS 1`] = `
+exports[`ScansReducer should handle all defined error types: rejected types GET_SCANS_SOURCES 1`] = `
 Object {
   "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
     "mergeDialog": Object {
       "details": false,
       "scans": Array [],
       "show": false,
     },
-    "view": Object {
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCANS_SOURCES_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "PAUSE_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "RESTART_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "view": Object {},
+  },
+  "type": "START_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types CANCEL_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
       "error": false,
       "errorMessage": "",
       "fulfilled": true,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": false,
+      "update": false,
+    },
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
       "scans": Array [],
-      "updateScans": false,
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "CANCEL_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOB_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOBS_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCANS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
     },
   },
   "type": "GET_SCANS_FULFILLED",
 }
 `;
 
-exports[`ScansReducer should handle all defined pending types: pending types GET_SCANS 1`] = `
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCANS_SOURCES 1`] = `
 Object {
   "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
     "mergeDialog": Object {
       "details": false,
       "scans": Array [],
       "show": false,
     },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCANS_SOURCES_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "PAUSE_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "RESTART_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "view": Object {},
+  },
+  "type": "START_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types CANCEL_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "CANCEL_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCAN_CONNECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_CONNECTION_RESULTS_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCAN_INSPECTION_RESULTS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_INSPECTION_RESULTS_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCAN_JOB 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOB_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCAN_JOBS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCAN_JOBS_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCANS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
     "view": Object {
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": true,
-      "scans": Array [],
-      "updateScans": false,
+      "update": false,
     },
   },
   "type": "GET_SCANS_PENDING",
 }
 `;
 
-exports[`ScansReducer should handle specific defined types: defined type MERGE_SCAN_DIALOG_HIDE 1`] = `
+exports[`ScansReducer should handle all defined pending types: pending types GET_SCANS_SOURCES 1`] = `
 Object {
   "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
     "mergeDialog": Object {
       "details": false,
       "scans": Array [],
       "show": false,
     },
-    "view": Object {
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "GET_SCANS_SOURCES_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types PAUSE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "lastRefresh": 0,
-      "pending": false,
-      "scans": Array [],
-      "updateScans": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
     },
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "PAUSE_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types RESTART_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "start": Object {},
+    "view": Object {},
+  },
+  "type": "RESTART_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types START_SCAN 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "view": Object {},
+  },
+  "type": "START_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle specific defined types: defined type MERGE_SCAN_DIALOG_HIDE 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
   },
   "type": "MERGE_SCAN_DIALOG_HIDE",
 }
@@ -91,21 +1036,47 @@ Object {
 exports[`ScansReducer should handle specific defined types: defined type MERGE_SCAN_DIALOG_SHOW 1`] = `
 Object {
   "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
     "mergeDialog": Object {
       "details": undefined,
       "scans": undefined,
       "show": true,
     },
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "lastRefresh": 0,
-      "pending": false,
-      "scans": Array [],
-      "updateScans": false,
-    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {},
   },
   "type": "MERGE_SCAN_DIALOG_SHOW",
+}
+`;
+
+exports[`ScansReducer should handle specific defined types: defined type UPDATE_SCANS 1`] = `
+Object {
+  "result": Object {
+    "cancel": Object {},
+    "connection": Object {},
+    "empty": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "pause": Object {},
+    "restart": Object {},
+    "start": Object {},
+    "view": Object {
+      "update": true,
+    },
+  },
+  "type": "UPDATE_SCANS",
 }
 `;

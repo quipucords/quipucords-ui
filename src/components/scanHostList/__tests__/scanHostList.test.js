@@ -8,7 +8,7 @@ describe('ScanHostList Component', () => {
 
   it('should render a connected component', () => {
     const store = generateEmptyStore({
-      scansAction: {
+      scans: {
         connection: {},
         inspection: {}
       }

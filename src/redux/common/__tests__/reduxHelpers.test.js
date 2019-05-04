@@ -88,7 +88,32 @@ describe('ReduxHelpers', () => {
         state,
         { ...action, type: reduxHelpers.PENDING_ACTION('LOREM') }
       )
-    ).toMatchSnapshot('generatedPromiseActionReducer rejected');
+    ).toMatchSnapshot('generatedPromiseActionReducer pending');
+
+    delete action.meta;
+    expect(
+      reduxHelpers.generatedPromiseActionReducer(
+        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        state,
+        { ...action, type: reduxHelpers.FULFILLED_ACTION('LOREM') }
+      )
+    ).toMatchSnapshot('generatedPromiseActionReducer fulfilled no meta data');
+
+    expect(
+      reduxHelpers.generatedPromiseActionReducer(
+        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        state,
+        { ...action, type: reduxHelpers.REJECTED_ACTION('LOREM') }
+      )
+    ).toMatchSnapshot('generatedPromiseActionReducer rejected no meta data');
+
+    expect(
+      reduxHelpers.generatedPromiseActionReducer(
+        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        state,
+        { ...action, type: reduxHelpers.PENDING_ACTION('LOREM') }
+      )
+    ).toMatchSnapshot('generatedPromiseActionReducer pending no meta data');
   });
 
   it('should combine multiple reducer action types', () => {

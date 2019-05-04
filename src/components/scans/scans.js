@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button, DropdownButton, EmptyState, ListView, MenuItem, Modal, Spinner } from 'patternfly-react';
 import _size from 'lodash/size';
-import { connect, reduxActions, reduxTypes, store } from '../../redux';
+import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
@@ -20,9 +20,9 @@ class Scans extends React.Component {
   }
 
   componentDidUpdate() {
-    const { getScans, updateScans, viewOptions } = this.props;
+    const { getScans, update, viewOptions } = this.props;
 
-    if (updateScans) {
+    if (update) {
       getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
     }
   }
@@ -169,7 +169,7 @@ Scans.propTypes = {
   lastRefresh: PropTypes.number,
   pending: PropTypes.bool,
   scans: PropTypes.array,
-  updateScans: PropTypes.bool,
+  update: PropTypes.bool,
   viewOptions: PropTypes.object
 };
 
@@ -180,7 +180,7 @@ Scans.defaultProps = {
   lastRefresh: 0,
   pending: false,
   scans: [],
-  updateScans: false,
+  update: false,
   viewOptions: {}
 };
 
@@ -188,13 +188,17 @@ const mapDispatchToProps = dispatch => ({
   getScans: queryObj => dispatch(reduxActions.scans.getScans(queryObj))
 });
 
-const mapStateToProps = state =>
-  Object.assign({}, state.scans.view, {
+const makeMapStateToProps = () => {
+  const scansView = reduxSelectors.scans.makeScansView();
+
+  return (state, props) => ({
+    ...scansView(state, props),
     viewOptions: state.viewOptions[reduxTypes.view.SCANS_VIEW]
   });
+};
 
 const ConnectedScans = connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(Scans);
 

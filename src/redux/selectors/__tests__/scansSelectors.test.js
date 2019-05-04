@@ -8,7 +8,7 @@ describe('ScansSelectors', () => {
 
   it('Should map a hosts object to consumable props', () => {
     const state = {
-      scansAction: {
+      scans: {
         connection: {
           1: {
             data: {
@@ -65,7 +65,7 @@ describe('ScansSelectors', () => {
 
   it('Should map a job object to consumable props and sorted by source', () => {
     const state = {
-      scansAction: {
+      scans: {
         job: {
           1: {
             data: {

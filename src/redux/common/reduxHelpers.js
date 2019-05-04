@@ -46,10 +46,6 @@ const setStateProp = (prop, data, options) => {
 };
 
 const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
-  if (!action.meta || !action.meta.id) {
-    return state;
-  }
-
   const { type } = action;
   const expandedTypes = [];
 
@@ -69,20 +65,29 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     return state;
   }
 
+  const baseState = {
+    error: false,
+    errorMessage: '',
+    fulfilled: false,
+    metaData: action.meta && action.meta.data,
+    metaId: action.meta && action.meta.id,
+    metaQuery: action.meta && action.meta.query,
+    pending: false,
+    update: false
+  };
+
+  const useId = data =>
+    (action.meta && action.meta.id && { [action.meta.id]: { ...baseState, ...data } }) || { ...baseState, ...data };
+
   switch (type) {
     case REJECTED_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        {
-          [action.meta.id]: {
-            error: action.error,
-            errorMessage: helpers.getMessageFromResults(action.payload).message,
-            errorStatus: helpers.getStatusFromResults(action.payload),
-            metaData: action.meta.data,
-            metaId: action.meta.id,
-            metaQuery: action.meta.query
-          }
-        },
+        useId({
+          error: true,
+          errorMessage: helpers.getMessageFromResults(action.payload).message,
+          errorStatus: helpers.getStatusFromResults(action.payload)
+        }),
         {
           state
         }
@@ -90,14 +95,9 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     case PENDING_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        {
-          [action.meta.id]: {
-            metaData: action.meta.data,
-            metaId: action.meta.id,
-            metaQuery: action.meta.query,
-            pending: true
-          }
-        },
+        useId({
+          pending: true
+        }),
         {
           state
         }
@@ -106,15 +106,11 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     case FULFILLED_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        {
-          [action.meta.id]: {
-            data: (action.payload && action.payload.data) || {},
-            fulfilled: true,
-            metaData: action.meta.data,
-            metaId: action.meta.id,
-            metaQuery: action.meta.query
-          }
-        },
+        useId({
+          date: action.payload.headers && action.payload.headers.date,
+          data: (action.payload && action.payload.data) || {},
+          fulfilled: true
+        }),
         {
           state
         }

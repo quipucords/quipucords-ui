@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EmptyState, Grid, Icon } from 'patternfly-react';
+import { EmptyState, Grid, Icon, Spinner } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 
@@ -39,8 +39,8 @@ class ScanSourceList extends React.Component {
     if (pending) {
       return (
         <EmptyState>
-          <EmptyState.Icon name="spinner spinner-xl" />
-          <EmptyState.Title>Loading scan jobs...</EmptyState.Title>
+          <Spinner loading size="sm" className="blank-slate-pf-icon" />
+          <EmptyState.Title>Loading...</EmptyState.Title>
         </EmptyState>
       );
     }

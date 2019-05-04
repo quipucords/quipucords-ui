@@ -1,5 +1,5 @@
 import { scansReducer } from '../scansReducer';
-import { scansTypes as types } from '../../constants';
+import { scansTypes as types, sourcesTypes } from '../../constants';
 import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('ScansReducer', () => {
@@ -8,7 +8,7 @@ describe('ScansReducer', () => {
   });
 
   it('should handle specific defined types', () => {
-    const specificTypes = [types.MERGE_SCAN_DIALOG_SHOW, types.MERGE_SCAN_DIALOG_HIDE];
+    const specificTypes = [types.UPDATE_SCANS, types.MERGE_SCAN_DIALOG_SHOW, types.MERGE_SCAN_DIALOG_HIDE];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -22,7 +22,18 @@ describe('ScansReducer', () => {
   });
 
   it('should handle all defined error types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [
+      sourcesTypes.GET_SCANS_SOURCES,
+      types.GET_SCAN_CONNECTION_RESULTS,
+      types.GET_SCAN_INSPECTION_RESULTS,
+      types.GET_SCAN_JOB,
+      types.GET_SCAN_JOBS,
+      types.CANCEL_SCAN,
+      types.PAUSE_SCAN,
+      types.RESTART_SCAN,
+      types.START_SCAN,
+      types.GET_SCANS
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -49,7 +60,18 @@ describe('ScansReducer', () => {
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [
+      sourcesTypes.GET_SCANS_SOURCES,
+      types.GET_SCAN_CONNECTION_RESULTS,
+      types.GET_SCAN_INSPECTION_RESULTS,
+      types.GET_SCAN_JOB,
+      types.GET_SCAN_JOBS,
+      types.CANCEL_SCAN,
+      types.PAUSE_SCAN,
+      types.RESTART_SCAN,
+      types.START_SCAN,
+      types.GET_SCANS
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -65,7 +87,18 @@ describe('ScansReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.GET_SCANS];
+    const specificTypes = [
+      sourcesTypes.GET_SCANS_SOURCES,
+      types.GET_SCAN_CONNECTION_RESULTS,
+      types.GET_SCAN_INSPECTION_RESULTS,
+      types.GET_SCAN_JOB,
+      types.GET_SCAN_JOBS,
+      types.CANCEL_SCAN,
+      types.PAUSE_SCAN,
+      types.RESTART_SCAN,
+      types.START_SCAN,
+      types.GET_SCANS
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {

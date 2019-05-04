@@ -24,39 +24,41 @@ exports[`SourceListItem Component should render a connected component: connected
 exports[`SourceListItem Component should render a non-connected component: non-connected 1`] = `
 <ListViewItem
   actions={
-    <Tooltip
-      delayShow={500}
-      id={null}
-      placement="top"
-      popover={null}
-      rootClose={true}
-      tooltip="Run Scan"
-      trigger={
-        Array [
-          "hover",
-        ]
-      }
-    >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        onClick={[Function]}
+    <React.Fragment>
+      <Tooltip
+        delayShow={500}
+        id={null}
+        placement="top"
+        popover={null}
+        rootClose={true}
+        tooltip="Run Scan"
+        trigger={
+          Array [
+            "hover",
+          ]
+        }
       >
-        <Icon
-          aria-label="Start"
-          name="spinner2"
-          type="pf"
-        />
-      </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <Icon
+            aria-label="Start"
+            name="spinner2"
+            type="pf"
+          />
+        </Button>
+      </Tooltip>
       <Connect(ScanDownload)
+        className="pull-right"
         downloadId={3}
         pullRight={true}
-        title="Download"
       />
-    </Tooltip>
+    </React.Fragment>
   }
   additionalInfo={
     Array [

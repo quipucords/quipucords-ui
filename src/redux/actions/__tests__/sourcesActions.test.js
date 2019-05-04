@@ -1,7 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import moxios from 'moxios';
-import { addSourceWizardReducer, scansEmptyStateReducer, sourcesReducer } from '../../reducers';
+import { addSourceWizardReducer, scansReducer, sourcesReducer } from '../../reducers';
 import { sourcesActions } from '..';
 import apiTypes from '../../../constants/apiConstants';
 
@@ -11,7 +11,7 @@ describe('SourcesActions', () => {
     createStore(
       combineReducers({
         addSourceWizard: addSourceWizardReducer,
-        scansEmptyState: scansEmptyStateReducer,
+        scans: scansReducer,
         sources: sourcesReducer
       }),
       applyMiddleware(...middleware)
@@ -73,9 +73,9 @@ describe('SourcesActions', () => {
     const dispatcher = sourcesActions.getScansSources();
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scansEmptyState;
+      const response = store.getState().scans;
 
-      expect(response.fulfilled).toEqual(true);
+      expect(response.empty.fulfilled).toEqual(true);
       done();
     });
   });
