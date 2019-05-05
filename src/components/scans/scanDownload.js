@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, Icon, MenuItem } from 'patternfly-react';
+import { Button } from 'patternfly-react';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
+import Tooltip from '../tooltip/tooltip';
 
 class ScanDownload extends React.Component {
-  static notifyDownloadStatus(error, results) {
+  onReportDownload = () => {
+    const { downloadId, getReportsDownload } = this.props;
+
+    getReportsDownload(downloadId).then(
+      () => this.notifyDownloadStatus(false),
+      error => this.notifyDownloadStatus(true, error.message)
+    );
+  };
+
+  notifyDownloadStatus(error, results) {
+    const { downloadName } = this.props;
+
     if (error) {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
@@ -17,66 +29,50 @@ class ScanDownload extends React.Component {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'success',
-        message: <span>Report downloaded.</span>
+        message: (
+          <span>
+            Report <strong>{(downloadName && `${downloadName} `) || ''}</strong> downloaded.
+          </span>
+        )
       });
     }
   }
 
-  onDetailedDownload = () => {
-    const { getReportDetailsCsv, downloadId } = this.props;
-
-    getReportDetailsCsv(downloadId).then(
-      () => ScanDownload.notifyDownloadStatus(false),
-      error => ScanDownload.notifyDownloadStatus(true, error.message)
-    );
-  };
-
-  onSummaryDownload = () => {
-    const { getReportSummaryCsv, downloadId } = this.props;
-
-    getReportSummaryCsv(downloadId).then(
-      () => ScanDownload.notifyDownloadStatus(false),
-      error => ScanDownload.notifyDownloadStatus(true, error.message)
-    );
-  };
-
   render() {
-    const { downloadId, getReportDetailsCsv, getReportSummaryCsv, ...props } = this.props;
+    const { children, downloadId, downloadName, getReportsDownload, tooltip, ...props } = this.props;
+
+    const button = (
+      <Button id={helpers.generateId()} title="Download" onClick={this.onReportDownload} {...props}>
+        {children}
+      </Button>
+    );
 
     return (
       <React.Fragment>
-        <Dropdown id={helpers.generateId()} {...props}>
-          <Dropdown.Toggle useAnchor className="btn-link">
-            <Icon type="fa" name="download" />
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <MenuItem eventKey="1" onClick={() => this.onSummaryDownload()}>
-              Summary Report
-            </MenuItem>
-            <MenuItem eventKey="2" onClick={() => this.onDetailedDownload()}>
-              Detailed Report
-            </MenuItem>
-          </Dropdown.Menu>
-        </Dropdown>
+        {tooltip && <Tooltip tooltip={tooltip}>{button}</Tooltip>}
+        {!tooltip && button}
       </React.Fragment>
     );
   }
 }
 
 ScanDownload.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  tooltip: PropTypes.string,
   downloadId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  getReportDetailsCsv: PropTypes.func,
-  getReportSummaryCsv: PropTypes.func
+  downloadName: PropTypes.string,
+  getReportsDownload: PropTypes.func
 };
 
 ScanDownload.defaultProps = {
-  getReportDetailsCsv: helpers.noop,
-  getReportSummaryCsv: helpers.noop
+  children: 'Download',
+  tooltip: null,
+  downloadName: null,
+  getReportsDownload: helpers.noop
 };
 
 const mapDispatchToProps = dispatch => ({
-  getReportDetailsCsv: id => dispatch(reduxActions.reports.getReportDetailsCsv(id)),
-  getReportSummaryCsv: (id, query) => dispatch(reduxActions.reports.getReportSummaryCsv(id, query))
+  getReportsDownload: id => dispatch(reduxActions.reports.getReportsDownload(id))
 });
 
 const mapStateToProps = () => ({});

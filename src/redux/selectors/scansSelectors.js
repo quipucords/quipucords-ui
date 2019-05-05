@@ -247,6 +247,12 @@ const scanJobsListSelector = createSelector(
 
       helpers.setPropIfDefined(
         updatedJob,
+        ['scanName'],
+        _get(job, [apiTypes.API_RESPONSE_JOB_SCAN, apiTypes.API_RESPONSE_JOB_SCAN_NAME])
+      );
+
+      helpers.setPropIfDefined(
+        updatedJob,
         ['systemsScanned'],
         job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] >= 0 ? job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] : 0
       );

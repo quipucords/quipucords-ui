@@ -51,8 +51,7 @@ Object {
     },
     "reports": Object {
       "GET_MERGE_REPORT": "GET_MERGE_REPORT",
-      "GET_REPORT": "GET_REPORT",
-      "GET_REPORTS": "GET_REPORTS",
+      "GET_REPORTS_DOWNLOAD": "GET_REPORTS_DOWNLOAD",
     },
     "scans": Object {
       "ADD_SCAN": "ADD_SCAN",
@@ -161,8 +160,7 @@ Object {
     },
     "reports": Object {
       "GET_MERGE_REPORT": "GET_MERGE_REPORT",
-      "GET_REPORT": "GET_REPORT",
-      "GET_REPORTS": "GET_REPORTS",
+      "GET_REPORTS_DOWNLOAD": "GET_REPORTS_DOWNLOAD",
     },
     "scans": Object {
       "ADD_SCAN": "ADD_SCAN",
@@ -241,8 +239,7 @@ Object {
   },
   "reportsTypes": Object {
     "GET_MERGE_REPORT": "GET_MERGE_REPORT",
-    "GET_REPORT": "GET_REPORT",
-    "GET_REPORTS": "GET_REPORTS",
+    "GET_REPORTS_DOWNLOAD": "GET_REPORTS_DOWNLOAD",
   },
   "scansTypes": Object {
     "ADD_SCAN": "ADD_SCAN",
@@ -350,8 +347,7 @@ Object {
   },
   "reports": Object {
     "GET_MERGE_REPORT": "GET_MERGE_REPORT",
-    "GET_REPORT": "GET_REPORT",
-    "GET_REPORTS": "GET_REPORTS",
+    "GET_REPORTS_DOWNLOAD": "GET_REPORTS_DOWNLOAD",
   },
   "scans": Object {
     "ADD_SCAN": "ADD_SCAN",

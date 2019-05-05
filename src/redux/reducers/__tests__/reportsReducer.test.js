@@ -8,7 +8,7 @@ describe('ReportsReducer', () => {
   });
 
   it('should handle all defined error types', () => {
-    const specificTypes = [types.GET_REPORT, types.GET_REPORTS, types.GET_MERGE_REPORT];
+    const specificTypes = [types.GET_REPORTS_DOWNLOAD, types.GET_MERGE_REPORT];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -35,7 +35,7 @@ describe('ReportsReducer', () => {
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.GET_REPORT, types.GET_REPORTS, types.GET_MERGE_REPORT];
+    const specificTypes = [types.GET_REPORTS_DOWNLOAD, types.GET_MERGE_REPORT];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -51,7 +51,7 @@ describe('ReportsReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.GET_REPORT, types.GET_REPORTS, types.GET_MERGE_REPORT];
+    const specificTypes = [types.GET_REPORTS_DOWNLOAD, types.GET_MERGE_REPORT];
 
     specificTypes.forEach(value => {
       const dispatched = {

@@ -1,63 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ScanDownload Component should handle custom children: custom 1`] = `
+<button
+  class="btn btn-default"
+  id="generatedid-"
+  title="Download"
+  type="button"
+>
+  lorem ipsum
+</button>
+`;
+
+exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
+<ScanDownload
+  downloadId={1}
+  downloadName={null}
+  getReportsDownload={[Function]}
+  tooltip="Lorem ipsum dolor sit"
+>
+  <Tooltip
+    delayShow={500}
+    id={null}
+    placement="top"
+    popover={null}
+    rootClose={true}
+    tooltip="Lorem ipsum dolor sit"
+    trigger={
+      Array [
+        "hover",
+      ]
+    }
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      delayShow={500}
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="generatedid-"
+          placement="right"
+        >
+          Lorem ipsum dolor sit
+        </Tooltip>
+      }
+      placement="top"
+      rootClose={true}
+      trigger={
+        Array [
+          "hover",
+        ]
+      }
+    >
+      <span
+        onClick={null}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={false}
+          id="generatedid-"
+          onClick={[Function]}
+          title="Download"
+        >
+          <button
+            className="btn btn-default"
+            disabled={false}
+            id="generatedid-"
+            onClick={[Function]}
+            title="Download"
+            type="button"
+          >
+            Download
+          </button>
+        </Button>
+      </span>
+    </OverlayTrigger>
+  </Tooltip>
+</ScanDownload>
+`;
+
 exports[`ScanDownload Component should render a connected component: connected 1`] = `
 <ScanDownload
   downloadId={1}
-  getReportDetailsCsv={[Function]}
-  getReportSummaryCsv={[Function]}
-/>
+  downloadName={null}
+  getReportsDownload={[Function]}
+  tooltip={null}
+>
+  Download
+</ScanDownload>
 `;
 
 exports[`ScanDownload Component should render a non-connected component: non-connected 1`] = `
-<div
-  class="dropdown btn-group"
+<button
+  class="btn btn-default"
+  id="generatedid-"
+  title="Download"
+  type="button"
 >
-  <a
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="btn-link dropdown-toggle"
-    href="#"
-    id="generatedid-"
-    role="button"
-  >
-    <span
-      aria-hidden="true"
-      class="fa fa-download"
-    />
-     
-    <span
-      class="caret"
-    />
-  </a>
-  <ul
-    aria-labelledby="generatedid-"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        Summary Report
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        Detailed Report
-      </a>
-    </li>
-  </ul>
-</div>
+  Download
+</button>
 `;

@@ -5,6 +5,7 @@ exports[`SourceListItem Component should render a connected component: connected
   cancelScan={[Function]}
   lastRefresh={0}
   pauseScan={[Function]}
+  pollInterval={120000}
   restartScan={[Function]}
   scan={
     Object {
@@ -22,154 +23,161 @@ exports[`SourceListItem Component should render a connected component: connected
 `;
 
 exports[`SourceListItem Component should render a non-connected component: non-connected 1`] = `
-<ListViewItem
-  actions={
-    <React.Fragment>
-      <Tooltip
-        delayShow={500}
-        id={null}
-        placement="top"
-        popover={null}
-        rootClose={true}
-        tooltip="Run Scan"
-        trigger={
-          Array [
-            "hover",
-          ]
-        }
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="link"
-          disabled={false}
-          onClick={[Function]}
+<Poll
+  interval={120000}
+  itemId="scanListItem-42"
+  itemIdCheck={false}
+  key="42"
+  onPoll={[Function]}
+>
+  <ListViewItem
+    actions={
+      <React.Fragment>
+        <Tooltip
+          delayShow={500}
+          id={null}
+          placement="top"
+          popover={null}
+          rootClose={true}
+          tooltip="Run Scan"
+          trigger={
+            Array [
+              "hover",
+            ]
+          }
         >
-          <Icon
-            aria-label="Start"
-            name="spinner2"
-            type="pf"
-          />
-        </Button>
-      </Tooltip>
-      <Connect(ScanDownload)
-        className="pull-right"
-        downloadId={3}
-        pullRight={true}
-      />
-    </React.Fragment>
-  }
-  additionalInfo={
-    Array [
-      <ListStatusItem
-        count={20}
-        emptyText="0 Successful"
-        expandType="systemsScanned"
-        expanded={false}
-        iconInfo={
-          Object {
-            "classNames": Array [],
-            "name": "ok",
-            "type": "pf",
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="link"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <Icon
+              aria-label="Start"
+              name="spinner2"
+              type="pf"
+            />
+          </Button>
+        </Tooltip>
+        <Connect(ScanDownload)
+          downloadId={3}
+          downloadName="lorem"
+        />
+      </React.Fragment>
+    }
+    additionalInfo={
+      Array [
+        <ListStatusItem
+          count={20}
+          emptyText="0 Successful"
+          expandType="systemsScanned"
+          expanded={false}
+          iconInfo={
+            Object {
+              "classNames": Array [],
+              "name": "ok",
+              "type": "pf",
+            }
           }
-        }
-        id="successHosts"
-        tipPlural="Successful Systems"
-        tipSingular="Successful System"
-        toggleExpand={[Function]}
-      />,
-      <ListStatusItem
-        count={1}
-        emptyText="0 Failed"
-        expandType="systemsFailed"
-        expanded={false}
-        iconInfo={
-          Object {
-            "classNames": Array [],
-            "name": "error-circle-o",
-            "type": "pf",
+          id="successHosts"
+          tipPlural="Successful Systems"
+          tipSingular="Successful System"
+          toggleExpand={[Function]}
+        />,
+        <ListStatusItem
+          count={1}
+          emptyText="0 Failed"
+          expandType="systemsFailed"
+          expanded={false}
+          iconInfo={
+            Object {
+              "classNames": Array [],
+              "name": "error-circle-o",
+              "type": "pf",
+            }
           }
-        }
-        id="systemsFailed"
-        tipPlural="Failed Systems"
-        tipSingular="Failed System"
-        toggleExpand={[Function]}
-      />,
-      <ListStatusItem
-        count={1}
-        emptyText="0 Sources"
-        expandType="sources"
-        expanded={false}
-        iconInfo={null}
-        id="sources"
-        tipPlural="Sources"
-        tipSingular="Source"
-        toggleExpand={[Function]}
-      />,
-      <ListStatusItem
-        count={0}
-        emptyText="0 Previous"
-        expandType="jobs"
-        expanded={false}
-        iconInfo={null}
-        id="scans"
-        tipPlural="Previous"
-        tipSingular="Previous"
-        toggleExpand={[Function]}
-      />,
-    ]
-  }
-  checkboxInput={
-    <Checkbox
-      bsClass=""
-      checked={false}
-      disabled={false}
-      inline={false}
-      onChange={[Function]}
-      title=""
-    />
-  }
-  className="quipucords-scan-list-item list-view-pf-top-align"
-  compoundExpand={true}
-  compoundExpanded={false}
-  description={
-    <div
-      className="scan-description"
-    >
-      <Icon
-        className="scan-status-icon"
-        name="ok"
-        type="pf"
+          id="systemsFailed"
+          tipPlural="Failed Systems"
+          tipSingular="Failed System"
+          toggleExpand={[Function]}
+        />,
+        <ListStatusItem
+          count={1}
+          emptyText="0 Sources"
+          expandType="sources"
+          expanded={false}
+          iconInfo={null}
+          id="sources"
+          tipPlural="Sources"
+          tipSingular="Source"
+          toggleExpand={[Function]}
+        />,
+        <ListStatusItem
+          count={0}
+          emptyText="0 Previous"
+          expandType="jobs"
+          expanded={false}
+          iconInfo={null}
+          id="scans"
+          tipPlural="Previous"
+          tipSingular="Previous"
+          toggleExpand={[Function]}
+        />,
+      ]
+    }
+    checkboxInput={
+      <Checkbox
+        bsClass=""
+        checked={false}
+        disabled={false}
+        inline={false}
+        onChange={[Function]}
+        title=""
       />
+    }
+    className="quipucords-scan-list-item list-view-pf-top-align"
+    compoundExpand={true}
+    compoundExpanded={false}
+    description={
       <div
-        className="scan-status-text"
+        className="scan-description"
       >
-        <div>
-          Lorem ipsum
-        </div>
+        <Icon
+          className="scan-status-icon"
+          name="ok"
+          type="pf"
+        />
         <div
-          className="text-muted"
+          className="scan-status-text"
         >
-          
+          <div>
+            Lorem ipsum
+          </div>
+          <div
+            className="text-muted"
+          >
+            
+          </div>
         </div>
       </div>
-    </div>
-  }
-  heading={null}
-  hideCloseIcon={false}
-  initExpanded={false}
-  key="42"
-  leftContent={
-    <div
-      className="list-item-name"
-    >
-      lorem
-    </div>
-  }
-  onCloseCompoundExpand={[Function]}
-  onExpand={[Function]}
-  onExpandClose={[Function]}
-  stacked={false}
-/>
+    }
+    heading={null}
+    hideCloseIcon={false}
+    initExpanded={false}
+    key="42"
+    leftContent={
+      <div
+        className="list-item-name"
+      >
+        lorem
+      </div>
+    }
+    onCloseCompoundExpand={[Function]}
+    onExpand={[Function]}
+    onExpandClose={[Function]}
+    stacked={false}
+  />
+</Poll>
 `;

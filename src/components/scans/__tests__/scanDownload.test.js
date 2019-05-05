@@ -29,4 +29,25 @@ describe('ScanDownload Component', () => {
 
     expect(component.render()).toMatchSnapshot('non-connected');
   });
+
+  it('should handle custom children', () => {
+    const props = {
+      downloadId: 1
+    };
+
+    const component = mount(<ScanDownload {...props}>lorem ipsum</ScanDownload>);
+
+    expect(component.render()).toMatchSnapshot('custom');
+  });
+
+  it('should have an optional tooltip', () => {
+    const props = {
+      downloadId: 1,
+      tooltip: 'Lorem ipsum dolor sit'
+    };
+
+    const component = mount(<ScanDownload {...props} />);
+
+    expect(component).toMatchSnapshot('tooltip');
+  });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, DropdownButton, EmptyState, ListView, MenuItem, Modal, Spinner } from 'patternfly-react';
+import { Alert, Button, EmptyState, ListView, Modal, Spinner } from 'patternfly-react';
+import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -19,22 +20,21 @@ class Scans extends React.Component {
     getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { getScans, update, viewOptions } = this.props;
 
-    if (update) {
+    if (update || !_isEqual(viewOptions, prevProps.viewOptions)) {
       getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
     }
   }
 
-  onMergeScanResults = details => {
+  onMergeScanResults = () => {
     const { viewOptions } = this.props;
 
     store.dispatch({
       type: reduxTypes.scans.MERGE_SCAN_DIALOG_SHOW,
       show: true,
-      scans: viewOptions.selectedItems,
-      details
+      scans: viewOptions.selectedItems
     });
   };
 
@@ -57,19 +57,9 @@ class Scans extends React.Component {
     return (
       <div className="form-group">
         <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
-          <DropdownButton
-            key="mergeButton"
-            title="Merge Report"
-            id="merge-reports-dropdown"
-            disabled={viewOptions.selectedItems.length <= 1}
-          >
-            <MenuItem eventKey="1" onClick={() => this.onMergeScanResults(false)}>
-              Summary Report
-            </MenuItem>
-            <MenuItem eventKey="2" onClick={() => this.onMergeScanResults(true)}>
-              Detailed Report
-            </MenuItem>
-          </DropdownButton>
+          <Button id="merge-reports" disabled={viewOptions.selectedItems.length <= 1} onClick={this.onMergeScanResults}>
+            Merge reports
+          </Button>
         </Tooltip>
       </div>
     );

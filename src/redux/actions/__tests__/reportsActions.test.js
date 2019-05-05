@@ -32,98 +32,26 @@ describe('ReportsActions', () => {
     moxios.uninstall();
   });
 
-  it('Should return response content for getReports method', done => {
+  it('Should return response content for getReportsDownload method', done => {
     const store = generateStore();
-    const dispatcher = reportsActions.getReports();
+    const dispatcher = reportsActions.getReportsDownload();
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().reports;
 
-      expect(response.reports.fulfilled).toEqual(true);
+      expect(response.fulfilled).toEqual(true);
       done();
     });
   });
 
-  it('Should return response content for getReportSummary method', done => {
+  it('Should return response content for mergeReports method', done => {
     const store = generateStore();
-    const dispatcher = reportsActions.getReportSummary();
+    const dispatcher = reportsActions.mergeReports();
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().reports;
 
-      expect(response.report.reports.test).toEqual('success');
-      done();
-    });
-  });
-
-  it('Should return response content for getReportSummaryCsv method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.getReportSummaryCsv();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.report.fulfilled).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for getReportDetails method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.getReportDetails();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.report.reports.test).toEqual('success');
-      done();
-    });
-  });
-
-  it('Should return response content for getReportDetailsCsv method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.getReportDetailsCsv();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.report.fulfilled).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for getMergedScanReportSummaryCsv method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.getMergedScanReportSummaryCsv();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.report.fulfilled).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for getMergedScanReportDetailsCsv method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.getMergedScanReportDetailsCsv();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.report.fulfilled).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for mergeScanReports method', done => {
-    const store = generateStore();
-    const dispatcher = reportsActions.mergeScanReports();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
-
-      expect(response.merge.fulfilled).toEqual(true);
+      expect(response.fulfilled).toEqual(true);
       done();
     });
   });

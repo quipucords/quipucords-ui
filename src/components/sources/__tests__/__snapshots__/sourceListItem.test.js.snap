@@ -10,6 +10,7 @@ exports[`SourceListItem Component should render a connected component with defau
     }
   }
   lastRefresh={0}
+  pollInterval={120000}
   selectedSources={Array []}
 />
 `;
