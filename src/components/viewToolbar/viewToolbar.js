@@ -68,24 +68,20 @@ class ViewToolbar extends React.Component {
     }
   };
 
-  onUpdateCurrentValue = event => {
-    const { viewType } = this.props;
-    const filterValue = event.target.value;
-
-    store.dispatch({
-      type: reduxTypes.viewToolbar.SET_FILTER_VALUE,
-      viewType,
-      filterValue
-    });
-  };
-
   onValueKeyPress = keyEvent => {
-    const { filterType, filterValue } = this.props;
+    const { filterType, viewType } = this.props;
+    const filterValue = keyEvent.target.value;
 
     if (keyEvent.key === 'Enter' && filterValue && filterValue.length) {
       this.onFilterAdded(filterType, filterValue);
       keyEvent.stopPropagation();
       keyEvent.preventDefault();
+
+      store.dispatch({
+        type: reduxTypes.viewToolbar.SET_FILTER_VALUE,
+        viewType,
+        filterValue
+      });
     }
   };
 
@@ -145,9 +141,8 @@ class ViewToolbar extends React.Component {
       <input
         className="form-control"
         type={filterType.filterType}
-        value={filterValue}
+        defaultValue={filterValue}
         placeholder={filterType.placeholder}
-        onChange={e => this.onUpdateCurrentValue(e)}
         onKeyPress={e => this.onValueKeyPress(e)}
       />
     );

@@ -23,8 +23,13 @@ class Scans extends React.Component {
   componentDidUpdate(prevProps) {
     const { getScans, update, viewOptions } = this.props;
 
-    if (update || !_isEqual(viewOptions, prevProps.viewOptions)) {
-      getScans(helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' }));
+    const prevQuery = helpers.createViewQueryObject(prevProps.viewOptions, {
+      [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect'
+    });
+    const nextQuery = helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' });
+
+    if (update || !_isEqual(prevQuery, nextQuery)) {
+      getScans(nextQuery);
     }
   }
 

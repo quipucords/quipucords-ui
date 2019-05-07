@@ -192,7 +192,8 @@ const viewOptionsReducer = (state = initialState, action) => {
 
     case viewPaginationTypes.SET_PER_PAGE:
       updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        pageSize: action.pageSize
+        pageSize: action.pageSize,
+        currentPage: 1
       });
       return Object.assign({}, state, updateState);
 
