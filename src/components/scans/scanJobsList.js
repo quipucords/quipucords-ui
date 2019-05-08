@@ -14,7 +14,7 @@ class ScanJobsList extends React.Component {
     queryObject: {
       [apiTypes.API_QUERY_PAGE]: 1,
       [apiTypes.API_QUERY_PAGE_SIZE]: 100,
-      [apiTypes.API_QUERY_ORDERING]: 'name'
+      [apiTypes.API_QUERY_ORDERING]: '-end_time'
     }
   };
 
