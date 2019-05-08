@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
-import _find from 'lodash/find';
 import _get from 'lodash/get';
 import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
@@ -15,21 +14,16 @@ import ListStatusItem from '../listStatusItem/listStatusItem';
 import { apiTypes } from '../../constants/apiConstants';
 
 class SourceListItem extends React.Component {
-  static isSelected(item, selectedSources) {
-    return _find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
-  }
-
   state = {
     expandType: null
   };
 
-  onItemSelectChange = () => {
-    const { item, selectedSources } = this.props;
+  onItemSelectChange = event => {
+    const { checked } = event.target;
+    const { item } = this.props;
 
     store.dispatch({
-      type: SourceListItem.isSelected(item, selectedSources)
-        ? reduxTypes.view.DESELECT_ITEM
-        : reduxTypes.view.SELECT_ITEM,
+      type: checked ? reduxTypes.view.SELECT_ITEM : reduxTypes.view.DESELECT_ITEM,
       viewType: reduxTypes.view.SOURCES_VIEW,
       item
     });
@@ -113,6 +107,14 @@ class SourceListItem extends React.Component {
       sources: [source]
     });
   };
+
+  isSelected() {
+    const { item, selectedSources } = this.props;
+
+    return (
+      selectedSources.find(nextSelected => nextSelected[apiTypes.API_RESPONSE_SOURCE_ID] === item.id) !== undefined
+    );
+  }
 
   renderSourceType() {
     const { item } = this.props;
@@ -373,8 +375,8 @@ class SourceListItem extends React.Component {
 
   render() {
     const { expandType } = this.state;
-    const { item, selectedSources } = this.props;
-    const selected = SourceListItem.isSelected(item, selectedSources);
+    const { item } = this.props;
+    const selected = this.isSelected();
 
     return (
       <ListView.Item

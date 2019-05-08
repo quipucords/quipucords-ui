@@ -271,18 +271,19 @@ const getStatusFromResults = results => {
   return status;
 };
 
-const getTimeStampFromResults = results =>
-  (process.env.REACT_APP_ENV !== 'test' &&
-    moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')) ||
-  '20190225_164640';
+const getTimeStampFromResults =
+  process.env.REACT_APP_ENV !== 'test'
+    ? results => moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')
+    : () => '20190225_164640';
 
-const getTimeDisplayHowLongAgo = timestamp =>
-  (process.env.REACT_APP_ENV !== 'test' &&
-    moment
-      .utc(timestamp)
-      .utcOffset(moment().utcOffset())
-      .fromNow()) ||
-  'a day ago';
+const getTimeDisplayHowLongAgo =
+  process.env.REACT_APP_ENV !== 'test'
+    ? timestamp =>
+        moment
+          .utc(timestamp)
+          .utcOffset(moment().utcOffset())
+          .fromNow()
+    : () => 'a day ago';
 
 const isIpAddress = name => {
   const vals = name.split('.');

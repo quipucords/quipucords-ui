@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
-import _find from 'lodash/find';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import Tooltip from '../tooltip/tooltip';
@@ -114,7 +113,7 @@ class ScanListItem extends React.Component {
   isSelected() {
     const { scan, selectedScans } = this.props;
 
-    return _find(selectedScans, nextSelected => nextSelected[apiTypes.API_RESPONSE_SCAN_ID] === scan.id) !== undefined;
+    return selectedScans.find(nextSelected => nextSelected[apiTypes.API_RESPONSE_SCAN_ID] === scan.id) !== undefined;
   }
 
   renderDescription() {
@@ -344,8 +343,8 @@ class ScanListItem extends React.Component {
 
   render() {
     const { expandType } = this.state;
-    const { scan, selectedScans } = this.props;
-    const selected = this.isSelected(scan, selectedScans);
+    const { scan } = this.props;
+    const selected = this.isSelected();
 
     const classes = cx({
       'quipucords-scan-list-item': true,
