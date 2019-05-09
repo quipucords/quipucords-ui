@@ -13,7 +13,7 @@ exports[`ScanHostList Component should render a connected component: connected 1
   getInspectionScanResults={[Function]}
   hostsList={Array []}
   id={1}
-  isMoreResults={true}
+  isMoreResults={false}
   pending={false}
   useConnectionResults={true}
   useInspectionResults={true}

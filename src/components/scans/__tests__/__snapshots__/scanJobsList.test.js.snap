@@ -6,7 +6,7 @@ exports[`ScanJobsList Component should render a connected component: connected 1
   errorMessage={null}
   getScanJobs={[Function]}
   id={1}
-  isMoreResults={true}
+  isMoreResults={false}
   mostRecentId={null}
   pending={false}
   scanJobsList={Array []}
