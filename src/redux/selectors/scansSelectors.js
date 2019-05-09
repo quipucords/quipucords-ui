@@ -20,8 +20,8 @@ const scanHostsListSelector = createSelector(
     const connectionData = (connection && connection.data) || {};
     const inspectionData = (inspection && inspection.data) || {};
 
-    const isMoreConnectionResults = _get(connectionData, apiTypes.API_RESPONSE_JOBS_NEXT) !== null;
-    const isMoreInspectionResults = _get(inspectionData, apiTypes.API_RESPONSE_JOBS_NEXT) !== null;
+    const isMoreConnectionResults = _get(connectionData, apiTypes.API_RESPONSE_JOBS_NEXT, null) !== null;
+    const isMoreInspectionResults = _get(inspectionData, apiTypes.API_RESPONSE_JOBS_NEXT, null) !== null;
     const isMoreResults = isMoreConnectionResults || isMoreInspectionResults;
 
     const sortHosts = (item1, item2) => {
@@ -209,7 +209,7 @@ const scanJobsListSelector = createSelector(
   scanJobs => {
     const { data, metaId, metaQuery, ...props } = scanJobs || {};
 
-    const isMoreResults = _get(data, apiTypes.API_RESPONSE_JOBS_NEXT) !== null;
+    const isMoreResults = _get(data, apiTypes.API_RESPONSE_JOBS_NEXT, null) !== null;
 
     // map results to consumable props
     let newScanJobsList = ((data && data[apiTypes.API_RESPONSE_JOBS_RESULTS]) || []).map(job => {
