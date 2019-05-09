@@ -290,7 +290,7 @@ class ScanListItem extends React.Component {
 
   static renderHostRow(host) {
     return (
-      <Grid.Row className="fadein" key={`${host.name}-${host.sourceId}-${host.jobType}`}>
+      <Grid.Row className="fadein" key={helpers.generateId('hostRow')}>
         <Grid.Col xs={6} sm={4} md={3}>
           <span>
             <Icon type="pf" name={host.status === 'success' ? 'ok' : 'error-circle-o'} />

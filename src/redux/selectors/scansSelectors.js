@@ -71,15 +71,39 @@ const scanHostsListSelector = createSelector(
     let newScanHostsList = [];
 
     if (newProps.fulfilled) {
+      const mapJob = (jobResult, jobType) => {
+        const updatedVal = {
+          jobType
+        };
+
+        helpers.setPropIfDefined(updatedVal, ['name'], jobResult[apiTypes.API_RESPONSE_JOB_NAME]);
+
+        helpers.setPropIfDefined(
+          updatedVal,
+          ['credentialName'],
+          _get(jobResult, [apiTypes.API_RESPONSE_JOB_CREDENTIAL, apiTypes.API_RESPONSE_JOB_CREDENTIAL_NAME])
+        );
+
+        helpers.setPropIfDefined(
+          updatedVal,
+          ['sourceId'],
+          _get(jobResult, [apiTypes.API_RESPONSE_JOB_SOURCE, apiTypes.API_RESPONSE_JOB_SOURCE_ID])
+        );
+
+        helpers.setPropIfDefined(
+          updatedVal,
+          ['sourceName'],
+          _get(jobResult, [apiTypes.API_RESPONSE_JOB_SOURCE, apiTypes.API_RESPONSE_JOB_SOURCE_NAME])
+        );
+
+        helpers.setPropIfDefined(updatedVal, ['status'], jobResult[apiTypes.API_RESPONSE_JOB_STATUS]);
+
+        return updatedVal;
+      };
+
       newScanHostsList = [
-        ..._get(connectionData, apiTypes.API_RESPONSE_JOBS_RESULTS, []).map(val => ({
-          ...val,
-          ...{ jobType: 'connection' }
-        })),
-        ..._get(inspectionData, apiTypes.API_RESPONSE_JOBS_RESULTS, []).map(val => ({
-          ...val,
-          ...{ jobType: 'inspection' }
-        }))
+        ..._get(connectionData, apiTypes.API_RESPONSE_JOBS_RESULTS, []).map(val => mapJob(val, 'connection')),
+        ..._get(inspectionData, apiTypes.API_RESPONSE_JOBS_RESULTS, []).map(val => mapJob(val, 'inspection'))
       ];
 
       // cache, concat results, reset if necessary

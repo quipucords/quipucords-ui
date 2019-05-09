@@ -22,6 +22,7 @@ class ScanHostList extends React.Component {
   onRefresh(updatedQueryObject = {}) {
     const { queryObject } = this.state;
     const {
+      filter,
       getConnectionScanResults,
       getInspectionScanResults,
       id,
@@ -30,18 +31,18 @@ class ScanHostList extends React.Component {
     } = this.props;
 
     if (useConnectionResults) {
-      getConnectionScanResults(id, { ...queryObject, ...updatedQueryObject });
+      getConnectionScanResults(id, { ...queryObject, ...filter, ...updatedQueryObject });
     }
 
     if (useInspectionResults) {
-      getInspectionScanResults(id, { ...queryObject, ...updatedQueryObject });
+      getInspectionScanResults(id, { ...queryObject, ...filter, ...updatedQueryObject });
     }
   }
 
   onScrollList = event => {
     const { target } = event;
-    const { currentPage, queryObject } = this.state;
-    const { filter, isMoreResults, pending } = this.props;
+    const { currentPage } = this.state;
+    const { isMoreResults, pending } = this.props;
 
     const bottom = target.scrollHeight - target.scrollTop === target.clientHeight;
 
@@ -49,8 +50,6 @@ class ScanHostList extends React.Component {
       const newPage = currentPage + 1;
 
       const updatedQueryObject = {
-        ...queryObject,
-        ...filter,
         [apiTypes.API_QUERY_PAGE]: newPage
       };
 
@@ -110,7 +109,8 @@ ScanHostList.propTypes = {
       jobType: PropTypes.oneOf(['connection', 'inspection']),
       name: PropTypes.string,
       sourceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      sourceName: PropTypes.string
+      sourceName: PropTypes.string,
+      status: PropTypes.string
     })
   ),
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

@@ -217,7 +217,7 @@ class SourceListItem extends React.Component {
     const iconInfo = helpers.scanStatusIcon(host.status);
 
     return (
-      <Grid.Row key={`${host.name}-${host.sourceId}`}>
+      <Grid.Row className="fadein" key={helpers.generateId('hostRow')}>
         <Grid.Col xs={host.status === 'success' ? 6 : 12} sm={4}>
           <span>
             <Icon type={iconInfo.type} name={iconInfo.name} className={cx(...iconInfo.classNames)} />
