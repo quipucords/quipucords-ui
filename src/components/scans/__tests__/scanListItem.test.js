@@ -1,25 +1,60 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import { mount } from 'enzyme';
-import ScanListItem from '../scanListItem';
+import { shallow } from 'enzyme';
+import { ConnectedScanListItem, ScanListItem } from '../scanListItem';
 import { viewTypes } from '../../../redux/constants';
 
 describe('SourceListItem Component', () => {
-  const generateEmptyStore = () => configureMockStore()({ sources: {}, viewOptions: { [viewTypes.SCANS_VIEW]: {} } });
+  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
-  it('should render a basic component with a success status', () => {
-    const store = generateEmptyStore();
+  it('should render a connected component', () => {
+    const store = generateEmptyStore({ viewOptions: { [viewTypes.SCANS_VIEW]: {} } });
+
     const props = {
-      item: {
-        id: 1,
-        most_recent: {
-          status: 'success'
-        }
+      lastRefresh: 0,
+      scan: {
+        jobsTotal: 1,
+        id: 42,
+        mostRecentEndTime: '',
+        mostRecentId: 2,
+        mostRecentReportId: 3,
+        mostRecentStatus: 'completed',
+        mostRecentStartTime: '',
+        mostRecentStatusMessage: 'Lorem ipsum',
+        mostRecentSysFailed: 1,
+        mostRecentSysScanned: 20,
+        name: 'lorem',
+        sourcesTotal: 1
       }
     };
 
-    const component = mount(<ScanListItem {...props} />, { context: { store } });
+    const component = shallow(<ConnectedScanListItem {...props} />, {
+      context: { store }
+    });
 
-    expect(component.render()).toMatchSnapshot();
+    expect(component).toMatchSnapshot('connected');
+  });
+
+  it('should render a non-connected component', () => {
+    const props = {
+      lastRefresh: 0,
+      scan: {
+        jobsTotal: 1,
+        id: 42,
+        mostRecentEndTime: '',
+        mostRecentId: 2,
+        mostRecentReportId: 3,
+        mostRecentStatus: 'completed',
+        mostRecentStartTime: '',
+        mostRecentStatusMessage: 'Lorem ipsum',
+        mostRecentSysFailed: 1,
+        mostRecentSysScanned: 20,
+        name: 'lorem',
+        sourcesTotal: 1
+      }
+    };
+
+    const component = shallow(<ScanListItem {...props} />);
+    expect(component).toMatchSnapshot('non-connected');
   });
 });

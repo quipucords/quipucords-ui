@@ -1,217 +1,167 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Dropdown, EmptyState, Grid, Icon, MenuItem, Pager } from 'patternfly-react';
-import _get from 'lodash/get';
-import _isEqual from 'lodash/isEqual';
-import * as moment from 'moment/moment';
-import { connect, reduxActions } from '../../redux';
+import { EmptyState, Grid, Icon, Spinner } from 'patternfly-react';
+import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
+import { apiTypes } from '../../constants/apiConstants';
+import ScanDownload from './scanDownload';
 
 class ScanJobsList extends React.Component {
   state = {
-    scanJobs: [],
-    scanJobsError: false,
-    scanJobsPending: false,
-    page: 1,
-    disableNext: true,
-    disablePrevious: true
+    currentPage: 1,
+    queryObject: {
+      [apiTypes.API_QUERY_PAGE]: 1,
+      [apiTypes.API_QUERY_PAGE_SIZE]: 100,
+      [apiTypes.API_QUERY_ORDERING]: 'name'
+    }
   };
 
   componentDidMount() {
-    this.refresh();
+    const { queryObject } = this.state;
+    const { getScanJobs, id } = this.props;
+
+    getScanJobs(id, queryObject);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { lastRefresh } = this.props;
-    // Check for changes resulting in a fetch
-    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
-      this.refresh();
-    }
-  }
+  onScrollList = event => {
+    const { target } = event;
+    const { currentPage, queryObject } = this.state;
+    const { getScanJobs, id, isMoreResults, pending } = this.props;
 
-  onNextPage = () => {
-    const { page } = this.state;
+    const bottom = target.scrollHeight - target.scrollTop === target.clientHeight;
 
-    this.setState({ page: page + 1 });
-    this.refresh(page + 1);
-  };
+    if (bottom && !pending && isMoreResults) {
+      const newPage = currentPage + 1;
 
-  onPreviousPage = () => {
-    const { page } = this.state;
+      const updatedQueryObject = {
+        [apiTypes.API_QUERY_PAGE]: newPage
+      };
 
-    this.setState({ page: page - 1 });
-    this.refresh(page - 1);
-  };
-
-  refresh(passedPage) {
-    const { scan, getScanJobs } = this.props;
-    const { page } = this.state;
-
-    this.setState({
-      scanJobsPending: true,
-      disableNext: true,
-      disablePrevious: true
-    });
-
-    const queryObject = {
-      page: passedPage === undefined ? page : passedPage,
-      page_size: 100,
-      ordering: 'name'
-    };
-
-    if (_get(scan, 'id')) {
-      getScanJobs(scan.id, queryObject)
-        .then(results => {
-          this.setState({
-            scanJobsPending: false,
-            scanJobs: _get(results.value, 'data.results')
-          });
-        })
-        .catch(error => {
-          this.setState({
-            scanJobsPending: false,
-            scanJobsError: helpers.getMessageFromResults(error).message
-          });
-        });
-    }
-  }
-
-  renderJob(job) {
-    const { scan, onSummaryDownload, onDetailedDownload } = this.props;
-
-    if (job.id === _get(scan, 'most_recent.id')) {
-      return null;
-    }
-
-    const scanDescription = dictionary[job.status] || '';
-    const statusIconInfo = helpers.scanStatusIcon(job.status);
-    const icon = (
-      <Icon
-        className={cx('scan-job-status-icon', ...statusIconInfo.classNames)}
-        type={statusIconInfo.type}
-        name={statusIconInfo.name}
-      />
-    );
-
-    let scanTime = _get(job, 'end_time');
-
-    if (job.status === 'pending' || job.status === 'running') {
-      scanTime = _get(job, 'start_time');
-    }
-
-    return (
-      <Grid.Row key={job.id}>
-        <Grid.Col xs={6} sm={3}>
-          {icon}
-          {scanDescription}
-        </Grid.Col>
-        <Grid.Col xs={3} sm={2} smPush={3}>
-          <Icon className="scan-job-status-icon systems" type="pf" name="ok" />
-          {job.systems_scanned > 0 ? job.systems_scanned : '0'}
-        </Grid.Col>
-        <Grid.Col xs={3} sm={2} smPush={5}>
-          {job.report_id > 0 && (
-            <Dropdown id={helpers.generateId()} className="pull-right" pullRight>
-              <Dropdown.Toggle useAnchor>
-                <Icon type="fa" name="download" />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <MenuItem eventKey="1" onClick={() => onSummaryDownload(job.report_id)}>
-                  Summary Report
-                </MenuItem>
-                <MenuItem eventKey="2" onClick={() => onDetailedDownload(job.report_id)}>
-                  Detailed Report
-                </MenuItem>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-        </Grid.Col>
-        <Grid.Col xs={6} sm={3} smPull={4}>
-          {moment
-            .utc(scanTime)
-            .utcOffset(moment().utcOffset())
-            .fromNow()}
-        </Grid.Col>
-        <Grid.Col xs={3} sm={2} smPull={2}>
-          <Icon className="scan-job-status-icon systems" type="pf" name="error-circle-o" />
-          {job.systems_failed > 0 ? job.systems_failed : '0'}
-        </Grid.Col>
-      </Grid.Row>
-    );
-  }
-
-  render() {
-    const { scan } = this.props;
-    const { scanJobs, scanJobsPending, scanJobsError, disableNext, disablePrevious } = this.state;
-
-    if (scanJobsPending === true) {
-      return (
-        <EmptyState>
-          <EmptyState.Icon name="spinner spinner-xl" />
-          <EmptyState.Title>Loading scan jobs...</EmptyState.Title>
-        </EmptyState>
+      this.setState(
+        {
+          currentPage: newPage
+        },
+        () => {
+          getScanJobs(id, { ...queryObject, ...updatedQueryObject });
+        }
       );
     }
+  };
 
-    if (scanJobsError) {
+  render() {
+    const { error, errorMessage, mostRecentId, pending, scanJobsList } = this.props;
+
+    if (error) {
       return (
         <EmptyState>
           <EmptyState.Icon name="error-circle-o" />
           <EmptyState.Title>Error retrieving scan jobs</EmptyState.Title>
-          <EmptyState.Info>{scan.scanJobsError}</EmptyState.Info>
+          <EmptyState.Info>{errorMessage}</EmptyState.Info>
         </EmptyState>
       );
     }
 
+    if (pending) {
+      return (
+        <EmptyState>
+          <Spinner loading size="sm" className="blank-slate-pf-icon" />
+          <EmptyState.Title>Loading...</EmptyState.Title>
+        </EmptyState>
+      );
+    }
+
+    const iconProps = status => {
+      const { type, name, classNames } = helpers.scanStatusIcon(status);
+      return {
+        type,
+        name,
+        className: cx('scan-job-status-icon', classNames)
+      };
+    };
+
     return (
-      <React.Fragment>
-        {(!disableNext || !disablePrevious) && (
-          <Grid fluid>
-            <Grid.Row>
-              <Pager
-                className="pager-sm"
-                onNextPage={this.onNextPage}
-                onPreviousPage={this.onPreviousPage}
-                disableNext={disableNext}
-                disablePrevious={disablePrevious}
-              />
-            </Grid.Row>
-          </Grid>
-        )}
-        <Grid fluid className="host-list">
-          {scanJobs && scanJobs.map(job => this.renderJob(job))}
+      <div className="quipucords-infinite-results">
+        <Grid fluid onScroll={this.onScrollList} className="quipucords-infinite-list">
+          {scanJobsList.map(
+            item =>
+              mostRecentId !== item.id && (
+                <Grid.Row className="fadein" key={item.id}>
+                  <Grid.Col xs={6} sm={3}>
+                    <Icon {...iconProps(item.status)} />
+                    {dictionary[item.status] || ''}
+                  </Grid.Col>
+                  <Grid.Col xs={6} sm={3}>
+                    {helpers.getTimeDisplayHowLongAgo(
+                      item.status === 'pending' || item.status === 'running' ? item.startTime : item.endTime
+                    )}
+                  </Grid.Col>
+                  <Grid.Col xs={3} sm={2}>
+                    <Icon className="scan-job-status-icon systems" type="pf" name="ok" />
+                    {item.systemsScanned}
+                  </Grid.Col>
+                  <Grid.Col xs={3} sm={2}>
+                    <Icon className="scan-job-status-icon systems" type="pf" name="error-circle-o" />
+                    {item.systemsFailed}
+                  </Grid.Col>
+                  <Grid.Col xs={3} sm={2}>
+                    {item.reportId > 0 && <ScanDownload downloadId={item.reportId} className="pull-right" pullRight />}
+                  </Grid.Col>
+                </Grid.Row>
+              )
+          )}
         </Grid>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
 ScanJobsList.propTypes = {
-  scan: PropTypes.object,
-  lastRefresh: PropTypes.number,
-  onSummaryDownload: PropTypes.func,
-  onDetailedDownload: PropTypes.func,
-  getScanJobs: PropTypes.func
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  getScanJobs: PropTypes.func,
+  isMoreResults: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  mostRecentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  pending: PropTypes.bool,
+  scanJobsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      endTime: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      reportId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      startTime: PropTypes.string,
+      status: PropTypes.string,
+      systemsScanned: PropTypes.number,
+      systemsFailed: PropTypes.number
+    })
+  )
 };
 
 ScanJobsList.defaultProps = {
-  scan: {},
-  lastRefresh: 0,
-  onSummaryDownload: helpers.noop,
-  onDetailedDownload: helpers.noop,
-  getScanJobs: helpers.noop
+  error: false,
+  errorMessage: null,
+  getScanJobs: helpers.noop,
+  isMoreResults: false,
+  mostRecentId: null,
+  pending: false,
+  scanJobsList: []
 };
 
 const mapDispatchToProps = dispatch => ({
   getScanJobs: (id, query) => dispatch(reduxActions.scans.getScanJobs(id, query))
 });
 
-const mapStateToProps = () => ({});
+const makeMapStateToProps = () => {
+  const getScanJobsDetails = reduxSelectors.scans.makeScanJobsList();
+
+  return (state, props) => ({
+    ...getScanJobsDetails(state, props)
+  });
+};
 
 const ConnectedScanJobsList = connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(ScanJobsList);
 

@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Icon } from 'patternfly-react';
 import _get from 'lodash/get';
-import _filter from 'lodash/filter';
-import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 
@@ -38,16 +36,18 @@ class MergeReportsDialog extends React.Component {
 
   getValidScans() {
     const { scans } = this.props;
-    return _filter(scans, scan => _get(scan, 'most_recent.status') === 'completed');
+
+    return scans.filter(scan => scan.mostRecentStatus === 'completed');
   }
 
   getInvalidScans() {
     const { scans } = this.props;
-    return _filter(scans, scan => _get(scan, 'most_recent.status') !== 'completed');
+
+    return scans.filter(scan => scan.mostRecentStatus !== 'completed');
   }
 
   getValidReportId() {
-    return this.getValidScans().map(scan => scan.most_recent.report_id);
+    return this.getValidScans().map(scan => scan.mostRecentReportId);
   }
 
   notifyDownloadStatus(error, results) {
@@ -72,13 +72,13 @@ class MergeReportsDialog extends React.Component {
   renderValidScans() {
     const validScans = this.getValidScans();
 
-    if (_size(validScans)) {
+    if (validScans.length) {
       return (
         <div>
           <span>Scans to be included in the merged report:</span>
           <ul>
             {validScans.map(scan => (
-              <li key={scan.id}>{scan.name}</li>
+              <li key={scan.id}>{scan.name || `ID ${scan.id}`}</li>
             ))}
           </ul>
         </div>
@@ -91,13 +91,13 @@ class MergeReportsDialog extends React.Component {
   renderInvalidScans() {
     const invalidScans = this.getInvalidScans();
 
-    if (_size(invalidScans)) {
+    if (invalidScans.length) {
       return (
         <div>
           <span>Failed scans that cannot be included in the merged report:</span>
           <ul>
             {invalidScans.map(scan => (
-              <li key={scan.id}>{scan.name}</li>
+              <li key={scan.id}>{scan.name || `ID ${scan.id}`}</li>
             ))}
           </ul>
         </div>
@@ -108,7 +108,7 @@ class MergeReportsDialog extends React.Component {
   }
 
   renderButtons() {
-    const validCount = _size(this.getValidScans());
+    const validCount = this.getValidScans().length;
 
     if (validCount === 0) {
       return (
@@ -133,34 +133,35 @@ class MergeReportsDialog extends React.Component {
   render() {
     const { show, scans, details } = this.props;
 
-    if (!scans || scans.length === 0 || !scans[0]) {
+    if (!scans || scans.length === 0) {
       return null;
     }
 
-    const validCount = _size(this.getValidScans());
-    const invalidCount = _size(this.getInvalidScans());
+    const validCount = this.getValidScans().length;
+    const invalidCount = this.getInvalidScans().length;
 
-    let icon;
+    let icon = <Icon type="pf" name="info" />;
     let heading;
     let footer = <span>Once the scan reports are merged, the results will be downloaded to your local machine.</span>;
 
     if (validCount < 2) {
       icon = <Icon type="pf" name="error-circle-o" />;
+
       heading = (
         <h3 className="merge-reports-heading">
           This action is invalid. You must select at least two scans with successful most recent scans.
         </h3>
       );
+
       footer = null;
     } else if (invalidCount > 0) {
       icon = <Icon type="pf" name="warning-triangle-o" />;
+
       heading = (
         <h3 className="merge-reports-heading">
           Warning, only the selected scans with successful most recent scans will be included in the report.
         </h3>
       );
-    } else {
-      icon = <Icon type="pf" name="info" />;
     }
 
     return (
@@ -191,29 +192,36 @@ class MergeReportsDialog extends React.Component {
 }
 
 MergeReportsDialog.propTypes = {
-  mergeScans: PropTypes.func,
+  details: PropTypes.bool.isRequired,
   getMergedScanReportDetailsCsv: PropTypes.func,
   getMergedScanReportSummaryCsv: PropTypes.func,
-  show: PropTypes.bool.isRequired,
-  scans: PropTypes.array,
-  details: PropTypes.bool.isRequired
+  mergeScans: PropTypes.func,
+  scans: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      mostRecentStatus: PropTypes.string,
+      mostRecentReportId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string
+    })
+  ),
+  show: PropTypes.bool.isRequired
 };
 
 MergeReportsDialog.defaultProps = {
-  mergeScans: helpers.noop,
   getMergedScanReportDetailsCsv: helpers.noop,
   getMergedScanReportSummaryCsv: helpers.noop,
+  mergeScans: helpers.noop,
   scans: []
 };
 
 const mapDispatchToProps = dispatch => ({
-  mergeScans: data => dispatch(reduxActions.reports.mergeScanReports(data)),
   getMergedScanReportDetailsCsv: id => dispatch(reduxActions.reports.getMergedScanReportDetailsCsv(id)),
-  getMergedScanReportSummaryCsv: id => dispatch(reduxActions.reports.getMergedScanReportSummaryCsv(id))
+  getMergedScanReportSummaryCsv: id => dispatch(reduxActions.reports.getMergedScanReportSummaryCsv(id)),
+  mergeScans: data => dispatch(reduxActions.reports.mergeScanReports(data))
 });
 
 const mapStateToProps = state => ({
-  ...state.scans.merge_dialog
+  ...state.scans.mergeDialog
 });
 
 const ConnectedMergeReportsDialog = connect(

@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScansActions Should return response content for addStartScan method: addStartScan 1`] = `"ADD_START_SCAN_FULFILLED"`;
-
-exports[`ScansActions Should return response content for getScanJob method: getScanJob 1`] = `"GET_SCAN_JOB_FULFILLED"`;
-
-exports[`ScansActions Should return response content for updatePartialScan method: updatePartialScan 1`] = `"UPDATE_SCAN_FULFILLED"`;
-
-exports[`ScansActions Should return response content for updateScan method: updateScan 1`] = `"UPDATE_SCAN_FULFILLED"`;

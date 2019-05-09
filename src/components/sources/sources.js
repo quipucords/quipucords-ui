@@ -162,7 +162,6 @@ class Sources extends React.Component {
 Sources.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
-  fulfilled: PropTypes.bool,
   getSources: PropTypes.func,
   lastRefresh: PropTypes.number,
   pending: PropTypes.bool,
@@ -174,7 +173,6 @@ Sources.propTypes = {
 Sources.defaultProps = {
   error: false,
   errorMessage: null,
-  fulfilled: false,
   getSources: helpers.noop,
   lastRefresh: 0,
   pending: false,

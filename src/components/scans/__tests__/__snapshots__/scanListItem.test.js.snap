@@ -1,120 +1,175 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourceListItem Component should render a basic component with a success status 1`] = `
-<div
-  class="list-group-item quipucords-scan-list-item list-view-pf-top-align"
->
-  <div
-    class="list-view-pf-checkbox"
-  >
-    <div
-      class=""
-    >
-      <label
-        title=""
+exports[`SourceListItem Component should render a connected component: connected 1`] = `
+<ScanListItem
+  cancelScan={[Function]}
+  lastRefresh={0}
+  pauseScan={[Function]}
+  restartScan={[Function]}
+  scan={
+    Object {
+      "id": 42,
+      "jobsTotal": 0,
+      "mostRecentSysFailed": 0,
+      "mostRecentSysScanned": 0,
+      "name": "lorem",
+      "sourcesTotal": 0,
+    }
+  }
+  selectedScans={Array []}
+  startScan={[Function]}
+/>
+`;
+
+exports[`SourceListItem Component should render a non-connected component: non-connected 1`] = `
+<ListViewItem
+  actions={
+    <React.Fragment>
+      <Tooltip
+        delayShow={500}
+        id={null}
+        placement="top"
+        popover={null}
+        rootClose={true}
+        tooltip="Run Scan"
+        trigger={
+          Array [
+            "hover",
+          ]
+        }
       >
-        <input
-          type="checkbox"
-        />
-      </label>
-    </div>
-  </div>
-  <div
-    class="list-view-pf-actions"
-  >
-    <span>
-      <button
-        class="btn btn-link"
-        type="button"
-      >
-        <span
-          aria-hidden="true"
-          aria-label="Start"
-          class="fa fa-play"
-        />
-      </button>
-    </span>
-  </div>
-  <div
-    class="list-view-pf-main-info"
-  >
-    <div
-      class="list-view-pf-left"
-    >
-      <div
-        class="list-item-name"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <Icon
+            aria-label="Start"
+            name="spinner2"
+            type="pf"
+          />
+        </Button>
+      </Tooltip>
+      <Connect(ScanDownload)
+        className="pull-right"
+        downloadId={3}
+        pullRight={true}
       />
-    </div>
+    </React.Fragment>
+  }
+  additionalInfo={
+    Array [
+      <ListStatusItem
+        count={20}
+        emptyText="0 Successful"
+        expandType="systemsScanned"
+        expanded={false}
+        iconInfo={
+          Object {
+            "classNames": Array [],
+            "name": "ok",
+            "type": "pf",
+          }
+        }
+        id="successHosts"
+        tipPlural="Successful Systems"
+        tipSingular="Successful System"
+        toggleExpand={[Function]}
+      />,
+      <ListStatusItem
+        count={1}
+        emptyText="0 Failed"
+        expandType="systemsFailed"
+        expanded={false}
+        iconInfo={
+          Object {
+            "classNames": Array [],
+            "name": "error-circle-o",
+            "type": "pf",
+          }
+        }
+        id="systemsFailed"
+        tipPlural="Failed Systems"
+        tipSingular="Failed System"
+        toggleExpand={[Function]}
+      />,
+      <ListStatusItem
+        count={1}
+        emptyText="0 Sources"
+        expandType="sources"
+        expanded={false}
+        iconInfo={null}
+        id="sources"
+        tipPlural="Sources"
+        tipSingular="Source"
+        toggleExpand={[Function]}
+      />,
+      <ListStatusItem
+        count={0}
+        emptyText="0 Previous"
+        expandType="jobs"
+        expanded={false}
+        iconInfo={null}
+        id="scans"
+        tipPlural="Previous"
+        tipSingular="Previous"
+        toggleExpand={[Function]}
+      />,
+    ]
+  }
+  checkboxInput={
+    <Checkbox
+      bsClass=""
+      checked={false}
+      disabled={false}
+      inline={false}
+      onChange={[Function]}
+      title=""
+    />
+  }
+  className="quipucords-scan-list-item list-view-pf-top-align"
+  compoundExpand={true}
+  compoundExpanded={false}
+  description={
     <div
-      class="list-view-pf-body"
+      className="scan-description"
     >
+      <Icon
+        className="scan-status-icon"
+        name="ok"
+        type="pf"
+      />
       <div
-        class="list-view-pf-description"
+        className="scan-status-text"
       >
-        <div
-          class="list-group-item-text"
-        >
-          <div
-            class="scan-description"
-          >
-            <span
-              aria-hidden="true"
-              class="pficon pficon-ok scan-status-icon"
-            />
-            <div
-              class="scan-status-text"
-            >
-              <div>
-                Scan created
-              </div>
-              <div
-                class="text-muted"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="list-view-pf-additional-info"
-      >
-        <div
-          class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
-        >
-          <span>
-            <span>
-              0 Successful
-            </span>
-          </span>
+        <div>
+          Lorem ipsum
         </div>
         <div
-          class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
+          className="text-muted"
         >
-          <span>
-            <span>
-              0 Failed
-            </span>
-          </span>
-        </div>
-        <div
-          class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
-        >
-          <span>
-            <span>
-              0 Sources
-            </span>
-          </span>
-        </div>
-        <div
-          class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
-        >
-          <span>
-            <span>
-              0 Previous
-            </span>
-          </span>
+          
         </div>
       </div>
     </div>
-  </div>
-</div>
+  }
+  heading={null}
+  hideCloseIcon={false}
+  initExpanded={false}
+  key="42"
+  leftContent={
+    <div
+      className="list-item-name"
+    >
+      lorem
+    </div>
+  }
+  onCloseCompoundExpand={[Function]}
+  onExpand={[Function]}
+  onExpandClose={[Function]}
+  stacked={false}
+/>
 `;

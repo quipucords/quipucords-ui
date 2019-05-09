@@ -1,6 +1,6 @@
 import userReducer from '../userReducer';
 import { userTypes as types } from '../../constants';
-import helpers from '../../../common/helpers';
+import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('userReducer', () => {
   it('should return the initial state', () => {
@@ -12,7 +12,7 @@ describe('userReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.REJECTED_ACTION(value),
+        type: reduxHelpers.REJECTED_ACTION(value),
         error: true,
         payload: {
           message: 'MESSAGE',
@@ -28,7 +28,9 @@ describe('userReducer', () => {
 
       const resultState = userReducer(undefined, dispatched);
 
-      expect({ type: helpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(`rejected types ${value}`);
+      expect({ type: reduxHelpers.REJECTED_ACTION(value), result: resultState }).toMatchSnapshot(
+        `rejected types ${value}`
+      );
     });
   });
 
@@ -37,12 +39,14 @@ describe('userReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.PENDING_ACTION(value)
+        type: reduxHelpers.PENDING_ACTION(value)
       };
 
       const resultState = userReducer(undefined, dispatched);
 
-      expect({ type: helpers.PENDING_ACTION(value), result: resultState }).toMatchSnapshot(`pending types ${value}`);
+      expect({ type: reduxHelpers.PENDING_ACTION(value), result: resultState }).toMatchSnapshot(
+        `pending types ${value}`
+      );
     });
   });
 
@@ -51,7 +55,7 @@ describe('userReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.FULFILLED_ACTION(value),
+        type: reduxHelpers.FULFILLED_ACTION(value),
         payload: {
           data: {
             test: 'success'
@@ -61,7 +65,7 @@ describe('userReducer', () => {
 
       const resultState = userReducer(undefined, dispatched);
 
-      expect({ type: helpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
+      expect({ type: reduxHelpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
         `fulfilled types ${value}`
       );
     });

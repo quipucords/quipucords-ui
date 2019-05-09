@@ -8,10 +8,6 @@ describe('Helpers', () => {
   it('should support generated strings and flags', () => {
     expect(helpers.generateId()).toBe('generatedid-');
     expect(helpers.generateId('lorem')).toBe('lorem-');
-
-    expect(helpers.FULFILLED_ACTION('lorem')).toBe(`lorem_FULFILLED`);
-    expect(helpers.PENDING_ACTION('lorem')).toBe(`lorem_PENDING`);
-    expect(helpers.REJECTED_ACTION('lorem')).toBe(`lorem_REJECTED`);
   });
 
   it('should support displaying the ui version', () => {
@@ -33,44 +29,6 @@ describe('Helpers', () => {
     expect(helpers.setPropIfTruthy(truthyObj, ['lorem'], 0)).toMatchSnapshot('setPropIfTruthy number');
     expect(helpers.setPropIfTruthy(truthyObj, ['lorem'], true)).toMatchSnapshot('setPropIfTruthy bool');
     expect(helpers.setPropIfTruthy(truthyObj, ['lorem'], '')).toMatchSnapshot('setPropIfTruthy string');
-  });
-
-  it('should update a state object', () => {
-    const initialState = {
-      lorem: false,
-      ipsum: true
-    };
-
-    const state = {};
-    state.ipsum = false;
-
-    expect(
-      helpers.setStateProp(
-        null,
-        {
-          lorem: true
-        },
-        {
-          state,
-          initialState
-        }
-      )
-    ).toMatchSnapshot('reset state object');
-
-    state.ipsum = false;
-
-    expect(
-      helpers.setStateProp(
-        null,
-        {
-          lorem: true
-        },
-        {
-          state,
-          reset: false
-        }
-      )
-    ).toMatchSnapshot('dont reset state object');
   });
 
   it('should handle view related selectors and props updates', () => {

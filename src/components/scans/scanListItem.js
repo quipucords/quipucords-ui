@@ -1,96 +1,126 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Checkbox, DropdownButton, Grid, Icon, ListView, MenuItem } from 'patternfly-react';
-import _find from 'lodash/find';
-import _get from 'lodash/get';
-import _isEqual from 'lodash/isEqual';
-import * as moment from 'moment';
-import { connect, reduxTypes, store } from '../../redux';
+import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
+import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import Tooltip from '../tooltip/tooltip';
 import ScanSourceList from './scanSourceList';
 import ScanHostList from '../scanHostList/scanHostList';
 import ScanJobsList from './scanJobsList';
+import ScanDownload from './scanDownload';
 import ListStatusItem from '../listStatusItem/listStatusItem';
+import { apiTypes } from '../../constants/apiConstants';
 
 class ScanListItem extends React.Component {
-  static isSelected(item, selectedSources) {
-    return _find(selectedSources, nextSelected => nextSelected.id === item.id) !== undefined;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { lastRefresh } = this.props;
-    // Check for changes resulting in a fetch
-    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
-      this.closeExpandIfNoData(this.expandType());
-    }
-  }
-
-  onToggleExpand = expandType => {
-    const { item } = this.props;
-
-    if (expandType === this.expandType()) {
+  static notifyActionStatus(scan, actionText, error, results) {
+    if (error) {
       store.dispatch({
-        type: reduxTypes.view.EXPAND_ITEM,
-        viewType: reduxTypes.view.SCANS_VIEW,
-        item
+        type: reduxTypes.toastNotifications.TOAST_ADD,
+        alertType: 'error',
+        header: 'Error',
+        message: helpers.getMessageFromResults(results).message
       });
     } else {
       store.dispatch({
-        type: reduxTypes.view.EXPAND_ITEM,
-        viewType: reduxTypes.view.SCANS_VIEW,
-        item,
-        expandType
+        type: reduxTypes.toastNotifications.TOAST_ADD,
+        alertType: 'success',
+        message: (
+          <span>
+            Scan <strong>{scan.name}</strong> {actionText}.
+          </span>
+        )
       });
     }
+  }
+
+  state = {
+    expandType: null
+  };
+
+  onRefresh = () => {
+    store.dispatch({
+      type: reduxTypes.scans.UPDATE_SCANS
+    });
+  };
+
+  onItemSelectChange = event => {
+    const { checked } = event.target;
+    const { scan } = this.props;
+
+    store.dispatch({
+      type: checked ? reduxTypes.view.SELECT_ITEM : reduxTypes.view.DESELECT_ITEM,
+      viewType: reduxTypes.view.SCANS_VIEW,
+      item: scan
+    });
+  };
+
+  onToggleExpand = toggleExpandType => {
+    const { expandType } = this.state;
+    const toggle = expandType === toggleExpandType ? null : toggleExpandType;
+
+    this.setState({ expandType: toggle });
   };
 
   onCloseExpand = () => {
-    const { item } = this.props;
-    store.dispatch({
-      type: reduxTypes.view.EXPAND_ITEM,
-      viewType: reduxTypes.view.SCANS_VIEW,
-      item
-    });
+    this.setState({ expandType: null });
   };
 
-  onItemSelectChange = () => {
-    const { item, selectedScans } = this.props;
+  onStartScan = () => {
+    const { scan, startScan } = this.props;
 
-    store.dispatch({
-      type: ScanListItem.isSelected(item, selectedScans) ? reduxTypes.view.DESELECT_ITEM : reduxTypes.view.SELECT_ITEM,
-      viewType: reduxTypes.view.SCANS_VIEW,
-      item
-    });
+    startScan(scan.id)
+      .then(
+        response => ScanListItem.notifyActionStatus(scan, 'started', false, response.value),
+        error => ScanListItem.notifyActionStatus(scan, 'started', true, error)
+      )
+      .finally(() => this.onRefresh());
   };
 
-  expandType() {
-    const { item, expandedScans } = this.props;
+  onPauseScan = () => {
+    const { scan, pauseScan } = this.props;
 
-    return _get(_find(expandedScans, nextExpanded => nextExpanded.id === item.id), 'expandType');
-  }
+    pauseScan(scan.mostRecentId)
+      .then(
+        response => ScanListItem.notifyActionStatus(scan, 'paused', false, response.value),
+        error => ScanListItem.notifyActionStatus(scan, 'paused', true, error)
+      )
+      .finally(() => this.onRefresh());
+  };
 
-  closeExpandIfNoData(expandType) {
-    const { item } = this.props;
+  onResumeScan = () => {
+    const { scan, restartScan } = this.props;
 
-    const successHosts = _get(item, 'most_recent.systems_scanned', 0);
-    const failedHosts = _get(item, 'most_recent.systems_failed', 0);
-    const prevCount = Math.max(_get(item, 'jobs', []).length - 1, 0);
+    restartScan(scan.mostRecentId)
+      .then(
+        response => ScanListItem.notifyActionStatus(scan, 'resumed', false, response.value),
+        error => ScanListItem.notifyActionStatus(scan, 'resumed', true, error)
+      )
+      .finally(() => this.onRefresh());
+  };
 
-    if (
-      (expandType === 'systemsScanned' && successHosts === 0) ||
-      (expandType === 'systemsFailed' && failedHosts === 0) ||
-      (expandType === 'jobs' && prevCount === 0)
-    ) {
-      this.onCloseExpand();
-    }
+  onCancelScan = () => {
+    const { scan, cancelScan } = this.props;
+
+    cancelScan(scan.mostRecentId)
+      .then(
+        response => ScanListItem.notifyActionStatus(scan, 'canceled', false, response.value),
+        error => ScanListItem.notifyActionStatus(scan, 'canceled', true, error)
+      )
+      .finally(() => this.onRefresh());
+  };
+
+  isSelected() {
+    const { scan, selectedScans } = this.props;
+
+    return selectedScans.find(nextSelected => nextSelected[apiTypes.API_RESPONSE_SCAN_ID] === scan.id) !== undefined;
   }
 
   renderDescription() {
-    const { item } = this.props;
-    const scanStatus = _get(item, 'most_recent.status');
+    const { scan } = this.props;
+    const scanStatus = scan.mostRecentStatus;
     const statusIconInfo = helpers.scanStatusIcon(scanStatus);
+
     const icon = statusIconInfo ? (
       <Icon
         className={cx('scan-status-icon', ...statusIconInfo.classNames)}
@@ -99,37 +129,31 @@ class ScanListItem extends React.Component {
       />
     ) : null;
 
-    let scanTime = _get(item, 'most_recent.end_time');
+    let scanTime = scan.mostRecentEndTime;
 
     if (scanStatus === 'pending' || scanStatus === 'running') {
-      scanTime = _get(item, 'most_recent.start_time');
+      scanTime = scan.mostRecentStartTime;
     }
 
     return (
       <div className="scan-description">
         {icon}
         <div className="scan-status-text">
-          <div>{_get(item, 'most_recent.status_details.job_status_message', 'Scan created')}</div>
-          <div className="text-muted">
-            {scanTime &&
-              moment
-                .utc(scanTime)
-                .utcOffset(moment().utcOffset())
-                .fromNow()}
-          </div>
+          <div>{(scan.mostRecentStatusMessage && scan.mostRecentStatusMessage) || 'Scan created'}</div>
+          <div className="text-muted">{scanTime && helpers.getTimeDisplayHowLongAgo(scanTime)}</div>
         </div>
       </div>
     );
   }
 
   renderStatusItems() {
-    const { item } = this.props;
+    const { expandType } = this.state;
+    const { scan } = this.props;
 
-    const expandType = this.expandType();
-    const sourcesCount = item.sources ? item.sources.length : 0;
-    const prevCount = Math.max(_get(item, 'jobs', []).length - 1, 0);
-    const successHosts = _get(item, 'most_recent.systems_scanned', 0);
-    const failedHosts = _get(item, 'most_recent.systems_failed', 0);
+    const sourcesCount = scan.sourcesTotal;
+    const prevCount = Math.max(scan.jobsTotal - 1, 0);
+    const successHosts = scan.mostRecentSysScanned;
+    const failedHosts = scan.mostRecentSysFailed;
 
     return [
       <ListStatusItem
@@ -182,28 +206,17 @@ class ScanListItem extends React.Component {
   }
 
   renderActions() {
-    const { item, onSummaryDownload, onDetailedDownload, onPause, onCancel, onStart, onResume } = this.props;
+    const { scan } = this.props;
+    const downloadActions = scan.mostRecentReportId && (
+      <ScanDownload downloadId={scan.mostRecentReportId} className="pull-right" pullRight />
+    );
 
-    let downloadActions = null;
-    if (_get(item, 'most_recent.report_id')) {
-      downloadActions = (
-        <DropdownButton key="downLoadButton" title="Download" pullRight id={`downloadButton_${item.id}`}>
-          <MenuItem eventKey="1" onClick={() => onSummaryDownload(_get(item, 'most_recent.report_id'))}>
-            Summary Report
-          </MenuItem>
-          <MenuItem eventKey="2" onClick={() => onDetailedDownload(_get(item, 'most_recent.report_id'))}>
-            Detailed Report
-          </MenuItem>
-        </DropdownButton>
-      );
-    }
-
-    switch (_get(item, 'most_recent.status')) {
+    switch (scan.mostRecentStatus) {
       case 'completed':
         return (
           <React.Fragment>
-            <Tooltip key="startTip" tooltip="Run Scan">
-              <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
+            <Tooltip tooltip="Run Scan">
+              <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
                 <Icon type="pf" name="spinner2" aria-label="Start" />
               </Button>
             </Tooltip>
@@ -213,24 +226,26 @@ class ScanListItem extends React.Component {
       case 'failed':
       case 'canceled':
         return (
-          <Tooltip tooltip="Retry Scan">
-            <Button key="restartButton" onClick={() => onStart(item)} bsStyle="link">
-              <Icon type="pf" name="spinner2" aria-label="Start" />
-            </Button>
+          <React.Fragment>
+            <Tooltip tooltip="Retry Scan">
+              <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
+                <Icon type="pf" name="spinner2" aria-label="Start" />
+              </Button>
+            </Tooltip>
             {downloadActions}
-          </Tooltip>
+          </React.Fragment>
         );
       case 'created':
       case 'running':
         return (
           <React.Fragment>
             <Tooltip key="pauseButton" tooltip="Pause Scan">
-              <Button onClick={() => onPause(item)} bsStyle="link">
+              <Button onClick={this.onPauseScan} bsStyle="link">
                 <Icon type="fa" name="pause" aria-label="Pause" />
               </Button>
             </Tooltip>
             <Tooltip key="stop" tooltip="Cancel Scan">
-              <Button onClick={() => onCancel(item)} bsStyle="link">
+              <Button onClick={this.onCancelScan} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
             </Tooltip>
@@ -239,18 +254,20 @@ class ScanListItem extends React.Component {
         );
       case 'paused':
         return (
-          <Tooltip tooltip="Resume Scan">
-            <Button key="resumeButton" onClick={() => onResume(item)} bsStyle="link">
-              <Icon type="fa" name="play" aria-label="Resume" />
-            </Button>
+          <React.Fragment>
+            <Tooltip tooltip="Resume Scan">
+              <Button onClick={this.onResumeScan} bsStyle="link">
+                <Icon type="fa" name="play" aria-label="Resume" />
+              </Button>
+            </Tooltip>
             {downloadActions}
-          </Tooltip>
+          </React.Fragment>
         );
       case 'pending':
         return (
           <React.Fragment>
             <Tooltip key="stop" tooltip="Cancel Scan">
-              <Button onClick={() => onCancel(item)} bsStyle="link">
+              <Button onClick={this.onCancelScan} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
             </Tooltip>
@@ -259,19 +276,21 @@ class ScanListItem extends React.Component {
         );
       default:
         return (
-          <Tooltip tooltip="Start Scan">
-            <Button onClick={() => onStart(item)} bsStyle="link">
-              <Icon type="fa" name="play" aria-label="Start" />
-            </Button>
+          <React.Fragment>
+            <Tooltip tooltip="Start Scan">
+              <Button onClick={this.onStartScan} bsStyle="link">
+                <Icon type="fa" name="play" aria-label="Start" />
+              </Button>
+            </Tooltip>
             {downloadActions}
-          </Tooltip>
+          </React.Fragment>
         );
     }
   }
 
   static renderHostRow(host) {
     return (
-      <React.Fragment>
+      <Grid.Row className="fadein" key={helpers.generateId('hostRow')}>
         <Grid.Col xs={6} sm={4} md={3}>
           <span>
             <Icon type="pf" name={host.status === 'success' ? 'ok' : 'error-circle-o'} />
@@ -279,56 +298,53 @@ class ScanListItem extends React.Component {
           </span>
         </Grid.Col>
         <Grid.Col xs={6} sm={8} md={9}>
-          {_get(host, 'source.name')}
+          {host.sourceName}
         </Grid.Col>
-      </React.Fragment>
+      </Grid.Row>
     );
   }
 
   renderExpansionContents() {
-    const { item, onSummaryDownload, onDetailedDownload, lastRefresh } = this.props;
+    const { expandType } = this.state;
+    const { scan, lastRefresh } = this.props;
 
-    switch (this.expandType()) {
+    switch (expandType) {
       case 'systemsScanned':
         return (
           <ScanHostList
-            scanId={item.most_recent.id}
-            lastRefresh={lastRefresh}
-            status="success"
-            renderHostRow={ScanListItem.renderHostRow}
+            key={`systemsScanned-${lastRefresh}`}
+            id={scan.mostRecentId}
+            filter={{ [apiTypes.API_QUERY_STATUS]: 'success' }}
             useInspectionResults
-          />
+          >
+            {({ host }) => ScanListItem.renderHostRow(host)}
+          </ScanHostList>
         );
       case 'systemsFailed':
         return (
           <ScanHostList
-            scanId={item.most_recent.id}
-            lastRefresh={lastRefresh}
-            status="failed"
-            renderHostRow={ScanListItem.renderHostRow}
+            key={`systemsFailed-${lastRefresh}`}
+            id={scan.mostRecentId}
+            filter={{ [apiTypes.API_QUERY_STATUS]: 'failed' }}
             useConnectionResults
             useInspectionResults
-          />
+          >
+            {({ host }) => ScanListItem.renderHostRow(host)}
+          </ScanHostList>
         );
       case 'sources':
-        return <ScanSourceList scan={item} lastRefresh={lastRefresh} />;
+        return <ScanSourceList key={`sources-${lastRefresh}`} id={scan.id} />;
       case 'jobs':
-        return (
-          <ScanJobsList
-            scan={item}
-            onSummaryDownload={onSummaryDownload}
-            onDetailedDownload={onDetailedDownload}
-            lastRefresh={lastRefresh}
-          />
-        );
+        return <ScanJobsList key={`jobs-${lastRefresh}`} id={scan.id} mostRecentId={scan.mostRecentId} />;
       default:
         return null;
     }
   }
 
   render() {
-    const { item, selectedScans } = this.props;
-    const selected = ScanListItem.isSelected(item, selectedScans);
+    const { expandType } = this.state;
+    const { scan } = this.props;
+    const selected = this.isSelected();
 
     const classes = cx({
       'quipucords-scan-list-item': true,
@@ -338,15 +354,15 @@ class ScanListItem extends React.Component {
 
     return (
       <ListView.Item
-        key={item.id}
+        key={scan.id}
         className={classes}
         checkboxInput={<Checkbox checked={selected} bsClass="" onChange={this.onItemSelectChange} />}
         actions={this.renderActions()}
-        leftContent={<div className="list-item-name">{item.name}</div>}
+        leftContent={<div className="list-item-name">{scan.name}</div>}
         description={this.renderDescription()}
         additionalInfo={this.renderStatusItems()}
         compoundExpand
-        compoundExpanded={this.expandType() !== undefined}
+        compoundExpanded={expandType !== null}
         onCloseCompoundExpand={this.onCloseExpand}
       >
         {this.renderExpansionContents()}
@@ -356,35 +372,56 @@ class ScanListItem extends React.Component {
 }
 
 ScanListItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  cancelScan: PropTypes.func,
+  scan: PropTypes.shape({
+    jobsTotal: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    mostRecentEndTime: PropTypes.string,
+    mostRecentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    mostRecentReportId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    mostRecentStatus: PropTypes.string,
+    mostRecentStartTime: PropTypes.string,
+    mostRecentStatusMessage: PropTypes.string,
+    mostRecentSysFailed: PropTypes.number,
+    mostRecentSysScanned: PropTypes.number,
+    name: PropTypes.string,
+    sourcesTotal: PropTypes.number
+  }).isRequired,
   lastRefresh: PropTypes.number,
-  onSummaryDownload: PropTypes.func,
-  onDetailedDownload: PropTypes.func,
-  onPause: PropTypes.func,
-  onCancel: PropTypes.func,
-  onStart: PropTypes.func,
-  onResume: PropTypes.func,
+  pauseScan: PropTypes.func,
+  restartScan: PropTypes.func,
   selectedScans: PropTypes.array,
-  expandedScans: PropTypes.array
+  startScan: PropTypes.func
 };
 
 ScanListItem.defaultProps = {
+  cancelScan: helpers.noop,
   lastRefresh: 0,
-  onSummaryDownload: helpers.noop,
-  onDetailedDownload: helpers.noop,
-  onPause: helpers.noop,
-  onCancel: helpers.noop,
-  onStart: helpers.noop,
-  onResume: helpers.noop,
+  pauseScan: helpers.noop,
+  restartScan: helpers.noop,
   selectedScans: [],
-  expandedScans: []
+  startScan: helpers.noop
 };
 
-const mapStateToProps = state => ({
-  expandedScans: state.viewOptions[reduxTypes.view.SCANS_VIEW].expandedItems,
-  selectedScans: state.viewOptions[reduxTypes.view.SCANS_VIEW].selectedItems
+const mapDispatchToProps = dispatch => ({
+  cancelScan: id => dispatch(reduxActions.scans.cancelScan(id)),
+  pauseScan: id => dispatch(reduxActions.scans.pauseScan(id)),
+  restartScan: id => dispatch(reduxActions.scans.restartScan(id)),
+  startScan: id => dispatch(reduxActions.scans.startScan(id))
 });
 
-const ConnectedScanListItem = connect(mapStateToProps)(ScanListItem);
+const makeMapStateToProps = () => {
+  const getScanListItem = reduxSelectors.scans.makeScanListItem();
+
+  return (state, props) => ({
+    selectedScans: state.viewOptions[reduxTypes.view.SCANS_VIEW].selectedItems,
+    ...getScanListItem(state, props)
+  });
+};
+
+const ConnectedScanListItem = connect(
+  makeMapStateToProps,
+  mapDispatchToProps
+)(ScanListItem);
 
 export { ConnectedScanListItem as default, ConnectedScanListItem, ScanListItem };

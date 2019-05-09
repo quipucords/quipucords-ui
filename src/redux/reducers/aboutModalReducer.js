@@ -1,5 +1,5 @@
 import { aboutModalTypes } from '../constants';
-import helpers from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 
 const initialState = {
   show: false
@@ -8,7 +8,7 @@ const initialState = {
 const aboutModalReducer = (state = initialState, action) => {
   switch (action.type) {
     case aboutModalTypes.ABOUT_MODAL_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           show: true
@@ -20,7 +20,7 @@ const aboutModalReducer = (state = initialState, action) => {
       );
 
     case aboutModalTypes.ABOUT_MODAL_HIDE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           show: false

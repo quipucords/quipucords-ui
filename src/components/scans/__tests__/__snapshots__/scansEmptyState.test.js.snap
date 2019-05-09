@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScansEmptyState Component should render a connected component: connected 1`] = `
+<Route>
+  <Component />
+</Route>
+`;
+
+exports[`ScansEmptyState Component should render a non-connected component: non-connected do not exist 1`] = `
+<div
+  class="fadein container-fluid"
+>
+  <div
+    class="row"
+  >
+    <div
+      class="blank-slate-pf full-page-blank-slate"
+    >
+      <div
+        class="blank-slate-pf-icon"
+      >
+        <span
+          aria-hidden="true"
+          class="pficon pficon-add-circle-o"
+        />
+      </div>
+      <h4
+        class="h1 blank-slate-pf-title"
+      >
+        Welcome to discovery
+      </h4>
+      <p
+        class="blank-slate-pf-info"
+      >
+        Begin by adding one or more sources. A source contains a collection of network information, 
+        <br />
+        including systems management solution information, IP addresses, or host names, in addition to 
+        <br />
+        SSH ports and credentials.
+      </p>
+      <div
+        class="blank-slate-pf-main-action"
+      >
+        <button
+          class="btn btn-lg btn-primary"
+          type="button"
+        >
+          Add Source
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ScansEmptyState Component should render a non-connected component: non-connected exist 1`] = `
+<div
+  class="container-fluid"
+>
+  <div
+    class="row"
+  >
+    <div
+      class="blank-slate-pf full-page-blank-slate"
+    >
+      <div
+        class="blank-slate-pf-icon"
+      >
+        <span
+          aria-hidden="true"
+          class="pficon pficon-add-circle-o"
+        />
+      </div>
+      <h4
+        class="h1 blank-slate-pf-title"
+      >
+        No scans exist yet
+      </h4>
+      <p
+        class="blank-slate-pf-info"
+      >
+        Select a Source to scan from the Sources page.
+      </p>
+      <div
+        class="blank-slate-pf-main-action"
+      >
+        <button
+          class="btn btn-lg btn-primary"
+          type="button"
+        >
+          Go to Sources
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

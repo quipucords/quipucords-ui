@@ -75,7 +75,7 @@ describe('SourcesActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().scans;
 
-      expect(response.view.sourcesCount).toEqual(3);
+      expect(response.empty.fulfilled).toEqual(true);
       done();
     });
   });

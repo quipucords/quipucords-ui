@@ -17,10 +17,11 @@ describe('ReportsService', () => {
   });
 
   it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(reportsService)).toHaveLength(7);
+    expect(Object.keys(reportsService)).toHaveLength(8);
   });
 
   it('should have specific methods', () => {
+    expect(reportsService.getReports).toBeDefined();
     expect(reportsService.getReportDetails).toBeDefined();
     expect(reportsService.getReportDetailsCsv).toBeDefined();
     expect(reportsService.getReportSummary).toBeDefined();

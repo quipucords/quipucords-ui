@@ -1,18 +1,42 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import { shallow } from 'enzyme';
-import MergeReportsDialog from '../mergeReportsDialog';
+import { mount, shallow } from 'enzyme';
+import { ConnectedMergeReportsDialog, MergeReportsDialog } from '../mergeReportsDialog';
 
-describe('ToastNotificationsList Component', () => {
-  const generateEmptyStore = () => configureMockStore()({ scans: {} });
+describe('MergeReportsDialog Component', () => {
+  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
-  it('should shallow render a basic component', () => {
-    const store = generateEmptyStore();
-    const props = { show: true };
-    const wrapper = shallow(<MergeReportsDialog {...props} show details={false} scans={[{ id: 1, name: 'test' }]} />, {
-      context: { store }
+  it('should render a connected component', () => {
+    const store = generateEmptyStore({
+      scans: {
+        mergeDialog: {
+          details: false,
+          show: true,
+          scans: [
+            { id: 1, mostRecentStatus: 'completed', mostRecentReportId: 2, name: 'lorem' },
+            { id: 2, mostRecentStatus: 'pending', mostRecentReportId: 2, name: 'ipsum' }
+          ]
+        }
+      }
     });
 
-    expect(wrapper.dive()).toMatchSnapshot();
+    const props = {};
+    const component = shallow(<ConnectedMergeReportsDialog {...props} />, { context: { store } });
+
+    expect(component).toMatchSnapshot('connected');
+  });
+
+  it('should render a non-connected component, failure and success', () => {
+    const props = {
+      details: true,
+      show: true,
+      scans: [
+        { id: 1, mostRecentStatus: 'completed', mostRecentReportId: 2, name: 'lorem' },
+        { id: 2, mostRecentStatus: 'pending', mostRecentReportId: 2, name: 'ipsum' }
+      ]
+    };
+
+    const component = mount(<MergeReportsDialog {...props} />);
+    expect(component.render()).toMatchSnapshot('non-connected');
   });
 });

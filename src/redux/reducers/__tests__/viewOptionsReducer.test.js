@@ -7,7 +7,7 @@ import {
   scansTypes,
   sourcesTypes
 } from '../../constants';
-import helpers from '../../../common/helpers';
+import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('viewOptionsReducer', () => {
   it('should return the initial state', () => {
@@ -51,7 +51,7 @@ describe('viewOptionsReducer', () => {
 
     specificTypes.forEach(value => {
       const dispatched = {
-        type: helpers.FULFILLED_ACTION(value),
+        type: reduxHelpers.FULFILLED_ACTION(value),
         payload: {
           data: {
             test: 'success'
@@ -61,7 +61,7 @@ describe('viewOptionsReducer', () => {
 
       const resultState = viewOptionsReducer(undefined, dispatched);
 
-      expect({ type: helpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
+      expect({ type: reduxHelpers.FULFILLED_ACTION(value), result: resultState }).toMatchSnapshot(
         `fulfilled types ${value}`
       );
     });

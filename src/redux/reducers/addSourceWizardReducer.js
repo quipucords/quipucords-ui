@@ -1,5 +1,6 @@
 import { sourcesTypes } from '../constants';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -21,7 +22,7 @@ const initialState = {
 const addSourceWizardReducer = (state = initialState, action) => {
   switch (action.type) {
     case sourcesTypes.CREATE_SOURCE_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           add: true,
@@ -34,7 +35,7 @@ const addSourceWizardReducer = (state = initialState, action) => {
       );
 
     case sourcesTypes.EDIT_SOURCE_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           edit: true,
@@ -48,7 +49,7 @@ const addSourceWizardReducer = (state = initialState, action) => {
       );
 
     case sourcesTypes.UPDATE_SOURCE_HIDE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           show: false
@@ -60,7 +61,7 @@ const addSourceWizardReducer = (state = initialState, action) => {
       );
 
     case sourcesTypes.VALID_SOURCE_WIZARD_STEPONE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           add: state.add,
@@ -77,7 +78,7 @@ const addSourceWizardReducer = (state = initialState, action) => {
       );
 
     case sourcesTypes.VALID_SOURCE_WIZARD_STEPTWO:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           add: state.add,
@@ -93,8 +94,8 @@ const addSourceWizardReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(sourcesTypes.UPDATE_SOURCE):
-    case helpers.REJECTED_ACTION(sourcesTypes.ADD_SOURCE):
+    case reduxHelpers.REJECTED_ACTION(sourcesTypes.UPDATE_SOURCE):
+    case reduxHelpers.REJECTED_ACTION(sourcesTypes.ADD_SOURCE):
       const filterProperties = [
         apiTypes.API_SUBMIT_SOURCE_CREDENTIALS,
         apiTypes.API_SUBMIT_SOURCE_HOSTS,
@@ -129,7 +130,7 @@ const addSourceWizardReducer = (state = initialState, action) => {
         }
       });
 
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           error: action.error,
@@ -145,9 +146,9 @@ const addSourceWizardReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(sourcesTypes.UPDATE_SOURCE):
-    case helpers.PENDING_ACTION(sourcesTypes.ADD_SOURCE):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(sourcesTypes.UPDATE_SOURCE):
+    case reduxHelpers.PENDING_ACTION(sourcesTypes.ADD_SOURCE):
+      return reduxHelpers.setStateProp(
         null,
         {
           error: false,
@@ -160,9 +161,9 @@ const addSourceWizardReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(sourcesTypes.UPDATE_SOURCE):
-    case helpers.FULFILLED_ACTION(sourcesTypes.ADD_SOURCE):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(sourcesTypes.UPDATE_SOURCE):
+    case reduxHelpers.FULFILLED_ACTION(sourcesTypes.ADD_SOURCE):
+      return reduxHelpers.setStateProp(
         null,
         {
           add: state.add,

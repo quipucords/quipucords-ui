@@ -1,97 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Icon } from 'patternfly-react';
-import _find from 'lodash/find';
-import _get from 'lodash/get';
-import _isEqual from 'lodash/isEqual';
-import { connect, reduxActions } from '../../redux';
+import { EmptyState, Grid, Icon, Spinner } from 'patternfly-react';
+import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 
 class ScanSourceList extends React.Component {
-  static renderSourceIcon(source) {
-    const iconInfo = helpers.sourceTypeIcon(source.source_type);
-
-    return <Icon type={iconInfo.type} name={iconInfo.name} />;
-  }
-
-  state = {
-    sources: [],
-    scanJob: []
-  };
-
-  componentDidMount() {
-    this.sortSources(_get(this.props, 'scan'));
-    this.refresh();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { lastRefresh, scan } = this.props;
-    // Check for changes resulting in a fetch
-    if (!_isEqual(nextProps.lastRefresh, lastRefresh)) {
-      this.refresh();
-    }
-
-    if (nextProps.scan !== scan) {
-      this.sortSources(_get(nextProps, 'scan'));
-    }
-  }
-
-  getSourceStatus(source) {
-    const { scanJob } = this.state;
-
-    if (!source || !scanJob) {
+  static setSourceStatus(source) {
+    if (!source.connectTaskStatus && !source.inspectTaskStatus) {
       return null;
     }
 
-    // Get the tasks for this source
-    const connectTask = _find(scanJob.tasks, { source: source.id, scan_type: 'connect' });
-    const inspectTask = _find(scanJob.tasks, { source: source.id, scan_type: 'inspect' });
-
-    if (_get(connectTask, 'status') !== 'completed' || !inspectTask) {
-      return `Connection Scan: ${_get(connectTask, 'status_message', 'checking status...')}`;
+    if (source.connectTaskStatus !== 'completed' || !source.inspectTaskStatus) {
+      return `Connection Scan: ${source.connectTaskStatusMessage || 'checking status...'}`;
     }
 
-    return `Inspection Scan: ${_get(inspectTask, 'status_message', 'checking status...')}`;
+    return `Inspection Scan: ${source.inspectTaskStatusMessage || 'checking status...'}`;
   }
 
-  refresh() {
-    const { scan, getScanJob } = this.props;
-    const jobId = _get(scan, 'most_recent.id');
+  componentDidMount() {
+    const { getScanJob, id } = this.props;
 
-    if (jobId) {
-      getScanJob(jobId).then(results => {
-        this.setState({ scanJob: _get(results.value, 'data') });
-      });
-    }
-  }
-
-  sortSources(scan) {
-    const sources = [..._get(scan, 'sources', [])];
-
-    sources.sort((item1, item2) => {
-      let cmp = item1.source_type.localeCompare(item2.source_type);
-      if (cmp === 0) {
-        cmp = item1.name.localeCompare(item2.name);
-      }
-      return cmp;
-    });
-
-    this.setState({ sources });
+    getScanJob(id);
   }
 
   render() {
-    const { sources } = this.state;
+    const { error, errorMessage, pending, scanJobList } = this.props;
+
+    if (error) {
+      return (
+        <EmptyState>
+          <EmptyState.Icon name="error-circle-o" />
+          <EmptyState.Title>Error retrieving scan jobs</EmptyState.Title>
+          <EmptyState.Info>{errorMessage}</EmptyState.Info>
+        </EmptyState>
+      );
+    }
+
+    if (pending) {
+      return (
+        <EmptyState>
+          <Spinner loading size="sm" className="blank-slate-pf-icon" />
+          <EmptyState.Title>Loading...</EmptyState.Title>
+        </EmptyState>
+      );
+    }
 
     return (
       <Grid fluid>
-        {sources.map(item => (
-          <Grid.Row key={item.id}>
+        {scanJobList.map(item => (
+          <Grid.Row className="fadein" key={item.id}>
             <Grid.Col xs={4} md={3}>
-              {ScanSourceList.renderSourceIcon(item)}
+              <Icon {...helpers.sourceTypeIcon(item.sourceType)} />
               &nbsp; {item.name}
             </Grid.Col>
             <Grid.Col xs={8} md={9}>
-              {this.getSourceStatus(item)}
+              {ScanSourceList.setSourceStatus(item)}
             </Grid.Col>
           </Grid.Row>
         ))}
@@ -101,24 +64,46 @@ class ScanSourceList extends React.Component {
 }
 
 ScanSourceList.propTypes = {
-  scan: PropTypes.object.isRequired,
-  lastRefresh: PropTypes.number,
-  getScanJob: PropTypes.func
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  getScanJob: PropTypes.func,
+  pending: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  scanJobList: PropTypes.arrayOf(
+    PropTypes.shape({
+      connectTaskStatus: PropTypes.string,
+      connectTaskStatusMessage: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      inspectTaskStatus: PropTypes.string,
+      inspectTaskStatusMessage: PropTypes.string,
+      name: PropTypes.string,
+      sourceType: PropTypes.string
+    })
+  )
 };
 
 ScanSourceList.defaultProps = {
-  lastRefresh: 0,
-  getScanJob: helpers.noop
+  error: false,
+  errorMessage: null,
+  getScanJob: helpers.noop,
+  pending: false,
+  scanJobList: []
 };
 
 const mapDispatchToProps = dispatch => ({
   getScanJob: id => dispatch(reduxActions.scans.getScanJob(id))
 });
 
-const mapStateToProps = () => ({});
+const makeMapStateToProps = () => {
+  const getScanJobDetail = reduxSelectors.scans.makeScanJobDetailBySource();
+
+  return (state, props) => ({
+    ...getScanJobDetail(state, props)
+  });
+};
 
 const ConnectedScanSourceList = connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(ScanSourceList);
 

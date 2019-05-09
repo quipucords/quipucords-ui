@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScanDownload Component should render a connected component: connected 1`] = `
+<ScanDownload
+  downloadId={1}
+  getReportDetailsCsv={[Function]}
+  getReportSummaryCsv={[Function]}
+/>
+`;
+
+exports[`ScanDownload Component should render a non-connected component: non-connected 1`] = `
+<div
+  class="dropdown btn-group"
+>
+  <a
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="btn-link dropdown-toggle"
+    href="#"
+    id="generatedid-"
+    role="button"
+  >
+    <span
+      aria-hidden="true"
+      class="fa fa-download"
+    />
+     
+    <span
+      class="caret"
+    />
+  </a>
+  <ul
+    aria-labelledby="generatedid-"
+    class="dropdown-menu"
+    role="menu"
+  >
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        Summary Report
+      </a>
+    </li>
+    <li
+      class=""
+      role="presentation"
+    >
+      <a
+        href="#"
+        role="menuitem"
+        tabindex="-1"
+      >
+        Detailed Report
+      </a>
+    </li>
+  </ul>
+</div>
+`;

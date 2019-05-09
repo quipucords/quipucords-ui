@@ -41,28 +41,11 @@ const updatePartialScan = (id, data = {}) =>
     })
   );
 
-const deleteScan = id =>
-  axios(
-    serviceConfig({
-      method: 'delete',
-      url: `${process.env.REACT_APP_SCANS_SERVICE}${id}`
-    })
-  );
-
-const startScan = id =>
-  axios(
-    serviceConfig({
-      method: 'post',
-      url: process.env.REACT_APP_SCAN_JOBS_SERVICE_START_GET.replace('{0}', id)
-    })
-  );
-
 const getScanJobs = (id, params = {}) =>
   axios(
     serviceConfig(
       {
         url: process.env.REACT_APP_SCAN_JOBS_SERVICE_START_GET.replace('{0}', id),
-        timeout: process.env.REACT_APP_AJAX_TIMEOUT,
         params
       },
       false
@@ -73,8 +56,7 @@ const getScanJob = id =>
   axios(
     serviceConfig(
       {
-        url: `${process.env.REACT_APP_SCAN_JOBS_SERVICE}${id}`,
-        timeout: process.env.REACT_APP_AJAX_TIMEOUT
+        url: `${process.env.REACT_APP_SCAN_JOBS_SERVICE}${id}/`
       },
       false
     )
@@ -100,6 +82,22 @@ const getInspectionScanResults = (id, params = {}) =>
       },
       false
     )
+  );
+
+const deleteScan = id =>
+  axios(
+    serviceConfig({
+      method: 'delete',
+      url: `${process.env.REACT_APP_SCANS_SERVICE}${id}`
+    })
+  );
+
+const startScan = id =>
+  axios(
+    serviceConfig({
+      method: 'post',
+      url: process.env.REACT_APP_SCAN_JOBS_SERVICE_START_GET.replace('{0}', id)
+    })
   );
 
 const pauseScan = id =>
@@ -132,12 +130,12 @@ const scansService = {
   getScan,
   updateScan,
   updatePartialScan,
-  deleteScan,
-  startScan,
   getScanJobs,
   getScanJob,
   getConnectionScanResults,
   getInspectionScanResults,
+  deleteScan,
+  startScan,
   pauseScan,
   cancelScan,
   restartScan
@@ -151,12 +149,12 @@ export {
   getScan,
   updateScan,
   updatePartialScan,
-  deleteScan,
-  startScan,
   getScanJobs,
   getScanJob,
   getConnectionScanResults,
   getInspectionScanResults,
+  deleteScan,
+  startScan,
   pauseScan,
   cancelScan,
   restartScan

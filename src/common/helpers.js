@@ -124,45 +124,6 @@ const setPropIfDefined = (obj, props, value) => (obj && value !== undefined ? _s
 
 const setPropIfTruthy = (obj, props, value) => (obj && value ? _set(obj, props, value) : obj);
 
-const setStateProp = (prop, data, options) => {
-  const { state = {}, initialState = {}, reset = true } = options;
-  let obj = { ...state };
-
-  if (prop && !state[prop]) {
-    console.error(`Error: Property ${prop} does not exist within the passed state.`, state);
-  }
-
-  if (reset && prop && !initialState[prop]) {
-    console.warn(`Warning: Property ${prop} does not exist within the passed initialState.`, initialState);
-  }
-
-  if (reset && prop) {
-    obj[prop] = {
-      ...state[prop],
-      ...initialState[prop],
-      ...data
-    };
-  } else if (reset && !prop) {
-    obj = {
-      ...state,
-      ...initialState,
-      ...data
-    };
-  } else if (prop) {
-    obj[prop] = {
-      ...state[prop],
-      ...data
-    };
-  } else {
-    obj = {
-      ...state,
-      ...data
-    };
-  }
-
-  return obj;
-};
-
 const viewPropsChanged = (nextViewOptions, currentViewOptions) =>
   nextViewOptions.currentPage !== currentViewOptions.currentPage ||
   nextViewOptions.pageSize !== currentViewOptions.pageSize ||
@@ -310,10 +271,19 @@ const getStatusFromResults = results => {
   return status;
 };
 
-const getTimeStampFromResults = results =>
-  (process.env.REACT_APP_ENV !== 'test' &&
-    moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')) ||
-  '20190225_164640';
+const getTimeStampFromResults =
+  process.env.REACT_APP_ENV !== 'test'
+    ? results => moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')
+    : () => '20190225_164640';
+
+const getTimeDisplayHowLongAgo =
+  process.env.REACT_APP_ENV !== 'test'
+    ? timestamp =>
+        moment
+          .utc(timestamp)
+          .utcOffset(moment().utcOffset())
+          .fromNow()
+    : () => 'a day ago';
 
 const isIpAddress = name => {
   const vals = name.split('.');
@@ -336,12 +306,6 @@ const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
 
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
-const FULFILLED_ACTION = base => `${base}_FULFILLED`;
-
-const PENDING_ACTION = base => `${base}_PENDING`;
-
-const REJECTED_ACTION = base => `${base}_REJECTED`;
-
 const helpers = {
   copyClipboard,
   devModeNormalizeCount,
@@ -353,21 +317,18 @@ const helpers = {
   scanStatusIcon,
   setPropIfDefined,
   setPropIfTruthy,
-  setStateProp,
   viewPropsChanged,
   createViewQueryObject,
   getMessageFromResults,
   getStatusFromResults,
   getTimeStampFromResults,
+  getTimeDisplayHowLongAgo,
   isIpAddress,
   ipAddressValue,
   DEV_MODE,
   TEST_MODE,
   RH_BRAND,
-  UI_VERSION,
-  FULFILLED_ACTION,
-  PENDING_ACTION,
-  REJECTED_ACTION
+  UI_VERSION
 };
 
 export { helpers as default, helpers };

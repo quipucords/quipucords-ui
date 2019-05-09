@@ -1,6 +1,12 @@
 import { reportsTypes } from '../constants';
 import reportsService from '../../services/reportsService';
 
+const getReports = id => dispatch =>
+  dispatch({
+    type: reportsTypes.GET_REPORTS,
+    payload: reportsService.getReports(id)
+  });
+
 const getReportSummary = (id, query) => dispatch =>
   dispatch({
     type: reportsTypes.GET_REPORT,
@@ -44,6 +50,7 @@ const mergeScanReports = data => dispatch =>
   });
 
 export {
+  getReports,
   getReportSummary,
   getReportSummaryCsv,
   getReportDetails,

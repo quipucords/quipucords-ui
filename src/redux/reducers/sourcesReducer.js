@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { sourcesTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
 const sourcesReducer = (state = initialState, action) => {
   switch (action.type) {
     case sourcesTypes.UPDATE_SOURCES:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         'view',
         {
           updateSources: true
@@ -28,8 +29,8 @@ const sourcesReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(sourcesTypes.GET_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(sourcesTypes.GET_SOURCES):
+      return reduxHelpers.setStateProp(
         'view',
         {
           error: action.error,
@@ -41,8 +42,8 @@ const sourcesReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(sourcesTypes.GET_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(sourcesTypes.GET_SOURCES):
+      return reduxHelpers.setStateProp(
         'view',
         {
           pending: true,
@@ -54,8 +55,8 @@ const sourcesReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(sourcesTypes.GET_SOURCES):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(sourcesTypes.GET_SOURCES):
+      return reduxHelpers.setStateProp(
         'view',
         {
           fulfilled: true,

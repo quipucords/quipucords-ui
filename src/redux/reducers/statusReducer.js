@@ -1,5 +1,6 @@
 import { statusTypes } from '../constants';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -14,8 +15,8 @@ const initialState = {
 
 const statusReducer = (state = initialState, action) => {
   switch (action.type) {
-    case helpers.REJECTED_ACTION(statusTypes.STATUS_INFO):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(statusTypes.STATUS_INFO):
+      return reduxHelpers.setStateProp(
         null,
         {
           error: action.error,
@@ -27,8 +28,8 @@ const statusReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(statusTypes.STATUS_INFO):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(statusTypes.STATUS_INFO):
+      return reduxHelpers.setStateProp(
         null,
         {
           pending: true
@@ -39,8 +40,8 @@ const statusReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(statusTypes.STATUS_INFO):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(statusTypes.STATUS_INFO):
+      return reduxHelpers.setStateProp(
         null,
         {
           apiVersion: action.payload.data[apiTypes.API_RESPONSE_STATUS_API_VERSION],

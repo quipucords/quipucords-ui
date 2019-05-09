@@ -1,5 +1,6 @@
-import helpers from '../../common/helpers';
 import { scansTypes } from '../constants';
+import { helpers } from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import apiTypes from '../../constants/apiConstants';
 
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
 const scansEditReducer = (state = initialState, action) => {
   switch (action.type) {
     case scansTypes.EDIT_SCAN_SHOW:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           show: true,
@@ -30,7 +31,7 @@ const scansEditReducer = (state = initialState, action) => {
       );
 
     case scansTypes.EDIT_SCAN_HIDE:
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           show: false
@@ -41,7 +42,7 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(scansTypes.ADD_SCAN):
+    case reduxHelpers.REJECTED_ACTION(scansTypes.ADD_SCAN):
       const filterProperties = [
         apiTypes.API_SUBMIT_SCAN_NAME,
         apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH_DIRS,
@@ -70,7 +71,7 @@ const scansEditReducer = (state = initialState, action) => {
         }
       });
 
-      return helpers.setStateProp(
+      return reduxHelpers.setStateProp(
         null,
         {
           pending: false,
@@ -85,8 +86,8 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(scansTypes.ADD_SCAN):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(scansTypes.ADD_SCAN):
+      return reduxHelpers.setStateProp(
         null,
         {
           add: true,
@@ -98,8 +99,8 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(scansTypes.ADD_SCAN):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(scansTypes.ADD_SCAN):
+      return reduxHelpers.setStateProp(
         null,
         {
           add: true,
@@ -112,8 +113,8 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.REJECTED_ACTION(scansTypes.ADD_START_SCAN):
-      return helpers.setStateProp(
+    case reduxHelpers.REJECTED_ACTION(scansTypes.ADD_START_SCAN):
+      return reduxHelpers.setStateProp(
         null,
         {
           pending: false,
@@ -127,8 +128,8 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.PENDING_ACTION(scansTypes.ADD_START_SCAN):
-      return helpers.setStateProp(
+    case reduxHelpers.PENDING_ACTION(scansTypes.ADD_START_SCAN):
+      return reduxHelpers.setStateProp(
         null,
         {
           start: true,
@@ -140,8 +141,8 @@ const scansEditReducer = (state = initialState, action) => {
         }
       );
 
-    case helpers.FULFILLED_ACTION(scansTypes.ADD_START_SCAN):
-      return helpers.setStateProp(
+    case reduxHelpers.FULFILLED_ACTION(scansTypes.ADD_START_SCAN):
+      return reduxHelpers.setStateProp(
         null,
         {
           start: true,

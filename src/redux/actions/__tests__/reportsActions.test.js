@@ -32,6 +32,18 @@ describe('ReportsActions', () => {
     moxios.uninstall();
   });
 
+  it('Should return response content for getReports method', done => {
+    const store = generateStore();
+    const dispatcher = reportsActions.getReports();
+
+    dispatcher(store.dispatch).then(() => {
+      const response = store.getState().reports;
+
+      expect(response.reports.fulfilled).toEqual(true);
+      done();
+    });
+  });
+
   it('Should return response content for getReportSummary method', done => {
     const store = generateStore();
     const dispatcher = reportsActions.getReportSummary();

@@ -1,286 +1,136 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InfiniteScroll from 'react-infinite-scroller';
-import { EmptyState, Grid } from 'patternfly-react';
-import _get from 'lodash/get';
-import _isEqual from 'lodash/isEqual';
-import _size from 'lodash/size';
-import { connect, reduxActions } from '../../redux';
+import { EmptyState, Grid, Spinner } from 'patternfly-react';
+import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
-import { dictionary } from '../../constants/dictionaryConstants';
+import { apiTypes } from '../../constants/apiConstants';
 
 class ScanHostList extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      scanResults: [],
-      scanResultsError: false,
-      connectionScanResultsPending: false,
-      inspectionScanResultsPending: false,
-      moreResults: false,
-      prevResults: []
-    };
-
-    this.loading = false;
-  }
-
-  componentDidMount() {
-    this.refresh(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { lastRefresh, status, useConnectionResults, useInspectionResults } = this.props;
-    // Check for changes resulting in a fetch
-    if (
-      !_isEqual(nextProps.lastRefresh, lastRefresh) ||
-      nextProps.status !== status ||
-      nextProps.useConnectionResults !== useConnectionResults ||
-      nextProps.useInspectionResults !== useInspectionResults
-    ) {
-      this.refresh(nextProps);
+  state = {
+    currentPage: 1,
+    queryObject: {
+      [apiTypes.API_QUERY_PAGE]: 1,
+      [apiTypes.API_QUERY_PAGE_SIZE]: 100,
+      [apiTypes.API_QUERY_ORDERING]: 'name'
     }
-  }
-
-  onLoadMore = page => {
-    if (this.loading) {
-      return;
-    }
-
-    this.loading = true;
-    this.refresh(this.props, page);
   };
 
-  getInspectionResults(passedPage, status) {
-    const { scanId, sourceId, getInspectionScanResults, useConnectionResults, useInspectionResults } = this.props;
-    const { connectionScanResultsPending, page, prevResults } = this.state;
-    const fetchAll = useConnectionResults && useInspectionResults;
-
-    const queryObject = {
-      page: passedPage === undefined ? page : passedPage,
-      page_size: 100,
-      ordering: 'name',
-      status
-    };
-
-    if (sourceId) {
-      queryObject.source_id = sourceId;
-    }
-
-    getInspectionScanResults(scanId, queryObject)
-      .then(results => {
-        const morePages = fetchAll && _get(results.value, 'data.next') !== null;
-
-        this.setState({
-          inspectionScanResultsPending: morePages,
-          scanResults: this.addResults(results),
-          prevResults: morePages || connectionScanResultsPending ? prevResults : []
-        });
-        this.loading = connectionScanResultsPending;
-
-        if (morePages) {
-          this.getInspectionResults(passedPage + 1, status);
-        }
-      })
-      .catch(error => {
-        this.setState({
-          inspectionScanResultsPending: false,
-          scanResultsError: helpers.getMessageFromResults(error).message
-        });
-      });
+  componentDidMount() {
+    this.onRefresh();
   }
 
-  getConnectionResults(passedPage, status) {
-    const { scanId, sourceId, getConnectionScanResults, useConnectionResults, useInspectionResults } = this.props;
-    const { inspectionScanResultsPending, page, prevResults } = this.state;
-    const usePaging = !useConnectionResults || !useInspectionResults;
-
-    const queryObject = {
-      page: passedPage === undefined ? page : passedPage,
-      page_size: 100,
-      ordering: 'name',
-      status
-    };
-
-    if (sourceId) {
-      queryObject.source_id = sourceId;
-    }
-
-    getConnectionScanResults(scanId, queryObject)
-      .then(results => {
-        const allResults = this.addResults(results);
-        const morePages = _get(results.value, 'data.next') !== null;
-
-        this.setState({
-          moreResults: morePages,
-          connectionScanResultsPending: morePages && !usePaging,
-          scanResults: allResults,
-          prevResults: morePages || inspectionScanResultsPending ? prevResults : []
-        });
-        this.loading = inspectionScanResultsPending;
-
-        if (morePages && !usePaging) {
-          this.getConnectionResults(passedPage + 1, status);
-        }
-      })
-      .catch(error => {
-        this.setState({
-          connectionScanResultsPending: false,
-          scanResultsError: helpers.getMessageFromResults(error).message
-        });
-      });
-  }
-
-  addResults(results) {
-    const { scanResults } = this.state;
-    const { useConnectionResults, useInspectionResults } = this.props;
-
-    const newResults = _get(results, 'value.data.results', []);
-    const allResults = [...scanResults, ...newResults];
-
-    if (useConnectionResults && useInspectionResults) {
-      allResults.sort((item1, item2) => {
-        if (helpers.isIpAddress(item1.name) && helpers.isIpAddress(item2.name)) {
-          const value1 = helpers.ipAddressValue(item1.name);
-          const value2 = helpers.ipAddressValue(item2.name);
-
-          return value1 - value2;
-        }
-
-        return item1.name.localeCompare(item2.name);
-      });
-    }
-
-    return allResults;
-  }
-
-  refresh(useProps, page = 1) {
-    const { useConnectionResults, useInspectionResults, status } = useProps;
-    const { scanResults } = this.state;
-
-    this.setState({
-      connectionScanResultsPending: useConnectionResults,
-      inspectionScanResultsPending: useInspectionResults,
-      scanResults: page === 1 ? [] : scanResults,
-      prevResults: scanResults,
-      moreResults: false
-    });
-    this.loading = true;
+  onRefresh(updatedQueryObject = {}) {
+    const { queryObject } = this.state;
+    const {
+      filter,
+      getConnectionScanResults,
+      getInspectionScanResults,
+      id,
+      useConnectionResults,
+      useInspectionResults
+    } = this.props;
 
     if (useConnectionResults) {
-      this.getConnectionResults(page, status);
+      getConnectionScanResults(id, { ...queryObject, ...filter, ...updatedQueryObject });
     }
 
     if (useInspectionResults) {
-      this.getInspectionResults(page, status);
+      getInspectionScanResults(id, { ...queryObject, ...filter, ...updatedQueryObject });
     }
   }
 
-  renderResults(results) {
-    const { renderHostRow } = this.props;
-    const { moreResults } = this.state;
+  onScrollList = event => {
+    const { target } = event;
+    const { currentPage } = this.state;
+    const { isMoreResults, pending } = this.props;
 
-    if (_size(results) === 0) {
-      return null;
-    }
+    const bottom = target.scrollHeight - target.scrollTop === target.clientHeight;
 
-    const rowItems = results.map(host => (
-      <Grid.Row key={`${host.name}-${host.source.id}`}>{renderHostRow(host)}</Grid.Row>
-    ));
+    if (bottom && !pending && isMoreResults) {
+      const newPage = currentPage + 1;
 
-    const loader = (
-      <div key="loader" className="loader">
-        Loading...
-      </div>
-    );
+      const updatedQueryObject = {
+        [apiTypes.API_QUERY_PAGE]: newPage
+      };
 
-    return (
-      <div className="host-results">
-        <Grid fluid className="host-list">
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={this.onLoadMore}
-            hasMore={moreResults}
-            useWindow={false}
-            loader={loader}
-          >
-            {rowItems}
-          </InfiniteScroll>
-        </Grid>
-      </div>
-    );
-  }
-
-  render() {
-    const { status, useConnectionResults, useInspectionResults } = this.props;
-    const {
-      scanResults,
-      connectionScanResultsPending,
-      inspectionScanResultsPending,
-      scanResultsError,
-      prevResults
-    } = this.state;
-    const usePaging = !useConnectionResults || !useInspectionResults;
-
-    if ((!_size(scanResults) || !usePaging) && (inspectionScanResultsPending || connectionScanResultsPending)) {
-      return (
-        <React.Fragment>
-          <EmptyState>
-            <EmptyState.Icon name="spinner spinner-xl" />
-            <EmptyState.Title>Loading scan results...</EmptyState.Title>
-          </EmptyState>
-          <div className="hidden-results">{this.renderResults(prevResults)}</div>
-        </React.Fragment>
+      this.setState(
+        {
+          currentPage: newPage
+        },
+        () => {
+          this.onRefresh(updatedQueryObject);
+        }
       );
     }
+  };
 
-    if (scanResultsError) {
+  render() {
+    const { children, error, errorMessage, hostsList, pending } = this.props;
+
+    if (error) {
       return (
         <EmptyState>
           <EmptyState.Icon name="error-circle-o" />
           <EmptyState.Title>Error retrieving scan results</EmptyState.Title>
-          <EmptyState.Info>{scanResultsError}</EmptyState.Info>
+          <EmptyState.Info>{errorMessage}</EmptyState.Info>
         </EmptyState>
       );
     }
 
-    if (_size(scanResults) === 0) {
+    if (pending) {
       return (
         <EmptyState>
-          <EmptyState.Icon name="warning-triangle-o" />
-          <EmptyState.Title>
-            {`${dictionary[status] || ''} systems were not available, please refresh.`}
-          </EmptyState.Title>
+          <Spinner loading size="sm" className="blank-slate-pf-icon" />
+          <EmptyState.Title>Loading...</EmptyState.Title>
         </EmptyState>
       );
     }
 
-    return this.renderResults(scanResults);
+    return (
+      <div className="quipucords-infinite-results">
+        <Grid fluid onScroll={this.onScrollList} className="quipucords-infinite-list">
+          {hostsList.map(host => children({ host }))}
+        </Grid>
+      </div>
+    );
   }
 }
 
 ScanHostList.propTypes = {
-  scanId: PropTypes.number,
-  sourceId: PropTypes.number,
-  lastRefresh: PropTypes.number,
-  status: PropTypes.string,
-  renderHostRow: PropTypes.func,
-  useConnectionResults: PropTypes.bool,
-  useInspectionResults: PropTypes.bool,
+  children: PropTypes.func.isRequired,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  filter: PropTypes.object,
   getConnectionScanResults: PropTypes.func,
-  getInspectionScanResults: PropTypes.func
+  getInspectionScanResults: PropTypes.func,
+  hostsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      credentialName: PropTypes.string,
+      jobType: PropTypes.oneOf(['connection', 'inspection']),
+      name: PropTypes.string,
+      sourceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      sourceName: PropTypes.string,
+      status: PropTypes.string
+    })
+  ),
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  isMoreResults: PropTypes.bool,
+  pending: PropTypes.bool,
+  useConnectionResults: PropTypes.bool,
+  useInspectionResults: PropTypes.bool
 };
 
 ScanHostList.defaultProps = {
-  scanId: null,
-  sourceId: null,
-  lastRefresh: 0,
-  status: null,
-  renderHostRow: helpers.noop,
-  useConnectionResults: false,
-  useInspectionResults: false,
+  error: false,
+  errorMessage: null,
+  filter: {},
   getConnectionScanResults: helpers.noop,
-  getInspectionScanResults: helpers.noop
+  getInspectionScanResults: helpers.noop,
+  hostsList: [],
+  isMoreResults: false,
+  pending: false,
+  useConnectionResults: false,
+  useInspectionResults: false
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -288,10 +138,16 @@ const mapDispatchToProps = dispatch => ({
   getInspectionScanResults: (id, query) => dispatch(reduxActions.scans.getInspectionScanResults(id, query))
 });
 
-const mapStateToProps = () => ({});
+const makeMapStateToProps = () => {
+  const getScanHostsDetails = reduxSelectors.scans.makeScanHostsList();
+
+  return (state, props) => ({
+    ...getScanHostsDetails(state, props)
+  });
+};
 
 const ConnectedScanHostList = connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(ScanHostList);
 

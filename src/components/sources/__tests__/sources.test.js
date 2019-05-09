@@ -14,28 +14,7 @@ describe('Sources Component', () => {
     expect(component).toMatchSnapshot('connected');
   });
 
-  it('should render a non-connected component in error state', () => {
-    const props = {
-      error: true
-    };
-
-    const component = shallow(<Sources {...props} />);
-
-    expect(component.render()).toMatchSnapshot('error');
-  });
-
-  it('should render a non-connected component in pending state', () => {
-    const props = {
-      pending: true,
-      sources: []
-    };
-
-    const component = shallow(<Sources {...props} />);
-
-    expect(component.render()).toMatchSnapshot('pending');
-  });
-
-  it('should render a non-connected component in fulfilled state', () => {
+  it('should render a non-connected component', () => {
     const props = {
       fulfilled: true,
       sources: [
@@ -51,7 +30,28 @@ describe('Sources Component', () => {
 
     const component = shallow(<Sources {...props} />);
 
-    expect(component).toMatchSnapshot('fulfilled');
+    expect(component).toMatchSnapshot('non-connected');
+  });
+
+  it('should render a non-connected component error', () => {
+    const props = {
+      error: true
+    };
+
+    const component = shallow(<Sources {...props} />);
+
+    expect(component.render()).toMatchSnapshot('error');
+  });
+
+  it('should render a non-connected component pending', () => {
+    const props = {
+      pending: true,
+      sources: []
+    };
+
+    const component = shallow(<Sources {...props} />);
+
+    expect(component.render()).toMatchSnapshot('pending');
   });
 
   it('should render a non-connected component with empty state', () => {

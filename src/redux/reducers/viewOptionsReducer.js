@@ -1,6 +1,6 @@
 import _findIndex from 'lodash/findIndex';
 import _get from 'lodash/get';
-import helpers from '../../common/helpers';
+import { reduxHelpers } from '../common/reduxHelpers';
 import {
   viewTypes,
   viewPaginationTypes,
@@ -196,15 +196,15 @@ const viewOptionsReducer = (state = initialState, action) => {
       });
       return Object.assign({}, state, updateState);
 
-    case helpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
+    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
       updatePageCounts(viewTypes.CREDENTIALS_VIEW, action.payload.data[apiTypes.API_RESPONSE_CREDENTIALS_COUNT]);
       return Object.assign({}, state, updateState);
 
-    case helpers.FULFILLED_ACTION(sourcesTypes.GET_SOURCES):
+    case reduxHelpers.FULFILLED_ACTION(sourcesTypes.GET_SOURCES):
       updatePageCounts(viewTypes.SOURCES_VIEW, action.payload.data[apiTypes.API_RESPONSE_SOURCES_COUNT]);
       return Object.assign({}, state, updateState);
 
-    case helpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
+    case reduxHelpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
       updatePageCounts(viewTypes.SCANS_VIEW, action.payload.data[apiTypes.API_RESPONSE_SCANS_COUNT]);
       return Object.assign({}, state, updateState);
 

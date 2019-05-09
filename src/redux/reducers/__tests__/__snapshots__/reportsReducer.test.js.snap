@@ -16,6 +16,12 @@ Object {
       "pending": false,
       "reports": Array [],
     },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
   },
   "type": "GET_MERGE_REPORT_REJECTED",
 }
@@ -37,8 +43,41 @@ Object {
       "pending": false,
       "reports": Array [],
     },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
   },
   "type": "GET_REPORT_REJECTED",
+}
+`;
+
+exports[`ReportsReducer should handle all defined error types: rejected types GET_REPORTS 1`] = `
+Object {
+  "result": Object {
+    "merge": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+    "report": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "reports": Array [],
+    },
+    "reports": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "fulfilled": false,
+      "pending": false,
+    },
+  },
+  "type": "GET_REPORTS_REJECTED",
 }
 `;
 
@@ -57,6 +96,12 @@ Object {
       "fulfilled": false,
       "pending": false,
       "reports": Array [],
+    },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
     },
   },
   "type": "GET_MERGE_REPORT_FULFILLED",
@@ -81,8 +126,41 @@ Object {
         "test": "success",
       },
     },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
   },
   "type": "GET_REPORT_FULFILLED",
+}
+`;
+
+exports[`ReportsReducer should handle all defined fulfilled types: fulfilled types GET_REPORTS 1`] = `
+Object {
+  "result": Object {
+    "merge": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+    "report": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "reports": Array [],
+    },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "pending": false,
+    },
+  },
+  "type": "GET_REPORTS_FULFILLED",
 }
 `;
 
@@ -101,6 +179,12 @@ Object {
       "fulfilled": false,
       "pending": false,
       "reports": Array [],
+    },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
     },
   },
   "type": "GET_MERGE_REPORT_PENDING",
@@ -123,7 +207,40 @@ Object {
       "pending": true,
       "reports": Array [],
     },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
   },
   "type": "GET_REPORT_PENDING",
+}
+`;
+
+exports[`ReportsReducer should handle all defined pending types: pending types GET_REPORTS 1`] = `
+Object {
+  "result": Object {
+    "merge": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+    },
+    "report": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": false,
+      "reports": Array [],
+    },
+    "reports": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "pending": true,
+    },
+  },
+  "type": "GET_REPORTS_PENDING",
 }
 `;
