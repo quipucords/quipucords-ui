@@ -17,10 +17,11 @@ describe('UserService', () => {
   });
 
   it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(userService)).toHaveLength(2);
+    expect(Object.keys(userService)).toHaveLength(3);
   });
 
   it('should have specific methods', () => {
+    expect(userService.getLocale).toBeDefined();
     expect(userService.whoami).toBeDefined();
     expect(userService.logoutUser).toBeDefined();
   });

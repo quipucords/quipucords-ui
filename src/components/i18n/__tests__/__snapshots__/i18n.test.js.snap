@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`I18n Component should pass children 1`] = `"lorem ipsum"`;

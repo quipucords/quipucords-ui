@@ -10,6 +10,7 @@ const initialState = {
     errorMessage: '',
     pending: false,
     fulfilled: false,
+    locale: null,
     username: null
   }
 };
@@ -21,7 +22,8 @@ const userReducer = (state = initialState, action) => {
         'session',
         {
           error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
+          errorMessage: helpers.getMessageFromResults(action.payload).message,
+          locale: state.session.locale
         },
         {
           state,
@@ -33,6 +35,7 @@ const userReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'session',
         {
+          locale: state.session.locale,
           pending: true
         },
         {
@@ -47,6 +50,7 @@ const userReducer = (state = initialState, action) => {
         {
           authorized: true,
           fulfilled: true,
+          locale: state.session.locale,
           username: action.payload.data[apiTypes.API_RESPONSE_USER_USERNAME]
         },
         {
@@ -60,7 +64,8 @@ const userReducer = (state = initialState, action) => {
         'session',
         {
           error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
+          errorMessage: helpers.getMessageFromResults(action.payload).message,
+          locale: state.session.locale
         },
         {
           state,
@@ -72,7 +77,8 @@ const userReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'session',
         {
-          pending: true
+          pending: true,
+          locale: state.session.locale
         },
         {
           state,
@@ -84,11 +90,24 @@ const userReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'session',
         {
-          authorized: false
+          authorized: false,
+          locale: state.session.locale
         },
         {
           state,
           initialState
+        }
+      );
+
+    case reduxHelpers.FULFILLED_ACTION(userTypes.USER_LOCALE):
+      return reduxHelpers.setStateProp(
+        'session',
+        {
+          locale: action.payload.data
+        },
+        {
+          state,
+          reset: false
         }
       );
 

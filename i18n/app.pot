@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: src/components/aboutModal/aboutModal.js:99
+msgctxt "Browser OS"
+msgid "about.browserOS"
+msgstr ""
+
+#: src/components/aboutModal/aboutModal.js:94
+msgctxt "Browser Version"
+msgid "about.browserVersion"
+msgstr ""
+
+#: src/components/aboutModal/aboutModal.js:103
+msgctxt "Server Version"
+msgid "about.serverVersion"
+msgstr ""
+
+#: src/components/aboutModal/aboutModal.js:108
+msgctxt "UI Version"
+msgid "about.uiVersion"
+msgstr ""
+
+#: src/components/aboutModal/aboutModal.js:90
+msgctxt "Username"
+msgid "about.username"
+msgstr ""

@@ -97,6 +97,8 @@ const noop = Function.prototype;
 
 const noopPromise = Promise.resolve({});
 
+const noopTranslate = (key, value) => value || `t('${key}')`;
+
 const sourceTypeIcon = sourceType => {
   switch (sourceType) {
     case 'vcenter':
@@ -337,6 +339,7 @@ const helpers = {
   generateId,
   noop,
   noopPromise,
+  noopTranslate,
   sourceTypeIcon,
   scanTypeIcon,
   scanStatusIcon,

@@ -79,6 +79,7 @@ Object {
   "isIpAddress": [Function],
   "noop": [Function],
   "noopPromise": Promise {},
+  "noopTranslate": [Function],
   "scanStatusIcon": [Function],
   "scanTypeIcon": [Function],
   "setPropIfDefined": [Function],
