@@ -14,7 +14,7 @@ class ScanJobsList extends React.Component {
     queryObject: {
       [apiTypes.API_QUERY_PAGE]: 1,
       [apiTypes.API_QUERY_PAGE_SIZE]: 100,
-      [apiTypes.API_QUERY_ORDERING]: 'name'
+      [apiTypes.API_QUERY_ORDERING]: '-end_time'
     }
   };
 
@@ -106,7 +106,11 @@ class ScanJobsList extends React.Component {
                     {item.systemsFailed}
                   </Grid.Col>
                   <Grid.Col xs={3} sm={2}>
-                    {item.reportId > 0 && <ScanDownload downloadId={item.reportId} className="pull-right" pullRight />}
+                    {item.reportId > 0 && (
+                      <ScanDownload downloadName={item.scanName} downloadId={item.reportId} bsStyle="link">
+                        <Icon type="pf" name="export" /> &nbsp;Download
+                      </ScanDownload>
+                    )}
                   </Grid.Col>
                 </Grid.Row>
               )
@@ -130,6 +134,7 @@ ScanJobsList.propTypes = {
       endTime: PropTypes.string,
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       reportId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      scanName: PropTypes.string,
       startTime: PropTypes.string,
       status: PropTypes.string,
       systemsScanned: PropTypes.number,

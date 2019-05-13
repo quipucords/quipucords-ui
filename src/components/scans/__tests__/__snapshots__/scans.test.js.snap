@@ -104,32 +104,17 @@ exports[`Scans Component should render a non-connected component: non-connected 
             ]
           }
         >
-          <DropdownButton
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
             disabled={true}
-            id="merge-reports-dropdown"
-            title="Merge Report"
+            id="merge-reports"
+            onClick={[Function]}
           >
-            <MenuItem
-              bsClass="dropdown"
-              disabled={false}
-              divider={false}
-              eventKey="1"
-              header={false}
-              onClick={[Function]}
-            >
-              Summary Report
-            </MenuItem>
-            <MenuItem
-              bsClass="dropdown"
-              disabled={false}
-              divider={false}
-              eventKey="2"
-              header={false}
-              onClick={[Function]}
-            >
-              Detailed Report
-            </MenuItem>
-          </DropdownButton>
+            Merge reports
+          </Button>
         </Tooltip>
       </div>
     }

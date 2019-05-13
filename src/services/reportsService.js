@@ -2,83 +2,21 @@ import axios from 'axios';
 import serviceConfig from './config';
 import helpers from '../common/helpers';
 
-const getReports = id =>
-  axios(
-    serviceConfig(
-      {
-        url: `${process.env.REACT_APP_REPORTS_SERVICE}${id}/`
-      },
-      false
-    )
-  );
+/**
+ * ToDo: Evaluate naming the download package
+ * Since the data is already being handled on the server we do not need to
+ * handle the blob/file, simply link to it.
+ *
+ * Currently when we apply the anchor download attribute in an attempt to rename
+ * the gzip it throws a server cert error in staging, i.e. "Failed - Bad certificate"
+ * Removing the anchor tag download attribute removes the error, but then all the
+ * packages are simply named "download"
+ */
+const getReportsDownload = id =>
+  (helpers.TEST_MODE && helpers.noopPromise) ||
+  helpers.downloadPackage(`${process.env.REACT_APP_REPORTS_SERVICE}${id}/`);
 
-const getReportDetails = (id, params = {}) =>
-  axios(
-    serviceConfig(
-      {
-        url: process.env.REACT_APP_REPORTS_SERVICE_DETAILS.replace('{0}', id),
-        params
-      },
-      false
-    )
-  );
-
-const getReportDetailsCsv = id =>
-  getReportDetails(id, { format: 'csv' }).then(
-    success =>
-      (helpers.TEST_MODE && success.data) ||
-      helpers.downloadData(
-        success.data,
-        `report_${id}_details_${helpers.getTimeStampFromResults(success)}.csv`,
-        'text/csv'
-      )
-  );
-
-const getReportSummary = (id, params = {}) =>
-  axios(
-    serviceConfig(
-      {
-        url: process.env.REACT_APP_REPORTS_SERVICE_DEPLOYMENTS.replace('{0}', id),
-        params
-      },
-      false
-    )
-  );
-
-const getReportSummaryCsv = (id, params = {}) =>
-  getReportSummary(id, Object.assign(params, { format: 'csv' })).then(
-    success =>
-      (helpers.TEST_MODE && success.data) ||
-      helpers.downloadData(
-        success.data,
-        `report_${id}_summary_${helpers.getTimeStampFromResults(success)}.csv`,
-        'text/csv'
-      )
-  );
-
-const getMergedScanReportDetailsCsv = id =>
-  getReportDetails(id, { format: 'csv' }).then(
-    success =>
-      (helpers.TEST_MODE && success.data) ||
-      helpers.downloadData(
-        success.data,
-        `merged_report_details_${helpers.getTimeStampFromResults(success)}.csv`,
-        'text/csv'
-      )
-  );
-
-const getMergedScanReportSummaryCsv = id =>
-  getReportSummary(id, { format: 'csv' }).then(
-    success =>
-      (helpers.TEST_MODE && success.data) ||
-      helpers.downloadData(
-        success.data,
-        `merged_report_summary_${helpers.getTimeStampFromResults(success)}.csv`,
-        'text/csv'
-      )
-  );
-
-const mergeScanReports = (data = {}) =>
+const mergeReports = (data = {}) =>
   axios(
     serviceConfig({
       method: 'put',
@@ -88,25 +26,8 @@ const mergeScanReports = (data = {}) =>
   );
 
 const reportsService = {
-  getReports,
-  getReportDetails,
-  getReportDetailsCsv,
-  getReportSummary,
-  getReportSummaryCsv,
-  getMergedScanReportDetailsCsv,
-  getMergedScanReportSummaryCsv,
-  mergeScanReports
+  getReportsDownload,
+  mergeReports
 };
 
-export {
-  reportsService as default,
-  reportsService,
-  getReports,
-  getReportDetails,
-  getReportDetailsCsv,
-  getReportSummary,
-  getReportSummaryCsv,
-  getMergedScanReportDetailsCsv,
-  getMergedScanReportSummaryCsv,
-  mergeScanReports
-};
+export { reportsService as default, reportsService, getReportsDownload, mergeReports };

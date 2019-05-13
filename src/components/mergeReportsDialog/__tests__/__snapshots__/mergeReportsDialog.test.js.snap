@@ -1,11 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MergeReportsDialog Component should render a component, pending: pending 1`] = `
+<div
+  role="dialog"
+>
+  <div
+    class="fade modal-backdrop in"
+  />
+  <div
+    class="fade in modal"
+    role="dialog"
+    style="display: block; padding-right: 0px;"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog"
+    >
+      <div
+        class="modal-content"
+        role="document"
+      >
+        <div
+          class="modal-header"
+        >
+          <button
+            aria-hidden="true"
+            aria-label="Close"
+            class="close"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="pficon pficon-close"
+            />
+          </button>
+          <h4
+            class="modal-title"
+          >
+            Merge reports
+          </h4>
+        </div>
+        <div
+          aria-live="polite"
+          class="modal-body"
+        >
+          <div
+            class="blank-slate-pf-icon spinner spinner-lg"
+          />
+          <div
+            class="text-center"
+          >
+            Merging reports...
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="btn-cancel btn btn-default"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-primary"
+            disabled=""
+            type="submit"
+          >
+            Merge
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`MergeReportsDialog Component should render a connected component: connected 1`] = `
 <MergeReportsDialog
-  details={false}
-  getMergedScanReportDetailsCsv={[Function]}
-  getMergedScanReportSummaryCsv={[Function]}
-  mergeScans={[Function]}
+  getReportsDownload={[Function]}
+  mergeReports={[Function]}
+  pending={false}
   scans={
     Array [
       Object {
@@ -63,10 +138,11 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
           <h4
             class="modal-title"
           >
-            Detailed Merge Report
+            Merge reports
           </h4>
         </div>
         <div
+          aria-live="polite"
           class="modal-body"
         >
           <div

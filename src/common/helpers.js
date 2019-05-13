@@ -69,10 +69,33 @@ const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/pla
     }
   });
 
+const downloadPackage = (filePath = '') =>
+  new Promise((resolve, reject) => {
+    try {
+      const anchorTag = window.document.createElement('a');
+
+      anchorTag.href = filePath;
+      anchorTag.style.display = 'none';
+
+      window.document.body.appendChild(anchorTag);
+
+      anchorTag.click();
+
+      setTimeout(() => {
+        window.document.body.removeChild(anchorTag);
+        resolve({ filePath });
+      }, 250);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 const generateId = prefix =>
   `${prefix || 'generatedid'}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
 
 const noop = Function.prototype;
+
+const noopPromise = Promise.resolve({});
 
 const sourceTypeIcon = sourceType => {
   switch (sourceType) {
@@ -310,8 +333,10 @@ const helpers = {
   copyClipboard,
   devModeNormalizeCount,
   downloadData,
+  downloadPackage,
   generateId,
   noop,
+  noopPromise,
   sourceTypeIcon,
   scanTypeIcon,
   scanStatusIcon,

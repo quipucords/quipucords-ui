@@ -129,6 +129,16 @@
       border-right: 0;
       margin-top: 25px;
       padding: 5px 20px 5px 10px;
+
+      .btn-link {
+        color: $color-pf-black-700;
+        .pficon, .fa {
+          font-size: 14px;
+        }
+        &:hover, &:focus {
+          color: $color-pf-blue;
+        }
+      }
     }
 
     .show-next-button {

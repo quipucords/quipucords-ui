@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Icon } from 'patternfly-react';
-import _get from 'lodash/get';
+import { Modal, Button, Icon, Spinner } from 'patternfly-react';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common/helpers';
+import { apiTypes } from '../../constants/apiConstants';
 
 class MergeReportsDialog extends React.Component {
   onClose = () => {
@@ -13,24 +13,32 @@ class MergeReportsDialog extends React.Component {
   };
 
   onMergeScanResults = () => {
-    const { mergeScans, details, getMergedScanReportDetailsCsv, getMergedScanReportSummaryCsv } = this.props;
-    const data = { reports: this.getValidReportId() };
+    const { getReportsDownload, mergeReports } = this.props;
+    const validReports = { [apiTypes.API_SUBMIT_REPORTS_REPORTS]: this.getValidReportId() };
 
-    mergeScans(data).then(
-      response => {
-        if (details) {
-          getMergedScanReportDetailsCsv(_get(response, 'value.data.report_id')).then(
-            () => this.notifyDownloadStatus(false),
-            error => this.notifyDownloadStatus(true, error)
-          );
-        } else {
-          getMergedScanReportSummaryCsv(_get(response, 'value.data.report_id')).then(
-            () => this.notifyDownloadStatus(false),
-            error => this.notifyDownloadStatus(true, error)
-          );
-        }
+    const mergeThenDownloadReport = async data => {
+      const mergeResponse = await mergeReports(data);
+      await getReportsDownload(mergeResponse.value.data[apiTypes.API_RESPONSE_REPORTS_REPORT_ID]);
+    };
+
+    mergeThenDownloadReport(validReports).then(
+      () => {
+        this.onClose();
+
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
+          alertType: 'success',
+          message: <span>Merged report downloaded.</span>
+        });
       },
-      error => this.notifyDownloadStatus(true, error)
+      error => {
+        store.dispatch({
+          type: reduxTypes.toastNotifications.TOAST_ADD,
+          alertType: 'error',
+          header: 'Error merging reports',
+          message: helpers.getMessageFromResults(error).message
+        });
+      }
     );
   };
 
@@ -48,25 +56,6 @@ class MergeReportsDialog extends React.Component {
 
   getValidReportId() {
     return this.getValidScans().map(scan => scan.mostRecentReportId);
-  }
-
-  notifyDownloadStatus(error, results) {
-    if (error) {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'error',
-        header: 'Error',
-        message: helpers.getMessageFromResults(results).message
-      });
-    } else {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'success',
-        message: <span>Report downloaded.</span>
-      });
-    }
-
-    this.onClose();
   }
 
   renderValidScans() {
@@ -131,7 +120,7 @@ class MergeReportsDialog extends React.Component {
   }
 
   render() {
-    const { show, scans, details } = this.props;
+    const { pending, show, scans } = this.props;
 
     if (!scans || scans.length === 0) {
       return null;
@@ -170,20 +159,28 @@ class MergeReportsDialog extends React.Component {
           <button type="button" className="close" onClick={this.onClose} aria-hidden="true" aria-label="Close">
             <Icon type="pf" name="close" />
           </button>
-          <Modal.Title>{`${details ? 'Detailed' : 'Summary'} Merge Report`}</Modal.Title>
+          <Modal.Title>Merge reports</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <div className="merge-reports-body">
-            <span className="merge-reports-icon">{icon}</span>
-            <span>
-              {heading}
-              <div>
-                {this.renderValidScans()}
-                {this.renderInvalidScans()}
-                {footer}
-              </div>
-            </span>
-          </div>
+        <Modal.Body aria-live="polite">
+          {pending && (
+            <React.Fragment>
+              <Spinner loading size="lg" className="blank-slate-pf-icon" />
+              <div className="text-center">Merging reports...</div>
+            </React.Fragment>
+          )}
+          {!pending && (
+            <div className="merge-reports-body">
+              <span className="merge-reports-icon">{icon}</span>
+              <span>
+                {heading}
+                <div>
+                  {this.renderValidScans()}
+                  {this.renderInvalidScans()}
+                  {footer}
+                </div>
+              </span>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>{this.renderButtons()}</Modal.Footer>
       </Modal>
@@ -192,10 +189,9 @@ class MergeReportsDialog extends React.Component {
 }
 
 MergeReportsDialog.propTypes = {
-  details: PropTypes.bool.isRequired,
-  getMergedScanReportDetailsCsv: PropTypes.func,
-  getMergedScanReportSummaryCsv: PropTypes.func,
-  mergeScans: PropTypes.func,
+  getReportsDownload: PropTypes.func,
+  mergeReports: PropTypes.func,
+  pending: PropTypes.bool,
   scans: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -208,20 +204,20 @@ MergeReportsDialog.propTypes = {
 };
 
 MergeReportsDialog.defaultProps = {
-  getMergedScanReportDetailsCsv: helpers.noop,
-  getMergedScanReportSummaryCsv: helpers.noop,
-  mergeScans: helpers.noop,
+  getReportsDownload: helpers.noop,
+  mergeReports: helpers.noop,
+  pending: false,
   scans: []
 };
 
 const mapDispatchToProps = dispatch => ({
-  getMergedScanReportDetailsCsv: id => dispatch(reduxActions.reports.getMergedScanReportDetailsCsv(id)),
-  getMergedScanReportSummaryCsv: id => dispatch(reduxActions.reports.getMergedScanReportSummaryCsv(id)),
-  mergeScans: data => dispatch(reduxActions.reports.mergeScanReports(data))
+  getReportsDownload: id => dispatch(reduxActions.reports.getReportsDownload(id)),
+  mergeReports: data => dispatch(reduxActions.reports.mergeReports(data))
 });
 
 const mapStateToProps = state => ({
-  ...state.scans.mergeDialog
+  ...state.scans.mergeDialog,
+  ...state.reports
 });
 
 const ConnectedMergeReportsDialog = connect(
