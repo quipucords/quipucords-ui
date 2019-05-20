@@ -1,10 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { I18n, i18nInit } from '../i18n';
+import { mount, shallow } from 'enzyme';
+import { I18n } from '../i18n';
 
 describe('I18n Component', () => {
-  it('should have an initial method', () => {
-    expect(i18nInit).toBeDefined();
+  it('should render a non-connected component', () => {
+    const props = {
+      locale: 'es'
+    };
+
+    const component = mount(
+      <I18n {...props}>
+        <React.Fragment>lorem ipsum</React.Fragment>
+      </I18n>
+    );
+
+    expect(component).toMatchSnapshot('non-connected');
   });
 
   it('should pass children', () => {
@@ -14,6 +24,6 @@ describe('I18n Component', () => {
       </I18n>
     );
 
-    expect(component.html()).toMatchSnapshot();
+    expect(component.html()).toMatchSnapshot('children');
   });
 });

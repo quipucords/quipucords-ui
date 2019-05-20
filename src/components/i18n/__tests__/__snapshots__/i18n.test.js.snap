@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`I18n Component should pass children 1`] = `"lorem ipsum"`;
+exports[`I18n Component should pass children: children 1`] = `"lorem ipsum"`;
+
+exports[`I18n Component should render a non-connected component: non-connected 1`] = `
+<I18n
+  fallbackLng="en"
+  loadPath="/locales/{{lng}}.json"
+  locale="es"
+>
+  lorem ipsum
+</I18n>
+`;

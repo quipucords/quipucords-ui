@@ -62,6 +62,7 @@ Object {
 exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
+  "PROD_MODE": false,
   "RH_BRAND": false,
   "TEST_MODE": true,
   "UI_VERSION": "0.0.0.0000000",

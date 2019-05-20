@@ -11,7 +11,7 @@ const connectTranslate = (mapStateToProps, mapDispatchToProps) => component =>
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(withTranslation()(component));
+  )((process.env.REACT_APP_ENV !== 'test' && withTranslation()(component)) || component);
 
 const connectRouterTranslate = (mapStateToProps, mapDispatchToProps) => component =>
   withRouter(connectTranslate(mapStateToProps, mapDispatchToProps)(component));

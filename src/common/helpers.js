@@ -325,6 +325,8 @@ const ipAddressValue = name => {
 
 const DEV_MODE = process.env.REACT_APP_ENV === 'development';
 
+const PROD_MODE = process.env.REACT_APP_ENV === 'production';
+
 const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 
 const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
@@ -354,6 +356,7 @@ const helpers = {
   isIpAddress,
   ipAddressValue,
   DEV_MODE,
+  PROD_MODE,
   TEST_MODE,
   RH_BRAND,
   UI_VERSION
