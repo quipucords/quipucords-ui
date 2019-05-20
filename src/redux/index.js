@@ -6,12 +6,13 @@ import reduxActions from './actions';
 import reduxReducers from './reducers';
 import reduxSelectors from './selectors';
 import reduxTypes from './constants';
+import { helpers } from '../common/helpers';
 
 const connectTranslate = (mapStateToProps, mapDispatchToProps) => component =>
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )((process.env.REACT_APP_ENV !== 'test' && withTranslation()(component)) || component);
+  )((!helpers.TEST_MODE && withTranslation()(component)) || component);
 
 const connectRouterTranslate = (mapStateToProps, mapDispatchToProps) => component =>
   withRouter(connectTranslate(mapStateToProps, mapDispatchToProps)(component));

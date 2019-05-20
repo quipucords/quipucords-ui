@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
 import { initReactI18next } from 'react-i18next';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common/helpers';
 
 /**
  * ToDo: reevaluate the "I18nextProvider" on package update.
