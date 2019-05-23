@@ -97,6 +97,8 @@ const noop = Function.prototype;
 
 const noopPromise = Promise.resolve({});
 
+const noopTranslate = (key, value) => value || `t('${key}')`;
+
 const sourceTypeIcon = sourceType => {
   switch (sourceType) {
     case 'vcenter':
@@ -323,6 +325,8 @@ const ipAddressValue = name => {
 
 const DEV_MODE = process.env.REACT_APP_ENV === 'development';
 
+const PROD_MODE = process.env.REACT_APP_ENV === 'production';
+
 const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 
 const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
@@ -337,6 +341,7 @@ const helpers = {
   generateId,
   noop,
   noopPromise,
+  noopTranslate,
   sourceTypeIcon,
   scanTypeIcon,
   scanStatusIcon,
@@ -351,6 +356,7 @@ const helpers = {
   isIpAddress,
   ipAddressValue,
   DEV_MODE,
+  PROD_MODE,
   TEST_MODE,
   RH_BRAND,
   UI_VERSION

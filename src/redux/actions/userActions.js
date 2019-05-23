@@ -7,10 +7,15 @@ const authorizeUser = () => dispatch =>
     payload: userService.whoami()
   });
 
+const getLocale = () => ({
+  type: userTypes.USER_LOCALE,
+  payload: userService.getLocale()
+});
+
 const logoutUser = () => dispatch =>
   dispatch({
     type: userTypes.USER_LOGOUT,
     payload: userService.logoutUser()
   });
 
-export { authorizeUser, logoutUser };
+export { authorizeUser, getLocale, logoutUser };

@@ -17,7 +17,7 @@ coverage
 build
 dist/
 public/assets
-translations
+
 .css
 templates/client
 styles/*.css

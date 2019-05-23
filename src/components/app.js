@@ -1,8 +1,11 @@
 import React from 'react';
-import { connectRouter } from '../redux';
+import PropTypes from 'prop-types';
+import { connectRouter, reduxActions } from '../redux';
+import { helpers } from '../common/helpers';
+import I18n from './i18n/i18n';
 import Authentication from './authentication/authentication';
-import { ConnectedPageLayout } from './pageLayout/pageLayout';
-import { Router } from './router/router';
+import PageLayout from './pageLayout/pageLayout';
+import Router from './router/router';
 import ToastNotificationsList from './toastNotificationsList/toastNotificationsList';
 import ConfirmationModal from './confirmationModal/confirmationModal';
 import AboutModal from './aboutModal/aboutModal';
@@ -11,25 +14,53 @@ import CreateCredentialDialog from './createCredentialDialog/createCredentialDia
 import CreateScanDialog from './createScanDialog/createScanDialog';
 import MergeReportsDialog from './mergeReportsDialog/mergeReportsDialog';
 
-const App = () => (
-  <Authentication>
-    <ConnectedPageLayout>
-      <Router />
-      <ToastNotificationsList />
-      <ConfirmationModal />
-      <AboutModal />
-      <AddSourceWizard />
-      <CreateCredentialDialog />
-      <CreateScanDialog />
-      <MergeReportsDialog />
-    </ConnectedPageLayout>
-  </Authentication>
-);
+class App extends React.Component {
+  componentDidMount() {
+    const { getLocale } = this.props;
 
-App.propTypes = {};
+    getLocale();
+  }
 
-App.defaultProps = {};
+  render() {
+    const { locale } = this.props;
 
-const ConnectedApp = connectRouter()(App);
+    return (
+      <I18n locale={(locale && locale.value) || null}>
+        <Authentication>
+          <PageLayout>
+            <Router />
+            <ToastNotificationsList />
+            <ConfirmationModal />
+            <AboutModal />
+            <AddSourceWizard />
+            <CreateCredentialDialog />
+            <CreateScanDialog />
+            <MergeReportsDialog />
+          </PageLayout>
+        </Authentication>
+      </I18n>
+    );
+  }
+}
+
+App.propTypes = {
+  getLocale: PropTypes.func,
+  locale: PropTypes.shape({
+    value: PropTypes.string
+  })
+};
+
+App.defaultProps = {
+  getLocale: helpers.noop,
+  locale: {}
+};
+
+const mapDispatchToProps = dispatch => ({
+  getLocale: () => dispatch(reduxActions.user.getLocale())
+});
+
+const mapStateToProps = state => ({ locale: state.user.session.locale });
+
+const ConnectedApp = connectRouter(mapStateToProps, mapDispatchToProps)(App);
 
 export { ConnectedApp as default, ConnectedApp, App };

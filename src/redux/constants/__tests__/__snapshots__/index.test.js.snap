@@ -100,6 +100,7 @@ Object {
     "user": Object {
       "USER_AUTH": "USER_AUTH",
       "USER_INFO": "USER_INFO",
+      "USER_LOCALE": "USER_LOCALE",
       "USER_LOGOUT": "USER_LOGOUT",
     },
     "view": Object {
@@ -209,6 +210,7 @@ Object {
     "user": Object {
       "USER_AUTH": "USER_AUTH",
       "USER_INFO": "USER_INFO",
+      "USER_LOCALE": "USER_LOCALE",
       "USER_LOGOUT": "USER_LOGOUT",
     },
     "view": Object {
@@ -288,6 +290,7 @@ Object {
   "userTypes": Object {
     "USER_AUTH": "USER_AUTH",
     "USER_INFO": "USER_INFO",
+    "USER_LOCALE": "USER_LOCALE",
     "USER_LOGOUT": "USER_LOGOUT",
   },
   "viewPaginationTypes": Object {
@@ -396,6 +399,7 @@ Object {
   "user": Object {
     "USER_AUTH": "USER_AUTH",
     "USER_INFO": "USER_INFO",
+    "USER_LOCALE": "USER_LOCALE",
     "USER_LOGOUT": "USER_LOGOUT",
   },
   "view": Object {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { detect } from 'detect-browser';
 import { AboutModal as PfAboutModal, Button, Icon } from 'patternfly-react';
-import { connect, reduxActions, reduxTypes, store } from '../../redux';
+import { connectTranslate, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import logoImg from '../../styles/images/logo.svg';
 import titleImg from '../../styles/images/title.svg';
@@ -64,7 +64,7 @@ class AboutModal extends React.Component {
 
   render() {
     const { copied } = this.state;
-    const { brand, show, serverVersion, uiVersion, username } = this.props;
+    const { brand, show, serverVersion, t, uiVersion, username } = this.props;
     const browser = detect();
 
     const props = {
@@ -86,13 +86,27 @@ class AboutModal extends React.Component {
       <PfAboutModal {...props}>
         <div ref={this.selectElement} tabIndex={-1} aria-label="Application information copied" aria-live="polite">
           <PfAboutModal.Versions className="quipucords-about-modal-list">
-            {username && <PfAboutModal.VersionItem label="Username" versionText={username || ''} />}
-            {browser && (
-              <PfAboutModal.VersionItem label="Browser Version" versionText={`${browser.name} ${browser.version}`} />
+            {username && (
+              <PfAboutModal.VersionItem label={t('about.username', 'Username')} versionText={username || ''} />
             )}
-            {browser && <PfAboutModal.VersionItem label="Browser OS" versionText={browser.os || ''} />}
-            {serverVersion && <PfAboutModal.VersionItem label="Server Version" versionText={serverVersion} />}
-            {uiVersion && <PfAboutModal.VersionItem label="UI Version" versionText={uiVersion} />}
+            {browser && (
+              <PfAboutModal.VersionItem
+                label={t('about.browserVersion', 'Browser Version')}
+                versionText={`${browser.name} ${browser.version}`}
+              />
+            )}
+            {browser && (
+              <PfAboutModal.VersionItem label={t('about.browserOS', 'Browser OS')} versionText={browser.os || ''} />
+            )}
+            {serverVersion && (
+              <PfAboutModal.VersionItem
+                label={t('about.serverVersion', 'Server Version')}
+                versionText={serverVersion}
+              />
+            )}
+            {uiVersion && (
+              <PfAboutModal.VersionItem label={t('about.uiVersion', 'UI Version')} versionText={uiVersion} />
+            )}
           </PfAboutModal.Versions>
         </div>
         <div className="quipucords-about-modal-copy-footer">
@@ -117,6 +131,7 @@ AboutModal.propTypes = {
   resetTimer: PropTypes.number,
   serverVersion: PropTypes.string,
   show: PropTypes.bool.isRequired,
+  t: PropTypes.func,
   uiVersion: PropTypes.string,
   username: PropTypes.string
 };
@@ -127,6 +142,7 @@ AboutModal.defaultProps = {
   getUser: helpers.noop,
   resetTimer: 3000,
   serverVersion: null,
+  t: helpers.noopTranslate,
   uiVersion: helpers.UI_VERSION,
   username: null
 };
@@ -141,9 +157,6 @@ const mapStateToProps = state => ({
   username: state.user.session.username
 });
 
-const ConnectedAboutModal = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AboutModal);
+const ConnectedAboutModal = connectTranslate(mapStateToProps, mapDispatchToProps)(AboutModal);
 
 export { ConnectedAboutModal as default, ConnectedAboutModal, AboutModal };
