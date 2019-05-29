@@ -70,7 +70,6 @@ Object {
   "createViewQueryObject": [Function],
   "devModeNormalizeCount": [Function],
   "downloadData": [Function],
-  "downloadPackage": [Function],
   "generateId": [Function],
   "getMessageFromResults": [Function],
   "getStatusFromResults": [Function],
