@@ -133,6 +133,7 @@ buildApp()
   checkBuildFilesExist
 
   docker stop -t 0 $CONTAINER >/dev/null
+  docker rmi -f $CONTAINER:latest
 
   echo "Setting up QPC container"
 
