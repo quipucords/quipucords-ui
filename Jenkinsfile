@@ -1,6 +1,4 @@
-def qpc_version = "0.0.47"
-def image_name = "quipucords-ui:${qpc_version}"
-def tarfile = "quipucords-ui.${qpc_version}.tar"
+def tarfile = "quipucords-ui-dist.tar"
 def targzfile = "${tarfile}.gz"
 
 node('f28-os') {
