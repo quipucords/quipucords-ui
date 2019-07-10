@@ -87,25 +87,28 @@ class AboutModal extends React.Component {
         <div ref={this.selectElement} tabIndex={-1} aria-label="Application information copied" aria-live="polite">
           <PfAboutModal.Versions className="quipucords-about-modal-list">
             {username && (
-              <PfAboutModal.VersionItem label={t('about.username', 'Username')} versionText={username || ''} />
+              <PfAboutModal.VersionItem label={t('about-modal.username', 'Username')} versionText={username || ''} />
             )}
             {browser && (
               <PfAboutModal.VersionItem
-                label={t('about.browserVersion', 'Browser Version')}
+                label={t('about-modal.browser-version', 'Browser Version')}
                 versionText={`${browser.name} ${browser.version}`}
               />
             )}
             {browser && (
-              <PfAboutModal.VersionItem label={t('about.browserOS', 'Browser OS')} versionText={browser.os || ''} />
+              <PfAboutModal.VersionItem
+                label={t('about-modal.browser-os', 'Browser OS')}
+                versionText={browser.os || ''}
+              />
             )}
             {serverVersion && (
               <PfAboutModal.VersionItem
-                label={t('about.serverVersion', 'Server Version')}
+                label={t('about-modal.server-version', 'Server Version')}
                 versionText={serverVersion}
               />
             )}
             {uiVersion && (
-              <PfAboutModal.VersionItem label={t('about.uiVersion', 'UI Version')} versionText={uiVersion} />
+              <PfAboutModal.VersionItem label={t('about-modal.ui-version', 'UI Version')} versionText={uiVersion} />
             )}
           </PfAboutModal.Versions>
         </div>

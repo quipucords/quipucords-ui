@@ -47,9 +47,15 @@ class PageLayout extends React.Component {
           <MenuItem eventKey="2" onClick={this.onAbout}>
             About
           </MenuItem>
+          <MenuItem eventKey="3" href="./docs/install.html" target="_blank">
+            Guides - Installing
+          </MenuItem>
+          <MenuItem eventKey="4" href="./docs/use.html" target="_blank">
+            Guides - Using
+          </MenuItem>
         </Masthead.Dropdown>
         <Masthead.Dropdown id="app-user-dropdown" title={title}>
-          <MenuItem eventKey="3" onClick={this.onLogout}>
+          <MenuItem eventKey="5" onClick={this.onLogout}>
             Logout
           </MenuItem>
         </Masthead.Dropdown>
@@ -60,6 +66,13 @@ class PageLayout extends React.Component {
   renderMenuActions() {
     return [
       <VerticalNav.Item key="about" className="collapsed-nav-item" title="About" onClick={this.onAbout} />,
+      <VerticalNav.Item
+        key="install"
+        className="collapsed-nav-item"
+        title="Guide - Install"
+        href="./docs/install.html"
+      />,
+      <VerticalNav.Item key="use" className="collapsed-nav-item" title="Guide - Using" href="./docs/use.html" />,
       <VerticalNav.Item key="logout" className="collapsed-nav-item" title="Logout" onClick={this.onLogout} />
     ];
   }
