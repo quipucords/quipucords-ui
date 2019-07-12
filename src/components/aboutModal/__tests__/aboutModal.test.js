@@ -31,7 +31,9 @@ describe('AboutModal Component', () => {
   it('should contain brand', () => {
     const props = {
       show: true,
-      brand: true
+      uiBrand: true,
+      uiName: 'Lorem ipsum',
+      uiShortName: 'Ipsum'
     };
 
     const component = shallow(<AboutModal {...props} />);
@@ -42,7 +44,7 @@ describe('AboutModal Component', () => {
     const props = {
       show: true,
       serverVersion: '0.0.0.0000000',
-      brand: true,
+      uiBrand: true,
       reset: 100
     };
 

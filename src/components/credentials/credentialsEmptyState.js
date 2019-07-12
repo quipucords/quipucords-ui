@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { Button, DropdownButton, EmptyState, Grid, MenuItem, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
-const CredentialsEmptyState = ({ onAddCredential, onAddSource }) => (
+const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiShortName }) => (
   <Grid fluid>
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat '}discovery</EmptyState.Title>
+        <EmptyState.Title>Welcome to {uiShortName}</EmptyState.Title>
         <EmptyState.Info>
           Credentials contain authentication information needed to scan a source. A credential includes <br />a username
-          and a password or SSH key. Discovery uses SSH to connect to servers <br /> on the network and uses credentials
-          to access those servers.
+          and a password or SSH key. {uiShortName} uses SSH to connect to servers <br /> on the network and uses
+          credentials to access those servers.
         </EmptyState.Info>
         <EmptyState.Action>
           <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
@@ -39,12 +39,14 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource }) => (
 
 CredentialsEmptyState.propTypes = {
   onAddCredential: PropTypes.func,
-  onAddSource: PropTypes.func
+  onAddSource: PropTypes.func,
+  uiShortName: PropTypes.string
 };
 
 CredentialsEmptyState.defaultProps = {
   onAddCredential: helpers.noop,
-  onAddSource: helpers.noop
+  onAddSource: helpers.noop,
+  uiShortName: helpers.UI_SHORT_NAME
 };
 
 export { CredentialsEmptyState as default, CredentialsEmptyState };

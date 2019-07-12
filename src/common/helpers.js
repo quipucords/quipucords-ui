@@ -308,7 +308,11 @@ const PROD_MODE = process.env.REACT_APP_ENV === 'production';
 
 const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 
-const RH_BRAND = process.env.REACT_APP_RH_BRAND === 'true';
+const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
+
+const UI_NAME = process.env.REACT_APP_UI_NAME;
+
+const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
 
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
@@ -336,7 +340,9 @@ const helpers = {
   DEV_MODE,
   PROD_MODE,
   TEST_MODE,
-  RH_BRAND,
+  UI_BRAND,
+  UI_NAME,
+  UI_SHORT_NAME,
   UI_VERSION
 };
 

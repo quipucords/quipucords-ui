@@ -175,9 +175,177 @@ exports[`PageLayout Component should render a non-connected component authorized
 </div>
 `;
 
+exports[`PageLayout Component should render a non-connected component branded: non-connected brand 1`] = `
+<div
+  className="layout-pf layout-pf-fixed fadein"
+>
+  <VerticalNav
+    blurDelay={700}
+    blurDisabled={false}
+    dynamicBodyClasses={true}
+    forceHidden={false}
+    hiddenIcons={false}
+    hideMasthead={false}
+    hoverDelay={500}
+    hoverDisabled={false}
+    items={null}
+    masthead={null}
+    onCollapse={null}
+    onExpand={null}
+    onItemBlur={null}
+    onItemClick={null}
+    onItemHover={null}
+    onItemPin={null}
+    onMenuToggleClick={null}
+    onMobileSelection={null}
+    onNavigate={[Function]}
+    persist={true}
+    persistentSecondary={false}
+    pinnableMenus={false}
+    showBadges={false}
+  >
+    <VerticalNav.Masthead>
+      <VerticalNav.Brand
+        href=""
+        iconImg=""
+        img=""
+        onClick={null}
+        title=""
+        titleImg="title-brand.svg"
+      />
+      <VerticalNav.IconBar
+        collapse={true}
+      >
+        <MastheadDropdown
+          className=""
+          id="app-help-dropdown"
+          noCaret={false}
+          title={
+            <span
+              aria-hidden={true}
+              className="pficon pficon-help"
+            />
+          }
+        >
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="2"
+            header={false}
+            onClick={[Function]}
+          >
+            About
+          </MenuItem>
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="3"
+            header={false}
+            href="./docs/install.html"
+            target="_blank"
+          >
+            Guides - Installing
+          </MenuItem>
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="4"
+            header={false}
+            href="./docs/use.html"
+            target="_blank"
+          >
+            Guides - Using
+          </MenuItem>
+        </MastheadDropdown>
+        <MastheadDropdown
+          className=""
+          id="app-user-dropdown"
+          noCaret={false}
+          title={
+            <React.Fragment>
+              <Icon
+                name="user"
+                type="pf"
+              />
+               
+              lorem
+            </React.Fragment>
+          }
+        >
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="5"
+            header={false}
+            onClick={[Function]}
+          >
+            Logout
+          </MenuItem>
+        </MastheadDropdown>
+      </VerticalNav.IconBar>
+    </VerticalNav.Masthead>
+    <VerticalNav.Item
+      active={true}
+      iconClass="fa fa-crosshairs"
+      key="/sources"
+      onClick={[Function]}
+      title="Sources"
+    />
+    <VerticalNav.Item
+      iconClass="pficon pficon-orders"
+      key="/scans"
+      onClick={[Function]}
+      title="Scans"
+    />
+    <VerticalNav.Item
+      iconClass="fa fa-id-card"
+      key="/credentials"
+      onClick={[Function]}
+      title="Credentials"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      key="about"
+      onClick={[Function]}
+      title="About"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      href="./docs/install.html"
+      key="install"
+      title="Guide - Install"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      href="./docs/use.html"
+      key="use"
+      title="Guide - Using"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      key="logout"
+      onClick={[Function]}
+      title="Logout"
+    />
+  </VerticalNav>
+  <div
+    className="container-pf-nav-pf-vertical"
+  >
+    <span
+      className="test"
+    >
+      lorem
+    </span>
+  </div>
+</div>
+`;
+
 exports[`PageLayout Component should render a non-connected component unauthorized: non-connected unauthorized 1`] = `
 <PageLayout
-  brand={false}
   history={Object {}}
   isFullPage={false}
   location={Object {}}
@@ -211,6 +379,8 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
       "username": "lorem",
     }
   }
+  uiBrand={false}
+  uiName="quipucords"
 >
   <div
     className="layout-pf layout-pf-fixed fadein"
@@ -224,7 +394,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
       onNavToggleClick={[Function]}
       onTitleClick={[Function]}
       thin={false}
-      title="product discovery"
+      title="quipucords"
       titleImg="title.svg"
     >
       <nav
@@ -240,7 +410,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
             role="button"
           >
             <img
-              alt="product discovery"
+              alt="quipucords"
               className="navbar-brand-name"
               src="title.svg"
             />
