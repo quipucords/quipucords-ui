@@ -9,19 +9,23 @@ const cache = {
 
 const serveDocs = (yamlFile = `${process.cwd()}/.qpc/quipucords/docs/swagger.yml`, port = 5050) => {
   if (fs.existsSync(yamlFile)) {
-    const app = express();
+    try {
+      const app = express();
 
-    app.use('/docs/api', swaggerUi.serve, swaggerUi.setup(YAML.load(yamlFile)));
+      app.use('/docs/api', swaggerUi.serve, swaggerUi.setup(YAML.load(yamlFile)));
 
-    app.listen(port, () => {
-      console.log(`\nYou can now view API docs in the browser.\n  Open: http://localhost:${port}/docs/api\n`);
+      app.listen(port, () => {
+        console.log(`\nYou can now view API docs in the browser.\n  Open: http://localhost:${port}/docs/api\n`);
 
-      swaggerParser.validate(yamlFile, err => {
-        if (err) {
-          console.error(`  \x1b[31m${err.name}\n  \x1b[31m${err.message}\x1b[0m\n`);
-        }
+        swaggerParser.validate(yamlFile, err => {
+          if (err) {
+            console.error(`  \x1b[31m${err.name}\n  \x1b[31m${err.message}\x1b[0m\n`);
+          }
+        });
       });
-    });
+    } catch (e) {
+      console.error(`\x1b[31mSwagger ERROR...\x1b[0m\n${JSON.stringify(e, null, 2)}`);
+    }
   } else if (cache.tryAgainCount < 10) {
     setTimeout(() => {
       console.info(`Locating swagger.yml...`);

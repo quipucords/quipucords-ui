@@ -9,14 +9,16 @@ const buildDocs = () => {
   try {
     const installFile = installDocFileOutput;
     const useFile = useDocFileOutput;
-    const isBrand = !!process.env.REACT_APP_RH_BRAND;
+    const isBrand = process.argv.slice(2)[0] === '-b';
     const installContent = (isBrand && install['index-brand'].content) || install.index.content;
     const userContent = (isBrand && user['index-brand'].content) || user.index.content;
 
     fs.writeFileSync(installFile, installContent);
     fs.writeFileSync(useFile, userContent);
+
+    console.info(`Building docs... DOCS_BRAND=${isBrand}...Complete`);
   } catch (e) {
-    console.warn('Docs build error:', e.message);
+    console.error(`\x1b[31mDocs build error: ${e.message}\x1b[0m`);
   }
 };
 
@@ -32,8 +34,10 @@ const buildEa = () => {
     Object.keys(eaJSON).forEach(key => {
       fs.writeFileSync(`${dir}${key}.json`, JSON.stringify(eaJSON[key], null, 2));
     });
+
+    console.info(`Building locale files...Complete`);
   } catch (e) {
-    console.warn('EA build error:', e.message);
+    console.error(`\x1b[31mLocale build error: ${e.message}\x1b[0m`);
   }
 };
 
