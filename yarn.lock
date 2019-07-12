@@ -8736,7 +8736,7 @@ quick-lru@^1.0.0:
 
 "quipudocs@https://github.com/quipucords/quipudocs.git#master":
   version "0.0.0"
-  resolved "https://github.com/quipucords/quipudocs.git#88e279d3cb97791a68c2000286847652ee70243a"
+  resolved "https://github.com/quipucords/quipudocs.git#fa39f9d42fa5c4e50d44c074ff7c47083ec90690"
 
 raf@3.4.0:
   version "3.4.0"

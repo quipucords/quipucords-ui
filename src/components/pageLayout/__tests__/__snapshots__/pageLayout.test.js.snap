@@ -68,6 +68,28 @@ exports[`PageLayout Component should render a non-connected component authorized
           >
             About
           </MenuItem>
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="3"
+            header={false}
+            href="./docs/install.html"
+            target="_blank"
+          >
+            Guides - Installing
+          </MenuItem>
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            eventKey="4"
+            header={false}
+            href="./docs/use.html"
+            target="_blank"
+          >
+            Guides - Using
+          </MenuItem>
         </MastheadDropdown>
         <MastheadDropdown
           className=""
@@ -88,7 +110,7 @@ exports[`PageLayout Component should render a non-connected component authorized
             bsClass="dropdown"
             disabled={false}
             divider={false}
-            eventKey="3"
+            eventKey="5"
             header={false}
             onClick={[Function]}
           >
@@ -121,6 +143,18 @@ exports[`PageLayout Component should render a non-connected component authorized
       key="about"
       onClick={[Function]}
       title="About"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      href="./docs/install.html"
+      key="install"
+      title="Guide - Install"
+    />
+    <VerticalNav.Item
+      className="collapsed-nav-item"
+      href="./docs/use.html"
+      key="use"
+      title="Guide - Using"
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
