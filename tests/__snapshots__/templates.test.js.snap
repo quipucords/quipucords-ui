@@ -105,7 +105,7 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 {% endblock %}
 
 {% block pagetitle %}
-{% trans \\"product discovery\\" %}
+{% trans \\"{{UI_NAME}}\\" %}
 {% endblock %}
 
 {% block pagelogo %}
@@ -113,7 +113,7 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\">
+<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\">
 {% endblock %}
 
 {% block content %}
@@ -159,7 +159,7 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 
 {% block description %}
 <p>
-  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  <strong>{% trans \\"Welcome to {{UI_NAME}}!\\" %}</strong>
   This inspection and reporting tool is designed to identify and report environment
   data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.
@@ -182,7 +182,7 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% endblock %}
 
 {% block pagetitle %}
-{% trans \\"product discovery\\" %}
+{% trans \\"{{UI_NAME}}\\" %}
 {% endblock %}
 
 {% block pagelogo %}
@@ -190,7 +190,7 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\" />
+<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\" />
 {% endblock %}
 
 {% block content %}
@@ -233,7 +233,7 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 
 {% block description %}
 <p>
-  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  <strong>{% trans \\"Welcome to {{UI_NAME}}!\\" %}</strong>
   This inspection and reporting tool is designed to identify and report environment
   data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.
