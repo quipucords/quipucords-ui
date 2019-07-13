@@ -109,11 +109,11 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 {% endblock %}
 
 {% block pagelogo %}
-<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\"/>
+<img src=\\"{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\"/>
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\">
+<img src=\\"{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\">
 {% endblock %}
 
 {% block content %}
@@ -186,11 +186,11 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% endblock %}
 
 {% block pagelogo %}
-<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\" />
+<img src=\\"{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\" />
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\" />
+<img src=\\"{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\" />
 {% endblock %}
 
 {% block content %}

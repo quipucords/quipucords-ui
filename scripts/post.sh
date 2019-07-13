@@ -32,6 +32,30 @@ templatesDisplayName()
 }
 #
 #
+# Update template graphics. Replace {{UI_BRAND_LABEL}} tokens for graphic display in template resources
+#
+templatesGraphics()
+{
+  local FILE=$TEMP_FILE
+  local UI_BRAND="$(readDotEnv "UI_BRAND" $FILE)"
+  local UI_BRAND_LABEL=""
+
+  if [ "$UI_BRAND" = true ]; then
+    UI_BRAND_LABEL="-brand"
+  fi
+
+  printf "Updating graphics... UI_BRAND_LABEL=${UI_BRAND_LABEL}..."
+
+  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/" ./dist/templates/registration/login.html
+  rm ./dist/templates/registration/login.html.bak
+
+  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/" ./dist/templates/registration/logged_out.html
+  rm ./dist/templates/registration/logged_out.html.bak
+
+  printf "Completed\n"
+}
+#
+#
 #
 #
 updateDistribution()
@@ -65,5 +89,6 @@ updateDistribution()
   TEMP_FILE="$(pwd)/.env.production.local"
 
   updateDistribution
+  templatesGraphics
   templatesDisplayName
 }
