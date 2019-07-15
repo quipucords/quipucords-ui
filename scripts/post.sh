@@ -46,10 +46,10 @@ templatesGraphics()
 
   printf "Updating graphics... UI_BRAND_LABEL=${UI_BRAND_LABEL}..."
 
-  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/" ./dist/templates/registration/login.html
+  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/g" ./dist/templates/registration/login.html
   rm ./dist/templates/registration/login.html.bak
 
-  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/" ./dist/templates/registration/logged_out.html
+  sed -i.bak -e "s/{{UI_BRAND_LABEL}}/${UI_BRAND_LABEL}/g" ./dist/templates/registration/logged_out.html
   rm ./dist/templates/registration/logged_out.html.bak
 
   printf "Completed\n"
