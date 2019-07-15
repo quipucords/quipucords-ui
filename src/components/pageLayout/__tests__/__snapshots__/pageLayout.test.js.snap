@@ -380,7 +380,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
     }
   }
   uiBrand={false}
-  uiName="quipucords"
+  uiName="Quipucords"
 >
   <div
     className="layout-pf layout-pf-fixed fadein"
@@ -394,7 +394,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
       onNavToggleClick={[Function]}
       onTitleClick={[Function]}
       thin={false}
-      title="quipucords"
+      title="Quipucords"
       titleImg="title.svg"
     >
       <nav
@@ -410,7 +410,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
             role="button"
           >
             <img
-              alt="quipucords"
+              alt="Quipucords"
               className="navbar-brand-name"
               src="title.svg"
             />

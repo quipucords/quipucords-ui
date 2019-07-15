@@ -68,13 +68,13 @@ Object {
 
 exports[`AboutModal Component should render a connected component with default props: connected 1`] = `
 <AboutModal
-  altLogo="quipucords"
+  altLogo="Quipucords"
   className=""
   logo="logo.svg"
   onHide={[Function]}
   productTitle={
     <img
-      alt="quipucords"
+      alt="Quipucords"
       src="title.svg"
     />
   }
@@ -137,19 +137,19 @@ exports[`AboutModal Component should render a non-connected component: hidden mo
   show={false}
   t={[Function]}
   uiBrand={false}
-  uiName="quipucords"
-  uiShortName="quipucords"
+  uiName="Quipucords"
+  uiShortName="Quipucords"
   uiVersion="0.0.0.0000000"
   username="admin"
 >
   <AboutModal
-    altLogo="quipucords"
+    altLogo="Quipucords"
     className=""
     logo="logo.svg"
     onHide={[Function]}
     productTitle={
       <img
-        alt="quipucords"
+        alt="Quipucords"
         src="title.svg"
       />
     }
