@@ -21,20 +21,24 @@ brand()
   local FILE=$TEMP_FILE
   local NAME="$(readDotEnv "REACT_APP_UI_NAME" "$(pwd)/.env")"
   local SHORT_NAME="$(readDotEnv "REACT_APP_UI_SHORT_NAME" "$(pwd)/.env")"
+  local SENTENCE_START_NAME="$(readDotEnv "REACT_APP_UI_SENTENCE_START_NAME" "$(pwd)/.env")"
 
   if [ "$BRAND" = true ]; then
     NAME="$(readDotEnv "REACT_APP_UI_BRAND_NAME" "$(pwd)/.env")"
     SHORT_NAME="$(readDotEnv "REACT_APP_UI_BRAND_SHORT_NAME" "$(pwd)/.env")"
+    SENTENCE_START_NAME="$(readDotEnv "REACT_APP_UI_BRAND_SENTENCE_START_NAME" "$(pwd)/.env")"
   fi
 
   # todo: look at exporting these values, appears npm-run-all may spawn subshells that interfere with exporting
   echo UI_BRAND="$BRAND" >> $FILE;
   echo UI_NAME="$NAME" >> $FILE;
   echo UI_SHORT_NAME="$SHORT_NAME" >> $FILE;
+  echo UI_SENTENCE_START_NAME="$SENTENCE_START_NAME" >> $FILE;
 
   echo "Brand... UI_BRAND=$BRAND"
   echo "App name... UI_NAME=$NAME"
   echo "App short name... UI_SHORT_NAME=$SHORT_NAME"
+  echo "App sentence start name... UI_SENTENCE_START_NAME=$SENTENCE_START_NAME"
 }
 #
 #

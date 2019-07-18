@@ -312,6 +312,8 @@ const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
 
 const UI_NAME = process.env.REACT_APP_UI_NAME;
 
+const UI_SENTENCE_START_NAME = process.env.REACT_APP_UI_SENTENCE_START_NAME;
+
 const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
 
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
@@ -342,6 +344,7 @@ const helpers = {
   TEST_MODE,
   UI_BRAND,
   UI_NAME,
+  UI_SENTENCE_START_NAME,
   UI_SHORT_NAME,
   UI_VERSION
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, DropdownButton, EmptyState, Grid, MenuItem, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
-const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiShortName }) => (
+const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiSentenceStartName, uiShortName }) => (
   <Grid fluid>
     <Row>
       <EmptyState className="full-page-blank-slate">
@@ -11,7 +11,7 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiShortName }) =>
         <EmptyState.Title>Welcome to {uiShortName}</EmptyState.Title>
         <EmptyState.Info>
           Credentials contain authentication information needed to scan a source. A credential includes <br />a username
-          and a password or SSH key. {uiShortName} uses SSH to connect to servers <br /> on the network and uses
+          and a password or SSH key. {uiSentenceStartName} uses SSH to connect to servers <br /> on the network and uses
           credentials to access those servers.
         </EmptyState.Info>
         <EmptyState.Action>
@@ -40,12 +40,14 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiShortName }) =>
 CredentialsEmptyState.propTypes = {
   onAddCredential: PropTypes.func,
   onAddSource: PropTypes.func,
+  uiSentenceStartName: PropTypes.string,
   uiShortName: PropTypes.string
 };
 
 CredentialsEmptyState.defaultProps = {
   onAddCredential: helpers.noop,
   onAddSource: helpers.noop,
+  uiSentenceStartName: helpers.UI_SENTENCE_START_NAME,
   uiShortName: helpers.UI_SHORT_NAME
 };
 
