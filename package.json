@@ -68,7 +68,7 @@
     "start:stage": "open https://localhost:5001/login/; run-s api:build && run-p -l api:stage watch:css start:ui-stage",
     "start:ui-stage": "sh -ac '. ./.env;. ./.env.staging; react-app-rewired start'",
     "test": "run-s test:lint test:ci",
-    "test:ci": "CI=true; react-scripts test --env=jsdom --coverage",
+    "test:ci": "export CI=true; react-scripts test --env=jsdom --coverage",
     "test:clearCache": "react-scripts test -- --clearCache",
     "test:dev": "run-s test:lint test:unit",
     "test:docs": "htmlhint ./public/docs; eslint --ext=json ./public/locales",

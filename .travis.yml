@@ -1,13 +1,17 @@
 language: node_js
 
+node_js:
+  - "10"
+
 cache: yarn
 
 jobs:
   include:
-    - stage: test
-      env:
-        - NAME=yarn
-      node_js: "10"
-      before_script: yarn global add codecov
-      script: yarn test
+    - stage: Test
+      script: yarn test:lint
+    - before_script: yarn global add codecov
+      script: yarn test:ci
       after_success: codecov
+    - stage: Build
+      script: yarn build
+    - script: yarn build:brand
