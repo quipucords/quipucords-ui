@@ -9,7 +9,7 @@ Web user interface for [Quipucords](https://github.com/quipucords/quipucords), b
 Before developing for Quipucords UI, the basic requirements:
  * Your system needs to be running [NodeJS version 10+](https://nodejs.org/)
  * [Docker](https://docs.docker.com/engine/installation/)
- * And [Yarn 1.12+](https://yarnpkg.com) for dependency and script management.
+ * And [Yarn 1.13+](https://yarnpkg.com) for dependency and script management.
 
 ### Docker & Mac
 Setting Docker up on a Mac? Install the appropriate package and you should be good to go. To check if everything installed correctly you can try these steps.
@@ -31,7 +31,7 @@ Setting Docker up on a Linux machine can include an additional convenience step.
   $ brew install yarn
   ```
 
-## Development
+## Development, Quick Start
 
 ### Installing
   1. Clone the repository
@@ -39,80 +39,31 @@ Setting Docker up on a Linux machine can include an additional convenience step.
      $ git clone https://github.com/quipucords/quipucords-ui.git
      ```
 
-  1. Within the Quipucords UI repo, install project dependencies
+  1. Install project dependencies
      ```
-     $ yarn
+     $ cd quipucords-ui && yarn
      ```
 
 ### Serving Content
 
 #### Development Serve, local UI with mock API
-This is the default context for running a local UI with a local mock API. You need the base Quipucords UI requirements to run this context. 
+This is the default context for running a local UI with a randomized mock API. 
 
 Make sure **Docker** is running, then run
   ```
   $ yarn start
   ```
-There are limitations in running against the mock serve, accuracy in API responses is much more lenient. This means server responses may not throw the appropriate errors where needed.
 
-#### Staging serve, local UI with API
-This is the context for running a local UI with the API. You need the base Quipucords UI requirements to run this context. 
+For in-depth local run guidance review the [contribution guidelines](./CONTRIBUTING.md#Serving%20Content)
 
-Make sure **Docker** is running, then run
-  ```
-  $ yarn start:stage
-  ```
+### Testing
+Run the tests with coverage.
 
-#### Review serve, compiled UI with API
-This is the context for running the compiled UI with the API. You need the base Quipucords UI requirements to run this context. 
-
-Make sure **Docker** is running, then run
-  ```
-  $ yarn start:review
-  ```
-  
-### Testing and Debugging
-
-#### Debugging Redux
-This project makes use of React & Redux. To enable Redux console logging, within the repository root directory, add a `.env.local` (dotenv) file with the follow line
-  ```
-  REACT_APP_DEBUG_MIDDLEWARE=true
-  ```
-
-Once you've made the change, restart the project and console browser logging should appear.
-
-
-*Any changes you make to the `.env.local` file should be ignored with `.gitignore`.*
-
-#### Unit Testing
-To run the unit tests with a watch during development you'll need to open an additional terminal instance, then run
-  ```
-  $ yarn test:dev
-  ```
-
-##### Updating snapshots
-To update snapshots from the terminal run 
-  ```
-  $ yarn test:dev
-  ```
-  
-From there you'll be presented with a few choices, one of them is "update", you can then hit the "u" key. Once the update script has run you should see additional changed files within Git, make sure to commit them along with your changes or testing will fail.
-
-##### Checking code coverage
-To check the coverage report from the terminal run
   ```
   $ yarn test
   ```
   
-##### Code coverage failing to update?
-If you're having trouble getting an accurate code coverage report, or it's failing to provide updated results (i.e. you renamed files) you can try running
-  ```
-  $ yarn test:clearCache
-  ```
-
-### Running with the Quipucords API toolset locally
-
-Quipucords UI is the web user interface for [Quipucords](https://github.com/quipucords/quipucords). Please refer to [Quipucords](https://github.com/quipucords/quipucords) for up to date instructions on how to run.
+For in-depth testing guidance review the [contribution guidelines](./CONTRIBUTING.md#Testing)
 
 ## Contributing
-Contributing to Quipucords UI encompasses repository specific requirements and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.rst).
+Contributing to Quipucords UI encompasses [repository specific requirements](./CONTRIBUTING.md)  and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.md).

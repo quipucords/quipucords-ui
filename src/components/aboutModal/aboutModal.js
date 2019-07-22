@@ -64,21 +64,20 @@ class AboutModal extends React.Component {
 
   render() {
     const { copied } = this.state;
-    const { brand, show, serverVersion, t, uiVersion, username } = this.props;
+    const { show, serverVersion, t, uiBrand, uiName, uiShortName, uiVersion, username } = this.props;
     const browser = detect();
 
     const props = {
       show,
       onHide: this.onClose,
       logo: logoImg,
-      productTitle: <img src={titleImg} alt="product discovery" />,
-      altLogo: 'ER'
+      productTitle: <img src={titleImg} alt={uiName} />,
+      altLogo: uiShortName
     };
 
-    if (brand) {
+    if (uiBrand) {
       props.logo = logoImgBrand;
-      props.productTitle = <img src={titleImgBrand} alt="Red Hat product discovery" />;
-      props.altLogo = 'RH ER';
+      props.productTitle = <img src={titleImgBrand} alt={uiName} />;
       props.trademarkText = 'Copyright (c) 2019 Red Hat Inc.';
     }
 
@@ -128,24 +127,28 @@ class AboutModal extends React.Component {
 }
 
 AboutModal.propTypes = {
-  brand: PropTypes.bool,
   getStatus: PropTypes.func,
   getUser: PropTypes.func,
   resetTimer: PropTypes.number,
   serverVersion: PropTypes.string,
   show: PropTypes.bool.isRequired,
   t: PropTypes.func,
+  uiBrand: PropTypes.bool,
+  uiName: PropTypes.string,
+  uiShortName: PropTypes.string,
   uiVersion: PropTypes.string,
   username: PropTypes.string
 };
 
 AboutModal.defaultProps = {
-  brand: helpers.RH_BRAND,
   getStatus: helpers.noop,
   getUser: helpers.noop,
   resetTimer: 3000,
   serverVersion: null,
   t: helpers.noopTranslate,
+  uiBrand: helpers.UI_BRAND,
+  uiName: helpers.UI_NAME,
+  uiShortName: helpers.UI_SHORT_NAME,
   uiVersion: helpers.UI_VERSION,
   username: null
 };

@@ -51,4 +51,21 @@ describe('PageLayout Component', () => {
 
     expect(component).toMatchSnapshot('non-connected authorized');
   });
+
+  it('should render a non-connected component branded', () => {
+    const props = {
+      session: {
+        authorized: true,
+        username: 'lorem'
+      },
+      uiBrand: true
+    };
+    const component = shallow(
+      <PageLayout {...props}>
+        <span className="test">lorem</span>
+      </PageLayout>
+    );
+
+    expect(component).toMatchSnapshot('non-connected brand');
+  });
 });

@@ -21,7 +21,7 @@ exports[`SourcesEmptyState Component should render a basic component 1`] = `
       <h4
         class="h1 blank-slate-pf-title"
       >
-        Welcome to discovery
+        Welcome to Quipucords
       </h4>
       <p
         class="blank-slate-pf-info"
@@ -45,4 +45,17 @@ exports[`SourcesEmptyState Component should render a basic component 1`] = `
     </div>
   </div>
 </div>
+`;
+
+exports[`SourcesEmptyState Component should render the application name: application name 1`] = `
+<EmptyStateTitle
+  className=""
+>
+  <h4
+    className="h1 blank-slate-pf-title"
+  >
+    Welcome to 
+    Ipsum
+  </h4>
+</EmptyStateTitle>
 `;

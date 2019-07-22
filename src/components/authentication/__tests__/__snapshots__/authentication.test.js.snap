@@ -53,7 +53,6 @@ exports[`Authentication Component should render a non-connected component error:
   }
 >
   <PageLayout
-    brand={false}
     history={Object {}}
     isFullPage={false}
     location={Object {}}
@@ -87,6 +86,8 @@ exports[`Authentication Component should render a non-connected component error:
         "username": "",
       }
     }
+    uiBrand={false}
+    uiName="Quipucords"
   >
     <div
       className="layout-pf layout-pf-fixed fadein"
@@ -100,7 +101,7 @@ exports[`Authentication Component should render a non-connected component error:
         onNavToggleClick={[Function]}
         onTitleClick={[Function]}
         thin={false}
-        title="product discovery"
+        title="Quipucords"
         titleImg="title.svg"
       >
         <nav
@@ -116,7 +117,7 @@ exports[`Authentication Component should render a non-connected component error:
               role="button"
             >
               <img
-                alt="product discovery"
+                alt="Quipucords"
                 className="navbar-brand-name"
                 src="title.svg"
               />
