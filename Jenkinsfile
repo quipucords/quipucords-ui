@@ -52,6 +52,7 @@ pipeline {
                 sh "npm -v"
                 sh "sudo npm install yarn -g"
                 sh "yarn --non-interactive"
+                sh "yarn upgrade --pattern quipudocs"
             }
         }
         stage ('Test Client') {
