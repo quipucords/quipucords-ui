@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`i18n locale should generate a predictable pot output snapshot: pot output 1`] = `
+"msgid \\"\\"
+msgstr \\"\\"
+\\"Content-Type: text/plain; charset=UTF-8\\\\n\\"
+
+#: src/components/aboutModal/aboutModal.js:99
+msgctxt \\"Browser OS\\"
+msgid \\"about-modal.browser-os\\"
+msgstr \\"\\"
+
+#: src/components/aboutModal/aboutModal.js:93
+msgctxt \\"Browser Version\\"
+msgid \\"about-modal.browser-version\\"
+msgstr \\"\\"
+
+#: src/components/aboutModal/aboutModal.js:105
+msgctxt \\"Server Version\\"
+msgid \\"about-modal.server-version\\"
+msgstr \\"\\"
+
+#: src/components/aboutModal/aboutModal.js:110
+msgctxt \\"UI Version\\"
+msgid \\"about-modal.ui-version\\"
+msgstr \\"\\"
+
+#: src/components/aboutModal/aboutModal.js:89
+msgctxt \\"Username\\"
+msgid \\"about-modal.username\\"
+msgstr \\"\\"
+"
+`;

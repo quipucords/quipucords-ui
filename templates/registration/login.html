@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block pagetitle %}
-{% trans "product discovery" %}
+{% trans "{{UI_NAME}}" %}
 {% endblock %}
 
 {% block pagelogo %}
-<img src="{% static '/assets/images/logo.svg' %}" alt="logo" style="height: 40px;"/>
+<img src="{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}" alt="logo" style="height: 40px;"/>
 {% endblock %}
 
 {% block title %}
-<img src="{% static '/assets/images/title.svg' %}" alt="{% trans "product discovery" %}">
+<img class="login-title-img{{UI_BRAND_LABEL}}"  src="{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}" alt="{% trans "{{UI_NAME}}" %}">
 {% endblock %}
 
 {% block content %}
@@ -64,7 +64,7 @@
 
 {% block description %}
 <p>
-  <strong>{% trans "Welcome to product discovery!" %}</strong>
+  <strong>{% trans "Welcome to {{UI_NAME}}!" %}</strong>
   This inspection and reporting tool is designed to identify and report environment
   data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.

@@ -4,6 +4,13 @@
   color: $color-pf-white;
 }
 
-#brand.login-title img {
+#brand.login-title img {}
+
+#brand img.login-title-img {
+  min-width: 200px;
+  max-width: 380px;
+}
+
+#brand img.login-title-img-brand {
   width: 38%;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { EmptyState } from 'patternfly-react';
 import CredentialsEmptyState from '../credentialsEmptyState';
 
 describe('CredentialsEmptyState Component', () => {
@@ -9,5 +10,14 @@ describe('CredentialsEmptyState Component', () => {
     const component = mount(<CredentialsEmptyState {...props} />);
 
     expect(component.render()).toMatchSnapshot();
+  });
+
+  it('should render the application name', () => {
+    const props = {
+      uiShortName: 'Ipsum'
+    };
+
+    const component = mount(<CredentialsEmptyState {...props} />);
+    expect(component.find(EmptyState.Title)).toMatchSnapshot('application name');
   });
 });

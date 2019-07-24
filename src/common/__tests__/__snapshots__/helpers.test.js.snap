@@ -63,8 +63,11 @@ exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
   "PROD_MODE": false,
-  "RH_BRAND": false,
   "TEST_MODE": true,
+  "UI_BRAND": false,
+  "UI_NAME": "Quipucords",
+  "UI_SENTENCE_START_NAME": "The Quipucords tool",
+  "UI_SHORT_NAME": "Quipucords",
   "UI_VERSION": "0.0.0.0000000",
   "copyClipboard": [Function],
   "createViewQueryObject": [Function],

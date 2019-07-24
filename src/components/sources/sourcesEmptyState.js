@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Button, EmptyState, Grid, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
-const SourcesEmptyState = ({ onAddSource }) => (
+const SourcesEmptyState = ({ onAddSource, uiShortName }) => (
   <Grid fluid className="fadein">
     <Row>
       <EmptyState className="full-page-blank-slate">
         <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {helpers.RH_BRAND && 'Red Hat '}discovery</EmptyState.Title>
+        <EmptyState.Title>Welcome to {uiShortName}</EmptyState.Title>
         <EmptyState.Info>
           Begin by adding one or more sources. A source contains a collection of network information, <br />
           including systems management solution information, IP addresses, or host names, in addition to <br />
@@ -25,11 +25,13 @@ const SourcesEmptyState = ({ onAddSource }) => (
 );
 
 SourcesEmptyState.propTypes = {
-  onAddSource: PropTypes.func
+  onAddSource: PropTypes.func,
+  uiShortName: PropTypes.string
 };
 
 SourcesEmptyState.defaultProps = {
-  onAddSource: helpers.noop
+  onAddSource: helpers.noop,
+  uiShortName: helpers.UI_SHORT_NAME
 };
 
 export { SourcesEmptyState as default, SourcesEmptyState };

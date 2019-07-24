@@ -33,7 +33,7 @@ exports[`Templates should contain templates with a specific output: base 1`] = `
         <div class=\\"col-sm-12\\">
           <div id=\\"brand\\" class=\\"login-title\\">
             {% block title %}
-            <img src=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/img/brand.svg\\" alt=\\"PatternFly Enterprise Application\\">
+            <img class=\\"login-title-img\\" src=\\"//cdnjs.cloudflare.com/ajax/libs/patternfly/3.54.8/img/brand.svg\\" alt=\\"PatternFly Enterprise Application\\">
             {% endblock %}
           </div>
         </div>
@@ -105,15 +105,15 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 {% endblock %}
 
 {% block pagetitle %}
-{% trans \\"product discovery\\" %}
+{% trans \\"{{UI_NAME}}\\" %}
 {% endblock %}
 
 {% block pagelogo %}
-<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\"/>
+<img src=\\"{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\"/>
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\">
+<img class=\\"login-title-img{{UI_BRAND_LABEL}}\\"  src=\\"{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\">
 {% endblock %}
 
 {% block content %}
@@ -159,7 +159,7 @@ exports[`Templates should contain templates with a specific output: login 1`] = 
 
 {% block description %}
 <p>
-  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  <strong>{% trans \\"Welcome to {{UI_NAME}}!\\" %}</strong>
   This inspection and reporting tool is designed to identify and report environment
   data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.
@@ -182,15 +182,15 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 {% endblock %}
 
 {% block pagetitle %}
-{% trans \\"product discovery\\" %}
+{% trans \\"{{UI_NAME}}\\" %}
 {% endblock %}
 
 {% block pagelogo %}
-<img src=\\"{% static '/assets/images/logo.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\" />
+<img src=\\"{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"logo\\" style=\\"height: 40px;\\" />
 {% endblock %}
 
 {% block title %}
-<img src=\\"{% static '/assets/images/title.svg' %}\\" alt=\\"{% trans \\"product discovery\\" %}\\" />
+<img class=\\"login-title-img{{UI_BRAND_LABEL}}\\" src=\\"{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}\\" alt=\\"{% trans \\"{{UI_NAME}}\\" %}\\" />
 {% endblock %}
 
 {% block content %}
@@ -233,7 +233,7 @@ exports[`Templates should contain templates with a specific output: logout 1`] =
 
 {% block description %}
 <p>
-  <strong>{% trans \\"Welcome to product discovery!\\" %}</strong>
+  <strong>{% trans \\"Welcome to {{UI_NAME}}!\\" %}</strong>
   This inspection and reporting tool is designed to identify and report environment
   data, or facts, such as the number of physical and virtual systems on a network, their operating systems,
   and other configuration data.

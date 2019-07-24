@@ -64,21 +64,20 @@ class AboutModal extends React.Component {
 
   render() {
     const { copied } = this.state;
-    const { brand, show, serverVersion, t, uiVersion, username } = this.props;
+    const { show, serverVersion, t, uiBrand, uiName, uiShortName, uiVersion, username } = this.props;
     const browser = detect();
 
     const props = {
       show,
       onHide: this.onClose,
       logo: logoImg,
-      productTitle: <img src={titleImg} alt="product discovery" />,
-      altLogo: 'ER'
+      productTitle: <img src={titleImg} alt={uiName} />,
+      altLogo: uiShortName
     };
 
-    if (brand) {
+    if (uiBrand) {
       props.logo = logoImgBrand;
-      props.productTitle = <img src={titleImgBrand} alt="Red Hat product discovery" />;
-      props.altLogo = 'RH ER';
+      props.productTitle = <img src={titleImgBrand} alt={uiName} />;
       props.trademarkText = 'Copyright (c) 2019 Red Hat Inc.';
     }
 
@@ -87,25 +86,28 @@ class AboutModal extends React.Component {
         <div ref={this.selectElement} tabIndex={-1} aria-label="Application information copied" aria-live="polite">
           <PfAboutModal.Versions className="quipucords-about-modal-list">
             {username && (
-              <PfAboutModal.VersionItem label={t('about.username', 'Username')} versionText={username || ''} />
+              <PfAboutModal.VersionItem label={t('about-modal.username', 'Username')} versionText={username || ''} />
             )}
             {browser && (
               <PfAboutModal.VersionItem
-                label={t('about.browserVersion', 'Browser Version')}
+                label={t('about-modal.browser-version', 'Browser Version')}
                 versionText={`${browser.name} ${browser.version}`}
               />
             )}
             {browser && (
-              <PfAboutModal.VersionItem label={t('about.browserOS', 'Browser OS')} versionText={browser.os || ''} />
+              <PfAboutModal.VersionItem
+                label={t('about-modal.browser-os', 'Browser OS')}
+                versionText={browser.os || ''}
+              />
             )}
             {serverVersion && (
               <PfAboutModal.VersionItem
-                label={t('about.serverVersion', 'Server Version')}
+                label={t('about-modal.server-version', 'Server Version')}
                 versionText={serverVersion}
               />
             )}
             {uiVersion && (
-              <PfAboutModal.VersionItem label={t('about.uiVersion', 'UI Version')} versionText={uiVersion} />
+              <PfAboutModal.VersionItem label={t('about-modal.ui-version', 'UI Version')} versionText={uiVersion} />
             )}
           </PfAboutModal.Versions>
         </div>
@@ -125,24 +127,28 @@ class AboutModal extends React.Component {
 }
 
 AboutModal.propTypes = {
-  brand: PropTypes.bool,
   getStatus: PropTypes.func,
   getUser: PropTypes.func,
   resetTimer: PropTypes.number,
   serverVersion: PropTypes.string,
   show: PropTypes.bool.isRequired,
   t: PropTypes.func,
+  uiBrand: PropTypes.bool,
+  uiName: PropTypes.string,
+  uiShortName: PropTypes.string,
   uiVersion: PropTypes.string,
   username: PropTypes.string
 };
 
 AboutModal.defaultProps = {
-  brand: helpers.RH_BRAND,
   getStatus: helpers.noop,
   getUser: helpers.noop,
   resetTimer: 3000,
   serverVersion: null,
   t: helpers.noopTranslate,
+  uiBrand: helpers.UI_BRAND,
+  uiName: helpers.UI_NAME,
+  uiShortName: helpers.UI_SHORT_NAME,
   uiVersion: helpers.UI_VERSION,
   username: null
 };
