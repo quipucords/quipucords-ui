@@ -8758,7 +8758,7 @@ quick-lru@^1.0.0:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
 
-"quipudocs@https://github.com/quipucords/quipudocs.git#master":
+"quipudocs@https://github.com/quipucords/quipudocs.git#^0.9.1":
   version "0.0.0"
   resolved "https://github.com/quipucords/quipudocs.git#fa39f9d42fa5c4e50d44c074ff7c47083ec90690"
 
