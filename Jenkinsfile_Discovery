@@ -21,7 +21,7 @@ node('f28-os') {
         sh "yarn test"
     }
     stage('Build Client') {
-        sh "yarn build:build"
+        sh "yarn build:brand"
     }
     stage('Distribute Client Build') {
         sh "sudo tar -cvf $tarfile dist/*"
