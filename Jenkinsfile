@@ -2,7 +2,6 @@ pipeline {
     agent { label 'f28-os' }
 
     environment {
-
         qpc_version = "${params.version_name}"
         image_name = "quipucords-ui:${qpc_version}"
         tarfile = "quipucords-ui.${qpc_version}.tar"
@@ -62,7 +61,7 @@ pipeline {
         }
         stage('Build Client') {
             steps {
-                sh "yarn build"
+                sh "yarn build ${UI_BUILD_FLAGS}"
             }
         }
         stage('Distribute Client Build') {
