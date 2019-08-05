@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Build Client') {
             steps {
-                sh "yarn build ${UI_BUILD_FLAGS}"
+                sh "yarn build${UI_BUILD_FLAGS}"
             }
         }
         stage('Distribute Client Build') {
