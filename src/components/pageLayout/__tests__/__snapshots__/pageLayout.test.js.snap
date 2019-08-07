@@ -61,9 +61,13 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="About"
             divider={false}
-            eventKey="2"
+            eventKey={0}
             header={false}
+            isActive={true}
+            key="about"
+            menuType="help"
             onClick={[Function]}
           >
             About
@@ -71,21 +75,14 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="Guides - Using"
             divider={false}
-            eventKey="3"
-            header={false}
-            href="./docs/install.html"
-            target="_blank"
-          >
-            Guides - Installing
-          </MenuItem>
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey="4"
+            eventKey={2}
             header={false}
             href="./docs/use.html"
+            isActive={true}
+            key="use"
+            menuType="help"
             target="_blank"
           >
             Guides - Using
@@ -109,9 +106,13 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="Logout"
             divider={false}
-            eventKey="5"
+            eventKey={3}
             header={false}
+            isActive={true}
+            key="logout"
+            menuType="action"
             onClick={[Function]}
           >
             Logout
@@ -140,25 +141,29 @@ exports[`PageLayout Component should render a non-connected component authorized
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
+      displayTitle="About"
+      isActive={true}
       key="about"
+      menuType="help"
       onClick={[Function]}
       title="About"
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
-      href="./docs/install.html"
-      key="install"
-      title="Guide - Install"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
+      displayTitle="Guides - Using"
       href="./docs/use.html"
+      isActive={true}
       key="use"
-      title="Guide - Using"
+      menuType="help"
+      target="_blank"
+      title="Guides - Using"
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
+      displayTitle="Logout"
+      isActive={true}
       key="logout"
+      menuType="action"
       onClick={[Function]}
       title="Logout"
     />
@@ -230,9 +235,13 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="About"
             divider={false}
-            eventKey="2"
+            eventKey={0}
             header={false}
+            isActive={true}
+            key="about"
+            menuType="help"
             onClick={[Function]}
           >
             About
@@ -240,21 +249,14 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="Guides - Using"
             divider={false}
-            eventKey="3"
-            header={false}
-            href="./docs/install.html"
-            target="_blank"
-          >
-            Guides - Installing
-          </MenuItem>
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey="4"
+            eventKey={2}
             header={false}
             href="./docs/use.html"
+            isActive={true}
+            key="use"
+            menuType="help"
             target="_blank"
           >
             Guides - Using
@@ -278,9 +280,13 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
+            displayTitle="Logout"
             divider={false}
-            eventKey="5"
+            eventKey={3}
             header={false}
+            isActive={true}
+            key="logout"
+            menuType="action"
             onClick={[Function]}
           >
             Logout
@@ -309,25 +315,29 @@ exports[`PageLayout Component should render a non-connected component branded: n
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
+      displayTitle="About"
+      isActive={true}
       key="about"
+      menuType="help"
       onClick={[Function]}
       title="About"
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
-      href="./docs/install.html"
-      key="install"
-      title="Guide - Install"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
+      displayTitle="Guides - Using"
       href="./docs/use.html"
+      isActive={true}
       key="use"
-      title="Guide - Using"
+      menuType="help"
+      target="_blank"
+      title="Guides - Using"
     />
     <VerticalNav.Item
       className="collapsed-nav-item"
+      displayTitle="Logout"
+      isActive={true}
       key="logout"
+      menuType="action"
       onClick={[Function]}
       title="Logout"
     />
