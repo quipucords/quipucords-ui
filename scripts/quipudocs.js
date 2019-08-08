@@ -5,16 +5,21 @@ const useDocFileOutput = './public/docs/use.html';
 const localesFileOutput = './public/locales/locales.json';
 const localesDir = './public/locales/';
 
-const buildDocs = () => {
+const buildDocs = ({ buildUserDocs = true, buildInstallDocs = false }) => {
   try {
-    const installFile = installDocFileOutput;
-    const useFile = useDocFileOutput;
     const isBrand = process.argv.slice(2)[0] === '-b';
-    const installContent = (isBrand && install['index-brand'].content) || install.index.content;
-    const userContent = (isBrand && user['index-brand'].content) || user.index.content;
 
-    fs.writeFileSync(installFile, installContent);
-    fs.writeFileSync(useFile, userContent);
+    if (buildUserDocs) {
+      const useFile = useDocFileOutput;
+      const userContent = (isBrand && user['index-brand'].content) || user.index.content;
+      fs.writeFileSync(useFile, userContent);
+    }
+
+    if (buildInstallDocs) {
+      const installFile = installDocFileOutput;
+      const installContent = (isBrand && install['index-brand'].content) || install.index.content;
+      fs.writeFileSync(installFile, installContent);
+    }
 
     console.info(`Building docs... DOCS_BRAND=${isBrand}...Complete`);
   } catch (e) {
@@ -41,5 +46,5 @@ const buildEa = () => {
   }
 };
 
-buildDocs();
+buildDocs({});
 buildEa();

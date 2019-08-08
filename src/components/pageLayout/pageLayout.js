@@ -8,6 +8,31 @@ import titleImgBrand from '../../styles/images/title-brand.svg';
 import titleImg from '../../styles/images/title.svg';
 
 class PageLayout extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.menuItems = [
+      { isActive: true, menuType: 'help', displayTitle: 'About', key: 'about', onClick: this.onAbout },
+      {
+        isActive: false,
+        menuType: 'help',
+        displayTitle: 'Guides - Install',
+        key: 'install',
+        href: './docs/install.html',
+        target: '_blank'
+      },
+      {
+        isActive: true,
+        menuType: 'help',
+        displayTitle: 'Guides - Using',
+        key: 'use',
+        href: './docs/use.html',
+        target: '_blank'
+      },
+      { isActive: true, menuType: 'action', displayTitle: 'Logout', key: 'logout', onClick: this.onLogout }
+    ];
+  }
+
   onAbout = () => {
     store.dispatch({
       type: reduxTypes.aboutModal.ABOUT_MODAL_SHOW
@@ -44,37 +69,35 @@ class PageLayout extends React.Component {
     return (
       <React.Fragment>
         <Masthead.Dropdown id="app-help-dropdown" title={<span aria-hidden className="pficon pficon-help" />}>
-          <MenuItem eventKey="2" onClick={this.onAbout}>
-            About
-          </MenuItem>
-          <MenuItem eventKey="3" href="./docs/install.html" target="_blank">
-            Guides - Installing
-          </MenuItem>
-          <MenuItem eventKey="4" href="./docs/use.html" target="_blank">
-            Guides - Using
-          </MenuItem>
+          {this.menuItems.map(
+            (item, index) =>
+              item.isActive &&
+              item.menuType === 'help' && (
+                <MenuItem eventKey={index} {...item}>
+                  {item.displayTitle}
+                </MenuItem>
+              )
+          )}
         </Masthead.Dropdown>
         <Masthead.Dropdown id="app-user-dropdown" title={title}>
-          <MenuItem eventKey="5" onClick={this.onLogout}>
-            Logout
-          </MenuItem>
+          {this.menuItems.map(
+            (item, index) =>
+              item.isActive &&
+              item.menuType === 'action' && (
+                <MenuItem eventKey={index} {...item}>
+                  {item.displayTitle}
+                </MenuItem>
+              )
+          )}
         </Masthead.Dropdown>
       </React.Fragment>
     );
   }
 
   renderMenuActions() {
-    return [
-      <VerticalNav.Item key="about" className="collapsed-nav-item" title="About" onClick={this.onAbout} />,
-      <VerticalNav.Item
-        key="install"
-        className="collapsed-nav-item"
-        title="Guide - Install"
-        href="./docs/install.html"
-      />,
-      <VerticalNav.Item key="use" className="collapsed-nav-item" title="Guide - Using" href="./docs/use.html" />,
-      <VerticalNav.Item key="logout" className="collapsed-nav-item" title="Logout" onClick={this.onLogout} />
-    ];
+    return this.menuItems.map(
+      item => item.isActive && <VerticalNav.Item className="collapsed-nav-item" title={item.displayTitle} {...item} />
+    );
   }
 
   renderMenuItems() {
