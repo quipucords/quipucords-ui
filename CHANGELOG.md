@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.9.1 (2019-08-14)
+
+
+### Bug Fixes
+
+* **build:** issues/53 brand, contribution guide ([#65](https://github.com/quipucords/quipucords-ui/issues/65)) ([10d4a37](https://github.com/quipucords/quipucords-ui/commit/10d4a37))
+* **build:** issues/60 jenkins file for branded UI ([#67](https://github.com/quipucords/quipucords-ui/issues/67)) ([14b6d95](https://github.com/quipucords/quipucords-ui/commit/14b6d95))
+* **build:** issues/63 Quipudocs package ([#66](https://github.com/quipucords/quipucords-ui/issues/66)) ([354a5bf](https://github.com/quipucords/quipucords-ui/commit/354a5bf))
+* **quipudocs, pageLayout:** issues/68 disable install guide ([#69](https://github.com/quipucords/quipucords-ui/issues/69)) ([2cdf23f](https://github.com/quipucords/quipucords-ui/commit/2cdf23f))
+
+
+### Features
+
+* **docs:** issues/38 integrate documentation ([#62](https://github.com/quipucords/quipucords-ui/issues/62)) ([d21d47f](https://github.com/quipucords/quipucords-ui/commit/d21d47f))
+
+
+
 # 0.9.0 (2019-05-31)
 
 
