@@ -94,7 +94,7 @@
     "patternfly": "3.55.0",
     "patternfly-react": "^2.24.3",
     "prop-types": "^15.6.2",
-    "quipudocs": "https://github.com/quipucords/quipudocs.git#^0.9.1",
+    "quipudocs": "https://github.com/quipucords/quipudocs.git#master",
     "react": "^16.8.4",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.8.4",
