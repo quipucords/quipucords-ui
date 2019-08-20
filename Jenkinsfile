@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         qpc_version = "${params.version_name}"
-        image_name = "quipucords-ui:${qpc_version}"
-        tarfile = "quipucords-ui.${qpc_version}.tar"
+        tarfile = "${DISTRIBUTION_NAME}-ui.${qpc_version}.tar"
         targzfile = "${tarfile}.gz"
     }
 
