@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Distribution should have specific ajax environment parameters set: ajax parameters 1`] = `
+Object {
+  "ajaxToken": "csrftoken",
+  "files": Array [
+    "",
+    "./dist/client/static/js/main*js",
+    "./dist/client/static/js/main*js.map",
+  ],
+}
+`;
+
 exports[`Distribution should match a specific file output: dist-output 1`] = `
 Array [
   "",
