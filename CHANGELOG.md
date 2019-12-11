@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 0.9.1 (2019-08-14)
+## 0.9.2 (2019-12-11)
+
+
+### Bug Fixes
+
+* **build:** issues/73 correct Django token reference ([#74](https://github.com/quipucords/quipucords-ui/issues/74)) ([06966d4](https://github.com/quipucords/quipucords-ui/commit/06966d4))
+
+
+
+## 0.9.1 (2019-08-20)
 
 
 ### Bug Fixes
