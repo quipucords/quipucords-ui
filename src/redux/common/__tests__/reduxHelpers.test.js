@@ -68,7 +68,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.FULFILLED_ACTION('LOREM') }
       )
@@ -76,7 +79,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.REJECTED_ACTION('LOREM') }
       )
@@ -84,7 +90,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.PENDING_ACTION('LOREM') }
       )
@@ -93,7 +102,10 @@ describe('ReduxHelpers', () => {
     delete action.meta;
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.FULFILLED_ACTION('LOREM') }
       )
@@ -101,7 +113,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.REJECTED_ACTION('LOREM') }
       )
@@ -109,7 +124,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'lorem', type: 'LOREM' }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'lorem', type: 'LOREM' },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.PENDING_ACTION('LOREM') }
       )
@@ -135,7 +153,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.FULFILLED_ACTION('IPSUM') }
       )
@@ -143,7 +164,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.REJECTED_ACTION('IPSUM') }
       )
@@ -151,7 +175,10 @@ describe('ReduxHelpers', () => {
 
     expect(
       reduxHelpers.generatedPromiseActionReducer(
-        [{ ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] }, { ref: 'ipsum', type: 'IPSUM' }],
+        [
+          { ref: 'loremIpsum', type: ['LOREM', 'IPSUM'] },
+          { ref: 'ipsum', type: 'IPSUM' }
+        ],
         state,
         { ...action, type: reduxHelpers.PENDING_ACTION('IPSUM') }
       )

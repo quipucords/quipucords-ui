@@ -192,9 +192,6 @@ const makeMapStateToProps = () => {
   });
 };
 
-const ConnectedScans = connect(
-  makeMapStateToProps,
-  mapDispatchToProps
-)(Scans);
+const ConnectedScans = connect(makeMapStateToProps, mapDispatchToProps)(Scans);
 
 export { ConnectedScans as default, ConnectedScans, Scans };

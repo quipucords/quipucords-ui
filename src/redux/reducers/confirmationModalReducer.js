@@ -13,7 +13,8 @@ const initialState = {
 const confirmationModalReducer = (state = initialState, action) => {
   switch (action.type) {
     case confirmationModalTypes.CONFIRMATION_MODAL_SHOW:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         show: true,
         title: action.title,
         heading: action.heading,
@@ -23,12 +24,10 @@ const confirmationModalReducer = (state = initialState, action) => {
         cancelButtonText: action.cancelButtonText || 'Cancel',
         onConfirm: action.onConfirm,
         onCancel: action.onCancel
-      });
+      };
 
     case confirmationModalTypes.CONFIRMATION_MODAL_HIDE:
-      return Object.assign({}, state, {
-        show: false
-      });
+      return { ...state, show: false };
 
     default:
       return state;

@@ -436,14 +436,8 @@ const mapDispatchToProps = dispatch => ({
   deleteSource: id => dispatch(reduxActions.sources.deleteSource(id))
 });
 
-const mapStateToProps = state =>
-  Object.assign({
-    selectedSources: state.viewOptions[reduxTypes.view.SOURCES_VIEW].selectedItems
-  });
+const mapStateToProps = state => ({ selectedSources: state.viewOptions[reduxTypes.view.SOURCES_VIEW].selectedItems });
 
-const ConnectedSourceListItem = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SourceListItem);
+const ConnectedSourceListItem = connect(mapStateToProps, mapDispatchToProps)(SourceListItem);
 
 export { ConnectedSourceListItem as default, ConnectedSourceListItem, SourceListItem };

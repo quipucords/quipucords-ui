@@ -12,13 +12,10 @@ const authHeader = () => {
   };
 };
 
-const serviceConfig = (passedConfig = {}, auth = true) =>
-  Object.assign(
-    {
-      headers: auth ? authHeader() : {},
-      timeout: process.env.REACT_APP_AJAX_TIMEOUT
-    },
-    passedConfig
-  );
+const serviceConfig = (passedConfig = {}, auth = true) => ({
+  headers: auth ? authHeader() : {},
+  timeout: process.env.REACT_APP_AJAX_TIMEOUT,
+  ...passedConfig
+});
 
 export { serviceConfig as default, serviceConfig };

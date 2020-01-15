@@ -102,9 +102,6 @@ const makeMapStateToProps = () => {
   });
 };
 
-const ConnectedScanSourceList = connect(
-  makeMapStateToProps,
-  mapDispatchToProps
-)(ScanSourceList);
+const ConnectedScanSourceList = connect(makeMapStateToProps, mapDispatchToProps)(ScanSourceList);
 
 export { ConnectedScanSourceList as default, ConnectedScanSourceList, ScanSourceList };

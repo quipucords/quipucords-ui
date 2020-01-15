@@ -533,12 +533,11 @@ const mapDispatchToProps = dispatch => ({
   updateCredential: (id, data) => dispatch(reduxActions.credentials.updateCredential(id, data))
 });
 
-const mapStateToProps = state =>
-  Object.assign({}, state.credentials.update, { viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW] });
+const mapStateToProps = state => ({
+  ...state.credentials.update,
+  viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW]
+});
 
-const ConnectedCreateCredentialDialog = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateCredentialDialog);
+const ConnectedCreateCredentialDialog = connect(mapStateToProps, mapDispatchToProps)(CreateCredentialDialog);
 
 export { ConnectedCreateCredentialDialog as default, ConnectedCreateCredentialDialog, CreateCredentialDialog };

@@ -146,9 +146,6 @@ const makeMapStateToProps = () => {
   });
 };
 
-const ConnectedScanHostList = connect(
-  makeMapStateToProps,
-  mapDispatchToProps
-)(ScanHostList);
+const ConnectedScanHostList = connect(makeMapStateToProps, mapDispatchToProps)(ScanHostList);
 
 export { ConnectedScanHostList as default, ConnectedScanHostList, ScanHostList };

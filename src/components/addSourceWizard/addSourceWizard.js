@@ -250,9 +250,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ ...state.addSourceWizard });
 
-const ConnectedAddSourceWizard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddSourceWizard);
+const ConnectedAddSourceWizard = connect(mapStateToProps, mapDispatchToProps)(AddSourceWizard);
 
 export { ConnectedAddSourceWizard as default, ConnectedAddSourceWizard, AddSourceWizard };
