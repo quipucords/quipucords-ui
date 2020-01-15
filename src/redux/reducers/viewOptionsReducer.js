@@ -45,11 +45,12 @@ const viewOptionsReducer = (state = initialState, action) => {
 
     const totalPages = Math.ceil(totalCount / state[viewType].pageSize);
 
-    updateState[viewType] = Object.assign({}, state[viewType], {
+    updateState[viewType] = {
+      ...state[viewType],
       totalCount,
       totalPages,
       currentPage: Math.min(state[viewType].currentPage, totalPages || 1)
-    });
+    };
   };
 
   const selectedIndex = (stateObj, item) =>
@@ -64,117 +65,106 @@ const viewOptionsReducer = (state = initialState, action) => {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        filterType: action.filterType,
-        filterValue: ''
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], filterType: action.filterType, filterValue: '' };
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.SET_FILTER_VALUE:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        filterValue: action.filterValue
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], filterValue: action.filterValue };
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.ADD_FILTER:
       const currentFilter = state[action.viewType].activeFilters.find(filter => action.filter.field === filter.field);
 
       if (!currentFilter) {
-        updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+        updateState[action.viewType] = {
+          ...state[action.viewType],
           activeFilters: [...state[action.viewType].activeFilters, action.filter],
           currentPage: 1
-        });
+        };
       } else if (currentFilter.value === action.filter.value) {
         // Do nothing if an existing filter has the same value
         return state;
       } else {
         // replace the existing filter
         const index = state[action.viewType].activeFilters.indexOf(currentFilter);
-        updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+        updateState[action.viewType] = {
+          ...state[action.viewType],
           activeFilters: [
             ...state[action.viewType].activeFilters.slice(0, index),
             action.filter,
             ...state[action.viewType].activeFilters.slice(index + 1)
           ],
           currentPage: 1
-        });
+        };
       }
 
-      return Object.assign({}, state, updateState);
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.REMOVE_FILTER:
       const index = state[action.viewType].activeFilters.indexOf(action.filter);
       if (index >= 0) {
-        updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+        updateState[action.viewType] = {
+          ...state[action.viewType],
           activeFilters: [
             ...state[action.viewType].activeFilters.slice(0, index),
             ...state[action.viewType].activeFilters.slice(index + 1)
           ],
           currentPage: 1
-        });
-        return Object.assign({}, state, updateState);
+        };
+        return { ...state, ...updateState };
       }
 
       return state;
 
     case viewToolbarTypes.CLEAR_FILTERS:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        activeFilters: [],
-        currentPage: 1
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], activeFilters: [], currentPage: 1 };
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.SET_SORT_TYPE:
       if (state[action.viewType].sortType === action.sortType) {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+      updateState[action.viewType] = {
+        ...state[action.viewType],
         sortType: action.sortType,
         sortField: action.sortType && action.sortType.id,
         sortAscending: _get(action, 'sortType.sortAscending', true),
         currentPage: 1
-      });
+      };
 
-      return Object.assign({}, state, updateState);
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.TOGGLE_SORT_ASCENDING:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+      updateState[action.viewType] = {
+        ...state[action.viewType],
         sortAscending: !state[action.viewType].sortAscending,
         currentPage: 1
-      });
-      return Object.assign({}, state, updateState);
+      };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.VIEW_FIRST_PAGE:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        currentPage: 1
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], currentPage: 1 };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.VIEW_LAST_PAGE:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        currentPage: state[action.viewType].totalPages
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], currentPage: state[action.viewType].totalPages };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.VIEW_PREVIOUS_PAGE:
       if (state[action.viewType].currentPage < 2) {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        currentPage: state[action.viewType].currentPage - 1
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], currentPage: state[action.viewType].currentPage - 1 };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.VIEW_NEXT_PAGE:
       if (state[action.viewType].currentPage >= state[action.viewType].totalPages) {
         return state;
       }
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        currentPage: state[action.viewType].currentPage + 1
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], currentPage: state[action.viewType].currentPage + 1 };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.VIEW_PAGE_NUMBER:
       if (
@@ -185,29 +175,24 @@ const viewOptionsReducer = (state = initialState, action) => {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        currentPage: action.pageNumber
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], currentPage: action.pageNumber };
+      return { ...state, ...updateState };
 
     case viewPaginationTypes.SET_PER_PAGE:
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        pageSize: action.pageSize,
-        currentPage: 1
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], pageSize: action.pageSize, currentPage: 1 };
+      return { ...state, ...updateState };
 
     case reduxHelpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
       updatePageCounts(viewTypes.CREDENTIALS_VIEW, action.payload.data[apiTypes.API_RESPONSE_CREDENTIALS_COUNT]);
-      return Object.assign({}, state, updateState);
+      return { ...state, ...updateState };
 
     case reduxHelpers.FULFILLED_ACTION(sourcesTypes.GET_SOURCES):
       updatePageCounts(viewTypes.SOURCES_VIEW, action.payload.data[apiTypes.API_RESPONSE_SOURCES_COUNT]);
-      return Object.assign({}, state, updateState);
+      return { ...state, ...updateState };
 
     case reduxHelpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
       updatePageCounts(viewTypes.SCANS_VIEW, action.payload.data[apiTypes.API_RESPONSE_SCANS_COUNT]);
-      return Object.assign({}, state, updateState);
+      return { ...state, ...updateState };
 
     case viewTypes.SELECT_ITEM:
       // Do nothing if it is already selected
@@ -215,10 +200,11 @@ const viewOptionsReducer = (state = initialState, action) => {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+      updateState[action.viewType] = {
+        ...state[action.viewType],
         selectedItems: [...state[action.viewType].selectedItems, action.item]
-      });
-      return Object.assign({}, state, updateState);
+      };
+      return { ...state, ...updateState };
 
     case viewTypes.DESELECT_ITEM:
       const foundIndex = selectedIndex(state[action.viewType], action.item);
@@ -228,13 +214,14 @@ const viewOptionsReducer = (state = initialState, action) => {
         return state;
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
+      updateState[action.viewType] = {
+        ...state[action.viewType],
         selectedItems: [
           ...state[action.viewType].selectedItems.slice(0, foundIndex),
           ...state[action.viewType].selectedItems.slice(foundIndex + 1)
         ]
-      });
-      return Object.assign({}, state, updateState);
+      };
+      return { ...state, ...updateState };
 
     case viewTypes.EXPAND_ITEM:
       const expandIndex = expandedIndex(state[action.viewType], action.item);
@@ -256,10 +243,8 @@ const viewOptionsReducer = (state = initialState, action) => {
         });
       }
 
-      updateState[action.viewType] = Object.assign({}, state[action.viewType], {
-        expandedItems: newExpansions
-      });
-      return Object.assign({}, state, updateState);
+      updateState[action.viewType] = { ...state[action.viewType], expandedItems: newExpansions };
+      return { ...state, ...updateState };
 
     default:
       return state;

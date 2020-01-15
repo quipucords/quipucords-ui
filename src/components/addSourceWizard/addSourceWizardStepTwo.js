@@ -29,13 +29,12 @@ class AddSourceWizardStepTwo extends React.Component {
 
       if (
         host !== '' &&
-        (!new RegExp(
+        !new RegExp(
           '^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.(\\d{1,3}|\\[\\d{1,3}:\\d{1,3}\\]|\\d{1,3}\\/([1][6-9]|[2][0-9]|30|31|32))$'
         ).test(host) &&
-          !new RegExp(
-            '^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$',
-            'i'
-          ).test(host))
+        !new RegExp('^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$', 'i').test(
+          host
+        )
       ) {
         return false;
       }
@@ -494,9 +493,6 @@ const makeMapStateToProps = () => {
   });
 };
 
-const ConnectedAddSourceWizardStepTwo = connect(
-  makeMapStateToProps,
-  mapDispatchToProps
-)(AddSourceWizardStepTwo);
+const ConnectedAddSourceWizardStepTwo = connect(makeMapStateToProps, mapDispatchToProps)(AddSourceWizardStepTwo);
 
 export { ConnectedAddSourceWizardStepTwo as default, ConnectedAddSourceWizardStepTwo, AddSourceWizardStepTwo };

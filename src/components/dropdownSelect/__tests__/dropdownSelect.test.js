@@ -7,7 +7,10 @@ describe('DropdownSelect Component', () => {
   it('should render a basic component', () => {
     const props = {
       id: 'test',
-      options: [{ title: 'lorem', value: 'ipsum' }, { title: 'hello', value: 'world', selected: true }]
+      options: [
+        { title: 'lorem', value: 'ipsum' },
+        { title: 'hello', value: 'world', selected: true }
+      ]
     };
 
     let component = mount(

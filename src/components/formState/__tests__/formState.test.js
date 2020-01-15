@@ -135,7 +135,10 @@ describe('FormState Component', () => {
     componentInstance.onEventCustom({ name: 'lorem', value: 'woot' });
     expect(componentInstance.values).toMatchSnapshot('single custom event');
 
-    componentInstance.onEventCustom([{ name: 'lorem', value: 'woot again' }, { name: 'dolor', value: 'sit' }]);
+    componentInstance.onEventCustom([
+      { name: 'lorem', value: 'woot again' },
+      { name: 'dolor', value: 'sit' }
+    ]);
     expect(componentInstance.values).toMatchSnapshot('multiple custom events');
   });
 

@@ -342,15 +342,12 @@ const mapDispatchToProps = dispatch => ({
   deleteCredential: id => dispatch(reduxActions.credentials.deleteCredential(id))
 });
 
-const mapStateToProps = state =>
-  Object.assign({}, state.credentials.view, {
-    viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW],
-    update: state.credentials.update
-  });
+const mapStateToProps = state => ({
+  ...state.credentials.view,
+  viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW],
+  update: state.credentials.update
+});
 
-const ConnectedCredentials = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Credentials);
+const ConnectedCredentials = connect(mapStateToProps, mapDispatchToProps)(Credentials);
 
 export { ConnectedCredentials as default, ConnectedCredentials, Credentials };

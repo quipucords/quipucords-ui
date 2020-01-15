@@ -77,9 +77,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = () => ({});
 
-const ConnectedScanDownload = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ScanDownload);
+const ConnectedScanDownload = connect(mapStateToProps, mapDispatchToProps)(ScanDownload);
 
 export { ConnectedScanDownload as default, ConnectedScanDownload, ScanDownload };

@@ -80,9 +80,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ session: state.user.session });
 
-const ConnectedAuthentication = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Authentication);
+const ConnectedAuthentication = connect(mapStateToProps, mapDispatchToProps)(Authentication);
 
 export { ConnectedAuthentication as default, ConnectedAuthentication, Authentication };

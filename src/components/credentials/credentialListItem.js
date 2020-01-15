@@ -55,7 +55,10 @@ class CredentialListItem extends React.Component {
   expandType() {
     const { item, expandedCredentials } = this.props;
 
-    return _get(_find(expandedCredentials, nextExpanded => nextExpanded.id === item.id), 'expandType');
+    return _get(
+      _find(expandedCredentials, nextExpanded => nextExpanded.id === item.id),
+      'expandType'
+    );
   }
 
   isSelected() {

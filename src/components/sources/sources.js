@@ -189,12 +189,11 @@ const mapDispatchToProps = dispatch => ({
   getSources: queryObj => dispatch(reduxActions.sources.getSources(queryObj))
 });
 
-const mapStateToProps = state =>
-  Object.assign({}, state.sources.view, { viewOptions: state.viewOptions[reduxTypes.view.SOURCES_VIEW] });
+const mapStateToProps = state => ({
+  ...state.sources.view,
+  viewOptions: state.viewOptions[reduxTypes.view.SOURCES_VIEW]
+});
 
-const ConnectedSources = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sources);
+const ConnectedSources = connect(mapStateToProps, mapDispatchToProps)(Sources);
 
 export { ConnectedSources as default, ConnectedSources, Sources };

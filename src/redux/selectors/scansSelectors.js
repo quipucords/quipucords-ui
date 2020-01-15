@@ -134,90 +134,87 @@ const makeScanHostsListSelector = () => scanHostsListSelector;
  */
 const scanJobDetail = (state, props) => state.scans.job[props.id];
 
-const scanJobDetailBySourceSelector = createSelector(
-  [scanJobDetail],
-  scanJob => {
-    const { data, ...props } = scanJob || {};
-    let newScanJobList = [];
+const scanJobDetailBySourceSelector = createSelector([scanJobDetail], scanJob => {
+  const { data, ...props } = scanJob || {};
+  let newScanJobList = [];
 
-    const sortSources = scan => {
-      const sources = [..._get(scan, apiTypes.API_RESPONSE_JOB_SOURCES, [])];
+  const sortSources = scan => {
+    const sources = [..._get(scan, apiTypes.API_RESPONSE_JOB_SOURCES, [])];
 
-      sources.sort((item1, item2) => {
-        let cmp = item1[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE].localeCompare(
-          item2[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE]
+    sources.sort((item1, item2) => {
+      let cmp = item1[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE].localeCompare(
+        item2[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE]
+      );
+
+      if (cmp === 0) {
+        cmp = item1[apiTypes.API_RESPONSE_JOB_SOURCES_NAME].localeCompare(
+          item2[apiTypes.API_RESPONSE_JOB_SOURCES_NAME]
+        );
+      }
+
+      return cmp;
+    });
+
+    return sources;
+  };
+
+  if (data) {
+    const sources = sortSources(data);
+
+    newScanJobList = sources.map(source => {
+      const updatedSource = {};
+
+      helpers.setPropIfDefined(updatedSource, ['id'], source[apiTypes.API_RESPONSE_JOB_SOURCES_ID]);
+      helpers.setPropIfDefined(updatedSource, ['name'], source[apiTypes.API_RESPONSE_JOB_SOURCES_NAME]);
+      helpers.setPropIfDefined(updatedSource, ['sourceType'], source[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE]);
+
+      const connectTask = _find(scanJob[apiTypes.API_RESPONSE_JOB_TASKS], {
+        [apiTypes.API_RESPONSE_JOB_TASKS_SOURCE]: source[apiTypes.API_RESPONSE_JOB_SOURCES_ID],
+        [apiTypes.API_RESPONSE_JOB_TASKS_SCAN_TYPE]: 'connect'
+      });
+
+      if (connectTask) {
+        helpers.setPropIfDefined(
+          updatedSource,
+          ['connectTaskStatus'],
+          connectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS]
         );
 
-        if (cmp === 0) {
-          cmp = item1[apiTypes.API_RESPONSE_JOB_SOURCES_NAME].localeCompare(
-            item2[apiTypes.API_RESPONSE_JOB_SOURCES_NAME]
-          );
-        }
+        helpers.setPropIfDefined(
+          updatedSource,
+          ['connectTaskStatusMessage'],
+          connectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS_MESSAGE]
+        );
+      }
 
-        return cmp;
+      const inspectTask = _find(scanJob[apiTypes.API_RESPONSE_JOB_TASKS], {
+        [apiTypes.API_RESPONSE_JOB_TASKS_SOURCE]: source[apiTypes.API_RESPONSE_JOB_SOURCES_ID],
+        [apiTypes.API_RESPONSE_JOB_TASKS_SCAN_TYPE]: 'inspect'
       });
 
-      return sources;
-    };
+      if (inspectTask) {
+        helpers.setPropIfDefined(
+          updatedSource,
+          ['inspectTaskStatus'],
+          inspectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS]
+        );
 
-    if (data) {
-      const sources = sortSources(data);
+        helpers.setPropIfDefined(
+          updatedSource,
+          ['inspectTaskStatusMessage'],
+          inspectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS_MESSAGE]
+        );
+      }
 
-      newScanJobList = sources.map(source => {
-        const updatedSource = {};
-
-        helpers.setPropIfDefined(updatedSource, ['id'], source[apiTypes.API_RESPONSE_JOB_SOURCES_ID]);
-        helpers.setPropIfDefined(updatedSource, ['name'], source[apiTypes.API_RESPONSE_JOB_SOURCES_NAME]);
-        helpers.setPropIfDefined(updatedSource, ['sourceType'], source[apiTypes.API_RESPONSE_JOB_SOURCES_SOURCE_TYPE]);
-
-        const connectTask = _find(scanJob[apiTypes.API_RESPONSE_JOB_TASKS], {
-          [apiTypes.API_RESPONSE_JOB_TASKS_SOURCE]: source[apiTypes.API_RESPONSE_JOB_SOURCES_ID],
-          [apiTypes.API_RESPONSE_JOB_TASKS_SCAN_TYPE]: 'connect'
-        });
-
-        if (connectTask) {
-          helpers.setPropIfDefined(
-            updatedSource,
-            ['connectTaskStatus'],
-            connectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS]
-          );
-
-          helpers.setPropIfDefined(
-            updatedSource,
-            ['connectTaskStatusMessage'],
-            connectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS_MESSAGE]
-          );
-        }
-
-        const inspectTask = _find(scanJob[apiTypes.API_RESPONSE_JOB_TASKS], {
-          [apiTypes.API_RESPONSE_JOB_TASKS_SOURCE]: source[apiTypes.API_RESPONSE_JOB_SOURCES_ID],
-          [apiTypes.API_RESPONSE_JOB_TASKS_SCAN_TYPE]: 'inspect'
-        });
-
-        if (inspectTask) {
-          helpers.setPropIfDefined(
-            updatedSource,
-            ['inspectTaskStatus'],
-            inspectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS]
-          );
-
-          helpers.setPropIfDefined(
-            updatedSource,
-            ['inspectTaskStatusMessage'],
-            inspectTask[apiTypes.API_RESPONSE_JOB_TASKS_STATUS_MESSAGE]
-          );
-        }
-
-        return updatedSource;
-      });
-    }
-
-    return {
-      ...props,
-      scanJobList: newScanJobList
-    };
+      return updatedSource;
+    });
   }
-);
+
+  return {
+    ...props,
+    scanJobList: newScanJobList
+  };
+});
 
 const makeScanJobDetailBySourceSelector = () => scanJobDetailBySourceSelector;
 
@@ -228,62 +225,59 @@ const previousScansSelectorsCache = {};
 
 const previousScanJobs = (state, props) => state.scans.jobs[props.id];
 
-const scanJobsListSelector = createSelector(
-  [previousScanJobs],
-  scanJobs => {
-    const { data, metaId, metaQuery, ...props } = scanJobs || {};
+const scanJobsListSelector = createSelector([previousScanJobs], scanJobs => {
+  const { data, metaId, metaQuery, ...props } = scanJobs || {};
 
-    const isMoreResults = _get(data, apiTypes.API_RESPONSE_JOBS_NEXT, null) !== null;
+  const isMoreResults = _get(data, apiTypes.API_RESPONSE_JOBS_NEXT, null) !== null;
 
-    // map results to consumable props
-    let newScanJobsList = ((data && data[apiTypes.API_RESPONSE_JOBS_RESULTS]) || []).map(job => {
-      const updatedJob = {};
+  // map results to consumable props
+  let newScanJobsList = ((data && data[apiTypes.API_RESPONSE_JOBS_RESULTS]) || []).map(job => {
+    const updatedJob = {};
 
-      helpers.setPropIfDefined(updatedJob, ['endTime'], job[apiTypes.API_RESPONSE_JOB_END_TIME]);
-      helpers.setPropIfDefined(updatedJob, ['id'], job[apiTypes.API_RESPONSE_JOB_ID]);
-      helpers.setPropIfDefined(updatedJob, ['reportId'], job[apiTypes.API_RESPONSE_JOB_REPORT_ID]);
-      helpers.setPropIfDefined(updatedJob, ['startTime'], job[apiTypes.API_RESPONSE_JOB_START_TIME]);
-      helpers.setPropIfDefined(updatedJob, ['status'], job[apiTypes.API_RESPONSE_JOB_STATUS]);
+    helpers.setPropIfDefined(updatedJob, ['endTime'], job[apiTypes.API_RESPONSE_JOB_END_TIME]);
+    helpers.setPropIfDefined(updatedJob, ['id'], job[apiTypes.API_RESPONSE_JOB_ID]);
+    helpers.setPropIfDefined(updatedJob, ['reportId'], job[apiTypes.API_RESPONSE_JOB_REPORT_ID]);
+    helpers.setPropIfDefined(updatedJob, ['startTime'], job[apiTypes.API_RESPONSE_JOB_START_TIME]);
+    helpers.setPropIfDefined(updatedJob, ['status'], job[apiTypes.API_RESPONSE_JOB_STATUS]);
 
-      helpers.setPropIfDefined(
-        updatedJob,
-        ['scanName'],
-        _get(job, [apiTypes.API_RESPONSE_JOB_SCAN, apiTypes.API_RESPONSE_JOB_SCAN_NAME])
-      );
+    helpers.setPropIfDefined(
+      updatedJob,
+      ['scanName'],
+      _get(job, [apiTypes.API_RESPONSE_JOB_SCAN, apiTypes.API_RESPONSE_JOB_SCAN_NAME])
+    );
 
-      helpers.setPropIfDefined(
-        updatedJob,
-        ['systemsScanned'],
-        job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] >= 0 ? job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] : 0
-      );
-      helpers.setPropIfDefined(
-        updatedJob,
-        ['systemsFailed'],
-        job[apiTypes.API_RESPONSE_JOB_SYS_FAILED] >= 0 ? job[apiTypes.API_RESPONSE_JOB_SYS_FAILED] : 0
-      );
+    helpers.setPropIfDefined(
+      updatedJob,
+      ['systemsScanned'],
+      job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] >= 0 ? job[apiTypes.API_RESPONSE_JOB_SYS_SCANNED] : 0
+    );
+    helpers.setPropIfDefined(
+      updatedJob,
+      ['systemsFailed'],
+      job[apiTypes.API_RESPONSE_JOB_SYS_FAILED] >= 0 ? job[apiTypes.API_RESPONSE_JOB_SYS_FAILED] : 0
+    );
 
-      return updatedJob;
-    });
+    return updatedJob;
+  });
 
-    // cache, concat results, reset if necessary
-    if (metaId) {
-      previousScansSelectorsCache[metaId] = previousScansSelectorsCache[metaId] || { previous: [] };
+  // cache, concat results, reset if necessary
+  if (metaId) {
+    previousScansSelectorsCache[metaId] = previousScansSelectorsCache[metaId] || { previous: [] };
 
-      if (metaQuery && metaQuery[apiTypes.API_QUERY_PAGE] === 1) {
-        previousScansSelectorsCache[metaId] = { previous: [] };
-      }
-
-      newScanJobsList = [...previousScansSelectorsCache[metaId].previous, ...newScanJobsList];
-      previousScansSelectorsCache[metaId].previous = newScanJobsList;
+    if (metaQuery && metaQuery[apiTypes.API_QUERY_PAGE] === 1) {
+      previousScansSelectorsCache[metaId] = { previous: [] };
     }
 
-    return {
-      ...props,
-      isMoreResults,
-      scanJobsList: newScanJobsList
-    };
+    newScanJobsList = [...previousScansSelectorsCache[metaId].previous, ...newScanJobsList];
+    previousScansSelectorsCache[metaId].previous = newScanJobsList;
   }
-);
+
+  return {
+    ...props,
+    isMoreResults,
+    scanJobsList: newScanJobsList
+  };
+});
 
 const makeScanJobsListSelector = () => scanJobsListSelector;
 
@@ -292,76 +286,73 @@ const makeScanJobsListSelector = () => scanJobsListSelector;
  */
 const scanListItem = (state, props) => props;
 
-const scanListItemSelector = createSelector(
-  [scanListItem],
-  props => {
-    const { scan } = props;
-    const updatedScan = {};
+const scanListItemSelector = createSelector([scanListItem], props => {
+  const { scan } = props;
+  const updatedScan = {};
 
-    helpers.setPropIfDefined(updatedScan, ['id'], scan[apiTypes.API_RESPONSE_SCAN_ID]);
-    helpers.setPropIfDefined(updatedScan, ['name'], scan[apiTypes.API_RESPONSE_SCAN_NAME]);
-    helpers.setPropIfDefined(updatedScan, ['jobsTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_JOBS, []).length);
-    helpers.setPropIfDefined(updatedScan, ['sourcesTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_SOURCES, []).length);
+  helpers.setPropIfDefined(updatedScan, ['id'], scan[apiTypes.API_RESPONSE_SCAN_ID]);
+  helpers.setPropIfDefined(updatedScan, ['name'], scan[apiTypes.API_RESPONSE_SCAN_NAME]);
+  helpers.setPropIfDefined(updatedScan, ['jobsTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_JOBS, []).length);
+  helpers.setPropIfDefined(updatedScan, ['sourcesTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_SOURCES, []).length);
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentEndTime'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_END_TIME])
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentEndTime'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_END_TIME])
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentId'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID])
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentId'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID])
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentReportId'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_REPORT_ID])
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentReportId'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_REPORT_ID])
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentStatus'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS])
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentStatus'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS])
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentStartTime'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_START_TIME])
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentStartTime'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_START_TIME])
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentStatusMessage'],
-      _get(
-        scan,
-        [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS][
-          apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS_MESSAGE
-        ]
-      )
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentStatusMessage'],
+    _get(
+      scan,
+      [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS][
+        apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS_MESSAGE
+      ]
+    )
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentSysFailed'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_FAILED], 0)
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentSysFailed'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_FAILED], 0)
+  );
 
-    helpers.setPropIfDefined(
-      updatedScan,
-      ['mostRecentSysScanned'],
-      _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_SCANNED], 0)
-    );
+  helpers.setPropIfDefined(
+    updatedScan,
+    ['mostRecentSysScanned'],
+    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_SCANNED], 0)
+  );
 
-    return {
-      ...props,
-      scan: updatedScan
-    };
-  }
-);
+  return {
+    ...props,
+    scan: updatedScan
+  };
+});
 
 const makeScanListItemSelector = () => scanListItemSelector;
 
@@ -370,17 +361,14 @@ const makeScanListItemSelector = () => scanListItemSelector;
  */
 const scansEmptyState = state => state.scans.empty;
 
-const scansEmptyStateSelector = createSelector(
-  [scansEmptyState],
-  empty => {
-    const sourcesExist = (empty.data && empty.data[apiTypes.API_RESPONSE_SOURCES_COUNT]) > 0;
+const scansEmptyStateSelector = createSelector([scansEmptyState], empty => {
+  const sourcesExist = (empty.data && empty.data[apiTypes.API_RESPONSE_SOURCES_COUNT]) > 0;
 
-    return {
-      ...empty,
-      sourcesExist
-    };
-  }
-);
+  return {
+    ...empty,
+    sourcesExist
+  };
+});
 
 const makeScansEmptyStateSelector = () => scansEmptyStateSelector;
 
@@ -389,19 +377,16 @@ const makeScansEmptyStateSelector = () => scansEmptyStateSelector;
  */
 const scansView = state => state.scans.view;
 
-const scansViewSelector = createSelector(
-  [scansView],
-  view => {
-    const lastRefresh = (view.date && new Date(view.date).getTime()) || 0;
-    const scans = (view.data && view.data[apiTypes.API_RESPONSE_SCANS_RESULTS]) || [];
+const scansViewSelector = createSelector([scansView], view => {
+  const lastRefresh = (view.date && new Date(view.date).getTime()) || 0;
+  const scans = (view.data && view.data[apiTypes.API_RESPONSE_SCANS_RESULTS]) || [];
 
-    return {
-      ...view,
-      lastRefresh,
-      scans
-    };
-  }
-);
+  return {
+    ...view,
+    lastRefresh,
+    scans
+  };
+});
 
 const makeScansViewSelector = () => scansViewSelector;
 

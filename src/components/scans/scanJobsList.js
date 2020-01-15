@@ -165,9 +165,6 @@ const makeMapStateToProps = () => {
   });
 };
 
-const ConnectedScanJobsList = connect(
-  makeMapStateToProps,
-  mapDispatchToProps
-)(ScanJobsList);
+const ConnectedScanJobsList = connect(makeMapStateToProps, mapDispatchToProps)(ScanJobsList);
 
 export { ConnectedScanJobsList as default, ConnectedScanJobsList, ScanJobsList };

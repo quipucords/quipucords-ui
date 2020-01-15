@@ -414,9 +414,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ ...state.scansEdit });
 
-const ConnectedCreateScanDialog = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateScanDialog);
+const ConnectedCreateScanDialog = connect(mapStateToProps, mapDispatchToProps)(CreateScanDialog);
 
 export { ConnectedCreateScanDialog as default, ConnectedCreateScanDialog, CreateScanDialog };
