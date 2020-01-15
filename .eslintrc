@@ -23,7 +23,15 @@
       "error",
       "as-needed"
     ],
+    "class-methods-use-this": 1,
     "comma-dangle": 0,
+    "consistent-return": 1,
+    "import/extensions": [
+      "error",
+      {
+        "json": "never"
+      }
+    ],
     "import/first": 0,
     "import/newline-after-import": 0,
     "import/no-extraneous-dependencies": [
@@ -34,6 +42,7 @@
     ],
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
+    "jest/no-test-callback": 0,
     "jest/prefer-to-have-length": 0,
     "max-len": [
       "error",
@@ -42,10 +51,14 @@
         "ignoreUrls": true
       }
     ],
-    "no-console": 0,
-    "no-debugger": 1,
-    "no-plusplus": 0,
     "no-case-declarations": 0,
+    "no-console": 0,
+    "no-continue": 0,
+    "no-debugger": 1,
+    "no-lonely-if": 1,
+    "no-plusplus": 0,
+    "no-restricted-properties": [0, {"object": "Math", "property": "pow"}],
+    "no-underscore-dangle": 0,
     "prettier/prettier": [
       "error",
       {
@@ -53,23 +66,26 @@
         "printWidth": 120
       }
     ],
-    "react/no-unused-prop-types": 1,
-    "react/jsx-filename-extension": 0,
     "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-fragments": [ 1, "element" ],
+    "react/jsx-props-no-spreading": 0,
     "react/jsx-one-expression-per-line": 0,
+    "react/no-unused-prop-types": 1,
+    "react/state-in-constructor": [ 1, "never" ],
     "space-before-function-paren": 0,
     "jsx-a11y/anchor-is-valid": 1,
-    "jsx-a11y/label-has-for": [ 2, {
-      "components": [ "Label" ],
-      "required": {
-        "some": [ "nesting", "id" ]
-      }
-    }],
     "jsx-a11y/label-has-associated-control": [ 2, {
       "labelComponents": ["CustomInputLabel"],
       "labelAttributes": ["label"],
       "controlComponents": ["CustomInput"],
       "depth": 3
+    }],
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+        "some": [ "nesting", "id" ]
+      }
     }]
   }
 }
