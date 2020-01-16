@@ -13,7 +13,7 @@ class AddSourceWizardStepTwo extends React.Component {
   static hostValid(value) {
     return (
       new RegExp('^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$').test(value) ||
-      new RegExp('^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$', 'i').test(
+      new RegExp('^(([a-z0-9]|[a-z0-9][a-z0-9_\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9_\\-]*[a-z0-9])$', 'i').test(
         value
       )
     );
@@ -32,9 +32,10 @@ class AddSourceWizardStepTwo extends React.Component {
         !new RegExp(
           '^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.(\\d{1,3}|\\[\\d{1,3}:\\d{1,3}\\]|\\d{1,3}\\/([1][6-9]|[2][0-9]|30|31|32))$'
         ).test(host) &&
-        !new RegExp('^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$', 'i').test(
-          host
-        )
+        !new RegExp(
+          '^(([a-z0-9]|[a-z0-9][a-z0-9_\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9_\\-]*[a-z0-9])$',
+          'i'
+        ).test(host)
       ) {
         return false;
       }
