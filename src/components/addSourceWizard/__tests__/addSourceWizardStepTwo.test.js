@@ -68,6 +68,18 @@ describe('AddSourceWizardStepTwo Component', () => {
     expect(AddSourceWizardStepTwo.hostsValid(['l.'])).toBe(false);
     expect(AddSourceWizardStepTwo.hostValid('l.')).toBe(false);
 
+    expect(AddSourceWizardStepTwo.hostsValid(['l-'])).toBe(false);
+    expect(AddSourceWizardStepTwo.hostValid('l-')).toBe(false);
+
+    expect(AddSourceWizardStepTwo.hostsValid(['l-l'])).toBe(true);
+    expect(AddSourceWizardStepTwo.hostValid('l-l')).toBe(true);
+
+    expect(AddSourceWizardStepTwo.hostsValid(['l_'])).toBe(false);
+    expect(AddSourceWizardStepTwo.hostValid('l_')).toBe(false);
+
+    expect(AddSourceWizardStepTwo.hostsValid(['l_l'])).toBe(true);
+    expect(AddSourceWizardStepTwo.hostValid('l_l')).toBe(true);
+
     expect(AddSourceWizardStepTwo.hostsValid(['0.0.0.0:'])).toBe(false);
     expect(AddSourceWizardStepTwo.hostValid('0.0.0.0:')).toBe(false);
 
