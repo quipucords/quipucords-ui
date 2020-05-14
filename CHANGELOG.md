@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 0.9.2 (2019-12-11)
+## 0.9.3 (2020-05-14)
+
+
+### Bug Fixes
+
+* **addSourceWizardStepTwo:** issues/77 add source regex ([#78](https://github.com/quipucords/quipucords-ui/issues/78)) ([3d1aeea](https://github.com/quipucords/quipucords-ui/commit/3d1aeea))
+* **build:** file lint updates ([2919e90](https://github.com/quipucords/quipucords-ui/commit/2919e90))
+* **build:** npm updates and linting ([dc5cbdf](https://github.com/quipucords/quipucords-ui/commit/dc5cbdf))
+
+
+
+## 0.9.2 (2019-12-12)
 
 
 ### Bug Fixes
@@ -28,7 +39,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-# 0.9.0 (2019-05-31)
+# 0.9.0 (2019-06-13)
 
 
 ### Bug Fixes
