@@ -3,8 +3,7 @@
 exports[`Application branding should have a specific branding file output: ui name within GUI 1`] = `
 Array [
   "",
-  "./dist/client/static/js/main*js",
-  "./dist/client/static/js/main*js.map",
+  "./dist/client/static/js/main*chunk.js",
 ]
 `;
 
@@ -20,15 +19,13 @@ Array [
 exports[`Application branding should have a specific branding file output: ui sentence name within GUI 1`] = `
 Array [
   "",
-  "./dist/client/static/js/main*js",
-  "./dist/client/static/js/main*js.map",
+  "./dist/client/static/js/main*chunk.js",
 ]
 `;
 
 exports[`Application branding should have a specific branding file output: ui short name within GUI 1`] = `
 Array [
   "",
-  "./dist/client/static/js/main*js",
-  "./dist/client/static/js/main*js.map",
+  "./dist/client/static/js/main*chunk.js",
 ]
 `;

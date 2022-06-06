@@ -1,11 +1,13 @@
 import { sourcesTypes } from '../constants';
 import sourcesService from '../../services/sourcesService';
 
-const addSource = (data, query = {}) => dispatch =>
-  dispatch({
-    type: sourcesTypes.ADD_SOURCE,
-    payload: sourcesService.addSource(data, query)
-  });
+const addSource =
+  (data, query = {}) =>
+  dispatch =>
+    dispatch({
+      type: sourcesTypes.ADD_SOURCE,
+      payload: sourcesService.addSource(data, query)
+    });
 
 const deleteSource = id => dispatch =>
   dispatch({
@@ -13,17 +15,21 @@ const deleteSource = id => dispatch =>
     payload: sourcesService.deleteSource(id)
   });
 
-const deleteSources = (ids = []) => dispatch =>
-  dispatch({
-    type: sourcesTypes.DELETE_SOURCES,
-    payload: sourcesService.deleteSources(ids)
-  });
+const deleteSources =
+  (ids = []) =>
+  dispatch =>
+    dispatch({
+      type: sourcesTypes.DELETE_SOURCES,
+      payload: sourcesService.deleteSources(ids)
+    });
 
-const getScansSources = (query = {}) => dispatch =>
-  dispatch({
-    type: sourcesTypes.GET_SCANS_SOURCES,
-    payload: sourcesService.getSources('', query)
-  });
+const getScansSources =
+  (query = {}) =>
+  dispatch =>
+    dispatch({
+      type: sourcesTypes.GET_SCANS_SOURCES,
+      payload: sourcesService.getSources('', query)
+    });
 
 const getSource = id => dispatch =>
   dispatch({
@@ -31,11 +37,13 @@ const getSource = id => dispatch =>
     payload: sourcesService.getSource(id)
   });
 
-const getSources = (query = {}) => dispatch =>
-  dispatch({
-    type: sourcesTypes.GET_SOURCES,
-    payload: sourcesService.getSources('', query)
-  });
+const getSources =
+  (query = {}) =>
+  dispatch =>
+    dispatch({
+      type: sourcesTypes.GET_SOURCES,
+      payload: sourcesService.getSources('', query)
+    });
 
 const updateSource = (id, data) => dispatch =>
   dispatch({

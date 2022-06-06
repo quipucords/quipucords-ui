@@ -13,18 +13,22 @@ const addStartScan = id => dispatch =>
     payload: scansService.startScan(id)
   });
 
-const getScans = (query = {}) => dispatch =>
-  dispatch({
-    type: scansTypes.GET_SCANS,
-    payload: scansService.getScans('', query)
-  });
+const getScans =
+  (query = {}) =>
+  dispatch =>
+    dispatch({
+      type: scansTypes.GET_SCANS,
+      payload: scansService.getScans('', query)
+    });
 
-const getScanJobs = (id, query = {}) => dispatch =>
-  dispatch({
-    type: scansTypes.GET_SCAN_JOBS,
-    payload: scansService.getScanJobs(id, query),
-    meta: { id, query }
-  });
+const getScanJobs =
+  (id, query = {}) =>
+  dispatch =>
+    dispatch({
+      type: scansTypes.GET_SCAN_JOBS,
+      payload: scansService.getScanJobs(id, query),
+      meta: { id, query }
+    });
 
 const getScanJob = id => dispatch =>
   dispatch({
@@ -33,19 +37,23 @@ const getScanJob = id => dispatch =>
     meta: { id }
   });
 
-const getConnectionScanResults = (id, query = {}) => dispatch =>
-  dispatch({
-    type: scansTypes.GET_SCAN_CONNECTION_RESULTS,
-    payload: scansService.getConnectionScanResults(id, query),
-    meta: { id, query }
-  });
+const getConnectionScanResults =
+  (id, query = {}) =>
+  dispatch =>
+    dispatch({
+      type: scansTypes.GET_SCAN_CONNECTION_RESULTS,
+      payload: scansService.getConnectionScanResults(id, query),
+      meta: { id, query }
+    });
 
-const getInspectionScanResults = (id, query = {}) => dispatch =>
-  dispatch({
-    type: scansTypes.GET_SCAN_INSPECTION_RESULTS,
-    payload: scansService.getInspectionScanResults(id, query),
-    meta: { id, query }
-  });
+const getInspectionScanResults =
+  (id, query = {}) =>
+  dispatch =>
+    dispatch({
+      type: scansTypes.GET_SCAN_INSPECTION_RESULTS,
+      payload: scansService.getInspectionScanResults(id, query),
+      meta: { id, query }
+    });
 
 const startScan = id => dispatch =>
   dispatch({
