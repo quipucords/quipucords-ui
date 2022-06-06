@@ -8,7 +8,7 @@ import store from './redux/store';
 
 import 'patternfly/dist/css/rcue.css';
 import 'patternfly/dist/css/rcue-additions.css';
-import './styles/.css/index.css'; // eslint-disable-line
+import './styles/index.scss';
 
 ReactDOM.render(
   <Provider store={store}>

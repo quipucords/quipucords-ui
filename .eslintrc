@@ -14,7 +14,9 @@
     "react"
   ],
   "extends": [
+    "react-app",
     "airbnb",
+    "airbnb/hooks",
     "prettier",
     "plugin:jest/recommended"
   ],
@@ -42,7 +44,7 @@
     ],
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
-    "jest/no-test-callback": 0,
+    "jest/no-done-callback": 0,
     "jest/prefer-to-have-length": 0,
     "max-len": [
       "error",
@@ -62,7 +64,9 @@
     "prettier/prettier": [
       "error",
       {
+        "arrowParens": "avoid",
         "singleQuote": true,
+        "trailingComma": "none",
         "printWidth": 120
       }
     ],

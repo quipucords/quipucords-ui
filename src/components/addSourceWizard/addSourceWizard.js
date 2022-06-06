@@ -96,8 +96,9 @@ class AddSourceWizard extends React.Component {
               store.dispatch({
                 type: reduxTypes.toastNotifications.TOAST_ADD,
                 alertType: 'success',
-                message: `Source ${source[apiTypes.API_SUBMIT_SOURCE_NAME]} was ${(props.edit && 'updated') ||
-                  'created'}`
+                message: `Source ${source[apiTypes.API_SUBMIT_SOURCE_NAME]} was ${
+                  (props.edit && 'updated') || 'created'
+                }`
               });
             }
           },
@@ -141,18 +142,8 @@ class AddSourceWizard extends React.Component {
   }
 
   render() {
-    const {
-      addSteps,
-      edit,
-      editSteps,
-      error,
-      errorStatus,
-      fulfilled,
-      pending,
-      show,
-      stepOneValid,
-      stepTwoValid
-    } = this.props;
+    const { addSteps, edit, editSteps, error, errorStatus, fulfilled, pending, show, stepOneValid, stepTwoValid } =
+      this.props;
     const { activeStepIndex } = this.state;
     const wizardSteps = edit ? editSteps : addSteps;
 

@@ -282,11 +282,7 @@ const getTimeStampFromResults =
 
 const getTimeDisplayHowLongAgo =
   process.env.REACT_APP_ENV !== 'test'
-    ? timestamp =>
-        moment
-          .utc(timestamp)
-          .utcOffset(moment().utcOffset())
-          .fromNow()
+    ? timestamp => moment.utc(timestamp).utcOffset(moment().utcOffset()).fromNow()
     : () => 'a day ago';
 
 const isIpAddress = name => {

@@ -11,7 +11,7 @@ Object {
   "check": Object {
     "lorem": false,
   },
-  "timer": 6,
+  "timer": 7,
 }
 `;
 
@@ -20,6 +20,6 @@ Object {
   "check": Object {
     "lorem": true,
   },
-  "timer": 3,
+  "timer": 5,
 }
 `;

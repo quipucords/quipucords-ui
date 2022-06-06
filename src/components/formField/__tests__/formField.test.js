@@ -13,12 +13,7 @@ describe('FormField Component', () => {
     );
 
     expect(component.render()).toMatchSnapshot('basic formfield');
-    expect(
-      component
-        .find('label')
-        .at(0)
-        .render()
-    ).toMatchSnapshot('basic label');
+    expect(component.find('label').at(0).render()).toMatchSnapshot('basic label');
   });
 
   it('should handle multiple error message types', () => {
