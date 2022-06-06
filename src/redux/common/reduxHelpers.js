@@ -76,14 +76,14 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     update: false
   };
 
-  const useId = data =>
+  const idUse = data =>
     (action.meta && action.meta.id && { [action.meta.id]: { ...baseState, ...data } }) || { ...baseState, ...data };
 
   switch (type) {
     case REJECTED_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        useId({
+        idUse({
           error: true,
           errorMessage: helpers.getMessageFromResults(action.payload).message,
           errorStatus: helpers.getStatusFromResults(action.payload)
@@ -95,7 +95,7 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     case PENDING_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        useId({
+        idUse({
           pending: true
         }),
         {
@@ -106,7 +106,7 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
     case FULFILLED_ACTION(whichType.type || whichType):
       return setStateProp(
         whichType.ref || null,
-        useId({
+        idUse({
           date: action.payload.headers && action.payload.headers.date,
           data: (action.payload && action.payload.data) || {},
           fulfilled: true

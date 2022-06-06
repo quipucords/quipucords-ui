@@ -13,11 +13,13 @@ const getCredential = id => dispatch =>
     payload: credentialsService.getCredential(id)
   });
 
-const getCredentials = (query = {}) => dispatch =>
-  dispatch({
-    type: credentialsTypes.GET_CREDENTIALS,
-    payload: credentialsService.getCredentials('', query)
-  });
+const getCredentials =
+  (query = {}) =>
+  dispatch =>
+    dispatch({
+      type: credentialsTypes.GET_CREDENTIALS,
+      payload: credentialsService.getCredentials('', query)
+    });
 
 const updateCredential = (id, data) => dispatch =>
   dispatch({
@@ -31,10 +33,12 @@ const deleteCredential = id => dispatch =>
     payload: credentialsService.deleteCredential(id)
   });
 
-const deleteCredentials = (ids = []) => dispatch =>
-  dispatch({
-    type: credentialsTypes.DELETE_CREDENTIALS,
-    payload: credentialsService.deleteCredentials(ids)
-  });
+const deleteCredentials =
+  (ids = []) =>
+  dispatch =>
+    dispatch({
+      type: credentialsTypes.DELETE_CREDENTIALS,
+      payload: credentialsService.deleteCredentials(ids)
+    });
 
 export { addCredential, deleteCredential, deleteCredentials, getCredential, getCredentials, updateCredential };

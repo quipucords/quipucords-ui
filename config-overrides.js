@@ -17,6 +17,7 @@ const webpack = (config, env) => {
 
   if (newConfig.output) {
     newConfig.output.path = path.join(__dirname, './build');
+    newConfig.output.futureEmitAssets = false;
   }
 
   return newConfig;

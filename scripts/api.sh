@@ -87,7 +87,7 @@ startDB()
 {
   local CONTAINER="postgres:9.6.10"
   local NAME=$1
-  local DATA="$(pwd)/.container"
+  local DATA="$(pwd)/.container/postgres"
   local DATA_VOLUME="/var/lib/postgresql/data"
   local STORE_DATA=$2
 
@@ -143,21 +143,29 @@ buildApp()
 }
 #
 #
-# Run review/stage setup, used for GUI against the latest API for confirmation
+# Run a production setup, used for GUI against the latest API for confirmation
 #
 reviewApi()
 {
-  local CONTAINER="qpc-review"
+  local NAME="qpc-review"
   local DB_NAME="qpc-db"
   local PORT=$1
+  local IS_BUILT=$2
+  local CONTAINER=$3
 
-  buildApp $CONTAINER
+  if [ "$IS_BUILT" = true ]; then
+    CONTAINER=$NAME
+    buildApp $CONTAINER
+  else
+    docker stop -t 0 $NAME >/dev/null
+  fi
+
   startDB $DB_NAME
 
   if [ -z "$(docker ps | grep $CONTAINER)" ]; then
     printf "\n"
     echo "Starting API..."
-    docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $CONTAINER $CONTAINER >/dev/null
+    docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
   fi
 
   checkContainerRunning $CONTAINER
@@ -165,7 +173,7 @@ reviewApi()
   if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
     echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
     echo "  QPC API running: https://localhost:${PORT}/"
-    printf "  To stop: $ ${GREEN}docker stop ${CONTAINER}${NOCOLOR}\n"
+    printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
   fi
 
   exit 0
@@ -176,10 +184,12 @@ reviewApi()
 #
 stageApi()
 {
-  local CONTAINER="qpc-stage"
+  local NAME="qpc-stage"
   local DB_NAME="qpc-db"
   local PORT=$1
   local UPDATE=$2
+  local IS_BUILT=$3
+  local CONTAINER=$4
 
   local BUILD_DIR="$(pwd)/build"
   local CLIENT_VOLUME="/app/quipucords/client"
@@ -191,7 +201,12 @@ stageApi()
   local DIST_CLIENT_ASSETS="$(pwd)/dist/client/assets"
   local CLIENT_ASSETS_VOLUME="/app/quipucords/client/assets"
 
-  buildApp $CONTAINER
+  if [ "$IS_BUILT" = true ]; then
+    CONTAINER=$NAME
+    buildApp $CONTAINER
+  else
+    docker stop -t 0 $NAME >/dev/null
+  fi
 
   if [ ! "$UPDATE" = true ]; then
     startDB $DB_NAME true
@@ -199,7 +214,7 @@ stageApi()
     if [ -z "$(docker ps | grep $CONTAINER)" ]; then
       printf "\n"
       echo "Starting API..."
-      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $CONTAINER $CONTAINER >/dev/null
+      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
     fi
 
     checkContainerRunning $CONTAINER
@@ -207,7 +222,7 @@ stageApi()
     if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
       echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
       echo "  QPC API running: https://localhost:${PORT}/"
-      printf "  To stop: $ ${GREEN}docker stop ${CONTAINER}${NOCOLOR}\n"
+      printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
     fi
 
     runDocs
@@ -220,11 +235,11 @@ stageApi()
 #
 devApi()
 {
-  local CONTAINER="palo/swagger-api-mock"
   local NAME="qpc-dev"
   local PORT=$1
   local FILE=$2
   local UPDATE=$3
+  local CONTAINER=$4
 
   docker stop -t 0 $NAME >/dev/null
 
@@ -280,19 +295,21 @@ runDocs()
   FILE="$(pwd)/.qpc/quipucords/docs/swagger.yml"
 
   QPC_REPO="https://github.com/quipucords/quipucords.git"
+  QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords"
+  MOCK_IMAGE_CONTAINER="palo/swagger-api-mock"
   DATADIR="$(pwd)/.qpc"
   DATADIR_REPO="$(pwd)/.qpc/quipucords"
   DATADIR_REPO_QPC="$(pwd)/.qpc/quipucords/quipucords"
   DATADIR_REPO_QPC_TEMPLATES="$(pwd)/.qpc/quipucords/quipucords/quipucords"
 
-  DISTDIR="$(pwd)/dist"
   DISTDIR_CLIENT="$(pwd)/dist/client"
   DISTDIR_TEMPLATES="$(pwd)/dist/templates"
 
+  BUILT=false
   UPDATE=false
   CLEAN=false
 
-  while getopts p:f:t:cu option;
+  while getopts p:f:t:cub option;
     do
       case $option in
         p ) PORT=$OPTARG;;
@@ -300,6 +317,7 @@ runDocs()
         t ) TYPE="$OPTARG";;
         c ) CLEAN=true;;
         u ) UPDATE=true;;
+        b ) BUILT=true;;
       esac
   done
 
@@ -317,11 +335,11 @@ runDocs()
 
   case $TYPE in
     review )
-      reviewApi $PORT;;
+      reviewApi $PORT $BUILT $QPC_IMAGE_CONTAINER;;
     stage )
-      stageApi $PORT $UPDATE;;
+      stageApi $PORT $UPDATE $BUILT $QPC_IMAGE_CONTAINER;;
     dev )
-      devApi $PORT "$FILE" $UPDATE;;
+      devApi $PORT "$FILE" $UPDATE $MOCK_IMAGE_CONTAINER;;
     docs )
       runDocs true;;
     gitApi )

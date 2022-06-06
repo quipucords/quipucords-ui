@@ -283,15 +283,8 @@ class CreateCredentialDialog extends React.Component {
   }
 
   renderAuthForm() {
-    const {
-      authorizationType,
-      password,
-      sshKeyFile,
-      passphrase,
-      passwordError,
-      sskKeyFileError,
-      sshKeyDisabled
-    } = this.state;
+    const { authorizationType, password, sshKeyFile, passphrase, passwordError, sskKeyFileError, sshKeyDisabled } =
+      this.state;
 
     switch (authorizationType) {
       case 'usernamePassword':
