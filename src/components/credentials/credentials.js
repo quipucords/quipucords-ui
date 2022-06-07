@@ -28,7 +28,7 @@ class Credentials extends React.Component {
     this.onRefresh();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) { //eslint-disable-line
     const { credentials, fulfilled, update, viewOptions } = this.props;
 
     if (!_isEqual(nextProps.credentials, credentials) && nextProps.fulfilled && !fulfilled) {

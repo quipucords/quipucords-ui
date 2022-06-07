@@ -72,7 +72,7 @@ class CreateCredentialDialog extends React.Component {
     this.becomeMethods = ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'];
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) { //eslint-disable-line
     const { edit, fulfilled, getCredentials, show, viewOptions } = this.props;
 
     if (!show && nextProps.show) {
