@@ -2,7 +2,7 @@
 
 exports[`I18n Component should pass children: children 1`] = `"lorem ipsum"`;
 
-exports[`I18n Component should render a non-connected component: non-connected 1`] = `
+exports[`I18n Component should render a basic component: basic 1`] = `
 <I18n
   fallbackLng="en"
   loadPath="/locales/{{lng}}.json"
