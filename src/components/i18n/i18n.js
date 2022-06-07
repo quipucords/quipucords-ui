@@ -1,56 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import i18n from 'i18next';
+import i18next from 'i18next';
 import XHR from 'i18next-xhr-backend';
 import { initReactI18next } from 'react-i18next';
+import { useMount } from 'react-use';
 import { helpers } from '../../common/helpers';
 
-/**
- * ToDo: reevaluate the "I18nextProvider" on package update.
- * It currently appears to have timing issues, and subsequent firings of the
- * ajax/xhr setup. Reverting it to just a function call that populates behind
- * the scenes appears more predictable.
- */
-class I18n extends React.Component {
-  componentDidMount() {
-    this.i18nInit();
-  }
+const I18n = ({ children, fallbackLng, loadPath, locale }) => {
+  const [initialized, setInitialized] = useState(false);
 
-  componentDidUpdate(prevProps) {
-    const { locale } = this.props;
-
-    if (locale !== prevProps.locale) {
-      this.i18nInit();
+  /**
+   * Initialize i18next
+   */
+  useMount(async () => {
+    try {
+      await i18next
+        .use(XHR)
+        .use(initReactI18next)
+        .init({
+          backend: {
+            loadPath
+          },
+          fallbackLng,
+          lng: undefined,
+          debug: !helpers.PROD_MODE,
+          ns: ['default'],
+          defaultNS: 'default',
+          react: {
+            useSuspense: false
+          }
+        });
+    } catch (e) {
+      //
     }
-  }
 
-  i18nInit() {
-    const { fallbackLng, loadPath, locale } = this.props;
+    setInitialized(true);
+  });
 
-    i18n
-      .use(XHR)
-      .use(initReactI18next)
-      .init({
-        backend: {
-          loadPath
-        },
-        fallbackLng,
-        lng: locale,
-        debug: !helpers.PROD_MODE,
-        ns: ['default'],
-        defaultNS: 'default',
-        react: {
-          useSuspense: false
-        }
-      });
-  }
+  /**
+   * Update locale.
+   */
+  useEffect(() => {
+    if (initialized) {
+      try {
+        i18next.changeLanguage(locale);
+      } catch (e) {
+        //
+      }
+    }
+  }, [initialized, locale]);
 
-  render() {
-    const { children } = this.props;
-
-    return <React.Fragment>{children}</React.Fragment>;
-  }
-}
+  return (initialized && children) || <React.Fragment />;
+};
 
 I18n.propTypes = {
   children: PropTypes.node.isRequired,
