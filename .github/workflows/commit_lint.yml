@@ -1,0 +1,37 @@
+name: Commit lint
+on:
+  pull_request
+env:
+  BRANCH: ${{ github.base_ref }}
+
+jobs:
+  Commits:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Git commits
+        run: |
+          git remote add ssh-origin "https://github.com/$GITHUB_REPOSITORY"
+          git fetch ssh-origin
+          echo 'GIT_COMMITS<<EOF' >> $GITHUB_ENV
+          git cherry -v ssh-origin/${{ env.BRANCH }} | grep "+" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Lint
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const actionCommit = require(`${process.env.GITHUB_WORKSPACE}/scripts/actions.commit.js`)
+            const { resultsArray, resultsString } = actionCommit(process.env.GIT_COMMITS)
+
+            if (resultsArray.length) {
+              core.setFailed(resultsString)
+            }
