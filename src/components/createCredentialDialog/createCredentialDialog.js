@@ -43,34 +43,36 @@ class CreateCredentialDialog extends React.Component {
     return '';
   }
 
-  constructor() {
-    super();
+  static validateSshKeyFile(keyFile) {
+    const sshKeyFileValidator = new RegExp(/^\/.*$/);
 
-    // ToDo: evaluate "sudo" as the default for becomeMethod
-    this.initialState = {
-      credentialName: '',
-      credentialType: '',
-      authorizationType: 'usernamePassword',
-      sshKeyFile: '',
-      passphrase: '',
-      username: '',
-      password: '',
-      becomeMethod: 'sudo',
-      becomeUser: '',
-      becomePassword: '',
-      credentialNameError: '',
-      usernameError: '',
-      sskKeyFileError: '',
-      becomeUserError: '',
-      sshKeyDisabled: false
-    };
+    if (!sshKeyFileValidator.test(keyFile)) {
+      return 'Please enter the full path to the SSH Key File';
+    }
 
-    this.state = { ...this.initialState };
-
-    this.sshKeyFileValidator = new RegExp(/^\/.*$/);
-
-    this.becomeMethods = ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'];
+    return '';
   }
+
+  // ToDo: evaluate "sudo" as the default for becomeMethod
+  initialState = {
+    credentialName: '',
+    credentialType: '',
+    authorizationType: 'usernamePassword',
+    sshKeyFile: '',
+    passphrase: '',
+    username: '',
+    password: '',
+    becomeMethod: 'sudo',
+    becomeUser: '',
+    becomePassword: '',
+    credentialNameError: '',
+    usernameError: '',
+    sskKeyFileError: '',
+    becomeUserError: '',
+    sshKeyDisabled: false
+  };
+
+  state = { ...this.initialState };
 
   UNSAFE_componentWillReceiveProps(nextProps) { //eslint-disable-line
     const { edit, fulfilled, getCredentials, show, viewOptions } = this.props;
@@ -180,7 +182,7 @@ class CreateCredentialDialog extends React.Component {
   onUpdateSshKeyFile = event => {
     this.setState({
       sshKeyFile: event.target.value,
-      sskKeyFileError: this.validateSshKeyFile(event.target.value)
+      sskKeyFileError: CreateCredentialDialog.validateSshKeyFile(event.target.value)
     });
   };
 
@@ -274,14 +276,6 @@ class CreateCredentialDialog extends React.Component {
     );
   }
 
-  validateSshKeyFile(keyFile) {
-    if (!this.sshKeyFileValidator.test(keyFile)) {
-      return 'Please enter the full path to the SSH Key File';
-    }
-
-    return '';
-  }
-
   renderAuthForm() {
     const { authorizationType, password, sshKeyFile, passphrase, passwordError, sskKeyFileError, sshKeyDisabled } =
       this.state;
@@ -341,6 +335,7 @@ class CreateCredentialDialog extends React.Component {
 
   renderNetworkForm() {
     const { credentialType, becomeMethod, becomeUser, becomePassword, becomeUserError } = this.state;
+    const { becomeMethods } = this.props;
 
     if (credentialType !== 'network') {
       return null;
@@ -356,7 +351,7 @@ class CreateCredentialDialog extends React.Component {
               multiselect={false}
               onSelect={this.onSetBecomeMethod}
               selectValue={becomeMethod}
-              options={this.becomeMethods}
+              options={becomeMethods}
             />
           </Grid.Col>
         </Form.FormGroup>
@@ -494,6 +489,7 @@ class CreateCredentialDialog extends React.Component {
 
 CreateCredentialDialog.propTypes = {
   addCredential: PropTypes.func,
+  becomeMethods: PropTypes.arrayOf(PropTypes.string),
   getCredentials: PropTypes.func,
   updateCredential: PropTypes.func,
   credential: PropTypes.object,
@@ -508,6 +504,7 @@ CreateCredentialDialog.propTypes = {
 
 CreateCredentialDialog.defaultProps = {
   addCredential: helpers.noop,
+  becomeMethods: ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'],
   getCredentials: helpers.noop,
   updateCredential: helpers.noop,
   credential: {},

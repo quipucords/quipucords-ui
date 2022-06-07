@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Form, Icon, InputGroup, Button } from 'patternfly-react';
 import helpers from '../../common/helpers';
 
+// FixMe: remove the eslint-disable
 class TouchSpin extends React.Component {
   constructor(props) {
     super(props);
 
+    // eslint-disable-next-line
     this.state = {
       displayValue: Number.parseInt(props.value, 10),
       maxValue: Number.parseInt(props.maxValue, 10),

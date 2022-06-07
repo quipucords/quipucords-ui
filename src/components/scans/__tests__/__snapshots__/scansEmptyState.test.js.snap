@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScansEmptyState Component should render a connected component: connected 1`] = `
-<Route>
+<ContextConsumer>
   <Component />
-</Route>
+</ContextConsumer>
 `;
 
 exports[`ScansEmptyState Component should render a non-connected component: non-connected do not exist 1`] = `

@@ -55,7 +55,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
 exports[`AboutModal Component should have a copy event that updates state: post copy event 1`] = `
 Object {
   "copied": null,
-  "timer": 13,
+  "timer": 14,
 }
 `;
 
@@ -206,6 +206,7 @@ exports[`AboutModal Component should render a non-connected component: hidden mo
         onEntering={[Function]}
         onExited={[Function]}
         onHide={[Function]}
+        onMouseUp={[Function]}
         renderBackdrop={[Function]}
         restoreFocus={true}
         show={false}
