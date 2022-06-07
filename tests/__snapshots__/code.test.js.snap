@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
+Array [
+  "common/helpers.js:33:      console.warn('Copy to clipboard failed.', e.message);",
+  "common/helpers.js:122:      console.error(\`Unknown status: \${scanStatus}\`);",
+  "redux/common/reduxHelpers.js:14:    console.error(\`Error: Property \${prop} does not exist within the passed state.\`, state);",
+  "redux/common/reduxHelpers.js:18:    console.warn(\`Warning: Property \${prop} does not exist within the passed initialState.\`, initialState);",
+  "setupTests.js:83:  console.error = (message, ...args) => {",
+]
+`;

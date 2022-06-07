@@ -20,6 +20,12 @@
     "prettier",
     "plugin:jest/recommended"
   ],
+  "globals": {
+    "mountHookComponent": "readonly",
+    "mountHookWrapper": "readonly",
+    "shallowHookComponent": "readonly",
+    "shallowHookWrapper": "readonly"
+  },
   "rules": {
     "arrow-parens": [
       "error",

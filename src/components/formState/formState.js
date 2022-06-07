@@ -31,6 +31,10 @@ class FormState extends React.Component {
     return Object.prototype.toString.call(obj) === '[object Promise]';
   }
 
+  state = {
+    ...initialState
+  };
+
   constructor(props) {
     super(props);
 
@@ -43,10 +47,6 @@ class FormState extends React.Component {
 
     this.errors = {};
     this.values = _cloneDeep(props.setValues);
-
-    this.state = {
-      ...initialState
-    };
   }
 
   componentDidMount() {
