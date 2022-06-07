@@ -49,7 +49,7 @@ describe('Sources Component', () => {
       sources: []
     };
 
-    const component = shallow(<Sources {...props} />);
+    const component = mount(<Sources {...props} />);
 
     expect(component.render()).toMatchSnapshot('pending');
   });

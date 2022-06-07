@@ -22,7 +22,6 @@ exports[`Router Component should shallow render a basic component 1`] = `
     />
     <Redirect
       from="/"
-      push={false}
       to="/sources"
     />
   </Switch>

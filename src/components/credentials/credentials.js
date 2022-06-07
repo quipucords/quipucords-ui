@@ -13,16 +13,13 @@ import CredentialListItem from './credentialListItem';
 import { CredentialFilterFields, CredentialSortFields } from './credentialConstants';
 
 class Credentials extends React.Component {
-  constructor() {
-    super();
+  credentialsToDelete = [];
 
-    this.credentialsToDelete = [];
-    this.deletingCredential = null;
+  deletingCredential = null;
 
-    this.state = {
-      lastRefresh: null
-    };
-  }
+  state = {
+    lastRefresh: null
+  };
 
   componentDidMount() {
     this.onRefresh();
