@@ -37,8 +37,10 @@ pids
 *.pid
 *.seed
 *.pid.lock
+pr.txt
 
 # logs
+dependency-update-log.txt
 logs
 *.log
 npm-debug.log*
