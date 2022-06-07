@@ -3,33 +3,15 @@
 [![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
 [![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/master/LICENSE)
 
-Web user interface for [Quipucords](https://github.com/quipucords/quipucords), based on [Patternfly <img src="https://www.patternfly.org/assets/img/logo.svg" height="30" />](https://www.patternfly.org/)
+Web user interface for [Quipucords](https://github.com/quipucords/quipucords), based on [Patternfly](https://www.patternfly.org/)
 
 ## Requirements
-Before developing for Quipucords UI, the basic requirements:
- * Your system needs to be running [NodeJS version 10+](https://nodejs.org/)
- * [Docker](https://docs.docker.com/engine/installation/)
- * And [Yarn 1.13+](https://yarnpkg.com) for dependency and script management.
+Before developing, the basic requirements:
+   * Your system needs to be running [NodeJS version 14+ and NPM](https://nodejs.org/)
+   * [Docker](https://docs.docker.com/engine/install/)
+   * And [Yarn 1.22+](https://yarnpkg.com) for dependency and script management.
 
-### Docker & Mac
-Setting Docker up on a Mac? Install the appropriate package and you should be good to go. To check if everything installed correctly you can try these steps.
-  * At a terminal prompt type
-
-    ```
-    $ docker run hello-world
-    ```
-
-### Docker & Linux
-Setting Docker up on a Linux machine can include an additional convenience step. If you're having to prefix "sudo" in front of your Docker commands you can try these steps.
-  * [Docker postinstall documentation](https://docs.docker.com/install/linux/linux-postinstall/)
-
-### Yarn
- We recommend using [Homebrew](https://brew.sh/) to do the install.
-
-  ```
-  $ brew update
-  $ brew install yarn
-  ```
+For in-depth tooling install guidance see the [contribution guidelines](./CONTRIBUTING.md#Install)
 
 ## Development, Quick Start
 
@@ -39,14 +21,12 @@ Setting Docker up on a Linux machine can include an additional convenience step.
      $ git clone https://github.com/quipucords/quipucords-ui.git
      ```
 
-  1. Install project dependencies
+  1. Within the repo context, install project dependencies
      ```
      $ cd quipucords-ui && yarn
      ```
 
 ### Serving Content
-
-#### Development Serve, local UI with mock API
 This is the default context for running a local UI with a randomized mock API. 
 
 Make sure **Docker** is running, then run
@@ -66,4 +46,4 @@ Run the tests with coverage.
 For in-depth testing guidance review the [contribution guidelines](./CONTRIBUTING.md#Testing)
 
 ## Contributing
-Contributing to Quipucords UI encompasses [repository specific requirements](./CONTRIBUTING.md)  and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.md).
+Contributing encompasses [repository specific requirements](./CONTRIBUTING.md) and the global [contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.md).

@@ -9,11 +9,25 @@
 <!-- Are there directions to test/review? -->
 <!--
 ### Coverage and basic unit test check
-1. update the NPM packages with `$ npm install` or `$ yarn`
-1. `$ npm test` or `$ yarn test`
+1. update the NPM packages with `$ yarn`
+1. `$ yarn test`
+-->
+<!--
 ### Interactive unit test check
-1. update the NPM packages with `$ npm install` or `$ yarn`
-1. `$ npm run test:dev` or `$ yarn test:dev`
+1. update the NPM packages with `$ yarn`
+1. `$ yarn test:dev`
+-->
+<!--
+### Local run check
+1. update the NPM packages with `$ yarn`
+1. `$ yarn start:stage`
+1. next...
+-->
+<!--
+### Check the build
+1. update the NPM packages with `$ yarn`
+1. `$ yarn build`
+1. next...
 -->
 
 ## Example
@@ -22,3 +36,4 @@
 
 ## Updates issue/story
 <!-- What issue/story does this update, i.e Updates #33 -->
+<!-- [DISCOVERY-X](https://issues.redhat.com/browse/DISCOVERY-X) -->

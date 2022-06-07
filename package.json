@@ -13,7 +13,7 @@
     "url": "https://github.com/quipucords/quipucords-ui/issues"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=14.0.0"
   },
   "jest": {
     "coverageThreshold": {
@@ -55,6 +55,8 @@
     "api:stage": "sh ./scripts/api.sh -p 5001 -t stage",
     "api:update": "npm run api:build; sh ./scripts/api.sh -t update",
     "build": "run-s -l build:pre build:docs test:docs build:js build:post test:integration",
+    "build:clean": "bash ./scripts/clean.sh",
+    "build:deps": "bash ./scripts/dependencies.sh --doctor -u --doctorInstall \"yarn\" --doctorTest \"yarn test:deps\" --reject \"patternfly*, quipudocs\"",
     "build:docs": "node ./scripts/quipudocs.js",
     "build:js": "react-scripts build",
     "build:post": "bash ./scripts/post.sh",
@@ -70,6 +72,7 @@
     "test": "run-s test:lint test:ci",
     "test:ci": "export CI=true; react-scripts test --env=jsdom --coverage",
     "test:clearCache": "react-scripts test -- --clearCache",
+    "test:deps": "run-s test build",
     "test:dev": "run-s test:lint test:unit",
     "test:docs": "htmlhint ./public/docs; eslint --ext=json ./public/locales",
     "test:integration": "jest --roots=./tests",
@@ -129,6 +132,7 @@
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.4",
     "moxios": "^0.4.0",
+    "npm-check-updates": "^13.1.1",
     "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.11",
     "redux-mock-store": "^1.5.4",
