@@ -1,14 +1,11 @@
-import axios from 'axios';
-import serviceConfig from './config';
+import { serviceCall } from './config';
 
 const getStatus = () =>
-  axios(
-    serviceConfig(
-      {
-        url: process.env.REACT_APP_STATUS_SERVICE
-      },
-      false
-    )
+  serviceCall(
+    {
+      url: process.env.REACT_APP_STATUS_SERVICE
+    },
+    { auth: false }
   );
 
 const statusService = {

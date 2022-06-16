@@ -1,16 +1,13 @@
-import axios from 'axios';
-import serviceConfig from './config';
+import { serviceCall } from './config';
 import helpers from '../common/helpers';
 
 const getReportsDownload = id =>
-  axios(
-    serviceConfig(
-      {
-        url: `${process.env.REACT_APP_REPORTS_SERVICE}${id}/`,
-        responseType: 'blob'
-      },
-      false
-    )
+  serviceCall(
+    {
+      url: `${process.env.REACT_APP_REPORTS_SERVICE}${id}/`,
+      responseType: 'blob'
+    },
+    { auth: false }
   ).then(
     success =>
       (helpers.TEST_MODE && success.data) ||
@@ -22,13 +19,11 @@ const getReportsDownload = id =>
   );
 
 const mergeReports = (data = {}) =>
-  axios(
-    serviceConfig({
-      method: 'put',
-      url: process.env.REACT_APP_REPORTS_SERVICE_MERGE,
-      data
-    })
-  );
+  serviceCall({
+    method: 'put',
+    url: process.env.REACT_APP_REPORTS_SERVICE_MERGE,
+    data
+  });
 
 const reportsService = {
   getReportsDownload,
