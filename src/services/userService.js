@@ -1,5 +1,4 @@
-import axios from 'axios';
-import serviceConfig from './config';
+import { serviceCall } from './config';
 
 /**
  * ToDo: Prep for accessing the users locale
@@ -27,20 +26,16 @@ const getLocale = () => {
 };
 
 const whoami = () =>
-  axios(
-    serviceConfig({
-      method: 'get',
-      url: process.env.REACT_APP_USER_SERVICE_CURRENT
-    })
-  );
+  serviceCall({
+    method: 'get',
+    url: process.env.REACT_APP_USER_SERVICE_CURRENT
+  });
 
 const logoutUser = () =>
-  axios(
-    serviceConfig({
-      method: 'put',
-      url: process.env.REACT_APP_USER_SERVICE_LOGOUT
-    })
-  );
+  serviceCall({
+    method: 'put',
+    url: process.env.REACT_APP_USER_SERVICE_LOGOUT
+  });
 
 const userService = { getLocale, whoami, logoutUser };
 

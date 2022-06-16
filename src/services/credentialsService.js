@@ -1,47 +1,38 @@
-import axios from 'axios';
-import serviceConfig from './config';
+import { serviceCall } from './config';
 
 const addCredential = (data = {}) =>
-  axios(
-    serviceConfig({
-      method: 'post',
-      url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}`,
-      data
-    })
-  );
+  serviceCall({
+    method: 'post',
+    url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}`,
+    data
+  });
 
 const deleteCredential = id =>
-  axios(
-    serviceConfig({
-      method: 'delete',
-      url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`
-    })
-  );
+  serviceCall({
+    method: 'delete',
+    url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`
+  });
 
 const deleteCredentials = (data = []) =>
   Promise.all(data.map(id => deleteCredential(id))).then(success => new Promise(resolve => resolve({ data: success })));
 
 const getCredentials = (id = '', params = {}) =>
-  axios(
-    serviceConfig(
-      {
-        url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}`,
-        params
-      },
-      false
-    )
+  serviceCall(
+    {
+      url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}`,
+      params
+    },
+    { auth: false }
   );
 
 const getCredential = id => getCredentials(id);
 
 const updateCredential = (id, data = {}) =>
-  axios(
-    serviceConfig({
-      method: 'put',
-      url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`,
-      data
-    })
-  );
+  serviceCall({
+    method: 'put',
+    url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`,
+    data
+  });
 
 const credentialsService = {
   addCredential,
