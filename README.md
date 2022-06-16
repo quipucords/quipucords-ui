@@ -1,5 +1,5 @@
 # Quipucords UI
-[![Build Status](https://travis-ci.org/quipucords/quipucords-ui.svg?branch=master)](https://travis-ci.org/quipucords/quipucords-ui)
+[![Build Status](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml/badge.svg)](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml)
 [![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
 [![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/master/LICENSE)
 
