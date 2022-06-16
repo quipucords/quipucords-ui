@@ -1,17 +1,17 @@
 import cookies from 'js-cookie';
-import * as service from '../config';
+import { config } from '../config';
 
 describe('ServiceConfig', () => {
-  it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(service)).toHaveLength(2);
+  it('should have specific properties and methods', () => {
+    expect(Object.keys(config)).toMatchSnapshot('specific props and methods');
   });
 
   it('should export a default services config', () => {
-    expect(service.serviceConfig).toBeDefined();
+    expect(config.serviceConfig).toBeDefined();
 
     cookies.set(process.env.REACT_APP_AUTH_TOKEN, 'spoof');
 
-    const configObject = service.serviceConfig(
+    const configObject = config.serviceConfig(
       {
         method: 'post',
         timeout: 3
@@ -24,7 +24,7 @@ describe('ServiceConfig', () => {
   });
 
   it('should export a default services config without authorization', () => {
-    const configObject = service.serviceConfig({}, false);
+    const configObject = config.serviceConfig({}, { auth: false });
 
     expect(configObject.headers[process.env.REACT_APP_AUTH_HEADER]).toBeUndefined();
   });
