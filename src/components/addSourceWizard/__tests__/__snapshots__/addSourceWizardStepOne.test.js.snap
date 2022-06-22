@@ -1,24 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddSourceWizardStepOne Component should render a connected component: connected 1`] = `
-<FormState
-  onReset={[Function]}
-  onSubmit={[Function]}
-  resetUsingSetValues={true}
-  setValues={
-    Object {
-      "sourceType": "network",
-    }
-  }
-  setValuesAssumeBoolIsChecked={true}
-  setValuesOnUpdate={false}
-  validate={[Function]}
-  validateOnMount={true}
-  validateOnUpdate={false}
->
-  <Component />
-</FormState>
-`;
+exports[`AddSourceWizardStepOne Component should render a connected component: connected 1`] = `<Connect(AddSourceWizardStepOne) />`;
 
 exports[`AddSourceWizardStepOne Component should render a non-connected component: non-connected 1`] = `
 <form

@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedSourceListItem, SourceListItem } from '../sourceListItem';
 import { reduxTypes } from '../../../redux';
@@ -16,9 +17,13 @@ describe('SourceListItem Component', () => {
         [apiTypes.API_RESPONSE_SOURCE_SOURCE_TYPE]: 'network'
       }
     };
-    const component = shallow(<ConnectedSourceListItem {...props} />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedSourceListItem {...props} />{' '}
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedSourceListItem)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

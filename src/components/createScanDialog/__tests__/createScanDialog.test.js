@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedCreateScanDialog, CreateScanDialog } from '../createScanDialog';
 
@@ -11,9 +12,13 @@ describe('CreateScanDialog Component', () => {
       scansEdit: { show: true, sources: [{ name: 'test name' }] }
     });
 
-    const component = shallow(<ConnectedCreateScanDialog />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedCreateScanDialog />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedCreateScanDialog)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

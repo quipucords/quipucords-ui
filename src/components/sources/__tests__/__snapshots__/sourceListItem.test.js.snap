@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SourceListItem Component should render a connected component with default props: connected 1`] = `
-<SourceListItem
-  deleteSource={[Function]}
+<Connect(SourceListItem)
   item={
     Object {
       "id": 1,
       "source_type": "network",
     }
   }
-  lastRefresh={0}
-  pollInterval={120000}
-  selectedSources={Array []}
 />
 `;
 

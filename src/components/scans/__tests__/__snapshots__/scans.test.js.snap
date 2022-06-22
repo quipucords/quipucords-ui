@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scans Component should render a connected component with default props: connected 1`] = `
-<Scans
-  error={false}
-  errorMessage={null}
-  getScans={[Function]}
-  lastRefresh={0}
-  pending={false}
-  scans={Array []}
-  update={false}
-  viewOptions={Object {}}
-/>
-`;
+exports[`Scans Component should render a connected component with default props: connected 1`] = `<Connect(Scans) />`;
 
 exports[`Scans Component should render a non-connected component error: error 1`] = `
 <EmptyState
