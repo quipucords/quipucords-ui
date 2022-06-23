@@ -1,5 +1,5 @@
 import { sourcesTypes } from '../constants';
-import sourcesService from '../../services/sourcesService';
+import { sourcesService } from '../../services';
 
 const addSource =
   (data, query = {}) =>
@@ -51,4 +51,24 @@ const updateSource = (id, data) => dispatch =>
     payload: sourcesService.updateSource(id, data)
   });
 
-export { addSource, deleteSource, deleteSources, getScansSources, getSource, getSources, updateSource };
+const sourcesActions = {
+  addSource,
+  deleteSource,
+  deleteSources,
+  getScansSources,
+  getSource,
+  getSources,
+  updateSource
+};
+
+export {
+  sourcesActions as default,
+  sourcesActions,
+  addSource,
+  deleteSource,
+  deleteSources,
+  getScansSources,
+  getSource,
+  getSources,
+  updateSource
+};

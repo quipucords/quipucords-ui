@@ -2,6 +2,30 @@ import moment from 'moment';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
 
+/**
+ * Fill for AggregatedError
+ *
+ * @param {Array|*} errors An array of errors
+ * @param {string|*} message
+ * @param {object} options
+ * @param {string} options.name
+ * @returns {Error|window.AggregateError<Error>}
+ */
+const aggregatedError = (errors, message, { name = 'AggregateError' } = {}) => {
+  const { AggregateError, Error } = window;
+  let err;
+
+  if (AggregateError) {
+    err = new AggregateError(errors, message);
+  } else {
+    err = new Error(message);
+    err.name = name;
+    err.errors = (Array.isArray(errors) && errors) || [errors];
+    err.isEmulated = true;
+  }
+  return err;
+};
+
 const copyClipboard = text => {
   let successful;
 
@@ -315,6 +339,7 @@ const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
 const helpers = {
+  aggregatedError,
   copyClipboard,
   devModeNormalizeCount,
   downloadData,
