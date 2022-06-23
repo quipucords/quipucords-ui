@@ -8,7 +8,7 @@ import { multiActionMiddleware } from './multiActionMiddleware';
  *
  * @type {Array}
  */
-const reduxMiddleware = [thunkMiddleware, multiActionMiddleware, promiseMiddleware()];
+const reduxMiddleware = [thunkMiddleware, multiActionMiddleware, promiseMiddleware];
 
 if (process.env.NODE_ENV !== 'production' && process.env.REACT_APP_DEBUG_MIDDLEWARE === 'true') {
   reduxMiddleware.push(createLogger());
