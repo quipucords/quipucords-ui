@@ -1,5 +1,5 @@
 import { reportsTypes } from '../constants';
-import reportsService from '../../services/reportsService';
+import { reportsService } from '../../services';
 
 const getReportsDownload = id => dispatch =>
   dispatch({
@@ -13,4 +13,9 @@ const mergeReports = data => dispatch =>
     payload: reportsService.mergeReports(data)
   });
 
-export { getReportsDownload, mergeReports };
+const reportsActions = {
+  getReportsDownload,
+  mergeReports
+};
+
+export { reportsActions as default, reportsActions, getReportsDownload, mergeReports };

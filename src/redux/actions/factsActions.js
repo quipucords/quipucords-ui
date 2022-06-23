@@ -1,5 +1,5 @@
 import { factsTypes } from '../constants';
-import factsService from '../../services/factsService';
+import { factsService } from '../../services';
 
 const addFacts = data => dispatch =>
   dispatch({
@@ -7,4 +7,8 @@ const addFacts = data => dispatch =>
     payload: factsService.addFacts(data)
   });
 
-export { addFacts as default, addFacts };
+const factsActions = {
+  addFacts
+};
+
+export { factsActions as default, factsActions, addFacts };

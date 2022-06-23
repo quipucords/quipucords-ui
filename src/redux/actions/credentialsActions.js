@@ -1,5 +1,5 @@
 import { credentialsTypes } from '../constants';
-import credentialsService from '../../services/credentialsService';
+import { credentialsService } from '../../services';
 
 const addCredential = data => dispatch =>
   dispatch({
@@ -41,4 +41,22 @@ const deleteCredentials =
       payload: credentialsService.deleteCredentials(ids)
     });
 
-export { addCredential, deleteCredential, deleteCredentials, getCredential, getCredentials, updateCredential };
+const credentialsActions = {
+  addCredential,
+  deleteCredential,
+  deleteCredentials,
+  getCredential,
+  getCredentials,
+  updateCredential
+};
+
+export {
+  credentialsActions as default,
+  credentialsActions,
+  addCredential,
+  deleteCredential,
+  deleteCredentials,
+  getCredential,
+  getCredentials,
+  updateCredential
+};

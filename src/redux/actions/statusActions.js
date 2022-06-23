@@ -1,5 +1,5 @@
 import { statusTypes } from '../constants';
-import statusService from '../../services/statusService';
+import { statusService } from '../../services';
 
 const getStatus = () => dispatch =>
   dispatch({
@@ -7,4 +7,6 @@ const getStatus = () => dispatch =>
     payload: statusService.getStatus()
   });
 
-export { getStatus as default, getStatus };
+const statusActions = { getStatus };
+
+export { statusActions as default, statusActions, getStatus };

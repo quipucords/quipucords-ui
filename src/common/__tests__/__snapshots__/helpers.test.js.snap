@@ -69,6 +69,7 @@ Object {
   "UI_SENTENCE_START_NAME": "The Quipucords tool",
   "UI_SHORT_NAME": "Quipucords",
   "UI_VERSION": "0.0.0.0000000",
+  "aggregatedError": [Function],
   "copyClipboard": [Function],
   "createViewQueryObject": [Function],
   "devModeNormalizeCount": [Function],
