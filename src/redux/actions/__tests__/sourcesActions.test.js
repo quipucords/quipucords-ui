@@ -1,12 +1,12 @@
 import promiseMiddleware from 'redux-promise-middleware';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
 import moxios from 'moxios';
 import { addSourceWizardReducer, scansReducer, sourcesReducer } from '../../reducers';
 import { sourcesActions } from '..';
 import apiTypes from '../../../constants/apiConstants';
 
 describe('SourcesActions', () => {
-  const middleware = [promiseMiddleware()];
+  const middleware = [promiseMiddleware];
   const generateStore = () =>
     createStore(
       combineReducers({
