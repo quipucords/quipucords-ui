@@ -13,6 +13,9 @@
     "prettier",
     "react"
   ],
+  "settings": {
+    "import/external-module-folders": ["public"]
+  },
   "extends": [
     "react-app",
     "airbnb",
@@ -21,8 +24,10 @@
     "plugin:jest/recommended"
   ],
   "globals": {
+    "mountHook": "readonly",
     "mountHookComponent": "readonly",
     "mountHookWrapper": "readonly",
+    "shallowHook": "readonly",
     "shallowHookComponent": "readonly",
     "shallowHookWrapper": "readonly"
   },
@@ -37,7 +42,7 @@
     "import/extensions": [
       "error",
       {
-        "json": "never"
+        "json": "always"
       }
     ],
     "import/first": 0,

@@ -1,5 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`I18n Component should generate a predictable locale key output snapshot: key output 1`] = `
+Array [
+  Object {
+    "file": "./src/common/helpers.js",
+    "keys": Array [
+      Object {
+        "key": "",
+        "match": "t(\${updatedKey}\${(updatedValue && \`, \${updatedValue}\`)",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "keys": Array [
+      Object {
+        "key": "about-modal.username",
+        "match": "t('about-modal.username', 'Username')",
+      },
+      Object {
+        "key": "about-modal.browser-version",
+        "match": "t('about-modal.browser-version', 'Browser Version')",
+      },
+      Object {
+        "key": "about-modal.browser-os",
+        "match": "t('about-modal.browser-os', 'Browser OS')",
+      },
+      Object {
+        "key": "about-modal.server-version",
+        "match": "t('about-modal.server-version', 'Server Version')",
+      },
+      Object {
+        "key": "about-modal.ui-version",
+        "match": "t('about-modal.ui-version', 'UI Version')",
+      },
+    ],
+  },
+]
+`;
+
+exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
+Array [
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "key": "about-modal.username",
+  },
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "key": "about-modal.browser-version",
+  },
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "key": "about-modal.browser-os",
+  },
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "key": "about-modal.server-version",
+  },
+  Object {
+    "file": "./src/components/aboutModal/aboutModal.js",
+    "key": "about-modal.ui-version",
+  },
+]
+`;
+
 exports[`I18n Component should pass children: children 1`] = `"lorem ipsum"`;
 
 exports[`I18n Component should render a basic component: basic 1`] = `
