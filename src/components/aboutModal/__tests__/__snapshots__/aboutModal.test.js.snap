@@ -25,7 +25,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
     >
       <AboutModalVersionItem
         className=""
-        label="UI Version"
+        label="t(about-modal.ui-version, UI Version)"
         versionText="0.0.0.0000000"
       />
     </AboutModalVersions>

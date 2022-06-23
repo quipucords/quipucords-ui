@@ -26,6 +26,12 @@ const aggregatedError = (errors, message, { name = 'AggregateError' } = {}) => {
   return err;
 };
 
+/**
+ * Copy value into "clipboard"
+ *
+ * @param {string|*} text
+ * @returns {boolean}
+ */
 const copyClipboard = text => {
   let successful;
 
@@ -61,8 +67,23 @@ const copyClipboard = text => {
   return successful;
 };
 
+/**
+ * Apply more realistic values numerical values when using the generated data in dev mode.
+ *
+ * @param {number} count
+ * @param {number} modulus
+ * @returns {number}
+ */
 const devModeNormalizeCount = (count, modulus = 100) => Math.abs(count) % modulus;
 
+/**
+ * Allow data to be downloaded.
+ *
+ * @param {string|*} data
+ * @param {string} fileName
+ * @param {string} fileType
+ * @returns {Promise<unknown>}
+ */
 const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/plain') =>
   new Promise((resolve, reject) => {
     try {
@@ -93,15 +114,58 @@ const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/pla
     }
   });
 
+/**
+ * Generate a random'ish ID.
+ *
+ * @param {string} prefix
+ * @returns {string}
+ */
 const generateId = prefix =>
   `${prefix || 'generatedid'}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
 
+/**
+ * An empty function.
+ * Typically used as a default prop.
+ */
 const noop = Function.prototype;
 
+/**
+ * An empty promise.
+ * Typically used as a default prop, or during testing.
+ *
+ * @type {Promise<{}>}
+ */
 const noopPromise = Promise.resolve({});
 
-const noopTranslate = (key, value) => value || `t('${key}')`;
+/**
+ * A placeholder for "t", or any translation method.
+ * Associated with the i18n package, and typically used as a default prop.
+ *
+ * @param {string|Array} key
+ * @param {string|object|Array} value
+ * @param {Array} components
+ * @returns {string}
+ */
+const noopTranslate = (key, value, components) => {
+  const updatedKey = (Array.isArray(key) && `[${key}]`) || key;
+  const updatedValue =
+    (typeof value === 'string' && value) ||
+    (Array.isArray(value) && `[${value}]`) ||
+    (Object.keys(value || '').length && JSON.stringify(value)) ||
+    '';
+  const updatedComponents = (components && `${components}`) || '';
 
+  return `t(${updatedKey}${(updatedValue && `, ${updatedValue}`) || ''}${
+    (updatedComponents && `, ${updatedComponents}`) || ''
+  })`;
+};
+
+/**
+ * Return an icon for source type.
+ *
+ * @param {string} sourceType
+ * @returns {{name: string, type: string}}
+ */
 const sourceTypeIcon = sourceType => {
   switch (sourceType) {
     case 'vcenter':
@@ -115,6 +179,12 @@ const sourceTypeIcon = sourceType => {
   }
 };
 
+/**
+ * Return an icon for scanning type.
+ *
+ * @param {string} scanType
+ * @returns {{name: string, type: string}}
+ */
 const scanTypeIcon = scanType => {
   switch (scanType) {
     case 'connect':
@@ -126,6 +196,12 @@ const scanTypeIcon = scanType => {
   }
 };
 
+/**
+ * Return an icon for scanning status.
+ *
+ * @param {string} scanStatus
+ * @returns {{name: string, classNames: *[], type: string}|{name: string, classNames: string[], type: string}}
+ */
 const scanStatusIcon = scanStatus => {
   switch (scanStatus) {
     case 'completed':
@@ -148,10 +224,33 @@ const scanStatusIcon = scanStatus => {
   }
 };
 
+/**
+ * Set a property if the value is NOT undefined using lodash "set".
+ *
+ * @param {object} obj
+ * @param {Array|*} props
+ * @param {*} value
+ * @returns {*}
+ */
 const setPropIfDefined = (obj, props, value) => (obj && value !== undefined ? _set(obj, props, value) : obj);
 
+/**
+ * Set a property if it equates to "truthy" using lodash "set".
+ *
+ * @param {object} obj
+ * @param {Array|*} props
+ * @param {*} value
+ * @returns {*}
+ */
 const setPropIfTruthy = (obj, props, value) => (obj && value ? _set(obj, props, value) : obj);
 
+/**
+ * View lifecycle method helper to determine if props have changed.
+ *
+ * @param {object} nextViewOptions
+ * @param {object} currentViewOptions
+ * @returns {boolean}
+ */
 const viewPropsChanged = (nextViewOptions, currentViewOptions) =>
   nextViewOptions.currentPage !== currentViewOptions.currentPage ||
   nextViewOptions.pageSize !== currentViewOptions.pageSize ||
@@ -159,6 +258,13 @@ const viewPropsChanged = (nextViewOptions, currentViewOptions) =>
   nextViewOptions.sortAscending !== currentViewOptions.sortAscending ||
   nextViewOptions.activeFilters !== currentViewOptions.activeFilters;
 
+/**
+ * Generate a consistent query parameter object for views.
+ *
+ * @param {object} viewOptions
+ * @param {object} queryObj
+ * @returns {object}
+ */
 const createViewQueryObject = (viewOptions, queryObj) => {
   const queryObject = {
     ...queryObj
@@ -182,6 +288,13 @@ const createViewQueryObject = (viewOptions, queryObj) => {
   return queryObject;
 };
 
+/**
+ * A redux helper associated with getting a message from results.
+ *
+ * @param {object} results
+ * @param {*} filter
+ * @returns {{messages: {}, message: null, url, status: number}}
+ */
 const getMessageFromResults = (results, filter = null) => {
   const status = _get(results, 'response.status', results.status);
   const statusResponse = _get(results, 'response.statusText', results.statusText);
@@ -289,6 +402,12 @@ const getMessageFromResults = (results, filter = null) => {
   return messages;
 };
 
+/**
+ * A redux helper associated with returning a http status from results.
+ *
+ * @param {object} results
+ * @returns {number}
+ */
 const getStatusFromResults = results => {
   let status = _get(results, 'response.status', results.status);
 
@@ -299,16 +418,32 @@ const getStatusFromResults = results => {
   return status;
 };
 
+/**
+ * Return a callback for determining a timestamp.
+ *
+ * @returns {Function}
+ */
 const getTimeStampFromResults =
   process.env.REACT_APP_ENV !== 'test'
     ? results => moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')
     : () => '20190225_164640';
 
+/**
+ * Return a callback for determine time offset.
+ *
+ * @returns {Function}
+ */
 const getTimeDisplayHowLongAgo =
   process.env.REACT_APP_ENV !== 'test'
     ? timestamp => moment.utc(timestamp).utcOffset(moment().utcOffset()).fromNow()
     : () => 'a day ago';
 
+/**
+ * Is this an IP address.
+ *
+ * @param {string} name
+ * @returns {boolean}
+ */
 const isIpAddress = name => {
   const vals = name.split('.');
   if (vals.length === 4) {
@@ -317,25 +452,79 @@ const isIpAddress = name => {
   return false;
 };
 
+/**
+ * Return an IP address value.
+ *
+ * @param {string} name
+ * @returns {*}
+ */
 const ipAddressValue = name => {
   const values = name.split('.');
   return values[0] * 0x1000000 + values[1] * 0x10000 + values[2] * 0x100 + values[3] * 1;
 };
 
+/**
+ * Is dev mode active.
+ * Associated with using the NPM script "start". See dotenv config files for activation.
+ *
+ * @type {boolean}
+ */
 const DEV_MODE = process.env.REACT_APP_ENV === 'development';
 
+/**
+ * Is prod mode active.
+ * Associated with production builds. See dotenv config files for activation.
+ *
+ * @type {boolean}
+ */
 const PROD_MODE = process.env.REACT_APP_ENV === 'production';
 
+/**
+ * Is test mode active.
+ * Associated with running unit tests. See dotenv config files for activation.
+ *
+ * @type {boolean}
+ */
 const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 
+/**
+ * Is UI application name active.
+ * See dotenv config files for updating. See build scripts for how this value is being applied.
+ *
+ * @type {boolean}
+ */
 const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
 
+/**
+ * UI coded name.
+ * See dotenv config files for updating.
+ *
+ * @type {string}
+ */
 const UI_NAME = process.env.REACT_APP_UI_NAME;
 
+/**
+ * UI cased sentence start name.
+ * See dotenv config files for updating.
+ *
+ * @type {string}
+ */
 const UI_SENTENCE_START_NAME = process.env.REACT_APP_UI_SENTENCE_START_NAME;
 
+/**
+ * UI short name.
+ * See dotenv config files for updating.
+ *
+ * @type {string}
+ */
 const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
 
+/**
+ * UI packaged application version, with generated hash.
+ * See dotenv config files for updating. See build scripts for generated hash.
+ *
+ * @type {string}
+ */
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
 const helpers = {
