@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { ea, install, locales, user } = require('quipudocs');
+const _merge = require('lodash/merge');
 const installDocFileOutput = './public/docs/install.html';
 const useDocFileOutput = './public/docs/use.html';
 const localesFileOutput = './public/locales/locales.json';
@@ -33,11 +34,23 @@ const buildEa = () => {
     const dir = localesDir;
     const localesJSON = locales;
     const eaJSON = ea;
+    let currentFileOutput = {};
 
-    fs.writeFileSync(fileOutput, JSON.stringify(localesJSON, null, 2));
+    if (fs.existsSync(fileOutput)) {
+      currentFileOutput = JSON.parse(fs.readFileSync(fileOutput, 'utf-8'));
+    }
+
+    fs.writeFileSync(fileOutput, JSON.stringify(_merge(currentFileOutput, localesJSON), null, 2));
 
     Object.keys(eaJSON).forEach(key => {
-      fs.writeFileSync(`${dir}${key}.json`, JSON.stringify(eaJSON[key], null, 2));
+      const langFile = `${dir}${key}.json`;
+      let currentLangFile = {};
+
+      if (fs.existsSync(langFile)) {
+        currentLangFile = JSON.parse(fs.readFileSync(langFile, 'utf-8'));
+      }
+
+      fs.writeFileSync(langFile, JSON.stringify(_merge(currentLangFile, eaJSON[key]), null, 2));
     });
 
     console.info(`Building locale files...Complete`);

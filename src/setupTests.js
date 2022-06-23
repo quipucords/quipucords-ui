@@ -1,6 +1,9 @@
+import React from 'react';
 import { configure, mount, shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { act } from 'react-dom/test-utils';
+import * as reactRedux from 'react-redux';
+
 configure({ adapter: new Adapter() });
 
 /**
@@ -73,8 +76,73 @@ global.shallowHookComponent = async (component, { callback, ...options } = {}) =
 
 global.shallowHookWrapper = global.shallowHookComponent;
 
+/**
+ * Fire a hook, return the result.
+ *
+ * @param {Function} useHook
+ * @param {object} options
+ * @param {object} options.state An object representing a mock Redux store's state.
+ * @returns {*}
+ */
+global.mountHook = async (useHook = Function.prototype, { state } = {}) => {
+  let result;
+  let mountedHook;
+  let spyUseSelector;
+  const Hook = () => {
+    result = useHook();
+    return null;
+  };
+  await act(async () => {
+    if (state) {
+      spyUseSelector = jest.spyOn(reactRedux, 'useSelector').mockImplementation(_ => _(state));
+    }
+    mountedHook = mount(<Hook />);
+  });
+  mountedHook?.update();
+
+  const unmount = async () => {
+    await act(async () => mountedHook.unmount());
+  };
+
+  if (state) {
+    spyUseSelector.mockClear();
+  }
+
+  return { unmount, result };
+};
+
+/**
+ * Fire a hook, return the result.
+ *
+ * @param {Function} useHook
+ * @param {object} options
+ * @param {object} options.state An object representing a mock Redux store's state.
+ * @returns {*}
+ */
+global.shallowHook = (useHook = Function.prototype, { state } = {}) => {
+  let result;
+  let spyUseSelector;
+  const Hook = () => {
+    result = useHook();
+    return null;
+  };
+
+  if (state) {
+    spyUseSelector = jest.spyOn(reactRedux, 'useSelector').mockImplementation(_ => _(state));
+  }
+
+  const shallowHook = shallow(<Hook />);
+  const unmount = () => shallowHook.unmount();
+
+  if (state) {
+    spyUseSelector.mockClear();
+  }
+
+  return { unmount, result };
+};
+
 /*
- * This is a temporary patch for applying a global Jest "beforeAll", based on
+ * Apply invalid prop, failed prop checks.
  * jest-prop-type-error, https://www.npmjs.com/package/jest-prop-type-error
  */
 beforeAll(() => {
