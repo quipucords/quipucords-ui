@@ -112,13 +112,8 @@ exports[`ScanSourceList Component should handle multiple status messages: inspec
 `;
 
 exports[`ScanSourceList Component should render a connected component: connected 1`] = `
-<ScanSourceList
-  error={false}
-  errorMessage={null}
-  getScanJob={[Function]}
+<Connect(ScanSourceList)
   id={1}
-  pending={false}
-  scanJobList={Array []}
 />
 `;
 

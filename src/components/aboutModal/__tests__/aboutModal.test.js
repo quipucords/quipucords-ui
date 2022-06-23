@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedAboutModal, AboutModal } from '../aboutModal';
 
@@ -13,8 +14,12 @@ describe('AboutModal Component', () => {
       status: { serverVersion: '0.0.0.0000000' }
     });
 
-    const component = shallow(<ConnectedAboutModal />, { context: { store } });
-    expect(component.dive()).toMatchSnapshot('connected');
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedAboutModal />
+      </Provider>
+    );
+    expect(component.find(ConnectedAboutModal)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

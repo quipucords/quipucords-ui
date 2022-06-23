@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedCredentialListItem, CredentialListItem } from '../credentialListItem';
 import { viewTypes } from '../../../redux/constants';
@@ -17,8 +18,12 @@ describe('CredentialListItem Component', () => {
       }
     };
 
-    const component = shallow(<ConnectedCredentialListItem {...props} />, { context: { store } });
-    expect(component).toMatchSnapshot('connected');
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedCredentialListItem {...props} />
+      </Provider>
+    );
+    expect(component.find(ConnectedCredentialListItem)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

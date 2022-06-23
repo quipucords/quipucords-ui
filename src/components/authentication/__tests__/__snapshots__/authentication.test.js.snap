@@ -1,23 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Authentication Component should render a connected component: connected 1`] = `
-<Authentication
-  authorizeUser={[Function]}
-  session={
-    Object {
-      "authorized": false,
-      "error": false,
-      "errorMessage": "",
-      "pending": false,
-    }
-  }
->
+<Connect(Authentication)>
   <span
     className="test"
   >
     lorem
   </span>
-</Authentication>
+</Connect(Authentication)>
 `;
 
 exports[`Authentication Component should render a non-connected component authorized: non-connected authorized 1`] = `
@@ -60,20 +50,35 @@ exports[`Authentication Component should render a non-connected component error:
     menu={
       Array [
         Object {
-          "component": [Function],
+          "component": Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          },
           "iconClass": "fa fa-crosshairs",
           "redirect": true,
           "title": "Sources",
           "to": "/sources",
         },
         Object {
-          "component": [Function],
+          "component": Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          },
           "iconClass": "pficon pficon-orders",
           "title": "Scans",
           "to": "/scans",
         },
         Object {
-          "component": [Function],
+          "component": Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          },
           "iconClass": "fa fa-id-card",
           "title": "Credentials",
           "to": "/credentials",

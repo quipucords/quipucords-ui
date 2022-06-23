@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedSources, Sources } from '../sources';
 import { apiTypes } from '../../../constants/apiConstants';
@@ -9,9 +10,13 @@ describe('Sources Component', () => {
 
   it('should render a connected component with default props', () => {
     const store = generateEmptyStore({ sources: { view: {} }, viewOptions: {} });
-    const component = shallow(<ConnectedSources />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedSources />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedSources)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

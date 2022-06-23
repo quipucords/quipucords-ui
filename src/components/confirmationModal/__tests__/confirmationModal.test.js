@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedConfirmationModal, ConfirmationModal } from '../confirmationModal';
 
@@ -18,9 +19,13 @@ describe('Confirmation Modal Component', () => {
         cancelButtonText: 'Cancel'
       }
     });
-    const component = shallow(<ConnectedConfirmationModal />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedConfirmationModal />
+      </Provider>
+    );
 
-    expect(component.dive()).toMatchSnapshot('connected');
+    expect(component.find(ConnectedConfirmationModal)).toMatchSnapshot('connected');
   });
 
   it('should display a confirmation modal', () => {

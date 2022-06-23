@@ -1,15 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScanJobsList Component should render a connected component: connected 1`] = `
-<ScanJobsList
-  error={false}
-  errorMessage={null}
-  getScanJobs={[Function]}
+<Connect(ScanJobsList)
   id={1}
-  isMoreResults={false}
-  mostRecentId={null}
-  pending={false}
-  scanJobsList={Array []}
 />
 `;
 

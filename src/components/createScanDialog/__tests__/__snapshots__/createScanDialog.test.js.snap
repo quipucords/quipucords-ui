@@ -60,25 +60,7 @@ exports[`CreateScanDialog Component should handle multiple error responses: name
 </div>
 `;
 
-exports[`CreateScanDialog Component should render a connected component with default props: connected 1`] = `
-<CreateScanDialog
-  addScan={[Function]}
-  error={false}
-  errorMessage={null}
-  fulfilled={false}
-  pending={false}
-  show={true}
-  sources={
-    Array [
-      Object {
-        "name": "test name",
-      },
-    ]
-  }
-  startScan={[Function]}
-  submitErrorMessages={Object {}}
-/>
-`;
+exports[`CreateScanDialog Component should render a connected component with default props: connected 1`] = `<Connect(CreateScanDialog) />`;
 
 exports[`CreateScanDialog Component should render a non-connected component: non-connected 1`] = `
 <div

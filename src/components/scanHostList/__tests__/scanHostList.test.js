@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedScanHostList, ScanHostList } from '../scanHostList';
 
@@ -21,11 +22,13 @@ describe('ScanHostList Component', () => {
       useInspectionResults: true
     };
 
-    const component = shallow(<ConnectedScanHostList {...props}>{() => 'lorem ipsum'}</ConnectedScanHostList>, {
-      context: { store }
-    });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedScanHostList {...props}>{() => 'lorem ipsum'}</ConnectedScanHostList>
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedScanHostList)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

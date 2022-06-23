@@ -6,17 +6,38 @@ exports[`Router Component should shallow render a basic component 1`] = `
 >
   <Switch>
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "type": [Function],
+        }
+      }
       key="/sources"
       path="/sources"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "type": [Function],
+        }
+      }
       key="/scans"
       path="/scans"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "type": [Function],
+        }
+      }
       key="/credentials"
       path="/credentials"
     />

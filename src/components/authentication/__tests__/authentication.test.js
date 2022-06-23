@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import { ConnectedAuthentication, Authentication } from '../authentication';
 
@@ -11,13 +12,14 @@ describe('Authentication Component', () => {
       user: { session: { authorized: false, error: false, errorMessage: '', pending: false } }
     });
     const component = shallow(
-      <ConnectedAuthentication>
-        <span className="test">lorem</span>
-      </ConnectedAuthentication>,
-      { context: { store } }
+      <Provider store={store}>
+        <ConnectedAuthentication>
+          <span className="test">lorem</span>
+        </ConnectedAuthentication>
+      </Provider>
     );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedAuthentication)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component error', () => {

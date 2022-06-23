@@ -85,32 +85,4 @@ exports[`Confirmation Modal Component should display a confirmation modal: show 
 </div>
 `;
 
-exports[`Confirmation Modal Component should render a connected component: connected 1`] = `
-<MessageDialog
-  accessibleDescription=""
-  accessibleName=""
-  className=""
-  enforceFocus={true}
-  footer={null}
-  icon={null}
-  onHide={[Function]}
-  primaryAction={[Function]}
-  primaryActionButtonBsStyle="primary"
-  primaryActionButtonContent="Confirm"
-  primaryContent={
-    <p>
-      test
-    </p>
-  }
-  secondaryAction={[Function]}
-  secondaryActionButtonBsStyle="default"
-  secondaryActionButtonContent="Cancel"
-  secondaryContent={
-    <p>
-      Test body
-    </p>
-  }
-  show={true}
-  title="Confirm"
-/>
-`;
+exports[`Confirmation Modal Component should render a connected component: connected 1`] = `<Connect(ConfirmationModal) />`;
