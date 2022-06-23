@@ -1,11 +1,11 @@
 import promiseMiddleware from 'redux-promise-middleware';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
 import moxios from 'moxios';
 import { reportsReducer } from '../../reducers';
 import { reportsActions } from '..';
 
 describe('ReportsActions', () => {
-  const middleware = [promiseMiddleware()];
+  const middleware = [promiseMiddleware];
   const generateStore = () =>
     createStore(
       combineReducers({

@@ -5,6 +5,7 @@ Object {
   "ajaxToken": "csrftoken",
   "files": Array [
     "",
+    "./dist/client/static/js/2*chunk.js",
     "./dist/client/static/js/main*chunk.js",
   ],
 }
