@@ -76,7 +76,6 @@ updateDistribution()
   mkdir -p ./dist/client/assets/css
   cp -R ./node_modules/patternfly/dist/* ./dist/client/assets/rcue
   cp -R ./src/styles/images/* ./dist/client/assets/images
-  cp -R ./src/styles/.css/* ./dist/client/assets/css
   cp -R ./templates/* ./dist/templates
 
   printf "Completed\n"

@@ -59,7 +59,7 @@
     "build:deps": "bash ./scripts/dependencies.sh --doctor -u --doctorInstall \"yarn\" --doctorTest \"yarn test:deps\" --reject \"patternfly*, quipudocs, jest*\"",
     "build:docs": "node ./scripts/quipudocs.js",
     "build:js": "react-scripts build",
-    "build:post": "bash ./scripts/post.sh",
+    "build:post": "bash ./scripts/post.sh; bash ./scripts/clean.sh",
     "build:pre": "bash ./scripts/pre.sh",
     "build:brand": "run-s -l 'build:pre -b' 'build:docs -b' test:docs build:js build:post test:integration",
     "release": "> ./CHANGELOG.md && standard-version",

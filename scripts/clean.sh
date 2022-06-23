@@ -5,7 +5,7 @@
 #
 cleanDocs()
 {
-  printf "Cleaning locale resources..."
+  printf "Cleaning document resources..."
 
   (git status > /dev/null 2>&1)
 
