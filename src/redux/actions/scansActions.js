@@ -1,5 +1,5 @@
 import { scansTypes } from '../constants';
-import scansService from '../../services/scansService';
+import { scansService } from '../../services';
 
 const addScan = data => dispatch =>
   dispatch({
@@ -83,7 +83,23 @@ const restartScan = id => dispatch =>
     meta: { id }
   });
 
+const scansActions = {
+  addScan,
+  addStartScan,
+  getScans,
+  getScanJobs,
+  getScanJob,
+  getConnectionScanResults,
+  getInspectionScanResults,
+  startScan,
+  pauseScan,
+  cancelScan,
+  restartScan
+};
+
 export {
+  scansActions as default,
+  scansActions,
   addScan,
   addStartScan,
   getScans,

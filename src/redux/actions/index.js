@@ -1,12 +1,12 @@
-import * as credentialsActions from './credentialsActions';
-import * as factsActions from './factsActions';
-import * as reportsActions from './reportsActions';
-import * as scansActions from './scansActions';
-import * as sourcesActions from './sourcesActions';
-import * as statusActions from './statusActions';
-import * as userActions from './userActions';
+import { credentialsActions } from './credentialsActions';
+import { factsActions } from './factsActions';
+import { reportsActions } from './reportsActions';
+import { scansActions } from './scansActions';
+import { sourcesActions } from './sourcesActions';
+import { statusActions } from './statusActions';
+import { userActions } from './userActions';
 
-const actions = {
+const reduxActions = {
   credentials: credentialsActions,
   facts: factsActions,
   reports: reportsActions,
@@ -16,12 +16,9 @@ const actions = {
   user: userActions
 };
 
-const reduxActions = { ...actions };
-
 export {
   reduxActions as default,
   reduxActions,
-  actions,
   credentialsActions,
   factsActions,
   reportsActions,

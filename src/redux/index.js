@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
-import store from './store';
-import reduxActions from './actions';
-import reduxReducers from './reducers';
-import reduxSelectors from './selectors';
-import reduxTypes from './constants';
+import { store } from './store';
+import { reduxActions } from './actions';
+import { reduxHelpers } from './common';
+import { storeHooks } from './hooks';
+import { reduxReducers } from './reducers';
+import { reduxSelectors } from './selectors';
+import { reduxTypes } from './constants';
 import { helpers } from '../common/helpers';
 
 const connectTranslate = (mapStateToProps, mapDispatchToProps) => component =>
@@ -23,8 +25,10 @@ export {
   connectRouterTranslate,
   connectTranslate,
   reduxActions,
+  reduxHelpers,
   reduxReducers,
   reduxSelectors,
   reduxTypes,
-  store
+  store,
+  storeHooks
 };

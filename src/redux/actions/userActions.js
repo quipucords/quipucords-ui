@@ -1,5 +1,5 @@
 import { userTypes } from '../constants';
-import userService from '../../services/userService';
+import { userService } from '../../services';
 
 const authorizeUser = () => dispatch =>
   dispatch({
@@ -18,4 +18,10 @@ const logoutUser = () => dispatch =>
     payload: userService.logoutUser()
   });
 
-export { authorizeUser, getLocale, logoutUser };
+const userActions = {
+  authorizeUser,
+  getLocale,
+  logoutUser
+};
+
+export { userActions as default, userActions, authorizeUser, getLocale, logoutUser };
