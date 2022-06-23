@@ -1,10 +1,11 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { ConnectedScanListItem, ScanListItem } from '../scanListItem';
 import { viewTypes } from '../../../redux/constants';
 
-describe('SourceListItem Component', () => {
+describe('ScanListItem Component', () => {
   const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
   it('should render a connected component', () => {
@@ -28,11 +29,13 @@ describe('SourceListItem Component', () => {
       }
     };
 
-    const component = shallow(<ConnectedScanListItem {...props} />, {
-      context: { store }
-    });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedScanListItem {...props} />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedScanListItem)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

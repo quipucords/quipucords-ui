@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sources Component should render a connected component with default props: connected 1`] = `
-<Sources
-  error={false}
-  errorMessage={null}
-  getSources={[Function]}
-  lastRefresh={0}
-  pending={false}
-  sources={Array []}
-  updateSources={false}
-  viewOptions={Object {}}
-/>
-`;
+exports[`Sources Component should render a connected component with default props: connected 1`] = `<Connect(Sources) />`;
 
 exports[`Sources Component should render a non-connected component error: error 1`] = `
 <div

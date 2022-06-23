@@ -76,30 +76,7 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
 </div>
 `;
 
-exports[`MergeReportsDialog Component should render a connected component: connected 1`] = `
-<MergeReportsDialog
-  getReportsDownload={[Function]}
-  mergeReports={[Function]}
-  pending={false}
-  scans={
-    Array [
-      Object {
-        "id": 1,
-        "mostRecentReportId": 2,
-        "mostRecentStatus": "completed",
-        "name": "lorem",
-      },
-      Object {
-        "id": 2,
-        "mostRecentReportId": 2,
-        "mostRecentStatus": "pending",
-        "name": "ipsum",
-      },
-    ]
-  }
-  show={true}
-/>
-`;
+exports[`MergeReportsDialog Component should render a connected component: connected 1`] = `<Connect(MergeReportsDialog) />`;
 
 exports[`MergeReportsDialog Component should render a non-connected component, failure and success: non-connected 1`] = `
 <div

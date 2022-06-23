@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourceListItem Component should render a connected component: connected 1`] = `
-<ScanListItem
-  cancelScan={[Function]}
+exports[`ScanListItem Component should render a connected component: connected 1`] = `
+<Connect(ScanListItem)
   lastRefresh={0}
-  pauseScan={[Function]}
-  pollInterval={120000}
-  restartScan={[Function]}
   scan={
     Object {
       "id": 42,
-      "jobsTotal": 0,
-      "mostRecentSysFailed": 0,
-      "mostRecentSysScanned": 0,
+      "jobsTotal": 1,
+      "mostRecentEndTime": "",
+      "mostRecentId": 2,
+      "mostRecentReportId": 3,
+      "mostRecentStartTime": "",
+      "mostRecentStatus": "completed",
+      "mostRecentStatusMessage": "Lorem ipsum",
+      "mostRecentSysFailed": 1,
+      "mostRecentSysScanned": 20,
       "name": "lorem",
-      "sourcesTotal": 0,
+      "sourcesTotal": 1,
     }
   }
-  selectedScans={Array []}
-  startScan={[Function]}
 />
 `;
 
-exports[`SourceListItem Component should render a non-connected component: non-connected 1`] = `
+exports[`ScanListItem Component should render a non-connected component: non-connected 1`] = `
 <Poll
   interval={120000}
   itemId="scanListItem-42"
@@ -61,7 +61,7 @@ exports[`SourceListItem Component should render a non-connected component: non-c
             />
           </Button>
         </Tooltip>
-        <Connect(ScanDownload)
+        <Memo(Connect(ScanDownload))
           downloadId={3}
           downloadName="lorem"
         />

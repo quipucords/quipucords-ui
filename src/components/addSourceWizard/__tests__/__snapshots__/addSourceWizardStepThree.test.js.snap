@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccountWizardStepResults Component should render a connected component with error: connected 1`] = `
-<AddSourceWizardStepThree
-  add={false}
-  credentials={Array []}
-  dispatch={[Function]}
-  error={true}
-  errorMessage="Lorem ipsum"
-  fulfilled={false}
-  name={null}
-  pending={false}
-/>
-`;
+exports[`AccountWizardStepResults Component should render a connected component with error: connected 1`] = `<Connect(AddSourceWizardStepThree) />`;
 
 exports[`AccountWizardStepResults Component should render a wizard results step with error: error created 1`] = `
 <AddSourceWizardStepThree

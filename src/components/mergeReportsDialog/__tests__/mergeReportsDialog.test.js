@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedMergeReportsDialog, MergeReportsDialog } from '../mergeReportsDialog';
 
@@ -20,9 +21,13 @@ describe('MergeReportsDialog Component', () => {
     });
 
     const props = {};
-    const component = shallow(<ConnectedMergeReportsDialog {...props} />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedMergeReportsDialog {...props} />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedMergeReportsDialog)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component, failure and success', () => {

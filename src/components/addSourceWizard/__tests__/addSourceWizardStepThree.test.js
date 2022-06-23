@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedAddSourceWizardStepThree, AddSourceWizardStepThree } from '../addSourceWizardStepThree';
 
@@ -13,9 +14,13 @@ describe('AccountWizardStepResults Component', () => {
         errorMessage: 'Lorem ipsum'
       }
     });
-    const component = shallow(<ConnectedAddSourceWizardStepThree />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        (<ConnectedAddSourceWizardStepThree />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedAddSourceWizardStepThree)).toMatchSnapshot('connected');
   });
 
   it('should render a wizard results step with error', () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import { ConnectedAddSourceWizard, AddSourceWizard } from '../addSourceWizard';
 
@@ -8,16 +9,23 @@ describe('AddSourceWizard Component', () => {
 
   it('should render a connected component', () => {
     const store = generateEmptyStore({ addSourceWizard: { show: true } });
-    const component = shallow(<ConnectedAddSourceWizard />, { context: { store } });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedAddSourceWizard />
+      </Provider>
+    );
 
-    expect(component.dive()).toMatchSnapshot('connected');
+    expect(component.find(ConnectedAddSourceWizard)).toMatchSnapshot('connected');
   });
 
   it('should display update steps', () => {
-    const store = generateEmptyStore({ addSourceWizard: { show: true, edit: true } });
-    const component = shallow(<ConnectedAddSourceWizard />, { context: { store } });
+    const props = {
+      show: true,
+      edit: true
+    };
 
-    expect(component.dive()).toMatchSnapshot('connected update');
+    const component = shallow(<AddSourceWizard {...props} />);
+    expect(component).toMatchSnapshot('update');
   });
 
   it('should not display a wizard', () => {

@@ -1,25 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScanHostList Component should render a connected component: connected 1`] = `
-<ScanHostList
-  error={false}
-  errorMessage={null}
+<Connect(ScanHostList)
   filter={
     Object {
       "lorem": "ipsum",
     }
   }
-  getConnectionScanResults={[Function]}
-  getInspectionScanResults={[Function]}
-  hostsList={Array []}
   id={1}
-  isMoreResults={false}
-  pending={false}
   useConnectionResults={true}
   useInspectionResults={true}
 >
   <Component />
-</ScanHostList>
+</Connect(ScanHostList)>
 `;
 
 exports[`ScanHostList Component should render a non-connected component error: error 1`] = `

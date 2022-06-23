@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { ConnectedScanJobsList, ScanJobsList } from '../scanJobsList';
 
@@ -13,11 +14,13 @@ describe('ScanJobsList Component', () => {
       id: 1
     };
 
-    const component = shallow(<ConnectedScanJobsList {...props} />, {
-      context: { store }
-    });
+    const component = shallow(
+      <Provider store={store}>
+        <ConnectedScanJobsList {...props} />
+      </Provider>
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedScanJobsList)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

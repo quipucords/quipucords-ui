@@ -84,14 +84,14 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
 `;
 
 exports[`ScanDownload Component should render a connected component: connected 1`] = `
-<ScanDownload
-  downloadId={1}
-  downloadName={null}
-  getReportsDownload={[Function]}
-  tooltip={null}
+<button
+  class="btn btn-default"
+  id="generatedid-"
+  title="Download"
+  type="button"
 >
   Download
-</ScanDownload>
+</button>
 `;
 
 exports[`ScanDownload Component should render a non-connected component: non-connected 1`] = `
