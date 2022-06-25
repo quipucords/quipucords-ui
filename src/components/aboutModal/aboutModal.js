@@ -1,14 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { detect } from 'detect-browser';
-import { AboutModal as PfAboutModal, Button, Icon } from 'patternfly-react';
-import { connectTranslate, reduxActions, reduxTypes, store } from '../../redux';
-import helpers from '../../common/helpers';
+import {
+  AboutModal as PfAboutModal,
+  Button,
+  ButtonVariant,
+  TextContent,
+  TextList,
+  TextListItem
+} from '@patternfly/react-core';
+import { CheckIcon, PasteIcon } from '@patternfly/react-icons';
+import { connect, reduxActions, reduxTypes, store } from '../../redux';
+import { helpers } from '../../common';
+import { translate } from '../i18n/i18n';
 import logoImg from '../../styles/images/logo.svg';
 import titleImg from '../../styles/images/title.svg';
 import logoImgBrand from '../../styles/images/logo-brand.svg';
 import titleImgBrand from '../../styles/images/title-brand.svg';
 
+/**
+ * About modal, display application information.
+ */
 class AboutModal extends React.Component {
   selectElement = React.createRef();
 
@@ -66,6 +79,7 @@ class AboutModal extends React.Component {
     const { copied } = this.state;
     const { show, serverVersion, t, uiBrand, uiName, uiShortName, uiVersion, username } = this.props;
     const browser = detect();
+    const currentYear = moment.utc(helpers.getCurrentDate()).format('YYYY');
 
     const props = {
       show,
@@ -78,47 +92,69 @@ class AboutModal extends React.Component {
     if (uiBrand) {
       props.logo = logoImgBrand;
       props.productTitle = <img src={titleImgBrand} alt={uiName} />;
-      props.trademarkText = 'Copyright (c) 2019 - 2022 Red Hat Inc.';
+      props.trademarkText = t('about-modal.copyright', { year: currentYear });
     }
 
     return (
-      <PfAboutModal {...props}>
-        <div ref={this.selectElement} tabIndex={-1} aria-label="Application information copied" aria-live="polite">
-          <PfAboutModal.Versions className="quipucords-about-modal-list">
-            {username && (
-              <PfAboutModal.VersionItem label={t('about-modal.username', 'Username')} versionText={username || ''} />
-            )}
-            {browser && (
-              <PfAboutModal.VersionItem
-                label={t('about-modal.browser-version', 'Browser Version')}
-                versionText={`${browser.name} ${browser.version}`}
-              />
-            )}
-            {browser && (
-              <PfAboutModal.VersionItem
-                label={t('about-modal.browser-os', 'Browser OS')}
-                versionText={browser.os || ''}
-              />
-            )}
-            {serverVersion && (
-              <PfAboutModal.VersionItem
-                label={t('about-modal.server-version', 'Server Version')}
-                versionText={serverVersion}
-              />
-            )}
-            {uiVersion && (
-              <PfAboutModal.VersionItem label={t('about-modal.ui-version', 'UI Version')} versionText={uiVersion} />
-            )}
-          </PfAboutModal.Versions>
+      <PfAboutModal
+        className="quipucords-about-modal"
+        isOpen={props.show}
+        onClose={props.onHide}
+        productName={props.productTitle}
+        brandImageSrc={props.logo}
+        brandImageAlt={props.altLogo}
+        trademark={props.trademarkText}
+      >
+        <div
+          ref={this.selectElement}
+          className="quipucords-about-modal-list"
+          tabIndex={-1}
+          aria-label={t('about-modal.copy-confirmation')}
+          aria-live="polite"
+        >
+          <TextContent>
+            <TextList component="dl">
+              {username && (
+                <React.Fragment>
+                  <TextListItem component="dt">{t('about-modal.username')}</TextListItem>
+                  <TextListItem component="dd">{username || ''}</TextListItem>
+                </React.Fragment>
+              )}
+              {browser && (
+                <React.Fragment>
+                  <TextListItem component="dt">{t('about-modal.browser-version')}</TextListItem>
+                  <TextListItem component="dd">{`${browser.name} ${browser.version}`}</TextListItem>
+                </React.Fragment>
+              )}
+              {browser && (
+                <React.Fragment>
+                  <TextListItem component="dt">{t('about-modal.browser-os')}</TextListItem>
+                  <TextListItem component="dd">{browser.os || ''}</TextListItem>
+                </React.Fragment>
+              )}
+              {serverVersion && (
+                <React.Fragment>
+                  <TextListItem component="dt">{t('about-modal.server-version')}</TextListItem>
+                  <TextListItem component="dd">{serverVersion}</TextListItem>
+                </React.Fragment>
+              )}
+              {uiVersion && (
+                <React.Fragment>
+                  <TextListItem component="dt">{t('about-modal.ui-version')}</TextListItem>
+                  <TextListItem component="dd">{uiVersion}</TextListItem>
+                </React.Fragment>
+              )}
+            </TextList>
+          </TextContent>
         </div>
         <div className="quipucords-about-modal-copy-footer">
           <Button
             onClick={this.onCopy}
-            title="Copy application information"
+            title={t('about-modal.copy-button')}
             className="quipucords-about-modal-copy-button"
+            variant={ButtonVariant.tertiary}
           >
-            {copied && <Icon type="fa" name="check" />}
-            {!copied && <Icon type="fa" name="paste" />}
+            {(copied && <CheckIcon />) || <PasteIcon />}
           </Button>
         </div>
       </PfAboutModal>
@@ -126,9 +162,14 @@ class AboutModal extends React.Component {
   }
 }
 
+/**
+ * Prop types.
+ *
+ * @type {{uiShortName: string, serverVersion: string, t: Function, resetTimer: number, show: boolean,
+ *     uiVersion: string, getStatus: Function, uiName: string, uiBrand: boolean, username: string}}
+ */
 AboutModal.propTypes = {
   getStatus: PropTypes.func,
-  getUser: PropTypes.func,
   resetTimer: PropTypes.number,
   serverVersion: PropTypes.string,
   show: PropTypes.bool.isRequired,
@@ -140,12 +181,17 @@ AboutModal.propTypes = {
   username: PropTypes.string
 };
 
+/**
+ * Default props.
+ *
+ * @type {{uiShortName: string, serverVersion: null, t: translate, resetTimer: number, uiVersion: string,
+ *     getStatus: Function, uiName: string, uiBrand: boolean, username: null}}
+ */
 AboutModal.defaultProps = {
   getStatus: helpers.noop,
-  getUser: helpers.noop,
   resetTimer: 3000,
   serverVersion: null,
-  t: helpers.noopTranslate,
+  t: translate,
   uiBrand: helpers.UI_BRAND,
   uiName: helpers.UI_NAME,
   uiShortName: helpers.UI_SHORT_NAME,
@@ -163,6 +209,6 @@ const mapStateToProps = state => ({
   username: state.user.session.username
 });
 
-const ConnectedAboutModal = connectTranslate(mapStateToProps, mapDispatchToProps)(AboutModal);
+const ConnectedAboutModal = connect(mapStateToProps, mapDispatchToProps)(AboutModal);
 
 export { ConnectedAboutModal as default, ConnectedAboutModal, AboutModal };

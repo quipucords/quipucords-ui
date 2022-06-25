@@ -1,1 +1,12 @@
-{}
+{
+  "about-modal": {
+    "browser-os": "Browser OS",
+    "browser-version": "Browser Version",
+    "copy-button": "Copy application information",
+    "copy-confirmation": "Application information copied",
+    "copyright": "Copyright (c) {{year}} Red Hat Inc.",
+    "server-version": "Server Version",
+    "ui-version": "UI Version",
+    "username": "Username"
+  }
+}
