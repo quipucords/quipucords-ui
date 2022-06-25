@@ -5,6 +5,21 @@ describe('Helpers', () => {
     expect(helpers).toMatchSnapshot('helpers');
   });
 
+  it('should handle use aggregate error, or fallback', () => {
+    const aggregateError = window.AggregateError;
+    window.AggregateError = undefined;
+    const aggregated = helpers.aggregatedError(
+      [new Error('lorem ipsum'), new Error('dolor sit')],
+      'testing aggregated'
+    );
+    expect({
+      aggregated,
+      ...aggregated
+    }).toMatchSnapshot('emulated aggregate error');
+
+    window.AggregateError = aggregateError;
+  });
+
   it('should support generated strings and flags', () => {
     expect(helpers.generateId()).toBe('generatedid-');
     expect(helpers.generateId('lorem')).toBe('lorem-');
@@ -174,5 +189,10 @@ describe('Helpers', () => {
     expect(helpers.ipAddressValue('0.0.0.1')).toBe(1);
     expect(helpers.ipAddressValue('0.0.0.1.5')).toBe(1);
     expect(Number.isNaN(helpers.ipAddressValue('lorem'))).toBe(true);
+  });
+
+  it('should return a predictable current date', () => {
+    const currentDate = helpers.getCurrentDate();
+    expect({ currentDate }).toMatchSnapshot('current date');
   });
 });
