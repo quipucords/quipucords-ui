@@ -496,12 +496,12 @@ const TEST_MODE = process.env.REACT_APP_ENV === 'test';
 const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
 
 /**
- * UI coded name.
+ * UI coded name, brand dependent.
  * See dotenv config files for updating.
  *
  * @type {string}
  */
-const UI_NAME = process.env.REACT_APP_UI_NAME;
+const UI_NAME = UI_BRAND === true ? process.env.REACT_APP_UI_BRAND_NAME : process.env.REACT_APP_UI_NAME;
 
 /**
  * UI cased sentence start name.
@@ -509,7 +509,8 @@ const UI_NAME = process.env.REACT_APP_UI_NAME;
  *
  * @type {string}
  */
-const UI_SENTENCE_START_NAME = process.env.REACT_APP_UI_SENTENCE_START_NAME;
+const UI_SENTENCE_START_NAME =
+  UI_BRAND === true ? process.env.REACT_APP_UI_BRAND_SENTENCE_START_NAME : process.env.REACT_APP_UI_SENTENCE_START_NAME;
 
 /**
  * UI short name.
@@ -517,7 +518,8 @@ const UI_SENTENCE_START_NAME = process.env.REACT_APP_UI_SENTENCE_START_NAME;
  *
  * @type {string}
  */
-const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
+const UI_SHORT_NAME =
+  UI_BRAND === true ? process.env.REACT_APP_UI_BRAND_SHORT_NAME : process.env.REACT_APP_UI_SHORT_NAME;
 
 /**
  * UI packaged application version, with generated hash.
@@ -526,6 +528,13 @@ const UI_SHORT_NAME = process.env.REACT_APP_UI_SHORT_NAME;
  * @type {string}
  */
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
+
+/**
+ * Return a consistent current date.
+ *
+ * @returns {string|Date}
+ */
+const getCurrentDate = () => (TEST_MODE && moment.utc('20220601').toDate()) || moment.utc().toDate();
 
 const helpers = {
   aggregatedError,
@@ -556,7 +565,8 @@ const helpers = {
   UI_NAME,
   UI_SENTENCE_START_NAME,
   UI_SHORT_NAME,
-  UI_VERSION
+  UI_VERSION,
+  getCurrentDate
 };
 
 export { helpers as default, helpers };
