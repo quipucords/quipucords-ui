@@ -2,50 +2,58 @@
 
 exports[`AboutModal Component should contain brand: brand 1`] = `
 <AboutModal
-  altLogo="Ipsum"
-  className=""
-  logo="logo-brand.svg"
-  onHide={[Function]}
-  productTitle={
+  appendTo={null}
+  backgroundImageSrc=""
+  brandImageAlt="Ipsum"
+  brandImageSrc="logo-brand.svg"
+  className="quipucords-about-modal"
+  isOpen={true}
+  noAboutModalBoxContentContainer={false}
+  onClose={[Function]}
+  productName={
     <img
       alt="Lorem ipsum"
       src="title-brand.svg"
     />
   }
-  show={true}
-  trademarkText="Copyright (c) 2019 Red Hat Inc."
+  trademark="t(about-modal.copyright, {\\"year\\":\\"2022\\"})"
 >
   <div
-    aria-label="Application information copied"
+    aria-label="t(about-modal.copy-confirmation)"
     aria-live="polite"
+    className="quipucords-about-modal-list"
     tabIndex={-1}
   >
-    <AboutModalVersions
-      className="quipucords-about-modal-list"
-    >
-      <AboutModalVersionItem
-        className=""
-        label="t(about-modal.ui-version, UI Version)"
-        versionText="0.0.0.0000000"
-      />
-    </AboutModalVersions>
+    <TextContent>
+      <TextList
+        component="dl"
+      >
+        <TextListItem
+          component="dt"
+        >
+          t(about-modal.ui-version)
+        </TextListItem>
+        <TextListItem
+          component="dd"
+        >
+          0.0.0.0000000
+        </TextListItem>
+      </TextList>
+    </TextContent>
   </div>
   <div
     className="quipucords-about-modal-copy-footer"
   >
     <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
       className="quipucords-about-modal-copy-button"
-      disabled={false}
       onClick={[Function]}
-      title="Copy application information"
+      title="t(about-modal.copy-button)"
+      variant="tertiary"
     >
-      <Icon
-        name="paste"
-        type="fa"
+      <PasteIcon
+        color="currentColor"
+        noVerticalAlign={false}
+        size="sm"
       />
     </Button>
   </div>
@@ -55,7 +63,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
 exports[`AboutModal Component should have a copy event that updates state: post copy event 1`] = `
 Object {
   "copied": null,
-  "timer": 14,
+  "timer": 13,
 }
 `;
 
@@ -71,7 +79,6 @@ exports[`AboutModal Component should render a connected component with default p
 exports[`AboutModal Component should render a non-connected component: hidden modal 1`] = `
 <AboutModal
   getStatus={[Function]}
-  getUser={[Function]}
   resetTimer={3000}
   serverVersion="0.0.0.0000000"
   show={false}
@@ -83,76 +90,44 @@ exports[`AboutModal Component should render a non-connected component: hidden mo
   username="admin"
 >
   <AboutModal
-    altLogo="Quipucords"
-    className=""
-    logo="logo.svg"
-    onHide={[Function]}
-    productTitle={
+    appendTo={null}
+    backgroundImageSrc=""
+    brandImageAlt="Quipucords"
+    brandImageSrc="logo.svg"
+    className="quipucords-about-modal"
+    isOpen={false}
+    noAboutModalBoxContentContainer={false}
+    onClose={[Function]}
+    productName={
       <img
         alt="Quipucords"
         src="title.svg"
       />
     }
-    show={false}
-    trademarkText=""
+    trademark=""
   >
-    <Modal
-      animation={true}
-      autoFocus={true}
-      backdrop={true}
-      bsClass="modal"
-      className=""
-      contentClassName="about-modal-pf"
-      dialogComponentClass={[Function]}
-      enforceFocus={true}
-      keyboard={true}
-      manager={
-        ModalManager {
-          "add": [Function],
-          "containers": Array [],
-          "data": Array [],
-          "handleContainerOverflow": true,
-          "hideSiblingNodes": true,
-          "isTopModal": [Function],
-          "modals": Array [],
-          "remove": [Function],
-        }
-      }
-      onHide={[Function]}
-      renderBackdrop={[Function]}
-      restoreFocus={true}
-      show={false}
+    <Portal
+      containerInfo={<div />}
     >
-      <Modal
-        autoFocus={true}
-        backdrop={true}
-        backdropClassName="modal-backdrop"
-        backdropTransition={[Function]}
-        containerClassName="modal-open"
-        enforceFocus={true}
-        keyboard={true}
-        manager={
-          ModalManager {
-            "add": [Function],
-            "containers": Array [],
-            "data": Array [],
-            "handleContainerOverflow": true,
-            "hideSiblingNodes": true,
-            "isTopModal": [Function],
-            "modals": Array [],
-            "remove": [Function],
-          }
+      <AboutModalContainer
+        aboutModalBoxContentId="pf-about-modal-content-0"
+        aboutModalBoxHeaderId="pf-about-modal-title-0"
+        backgroundImageSrc=""
+        brandImageAlt="Quipucords"
+        brandImageSrc="logo.svg"
+        className="quipucords-about-modal"
+        isOpen={false}
+        noAboutModalBoxContentContainer={false}
+        onClose={[Function]}
+        productName={
+          <img
+            alt="Quipucords"
+            src="title.svg"
+          />
         }
-        onEntering={[Function]}
-        onExited={[Function]}
-        onHide={[Function]}
-        onMouseUp={[Function]}
-        renderBackdrop={[Function]}
-        restoreFocus={true}
-        show={false}
-        transition={[Function]}
+        trademark=""
       />
-    </Modal>
+    </Portal>
   </AboutModal>
 </AboutModal>
 `;

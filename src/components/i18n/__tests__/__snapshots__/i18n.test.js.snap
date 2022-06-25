@@ -15,54 +15,43 @@ Array [
     "file": "./src/components/aboutModal/aboutModal.js",
     "keys": Array [
       Object {
+        "key": "about-modal.copyright",
+        "match": "t('about-modal.copyright', { year: currentYear })",
+      },
+      Object {
+        "key": "about-modal.copy-confirmation",
+        "match": "t('about-modal.copy-confirmation')",
+      },
+      Object {
         "key": "about-modal.username",
-        "match": "t('about-modal.username', 'Username')",
+        "match": "t('about-modal.username')",
       },
       Object {
         "key": "about-modal.browser-version",
-        "match": "t('about-modal.browser-version', 'Browser Version')",
+        "match": "t('about-modal.browser-version')",
       },
       Object {
         "key": "about-modal.browser-os",
-        "match": "t('about-modal.browser-os', 'Browser OS')",
+        "match": "t('about-modal.browser-os')",
       },
       Object {
         "key": "about-modal.server-version",
-        "match": "t('about-modal.server-version', 'Server Version')",
+        "match": "t('about-modal.server-version')",
       },
       Object {
         "key": "about-modal.ui-version",
-        "match": "t('about-modal.ui-version', 'UI Version')",
+        "match": "t('about-modal.ui-version')",
+      },
+      Object {
+        "key": "about-modal.copy-button",
+        "match": "t('about-modal.copy-button')",
       },
     ],
   },
 ]
 `;
 
-exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
-Array [
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "key": "about-modal.username",
-  },
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "key": "about-modal.browser-version",
-  },
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "key": "about-modal.browser-os",
-  },
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "key": "about-modal.server-version",
-  },
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "key": "about-modal.ui-version",
-  },
-]
-`;
+exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `Array []`;
 
 exports[`I18n Component should pass children: children 1`] = `"lorem ipsum"`;
 
