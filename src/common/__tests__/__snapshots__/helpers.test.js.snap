@@ -52,6 +52,18 @@ exports[`Helpers should handle http status less than 400 message from response: 
 
 exports[`Helpers should handle http status less than 400 message from response: 400 message 1`] = `"Request success XXX"`;
 
+exports[`Helpers should handle use aggregate error, or fallback: emulated aggregate error 1`] = `
+Object {
+  "aggregated": [AggregateError: testing aggregated],
+  "errors": Array [
+    [Error: lorem ipsum],
+    [Error: dolor sit],
+  ],
+  "isEmulated": true,
+  "name": "AggregateError",
+}
+`;
+
 exports[`Helpers should handle view related selectors and props updates: createViewQueryObject 1`] = `
 Object {
   "page": 1,
@@ -75,6 +87,7 @@ Object {
   "devModeNormalizeCount": [Function],
   "downloadData": [Function],
   "generateId": [Function],
+  "getCurrentDate": [Function],
   "getMessageFromResults": [Function],
   "getStatusFromResults": [Function],
   "getTimeDisplayHowLongAgo": [Function],
@@ -90,6 +103,12 @@ Object {
   "setPropIfTruthy": [Function],
   "sourceTypeIcon": [Function],
   "viewPropsChanged": [Function],
+}
+`;
+
+exports[`Helpers should return a predictable current date: current date 1`] = `
+Object {
+  "currentDate": 2022-06-01T00:00:00.000Z,
 }
 `;
 
