@@ -87,7 +87,7 @@ startDB()
 {
   local CONTAINER="postgres:9.6.10"
   local NAME=$1
-  local DATA="$(pwd)/.container/postgres"
+  local DATA="$(pwd)/.container/${NAME}/postgres"
   local DATA_VOLUME="/var/lib/postgresql/data"
   local STORE_DATA=$2
 
@@ -110,8 +110,8 @@ startDB()
 
   checkContainerRunning $NAME
 
-  if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
-    echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
+  if [ ! -z "$(docker ps | grep $NAME)" ]; then
+    echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
     echo "  QPC DB running:"
     printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
   fi
@@ -148,7 +148,7 @@ buildApp()
 reviewApi()
 {
   local NAME="qpc-review"
-  local DB_NAME="qpc-db"
+  local DB_NAME="qpc-db-review"
   local PORT=$1
   local IS_BUILT=$2
   local CONTAINER=$3
@@ -160,19 +160,19 @@ reviewApi()
     docker stop -t 0 $NAME >/dev/null
   fi
 
-  startDB $DB_NAME
+  startDB $DB_NAME true
 
-  if [ -z "$(docker ps | grep $CONTAINER)" ]; then
+  if [ -z "$(docker ps | grep $NAME)" ]; then
     printf "\n"
     echo "Starting API..."
     docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
   fi
 
-  checkContainerRunning $CONTAINER
+  checkContainerRunning $NAME
 
-  if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
-    echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
-    echo "  QPC API running: https://localhost:${PORT}/"
+  if [ ! -z "$(docker ps | grep $NAME)" ]; then
+    echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
+    echo "  QPC API running: https://127.0.0.1:${PORT}/"
     printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
   fi
 
@@ -185,7 +185,7 @@ reviewApi()
 stageApi()
 {
   local NAME="qpc-stage"
-  local DB_NAME="qpc-db"
+  local DB_NAME="qpc-db-stage"
   local PORT=$1
   local UPDATE=$2
   local IS_BUILT=$3
@@ -211,21 +211,20 @@ stageApi()
   if [ ! "$UPDATE" = true ]; then
     startDB $DB_NAME true
 
-    if [ -z "$(docker ps | grep $CONTAINER)" ]; then
+    if [ -z "$(docker ps | grep $NAME)" ]; then
       printf "\n"
       echo "Starting API..."
       docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
     fi
 
-    checkContainerRunning $CONTAINER
+    checkContainerRunning $NAME
 
-    if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
-      echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
+    if [ ! -z "$(docker ps | grep $NAME)" ]; then
+      echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
       echo "  QPC API running: https://localhost:${PORT}/"
       printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
     fi
 
-    runDocs
     exit 0
   fi
 }
@@ -264,7 +263,6 @@ devApi()
       printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
     fi
 
-    runDocs
     exit 0
   fi
 }
@@ -272,7 +270,7 @@ devApi()
 #
 # Serve swagger spec
 #
-runDocs()
+runSpecs()
 {
   local GITREPO=$1
 
@@ -281,6 +279,14 @@ runDocs()
   fi
 
   node "./scripts/swagger.js"
+}
+#
+#
+# Stop QPC containers
+#
+stopApi()
+{
+  docker stop $(docker ps --filter name="qpc*")
 }
 #
 #
@@ -340,10 +346,12 @@ runDocs()
       stageApi $PORT $UPDATE $BUILT $QPC_IMAGE_CONTAINER;;
     dev )
       devApi $PORT "$FILE" $UPDATE $MOCK_IMAGE_CONTAINER;;
-    docs )
-      runDocs true;;
+    specs )
+      runSpecs true;;
     gitApi )
       gitApi;;
+    stopApi )
+      stopApi;;
     update )
       devApi $PORT "$FILE" true
       stageApi $PORT true
