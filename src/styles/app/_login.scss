@@ -1,7 +1,7 @@
 /* _login.scss */
 .login .alert {
   background: transparent;
-  color: $color-pf-white;
+  color: var(--pf-global--palette--white);
 }
 
 #brand.login-title img {}

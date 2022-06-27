@@ -17,7 +17,7 @@
 }
 
 .quipucords-view-container {
-  background-color: $color-pf-white;
+  background-color: var(--pf-global--palette--white);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -33,7 +33,7 @@
     }
 
     .last-refresh-time {
-      font-size: $font-size-small;
+      font-size: var(--pf-global--FontSize--xs);
       margin-left: 5px;
       position: relative;
       top: -1px;
@@ -60,12 +60,12 @@
     width: 150px;
 
     .btn-link {
-      color: $color-pf-black-700;
+      color: var(--pf-global--palette--black-700);
       .pficon, .fa {
         font-size: 14px;
       }
       &:hover, &:focus {
-        color: $color-pf-blue;
+        color: var(--pf-global--palette--blue-500);
       }
     }
     .dropdown.btn-group {
@@ -96,9 +96,9 @@
       flex: 1 1 auto;
       .dropdown.btn-group {
         .dropdown-toggle {
-          color: $color-pf-black-700;
+          color: var(--pf-global--palette--black-700);
           &:hover, &:focus {
-            color: $color-pf-blue;
+            color: var(--pf-global--palette--blue-500);
           }
         }
       }
@@ -124,19 +124,19 @@
       overflow-y: auto;
       min-height: 70px;
       max-height: 300px;
-      border: solid 1px $list-view-divider;
+      border: solid 1px var(--quipucords--gray-light);
       border-left: 0;
       border-right: 0;
       margin-top: 25px;
       padding: 5px 20px 5px 10px;
 
       .btn-link {
-        color: $color-pf-black-700;
+        color: var(--pf-global--palette--black-700);
         .pficon, .fa {
           font-size: 14px;
         }
         &:hover, &:focus {
-          color: $color-pf-blue;
+          color: var(--pf-global--palette--blue-500);
         }
       }
     }
@@ -190,7 +190,7 @@
   width: 50%;
   margin-right: 10px;
   .list-group-item-heading {
-    margin-right: 0px;
+    margin-right: 0;
 
     .btn-link {
       font-size: inherit;
@@ -200,7 +200,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-right: 0px;
+    margin-right: 0;
   }
 }
 
@@ -278,5 +278,5 @@
 }
 
 .pficon.pficon-disconnected.is-error::before {
-  color: $color-pf-red-100;
+  color: var(--pf-global--palette--red-100);
 }

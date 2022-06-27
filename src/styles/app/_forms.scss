@@ -1,7 +1,7 @@
 /* _forms.scss */
 .quipucords {
   .has-error textarea.form-control {
-    border-color: $color-pf-red-100;
+    border-color: var(--pf-global--palette--red-100);
   }
 }
 
@@ -68,7 +68,7 @@ textarea.vertical-scroll {
 }
 
 .quipucords-form-control.form-control[readonly] {
-  background-color: $color-pf-white;
+  background-color: var(--pf-global--palette--white);
   border: 0;
   color: inherit;
   font-weight: 700;
