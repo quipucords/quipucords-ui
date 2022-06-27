@@ -22,7 +22,7 @@
 .scan-job-status-icon {
   margin-right: 5px;
   &.systems:before, &.systems:before {
-    color: $color-pf-black;
+    color: var(--pf-global--palette--black-1000);
   }
 }
 
