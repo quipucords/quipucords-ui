@@ -4,16 +4,16 @@
 }
 
 .quipucords-about-modal-copy-button {
-  box-shadow: 0 0 3px $color-pf-black-300;
+  box-shadow: 0 0 3px var(--pf-global--palette--black-300);
 }
 
 .quipucords-about-modal-list {
-  box-shadow: 0 0 2px $color-pf-black-300;
+  box-shadow: 0 0 2px var(--pf-global--palette--black-300);
   padding: 10px;
 
   &:focus,
   &:hover {
-    box-shadow: 0 0 5px $color-pf-black-100;
+    box-shadow: 0 0 5px var(--pf-global--palette--black-100);
   }
 
   .list-unstyled li {

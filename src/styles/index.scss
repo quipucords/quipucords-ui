@@ -18,6 +18,7 @@ $icon-font-path: '~patternfly/dist/fonts/';
 @import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
 @import '~patternfly/dist/sass/patternfly/mixins';
 
+@import 'app/vars';
 @import 'app/overrides';
 @import 'app/common';
 @import 'app/aboutModal';
