@@ -48,6 +48,15 @@ Array [
       },
     ],
   },
+  Object {
+    "file": "./src/components/modal/modal.js",
+    "keys": Array [
+      Object {
+        "key": "modal.aria-label-default",
+        "match": "t('modal.aria-label-default')",
+      },
+    ],
+  },
 ]
 `;
 

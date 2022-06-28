@@ -8,5 +8,8 @@
     "server-version": "Server Version",
     "ui-version": "UI Version",
     "username": "Username"
+  },
+  "modal": {
+    "aria-label-default": "Application modal"
   }
 }
