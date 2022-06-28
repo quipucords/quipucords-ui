@@ -4,13 +4,15 @@ import Credentials from '../credentials/credentials';
 
 /**
  * Return the application base directory.
+ *
  * @type {string}
  */
 const baseName = '/client';
 
 /**
  * Return array of objects that describe navigation
- * @return {array}
+ *
+ * @returns {Array}
  */
 const routes = [
   {

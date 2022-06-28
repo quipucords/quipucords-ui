@@ -5,11 +5,17 @@ import apiTypes from '../../constants/apiConstants';
 
 /**
  * Map a new source object to consumable prop names
+ *
+ * @param {object} state
+ * @returns {*}
  */
 const sourceDetail = state => state.addSourceWizard.source;
 
 /**
  * Map an edit source object to consumable prop names
+ *
+ * @param {object} state
+ * @returns {*}
  */
 const editSourceDetail = state => state.addSourceWizard.editSource;
 
