@@ -421,7 +421,7 @@ const getStatusFromResults = results => {
 /**
  * Return a callback for determining a timestamp.
  *
- * @returns {Function}
+ * @type {Function}
  */
 const getTimeStampFromResults =
   process.env.REACT_APP_ENV !== 'test'
@@ -431,7 +431,7 @@ const getTimeStampFromResults =
 /**
  * Return a callback for determine time offset.
  *
- * @returns {Function}
+ * @type {Function}
  */
 const getTimeDisplayHowLongAgo =
   process.env.REACT_APP_ENV !== 'test'

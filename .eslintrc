@@ -9,6 +9,7 @@
   "plugins": [
     "import",
     "jest",
+    "jsdoc",
     "json",
     "prettier",
     "react"
@@ -21,7 +22,8 @@
     "airbnb",
     "airbnb/hooks",
     "prettier",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:jsdoc/recommended"
   ],
   "globals": {
     "mountHook": "readonly",
@@ -57,6 +59,17 @@
     "import/no-named-as-default-member": 0,
     "jest/no-done-callback": 0,
     "jest/prefer-to-have-length": 0,
+    "jsdoc/require-param-description": 0,
+    "jsdoc/require-property-description": 0,
+    "jsdoc/require-returns-description": 0,
+    "jsdoc/tag-lines": [
+      "warn",
+      "always",
+      {
+        "count": 0,
+        "noEndLines": true
+      }
+    ],
     "max-len": [
       "error",
       {

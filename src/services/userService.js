@@ -6,6 +6,7 @@ import { serviceCall } from './config';
  */
 /**
  * Get the users locale
+ *
  * @returns {Promise<any>}
  */
 const getLocale = () => {
