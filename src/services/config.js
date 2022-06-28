@@ -9,7 +9,7 @@ const globalXhrTimeout = Number.parseInt(process.env.REACT_APP_AJAX_TIMEOUT, 10)
 /**
  * Return a formatted auth header.
  *
- * @return {{}}
+ * @returns {{}}
  */
 const authHeader = () => {
   const authToken = cookies.get(process.env.REACT_APP_AUTH_TOKEN) || '';
