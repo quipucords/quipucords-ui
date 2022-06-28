@@ -6,6 +6,8 @@ import { apiTypes } from '../../constants/apiConstants';
 
 /**
  * Map a hosts object to consumable prop names
+ *
+ * @type {{}}
  */
 const scanHostsListSelectorCache = {};
 
@@ -131,6 +133,10 @@ const makeScanHostsListSelector = () => scanHostsListSelector;
 
 /**
  * Map a job object to consumable prop names and sorted by source
+ *
+ * @param {object} state
+ * @param {object} props
+ * @returns {*}
  */
 const scanJobDetail = (state, props) => state.scans.job[props.id];
 
@@ -220,6 +226,8 @@ const makeScanJobDetailBySourceSelector = () => scanJobDetailBySourceSelector;
 
 /**
  * Map a jobs object to consumable prop names
+ *
+ * @type {{}}
  */
 const previousScansSelectorsCache = {};
 
@@ -283,6 +291,10 @@ const makeScanJobsListSelector = () => scanJobsListSelector;
 
 /**
  * Map a scan object to consumable prop names
+ *
+ * @param {object} state
+ * @param {object} props
+ * @returns {*}
  */
 const scanListItem = (state, props) => props;
 
@@ -358,6 +370,9 @@ const makeScanListItemSelector = () => scanListItemSelector;
 
 /**
  * Return a check for sources existing
+ *
+ * @param {object} state
+ * @returns {*}
  */
 const scansEmptyState = state => state.scans.empty;
 
@@ -374,6 +389,9 @@ const makeScansEmptyStateSelector = () => scansEmptyStateSelector;
 
 /**
  * Return a list of scan objects
+ *
+ * @param {object} state
+ * @returns {*}
  */
 const scansView = state => state.scans.view;
 

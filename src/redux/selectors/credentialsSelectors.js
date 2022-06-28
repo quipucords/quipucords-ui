@@ -3,6 +3,9 @@ import apiTypes from '../../constants/apiConstants';
 
 /**
  * Map a credential array to a consumable dropdown format
+ *
+ * @param {object} state
+ * @returns {*}
  */
 const credentials = state => state.credentials.view.credentials;
 
