@@ -1,0 +1,35 @@
+.quipucords{
+  &-modal {
+    h4.pf-c-title.pf-m-md {
+      font-size: 0.9rem;
+    }
+
+    .pf-c-button {
+      font-size: inherit;
+    }
+
+    &__rcue-width {
+      div.pf-c-modal-box.pf-m-align-top {
+        @media (min-width: $pf-global--breakpoint--md) {
+          width: auto;
+          min-width: 600px;
+        }
+      }
+    }
+
+    &__hide-backdrop {
+      .pf-c-backdrop {
+        background-color: transparent;
+      }
+    }
+
+    &__confirmation {
+      .pf-c-backdrop {
+        z-index: 1100;
+      }
+      .pf-c-modal-box__body {
+        padding-bottom: var(--pf-c-modal-box__body--PaddingTop);
+      }
+    }
+  }
+}
