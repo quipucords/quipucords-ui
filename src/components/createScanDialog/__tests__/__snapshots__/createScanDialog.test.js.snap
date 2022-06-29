@@ -64,307 +64,330 @@ exports[`CreateScanDialog Component should render a connected component with def
 
 exports[`CreateScanDialog Component should render a non-connected component: non-connected 1`] = `
 <div
-  role="dialog"
+  class="pf-c-backdrop"
 >
   <div
-    class="fade modal-backdrop in"
-  />
-  <div
-    class="fade in modal"
-    role="dialog"
-    style="display: block; padding-right: 0px;"
-    tabindex="-1"
+    class="pf-l-bullseye"
   >
     <div
-      class="modal-dialog"
+      aria-describedby="pf-modal-part-2"
+      aria-label="t(modal.aria-label-default)"
+      aria-labelledby="pf-modal-part-0"
+      aria-modal="true"
+      class="pf-c-modal-box pf-m-align-top"
+      data-ouia-component-id="OUIA-Generated-Modal-1"
+      data-ouia-component-type="PF4/ModalContent"
+      data-ouia-safe="true"
+      id="pf-modal-part-0"
+      role="dialog"
+      style="--pf-c-modal-box--m-align-top--spacer: 5%;"
     >
+      <button
+        aria-disabled="false"
+        aria-label="Close"
+        class="pf-c-button pf-m-plain"
+        data-ouia-component-id="OUIA-Generated-Modal-1-ModalBoxCloseButton"
+        data-ouia-component-type="PF4/Button"
+        data-ouia-safe="true"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="currentColor"
+          height="1em"
+          role="img"
+          style="vertical-align: -0.125em;"
+          viewBox="0 0 352 512"
+          width="1em"
+        >
+          <path
+            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+          />
+        </svg>
+      </button>
+      <header
+        class="pf-c-modal-box__header"
+      >
+        <h4
+          class="pf-c-title pf-m-md"
+          data-ouia-component-id="OUIA-Generated-Title-1"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
+        >
+          Scan
+        </h4>
+      </header>
       <div
-        class="modal-content"
-        role="document"
+        aria-live="polite"
+        class="pf-c-modal-box__body"
+        id="pf-modal-part-2"
       >
         <form
           class="form-horizontal"
         >
           <div
-            class="modal-header"
+            class="form-group"
           >
-            <button
-              aria-hidden="true"
-              aria-label="Close"
-              class="close"
-              type="button"
+            <label
+              class="col-sm-3 control-label"
+              for="generatedid-"
             >
-              <span
-                aria-hidden="true"
-                class="pficon pficon-close"
+              Name
+            </label>
+            <div
+              class="col-sm-9"
+            >
+              <input
+                class="form-control"
+                id="generatedid-"
+                maxlength="256"
+                name="scanName"
+                placeholder="Enter a name for the scan"
+                type="text"
+                value=""
               />
-            </button>
-            <h4
-              class="modal-title"
-            >
-              Scan
-            </h4>
+            </div>
           </div>
           <div
-            aria-live="polite"
-            class="modal-body"
+            class="form-group"
           >
-            <div
-              class="form-group"
+            <label
+              class="col-sm-3 control-label"
+              for="generatedid-"
             >
-              <label
-                class="col-sm-3 control-label"
-                for="generatedid-"
+              Sources
+            </label>
+            <div
+              class="col-sm-9"
+            >
+              <textarea
+                class="quipucords-form-control form-control"
+                id="generatedid-"
+                name="displayScanSources"
+                readonly=""
+                rows="2"
               >
-                Name
-              </label>
-              <div
-                class="col-sm-9"
-              >
-                <input
-                  class="form-control"
-                  id="generatedid-"
-                  maxlength="256"
-                  name="scanName"
-                  placeholder="Enter a name for the scan"
-                  type="text"
-                  value=""
-                />
-              </div>
+                test name
+              </textarea>
             </div>
-            <div
-              class="form-group"
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="col-sm-3 control-label"
+              for="scanConcurrency"
             >
-              <label
-                class="col-sm-3 control-label"
-                for="generatedid-"
-              >
-                Sources
-              </label>
-              <div
-                class="col-sm-9"
-              >
-                <textarea
-                  class="quipucords-form-control form-control"
-                  id="generatedid-"
-                  name="displayScanSources"
-                  readonly=""
-                  rows="2"
-                >
-                  test name
-                </textarea>
-              </div>
-            </div>
+              Maximum concurrent scans
+            </label>
             <div
-              class="form-group"
+              class="col-sm-9"
             >
-              <label
-                class="col-sm-3 control-label"
-                for="scanConcurrency"
-              >
-                Maximum concurrent scans
-              </label>
-              <div
-                class="col-sm-9"
+              <span
+                class="cloudmeter-touchspin cloudmeter-scan-dialog-touchspin input-group"
               >
                 <span
-                  class="cloudmeter-touchspin cloudmeter-scan-dialog-touchspin input-group"
+                  class="input-group-btn"
                 >
-                  <span
-                    class="input-group-btn"
-                  >
-                    <button
-                      aria-hidden="true"
-                      class="cloudmeter-touchspin-min-button form-control btn btn-default"
-                      tabindex="-1"
-                      title="Decrease number input"
-                      type="button"
-                    >
-                      <span
-                        aria-hidden="true"
-                        class="fa fa-minus"
-                      />
-                    </button>
-                  </span>
-                  <input
-                    class="cloudmeter-touchspin-input form-control"
-                    id="scanConcurrency"
-                    name="scanConcurrency"
-                    type="text"
-                    value="25"
-                  />
-                  <span
-                    class="input-group-btn"
-                  >
-                    <button
-                      aria-hidden="true"
-                      class="cloudmeter-touchspin-max-button form-control btn btn-default"
-                      tabindex="-1"
-                      title="Increase number input"
-                      type="button"
-                    >
-                      <span
-                        aria-hidden="true"
-                        class="fa fa-plus"
-                      />
-                    </button>
-                  </span>
-                </span>
-                <span
-                  class="help-block"
-                >
-                  <abbr
-                    title="Minimum value 1, maximum value 200"
-                  >
-                    1 - 200
-                  </abbr>
-                </span>
-              </div>
-            </div>
-            <div
-              class="form-group"
-            >
-              <label
-                class="col-sm-3 control-label"
-                for="generatedid-"
-              >
-                <div>
-                  Deep scan
-                  <br />
-                  for these
-                  <br />
-                  products
                   <button
-                    class="popover-pf-info btn btn-link"
+                    aria-hidden="true"
+                    class="cloudmeter-touchspin-min-button form-control btn btn-default"
+                    tabindex="-1"
+                    title="Decrease number input"
                     type="button"
                   >
                     <span
                       aria-hidden="true"
-                      class="pficon pficon-info"
+                      class="fa fa-minus"
                     />
                   </button>
-                </div>
-              </label>
-              <div
-                class="col-sm-9"
-              >
-                <div
-                  class="checkbox"
-                >
-                  <label
-                    title=""
-                  >
-                    <input
-                      name="jbossEap"
-                      type="checkbox"
-                    />
-                    <abbr
-                      title="Red Hat JBoss Enterprise Application Platform"
-                    >
-                      JBoss EAP
-                    </abbr>
-                  </label>
-                </div>
-                <div
-                  class="checkbox"
-                >
-                  <label
-                    title=""
-                  >
-                    <input
-                      name="jbossFuse"
-                      type="checkbox"
-                    />
-                    <abbr
-                      title="Red Hat Fuse"
-                    >
-                      Fuse
-                    </abbr>
-                  </label>
-                </div>
-                <div
-                  class="checkbox"
-                >
-                  <label
-                    title=""
-                  >
-                    <input
-                      name="jbossWs"
-                      type="checkbox"
-                    />
-                    <abbr
-                      title="Red Hat JBoss Web Server"
-                    >
-                      JBoss Web Server
-                    </abbr>
-                  </label>
-                </div>
-                <div
-                  class="checkbox"
-                >
-                  <label
-                    title=""
-                  >
-                    <input
-                      name="jbossBrms"
-                      type="checkbox"
-                    />
-                    <abbr
-                      title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
-                    >
-                      Decision Manager
-                    </abbr>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div
-              class="form-group"
-            >
-              <label
-                class="col-sm-3 control-label"
-                for="generatedid-"
-              >
-                Scan alternate directories
-              </label>
-              <div
-                class="col-sm-9"
-              >
-                <textarea
-                  class="vertical-scroll form-control"
-                  disabled=""
-                  id="generatedid-"
-                  name="displayScanDirectories"
-                  placeholder="Optional. Enter values separated by commas"
-                  rows="4"
+                </span>
+                <input
+                  class="cloudmeter-touchspin-input form-control"
+                  id="scanConcurrency"
+                  name="scanConcurrency"
+                  type="text"
+                  value="25"
                 />
                 <span
-                  class="help-block"
+                  class="input-group-btn"
                 >
-                  Default directories are /, /opt, /app, /home, /usr
+                  <button
+                    aria-hidden="true"
+                    class="cloudmeter-touchspin-max-button form-control btn btn-default"
+                    tabindex="-1"
+                    title="Increase number input"
+                    type="button"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="fa fa-plus"
+                    />
+                  </button>
                 </span>
+              </span>
+              <span
+                class="help-block"
+              >
+                <abbr
+                  title="Minimum value 1, maximum value 200"
+                >
+                  1 - 200
+                </abbr>
+              </span>
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="col-sm-3 control-label"
+              for="generatedid-"
+            >
+              <div>
+                Deep scan
+                <br />
+                for these
+                <br />
+                products
+                <button
+                  class="popover-pf-info btn btn-link"
+                  type="button"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="pficon pficon-info"
+                  />
+                </button>
+              </div>
+            </label>
+            <div
+              class="col-sm-9"
+            >
+              <div
+                class="checkbox"
+              >
+                <label
+                  title=""
+                >
+                  <input
+                    name="jbossEap"
+                    type="checkbox"
+                  />
+                  <abbr
+                    title="Red Hat JBoss Enterprise Application Platform"
+                  >
+                    JBoss EAP
+                  </abbr>
+                </label>
+              </div>
+              <div
+                class="checkbox"
+              >
+                <label
+                  title=""
+                >
+                  <input
+                    name="jbossFuse"
+                    type="checkbox"
+                  />
+                  <abbr
+                    title="Red Hat Fuse"
+                  >
+                    Fuse
+                  </abbr>
+                </label>
+              </div>
+              <div
+                class="checkbox"
+              >
+                <label
+                  title=""
+                >
+                  <input
+                    name="jbossWs"
+                    type="checkbox"
+                  />
+                  <abbr
+                    title="Red Hat JBoss Web Server"
+                  >
+                    JBoss Web Server
+                  </abbr>
+                </label>
+              </div>
+              <div
+                class="checkbox"
+              >
+                <label
+                  title=""
+                >
+                  <input
+                    name="jbossBrms"
+                    type="checkbox"
+                  />
+                  <abbr
+                    title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+                  >
+                    Decision Manager
+                  </abbr>
+                </label>
               </div>
             </div>
           </div>
           <div
-            class="modal-footer"
+            class="form-group"
           >
-            <button
-              class="btn-cancel btn btn-default"
-              type="button"
+            <label
+              class="col-sm-3 control-label"
+              for="generatedid-"
             >
-              Cancel
-            </button>
-            <button
-              class="btn btn-primary"
-              disabled=""
-              type="submit"
+              Scan alternate directories
+            </label>
+            <div
+              class="col-sm-9"
             >
-              Scan
-            </button>
+              <textarea
+                class="vertical-scroll form-control"
+                disabled=""
+                id="generatedid-"
+                name="displayScanDirectories"
+                placeholder="Optional. Enter values separated by commas"
+                rows="4"
+              />
+              <span
+                class="help-block"
+              >
+                Default directories are /, /opt, /app, /home, /usr
+              </span>
+            </div>
           </div>
         </form>
       </div>
+      <footer
+        class="pf-c-modal-box__footer"
+      >
+        <button
+          aria-disabled="true"
+          class="pf-c-button pf-m-primary pf-m-disabled"
+          data-ouia-component-id="OUIA-Generated-Button-primary-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          disabled=""
+          type="button"
+        >
+          t(form-dialog.label, {"context":"submit_create-scan"})
+        </button>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link"
+          data-ouia-component-id="OUIA-Generated-Button-link-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          type="button"
+        >
+          t(form-dialog.label, {"context":"cancel"})
+        </button>
+      </footer>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, EmptyState, Modal } from 'patternfly-react';
+import { Alert, EmptyState } from 'patternfly-react';
+import { Modal, ModalVariant } from '../modal/modal';
 import { reduxActions } from '../../redux';
 import helpers from '../../common/helpers';
 import { PageLayout } from '../pageLayout/pageLayout';
@@ -24,11 +25,9 @@ class Authentication extends React.Component {
 
     if (session.pending) {
       return (
-        <Modal bsSize="lg" backdrop={false} show animation={false}>
-          <Modal.Body>
-            <div className="spinner spinner-xl" />
-            <div className="text-center">Logging in...</div>
-          </Modal.Body>
+        <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
+          <div className="spinner spinner-xl" />
+          <div className="text-center">Logging in...</div>
         </Modal>
       );
     }

@@ -9,7 +9,20 @@
     "ui-version": "UI Version",
     "username": "Username"
   },
+  "form-dialog": {
+    "label_cancel": "Cancel",
+    "label_close": "Close",
+    "label_submit": "Submit",
+    "label_submit_confirmation": "Confirm",
+    "label_submit_create-credential": "Save",
+    "label_submit_create-scan": "Scan",
+    "label_submit_merge-reports": "Merge"
+  },
   "modal": {
     "aria-label-default": "Application modal"
+  },
+  "view": {
+    "loading": "Loading...",
+    "loading_credentials": "Loading credentials..."
   }
 }

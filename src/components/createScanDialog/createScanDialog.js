@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, FieldLevelHelp, Form, Icon, Modal, Spinner } from 'patternfly-react';
+import { Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { Alert, FieldLevelHelp, Form, Spinner } from 'patternfly-react';
+import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { FormState } from '../formState/formState';
 import { FormField, fieldValidation } from '../formField/formField';
 import { TouchSpin } from '../touchspin/touchspin';
 import helpers from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
+import { translate } from '../i18n/i18n';
 
 class CreateScanDialog extends React.Component {
   onClose = () => {
@@ -319,63 +322,70 @@ class CreateScanDialog extends React.Component {
   }
 
   render() {
-    const { pending, show, sources } = this.props;
+    const { pending, show, sources, t } = this.props;
 
     if (!sources || sources.length === 0 || !sources[0]) {
       return null;
     }
 
+    const formActions = (onSubmit, isValid) => {
+      const updatedActions = [];
+      if (!pending) {
+        updatedActions.push(
+          <Button key="scan" onClick={onSubmit} isDisabled={!isValid}>
+            {t('form-dialog.label', { context: ['submit', 'create-scan'] })}
+          </Button>
+        );
+        updatedActions.push(
+          <Button key="cancel" variant={ButtonVariant.link} onClick={this.onClose}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        );
+      }
+      return updatedActions;
+    };
+
     return (
-      <Modal show={show} onHide={this.onClose}>
-        <FormState
-          validateOnMount={false}
-          setValues={{
-            displayScanDirectories: '',
-            displayScanSources: sources.map(item => item.name).join(', '),
-            scanConcurrency: 25,
-            scanDirectories: [],
-            jbossEap: false,
-            jbossFuse: false,
-            jbossWs: false,
-            jbossBrms: false,
-            scanName: '',
-            scanSources: sources.map(item => item.id)
-          }}
-          validate={this.onValidateForm}
-          onSubmit={this.onSubmit}
-        >
-          {({ handleOnSubmit, isValid, ...options }) => (
+      <FormState
+        validateOnMount={false}
+        setValues={{
+          displayScanDirectories: '',
+          displayScanSources: sources.map(item => item.name).join(', '),
+          scanConcurrency: 25,
+          scanDirectories: [],
+          jbossEap: false,
+          jbossFuse: false,
+          jbossWs: false,
+          jbossBrms: false,
+          scanName: '',
+          scanSources: sources.map(item => item.id)
+        }}
+        validate={this.onValidateForm}
+        onSubmit={this.onSubmit}
+      >
+        {({ handleOnSubmit, isValid, ...options }) => (
+          <Modal
+            isOpen={show}
+            showClose
+            onClose={this.onClose}
+            header={<Title headingLevel="h4">Scan</Title>}
+            actions={formActions(handleOnSubmit, isValid)}
+          >
             <Form horizontal onSubmit={handleOnSubmit}>
-              <Modal.Header>
-                <button type="button" className="close" onClick={this.onClose} aria-hidden="true" aria-label="Close">
-                  <Icon type="pf" name="close" />
-                </button>
-                <Modal.Title>Scan</Modal.Title>
-              </Modal.Header>
-              <Modal.Body aria-live="polite">
-                {pending && (
-                  <React.Fragment>
-                    <Spinner loading size="lg" className="blank-slate-pf-icon" />
-                    <div className="text-center">Scan updating...</div>
-                  </React.Fragment>
-                )}
-                {!pending && this.renderErrorMessage(options)}
-                {!pending && this.renderNameSources(options)}
-                {!pending && this.renderConcurrentScans(options)}
-                {!pending && this.renderAdditionalProducts(options)}
-              </Modal.Body>
-              <Modal.Footer>
-                <Button bsStyle="default" className="btn-cancel" onClick={this.onClose}>
-                  Cancel
-                </Button>
-                <Button bsStyle="primary" type="submit" disabled={!isValid}>
-                  Scan
-                </Button>
-              </Modal.Footer>
+              {pending && (
+                <React.Fragment>
+                  <Spinner loading size="lg" className="blank-slate-pf-icon" />
+                  <div className="text-center">Scan updating...</div>
+                </React.Fragment>
+              )}
+              {!pending && this.renderErrorMessage(options)}
+              {!pending && this.renderNameSources(options)}
+              {!pending && this.renderConcurrentScans(options)}
+              {!pending && this.renderAdditionalProducts(options)}
             </Form>
-          )}
-        </FormState>
-      </Modal>
+          </Modal>
+        )}
+      </FormState>
     );
   }
 }
@@ -394,7 +404,8 @@ CreateScanDialog.propTypes = {
     scanDirectories: PropTypes.string,
     scanName: PropTypes.string,
     scanSources: PropTypes.string
-  })
+  }),
+  t: PropTypes.func
 };
 
 CreateScanDialog.defaultProps = {
@@ -404,7 +415,8 @@ CreateScanDialog.defaultProps = {
   fulfilled: false,
   pending: false,
   startScan: helpers.noop,
-  submitErrorMessages: {}
+  submitErrorMessages: {},
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({

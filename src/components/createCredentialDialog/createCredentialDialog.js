@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Alert, Button, Icon, Form, Grid } from 'patternfly-react';
+import { Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { Alert, Form, Grid } from 'patternfly-react';
+import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { authDictionary, dictionary } from '../../constants/dictionaryConstants';
 import DropdownSelect from '../dropdownSelect/dropdownSelect';
+import { translate } from '../i18n/i18n';
 
 class CreateCredentialDialog extends React.Component {
   static renderFormLabel(label) {
@@ -396,7 +399,7 @@ class CreateCredentialDialog extends React.Component {
   }
 
   render() {
-    const { show, edit } = this.props;
+    const { show, edit, t } = this.props;
     const {
       credentialType,
       credentialName,
@@ -408,14 +411,20 @@ class CreateCredentialDialog extends React.Component {
     } = this.state;
 
     return (
-      <Modal show={show} onHide={this.onCancel}>
-        <Modal.Header>
-          <Button className="close" onClick={this.onCancel} aria-hidden="true" aria-label="Close">
-            <Icon type="pf" name="close" />
+      <Modal
+        isOpen={show}
+        showClose
+        onClose={this.onCancel}
+        header={<Title headingLevel="h4">{edit ? `View Credential - ${credentialName}` : 'Add Credential'}</Title>}
+        actions={[
+          <Button key="save" onClick={this.onSave} isDisabled={!this.validateForm()}>
+            {t('form-dialog.label', { context: ['submit', 'create-credential'] })}
+          </Button>,
+          <Button key="cancel" variant={ButtonVariant.link} autoFocus={edit} onClick={this.onCancel}>
+            {t('form-dialog.label', { context: 'cancel' })}
           </Button>
-          <Modal.Title>{edit ? `View Credential - ${credentialName}` : 'Add Credential'}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body />
+        ]}
+      >
         <Grid fluid>
           {this.renderErrorMessage()}
           <Form horizontal>
@@ -474,14 +483,6 @@ class CreateCredentialDialog extends React.Component {
             {this.renderNetworkForm()}
           </Form>
         </Grid>
-        <Modal.Footer>
-          <Button bsStyle="default" className="btn-cancel" autoFocus={edit} onClick={this.onCancel}>
-            Cancel
-          </Button>
-          <Button bsStyle="primary" onClick={this.onSave} disabled={!this.validateForm()}>
-            Save
-          </Button>
-        </Modal.Footer>
       </Modal>
     );
   }
@@ -499,6 +500,7 @@ CreateCredentialDialog.propTypes = {
   fulfilled: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  t: PropTypes.func,
   viewOptions: PropTypes.object
 };
 
@@ -514,6 +516,7 @@ CreateCredentialDialog.defaultProps = {
   fulfilled: false,
   error: false,
   errorMessage: null,
+  t: translate,
   viewOptions: {}
 };
 

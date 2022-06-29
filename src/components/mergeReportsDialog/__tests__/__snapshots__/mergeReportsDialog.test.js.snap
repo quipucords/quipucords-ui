@@ -2,48 +2,42 @@
 
 exports[`MergeReportsDialog Component should render a component, pending: pending 1`] = `
 <div
-  role="dialog"
+  class="pf-c-backdrop"
 >
   <div
-    class="fade modal-backdrop in"
-  />
-  <div
-    class="fade in modal"
-    role="dialog"
-    style="display: block; padding-right: 0px;"
-    tabindex="-1"
+    class="pf-l-bullseye"
   >
     <div
-      class="modal-dialog"
+      aria-describedby="pf-modal-part-3"
+      aria-label="t(modal.aria-label-default)"
+      aria-labelledby="pf-modal-part-1"
+      aria-modal="true"
+      class="pf-c-modal-box pf-m-align-top"
+      data-ouia-component-id="OUIA-Generated-Modal-2"
+      data-ouia-component-type="PF4/ModalContent"
+      data-ouia-safe="true"
+      id="pf-modal-part-1"
+      role="dialog"
+      style="--pf-c-modal-box--m-align-top--spacer: 5%;"
     >
-      <div
-        class="modal-content"
-        role="document"
+      <header
+        class="pf-c-modal-box__header"
       >
-        <div
-          class="modal-header"
+        <h4
+          class="pf-c-title pf-m-md"
+          data-ouia-component-id="OUIA-Generated-Title-2"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
         >
-          <button
-            aria-hidden="true"
-            aria-label="Close"
-            class="close"
-            type="button"
-          >
-            <span
-              aria-hidden="true"
-              class="pficon pficon-close"
-            />
-          </button>
-          <h4
-            class="modal-title"
-          >
-            Merge reports
-          </h4>
-        </div>
-        <div
-          aria-live="polite"
-          class="modal-body"
-        >
+          Merge reports
+        </h4>
+      </header>
+      <div
+        aria-live="polite"
+        class="pf-c-modal-box__body"
+        id="pf-modal-part-3"
+      >
+        <div>
           <div
             class="blank-slate-pf-icon spinner spinner-lg"
           />
@@ -53,24 +47,32 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
             Merging reports...
           </div>
         </div>
-        <div
-          class="modal-footer"
-        >
-          <button
-            class="btn-cancel btn btn-default"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            class="btn btn-primary"
-            disabled=""
-            type="submit"
-          >
-            Merge
-          </button>
-        </div>
       </div>
+      <footer
+        class="pf-c-modal-box__footer"
+      >
+        <button
+          aria-disabled="true"
+          class="pf-c-button pf-m-primary pf-m-disabled"
+          data-ouia-component-id="OUIA-Generated-Button-primary-2"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          disabled=""
+          type="button"
+        >
+          t(form-dialog.label, {"context":"submit_merge-reports"})
+        </button>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link"
+          data-ouia-component-id="OUIA-Generated-Button-link-2"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          type="button"
+        >
+          t(form-dialog.label, {"context":"cancel"})
+        </button>
+      </footer>
     </div>
   </div>
 </div>
@@ -80,48 +82,42 @@ exports[`MergeReportsDialog Component should render a connected component: conne
 
 exports[`MergeReportsDialog Component should render a non-connected component, failure and success: non-connected 1`] = `
 <div
-  role="dialog"
+  class="pf-c-backdrop"
 >
   <div
-    class="fade modal-backdrop in"
-  />
-  <div
-    class="fade in modal"
-    role="dialog"
-    style="display: block; padding-right: 0px;"
-    tabindex="-1"
+    class="pf-l-bullseye"
   >
     <div
-      class="modal-dialog"
+      aria-describedby="pf-modal-part-2"
+      aria-label="t(modal.aria-label-default)"
+      aria-labelledby="pf-modal-part-0"
+      aria-modal="true"
+      class="pf-c-modal-box pf-m-align-top"
+      data-ouia-component-id="OUIA-Generated-Modal-1"
+      data-ouia-component-type="PF4/ModalContent"
+      data-ouia-safe="true"
+      id="pf-modal-part-0"
+      role="dialog"
+      style="--pf-c-modal-box--m-align-top--spacer: 5%;"
     >
-      <div
-        class="modal-content"
-        role="document"
+      <header
+        class="pf-c-modal-box__header"
       >
-        <div
-          class="modal-header"
+        <h4
+          class="pf-c-title pf-m-md"
+          data-ouia-component-id="OUIA-Generated-Title-1"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
         >
-          <button
-            aria-hidden="true"
-            aria-label="Close"
-            class="close"
-            type="button"
-          >
-            <span
-              aria-hidden="true"
-              class="pficon pficon-close"
-            />
-          </button>
-          <h4
-            class="modal-title"
-          >
-            Merge reports
-          </h4>
-        </div>
-        <div
-          aria-live="polite"
-          class="modal-body"
-        >
+          Merge reports
+        </h4>
+      </header>
+      <div
+        aria-live="polite"
+        class="pf-c-modal-box__body"
+        id="pf-modal-part-2"
+      >
+        <div>
           <div
             class="merge-reports-body"
           >
@@ -164,24 +160,32 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
             </span>
           </div>
         </div>
-        <div
-          class="modal-footer"
-        >
-          <button
-            class="btn-cancel btn btn-default"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            class="btn btn-primary"
-            disabled=""
-            type="submit"
-          >
-            Merge
-          </button>
-        </div>
       </div>
+      <footer
+        class="pf-c-modal-box__footer"
+      >
+        <button
+          aria-disabled="true"
+          class="pf-c-button pf-m-primary pf-m-disabled"
+          data-ouia-component-id="OUIA-Generated-Button-primary-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          disabled=""
+          type="button"
+        >
+          t(form-dialog.label, {"context":"submit_merge-reports"})
+        </button>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link"
+          data-ouia-component-id="OUIA-Generated-Button-link-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          type="button"
+        >
+          t(form-dialog.label, {"context":"cancel"})
+        </button>
+      </footer>
     </div>
   </div>
 </div>

@@ -49,6 +49,75 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'confirmation'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'confirmation'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'create-credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/createScanDialog/createScanDialog.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'create-scan'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: 'credentials' })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'close' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'merge-reports'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/modal/modal.js",
     "keys": Array [
       Object {
@@ -57,10 +126,71 @@ Array [
       },
     ],
   },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: 'scans' })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: 'sources' })",
+      },
+    ],
+  },
 ]
 `;
 
-exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `Array []`;
+exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
+Array [
+  Object {
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.label",
+  },
+]
+`;
 
 exports[`I18n Component should pass children: children 1`] = `"lorem ipsum"`;
 
