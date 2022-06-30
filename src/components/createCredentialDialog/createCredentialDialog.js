@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Title } from '@patternfly/react-core';
-import { Alert, Form, Grid } from 'patternfly-react';
+import { Alert, Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { Form, Grid } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
@@ -77,7 +77,8 @@ class CreateCredentialDialog extends React.Component {
 
   state = { ...this.initialState };
 
-  UNSAFE_componentWillReceiveProps(nextProps) { //eslint-disable-line
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { edit, fulfilled, getCredentials, show, viewOptions } = this.props;
 
     if (!show && nextProps.show) {
@@ -389,8 +390,8 @@ class CreateCredentialDialog extends React.Component {
 
     if (error) {
       return (
-        <Alert type="error" onDismiss={this.onErrorDismissed}>
-          <strong>Error</strong> {errorMessage}
+        <Alert isInline variant="danger" title="Error">
+          {errorMessage}
         </Alert>
       );
     }
