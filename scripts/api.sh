@@ -160,7 +160,7 @@ reviewApi()
     docker stop -t 0 $NAME >/dev/null
   fi
 
-  startDB $DB_NAME true
+  startDB $DB_NAME
 
   if [ -z "$(docker ps | grep $NAME)" ]; then
     printf "\n"
@@ -209,7 +209,7 @@ stageApi()
   fi
 
   if [ ! "$UPDATE" = true ]; then
-    startDB $DB_NAME true
+    startDB $DB_NAME
 
     if [ -z "$(docker ps | grep $NAME)" ]; then
       printf "\n"
