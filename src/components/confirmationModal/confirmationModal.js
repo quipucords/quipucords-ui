@@ -60,7 +60,7 @@ const ConfirmationModal = ({
       }
       disableFocusTrap
     >
-      <Alert isInline isPlain variant={icon} title={heading}>
+      <Alert isInline isPlain variant={icon || undefined} title={heading}>
         {body && <p>{body}</p>}
       </Alert>
     </Modal>

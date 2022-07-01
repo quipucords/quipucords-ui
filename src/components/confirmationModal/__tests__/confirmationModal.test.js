@@ -34,7 +34,7 @@ describe('Confirmation Modal Component', () => {
       show: true,
       title: 'Confirm',
       heading: 'test',
-      icon: undefined,
+      icon: null,
       body: 'Test body',
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
