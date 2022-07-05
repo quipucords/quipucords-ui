@@ -337,7 +337,7 @@ class CreateScanDialog extends React.Component {
           </Button>
         );
         updatedActions.push(
-          <Button key="cancel" variant={ButtonVariant.link} onClick={this.onClose}>
+          <Button key="cancel" variant={ButtonVariant.secondary} onClick={this.onClose}>
             {t('form-dialog.label', { context: 'cancel' })}
           </Button>
         );

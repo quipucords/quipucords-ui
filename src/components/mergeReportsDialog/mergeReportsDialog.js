@@ -105,7 +105,7 @@ class MergeReportsDialog extends React.Component {
 
     if (validCount === 0) {
       return [
-        <Button key="close" variant={ButtonVariant.secondary} onClick={this.onClose}>
+        <Button key="close" onClick={this.onClose}>
           {t('form-dialog.label', { context: 'close' })}
         </Button>
       ];
@@ -115,7 +115,7 @@ class MergeReportsDialog extends React.Component {
       <Button key="merge" isDisabled={validCount < 2} onClick={this.onMergeScanResults}>
         {t('form-dialog.label', { context: ['submit', 'merge-reports'] })}
       </Button>,
-      <Button key="cancel" variant={ButtonVariant.link} onClick={this.onClose}>
+      <Button key="cancel" variant={ButtonVariant.secondary} onClick={this.onClose}>
         {t('form-dialog.label', { context: 'cancel' })}
       </Button>
     ];

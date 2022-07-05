@@ -420,7 +420,7 @@ class CreateCredentialDialog extends React.Component {
           <Button key="save" onClick={this.onSave} isDisabled={!this.validateForm()}>
             {t('form-dialog.label', { context: ['submit', 'create-credential'] })}
           </Button>,
-          <Button key="cancel" variant={ButtonVariant.link} autoFocus={edit} onClick={this.onCancel}>
+          <Button key="cancel" variant={ButtonVariant.secondary} autoFocus={edit} onClick={this.onCancel}>
             {t('form-dialog.label', { context: 'cancel' })}
           </Button>
         ]}
