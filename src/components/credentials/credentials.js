@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, DropdownButton, EmptyState, Form, Grid, ListView, MenuItem, Modal } from 'patternfly-react';
 import _get from 'lodash/get';
 import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
+import { Alert, Button, DropdownButton, EmptyState, Form, Grid, ListView, MenuItem } from 'patternfly-react';
+import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
@@ -11,6 +12,7 @@ import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import CredentialsEmptyState from './credentialsEmptyState';
 import CredentialListItem from './credentialListItem';
 import { CredentialFilterFields, CredentialSortFields } from './credentialConstants';
+import { translate } from '../i18n/i18n';
 
 class Credentials extends React.Component {
   credentialsToDelete = [];
@@ -217,15 +219,13 @@ class Credentials extends React.Component {
   }
 
   renderPendingMessage() {
-    const { pending } = this.props;
+    const { pending, t } = this.props;
 
     if (pending) {
       return (
-        <Modal bsSize="lg" backdrop={false} show animation={false}>
-          <Modal.Body>
-            <div className="spinner spinner-xl" />
-            <div className="text-center">Loading credentials...</div>
-          </Modal.Body>
+        <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
+          <div className="spinner spinner-xl" />
+          <div className="text-center">{t('view.loading', { context: 'credentials' })}</div>
         </Modal>
       );
     }
@@ -319,6 +319,7 @@ Credentials.propTypes = {
   pending: PropTypes.bool,
   credentials: PropTypes.array,
   viewOptions: PropTypes.object,
+  t: PropTypes.func,
   update: PropTypes.object
 };
 
@@ -331,6 +332,7 @@ Credentials.defaultProps = {
   pending: false,
   credentials: [],
   viewOptions: {},
+  t: translate,
   update: {}
 };
 
