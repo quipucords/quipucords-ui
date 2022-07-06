@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, EmptyState } from 'patternfly-react';
+import { Alert, Button, Bullseye } from '@patternfly/react-core';
+import { EmptyState } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
 import { reduxActions } from '../../redux';
 import helpers from '../../common/helpers';
 import { PageLayout } from '../pageLayout/pageLayout';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Authentication, determine if a user is authorized.
+ */
 class Authentication extends React.Component {
   componentDidMount() {
     const { session, authorizeUser } = this.props;
@@ -17,7 +22,7 @@ class Authentication extends React.Component {
   }
 
   render() {
-    const { children, session } = this.props;
+    const { children, session, t } = this.props;
 
     if (session.authorized) {
       return <React.Fragment>{children}</React.Fragment>;
@@ -27,7 +32,7 @@ class Authentication extends React.Component {
       return (
         <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
           <div className="spinner spinner-xl" />
-          <div className="text-center">Logging in...</div>
+          <Bullseye>{t('view.login', { context: 'pending' })}</Bullseye>
         </Modal>
       );
     }
@@ -35,16 +40,13 @@ class Authentication extends React.Component {
     return (
       <PageLayout>
         <EmptyState className="full-page-blank-slate">
-          <Alert type="error">
-            <span>
-              Login error: {session.errorMessage.replace(/\.$/, '')}
-              {session.errorMessage && '.'}
-              {!session.authorized && (
-                <React.Fragment>
-                  Please <a href="/login">login</a> to continue.
-                </React.Fragment>
-              )}
-            </span>
+          <Alert variant="danger" title={t('view.login', { context: 'error' })}>
+            {session.errorMessage.replace(/\.$/, '')}
+            {session.errorMessage && '.'}
+            {!session.authorized &&
+              t('view.login-message', { context: 'error' }, [
+                <Button isInline component="a" variant="link" href="/login" />
+              ])}
           </Alert>
         </EmptyState>
       </PageLayout>
@@ -52,6 +54,11 @@ class Authentication extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{authorizeUser: Function, t: Function, children: React.ReactNode, session: object}}
+ */
 Authentication.propTypes = {
   authorizeUser: PropTypes.func,
   children: PropTypes.node.isRequired,
@@ -60,9 +67,16 @@ Authentication.propTypes = {
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
     pending: PropTypes.bool
-  })
+  }),
+  t: PropTypes.func
 };
 
+/**
+ * Default props.
+ *
+ * @type {{authorizeUser: Function, t: translate, session: {authorized: boolean, pending: boolean,
+ *     errorMessage: string, error: boolean}}}
+ */
 Authentication.defaultProps = {
   authorizeUser: helpers.noop,
   session: {
@@ -70,7 +84,8 @@ Authentication.defaultProps = {
     error: false,
     errorMessage: '',
     pending: false
-  }
+  },
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({
