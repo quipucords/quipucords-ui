@@ -1,16 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ToastNotificationList, TimedToastNotification } from 'patternfly-react';
+import { Alert, AlertActionCloseButton, AlertGroup, AlertVariant } from '@patternfly/react-core';
 import { connect, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 
+/**
+ * Toast notifications list: operates by allowing mutation of the passed/original toast object from state.
+ */
 class ToastNotificationsList extends React.Component {
-  onHover = () => {
-    store.dispatch({ type: reduxTypes.toastNotifications.TOAST_PAUSE });
+  onHover = toast => {
+    store.dispatch({
+      type: reduxTypes.toastNotifications.TOAST_PAUSE,
+      toast
+    });
   };
 
-  onLeave = () => {
-    store.dispatch({ type: reduxTypes.toastNotifications.TOAST_RESUME });
+  onLeave = toast => {
+    store.dispatch({
+      type: reduxTypes.toastNotifications.TOAST_RESUME,
+      toast
+    });
   };
 
   onDismiss = toast => {
@@ -21,46 +30,50 @@ class ToastNotificationsList extends React.Component {
   };
 
   render() {
-    const { toasts, paused } = this.props;
+    const { toasts, timeout } = this.props;
 
     return (
-      <ToastNotificationList>
-        {toasts &&
-          toasts.map((toast, index) => {
-            if (!toast.removed) {
-              return (
-                <TimedToastNotification
-                  key={helpers.generateId('key')}
-                  toastIndex={index}
-                  type={toast.alertType}
-                  paused={paused}
-                  onDismiss={() => this.onDismiss(toast)}
-                  onMouseEnter={this.onHover}
-                  onMouseLeave={this.onLeave}
-                >
-                  <span>
-                    <strong>{toast.header}</strong> &nbsp;
-                    {toast.message}
-                  </span>
-                </TimedToastNotification>
-              );
-            }
-
-            return null;
-          })}
-      </ToastNotificationList>
+      <AlertGroup isLiveRegion isToast className="quipucords-toast-notifications__alert-group">
+        {toasts?.map(toast => {
+          if (!toast.removed) {
+            return (
+              <Alert
+                title={toast.header || toast.message}
+                truncateTitle={2}
+                timeout={!toast.paused && timeout}
+                onTimeout={() => this.onDismiss(toast)}
+                variant={toast.alertType}
+                actionClose={<AlertActionCloseButton onClose={() => this.onDismiss(toast)} />}
+                key={helpers.generateId('key')}
+                onMouseEnter={() => this.onHover(toast)}
+                onMouseLeave={() => this.onLeave(toast)}
+              >
+                {(toast.header && toast.message) || ''}
+              </Alert>
+            );
+          }
+          return null;
+        })}
+      </AlertGroup>
     );
   }
 }
 
 ToastNotificationsList.propTypes = {
-  toasts: PropTypes.array,
-  paused: PropTypes.bool
+  toasts: PropTypes.arrayOf(
+    PropTypes.shape({
+      alertType: PropTypes.oneOf([...Object.values(AlertVariant)]),
+      header: PropTypes.node,
+      message: PropTypes.node,
+      removed: PropTypes.bool
+    })
+  ),
+  timeout: PropTypes.number
 };
 
 ToastNotificationsList.defaultProps = {
   toasts: [],
-  paused: false
+  timeout: helpers.TOAST_NOTIFICATIONS_TIMEOUT
 };
 
 const mapStateToProps = state => ({ ...state.toastNotifications });

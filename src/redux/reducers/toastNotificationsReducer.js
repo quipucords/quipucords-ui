@@ -2,7 +2,6 @@ import { toastNotificationTypes } from '../constants';
 
 const initialState = {
   toasts: [],
-  paused: false,
   displayedToasts: 0
 };
 
@@ -41,18 +40,32 @@ const toastNotificationsReducer = (state = initialState, action) => {
       };
 
     case toastNotificationTypes.TOAST_PAUSE:
+      const pausedToasts = [...state.toasts];
+      const pausedToastIndex = state.toasts.indexOf(action.toast);
+
+      if (pausedToastIndex > -1) {
+        pausedToasts[pausedToastIndex].paused = true;
+      }
+
       return {
         ...state,
         ...{
-          paused: true
+          toasts: pausedToasts
         }
       };
 
     case toastNotificationTypes.TOAST_RESUME:
+      const resumedToasts = [...state.toasts];
+      const resumedToastIndex = state.toasts.indexOf(action.toast);
+
+      if (resumedToastIndex > -1) {
+        resumedToasts[resumedToastIndex].paused = false;
+      }
+
       return {
         ...state,
         ...{
-          paused: false
+          toasts: resumedToasts
         }
       };
 
