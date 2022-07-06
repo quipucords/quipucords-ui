@@ -37,7 +37,7 @@ describe('Authentication Component', () => {
       </Authentication>
     );
 
-    expect(component).toMatchSnapshot('non-connected error');
+    expect(component.find('.pf-c-modal-box__body')).toMatchSnapshot('non-connected error');
   });
 
   it('should render a non-connected component pending', () => {
