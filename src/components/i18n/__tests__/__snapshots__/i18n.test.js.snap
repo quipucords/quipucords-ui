@@ -49,6 +49,23 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/authentication/authentication.js",
+    "keys": Array [
+      Object {
+        "key": "view.login",
+        "match": "t('view.login', { context: 'pending' })",
+      },
+      Object {
+        "key": "view.login",
+        "match": "t('view.login', { context: 'error' })",
+      },
+      Object {
+        "key": "view.login-message",
+        "match": "t('view.login-message', { context: 'error' }, [ <Button isInline component=\\"a\\" variant=\\"link\\" href=\\"/login\\" /> ])",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
     "keys": Array [
       Object {
@@ -149,6 +166,18 @@ Array [
 
 exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
 Array [
+  Object {
+    "file": "./src/components/authentication/authentication.js",
+    "key": "view.login",
+  },
+  Object {
+    "file": "./src/components/authentication/authentication.js",
+    "key": "view.login",
+  },
+  Object {
+    "file": "./src/components/authentication/authentication.js",
+    "key": "view.login-message",
+  },
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
     "key": "form-dialog.label",

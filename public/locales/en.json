@@ -23,6 +23,9 @@
   },
   "view": {
     "loading": "Loading...",
-    "loading_credentials": "Loading credentials..."
+    "loading_credentials": "Loading credentials...",
+    "login_error": "Login error",
+    "login-message_error": "Please <0>login</0> to continue.",
+    "login_pending": "Logging in..."
   }
 }
