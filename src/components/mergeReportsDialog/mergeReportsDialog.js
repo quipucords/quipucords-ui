@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Icon, Spinner } from 'patternfly-react';
+import { Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { Icon, Spinner } from 'patternfly-react';
+import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { apiTypes } from '../../constants/apiConstants';
+import { translate } from '../i18n/i18n';
 
 class MergeReportsDialog extends React.Component {
   onClose = () => {
@@ -97,26 +100,25 @@ class MergeReportsDialog extends React.Component {
   }
 
   renderButtons() {
+    const { t } = this.props;
     const validCount = this.getValidScans().length;
 
     if (validCount === 0) {
-      return (
-        <Button bsStyle="primary" className="btn-cancel" onClick={this.onClose}>
-          Close
+      return [
+        <Button key="close" onClick={this.onClose}>
+          {t('form-dialog.label', { context: 'close' })}
         </Button>
-      );
+      ];
     }
 
-    return (
-      <React.Fragment>
-        <Button bsStyle="default" className="btn-cancel" onClick={this.onClose}>
-          Cancel
-        </Button>
-        <Button bsStyle="primary" type="submit" disabled={validCount < 2} onClick={this.onMergeScanResults}>
-          Merge
-        </Button>
-      </React.Fragment>
-    );
+    return [
+      <Button key="merge" isDisabled={validCount < 2} onClick={this.onMergeScanResults}>
+        {t('form-dialog.label', { context: ['submit', 'merge-reports'] })}
+      </Button>,
+      <Button key="cancel" variant={ButtonVariant.secondary} onClick={this.onClose}>
+        {t('form-dialog.label', { context: 'cancel' })}
+      </Button>
+    ];
   }
 
   render() {
@@ -154,35 +156,31 @@ class MergeReportsDialog extends React.Component {
     }
 
     return (
-      <Modal show={show} onHide={this.onClose}>
-        <Modal.Header>
-          <button type="button" className="close" onClick={this.onClose} aria-hidden="true" aria-label="Close">
-            <Icon type="pf" name="close" />
-          </button>
-          <Modal.Title>Merge reports</Modal.Title>
-        </Modal.Header>
-        <Modal.Body aria-live="polite">
-          {pending && (
-            <React.Fragment>
-              <Spinner loading size="lg" className="blank-slate-pf-icon" />
-              <div className="text-center">Merging reports...</div>
-            </React.Fragment>
-          )}
-          {!pending && (
-            <div className="merge-reports-body">
-              <span className="merge-reports-icon">{icon}</span>
-              <span>
-                {heading}
-                <div>
-                  {this.renderValidScans()}
-                  {this.renderInvalidScans()}
-                  {footer}
-                </div>
-              </span>
-            </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>{this.renderButtons()}</Modal.Footer>
+      <Modal
+        isOpen={show}
+        onClose={this.onClose}
+        header={<Title headingLevel="h4">Merge reports</Title>}
+        actions={this.renderButtons()}
+      >
+        {pending && (
+          <React.Fragment>
+            <Spinner loading size="lg" className="blank-slate-pf-icon" />
+            <div className="text-center">Merging reports...</div>
+          </React.Fragment>
+        )}
+        {!pending && (
+          <div className="merge-reports-body">
+            <span className="merge-reports-icon">{icon}</span>
+            <span>
+              {heading}
+              <div>
+                {this.renderValidScans()}
+                {this.renderInvalidScans()}
+                {footer}
+              </div>
+            </span>
+          </div>
+        )}
       </Modal>
     );
   }
@@ -200,14 +198,16 @@ MergeReportsDialog.propTypes = {
       name: PropTypes.string
     })
   ),
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool.isRequired,
+  t: PropTypes.func
 };
 
 MergeReportsDialog.defaultProps = {
   getReportsDownload: helpers.noop,
   mergeReports: helpers.noop,
   pending: false,
-  scans: []
+  scans: [],
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({

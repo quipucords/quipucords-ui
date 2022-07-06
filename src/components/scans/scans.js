@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, EmptyState, ListView, Modal, Spinner } from 'patternfly-react';
 import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
+import { Alert, Button, EmptyState, ListView, Spinner } from 'patternfly-react';
+import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
@@ -12,6 +13,7 @@ import ScanListItem from './scanListItem';
 import Tooltip from '../tooltip/tooltip';
 import { ScanFilterFields, ScanSortFields } from './scanConstants';
 import { apiTypes } from '../../constants/apiConstants';
+import { translate } from '../i18n/i18n';
 
 class Scans extends React.Component {
   componentDidMount() {
@@ -71,15 +73,13 @@ class Scans extends React.Component {
   }
 
   renderPendingMessage() {
-    const { pending } = this.props;
+    const { pending, t } = this.props;
 
     if (pending) {
       return (
-        <Modal bsSize="lg" backdrop={false} show animation={false}>
-          <Modal.Body>
-            <Spinner loading size="lg" className="blank-slate-pf-icon" />
-            <div className="text-center">Loading...</div>
-          </Modal.Body>
+        <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
+          <Spinner loading size="lg" className="blank-slate-pf-icon" />
+          <div className="text-center">{t('view.loading', { context: 'scans' })}</div>
         </Modal>
       );
     }
@@ -164,6 +164,7 @@ Scans.propTypes = {
   lastRefresh: PropTypes.number,
   pending: PropTypes.bool,
   scans: PropTypes.array,
+  t: PropTypes.func,
   update: PropTypes.bool,
   viewOptions: PropTypes.object
 };
@@ -175,6 +176,7 @@ Scans.defaultProps = {
   lastRefresh: 0,
   pending: false,
   scans: [],
+  t: translate,
   update: false,
   viewOptions: {}
 };

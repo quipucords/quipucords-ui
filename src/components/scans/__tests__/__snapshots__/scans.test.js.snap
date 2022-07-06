@@ -23,48 +23,31 @@ exports[`Scans Component should render a non-connected component pending: pendin
   className="quipucords-view-container"
 >
   <Modal
-    animation={false}
-    autoFocus={true}
+    aria-label={null}
     backdrop={false}
-    bsClass="modal"
-    bsSize="lg"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
+    className={null}
+    disableFocusTrap={true}
+    footer={null}
+    header={null}
+    isOpen={true}
+    position="top"
+    positionOffset="5%"
+    showClose={false}
+    t={[Function]}
+    variant="medium"
   >
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
+    <Spinner
+      className="blank-slate-pf-icon"
+      inline={false}
+      inverse={false}
+      loading={true}
+      size="lg"
+    />
+    <div
+      className="text-center"
     >
-      <Spinner
-        className="blank-slate-pf-icon"
-        inline={false}
-        inverse={false}
-        loading={true}
-        size="lg"
-      />
-      <div
-        className="text-center"
-      >
-        Loading...
-      </div>
-    </ModalBody>
+      t(view.loading, {"context":"scans"})
+    </div>
   </Modal>
 </div>
 `;
