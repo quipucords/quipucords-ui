@@ -18,7 +18,7 @@ class ScanListItem extends React.Component {
     if (error) {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'error',
+        alertType: 'danger',
         header: 'Error',
         message: helpers.getMessageFromResults(results).message
       });

@@ -76,6 +76,7 @@ Object {
   "DEV_MODE": false,
   "PROD_MODE": false,
   "TEST_MODE": true,
+  "TOAST_NOTIFICATIONS_TIMEOUT": 8000,
   "UI_BRAND": false,
   "UI_NAME": "Quipucords",
   "UI_SENTENCE_START_NAME": "The Quipucords tool",

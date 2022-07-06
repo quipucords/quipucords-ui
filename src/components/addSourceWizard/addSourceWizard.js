@@ -108,7 +108,7 @@ class AddSourceWizard extends React.Component {
             if (!props.show) {
               store.dispatch({
                 type: reduxTypes.toastNotifications.TOAST_ADD,
-                alertType: 'error',
+                alertType: 'danger',
                 header: `Error ${(props.edit && 'updating') || 'creating'} source`,
                 message: props.errorMessage
               });
