@@ -21,6 +21,9 @@
   "modal": {
     "aria-label-default": "Application modal"
   },
+  "refresh-time-button": {
+    "refreshed_load": "Refreshed "
+  },
   "view": {
     "empty-state_title": "Welcome to {{name}}",
     "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
