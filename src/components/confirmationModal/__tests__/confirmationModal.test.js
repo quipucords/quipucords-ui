@@ -56,4 +56,40 @@ describe('Confirmation Modal Component', () => {
     const component = await mountHookComponent(<ConfirmationModal {...props} />);
     expect(component.render()).toMatchSnapshot('hidden');
   });
+
+  it('should allow passed children, or specific props', async () => {
+    const props = {
+      show: true,
+      heading: 'Lorem ipsum',
+      children: 'hello world'
+    };
+
+    const component = await mountHookComponent(<ConfirmationModal {...props} />);
+    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('heading');
+
+    component.setProps({
+      heading: null,
+      body: 'Dolor sit'
+    });
+
+    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('body');
+
+    component.setProps({
+      body: null
+    });
+
+    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('children');
+  });
+
+  it('should allow custom content', async () => {
+    const props = {
+      show: true,
+      isActions: false,
+      isClose: false,
+      isContentOnly: true
+    };
+
+    const component = await mountHookComponent(<ConfirmationModal {...props}>lorem ipsum</ConfirmationModal>);
+    expect(component.render()).toMatchSnapshot('custom');
+  });
 });
