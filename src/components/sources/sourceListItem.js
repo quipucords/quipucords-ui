@@ -80,7 +80,7 @@ class SourceListItem extends React.Component {
         error => {
           store.dispatch({
             type: reduxTypes.toastNotifications.TOAST_ADD,
-            alertType: 'error',
+            alertType: 'danger',
             header: 'Error',
             message: helpers.getMessageFromResults(error).message
           });

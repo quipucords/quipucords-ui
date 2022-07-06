@@ -3,7 +3,6 @@
 exports[`toastNotificationsReducer should handle adding and removing toast notifications: toast added 1`] = `
 Object {
   "displayedToasts": 2,
-  "paused": false,
   "toasts": Array [
     Object {
       "alertType": "success",
@@ -24,7 +23,6 @@ Object {
 exports[`toastNotificationsReducer should handle adding and removing toast notifications: toast removed 1`] = `
 Object {
   "displayedToasts": 2,
-  "paused": false,
   "toasts": Array [
     Object {
       "alertType": "success",
@@ -47,7 +45,6 @@ exports[`toastNotificationsReducer should handle specific defined types: defined
 Object {
   "result": Object {
     "displayedToasts": 1,
-    "paused": false,
     "toasts": Array [
       Object {
         "alertType": undefined,
@@ -65,7 +62,6 @@ exports[`toastNotificationsReducer should handle specific defined types: defined
 Object {
   "result": Object {
     "displayedToasts": 0,
-    "paused": true,
     "toasts": Array [],
   },
   "type": "TOAST_PAUSE",
@@ -76,7 +72,6 @@ exports[`toastNotificationsReducer should handle specific defined types: defined
 Object {
   "result": Object {
     "displayedToasts": 0,
-    "paused": false,
     "toasts": Array [],
   },
   "type": "TOAST_REMOVE",
@@ -87,7 +82,6 @@ exports[`toastNotificationsReducer should handle specific defined types: defined
 Object {
   "result": Object {
     "displayedToasts": 0,
-    "paused": false,
     "toasts": Array [],
   },
   "type": "TOAST_RESUME",
