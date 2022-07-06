@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, Button, Bullseye } from '@patternfly/react-core';
-import { EmptyState } from 'patternfly-react';
+import { Alert, AlertVariant, Button, Bullseye } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '../modal/modal';
+import { ConfirmationModal, ConfirmationVariant } from '../confirmationModal/confirmationModal';
 import { reduxActions } from '../../redux';
 import helpers from '../../common/helpers';
 import { PageLayout } from '../pageLayout/pageLayout';
@@ -39,8 +39,8 @@ class Authentication extends React.Component {
 
     return (
       <PageLayout>
-        <EmptyState className="full-page-blank-slate">
-          <Alert variant="danger" title={t('view.login', { context: 'error' })}>
+        <ConfirmationModal icon={ConfirmationVariant.danger} show isContentOnly isClose={false} isActions={false}>
+          <Alert variant={AlertVariant.danger} title={t('view.login', { context: 'error' })}>
             {session.errorMessage.replace(/\.$/, '')}
             {session.errorMessage && '.'}
             {!session.authorized &&
@@ -48,7 +48,7 @@ class Authentication extends React.Component {
                 <Button isInline component="a" variant="link" href="/login" />
               ])}
           </Alert>
-        </EmptyState>
+        </ConfirmationModal>
       </PageLayout>
     );
   }
