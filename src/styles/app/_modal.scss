@@ -31,5 +31,11 @@
         padding-bottom: var(--pf-c-modal-box__body--PaddingTop);
       }
     }
+
+    &__content-only {
+      .pf-c-modal-box__body {
+        padding: 0 !important;
+      }
+    }
   }
 }
