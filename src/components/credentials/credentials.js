@@ -78,7 +78,7 @@ class Credentials extends React.Component {
       if (nextProps.update.error && !update.error) {
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'error',
+          alertType: 'danger',
           header: 'Error',
           message: (
             <span>

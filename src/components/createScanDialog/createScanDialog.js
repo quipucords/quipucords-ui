@@ -142,7 +142,7 @@ class CreateScanDialog extends React.Component {
         if (!props.show) {
           store.dispatch({
             type: reduxTypes.toastNotifications.TOAST_ADD,
-            alertType: 'error',
+            alertType: 'danger',
             header: `Error creating scan ${values.scanName}`,
             message: props.errorMessage
           });
