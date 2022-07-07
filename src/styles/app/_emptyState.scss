@@ -1,0 +1,18 @@
+.quipucords-empty-state {
+  .pf-c-empty-state__primary .pf-c-button,
+  .pf-c-empty-state__secondary .pf-c-button,
+  .pf-c-empty-state__body {
+    font-size: inherit;
+  }
+
+  &__alert {
+    .pf-c-empty-state__content {
+      text-align: left;
+      --pf-c-empty-state__content--MaxWidth: var(--pf-c-empty-state--m-lg__content--MaxWidth);
+
+      @media (min-width: $pf-global--breakpoint--md) {
+        min-width: var(--pf-c-empty-state__content--MaxWidth);
+      }
+    }
+  }
+}
