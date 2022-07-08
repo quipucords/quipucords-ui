@@ -2,6 +2,7 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
+import { Alert } from '@patternfly/react-core';
 import { ConnectedAuthentication, Authentication } from '../authentication';
 
 describe('Authentication Component', () => {
@@ -37,7 +38,7 @@ describe('Authentication Component', () => {
       </Authentication>
     );
 
-    expect(component.find('.pf-c-modal-box__body')).toMatchSnapshot('non-connected error');
+    expect(component.find(Alert)).toMatchSnapshot('non-connected error');
   });
 
   it('should render a non-connected component pending', () => {

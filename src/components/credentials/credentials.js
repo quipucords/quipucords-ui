@@ -3,7 +3,21 @@ import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
-import { Alert, Button, DropdownButton, EmptyState, Form, Grid, ListView, MenuItem } from 'patternfly-react';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { SearchIcon } from '@patternfly/react-icons';
+import { Button as ButtonPf3, DropdownButton, Form, Grid, ListView, MenuItem } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -208,12 +222,12 @@ class Credentials extends React.Component {
             VCenter Credential
           </MenuItem>
         </DropdownButton>
-        <Button
+        <ButtonPf3
           disabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
           onClick={this.onDeleteCredentials}
         >
           Delete
-        </Button>
+        </ButtonPf3>
       </div>
     );
   }
@@ -234,6 +248,8 @@ class Credentials extends React.Component {
   }
 
   renderCredentialsList(items) {
+    const { t } = this.props;
+
     if (_size(items)) {
       return (
         <ListView className="quipicords-list-view">
@@ -250,29 +266,35 @@ class Credentials extends React.Component {
     }
 
     return (
-      <EmptyState className="list-view-blank-slate">
-        <EmptyState.Title>No Results Match the Filter Criteria</EmptyState.Title>
-        <EmptyState.Info>The active filters are hiding all items.</EmptyState.Info>
-        <EmptyState.Action>
-          <Button bsStyle="link" onClick={this.onClearFilters}>
-            Clear Filters
+      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={SearchIcon} />
+        <Title size={TitleSizes.lg} headingLevel="h1">
+          {t('view.empty-state', { context: ['filter', 'title'] })}
+        </Title>
+        <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+        <EmptyStatePrimary>
+          <Button variant={ButtonVariant.link} onClick={this.onClearFilters}>
+            {t('view.empty-state', { context: ['label', 'clear'] })}
           </Button>
-        </EmptyState.Action>
+        </EmptyStatePrimary>
       </EmptyState>
     );
   }
 
   render() {
-    const { error, errorMessage, credentials, viewOptions } = this.props;
+    const { error, errorMessage, credentials, pending, t, viewOptions } = this.props;
     const { lastRefresh } = this.state;
+
+    if (pending) {
+      return this.renderPendingMessage();
+    }
 
     if (error) {
       return (
-        <EmptyState>
-          <Alert type="error">
-            <span>Error retrieving credentials: {errorMessage}</span>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert variant={AlertVariant.danger} title={t('view.error', { context: 'credentials' })}>
+            {t('view.error-message', { context: ['credentials'], message: errorMessage })}
           </Alert>
-          {this.renderPendingMessage()}
         </EmptyState>
       );
     }
