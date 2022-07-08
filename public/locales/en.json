@@ -22,10 +22,18 @@
     "aria-label-default": "Application modal"
   },
   "view": {
+    "empty-state_title": "Welcome to {{name}}",
+    "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
+    "empty-state_filter_description": "The active filters are hiding all items.",
+    "empty-state_filter_title": "No Results Match the Filter Criteria",
+    "empty-state_label_clear": "Clear Filters",
+    "empty-state_label_source": "Add Source",
+    "error_credentials": "Credentials error",
+    "error-message_credentials": "Error retrieving credentials: {{message}}",
+    "error_authentication": "Login error",
+    "error-message_authentication": "{{message}} Please <0>login</0> to continue.",
     "loading": "Loading...",
-    "loading_credentials": "Loading credentials...",
-    "login_error": "Login error",
-    "login-message_error": "Please <0>login</0> to continue.",
-    "login_pending": "Logging in..."
+    "loading_authentication": "Logging in...",
+    "loading_credentials": "Loading credentials..."
   }
 }

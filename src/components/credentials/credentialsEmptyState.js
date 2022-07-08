@@ -1,20 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, DropdownButton, EmptyState, Grid, MenuItem, Row } from 'patternfly-react';
+import {
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateSecondaryActions,
+  EmptyStateVariant,
+  Title
+} from '@patternfly/react-core';
+import { AddCircleOIcon } from '@patternfly/react-icons';
+import { DropdownButton, Grid, MenuItem, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
+import { translate } from '../i18n/i18n';
 
-const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiSentenceStartName, uiShortName }) => (
+const CredentialsEmptyState = ({ onAddCredential, onAddSource, t, uiSentenceStartName, uiShortName }) => (
   <Grid fluid>
     <Row>
-      <EmptyState className="full-page-blank-slate">
-        <EmptyState.Icon />
-        <EmptyState.Title>Welcome to {uiShortName}</EmptyState.Title>
-        <EmptyState.Info>
-          Credentials contain authentication information needed to scan a source. A credential includes <br />a username
-          and a password or SSH key. {uiSentenceStartName} uses SSH to connect to servers <br /> on the network and uses
-          credentials to access those servers.
-        </EmptyState.Info>
-        <EmptyState.Action>
+      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={AddCircleOIcon} />
+        <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
+        <EmptyStateBody>
+          {t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })}
+        </EmptyStateBody>
+        <EmptyStatePrimary>
           <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
             <MenuItem eventKey="1" onClick={() => onAddCredential('network')}>
               Network Credential
@@ -26,12 +37,12 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiSentenceStartNa
               VCenter Credential
             </MenuItem>
           </DropdownButton>
-        </EmptyState.Action>
-        <EmptyState.Action secondary>
-          <Button bsStyle="default" onClick={onAddSource}>
-            Add Source
+        </EmptyStatePrimary>
+        <EmptyStateSecondaryActions>
+          <Button variant={ButtonVariant.link} onClick={onAddSource}>
+            {t('view.empty-state', { context: ['label', 'source'] })}
           </Button>
-        </EmptyState.Action>
+        </EmptyStateSecondaryActions>
       </EmptyState>
     </Row>
   </Grid>
@@ -40,6 +51,7 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, uiSentenceStartNa
 CredentialsEmptyState.propTypes = {
   onAddCredential: PropTypes.func,
   onAddSource: PropTypes.func,
+  t: PropTypes.func,
   uiSentenceStartName: PropTypes.string,
   uiShortName: PropTypes.string
 };
@@ -47,6 +59,7 @@ CredentialsEmptyState.propTypes = {
 CredentialsEmptyState.defaultProps = {
   onAddCredential: helpers.noop,
   onAddSource: helpers.noop,
+  t: translate,
   uiSentenceStartName: helpers.UI_SENTENCE_START_NAME,
   uiShortName: helpers.UI_SHORT_NAME
 };
