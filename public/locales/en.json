@@ -22,7 +22,8 @@
     "aria-label-default": "Application modal"
   },
   "refresh-time-button": {
-    "refreshed_load": "Refreshed "
+    "refreshed": "Refreshed just now",
+    "refreshed_load": "Refreshed {{refresh}}"
   },
   "view": {
     "empty-state_title": "Welcome to {{name}}",
