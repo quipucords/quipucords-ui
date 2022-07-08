@@ -1,10 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, EmptyState, Grid, Row } from 'patternfly-react';
+import {
+  Button,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Title
+} from '@patternfly/react-core';
+import { AddCircleOIcon } from '@patternfly/react-icons';
+import { Grid, Row } from 'patternfly-react';
 import SourcesEmptyState from '../sources/sourcesEmptyState';
 import helpers from '../../common/helpers';
 import { connectRouter, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Return a scans empty state.
+ */
 class ScansEmptyState extends React.Component {
   componentDidMount() {
     const { getScansSources } = this.props;
@@ -25,21 +39,21 @@ class ScansEmptyState extends React.Component {
   };
 
   render() {
-    const { sourcesExist } = this.props;
+    const { sourcesExist, t } = this.props;
 
     if (sourcesExist) {
       return (
         <Grid fluid>
           <Row>
-            <EmptyState className="full-page-blank-slate">
-              <EmptyState.Icon />
-              <EmptyState.Title>No scans exist yet</EmptyState.Title>
-              <EmptyState.Info>Select a Source to scan from the Sources page.</EmptyState.Info>
-              <EmptyState.Action>
-                <Button bsStyle="primary" bsSize="large" onClick={this.onAddSource}>
-                  Go to Sources
+            <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+              <EmptyStateIcon icon={AddCircleOIcon} />
+              <Title headingLevel="h1">{t('view.empty-state', { context: ['title', 'scans'] })}</Title>
+              <EmptyStateBody>{t('view.empty-state', { context: ['description', 'scans'] })}</EmptyStateBody>
+              <EmptyStatePrimary>
+                <Button onClick={this.onAddSource}>
+                  {t('view.empty-state', { context: ['label', 'source-navigate'] })}
                 </Button>
-              </EmptyState.Action>
+              </EmptyStatePrimary>
             </EmptyState>
           </Row>
         </Grid>
@@ -50,18 +64,30 @@ class ScansEmptyState extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{getScansSources: Function, sourcesExist: boolean, t: Function, history: object}}
+ */
 ScansEmptyState.propTypes = {
   getScansSources: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  sourcesExist: PropTypes.bool
+  sourcesExist: PropTypes.bool,
+  t: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{getScansSources: Function, sourcesExist: boolean, t: translate, history: object}}
+ */
 ScansEmptyState.defaultProps = {
   getScansSources: helpers.noop,
   history: {},
-  sourcesExist: false
+  sourcesExist: false,
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({

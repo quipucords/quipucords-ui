@@ -4,52 +4,45 @@ exports[`Scans Component should render a connected component with default props:
 
 exports[`Scans Component should render a non-connected component error: error 1`] = `
 <EmptyState
-  className=""
+  className="quipucords-empty-state__alert"
 >
   <Alert
-    className=""
-    onDismiss={null}
-    type="error"
+    title="t(view.error, {\\"context\\":\\"scans\\"})"
+    variant="danger"
   >
-    <span>
-      Error retrieving scans: 
-    </span>
+    t(view.error-message, {"context":"scans","message":null})
   </Alert>
 </EmptyState>
 `;
 
 exports[`Scans Component should render a non-connected component pending: pending 1`] = `
-<div
-  className="quipucords-view-container"
+<Modal
+  aria-label={null}
+  backdrop={false}
+  className={null}
+  disableFocusTrap={true}
+  footer={null}
+  header={null}
+  isOpen={true}
+  position="top"
+  positionOffset="5%"
+  showClose={false}
+  t={[Function]}
+  variant="medium"
 >
-  <Modal
-    aria-label={null}
-    backdrop={false}
-    className={null}
-    disableFocusTrap={true}
-    footer={null}
-    header={null}
-    isOpen={true}
-    position="top"
-    positionOffset="5%"
-    showClose={false}
-    t={[Function]}
-    variant="medium"
+  <Spinner
+    className="blank-slate-pf-icon"
+    inline={false}
+    inverse={false}
+    loading={true}
+    size="lg"
+  />
+  <div
+    className="text-center"
   >
-    <Spinner
-      className="blank-slate-pf-icon"
-      inline={false}
-      inverse={false}
-      loading={true}
-      size="lg"
-    />
-    <div
-      className="text-center"
-    >
-      t(view.loading, {"context":"scans"})
-    </div>
-  </Modal>
-</div>
+    t(view.loading, {"context":"scans"})
+  </div>
+</Modal>
 `;
 
 exports[`Scans Component should render a non-connected component with empty state: empty state 1`] = `<withRouter(Connect(ScansEmptyState)) />`;
