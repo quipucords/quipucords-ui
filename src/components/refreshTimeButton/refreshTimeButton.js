@@ -50,8 +50,10 @@ class RefreshTimeButton extends React.Component {
     return (
       <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh}>
         <span className="last-refresh-time">
-          {t('refresh-time-button.refreshed', { context: 'load' })}
-          {lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)}
+          {t('refresh-time-button.refreshed', {
+            context: lastRefresh && 'load',
+            refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)
+          })}
         </span>
       </Button>
     );

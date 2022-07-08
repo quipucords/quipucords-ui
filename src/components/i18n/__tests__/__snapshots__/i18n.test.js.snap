@@ -181,6 +181,15 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/refreshTimeButton/refreshTimeButton.js",
+    "keys": Array [
+      Object {
+        "key": "refresh-time-button.refreshed",
+        "match": "t('refresh-time-button.refreshed', { context: lastRefresh && 'load', refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/scans/scans.js",
     "keys": Array [
       Object {
