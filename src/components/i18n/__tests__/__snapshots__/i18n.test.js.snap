@@ -52,16 +52,16 @@ Array [
     "file": "./src/components/authentication/authentication.js",
     "keys": Array [
       Object {
-        "key": "view.login",
-        "match": "t('view.login', { context: 'pending' })",
+        "key": "view.loading",
+        "match": "t('view.loading', { context: 'authentication' })",
       },
       Object {
-        "key": "view.login",
-        "match": "t('view.login', { context: 'error' })",
+        "key": "view.error",
+        "match": "t('view.error', { context: 'authentication' })",
       },
       Object {
-        "key": "view.login-message",
-        "match": "t('view.login-message', { context: 'error' }, [ <Button isInline component=\\"a\\" variant=\\"link\\" href=\\"/login\\" /> ])",
+        "key": "view.error-message",
+        "match": "t( 'view.error-message', { context: 'authentication', message: \`\${session.errorMessage.replace(/\\\\.$/, '')",
       },
     ],
   },
@@ -114,6 +114,43 @@ Array [
       Object {
         "key": "view.loading",
         "match": "t('view.loading', { context: 'credentials' })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'credentials' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['credentials'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsEmptyState.js",
+    "keys": Array [
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: 'title', name: uiShortName })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'source'] })",
       },
     ],
   },
@@ -168,15 +205,11 @@ exports[`I18n Component should have locale keys that exist in the default langua
 Array [
   Object {
     "file": "./src/components/authentication/authentication.js",
-    "key": "view.login",
+    "key": "view.error",
   },
   Object {
     "file": "./src/components/authentication/authentication.js",
-    "key": "view.login",
-  },
-  Object {
-    "file": "./src/components/authentication/authentication.js",
-    "key": "view.login-message",
+    "key": "view.error-message",
   },
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
@@ -205,6 +238,38 @@ Array [
   Object {
     "file": "./src/components/createScanDialog/createScanDialog.js",
     "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
   },
   Object {
     "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
