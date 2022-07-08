@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, AlertVariant, Button, Bullseye } from '@patternfly/react-core';
+import { Alert, AlertVariant, Button, Bullseye, EmptyState } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '../modal/modal';
-import { ConfirmationModal, ConfirmationVariant } from '../confirmationModal/confirmationModal';
 import { reduxActions } from '../../redux';
 import helpers from '../../common/helpers';
 import { PageLayout } from '../pageLayout/pageLayout';
@@ -32,23 +31,26 @@ class Authentication extends React.Component {
       return (
         <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
           <div className="spinner spinner-xl" />
-          <Bullseye>{t('view.login', { context: 'pending' })}</Bullseye>
+          <Bullseye>{t('view.loading', { context: 'authentication' })}</Bullseye>
         </Modal>
       );
     }
 
     return (
       <PageLayout>
-        <ConfirmationModal icon={ConfirmationVariant.danger} show isContentOnly isClose={false} isActions={false}>
-          <Alert variant={AlertVariant.danger} title={t('view.login', { context: 'error' })}>
-            {session.errorMessage.replace(/\.$/, '')}
-            {session.errorMessage && '.'}
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert variant={AlertVariant.danger} title={t('view.error', { context: 'authentication' })}>
             {!session.authorized &&
-              t('view.login-message', { context: 'error' }, [
-                <Button isInline component="a" variant="link" href="/login" />
-              ])}
+              t(
+                'view.error-message',
+                {
+                  context: 'authentication',
+                  message: `${session.errorMessage.replace(/\.$/, '')}${session.errorMessage && '.'}` || undefined
+                },
+                [<Button isInline component="a" variant="link" href="/login" />]
+              )}
           </Alert>
-        </ConfirmationModal>
+        </EmptyState>
       </PageLayout>
     );
   }
