@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'patternfly-react';
+import { Button } from '@patternfly/react-core';
+import { RebootingIcon } from '@patternfly/react-icons';
 import { helpers } from '../../common/helpers';
+import { translate } from '../i18n/i18n';
 
 class RefreshTimeButton extends React.Component {
   pollingInterval = null;
@@ -43,13 +45,15 @@ class RefreshTimeButton extends React.Component {
   }
 
   render() {
-    const { lastRefresh, onRefresh } = this.props;
+    const { lastRefresh, onRefresh, t } = this.props;
 
     return (
-      <Button onClick={onRefresh} bsStyle="link" className="refresh-button">
-        <Icon type="fa" name="refresh" />
+      <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh}>
         <span className="last-refresh-time">
-          Refreshed {lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)}
+          {t('refresh-time-button.refreshed', {
+            context: lastRefresh && 'load',
+            refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)
+          })}
         </span>
       </Button>
     );
@@ -58,11 +62,13 @@ class RefreshTimeButton extends React.Component {
 
 RefreshTimeButton.propTypes = {
   lastRefresh: PropTypes.number,
-  onRefresh: PropTypes.func.isRequired
+  onRefresh: PropTypes.func.isRequired,
+  t: PropTypes.func
 };
 
 RefreshTimeButton.defaultProps = {
-  lastRefresh: 0
+  lastRefresh: 0,
+  t: translate
 };
 
 export { RefreshTimeButton as default, RefreshTimeButton };
