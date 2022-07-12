@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { EmptyState, Grid, Icon, Spinner } from 'patternfly-react';
+import { Alert, AlertVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
+import { Grid, Icon } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import ScanDownload from './scanDownload';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Return a scan jobs listing for "jobs".
+ */
 class ScanJobsList extends React.Component {
   state = {
     currentPage: 1,
@@ -51,23 +56,22 @@ class ScanJobsList extends React.Component {
   };
 
   render() {
-    const { error, errorMessage, mostRecentId, pending, scanJobsList } = this.props;
+    const { error, errorMessage, mostRecentId, pending, scanJobsList, t } = this.props;
 
-    if (error) {
+    if (pending) {
       return (
-        <EmptyState>
-          <EmptyState.Icon name="error-circle-o" />
-          <EmptyState.Title>Error retrieving scan jobs</EmptyState.Title>
-          <EmptyState.Info>{errorMessage}</EmptyState.Info>
+        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+          <Spinner isSVG size="sm" /> {t('view.loading')}
         </EmptyState>
       );
     }
 
-    if (pending) {
+    if (error) {
       return (
-        <EmptyState>
-          <Spinner loading size="sm" className="blank-slate-pf-icon" />
-          <EmptyState.Title>Loading...</EmptyState.Title>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert isInline isPlain variant={AlertVariant.danger} title={t('view.error', { context: 'scan-jobs' })}>
+            {t('view.error-message', { context: ['scan-jobs'], message: errorMessage })}
+          </Alert>
         </EmptyState>
       );
     }
@@ -121,6 +125,12 @@ class ScanJobsList extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{t: Function, isMoreResults: boolean, pending: boolean, errorMessage: string, getScanJobs: Function,
+ *     scanJobsList: Array, id: string|number, error: boolean, mostRecentId: string|number}}
+ */
 ScanJobsList.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -140,9 +150,16 @@ ScanJobsList.propTypes = {
       systemsScanned: PropTypes.number,
       systemsFailed: PropTypes.number
     })
-  )
+  ),
+  t: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{t: translate, isMoreResults: boolean, pending: boolean, errorMessage: null, getScanJobs: Function,
+ *     scanJobsList: *[], error: boolean, mostRecentId: null}}
+ */
 ScanJobsList.defaultProps = {
   error: false,
   errorMessage: null,
@@ -150,7 +167,8 @@ ScanJobsList.defaultProps = {
   isMoreResults: false,
   mostRecentId: null,
   pending: false,
-  scanJobsList: []
+  scanJobsList: [],
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({
