@@ -4,69 +4,150 @@ exports[`Sources Component should render a connected component with default prop
 
 exports[`Sources Component should render a non-connected component error: error 1`] = `
 <div
-  class="blank-slate-pf"
+  class="pf-c-empty-state quipucords-empty-state__alert"
 >
   <div
-    class="alert alert-danger"
+    class="pf-c-empty-state__content"
   >
-    <span
-      aria-hidden="true"
-      class="pficon pficon-error-circle-o"
-    />
-    <span>
-      Error retrieving sources: 
-    </span>
+    <div
+      aria-label="Danger Alert"
+      class="pf-c-alert pf-m-danger"
+      data-ouia-component-id="OUIA-Generated-Alert-danger-1"
+      data-ouia-component-type="PF4/Alert"
+      data-ouia-safe="true"
+    >
+      <div
+        class="pf-c-alert__icon"
+      >
+        <svg
+          aria-hidden="true"
+          fill="currentColor"
+          height="1em"
+          role="img"
+          style="vertical-align:-0.125em"
+          viewBox="0 0 512 512"
+          width="1em"
+        >
+          <path
+            d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+          />
+        </svg>
+      </div>
+      <h4
+        class="pf-c-alert__title"
+      >
+        <span
+          class="pf-u-screen-reader"
+        >
+          Danger alert:
+        </span>
+        t(view.error, {"context":"sources"})
+      </h4>
+      <div
+        class="pf-c-alert__description"
+      >
+        t(view.error-message, {"context":"sources","message":null})
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`Sources Component should render a non-connected component pending: pending 1`] = `
 <div
-  class="quipucords-view-container"
-/>
+  class="pf-c-backdrop"
+>
+  <div
+    class="pf-l-bullseye"
+  >
+    <div
+      aria-describedby="pf-modal-part-2"
+      aria-label="t(modal.aria-label-default)"
+      aria-labelledby="pf-modal-part-0"
+      aria-modal="true"
+      class="pf-c-modal-box pf-m-align-top pf-m-md"
+      data-ouia-component-id="OUIA-Generated-Modal-medium-1"
+      data-ouia-component-type="PF4/ModalContent"
+      data-ouia-safe="true"
+      id="pf-modal-part-0"
+      role="dialog"
+      style="--pf-c-modal-box--m-align-top--spacer: 5%;"
+    >
+      <div
+        aria-live="polite"
+        class="pf-c-modal-box__body"
+        id="pf-modal-part-2"
+      >
+        <div>
+          <div
+            class="blank-slate-pf-icon spinner spinner-lg"
+          />
+          <div
+            class="text-center"
+          >
+            t(view.loading, {"context":"sources"})
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Sources Component should render a non-connected component with empty state: empty state 1`] = `
 <div
-  class="fadein container-fluid"
+  class="container-fluid"
 >
   <div
     class="row"
   >
     <div
-      class="blank-slate-pf full-page-blank-slate"
+      class="pf-c-empty-state pf-m-lg quipucords-empty-state"
     >
       <div
-        class="blank-slate-pf-icon"
+        class="pf-c-empty-state__content"
       >
-        <span
+        <svg
           aria-hidden="true"
-          class="pficon pficon-add-circle-o"
-        />
-      </div>
-      <h4
-        class="h1 blank-slate-pf-title"
-      >
-        Welcome to Quipucords
-      </h4>
-      <p
-        class="blank-slate-pf-info"
-      >
-        Begin by adding one or more sources. A source contains a collection of network information, 
-        <br />
-        including systems management solution information, IP addresses, or host names, in addition to 
-        <br />
-        SSH ports and credentials.
-      </p>
-      <div
-        class="blank-slate-pf-main-action"
-      >
-        <button
-          class="btn btn-lg btn-primary"
-          type="button"
+          class="pf-c-empty-state__icon"
+          fill="currentColor"
+          height="1em"
+          role="img"
+          style="vertical-align: -0.125em;"
+          viewBox="0 0 1024 1024"
+          width="1em"
         >
-          Add Source
-        </button>
+          <path
+            d="M576,303 C576,294.715729 569.284271,288 561,288 L463,288 C454.715729,288 448,294.715729 448,303 L448,448 L303,448 C294.715729,448 288,454.715729 288,463 L288,561 C288,569.284271 294.715729,576 303,576 L448,576 L448,720.9 C447.983373,729.207373 454.6927,735.961429 463,736 L561,736 C569.3073,735.961429 576.016627,729.207373 576,720.9 L576,576 L721,576 C724.969024,576.026638 728.784638,574.468589 731.600595,571.671405 C734.416553,568.87422 736.000031,565.069113 736.000031,561.1 L736.000031,463.1 C736.016627,454.792627 729.3073,448.038571 721,448 L576,448 L576,303 Z M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 Z M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0 Z"
+          />
+        </svg>
+        <h1
+          class="pf-c-title pf-m-2xl"
+          data-ouia-component-id="OUIA-Generated-Title-1"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
+        >
+          t(view.empty-state, {"context":"title","name":"Quipucords"})
+        </h1>
+        <div
+          class="pf-c-empty-state__body"
+        >
+          t(view.empty-state, {"context":"description_sources"})
+        </div>
+        <div
+          class="pf-c-empty-state__primary"
+        >
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-primary"
+            data-ouia-component-id="OUIA-Generated-Button-primary-1"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            t(view.empty-state, {"context":"label_source"})
+          </button>
+        </div>
       </div>
     </div>
   </div>

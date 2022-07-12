@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { EmptyState } from 'patternfly-react';
+import { Title } from '@patternfly/react-core';
 import SourcesEmptyState from '../sourcesEmptyState';
 
 describe('SourcesEmptyState Component', () => {
@@ -17,6 +17,6 @@ describe('SourcesEmptyState Component', () => {
     };
 
     const component = mount(<SourcesEmptyState {...props} />);
-    expect(component.find(EmptyState.Title)).toMatchSnapshot('application name');
+    expect(component.find(Title)).toMatchSnapshot('application name');
   });
 });
