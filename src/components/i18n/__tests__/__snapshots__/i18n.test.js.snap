@@ -190,11 +190,82 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/scans/scanJobsList.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-jobs' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/scans/scans.js",
     "keys": Array [
       Object {
         "key": "view.loading",
         "match": "t('view.loading', { context: 'scans' })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scans' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scans'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/scans/scansEmptyState.js",
+    "keys": Array [
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['title', 'scans'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', 'scans'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'source-navigate'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/scans/scanSourceList.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-jobs' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
       },
     ],
   },
@@ -291,6 +362,54 @@ Array [
   Object {
     "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
     "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/scans/scanJobsList.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/scans/scanJobsList.js",
+    "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scanSourceList.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/scans/scanSourceList.js",
+    "key": "view.error-message",
   },
 ]
 `;
