@@ -2,7 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
-import { Alert, Button, EmptyState, ListView, Spinner } from 'patternfly-react';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { Button as ButtonPf3, ListView, Spinner } from 'patternfly-react';
+import { SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -15,6 +29,9 @@ import { ScanFilterFields, ScanSortFields } from './scanConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 
+/**
+ * A scans view.
+ */
 class Scans extends React.Component {
   componentDidMount() {
     const { getScans, viewOptions } = this.props;
@@ -64,9 +81,13 @@ class Scans extends React.Component {
     return (
       <div className="form-group">
         <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
-          <Button id="merge-reports" disabled={viewOptions.selectedItems.length <= 1} onClick={this.onMergeScanResults}>
+          <ButtonPf3
+            id="merge-reports"
+            disabled={viewOptions.selectedItems.length <= 1}
+            onClick={this.onMergeScanResults}
+          >
             Merge reports
-          </Button>
+          </ButtonPf3>
         </Tooltip>
       </div>
     );
@@ -88,7 +109,7 @@ class Scans extends React.Component {
   }
 
   renderScansList(scans) {
-    const { lastRefresh } = this.props;
+    const { lastRefresh, t } = this.props;
 
     if (scans.length) {
       return (
@@ -101,34 +122,36 @@ class Scans extends React.Component {
     }
 
     return (
-      <EmptyState className="list-view-blank-slate">
-        <EmptyState.Title>No Results Match the Filter Criteria</EmptyState.Title>
-        <EmptyState.Info>The active filters are hiding all items.</EmptyState.Info>
-        <EmptyState.Action>
-          <Button bsStyle="link" onClick={this.onClearFilters}>
-            Clear Filters
+      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={SearchIcon} />
+        <Title size={TitleSizes.lg} headingLevel="h1">
+          {t('view.empty-state', { context: ['filter', 'title'] })}
+        </Title>
+        <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+        <EmptyStatePrimary>
+          <Button variant={ButtonVariant.link} onClick={this.onClearFilters}>
+            {t('view.empty-state', { context: ['label', 'clear'] })}
           </Button>
-        </EmptyState.Action>
+        </EmptyStatePrimary>
       </EmptyState>
     );
   }
 
   render() {
-    const { error, errorMessage, lastRefresh, pending, scans, viewOptions } = this.props;
+    const { error, errorMessage, lastRefresh, pending, scans, t, viewOptions } = this.props;
+
+    if (pending || (pending && !scans.length)) {
+      return this.renderPendingMessage();
+    }
 
     if (error) {
       return (
-        <EmptyState>
-          <Alert type="error">
-            <span>Error retrieving scans: {errorMessage}</span>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert variant={AlertVariant.danger} title={t('view.error', { context: 'scans' })}>
+            {t('view.error-message', { context: ['scans'], message: errorMessage })}
           </Alert>
-          {this.renderPendingMessage()}
         </EmptyState>
       );
-    }
-
-    if (pending && !scans.length) {
-      return <div className="quipucords-view-container">{this.renderPendingMessage()}</div>;
     }
 
     if (scans.length || _size(viewOptions.activeFilters)) {
@@ -157,6 +180,12 @@ class Scans extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{getScans: Function, t: Function, lastRefresh: number, scans: Array, pending: boolean,
+ *    errorMessage: string, update: boolean, error: boolean, viewOptions: object}}
+ */
 Scans.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -169,6 +198,12 @@ Scans.propTypes = {
   viewOptions: PropTypes.object
 };
 
+/**
+ * Default props
+ *
+ * @type {{getScans: Function, t: translate, lastRefresh: number, scans: *[], pending: boolean, errorMessage: null,
+ *     update: boolean, error: boolean, viewOptions: {}}}
+ */
 Scans.defaultProps = {
   error: false,
   errorMessage: null,
