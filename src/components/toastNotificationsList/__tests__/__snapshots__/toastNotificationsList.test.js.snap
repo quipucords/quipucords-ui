@@ -1,7 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ToastNotificationsList Component should shallow render a basic component 1`] = `
-<Connect(ToastNotificationsList)
-  show={true}
-/>
+exports[`ToastNotificationsList Component should handle toast variations: variations 1`] = `
+<AlertGroup
+  className="quipucords-toast-notifications__alert-group"
+  isLiveRegion={true}
+  isToast={true}
+>
+  <Alert
+    actionClose={
+      <AlertActionCloseButton
+        onClose={[Function]}
+      />
+    }
+    key="key-"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTimeout={[Function]}
+    timeout={8000}
+    title="Lorem ipsum"
+    truncateTitle={2}
+  />
+  <Alert
+    actionClose={
+      <AlertActionCloseButton
+        onClose={[Function]}
+      />
+    }
+    key="key-"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTimeout={[Function]}
+    timeout={8000}
+    title="Dolor sit"
+    truncateTitle={2}
+    variant="success"
+  />
+  <Alert
+    actionClose={
+      <AlertActionCloseButton
+        onClose={[Function]}
+      />
+    }
+    key="key-"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTimeout={[Function]}
+    timeout={8000}
+    title="Dolor sit"
+    truncateTitle={2}
+    variant="danger"
+  >
+    Lorem ipsum
+  </Alert>
+  <Alert
+    actionClose={
+      <AlertActionCloseButton
+        onClose={[Function]}
+      />
+    }
+    key="key-"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTimeout={[Function]}
+    timeout={false}
+    title="PAUSED, Dolor sit"
+    truncateTitle={2}
+    variant="info"
+  />
+</AlertGroup>
 `;
+
+exports[`ToastNotificationsList Component should shallow render a basic component: basic 1`] = `<Connect(ToastNotificationsList) />`;
