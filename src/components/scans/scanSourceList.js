@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EmptyState, Grid, Icon, Spinner } from 'patternfly-react';
+import { Alert, AlertVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
+import { Grid, Icon } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Return a scan jobs listing for "sources".
+ */
 class ScanSourceList extends React.Component {
   static setSourceStatus(source) {
     if (!source.connectTaskStatus && !source.inspectTaskStatus) {
@@ -24,23 +29,22 @@ class ScanSourceList extends React.Component {
   }
 
   render() {
-    const { error, errorMessage, pending, scanJobList } = this.props;
+    const { error, errorMessage, pending, scanJobList, t } = this.props;
 
-    if (error) {
+    if (pending) {
       return (
-        <EmptyState>
-          <EmptyState.Icon name="error-circle-o" />
-          <EmptyState.Title>Error retrieving scan jobs</EmptyState.Title>
-          <EmptyState.Info>{errorMessage}</EmptyState.Info>
+        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+          <Spinner isSVG size="sm" /> {t('view.loading')}
         </EmptyState>
       );
     }
 
-    if (pending) {
+    if (error) {
       return (
-        <EmptyState>
-          <Spinner loading size="sm" className="blank-slate-pf-icon" />
-          <EmptyState.Title>Loading...</EmptyState.Title>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert isInline isPlain variant={AlertVariant.danger} title={t('view.error', { context: 'scan-jobs' })}>
+            {t('view.error-message', { context: ['scan-jobs'], message: errorMessage })}
+          </Alert>
         </EmptyState>
       );
     }
@@ -63,6 +67,12 @@ class ScanSourceList extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{t: Function, pending: boolean, errorMessage: string, getScanJob: Function, id: string|number,
+ *     error: boolean, scanJobList: Array}}
+ */
 ScanSourceList.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -79,15 +89,23 @@ ScanSourceList.propTypes = {
       name: PropTypes.string,
       sourceType: PropTypes.string
     })
-  )
+  ),
+  t: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{t: translate, pending: boolean, errorMessage: null, getScanJob: Function, error: boolean,
+ *     scanJobList: *[]}}
+ */
 ScanSourceList.defaultProps = {
   error: false,
   errorMessage: null,
   getScanJob: helpers.noop,
   pending: false,
-  scanJobList: []
+  scanJobList: [],
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({
