@@ -12,40 +12,36 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import { DropdownButton, Grid, MenuItem, Row } from 'patternfly-react';
+import { DropdownButton, MenuItem } from 'patternfly-react';
 import helpers from '../../common/helpers';
 import { translate } from '../i18n/i18n';
 
 const CredentialsEmptyState = ({ onAddCredential, onAddSource, t, uiSentenceStartName, uiShortName }) => (
-  <Grid fluid>
-    <Row>
-      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-        <EmptyStateIcon icon={AddCircleOIcon} />
-        <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
-        <EmptyStateBody>
-          {t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })}
-        </EmptyStateBody>
-        <EmptyStatePrimary>
-          <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
-            <MenuItem eventKey="1" onClick={() => onAddCredential('network')}>
-              Network Credential
-            </MenuItem>
-            <MenuItem eventKey="2" onClick={() => onAddCredential('satellite')}>
-              Satellite Credential
-            </MenuItem>
-            <MenuItem eventKey="2" onClick={() => onAddCredential('vcenter')}>
-              VCenter Credential
-            </MenuItem>
-          </DropdownButton>
-        </EmptyStatePrimary>
-        <EmptyStateSecondaryActions>
-          <Button variant={ButtonVariant.link} onClick={onAddSource}>
-            {t('view.empty-state', { context: ['label', 'source'] })}
-          </Button>
-        </EmptyStateSecondaryActions>
-      </EmptyState>
-    </Row>
-  </Grid>
+  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+    <EmptyStateIcon icon={AddCircleOIcon} />
+    <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
+    <EmptyStateBody>
+      {t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })}
+    </EmptyStateBody>
+    <EmptyStatePrimary>
+      <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
+        <MenuItem eventKey="1" onClick={() => onAddCredential('network')}>
+          Network Credential
+        </MenuItem>
+        <MenuItem eventKey="2" onClick={() => onAddCredential('satellite')}>
+          Satellite Credential
+        </MenuItem>
+        <MenuItem eventKey="2" onClick={() => onAddCredential('vcenter')}>
+          VCenter Credential
+        </MenuItem>
+      </DropdownButton>
+    </EmptyStatePrimary>
+    <EmptyStateSecondaryActions>
+      <Button variant={ButtonVariant.link} onClick={onAddSource}>
+        {t('view.empty-state', { context: ['label', 'source'] })}
+      </Button>
+    </EmptyStateSecondaryActions>
+  </EmptyState>
 );
 
 CredentialsEmptyState.propTypes = {
