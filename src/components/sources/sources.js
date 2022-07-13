@@ -2,7 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _isEqual from 'lodash/isEqual';
 import _size from 'lodash/size';
-import { Alert, Button, EmptyState, ListView, Spinner } from 'patternfly-react';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { SearchIcon } from '@patternfly/react-icons';
+import { Button as ButtonPf3, ListView, Spinner } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -14,6 +28,9 @@ import { SourceFilterFields, SourceSortFields } from './sourceConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 
+/**
+ * A sources view.
+ */
 class Sources extends React.Component {
   componentDidMount() {
     const { getSources, viewOptions } = this.props;
@@ -65,15 +82,15 @@ class Sources extends React.Component {
 
     return (
       <div className="form-group">
-        <Button bsStyle="primary" onClick={this.onShowAddSourceWizard}>
+        <ButtonPf3 bsStyle="primary" onClick={this.onShowAddSourceWizard}>
           Add
-        </Button>
-        <Button
+        </ButtonPf3>
+        <ButtonPf3
           disabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
           onClick={this.onScanSources}
         >
           Scan
-        </Button>
+        </ButtonPf3>
       </div>
     );
   }
@@ -94,7 +111,7 @@ class Sources extends React.Component {
   }
 
   renderSourcesList(sources) {
-    const { lastRefresh } = this.props;
+    const { lastRefresh, t } = this.props;
 
     if (sources.length) {
       return (
@@ -107,34 +124,36 @@ class Sources extends React.Component {
     }
 
     return (
-      <EmptyState className="list-view-blank-slate">
-        <EmptyState.Title>No Results Match the Filter Criteria</EmptyState.Title>
-        <EmptyState.Info>The active filters are hiding all items.</EmptyState.Info>
-        <EmptyState.Action>
-          <Button bsStyle="link" onClick={this.onClearFilters}>
-            Clear Filters
+      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={SearchIcon} />
+        <Title size={TitleSizes.lg} headingLevel="h1">
+          {t('view.empty-state', { context: ['filter', 'title'] })}
+        </Title>
+        <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+        <EmptyStatePrimary>
+          <Button variant={ButtonVariant.link} onClick={this.onClearFilters}>
+            {t('view.empty-state', { context: ['label', 'clear'] })}
           </Button>
-        </EmptyState.Action>
+        </EmptyStatePrimary>
       </EmptyState>
     );
   }
 
   render() {
-    const { error, errorMessage, lastRefresh, pending, sources, viewOptions } = this.props;
+    const { error, errorMessage, lastRefresh, pending, sources, t, viewOptions } = this.props;
+
+    if (pending && !sources.length) {
+      return this.renderPendingMessage();
+    }
 
     if (error) {
       return (
-        <EmptyState>
-          <Alert type="error">
-            <span>Error retrieving sources: {errorMessage}</span>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert variant={AlertVariant.danger} title={t('view.error', { context: 'sources' })}>
+            {t('view.error-message', { context: ['sources'], message: errorMessage })}
           </Alert>
-          {this.renderPendingMessage()}
         </EmptyState>
       );
-    }
-
-    if (pending && !sources.length) {
-      return <div className="quipucords-view-container">{this.renderPendingMessage()}</div>;
     }
 
     if (sources.length || _size(viewOptions.activeFilters)) {
@@ -163,6 +182,12 @@ class Sources extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{sources: Array, t: Function, lastRefresh: number, pending: boolean, errorMessage: string,
+ *     getSources: Function, error: boolean, updateSources: boolean, viewOptions: object}}
+ */
 Sources.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -175,6 +200,12 @@ Sources.propTypes = {
   viewOptions: PropTypes.object
 };
 
+/**
+ * Default props
+ *
+ * @type {{sources: *[], t: Function, lastRefresh: number, pending: boolean, errorMessage: null,
+ *     getSources: Function, error: boolean, updateSources: boolean, viewOptions: {}}}
+ */
 Sources.defaultProps = {
   error: false,
   errorMessage: null,

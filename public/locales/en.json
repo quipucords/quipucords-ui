@@ -28,6 +28,7 @@
   "view": {
     "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
     "empty-state_description_scans": "Select a Source to scan from the Sources page.",
+    "empty-state_description_sources": "Begin by adding one or more sources. A source contains a collection of network information, including systems management solution information, IP addresses, or host names, in addition to SSH ports and credentials.",
     "empty-state_filter_description": "The active filters are hiding all items.",
     "empty-state_filter_title": "No Results Match the Filter Criteria",
     "empty-state_label_clear": "Clear Filters",
@@ -39,10 +40,12 @@
     "error_credentials": "Credentials error",
     "error_scan-jobs": "Scan jobs error",
     "error_scans": "Scans error",
+    "error_sources": "Sources error",
     "error-message_authentication": "{{message}} Please <0>login</0> to continue.",
     "error-message_credentials": "Error retrieving credentials: {{message}}",
     "error-message_scan-jobs": "Error retrieving scan jobs: {{message}}",
     "error-message_scans": "Error retrieving scans: {{message}}",
+    "error-message_sources": "Error retrieving sources: {{message}}",
     "loading": "Loading...",
     "loading_authentication": "Logging in...",
     "loading_credentials": "Loading credentials..."

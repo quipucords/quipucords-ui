@@ -276,6 +276,43 @@ Array [
         "key": "view.loading",
         "match": "t('view.loading', { context: 'sources' })",
       },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'sources' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['sources'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/sources/sourcesEmptyState.js",
+    "keys": Array [
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['title'], name: uiShortName })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', 'sources'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'source'] })",
+      },
     ],
   },
 ]
@@ -410,6 +447,38 @@ Array [
   Object {
     "file": "./src/components/scans/scanSourceList.js",
     "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
   },
 ]
 `;
