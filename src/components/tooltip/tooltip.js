@@ -1,31 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, OverlayTrigger, Popover, Tooltip as PFTooltip } from 'patternfly-react';
+import { Icon } from 'patternfly-react';
+import { Tooltip as PFTooltip } from '@patternfly/react-core';
 import helpers from '../../common/helpers';
 
 const Tooltip = ({ children, tooltip, id, placement, popover, rootClose, trigger, delayShow, ...props }) => {
   const setId = id || helpers.generateId();
 
-  const tooltipPopover = popover ? (
-    <Popover id={setId} {...props}>
-      {popover}
-    </Popover>
-  ) : (
-    <PFTooltip id={setId} {...props}>
-      {tooltip || 'example tooltip'}
-    </PFTooltip>
-  );
-
   return (
-    <OverlayTrigger
-      overlay={tooltipPopover}
-      placement={placement}
-      trigger={trigger}
-      delayShow={delayShow}
-      rootClose={rootClose}
-    >
+    <PFTooltip id={setId} content={<div>{tooltip}</div>} {...props}>
       <span>{children || <Icon type="pf" name="info" />}</span>
-    </OverlayTrigger>
+    </PFTooltip>
   );
 };
 

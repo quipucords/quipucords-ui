@@ -14,34 +14,91 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
     ]
   }
 >
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    delayShow={500}
-    overlay={
-      <Popover
-        bsClass="popover"
-        id="test"
-        placement="right"
-      >
-        hello world
-      </Popover>
-    }
-    placement="top"
-    rootClose={true}
-    trigger={
-      Array [
-        "hover",
-      ]
-    }
+  <Tooltip
+    content={<div />}
+    id="test"
   >
-    <span
-      onClick={null}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
+    <Popper
+      appendTo={[Function]}
+      distance={15}
+      enableFlip={true}
+      flipBehavior={
+        Array [
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "top",
+          "right",
+          "bottom",
+        ]
+      }
+      isVisible={false}
+      onBlur={[Function]}
+      onDocumentClick={false}
+      onDocumentKeyDown={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onPopperMouseEnter={[Function]}
+      onPopperMouseLeave={[Function]}
+      onTriggerEnter={[Function]}
+      placement="top"
+      popper={
+        <div
+          aria-live="off"
+          className="pf-c-tooltip"
+          id="test"
+          role="tooltip"
+          style={
+            Object {
+              "maxWidth": null,
+              "opacity": 0,
+              "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
+            }
+          }
+        >
+          <TooltipArrow />
+          <TooltipContent
+            isLeftAligned={false}
+          >
+            <div />
+          </TooltipContent>
+        </div>
+      }
+      popperMatchesTriggerWidth={false}
+      positionModifiers={
+        Object {
+          "bottom": "pf-m-bottom",
+          "bottom-end": "pf-m-bottom-right",
+          "bottom-start": "pf-m-bottom-left",
+          "left": "pf-m-left",
+          "left-end": "pf-m-left-bottom",
+          "left-start": "pf-m-left-top",
+          "right": "pf-m-right",
+          "right-end": "pf-m-right-bottom",
+          "right-start": "pf-m-right-top",
+          "top": "pf-m-top",
+          "top-end": "pf-m-top-right",
+          "top-start": "pf-m-top-left",
+        }
+      }
+      trigger={
+        <span>
+          Test popover
+        </span>
+      }
+      zIndex={9999}
     >
-      Test popover
-    </span>
-  </OverlayTrigger>
+      <FindRefWrapper
+        onFoundRef={[Function]}
+      >
+        <span>
+          Test popover
+        </span>
+      </FindRefWrapper>
+    </Popper>
+  </Tooltip>
 </Tooltip>
 `;
 
@@ -59,33 +116,96 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
     ]
   }
 >
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    delayShow={500}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        id="test"
-        placement="right"
-      >
+  <Tooltip
+    content={
+      <div>
         hello world
-      </Tooltip>
+      </div>
     }
-    placement="top"
-    rootClose={true}
-    trigger={
-      Array [
-        "hover",
-      ]
-    }
+    id="test"
   >
-    <span
-      onClick={null}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
+    <Popper
+      appendTo={[Function]}
+      distance={15}
+      enableFlip={true}
+      flipBehavior={
+        Array [
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "top",
+          "right",
+          "bottom",
+        ]
+      }
+      isVisible={false}
+      onBlur={[Function]}
+      onDocumentClick={false}
+      onDocumentKeyDown={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onPopperMouseEnter={[Function]}
+      onPopperMouseLeave={[Function]}
+      onTriggerEnter={[Function]}
+      placement="top"
+      popper={
+        <div
+          aria-live="off"
+          className="pf-c-tooltip"
+          id="test"
+          role="tooltip"
+          style={
+            Object {
+              "maxWidth": null,
+              "opacity": 0,
+              "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
+            }
+          }
+        >
+          <TooltipArrow />
+          <TooltipContent
+            isLeftAligned={false}
+          >
+            <div>
+              hello world
+            </div>
+          </TooltipContent>
+        </div>
+      }
+      popperMatchesTriggerWidth={false}
+      positionModifiers={
+        Object {
+          "bottom": "pf-m-bottom",
+          "bottom-end": "pf-m-bottom-right",
+          "bottom-start": "pf-m-bottom-left",
+          "left": "pf-m-left",
+          "left-end": "pf-m-left-bottom",
+          "left-start": "pf-m-left-top",
+          "right": "pf-m-right",
+          "right-end": "pf-m-right-bottom",
+          "right-start": "pf-m-right-top",
+          "top": "pf-m-top",
+          "top-end": "pf-m-top-right",
+          "top-start": "pf-m-top-left",
+        }
+      }
+      trigger={
+        <span>
+          Test tooltip
+        </span>
+      }
+      zIndex={9999}
     >
-      Test tooltip
-    </span>
-  </OverlayTrigger>
+      <FindRefWrapper
+        onFoundRef={[Function]}
+      >
+        <span>
+          Test tooltip
+        </span>
+      </FindRefWrapper>
+    </Popper>
+  </Tooltip>
 </Tooltip>
 `;
