@@ -10,7 +10,6 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import { Grid, Row } from 'patternfly-react';
 import SourcesEmptyState from '../sources/sourcesEmptyState';
 import helpers from '../../common/helpers';
 import { connectRouter, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
@@ -43,20 +42,16 @@ class ScansEmptyState extends React.Component {
 
     if (sourcesExist) {
       return (
-        <Grid fluid>
-          <Row>
-            <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-              <EmptyStateIcon icon={AddCircleOIcon} />
-              <Title headingLevel="h1">{t('view.empty-state', { context: ['title', 'scans'] })}</Title>
-              <EmptyStateBody>{t('view.empty-state', { context: ['description', 'scans'] })}</EmptyStateBody>
-              <EmptyStatePrimary>
-                <Button onClick={this.onAddSource}>
-                  {t('view.empty-state', { context: ['label', 'source-navigate'] })}
-                </Button>
-              </EmptyStatePrimary>
-            </EmptyState>
-          </Row>
-        </Grid>
+        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+          <EmptyStateIcon icon={AddCircleOIcon} />
+          <Title headingLevel="h1">{t('view.empty-state', { context: ['title', 'scans'] })}</Title>
+          <EmptyStateBody>{t('view.empty-state', { context: ['description', 'scans'] })}</EmptyStateBody>
+          <EmptyStatePrimary>
+            <Button onClick={this.onAddSource}>
+              {t('view.empty-state', { context: ['label', 'source-navigate'] })}
+            </Button>
+          </EmptyStatePrimary>
+        </EmptyState>
       );
     }
 
