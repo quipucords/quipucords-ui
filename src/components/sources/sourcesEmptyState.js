@@ -10,7 +10,6 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import { Grid, Row } from 'patternfly-react';
 import helpers from '../../common/helpers';
 import { translate } from '../i18n/i18n';
 
@@ -24,18 +23,14 @@ import { translate } from '../i18n/i18n';
  * @returns {React.ReactNode}
  */
 const SourcesEmptyState = ({ onAddSource, t, uiShortName }) => (
-  <Grid fluid>
-    <Row>
-      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-        <EmptyStateIcon icon={AddCircleOIcon} />
-        <Title headingLevel="h1">{t('view.empty-state', { context: ['title'], name: uiShortName })}</Title>
-        <EmptyStateBody>{t('view.empty-state', { context: ['description', 'sources'] })}</EmptyStateBody>
-        <EmptyStatePrimary>
-          <Button onClick={onAddSource}>{t('view.empty-state', { context: ['label', 'source'] })}</Button>
-        </EmptyStatePrimary>
-      </EmptyState>
-    </Row>
-  </Grid>
+  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+    <EmptyStateIcon icon={AddCircleOIcon} />
+    <Title headingLevel="h1">{t('view.empty-state', { context: ['title'], name: uiShortName })}</Title>
+    <EmptyStateBody>{t('view.empty-state', { context: ['description', 'sources'] })}</EmptyStateBody>
+    <EmptyStatePrimary>
+      <Button onClick={onAddSource}>{t('view.empty-state', { context: ['label', 'source'] })}</Button>
+    </EmptyStatePrimary>
+  </EmptyState>
 );
 
 /**
