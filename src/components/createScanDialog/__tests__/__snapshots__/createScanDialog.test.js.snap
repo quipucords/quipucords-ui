@@ -375,7 +375,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
           disabled=""
           type="button"
         >
-          t(form-dialog.label, {"context":"submit_create-scan"})
+          t(form-dialog.label_submit, {"context":"create-scan"})
         </button>
         <button
           aria-disabled="false"
