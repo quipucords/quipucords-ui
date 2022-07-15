@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { Alert, AlertVariant as ConfirmationVariant, Button, ButtonVariant, Title } from '@patternfly/react-core';
 import { Modal } from '../modal/modal';
 import { connect, store, reduxTypes } from '../../redux';
@@ -87,9 +86,8 @@ const ConfirmationModal = ({
 
   return (
     <Modal
-      className={classNames('quipucords-modal__confirmation', {
-        'quipucords-modal__content-only': isContentOnly === true
-      })}
+      className="quipucords-modal__confirmation"
+      isContentOnly={isContentOnly}
       isOpen={show}
       backdrop={false}
       showClose={isClose}

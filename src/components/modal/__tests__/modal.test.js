@@ -23,6 +23,13 @@ describe('Modal Component', () => {
 
     const ariaLabelComponent = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
     expect(ariaLabelComponent.find(PfModal)).toMatchSnapshot('aria-label');
+
+    props.backdrop = false;
+    props['aria-label'] = undefined;
+    props.isContentOnly = true;
+
+    const contentComponent = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
+    expect(contentComponent.find(PfModal)).toMatchSnapshot('isContentOnly');
   });
 
   it('should allow custom headers and footers', async () => {
