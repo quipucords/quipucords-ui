@@ -23,6 +23,7 @@ exports[`Scans Component should render a non-connected component pending: pendin
   disableFocusTrap={true}
   footer={null}
   header={null}
+  isContentOnly={false}
   isOpen={true}
   position="top"
   positionOffset="5%"
