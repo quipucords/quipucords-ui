@@ -60,7 +60,7 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
           disabled=""
           type="button"
         >
-          t(form-dialog.label, {"context":"submit_merge-reports"})
+          t(form-dialog.label_submit, {"context":"merge-reports"})
         </button>
         <button
           aria-disabled="false"
@@ -173,7 +173,7 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
           disabled=""
           type="button"
         >
-          t(form-dialog.label, {"context":"submit_merge-reports"})
+          t(form-dialog.label_submit, {"context":"merge-reports"})
         </button>
         <button
           aria-disabled="false"
