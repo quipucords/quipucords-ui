@@ -1,57 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Spinner } from 'patternfly-react';
+import { EmptyState, EmptyStateBody, EmptyStateIcon, Spinner, Title } from '@patternfly/react-core';
+import { OutlinedCheckCircleIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
+import { global_success_color_100 as green, global_danger_color_100 as red } from '@patternfly/react-tokens';
 import { connect, reduxSelectors } from '../../redux';
+import { EMPTY_CONTEXT, translate } from '../i18n/i18n';
 
-const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name }) => (
+/**
+ * Add source wizard, step three, confirmation.
+ *
+ * @param {object} props
+ * @param {boolean} props.add
+ * @param {boolean} props.error
+ * @param {boolean} props.fulfilled
+ * @param {boolean} props.pending
+ * @param {string} props.name
+ * @param {Function} props.t
+ * @returns {React.ReactNode}
+ */
+const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name, t }) => (
   <React.Fragment>
-    {error && (
-      <div className="wizard-pf-complete blank-slate-pf">
-        <div className="wizard-pf-success-icon">
-          <Icon type="pf" name="error-circle-o" />
-        </div>
-        <h3 className="blank-slate-pf-main-action">Error {add ? 'Creating' : 'Updating'} Source</h3>
-        <p className="blank-slate-pf-secondary-action">
-          There are errors on a previous step. Use the Back button to review your settings and try again.
-        </p>
-      </div>
-    )}
-    {fulfilled && (
-      <div className="wizard-pf-complete blank-slate-pf">
-        <div className="wizard-pf-success-icon">
-          <Icon type="pf" name="ok" />
-        </div>
-        <h3 className="blank-slate-pf-main-action">
-          <strong>{name}</strong> was {add ? 'created' : 'updated'}.
-        </h3>
-      </div>
-    )}
-    {pending && (
-      <div className="wizard-pf-process blank-slate-pf">
-        <Spinner loading size="lg" className="blank-slate-pf-icon" />
-        <h3 className="blank-slate-pf-main-action">{add ? 'Creating' : 'Updating'} Source...</h3>
-        <p className="blank-slate-pf-secondary-action">
-          Please wait while source <strong>{name}</strong> is being {add ? 'created' : 'updated'}.
-        </p>
-      </div>
-    )}
+    <EmptyState className="quipucords-empty-state">
+      {error && <EmptyStateIcon icon={ExclamationCircleIcon} color={red.value} />}
+      {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} color={green.value} />}
+      {pending && <EmptyStateIcon icon={Spinner} />}
+      <Title headingLevel="h3">
+        {t('form-dialog.empty-state_title_add-source', {
+          context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
+          name
+        })}
+      </Title>
+      <EmptyStateBody>
+        {t(`form-dialog.empty-state_description_add-source`, {
+          context: [(error && 'error') || (pending && 'pending'), (!add && pending && 'edit') || EMPTY_CONTEXT],
+          name
+        })}
+      </EmptyStateBody>
+    </EmptyState>
   </React.Fragment>
 );
 
+/**
+ * Prop types
+ *
+ * @type {{add: boolean, t: Function, pending: boolean, fulfilled: boolean, name: string, error: boolean}}
+ */
 AddSourceWizardStepThree.propTypes = {
   add: PropTypes.bool,
   error: PropTypes.bool,
   fulfilled: PropTypes.bool,
   pending: PropTypes.bool,
-  name: PropTypes.string
+  name: PropTypes.string,
+  t: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{add: boolean, t: translate, pending: boolean, fulfilled: boolean, name: null, error: boolean}}
+ */
 AddSourceWizardStepThree.defaultProps = {
   add: false,
   error: false,
   fulfilled: false,
   pending: false,
-  name: null
+  name: null,
+  t: translate
 };
 
 const makeMapStateToProps = () => {

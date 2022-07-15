@@ -6,56 +6,65 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
 <form
   class="form-horizontal"
 >
-  <h3
-    class="right-aligned_basic-form"
-  >
-    Select source type
-  </h3>
   <div
     class="form-group"
   >
-    <div
-      class="radio"
+    <label
+      class="col-sm-3 control-label"
+      for="generatedid-"
     >
-      <label
-        title=""
-      >
-        <input
-          checked=""
-          name="sourceType"
-          type="radio"
-          value="network"
-        />
-        Network Range
-      </label>
-    </div>
+      Select source type
+    </label>
     <div
-      class="radio"
+      class="col-sm-9"
     >
-      <label
-        title=""
+      <div
+        class="form-group"
       >
-        <input
-          name="sourceType"
-          type="radio"
-          value="satellite"
-        />
-        Satellite
-      </label>
-    </div>
-    <div
-      class="radio"
-    >
-      <label
-        title=""
-      >
-        <input
-          name="sourceType"
-          type="radio"
-          value="vcenter"
-        />
-        vCenter Server
-      </label>
+        <div
+          class="radio"
+        >
+          <label
+            title=""
+          >
+            <input
+              checked=""
+              name="sourceType"
+              type="radio"
+              value="network"
+            />
+            Network Range
+          </label>
+        </div>
+        <div
+          class="radio"
+        >
+          <label
+            title=""
+          >
+            <input
+              name="sourceType"
+              type="radio"
+              value="satellite"
+            />
+            Satellite
+          </label>
+        </div>
+        <div
+          class="radio"
+        >
+          <label
+            title=""
+          >
+            <input
+              name="sourceType"
+              type="radio"
+              value="vcenter"
+            />
+            vCenter Server
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 </form>

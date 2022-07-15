@@ -53,7 +53,7 @@ Object {
     "errorStatus": null,
     "fulfilled": true,
     "pending": false,
-    "show": true,
+    "show": false,
     "source": Object {
       "test": "success",
     },
@@ -97,7 +97,7 @@ Object {
     "errorStatus": null,
     "fulfilled": true,
     "pending": false,
-    "show": true,
+    "show": false,
     "source": Object {
       "test": "success",
     },
