@@ -118,7 +118,6 @@ exports[`CreateScanDialog Component should render a non-connected component: non
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-2"
       >
