@@ -168,13 +168,15 @@ const addSourceWizardReducer = (state = initialState, action) => {
         {
           add: state.add,
           edit: state.edit,
+          error: false,
+          errorMessage: null,
+          pending: false,
           fulfilled: true,
-          show: true,
           source: action.payload.data
         },
         {
           state,
-          initialState
+          reset: false
         }
       );
 

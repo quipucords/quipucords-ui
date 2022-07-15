@@ -10,41 +10,71 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={false}
   name={null}
   pending={false}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-complete blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
     <div
-      className="wizard-pf-success-icon"
+      className="pf-c-empty-state quipucords-empty-state"
     >
-      <Icon
-        name="error-circle-o"
-        type="pf"
+      <div
+        className="pf-c-empty-state__content"
       >
-        <PatternflyIcon
-          className=""
-          name="error-circle-o"
+        <EmptyStateIcon
+          color="#c9190b"
+          icon={[Function]}
         >
-          <span
+          <ExclamationCircleIcon
             aria-hidden="true"
-            className="pficon pficon-error-circle-o"
-          />
-        </PatternflyIcon>
-      </Icon>
+            className="pf-c-empty-state__icon"
+            color="#c9190b"
+            noVerticalAlign={false}
+            size="sm"
+          >
+            <svg
+              aria-hidden="true"
+              aria-labelledby={null}
+              className="pf-c-empty-state__icon"
+              fill="#c9190b"
+              height="1em"
+              role="img"
+              style={
+                Object {
+                  "verticalAlign": "-0.125em",
+                }
+              }
+              viewBox="0 0 512 512"
+              width="1em"
+            >
+              <path
+                d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+              />
+            </svg>
+          </ExclamationCircleIcon>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-2"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source, {"context":"error","name":null})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source_error, {"context":" ","name":null})
+          </div>
+        </EmptyStateBody>
+      </div>
     </div>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      Error 
-      Creating
-       Source
-    </h3>
-    <p
-      className="blank-slate-pf-secondary-action"
-    >
-      There are errors on a previous step. Use the Back button to review your settings and try again.
-    </p>
-  </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
 
@@ -56,41 +86,71 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={false}
   name={null}
   pending={false}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-complete blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
     <div
-      className="wizard-pf-success-icon"
+      className="pf-c-empty-state quipucords-empty-state"
     >
-      <Icon
-        name="error-circle-o"
-        type="pf"
+      <div
+        className="pf-c-empty-state__content"
       >
-        <PatternflyIcon
-          className=""
-          name="error-circle-o"
+        <EmptyStateIcon
+          color="#c9190b"
+          icon={[Function]}
         >
-          <span
+          <ExclamationCircleIcon
             aria-hidden="true"
-            className="pficon pficon-error-circle-o"
-          />
-        </PatternflyIcon>
-      </Icon>
+            className="pf-c-empty-state__icon"
+            color="#c9190b"
+            noVerticalAlign={false}
+            size="sm"
+          >
+            <svg
+              aria-hidden="true"
+              aria-labelledby={null}
+              className="pf-c-empty-state__icon"
+              fill="#c9190b"
+              height="1em"
+              role="img"
+              style={
+                Object {
+                  "verticalAlign": "-0.125em",
+                }
+              }
+              viewBox="0 0 512 512"
+              width="1em"
+            >
+              <path
+                d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+              />
+            </svg>
+          </ExclamationCircleIcon>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-1"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source_error, {"context":"edit","name":null})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source_error, {"context":" ","name":null})
+          </div>
+        </EmptyStateBody>
+      </div>
     </div>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      Error 
-      Updating
-       Source
-    </h3>
-    <p
-      className="blank-slate-pf-secondary-action"
-    >
-      There are errors on a previous step. Use the Back button to review your settings and try again.
-    </p>
-  </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
 
@@ -101,39 +161,71 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={true}
   name="Dolor"
   pending={false}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-complete blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
     <div
-      className="wizard-pf-success-icon"
+      className="pf-c-empty-state quipucords-empty-state"
     >
-      <Icon
-        name="ok"
-        type="pf"
+      <div
+        className="pf-c-empty-state__content"
       >
-        <PatternflyIcon
-          className=""
-          name="ok"
+        <EmptyStateIcon
+          color="#3e8635"
+          icon={[Function]}
         >
-          <span
+          <OutlinedCheckCircleIcon
             aria-hidden="true"
-            className="pficon pficon-ok"
-          />
-        </PatternflyIcon>
-      </Icon>
+            className="pf-c-empty-state__icon"
+            color="#3e8635"
+            noVerticalAlign={false}
+            size="sm"
+          >
+            <svg
+              aria-hidden="true"
+              aria-labelledby={null}
+              className="pf-c-empty-state__icon"
+              fill="#3e8635"
+              height="1em"
+              role="img"
+              style={
+                Object {
+                  "verticalAlign": "-0.125em",
+                }
+              }
+              viewBox="0 0 512 512"
+              width="1em"
+            >
+              <path
+                d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"
+              />
+            </svg>
+          </OutlinedCheckCircleIcon>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-6"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source, {"context":"","name":"Dolor"})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source, {"context":" ","name":"Dolor"})
+          </div>
+        </EmptyStateBody>
+      </div>
     </div>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      <strong>
-        Dolor
-      </strong>
-       was 
-      created
-      .
-    </h3>
-  </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
 
@@ -144,39 +236,71 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={true}
   name="Dolor"
   pending={false}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-complete blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
     <div
-      className="wizard-pf-success-icon"
+      className="pf-c-empty-state quipucords-empty-state"
     >
-      <Icon
-        name="ok"
-        type="pf"
+      <div
+        className="pf-c-empty-state__content"
       >
-        <PatternflyIcon
-          className=""
-          name="ok"
+        <EmptyStateIcon
+          color="#3e8635"
+          icon={[Function]}
         >
-          <span
+          <OutlinedCheckCircleIcon
             aria-hidden="true"
-            className="pficon pficon-ok"
-          />
-        </PatternflyIcon>
-      </Icon>
+            className="pf-c-empty-state__icon"
+            color="#3e8635"
+            noVerticalAlign={false}
+            size="sm"
+          >
+            <svg
+              aria-hidden="true"
+              aria-labelledby={null}
+              className="pf-c-empty-state__icon"
+              fill="#3e8635"
+              height="1em"
+              role="img"
+              style={
+                Object {
+                  "verticalAlign": "-0.125em",
+                }
+              }
+              viewBox="0 0 512 512"
+              width="1em"
+            >
+              <path
+                d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"
+              />
+            </svg>
+          </OutlinedCheckCircleIcon>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-5"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source, {"context":"edit","name":"Dolor"})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source, {"context":" ","name":"Dolor"})
+          </div>
+        </EmptyStateBody>
+      </div>
     </div>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      <strong>
-        Dolor
-      </strong>
-       was 
-      updated
-      .
-    </h3>
-  </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
 
@@ -187,39 +311,65 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={false}
   name="Dolor"
   pending={true}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-process blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
-    <Spinner
-      className="blank-slate-pf-icon"
-      inline={false}
-      inverse={false}
-      loading={true}
-      size="lg"
+    <div
+      className="pf-c-empty-state quipucords-empty-state"
     >
       <div
-        className="blank-slate-pf-icon spinner spinner-lg"
-      />
-    </Spinner>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      Creating
-       Source...
-    </h3>
-    <p
-      className="blank-slate-pf-secondary-action"
-    >
-      Please wait while source 
-      <strong>
-        Dolor
-      </strong>
-       is being 
-      created
-      .
-    </p>
-  </div>
+        className="pf-c-empty-state__content"
+      >
+        <EmptyStateIcon
+          icon={[Function]}
+        >
+          <Spinner
+            aria-hidden="true"
+            className="pf-c-empty-state__icon"
+          >
+            <span
+              aria-hidden="true"
+              aria-label="Contents"
+              aria-valuetext="Loading..."
+              className="pf-c-spinner pf-m-xl pf-c-empty-state__icon"
+              role="progressbar"
+            >
+              <span
+                className="pf-c-spinner__clipper"
+              />
+              <span
+                className="pf-c-spinner__lead-ball"
+              />
+              <span
+                className="pf-c-spinner__tail-ball"
+              />
+            </span>
+          </Spinner>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-4"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source, {"context":"pending","name":"Dolor"})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source_pending, {"context":" ","name":"Dolor"})
+          </div>
+        </EmptyStateBody>
+      </div>
+    </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
 
@@ -230,38 +380,64 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   fulfilled={false}
   name="Dolor"
   pending={true}
+  t={[Function]}
 >
-  <div
-    className="wizard-pf-process blank-slate-pf"
+  <EmptyState
+    className="quipucords-empty-state"
   >
-    <Spinner
-      className="blank-slate-pf-icon"
-      inline={false}
-      inverse={false}
-      loading={true}
-      size="lg"
+    <div
+      className="pf-c-empty-state quipucords-empty-state"
     >
       <div
-        className="blank-slate-pf-icon spinner spinner-lg"
-      />
-    </Spinner>
-    <h3
-      className="blank-slate-pf-main-action"
-    >
-      Updating
-       Source...
-    </h3>
-    <p
-      className="blank-slate-pf-secondary-action"
-    >
-      Please wait while source 
-      <strong>
-        Dolor
-      </strong>
-       is being 
-      updated
-      .
-    </p>
-  </div>
+        className="pf-c-empty-state__content"
+      >
+        <EmptyStateIcon
+          icon={[Function]}
+        >
+          <Spinner
+            aria-hidden="true"
+            className="pf-c-empty-state__icon"
+          >
+            <span
+              aria-hidden="true"
+              aria-label="Contents"
+              aria-valuetext="Loading..."
+              className="pf-c-spinner pf-m-xl pf-c-empty-state__icon"
+              role="progressbar"
+            >
+              <span
+                className="pf-c-spinner__clipper"
+              />
+              <span
+                className="pf-c-spinner__lead-ball"
+              />
+              <span
+                className="pf-c-spinner__tail-ball"
+              />
+            </span>
+          </Spinner>
+        </EmptyStateIcon>
+        <Title
+          headingLevel="h3"
+        >
+          <h3
+            className="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-3"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe={true}
+          >
+            t(form-dialog.empty-state_title_add-source_pending, {"context":"edit","name":"Dolor"})
+          </h3>
+        </Title>
+        <EmptyStateBody>
+          <div
+            className="pf-c-empty-state__body"
+          >
+            t(form-dialog.empty-state_description_add-source_pending, {"context":"edit","name":"Dolor"})
+          </div>
+        </EmptyStateBody>
+      </div>
+    </div>
+  </EmptyState>
 </AddSourceWizardStepThree>
 `;
