@@ -33,7 +33,6 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-3"
       >
@@ -113,7 +112,6 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-2"
       >
