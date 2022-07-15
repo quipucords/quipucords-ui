@@ -10,7 +10,6 @@ exports[`Confirmation Modal Component should allow custom content: custom 1`] = 
     class="pf-l-bullseye"
   >
     <div
-      aria-describedby="pf-modal-part-5"
       aria-label="t(modal.aria-label-default)"
       aria-labelledby="pf-modal-part-3"
       aria-modal="true"
@@ -22,14 +21,8 @@ exports[`Confirmation Modal Component should allow custom content: custom 1`] = 
       role="dialog"
       style="--pf-c-modal-box--m-align-top--spacer: 5%;"
     >
-      <div
-        aria-live="polite"
-        class="pf-c-modal-box__body"
-        id="pf-modal-part-5"
-      >
-        <div>
-          lorem ipsum
-        </div>
+      <div>
+        lorem ipsum
       </div>
     </div>
   </div>
@@ -38,7 +31,6 @@ exports[`Confirmation Modal Component should allow custom content: custom 1`] = 
 
 exports[`Confirmation Modal Component should allow passed children, or specific props: body 1`] = `
 <div
-  aria-live="polite"
   class="pf-c-modal-box__body"
   id="pf-modal-part-4"
 >
@@ -88,7 +80,6 @@ exports[`Confirmation Modal Component should allow passed children, or specific 
 
 exports[`Confirmation Modal Component should allow passed children, or specific props: children 1`] = `
 <div
-  aria-live="polite"
   class="pf-c-modal-box__body"
   id="pf-modal-part-4"
 >
@@ -100,7 +91,6 @@ exports[`Confirmation Modal Component should allow passed children, or specific 
 
 exports[`Confirmation Modal Component should allow passed children, or specific props: heading 1`] = `
 <div
-  aria-live="polite"
   class="pf-c-modal-box__body"
   id="pf-modal-part-4"
 >
@@ -203,7 +193,6 @@ exports[`Confirmation Modal Component should display a confirmation modal: show 
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-2"
       >

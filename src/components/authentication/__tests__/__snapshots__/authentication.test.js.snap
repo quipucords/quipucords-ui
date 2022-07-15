@@ -104,6 +104,7 @@ exports[`Authentication Component should render a non-connected component pendin
   disableFocusTrap={true}
   footer={null}
   header={null}
+  isContentOnly={false}
   isOpen={true}
   position="top"
   positionOffset="5%"
