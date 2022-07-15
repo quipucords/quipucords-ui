@@ -10,13 +10,41 @@
     "username": "Username"
   },
   "form-dialog": {
+    "confirmation_body_add-source": "{{context}}",
+    "confirmation_body_add-source_edit": "{{context}}",
+    "confirmation_heading_add-source": "Are you sure you want to cancel adding this source?",
+    "confirmation_heading_add-source_edit": "Are you sure you want to cancel updating this source?",
+    "confirmation_title_add-source": "Cancel Add Source",
+    "confirmation_title_add-source_edit": "Cancel Updating Source",
+    "confirmation_body_add-source_exit": "The wizard is in a pending state and will continue adding this source.",
+    "confirmation_body_add-source_exit_edit": "The wizard is in a pending state and will continue updating this source.",
+    "confirmation_heading_add-source_exit": "Are you sure you want to exit this wizard?",
+    "confirmation_title_add-source_exit": "Exit Wizard",
+    "empty-state_description_add-source": "{{context}}",
+    "empty-state_description_add-source_error": "There are errors on a previous step. Use the Back button to review your settings and try again.",
+    "empty-state_description_add-source_pending": "Please wait while source {{name}} is being created.",
+    "empty-state_description_add-source_pending_edit": "Please wait while source {{name}} is being updated.",
+    "empty-state_title_add-source": "{{name}} was created.",
+    "empty-state_title_add-source_edit": "{{name}} was updated.",
+    "empty-state_title_add-source_error": "Error Creating Source",
+    "empty-state_title_add-source_error_edit": "Error Updating Source",
+    "empty-state_title_add-source_pending": "Creating Source...",
+    "empty-state_title_add-source_pending_edit": "Updating Source...",
     "label_cancel": "Cancel",
     "label_close": "Close",
+    "label_no": "No",
     "label_submit": "Submit",
+    "label_submit_add-source": "Save",
     "label_submit_confirmation": "Confirm",
     "label_submit_create-credential": "Save",
     "label_submit_create-scan": "Scan",
-    "label_submit_merge-reports": "Merge"
+    "label_submit_merge-reports": "Merge",
+    "label_yes": "Yes",
+    "title_add-source": "Add Source",
+    "title_add-source_edit": "Edit Source",
+    "title_add-source_step": "Source Type",
+    "title_add-source_step_two": "Credentials",
+    "title_add-source_step_three": "Confirm"
   },
   "modal": {
     "aria-label-default": "Application modal"
@@ -24,6 +52,16 @@
   "refresh-time-button": {
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"
+  },
+  "toast-notifications": {
+    "description_add-source_hidden": "Source {{name}} was created",
+    "description_add-source_hidden_edit": "Source {{name}} was updated",
+    "description_add-source_hidden_error": "{{message}}",
+    "description_add-source_hidden_error_edit": "{{message}}",
+    "title_add-source_hidden": "Success creating source",
+    "title_add-source_hidden_edit": "Success updating source",
+    "title_add-source_hidden_error": "Error creating source",
+    "title_add-source_hidden_error_edit": "Error updating source"
   },
   "view": {
     "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
