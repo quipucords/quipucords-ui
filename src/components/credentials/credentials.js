@@ -13,11 +13,12 @@ import {
   EmptyStateIcon,
   EmptyStatePrimary,
   EmptyStateVariant,
+  List,
   Title,
   TitleSizes
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-import { Button as ButtonPf3, DropdownButton, Form, Grid, ListView, MenuItem } from 'patternfly-react';
+import { Button as ButtonPf3, DropdownButton, Form, ListView, MenuItem } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -116,7 +117,7 @@ class Credentials extends React.Component {
     });
 
     const body = (
-      <Grid.Col sm={12}>
+      <List isPlain>
         <Form.FormControl
           className="quipucords-form-control"
           componentClass="textarea"
@@ -125,7 +126,7 @@ class Credentials extends React.Component {
           rows={viewOptions.selectedItems.length}
           value={credentialsList}
         />
-      </Grid.Col>
+      </List>
     );
 
     const onConfirm = () => this.doDeleteCredentials(viewOptions.selectedItems);

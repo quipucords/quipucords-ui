@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ListView, Button, Grid, Icon, Checkbox } from 'patternfly-react';
+import { ListView, Button, Icon, Checkbox } from 'patternfly-react';
+import { List, ListItem } from '@patternfly/react-core';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
 import { connect, reduxTypes, store } from '../../redux';
@@ -127,21 +128,18 @@ class CredentialListItem extends React.Component {
       case 'sources':
         (item.sources || []).sort((item1, item2) => item1.name.localeCompare(item2.name));
         return (
-          <Grid fluid>
-            {item.sources &&
-              item.sources.map(source => (
-                <Grid.Row key={source.name}>
-                  <Grid.Col xs={12} sm={4}>
-                    <span>
-                      <Tooltip tooltip={dictionary[source.source_type]}>
-                        <Icon type={typeIcon.type} name={typeIcon.name} />
-                      </Tooltip>
-                      &nbsp; {source.name}
-                    </span>
-                  </Grid.Col>
-                </Grid.Row>
-              ))}
-          </Grid>
+          <List isPlain>
+            {item?.sources?.map(source => (
+              <ListItem key={source.name}>
+                <span>
+                  <Tooltip tooltip={dictionary[source.source_type]}>
+                    <Icon type={typeIcon.type} name={typeIcon.name} />
+                  </Tooltip>
+                </span>
+                &nbsp; {source.name}
+              </ListItem>
+            ))}
+          </List>
         );
       default:
         return null;
