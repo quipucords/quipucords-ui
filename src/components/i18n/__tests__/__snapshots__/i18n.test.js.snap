@@ -286,6 +286,23 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-hosts' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-hosts'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/scans/scanJobsList.js",
     "keys": Array [
       Object {
@@ -543,6 +560,14 @@ Array [
   Object {
     "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
     "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "key": "view.error-message",
   },
   Object {
     "file": "./src/components/scans/scanJobsList.js",
