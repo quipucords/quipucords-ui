@@ -17,42 +17,30 @@ exports[`ScanHostList Component should render a connected component: connected 1
 
 exports[`ScanHostList Component should render a non-connected component error: error 1`] = `
 <EmptyState
-  className=""
+  className="quipucords-empty-state__alert"
 >
-  <EmptyStateIcon
-    className=""
-    name="error-circle-o"
-    type="pf"
-  />
-  <EmptyStateTitle
-    className=""
+  <Alert
+    isInline={true}
+    isPlain={true}
+    title="t(view.error, {\\"context\\":\\"scan-hosts\\"})"
+    variant="danger"
   >
-    Error retrieving scan results
-  </EmptyStateTitle>
-  <EmptyStateInfo
-    className=""
-  >
-    Lorem Ipsum.
-  </EmptyStateInfo>
+    t(view.error-message, {"context":"scan-hosts","message":"Lorem Ipsum."})
+  </Alert>
 </EmptyState>
 `;
 
 exports[`ScanHostList Component should render a non-connected component pending: pending 1`] = `
 <EmptyState
-  className=""
+  className="quipucords-empty-state"
+  variant="large"
 >
   <Spinner
-    className="blank-slate-pf-icon"
-    inline={false}
-    inverse={false}
-    loading={true}
+    isSVG={true}
     size="sm"
   />
-  <EmptyStateTitle
-    className=""
-  >
-    Loading...
-  </EmptyStateTitle>
+   
+  t(view.loading)
 </EmptyState>
 `;
 
