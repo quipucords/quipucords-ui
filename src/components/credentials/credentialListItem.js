@@ -130,14 +130,11 @@ class CredentialListItem extends React.Component {
         return (
           <List isPlain>
             {item?.sources?.map(source => (
-              <ListItem key={source.name}>
-                <span>
-                  <Tooltip tooltip={dictionary[source.source_type]}>
-                    <Icon type={typeIcon.type} name={typeIcon.name} />
-                  </Tooltip>
-                </span>
-                &nbsp; {source.name}
-              </ListItem>
+              <Tooltip tooltip={dictionary[source.source_type]}>
+                <ListItem key={source.name} icon={<Icon type={typeIcon.type} name={typeIcon.name} />}>
+                  {source.name}
+                </ListItem>
+              </Tooltip>
             ))}
           </List>
         );
