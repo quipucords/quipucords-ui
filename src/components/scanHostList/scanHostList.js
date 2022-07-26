@@ -90,15 +90,13 @@ class ScanHostList extends React.Component {
     }
 
     return (
-      <div onScroll={this.onScrollList} className="quipucords-infinite-results quipucords-infinite-list">
-        <List isPlain>
-          {hostsList?.map(host => (
-            <ListItem isPlain key={host.name}>
-              {children({ host })}
-            </ListItem>
-          ))}
-        </List>
-      </div>
+      <List onScroll={this.onScrollList} className="quipucords-infinite-results quipucords-infinite-list" isPlain>
+        {hostsList?.map(host => (
+          <ListItem isPlain key={host.name}>
+            {children({ host })}
+          </ListItem>
+        ))}
+      </List>
     );
   }
 }
