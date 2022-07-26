@@ -13,7 +13,6 @@ import {
   EmptyStateIcon,
   EmptyStatePrimary,
   EmptyStateVariant,
-  List,
   Title,
   TitleSizes
 } from '@patternfly/react-core';
@@ -117,16 +116,14 @@ class Credentials extends React.Component {
     });
 
     const body = (
-      <List isPlain>
-        <Form.FormControl
-          className="quipucords-form-control"
-          componentClass="textarea"
-          type="textarea"
-          readOnly
-          rows={viewOptions.selectedItems.length}
-          value={credentialsList}
-        />
-      </List>
+      <Form.FormControl
+        className="quipucords-form-control"
+        componentClass="textarea"
+        type="textarea"
+        readOnly
+        rows={viewOptions.selectedItems.length}
+        value={credentialsList}
+      />
     );
 
     const onConfirm = () => this.doDeleteCredentials(viewOptions.selectedItems);

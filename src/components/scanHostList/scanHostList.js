@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, EmptyState, EmptyStateVariant, List, Spinner } from '@patternfly/react-core';
+import { Alert, AlertVariant, EmptyState, EmptyStateVariant, List, ListItem, Spinner } from '@patternfly/react-core';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { apiTypes } from '../../constants/apiConstants';
@@ -90,9 +90,13 @@ class ScanHostList extends React.Component {
     }
 
     return (
-      <div className="quipucords-infinite-results">
-        <List isPlain onScroll={this.onScrollList}>
-          {hostsList?.map(host => children({ host }))}
+      <div onScroll={this.onScrollList} className="quipucords-infinite-results quipucords-infinite-list">
+        <List isPlain>
+          {hostsList?.map(host => (
+            <ListItem isPlain key={host.name}>
+              {children({ host })}
+            </ListItem>
+          ))}
         </List>
       </div>
     );
