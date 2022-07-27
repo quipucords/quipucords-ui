@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
-import { Grid, Icon } from 'patternfly-react';
+import { Alert, AlertVariant, EmptyState, EmptyStateVariant, List, ListItem, Spinner } from '@patternfly/react-core';
+import { Icon } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { translate } from '../i18n/i18n';
@@ -50,19 +50,18 @@ class ScanSourceList extends React.Component {
     }
 
     return (
-      <Grid fluid>
-        {scanJobList.map(item => (
-          <Grid.Row className="fadein" key={item.id}>
-            <Grid.Col xs={4} md={3}>
-              <Icon {...helpers.sourceTypeIcon(item.sourceType)} />
-              &nbsp; {item.name}
-            </Grid.Col>
-            <Grid.Col xs={8} md={9}>
-              {ScanSourceList.setSourceStatus(item)}
-            </Grid.Col>
-          </Grid.Row>
+      <List isPlain>
+        {scanJobList?.map(item => (
+          <ListItem key={item.id}>
+            <List isPlain>
+              <ListItem icon={<Icon {...helpers.sourceTypeIcon(item.sourceType)} />} key={item.name}>
+                {item.name}
+              </ListItem>
+              <ListItem key={`desc-${item.name}`}>{ScanSourceList.setSourceStatus(item)}</ListItem>
+            </List>
+          </ListItem>
         ))}
-      </Grid>
+      </List>
     );
   }
 }

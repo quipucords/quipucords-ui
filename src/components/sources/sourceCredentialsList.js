@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Icon } from 'patternfly-react';
+import { Icon } from 'patternfly-react';
+import { List, ListItem } from '@patternfly/react-core';
 import { apiTypes } from '../../constants/apiConstants';
 
 const SourceCredentialsList = ({ source }) => {
@@ -14,18 +15,16 @@ const SourceCredentialsList = ({ source }) => {
   );
 
   return (
-    <Grid fluid>
-      {credentials.map(credential => (
-        <Grid.Row key={credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}>
-          <Grid.Col xs={12} sm={4}>
-            <span>
-              <Icon type="fa" name="id-card" />
-              &nbsp; {credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
-            </span>
-          </Grid.Col>
-        </Grid.Row>
+    <List isPlain>
+      {credentials?.map(credential => (
+        <ListItem
+          key={credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
+          icon={<Icon type="fa" name="id-card" />}
+        >
+          {credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
+        </ListItem>
       ))}
-    </Grid>
+    </List>
   );
 };
 
