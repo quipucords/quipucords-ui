@@ -1,0 +1,29 @@
+.quipucords{
+  &-select {
+    position: relative;
+
+    > .quipucords-select-pf {
+      transform: unset !important;
+    }
+
+    &-pf__no-toggle-text {
+      span.pf-c-select__toggle-arrow {
+        margin-left: var(--pf-c-select__toggle-arrow--MarginRight);
+      }
+
+      span.pf-c-select__toggle-text {
+        display: none;
+      }
+    }
+
+    &-pf__position-right {
+      > .pf-c-select__menu {
+        right: 0;
+      }
+    }
+
+    &__inline {
+      display: inline-block;
+    }
+  }
+}
