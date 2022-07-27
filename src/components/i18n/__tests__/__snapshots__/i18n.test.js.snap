@@ -145,6 +145,31 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', type] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'disableSsl'] })",
+      },
+      Object {
+        "key": "form-dialog.label_placeholder",
+        "match": "t('form-dialog.label_placeholder', { context: [ 'add-source', 'credential', multiselectCredentials && 'multi', !availableCredentials.length && 'add' ] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/authentication/authentication.js",
     "keys": Array [
       Object {
@@ -181,6 +206,10 @@ Array [
   Object {
     "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
     "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', type] })",
+      },
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: ['submit', 'create-credential'] })",
@@ -482,6 +511,26 @@ Array [
     "key": "form-dialog.label",
   },
   Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label_placeholder",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
     "file": "./src/components/authentication/authentication.js",
     "key": "view.error",
   },
@@ -499,6 +548,10 @@ Array [
   },
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
     "key": "form-dialog.label",
   },
   Object {

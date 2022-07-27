@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { AddSourceWizardStepTwo } from '../addSourceWizardStepTwo';
+import { AddSourceWizardStepTwo, sslProtocolOptions } from '../addSourceWizardStepTwo';
 
 describe('AddSourceWizardStepTwo Component', () => {
   it('should render a non-connected component', () => {
@@ -11,6 +11,15 @@ describe('AddSourceWizardStepTwo Component', () => {
     const component = mount(<AddSourceWizardStepTwo {...props} />);
 
     expect(component.render()).toMatchSnapshot('non-connected');
+  });
+
+  it('should export select options', () => {
+    expect(
+      sslProtocolOptions.map(({ title, ...option }) => ({
+        ...option,
+        title: (typeof title === 'function' && title()) || title
+      }))
+    ).toMatchSnapshot('options');
   });
 
   it('should display different forms for source types', () => {

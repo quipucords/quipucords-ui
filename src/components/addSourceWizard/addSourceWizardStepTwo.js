@@ -1,14 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Icon } from 'patternfly-react';
+import { Button, ButtonVariant } from '@patternfly/react-core';
+import { PlusIcon } from '@patternfly/react-icons';
+import { Form } from 'patternfly-react';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
 import { helpers } from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
 import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
 import { FormField, fieldValidation } from '../formField/formField';
 import { FormState } from '../formState/formState';
-import DropdownSelect from '../dropdownSelect/dropdownSelect';
+import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Generate ssl protocol options.
+ *
+ * @type {{title: string|Function, value: *}[]}
+ */
+const sslProtocolOptions = Object.keys(sslProtocolDictionary)
+  .map(type => ({
+    title: () => translate('form-dialog.label', { context: ['option', type] }),
+    value: type
+  }))
+  .concat({
+    title: () => translate('form-dialog.label', { context: ['option', 'disableSsl'] }),
+    value: 'disableSsl'
+  });
+
+/**
+ * Add a source with a Wizard, step two, apply credentials.
+ */
 class AddSourceWizardStepTwo extends React.Component {
   static hostValid(value) {
     return (
@@ -275,15 +296,10 @@ class AddSourceWizardStepTwo extends React.Component {
   }
 
   renderCredentials({ errors, touched, handleOnEventCustom }) {
-    const { availableCredentials, credentials, stepTwoErrorMessages, type } = this.props;
+    const { availableCredentials, credentials, stepTwoErrorMessages, t, type } = this.props;
 
     const multiselectCredentials = type === 'network';
     const sourceCredentials = availableCredentials.filter(cred => cred.type === type);
-
-    const titleAddSelect = availableCredentials.length ? 'Select' : 'Add';
-    const title = multiselectCredentials
-      ? `${titleAddSelect} one or more credentials`
-      : `${titleAddSelect} a credential`;
 
     const onChangeCredential = event => {
       handleOnEventCustom({
@@ -300,20 +316,31 @@ class AddSourceWizardStepTwo extends React.Component {
       >
         <Form.InputGroup>
           <DropdownSelect
-            title={title}
+            placeholder={t('form-dialog.label_placeholder', {
+              context: [
+                'add-source',
+                'credential',
+                multiselectCredentials && 'multi',
+                !availableCredentials.length && 'add'
+              ]
+            })}
             id="credentials"
+            isInline={false}
             disabled={!sourceCredentials.length}
-            multiselect={multiselectCredentials}
+            variant={(multiselectCredentials && SelectVariant.checkbox) || SelectVariant.single}
             onSelect={onChangeCredential}
             options={sourceCredentials}
-            selectValue={credentials}
+            selectedOptions={credentials}
             key={`dropdown-update-${sourceCredentials.length}`}
           />
           <Form.InputGroup.Button>
-            <Button className="form-control" onClick={this.onAddCredential} title="Add a credential">
-              <span className="sr-only">Add</span>
-              <Icon type="fa" name="plus" />
-            </Button>
+            <Button
+              variant={ButtonVariant.control}
+              aria-label={t('form-dialog.label', { context: 'add-credential' })}
+              icon={<PlusIcon />}
+              onClick={this.onAddCredential}
+              title={t('form-dialog.label', { context: 'add-credential' })}
+            />
           </Form.InputGroup.Button>
         </Form.InputGroup>
       </FormField>
@@ -364,9 +391,10 @@ class AddSourceWizardStepTwo extends React.Component {
             <FormField label="Connection">
               <DropdownSelect
                 id="optionSslProtocol"
+                isInline={false}
                 onSelect={onChangeSslProtocol}
-                options={{ ...sslProtocolDictionary, disableSsl: 'Disable SSL' }}
-                selectValue={[(checked.optionDisableSsl && 'disableSsl') || values.optionSslProtocol]}
+                options={sslProtocolOptions}
+                selectedOptions={[(checked.optionDisableSsl && 'disableSsl') || values.optionSslProtocol]}
               />
             </FormField>
             <FormField error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
@@ -431,6 +459,14 @@ class AddSourceWizardStepTwo extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{add: boolean, optionDisableSsl: boolean, hostsSingle: string, optionParamiko: boolean, credentials: Array,
+ *     edit: boolean, stepTwoErrorMessages: object, hosts: Array, optionSslProtocol: string, getCredentials: Function,
+ *     type: string, hostsMultiple: string, optionSslCert: boolean, availableCredentials: Array, t: Function,
+ *     port: string|number, name: string, id: string|number}}
+ */
 AddSourceWizardStepTwo.propTypes = {
   add: PropTypes.bool,
   availableCredentials: PropTypes.array,
@@ -454,9 +490,17 @@ AddSourceWizardStepTwo.propTypes = {
     options: PropTypes.string,
     port: PropTypes.string
   }),
+  t: PropTypes.func,
   type: PropTypes.string
 };
 
+/**
+ * Default props
+ *
+ * @type {{add: boolean, optionDisableSsl: null, hostsSingle: string, optionParamiko: null, credentials: *[], edit: boolean,
+ *     stepTwoErrorMessages: {}, hosts: *[], optionSslProtocol: string, getCredentials: Function, type: null,
+ *     hostsMultiple: string, optionSslCert: null, availableCredentials: *[], t: translate, port: string, name: string, id: null}}
+ */
 AddSourceWizardStepTwo.defaultProps = {
   add: true,
   availableCredentials: [],
@@ -474,6 +518,7 @@ AddSourceWizardStepTwo.defaultProps = {
   optionParamiko: null,
   port: '',
   stepTwoErrorMessages: {},
+  t: translate,
   type: null
 };
 
@@ -496,4 +541,9 @@ const makeMapStateToProps = () => {
 
 const ConnectedAddSourceWizardStepTwo = connect(makeMapStateToProps, mapDispatchToProps)(AddSourceWizardStepTwo);
 
-export { ConnectedAddSourceWizardStepTwo as default, ConnectedAddSourceWizardStepTwo, AddSourceWizardStepTwo };
+export {
+  ConnectedAddSourceWizardStepTwo as default,
+  ConnectedAddSourceWizardStepTwo,
+  AddSourceWizardStepTwo,
+  sslProtocolOptions
+};
