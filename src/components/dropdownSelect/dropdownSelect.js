@@ -1,51 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, Grid, Icon, MenuItem } from 'patternfly-react';
-import _isPlainObject from 'lodash/isPlainObject';
+import {
+  DropdownDirection,
+  DropdownPosition,
+  Select as PfSelect,
+  SelectOption as PfSelectOption,
+  SelectVariant
+} from '@patternfly/react-core';
 import _cloneDeep from 'lodash/cloneDeep';
-import helpers from '../../common/helpers';
+import _isEqual from 'lodash/isEqual';
+import _findIndex from 'lodash/findIndex';
+import _isPlainObject from 'lodash/isPlainObject';
+import { helpers } from '../../common/helpers';
 
+/**
+ * Pass direction as select component variant option.
+ *
+ * @type {DropdownDirection}
+ */
+const SelectDirection = DropdownDirection;
+
+/**
+ * Pass position as select component variant option.
+ *
+ * @type {DropdownPosition}
+ */
+const SelectPosition = DropdownPosition;
+
+/**
+ * A wrapper for Patternfly Select. Provides restructured event data for onSelect callback.
+ *
+ * @augments React.Component
+ * @fires onSelect
+ * @fires onToggle
+ */
 class DropdownSelect extends React.Component {
-  static filterTitle(options, multiselect) {
-    const title = [];
+  state = { isExpanded: false, options: null, selected: null };
 
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected === true && options[i].title) {
-        title.push(options[i].title);
-      }
-
-      if (!multiselect && title.length > 0) {
-        break;
-      }
-    }
-
-    return title.length ? title.join(',') : null;
-  }
-
-  state = {
-    isOpen: false,
-    options: null,
-    selectedTitle: []
-  };
+  selectField = React.createRef();
 
   componentDidMount() {
     const { options } = this.state;
 
     if (options === null) {
-      this.formatFilterOptions();
+      this.formatOptions();
     }
   }
 
-  onSelect = value => {
+  componentDidUpdate(prevProps) {
+    const { options, selectedOptions } = this.props;
+
+    if (!_isEqual(prevProps.options, options) || !_isEqual(prevProps.selectedOptions, selectedOptions)) {
+      this.formatOptions();
+    }
+  }
+
+  /**
+   * Emulate select event object, apply to provided onSelect prop.
+   *
+   * @event onSelect
+   * @param {object} event
+   * @param {string} titleSelection
+   */
+  onSelect = (event, titleSelection) => {
     const { options } = this.state;
-    const { id, name, multiselect, onSelect } = this.props;
-    const updatedOptions = _cloneDeep(options);
+    const { id, name, onSelect, variant } = this.props;
 
-    const optionsIndex = updatedOptions.findIndex(option => option.value === value);
+    const updatedOptions = options;
+    const optionsIndex = updatedOptions.findIndex(option => option.title === titleSelection);
+    updatedOptions[optionsIndex].selected =
+      variant === SelectVariant.single ? true : !updatedOptions[optionsIndex].selected;
 
-    updatedOptions[optionsIndex].selected = !multiselect ? true : !updatedOptions[optionsIndex].selected;
-
-    if (!multiselect) {
+    if (variant === SelectVariant.single) {
       updatedOptions.forEach((option, index) => {
         if (optionsIndex !== index) {
           updatedOptions[index].selected = false;
@@ -53,22 +79,34 @@ class DropdownSelect extends React.Component {
       });
     }
 
-    const updatedSelectedTitle = DropdownSelect.filterTitle(updatedOptions, multiselect);
+    const updateSelected =
+      variant === SelectVariant.single
+        ? titleSelection
+        : updatedOptions.filter(opt => opt.selected === true).map(opt => opt.title);
 
     this.setState(
       {
-        selectedTitle: updatedSelectedTitle,
-        options: updatedOptions
+        options: updatedOptions,
+        selected: updateSelected
       },
       () => {
+        const mockUpdatedOptions = _cloneDeep(updatedOptions);
+
         const mockTarget = {
           id,
           name: name || id,
-          value: updatedOptions[optionsIndex].value,
+          value: mockUpdatedOptions[optionsIndex].value,
+          selected:
+            (variant === SelectVariant.single && mockUpdatedOptions[optionsIndex]) || _cloneDeep(updateSelected),
           selectedIndex: optionsIndex,
-          type: `select-${(multiselect && 'multiple') || 'one'}`,
-          options: updatedOptions
+          type: `select-${(variant === SelectVariant.single && 'one') || 'multiple'}`,
+          options: mockUpdatedOptions
         };
+
+        if (variant === SelectVariant.checkbox) {
+          mockTarget.checked = mockUpdatedOptions[optionsIndex].selected;
+        }
+
         const mockEvent = {
           ...mockTarget,
           target: { ...mockTarget },
@@ -76,28 +114,48 @@ class DropdownSelect extends React.Component {
           persist: helpers.noop
         };
 
-        onSelect({ ...mockEvent }, optionsIndex, updatedOptions);
+        onSelect({ ...mockEvent }, optionsIndex, mockUpdatedOptions);
+
+        if (variant === SelectVariant.single) {
+          this.setState({
+            isExpanded: false
+          });
+        }
       }
     );
   };
 
-  onToggleDropDown = (a, b, c) => {
-    const { isOpen } = this.state;
-
+  /**
+   * Patternfly Select's open/closed state.
+   *
+   * @event onToggle
+   * @param {boolean} expanded
+   */
+  onToggle = expanded => {
     this.setState({
-      isOpen: (c && c.source === 'select') || !isOpen
+      isExpanded: expanded
     });
   };
 
-  formatFilterOptions() {
-    const { options, multiselect, selectValue } = this.props;
+  // FixMe: attributes filtered on PF select component. allow data- attributes
+  /**
+   * Format options into a consumable array of objects format.
+   * Note: It is understood that for line 151'ish around "updatedOptions" we dump all values regardless
+   * of whether they are plain objects, or not, into updatedOptions. This has been done for speed only,
+   * one less check to perform.
+   */
+  formatOptions() {
+    const { current: domElement = {} } = this.selectField;
+    const { options, selectedOptions, variant } = this.props;
+    const dataAttributes = Object.entries(this.props).filter(([key]) => /^data-/i.test(key));
     const updatedOptions = _isPlainObject(options)
-      ? Object.keys(options).map(value => ({ title: options[value], value }))
+      ? Object.entries(options).map(([key, value]) => ({ ...value, title: key, value }))
       : _cloneDeep(options);
 
-    const updatedTitle = [];
-    const activateValues =
-      (selectValue && typeof selectValue === 'string') || typeof selectValue === 'number' ? [selectValue] : selectValue;
+    const activateOptions =
+      (selectedOptions && typeof selectedOptions === 'string') || typeof selectedOptions === 'number'
+        ? [selectedOptions]
+        : selectedOptions;
 
     updatedOptions.forEach((option, index) => {
       let convertedOption = option;
@@ -109,101 +167,203 @@ class DropdownSelect extends React.Component {
         };
 
         updatedOptions[index] = convertedOption;
+      } else if (typeof convertedOption.title === 'function') {
+        convertedOption.title = convertedOption.title();
       }
 
       convertedOption.text = convertedOption.text || convertedOption.title;
       convertedOption.textContent = convertedOption.textContent || convertedOption.title;
       convertedOption.label = convertedOption.label || convertedOption.title;
 
-      if (activateValues) {
-        updatedOptions[index].selected = activateValues.includes(convertedOption.value);
-      }
+      if (activateOptions) {
+        let isSelected;
 
-      if (convertedOption.selected === true) {
-        if (!multiselect && updatedTitle.length) {
-          updatedOptions[index].selected = false;
+        if (_isPlainObject(convertedOption.value)) {
+          isSelected = _findIndex(activateOptions, convertedOption.value) > -1;
+
+          if (!isSelected) {
+            const tempSearch = activateOptions.find(activeOption =>
+              Object.values(convertedOption.value).includes(activeOption)
+            );
+            isSelected = !!tempSearch;
+          }
+        } else {
+          isSelected = activateOptions.includes(convertedOption.value);
         }
 
-        if (multiselect || (!multiselect && !updatedTitle.length)) {
-          updatedTitle.push(convertedOption.title);
+        if (!isSelected) {
+          isSelected = activateOptions.includes(convertedOption.title);
         }
+
+        updatedOptions[index].selected = isSelected;
       }
     });
 
+    let updateSelected;
+
+    if (variant === SelectVariant.single) {
+      updateSelected = (updatedOptions.find(opt => opt.selected === true) || {}).title;
+    } else {
+      updateSelected = updatedOptions.filter(opt => opt.selected === true).map(opt => opt.title);
+    }
+
+    if (domElement?.parentRef?.current) {
+      dataAttributes.forEach(([key, value]) => domElement?.parentRef?.current.setAttribute(key, value));
+    }
+
     this.setState({
-      selectedTitle: updatedTitle.length ? updatedTitle.join(',') : null,
-      options: updatedOptions
+      options: updatedOptions,
+      selected: updateSelected
     });
   }
 
+  /**
+   * Render a select/dropdown list.
+   *
+   * @returns {Node}
+   */
   render() {
-    const { isOpen, options, selectedTitle } = this.state;
-    const { className, id, name, multiselect, pullRight, title } = this.props;
-    const additionalProps = {};
+    const { options, selected, isExpanded } = this.state;
+    const {
+      ariaLabel,
+      className,
+      direction,
+      isDisabled,
+      isInline,
+      isToggleText,
+      maxHeight,
+      placeholder,
+      position,
+      toggleIcon,
+      variant
+    } = this.props;
 
-    if (multiselect) {
-      additionalProps.onToggle = this.onToggleDropDown;
-      additionalProps.open = isOpen;
+    const pfSelectOptions = {
+      direction,
+      maxHeight
+    };
+
+    // FixMe: investigate "isDisabled", PFReact quirks?
+    if (!options || !options.length || isDisabled) {
+      pfSelectOptions.isDisabled = true;
     }
 
+    /**
+     * FixMe: PFReact quirks around PfSelect, requires children
+     * "Null" is a typical fallback we use across the board on a multitude of React apps.
+     * In this case "null" is a fallback for scenarios where an "undefined" list is passed
+     * during initial mount. Converted to an empty list/array "[]" to compensate.
+     */
+    /**
+     * Note: PFReact missing select border on compile
+     * Related https://github.com/patternfly/patternfly-react/issues/5650 and
+     * https://github.com/cssnano/cssnano/issues/1051
+     */
     return (
-      <Dropdown
-        id={id}
-        name={name || id}
-        disabled={!options || !options.length}
-        className={`quipucords-dropdownselect ${className}`}
-        onSelect={this.onSelect}
-        pullRight={pullRight}
-        {...additionalProps}
-      >
-        <Dropdown.Toggle className="form-control">
-          <span>{selectedTitle || title}</span>
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          {options &&
+      <div className={`quipucords-select${(isInline && ' quipucords-select__inline') || ''}`}>
+        <PfSelect
+          menuAppendTo="parent"
+          className={`quipucords-select-pf${(!isToggleText && '__no-toggle-text') || ''} ${
+            (position === DropdownPosition.right && 'quipucords-select-pf__position-right') || ''
+          } ${className}`}
+          variant={variant}
+          aria-label={ariaLabel}
+          onToggle={this.onToggle}
+          onSelect={this.onSelect}
+          selections={selected}
+          isOpen={isExpanded}
+          toggleIcon={toggleIcon}
+          placeholderText={placeholder}
+          ref={this.selectField}
+          {...pfSelectOptions}
+        >
+          {(options &&
             options.map(option => (
-              <MenuItem key={option.value} eventKey={option.value} active={!multiselect && option.selected}>
-                {!multiselect && option.title}
-                {multiselect && (
-                  <Grid.Row className="quipucords-dropdownselect-menuitem">
-                    <Grid.Col xs={10} className="quipucords-dropdownselect-menuitemname">
-                      {option.title}
-                    </Grid.Col>
-                    <Grid.Col xs={2} className="quipucords-dropdownselect-menuitemcheck">
-                      {option.selected && <Icon type="fa" name="check" />}
-                    </Grid.Col>
-                  </Grid.Row>
-                )}
-              </MenuItem>
-            ))}
-        </Dropdown.Menu>
-      </Dropdown>
+              <PfSelectOption
+                key={window.btoa(`${option.title}-${option.value}`)}
+                id={window.btoa(`${option.title}-${option.value}`)}
+                value={option.title}
+                data-value={(_isPlainObject(option.value) && JSON.stringify([option.value])) || option.value}
+                data-title={option.title}
+              />
+            ))) ||
+            []}
+        </PfSelect>
+      </div>
     );
   }
 }
 
+/**
+ * Prop types.
+ *
+ * @type {{toggleIcon: (React.ReactNode|Function), className: string, ariaLabel: string, onSelect: Function, isToggleText: boolean,
+ *     maxHeight: number, name: string, options: Array|object, selectedOptions: Array|number|string, variant: string,
+ *     isInline: boolean, id: string, isDisabled: boolean, placeholder: string, position: string, direction: string}}
+ */
 DropdownSelect.propTypes = {
+  ariaLabel: PropTypes.string,
   className: PropTypes.string,
+  direction: PropTypes.oneOf(Object.values(SelectDirection)),
   id: PropTypes.string,
-  multiselect: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  isInline: PropTypes.bool,
+  isToggleText: PropTypes.bool,
+  maxHeight: PropTypes.number,
   name: PropTypes.string,
   onSelect: PropTypes.func,
-  options: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  pullRight: PropTypes.bool,
-  selectValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
-  title: PropTypes.string
+  options: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.any,
+        value: PropTypes.any.isRequired,
+        selected: PropTypes.bool
+      })
+    ),
+    PropTypes.shape({
+      title: PropTypes.any,
+      value: PropTypes.any.isRequired,
+      selected: PropTypes.bool
+    }),
+    PropTypes.object
+  ]),
+  placeholder: PropTypes.string,
+  position: PropTypes.oneOf(Object.values(SelectPosition)),
+  selectedOptions: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
+  ]),
+  toggleIcon: PropTypes.element,
+  variant: PropTypes.oneOf([...Object.values(SelectVariant)])
 };
 
+/**
+ * Default props.
+ *
+ * @type {{toggleIcon: (React.ReactNode|Function), className: string, ariaLabel: string, onSelect: Function,
+ *     isToggleText: boolean, maxHeight: null, name: null, options: *[], selectedOptions: null, variant: SelectVariant.single,
+ *     isInline: boolean, id: string, isDisabled: boolean, placeholder: string, position: DropdownPosition.left,
+ *     direction: DropdownDirection.down}}
+ */
 DropdownSelect.defaultProps = {
+  ariaLabel: 'Select option',
   className: '',
+  direction: SelectDirection.down,
   id: helpers.generateId(),
-  multiselect: false,
+  isDisabled: false,
+  isInline: true,
+  isToggleText: true,
+  maxHeight: null,
   name: null,
   onSelect: helpers.noop,
   options: [],
-  pullRight: false,
-  selectValue: null,
-  title: 'Select option'
+  placeholder: 'Select option',
+  position: SelectPosition.left,
+  selectedOptions: null,
+  toggleIcon: null,
+  variant: SelectVariant.single
 };
 
-export { DropdownSelect as default, DropdownSelect };
+export { DropdownSelect as default, DropdownSelect, SelectDirection, SelectPosition, SelectVariant };
