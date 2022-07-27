@@ -1,532 +1,676 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DropdownSelect Component should allow a alternate array and object options: key value object 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      Select option
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
-</div>
+exports[`Select Component should allow alternate array and object options: key value object 1`] = `
+Array [
+  Object {
+    "0": "i",
+    "1": "p",
+    "2": "s",
+    "3": "u",
+    "4": "m",
+    "label": "lorem",
+    "selected": true,
+    "text": "lorem",
+    "textContent": "lorem",
+    "title": "lorem",
+    "value": "ipsum",
+  },
+  Object {
+    "0": "w",
+    "1": "o",
+    "2": "r",
+    "3": "l",
+    "4": "d",
+    "label": "hello",
+    "selected": true,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": "world",
+  },
+]
 `;
 
-exports[`DropdownSelect Component should allow a alternate array and object options: string array 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      ipsum
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        lorem
-      </a>
-    </li>
-    <li
-      class="active"
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        hello
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
-</div>
+exports[`Select Component should allow alternate array and object options: key value object 2`] = `
+Array [
+  Object {
+    "label": "lorem",
+    "selected": true,
+    "text": "lorem",
+    "textContent": "lorem",
+    "title": "lorem",
+    "value": "ipsum",
+  },
+  Object {
+    "label": "hello",
+    "selected": true,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": "world",
+  },
+]
 `;
 
-exports[`DropdownSelect Component should render a basic component: basic dropdown 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      hello
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        lorem
-      </a>
-    </li>
-    <li
-      class="active"
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        hello
-      </a>
-    </li>
-  </ul>
-</div>
+exports[`Select Component should allow alternate array and object options: string array 1`] = `
+Array [
+  Object {
+    "label": "lorem",
+    "selected": false,
+    "text": "lorem",
+    "textContent": "lorem",
+    "title": "lorem",
+    "value": "lorem",
+  },
+  Object {
+    "label": "ipsum",
+    "selected": true,
+    "text": "ipsum",
+    "textContent": "ipsum",
+    "title": "ipsum",
+    "value": "ipsum",
+  },
+  Object {
+    "label": "hello",
+    "selected": false,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": "hello",
+  },
+  Object {
+    "label": "world",
+    "selected": false,
+    "text": "world",
+    "textContent": "world",
+    "title": "world",
+    "value": "world",
+  },
+]
 `;
 
-exports[`DropdownSelect Component should render a basic component: multiselect dropdown 1`] = `
-<div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
->
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      lorem,hello
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        <div
-          class="quipucords-dropdownselect-menuitem row"
-        >
-          <div
-            class="quipucords-dropdownselect-menuitemname col-xs-10"
-          >
-            lorem
-          </div>
-          <div
-            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
-          >
-            <span
-              aria-hidden="true"
-              class="fa fa-check"
-            />
-          </div>
-        </div>
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        <div
-          class="quipucords-dropdownselect-menuitem row"
-        >
-          <div
-            class="quipucords-dropdownselect-menuitemname col-xs-10"
-          >
-            hello
-          </div>
-          <div
-            class="quipucords-dropdownselect-menuitemcheck col-xs-2"
-          >
-            <span
-              aria-hidden="true"
-              class="fa fa-check"
-            />
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`DropdownSelect Component should return an emulated onchange event: emulated event 1`] = `
+exports[`Select Component should allow alternate direction and position options: direction up 1`] = `
 Object {
-  "currentTarget": Object {
-    "id": "test",
-    "name": "test",
-    "options": Array [
-      Object {
-        "label": "lorem",
-        "selected": false,
-        "text": "lorem",
-        "textContent": "lorem",
-        "title": "lorem",
-        "value": "lorem",
-      },
-      Object {
-        "label": "ipsum",
-        "selected": false,
-        "text": "ipsum",
-        "textContent": "ipsum",
-        "title": "ipsum",
-        "value": "ipsum",
-      },
-      Object {
-        "label": "hello",
-        "selected": true,
-        "text": "hello",
-        "textContent": "hello",
-        "title": "hello",
-        "value": "hello",
-      },
-      Object {
-        "label": "world",
-        "selected": false,
-        "text": "world",
-        "textContent": "world",
-        "title": "world",
-        "value": "world",
-      },
-    ],
-    "selectedIndex": 2,
-    "type": "select-one",
-    "value": "hello",
-  },
-  "id": "test",
-  "name": "test",
-  "options": Array [
-    Object {
-      "label": "lorem",
-      "selected": false,
-      "text": "lorem",
-      "textContent": "lorem",
-      "title": "lorem",
-      "value": "lorem",
-    },
-    Object {
-      "label": "ipsum",
-      "selected": false,
-      "text": "ipsum",
-      "textContent": "ipsum",
-      "title": "ipsum",
-      "value": "ipsum",
-    },
-    Object {
-      "label": "hello",
-      "selected": true,
-      "text": "hello",
-      "textContent": "hello",
-      "title": "hello",
-      "value": "hello",
-    },
-    Object {
-      "label": "world",
-      "selected": false,
-      "text": "world",
-      "textContent": "world",
-      "title": "world",
-      "value": "world",
-    },
-  ],
-  "persist": [Function],
-  "selectedIndex": 2,
-  "target": Object {
-    "id": "test",
-    "name": "test",
-    "options": Array [
-      Object {
-        "label": "lorem",
-        "selected": false,
-        "text": "lorem",
-        "textContent": "lorem",
-        "title": "lorem",
-        "value": "lorem",
-      },
-      Object {
-        "label": "ipsum",
-        "selected": false,
-        "text": "ipsum",
-        "textContent": "ipsum",
-        "title": "ipsum",
-        "value": "ipsum",
-      },
-      Object {
-        "label": "hello",
-        "selected": true,
-        "text": "hello",
-        "textContent": "hello",
-        "title": "hello",
-        "value": "hello",
-      },
-      Object {
-        "label": "world",
-        "selected": false,
-        "text": "world",
-        "textContent": "world",
-        "title": "world",
-        "value": "world",
-      },
-    ],
-    "selectedIndex": 2,
-    "type": "select-one",
-    "value": "hello",
-  },
-  "type": "select-one",
-  "value": "hello",
+  "className": "quipucords-select-pf  ",
+  "direction": "up",
 }
 `;
 
-exports[`DropdownSelect Component should return an emulated onchange event: key value object 1`] = `
+exports[`Select Component should allow alternate direction and position options: position right 1`] = `
+Object {
+  "className": "quipucords-select-pf quipucords-select-pf__position-right ",
+  "direction": "down",
+}
+`;
+
+exports[`Select Component should allow being disabled with missing options: no options 1`] = `
 <div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
+  className="quipucords-select quipucords-select__inline"
 >
-  <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
-    type="button"
-  >
-    <span>
-      Select option
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
-  >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
+  <Select
+    aria-describedby=""
+    aria-invalid={false}
+    aria-label="Select option"
+    aria-labelledby=""
+    chipGroupComponent={null}
+    className="quipucords-select-pf  "
+    clearSelectionsAriaLabel="Clear all"
+    createText="Create"
+    customBadgeText={null}
+    customContent={null}
+    direction="down"
+    favorites={Array []}
+    favoritesLabel="Favorites"
+    hasInlineFilter={false}
+    hasPlaceholderStyle={false}
+    inlineFilterPlaceholderText={null}
+    inputAutoComplete="off"
+    inputIdPrefix=""
+    isCreatable={false}
+    isCreateSelectOptionObject={false}
+    isDisabled={true}
+    isFlipEnabled={false}
+    isGrouped={false}
+    isInputFilterPersisted={false}
+    isInputValuePersisted={false}
+    isOpen={false}
+    isPlain={false}
+    maxHeight={null}
+    menuAppendTo="parent"
+    noResultsFoundText="No results found"
+    onClear={[Function]}
+    onCreateOption={[Function]}
+    onFilter={null}
+    onSelect={[Function]}
+    onToggle={[Function]}
+    onTypeaheadInputChanged={null}
+    ouiaSafe={true}
+    placeholderText="Select option"
+    position="left"
+    removeSelectionAriaLabel="Remove"
+    selections={Array []}
+    shouldResetOnSelect={true}
+    toggleAriaLabel="Options menu"
+    toggleIcon={null}
+    toggleId={null}
+    typeAheadAriaDescribedby=""
+    typeAheadAriaLabel=""
+    validated="default"
+    variant="single"
+    width=""
+  />
 </div>
 `;
 
-exports[`DropdownSelect Component should return an emulated onchange event: string array 1`] = `
+exports[`Select Component should allow being disabled with missing options: options, but disabled 1`] = `
 <div
-  class="quipucords-dropdownselect  dropdown btn-group"
-  name="test"
+  className="quipucords-select quipucords-select__inline"
 >
+  <Select
+    aria-describedby=""
+    aria-invalid={false}
+    aria-label="Select option"
+    aria-labelledby=""
+    chipGroupComponent={null}
+    className="quipucords-select-pf  "
+    clearSelectionsAriaLabel="Clear all"
+    createText="Create"
+    customBadgeText={null}
+    customContent={null}
+    direction="down"
+    favorites={Array []}
+    favoritesLabel="Favorites"
+    hasInlineFilter={false}
+    hasPlaceholderStyle={false}
+    inlineFilterPlaceholderText={null}
+    inputAutoComplete="off"
+    inputIdPrefix=""
+    isCreatable={false}
+    isCreateSelectOptionObject={false}
+    isDisabled={true}
+    isFlipEnabled={false}
+    isGrouped={false}
+    isInputFilterPersisted={false}
+    isInputValuePersisted={false}
+    isOpen={false}
+    isPlain={false}
+    maxHeight={null}
+    menuAppendTo="parent"
+    noResultsFoundText="No results found"
+    onClear={[Function]}
+    onCreateOption={[Function]}
+    onFilter={null}
+    onSelect={[Function]}
+    onToggle={[Function]}
+    onTypeaheadInputChanged={null}
+    ouiaSafe={true}
+    placeholderText="Select option"
+    position="left"
+    removeSelectionAriaLabel="Remove"
+    selections={Array []}
+    shouldResetOnSelect={true}
+    toggleAriaLabel="Options menu"
+    toggleIcon={null}
+    toggleId={null}
+    typeAheadAriaDescribedby=""
+    typeAheadAriaLabel=""
+    validated="default"
+    variant="single"
+    width=""
+  >
+    <SelectOption
+      className=""
+      component="button"
+      data-title="lorem"
+      data-value="lorem"
+      id="bG9yZW0tbG9yZW0="
+      index={0}
+      inputId=""
+      isChecked={false}
+      isDisabled={false}
+      isFavorite={null}
+      isLastOptionBeforeFooter={[Function]}
+      isLoad={false}
+      isLoading={false}
+      isNoResultsOption={false}
+      isPlaceholder={false}
+      isSelected={false}
+      key="bG9yZW0tbG9yZW0="
+      keyHandler={[Function]}
+      onClick={[Function]}
+      sendRef={[Function]}
+      setViewMoreNextIndex={[Function]}
+      value="lorem"
+    />
+    <SelectOption
+      className=""
+      component="button"
+      data-title="ipsum"
+      data-value="ipsum"
+      id="aXBzdW0taXBzdW0="
+      index={0}
+      inputId=""
+      isChecked={false}
+      isDisabled={false}
+      isFavorite={null}
+      isLastOptionBeforeFooter={[Function]}
+      isLoad={false}
+      isLoading={false}
+      isNoResultsOption={false}
+      isPlaceholder={false}
+      isSelected={false}
+      key="aXBzdW0taXBzdW0="
+      keyHandler={[Function]}
+      onClick={[Function]}
+      sendRef={[Function]}
+      setViewMoreNextIndex={[Function]}
+      value="ipsum"
+    />
+    <SelectOption
+      className=""
+      component="button"
+      data-title="hello"
+      data-value="hello"
+      id="aGVsbG8taGVsbG8="
+      index={0}
+      inputId=""
+      isChecked={false}
+      isDisabled={false}
+      isFavorite={null}
+      isLastOptionBeforeFooter={[Function]}
+      isLoad={false}
+      isLoading={false}
+      isNoResultsOption={false}
+      isPlaceholder={false}
+      isSelected={false}
+      key="aGVsbG8taGVsbG8="
+      keyHandler={[Function]}
+      onClick={[Function]}
+      sendRef={[Function]}
+      setViewMoreNextIndex={[Function]}
+      value="hello"
+    />
+    <SelectOption
+      className=""
+      component="button"
+      data-title="world"
+      data-value="world"
+      id="d29ybGQtd29ybGQ="
+      index={0}
+      inputId=""
+      isChecked={false}
+      isDisabled={false}
+      isFavorite={null}
+      isLastOptionBeforeFooter={[Function]}
+      isLoad={false}
+      isLoading={false}
+      isNoResultsOption={false}
+      isPlaceholder={false}
+      isSelected={false}
+      key="d29ybGQtd29ybGQ="
+      keyHandler={[Function]}
+      onClick={[Function]}
+      sendRef={[Function]}
+      setViewMoreNextIndex={[Function]}
+      value="world"
+    />
+  </Select>
+</div>
+`;
+
+exports[`Select Component should allow being disabled with missing options: options, but no content 1`] = `
+<div
+  className="quipucords-select quipucords-select__inline"
+>
+  <Select
+    aria-describedby=""
+    aria-invalid={false}
+    aria-label="Select option"
+    aria-labelledby=""
+    chipGroupComponent={null}
+    className="quipucords-select-pf  "
+    clearSelectionsAriaLabel="Clear all"
+    createText="Create"
+    customBadgeText={null}
+    customContent={null}
+    direction="down"
+    favorites={Array []}
+    favoritesLabel="Favorites"
+    hasInlineFilter={false}
+    hasPlaceholderStyle={false}
+    inlineFilterPlaceholderText={null}
+    inputAutoComplete="off"
+    inputIdPrefix=""
+    isCreatable={false}
+    isCreateSelectOptionObject={false}
+    isDisabled={true}
+    isFlipEnabled={false}
+    isGrouped={false}
+    isInputFilterPersisted={false}
+    isInputValuePersisted={false}
+    isOpen={false}
+    isPlain={false}
+    maxHeight={null}
+    menuAppendTo="parent"
+    noResultsFoundText="No results found"
+    onClear={[Function]}
+    onCreateOption={[Function]}
+    onFilter={null}
+    onSelect={[Function]}
+    onToggle={[Function]}
+    onTypeaheadInputChanged={null}
+    ouiaSafe={true}
+    placeholderText="Select option"
+    position="left"
+    removeSelectionAriaLabel="Remove"
+    selections={Array []}
+    shouldResetOnSelect={true}
+    toggleAriaLabel="Options menu"
+    toggleIcon={null}
+    toggleId={null}
+    typeAheadAriaDescribedby=""
+    typeAheadAriaLabel=""
+    validated="default"
+    variant="single"
+    width=""
+  />
+</div>
+`;
+
+exports[`Select Component should allow data- props: data- attributes 1`] = `
+Object {
+  "ariaLabel": "Select option",
+  "className": "",
+  "data-dolor-sit": "dolor sit",
+  "data-lorem": "ipsum",
+  "direction": "down",
+  "id": "generatedid-",
+  "isDisabled": false,
+  "isInline": true,
+  "isToggleText": true,
+  "maxHeight": null,
+  "name": null,
+  "onSelect": [Function],
+  "options": Array [],
+  "placeholder": "Select option",
+  "position": "left",
+  "selectedOptions": null,
+  "toggleIcon": null,
+  "variant": "single",
+}
+`;
+
+exports[`Select Component should allow plain objects as values, and be able to select options based on values within the object: select when option values are objects 1`] = `
+Array [
+  Object {
+    "label": "lorem",
+    "selected": false,
+    "text": "lorem",
+    "textContent": "lorem",
+    "title": "lorem",
+    "value": Object {
+      "dolor": "sit",
+    },
+  },
+  Object {
+    "label": "dolor",
+    "selected": false,
+    "text": "dolor",
+    "textContent": "dolor",
+    "title": "dolor",
+    "value": Object {
+      "lorem": "ipsum",
+    },
+  },
+  Object {
+    "label": "hello",
+    "selected": true,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": Object {
+      "hello": "world",
+    },
+  },
+]
+`;
+
+exports[`Select Component should allow selected options to match value or title: value or title match 1`] = `
+Array [
+  Object {
+    "0": "i",
+    "1": "p",
+    "2": "s",
+    "3": "u",
+    "4": "m",
+    "label": "lorem",
+    "selected": true,
+    "text": "lorem",
+    "textContent": "lorem",
+    "title": "lorem",
+    "value": "ipsum",
+  },
+  Object {
+    "0": "w",
+    "1": "o",
+    "2": "r",
+    "3": "l",
+    "4": "d",
+    "label": "hello",
+    "selected": true,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": "world",
+  },
+  Object {
+    "0": "s",
+    "1": "e",
+    "2": "t",
+    "label": "dolor",
+    "selected": false,
+    "text": "dolor",
+    "textContent": "dolor",
+    "title": "dolor",
+    "value": "set",
+  },
+]
+`;
+
+exports[`Select Component should disable toggle text: disabled text 1`] = `"quipucords-select-pf__no-toggle-text  "`;
+
+exports[`Select Component should render a basic component: basic component 1`] = `
+<div
+  class="quipucords-select quipucords-select__inline"
+>
+  <div
+    class="pf-c-select quipucords-select-pf  "
+    data-ouia-component-id="OUIA-Generated-Select-single-1"
+    data-ouia-component-type="PF4/Select"
+    data-ouia-safe="true"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-label="Options menu"
+      aria-labelledby=" pf-select-toggle-id-2"
+      class="pf-c-select__toggle"
+      id="pf-select-toggle-id-2"
+      type="button"
+    >
+      <div
+        class="pf-c-select__toggle-wrapper"
+      >
+        <span
+          class="pf-c-select__toggle-text"
+        >
+          hello
+        </span>
+      </div>
+      <span
+        class="pf-c-select__toggle-arrow"
+      >
+        <svg
+          aria-hidden="true"
+          fill="currentColor"
+          height="1em"
+          role="img"
+          style="vertical-align: -0.125em;"
+          viewBox="0 0 320 512"
+          width="1em"
+        >
+          <path
+            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Select Component should render a checkbox select: checkbox select 1`] = `
+<div
+  class="quipucords-select quipucords-select__inline"
+>
+  <div
+    class="pf-c-select quipucords-select-pf  "
+    data-ouia-component-id="OUIA-Generated-Select-checkbox-1"
+    data-ouia-component-type="PF4/Select"
+    data-ouia-safe="true"
+  >
+    <button
+      aria-expanded="false"
+      aria-label="Options menu"
+      aria-labelledby=" pf-select-toggle-id-5"
+      class="pf-c-select__toggle"
+      id="pf-select-toggle-id-5"
+      type="button"
+    >
+      <div
+        class="pf-c-select__toggle-wrapper"
+      >
+        <span
+          class="pf-c-select__toggle-text"
+        >
+          multiselect test
+        </span>
+        <div
+          class="pf-c-select__toggle-badge"
+        >
+          <span
+            class="pf-c-badge pf-m-read"
+          >
+            2
+          </span>
+        </div>
+      </div>
+      <span
+        class="pf-c-select__toggle-arrow"
+      >
+        <svg
+          aria-hidden="true"
+          fill="currentColor"
+          height="1em"
+          role="img"
+          style="vertical-align: -0.125em;"
+          viewBox="0 0 320 512"
+          width="1em"
+        >
+          <path
+            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Select Component should render an expanded select: expanded 1`] = `
+Array [
   <button
-    aria-expanded="false"
-    aria-haspopup="true"
-    class="form-control dropdown-toggle btn btn-default"
-    id="test"
-    role="button"
+    aria-selected={null}
+    className="pf-c-select__menu-item"
+    data-title="lorem"
+    data-value="lorem"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="option"
     type="button"
   >
-    <span>
-      hello
-    </span>
-     
-    <span
-      class="caret"
-    />
-  </button>
-  <ul
-    aria-labelledby="test"
-    class="dropdown-menu"
-    role="menu"
+    lorem
+  </button>,
+  <button
+    aria-selected={null}
+    className="pf-c-select__menu-item"
+    data-title="ipsum"
+    data-value="ipsum"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="option"
+    type="button"
   >
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        lorem
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        ipsum
-      </a>
-    </li>
-    <li
-      class="active"
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        hello
-      </a>
-    </li>
-    <li
-      class=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        role="menuitem"
-        tabindex="-1"
-      >
-        world
-      </a>
-    </li>
-  </ul>
-</div>
+    ipsum
+  </button>,
+  <button
+    aria-selected={null}
+    className="pf-c-select__menu-item"
+    data-title="hello"
+    data-value="hello"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="option"
+    type="button"
+  >
+    hello
+  </button>,
+  <button
+    aria-selected={null}
+    className="pf-c-select__menu-item"
+    data-title="world"
+    data-value="world"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="option"
+    type="button"
+  >
+    world
+  </button>,
+]
+`;
+
+exports[`Select Component should return an emulated onchange event: checkbox emulated event 1`] = `
+Object {
+  "checked": true,
+  "id": "test",
+  "name": "test",
+  "persist": [Function],
+  "selected": Array [
+    "hello",
+    "world",
+  ],
+  "selectedIndex": 3,
+  "type": "select-multiple",
+  "value": "world",
+}
+`;
+
+exports[`Select Component should return an emulated onchange event: default emulated event 1`] = `
+Object {
+  "id": "test",
+  "name": "test",
+  "persist": [Function],
+  "selected": Object {
+    "label": "hello",
+    "selected": true,
+    "text": "hello",
+    "textContent": "hello",
+    "title": "hello",
+    "value": "hello",
+  },
+  "selectedIndex": 2,
+  "type": "select-one",
+  "value": "hello",
+}
 `;

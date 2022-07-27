@@ -2,7 +2,11 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
-import { ConnectedCreateCredentialDialog, CreateCredentialDialog } from '../createCredentialDialog';
+import {
+  ConnectedCreateCredentialDialog,
+  CreateCredentialDialog,
+  authenticationTypeOptions
+} from '../createCredentialDialog';
 
 describe('CreateCredentialDialog Component', () => {
   const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
@@ -26,5 +30,14 @@ describe('CreateCredentialDialog Component', () => {
 
     const component = shallow(<CreateCredentialDialog {...props} />);
     expect(component.render()).toMatchSnapshot('non-connected');
+  });
+
+  it('should export select options', () => {
+    expect(
+      authenticationTypeOptions.map(({ title, ...option }) => ({
+        ...option,
+        title: (typeof title === 'function' && title()) || title
+      }))
+    ).toMatchSnapshot('options');
   });
 });
