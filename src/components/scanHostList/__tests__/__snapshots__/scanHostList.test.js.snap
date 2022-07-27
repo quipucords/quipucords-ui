@@ -45,13 +45,18 @@ exports[`ScanHostList Component should render a non-connected component pending:
 `;
 
 exports[`ScanHostList Component should render a non-connected component: non-connected 1`] = `
-<div
-  class="quipucords-infinite-results"
+<ul
+  class="pf-c-list pf-m-plain quipucords-infinite-results quipucords-infinite-list"
 >
-  <div
-    class="quipucords-infinite-list container-fluid"
+  <li
+    class=""
   >
-    {"credentialName":"dolor","jobType":"connection","name":"lorem","sourceId":15,"sourceName":"lorem source"}{"credentialName":"set","jobType":"inspection","name":"ipsum","sourceId":16,"sourceName":"ipsum source"}
-  </div>
-</div>
+    {"credentialName":"dolor","jobType":"connection","name":"lorem","sourceId":15,"sourceName":"lorem source"}
+  </li>
+  <li
+    class=""
+  >
+    {"credentialName":"set","jobType":"inspection","name":"ipsum","sourceId":16,"sourceName":"ipsum source"}
+  </li>
+</ul>
 `;
