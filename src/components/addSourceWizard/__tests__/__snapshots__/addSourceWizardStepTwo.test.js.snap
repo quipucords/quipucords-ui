@@ -109,10 +109,10 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         class="input-group"
       >
         <div
-          class="quipucords-select"
+          class="quipucords-select quipucords-select__not-inline"
         >
           <div
-            class="pf-c-select quipucords-select-pf  "
+            class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
             data-ouia-component-id="OUIA-Generated-Select-checkbox-2"
             data-ouia-component-type="PF4/Select"
             data-ouia-safe="true"
@@ -121,7 +121,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
               aria-expanded="false"
               aria-label="Options menu"
               aria-labelledby=" pf-select-toggle-id-3"
-              class="pf-c-select__toggle pf-m-disabled"
+              class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
               disabled=""
               id="pf-select-toggle-id-3"
               type="button"
@@ -284,10 +284,10 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         class="input-group"
       >
         <div
-          class="quipucords-select"
+          class="quipucords-select quipucords-select__not-inline"
         >
           <div
-            class="pf-c-select quipucords-select-pf  "
+            class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
             data-ouia-component-id="OUIA-Generated-Select-single-1"
             data-ouia-component-type="PF4/Select"
             data-ouia-safe="true"
@@ -297,7 +297,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
               aria-haspopup="listbox"
               aria-label="Options menu"
               aria-labelledby=" pf-select-toggle-id-6"
-              class="pf-c-select__toggle pf-m-disabled"
+              class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
               disabled=""
               id="pf-select-toggle-id-6"
               type="button"
@@ -379,10 +379,10 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
       class="col-sm-9"
     >
       <div
-        class="quipucords-select"
+        class="quipucords-select quipucords-select__not-inline"
       >
         <div
-          class="pf-c-select quipucords-select-pf  "
+          class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
           data-ouia-component-id="OUIA-Generated-Select-single-2"
           data-ouia-component-type="PF4/Select"
           data-ouia-safe="true"
@@ -568,10 +568,10 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         class="input-group"
       >
         <div
-          class="quipucords-select"
+          class="quipucords-select quipucords-select__not-inline"
         >
           <div
-            class="pf-c-select quipucords-select-pf  "
+            class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
             data-ouia-component-id="OUIA-Generated-Select-checkbox-1"
             data-ouia-component-type="PF4/Select"
             data-ouia-safe="true"
@@ -580,7 +580,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
               aria-expanded="false"
               aria-label="Options menu"
               aria-labelledby=" pf-select-toggle-id-1"
-              class="pf-c-select__toggle pf-m-disabled"
+              class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
               disabled=""
               id="pf-select-toggle-id-1"
               type="button"
