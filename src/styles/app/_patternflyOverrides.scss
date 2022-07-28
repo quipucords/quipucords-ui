@@ -2,3 +2,9 @@
 .cards-pf {
   --pf-global--FontSize--md: 0.8rem;
 }
+
+// rcue overrides, remove as part of clean up
+.pf-c-select.pf-m-expanded input[type="radio"],
+.pf-c-select.pf-m-expanded input[type="checkbox"] {
+  margin-top: inherit;
+}
