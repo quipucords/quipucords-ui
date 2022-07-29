@@ -71,6 +71,7 @@ class AddSourceWizardStepTwo extends React.Component {
     getCredentials();
   }
 
+  // ToDo: future, exported hook from addCredentialType can be leveraged here
   onAddCredential = () => {
     const { type } = this.props;
 

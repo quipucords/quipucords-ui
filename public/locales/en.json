@@ -35,6 +35,7 @@
     "label_add-credential": "Add a credential",
     "label_cancel": "Cancel",
     "label_close": "Close",
+    "label_delete": "Delete",
     "label_no": "No",
     "label_option_disableSsl": "Disable SSL",
     "label_option_SSLv23": "SSLv23",
