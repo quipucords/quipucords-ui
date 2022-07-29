@@ -12,11 +12,21 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import { DropdownButton, MenuItem } from 'patternfly-react';
+import { AddCredentialType, ButtonVariant as CredentialButtonVariant } from '../addCredentialType/addCredentialType';
 import helpers from '../../common/helpers';
 import { translate } from '../i18n/i18n';
 
-const CredentialsEmptyState = ({ onAddCredential, onAddSource, t, uiSentenceStartName, uiShortName }) => (
+/**
+ * Display an empty state for Credentials.
+ *
+ * @param {object} props
+ * @param {Function} props.onAddSource
+ * @param {Function} props.t
+ * @param {string} props.uiSentenceStartName
+ * @param {string} props.uiShortName
+ * @returns {React.ReactNode}
+ */
+const CredentialsEmptyState = ({ onAddSource, t, uiSentenceStartName, uiShortName }) => (
   <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={AddCircleOIcon} />
     <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
@@ -24,17 +34,7 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, t, uiSentenceStar
       {t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })}
     </EmptyStateBody>
     <EmptyStatePrimary>
-      <DropdownButton bsStyle="primary" bsSize="large" title="Add Credential" pullRight id="createCredentialButton">
-        <MenuItem eventKey="1" onClick={() => onAddCredential('network')}>
-          Network Credential
-        </MenuItem>
-        <MenuItem eventKey="2" onClick={() => onAddCredential('satellite')}>
-          Satellite Credential
-        </MenuItem>
-        <MenuItem eventKey="2" onClick={() => onAddCredential('vcenter')}>
-          VCenter Credential
-        </MenuItem>
-      </DropdownButton>
+      <AddCredentialType buttonVariant={CredentialButtonVariant.primary} />
     </EmptyStatePrimary>
     <EmptyStateSecondaryActions>
       <Button variant={ButtonVariant.link} onClick={onAddSource}>
@@ -44,16 +44,24 @@ const CredentialsEmptyState = ({ onAddCredential, onAddSource, t, uiSentenceStar
   </EmptyState>
 );
 
+/**
+ * Prop types
+ *
+ * @type {{uiShortName: string, t: Function, uiSentenceStartName: string, onAddSource: Function}}
+ */
 CredentialsEmptyState.propTypes = {
-  onAddCredential: PropTypes.func,
   onAddSource: PropTypes.func,
   t: PropTypes.func,
   uiSentenceStartName: PropTypes.string,
   uiShortName: PropTypes.string
 };
 
+/**
+ * Default props
+ *
+ * @type {{uiShortName: string, t: translate, uiSentenceStartName: string, onAddSource: Function}}
+ */
 CredentialsEmptyState.defaultProps = {
-  onAddCredential: helpers.noop,
   onAddSource: helpers.noop,
   t: translate,
   uiSentenceStartName: helpers.UI_SENTENCE_START_NAME,

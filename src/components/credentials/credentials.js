@@ -17,8 +17,13 @@ import {
   TitleSizes
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-import { Button as ButtonPf3, DropdownButton, Form, ListView, MenuItem } from 'patternfly-react';
+import { Form, ListView } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
+import {
+  AddCredentialType,
+  ButtonVariant as CredentialButtonVariant,
+  SelectPosition
+} from '../addCredentialType/addCredentialType';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
 import ViewToolbar from '../viewToolbar/viewToolbar';
@@ -92,13 +97,6 @@ class Credentials extends React.Component {
       }
     }
   }
-
-  onAddCredential = credentialType => {
-    store.dispatch({
-      type: reduxTypes.credentials.CREATE_CREDENTIAL_SHOW,
-      credentialType
-    });
-  };
 
   onDeleteCredentials = () => {
     const { viewOptions } = this.props;
@@ -205,27 +203,22 @@ class Credentials extends React.Component {
   }
 
   renderCredentialActions() {
-    const { viewOptions } = this.props;
+    const { t, viewOptions } = this.props;
 
     return (
       <div className="form-group">
-        <DropdownButton bsStyle="primary" title="Add" pullRight id="createCredentialButton">
-          <MenuItem eventKey="1" onClick={() => this.onAddCredential('network')}>
-            Network Credential
-          </MenuItem>
-          <MenuItem eventKey="2" onClick={() => this.onAddCredential('satellite')}>
-            Satellite Credential
-          </MenuItem>
-          <MenuItem eventKey="2" onClick={() => this.onAddCredential('vcenter')}>
-            VCenter Credential
-          </MenuItem>
-        </DropdownButton>
-        <ButtonPf3
-          disabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
+        <AddCredentialType
+          buttonVariant={CredentialButtonVariant.primary}
+          position={SelectPosition.right}
+          placeholder={t('form-dialog.label', { context: 'add' })}
+        />{' '}
+        <Button
+          variant={ButtonVariant.secondary}
+          isDisabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
           onClick={this.onDeleteCredentials}
         >
-          Delete
-        </ButtonPf3>
+          {t('form-dialog.label', { context: 'delete' })}
+        </Button>
       </div>
     );
   }
@@ -324,7 +317,7 @@ class Credentials extends React.Component {
     return (
       <React.Fragment>
         {this.renderPendingMessage()}
-        <CredentialsEmptyState onAddCredential={this.onAddCredential} onAddSource={this.onAddSource} />,
+        <CredentialsEmptyState onAddSource={this.onAddSource} />,
       </React.Fragment>
     );
   }
@@ -363,8 +356,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   ...state.credentials.view,
-  viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW],
-  update: state.credentials.update
+  viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW]
 });
 
 const ConnectedCredentials = connect(mapStateToProps, mapDispatchToProps)(Credentials);
