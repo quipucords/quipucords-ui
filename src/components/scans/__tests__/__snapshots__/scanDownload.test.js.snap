@@ -19,12 +19,12 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
   tooltip="Lorem ipsum dolor sit"
 >
   <Tooltip
+    content="Lorem ipsum dolor sit"
     delayShow={500}
     id={null}
+    isPopover={false}
     placement="top"
-    popover={null}
     rootClose={true}
-    tooltip="Lorem ipsum dolor sit"
     trigger={
       Array [
         "hover",
