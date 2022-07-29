@@ -27,6 +27,7 @@ Object {
     "onConfirm": undefined,
     "show": true,
     "title": undefined,
+    "variant": undefined,
   },
   "type": "CONFIRMATION_MODAL_SHOW",
 }

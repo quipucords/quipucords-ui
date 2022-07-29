@@ -74,7 +74,6 @@ exports[`Sources Component should render a non-connected component pending: pend
       style="--pf-c-modal-box--m-align-top--spacer: 5%;"
     >
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-2"
       >
@@ -126,7 +125,7 @@ exports[`Sources Component should render a non-connected component with empty st
     <div
       class="pf-c-empty-state__body"
     >
-      t(view.empty-state, {"context":"description_sources"})
+      t(view.empty-state_description, {"context":"sources"})
     </div>
     <div
       class="pf-c-empty-state__primary"
@@ -139,7 +138,7 @@ exports[`Sources Component should render a non-connected component with empty st
         data-ouia-safe="true"
         type="button"
       >
-        t(view.empty-state, {"context":"label_source"})
+        t(view.empty-state_label, {"context":"source"})
       </button>
     </div>
   </div>

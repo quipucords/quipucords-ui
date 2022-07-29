@@ -23,7 +23,8 @@ const confirmationModalReducer = (state = initialState, action) => {
         confirmButtonText: action.confirmButtonText || 'Confirm',
         cancelButtonText: action.cancelButtonText || 'Cancel',
         onConfirm: action.onConfirm,
-        onCancel: action.onCancel
+        onCancel: action.onCancel,
+        variant: action.variant
       };
 
     case confirmationModalTypes.CONFIRMATION_MODAL_HIDE:

@@ -33,7 +33,6 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-3"
       >
@@ -60,7 +59,7 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
           disabled=""
           type="button"
         >
-          t(form-dialog.label, {"context":"submit_merge-reports"})
+          t(form-dialog.label_submit, {"context":"merge-reports"})
         </button>
         <button
           aria-disabled="false"
@@ -113,7 +112,6 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
         </h4>
       </header>
       <div
-        aria-live="polite"
         class="pf-c-modal-box__body"
         id="pf-modal-part-2"
       >
@@ -173,7 +171,7 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
           disabled=""
           type="button"
         >
-          t(form-dialog.label, {"context":"submit_merge-reports"})
+          t(form-dialog.label_submit, {"context":"merge-reports"})
         </button>
         <button
           aria-disabled="false"

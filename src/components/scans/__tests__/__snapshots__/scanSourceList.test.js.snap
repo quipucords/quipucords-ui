@@ -1,114 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScanSourceList Component should handle multiple status messages: connect status 1`] = `
-<Grid
-  bsClass="container"
-  componentClass="div"
-  fluid={true}
+<List
+  isPlain={true}
 >
-  <Row
-    bsClass="row"
-    className="fadein"
-    componentClass="div"
+  <ListItem
     key="1"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={3}
-      xs={4}
+    <List
+      isPlain={true}
     >
-      <Icon
-        name=""
-        type="pf"
-      />
-        
-      test
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={9}
-      xs={8}
-    >
-      Connection Scan: ipsum
-    </Col>
-  </Row>
-</Grid>
+      <ListItem
+        icon={
+          <Icon
+            name=""
+            type="pf"
+          />
+        }
+        key="test"
+      >
+        test
+      </ListItem>
+      <ListItem
+        key="desc-test"
+      >
+        Connection Scan: ipsum
+      </ListItem>
+    </List>
+  </ListItem>
+</List>
 `;
 
 exports[`ScanSourceList Component should handle multiple status messages: fallback status 1`] = `
-<Grid
-  bsClass="container"
-  componentClass="div"
-  fluid={true}
+<List
+  isPlain={true}
 >
-  <Row
-    bsClass="row"
-    className="fadein"
-    componentClass="div"
+  <ListItem
     key="1"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={3}
-      xs={4}
+    <List
+      isPlain={true}
     >
-      <Icon
-        name=""
-        type="pf"
-      />
-        
-      test
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={9}
-      xs={8}
-    >
-      Connection Scan: ipsum
-    </Col>
-  </Row>
-</Grid>
+      <ListItem
+        icon={
+          <Icon
+            name=""
+            type="pf"
+          />
+        }
+        key="test"
+      >
+        test
+      </ListItem>
+      <ListItem
+        key="desc-test"
+      >
+        Connection Scan: ipsum
+      </ListItem>
+    </List>
+  </ListItem>
+</List>
 `;
 
 exports[`ScanSourceList Component should handle multiple status messages: inspect status 1`] = `
-<Grid
-  bsClass="container"
-  componentClass="div"
-  fluid={true}
+<List
+  isPlain={true}
 >
-  <Row
-    bsClass="row"
-    className="fadein"
-    componentClass="div"
+  <ListItem
     key="1"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={3}
-      xs={4}
+    <List
+      isPlain={true}
     >
-      <Icon
-        name=""
-        type="pf"
-      />
-        
-      test
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={9}
-      xs={8}
-    >
-      Inspection Scan: sit
-    </Col>
-  </Row>
-</Grid>
+      <ListItem
+        icon={
+          <Icon
+            name=""
+            type="pf"
+          />
+        }
+        key="test"
+      >
+        test
+      </ListItem>
+      <ListItem
+        key="desc-test"
+      >
+        Inspection Scan: sit
+      </ListItem>
+    </List>
+  </ListItem>
+</List>
 `;
 
 exports[`ScanSourceList Component should render a connected component: connected 1`] = `
@@ -147,26 +129,34 @@ exports[`ScanSourceList Component should render a non-connected component pendin
 `;
 
 exports[`ScanSourceList Component should render a non-connected component: non-connected 1`] = `
-<div
-  class="container-fluid"
+<ul
+  class="pf-c-list pf-m-plain"
 >
-  <div
-    class="fadein row"
+  <li
+    class=""
   >
-    <div
-      class="col-md-3 col-xs-4"
+    <ul
+      class="pf-c-list pf-m-plain"
     >
-      <span
-        aria-hidden="true"
-        class="pficon pficon-"
-      />
-        test
-    </div>
-    <div
-      class="col-md-9 col-xs-8"
-    >
-      Connection Scan: ipsum
-    </div>
-  </div>
-</div>
+      <li
+        class="pf-c-list__item"
+      >
+        <span
+          class="pf-c-list__item-icon"
+        >
+          <span
+            aria-hidden="true"
+            class="pficon pficon-"
+          />
+        </span>
+        test
+      </li>
+      <li
+        class=""
+      >
+        Connection Scan: ipsum
+      </li>
+    </ul>
+  </li>
+</ul>
 `;

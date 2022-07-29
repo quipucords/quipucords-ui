@@ -5,7 +5,6 @@
     }
 
     .pf-c-button {
-      font-size: inherit;
     }
 
     &__rcue-width {
@@ -25,16 +24,16 @@
 
     &__confirmation {
       .pf-c-backdrop {
-        z-index: 1100;
+        z-index: calc(var(--pf-c-backdrop--ZIndex) + 1);
       }
       .pf-c-modal-box__body {
         padding-bottom: var(--pf-c-modal-box__body--PaddingTop);
       }
     }
 
-    &__content-only {
-      .pf-c-modal-box__body {
-        padding: 0 !important;
+    &__wizard {
+      .pf-c-backdrop {
+        z-index: calc(var(--pf-c-backdrop--ZIndex) - 1);
       }
     }
   }

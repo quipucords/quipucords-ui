@@ -49,6 +49,127 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/addSourceWizard/addSourceWizard.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.confirmation_title_add-source",
+        "match": "t('form-dialog.confirmation_title_add-source', { context: [pending && 'exit', edit && 'edit'] })",
+      },
+      Object {
+        "key": "form-dialog.confirmation_heading_add-source",
+        "match": "t('form-dialog.confirmation_heading_add-source', { context: [pending && 'exit', edit && 'edit'] })",
+      },
+      Object {
+        "key": "form-dialog.confirmation_body_add-source",
+        "match": "t('form-dialog.confirmation_body_add-source', { context: [pending && 'exit', edit && 'edit', !pending && EMPTY_CONTEXT] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'no' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'yes' })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "t('form-dialog.title', { context: ['add-source', edit && 'edit'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step'] })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['close'] })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['close'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardContext.js",
+    "keys": Array [
+      Object {
+        "key": "toast-notifications.title_add-source_hidden",
+        "match": "t('toast-notifications.title_add-source_hidden', { context: [error && 'error', edit && 'edit'] })",
+      },
+      Object {
+        "key": "toast-notifications.description_add-source_hidden",
+        "match": "t('toast-notifications.description_add-source_hidden', { context: [error && 'error', edit && 'edit'], message: errorMessage, name: source?.[apiTypes.API_SUBMIT_SOURCE_NAME] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepThree.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.empty-state_title_add-source",
+        "match": "t('form-dialog.empty-state_title_add-source', { context: [(error && 'error')",
+      },
+      Object {
+        "key": "form-dialog.empty-state_description_add-source",
+        "match": "t(\`form-dialog.empty-state_description_add-source\`, { context: [(error && 'error')",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', type] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'disableSsl'] })",
+      },
+      Object {
+        "key": "form-dialog.label_placeholder",
+        "match": "t('form-dialog.label_placeholder', { context: [ 'add-source', 'credential', multiselectCredentials && 'multi', !availableCredentials.length && 'add' ] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/authentication/authentication.js",
     "keys": Array [
       Object {
@@ -85,6 +206,10 @@ Array [
   Object {
     "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
     "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', type] })",
+      },
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: ['submit', 'create-credential'] })",
@@ -186,6 +311,23 @@ Array [
       Object {
         "key": "refresh-time-button.refreshed",
         "match": "t('refresh-time-button.refreshed', { context: lastRefresh && 'load', refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "keys": Array [
+      Object {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      Object {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-hosts' })",
+      },
+      Object {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-hosts'], message: errorMessage })",
       },
     ],
   },
@@ -321,6 +463,74 @@ Array [
 exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
 Array [
   Object {
+    "file": "./src/components/addSourceWizard/addSourceWizard.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizard.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizard.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label_placeholder",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label",
+  },
+  Object {
     "file": "./src/components/authentication/authentication.js",
     "key": "view.error",
   },
@@ -338,6 +548,10 @@ Array [
   },
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
     "key": "form-dialog.label",
   },
   Object {
@@ -399,6 +613,14 @@ Array [
   Object {
     "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
     "key": "form-dialog.label",
+  },
+  Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "key": "view.error",
+  },
+  Object {
+    "file": "./src/components/scanHostList/scanHostList.js",
+    "key": "view.error-message",
   },
   Object {
     "file": "./src/components/scans/scanJobsList.js",

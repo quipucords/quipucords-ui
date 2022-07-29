@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Alert, AlertVariant as ConfirmationVariant, Button, ButtonVariant, Title } from '@patternfly/react-core';
+import {
+  Alert,
+  AlertVariant as ConfirmationVariant,
+  Button,
+  ButtonVariant,
+  ModalVariant,
+  Title
+} from '@patternfly/react-core';
 import { Modal } from '../modal/modal';
 import { connect, store, reduxTypes } from '../../redux';
 import { translate } from '../i18n/i18n';
@@ -24,6 +30,7 @@ import { translate } from '../i18n/i18n';
  * @param {boolean} props.show
  * @param {Function} props.t
  * @param {string} props.title
+ * @param {string} props.variant
  * @returns {React.ReactNode}
  */
 const ConfirmationModal = ({
@@ -40,7 +47,8 @@ const ConfirmationModal = ({
   onConfirm,
   show,
   t,
-  title
+  title,
+  variant
 }) => {
   const cancel = () => {
     if (onCancel) {
@@ -87,20 +95,20 @@ const ConfirmationModal = ({
 
   return (
     <Modal
-      className={classNames('quipucords-modal__confirmation', {
-        'quipucords-modal__content-only': isContentOnly === true
-      })}
-      isOpen={show}
-      backdrop={false}
-      showClose={isClose}
-      onClose={cancel}
       actions={setActions()}
+      backdrop={false}
+      className="quipucords-modal__confirmation"
+      disableFocusTrap
       header={
         title && (
           <Title headingLevel="h4">{title || t('form-dialog.label', { context: ['submit', 'confirmation'] })}</Title>
         )
       }
-      disableFocusTrap
+      isContentOnly={isContentOnly}
+      isOpen={show}
+      onClose={cancel}
+      showClose={isClose}
+      variant={variant}
     >
       {updatedChildren || ''}
     </Modal>
@@ -111,8 +119,8 @@ const ConfirmationModal = ({
  * Prop types
  *
  * @type {{isClose: boolean, isActions: boolean, heading: React.ReactNode, icon: string, body: React.ReactNode, title: string,
- *     show: boolean, t: Function, children: React.ReactNode, onCancel: Function, onConfirm: Function, isContentOnly: boolean,
- *     cancelButtonText: string, confirmButtonText: string}}
+ *     show: boolean, t: Function, children: React.ReactNode, onCancel: Function, onConfirm: Function, variant: string,
+ *     isContentOnly: boolean, cancelButtonText: string, confirmButtonText: string}}
  */
 ConfirmationModal.propTypes = {
   body: PropTypes.node,
@@ -128,15 +136,16 @@ ConfirmationModal.propTypes = {
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
   t: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
+  variant: PropTypes.oneOf([...Object.values(ModalVariant)])
 };
 
 /**
  * Default props.
  *
  * @type {{isClose: boolean, isActions: boolean, heading: null, icon: ConfirmationVariant.warning, title: null, body: null,
- *     t: translate, children: null, onCancel: null, onConfirm: null, isContentOnly: boolean, confirmButtonText: null,
- *     cancelButtonText: null}}
+ *     t: translate, children: null, onCancel: null, onConfirm: null, variant: null, isContentOnly: boolean,
+ *     confirmButtonText: null, cancelButtonText: null}}
  */
 ConfirmationModal.defaultProps = {
   children: null,
@@ -151,7 +160,8 @@ ConfirmationModal.defaultProps = {
   cancelButtonText: null,
   onConfirm: null,
   onCancel: null,
-  t: translate
+  t: translate,
+  variant: null
 };
 
 const mapStateToProps = state => ({ ...state.confirmationModal });

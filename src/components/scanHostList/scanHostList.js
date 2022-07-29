@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EmptyState, Grid, Spinner } from 'patternfly-react';
+import { Alert, AlertVariant, EmptyState, EmptyStateVariant, List, ListItem, Spinner } from '@patternfly/react-core';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { helpers } from '../../common/helpers';
 import { apiTypes } from '../../constants/apiConstants';
+import { translate } from '../i18n/i18n';
 
+/**
+ * Return a scan hosts listing for "hosts".
+ */
 class ScanHostList extends React.Component {
   state = {
     currentPage: 1,
@@ -65,37 +69,45 @@ class ScanHostList extends React.Component {
   };
 
   render() {
-    const { children, error, errorMessage, hostsList, pending } = this.props;
+    const { children, error, errorMessage, hostsList, pending, t } = this.props;
 
-    if (error) {
+    if (pending) {
       return (
-        <EmptyState>
-          <EmptyState.Icon name="error-circle-o" />
-          <EmptyState.Title>Error retrieving scan results</EmptyState.Title>
-          <EmptyState.Info>{errorMessage}</EmptyState.Info>
+        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+          <Spinner isSVG size="sm" /> {t('view.loading')}
         </EmptyState>
       );
     }
 
-    if (pending) {
+    if (error) {
       return (
-        <EmptyState>
-          <Spinner loading size="sm" className="blank-slate-pf-icon" />
-          <EmptyState.Title>Loading...</EmptyState.Title>
+        <EmptyState className="quipucords-empty-state__alert">
+          <Alert isInline isPlain variant={AlertVariant.danger} title={t('view.error', { context: 'scan-hosts' })}>
+            {t('view.error-message', { context: ['scan-hosts'], message: errorMessage })}
+          </Alert>
         </EmptyState>
       );
     }
 
     return (
-      <div className="quipucords-infinite-results">
-        <Grid fluid onScroll={this.onScrollList} className="quipucords-infinite-list">
-          {hostsList.map(host => children({ host }))}
-        </Grid>
-      </div>
+      <List onScroll={this.onScrollList} className="quipucords-infinite-results quipucords-infinite-list" isPlain>
+        {hostsList?.map(host => (
+          <ListItem isPlain key={host.name}>
+            {children({ host })}
+          </ListItem>
+        ))}
+      </List>
     );
   }
 }
 
+/**
+ * Default props
+ *
+ * @type {{useInspectionResults: boolean, pending: boolean, errorMessage: string, getInspectionScanResults: Function,
+ *     error: boolean, hostsList: Array, filter: object, t: Function, children: React.ReactNode, isMoreResults: boolean,
+ *     id: string|number, getConnectionScanResults: Function, useConnectionResults: boolean}}
+ */
 ScanHostList.propTypes = {
   children: PropTypes.func.isRequired,
   error: PropTypes.bool,
@@ -116,10 +128,18 @@ ScanHostList.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isMoreResults: PropTypes.bool,
   pending: PropTypes.bool,
+  t: PropTypes.func,
   useConnectionResults: PropTypes.bool,
   useInspectionResults: PropTypes.bool
 };
 
+/**
+ * Default props
+ *
+ * @type {{filter: {}, useInspectionResults: boolean, t: translate, isMoreResults: boolean, pending: boolean,
+ *     errorMessage: null, getInspectionScanResults: Function, error: boolean, getConnectionScanResults: Function,
+ *     useConnectionResults: boolean, hostsList: *[]}}
+ */
 ScanHostList.defaultProps = {
   error: false,
   errorMessage: null,
@@ -129,6 +149,7 @@ ScanHostList.defaultProps = {
   hostsList: [],
   isMoreResults: false,
   pending: false,
+  t: translate,
   useConnectionResults: false,
   useInspectionResults: false
 };

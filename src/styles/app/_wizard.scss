@@ -1,42 +1,52 @@
 /* _wizard.scss */
-.quipucords-wizard, .wizard-pf {
-  .wizard-pf-main {
-    overflow: inherit;
+.quipucords-wizard {
+  @media (min-width: $pf-global--breakpoint--sm) {
+    flex: unset !important;
+    min-height: 37rem !important;
   }
 
-  abbr {
-    border-bottom: none;
+  &__hide-nav {
+    .pf-c-wizard__outer-wrap {
+      padding-left: 0;
+
+      nav {
+        display: none;
+      }
+    }
   }
 
-  .form-horizontal .form-group {
-    margin-left:0;
-    margin-right:0;
+  &__hide-nav-last {
+    .pf-c-wizard__nav-list {
+      li:last-child {
+        display: none;
+      }
+    }
   }
 
-  .form-horizontal .form-group label {
-    padding-right: 0;
-  }
+  &__add-source {
+    abbr {
+      border-bottom: none;
+    }
 
-  .input-group .input-group-btn .btn {
-    height: 26px;
-  }
+    .form-horizontal .form-group {
+      margin-left:0;
+      margin-right:0;
+    }
 
-  .form-horizontal h3 {
-    margin-top: 0;
-  }
+    .form-horizontal .form-group label {
+      padding-right: 0;
+    }
 
-  .btn-file {
-    @extend .input-group-btn;
-  }
+    .input-group .input-group-btn .btn {
+      height: 26px;
+    }
 
-  @media (min-width: $screen-sm-min) {
-    margin: 30px auto;
-    padding: 0;
-    width: 600px;
+    .form-horizontal h3 {
+      margin-top: 0;
+    }
 
-    .wizard-pf-row {
-      min-height: 450px;
-      height: auto;
+    .btn-file {
+      @extend .input-group-btn;
     }
   }
 }
