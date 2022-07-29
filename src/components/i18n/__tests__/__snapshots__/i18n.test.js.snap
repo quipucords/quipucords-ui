@@ -258,6 +258,14 @@ Array [
     "file": "./src/components/credentials/credentials.js",
     "keys": Array [
       Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'delete' })",
+      },
+      Object {
         "key": "view.loading",
         "match": "t('view.loading', { context: 'credentials' })",
       },
