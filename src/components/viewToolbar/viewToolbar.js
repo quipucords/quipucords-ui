@@ -178,7 +178,7 @@ class ViewToolbar extends React.Component {
             currentSortType={sortType}
             onSortTypeSelected={this.onUpdateCurrentSortType}
           />
-          <Tooltip tooltip={`Sort by ${sortType.title}`}>
+          <Tooltip content={`Sort by ${sortType.title}`}>
             <Sort.DirectionSelector
               isNumeric={sortType.isNumeric}
               isAscending={sortAscending}

@@ -216,7 +216,7 @@ class ScanListItem extends React.Component {
       case 'completed':
         return (
           <React.Fragment>
-            <Tooltip tooltip="Run Scan">
+            <Tooltip content="Run Scan">
               <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
                 <Icon type="pf" name="spinner2" aria-label="Start" />
               </Button>
@@ -228,7 +228,7 @@ class ScanListItem extends React.Component {
       case 'canceled':
         return (
           <React.Fragment>
-            <Tooltip tooltip="Retry Scan">
+            <Tooltip content="Retry Scan">
               <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
                 <Icon type="pf" name="spinner2" aria-label="Start" />
               </Button>
@@ -240,12 +240,12 @@ class ScanListItem extends React.Component {
       case 'running':
         return (
           <React.Fragment>
-            <Tooltip key="pauseButton" tooltip="Pause Scan">
+            <Tooltip key="pauseButton" content="Pause Scan">
               <Button onClick={this.onPauseScan} bsStyle="link">
                 <Icon type="fa" name="pause" aria-label="Pause" />
               </Button>
             </Tooltip>
-            <Tooltip key="stop" tooltip="Cancel Scan">
+            <Tooltip key="stop" content="Cancel Scan">
               <Button onClick={this.onCancelScan} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
@@ -256,7 +256,7 @@ class ScanListItem extends React.Component {
       case 'paused':
         return (
           <React.Fragment>
-            <Tooltip tooltip="Resume Scan">
+            <Tooltip content="Resume Scan">
               <Button onClick={this.onResumeScan} bsStyle="link">
                 <Icon type="fa" name="play" aria-label="Resume" />
               </Button>
@@ -267,7 +267,7 @@ class ScanListItem extends React.Component {
       case 'pending':
         return (
           <React.Fragment>
-            <Tooltip key="stop" tooltip="Cancel Scan">
+            <Tooltip key="stop" content="Cancel Scan">
               <Button onClick={this.onCancelScan} bsStyle="link">
                 <Icon type="fa" name="stop" aria-label="Stop" />
               </Button>
@@ -278,7 +278,7 @@ class ScanListItem extends React.Component {
       default:
         return (
           <React.Fragment>
-            <Tooltip tooltip="Start Scan">
+            <Tooltip content="Start Scan">
               <Button onClick={this.onStartScan} bsStyle="link">
                 <Icon type="fa" name="play" aria-label="Start" />
               </Button>

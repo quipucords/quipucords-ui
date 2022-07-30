@@ -49,7 +49,7 @@ class ScanDownload extends React.Component {
 
     return (
       <React.Fragment>
-        {tooltip && <Tooltip tooltip={tooltip}>{button}</Tooltip>}
+        {tooltip && <Tooltip content={tooltip}>{button}</Tooltip>}
         {!tooltip && button}
       </React.Fragment>
     );
