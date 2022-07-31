@@ -128,7 +128,7 @@ class SourceListItem extends React.Component {
     const typeIcon = helpers.sourceTypeIcon(item.source_type);
 
     return (
-      <ToolTip tooltip={dictionary[item.source_type]}>
+      <ToolTip content={dictionary[item.source_type]}>
         <ListView.Icon type={typeIcon.type} name={typeIcon.name} />
       </ToolTip>
     );
@@ -139,12 +139,12 @@ class SourceListItem extends React.Component {
 
     return (
       <span>
-        <ToolTip tooltip="Edit">
+        <ToolTip content="Edit">
           <Button onClick={() => this.onEdit(item)} bsStyle="link">
             <Icon type="pf" name="edit" aria-label="Edit" />
           </Button>
         </ToolTip>
-        <ToolTip tooltip="Delete">
+        <ToolTip content="Delete">
           <Button onClick={() => this.onDelete(item)} bsStyle="link">
             <Icon type="pf" name="delete" aria-label="Delete" />
           </Button>
@@ -310,7 +310,7 @@ class SourceListItem extends React.Component {
       if (item.source_type === 'network') {
         itemDescription = (
           <ListView.DescriptionText>
-            <ToolTip delayShow={100} popover={itemHostsPopover} trigger="click" placement="left">
+            <ToolTip delayShow={100} isPopover content={itemHostsPopover} trigger="click" placement="left">
               <Button bsStyle="link" className="quipucords-sources-network-button">
                 Network Range
               </Button>
