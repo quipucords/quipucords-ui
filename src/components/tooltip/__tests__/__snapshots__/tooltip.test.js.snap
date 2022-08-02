@@ -2,27 +2,22 @@
 
 exports[`Tooltip Component should render a popover: popover 1`] = `
 <Tooltip
-  content={null}
+  content="hello world"
   delayShow={500}
   id="test"
-  isPopover={false}
+  isPopover={true}
   placement="top"
-  popover="hello world"
-  rootClose={true}
-  trigger={
-    Array [
-      "hover",
-    ]
-  }
 >
-  <Tooltip
-    content={<div />}
+  <Popover
+    bodyContent="hello world"
+    hasAutoWidth={true}
     id="test"
-    popover="hello world"
+    position="top"
+    showClose={false}
   >
     <Popper
       appendTo={[Function]}
-      distance={15}
+      distance={25}
       enableFlip={true}
       flipBehavior={
         Array [
@@ -36,38 +31,49 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
         ]
       }
       isVisible={false}
-      onBlur={[Function]}
-      onDocumentClick={false}
+      onDocumentClick={[Function]}
       onDocumentKeyDown={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onPopperMouseEnter={[Function]}
-      onPopperMouseLeave={[Function]}
-      onTriggerEnter={[Function]}
+      onTriggerClick={[Function]}
       placement="top"
       popper={
-        <div
-          aria-live="off"
-          className="pf-c-tooltip"
-          id="test"
-          popover="hello world"
-          role="tooltip"
+        <FocusTrap
+          active={false}
+          aria-describedby="popover-test-body"
+          aria-label=""
+          aria-modal="true"
+          className="pf-c-popover pf-m-width-auto"
+          focusTrapOptions={
+            Object {
+              "clickOutsideDeactivates": true,
+              "fallbackFocus": [Function],
+              "returnFocusOnDeactivate": true,
+              "tabbableOptions": Object {
+                "displayCheck": "none",
+              },
+            }
+          }
+          onMouseDown={[Function]}
+          paused={false}
+          preventScrollOnDeactivate={true}
+          role="dialog"
           style={
             Object {
               "maxWidth": null,
+              "minWidth": null,
               "opacity": 0,
               "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
             }
           }
         >
-          <TooltipArrow />
-          <TooltipContent
-            isLeftAligned={false}
-          >
-            <div />
-          </TooltipContent>
-        </div>
+          <PopoverArrow />
+          <PopoverContent>
+            <PopoverBody
+              id="popover-test-body"
+            >
+              hello world
+            </PopoverBody>
+          </PopoverContent>
+        </FocusTrap>
       }
       popperMatchesTriggerWidth={false}
       positionModifiers={
@@ -86,44 +92,32 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
-      trigger={
-        <span>
-          Test popover
-        </span>
-      }
+      trigger="Test popover"
       zIndex={9999}
     >
       <FindRefWrapper
         onFoundRef={[Function]}
       >
-        <span>
-          Test popover
-        </span>
+        Test popover
       </FindRefWrapper>
     </Popper>
-  </Tooltip>
+  </Popover>
 </Tooltip>
 `;
 
 exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
 <Tooltip
-  content={null}
+  content="hello world"
   delayShow={500}
   id="test"
   isPopover={false}
   placement="top"
-  rootClose={true}
-  tooltip="hello world"
-  trigger={
-    Array [
-      "hover",
-    ]
-  }
 >
   <Tooltip
-    content={<div />}
+    content="hello world"
+    entryDelay={500}
     id="test"
-    tooltip="hello world"
+    position="top"
   >
     <Popper
       appendTo={[Function]}
@@ -164,13 +158,12 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
               "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
             }
           }
-          tooltip="hello world"
         >
           <TooltipArrow />
           <TooltipContent
             isLeftAligned={false}
           >
-            <div />
+            hello world
           </TooltipContent>
         </div>
       }
@@ -191,19 +184,13 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
-      trigger={
-        <span>
-          Test tooltip
-        </span>
-      }
+      trigger="Test tooltip"
       zIndex={9999}
     >
       <FindRefWrapper
         onFoundRef={[Function]}
       >
-        <span>
-          Test tooltip
-        </span>
+        Test tooltip
       </FindRefWrapper>
     </Popper>
   </Tooltip>

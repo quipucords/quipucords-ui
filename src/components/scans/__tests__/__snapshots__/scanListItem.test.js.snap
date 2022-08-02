@@ -39,12 +39,6 @@ exports[`ScanListItem Component should render a non-connected component: non-con
           id={null}
           isPopover={false}
           placement="top"
-          rootClose={true}
-          trigger={
-            Array [
-              "hover",
-            ]
-          }
         >
           <Button
             active={false}

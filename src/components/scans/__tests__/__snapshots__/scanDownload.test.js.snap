@@ -24,20 +24,12 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
     id={null}
     isPopover={false}
     placement="top"
-    rootClose={true}
-    trigger={
-      Array [
-        "hover",
-      ]
-    }
   >
     <Tooltip
-      content={
-        <div>
-          Lorem ipsum dolor sit
-        </div>
-      }
+      content="Lorem ipsum dolor sit"
+      entryDelay={500}
       id="generatedid-"
+      position="top"
     >
       <Popper
         appendTo={[Function]}
@@ -83,9 +75,7 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
             <TooltipContent
               isLeftAligned={false}
             >
-              <div>
-                Lorem ipsum dolor sit
-              </div>
+              Lorem ipsum dolor sit
             </TooltipContent>
           </div>
         }
@@ -107,49 +97,45 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
           }
         }
         trigger={
-          <span>
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="default"
-              disabled={false}
-              id="generatedid-"
-              onClick={[Function]}
-              title="Download"
-            >
-              Download
-            </Button>
-          </span>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            id="generatedid-"
+            onClick={[Function]}
+            title="Download"
+          >
+            Download
+          </Button>
         }
         zIndex={9999}
       >
         <FindRefWrapper
           onFoundRef={[Function]}
         >
-          <span>
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="default"
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            id="generatedid-"
+            onClick={[Function]}
+            title="Download"
+          >
+            <button
+              className="btn btn-default"
               disabled={false}
               id="generatedid-"
               onClick={[Function]}
               title="Download"
+              type="button"
             >
-              <button
-                className="btn btn-default"
-                disabled={false}
-                id="generatedid-"
-                onClick={[Function]}
-                title="Download"
-                type="button"
-              >
-                Download
-              </button>
-            </Button>
-          </span>
+              Download
+            </button>
+          </Button>
         </FindRefWrapper>
       </Popper>
     </Tooltip>

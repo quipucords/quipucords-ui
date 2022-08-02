@@ -4,20 +4,20 @@ import { Icon } from 'patternfly-react';
 import { Popover, Tooltip as PFTooltip } from '@patternfly/react-core';
 import helpers from '../../common/helpers';
 
-const Tooltip = ({ children, id, placement, isPopover, content, rootClose, trigger, delayShow, ...props }) => {
+const Tooltip = ({ children, id, placement, isPopover, content, delayShow }) => {
   const setId = id || helpers.generateId();
 
   if (isPopover) {
     return (
-      <Popover id={setId} hasAutoWidth showClose={false} bodyContent={<div>{content}</div>}>
-        <span>{children || <Icon type="pf" name="info" />}</span>
+      <Popover id={setId} position={placement} hasAutoWidth showClose={false} bodyContent={content}>
+        {children || <Icon type="pf" name="info" />}
       </Popover>
     );
   }
 
   return (
-    <PFTooltip id={setId} content={<div>{content}</div>} {...props}>
-      <span>{children || <Icon type="pf" name="info" />}</span>
+    <PFTooltip id={setId} position={placement} content={content} entryDelay={delayShow}>
+      {children || <Icon type="pf" name="info" />}
     </PFTooltip>
   );
 };
@@ -28,8 +28,6 @@ Tooltip.propTypes = {
   content: PropTypes.node,
   id: PropTypes.string,
   placement: PropTypes.string,
-  rootClose: PropTypes.bool,
-  trigger: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   delayShow: PropTypes.number
 };
 
@@ -39,8 +37,6 @@ Tooltip.defaultProps = {
   content: null,
   id: null,
   placement: 'top',
-  rootClose: true,
-  trigger: ['hover'],
   delayShow: 500
 };
 
