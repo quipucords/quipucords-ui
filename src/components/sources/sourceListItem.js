@@ -310,7 +310,7 @@ class SourceListItem extends React.Component {
       if (item.source_type === 'network') {
         itemDescription = (
           <ListView.DescriptionText>
-            <ToolTip delayShow={100} isPopover content={itemHostsPopover} placement="left">
+            <ToolTip isPopover content={itemHostsPopover} placement="left">
               <Button bsStyle="link" className="quipucords-sources-network-button">
                 Network Range
               </Button>
