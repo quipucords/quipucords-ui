@@ -89,6 +89,8 @@ Array [
 ]
 `;
 
+exports[`Select Component should allow alternate array and object options: undefined options 1`] = `Array []`;
+
 exports[`Select Component should allow alternate direction and position options: direction up 1`] = `
 Object {
   "className": "quipucords-select-pf   ",
