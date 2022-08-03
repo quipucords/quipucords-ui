@@ -64,7 +64,7 @@ const SelectPosition = DropdownPosition;
 // FixMe: attributes filtered on PF select component. allow data- attributes
 /**
  * Format options into a consumable array of objects format.
- * Note: It is understood that for line 60'ish around "updatedOptions" we dump all values regardless
+ * Note: It is understood that for line 83'ish around "updatedOptions" we dump all values regardless
  * of whether they are plain objects, or not, into updatedOptions. This has been done for speed only,
  * one less check to perform.
  *
@@ -79,14 +79,13 @@ const SelectPosition = DropdownPosition;
 const formatOptions = ({ selectField = { current: null }, options, selectedOptions, variant, ...props } = {}) => {
   const { current: domElement = {} } = selectField;
   const dataAttributes = Object.entries(props).filter(([key]) => /^data-/i.test(key));
-  const updatedOptions = _isPlainObject(options)
-    ? Object.entries(options).map(([key, value]) => ({ ...value, title: key, value }))
-    : _cloneDeep(options);
-
+  const updatedOptions =
+    (_isPlainObject(options) && Object.entries(options).map(([key, value]) => ({ ...value, title: key, value }))) ||
+    (options && _cloneDeep(options)) ||
+    [];
+  const isSelectedOptionsStringNumber = typeof selectedOptions === 'string' || typeof selectedOptions === 'number';
   const activateOptions =
-    (selectedOptions && typeof selectedOptions === 'string') || typeof selectedOptions === 'number'
-      ? [selectedOptions]
-      : selectedOptions;
+    (Array.isArray(selectedOptions) && selectedOptions) || (isSelectedOptionsStringNumber && [selectedOptions]) || [];
 
   updatedOptions.forEach((option, index) => {
     let convertedOption = option;
@@ -106,7 +105,7 @@ const formatOptions = ({ selectField = { current: null }, options, selectedOptio
     convertedOption.textContent = convertedOption.textContent || convertedOption.title;
     convertedOption.label = convertedOption.label || convertedOption.title;
 
-    if (activateOptions) {
+    if (activateOptions.length) {
       let isSelected;
 
       if (_isPlainObject(convertedOption.value)) {

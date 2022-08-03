@@ -100,6 +100,11 @@ describe('Select Component', () => {
     props.selectedOptions = ['world', 'ipsum'];
 
     expect(formatOptions(props).options).toMatchSnapshot('key value object');
+
+    props.options = undefined;
+    props.selectedOptions = [];
+
+    expect(formatOptions(props).options).toMatchSnapshot('undefined options');
   });
 
   it('should allow plain objects as values, and be able to select options based on values within the object', async () => {
