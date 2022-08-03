@@ -10,7 +10,7 @@ const ListStatusItem = ({ count, emptyText, tipSingular, tipPlural, expanded, ex
   if (count <= 0) {
     return (
       <ListView.InfoItem className="list-view-info-item-icon-count empty-count">
-        <Tooltip tooltip={`0 ${tipPlural}`}>
+        <Tooltip content={`0 ${tipPlural}`}>
           <span>{emptyText}</span>
         </Tooltip>
       </ListView.InfoItem>
@@ -19,7 +19,7 @@ const ListStatusItem = ({ count, emptyText, tipSingular, tipPlural, expanded, ex
 
   return (
     <ListView.InfoItem className="list-view-info-item-icon-count">
-      <Tooltip tooltip={`${count}  ${count === 1 ? tipSingular : tipPlural}`}>
+      <Tooltip content={`${count}  ${count === 1 ? tipSingular : tipPlural}`}>
         <ListView.Expand
           expanded={expanded}
           toggleExpanded={() => {

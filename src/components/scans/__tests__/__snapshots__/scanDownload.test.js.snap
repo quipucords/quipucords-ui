@@ -19,66 +19,126 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
   tooltip="Lorem ipsum dolor sit"
 >
   <Tooltip
+    content="Lorem ipsum dolor sit"
     delayShow={500}
     id={null}
+    isPopover={false}
     placement="top"
-    popover={null}
-    rootClose={true}
-    tooltip="Lorem ipsum dolor sit"
-    trigger={
-      Array [
-        "hover",
-      ]
-    }
   >
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      delayShow={500}
-      overlay={
-        <Tooltip
-          bsClass="tooltip"
-          id="generatedid-"
-          placement="right"
-        >
-          Lorem ipsum dolor sit
-        </Tooltip>
-      }
-      placement="top"
-      rootClose={true}
-      trigger={
-        Array [
-          "hover",
-        ]
-      }
+    <Tooltip
+      content="Lorem ipsum dolor sit"
+      entryDelay={500}
+      id="generatedid-"
+      position="top"
     >
-      <span
-        onClick={null}
-        onMouseOut={[Function]}
-        onMouseOver={[Function]}
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={false}
-          id="generatedid-"
-          onClick={[Function]}
-          title="Download"
-        >
-          <button
-            className="btn btn-default"
+      <Popper
+        appendTo={[Function]}
+        distance={15}
+        enableFlip={true}
+        flipBehavior={
+          Array [
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "top",
+            "right",
+            "bottom",
+          ]
+        }
+        isVisible={false}
+        onBlur={[Function]}
+        onDocumentClick={false}
+        onDocumentKeyDown={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onPopperMouseEnter={[Function]}
+        onPopperMouseLeave={[Function]}
+        onTriggerEnter={[Function]}
+        placement="top"
+        popper={
+          <div
+            aria-live="off"
+            className="pf-c-tooltip"
+            id="generatedid-"
+            role="tooltip"
+            style={
+              Object {
+                "maxWidth": null,
+                "opacity": 0,
+                "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
+              }
+            }
+          >
+            <TooltipArrow />
+            <TooltipContent
+              isLeftAligned={false}
+            >
+              Lorem ipsum dolor sit
+            </TooltipContent>
+          </div>
+        }
+        popperMatchesTriggerWidth={false}
+        positionModifiers={
+          Object {
+            "bottom": "pf-m-bottom",
+            "bottom-end": "pf-m-bottom-right",
+            "bottom-start": "pf-m-bottom-left",
+            "left": "pf-m-left",
+            "left-end": "pf-m-left-bottom",
+            "left-start": "pf-m-left-top",
+            "right": "pf-m-right",
+            "right-end": "pf-m-right-bottom",
+            "right-start": "pf-m-right-top",
+            "top": "pf-m-top",
+            "top-end": "pf-m-top-right",
+            "top-start": "pf-m-top-left",
+          }
+        }
+        trigger={
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
             disabled={false}
             id="generatedid-"
             onClick={[Function]}
             title="Download"
-            type="button"
           >
             Download
-          </button>
-        </Button>
-      </span>
-    </OverlayTrigger>
+          </Button>
+        }
+        zIndex={9999}
+      >
+        <FindRefWrapper
+          onFoundRef={[Function]}
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            id="generatedid-"
+            onClick={[Function]}
+            title="Download"
+          >
+            <button
+              className="btn btn-default"
+              disabled={false}
+              id="generatedid-"
+              onClick={[Function]}
+              title="Download"
+              type="button"
+            >
+              Download
+            </button>
+          </Button>
+        </FindRefWrapper>
+      </Popper>
+    </Tooltip>
   </Tooltip>
 </ScanDownload>
 `;

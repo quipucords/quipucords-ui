@@ -32,17 +32,15 @@ exports[`ViewPaginationRow Component should render 1`] = `
         <div
           class="form-group"
         >
-          <span>
-            <button
-              class="btn btn-link"
-              type="button"
-            >
-              <span
-                aria-hidden="true"
-                class="fa fa-sort-numeric-asc sort-direction"
-              />
-            </button>
-          </span>
+          <button
+            class="btn btn-link"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="fa fa-sort-numeric-asc sort-direction"
+            />
+          </button>
         </div>
         <div
           class="form-group"

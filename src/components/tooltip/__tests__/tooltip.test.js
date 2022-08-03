@@ -6,7 +6,7 @@ describe('Tooltip Component', () => {
   it('should render a tooltip', () => {
     const props = {
       id: 'test',
-      tooltip: 'hello world'
+      content: 'hello world'
     };
 
     const component = mount(<Tooltip {...props}>Test tooltip</Tooltip>);
@@ -17,7 +17,8 @@ describe('Tooltip Component', () => {
   it('should render a popover', () => {
     const props = {
       id: 'test',
-      popover: 'hello world'
+      isPopover: true,
+      content: 'hello world'
     };
 
     const component = mount(<Tooltip {...props}>Test popover</Tooltip>);

@@ -72,7 +72,7 @@ class CredentialListItem extends React.Component {
     const { item, onEdit, onDelete } = this.props;
 
     return [
-      <Tooltip key="editButton" tooltip="View Credential">
+      <Tooltip key="editButton" content="View Credential">
         <Button
           onClick={() => {
             onEdit(item);
@@ -83,7 +83,7 @@ class CredentialListItem extends React.Component {
           <Icon type="fa" name="eye" />
         </Button>
       </Tooltip>,
-      <Tooltip key="deleteButton" tooltip="Delete Credential">
+      <Tooltip key="deleteButton" content="Delete Credential">
         <Button
           onClick={() => {
             onDelete(item);
@@ -131,7 +131,7 @@ class CredentialListItem extends React.Component {
           <List isPlain>
             {item?.sources?.map(source => (
               <ListItem key={source.name} icon={<Icon type={typeIcon.type} name={typeIcon.name} />}>
-                <Tooltip tooltip={dictionary[source.source_type]}>{source.name}</Tooltip>
+                <Tooltip content={dictionary[source.source_type]}>{source.name}</Tooltip>
               </ListItem>
             ))}
           </List>
@@ -147,7 +147,7 @@ class CredentialListItem extends React.Component {
     const sourceTypeIcon = helpers.sourceTypeIcon(item.cred_type);
 
     const leftContent = (
-      <Tooltip tooltip={dictionary[item.cred_type]}>
+      <Tooltip content={dictionary[item.cred_type]}>
         <ListView.Icon type={sourceTypeIcon.type} name={sourceTypeIcon.name} />
       </Tooltip>
     );
@@ -158,7 +158,7 @@ class CredentialListItem extends React.Component {
           <ListView.DescriptionHeading>{item.name}</ListView.DescriptionHeading>
         </span>
         <span className="quipucords-description-right">
-          <Tooltip tooltip="Authorization Type">{dictionary[CredentialListItem.authType(item)]}</Tooltip>
+          <Tooltip content="Authorization Type">{dictionary[CredentialListItem.authType(item)]}</Tooltip>
         </span>
       </div>
     );
