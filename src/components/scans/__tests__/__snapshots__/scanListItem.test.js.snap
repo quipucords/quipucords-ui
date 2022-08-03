@@ -34,17 +34,11 @@ exports[`ScanListItem Component should render a non-connected component: non-con
     actions={
       <React.Fragment>
         <Tooltip
+          content="Run Scan"
           delayShow={500}
           id={null}
+          isPopover={false}
           placement="top"
-          popover={null}
-          rootClose={true}
-          tooltip="Run Scan"
-          trigger={
-            Array [
-              "hover",
-            ]
-          }
         >
           <Button
             active={false}
