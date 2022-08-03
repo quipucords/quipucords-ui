@@ -34,30 +34,26 @@ exports[`SourceListItem Component should render a non-connected component: non-c
     class="list-view-pf-actions"
   >
     <span>
-      <span>
-        <button
-          class="btn btn-link"
-          type="button"
-        >
-          <span
-            aria-hidden="true"
-            aria-label="Edit"
-            class="pficon pficon-edit"
-          />
-        </button>
-      </span>
-      <span>
-        <button
-          class="btn btn-link"
-          type="button"
-        >
-          <span
-            aria-hidden="true"
-            aria-label="Delete"
-            class="pficon pficon-delete"
-          />
-        </button>
-      </span>
+      <button
+        class="btn btn-link"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+          aria-label="Edit"
+          class="pficon pficon-edit"
+        />
+      </button>
+      <button
+        class="btn btn-link"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+          aria-label="Delete"
+          class="pficon pficon-delete"
+        />
+      </button>
       <button
         class="btn btn-default"
         type="button"
@@ -72,12 +68,10 @@ exports[`SourceListItem Component should render a non-connected component: non-c
     <div
       class="list-view-pf-left"
     >
-      <span>
-        <span
-          aria-hidden="true"
-          class="pficon pficon-network-range list-view-pf-icon-sm"
-        />
-      </span>
+      <span
+        aria-hidden="true"
+        class="pficon pficon-network-range list-view-pf-icon-sm"
+      />
     </div>
     <div
       class="list-view-pf-body"
@@ -111,36 +105,28 @@ exports[`SourceListItem Component should render a non-connected component: non-c
           class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
         >
           <span>
-            <span>
-              0 Credentials
-            </span>
+            0 Credentials
           </span>
         </div>
         <div
           class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
         >
           <span>
-            <span>
-              0 Successful
-            </span>
+            0 Successful
           </span>
         </div>
         <div
           class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
         >
           <span>
-            <span>
-              0 Failed
-            </span>
+            0 Failed
           </span>
         </div>
         <div
           class="list-view-pf-additional-info-item list-view-info-item-icon-count empty-count"
         >
           <span>
-            <span>
-              0 Unreachable
-            </span>
+            0 Unreachable
           </span>
         </div>
       </div>

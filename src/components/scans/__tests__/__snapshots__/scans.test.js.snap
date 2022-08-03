@@ -58,17 +58,11 @@ exports[`Scans Component should render a non-connected component: non-connected 
         className="form-group"
       >
         <Tooltip
+          content="Merge selected scan results into a single report"
           delayShow={500}
           id={null}
+          isPopover={false}
           placement="top"
-          popover={null}
-          rootClose={true}
-          tooltip="Merge selected scan results into a single report"
-          trigger={
-            Array [
-              "hover",
-            ]
-          }
         >
           <Button
             active={false}

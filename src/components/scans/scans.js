@@ -80,7 +80,7 @@ class Scans extends React.Component {
 
     return (
       <div className="form-group">
-        <Tooltip key="mergeButtonTip" tooltip="Merge selected scan results into a single report">
+        <Tooltip key="mergeButtonTip" content="Merge selected scan results into a single report">
           <ButtonPf3
             id="merge-reports"
             disabled={viewOptions.selectedItems.length <= 1}
