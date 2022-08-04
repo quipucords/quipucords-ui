@@ -607,11 +607,8 @@ Array [
   "./dist/client/static/css/26*chunk.css",
   "./dist/client/static/css/27*chunk*map",
   "./dist/client/static/css/27*chunk.css",
-<<<<<<< HEAD
-=======
   "./dist/client/static/css/28*chunk*map",
   "./dist/client/static/css/28*chunk.css",
->>>>>>> f47c3a6 (refactor(pagination): use new PF4 component)
   "./dist/client/static/css/3*chunk*map",
   "./dist/client/static/css/3*chunk.css",
   "./dist/client/static/css/4*chunk*map",
