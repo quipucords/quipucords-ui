@@ -54,6 +54,7 @@
 }
 
 .quipicords-list-view {
+  margin-top: 15px;
   .list-view-pf-actions {
     margin-left: 0;
     text-align: right;
@@ -172,11 +173,6 @@
   }
 }
 
-
-.list-view-pagination-top {
-  padding: 0 14px;
-}
-
 .toolbar-pf-results .quipucords-view-count {
   float: right;
   margin-right: 0;
@@ -280,4 +276,8 @@
 
 .pficon.pficon-disconnected.is-error::before {
   color: var(--pf-global--palette--red-100);
+}
+
+.pf-c-pagination.pf-m-bottom.quipucords-view__pagination {
+  padding-bottom: 0 !important;
 }
