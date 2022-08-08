@@ -251,7 +251,6 @@ exports[`Sources Component should render a non-connected component: non-connecte
     pageSize={0}
     selectedItems={Array []}
     totalCount={0}
-    totalPages={0}
     viewType="SOURCES_VIEW"
   />
   <div
