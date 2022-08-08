@@ -113,11 +113,15 @@ Object {
     },
     "viewPagination": Object {
       "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_FIRST_PAGE": "VIEW_FIRST_PAGE",
-      "VIEW_LAST_PAGE": "VIEW_LAST_PAGE",
-      "VIEW_NEXT_PAGE": "VIEW_NEXT_PAGE",
-      "VIEW_PAGE_NUMBER": "VIEW_PAGE_NUMBER",
-      "VIEW_PREVIOUS_PAGE": "VIEW_PREVIOUS_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+      "default": Object {
+        "SET_PER_PAGE": "SET_PER_PAGE",
+        "VIEW_PAGE": "VIEW_PAGE",
+      },
+      "viewPaginationTypes": Object {
+        "SET_PER_PAGE": "SET_PER_PAGE",
+        "VIEW_PAGE": "VIEW_PAGE",
+      },
     },
     "viewToolbar": Object {
       "ADD_FILTER": "ADD_FILTER",
@@ -223,11 +227,15 @@ Object {
     },
     "viewPagination": Object {
       "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_FIRST_PAGE": "VIEW_FIRST_PAGE",
-      "VIEW_LAST_PAGE": "VIEW_LAST_PAGE",
-      "VIEW_NEXT_PAGE": "VIEW_NEXT_PAGE",
-      "VIEW_PAGE_NUMBER": "VIEW_PAGE_NUMBER",
-      "VIEW_PREVIOUS_PAGE": "VIEW_PREVIOUS_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+      "default": Object {
+        "SET_PER_PAGE": "SET_PER_PAGE",
+        "VIEW_PAGE": "VIEW_PAGE",
+      },
+      "viewPaginationTypes": Object {
+        "SET_PER_PAGE": "SET_PER_PAGE",
+        "VIEW_PAGE": "VIEW_PAGE",
+      },
     },
     "viewToolbar": Object {
       "ADD_FILTER": "ADD_FILTER",
@@ -295,11 +303,15 @@ Object {
   },
   "viewPaginationTypes": Object {
     "SET_PER_PAGE": "SET_PER_PAGE",
-    "VIEW_FIRST_PAGE": "VIEW_FIRST_PAGE",
-    "VIEW_LAST_PAGE": "VIEW_LAST_PAGE",
-    "VIEW_NEXT_PAGE": "VIEW_NEXT_PAGE",
-    "VIEW_PAGE_NUMBER": "VIEW_PAGE_NUMBER",
-    "VIEW_PREVIOUS_PAGE": "VIEW_PREVIOUS_PAGE",
+    "VIEW_PAGE": "VIEW_PAGE",
+    "default": Object {
+      "SET_PER_PAGE": "SET_PER_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+    },
+    "viewPaginationTypes": Object {
+      "SET_PER_PAGE": "SET_PER_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+    },
   },
   "viewToolbarTypes": Object {
     "ADD_FILTER": "ADD_FILTER",
@@ -412,11 +424,15 @@ Object {
   },
   "viewPagination": Object {
     "SET_PER_PAGE": "SET_PER_PAGE",
-    "VIEW_FIRST_PAGE": "VIEW_FIRST_PAGE",
-    "VIEW_LAST_PAGE": "VIEW_LAST_PAGE",
-    "VIEW_NEXT_PAGE": "VIEW_NEXT_PAGE",
-    "VIEW_PAGE_NUMBER": "VIEW_PAGE_NUMBER",
-    "VIEW_PREVIOUS_PAGE": "VIEW_PREVIOUS_PAGE",
+    "VIEW_PAGE": "VIEW_PAGE",
+    "default": Object {
+      "SET_PER_PAGE": "SET_PER_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+    },
+    "viewPaginationTypes": Object {
+      "SET_PER_PAGE": "SET_PER_PAGE",
+      "VIEW_PAGE": "VIEW_PAGE",
+    },
   },
   "viewToolbar": Object {
     "ADD_FILTER": "ADD_FILTER",

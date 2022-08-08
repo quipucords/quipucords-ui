@@ -128,7 +128,6 @@ exports[`Scans Component should render a non-connected component: non-connected 
     pageSize={0}
     selectedItems={Array []}
     totalCount={0}
-    totalPages={0}
     viewType="SCANS_VIEW"
   />
   <div
