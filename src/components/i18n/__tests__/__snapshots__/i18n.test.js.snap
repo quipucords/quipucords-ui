@@ -486,6 +486,19 @@ Array [
       },
     ],
   },
+  Object {
+    "file": "./src/components/table/tableEmpty.js",
+    "keys": Array [
+      Object {
+        "key": "table.empty-state_title",
+        "match": "t('table.empty-state_title', 'No results found')",
+      },
+      Object {
+        "key": "table.empty-state_description",
+        "match": "t('table.empty-state_description', 'Clear all filters and try again.')",
+      },
+    ],
+  },
 ]
 `;
 
@@ -646,6 +659,14 @@ Array [
   Object {
     "file": "./src/components/sources/sourcesEmptyState.js",
     "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/table/tableEmpty.js",
+    "key": "table.empty-state_title",
+  },
+  Object {
+    "file": "./src/components/table/tableEmpty.js",
+    "key": "table.empty-state_description",
   },
 ]
 `;

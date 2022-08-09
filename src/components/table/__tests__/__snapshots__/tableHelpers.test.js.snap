@@ -1,0 +1,425 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableHelpers generateTableKey should generate a variety of unique keys: keys 1`] = `
+Object {
+  "func": "table-() => 'lorem'",
+  "nan": "table-generatedid-",
+  "null": "table-generatedid-",
+  "number": "table-200",
+  "obj": "table-{\\"lorem\\":\\"ipsum\\"}",
+  "repeatNumber": "generatedid-",
+  "string": "table-lorem",
+  "undefined": "table-generatedid-",
+}
+`;
+
+exports[`TableHelpers should have specific functions: tableHelpers 1`] = `
+Object {
+  "generateTableKey": [Function],
+  "tableHeader": [Function],
+  "tableRows": [Function],
+}
+`;
+
+exports[`TableHelpers tableHeader should return parsed table header settings, props: tableHeader 1`] = `
+Object {
+  "allRowsSelected": Object {
+    "columnHeaders": Array [],
+    "headerSelectProps": Object {},
+    "isSortTable": false,
+  },
+  "basic": Object {
+    "columnHeaders": Array [],
+    "headerSelectProps": Object {},
+    "isSortTable": false,
+  },
+  "columnHeaders": Object {
+    "columnHeaders": Array [
+      Object {
+        "content": "lorem",
+      },
+      Object {
+        "content": "dolor",
+        "props": Object {},
+      },
+      Object {
+        "content": "hello world",
+      },
+      Object {
+        "content": <React.Fragment>
+          hello world
+        </React.Fragment>,
+      },
+    ],
+    "headerSelectProps": Object {},
+    "isSortTable": false,
+  },
+  "isRowExpand": Object {
+    "columnHeaders": Array [
+      Object {
+        "content": "lorem",
+      },
+      Object {
+        "content": "dolor",
+        "props": Object {
+          "sort": Object {
+            "columnIndex": 2,
+            "onSort": [Function],
+            "sortBy": Object {
+              "direction": "asc",
+            },
+          },
+        },
+      },
+      Object {
+        "content": "hello world",
+      },
+    ],
+    "headerSelectProps": Object {},
+    "isSortTable": true,
+  },
+  "onSelect": Object {
+    "columnHeaders": Array [
+      Object {
+        "content": "lorem",
+      },
+      Object {
+        "content": "dolor",
+        "props": Object {},
+      },
+      Object {
+        "content": "hello world",
+      },
+    ],
+    "headerSelectProps": Object {
+      "select": Object {
+        "isSelected": false,
+        "onSelect": [Function],
+      },
+    },
+    "isSortTable": false,
+  },
+  "onSort": Object {
+    "columnHeaders": Array [
+      Object {
+        "content": "lorem",
+      },
+      Object {
+        "content": "dolor",
+        "props": Object {
+          "sort": Object {
+            "columnIndex": 1,
+            "onSort": [Function],
+            "sortBy": Object {
+              "direction": "asc",
+            },
+          },
+        },
+      },
+      Object {
+        "content": "hello world",
+      },
+    ],
+    "headerSelectProps": Object {},
+    "isSortTable": true,
+  },
+}
+`;
+
+exports[`TableHelpers tableRows should return parsed table body settings, props: tableRows 1`] = `
+Object {
+  "basic": Object {
+    "allRowsSelected": true,
+    "isExpandableCell": false,
+    "isExpandableRow": false,
+    "isSelectTable": false,
+    "rows": Array [],
+  },
+  "onExpandCells": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": true,
+    "isExpandableRow": false,
+    "isSelectTable": false,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 0,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "expandedContent": "sit",
+            "isExpanded": true,
+            "props": Object {
+              "compoundExpand": Object {
+                "isExpanded": true,
+                "onToggle": [Function],
+              },
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "width": undefined,
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 1,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 2,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 3,
+        "select": undefined,
+      },
+    ],
+  },
+  "onExpandRows": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": false,
+    "isExpandableRow": true,
+    "isSelectTable": false,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+          },
+        ],
+        "expand": Object {
+          "isExpanded": true,
+          "onToggle": [Function],
+          "rowIndex": 0,
+        },
+        "expandedContent": "ipsum",
+        "rowIndex": 0,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "width": undefined,
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 1,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 2,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 3,
+        "select": undefined,
+      },
+    ],
+  },
+  "onSelect": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": false,
+    "isExpandableRow": false,
+    "isSelectTable": true,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 0,
+        "select": Object {
+          "cells": Array [
+            "lorem",
+          ],
+          "disable": false,
+          "isSelected": true,
+          "onSelect": [Function],
+          "rowIndex": 0,
+        },
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "width": undefined,
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 1,
+        "select": Object {
+          "cells": Array [
+            Object {
+              "content": "dolor",
+            },
+          ],
+          "disable": true,
+          "isSelected": false,
+          "onSelect": [Function],
+          "rowIndex": 1,
+        },
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 2,
+        "select": Object {
+          "cells": Array [
+            [Function],
+          ],
+          "disable": false,
+          "isSelected": false,
+          "onSelect": [Function],
+          "rowIndex": 2,
+        },
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 3,
+        "select": Object {
+          "cells": Array [
+            <React.Fragment>
+              hello world
+            </React.Fragment>,
+          ],
+          "disable": false,
+          "isSelected": false,
+          "onSelect": [Function],
+          "rowIndex": 3,
+        },
+      },
+    ],
+  },
+  "rows": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": false,
+    "isExpandableRow": false,
+    "isSelectTable": false,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 0,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "width": undefined,
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 1,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 2,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "rowIndex": 3,
+        "select": undefined,
+      },
+    ],
+  },
+}
+`;
