@@ -78,7 +78,7 @@ class AboutModal extends React.Component {
     if (uiBrand) {
       props.logo = logoImgBrand;
       props.productTitle = <img src={titleImgBrand} alt={uiName} />;
-      props.trademarkText = 'Copyright (c) 2019 Red Hat Inc.';
+      props.trademarkText = 'Copyright (c) 2019 - 2022 Red Hat Inc.';
     }
 
     return (
