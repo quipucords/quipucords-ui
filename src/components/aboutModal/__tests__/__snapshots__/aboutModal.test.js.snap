@@ -13,7 +13,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
     />
   }
   show={true}
-  trademarkText="Copyright (c) 2019 Red Hat Inc."
+  trademarkText="Copyright (c) 2019 - 2022 Red Hat Inc."
 >
   <div
     aria-label="Application information copied"
