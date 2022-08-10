@@ -47,9 +47,34 @@
   },
   "standard-version": {
     "skip": {
-      "commit": true,
       "tag": true
-    }
+    },
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "refactor",
+        "section": "Code Refactoring"
+      },
+      {
+        "type": "perf",
+        "section": "Performance Improvements"
+      },
+      {
+        "type": "style",
+        "section": "Styles"
+      },
+      {
+        "type": "build",
+        "section": "Build"
+      }
+    ]
   },
   "scripts": {
     "api:build": "run-s -l build:pre build:js build:post",
@@ -66,7 +91,7 @@
     "build:post": "bash ./scripts/post.sh; bash ./scripts/clean.sh",
     "build:pre": "bash ./scripts/pre.sh",
     "build:brand": "run-s -l 'build:pre -b' 'build:docs -b' test:docs build:js build:post test:integration",
-    "release": "> ./CHANGELOG.md && standard-version",
+    "release": "standard-version",
     "start": "open http://localhost:5050/docs/api; run-p -l api:dev start:js",
     "start:js": "react-scripts start",
     "start:dev": "npm start",
