@@ -1,9 +1,25 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 0.9.3 (2020-05-14)
+## 0.10.0 (2022-08-10)
 
+### Bug Fixes
+
+* **build:** base dep package updates ([#80](https://github.com/quipucords/quipucords-ui/issues/80)) ([e8fb47b](https://github.com/quipucords/quipucords-ui/commit/e8fb47be384272fd18bfbaa426b0232bed1a2d40))
+* **build:** discovery-8 allow repo locale files ([#85](https://github.com/quipucords/quipucords-ui/issues/85)) ([a5a1a0d](https://github.com/quipucords/quipucords-ui/commit/a5a1a0dd3e5e2881f3beb514bf3c28449f7db42c))
+* **build:** npm update, redux middleware ([#82](https://github.com/quipucords/quipucords-ui/issues/82)) ([d0a1aba](https://github.com/quipucords/quipucords-ui/commit/d0a1aba0c498067531ca335983897b622b31aa5f))
+* **build:** npm updates ([#80](https://github.com/quipucords/quipucords-ui/issues/80)) ([b1ec470](https://github.com/quipucords/quipucords-ui/commit/b1ec470eb25ab27169d7eec94b47629f4177b227))
+* **build:** npm updates ([#83](https://github.com/quipucords/quipucords-ui/issues/83)) ([29afd8f](https://github.com/quipucords/quipucords-ui/commit/29afd8f2ed4804a3a385c5c2938a2406ebb3b790))
+* **build:** update react ([#80](https://github.com/quipucords/quipucords-ui/issues/80)) ([1fdb58c](https://github.com/quipucords/quipucords-ui/commit/1fdb58c108b2adb1b72a9204d5946f2572c2c639))
+* **i18n:** component loading ([#80](https://github.com/quipucords/quipucords-ui/issues/80)) ([e904e0d](https://github.com/quipucords/quipucords-ui/commit/e904e0d663836a0dee40f6960cc4d81b3c99ddcc))
+
+### Code Refactoring
+
+* **redux:** discovery-8 middleware, hooks, restructure ([#82](https://github.com/quipucords/quipucords-ui/issues/82)) ([acabcf8](https://github.com/quipucords/quipucords-ui/commit/acabcf827f17d5755a7bc303ca49829fea5158bb))
+* **services:** discovery-8 minor config restructure ([#82](https://github.com/quipucords/quipucords-ui/issues/82)) ([90a4dfd](https://github.com/quipucords/quipucords-ui/commit/90a4dfdf9a536484b793cfe4ee4926652d70f506))
+
+## 0.9.3 (2020-05-14)
 
 ### Bug Fixes
 
@@ -11,19 +27,13 @@ All notable changes to this project will be documented in this file. See [standa
 * **build:** file lint updates ([2919e90](https://github.com/quipucords/quipucords-ui/commit/2919e90))
 * **build:** npm updates and linting ([dc5cbdf](https://github.com/quipucords/quipucords-ui/commit/dc5cbdf))
 
-
-
 ## 0.9.2 (2019-12-12)
-
 
 ### Bug Fixes
 
 * **build:** issues/73 correct Django token reference ([#74](https://github.com/quipucords/quipucords-ui/issues/74)) ([06966d4](https://github.com/quipucords/quipucords-ui/commit/06966d4))
 
-
-
 ## 0.9.1 (2019-08-20)
-
 
 ### Bug Fixes
 
@@ -32,15 +42,11 @@ All notable changes to this project will be documented in this file. See [standa
 * **build:** issues/63 Quipudocs package ([#66](https://github.com/quipucords/quipucords-ui/issues/66)) ([354a5bf](https://github.com/quipucords/quipucords-ui/commit/354a5bf))
 * **quipudocs, pageLayout:** issues/68 disable install guide ([#69](https://github.com/quipucords/quipucords-ui/issues/69)) ([2cdf23f](https://github.com/quipucords/quipucords-ui/commit/2cdf23f))
 
-
 ### Features
 
 * **docs:** issues/38 integrate documentation ([#62](https://github.com/quipucords/quipucords-ui/issues/62)) ([d21d47f](https://github.com/quipucords/quipucords-ui/commit/d21d47f))
 
-
-
-# 0.9.0 (2019-06-13)
-
+## 0.9.0 (2019-06-13)
 
 ### Bug Fixes
 
@@ -57,7 +63,6 @@ All notable changes to this project will be documented in this file. See [standa
 * **reportsService:** issues/52 name report package download ([#54](https://github.com/quipucords/quipucords-ui/issues/54)) ([d79bdd5](https://github.com/quipucords/quipucords-ui/commit/d79bdd5))
 * **sourceListItem:** update sources list on delete ([#33](https://github.com/quipucords/quipucords-ui/issues/33)) ([ae2fc83](https://github.com/quipucords/quipucords-ui/commit/ae2fc83))
 * **sources view:** issues/39 network address styling ([#41](https://github.com/quipucords/quipucords-ui/issues/41)) ([6700a9b](https://github.com/quipucords/quipucords-ui/commit/6700a9b))
-
 
 ### Features
 
