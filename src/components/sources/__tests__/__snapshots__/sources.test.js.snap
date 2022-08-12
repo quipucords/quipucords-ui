@@ -151,30 +151,21 @@ exports[`Sources Component should render a non-connected component: non-connecte
 >
   <ViewToolbar
     actions={
-      <div
-        className="form-group"
-      >
+      <React.Fragment>
         <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
           onClick={[Function]}
         >
           Add
         </Button>
+         
         <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={true}
+          isDisabled={true}
           onClick={[Function]}
+          variant="secondary"
         >
           Scan
         </Button>
-      </div>
+      </React.Fragment>
     }
     activeFilters={Array []}
     filterFields={

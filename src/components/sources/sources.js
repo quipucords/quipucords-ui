@@ -16,7 +16,7 @@ import {
   TitleSizes
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-import { Button as ButtonPf3, ListView, Spinner } from 'patternfly-react';
+import { ListView, Spinner } from 'patternfly-react';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import helpers from '../../common/helpers';
@@ -81,17 +81,16 @@ class Sources extends React.Component {
     const { viewOptions } = this.props;
 
     return (
-      <div className="form-group">
-        <ButtonPf3 bsStyle="primary" onClick={this.onShowAddSourceWizard}>
-          Add
-        </ButtonPf3>
-        <ButtonPf3
-          disabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
+      <React.Fragment>
+        <Button onClick={this.onShowAddSourceWizard}>Add</Button>{' '}
+        <Button
+          variant={ButtonVariant.secondary}
+          isDisabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
           onClick={this.onScanSources}
         >
           Scan
-        </ButtonPf3>
-      </div>
+        </Button>
+      </React.Fragment>
     );
   }
 
