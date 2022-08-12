@@ -141,7 +141,7 @@ class SourceListItem extends React.Component {
 
     return (
       <React.Fragment>
-        <ToolTip content="Edit">
+        <ToolTip key="tooltip-edit" content="Edit">
           <Button
             className="quipucords-view__row-button"
             onClick={() => this.onEdit(item)}
@@ -151,7 +151,7 @@ class SourceListItem extends React.Component {
             <PencilAltIcon />
           </Button>
         </ToolTip>
-        <ToolTip content="Delete">
+        <ToolTip key="tooltip-delete" content="Delete">
           <Button
             className="quipucords-view__row-button"
             onClick={() => this.onDelete(item)}
@@ -161,7 +161,7 @@ class SourceListItem extends React.Component {
             <TrashIcon />
           </Button>
         </ToolTip>
-        <Button variant={ButtonVariant.secondary} onClick={() => this.onScan(item)}>
+        <Button key="button-scan" variant={ButtonVariant.secondary} onClick={() => this.onScan(item)}>
           Scan
         </Button>
       </React.Fragment>
