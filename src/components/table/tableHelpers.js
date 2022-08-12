@@ -2,54 +2,6 @@ import React from 'react';
 import { SortByDirection } from '@patternfly/react-table';
 import { helpers } from '../../common';
 
-// ToDo: evaluate potential storage issues.
-/**
- * Store generated keys, check for repeats.
- *
- * @type {{}}
- */
-const tableKeyCache = {};
-
-/**
- * Generate table keys, avoid potential repeats.
- *
- * @param {*} value
- * @param {string} prefix
- * @returns {string}
- */
-const generateTableKey = (value, prefix = 'table') => {
-  let updatedValue = helpers.generateId();
-
-  if (value === undefined || value === null || Number.isNaN(value)) {
-    return `${prefix}-${updatedValue}`;
-  }
-
-  switch (typeof value) {
-    case 'string':
-      updatedValue = value;
-      break;
-    case 'object':
-      try {
-        updatedValue = JSON.stringify(value);
-      } catch (e) {
-        //
-      }
-      break;
-    default:
-      updatedValue = value.toString();
-  }
-
-  let key = `${prefix}-${updatedValue}`;
-
-  if (tableKeyCache[key]) {
-    key = helpers.generateId();
-  }
-
-  tableKeyCache[key] = true;
-
-  return key;
-};
-
 /**
  * Parse table header settings, props.
  *
@@ -75,9 +27,12 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
   }
 
   columnHeaders.forEach((columnHeader, index) => {
+    const key = `${helpers.generateId('head')}-${index}`;
+
     if (columnHeader?.content !== undefined) {
       const { isSort, isSortActive, sortDirection = SortByDirection.asc, content, ...props } = columnHeader;
       const tempColumnHeader = {
+        key,
         content,
         props
       };
@@ -111,6 +66,7 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
       updatedColumnHeaders.push(tempColumnHeader);
     } else {
       updatedColumnHeaders.push({
+        key,
         content:
           (React.isValidElement(columnHeader) && columnHeader) ||
           (typeof columnHeader === 'function' && columnHeader()) ||
@@ -145,6 +101,7 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
 
   rows.forEach(({ cells, isDisabled = false, isExpanded = false, isSelected = false, expandedContent }) => {
     const rowObj = {
+      key: undefined,
       cells: [],
       select: undefined,
       expand: undefined,
@@ -152,6 +109,7 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
     };
     updatedRows.push(rowObj);
     rowObj.rowIndex = updatedRows.length - 1;
+    rowObj.key = `${helpers.generateId('row')}-${rowObj.rowIndex}`;
 
     if (typeof onSelect === 'function') {
       const updatedIsSelected = isSelected ?? false;
@@ -185,9 +143,16 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
     }
 
     cells.forEach((cell, cellIndex) => {
+      const cellKey = `${helpers.generateId('cell')}-${cellIndex}`;
       if (cell?.content !== undefined) {
         const { dataLabel, isActionCell, noPadding, width, ...remainingProps } = cell;
-        const cellProps = { dataLabel, isActionCell, noPadding, width };
+        const cellProps = { dataLabel, isActionCell, noPadding };
+
+        if (typeof width === 'string') {
+          cellProps.style = { width };
+        } else {
+          cellProps.width = width;
+        }
 
         if (!isExpandableRow && cell?.expandedContent && typeof onExpand === 'function') {
           isExpandableCell = true;
@@ -204,9 +169,10 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
           };
         }
 
-        rowObj.cells.push({ ...remainingProps, props: cellProps });
+        rowObj.cells.push({ ...remainingProps, key: cellKey, props: cellProps });
       } else {
         rowObj.cells.push({
+          key: cellKey,
           content:
             (React.isValidElement(cell) && cell) ||
             (typeof cell === 'function' && cell()) ||
@@ -227,9 +193,8 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
 };
 
 const tableHelpers = {
-  generateTableKey,
   tableHeader,
   tableRows
 };
 
-export { tableHelpers as default, tableHelpers, generateTableKey, tableHeader, tableRows };
+export { tableHelpers as default, tableHelpers, tableHeader, tableRows };

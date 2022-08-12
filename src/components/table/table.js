@@ -257,13 +257,8 @@ const Table = ({
         <Tr className={componentClassNames.tr}>
           {updatedIsExpandableRow && <Td className={componentClassNames.th} key="expand-th-cell" />}
           {updatedIsSelectTable && <Td className={componentClassNames.th} key="select-th-cell" {...selectProps} />}
-          {updatedHeaders.map(({ content, props, sort }) => (
-            <Th
-              className={componentClassNames.th}
-              key={tableHelpers.generateTableKey(content, 'th-cell')}
-              sort={sort}
-              {...props}
-            >
+          {updatedHeaders.map(({ key: cellKey, content, props, sort }) => (
+            <Th className={componentClassNames.th} key={cellKey} sort={sort} {...props}>
               {content}
             </Th>
           ))}
@@ -282,7 +277,7 @@ const Table = ({
 
     return (
       <BodyWrapper>
-        {updatedRows.map(({ cells, expand, select, expandedContent }) => {
+        {updatedRows.map(({ key: rowKey, cells, expand, select, expandedContent }) => {
           const expandedCell =
             (updatedIsExpandableCell && cells.find(cell => cell?.props?.compoundExpand?.isExpanded === true)) ||
             undefined;
@@ -295,38 +290,22 @@ const Table = ({
             undefined;
 
           return (
-            <CellWrapper key={tableHelpers.generateTableKey(cells, 'parent-row')} {...cellWrapperProps}>
-              <Tr className={componentClassNames.tr} key={tableHelpers.generateTableKey(cells, 'row')}>
-                {expand && (
-                  <Td
-                    className={componentClassNames.td}
-                    key={tableHelpers.generateTableKey(cells, 'expand-col')}
-                    expand={expand}
-                  />
-                )}
-                {select && (
-                  <Td
-                    className={componentClassNames.td}
-                    key={tableHelpers.generateTableKey(cells, 'select-col')}
-                    select={select}
-                  />
-                )}
-                {cells.map(({ content, isTHeader, props: cellProps }) => {
+            <CellWrapper key={`${rowKey}-parent-row`} {...cellWrapperProps}>
+              <Tr className={componentClassNames.tr} key={`${rowKey}-row`}>
+                {expand && <Td className={componentClassNames.td} key={`${rowKey}-expand-col`} expand={expand} />}
+                {select && <Td className={componentClassNames.td} key={`${rowKey}-select-col`} select={select} />}
+                {cells.map(({ key: cellKey, content, isTHeader, props: cellProps }) => {
                   const WrapperCell = (isTHeader && Th) || Td;
 
                   return (
-                    <WrapperCell
-                      className={componentClassNames.td}
-                      key={tableHelpers.generateTableKey(content, 'cell')}
-                      {...cellProps}
-                    >
+                    <WrapperCell className={componentClassNames.td} key={cellKey} {...cellProps}>
                       {content}
                     </WrapperCell>
                   );
                 })}
               </Tr>
               {updatedIsExpandableRow && expandedRow && (
-                <Tr className={componentClassNames.tr} isExpanded>
+                <Tr className={componentClassNames.tr} isExpanded key={`${rowKey}-expandedrow`}>
                   <Td
                     className={`${componentClassNames.td} ${componentClassNames.trExpandedContent}`}
                     colSpan={cells.length}
@@ -336,12 +315,15 @@ const Table = ({
                 </Tr>
               )}
               {updatedIsExpandableCell && expandedCell && (
-                <Tr className={componentClassNames.tr} isExpanded>
+                <Tr className={componentClassNames.tr} isExpanded key={`${rowKey}-expandedcol`}>
                   <Td
                     className={`${componentClassNames.td} ${componentClassNames.tdExpandedContent}`}
                     colSpan={cells.length}
                   >
-                    <ExpandableRowContent>{expandedCell.expandedContent}</ExpandableRowContent>
+                    <ExpandableRowContent>
+                      {(typeof expandedCell.expandedContent === 'function' && expandedCell.expandedContent()) ||
+                        expandedCell.expandedContent}
+                    </ExpandableRowContent>
                   </Td>
                 </Tr>
               )}

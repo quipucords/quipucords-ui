@@ -1,22 +1,9 @@
 import React from 'react';
-import { tableHelpers, generateTableKey, tableHeader, tableRows } from '../tableHelpers';
+import { tableHelpers, tableHeader, tableRows } from '../tableHelpers';
 
 describe('TableHelpers', () => {
   it('should have specific functions', () => {
     expect(tableHelpers).toMatchSnapshot('tableHelpers');
-  });
-
-  it('generateTableKey should generate a variety of unique keys', () => {
-    expect({
-      string: generateTableKey('lorem'),
-      func: generateTableKey(() => 'lorem'),
-      obj: generateTableKey({ lorem: 'ipsum' }),
-      null: generateTableKey(null),
-      undefined: generateTableKey(undefined),
-      nan: generateTableKey(NaN),
-      number: generateTableKey(200),
-      repeatNumber: generateTableKey(200)
-    }).toMatchSnapshot('keys');
   });
 
   it('tableHeader should return parsed table header settings, props', () => {
