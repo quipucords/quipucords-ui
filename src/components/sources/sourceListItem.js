@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
+import { Button, ButtonVariant } from '@patternfly/react-core';
+import { PencilAltIcon, TrashIcon } from '@patternfly/react-icons';
+import { Checkbox, Grid, Icon, ListView } from 'patternfly-react';
 import _get from 'lodash/get';
 import _size from 'lodash/size';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
@@ -138,19 +140,31 @@ class SourceListItem extends React.Component {
     const { item } = this.props;
 
     return (
-      <span>
-        <ToolTip content="Edit">
-          <Button onClick={() => this.onEdit(item)} bsStyle="link">
-            <Icon type="pf" name="edit" aria-label="Edit" />
+      <React.Fragment>
+        <ToolTip key="tooltip-edit" content="Edit">
+          <Button
+            className="quipucords-view__row-button"
+            onClick={() => this.onEdit(item)}
+            aria-label="Edit"
+            variant={ButtonVariant.plain}
+          >
+            <PencilAltIcon />
           </Button>
         </ToolTip>
-        <ToolTip content="Delete">
-          <Button onClick={() => this.onDelete(item)} bsStyle="link">
-            <Icon type="pf" name="delete" aria-label="Delete" />
+        <ToolTip key="tooltip-delete" content="Delete">
+          <Button
+            className="quipucords-view__row-button"
+            onClick={() => this.onDelete(item)}
+            aria-label="Delete"
+            variant={ButtonVariant.plain}
+          >
+            <TrashIcon />
           </Button>
         </ToolTip>
-        <Button onClick={() => this.onScan(item)}>Scan</Button>
-      </span>
+        <Button key="button-scan" variant={ButtonVariant.secondary} onClick={() => this.onScan(item)}>
+          Scan
+        </Button>
+      </React.Fragment>
     );
   }
 
@@ -311,7 +325,7 @@ class SourceListItem extends React.Component {
         itemDescription = (
           <ListView.DescriptionText>
             <ToolTip isPopover content={itemHostsPopover} placement="left">
-              <Button bsStyle="link" className="quipucords-sources-network-button">
+              <Button variant={ButtonVariant.link} isInline>
                 Network Range
               </Button>
             </ToolTip>
