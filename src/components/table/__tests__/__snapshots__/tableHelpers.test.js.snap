@@ -1,7 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TableHelpers parseContent should return a consistent output from multiple types: multiple types 1`] = `
+Object {
+  "func": "lorem ipsum",
+  "node": <React.Fragment>
+    dolor sit
+  </React.Fragment>,
+  "null": "null",
+  "obj": "[object Object]",
+  "undefined": "",
+}
+`;
+
 exports[`TableHelpers should have specific functions: tableHelpers 1`] = `
 Object {
+  "parseContent": [Function],
   "tableHeader": [Function],
   "tableRows": [Function],
 }
@@ -168,6 +181,7 @@ Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
@@ -240,6 +254,7 @@ Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
@@ -316,6 +331,7 @@ Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
@@ -412,6 +428,7 @@ Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
@@ -442,6 +459,100 @@ Object {
               hello world
             </React.Fragment>,
             "key": "cell--0",
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--3",
+        "rowIndex": 3,
+        "select": undefined,
+      },
+    ],
+  },
+  "styling": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": false,
+    "isExpandableRow": false,
+    "isSelectTable": false,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "width": "9px",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--0",
+        "rowIndex": 0,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "backgroundColor": "red",
+                "width": "50em",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--1",
+        "rowIndex": 1,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "width": "1%",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--2",
+        "rowIndex": 2,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": undefined,
+              "width": 11,
+            },
           },
         ],
         "expand": undefined,

@@ -3,6 +3,19 @@ import { SortByDirection } from '@patternfly/react-table';
 import { helpers } from '../../common';
 
 /**
+ * Allow additional content to display in cells.
+ *
+ * @param {React.ReactNode|Function|object|*} content
+ * @returns {*|string}
+ */
+const parseContent = content =>
+  (React.isValidElement(content) && content) ||
+  (typeof content === 'function' && content()) ||
+  (typeof content === 'object' && `${content}`) ||
+  content ||
+  '';
+
+/**
  * Parse table header settings, props.
  *
  * @param {object} params
@@ -33,7 +46,7 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
       const { isSort, isSortActive, sortDirection = SortByDirection.asc, content, ...props } = columnHeader;
       const tempColumnHeader = {
         key,
-        content,
+        content: parseContent(content),
         props
       };
 
@@ -67,11 +80,7 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
     } else {
       updatedColumnHeaders.push({
         key,
-        content:
-          (React.isValidElement(columnHeader) && columnHeader) ||
-          (typeof columnHeader === 'function' && columnHeader()) ||
-          (typeof columnHeader === 'object' && `${columnHeader}`) ||
-          columnHeader
+        content: parseContent(columnHeader)
       });
     }
   });
@@ -145,11 +154,17 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
     cells.forEach((cell, cellIndex) => {
       const cellKey = `${helpers.generateId('cell')}-${cellIndex}`;
       if (cell?.content !== undefined) {
-        const { dataLabel, isActionCell, noPadding, width, ...remainingProps } = cell;
-        const cellProps = { dataLabel, isActionCell, noPadding };
+        const { content, dataLabel, isActionCell, noPadding, width, style, ...remainingProps } = cell;
+        const cellProps = { dataLabel, isActionCell, noPadding, style };
+        let updatedWidth = width;
 
-        if (typeof width === 'string') {
-          cellProps.style = { width };
+        // FixMe: PF doesn't appear to allow cell widths less than 10
+        if (width < 10) {
+          updatedWidth = `${width}%`;
+        }
+
+        if (typeof updatedWidth === 'string' || style) {
+          cellProps.style = { ...style, width: updatedWidth };
         } else {
           cellProps.width = width;
         }
@@ -169,15 +184,11 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
           };
         }
 
-        rowObj.cells.push({ ...remainingProps, key: cellKey, props: cellProps });
+        rowObj.cells.push({ ...remainingProps, content: parseContent(content), key: cellKey, props: cellProps });
       } else {
         rowObj.cells.push({
           key: cellKey,
-          content:
-            (React.isValidElement(cell) && cell) ||
-            (typeof cell === 'function' && cell()) ||
-            (typeof cell === 'object' && `${cell}`) ||
-            cell
+          content: parseContent(cell)
         });
       }
     });
@@ -193,8 +204,9 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
 };
 
 const tableHelpers = {
+  parseContent,
   tableHeader,
   tableRows
 };
 
-export { tableHelpers as default, tableHelpers, tableHeader, tableRows };
+export { tableHelpers as default, tableHelpers, parseContent, tableHeader, tableRows };
