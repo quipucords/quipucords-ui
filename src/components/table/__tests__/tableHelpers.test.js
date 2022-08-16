@@ -1,22 +1,19 @@
 import React from 'react';
-import { tableHelpers, generateTableKey, tableHeader, tableRows } from '../tableHelpers';
+import { tableHelpers, parseContent, tableHeader, tableRows } from '../tableHelpers';
 
 describe('TableHelpers', () => {
   it('should have specific functions', () => {
     expect(tableHelpers).toMatchSnapshot('tableHelpers');
   });
 
-  it('generateTableKey should generate a variety of unique keys', () => {
+  it('parseContent should return a consistent output from multiple types', () => {
     expect({
-      string: generateTableKey('lorem'),
-      func: generateTableKey(() => 'lorem'),
-      obj: generateTableKey({ lorem: 'ipsum' }),
-      null: generateTableKey(null),
-      undefined: generateTableKey(undefined),
-      nan: generateTableKey(NaN),
-      number: generateTableKey(200),
-      repeatNumber: generateTableKey(200)
-    }).toMatchSnapshot('keys');
+      func: parseContent(() => 'lorem ipsum'),
+      node: parseContent(<React.Fragment>dolor sit</React.Fragment>),
+      null: parseContent(null),
+      obj: parseContent({ hello: 'world' }),
+      undefined: parseContent(undefined)
+    }).toMatchSnapshot('multiple types');
   });
 
   it('tableHeader should return parsed table header settings, props', () => {
@@ -56,6 +53,14 @@ describe('TableHelpers', () => {
           { cells: [{ content: 'dolor' }] },
           { cells: [() => 'hello world'] },
           { cells: [<React.Fragment>hello world</React.Fragment>] }
+        ]
+      }),
+      styling: tableRows({
+        rows: [
+          { cells: [{ content: 'lorem', width: '9px' }] },
+          { cells: [{ content: 'dolor', style: { backgroundColor: 'red' }, width: '50em' }] },
+          { cells: [{ content: () => 'hello world', width: 1 }] },
+          { cells: [{ content: <React.Fragment>hello world</React.Fragment>, width: 11 }] }
         ]
       }),
       onExpandCells: tableRows({
