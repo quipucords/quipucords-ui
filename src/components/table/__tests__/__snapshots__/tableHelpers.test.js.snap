@@ -1,21 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TableHelpers generateTableKey should generate a variety of unique keys: keys 1`] = `
+exports[`TableHelpers parseContent should return a consistent output from multiple types: multiple types 1`] = `
 Object {
-  "func": "table-() => 'lorem'",
-  "nan": "table-generatedid-",
-  "null": "table-generatedid-",
-  "number": "table-200",
-  "obj": "table-{\\"lorem\\":\\"ipsum\\"}",
-  "repeatNumber": "generatedid-",
-  "string": "table-lorem",
-  "undefined": "table-generatedid-",
+  "func": "lorem ipsum",
+  "node": <React.Fragment>
+    dolor sit
+  </React.Fragment>,
+  "null": "null",
+  "obj": "[object Object]",
+  "undefined": "",
 }
 `;
 
 exports[`TableHelpers should have specific functions: tableHelpers 1`] = `
 Object {
-  "generateTableKey": [Function],
+  "parseContent": [Function],
   "tableHeader": [Function],
   "tableRows": [Function],
 }
@@ -37,18 +36,22 @@ Object {
     "columnHeaders": Array [
       Object {
         "content": "lorem",
+        "key": "head--0",
       },
       Object {
         "content": "dolor",
+        "key": "head--1",
         "props": Object {},
       },
       Object {
         "content": "hello world",
+        "key": "head--2",
       },
       Object {
         "content": <React.Fragment>
           hello world
         </React.Fragment>,
+        "key": "head--3",
       },
     ],
     "headerSelectProps": Object {},
@@ -58,9 +61,11 @@ Object {
     "columnHeaders": Array [
       Object {
         "content": "lorem",
+        "key": "head--0",
       },
       Object {
         "content": "dolor",
+        "key": "head--1",
         "props": Object {
           "sort": Object {
             "columnIndex": 2,
@@ -73,6 +78,7 @@ Object {
       },
       Object {
         "content": "hello world",
+        "key": "head--2",
       },
     ],
     "headerSelectProps": Object {},
@@ -82,13 +88,16 @@ Object {
     "columnHeaders": Array [
       Object {
         "content": "lorem",
+        "key": "head--0",
       },
       Object {
         "content": "dolor",
+        "key": "head--1",
         "props": Object {},
       },
       Object {
         "content": "hello world",
+        "key": "head--2",
       },
     ],
     "headerSelectProps": Object {
@@ -103,9 +112,11 @@ Object {
     "columnHeaders": Array [
       Object {
         "content": "lorem",
+        "key": "head--0",
       },
       Object {
         "content": "dolor",
+        "key": "head--1",
         "props": Object {
           "sort": Object {
             "columnIndex": 1,
@@ -118,6 +129,7 @@ Object {
       },
       Object {
         "content": "hello world",
+        "key": "head--2",
       },
     ],
     "headerSelectProps": Object {},
@@ -145,10 +157,12 @@ Object {
         "cells": Array [
           Object {
             "content": "lorem",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--0",
         "rowIndex": 0,
         "select": undefined,
       },
@@ -158,6 +172,7 @@ Object {
             "content": "dolor",
             "expandedContent": "sit",
             "isExpanded": true,
+            "key": "cell--0",
             "props": Object {
               "compoundExpand": Object {
                 "isExpanded": true,
@@ -166,12 +181,14 @@ Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--1",
         "rowIndex": 1,
         "select": undefined,
       },
@@ -179,10 +196,12 @@ Object {
         "cells": Array [
           Object {
             "content": "hello world",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--2",
         "rowIndex": 2,
         "select": undefined,
       },
@@ -192,10 +211,12 @@ Object {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--3",
         "rowIndex": 3,
         "select": undefined,
       },
@@ -211,6 +232,7 @@ Object {
         "cells": Array [
           Object {
             "content": "lorem",
+            "key": "cell--0",
           },
         ],
         "expand": Object {
@@ -219,6 +241,7 @@ Object {
           "rowIndex": 0,
         },
         "expandedContent": "ipsum",
+        "key": "row--0",
         "rowIndex": 0,
         "select": undefined,
       },
@@ -226,16 +249,19 @@ Object {
         "cells": Array [
           Object {
             "content": "dolor",
+            "key": "cell--0",
             "props": Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--1",
         "rowIndex": 1,
         "select": undefined,
       },
@@ -243,10 +269,12 @@ Object {
         "cells": Array [
           Object {
             "content": "hello world",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--2",
         "rowIndex": 2,
         "select": undefined,
       },
@@ -256,10 +284,12 @@ Object {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--3",
         "rowIndex": 3,
         "select": undefined,
       },
@@ -275,10 +305,12 @@ Object {
         "cells": Array [
           Object {
             "content": "lorem",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--0",
         "rowIndex": 0,
         "select": Object {
           "cells": Array [
@@ -294,16 +326,19 @@ Object {
         "cells": Array [
           Object {
             "content": "dolor",
+            "key": "cell--0",
             "props": Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--1",
         "rowIndex": 1,
         "select": Object {
           "cells": Array [
@@ -321,10 +356,12 @@ Object {
         "cells": Array [
           Object {
             "content": "hello world",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--2",
         "rowIndex": 2,
         "select": Object {
           "cells": Array [
@@ -342,10 +379,12 @@ Object {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--3",
         "rowIndex": 3,
         "select": Object {
           "cells": Array [
@@ -371,10 +410,12 @@ Object {
         "cells": Array [
           Object {
             "content": "lorem",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--0",
         "rowIndex": 0,
         "select": undefined,
       },
@@ -382,16 +423,19 @@ Object {
         "cells": Array [
           Object {
             "content": "dolor",
+            "key": "cell--0",
             "props": Object {
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
+              "style": undefined,
               "width": undefined,
             },
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--1",
         "rowIndex": 1,
         "select": undefined,
       },
@@ -399,10 +443,12 @@ Object {
         "cells": Array [
           Object {
             "content": "hello world",
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--2",
         "rowIndex": 2,
         "select": undefined,
       },
@@ -412,10 +458,106 @@ Object {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
+            "key": "cell--0",
           },
         ],
         "expand": undefined,
         "expandedContent": undefined,
+        "key": "row--3",
+        "rowIndex": 3,
+        "select": undefined,
+      },
+    ],
+  },
+  "styling": Object {
+    "allRowsSelected": false,
+    "isExpandableCell": false,
+    "isExpandableRow": false,
+    "isSelectTable": false,
+    "rows": Array [
+      Object {
+        "cells": Array [
+          Object {
+            "content": "lorem",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "width": "9px",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--0",
+        "rowIndex": 0,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "dolor",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "backgroundColor": "red",
+                "width": "50em",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--1",
+        "rowIndex": 1,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": "hello world",
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": Object {
+                "width": "1%",
+              },
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--2",
+        "rowIndex": 2,
+        "select": undefined,
+      },
+      Object {
+        "cells": Array [
+          Object {
+            "content": <React.Fragment>
+              hello world
+            </React.Fragment>,
+            "key": "cell--0",
+            "props": Object {
+              "dataLabel": undefined,
+              "isActionCell": undefined,
+              "noPadding": undefined,
+              "style": undefined,
+              "width": 11,
+            },
+          },
+        ],
+        "expand": undefined,
+        "expandedContent": undefined,
+        "key": "row--3",
         "rowIndex": 3,
         "select": undefined,
       },
