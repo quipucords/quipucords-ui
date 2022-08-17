@@ -15,6 +15,7 @@ exports[`Distribution should match a specific file output: dist-output 1`] = `
 Array [
   "",
   "./dist/client/asset-manifest.json",
+  "./dist/client/assets/css/index.css",
   "./dist/client/assets/images/about-bg.png",
   "./dist/client/assets/images/logo-brand.svg",
   "./dist/client/assets/images/logo.svg",
