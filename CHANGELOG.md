@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.10.1 (2022-08-17)
+
+### Bug Fixes
+
+* **build:** discovery-174 templates css ([#143](https://github.com/quipucords/quipucords-ui/issues/143)) ([ea98268](https://github.com/quipucords/quipucords-ui/commit/ea982687ad3347cff942782ffc947dd2172ccc1c))
+
 ## 0.10.0 (2022-08-10)
 
 ### Bug Fixes
