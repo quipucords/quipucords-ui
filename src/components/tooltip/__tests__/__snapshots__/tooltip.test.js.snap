@@ -10,6 +10,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
 >
   <Popover
     bodyContent="hello world"
+    className="quipucords-popover"
     hasAutoWidth={true}
     id="test"
     position="top"
@@ -41,7 +42,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           aria-describedby="popover-test-body"
           aria-label=""
           aria-modal="true"
-          className="pf-c-popover pf-m-width-auto"
+          className="pf-c-popover pf-m-width-auto quipucords-popover"
           focusTrapOptions={
             Object {
               "clickOutsideDeactivates": true,
@@ -92,13 +93,23 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
-      trigger="Test popover"
+      trigger={
+        <div
+          className="quipucords-popover__wrapper"
+        >
+          Test popover
+        </div>
+      }
       zIndex={9999}
     >
       <FindRefWrapper
         onFoundRef={[Function]}
       >
-        Test popover
+        <div
+          className="quipucords-popover__wrapper"
+        >
+          Test popover
+        </div>
       </FindRefWrapper>
     </Popper>
   </Popover>
@@ -114,6 +125,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
   placement="top"
 >
   <Tooltip
+    className="quipucords-tooltip"
     content="hello world"
     entryDelay={500}
     id="test"
@@ -148,7 +160,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
       popper={
         <div
           aria-live="off"
-          className="pf-c-tooltip"
+          className="pf-c-tooltip quipucords-tooltip"
           id="test"
           role="tooltip"
           style={
@@ -184,13 +196,23 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
-      trigger="Test tooltip"
+      trigger={
+        <div
+          className="quipucords-tooltip__wrapper"
+        >
+          Test tooltip
+        </div>
+      }
       zIndex={9999}
     >
       <FindRefWrapper
         onFoundRef={[Function]}
       >
-        Test tooltip
+        <div
+          className="quipucords-tooltip__wrapper"
+        >
+          Test tooltip
+        </div>
       </FindRefWrapper>
     </Popper>
   </Tooltip>
