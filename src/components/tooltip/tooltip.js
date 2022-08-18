@@ -9,15 +9,22 @@ const Tooltip = ({ children, id, placement, isPopover, content, delayShow }) => 
 
   if (isPopover) {
     return (
-      <Popover id={setId} position={placement} hasAutoWidth showClose={false} bodyContent={content}>
-        {children || <Icon type="pf" name="info" />}
+      <Popover
+        className="quipucords-popover"
+        id={setId}
+        position={placement}
+        hasAutoWidth
+        showClose={false}
+        bodyContent={content}
+      >
+        <div className="quipucords-popover__wrapper">{children || <Icon type="pf" name="info" />}</div>
       </Popover>
     );
   }
 
   return (
-    <PFTooltip id={setId} position={placement} content={content} entryDelay={delayShow}>
-      {children || <Icon type="pf" name="info" />}
+    <PFTooltip className="quipucords-tooltip" id={setId} position={placement} content={content} entryDelay={delayShow}>
+      <div className="quipucords-tooltip__wrapper">{children || <Icon type="pf" name="info" />}</div>
     </PFTooltip>
   );
 };
