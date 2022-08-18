@@ -5,18 +5,22 @@ exports[`ListStatusItem Component should render 1`] = `
   class="list-view-pf-additional-info-item list-view-info-item-icon-count"
 >
   <div
-    class="list-view-pf-expand active"
+    class="quipucords-tooltip__wrapper"
   >
-    <span
-      class="fa fa-angle-right fa-angle-down"
-    />
-    <span
-      aria-hidden="true"
-      class="fa fa-id-card list-view-compound-item-icon"
-    />
-    <strong>
-      100
-    </strong>
+    <div
+      class="list-view-pf-expand active"
+    >
+      <span
+        class="fa fa-angle-right fa-angle-down"
+      />
+      <span
+        aria-hidden="true"
+        class="fa fa-id-card list-view-compound-item-icon"
+      />
+      <strong>
+        100
+      </strong>
+    </div>
   </div>
 </div>
 `;
