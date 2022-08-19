@@ -65,13 +65,10 @@ exports[`Scans Component should render a non-connected component: non-connected 
           placement="top"
         >
           <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            disabled={true}
             id="merge-reports"
+            isDisabled={true}
             onClick={[Function]}
+            variant="primary"
           >
             Merge reports
           </Button>

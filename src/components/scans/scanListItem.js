@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Checkbox, Grid, Icon, ListView } from 'patternfly-react';
+import { Button, ButtonVariant } from '@patternfly/react-core';
+import { PauseIcon, StopIcon, RedoIcon, PlayIcon } from '@patternfly/react-icons';
+import { Checkbox, Grid, Icon, ListView } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common/helpers';
 import Tooltip from '../tooltip/tooltip';
@@ -217,8 +219,8 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip content="Run Scan">
-              <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
-                <Icon type="pf" name="spinner2" aria-label="Start" />
+              <Button onClick={() => this.onStartScan(scan)} aria-label="Start" variant={ButtonVariant.plain}>
+                <RedoIcon />
               </Button>
             </Tooltip>
             {downloadActions}
@@ -229,8 +231,13 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip content="Retry Scan">
-              <Button onClick={() => this.onStartScan(scan)} bsStyle="link">
-                <Icon type="pf" name="spinner2" aria-label="Start" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={() => this.onStartScan(scan)}
+                aria-label="Start"
+                variant={ButtonVariant.plain}
+              >
+                <RedoIcon />
               </Button>
             </Tooltip>
             {downloadActions}
@@ -241,13 +248,23 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip key="pauseButton" content="Pause Scan">
-              <Button onClick={this.onPauseScan} bsStyle="link">
-                <Icon type="fa" name="pause" aria-label="Pause" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={this.onPauseScan}
+                aria-label="Pause"
+                variant={ButtonVariant.plain}
+              >
+                <PauseIcon />
               </Button>
             </Tooltip>
             <Tooltip key="stop" content="Cancel Scan">
-              <Button onClick={this.onCancelScan} bsStyle="link">
-                <Icon type="fa" name="stop" aria-label="Stop" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={this.onCancelScan}
+                aria-label="Stop"
+                variant={ButtonVariant.plain}
+              >
+                <StopIcon />
               </Button>
             </Tooltip>
             {downloadActions}
@@ -257,8 +274,13 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip content="Resume Scan">
-              <Button onClick={this.onResumeScan} bsStyle="link">
-                <Icon type="fa" name="play" aria-label="Resume" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={this.onResumeScan}
+                aria-label="Resume"
+                variant={ButtonVariant.plain}
+              >
+                <PlayIcon />
               </Button>
             </Tooltip>
             {downloadActions}
@@ -268,8 +290,13 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip key="stop" content="Cancel Scan">
-              <Button onClick={this.onCancelScan} bsStyle="link">
-                <Icon type="fa" name="stop" aria-label="Stop" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={this.onCancelScan}
+                aria-label="Stop"
+                variant={ButtonVariant.plain}
+              >
+                <StopIcon />
               </Button>
             </Tooltip>
             {downloadActions}
@@ -279,8 +306,13 @@ class ScanListItem extends React.Component {
         return (
           <React.Fragment>
             <Tooltip content="Start Scan">
-              <Button onClick={this.onStartScan} bsStyle="link">
-                <Icon type="fa" name="play" aria-label="Start" />
+              <Button
+                className="quipucords-view__row-button"
+                onClick={this.onStartScan}
+                aria-label="Start"
+                variant={ButtonVariant.plain}
+              >
+                <PlayIcon />
               </Button>
             </Tooltip>
             {downloadActions}
