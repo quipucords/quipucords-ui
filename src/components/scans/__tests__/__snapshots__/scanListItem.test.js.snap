@@ -41,17 +41,14 @@ exports[`ScanListItem Component should render a non-connected component: non-con
           placement="top"
         >
           <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="link"
-            disabled={false}
+            aria-label="Start"
             onClick={[Function]}
+            variant="plain"
           >
-            <Icon
-              aria-label="Start"
-              name="spinner2"
-              type="pf"
+            <RedoIcon
+              color="currentColor"
+              noVerticalAlign={false}
+              size="sm"
             />
           </Button>
         </Tooltip>

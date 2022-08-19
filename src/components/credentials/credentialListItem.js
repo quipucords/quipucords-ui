@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ListView, Button, Icon, Checkbox } from 'patternfly-react';
-import { List, ListItem } from '@patternfly/react-core';
+import { ListView, Icon, Checkbox } from 'patternfly-react';
+import { Button, ButtonVariant, List, ListItem } from '@patternfly/react-core';
+import { EyeIcon, TrashIcon } from '@patternfly/react-icons';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
 import { connect, reduxTypes, store } from '../../redux';
@@ -74,24 +75,24 @@ class CredentialListItem extends React.Component {
     return [
       <Tooltip key="editButton" content="View Credential">
         <Button
+          className="quipucords-view__row-button"
           onClick={() => {
             onEdit(item);
           }}
-          bsStyle="link"
-          key="editButton"
+          variant={ButtonVariant.plain}
         >
-          <Icon type="fa" name="eye" />
+          <EyeIcon />
         </Button>
       </Tooltip>,
       <Tooltip key="deleteButton" content="Delete Credential">
         <Button
+          className="quipucords-view__row-button"
           onClick={() => {
             onDelete(item);
           }}
-          bsStyle="link"
-          key="removeButton"
+          variant={ButtonVariant.plain}
         >
-          <Icon type="pf" name="delete" />
+          <TrashIcon />
         </Button>
       </Tooltip>
     ];

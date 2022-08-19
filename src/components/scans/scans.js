@@ -15,7 +15,7 @@ import {
   Title,
   TitleSizes
 } from '@patternfly/react-core';
-import { Button as ButtonPf3, ListView, Spinner } from 'patternfly-react';
+import { ListView, Spinner } from 'patternfly-react';
 import { SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import { connect, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
@@ -81,13 +81,14 @@ class Scans extends React.Component {
     return (
       <div className="form-group">
         <Tooltip key="mergeButtonTip" content="Merge selected scan results into a single report">
-          <ButtonPf3
+          <Button
             id="merge-reports"
-            disabled={viewOptions.selectedItems.length <= 1}
+            variant={ButtonVariant.primary}
+            isDisabled={viewOptions.selectedItems.length <= 1}
             onClick={this.onMergeScanResults}
           >
             Merge reports
-          </ButtonPf3>
+          </Button>
         </Tooltip>
       </div>
     );
