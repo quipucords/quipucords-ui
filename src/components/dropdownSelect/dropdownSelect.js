@@ -164,17 +164,27 @@ const formatSelectProps = ({ isDisabled, placeholder, options } = {}) => {
     updatedProps.isDisabled = true;
   }
 
-  if (placeholder) {
+  if (typeof placeholder === 'string' && placeholder) {
     updatedProps.hasPlaceholderStyle = true;
   }
 
   return updatedProps;
 };
 
+/**
+ * Format consistent dropdown button props.
+ *
+ * @param {object} params
+ * @param {boolean} params.isDisabled
+ * @param {Array} params.options
+ * @param {string} params.buttonVariant
+ * @param {string} params.splitButtonVariant
+ * @returns {*}
+ */
 const formatButtonProps = ({ isDisabled, options, buttonVariant, splitButtonVariant } = {}) => {
   const buttonVariantPropLookup = {
     default: { toggleVariant: 'default' },
-    plain: { isPlain: true },
+    plain: { isPlain: true, toggleIndicator: null },
     primary: { toggleVariant: 'primary' },
     secondary: { toggleVariant: 'secondary' },
     text: { isText: true }
@@ -195,6 +205,25 @@ const formatButtonProps = ({ isDisabled, options, buttonVariant, splitButtonVari
   }
 
   return updatedProps;
+};
+
+/**
+ * FixMe: PF has an inconsistency in how it applies props for the dropdown
+ * Sometimes those props are on the toggle, sometimes those props are on the parent, little bit of guesswork.
+ * Additionally, it's not filtering props so you'll throw the "[HTML doesn't recognize attribute]" error.
+ */
+/**
+ * Fix pf props inconsistency for dropdown button props.
+ *
+ * @param {object} formattedButtonProps
+ * @returns {*}
+ */
+const formatButtonParentProps = (formattedButtonProps = {}) => {
+  const updatedButtonProps = formatButtonProps(formattedButtonProps);
+  delete updatedButtonProps.isDisabled;
+  delete updatedButtonProps.toggleIndicator;
+
+  return updatedButtonProps;
 };
 
 /**
@@ -375,6 +404,7 @@ const DropdownSelect = ({
             </DropdownItem>
           )) || []
         }
+        {...formatButtonParentProps({ buttonVariant })}
         {...props}
       />
     </div>
@@ -397,7 +427,7 @@ const DropdownSelect = ({
       selections={selected}
       isOpen={isExpanded}
       toggleIcon={toggleIcon}
-      placeholderText={placeholder}
+      placeholderText={(typeof placeholder === 'string' && placeholder) || undefined}
       {...{
         direction,
         maxHeight,
@@ -471,7 +501,7 @@ DropdownSelect.propTypes = {
     }),
     PropTypes.object
   ]),
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.any]),
   position: PropTypes.oneOf(Object.values(SelectPosition)),
   selectedOptions: PropTypes.oneOfType([
     PropTypes.number,
