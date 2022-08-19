@@ -19,7 +19,7 @@ describe('TableHelpers', () => {
   it('tableHeader should return parsed table header settings, props', () => {
     expect({
       basic: tableHeader(),
-      allRowsSelected: tableHeader({ allRowsSelected: true }),
+      isAllSelected: tableHeader({ isAllSelected: true }),
       columnHeaders: tableHeader({
         columnHeaders: [
           'lorem',
