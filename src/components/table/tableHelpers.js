@@ -1,6 +1,5 @@
 import React from 'react';
 import { SortByDirection } from '@patternfly/react-table';
-import { helpers } from '../../common';
 
 /**
  * Allow additional content to display in cells.
@@ -19,39 +18,59 @@ const parseContent = content =>
  * Parse table header settings, props.
  *
  * @param {object} params
- * @param {boolean} params.allRowsSelected
  * @param {Array} params.columnHeaders
+ * @param {boolean} params.isAllSelected
  * @param {boolean} params.isRowExpand
+ * @param {Array} params.parsedRows
  * @param {Function} params.onSelect
  * @param {Function} params.onSort
- * @returns {{columnHeaders: *[], isSortTable: boolean, headerSelectProps: {}}}
+ * @returns {{headerRow: *[], headerSelectProps: {}}}
  */
-const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand, onSelect, onSort } = {}) => {
+const tableHeader = ({
+  columnHeaders = [],
+  isAllSelected = false,
+  isRowExpand,
+  parsedRows = [],
+  onSelect,
+  onSort
+} = {}) => {
   const updatedColumnHeaders = [];
   const updatedHeaderSelectProps = {};
   const isSelectTable = typeof onSelect === 'function';
-  let isSortTable = false;
 
   if (isSelectTable) {
-    updatedHeaderSelectProps.select = {
-      onSelect: () => onSelect({ rowIndex: -1, type: 'all' }),
-      isSelected: allRowsSelected
-    };
+    const parsedRowData = parsedRows.map(({ data }) => data || {});
+    updatedHeaderSelectProps.onSelect = (_event, isSelected) =>
+      onSelect({ data: parsedRowData, isSelected, rowIndex: -1, type: 'all' });
+    updatedHeaderSelectProps.isSelected = isAllSelected;
   }
 
   columnHeaders.forEach((columnHeader, index) => {
-    const key = `${helpers.generateId('head')}-${index}`;
+    const key = `${window.btoa(columnHeader)}-${index}`;
 
     if (columnHeader?.content !== undefined) {
-      const { isSort, isSortActive, sortDirection = SortByDirection.asc, content, ...props } = columnHeader;
+      const {
+        isSort,
+        isSortActive,
+        sortDirection = SortByDirection.asc,
+        content,
+        dataLabel,
+        info,
+        tooltip,
+        ...headerCellData
+      } = columnHeader;
       const tempColumnHeader = {
         key,
         content: parseContent(content),
-        props
+        props: {
+          dataLabel,
+          info,
+          tooltip
+        },
+        data: headerCellData
       };
 
       if (typeof onSort === 'function' && (isSort === true || isSortActive === true)) {
-        isSortTable = true;
         let updatedColumnIndex = index;
 
         if (isRowExpand) {
@@ -66,7 +85,7 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
           columnIndex: updatedColumnIndex,
           sortBy: {},
           onSort: (_event, _colIndex, direction) =>
-            onSort({ cellIndex: updatedColumnIndex, direction, originalIndex: index })
+            onSort({ cellIndex: updatedColumnIndex, data: headerCellData, direction, originalIndex: index })
         };
 
         if (isSortActive) {
@@ -86,9 +105,8 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
   });
 
   return {
-    columnHeaders: updatedColumnHeaders,
-    headerSelectProps: updatedHeaderSelectProps,
-    isSortTable
+    headerRow: updatedColumnHeaders,
+    headerSelectProps: updatedHeaderSelectProps
   };
 };
 
@@ -99,39 +117,40 @@ const tableHeader = ({ allRowsSelected = false, columnHeaders = [], isRowExpand,
  * @param {Function} params.onExpand
  * @param {Function} params.onSelect
  * @param {Array} params.rows
- * @returns {{isExpandableCell: boolean, isSelectTable: boolean, isExpandableRow: boolean, allRowsSelected: boolean, rows: *[]}}
+ * @returns {{isExpandableCell: boolean, isSelectTable: boolean, isExpandableRow: boolean, isAllSelected: boolean, rows: *[]}}
  */
 const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
   const updatedRows = [];
+  const isSelectTable = typeof onSelect === 'function';
   let isExpandableRow = false;
   let isExpandableCell = false;
-  let isSelectTable = false;
   let selectedRows = 0;
 
-  rows.forEach(({ cells, isDisabled = false, isExpanded = false, isSelected = false, expandedContent }) => {
+  rows.forEach(({ cells, isDisabled = false, isExpanded = false, isSelected = false, expandedContent, ...rowData }) => {
     const rowObj = {
       key: undefined,
       cells: [],
       select: undefined,
       expand: undefined,
-      expandedContent
+      expandedContent,
+      data: rowData
     };
     updatedRows.push(rowObj);
     rowObj.rowIndex = updatedRows.length - 1;
-    rowObj.key = `${helpers.generateId('row')}-${rowObj.rowIndex}`;
+    rowObj.key = `${window.btoa(rowObj)}-${rowObj.rowIndex}`;
 
-    if (typeof onSelect === 'function') {
+    if (isSelectTable) {
       const updatedIsSelected = isSelected ?? false;
 
       if (updatedIsSelected === true) {
         selectedRows += 1;
       }
 
-      isSelectTable = true;
       rowObj.select = {
         cells,
         rowIndex: rowObj.rowIndex,
-        onSelect: () => onSelect({ rowIndex: rowObj.rowIndex, type: 'row' }),
+        onSelect: (_event, isRowSelected) =>
+          onSelect({ data: rowObj.data, isSelected: isRowSelected, rowIndex: rowObj.rowIndex, type: 'row' }),
         isSelected: updatedIsSelected,
         disable: isDisabled || false
       };
@@ -143,30 +162,32 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
       rowObj.expand = {
         rowIndex: rowObj.rowIndex,
         isExpanded,
-        onToggle: () =>
+        onToggle: (_event, rowIndex, isRowToggleExpanded) =>
           onExpand({
+            data: rowObj.data,
+            isExpanded: isRowToggleExpanded,
             rowIndex: rowObj.rowIndex,
             type: 'row'
           })
       };
     }
 
-    cells.forEach((cell, cellIndex) => {
-      const cellKey = `${helpers.generateId('cell')}-${cellIndex}`;
+    cells?.forEach((cell, cellIndex) => {
+      const cellKey = `${window.btoa(cell)}-${rowObj.rowIndex}-${cellIndex}`;
       if (cell?.content !== undefined) {
-        const { content, dataLabel, isActionCell, noPadding, width, style, ...remainingProps } = cell;
-        const cellProps = { dataLabel, isActionCell, noPadding, style };
-        let updatedWidth = width;
+        const { className, content, dataLabel, isActionCell, noPadding, width, style, ...remainingProps } = cell;
+        const cellProps = { className: className || '', dataLabel, isActionCell, noPadding, style: style || {} };
+        let updatedWidthClassName;
 
-        // FixMe: PF doesn't appear to allow cell widths less than 10
+        // FixMe: PF doesn't appear to apply cell width classNames when less than 10
         if (width < 10) {
-          updatedWidth = `${width}%`;
+          updatedWidthClassName = `pf-m-width-${width}`;
         }
 
-        if (typeof updatedWidth === 'string' || style) {
-          cellProps.style = { ...style, width: updatedWidth };
-        } else {
-          cellProps.width = width;
+        if (typeof width === 'string' || style) {
+          cellProps.style = { ...cellProps.style, width };
+        } else if (updatedWidthClassName) {
+          cellProps.className = `${cellProps.className || ''} ${updatedWidthClassName}`;
         }
 
         if (!isExpandableRow && cell?.expandedContent && typeof onExpand === 'function') {
@@ -175,10 +196,12 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
 
           cellProps.compoundExpand = {
             isExpanded: updateIsExpanded,
-            onToggle: () =>
+            onToggle: (_event, rowIndex, isRowToggleExpanded, isCellToggleExpanded) =>
               onExpand({
-                rowIndex: rowObj.rowIndex,
                 cellIndex,
+                data: rowObj.data,
+                isExpanded: !isCellToggleExpanded,
+                rowIndex: rowObj.rowIndex,
                 type: 'compound'
               })
           };
@@ -195,7 +218,7 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
   });
 
   return {
-    allRowsSelected: selectedRows === rows.length,
+    isAllSelected: selectedRows === rows.length,
     isExpandableRow,
     isExpandableCell,
     isSelectTable,
