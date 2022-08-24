@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Title } from '@patternfly/react-core';
-import { Alert, FieldLevelHelp, Form, Spinner } from 'patternfly-react';
+import { Alert, AlertVariant, Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { FieldLevelHelp, Form, Spinner } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { FormState } from '../formState/formState';
@@ -312,8 +312,8 @@ class CreateScanDialog extends React.Component {
 
     if (error && !Object.keys(submitErrorMessages).length) {
       return (
-        <Alert type="error">
-          <strong>Error</strong> {errorMessage}
+        <Alert isInline variant={AlertVariant.danger} title="Error">
+          {errorMessage}
         </Alert>
       );
     }
