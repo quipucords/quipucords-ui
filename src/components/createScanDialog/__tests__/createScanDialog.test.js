@@ -52,7 +52,7 @@ describe('CreateScanDialog Component', () => {
     };
 
     const component = mount(<CreateScanDialog {...props} />);
-    expect(component.find('div[className~="alert-danger"]').render()).toMatchSnapshot('basic error');
+    expect(component.find('div[className*="danger"]').render()).toMatchSnapshot('basic error');
 
     component.setProps({ submitErrorMessages: { scanName: 'lorem ipsum' } });
     expect(component.find('div[className~="has-error"]').render()).toMatchSnapshot('named error');
