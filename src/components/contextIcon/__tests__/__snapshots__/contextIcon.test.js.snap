@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, canceled 1`] = `
+<ErrorCircleOIcon
+  color="#c9190b"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, cancelled 1`] = `
+<ErrorCircleOIcon
+  color="#c9190b"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, completed 1`] = `
+<CheckCircleIcon
+  color="#3e8635"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, created 1`] = `
+<Spinner
+  isSVG={true}
+  size="md"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, failed 1`] = `
+<ErrorCircleOIcon
+  color="#c9190b"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, idCard 1`] = `
+<IdCardIcon
+  color="#151515"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, network 1`] = `
+<PficonNetworkRangeIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, paused 1`] = `
+<ExclamationTriangleIcon
+  color="#f0ab00"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, pencil 1`] = `
+<PencilAltIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, pending 1`] = `
+<Spinner
+  isSVG={true}
+  size="md"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, running 1`] = `
+<Spinner
+  isSVG={true}
+  size="md"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, satellite 1`] = `
+<PficonSatelliteIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, success 1`] = `
+<CheckCircleIcon
+  color="#3e8635"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, trash 1`] = `
+<TrashIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, unknown 1`] = `
+<UnknownIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, unreachable 1`] = `
+<DisconnectedIcon
+  color="#c9190b"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, vcenter 1`] = `
+<PficonVcenterIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: variants 1`] = `
+Object {
+  "canceled": "failed",
+  "cancelled": "failed",
+  "completed": "success",
+  "created": "pending",
+  "failed": "failed",
+  "idCard": "idCard",
+  "network": "network",
+  "paused": "paused",
+  "pencil": "pencil",
+  "pending": "pending",
+  "running": "pending",
+  "satellite": "satellite",
+  "success": "success",
+  "trash": "trash",
+  "unknown": "unknown",
+  "unreachable": "unreachable",
+  "vcenter": "vcenter",
+}
+`;
+
+exports[`ContextIcon Component should render a basic component with default props: basic 1`] = `
+<UnknownIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
