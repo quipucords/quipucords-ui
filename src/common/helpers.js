@@ -532,9 +532,17 @@ const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 /**
  * Timeout for toast alert notifications.
  *
- * @type {number}
+ * @type {number|undefined}
  */
 const TOAST_NOTIFICATIONS_TIMEOUT = Number.parseInt(process.env.REACT_APP_TOAST_NOTIFICATIONS_TIMEOUT, 10) || undefined;
+
+/**
+ * Global poll interval
+ *
+ * @type {number|undefined}
+ */
+const POLL_INTERVAL = Number.parseInt(process.env.REACT_APP_POLL_INTERVAL, 10) || undefined;
+
 /**
  * Return a consistent current date.
  *
@@ -565,6 +573,7 @@ const helpers = {
   isIpAddress,
   ipAddressValue,
   DEV_MODE,
+  POLL_INTERVAL,
   PROD_MODE,
   TEST_MODE,
   TOAST_NOTIFICATIONS_TIMEOUT,
