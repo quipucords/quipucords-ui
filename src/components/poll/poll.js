@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { helpers } from '../../common';
 
 const PollCache = {
   timer: null,
@@ -52,7 +53,7 @@ Poll.propTypes = {
 };
 
 Poll.defaultProps = {
-  interval: 60000
+  interval: helpers.POLL_INTERVAL
 };
 
 export { Poll as default, Poll, PollCache };

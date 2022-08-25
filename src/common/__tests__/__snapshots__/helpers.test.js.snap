@@ -74,6 +74,7 @@ Object {
 exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
+  "POLL_INTERVAL": 120000,
   "PROD_MODE": false,
   "TEST_MODE": true,
   "TOAST_NOTIFICATIONS_TIMEOUT": 8000,
