@@ -32,6 +32,7 @@
       "!src/components/app.js",
       "!src/components/**/index.js",
       "!src/common/index.js",
+      "!src/hooks/index.js",
       "!src/redux/index.js",
       "!src/redux/store.js",
       "!src/redux/middleware/**",
