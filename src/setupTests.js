@@ -19,6 +19,14 @@ jest.mock('i18next', () => {
 });
 
 /**
+ * We currently use a wrapper for useSelector, emulate for component checks
+ */
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn()
+}));
+
+/**
  * Enzyme for components using hooks.
  *
  * @param {React.ReactNode} component
