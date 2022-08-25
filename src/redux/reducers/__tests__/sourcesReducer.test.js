@@ -8,7 +8,15 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle specific defined types', () => {
-    const specificTypes = [types.UPDATE_SOURCES];
+    const specificTypes = [
+      types.UPDATE_SOURCES,
+      types.CONFIRM_DELETE_SOURCE,
+      types.RESET_DELETE_SOURCE,
+      types.SELECT_SOURCE,
+      types.DESELECT_SOURCE,
+      types.EXPANDED_SOURCE,
+      types.NOT_EXPANDED_SOURCE
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -22,7 +30,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined error types', () => {
-    const specificTypes = [types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -49,7 +57,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -65,7 +73,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.GET_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
 
     specificTypes.forEach(value => {
       const dispatched = {

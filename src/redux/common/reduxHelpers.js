@@ -1,3 +1,4 @@
+import _get from 'lodash/get';
 import { helpers } from '../../common/helpers';
 
 const FULFILLED_ACTION = base => `${base}_FULFILLED`;
@@ -107,7 +108,11 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
       return setStateProp(
         whichType.ref || null,
         idUse({
-          date: action.payload.headers && action.payload.headers.date,
+          date: _get(
+            action.payload,
+            'headers.date',
+            (helpers.DEV_MODE && helpers.getCurrentDate().toUTCString()) || undefined
+          ),
           data: (action.payload && action.payload.data) || {},
           fulfilled: true
         }),

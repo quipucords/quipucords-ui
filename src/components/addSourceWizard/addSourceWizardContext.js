@@ -42,8 +42,26 @@ const useGetAddSource = ({
   return selectorResponse;
 };
 
-const context = {
-  useGetAddSource
+/**
+ * An onShowAddSourceWizard callback for adding a source.
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @returns {Function}
+ */
+const useOnShowAddSourceWizard = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
+  const dispatch = useAliasDispatch();
+
+  return () => {
+    dispatch({
+      type: reduxTypes.sources.CREATE_SOURCE_SHOW
+    });
+  };
 };
 
-export { context as default, context, useGetAddSource };
+const context = {
+  useGetAddSource,
+  useOnShowAddSourceWizard
+};
+
+export { context as default, context, useGetAddSource, useOnShowAddSourceWizard };

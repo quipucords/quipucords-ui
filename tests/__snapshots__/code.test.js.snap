@@ -4,8 +4,8 @@ exports[`General code checks should only have specific console.[warn|log|info|er
 Array [
   "common/helpers.js:63:      console.warn('Copy to clipboard failed.', e.message);",
   "common/helpers.js:222:      console.error(\`Unknown status: \${scanStatus}\`);",
-  "redux/common/reduxHelpers.js:14:    console.error(\`Error: Property \${prop} does not exist within the passed state.\`, state);",
-  "redux/common/reduxHelpers.js:18:    console.warn(\`Warning: Property \${prop} does not exist within the passed initialState.\`, initialState);",
+  "redux/common/reduxHelpers.js:15:    console.error(\`Error: Property \${prop} does not exist within the passed state.\`, state);",
+  "redux/common/reduxHelpers.js:19:    console.warn(\`Warning: Property \${prop} does not exist within the passed initialState.\`, initialState);",
   "setupTests.js:159:  console.error = (message, ...args) => {",
 ]
 `;
