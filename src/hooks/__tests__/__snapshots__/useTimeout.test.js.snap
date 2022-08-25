@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useTimeout should apply a hook for useTimeout: timeout 1`] = `
+Object {
+  "cancel": [Function],
+  "update": undefined,
+}
+`;
