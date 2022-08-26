@@ -10,7 +10,6 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import SourcesEmptyState from '../sources/sourcesEmptyState';
 import helpers from '../../common/helpers';
 import { connectRouter, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
 import { translate } from '../i18n/i18n';
@@ -38,51 +37,59 @@ class ScansEmptyState extends React.Component {
   };
 
   render() {
-    const { sourcesExist, t } = this.props;
+    const { sourcesCount, t, uiShortName, viewId } = this.props;
 
-    if (sourcesExist) {
-      return (
-        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-          <EmptyStateIcon icon={AddCircleOIcon} />
-          <Title headingLevel="h1">{t('view.empty-state', { context: ['title', 'scans'] })}</Title>
-          <EmptyStateBody>{t('view.empty-state', { context: ['description', 'scans'] })}</EmptyStateBody>
-          <EmptyStatePrimary>
-            <Button onClick={this.onAddSource}>
-              {t('view.empty-state', { context: ['label', 'source-navigate'] })}
-            </Button>
-          </EmptyStatePrimary>
-        </EmptyState>
-      );
-    }
-
-    return <SourcesEmptyState onAddSource={this.onAddSource} />;
+    return (
+      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={AddCircleOIcon} />
+        <Title headingLevel="h1">
+          {t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })}
+        </Title>
+        <EmptyStateBody>
+          {t('view.empty-state', { context: ['description', viewId], count: sourcesCount })}
+        </EmptyStateBody>
+        <EmptyStatePrimary>
+          <Button onClick={this.onAddSource}>
+            {t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })}
+          </Button>
+        </EmptyStatePrimary>
+      </EmptyState>
+    );
   }
 }
 
 /**
  * Prop types
  *
- * @type {{getScansSources: Function, sourcesExist: boolean, t: Function, history: object}}
+ * @type {{getScansSources: Function, uiShortName: string, sourcesExist: boolean, viewId: string, t: translate,
+ *    history: object, sourcesCount: number}}
  */
 ScansEmptyState.propTypes = {
   getScansSources: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func
   }),
+  sourcesCount: PropTypes.number,
   sourcesExist: PropTypes.bool,
-  t: PropTypes.func
+  t: PropTypes.func,
+  uiShortName: PropTypes.string,
+  viewId: PropTypes.string
 };
 
 /**
  * Default props
  *
- * @type {{getScansSources: Function, sourcesExist: boolean, t: translate, history: object}}
+ * @type {{getScansSources: Function, uiShortName: string, sourcesExist: boolean, viewId: null, t: translate,
+ *    history: {}, sourcesCount: number}}
  */
 ScansEmptyState.defaultProps = {
   getScansSources: helpers.noop,
   history: {},
+  sourcesCount: 0,
   sourcesExist: false,
-  t: translate
+  t: translate,
+  uiShortName: helpers.UI_SHORT_NAME,
+  viewId: null
 };
 
 const mapDispatchToProps = dispatch => ({

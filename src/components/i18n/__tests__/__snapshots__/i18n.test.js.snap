@@ -411,15 +411,15 @@ Array [
     "keys": Array [
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['title', 'scans'] })",
+        "match": "t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', 'scans'] })",
+        "match": "t('view.empty-state', { context: ['description', viewId], count: sourcesCount })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'source-navigate'] })",
+        "match": "t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })",
       },
     ],
   },
@@ -444,28 +444,77 @@ Array [
     "file": "./src/components/sources/sources.js",
     "keys": Array [
       Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'add' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'scan' })",
+      },
+      Object {
         "key": "view.loading",
-        "match": "t('view.loading', { context: 'sources' })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+        "match": "t('view.loading', { context: viewId })",
       },
       Object {
         "key": "view.error",
-        "match": "t('view.error', { context: 'sources' })",
+        "match": "t('view.error', { context: viewId })",
       },
       Object {
         "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['sources'], message: errorMessage })",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['credentials'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['hosts', 'ok'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['hosts', 'failed'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['hosts', 'unreachable'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "keys": Array [
+      Object {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['deleted-source'], name: sourceName })",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-source'], name: sourceName })",
+      },
+      Object {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['deleted-source', 'error'], name: sourceName })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-source'] })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-source'], name: source[apiTypes.API_RESPONSE_SOURCE_NAME] }, [<strong />] )",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
       },
     ],
   },
@@ -478,11 +527,64 @@ Array [
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', 'sources'] })",
+        "match": "t('view.empty-state', { context: ['description', viewId] })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'source'] })",
+        "match": "t('view.empty-state', { context: ['label', viewId] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/sources/sourcesTableCells.js",
+    "keys": Array [
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'network-range' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status], count: updatedCount })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell'], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'scan' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'Scan' })",
       },
     ],
   },
@@ -630,23 +732,55 @@ Array [
   },
   Object {
     "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
     "key": "view.error",
   },
   Object {
     "file": "./src/components/sources/sources.js",
     "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "key": "toast-notifications.title",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "key": "toast-notifications.description",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "key": "toast-notifications.title",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  Object {
+    "file": "./src/components/sources/sourcesContext.js",
+    "key": "form-dialog.confirmation",
   },
   Object {
     "file": "./src/components/sources/sourcesEmptyState.js",

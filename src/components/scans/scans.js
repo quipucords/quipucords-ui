@@ -29,6 +29,8 @@ import { ScanFilterFields, ScanSortFields } from './scanConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 
+const VIEW_ID = 'scans';
+
 /**
  * A scans view.
  */
@@ -139,7 +141,7 @@ class Scans extends React.Component {
   }
 
   render() {
-    const { error, errorMessage, lastRefresh, pending, scans, t, viewOptions } = this.props;
+    const { error, errorMessage, lastRefresh, pending, scans, t, viewOptions, viewId } = this.props;
 
     if (pending || (pending && !scans.length)) {
       return this.renderPendingMessage();
@@ -177,15 +179,15 @@ class Scans extends React.Component {
       );
     }
 
-    return <ScansEmptyState />;
+    return <ScansEmptyState viewId={viewId} />;
   }
 }
 
 /**
  * Prop types
  *
- * @type {{getScans: Function, t: Function, lastRefresh: number, scans: Array, pending: boolean,
- *    errorMessage: string, update: boolean, error: boolean, viewOptions: object}}
+ * @type {{getScans: Function, viewId: string, t: Function, lastRefresh: number, scans: Array,
+ *     pending: boolean, errorMessage: string, update: boolean, error: boolean, viewOptions: object}}
  */
 Scans.propTypes = {
   error: PropTypes.bool,
@@ -196,14 +198,15 @@ Scans.propTypes = {
   scans: PropTypes.array,
   t: PropTypes.func,
   update: PropTypes.bool,
-  viewOptions: PropTypes.object
+  viewOptions: PropTypes.object,
+  viewId: PropTypes.string
 };
 
 /**
  * Default props
  *
- * @type {{getScans: Function, t: translate, lastRefresh: number, scans: *[], pending: boolean, errorMessage: null,
- *     update: boolean, error: boolean, viewOptions: {}}}
+ * @type {{getScans: Function, viewId: string, t: translate, lastRefresh: number, scans: *[], pending: boolean,
+ *     errorMessage: null, update: boolean, error: boolean, viewOptions: {}}}
  */
 Scans.defaultProps = {
   error: false,
@@ -214,7 +217,8 @@ Scans.defaultProps = {
   scans: [],
   t: translate,
   update: false,
-  viewOptions: {}
+  viewOptions: {},
+  viewId: VIEW_ID
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -232,4 +236,4 @@ const makeMapStateToProps = () => {
 
 const ConnectedScans = connect(makeMapStateToProps, mapDispatchToProps)(Scans);
 
-export { ConnectedScans as default, ConnectedScans, Scans };
+export { ConnectedScans as default, ConnectedScans, Scans, VIEW_ID };

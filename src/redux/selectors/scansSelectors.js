@@ -377,10 +377,12 @@ const makeScanListItemSelector = () => scanListItemSelector;
 const scansEmptyState = state => state.scans.empty;
 
 const scansEmptyStateSelector = createSelector([scansEmptyState], empty => {
-  const sourcesExist = (empty.data && empty.data[apiTypes.API_RESPONSE_SOURCES_COUNT]) > 0;
+  const sourcesCount = empty?.data?.[apiTypes.API_RESPONSE_SOURCES_COUNT];
+  const sourcesExist = sourcesCount > 0;
 
   return {
     ...empty,
+    sourcesCount,
     sourcesExist
   };
 });
