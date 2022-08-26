@@ -158,6 +158,7 @@ exports[`Sources Component should handle multiple display states, pending, error
                       placement="top"
                     >
                       <ContextIcon
+                        size="sm"
                         symbol={null}
                       />
                     </Tooltip>
@@ -182,6 +183,7 @@ exports[`Sources Component should handle multiple display states, pending, error
                     sm={2}
                   >
                     <ContextIcon
+                      size="sm"
                       symbol={null}
                     />
                   </GridItem>
@@ -189,7 +191,7 @@ exports[`Sources Component should handle multiple display states, pending, error
                     sm={10}
                   >
                     <div>
-                      t(table.label, {"context":"status"})
+                      t(table.label_status, {"context":"sources"})
                     </div>
                     a day ago
                   </GridItem>
@@ -214,45 +216,45 @@ exports[`Sources Component should handle multiple display states, pending, error
               },
               Object {
                 "content": <Tooltip
-                  content="t(table.label_status_tooltip, {\\"context\\":\\"success\\",\\"count\\":0})"
+                  content="t(table.label_status_tooltip_success, {\\"context\\":\\"sources\\",\\"count\\":0})"
                   delayShow={500}
                   id={null}
                   isPopover={false}
                   placement="top"
                 >
-                  t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+                  t(table.label_status_cell, {"context":"sources","count":0}, [object Object],[object Object])
                 </Tooltip>,
-                "dataLabel": "t(table.header_hosts, {\\"context\\":\\"ok\\"})",
+                "dataLabel": "t(table.header_success, {\\"context\\":\\"sources\\"})",
                 "expandedContent": undefined,
                 "isExpanded": false,
                 "width": 8,
               },
               Object {
                 "content": <Tooltip
-                  content="t(table.label_status_tooltip, {\\"context\\":\\"failed\\",\\"count\\":0})"
+                  content="t(table.label_status_tooltip_failed, {\\"context\\":\\"sources\\",\\"count\\":0})"
                   delayShow={500}
                   id={null}
                   isPopover={false}
                   placement="top"
                 >
-                  t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+                  t(table.label_status_cell, {"context":"sources","count":0}, [object Object],[object Object])
                 </Tooltip>,
-                "dataLabel": "t(table.header_hosts, {\\"context\\":\\"failed\\"})",
+                "dataLabel": "t(table.header_failed, {\\"context\\":\\"sources\\"})",
                 "expandedContent": undefined,
                 "isExpanded": false,
                 "width": 8,
               },
               Object {
                 "content": <Tooltip
-                  content="t(table.label_status_tooltip, {\\"context\\":\\"unreachable\\",\\"count\\":0})"
+                  content="t(table.label_status_tooltip_unreachable, {\\"context\\":\\"sources\\",\\"count\\":0})"
                   delayShow={500}
                   id={null}
                   isPopover={false}
                   placement="top"
                 >
-                  t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+                  t(table.label_status_cell, {"context":"sources","count":0}, [object Object],[object Object])
                 </Tooltip>,
-                "dataLabel": "t(table.header_hosts, {\\"context\\":\\"unreachable\\"})",
+                "dataLabel": "t(table.header_unreachable, {\\"context\\":\\"sources\\"})",
                 "expandedContent": undefined,
                 "isExpanded": false,
                 "width": 8,

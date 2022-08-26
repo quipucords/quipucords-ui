@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, AlertVariant, EmptyState, EmptyStateVariant, List, ListItem, Spinner } from '@patternfly/react-core';
-import { Icon } from 'patternfly-react';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { helpers } from '../../common/helpers';
 import { translate } from '../i18n/i18n';
 
@@ -54,7 +54,7 @@ class ScanSourceList extends React.Component {
         {scanJobList?.map(item => (
           <ListItem key={item.id}>
             <List isPlain>
-              <ListItem icon={<Icon {...helpers.sourceTypeIcon(item.sourceType)} />} key={item.name}>
+              <ListItem icon={<ContextIcon symbol={ContextIconVariant[item.sourceType]} />} key={item.name}>
                 {item.name}
               </ListItem>
               <ListItem key={`desc-${item.name}`}>{ScanSourceList.setSourceStatus(item)}</ListItem>

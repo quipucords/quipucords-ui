@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Alert, AlertVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
-import { Grid, Icon } from 'patternfly-react';
+import { Grid } from 'patternfly-react';
+import { IconSize } from '@patternfly/react-icons';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
+import { ContextIcon, ContextIconColors, ContextIconVariant } from '../contextIcon/contextIcon';
 import { helpers } from '../../common/helpers';
 import { dictionary } from '../../constants/dictionaryConstants';
 import { apiTypes } from '../../constants/apiConstants';
@@ -76,15 +77,6 @@ class ScanJobsList extends React.Component {
       );
     }
 
-    const iconProps = status => {
-      const { type, name, classNames } = helpers.scanStatusIcon(status);
-      return {
-        type,
-        name,
-        className: cx('scan-job-status-icon', classNames)
-      };
-    };
-
     return (
       <div className="quipucords-infinite-results">
         <Grid fluid onScroll={this.onScrollList} className="quipucords-infinite-list">
@@ -93,7 +85,7 @@ class ScanJobsList extends React.Component {
               mostRecentId !== item.id && (
                 <Grid.Row className="fadein" key={item.id}>
                   <Grid.Col xs={6} sm={3}>
-                    <Icon {...iconProps(item.status)} />
+                    <ContextIcon symbol={ContextIconVariant[item.status]} size={IconSize.sm} />{' '}
                     {dictionary[item.status] || ''}
                   </Grid.Col>
                   <Grid.Col xs={6} sm={3}>
@@ -102,17 +94,17 @@ class ScanJobsList extends React.Component {
                     )}
                   </Grid.Col>
                   <Grid.Col xs={3} sm={2}>
-                    <Icon className="scan-job-status-icon systems" type="pf" name="ok" />
+                    <ContextIcon symbol={ContextIconVariant.success} color={ContextIconColors.gray} />{' '}
                     {item.systemsScanned}
                   </Grid.Col>
                   <Grid.Col xs={3} sm={2}>
-                    <Icon className="scan-job-status-icon systems" type="pf" name="error-circle-o" />
+                    <ContextIcon symbol={ContextIconVariant.failed} color={ContextIconColors.gray} />{' '}
                     {item.systemsFailed}
                   </Grid.Col>
                   <Grid.Col xs={3} sm={2}>
                     {item.reportId > 0 && (
                       <ScanDownload downloadName={item.scanName} downloadId={item.reportId} bsStyle="link">
-                        <Icon type="pf" name="export" /> &nbsp;Download
+                        <ContextIcon symbol={ContextIconVariant.download} /> &nbsp;Download
                       </ScanDownload>
                     )}
                   </Grid.Col>

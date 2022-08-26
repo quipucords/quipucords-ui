@@ -122,7 +122,7 @@ describe('ScansActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().scans;
 
-      expect(response.start.lorem.fulfilled).toEqual(true);
+      expect(response.action.lorem.fulfilled).toEqual(true);
       done();
     });
   });
@@ -134,7 +134,7 @@ describe('ScansActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().scans;
 
-      expect(response.pause.lorem.fulfilled).toEqual(true);
+      expect(response.action.lorem.fulfilled).toEqual(true);
       done();
     });
   });
@@ -146,7 +146,7 @@ describe('ScansActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().scans;
 
-      expect(response.cancel.lorem.fulfilled).toEqual(true);
+      expect(response.action.lorem.fulfilled).toEqual(true);
       done();
     });
   });
@@ -158,7 +158,7 @@ describe('ScansActions', () => {
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().scans;
 
-      expect(response.restart.lorem.fulfilled).toEqual(true);
+      expect(response.action.lorem.fulfilled).toEqual(true);
       done();
     });
   });

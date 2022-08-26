@@ -27,7 +27,21 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, created 1`] = `
 <Spinner
   isSVG={true}
-  size="md"
+  style={
+    Object {
+      "display": "inline-block",
+      "height": "1em",
+      "width": "1em",
+    }
+  }
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, download 1`] = `
+<DownloadIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
 />
 `;
 
@@ -74,19 +88,47 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, pending 1`] = `
 <Spinner
   isSVG={true}
-  size="md"
+  style={
+    Object {
+      "display": "inline-block",
+      "height": "1em",
+      "width": "1em",
+    }
+  }
 />
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, running 1`] = `
 <Spinner
   isSVG={true}
-  size="md"
+  style={
+    Object {
+      "display": "inline-block",
+      "height": "1em",
+      "width": "1em",
+    }
+  }
 />
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, satellite 1`] = `
 <PficonSatelliteIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, scans 1`] = `
+<ClipboardCheckIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, sources 1`] = `
+<CrosshairsIcon
   color="currentColor"
   noVerticalAlign={false}
   size="sm"
@@ -139,6 +181,7 @@ Object {
   "cancelled": "failed",
   "completed": "success",
   "created": "pending",
+  "download": "download",
   "failed": "failed",
   "idCard": "idCard",
   "network": "network",
@@ -147,6 +190,8 @@ Object {
   "pending": "pending",
   "running": "pending",
   "satellite": "satellite",
+  "scans": "scans",
+  "sources": "sources",
   "success": "success",
   "trash": "trash",
   "unknown": "unknown",

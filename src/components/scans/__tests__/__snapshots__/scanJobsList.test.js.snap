@@ -58,11 +58,11 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
         sm={3}
         xs={6}
       >
-        <Icon
-          className="scan-job-status-icon"
-          name="ok"
-          type="pf"
+        <ContextIcon
+          size="sm"
+          symbol="success"
         />
+         
         Completed
       </Col>
       <Col
@@ -79,11 +79,18 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
         sm={2}
         xs={3}
       >
-        <Icon
-          className="scan-job-status-icon systems"
-          name="ok"
-          type="pf"
+        <ContextIcon
+          color={
+            Object {
+              "name": "--pf-global--Color--dark-100",
+              "value": "#151515",
+              "var": "var(--pf-global--Color--dark-100)",
+            }
+          }
+          size="sm"
+          symbol="success"
         />
+         
         10
       </Col>
       <Col
@@ -92,11 +99,18 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
         sm={2}
         xs={3}
       >
-        <Icon
-          className="scan-job-status-icon systems"
-          name="error-circle-o"
-          type="pf"
+        <ContextIcon
+          color={
+            Object {
+              "name": "--pf-global--Color--dark-100",
+              "value": "#151515",
+              "var": "var(--pf-global--Color--dark-100)",
+            }
+          }
+          size="sm"
+          symbol="failed"
         />
+         
         10
       </Col>
       <Col
@@ -109,9 +123,9 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
           bsStyle="link"
           downloadId={15}
         >
-          <Icon
-            name="export"
-            type="pf"
+          <ContextIcon
+            size="sm"
+            symbol="download"
           />
             Download
         </Connect(ScanDownload)>

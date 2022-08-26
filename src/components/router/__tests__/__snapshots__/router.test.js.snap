@@ -11,14 +11,7 @@ exports[`Router Component should shallow render a basic component 1`] = `
       path="/sources"
     />
     <Route
-      component={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "type": [Function],
-        }
-      }
+      component={[Function]}
       key="/scans"
       path="/scans"
     />
