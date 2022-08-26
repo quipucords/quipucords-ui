@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Icon, InputGroup, Button } from 'patternfly-react';
+import { InputGroup, Button, TextInput, ButtonVariant } from '@patternfly/react-core';
+import { PlusIcon, MinusIcon } from '@patternfly/react-icons';
 import helpers from '../../common/helpers';
 
 // FixMe: remove the eslint-disable
@@ -11,24 +12,36 @@ class TouchSpin extends React.Component {
     // eslint-disable-next-line
     this.state = {
       displayValue: Number.parseInt(props.value, 10),
-      maxValue: Number.parseInt(props.maxValue, 10),
-      minValue: Number.parseInt(props.minValue, 10),
-      value: Number.parseInt(props.value, 10)
+      maxValue: props.maxValue,
+      minValue: props.minValue
     };
 
     this.timer = null;
   }
 
+  normalizeBetween = (value, min, max) => {
+    if (min !== undefined && max !== undefined) {
+      return Math.max(Math.min(value, max), min);
+    }
+    if (value <= min) {
+      return min;
+    }
+    if (value >= max) {
+      return max;
+    }
+    return value;
+  };
+
   onFocusMax = () => {
-    const { maxValue, value } = this.state;
+    const { maxValue, displayValue } = this.state;
 
     const setTimer = (time = 500) => {
       clearTimeout(this.timer);
 
       this.timer = setTimeout(() => {
-        this.onMax();
+        this.onPlus();
 
-        if (value < maxValue) {
+        if (displayValue < maxValue) {
           setTimer(0);
         }
       }, time);
@@ -38,15 +51,15 @@ class TouchSpin extends React.Component {
   };
 
   onFocusMin = () => {
-    const { minValue, value } = this.state;
+    const { minValue, displayValue } = this.state;
 
     const setTimer = (time = 500) => {
       clearTimeout(this.timer);
 
       this.timer = setTimeout(() => {
-        this.onMin();
+        this.onMinus();
 
-        if (value > minValue) {
+        if (displayValue > minValue) {
           setTimer(0);
         }
       }, time);
@@ -59,46 +72,39 @@ class TouchSpin extends React.Component {
     clearTimeout(this.timer);
   };
 
-  onMin = () => {
-    const { maxValue, minValue, value } = this.state;
-    let updatedValue = value - 1 > minValue ? value - 1 : minValue;
+  onMinus = () => {
+    const { displayValue, minValue, maxValue } = this.state;
 
-    if (updatedValue > maxValue) {
-      updatedValue = maxValue;
-    }
-
-    this.onUpdateValue({ target: { value: updatedValue } });
+    this.setState({
+      displayValue: this.normalizeBetween(displayValue - 1, minValue, maxValue)
+    });
   };
 
-  onMax = () => {
-    const { maxValue, minValue, value } = this.state;
-    let updatedValue = value + 1 < maxValue ? value + 1 : maxValue;
+  onPlus = () => {
+    const { displayValue, minValue, maxValue } = this.state;
 
-    if (updatedValue < minValue) {
-      updatedValue = minValue;
-    }
-
-    this.onUpdateValue({ target: { value: updatedValue } });
+    this.setState({
+      displayValue: this.normalizeBetween(displayValue + 1, minValue, maxValue)
+    });
   };
 
-  onUpdateValue = event => {
-    const { maxValue, minValue } = this.state;
+  onUpdateValue = (_updatedValue, event) => {
     const { name, onChange } = this.props;
-    const { value } = event.target;
+    const { maxValue, minValue } = this.state;
 
-    let parsedValue = Number.parseInt(value, 10);
-    parsedValue = Number.isNaN(parsedValue) ? minValue : parsedValue;
+    let parsedValue = Number(event.target.value);
+    if (parsedValue > maxValue) {
+      parsedValue = maxValue;
+    }
 
-    const maxDisabled = parsedValue > maxValue;
-    const minDisabled = parsedValue < minValue;
+    if (parsedValue < minValue) {
+      parsedValue = minValue;
+    }
 
     clearTimeout(this.timer);
 
     this.setState({
-      displayValue: value,
-      value: parsedValue,
-      maxDisabled,
-      minDisabled
+      displayValue: parsedValue
     });
 
     const mockTarget = {
@@ -118,49 +124,43 @@ class TouchSpin extends React.Component {
   };
 
   render() {
-    const { displayValue, maxDisabled, minDisabled } = this.state;
+    const { displayValue, maxValue, minValue } = this.state;
     const { className, labelMax, labelMaxDescription, labelMin, labelMinDescription, name } = this.props;
 
     return (
-      <InputGroup className={`cloudmeter-touchspin ${className}`}>
-        <InputGroup.Button>
+      <div className={`pf-c-number-input ${className}`}>
+        <InputGroup>
           <Button
-            onClick={this.onMin}
+            onClick={this.onMinus}
+            variant={ButtonVariant.control}
             onMouseDown={this.onFocusMin}
             onMouseUp={this.onBlur}
             onMouseLeave={this.onBlur}
-            className="cloudmeter-touchspin-min-button form-control"
-            aria-hidden
-            tabIndex={-1}
-            title={labelMinDescription}
-            disabled={minDisabled}
+            isDisabled={displayValue <= minValue}
+            aria-label={labelMinDescription}
           >
             {labelMin}
           </Button>
-        </InputGroup.Button>
-        <Form.FormControl
-          type="text"
-          name={name}
-          value={displayValue}
-          className="cloudmeter-touchspin-input"
-          onChange={this.onUpdateValue}
-        />
-        <InputGroup.Button>
+          <TextInput
+            type="number"
+            name={name}
+            value={displayValue}
+            onChange={(value, event) => this.onUpdateValue(value, event)}
+            aria-label="Number Input"
+          />
           <Button
-            onClick={this.onMax}
+            variant={ButtonVariant.control}
+            onClick={this.onPlus}
             onMouseDown={this.onFocusMax}
             onMouseUp={this.onBlur}
             onMouseLeave={this.onBlur}
-            className="cloudmeter-touchspin-max-button form-control"
-            aria-hidden
-            tabIndex={-1}
-            title={labelMaxDescription}
-            disabled={maxDisabled}
+            isDisabled={displayValue >= maxValue}
+            aria-label={labelMaxDescription}
           >
             {labelMax}
           </Button>
-        </InputGroup.Button>
-      </InputGroup>
+        </InputGroup>
+      </div>
     );
   }
 }
@@ -175,15 +175,15 @@ TouchSpin.propTypes = {
   minValue: PropTypes.number,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  value: PropTypes.number
 };
 
 TouchSpin.defaultProps = {
   className: '',
-  labelMax: <Icon type="fa" name="plus" />,
-  labelMaxDescription: 'Increase number input',
-  labelMin: <Icon type="fa" name="minus" />,
-  labelMinDescription: 'Decrease number input',
+  labelMax: <PlusIcon />,
+  labelMaxDescription: 'Increase number button',
+  labelMin: <MinusIcon />,
+  labelMinDescription: 'Decrease number button',
   maxValue: 100,
   minValue: 0,
   onChange: helpers.noop,
