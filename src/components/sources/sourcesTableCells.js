@@ -87,9 +87,10 @@ const description = ({ hosts, name, source_type: sourceType } = {}, { t = transl
  * @param {object} params.connection
  * @param {object} options
  * @param {Function} options.t
+ * @param {string} options.viewId
  * @returns {React.ReactNode|null}
  */
-const scanStatus = ({ connection: scan = {} } = {}, { t = translate } = {}) => {
+const scanStatus = ({ connection: scan = {} } = {}, { t = translate, viewId } = {}) => {
   const { end_time: endTime, start_time: startTime, status } = scan;
   const isPending = status === 'created' || status === 'pending' || status === 'running';
   const scanTime = (isPending && startTime) || endTime;
@@ -100,7 +101,7 @@ const scanStatus = ({ connection: scan = {} } = {}, { t = translate } = {}) => {
         <ContextIcon symbol={ContextIconVariant[status]} />
       </GridItem>
       <GridItem sm={10}>
-        <div>{t('table.label', { context: ['status', status] })}</div>
+        <div>{t('table.label', { context: ['status', status, viewId] })}</div>
         {helpers.getTimeDisplayHowLongAgo(scanTime)}
       </GridItem>
     </Grid>
@@ -114,9 +115,10 @@ const scanStatus = ({ connection: scan = {} } = {}, { t = translate } = {}) => {
  * @param {number} params.count
  * @param {string} params.status
  * @param {Function} params.t
+ * @param {string} params.viewId
  * @returns {React.ReactNode}
  */
-const statusCell = ({ count, status = ContextIconVariant.unknown, t = translate } = {}) => {
+const statusCell = ({ count, status = ContextIconVariant.unknown, t = translate, viewId } = {}) => {
   let updatedCount = count || 0;
 
   if (helpers.DEV_MODE) {
@@ -124,8 +126,8 @@ const statusCell = ({ count, status = ContextIconVariant.unknown, t = translate 
   }
 
   return (
-    <Tooltip content={t('table.label', { context: ['status', 'tooltip', status], count: updatedCount })}>
-      {t('table.label', { context: ['status', 'cell'], count: updatedCount }, [
+    <Tooltip content={t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })}>
+      {t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [
         <ContextIcon symbol={status} />,
         <strong />
       ])}
@@ -140,14 +142,21 @@ const statusCell = ({ count, status = ContextIconVariant.unknown, t = translate 
  * @param {object} params.connection
  * @param {string} params.id
  * @param {string} params.status
+ * @param {object} options
+ * @param {boolean} options.useConnectionResults
+ * @param {boolean} options.useInspectionResults
  * @returns {React.ReactNode}
  */
-const statusContent = ({ connection, id, status } = {}) => (
+const statusContent = (
+  { connection, id, status } = {},
+  { useConnectionResults = true, useInspectionResults = false } = {}
+) => (
   <ScanHostList
     key={`status-content-${id}-${status}`}
     id={connection?.id}
     filter={{ [apiTypes.API_QUERY_SOURCE_TYPE]: id, [apiTypes.API_QUERY_STATUS]: status }}
-    useConnectionResults
+    useConnectionResults={useConnectionResults}
+    useInspectionResults={useInspectionResults}
   >
     {({ host }) => (
       <Grid key={`hostsRow-${host?.credentialName}`}>
@@ -216,13 +225,15 @@ const credentialsCellContent = (item = {}) => {
  * @param {object} params
  * @param {object} params.connection
  * @param {string} params.id
+ * @param {object} options
+ * @param {string} options.viewId
  * @returns {{cell: React.ReactNode, content: React.ReactNode}}
  */
-const failedHostsCellContent = ({ connection, id } = {}) => {
+const failedHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
   const count = Number.parseInt(connection?.source_systems_failed, 10);
 
   return {
-    content: statusCell({ count, status: ContextIconVariant.failed }),
+    content: statusCell({ count, status: ContextIconVariant.failed, viewId }),
     expandedContent: (count && statusContent({ connection, id, status: ContextIconVariant.failed })) || undefined
   };
 };
@@ -233,13 +244,15 @@ const failedHostsCellContent = ({ connection, id } = {}) => {
  * @param {object} params
  * @param {object} params.connection
  * @param {string} params.id
+ * @param {object} options
+ * @param {string} options.viewId
  * @returns {{cell: React.ReactNode, content: React.ReactNode}}
  */
-const okHostsCellContent = ({ connection, id } = {}) => {
+const okHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
   const count = Number.parseInt(connection?.source_systems_scanned, 10);
 
   return {
-    content: statusCell({ count, status: ContextIconVariant.success }),
+    content: statusCell({ count, status: ContextIconVariant.success, viewId }),
     expandedContent: (count && statusContent({ connection, id, status: ContextIconVariant.success })) || undefined
   };
 };
@@ -250,13 +263,15 @@ const okHostsCellContent = ({ connection, id } = {}) => {
  * @param {object} params
  * @param {object} params.connection
  * @param {string} params.id
+ * @param {object} options
+ * @param {string} options.viewId
  * @returns {{cell: React.ReactNode, content: React.ReactNode}}
  */
-const unreachableHostsCellContent = ({ connection, id } = {}) => {
+const unreachableHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
   const count = Number.parseInt(connection?.source_systems_unreachable, 10);
 
   return {
-    content: statusCell({ count, status: ContextIconVariant.unreachable }),
+    content: statusCell({ count, status: ContextIconVariant.unreachable, viewId }),
     expandedContent: (count && statusContent({ connection, id, status: ContextIconVariant.unreachable })) || undefined
   };
 };

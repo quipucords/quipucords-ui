@@ -153,6 +153,7 @@ exports[`SourcesTableCells should return consistent cell results: basic descript
       placement="top"
     >
       <ContextIcon
+        size="sm"
         symbol={null}
       />
     </Tooltip>
@@ -205,6 +206,7 @@ exports[`SourcesTableCells should return consistent cell results: basic scanStat
     sm={2}
   >
     <ContextIcon
+      size="sm"
       symbol={null}
     />
   </GridItem>
@@ -240,6 +242,7 @@ exports[`SourcesTableCells should return consistent cell results: basic statusCo
     }
   }
   useConnectionResults={true}
+  useInspectionResults={false}
 >
   [Function]
 </Memo(Connect(ScanHostList))>

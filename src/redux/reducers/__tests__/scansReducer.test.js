@@ -8,7 +8,15 @@ describe('ScansReducer', () => {
   });
 
   it('should handle specific defined types', () => {
-    const specificTypes = [types.UPDATE_SCANS, types.MERGE_SCAN_DIALOG_SHOW, types.MERGE_SCAN_DIALOG_HIDE];
+    const specificTypes = [
+      types.UPDATE_SCANS,
+      types.MERGE_SCAN_DIALOG_SHOW,
+      types.MERGE_SCAN_DIALOG_HIDE,
+      types.SELECT_SCAN,
+      types.DESELECT_SCAN,
+      types.EXPANDED_SCAN,
+      types.NOT_EXPANDED_SCAN
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {

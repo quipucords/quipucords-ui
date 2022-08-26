@@ -12,12 +12,7 @@ Array [
     "to": "/sources",
   },
   Object {
-    "component": Object {
-      "$$typeof": Symbol(react.memo),
-      "WrappedComponent": [Function],
-      "compare": null,
-      "type": [Function],
-    },
+    "component": [Function],
     "iconClass": "pficon pficon-orders",
     "title": "Scans",
     "to": "/scans",

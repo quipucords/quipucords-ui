@@ -96,7 +96,7 @@ Array [
     Array [
       Object {
         "alertType": "success",
-        "header": "t(toast-notifications.title, {\\"context\\":\\"deleted-source\\",\\"name\\":\\"lorem ipsum name\\"})",
+        "header": "t(toast-notifications.title, {\\"context\\":\\"deleted-source\\"})",
         "message": "t(toast-notifications.description, {\\"context\\":\\"deleted-source\\",\\"name\\":\\"lorem ipsum name\\"})",
         "type": "TOAST_ADD",
       },
