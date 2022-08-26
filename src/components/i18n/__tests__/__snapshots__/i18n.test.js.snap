@@ -381,28 +381,61 @@ Array [
     "file": "./src/components/scans/scans.js",
     "keys": Array [
       Object {
+        "key": "table.tooltip",
+        "match": "t('table.tooltip', { context: ['merge-reports'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['merge-reports'] })",
+      },
+      Object {
         "key": "view.loading",
-        "match": "t('view.loading', { context: 'scans' })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+        "match": "t('view.loading', { context: viewId })",
       },
       Object {
         "key": "view.error",
-        "match": "t('view.error', { context: 'scans' })",
+        "match": "t('view.error', { context: viewId })",
       },
       Object {
         "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['scans'], message: errorMessage })",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['success', viewId] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['failed', viewId] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['sources'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan-jobs'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/scans/scansContext.js",
+    "keys": Array [
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t( 'toast-notifications.description', { context: ['scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
+      },
+      Object {
+        "key": "toast-notifcations.title",
+        "match": "t('toast-notifcations.title', { context: ['error'] })",
       },
     ],
   },
@@ -437,6 +470,43 @@ Array [
       Object {
         "key": "view.error-message",
         "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/scans/scansTableCells.js",
+    "keys": Array [
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status, viewId] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
       },
     ],
   },
@@ -477,15 +547,15 @@ Array [
       },
       Object {
         "key": "table.header",
-        "match": "t('table.header', { context: ['hosts', 'ok'] })",
+        "match": "t('table.header', { context: ['success', viewId] })",
       },
       Object {
         "key": "table.header",
-        "match": "t('table.header', { context: ['hosts', 'failed'] })",
+        "match": "t('table.header', { context: ['failed', viewId] })",
       },
       Object {
         "key": "table.header",
-        "match": "t('table.header', { context: ['hosts', 'unreachable'] })",
+        "match": "t('table.header', { context: ['unreachable', viewId] })",
       },
     ],
   },
@@ -494,7 +564,7 @@ Array [
     "keys": Array [
       Object {
         "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['deleted-source'], name: sourceName })",
+        "match": "t('toast-notifications.title', { context: ['deleted-source'] })",
       },
       Object {
         "key": "toast-notifications.description",
@@ -502,7 +572,7 @@ Array [
       },
       Object {
         "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['deleted-source', 'error'], name: sourceName })",
+        "match": "t('toast-notifications.title', { context: ['error'] })",
       },
       Object {
         "key": "form-dialog.confirmation",
@@ -544,15 +614,15 @@ Array [
       },
       Object {
         "key": "table.label",
-        "match": "t('table.label', { context: ['status', status] })",
+        "match": "t('table.label', { context: ['status', status, viewId] })",
       },
       Object {
         "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'tooltip', status], count: updatedCount })",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
       },
       Object {
         "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'cell'], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
       },
       Object {
         "key": "table.label",
@@ -692,15 +762,7 @@ Array [
   },
   Object {
     "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
+    "key": "table.tooltip",
   },
   Object {
     "file": "./src/components/scans/scans.js",
@@ -709,6 +771,38 @@ Array [
   Object {
     "file": "./src/components/scans/scans.js",
     "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/scans/scansContext.js",
+    "key": "toast-notifications.description",
+  },
+  Object {
+    "file": "./src/components/scans/scansContext.js",
+    "key": "toast-notifcations.title",
   },
   Object {
     "file": "./src/components/scans/scansEmptyState.js",

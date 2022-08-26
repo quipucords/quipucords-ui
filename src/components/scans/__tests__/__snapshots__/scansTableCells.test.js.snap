@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScansTableCells should export specific function components: function components 1`] = `
+Object {
+  "actionsCell": [Function],
+  "description": [Function],
+  "failedHostsCellContent": [Function],
+  "okHostsCellContent": [Function],
+  "scanStatus": [Function],
+  "scansCellContent": [Function],
+  "sourcesCellContent": [Function],
+  "statusCell": [Function],
+  "statusContent": [Function],
+}
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic actionsCell cell 1`] = `
+<OverflowMenu
+  breakpoint="lg"
+>
+  <OverflowMenuContent>
+    <OverflowMenuGroup
+      groupType="button"
+    />
+  </OverflowMenuContent>
+  <OverflowMenuControl>
+    <DropdownSelect
+      ariaLabel="Select option"
+      buttonVariant="plain"
+      className=""
+      direction="down"
+      id="generatedid-"
+      isDisabled={false}
+      isDropdownButton={true}
+      isInline={true}
+      isToggleText={true}
+      maxHeight={null}
+      name={null}
+      onSelect={[Function]}
+      options={Array []}
+      placeholder={
+        <EllipsisVIcon
+          color="currentColor"
+          noVerticalAlign={false}
+          size="sm"
+        />
+      }
+      position="right"
+      selectedOptions={null}
+      splitButtonVariant={null}
+      toggleIcon={null}
+      variant="single"
+    />
+  </OverflowMenuControl>
+</OverflowMenu>
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic description cell 1`] = `
+<Grid
+  hasGutter={false}
+>
+  <GridItem
+    sm={2}
+  />
+  <GridItem
+    sm={10}
+  >
+    <div>
+      <strong />
+    </div>
+  </GridItem>
+</Grid>
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic failedHostsCellContent cell 1`] = `
+Object {
+  "content": <Tooltip
+    content="t(table.label_status_tooltip, {\\"context\\":\\"failed\\",\\"count\\":0})"
+    delayShow={500}
+    id={null}
+    isPopover={false}
+    placement="top"
+  >
+    t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+  </Tooltip>,
+  "expandedContent": undefined,
+}
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic okHostsCellContent cell 1`] = `
+Object {
+  "content": <Tooltip
+    content="t(table.label_status_tooltip, {\\"context\\":\\"success\\",\\"count\\":0})"
+    delayShow={500}
+    id={null}
+    isPopover={false}
+    placement="top"
+  >
+    t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+  </Tooltip>,
+  "expandedContent": undefined,
+}
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic scanStatus cell 1`] = `
+<Grid
+  hasGutter={false}
+>
+  <GridItem
+    sm={2}
+  >
+    <ContextIcon
+      size="sm"
+      symbol={null}
+    />
+  </GridItem>
+  <GridItem
+    sm={10}
+  >
+    <div>
+      t(table.label, {"context":"status"})
+    </div>
+    a day ago
+  </GridItem>
+</Grid>
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic scansCellContent cell 1`] = `
+Object {
+  "content": <Tooltip
+    content="t(table.label_status_tooltip, {\\"context\\":\\"scans\\",\\"count\\":0})"
+    delayShow={500}
+    id={null}
+    isPopover={false}
+    placement="top"
+  >
+    t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+  </Tooltip>,
+  "expandedContent": undefined,
+}
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic sourcesCellContent cell 1`] = `
+Object {
+  "content": <Tooltip
+    content="t(table.label_status_tooltip, {\\"context\\":\\"sources\\",\\"count\\":0})"
+    delayShow={500}
+    id={null}
+    isPopover={false}
+    placement="top"
+  >
+    t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+  </Tooltip>,
+  "expandedContent": undefined,
+}
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic statusCell cell 1`] = `
+<Tooltip
+  content="t(table.label_status_tooltip, {\\"context\\":\\"unknown\\",\\"count\\":0})"
+  delayShow={500}
+  id={null}
+  isPopover={false}
+  placement="top"
+>
+  t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
+</Tooltip>
+`;
+
+exports[`ScansTableCells should return consistent cell results: basic statusContent cell 1`] = `
+<Memo(Connect(ScanHostList))
+  filter={
+    Object {
+      "status": undefined,
+    }
+  }
+  useConnectionResults={false}
+  useInspectionResults={false}
+>
+  [Function]
+</Memo(Connect(ScanHostList))>
+`;

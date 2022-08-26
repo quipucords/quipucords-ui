@@ -49,8 +49,7 @@ const useOnDelete = ({
           type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: 'success',
           header: t('toast-notifications.title', {
-            context: ['deleted-source'],
-            name: sourceName
+            context: ['deleted-source']
           }),
           message: t('toast-notifications.description', {
             context: ['deleted-source'],
@@ -76,8 +75,7 @@ const useOnDelete = ({
         type: reduxTypes.toastNotifications.TOAST_ADD,
         alertType: 'danger',
         header: t('toast-notifications.title', {
-          context: ['deleted-source', 'error'],
-          name: sourceName
+          context: ['error']
         }),
         message
       });
@@ -250,10 +248,10 @@ const useGetSources = ({
   const dispatch = useAliasDispatch();
   const pollUpdate = useAliasPoll();
   const [refreshUpdate, selectedRows, expandedRows, viewOptions] = useAliasSelectors([
-    ({ sources }) => sources.update,
-    ({ sources }) => sources.selected,
-    ({ sources }) => sources.expanded,
-    ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SOURCES_VIEW]
+    ({ sources }) => sources?.update,
+    ({ sources }) => sources?.selected,
+    ({ sources }) => sources?.expanded,
+    ({ viewOptions: stateViewOptions }) => stateViewOptions?.[reduxTypes.view.SOURCES_VIEW]
   ]);
   const {
     data: responseData,
@@ -262,7 +260,7 @@ const useGetSources = ({
     message: errorMessage,
     pending,
     responses = {}
-  } = useAliasSelectorsResponse({ id: 'view', selector: ({ sources }) => sources.view });
+  } = useAliasSelectorsResponse({ id: 'view', selector: ({ sources }) => sources?.view });
 
   const [{ date } = {}] = responses?.list || [];
   const { results: data = [] } = responseData?.view || {};

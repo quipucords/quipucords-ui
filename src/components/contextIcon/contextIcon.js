@@ -4,6 +4,7 @@ import { Spinner } from '@patternfly/react-core';
 import {
   CheckCircleIcon,
   DisconnectedIcon,
+  DownloadIcon,
   ErrorCircleOIcon,
   ExclamationTriangleIcon,
   IdCardIcon,
@@ -13,7 +14,9 @@ import {
   PficonVcenterIcon,
   TrashIcon,
   UnknownIcon,
-  IconSize
+  IconSize,
+  ClipboardCheckIcon,
+  CrosshairsIcon
 } from '@patternfly/react-icons';
 import {
   global_Color_dark_100 as gray,
@@ -21,6 +24,18 @@ import {
   global_warning_color_100 as yellow,
   global_danger_color_100 as red
 } from '@patternfly/react-tokens';
+
+/**
+ * Context icon colors, for consistency
+ *
+ * @type {{ red: object, gray: object, green: object, yellow: object }}
+ */
+const ContextIconColors = {
+  gray,
+  green,
+  yellow,
+  red
+};
 
 /**
  * Context icon variants
@@ -37,15 +52,42 @@ const ContextIconVariant = {
   created: 'pending',
   pending: 'pending',
   running: 'pending',
+  paused: 'paused',
+  download: 'download',
   idCard: 'idCard',
   network: 'network',
-  paused: 'paused',
   pencil: 'pencil',
   satellite: 'satellite',
+  scans: 'scans',
+  sources: 'sources',
   trash: 'trash',
   unknown: 'unknown',
   unreachable: 'unreachable',
   vcenter: 'vcenter'
+};
+
+/**
+ * Emulate pf icon sizing for custom SVGs
+ *
+ * @param {string} size
+ * @returns {string} em measurement
+ */
+const svgSize = size => {
+  if (!Number.isNaN(Number.parseFloat(size))) {
+    return size;
+  }
+
+  switch (size) {
+    case 'md':
+      return '1.5em';
+    case 'lg':
+      return '2em';
+    case 'xl':
+      return '3em';
+    case 'sm':
+    default:
+      return '1em';
+  }
 };
 
 /**
@@ -58,6 +100,8 @@ const ContextIconVariant = {
  */
 const ContextIcon = ({ symbol, ...props }) => {
   switch (symbol) {
+    case ContextIconVariant.download:
+      return <DownloadIcon {...props} />;
     case ContextIconVariant.failed:
       return <ErrorCircleOIcon {...{ ...{ color: red.value }, ...props }} />;
     case ContextIconVariant.idCard:
@@ -69,9 +113,21 @@ const ContextIcon = ({ symbol, ...props }) => {
     case ContextIconVariant.pencil:
       return <PencilAltIcon {...props} />;
     case ContextIconVariant.pending:
-      return <Spinner isSVG {...{ ...{ size: IconSize.md }, ...props }} />;
+      const updatedSize = { style: { display: 'inline-block' } };
+
+      if (props.size) {
+        updatedSize.size = undefined;
+        updatedSize.style.height = svgSize(props.size);
+        updatedSize.style.width = svgSize(props.size);
+      }
+
+      return <Spinner isSVG {...{ ...props, ...updatedSize }} />;
     case ContextIconVariant.satellite:
       return <PficonSatelliteIcon {...props} />;
+    case ContextIconVariant.scans:
+      return <ClipboardCheckIcon {...props} />;
+    case ContextIconVariant.sources:
+      return <CrosshairsIcon {...props} />;
     case ContextIconVariant.success:
       return <CheckCircleIcon {...{ ...{ color: green.value }, ...props }} />;
     case ContextIconVariant.trash:
@@ -92,7 +148,8 @@ const ContextIcon = ({ symbol, ...props }) => {
  * @type {{symbol: string}}
  */
 ContextIcon.propTypes = {
-  symbol: PropTypes.oneOf([...Object.values(ContextIconVariant)])
+  symbol: PropTypes.oneOf([...Object.values(ContextIconVariant)]),
+  size: PropTypes.oneOf([...Object.values(IconSize)])
 };
 
 /**
@@ -101,7 +158,8 @@ ContextIcon.propTypes = {
  * @type {{symbol: null}}
  */
 ContextIcon.defaultProps = {
-  symbol: null
+  symbol: null,
+  size: IconSize.sm
 };
 
-export { ContextIcon as default, ContextIcon, ContextIconVariant };
+export { ContextIcon as default, ContextIcon, ContextIconColors, ContextIconVariant };

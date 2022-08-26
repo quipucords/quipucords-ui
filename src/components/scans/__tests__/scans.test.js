@@ -1,69 +1,64 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { shallow } from 'enzyme';
-import { ConnectedScans, Scans } from '../scans';
+import { Scans } from '../scans';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('Scans Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component with default props', () => {
-    const store = generateEmptyStore({ scans: { view: {} }, viewOptions: {} });
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedScans />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedScans)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', async () => {
     const props = {
-      fulfilled: true,
-      scans: [
-        {
-          [apiTypes.API_RESPONSE_SCAN_ID]: 1
-        }
-      ],
-      viewOptions: {
-        selectedItems: []
-      }
+      useGetScans: () => ({
+        fulfilled: true
+      })
     };
 
-    const component = shallow(<Scans {...props} />);
-
-    expect(component).toMatchSnapshot('non-connected');
+    const component = await shallowHookComponent(<Scans {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component error', () => {
+  it('should handle multiple display states, pending, error, fulfilled', async () => {
     const props = {
-      error: true
+      useGetScans: () => ({
+        pending: true
+      })
     };
 
-    const component = shallow(<Scans {...props} />);
+    const component = await shallowHookComponent(<Scans {...props} />);
+    expect(component).toMatchSnapshot('pending');
+
+    component.setProps({
+      useGetScans: () => ({
+        pending: false,
+        error: true
+      })
+    });
 
     expect(component).toMatchSnapshot('error');
+
+    component.setProps({
+      useGetScans: () => ({
+        pending: false,
+        error: false,
+        fulfilled: true,
+        data: [
+          {
+            [apiTypes.API_RESPONSE_SCAN_ID]: '1',
+            [apiTypes.API_RESPONSE_SCAN_NAME]: 'lorem'
+          }
+        ]
+      })
+    });
+
+    expect(component).toMatchSnapshot('fulfilled');
   });
 
-  it('should render a non-connected component pending', () => {
+  it('should return an empty state when there are no scans', async () => {
     const props = {
-      pending: true
+      useGetScans: () => ({
+        fulfilled: true,
+        data: []
+      })
     };
 
-    const component = shallow(<Scans {...props} />);
-
-    expect(component).toMatchSnapshot('pending');
-  });
-
-  it('should render a non-connected component with empty state', () => {
-    const props = {
-      scans: []
-    };
-
-    const component = shallow(<Scans {...props} />);
-
-    expect(component).toMatchSnapshot('empty state');
+    const component = await shallowHookComponent(<Scans {...props} />);
+    expect(component.render()).toMatchSnapshot('empty state');
   });
 });
