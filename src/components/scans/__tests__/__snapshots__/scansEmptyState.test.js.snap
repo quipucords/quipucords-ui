@@ -33,12 +33,12 @@ exports[`ScansEmptyState Component should render a non-connected component: non-
       data-ouia-component-type="PF4/Title"
       data-ouia-safe="true"
     >
-      t(view.empty-state, {"context":"title","name":"Quipucords"})
+      t(view.empty-state, {"context":"title","count":0,"name":"Quipucords"})
     </h1>
     <div
       class="pf-c-empty-state__body"
     >
-      t(view.empty-state_description, {"context":"sources"})
+      t(view.empty-state, {"context":"description","count":0})
     </div>
     <div
       class="pf-c-empty-state__primary"
@@ -51,7 +51,7 @@ exports[`ScansEmptyState Component should render a non-connected component: non-
         data-ouia-safe="true"
         type="button"
       >
-        t(view.empty-state_label, {"context":"source"})
+        t(view.empty-state_label, {"context":"source-navigate","count":0})
       </button>
     </div>
   </div>
@@ -85,12 +85,12 @@ exports[`ScansEmptyState Component should render a non-connected component: non-
       data-ouia-component-type="PF4/Title"
       data-ouia-safe="true"
     >
-      t(view.empty-state_title, {"context":"scans"})
+      t(view.empty-state, {"context":"title","count":0,"name":"Quipucords"})
     </h1>
     <div
       class="pf-c-empty-state__body"
     >
-      t(view.empty-state_description, {"context":"scans"})
+      t(view.empty-state, {"context":"description","count":0})
     </div>
     <div
       class="pf-c-empty-state__primary"
@@ -103,7 +103,7 @@ exports[`ScansEmptyState Component should render a non-connected component: non-
         data-ouia-safe="true"
         type="button"
       >
-        t(view.empty-state_label, {"context":"source-navigate"})
+        t(view.empty-state_label, {"context":"source-navigate","count":0})
       </button>
     </div>
   </div>

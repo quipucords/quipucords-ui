@@ -56,8 +56,19 @@ Object {
 }
 `;
 
+exports[`AddSourceWizardContext should handle an onShowAddSourceWizard event: onColumnSort event, dispatch 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "CREATE_SOURCE_SHOW",
+    },
+  ],
+]
+`;
+
 exports[`AddSourceWizardContext should return specific properties: specific properties 1`] = `
 Object {
   "useGetAddSource": [Function],
+  "useOnShowAddSourceWizard": [Function],
 }
 `;

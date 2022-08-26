@@ -1,231 +1,248 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _isEqual from 'lodash/isEqual';
-import _size from 'lodash/size';
-import {
-  Alert,
-  AlertVariant,
-  Button,
-  ButtonVariant,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStatePrimary,
-  EmptyStateVariant,
-  Title,
-  TitleSizes
-} from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
-import { ListView, Spinner } from 'patternfly-react';
+import { Alert, AlertVariant, Button, ButtonVariant, EmptyState, Spinner } from '@patternfly/react-core';
+import { IconSize } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
-import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import helpers from '../../common/helpers';
+import { reduxTypes, storeHooks } from '../../redux';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import SourcesEmptyState from './sourcesEmptyState';
-import SourceListItem from './sourceListItem';
 import { SourceFilterFields, SourceSortFields } from './sourceConstants';
-import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
+import { Table } from '../table/table';
+import { sourcesTableCells } from './sourcesTableCells';
+import {
+  useGetSources,
+  useOnDelete,
+  useOnEdit,
+  useOnExpand,
+  useOnRefresh,
+  useOnScan,
+  useOnSelect
+} from './sourcesContext';
+import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
+
+const VIEW_ID = 'sources';
 
 /**
  * A sources view.
+ *
+ * @param {object} props
+ * @param {Function} props.t
+ * @param {Function} props.useGetSources
+ * @param {Function} props.useOnDelete
+ * @param {Function} props.useOnEdit
+ * @param {Function} props.useOnExpand
+ * @param {Function} props.useOnRefresh
+ * @param {Function} props.useOnScan
+ * @param {Function} props.useOnSelect
+ * @param {Function} props.useOnShowAddSourceWizard
+ * @param {Function} props.useDispatch
+ * @param {Function} props.useSelectors
+ * @param {string} props.viewId
+ * @returns {React.ReactNode}
  */
-class Sources extends React.Component {
-  componentDidMount() {
-    const { getSources, viewOptions } = this.props;
+const Sources = ({
+  t,
+  useGetSources: useAliasGetSources,
+  useOnDelete: useAliasOnDelete,
+  useOnEdit: useAliasOnEdit,
+  useOnExpand: useAliasOnExpand,
+  useOnRefresh: useAliasOnRefresh,
+  useOnScan: useAliasOnScan,
+  useOnSelect: useAliasOnSelect,
+  useOnShowAddSourceWizard: useAliasOnShowAddSourceWizard,
+  useDispatch: useAliasDispatch,
+  useSelectors: useAliasSelectors,
+  viewId
+}) => {
+  const dispatch = useAliasDispatch();
+  const onDelete = useAliasOnDelete();
+  const onEdit = useAliasOnEdit();
+  const onExpand = useAliasOnExpand();
+  const onRefresh = useAliasOnRefresh();
+  const onScan = useAliasOnScan();
+  const onSelect = useAliasOnSelect();
+  const onShowAddSourceWizard = useAliasOnShowAddSourceWizard();
+  const { pending, error, errorMessage, date, data, selectedRows = {}, expandedRows = {} } = useAliasGetSources();
+  const [viewOptions = {}] = useAliasSelectors([
+    ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SOURCES_VIEW]
+  ]);
+  const filtersOrSourcesActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
 
-    getSources(helpers.createViewQueryObject(viewOptions));
-  }
-
-  componentDidUpdate(prevProps) {
-    const { getSources, updateSources, viewOptions } = this.props;
-
-    const prevQuery = helpers.createViewQueryObject(prevProps.viewOptions);
-    const nextQuery = helpers.createViewQueryObject(viewOptions);
-
-    if (updateSources || !_isEqual(prevQuery, nextQuery)) {
-      getSources(nextQuery);
-    }
-  }
-
-  onShowAddSourceWizard = () => {
-    store.dispatch({
-      type: reduxTypes.sources.CREATE_SOURCE_SHOW
-    });
-  };
-
-  onScanSources = () => {
-    const { viewOptions } = this.props;
-
-    store.dispatch({
+  // ToDo: review onScanSources, renderToolbarActions being standalone with upcoming toolbar updates
+  /**
+   * Toolbar actions onScanSources
+   *
+   * @event onScanSources
+   */
+  const onScanSources = () => {
+    dispatch({
       type: reduxTypes.scans.EDIT_SCAN_SHOW,
-      sources: viewOptions.selectedItems
+      sources: Object.values(selectedRows).filter(val => val !== null)
     });
   };
 
-  onRefresh = () => {
-    store.dispatch({
-      type: reduxTypes.sources.UPDATE_SOURCES
-    });
-  };
+  /**
+   * Return toolbar actions.
+   *
+   * @returns {React.ReactNode}
+   */
+  const renderToolbarActions = () => (
+    <React.Fragment>
+      <Button onClick={onShowAddSourceWizard}>{t('table.label', { context: 'add' })}</Button>{' '}
+      <Button
+        variant={ButtonVariant.secondary}
+        isDisabled={Object.values(selectedRows).filter(val => val !== null).length === 0}
+        onClick={onScanSources}
+      >
+        {t('table.label', { context: 'scan' })}
+      </Button>
+    </React.Fragment>
+  );
 
-  onClearFilters = () => {
-    store.dispatch({
-      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
-      viewType: reduxTypes.view.SOURCES_VIEW
-    });
-  };
-
-  renderSourceActions() {
-    const { viewOptions } = this.props;
-
+  if (pending) {
     return (
-      <React.Fragment>
-        <Button onClick={this.onShowAddSourceWizard}>Add</Button>{' '}
-        <Button
-          variant={ButtonVariant.secondary}
-          isDisabled={!viewOptions.selectedItems || viewOptions.selectedItems.length === 0}
-          onClick={this.onScanSources}
-        >
-          Scan
-        </Button>
-      </React.Fragment>
+      <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
+        <Spinner isSVG size={IconSize.lg} />
+        <div className="text-center">{t('view.loading', { context: viewId })}</div>
+      </Modal>
     );
   }
 
-  renderPendingMessage() {
-    const { pending, t } = this.props;
-
-    if (pending) {
-      return (
-        <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
-          <Spinner loading size="lg" className="blank-slate-pf-icon" />
-          <div className="text-center">{t('view.loading', { context: 'sources' })}</div>
-        </Modal>
-      );
-    }
-
-    return null;
-  }
-
-  renderSourcesList(sources) {
-    const { lastRefresh, t } = this.props;
-
-    if (sources.length) {
-      return (
-        <ListView className="quipicords-list-view">
-          {sources.map(source => (
-            <SourceListItem item={source} key={source[apiTypes.API_RESPONSE_SOURCE_ID]} lastRefresh={lastRefresh} />
-          ))}
-        </ListView>
-      );
-    }
-
+  if (error) {
     return (
-      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-        <EmptyStateIcon icon={SearchIcon} />
-        <Title size={TitleSizes.lg} headingLevel="h1">
-          {t('view.empty-state', { context: ['filter', 'title'] })}
-        </Title>
-        <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
-        <EmptyStatePrimary>
-          <Button variant={ButtonVariant.link} onClick={this.onClearFilters}>
-            {t('view.empty-state', { context: ['label', 'clear'] })}
-          </Button>
-        </EmptyStatePrimary>
+      <EmptyState className="quipucords-empty-state__alert">
+        <Alert variant={AlertVariant.danger} title={t('view.error', { context: viewId })}>
+          {t('view.error-message', { context: [viewId], message: errorMessage })}
+        </Alert>
       </EmptyState>
     );
   }
 
-  render() {
-    const { error, errorMessage, lastRefresh, pending, sources, t, viewOptions } = this.props;
-
-    if (pending && !sources.length) {
-      return this.renderPendingMessage();
-    }
-
-    if (error) {
-      return (
-        <EmptyState className="quipucords-empty-state__alert">
-          <Alert variant={AlertVariant.danger} title={t('view.error', { context: 'sources' })}>
-            {t('view.error-message', { context: ['sources'], message: errorMessage })}
-          </Alert>
-        </EmptyState>
-      );
-    }
-
-    if (sources.length || _size(viewOptions.activeFilters)) {
-      return (
-        <div className="quipucords-view-container">
+  return (
+    <div className="quipucords-view-container">
+      {filtersOrSourcesActive && (
+        <React.Fragment>
           <ViewToolbar
             viewType={reduxTypes.view.SOURCES_VIEW}
             filterFields={SourceFilterFields}
             sortFields={SourceSortFields}
-            onRefresh={this.onRefresh}
-            lastRefresh={lastRefresh}
-            actions={this.renderSourceActions()}
+            onRefresh={() => onRefresh()}
+            lastRefresh={new Date(date).getTime()}
+            actions={renderToolbarActions()}
             itemsType="Source"
             itemsTypePlural="Sources"
-            selectedCount={viewOptions.selectedItems.length}
+            selectedCount={viewOptions.selectedItems?.length}
             {...viewOptions}
           />
           <ViewPaginationRow viewType={reduxTypes.view.SOURCES_VIEW} {...viewOptions} />
-          <div className="quipucords-list-container">{this.renderSourcesList(sources)}</div>
-          {this.renderPendingMessage()}
-        </div>
-      );
-    }
-
-    return <SourcesEmptyState onAddSource={this.onShowAddSourceWizard} />;
-  }
-}
+        </React.Fragment>
+      )}
+      <div className="quipucords-list-container">
+        <Table
+          onExpand={onExpand}
+          onSelect={onSelect}
+          rows={data?.map((item, index) => ({
+            isSelected: (selectedRows?.[item.id] && true) || false,
+            source: item,
+            cells: [
+              {
+                content: sourcesTableCells.description(item),
+                dataLabel: t('table.header', { context: ['description'] })
+              },
+              {
+                content: sourcesTableCells.scanStatus(item),
+                width: 20,
+                dataLabel: t('table.header', { context: ['scan'] })
+              },
+              {
+                ...sourcesTableCells.credentialsCellContent(item),
+                isExpanded: expandedRows?.[item.id] === 2,
+                width: 8,
+                dataLabel: t('table.header', { context: ['credentials'] })
+              },
+              {
+                ...sourcesTableCells.okHostsCellContent(item),
+                isExpanded: expandedRows?.[item.id] === 3,
+                width: 8,
+                dataLabel: t('table.header', { context: ['hosts', 'ok'] })
+              },
+              {
+                ...sourcesTableCells.failedHostsCellContent(item),
+                isExpanded: expandedRows?.[item.id] === 4,
+                width: 8,
+                dataLabel: t('table.header', { context: ['hosts', 'failed'] })
+              },
+              {
+                ...sourcesTableCells.unreachableHostsCellContent(item),
+                isExpanded: expandedRows?.[item.id] === 5,
+                width: 8,
+                dataLabel: t('table.header', { context: ['hosts', 'unreachable'] })
+              },
+              {
+                content: sourcesTableCells.actionsCell({
+                  isFirst: index === 0,
+                  isLast: index === data.length - 1,
+                  item,
+                  onDelete: () => onDelete(item),
+                  onEdit: () => onEdit(item),
+                  onScan: () => onScan(item)
+                }),
+                isActionCell: true
+              }
+            ]
+          }))}
+        >
+          <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />
+        </Table>
+      </div>
+    </div>
+  );
+};
 
 /**
  * Prop types
  *
- * @type {{sources: Array, t: Function, lastRefresh: number, pending: boolean, errorMessage: string,
- *     getSources: Function, error: boolean, updateSources: boolean, viewOptions: object}}
+ * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function, useOnScan: Function,
+ *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
+ *     useOnShowAddSourceWizard: Function}}
  */
 Sources.propTypes = {
-  error: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  getSources: PropTypes.func,
-  lastRefresh: PropTypes.number,
-  pending: PropTypes.bool,
-  sources: PropTypes.array,
   t: PropTypes.func,
-  updateSources: PropTypes.bool,
-  viewOptions: PropTypes.object
+  useDispatch: PropTypes.func,
+  useGetSources: PropTypes.func,
+  useOnDelete: PropTypes.func,
+  useOnEdit: PropTypes.func,
+  useOnExpand: PropTypes.func,
+  useOnRefresh: PropTypes.func,
+  useOnScan: PropTypes.func,
+  useOnSelect: PropTypes.func,
+  useOnShowAddSourceWizard: PropTypes.func,
+  useSelectors: PropTypes.func,
+  viewId: PropTypes.string
 };
 
 /**
  * Default props
  *
- * @type {{sources: *[], t: Function, lastRefresh: number, pending: boolean, errorMessage: null,
- *     getSources: Function, error: boolean, updateSources: boolean, viewOptions: {}}}
+ * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function, useOnScan: Function,
+ *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
+ *     useOnShowAddSourceWizard: Function}}
  */
 Sources.defaultProps = {
-  error: false,
-  errorMessage: null,
-  getSources: helpers.noop,
-  lastRefresh: 0,
-  pending: false,
-  sources: [],
   t: translate,
-  updateSources: false,
-  viewOptions: {}
+  useDispatch: storeHooks.reactRedux.useDispatch,
+  useGetSources,
+  useOnDelete,
+  useOnEdit,
+  useOnExpand,
+  useOnRefresh,
+  useOnScan,
+  useOnSelect,
+  useOnShowAddSourceWizard,
+  useSelectors: storeHooks.reactRedux.useSelectors,
+  viewId: VIEW_ID
 };
 
-const mapDispatchToProps = dispatch => ({
-  getSources: queryObj => dispatch(reduxActions.sources.getSources(queryObj))
-});
-
-const mapStateToProps = state => ({
-  ...state.sources.view,
-  viewOptions: state.viewOptions[reduxTypes.view.SOURCES_VIEW]
-});
-
-const ConnectedSources = connect(mapStateToProps, mapDispatchToProps)(Sources);
-
-export { ConnectedSources as default, ConnectedSources, Sources };
+export { Sources as default, Sources, VIEW_ID };
