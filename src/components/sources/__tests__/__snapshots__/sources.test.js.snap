@@ -356,7 +356,7 @@ exports[`Sources Component should handle multiple display states, pending, error
                           size="sm"
                         />
                       }
-                      position="left"
+                      position="right"
                       selectedOptions={null}
                       splitButtonVariant={null}
                       toggleIcon={null}

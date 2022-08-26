@@ -143,7 +143,7 @@ const Sources = ({
         <Table
           onExpand={onExpand}
           onSelect={onSelect}
-          rows={data?.map(item => ({
+          rows={data?.map((item, index) => ({
             isSelected: (selectedRows?.[item.id] && true) || false,
             source: item,
             cells: [
@@ -182,6 +182,8 @@ const Sources = ({
               },
               {
                 content: sourcesTableCells.actionsCell({
+                  isFirst: index === 0,
+                  isLast: index === data.length - 1,
                   item,
                   onDelete: () => onDelete(item),
                   onEdit: () => onEdit(item),

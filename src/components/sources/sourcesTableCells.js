@@ -20,7 +20,7 @@ import { ConnectedScanHostList as ScanHostList } from '../scanHostList/scanHostL
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 import { helpers } from '../../common';
-import { DropdownSelect, SelectButtonVariant } from '../dropdownSelect/dropdownSelect';
+import { DropdownSelect, SelectButtonVariant, SelectDirection, SelectPosition } from '../dropdownSelect/dropdownSelect';
 
 /**
  * Source description and type icon
@@ -266,6 +266,8 @@ const unreachableHostsCellContent = ({ connection, id } = {}) => {
  * Action cell content
  *
  * @param {object} params
+ * @param {boolean} params.isFirst
+ * @param {boolean} params.isLast
  * @param {object} params.item
  * @param {Function} params.onScan
  * @param {Function} params.onDelete
@@ -274,6 +276,8 @@ const unreachableHostsCellContent = ({ connection, id } = {}) => {
  * @returns {React.ReactNode}
  */
 const actionsCell = ({
+  isFirst = false,
+  isLast = false,
   item = {},
   onScan = helpers.noop,
   onDelete = helpers.noop,
@@ -332,6 +336,8 @@ const actionsCell = ({
           onSelect={onSelect}
           isDropdownButton
           buttonVariant={SelectButtonVariant.plain}
+          direction={(isLast && !isFirst && SelectDirection.up) || undefined}
+          position={SelectPosition.right}
           placeholder={<EllipsisVIcon />}
           options={[
             { title: t('table.label', { context: 'edit' }), value: 'edit' },

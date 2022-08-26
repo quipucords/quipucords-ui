@@ -113,7 +113,7 @@ exports[`SourcesTableCells should return consistent cell results: basic actionsC
           size="sm"
         />
       }
-      position="left"
+      position="right"
       selectedOptions={null}
       splitButtonVariant={null}
       toggleIcon={null}
