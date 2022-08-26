@@ -1,5 +1,5 @@
 import Scans from '../scans/scans';
-import Sources from '../sources/sources';
+import { Sources } from '../sources/sources';
 import Credentials from '../credentials/credentials';
 
 /**

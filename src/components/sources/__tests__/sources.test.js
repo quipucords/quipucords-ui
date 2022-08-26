@@ -1,70 +1,64 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedSources, Sources } from '../sources';
+import { Sources } from '../sources';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('Sources Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component with default props', () => {
-    const store = generateEmptyStore({ sources: { view: {} }, viewOptions: {} });
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedSources />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedSources)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', async () => {
     const props = {
-      fulfilled: true,
-      sources: [
-        {
-          [apiTypes.API_RESPONSE_SOURCE_ID]: '1',
-          [apiTypes.API_RESPONSE_SOURCE_NAME]: 'lorem'
-        }
-      ],
-      viewOptions: {
-        selectedItems: []
-      }
+      useGetSources: () => ({
+        fulfilled: true
+      })
     };
 
-    const component = shallow(<Sources {...props} />);
-
-    expect(component).toMatchSnapshot('non-connected');
+    const component = await shallowHookComponent(<Sources {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component error', () => {
+  it('should handle multiple display states, pending, error, fulfilled', async () => {
     const props = {
-      error: true
+      useGetSources: () => ({
+        pending: true
+      })
     };
 
-    const component = shallow(<Sources {...props} />);
+    const component = await shallowHookComponent(<Sources {...props} />);
+    expect(component).toMatchSnapshot('pending');
 
-    expect(component.render()).toMatchSnapshot('error');
+    component.setProps({
+      useGetSources: () => ({
+        pending: false,
+        error: true
+      })
+    });
+
+    expect(component).toMatchSnapshot('error');
+
+    component.setProps({
+      useGetSources: () => ({
+        pending: false,
+        error: false,
+        fulfilled: true,
+        data: [
+          {
+            [apiTypes.API_RESPONSE_SOURCE_ID]: '1',
+            [apiTypes.API_RESPONSE_SOURCE_NAME]: 'lorem'
+          }
+        ]
+      })
+    });
+
+    expect(component).toMatchSnapshot('fulfilled');
   });
 
-  it('should render a non-connected component pending', () => {
+  it('should return an empty state when there are no sources', async () => {
     const props = {
-      pending: true,
-      sources: []
+      useGetSources: () => ({
+        fulfilled: true,
+        data: []
+      })
     };
 
-    const component = mount(<Sources {...props} />);
-
-    expect(component.render()).toMatchSnapshot('pending');
-  });
-
-  it('should render a non-connected component with empty state', () => {
-    const props = {};
-
-    const component = mount(<Sources {...props} />);
-
-    expect(component.find('button').length).toEqual(1);
+    const component = await shallowHookComponent(<Sources {...props} />);
     expect(component.render()).toMatchSnapshot('empty state');
   });
 });

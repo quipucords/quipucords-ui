@@ -1,23 +1,15 @@
-import { context, useGetAddSource } from '../addSourceWizardContext';
+import { context, useGetAddSource, useOnShowAddSourceWizard } from '../addSourceWizardContext';
 import apiTypes from '../../../constants/apiConstants';
 import { store } from '../../../redux';
 
 describe('AddSourceWizardContext', () => {
-  let mockDispatch;
-
-  beforeEach(() => {
-    mockDispatch = jest.spyOn(store, 'dispatch').mockImplementation((type, data) => ({ type, data }));
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should return specific properties', () => {
     expect(context).toMatchSnapshot('specific properties');
   });
 
   it('should apply a hook for retrieving data from a selector', async () => {
+    const mockDispatch = jest.spyOn(store, 'dispatch').mockImplementation((type, data) => ({ type, data }));
+
     const { result: errorResponse } = await mountHook(() =>
       useGetAddSource({
         useSelector: () => ({
@@ -69,5 +61,18 @@ describe('AddSourceWizardContext', () => {
 
     expect(successShowResponse).toMatchSnapshot('success show response');
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch confirmations on hide wizard');
+    mockDispatch.mockClear();
+  });
+
+  it('should handle an onShowAddSourceWizard event', () => {
+    const mockDispatch = jest.fn();
+    const onShowAddSourceWizard = useOnShowAddSourceWizard({
+      useDispatch: () => mockDispatch
+    });
+
+    onShowAddSourceWizard();
+
+    expect(mockDispatch.mock.calls).toMatchSnapshot('onColumnSort event, dispatch');
+    mockDispatch.mockClear();
   });
 });

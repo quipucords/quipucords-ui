@@ -73,13 +73,19 @@ Object {
     },
     "sources": Object {
       "ADD_SOURCE": "ADD_SOURCE",
+      "CONFIRM_DELETE_SOURCE": "CONFIRM_DELETE_SOURCE",
       "CREATE_SOURCE_SHOW": "CREATE_SOURCE_SHOW",
       "DELETE_SOURCE": "DELETE_SOURCE",
       "DELETE_SOURCES": "DELETE_SOURCES",
+      "DESELECT_SOURCE": "DESELECT_SOURCE",
       "EDIT_SOURCE_SHOW": "EDIT_SOURCE_SHOW",
+      "EXPANDED_SOURCE": "EXPANDED_SOURCE",
       "GET_SCANS_SOURCES": "GET_SCANS_SOURCES",
       "GET_SOURCE": "GET_SOURCE",
       "GET_SOURCES": "GET_SOURCES",
+      "NOT_EXPANDED_SOURCE": "NOT_EXPANDED_SOURCE",
+      "RESET_DELETE_SOURCE": "RESET_DELETE_SOURCE",
+      "SELECT_SOURCE": "SELECT_SOURCE",
       "UPDATE_SOURCE": "UPDATE_SOURCE",
       "UPDATE_SOURCES": "UPDATE_SOURCES",
       "UPDATE_SOURCE_HIDE": "UPDATE_SOURCE_HIDE",
@@ -114,14 +120,6 @@ Object {
     "viewPagination": Object {
       "SET_PER_PAGE": "SET_PER_PAGE",
       "VIEW_PAGE": "VIEW_PAGE",
-      "default": Object {
-        "SET_PER_PAGE": "SET_PER_PAGE",
-        "VIEW_PAGE": "VIEW_PAGE",
-      },
-      "viewPaginationTypes": Object {
-        "SET_PER_PAGE": "SET_PER_PAGE",
-        "VIEW_PAGE": "VIEW_PAGE",
-      },
     },
     "viewToolbar": Object {
       "ADD_FILTER": "ADD_FILTER",
@@ -187,13 +185,19 @@ Object {
     },
     "sources": Object {
       "ADD_SOURCE": "ADD_SOURCE",
+      "CONFIRM_DELETE_SOURCE": "CONFIRM_DELETE_SOURCE",
       "CREATE_SOURCE_SHOW": "CREATE_SOURCE_SHOW",
       "DELETE_SOURCE": "DELETE_SOURCE",
       "DELETE_SOURCES": "DELETE_SOURCES",
+      "DESELECT_SOURCE": "DESELECT_SOURCE",
       "EDIT_SOURCE_SHOW": "EDIT_SOURCE_SHOW",
+      "EXPANDED_SOURCE": "EXPANDED_SOURCE",
       "GET_SCANS_SOURCES": "GET_SCANS_SOURCES",
       "GET_SOURCE": "GET_SOURCE",
       "GET_SOURCES": "GET_SOURCES",
+      "NOT_EXPANDED_SOURCE": "NOT_EXPANDED_SOURCE",
+      "RESET_DELETE_SOURCE": "RESET_DELETE_SOURCE",
+      "SELECT_SOURCE": "SELECT_SOURCE",
       "UPDATE_SOURCE": "UPDATE_SOURCE",
       "UPDATE_SOURCES": "UPDATE_SOURCES",
       "UPDATE_SOURCE_HIDE": "UPDATE_SOURCE_HIDE",
@@ -228,14 +232,6 @@ Object {
     "viewPagination": Object {
       "SET_PER_PAGE": "SET_PER_PAGE",
       "VIEW_PAGE": "VIEW_PAGE",
-      "default": Object {
-        "SET_PER_PAGE": "SET_PER_PAGE",
-        "VIEW_PAGE": "VIEW_PAGE",
-      },
-      "viewPaginationTypes": Object {
-        "SET_PER_PAGE": "SET_PER_PAGE",
-        "VIEW_PAGE": "VIEW_PAGE",
-      },
     },
     "viewToolbar": Object {
       "ADD_FILTER": "ADD_FILTER",
@@ -271,13 +267,19 @@ Object {
   },
   "sourcesTypes": Object {
     "ADD_SOURCE": "ADD_SOURCE",
+    "CONFIRM_DELETE_SOURCE": "CONFIRM_DELETE_SOURCE",
     "CREATE_SOURCE_SHOW": "CREATE_SOURCE_SHOW",
     "DELETE_SOURCE": "DELETE_SOURCE",
     "DELETE_SOURCES": "DELETE_SOURCES",
+    "DESELECT_SOURCE": "DESELECT_SOURCE",
     "EDIT_SOURCE_SHOW": "EDIT_SOURCE_SHOW",
+    "EXPANDED_SOURCE": "EXPANDED_SOURCE",
     "GET_SCANS_SOURCES": "GET_SCANS_SOURCES",
     "GET_SOURCE": "GET_SOURCE",
     "GET_SOURCES": "GET_SOURCES",
+    "NOT_EXPANDED_SOURCE": "NOT_EXPANDED_SOURCE",
+    "RESET_DELETE_SOURCE": "RESET_DELETE_SOURCE",
+    "SELECT_SOURCE": "SELECT_SOURCE",
     "UPDATE_SOURCE": "UPDATE_SOURCE",
     "UPDATE_SOURCES": "UPDATE_SOURCES",
     "UPDATE_SOURCE_HIDE": "UPDATE_SOURCE_HIDE",
@@ -304,14 +306,6 @@ Object {
   "viewPaginationTypes": Object {
     "SET_PER_PAGE": "SET_PER_PAGE",
     "VIEW_PAGE": "VIEW_PAGE",
-    "default": Object {
-      "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_PAGE": "VIEW_PAGE",
-    },
-    "viewPaginationTypes": Object {
-      "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_PAGE": "VIEW_PAGE",
-    },
   },
   "viewToolbarTypes": Object {
     "ADD_FILTER": "ADD_FILTER",
@@ -384,13 +378,19 @@ Object {
   },
   "sources": Object {
     "ADD_SOURCE": "ADD_SOURCE",
+    "CONFIRM_DELETE_SOURCE": "CONFIRM_DELETE_SOURCE",
     "CREATE_SOURCE_SHOW": "CREATE_SOURCE_SHOW",
     "DELETE_SOURCE": "DELETE_SOURCE",
     "DELETE_SOURCES": "DELETE_SOURCES",
+    "DESELECT_SOURCE": "DESELECT_SOURCE",
     "EDIT_SOURCE_SHOW": "EDIT_SOURCE_SHOW",
+    "EXPANDED_SOURCE": "EXPANDED_SOURCE",
     "GET_SCANS_SOURCES": "GET_SCANS_SOURCES",
     "GET_SOURCE": "GET_SOURCE",
     "GET_SOURCES": "GET_SOURCES",
+    "NOT_EXPANDED_SOURCE": "NOT_EXPANDED_SOURCE",
+    "RESET_DELETE_SOURCE": "RESET_DELETE_SOURCE",
+    "SELECT_SOURCE": "SELECT_SOURCE",
     "UPDATE_SOURCE": "UPDATE_SOURCE",
     "UPDATE_SOURCES": "UPDATE_SOURCES",
     "UPDATE_SOURCE_HIDE": "UPDATE_SOURCE_HIDE",
@@ -425,14 +425,6 @@ Object {
   "viewPagination": Object {
     "SET_PER_PAGE": "SET_PER_PAGE",
     "VIEW_PAGE": "VIEW_PAGE",
-    "default": Object {
-      "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_PAGE": "VIEW_PAGE",
-    },
-    "viewPaginationTypes": Object {
-      "SET_PER_PAGE": "SET_PER_PAGE",
-      "VIEW_PAGE": "VIEW_PAGE",
-    },
   },
   "viewToolbar": Object {
     "ADD_FILTER": "ADD_FILTER",

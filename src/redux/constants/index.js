@@ -4,12 +4,12 @@ import * as credentialsTypes from './credentialsConstants';
 import * as factsTypes from './factsConstants';
 import * as reportsTypes from './reportsConstants';
 import * as scansTypes from './scansConstants';
-import * as sourcesTypes from './sourcesConstants';
+import { sourcesTypes } from './sourcesConstants';
 import * as statusTypes from './statusConstants';
 import * as toastNotificationTypes from './toasNotificationConstants';
 import * as userTypes from './userConstants';
 import * as viewTypes from './viewConstants';
-import * as viewPaginationTypes from './viewPaginationConstants';
+import { viewPaginationTypes } from './viewPaginationConstants';
 import * as viewToolbarTypes from './viewToolbarConstants';
 
 const reduxTypes = {
@@ -29,6 +29,7 @@ const reduxTypes = {
 };
 
 export {
+  reduxTypes as default,
   reduxTypes,
   aboutModalTypes,
   confirmationModalTypes,
@@ -44,5 +45,3 @@ export {
   viewPaginationTypes,
   viewToolbarTypes
 };
-
-export default reduxTypes;

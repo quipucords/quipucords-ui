@@ -1,68 +1,330 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SourcesReducer should handle all defined error types: rejected types DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCE_REJECTED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined error types: rejected types DELETE_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCES_REJECTED",
+}
+`;
+
 exports[`SourcesReducer should handle all defined error types: rejected types GET_SOURCES 1`] = `
 Object {
   "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
     "view": Object {
       "error": true,
       "errorMessage": "ERROR",
+      "errorStatus": 0,
       "fulfilled": false,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": false,
-      "sources": Array [],
-      "updateSources": false,
+      "update": false,
     },
   },
   "type": "GET_SOURCES_REJECTED",
 }
 `;
 
-exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types GET_SOURCES 1`] = `
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types DELETE_SOURCE 1`] = `
 Object {
   "result": Object {
-    "view": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
       "error": false,
       "errorMessage": "",
       "fulfilled": true,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": false,
-      "sources": Array [],
-      "updateSources": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCE_FULFILLED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types DELETE_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCES_FULFILLED",
+}
+`;
+
+exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types GET_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
     },
   },
   "type": "GET_SOURCES_FULFILLED",
 }
 `;
 
+exports[`SourcesReducer should handle all defined pending types: pending types DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCE_PENDING",
+}
+`;
+
+exports[`SourcesReducer should handle all defined pending types: pending types DELETE_SOURCES 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {
+      "error": false,
+      "errorMessage": "",
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SOURCES_PENDING",
+}
+`;
+
 exports[`SourcesReducer should handle all defined pending types: pending types GET_SOURCES 1`] = `
 Object {
   "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
     "view": Object {
       "error": false,
       "errorMessage": "",
       "fulfilled": false,
-      "lastRefresh": 0,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
       "pending": true,
-      "sources": Array [],
-      "updateSources": false,
+      "update": false,
     },
   },
   "type": "GET_SOURCES_PENDING",
 }
 `;
 
+exports[`SourcesReducer should handle specific defined types: defined type CONFIRM_DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {
+      "source": undefined,
+    },
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "CONFIRM_DELETE_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type DESELECT_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {
+      "undefined": null,
+    },
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DESELECT_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type EXPANDED_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {
+      "undefined": undefined,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "EXPANDED_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type NOT_EXPANDED_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {
+      "undefined": null,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "NOT_EXPANDED_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type RESET_DELETE_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "RESET_DELETE_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type SELECT_SOURCE 1`] = `
+Object {
+  "result": Object {
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {
+      "undefined": undefined,
+    },
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "SELECT_SOURCE",
+}
+`;
+
 exports[`SourcesReducer should handle specific defined types: defined type UPDATE_SOURCES 1`] = `
 Object {
   "result": Object {
-    "view": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "lastRefresh": 0,
-      "pending": false,
-      "sources": Array [],
-      "updateSources": true,
-    },
+    "confirmDelete": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 1654041600000,
+    "view": Object {},
   },
   "type": "UPDATE_SOURCES",
 }

@@ -46,7 +46,11 @@ exports[`Scans Component should render a non-connected component pending: pendin
 </Modal>
 `;
 
-exports[`Scans Component should render a non-connected component with empty state: empty state 1`] = `<withRouter(Connect(ScansEmptyState)) />`;
+exports[`Scans Component should render a non-connected component with empty state: empty state 1`] = `
+<withRouter(Connect(ScansEmptyState))
+  viewId="scans"
+/>
+`;
 
 exports[`Scans Component should render a non-connected component: non-connected 1`] = `
 <div
