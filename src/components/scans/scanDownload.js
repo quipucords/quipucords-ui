@@ -57,7 +57,7 @@ class ScanDownload extends React.Component {
 }
 
 ScanDownload.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  children: PropTypes.node,
   tooltip: PropTypes.string,
   downloadId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   downloadName: PropTypes.string,
