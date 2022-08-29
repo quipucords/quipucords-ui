@@ -92,7 +92,7 @@ class TouchSpin extends React.Component {
     const { name, onChange } = this.props;
     const { maxValue, minValue } = this.state;
 
-    let parsedValue = Number(event.target.value);
+    let parsedValue = Number.parseInt(event.target.value, 10);
     if (parsedValue > maxValue) {
       parsedValue = maxValue;
     }
