@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, canceled 1`] = `
+<RedoIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, cancelled 1`] = `
+<RedoIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, completed 1`] = `
+<RedoIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, created 1`] = `
+<PauseIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, failed 1`] = `
+<RedoIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, paused 1`] = `
+<PlayIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, pending 1`] = `
+<StopIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, play 1`] = `
+<PlayIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: icon variant, running 1`] = `
+<PauseIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIconAction Component should export, and handle icon variants: variants 1`] = `
+Object {
+  "canceled": "failed",
+  "cancelled": "failed",
+  "completed": "completed",
+  "created": "running",
+  "failed": "failed",
+  "paused": "paused",
+  "pending": "pending",
+  "play": "play",
+  "running": "running",
+}
+`;
+
+exports[`ContextIconAction Component should render a basic component with default props: basic 1`] = `
+<PlayIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
