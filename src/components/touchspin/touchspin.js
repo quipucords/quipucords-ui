@@ -88,11 +88,13 @@ class TouchSpin extends React.Component {
     });
   };
 
-  onUpdateValue = (_updatedValue, event) => {
-    const { name, onChange } = this.props;
+  onUpdateValue = event => {
     const { maxValue, minValue } = this.state;
+    const { name, onChange } = this.props;
 
     let parsedValue = Number.parseInt(event.target.value, 10);
+    parsedValue = Number.isNaN(parsedValue) ? minValue : parsedValue;
+
     if (parsedValue > maxValue) {
       parsedValue = maxValue;
     }
@@ -145,7 +147,7 @@ class TouchSpin extends React.Component {
             type="number"
             name={name}
             value={displayValue}
-            onChange={(value, event) => this.onUpdateValue(value, event)}
+            onChange={(_, event) => this.onUpdateValue(event)}
             aria-label="Number Input"
           />
           <Button
