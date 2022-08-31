@@ -197,7 +197,6 @@ class CreateScanDialog extends React.Component {
       >
         <TouchSpin
           name="scanConcurrency"
-          className="cloudmeter-scan-dialog-touchspin"
           minValue={1}
           maxValue={200}
           value={values.scanConcurrency}
