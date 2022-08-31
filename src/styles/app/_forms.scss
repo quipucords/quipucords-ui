@@ -9,22 +9,6 @@ textarea.vertical-scroll {
   resize: vertical;
 }
 
-.cloudmeter-touchspin {
-  &.cloudmeter-scan-dialog-touchspin {
-    width: 30%;
-  }
-
-  &.form-group {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .cloudmeter-touchspin-input,
-  .cloudmeter-touchspin-max-button {
-    left: -1px;
-  }
-}
-
 .quipucords-form-control.form-control[readonly] {
   background-color: var(--pf-global--palette--white);
   border: 0;
