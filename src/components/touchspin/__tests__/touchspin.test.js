@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { TextInput } from '@patternfly/react-core';
 import { TouchSpin } from '../touchspin';
 
 describe('TouchSpin Component', () => {
@@ -20,15 +21,15 @@ describe('TouchSpin Component', () => {
   it('should handle onchange events', () => {
     const props = {
       name: 'lorem',
-      onChange: jest.fn()
+      value: 1
     };
 
     const component = mount(<TouchSpin {...props} />);
 
-    component.find('button[title="Decrease number input"]').simulate('click');
-    expect(props.onChange).toHaveBeenCalledTimes(1);
+    component.find('button[aria-label="Increase number button"]').simulate('click');
+    expect(component.find(TextInput).props()?.value).toBe(2);
 
-    component.find('button[title="Increase number input"]').simulate('click');
-    expect(props.onChange).toHaveBeenCalledTimes(2);
+    component.find('button[aria-label="Decrease number button"]').simulate('click');
+    expect(component.find(TextInput).props()?.value).toBe(1);
   });
 });
