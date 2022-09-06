@@ -71,7 +71,8 @@ const useOnScanAction = ({
   const [updatedScan, setUpdatedScan] = useState({});
   const { id: scanId, name: scanName, context: scanContext } = updatedScan;
   const dispatch = useAliasDispatch();
-  const { error, fulfilled, message, pending } = useAliasSelectorsResponse(({ scans }) => scans?.action?.[scanId]);
+  const { data, error, fulfilled, pending } = useAliasSelectorsResponse(({ scans }) => scans?.action?.[scanId]);
+  const { errorMessage } = data?.[0] || {};
 
   useEffect(() => {
     if (scanId && !pending) {
@@ -90,11 +91,14 @@ const useOnScanAction = ({
       }
 
       if (error) {
+        const isWarning = /already\sfinished/i.test(errorMessage);
+
         dispatchList.push({
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.danger,
-          header: t('toast-notifcations.title', { context: ['error'] }),
-          message
+          alertType: (isWarning && AlertVariant.warning) || AlertVariant.danger,
+          header: t('toast-notifications.title', { context: [(isWarning && 'warning') || 'error'] }),
+          message:
+            errorMessage || t('toast-notifications.description', { context: [(isWarning && 'warning') || 'error'] })
         });
       }
 
@@ -109,7 +113,7 @@ const useOnScanAction = ({
         setUpdatedScan({});
       }
     }
-  }, [dispatch, error, fulfilled, message, pending, scanContext, scanId, scanName, t]);
+  }, [dispatch, error, errorMessage, fulfilled, pending, scanContext, scanId, scanName, t]);
 
   /**
    * onCancel for scanning
