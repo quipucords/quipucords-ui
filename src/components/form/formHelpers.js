@@ -1,3 +1,4 @@
+import _size from 'lodash/size';
 import { helpers } from '../../common';
 
 /**
@@ -35,9 +36,27 @@ const createMockEvent = (event, persistEvent = false) => {
 const doesNotHaveMinimumCharacters = (value, characters = 1) =>
   (typeof value === 'string' && value.length < characters) || typeof value !== 'string';
 
+/**
+ * Confirm a string is not empty.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+const isEmpty = value => (typeof value !== 'number' && _size(value) < 1) || false;
+
+/**
+ * Confirm the port is valid.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+const isPortValid = value => /^\d{1,5}$/.test(value) && value <= 65535;
+
 const formHelpers = {
   createMockEvent,
-  doesNotHaveMinimumCharacters
+  doesNotHaveMinimumCharacters,
+  isEmpty,
+  isPortValid
 };
 
 export { formHelpers as default, formHelpers, createMockEvent, doesNotHaveMinimumCharacters };
