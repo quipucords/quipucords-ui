@@ -75,17 +75,15 @@ class TouchSpin extends React.Component {
   onMinus = () => {
     const { displayValue, minValue, maxValue } = this.state;
 
-    this.setState({
-      displayValue: this.normalizeBetween(displayValue - 1, minValue, maxValue)
-    });
+    const updatedValue = this.normalizeBetween(displayValue - 1, minValue, maxValue);
+    this.onUpdateValue({ target: { value: updatedValue } });
   };
 
   onPlus = () => {
     const { displayValue, minValue, maxValue } = this.state;
 
-    this.setState({
-      displayValue: this.normalizeBetween(displayValue + 1, minValue, maxValue)
-    });
+    const updatedValue = this.normalizeBetween(displayValue + 1, minValue, maxValue);
+    this.onUpdateValue({ target: { value: updatedValue } });
   };
 
   onUpdateValue = event => {
@@ -169,9 +167,9 @@ class TouchSpin extends React.Component {
 
 TouchSpin.propTypes = {
   className: PropTypes.string,
-  labelMax: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  labelMax: PropTypes.node,
   labelMaxDescription: PropTypes.string,
-  labelMin: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  labelMin: PropTypes.node,
   labelMinDescription: PropTypes.string,
   maxValue: PropTypes.number,
   minValue: PropTypes.number,
