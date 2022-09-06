@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Radio } from 'patternfly-react';
+import { Form as Pf3Form, Radio } from 'patternfly-react';
+import { Form } from '@patternfly/react-core';
 import { connect, store, reduxSelectors, reduxTypes } from '../../redux';
-import { FormField } from '../formField/formField';
+import { FormGroup } from '../form/formGroup';
 import { FormState } from '../formState/formState';
 import apiTypes from '../../constants/apiConstants';
 
@@ -22,9 +23,9 @@ class AddSourceWizardStepOne extends React.Component {
     return (
       <FormState validateOnMount setValues={{ sourceType: type }} validate={this.isStepValid}>
         {({ values, handleOnEvent, handleOnSubmit }) => (
-          <Form horizontal onSubmit={handleOnSubmit}>
-            <FormField label="Select source type">
-              <Form.FormGroup>
+          <Form isHorizontal onSubmit={handleOnSubmit}>
+            <FormGroup label="Select source type">
+              <Pf3Form.FormGroup>
                 <Radio
                   name="sourceType"
                   value="network"
@@ -49,8 +50,8 @@ class AddSourceWizardStepOne extends React.Component {
                 >
                   vCenter Server
                 </Radio>
-              </Form.FormGroup>
-            </FormField>
+              </Pf3Form.FormGroup>
+            </FormGroup>
           </Form>
         )}
       </FormState>
