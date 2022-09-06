@@ -8,6 +8,7 @@ import { helpers } from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
 import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
 import { FormGroup } from '../form/formGroup';
+import { Checkbox } from '../form/checkbox';
 import { formHelpers } from '../form/formHelpers';
 import { FormState } from '../formState/formState';
 import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
@@ -376,14 +377,9 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'network':
         return (
           <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
-            <Pf3Form.Checkbox
-              name="optionParamiko"
-              checked={checked.optionParamiko || false}
-              inline
-              onChange={handleOnEvent}
-            >
+            <Checkbox name="optionParamiko" checked={checked.optionParamiko || false} onChange={handleOnEvent}>
               Connect using Paramiko instead of Open <abbr title="Secure Shell">SSH</abbr>
-            </Pf3Form.Checkbox>
+            </Checkbox>
           </FormGroup>
         );
       case 'vcenter':

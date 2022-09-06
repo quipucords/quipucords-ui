@@ -6,6 +6,7 @@ import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { FormState } from '../formState/formState';
 import { formHelpers } from '../form/formHelpers';
+import { Checkbox } from '../form/checkbox';
 import { FormGroup } from '../form/formGroup';
 import { TextInput } from '../form/textInput';
 import { TouchSpin } from '../touchspin/touchspin';
@@ -271,19 +272,29 @@ class CreateScanDialog extends React.Component {
 
     return (
       <React.Fragment>
-        <FormGroup label={scanProductsLabel}>
-          <Pf3Form.Checkbox name="jbossEap" checked={checked.jbossEap} onChange={onCheck}>
+        <FormGroup label={scanProductsLabel} isStack>
+          <Checkbox
+            ariaLabel="Red Hat JBoss Enterprise Application Platform"
+            name="jbossEap"
+            checked={checked.jbossEap}
+            onChange={onCheck}
+          >
             <abbr title="Red Hat JBoss Enterprise Application Platform">JBoss EAP</abbr>
-          </Pf3Form.Checkbox>
-          <Pf3Form.Checkbox name="jbossFuse" checked={checked.jbossFuse} onChange={onCheck}>
+          </Checkbox>
+          <Checkbox ariaLabel="Red Hat Fuse" name="jbossFuse" checked={checked.jbossFuse} onChange={onCheck}>
             <abbr title="Red Hat Fuse">Fuse</abbr>
-          </Pf3Form.Checkbox>
-          <Pf3Form.Checkbox name="jbossWs" checked={checked.jbossWs} onChange={onCheck}>
+          </Checkbox>
+          <Checkbox ariaLabel="Red Hat JBoss Web Server" name="jbossWs" checked={checked.jbossWs} onChange={onCheck}>
             <abbr title="Red Hat JBoss Web Server">JBoss Web Server</abbr>
-          </Pf3Form.Checkbox>
-          <Pf3Form.Checkbox name="jbossBrms" checked={checked.jbossBrms} onChange={onCheck}>
+          </Checkbox>
+          <Checkbox
+            ariaLabel="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+            name="jbossBrms"
+            checked={checked.jbossBrms}
+            onChange={onCheck}
+          >
             <abbr title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS">Decision Manager</abbr>
-          </Pf3Form.Checkbox>
+          </Checkbox>
         </FormGroup>
         <FormGroup
           label="Scan&nbsp;alternate directories"
