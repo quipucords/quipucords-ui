@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormGroup Component should handle multiple error message types: boolean error message 1`] = `
+<div
+  class="pf-c-form__group"
+  id="test"
+>
+  <div
+    class="pf-c-form__group-control"
+  >
+    <input
+      id="test"
+      readonly=""
+      type="text"
+      value=""
+    />
+    <div
+      aria-live="polite"
+      class="pf-c-form__helper-text pf-m-error"
+      id="undefined-helper"
+    >
+      Error
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FormGroup Component should handle multiple error message types: node error message 1`] = `
+<div
+  class="pf-c-form__group"
+  id="test"
+>
+  <div
+    class="pf-c-form__group-control"
+  >
+    <input
+      id="test"
+      readonly=""
+      type="text"
+      value=""
+    />
+    <span>
+      lorem ipsum
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FormGroup Component should handle multiple error message types: string error message 1`] = `
+<div
+  class="pf-c-form__group"
+  id="test"
+>
+  <div
+    class="pf-c-form__group-control"
+  >
+    <input
+      id="test"
+      readonly=""
+      type="text"
+      value=""
+    />
+    <div
+      aria-live="polite"
+      class="pf-c-form__helper-text pf-m-error"
+      id="undefined-helper"
+    >
+      lorem ipsum
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FormGroup Component should render a basic component: basic formgroup 1`] = `
+<div
+  class="pf-c-form__group"
+  id="test"
+>
+  <div
+    class="pf-c-form__group-label"
+  >
+    <label
+      class="pf-c-form__label"
+    >
+      <span
+        class="pf-c-form__label-text"
+      >
+        test
+      </span>
+    </label>
+     
+  </div>
+  <div
+    class="pf-c-form__group-control"
+  >
+    <input
+      id="test"
+      readonly=""
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`FormGroup Component should render a basic component: basic label 1`] = `
+<label
+  class="pf-c-form__label"
+>
+  <span
+    class="pf-c-form__label-text"
+  >
+    test
+  </span>
+</label>
+`;

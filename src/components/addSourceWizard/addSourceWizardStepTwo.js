@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant } from '@patternfly/react-core';
+import { Button, ButtonVariant, Form } from '@patternfly/react-core';
 import { PlusIcon } from '@patternfly/react-icons';
-import { Form } from 'patternfly-react';
+import { Form as Pf3Form } from 'patternfly-react';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
 import { helpers } from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
 import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
-import { FormField, fieldValidation } from '../formField/formField';
+import { FormGroup } from '../form/formGroup';
+import { formHelpers } from '../form/formHelpers';
 import { FormState } from '../formState/formState';
 import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
 import { translate } from '../i18n/i18n';
@@ -85,16 +86,16 @@ class AddSourceWizardStepTwo extends React.Component {
     const { add, edit, type } = this.props;
     const errors = {};
 
-    errors.credentials = fieldValidation.isEmpty(values.credentials);
-    errors.name = fieldValidation.isEmpty(values.name);
+    errors.credentials = formHelpers.isEmpty(values.credentials);
+    errors.name = formHelpers.isEmpty(values.name);
 
     if (type === 'network') {
-      errors.hosts = fieldValidation.isEmpty(values.hosts) || !AddSourceWizardStepTwo.hostsValid(values.hosts);
+      errors.hosts = formHelpers.isEmpty(values.hosts) || !AddSourceWizardStepTwo.hostsValid(values.hosts);
     } else {
-      errors.hosts = fieldValidation.isEmpty(values.hosts) || !AddSourceWizardStepTwo.hostValid(values.hosts[0]);
+      errors.hosts = formHelpers.isEmpty(values.hosts) || !AddSourceWizardStepTwo.hostValid(values.hosts[0]);
     }
 
-    errors.port = !fieldValidation.isEmpty(values.port) && !fieldValidation.isPortValid(values.port);
+    errors.port = !formHelpers.isEmpty(values.port) && !formHelpers.isPortValid(values.port);
 
     const isNotErrors = !Object.values(errors).filter(val => val === true).length;
 
@@ -156,19 +157,19 @@ class AddSourceWizardStepTwo extends React.Component {
     const { stepTwoErrorMessages, type } = this.props;
 
     return (
-      <FormField
+      <FormGroup
         label="Name"
         error={(touched.name && errors.name) || stepTwoErrorMessages.name}
         errorMessage={stepTwoErrorMessages.name || 'A source name is required'}
       >
-        <Form.FormControl
+        <Pf3Form.FormControl
           type="text"
           name="name"
           value={values.name}
           placeholder={`Enter a name for the ${dictionary[type] || ''} source`}
           onChange={handleOnEvent}
         />
-      </FormField>
+      </FormGroup>
     );
   }
 
@@ -220,12 +221,12 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'network':
         return (
           <React.Fragment>
-            <FormField
+            <FormGroup
               label="Search addresses"
               error={(touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts}
               errorMessage="A valid IP address or hostname is required"
             >
-              <Form.FormControl
+              <Pf3Form.FormControl
                 componentClass="textarea"
                 name="hostsMultiple"
                 value={values.hostsMultiple}
@@ -233,17 +234,17 @@ class AddSourceWizardStepTwo extends React.Component {
                 placeholder="Enter values separated by commas"
                 onChange={onChangeMultipleHost}
               />
-              <Form.HelpBlock>
+              <Pf3Form.HelpBlock>
                 IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for
                 ranges.
-              </Form.HelpBlock>
-            </FormField>
-            <FormField
+              </Pf3Form.HelpBlock>
+            </FormGroup>
+            <FormGroup
               label="Port"
               error={(touched.port && errors.port) || stepTwoErrorMessages.port}
               errorMessage="Port must be valid"
             >
-              <Form.FormControl
+              <Pf3Form.FormControl
                 name="port"
                 type="text"
                 value={values.port}
@@ -251,7 +252,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 placeholder="Default port is 22"
                 onChange={handleOnEvent}
               />
-            </FormField>
+            </FormGroup>
           </React.Fragment>
         );
 
@@ -266,7 +267,7 @@ class AddSourceWizardStepTwo extends React.Component {
 
         return (
           <React.Fragment>
-            <FormField
+            <FormGroup
               label="IP address or hostname"
               error={
                 (touched.hostsSingle && errors.hosts) ||
@@ -280,14 +281,14 @@ class AddSourceWizardStepTwo extends React.Component {
                 hostPortError
               }
             >
-              <Form.FormControl
+              <Pf3Form.FormControl
                 name="hostsSingle"
                 type="text"
                 value={values.hostsSingle}
                 placeholder="Enter an IP address or hostname (default port is 443)"
                 onChange={onChangeSingleHost}
               />
-            </FormField>
+            </FormGroup>
           </React.Fragment>
         );
 
@@ -310,12 +311,12 @@ class AddSourceWizardStepTwo extends React.Component {
     };
 
     return (
-      <FormField
+      <FormGroup
         label="Credentials"
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
         errorMessage={stepTwoErrorMessages.credentials || 'A credential is required'}
       >
-        <Form.InputGroup>
+        <Pf3Form.InputGroup>
           <DropdownSelect
             placeholder={t('form-dialog.label_placeholder', {
               context: [
@@ -334,7 +335,7 @@ class AddSourceWizardStepTwo extends React.Component {
             selectedOptions={credentials}
             key={`dropdown-update-${sourceCredentials.length}`}
           />
-          <Form.InputGroup.Button>
+          <Pf3Form.InputGroup.Button>
             <Button
               variant={ButtonVariant.control}
               aria-label={t('form-dialog.label', { context: 'add-credential' })}
@@ -342,9 +343,9 @@ class AddSourceWizardStepTwo extends React.Component {
               onClick={this.onAddCredential}
               title={t('form-dialog.label', { context: 'add-credential' })}
             />
-          </Form.InputGroup.Button>
-        </Form.InputGroup>
-      </FormField>
+          </Pf3Form.InputGroup.Button>
+        </Pf3Form.InputGroup>
+      </FormGroup>
     );
   }
 
@@ -374,22 +375,22 @@ class AddSourceWizardStepTwo extends React.Component {
     switch (type) {
       case 'network':
         return (
-          <FormField error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
-            <Form.Checkbox
+          <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
+            <Pf3Form.Checkbox
               name="optionParamiko"
               checked={checked.optionParamiko || false}
               inline
               onChange={handleOnEvent}
             >
               Connect using Paramiko instead of Open <abbr title="Secure Shell">SSH</abbr>
-            </Form.Checkbox>
-          </FormField>
+            </Pf3Form.Checkbox>
+          </FormGroup>
         );
       case 'vcenter':
       case 'satellite':
         return (
           <React.Fragment>
-            <FormField label="Connection">
+            <FormGroup label="Connection">
               <DropdownSelect
                 id="optionSslProtocol"
                 isInline={false}
@@ -397,9 +398,9 @@ class AddSourceWizardStepTwo extends React.Component {
                 options={sslProtocolOptions}
                 selectedOptions={[(checked.optionDisableSsl && 'disableSsl') || values.optionSslProtocol]}
               />
-            </FormField>
-            <FormField error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
-              <Form.Checkbox
+            </FormGroup>
+            <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
+              <Pf3Form.Checkbox
                 name="optionSslCert"
                 checked={checked.optionSslCert || false}
                 disabled={checked.optionDisableSsl}
@@ -407,8 +408,8 @@ class AddSourceWizardStepTwo extends React.Component {
                 onChange={handleOnEvent}
               >
                 Verify SSL Certificate
-              </Form.Checkbox>
-            </FormField>
+              </Pf3Form.Checkbox>
+            </FormGroup>
           </React.Fragment>
         );
       default:
@@ -448,7 +449,7 @@ class AddSourceWizardStepTwo extends React.Component {
     return (
       <FormState key={type} setValues={formValues} validateOnMount={edit} validate={this.isStepValid}>
         {({ handleOnSubmit, ...options }) => (
-          <Form horizontal onSubmit={handleOnSubmit}>
+          <Form isHorizontal onSubmit={handleOnSubmit}>
             {this.renderName(options)}
             {this.renderHosts(options)}
             {this.renderCredentials(options)}

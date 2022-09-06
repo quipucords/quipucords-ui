@@ -4,19 +4,29 @@ exports[`AddSourceWizardStepOne Component should render a connected component: c
 
 exports[`AddSourceWizardStepOne Component should render a non-connected component: non-connected 1`] = `
 <form
-  class="form-horizontal"
+  class="pf-c-form pf-m-horizontal"
+  novalidate=""
 >
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Select source type
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Select source type
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <div
         class="form-group"
