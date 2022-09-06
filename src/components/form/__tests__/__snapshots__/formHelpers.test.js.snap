@@ -4,6 +4,8 @@ exports[`FormHelpers should have specific helpers: helpers 1`] = `
 Object {
   "createMockEvent": [Function],
   "doesNotHaveMinimumCharacters": [Function],
+  "isEmpty": [Function],
+  "isPortValid": [Function],
 }
 `;
 

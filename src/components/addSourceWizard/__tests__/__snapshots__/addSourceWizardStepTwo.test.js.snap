@@ -20,23 +20,32 @@ Object {
 
 exports[`AddSourceWizardStepTwo Component should display different forms for source types: network 1`] = `
 <form
-  class="form-horizontal"
+  class="pf-c-form pf-m-horizontal"
+  novalidate=""
 >
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Name
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Name
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         name="name"
         placeholder="Enter a name for the Network source"
         type="text"
@@ -45,20 +54,28 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Search addresses
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Search addresses
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <textarea
         class="form-control"
-        id="generatedid-"
         name="hostsMultiple"
         placeholder="Enter values separated by commas"
         rows="5"
@@ -71,20 +88,28 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Port
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Port
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         maxlength="5"
         name="port"
         placeholder="Default port is 22"
@@ -94,16 +119,25 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Credentials
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Credentials
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <span
         class="input-group"
@@ -191,14 +225,11 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    />
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-control"
     >
       <label
         class="checkbox-inline"
@@ -222,23 +253,32 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 
 exports[`AddSourceWizardStepTwo Component should display different forms for source types: vcenter 1`] = `
 <form
-  class="form-horizontal"
+  class="pf-c-form pf-m-horizontal"
+  novalidate=""
 >
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Name
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Name
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         name="name"
         placeholder="Enter a name for the VCenter source"
         type="text"
@@ -247,20 +287,28 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      IP address or hostname
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          IP address or hostname
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         name="hostsSingle"
         placeholder="Enter an IP address or hostname (default port is 443)"
         type="text"
@@ -269,16 +317,25 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Credentials
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Credentials
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <span
         class="input-group"
@@ -367,16 +424,25 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Connection
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Connection
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <div
         class="quipucords-select quipucords-select__not-inline"
@@ -428,14 +494,11 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    />
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-control"
     >
       <label
         class="checkbox-inline"
@@ -479,23 +542,32 @@ Array [
 
 exports[`AddSourceWizardStepTwo Component should render a non-connected component: non-connected 1`] = `
 <form
-  class="form-horizontal"
+  class="pf-c-form pf-m-horizontal"
+  novalidate=""
 >
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Name
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Name
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         name="name"
         placeholder="Enter a name for the Network source"
         type="text"
@@ -504,20 +576,28 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Search addresses
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Search addresses
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <textarea
         class="form-control"
-        id="generatedid-"
         name="hostsMultiple"
         placeholder="Enter values separated by commas"
         rows="5"
@@ -530,20 +610,28 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Port
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Port
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <input
         class="form-control"
-        id="generatedid-"
         maxlength="5"
         name="port"
         placeholder="Default port is 22"
@@ -553,16 +641,25 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    >
-      Credentials
-    </label>
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-label"
+    >
+      <label
+        class="pf-c-form__label"
+      >
+        <span
+          class="pf-c-form__label-text"
+        >
+          Credentials
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
     >
       <span
         class="input-group"
@@ -650,14 +747,11 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
     </div>
   </div>
   <div
-    class="form-group"
+    class="pf-c-form__group"
+    id="generatedid-"
   >
-    <label
-      class="col-sm-3 control-label"
-      for="generatedid-"
-    />
     <div
-      class="col-sm-9"
+      class="pf-c-form__group-control"
     >
       <label
         class="checkbox-inline"
