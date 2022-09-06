@@ -207,11 +207,19 @@ const scansCellContent = (
 
   return {
     content: statusCell({ count, status: 'scans', viewId }),
-    expandedContent: (count && <ScanJobsList key={`jobs-${id}`} id={id} mostRecentId={mostRecentId} />) || undefined
+    expandedContent: (count > 1 && <ScanJobsList key={`jobs-${id}`} id={id} mostRecentId={mostRecentId} />) || undefined
   };
 };
 
 // FixMe: PF Overflow menu is attempting state updates on unmounted components
+/**
+ * FixMe: Older issue associated with displaying both "pause" and "cancel" after a user restarts a scan.
+ * Basically, in testing you can't immediately pause a scan, or multiple scans, or the API throws an error.
+ * Because of this we only display the "cancel"/"stop" button. Or at least that's what the old code was
+ * doing, pre-refactor. Hitting refresh should display both buttons. If this gets fixed the condition to
+ * modify is associated with...
+ *     mostRecentStatus === 'created' || mostRecentStatus === 'running'
+ */
 /**
  * Action cell content
  *
@@ -299,8 +307,8 @@ const actionsCell = ({
   const menuItems = [];
 
   if (mostRecentStatus) {
-    if (mostRecentStatus === ('created' || 'running')) {
-      menuItems.push(menuItem(mostRecentStatus), menuItem(ContextIconActionVariant.pending));
+    if (mostRecentStatus === 'created' || mostRecentStatus === 'running') {
+      menuItems.push(menuItem(ContextIconActionVariant.running), menuItem(ContextIconActionVariant.pending));
     } else {
       menuItems.push(menuItem(mostRecentStatus));
     }

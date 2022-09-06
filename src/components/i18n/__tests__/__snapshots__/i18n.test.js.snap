@@ -434,8 +434,12 @@ Array [
         "match": "t( 'toast-notifications.description', { context: ['scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
       },
       Object {
-        "key": "toast-notifcations.title",
-        "match": "t('toast-notifcations.title', { context: ['error'] })",
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(isWarning && 'warning')",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: [(isWarning && 'warning')",
       },
     ],
   },
@@ -797,14 +801,6 @@ Array [
     "key": "table.header",
   },
   Object {
-    "file": "./src/components/scans/scansContext.js",
-    "key": "toast-notifications.description",
-  },
-  Object {
-    "file": "./src/components/scans/scansContext.js",
-    "key": "toast-notifcations.title",
-  },
-  Object {
     "file": "./src/components/scans/scansEmptyState.js",
     "key": "view.empty-state",
   },
@@ -855,18 +851,6 @@ Array [
   Object {
     "file": "./src/components/sources/sources.js",
     "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "key": "toast-notifications.title",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "key": "toast-notifications.description",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "key": "toast-notifications.title",
   },
   Object {
     "file": "./src/components/sources/sourcesContext.js",

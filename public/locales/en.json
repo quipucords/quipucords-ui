@@ -150,22 +150,27 @@
     "tooltip_merge-reports": "Merge selected scan results into a single report"
   },
   "toast-notifications": {
+    "description": "{{context}}",
     "description_add-source_hidden": "Source {{name}} was created",
     "description_add-source_hidden_edit": "Source {{name}} was updated",
     "description_add-source_hidden_error": "{{message}}",
     "description_add-source_hidden_error_edit": "{{message}}",
     "description_deleted-source": "Deleted source {{name}}.",
+    "description_error": "Application error",
     "description_scan-report_canceled": "Scan <0>{{name}}</0> stopped",
     "description_scan-report_download": "Report <0>{{name}}</0> downloaded",
     "description_scan-report_paused": "Scan <0>{{name}}</0> paused",
     "description_scan-report_restart": "Scan <0>{{name}}</0> resumed",
     "description_scan-report_play": "Scan <0>{{name}}</0> started",
+    "description_warning": "Application warning",
+    "title": "Notification",
     "title_add-source_hidden": "Success creating source",
     "title_add-source_hidden_edit": "Success updating source",
     "title_add-source_hidden_error": "Error creating source",
     "title_add-source_hidden_error_edit": "Error updating source",
     "title_deleted-source": "Success deleting source",
-    "title_error": "Error"
+    "title_error": "Error",
+    "title_warning": "Warning"
   },
   "view": {
     "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
