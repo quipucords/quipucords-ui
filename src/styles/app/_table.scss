@@ -1,7 +1,7 @@
 .quipucords-table {
   // medium breakpoint for pf takes over
   &__td.pf-m-width {
-    @for $tdWidth from 1 through 9 {
+    @for $tdWidth from 0 through 100 {
       &-#{$tdWidth} {
         width: percentage($tdWidth/100);
       }
