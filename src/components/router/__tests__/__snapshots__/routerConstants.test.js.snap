@@ -18,12 +18,7 @@ Array [
     "to": "/scans",
   },
   Object {
-    "component": Object {
-      "$$typeof": Symbol(react.memo),
-      "WrappedComponent": [Function],
-      "compare": null,
-      "type": [Function],
-    },
+    "component": [Function],
     "iconClass": "fa fa-id-card",
     "title": "Credentials",
     "to": "/credentials",

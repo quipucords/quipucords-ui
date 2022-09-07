@@ -7,7 +7,7 @@ import apiTypes from '../../constants/apiConstants';
  * @param {object} state
  * @returns {*}
  */
-const credentials = state => state.credentials.view.credentials;
+const credentials = state => state.credentials.view?.data?.[apiTypes.API_RESPONSE_CREDENTIALS_RESULTS];
 
 const credentialsDropdownSelector = createSelector([credentials], creds =>
   (creds || []).map(cred => ({

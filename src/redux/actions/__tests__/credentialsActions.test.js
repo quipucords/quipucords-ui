@@ -22,6 +22,8 @@ describe('CredentialsActions', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
+        responseText: 'success',
+        timeout: 1,
         response: {
           test: 'success',
           [apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]: ['success']
@@ -34,24 +36,13 @@ describe('CredentialsActions', () => {
     moxios.uninstall();
   });
 
-  it('Should return response content for addAccount method', done => {
+  it('Should return response content for addCredential method', done => {
     const store = generateStore();
     const dispatcher = credentialsActions.addCredential();
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().credentials;
-
-      expect(response.update.credential.test).toEqual('success');
-      done();
-    });
-  });
-
-  it('Should return response content for getCredential method', done => {
-    const store = generateStore();
-    const dispatcher = credentialsActions.getCredential();
-
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('getCredential');
+      expect(response.dialog.fulfilled).toEqual(true);
       done();
     });
   });
@@ -62,8 +53,7 @@ describe('CredentialsActions', () => {
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().credentials;
-
-      expect(response.view.credentials[0]).toEqual('success');
+      expect(response.view.fulfilled).toEqual(true);
       done();
     });
   });
@@ -74,32 +64,18 @@ describe('CredentialsActions', () => {
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().credentials;
-
-      expect(response.update.credential.test).toEqual('success');
+      expect(response.dialog.fulfilled).toEqual(true);
       done();
     });
   });
 
   it('Should return response content for deleteCredential method', done => {
     const store = generateStore();
-    const dispatcher = credentialsActions.deleteCredential();
+    const dispatcher = credentialsActions.deleteCredential(['loremId']);
 
     dispatcher(store.dispatch).then(() => {
       const response = store.getState().credentials;
-
-      expect(response.update.delete).toEqual(true);
-      done();
-    });
-  });
-
-  it('Should return response content for deleteCredentials method', done => {
-    const store = generateStore();
-    const dispatcher = credentialsActions.deleteCredentials();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().credentials;
-
-      expect(response.update.delete).toEqual(true);
+      expect(response.deleted.fulfilled).toEqual(true);
       done();
     });
   });

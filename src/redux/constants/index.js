@@ -1,9 +1,9 @@
 import * as aboutModalTypes from './aboutModalConstants';
 import * as confirmationModalTypes from './confirmationModalConstants';
-import * as credentialsTypes from './credentialsConstants';
+import { credentialsTypes } from './credentialsConstants';
 import * as factsTypes from './factsConstants';
 import * as reportsTypes from './reportsConstants';
-import * as scansTypes from './scansConstants';
+import { scansTypes } from './scansConstants';
 import { sourcesTypes } from './sourcesConstants';
 import * as statusTypes from './statusConstants';
 import * as toastNotificationTypes from './toasNotificationConstants';

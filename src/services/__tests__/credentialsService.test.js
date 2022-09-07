@@ -17,14 +17,12 @@ describe('CredentialsService', () => {
   });
 
   it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(credentialsService)).toHaveLength(6);
+    expect(Object.keys(credentialsService)).toHaveLength(4);
   });
 
   it('should have specific methods', () => {
     expect(credentialsService.addCredential).toBeDefined();
     expect(credentialsService.deleteCredential).toBeDefined();
-    expect(credentialsService.deleteCredentials).toBeDefined();
-    expect(credentialsService.getCredential).toBeDefined();
     expect(credentialsService.getCredentials).toBeDefined();
     expect(credentialsService.updateCredential).toBeDefined();
   });

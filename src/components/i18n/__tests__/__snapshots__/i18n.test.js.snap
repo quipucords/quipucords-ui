@@ -212,15 +212,19 @@ Array [
     "keys": Array [
       Object {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', 'confirmation'] })",
+        "match": "t('form-dialog.label', { context: ['confirm'] })",
       },
       Object {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'cancel' })",
+        "match": "t('form-dialog.label', { context: ['cancel'] })",
       },
       Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', 'confirmation'] })",
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['heading'] })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title'] })",
       },
     ],
   },
@@ -267,27 +271,60 @@ Array [
       },
       Object {
         "key": "view.loading",
-        "match": "t('view.loading', { context: 'credentials' })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+        "match": "t('view.loading', { context: viewId })",
       },
       Object {
         "key": "view.error",
-        "match": "t('view.error', { context: 'credentials' })",
+        "match": "t('view.error', { context: viewId })",
       },
       Object {
         "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['credentials'], message: errorMessage })",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['auth-type'] })",
+      },
+      Object {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['sources'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsContext.js",
+    "keys": Array [
+      Object {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['deleted-credential'], count: credentialNames.length })",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-credential'], name: credentialNames[0], count: credentialNames.length })",
+      },
+      Object {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['error'] })",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-credential', 'error'], name: credentialNames[0], count: credentialNames.length, message: errorMessage })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-credential'], count: updatedCredentials.length })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-credential'], count: updatedCredentials.length, name: updatedCredentials?.[0]?.[apiTypes.API_RESPONSE_CREDENTIAL_NAME] }, [<strong />] )",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
       },
     ],
   },
@@ -300,11 +337,60 @@ Array [
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })",
+        "match": "t('view.empty-state', { context: ['description', viewId], name: uiSentenceStartName })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'source'] })",
+        "match": "t('view.empty-state', { context: ['label', 'sources'] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsTableCells.js",
+    "keys": Array [
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: [credType, viewId] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['auth', 'tooltip', viewId] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['auth', 'cell', sshKeyfile !== '' && 'sshKey', viewId] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'view' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'view' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
       },
     ],
   },
@@ -618,6 +704,10 @@ Array [
       },
       Object {
         "key": "table.label",
+        "match": "t('table.label', { context: [sourceType, viewId] })",
+      },
+      Object {
+        "key": "table.label",
         "match": "t('table.label', { context: ['status', status, viewId] })",
       },
       Object {
@@ -717,16 +807,12 @@ Array [
     "key": "view.error-message",
   },
   Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.confirmation",
   },
   Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
+    "file": "./src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.confirmation",
   },
   Object {
     "file": "./src/components/credentials/credentials.js",
@@ -735,6 +821,26 @@ Array [
   Object {
     "file": "./src/components/credentials/credentials.js",
     "key": "view.error-message",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  Object {
+    "file": "./src/components/credentials/credentialsContext.js",
+    "key": "form-dialog.confirmation",
   },
   Object {
     "file": "./src/components/credentials/credentialsEmptyState.js",

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useConfirmation should apply a hook for useConfirmation: dispatch confirmation 1`] = `
+Array [
+  Array [
+    Object {
+      "cancelButtonText": undefined,
+      "confirmButtonText": undefined,
+      "heading": "Lorem ipsum",
+      "onConfirm": [Function],
+      "title": "Dolor sit",
+      "type": "CONFIRMATION_MODAL_SHOW",
+    },
+  ],
+]
+`;

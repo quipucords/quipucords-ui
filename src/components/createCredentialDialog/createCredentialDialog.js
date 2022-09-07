@@ -535,13 +535,13 @@ CreateCredentialDialog.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getCredentials: queryObj => dispatch(reduxActions.credentials.getCredentials(queryObj)),
+  getCredentials: queryObj => dispatch(reduxActions.credentials.getCredentials(null, queryObj)),
   addCredential: data => dispatch(reduxActions.credentials.addCredential(data)),
   updateCredential: (id, data) => dispatch(reduxActions.credentials.updateCredential(id, data))
 });
 
 const mapStateToProps = state => ({
-  ...state.credentials.update,
+  ...state.credentials.dialog,
   viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW]
 });
 
