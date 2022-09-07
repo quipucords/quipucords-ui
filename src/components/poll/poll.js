@@ -45,7 +45,7 @@ class Poll extends React.Component {
 }
 
 Poll.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  children: PropTypes.node.isRequired,
   itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   itemIdCheck: PropTypes.bool.isRequired,
   interval: PropTypes.number,
