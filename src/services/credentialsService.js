@@ -13,9 +13,6 @@ const deleteCredential = id =>
     url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`
   });
 
-const deleteCredentials = (data = []) =>
-  Promise.all(data.map(id => deleteCredential(id))).then(success => new Promise(resolve => resolve({ data: success })));
-
 const getCredentials = (id = '', params = {}) =>
   serviceCall(
     {
@@ -24,8 +21,6 @@ const getCredentials = (id = '', params = {}) =>
     },
     { auth: false }
   );
-
-const getCredential = id => getCredentials(id);
 
 const updateCredential = (id, data = {}) =>
   serviceCall({
@@ -37,8 +32,6 @@ const updateCredential = (id, data = {}) =>
 const credentialsService = {
   addCredential,
   deleteCredential,
-  deleteCredentials,
-  getCredential,
   getCredentials,
   updateCredential
 };
@@ -48,8 +41,6 @@ export {
   credentialsService,
   addCredential,
   deleteCredential,
-  deleteCredentials,
-  getCredential,
   getCredentials,
   updateCredential
 };

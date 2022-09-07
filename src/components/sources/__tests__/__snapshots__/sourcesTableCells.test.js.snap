@@ -146,7 +146,7 @@ exports[`SourcesTableCells should return consistent cell results: basic descript
     sm={2}
   >
     <Tooltip
-      content={null}
+      content="t(table.label, {\\"context\\":\\"\\"})"
       delayShow={500}
       id={null}
       isPopover={false}
