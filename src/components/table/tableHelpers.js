@@ -179,8 +179,8 @@ const tableRows = ({ onExpand, onSelect, rows = [] } = {}) => {
         const cellProps = { className: className || '', dataLabel, isActionCell, noPadding, style: style || {} };
         let updatedWidthClassName;
 
-        // FixMe: PF doesn't appear to apply cell width classNames when less than 10
-        if (width < 10) {
+        // FixMe: PF doesn't appear to apply cell width classNames when less than 10, or consistently
+        if (typeof width === 'number') {
           updatedWidthClassName = `pf-m-width-${width}`;
         }
 
