@@ -15,7 +15,6 @@ import {
 import { PencilAltIcon, TrashIcon, EllipsisVIcon } from '@patternfly/react-icons';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { Tooltip } from '../tooltip/tooltip';
-import { dictionary } from '../../constants/dictionaryConstants';
 import { ConnectedScanHostList as ScanHostList } from '../scanHostList/scanHostList';
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
@@ -31,9 +30,10 @@ import { DropdownSelect, SelectButtonVariant, SelectDirection, SelectPosition } 
  * @param {string} params.source_type
  * @param {object} options
  * @param {Function} options.t
+ * @param {string} options.viewId
  * @returns {React.ReactNode}
  */
-const description = ({ hosts, name, source_type: sourceType } = {}, { t = translate } = {}) => {
+const description = ({ hosts, name, source_type: sourceType } = {}, { t = translate, viewId } = {}) => {
   const itemHostsPopover = (
     <div className="quipucords-sources-popover-scroll">
       {hosts?.length > 1 && (
@@ -66,7 +66,7 @@ const description = ({ hosts, name, source_type: sourceType } = {}, { t = transl
   return (
     <Grid hasGutter={false}>
       <GridItem sm={2}>
-        <Tooltip content={dictionary[sourceType]}>
+        <Tooltip content={t('table.label', { context: [sourceType, viewId] })}>
           <ContextIcon symbol={ContextIconVariant[sourceType]} />
         </Tooltip>
       </GridItem>

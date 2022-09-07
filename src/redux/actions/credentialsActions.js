@@ -7,18 +7,12 @@ const addCredential = data => dispatch =>
     payload: credentialsService.addCredential(data)
   });
 
-const getCredential = id => dispatch =>
-  dispatch({
-    type: credentialsTypes.GET_CREDENTIAL,
-    payload: credentialsService.getCredential(id)
-  });
-
 const getCredentials =
-  (query = {}) =>
+  (id, query = {}) =>
   dispatch =>
     dispatch({
       type: credentialsTypes.GET_CREDENTIALS,
-      payload: credentialsService.getCredentials('', query)
+      payload: credentialsService.getCredentials(id || '', query)
     });
 
 const updateCredential = (id, data) => dispatch =>
@@ -27,25 +21,18 @@ const updateCredential = (id, data) => dispatch =>
     payload: credentialsService.updateCredential(id, data)
   });
 
-const deleteCredential = id => dispatch =>
-  dispatch({
-    type: credentialsTypes.DELETE_CREDENTIAL,
-    payload: credentialsService.deleteCredential(id)
-  });
+const deleteCredential = id => dispatch => {
+  const updatedIds = (Array.isArray(id) && id) || [id];
 
-const deleteCredentials =
-  (ids = []) =>
-  dispatch =>
-    dispatch({
-      type: credentialsTypes.DELETE_CREDENTIALS,
-      payload: credentialsService.deleteCredentials(ids)
-    });
+  return dispatch({
+    type: credentialsTypes.DELETE_CREDENTIAL,
+    payload: Promise.all(updatedIds.map(updatedId => credentialsService.deleteCredential(updatedId)))
+  });
+};
 
 const credentialsActions = {
   addCredential,
   deleteCredential,
-  deleteCredentials,
-  getCredential,
   getCredentials,
   updateCredential
 };
@@ -55,8 +42,6 @@ export {
   credentialsActions,
   addCredential,
   deleteCredential,
-  deleteCredentials,
-  getCredential,
   getCredentials,
   updateCredential
 };

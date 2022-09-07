@@ -70,24 +70,26 @@ const ConfirmationModal = ({
     if (onConfirm) {
       actions.push(
         <Button key="submit" onClick={onConfirm}>
-          {confirmButtonText || t('form-dialog.label', { context: ['submit', 'confirmation'] })}
+          {confirmButtonText || t('form-dialog.label', { context: ['confirm'] })}
         </Button>
       );
     }
 
     actions.push(
       <Button key="cancel" variant={ButtonVariant.secondary} onClick={cancel}>
-        {cancelButtonText || t('form-dialog.label', { context: 'cancel' })}
+        {cancelButtonText || t('form-dialog.label', { context: ['cancel'] })}
       </Button>
     );
 
     return actions;
   };
 
+  const updatedHeading = heading || t('form-dialog.confirmation', { context: ['heading'] });
+
   const updatedChildren =
-    body || heading ? (
-      <Alert isInline isPlain variant={icon || undefined} title={heading}>
-        <p>{body}</p>
+    body || updatedHeading ? (
+      <Alert isInline isPlain variant={icon || undefined} title={updatedHeading}>
+        {body}
       </Alert>
     ) : (
       children
@@ -100,9 +102,7 @@ const ConfirmationModal = ({
       className="quipucords-modal__confirmation"
       disableFocusTrap
       header={
-        title && (
-          <Title headingLevel="h4">{title || t('form-dialog.label', { context: ['submit', 'confirmation'] })}</Title>
-        )
+        title && <Title headingLevel="h4">{title || t('form-dialog.confirmation', { context: ['title'] })}</Title>
       }
       isContentOnly={isContentOnly}
       isOpen={show}

@@ -1,35 +1,90 @@
 import { credentialsTypes } from '../constants';
-import { helpers } from '../../common/helpers';
-import { reduxHelpers } from '../common/reduxHelpers';
-import apiTypes from '../../constants/apiConstants';
+import { reduxHelpers } from '../common';
+import { helpers } from '../../common';
 
 const initialState = {
-  view: {
-    error: false,
-    errorMessage: '',
-    pending: false,
-    fulfilled: false,
-    credentials: []
-  },
-  update: {
-    error: false,
-    errorMessage: '',
-    pending: false,
-    fulfilled: false,
-    credential: null,
-    credentialType: '',
+  deleted: {},
+  dialog: {
     show: false,
     add: false,
     edit: false,
-    delete: false
-  }
+    credentialType: undefined,
+    credential: undefined
+  },
+  action: {},
+  selected: {},
+  expanded: {},
+  update: 0,
+  view: {}
 };
 
 const credentialsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case credentialsTypes.UPDATE_CREDENTIALS:
+      return reduxHelpers.setStateProp(
+        null,
+        {
+          update: helpers.getCurrentDate().getTime()
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+    case credentialsTypes.SELECT_CREDENTIAL:
+      return reduxHelpers.setStateProp(
+        'selected',
+        {
+          [action.item?.id]: action.item
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+    case credentialsTypes.DESELECT_CREDENTIAL:
+      const itemsToDeselect = {};
+      const deselectItems = (Array.isArray(action.item) && action.item) || [action?.item || {}];
+      deselectItems.forEach(({ id }) => {
+        itemsToDeselect[id] = null;
+      });
+
+      return reduxHelpers.setStateProp(
+        'selected',
+        {
+          ...itemsToDeselect
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+    case credentialsTypes.EXPANDED_CREDENTIAL:
+      return reduxHelpers.setStateProp(
+        'expanded',
+        {
+          [action.item?.id]: action.cellIndex
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+    case credentialsTypes.NOT_EXPANDED_CREDENTIAL:
+      return reduxHelpers.setStateProp(
+        'expanded',
+        {
+          [action.item?.id]: null
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+
     case credentialsTypes.CREATE_CREDENTIAL_SHOW:
       return reduxHelpers.setStateProp(
-        'update',
+        'dialog',
         {
           show: true,
           add: true,
@@ -43,7 +98,7 @@ const credentialsReducer = (state = initialState, action) => {
 
     case credentialsTypes.EDIT_CREDENTIAL_SHOW:
       return reduxHelpers.setStateProp(
-        'update',
+        'dialog',
         {
           show: true,
           edit: true,
@@ -57,7 +112,7 @@ const credentialsReducer = (state = initialState, action) => {
 
     case credentialsTypes.UPDATE_CREDENTIAL_HIDE:
       return reduxHelpers.setStateProp(
-        'update',
+        'dialog',
         {
           show: false
         },
@@ -67,179 +122,22 @@ const credentialsReducer = (state = initialState, action) => {
         }
       );
 
-    case reduxHelpers.REJECTED_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          add: true,
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message,
-          pending: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case reduxHelpers.REJECTED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message,
-          delete: true,
-          pending: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.REJECTED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message,
-          pending: false,
-          edit: true
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.REJECTED_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          error: action.error,
-          errorMessage: helpers.getMessageFromResults(action.payload).message
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.PENDING_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          pending: true,
-          error: false,
-          fulfilled: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case reduxHelpers.PENDING_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          pending: true,
-          delete: true,
-          error: false,
-          fulfilled: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.PENDING_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          pending: true,
-          error: false,
-          fulfilled: false
-        },
-        {
-          state,
-          reset: false
-        }
-      );
-
-    case reduxHelpers.PENDING_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          pending: true,
-          credentials: state.view.credentials
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.ADD_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          add: true,
-          credential: action.payload.data || {},
-          fulfilled: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIAL):
-    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.DELETE_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          delete: true,
-          fulfilled: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.UPDATE_CREDENTIAL):
-      return reduxHelpers.setStateProp(
-        'update',
-        {
-          credential: action.payload.data || {},
-          edit: true,
-          fulfilled: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
-    case reduxHelpers.FULFILLED_ACTION(credentialsTypes.GET_CREDENTIALS):
-      return reduxHelpers.setStateProp(
-        'view',
-        {
-          credentials: (action.payload.data && action.payload.data[apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]) || [],
-          fulfilled: true
-        },
-        {
-          state,
-          initialState
-        }
-      );
-
     default:
-      return state;
+      return reduxHelpers.generatedPromiseActionReducer(
+        [
+          {
+            ref: 'deleted',
+            type: [credentialsTypes.DELETE_CREDENTIAL]
+          },
+          {
+            ref: 'dialog',
+            type: [credentialsTypes.ADD_CREDENTIAL, credentialsTypes.UPDATE_CREDENTIAL]
+          },
+          { ref: 'view', type: credentialsTypes.GET_CREDENTIALS }
+        ],
+        state,
+        action
+      );
   }
 };
 

@@ -24,21 +24,22 @@ import { translate } from '../i18n/i18n';
  * @param {Function} props.t
  * @param {string} props.uiSentenceStartName
  * @param {string} props.uiShortName
+ * @param {string} props.viewId
  * @returns {React.ReactNode}
  */
-const CredentialsEmptyState = ({ onAddSource, t, uiSentenceStartName, uiShortName }) => (
+const CredentialsEmptyState = ({ onAddSource, t, uiSentenceStartName, uiShortName, viewId }) => (
   <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={AddCircleOIcon} />
     <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
     <EmptyStateBody>
-      {t('view.empty-state', { context: ['description', 'credentials'], name: uiSentenceStartName })}
+      {t('view.empty-state', { context: ['description', viewId], name: uiSentenceStartName })}
     </EmptyStateBody>
     <EmptyStatePrimary>
       <AddCredentialType buttonVariant={CredentialButtonVariant.primary} />
     </EmptyStatePrimary>
     <EmptyStateSecondaryActions>
       <Button variant={ButtonVariant.link} onClick={onAddSource}>
-        {t('view.empty-state', { context: ['label', 'source'] })}
+        {t('view.empty-state', { context: ['label', 'sources'] })}
       </Button>
     </EmptyStateSecondaryActions>
   </EmptyState>
@@ -53,7 +54,8 @@ CredentialsEmptyState.propTypes = {
   onAddSource: PropTypes.func,
   t: PropTypes.func,
   uiSentenceStartName: PropTypes.string,
-  uiShortName: PropTypes.string
+  uiShortName: PropTypes.string,
+  viewId: PropTypes.string
 };
 
 /**
@@ -65,7 +67,8 @@ CredentialsEmptyState.defaultProps = {
   onAddSource: helpers.noop,
   t: translate,
   uiSentenceStartName: helpers.UI_SENTENCE_START_NAME,
-  uiShortName: helpers.UI_SHORT_NAME
+  uiShortName: helpers.UI_SHORT_NAME,
+  viewId: null
 };
 
 export { CredentialsEmptyState as default, CredentialsEmptyState };

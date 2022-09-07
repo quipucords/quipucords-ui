@@ -1,6 +1,6 @@
 import credentialsReducer from '../credentialsReducer';
 import { credentialsTypes as types } from '../../constants';
-import { reduxHelpers } from '../../common/reduxHelpers';
+import { reduxHelpers } from '../../common';
 
 describe('CredentialsReducer', () => {
   it('should return the initial state', () => {
@@ -8,7 +8,16 @@ describe('CredentialsReducer', () => {
   });
 
   it('should handle specific defined types', () => {
-    const specificTypes = [types.CREATE_CREDENTIAL_SHOW, types.EDIT_CREDENTIAL_SHOW, types.UPDATE_CREDENTIAL_HIDE];
+    const specificTypes = [
+      types.UPDATE_CREDENTIALS,
+      types.SELECT_CREDENTIAL,
+      types.DESELECT_CREDENTIAL,
+      types.EXPANDED_CREDENTIAL,
+      types.NOT_EXPANDED_CREDENTIAL,
+      types.CREATE_CREDENTIAL_SHOW,
+      types.EDIT_CREDENTIAL_SHOW,
+      types.UPDATE_CREDENTIAL_HIDE
+    ];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -25,7 +34,6 @@ describe('CredentialsReducer', () => {
     const specificTypes = [
       types.ADD_CREDENTIAL,
       types.DELETE_CREDENTIAL,
-      types.DELETE_CREDENTIALS,
       types.UPDATE_CREDENTIAL,
       types.GET_CREDENTIALS
     ];
@@ -58,7 +66,6 @@ describe('CredentialsReducer', () => {
     const specificTypes = [
       types.ADD_CREDENTIAL,
       types.DELETE_CREDENTIAL,
-      types.DELETE_CREDENTIALS,
       types.UPDATE_CREDENTIAL,
       types.GET_CREDENTIALS
     ];
@@ -80,7 +87,6 @@ describe('CredentialsReducer', () => {
     const specificTypes = [
       types.ADD_CREDENTIAL,
       types.DELETE_CREDENTIAL,
-      types.DELETE_CREDENTIALS,
       types.UPDATE_CREDENTIAL,
       types.GET_CREDENTIALS
     ];

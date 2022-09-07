@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourcesContext should apply a hook for retreiving data from multiple selectors: responses 1`] = `
+exports[`SourcesContext should apply a hook for retrieving data from multiple selectors: responses 1`] = `
 Object {
   "errorResponse": Object {
     "data": Array [],

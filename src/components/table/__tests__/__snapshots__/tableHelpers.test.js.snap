@@ -577,7 +577,7 @@ Object {
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
             "props": Object {
-              "className": "",
+              "className": " pf-m-width-11",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,

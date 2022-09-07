@@ -56,7 +56,7 @@ describe('SourcesContext', () => {
     expect(mockUseTimeout.mock.calls).toMatchSnapshot('timeout');
   });
 
-  it('should apply a hook for retreiving data from multiple selectors', () => {
+  it('should apply a hook for retrieving data from multiple selectors', () => {
     const { result: errorResponse } = shallowHook(() =>
       useGetSources({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
