@@ -75,7 +75,9 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
       class="pf-c-form__group-control"
     >
       <textarea
-        class="form-control"
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
+        id="hostsMultiple"
         name="hostsMultiple"
         placeholder="Enter values separated by commas"
         rows="5"
@@ -609,7 +611,9 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
       class="pf-c-form__group-control"
     >
       <textarea
-        class="form-control"
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
+        id="hostsMultiple"
         name="hostsMultiple"
         placeholder="Enter values separated by commas"
         rows="5"
