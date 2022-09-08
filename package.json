@@ -91,7 +91,7 @@
     "build:post": "bash ./scripts/post.sh; bash ./scripts/clean.sh",
     "build:pre": "bash ./scripts/pre.sh",
     "build:brand": "run-s -l 'build:pre -b' 'build:docs -b' test:docs build:template-css build:js build:post test:integration",
-    "build:template-css": "sass --no-source-map --load-path ./src --load-path ./node_modules ./src/styles/index.scss ./src/styles/.css/index.css",
+    "build:template-css": "sass --no-source-map --load-path ./src --load-path ./node_modules ./src/styles/template.scss ./src/styles/.css/index.css",
     "release": "standard-version",
     "start": "open http://localhost:5050/docs/api; run-p -l api:dev start:js",
     "start:js": "react-scripts start",
