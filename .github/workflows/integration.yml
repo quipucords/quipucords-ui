@@ -1,7 +1,7 @@
 name: Build
 on:
   push:
-    branches: [master, main]
+    branches: [master, main, dev**]
     tags:
       - "*"
   pull_request:
