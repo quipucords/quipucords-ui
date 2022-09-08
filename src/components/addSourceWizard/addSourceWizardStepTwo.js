@@ -11,6 +11,7 @@ import { FormGroup } from '../form/formGroup';
 import { Checkbox } from '../form/checkbox';
 import { TextArea, TextAreResizeOrientation } from '../form/textArea';
 import { formHelpers } from '../form/formHelpers';
+import { TextInput } from '../form/textInput';
 import { FormState } from '../formState/formState';
 import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
 import { translate } from '../i18n/i18n';
@@ -168,12 +169,17 @@ class AddSourceWizardStepTwo extends React.Component {
         error={(touched.name && errors.name) || stepTwoErrorMessages.name}
         errorMessage={stepTwoErrorMessages.name || 'A source name is required'}
       >
-        <Pf3Form.FormControl
-          type="text"
+        <TextInput
           name="name"
           value={values.name}
           placeholder={`Enter a name for the ${dictionary[type] || ''} source`}
           onChange={handleOnEvent}
+          onClear={handleOnEvent}
+          validated={
+            (touched.name && errors.name) || stepTwoErrorMessages.name
+              ? ValidatedOptions.error
+              : ValidatedOptions.default
+          }
         />
       </FormGroup>
     );
@@ -256,13 +262,18 @@ class AddSourceWizardStepTwo extends React.Component {
               error={(touched.port && errors.port) || stepTwoErrorMessages.port}
               errorMessage="Port must be valid"
             >
-              <Pf3Form.FormControl
+              <TextInput
                 name="port"
-                type="text"
                 value={values.port}
                 maxLength={5}
                 placeholder="Default port is 22"
                 onChange={handleOnEvent}
+                onClear={handleOnEvent}
+                validated={
+                  (touched.port && errors.port) || stepTwoErrorMessages.port
+                    ? ValidatedOptions.error
+                    : ValidatedOptions.default
+                }
               />
             </FormGroup>
           </React.Fragment>
@@ -293,12 +304,20 @@ class AddSourceWizardStepTwo extends React.Component {
                 hostPortError
               }
             >
-              <Pf3Form.FormControl
+              <TextInput
                 name="hostsSingle"
-                type="text"
                 value={values.hostsSingle}
                 placeholder="Enter an IP address or hostname (default port is 443)"
                 onChange={onChangeSingleHost}
+                onClear={onChangeSingleHost}
+                validated={
+                  (touched.hostsSingle && errors.hosts) ||
+                  errors.port ||
+                  stepTwoErrorMessages.hosts ||
+                  stepTwoErrorMessages.port
+                    ? ValidatedOptions.error
+                    : ValidatedOptions.default
+                }
               />
             </FormGroup>
           </React.Fragment>
