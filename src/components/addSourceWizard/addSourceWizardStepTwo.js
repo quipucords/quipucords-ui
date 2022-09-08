@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Form } from '@patternfly/react-core';
+import { Button, ButtonVariant, Form, ValidatedOptions } from '@patternfly/react-core';
 import { PlusIcon } from '@patternfly/react-icons';
 import { Form as Pf3Form } from 'patternfly-react';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
@@ -9,6 +9,7 @@ import apiTypes from '../../constants/apiConstants';
 import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
 import { FormGroup } from '../form/formGroup';
 import { Checkbox } from '../form/checkbox';
+import { TextArea, TextAreResizeOrientation } from '../form/textArea';
 import { formHelpers } from '../form/formHelpers';
 import { FormState } from '../formState/formState';
 import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
@@ -227,13 +228,19 @@ class AddSourceWizardStepTwo extends React.Component {
               error={(touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts}
               errorMessage="A valid IP address or hostname is required"
             >
-              <Pf3Form.FormControl
-                componentClass="textarea"
+              <TextArea
                 name="hostsMultiple"
-                value={values.hostsMultiple}
                 rows={5}
+                value={values.hostsMultiple}
                 placeholder="Enter values separated by commas"
                 onChange={onChangeMultipleHost}
+                onClear={onChangeMultipleHost}
+                resizeOrientation={TextAreResizeOrientation.vertical}
+                validated={
+                  (touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts
+                    ? ValidatedOptions.error
+                    : ValidatedOptions.default
+                }
               />
               <Pf3Form.HelpBlock>
                 IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for

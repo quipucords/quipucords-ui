@@ -293,7 +293,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               class="pf-c-form__group-control"
             >
               <textarea
-                class="quipucords-form-control form-control"
+                aria-invalid="false"
+                class="pf-c-form-control quipucords-form__textarea quipucords-form__textarea-resize-none quipucords-form-control"
+                id="displayScanSources"
                 name="displayScanSources"
                 readonly=""
                 rows="2"
@@ -559,8 +561,10 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               class="pf-c-form__group-control"
             >
               <textarea
-                class="vertical-scroll form-control"
+                aria-invalid="false"
+                class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
                 disabled=""
+                id="displayScanDirectories"
                 name="displayScanDirectories"
                 placeholder="Optional. Enter values separated by commas"
                 rows="4"
