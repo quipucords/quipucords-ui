@@ -9,9 +9,10 @@ import {
   EmptyStateIcon,
   Form,
   Spinner,
-  Title
+  Title,
+  ValidatedOptions
 } from '@patternfly/react-core';
-import { FieldLevelHelp, Form as Pf3Form } from 'patternfly-react';
+import { FieldLevelHelp } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { FormState } from '../formState/formState';
@@ -19,6 +20,7 @@ import { formHelpers } from '../form/formHelpers';
 import { Checkbox } from '../form/checkbox';
 import { FormGroup } from '../form/formGroup';
 import { TextInput } from '../form/textInput';
+import { TextArea, TextAreResizeOrientation } from '../form/textArea';
 import { TouchSpin } from '../touchspin/touchspin';
 import helpers from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
@@ -185,13 +187,13 @@ class CreateScanDialog extends React.Component {
           />
         </FormGroup>
         <FormGroup label="Sources" error={submitErrorMessages.scanSources} errorMessage={submitErrorMessages.scanName}>
-          <Pf3Form.FormControl
+          <TextArea
             className="quipucords-form-control"
-            componentClass="textarea"
             name="displayScanSources"
             value={values.displayScanSources}
             rows={2}
-            readOnly
+            isReadOnly
+            resizeOrientation={TextAreResizeOrientation.none}
           />
         </FormGroup>
       </React.Fragment>
@@ -312,15 +314,19 @@ class CreateScanDialog extends React.Component {
           errorMessage={submitErrorMessages.scanDirectories || `Directories must begin with a root reference (/)`}
           helperText="Default directories are /, /opt, /app, /home, /usr"
         >
-          <Pf3Form.FormControl
-            disabled={!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs && !checked.jbossBrms}
-            componentClass="textarea"
+          <TextArea
+            isDisabled={!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs && !checked.jbossBrms}
             name="displayScanDirectories"
-            className="vertical-scroll"
             value={values.displayScanDirectories}
             rows={4}
             placeholder="Optional. Enter values separated by commas"
             onChange={onChangeDirectories}
+            resizeOrientation={TextAreResizeOrientation.vertical}
+            validated={
+              (touched.scanDirectories && errors.scanDirectories) || submitErrorMessages.scanDirectories
+                ? ValidatedOptions.error
+                : ValidatedOptions.default
+            }
           />
         </FormGroup>
       </React.Fragment>
