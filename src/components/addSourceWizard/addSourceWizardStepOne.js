@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form as Pf3Form, Radio } from 'patternfly-react';
 import { Form } from '@patternfly/react-core';
+import { Radio } from '../form/radio';
 import { connect, store, reduxSelectors, reduxTypes } from '../../redux';
 import { FormGroup } from '../form/formGroup';
 import { FormState } from '../formState/formState';
@@ -24,33 +24,31 @@ class AddSourceWizardStepOne extends React.Component {
       <FormState validateOnMount setValues={{ sourceType: type }} validate={this.isStepValid}>
         {({ values, handleOnEvent, handleOnSubmit }) => (
           <Form isHorizontal onSubmit={handleOnSubmit}>
-            <FormGroup label="Select source type">
-              <Pf3Form.FormGroup>
-                <Radio
-                  name="sourceType"
-                  value="network"
-                  checked={values.sourceType === 'network'}
-                  onChange={handleOnEvent}
-                >
-                  Network Range
-                </Radio>
-                <Radio
-                  name="sourceType"
-                  value="satellite"
-                  checked={values.sourceType === 'satellite'}
-                  onChange={handleOnEvent}
-                >
-                  Satellite
-                </Radio>
-                <Radio
-                  name="sourceType"
-                  value="vcenter"
-                  checked={values.sourceType === 'vcenter'}
-                  onChange={handleOnEvent}
-                >
-                  vCenter Server
-                </Radio>
-              </Pf3Form.FormGroup>
+            <FormGroup role="radiogroup" isStack label="Select source type">
+              <Radio
+                name="sourceType"
+                id="sourceType-network"
+                value="network"
+                checked={values.sourceType === 'network'}
+                onChange={handleOnEvent}
+                label="Network Range"
+              />
+              <Radio
+                name="sourceType"
+                id="sourceType-satellite"
+                value="satellite"
+                checked={values.sourceType === 'satellite'}
+                onChange={handleOnEvent}
+                label="Satellite"
+              />
+              <Radio
+                name="sourceType"
+                id="sourceType-vcenter"
+                value="vcenter"
+                checked={values.sourceType === 'vcenter'}
+                onChange={handleOnEvent}
+                label="vCenter Server"
+              />
             </FormGroup>
           </Form>
         )}
