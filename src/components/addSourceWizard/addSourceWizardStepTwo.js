@@ -4,8 +4,8 @@ import { Button, ButtonVariant, Form, ValidatedOptions } from '@patternfly/react
 import { PlusIcon } from '@patternfly/react-icons';
 import { Form as Pf3Form } from 'patternfly-react';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
-import { helpers } from '../../common/helpers';
-import apiTypes from '../../constants/apiConstants';
+import { helpers } from '../../common';
+import { apiTypes } from '../../constants/apiConstants';
 import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
 import { FormGroup } from '../form/formGroup';
 import { Checkbox } from '../form/checkbox';
@@ -105,6 +105,10 @@ class AddSourceWizardStepTwo extends React.Component {
       this.submitStep({
         checked,
         values
+      });
+    } else {
+      store.dispatch({
+        type: reduxTypes.sources.INVALID_SOURCE_WIZARD_STEPTWO
       });
     }
 
