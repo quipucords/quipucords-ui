@@ -10,7 +10,6 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
   <div
     class="pf-c-form__group"
     id="generatedid-"
-    role="radiogroup"
   >
     <div
       class="pf-c-form__group-label"
@@ -21,13 +20,13 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
         <span
           class="pf-c-form__label-text"
         >
-          Select source type
+          t(form-dialog.label_select_source-type)
         </span>
       </label>
        
     </div>
     <div
-      class="pf-c-form__group-control pf-m-stack"
+      class="pf-c-form__group-control"
     >
       <div
         class="pf-c-radio quipucords-form__radio "
@@ -48,7 +47,7 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
           class="pf-c-radio__label"
           for="sourceType-network"
         >
-          Network Range
+          t(form-dialog.label_network-range)
         </label>
       </div>
       <div
@@ -69,7 +68,7 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
           class="pf-c-radio__label"
           for="sourceType-satellite"
         >
-          Satellite
+          t(form-dialog.label_satellite)
         </label>
       </div>
       <div
@@ -90,7 +89,7 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
           class="pf-c-radio__label"
           for="sourceType-vcenter"
         >
-          vCenter Server
+          t(form-dialog.label_vCenter-server)
         </label>
       </div>
     </div>

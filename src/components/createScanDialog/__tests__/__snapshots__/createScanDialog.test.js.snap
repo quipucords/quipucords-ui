@@ -438,7 +438,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="Red Hat JBoss Enterprise Application Platform"
+                  aria-label="t(form-dialog.label_jboss_full)"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-1"
                   data-ouia-component-type="PF4/Checkbox"
@@ -453,9 +453,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossEap"
                 >
                   <abbr
-                    title="Red Hat JBoss Enterprise Application Platform"
+                    title="t(form-dialog.label_jboss_full)"
                   >
-                    JBoss EAP
+                    t(form-dialog.label_jboss)
                   </abbr>
                 </label>
               </div>
@@ -464,7 +464,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="Red Hat Fuse"
+                  aria-label="t(form-dialog.label_fuse_full)"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-2"
                   data-ouia-component-type="PF4/Checkbox"
@@ -481,7 +481,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   <abbr
                     title="Red Hat Fuse"
                   >
-                    Fuse
+                    t(form-dialog.label_fuse)
                   </abbr>
                 </label>
               </div>
@@ -490,7 +490,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="Red Hat JBoss Web Server"
+                  aria-label="t(form-dialog.label_jboss_full)"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-3"
                   data-ouia-component-type="PF4/Checkbox"
@@ -505,9 +505,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossWs"
                 >
                   <abbr
-                    title="Red Hat JBoss Web Server"
+                    title="t(form-dialog.label_jboss_full)"
                   >
-                    JBoss Web Server
+                    t(form-dialog.label_jboss)
                   </abbr>
                 </label>
               </div>
@@ -516,7 +516,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+                  aria-label="t(form-dialog.label_decision-manager_full)"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-4"
                   data-ouia-component-type="PF4/Checkbox"
@@ -531,9 +531,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossBrms"
                 >
                   <abbr
-                    title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+                    title="t(form-dialog.label_decision-manager_full)"
                   >
-                    Decision Manager
+                    t(form-dialog.label_decision-manager)
                   </abbr>
                 </label>
               </div>
@@ -552,7 +552,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                 <span
                   class="pf-c-form__label-text"
                 >
-                  Scan alternate directories
+                  t(form-dialog.label_scan-alt-directories)
                 </span>
               </label>
                
