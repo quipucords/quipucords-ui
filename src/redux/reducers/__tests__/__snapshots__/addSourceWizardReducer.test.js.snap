@@ -130,6 +130,27 @@ Object {
 }
 `;
 
+exports[`AddSourceWizardReducer should handle specific defined types: defined type INVALID_SOURCE_WIZARD_STEPTWO 1`] = `
+Object {
+  "result": Object {
+    "add": false,
+    "edit": false,
+    "editSource": null,
+    "error": false,
+    "errorMessage": null,
+    "errorStatus": null,
+    "fulfilled": false,
+    "pending": false,
+    "show": false,
+    "source": Object {},
+    "stepOneValid": true,
+    "stepTwoErrorMessages": Object {},
+    "stepTwoValid": false,
+  },
+  "type": "INVALID_SOURCE_WIZARD_STEPTWO",
+}
+`;
+
 exports[`AddSourceWizardReducer should handle specific defined types: defined type UPDATE_SOURCE_HIDE 1`] = `
 Object {
   "result": Object {
