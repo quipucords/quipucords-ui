@@ -94,6 +94,18 @@ const addSourceWizardReducer = (state = initialState, action) => {
         }
       );
 
+    case sourcesTypes.INVALID_SOURCE_WIZARD_STEPTWO:
+      return reduxHelpers.setStateProp(
+        null,
+        {
+          stepTwoValid: false
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+
     case reduxHelpers.REJECTED_ACTION(sourcesTypes.UPDATE_SOURCE):
     case reduxHelpers.REJECTED_ACTION(sourcesTypes.ADD_SOURCE):
       const filterProperties = [
