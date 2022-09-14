@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
-import { helpers } from '../../common/helpers';
+import { helpers } from '../../common';
 import { apiTypes } from '../../constants/apiConstants';
 
 /**
@@ -290,85 +290,6 @@ const scanJobsListSelector = createSelector([previousScanJobs], scanJobs => {
 const makeScanJobsListSelector = () => scanJobsListSelector;
 
 /**
- * Map a scan object to consumable prop names
- *
- * @param {object} state
- * @param {object} props
- * @returns {*}
- */
-const scanListItem = (state, props) => props;
-
-const scanListItemSelector = createSelector([scanListItem], props => {
-  const { scan } = props;
-  const updatedScan = {};
-
-  helpers.setPropIfDefined(updatedScan, ['id'], scan[apiTypes.API_RESPONSE_SCAN_ID]);
-  helpers.setPropIfDefined(updatedScan, ['name'], scan[apiTypes.API_RESPONSE_SCAN_NAME]);
-  helpers.setPropIfDefined(updatedScan, ['jobsTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_JOBS, []).length);
-  helpers.setPropIfDefined(updatedScan, ['sourcesTotal'], _get(scan, apiTypes.API_RESPONSE_SCAN_SOURCES, []).length);
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentEndTime'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_END_TIME])
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentId'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID])
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentReportId'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_REPORT_ID])
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentStatus'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS])
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentStartTime'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_START_TIME])
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentStatusMessage'],
-    _get(
-      scan,
-      [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS][
-        apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS_MESSAGE
-      ]
-    )
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentSysFailed'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_FAILED], 0)
-  );
-
-  helpers.setPropIfDefined(
-    updatedScan,
-    ['mostRecentSysScanned'],
-    _get(scan, [apiTypes.API_RESPONSE_SCAN_MOST_RECENT, apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_SCANNED], 0)
-  );
-
-  return {
-    ...props,
-    scan: updatedScan
-  };
-});
-
-const makeScanListItemSelector = () => scanListItemSelector;
-
-/**
  * Return a check for sources existing
  *
  * @param {object} state
@@ -389,27 +310,6 @@ const scansEmptyStateSelector = createSelector([scansEmptyState], empty => {
 
 const makeScansEmptyStateSelector = () => scansEmptyStateSelector;
 
-/**
- * Return a list of scan objects
- *
- * @param {object} state
- * @returns {*}
- */
-const scansView = state => state.scans.view;
-
-const scansViewSelector = createSelector([scansView], view => {
-  const lastRefresh = (view.date && new Date(view.date).getTime()) || 0;
-  const scans = (view.data && view.data[apiTypes.API_RESPONSE_SCANS_RESULTS]) || [];
-
-  return {
-    ...view,
-    lastRefresh,
-    scans
-  };
-});
-
-const makeScansViewSelector = () => scansViewSelector;
-
 const scansSelectors = {
   scanHostsList: scanHostsListSelector,
   makeScanHostsList: makeScanHostsListSelector,
@@ -417,12 +317,8 @@ const scansSelectors = {
   makeScanJobDetailBySource: makeScanJobDetailBySourceSelector,
   scanJobsList: scanJobsListSelector,
   makeScanJobsList: makeScanJobsListSelector,
-  scanListItem: scanListItemSelector,
-  makeScanListItem: makeScanListItemSelector,
   scansEmptyState: scansEmptyStateSelector,
-  makeScansEmptyState: makeScansEmptyStateSelector,
-  scansView: scansViewSelector,
-  makeScansView: makeScansViewSelector
+  makeScansEmptyState: makeScansEmptyStateSelector
 };
 
 export {
@@ -434,10 +330,6 @@ export {
   makeScanJobDetailBySourceSelector,
   scanJobsListSelector,
   makeScanJobsListSelector,
-  scanListItemSelector,
-  makeScanListItemSelector,
   scansEmptyStateSelector,
-  makeScansEmptyStateSelector,
-  scansViewSelector,
-  makeScansViewSelector
+  makeScansEmptyStateSelector
 };

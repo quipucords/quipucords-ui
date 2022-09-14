@@ -31,12 +31,6 @@ const getScansSources =
       payload: sourcesService.getSources('', query)
     });
 
-const getSource = id => dispatch =>
-  dispatch({
-    type: sourcesTypes.GET_SOURCE,
-    payload: sourcesService.getSource(id)
-  });
-
 const getSources =
   (query = {}) =>
   dispatch =>
@@ -56,7 +50,6 @@ const sourcesActions = {
   deleteSource,
   deleteSources,
   getScansSources,
-  getSource,
   getSources,
   updateSource
 };
@@ -68,7 +61,6 @@ export {
   deleteSource,
   deleteSources,
   getScansSources,
-  getSource,
   getSources,
   updateSource
 };

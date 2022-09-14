@@ -1,6 +1,6 @@
 import { factsTypes } from '../constants';
-import { helpers } from '../../common/helpers';
-import { reduxHelpers } from '../common/reduxHelpers';
+import { helpers } from '../../common';
+import { reduxHelpers } from '../common';
 
 const initialState = {
   update: {

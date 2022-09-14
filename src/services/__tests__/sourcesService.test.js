@@ -17,7 +17,7 @@ describe('SourcesService', () => {
   });
 
   it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(sourcesService)).toHaveLength(6);
+    expect(Object.keys(sourcesService)).toHaveLength(5);
   });
 
   it('should have specific methods', () => {
@@ -25,7 +25,6 @@ describe('SourcesService', () => {
     expect(sourcesService.deleteSource).toBeDefined();
     expect(sourcesService.deleteSources).toBeDefined();
     expect(sourcesService.getSources).toBeDefined();
-    expect(sourcesService.getSource).toBeDefined();
     expect(sourcesService.updateSource).toBeDefined();
   });
 

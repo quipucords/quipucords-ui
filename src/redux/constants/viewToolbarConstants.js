@@ -6,7 +6,19 @@ const CLEAR_FILTERS = 'CLEAR_FILTERS';
 const SET_SORT_TYPE = 'SET_SORT_TYPE';
 const TOGGLE_SORT_ASCENDING = 'TOGGLE_SORT_ASCENDING';
 
+const viewToolbarTypes = {
+  SET_FILTER_TYPE,
+  SET_FILTER_VALUE,
+  ADD_FILTER,
+  REMOVE_FILTER,
+  CLEAR_FILTERS,
+  SET_SORT_TYPE,
+  TOGGLE_SORT_ASCENDING
+};
+
 export {
+  viewToolbarTypes as default,
+  viewToolbarTypes,
   SET_FILTER_TYPE,
   SET_FILTER_VALUE,
   ADD_FILTER,

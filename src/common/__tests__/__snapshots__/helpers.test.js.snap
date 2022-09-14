@@ -99,12 +99,8 @@ Object {
   "noop": [Function],
   "noopPromise": Promise {},
   "noopTranslate": [Function],
-  "scanStatusIcon": [Function],
-  "scanTypeIcon": [Function],
   "setPropIfDefined": [Function],
   "setPropIfTruthy": [Function],
-  "sourceTypeIcon": [Function],
-  "viewPropsChanged": [Function],
 }
 `;
 
@@ -115,25 +111,3 @@ Object {
 `;
 
 exports[`Helpers should support displaying the ui version: ui version 1`] = `"0.0.0.0000000"`;
-
-exports[`Helpers should support icon references: scanStatusIcon 1`] = `
-Object {
-  "classNames": Array [],
-  "name": "ok",
-  "type": "pf",
-}
-`;
-
-exports[`Helpers should support icon references: scanTypeIcon 1`] = `
-Object {
-  "name": "connected",
-  "type": "pf",
-}
-`;
-
-exports[`Helpers should support icon references: sourceTypeIcon 1`] = `
-Object {
-  "name": "vcenter",
-  "type": "pf",
-}
-`;
