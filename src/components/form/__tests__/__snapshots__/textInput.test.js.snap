@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TextInput Component should export support constants, types: support 1`] = `
+Object {
+  "TextInputTypes": Object {
+    "date": "date",
+    "datetimeLocal": "datetime-local",
+    "email": "email",
+    "month": "month",
+    "number": "number",
+    "password": "password",
+    "search": "search",
+    "tel": "tel",
+    "text": "text",
+    "time": "time",
+    "url": "url",
+  },
+}
+`;
+
 exports[`TextInput Component should handle readOnly, disabled: active 1`] = `
 <input
   aria-invalid="false"
@@ -82,15 +100,33 @@ Array [
   Array [
     Object {
       "checked": undefined,
-      "currentTarget": Object {
-        "value": "dolor sit",
-      },
-      "id": undefined,
+      "currentTarget": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-3"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="text"
+        value="lorem ipsum"
+      />,
+      "id": "generatedid-",
       "keyCode": undefined,
-      "name": undefined,
+      "name": "generatedid-",
       "persist": [Function],
-      "target": Object {},
-      "value": "dolor sit",
+      "target": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-3"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="text"
+        value="lorem ipsum"
+      />,
+      "value": "lorem ipsum",
     },
   ],
 ]
@@ -101,14 +137,32 @@ Array [
   Array [
     Object {
       "checked": undefined,
-      "currentTarget": Object {
-        "value": "",
-      },
-      "id": undefined,
+      "currentTarget": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-5"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="search"
+        value=""
+      />,
+      "id": "generatedid-",
       "keyCode": 27,
-      "name": undefined,
+      "name": "generatedid-",
       "persist": [Function],
-      "target": Object {},
+      "target": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-5"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="search"
+        value=""
+      />,
       "value": "",
     },
   ],
@@ -120,14 +174,32 @@ Array [
   Array [
     Object {
       "checked": undefined,
-      "currentTarget": Object {
-        "value": "",
-      },
-      "id": undefined,
+      "currentTarget": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-4"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="text"
+        value=""
+      />,
+      "id": "generatedid-",
       "keyCode": 27,
-      "name": undefined,
+      "name": "generatedid-",
       "persist": [Function],
-      "target": Object {},
+      "target": <input
+        aria-invalid="false"
+        class="pf-c-form-control quipucords-form__text-input "
+        data-ouia-component-id="OUIA-Generated-TextInputBase-4"
+        data-ouia-component-type="PF4/TextInput"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="text"
+        value=""
+      />,
       "value": "",
     },
   ],
