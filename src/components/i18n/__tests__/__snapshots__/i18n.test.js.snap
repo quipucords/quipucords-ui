@@ -654,23 +654,27 @@ Array [
     "keys": Array [
       Object {
         "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['deleted-source'] })",
+        "match": "t('toast-notifications.title', { context: ['deleted-source'], count: sourceNames.length })",
       },
       Object {
         "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-source'], name: sourceName })",
+        "match": "t('toast-notifications.description', { context: ['deleted-source'], name: sourceNames[0], count: sourceNames.length })",
       },
       Object {
         "key": "toast-notifications.title",
         "match": "t('toast-notifications.title', { context: ['error'] })",
       },
       Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-source'] })",
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-source', 'error'], name: sourceNames[0], count: sourceNames.length, message: errorMessage })",
       },
       Object {
         "key": "form-dialog.confirmation",
-        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-source'], name: source[apiTypes.API_RESPONSE_SOURCE_NAME] }, [<strong />] )",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-source'], count: updatedSources.length })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-source'], count: updatedSources.length, name: updatedSources?.[0]?.[apiTypes.API_RESPONSE_SOURCE_NAME] }, [<strong />] )",
       },
       Object {
         "key": "form-dialog.label",

@@ -1,6 +1,6 @@
 import { scansReducer } from '../scansReducer';
 import { scansTypes as types, sourcesTypes } from '../../constants';
-import { reduxHelpers } from '../../common/reduxHelpers';
+import { reduxHelpers } from '../../common';
 
 describe('ScansReducer', () => {
   it('should return the initial state', () => {

@@ -1,110 +1,150 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useShallowCompareEffect } from 'react-use';
+import { AlertVariant, List, ListItem } from '@patternfly/react-core';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useTimeout } from '../../hooks';
 import { apiTypes } from '../../constants/apiConstants';
 import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
+import { useConfirmation } from '../../hooks/useConfirmation';
 
 /**
- * On Delete confirmation, and action.
+ * Sources action, onDelete.
  *
  * @param {object} options
- * @param {Function} options.deleteSource
+ * @param {Function} options.deleteSources
  * @param {Function} options.t
+ * @param {Function} options.useConfirmation
  * @param {Function} options.useDispatch
- * @param {Function} options.useSelector
  * @param {Function} options.useSelectorsResponse
- * @returns {Function}
+ * @returns {(function(*): void)|*}
  */
 const useOnDelete = ({
-  deleteSource = reduxActions.sources.deleteSource,
+  deleteSources = reduxActions.sources.deleteSource,
   t = translate,
+  useConfirmation: useAliasConfirmation = useConfirmation,
   useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
-  useSelector: useAliasSelector = storeHooks.reactRedux.useSelector,
   useSelectorsResponse: useAliasSelectorsResponse = storeHooks.reactRedux.useSelectorsResponse
 } = {}) => {
+  const onConfirmation = useAliasConfirmation();
+  const [sourcesToDelete, setSourcesToDelete] = useState([]);
   const dispatch = useAliasDispatch();
-  const sourceToDelete = useAliasSelector(({ sources }) => sources?.confirmDelete?.source, {});
-  const { error, fulfilled, message } = useAliasSelectorsResponse(({ sources }) => sources?.deleted);
-  const { [apiTypes.API_RESPONSE_SOURCE_ID]: sourceId, [apiTypes.API_RESPONSE_SOURCE_NAME]: sourceName } =
-    sourceToDelete;
-
-  useEffect(() => {
-    if (sourceId) {
-      dispatch([
-        {
-          type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_HIDE
-        }
-      ]);
-
-      deleteSource(sourceId)(dispatch);
-    }
-  }, [sourceId, deleteSource, dispatch]);
+  const {
+    data,
+    error: deletedError,
+    fulfilled: deletedFulfilled
+  } = useAliasSelectorsResponse(({ sources }) => sources?.deleted);
+  const { errorMessage } = data?.[0] || {};
 
   useShallowCompareEffect(() => {
-    if (fulfilled) {
+    if (sourcesToDelete.length) {
+      const sourceIds = sourcesToDelete.map(source => source[apiTypes.API_RESPONSE_SOURCE_ID]);
+      deleteSources(sourceIds)(dispatch);
+    }
+  }, [sourcesToDelete, deleteSources, dispatch]);
+
+  useShallowCompareEffect(() => {
+    if (deletedFulfilled && sourcesToDelete.length) {
+      const sourceNames = sourcesToDelete.map(source => source[apiTypes.API_RESPONSE_SOURCE_NAME]);
       dispatch([
         {
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'success',
+          alertType: AlertVariant.success,
           header: t('toast-notifications.title', {
-            context: ['deleted-source']
+            context: ['deleted-source'],
+            count: sourceNames.length
           }),
           message: t('toast-notifications.description', {
             context: ['deleted-source'],
-            name: sourceName
+            name: sourceNames[0],
+            count: sourceNames.length
           })
         },
         {
-          type: reduxTypes.sources.RESET_DELETE_SOURCE
+          type: reduxTypes.sources.DESELECT_SOURCE,
+          item: sourcesToDelete
         },
         {
           type: reduxTypes.sources.UPDATE_SOURCES
         }
       ]);
+
+      setSourcesToDelete(() => []);
     }
 
-    if (error) {
-      dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'danger',
-        header: t('toast-notifications.title', {
-          context: ['error']
-        }),
-        message
-      });
-    }
-  }, [error, fulfilled, message, dispatch, sourceName, sourceToDelete]);
+    if (deletedError && sourcesToDelete.length) {
+      const sourceNames = sourcesToDelete.map(source => source[apiTypes.API_RESPONSE_SOURCE_NAME]);
+      dispatch([
+        {
+          type: reduxTypes.toastNotifications.TOAST_ADD,
+          alertType: AlertVariant.danger,
+          header: t('toast-notifications.title', {
+            context: ['error']
+          }),
+          message: t('toast-notifications.description', {
+            context: ['deleted-source', 'error'],
+            name: sourceNames[0],
+            count: sourceNames.length,
+            message: errorMessage
+          })
+        },
+        {
+          type: reduxTypes.sources.DESELECT_SOURCE,
+          item: sourcesToDelete
+        },
+        {
+          type: reduxTypes.sources.UPDATE_SOURCES
+        }
+      ]);
 
-  return source => {
-    dispatch({
-      type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
+      setSourcesToDelete(() => []);
+    }
+  }, [deletedError, deletedFulfilled, dispatch, errorMessage, sourcesToDelete, t]);
+
+  return sources => {
+    const updatedSources = (Array.isArray(sources) && sources) || [sources];
+
+    onConfirmation({
       title: t('form-dialog.confirmation', {
-        context: ['title', 'delete-source']
+        context: ['title', 'delete-source'],
+        count: updatedSources.length
       }),
       heading: t(
         'form-dialog.confirmation',
         {
           context: ['heading', 'delete-source'],
-          name: source[apiTypes.API_RESPONSE_SOURCE_NAME]
+          count: updatedSources.length,
+          name: updatedSources?.[0]?.[apiTypes.API_RESPONSE_SOURCE_NAME]
         },
         [<strong />]
       ),
+      body:
+        (updatedSources.length > 1 && (
+          <List className="quipucords-list__overflow-scroll" isPlain>
+            {updatedSources.map(
+              ({
+                [apiTypes.API_RESPONSE_SOURCE_NAME]: name,
+                [apiTypes.API_RESPONSE_SOURCE_SOURCE_TYPE]: sourceType
+              }) => (
+                <ListItem key={name} icon={<ContextIcon symbol={ContextIconVariant[sourceType]} />}>
+                  {name}
+                </ListItem>
+              )
+            )}
+          </List>
+        )) ||
+        undefined,
       confirmButtonText: t('form-dialog.label', {
         context: ['delete']
       }),
-      onConfirm: () =>
-        dispatch({
-          type: reduxTypes.sources.CONFIRM_DELETE_SOURCE,
-          source
-        })
+      onConfirm: () => setSourcesToDelete(() => updatedSources)
     });
   };
 };
 
 /**
- * On edit a source
+ * On edit a source, show modal.
  *
  * @param {object} options
  * @param {Function} options.useDispatch
@@ -122,7 +162,7 @@ const useOnEdit = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDi
 };
 
 /**
- * On expand a source row facet.
+ * On expand a row facet.
  *
  * @param {object} options
  * @param {Function} options.useDispatch
@@ -135,14 +175,14 @@ const useOnExpand = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
     dispatch({
       type: isExpanded ? reduxTypes.sources.EXPANDED_SOURCE : reduxTypes.sources.NOT_EXPANDED_SOURCE,
       viewType: reduxTypes.view.SOURCES_VIEW,
-      source: sourceData.source,
+      item: sourceData.source,
       cellIndex
     });
   };
 };
 
 /**
- * On refresh sources view.
+ * On refresh view.
  *
  * @param {object} options
  * @param {Function} options.useDispatch
@@ -177,7 +217,7 @@ const useOnScan = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDi
 };
 
 /**
- * On select a source row.
+ * On select a row.
  *
  * @param {object} options
  * @param {Function} options.useDispatch
@@ -190,13 +230,13 @@ const useOnSelect = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
     dispatch({
       type: isSelected ? reduxTypes.sources.SELECT_SOURCE : reduxTypes.sources.DESELECT_SOURCE,
       viewType: reduxTypes.view.SOURCES_VIEW,
-      source: sourceData.source
+      item: sourceData.source
     });
   };
 };
 
 /**
- * Poll sources data for pending results.
+ * Poll data for pending results.
  *
  * @param {object} options
  * @param {number} options.pollInterval
@@ -231,7 +271,8 @@ const usePoll = ({
  * @param {Function} options.usePoll
  * @param {Function} options.useSelectors
  * @param {Function} options.useSelectorsResponse
- * @returns {{date: *, sources: *[], expandedSources: *, pending: boolean, errorMessage: null, fulfilled: boolean, error: boolean, selectedSources: *}}
+ * @returns {{date: *, sources: *[], expandedSources: *, pending: boolean, errorMessage: null, fulfilled: boolean,
+ *     error: boolean, selectedSources: *}}
  */
 const useGetSources = ({
   getSources = reduxActions.sources.getSources,

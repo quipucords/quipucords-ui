@@ -9,19 +9,14 @@ const addSource =
       payload: sourcesService.addSource(data, query)
     });
 
-const deleteSource = id => dispatch =>
-  dispatch({
-    type: sourcesTypes.DELETE_SOURCE,
-    payload: sourcesService.deleteSource(id)
-  });
+const deleteSource = id => dispatch => {
+  const updatedIds = (Array.isArray(id) && id) || [id];
 
-const deleteSources =
-  (ids = []) =>
-  dispatch =>
-    dispatch({
-      type: sourcesTypes.DELETE_SOURCES,
-      payload: sourcesService.deleteSources(ids)
-    });
+  return dispatch({
+    type: sourcesTypes.DELETE_SOURCE,
+    payload: Promise.all(updatedIds.map(updatedId => sourcesService.deleteSource(updatedId)))
+  });
+};
 
 const getScansSources =
   (query = {}) =>
@@ -48,7 +43,6 @@ const updateSource = (id, data) => dispatch =>
 const sourcesActions = {
   addSource,
   deleteSource,
-  deleteSources,
   getScansSources,
   getSources,
   updateSource
@@ -59,7 +53,6 @@ export {
   sourcesActions,
   addSource,
   deleteSource,
-  deleteSources,
   getScansSources,
   getSources,
   updateSource
