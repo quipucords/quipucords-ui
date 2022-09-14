@@ -31,37 +31,15 @@ Object {
 }
 `;
 
-exports[`ScansSelectors Should map a jobs object to consumable props: scanListItem 1`] = `
-Object {
-  "scan": Object {
-    "id": 4,
-    "jobsTotal": 0,
-    "mostRecentEndTime": "2019-05-03T06:28:54.564Z",
-    "mostRecentId": 42,
-    "mostRecentReportId": 3,
-    "mostRecentStartTime": "2019-05-03T06:28:54.564Z",
-    "mostRecentStatus": "completed",
-    "mostRecentSysFailed": 1,
-    "mostRecentSysScanned": 20,
-    "name": "lorem ipsum",
-    "sourcesTotal": 0,
-  },
-}
-`;
-
 exports[`ScansSelectors Should return specific selectors: selectors 1`] = `
 Object {
   "makeScanHostsList": [Function],
   "makeScanJobDetailBySource": [Function],
   "makeScanJobsList": [Function],
-  "makeScanListItem": [Function],
   "makeScansEmptyState": [Function],
-  "makeScansView": [Function],
   "scanHostsList": [Function],
   "scanJobDetailBySource": [Function],
   "scanJobsList": [Function],
-  "scanListItem": [Function],
   "scansEmptyState": [Function],
-  "scansView": [Function],
 }
 `;

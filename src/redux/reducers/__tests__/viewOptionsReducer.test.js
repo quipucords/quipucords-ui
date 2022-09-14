@@ -24,10 +24,7 @@ describe('viewOptionsReducer', () => {
       viewToolbarTypes.SET_SORT_TYPE,
       viewToolbarTypes.TOGGLE_SORT_ASCENDING,
       viewPaginationTypes.VIEW_PAGE,
-      viewPaginationTypes.SET_PER_PAGE,
-      viewTypes.SELECT_ITEM,
-      viewTypes.DESELECT_ITEM,
-      viewTypes.EXPAND_ITEM
+      viewPaginationTypes.SET_PER_PAGE
     ];
 
     specificTypes.forEach(value => {

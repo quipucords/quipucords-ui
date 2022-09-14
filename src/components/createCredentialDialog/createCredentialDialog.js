@@ -227,12 +227,6 @@ class CreateCredentialDialog extends React.Component {
     });
   };
 
-  onErrorDismissed = () => {
-    store.dispatch({
-      type: reduxTypes.credentials.RESET_CREDENTIAL_UPDATE_STATUS
-    });
-  };
-
   resetInitialState(nextProps) {
     let sshKeyDisabled = true;
 

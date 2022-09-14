@@ -161,70 +161,6 @@ const noopTranslate = (key, value, components) => {
 };
 
 /**
- * Return an icon for source type.
- *
- * @param {string} sourceType
- * @returns {{name: string, type: string}}
- */
-const sourceTypeIcon = sourceType => {
-  switch (sourceType) {
-    case 'vcenter':
-      return { type: 'pf', name: 'vcenter' };
-    case 'network':
-      return { type: 'pf', name: 'network-range' };
-    case 'satellite':
-      return { type: 'pf', name: 'satellite' };
-    default:
-      return { type: 'pf', name: '' };
-  }
-};
-
-/**
- * Return an icon for scanning type.
- *
- * @param {string} scanType
- * @returns {{name: string, type: string}}
- */
-const scanTypeIcon = scanType => {
-  switch (scanType) {
-    case 'connect':
-      return { type: 'pf', name: 'connected' };
-    case 'inspect':
-      return { type: 'fa', name: 'search' };
-    default:
-      return { type: 'pf', name: '' };
-  }
-};
-
-/**
- * Return an icon for scanning status.
- *
- * @param {string} scanStatus
- * @returns {{name: string, classNames: *[], type: string}|{name: string, classNames: string[], type: string}}
- */
-const scanStatusIcon = scanStatus => {
-  switch (scanStatus) {
-    case 'completed':
-    case 'success':
-      return { type: 'pf', name: 'ok', classNames: [] };
-    case 'failed':
-    case 'canceled':
-      return { type: 'pf', name: 'error-circle-o', classNames: [] };
-    case 'unreachable':
-      return { type: 'pf', name: 'disconnected', classNames: ['is-error'] };
-    case 'created':
-    case 'pending':
-    case 'running':
-      return { type: 'fa', name: 'spinner', classNames: ['fa-spin'] };
-    case 'paused':
-      return { type: 'pf', name: 'warning-triangle-o', classNames: [] };
-    default:
-      console.error(`Unknown status: ${scanStatus}`);
-      return { type: 'pf', name: 'unknown', classNames: [] };
-  }
-};
-
-/**
  * Set a property if the value is NOT undefined using lodash "set".
  *
  * @param {object} obj
@@ -243,20 +179,6 @@ const setPropIfDefined = (obj, props, value) => (obj && value !== undefined ? _s
  * @returns {*}
  */
 const setPropIfTruthy = (obj, props, value) => (obj && value ? _set(obj, props, value) : obj);
-
-/**
- * View lifecycle method helper to determine if props have changed.
- *
- * @param {object} nextViewOptions
- * @param {object} currentViewOptions
- * @returns {boolean}
- */
-const viewPropsChanged = (nextViewOptions, currentViewOptions) =>
-  nextViewOptions.currentPage !== currentViewOptions.currentPage ||
-  nextViewOptions.pageSize !== currentViewOptions.pageSize ||
-  nextViewOptions.sortField !== currentViewOptions.sortField ||
-  nextViewOptions.sortAscending !== currentViewOptions.sortAscending ||
-  nextViewOptions.activeFilters !== currentViewOptions.activeFilters;
 
 /**
  * Generate a consistent query parameter object for views.
@@ -559,12 +481,8 @@ const helpers = {
   noop,
   noopPromise,
   noopTranslate,
-  sourceTypeIcon,
-  scanTypeIcon,
-  scanStatusIcon,
   setPropIfDefined,
   setPropIfTruthy,
-  viewPropsChanged,
   createViewQueryObject,
   getMessageFromResults,
   getStatusFromResults,

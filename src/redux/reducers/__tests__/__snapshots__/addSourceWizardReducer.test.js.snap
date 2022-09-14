@@ -65,27 +65,6 @@ Object {
 }
 `;
 
-exports[`AddSourceWizardReducer should handle all defined fulfilled types: fulfilled types GET_WIZARD_CREDENTIALS 1`] = `
-Object {
-  "result": Object {
-    "add": false,
-    "edit": false,
-    "editSource": null,
-    "error": false,
-    "errorMessage": null,
-    "errorStatus": null,
-    "fulfilled": false,
-    "pending": false,
-    "show": false,
-    "source": Object {},
-    "stepOneValid": true,
-    "stepTwoErrorMessages": Object {},
-    "stepTwoValid": false,
-  },
-  "type": "GET_WIZARD_CREDENTIALS_FULFILLED",
-}
-`;
-
 exports[`AddSourceWizardReducer should handle all defined fulfilled types: fulfilled types UPDATE_SOURCE 1`] = `
 Object {
   "result": Object {
