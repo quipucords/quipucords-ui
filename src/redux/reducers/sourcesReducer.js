@@ -3,7 +3,6 @@ import { helpers } from '../../common';
 import { reduxHelpers } from '../common';
 
 const initialState = {
-  confirmDelete: {},
   deleted: {},
   selected: {},
   expanded: {},
@@ -24,34 +23,11 @@ const sourcesReducer = (state = initialState, action) => {
           reset: false
         }
       );
-    case sourcesTypes.CONFIRM_DELETE_SOURCE:
-      return reduxHelpers.setStateProp(
-        'confirmDelete',
-        {
-          source: action.source
-        },
-        {
-          state,
-          initialState
-        }
-      );
-    case sourcesTypes.RESET_DELETE_SOURCE:
-      return reduxHelpers.setStateProp(
-        null,
-        {
-          confirmDelete: {},
-          deleted: {}
-        },
-        {
-          state,
-          initialState
-        }
-      );
     case sourcesTypes.SELECT_SOURCE:
       return reduxHelpers.setStateProp(
         'selected',
         {
-          [action.source?.id]: action.source
+          [action.item?.id]: action.item
         },
         {
           state,
@@ -59,10 +35,16 @@ const sourcesReducer = (state = initialState, action) => {
         }
       );
     case sourcesTypes.DESELECT_SOURCE:
+      const itemsToDeselect = {};
+      const deselectItems = (Array.isArray(action.item) && action.item) || [action?.item || {}];
+      deselectItems.forEach(({ id }) => {
+        itemsToDeselect[id] = null;
+      });
+
       return reduxHelpers.setStateProp(
         'selected',
         {
-          [action.source?.id]: null
+          ...itemsToDeselect
         },
         {
           state,
@@ -73,7 +55,7 @@ const sourcesReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'expanded',
         {
-          [action.source?.id]: action.cellIndex
+          [action.item?.id]: action.cellIndex
         },
         {
           state,
@@ -84,7 +66,7 @@ const sourcesReducer = (state = initialState, action) => {
       return reduxHelpers.setStateProp(
         'expanded',
         {
-          [action.source?.id]: null
+          [action.item?.id]: null
         },
         {
           state,
@@ -94,7 +76,7 @@ const sourcesReducer = (state = initialState, action) => {
     default:
       return reduxHelpers.generatedPromiseActionReducer(
         [
-          { ref: 'deleted', type: [sourcesTypes.DELETE_SOURCE, sourcesTypes.DELETE_SOURCES] },
+          { ref: 'deleted', type: [sourcesTypes.DELETE_SOURCE] },
           { ref: 'view', type: sourcesTypes.GET_SOURCES }
         ],
         state,

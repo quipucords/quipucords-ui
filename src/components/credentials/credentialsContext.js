@@ -17,7 +17,7 @@ import { useConfirmation } from '../../hooks/useConfirmation';
  * @param {Function} options.useConfirmation
  * @param {Function} options.useDispatch
  * @param {Function} options.useSelectorsResponse
- * @returns {{onDelete: Function, onEdit: Function}}
+ * @returns {(function(*): void)|*}
  */
 const useOnDelete = ({
   deleteCredentials = reduxActions.credentials.deleteCredential,

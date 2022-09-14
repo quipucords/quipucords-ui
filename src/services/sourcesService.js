@@ -14,8 +14,6 @@ const deleteSource = id =>
     url: `${process.env.REACT_APP_SOURCES_SERVICE}${id}/`
   });
 
-const deleteSources = (data = []) => Promise.all(data.map(id => deleteSource(id)));
-
 const getSources = (id = '', params = {}) =>
   serviceCall(
     {
@@ -35,9 +33,8 @@ const updateSource = (id, data = {}) =>
 const sourcesService = {
   addSource,
   deleteSource,
-  deleteSources,
   getSources,
   updateSource
 };
 
-export { sourcesService as default, sourcesService, addSource, deleteSource, deleteSources, getSources, updateSource };
+export { sourcesService as default, sourcesService, addSource, deleteSource, getSources, updateSource };

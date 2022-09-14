@@ -8,27 +8,22 @@ describe('SourcesContext', () => {
   });
 
   it('should handle deleting a source with a confirmation', async () => {
-    const mockDispatch = jest.fn();
+    const mockConfirmation = jest.fn();
     const mockSource = {
       [apiTypes.API_RESPONSE_SOURCE_NAME]: 'lorem ipsum name',
       [apiTypes.API_RESPONSE_SOURCE_ID]: 'dolor sit id'
     };
 
-    // call confirmation
-    const { result: onDeleteConfirmation } = shallowHook(() => useOnDelete({ useDispatch: () => mockDispatch }));
-    onDeleteConfirmation(mockSource);
-
-    // delete results
-    await mountHook(() =>
+    const { result } = await shallowHook(() =>
       useOnDelete({
-        useDispatch: () => mockDispatch,
-        useSelector: () => mockSource,
-        useSelectorsResponse: () => ({ fulfilled: true })
+        useConfirmation: () => mockConfirmation
       })
     );
 
-    expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch delete a source, confirmation');
-    mockDispatch.mockClear();
+    result(mockSource);
+
+    expect(mockConfirmation.mock.calls).toMatchSnapshot('dispatch onDelete');
+    mockConfirmation.mockClear();
   });
 
   it('should attempt to poll sources', async () => {
