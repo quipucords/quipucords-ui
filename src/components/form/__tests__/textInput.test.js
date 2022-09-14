@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput as PfTextInput } from '@patternfly/react-core';
+import { TextInput as PfTextInput, TextInputTypes } from '@patternfly/react-core';
 import { TextInput } from '../textInput';
 import { helpers } from '../../../common';
 
@@ -9,6 +9,10 @@ describe('TextInput Component', () => {
 
     const component = await shallowHookComponent(<TextInput {...props} />);
     expect(component.render()).toMatchSnapshot('basic component');
+  });
+
+  it('should export support constants, types', () => {
+    expect({ TextInputTypes }).toMatchSnapshot('support');
   });
 
   it('should handle readOnly, disabled', async () => {
@@ -41,7 +45,7 @@ describe('TextInput Component', () => {
       value: 'lorem ipsum'
     };
 
-    const component = await shallowHookComponent(<TextInput {...props} />);
+    const component = await mountHookComponent(<TextInput {...props} />);
     const mockEvent = { currentTarget: { value: 'dolor sit' }, persist: helpers.noop };
     component.find(PfTextInput).simulate('change', 'hello world', mockEvent);
 
@@ -55,7 +59,7 @@ describe('TextInput Component', () => {
       value: 'lorem ipsum'
     };
 
-    const component = await shallowHookComponent(<TextInput {...props} />);
+    const component = await mountHookComponent(<TextInput {...props} />);
     const mockEvent = { keyCode: 27, currentTarget: { value: '' }, persist: helpers.noop };
     component.find(PfTextInput).simulate('keyup', mockEvent);
 
@@ -70,7 +74,7 @@ describe('TextInput Component', () => {
       type: 'search'
     };
 
-    const component = await shallowHookComponent(<TextInput {...props} />);
+    const component = await mountHookComponent(<TextInput {...props} />);
     const mockEvent = { keyCode: 27, currentTarget: { value: '' }, persist: helpers.noop };
     component.find(PfTextInput).simulate('keyup', mockEvent);
 
