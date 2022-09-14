@@ -11,7 +11,6 @@ const initialState = {
     credentialType: undefined,
     credential: undefined
   },
-  action: {},
   selected: {},
   expanded: {},
   update: 0,

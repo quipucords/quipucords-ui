@@ -1,5 +1,5 @@
 import addSourceWizardReducer from '../addSourceWizardReducer';
-import { sourcesTypes as types, credentialsTypes } from '../../constants';
+import { sourcesTypes as types } from '../../constants';
 import { reduxHelpers } from '../../common/reduxHelpers';
 
 describe('AddSourceWizardReducer', () => {
@@ -56,7 +56,7 @@ describe('AddSourceWizardReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.ADD_SOURCE, types.UPDATE_SOURCE, credentialsTypes.GET_WIZARD_CREDENTIALS];
+    const specificTypes = [types.ADD_SOURCE, types.UPDATE_SOURCE];
 
     specificTypes.forEach(value => {
       const dispatched = {

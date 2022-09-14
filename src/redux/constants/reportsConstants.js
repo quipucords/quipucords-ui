@@ -1,4 +1,9 @@
 const GET_REPORTS_DOWNLOAD = 'GET_REPORTS_DOWNLOAD';
 const GET_MERGE_REPORT = 'GET_MERGE_REPORT';
 
-export { GET_REPORTS_DOWNLOAD, GET_MERGE_REPORT };
+const reportsTypes = {
+  GET_REPORTS_DOWNLOAD,
+  GET_MERGE_REPORT
+};
+
+export { reportsTypes as default, reportsTypes, GET_REPORTS_DOWNLOAD, GET_MERGE_REPORT };

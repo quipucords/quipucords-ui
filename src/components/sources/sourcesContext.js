@@ -60,11 +60,6 @@ const useOnDelete = ({
           type: reduxTypes.sources.RESET_DELETE_SOURCE
         },
         {
-          type: reduxTypes.view.DESELECT_ITEM,
-          viewType: reduxTypes.view.SOURCES_VIEW,
-          item: sourceToDelete
-        },
-        {
           type: reduxTypes.sources.UPDATE_SOURCES
         }
       ]);

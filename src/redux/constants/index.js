@@ -1,16 +1,16 @@
-import * as aboutModalTypes from './aboutModalConstants';
-import * as confirmationModalTypes from './confirmationModalConstants';
+import { aboutModalTypes } from './aboutModalConstants';
+import { confirmationModalTypes } from './confirmationModalConstants';
 import { credentialsTypes } from './credentialsConstants';
-import * as factsTypes from './factsConstants';
-import * as reportsTypes from './reportsConstants';
+import { factsTypes } from './factsConstants';
+import { reportsTypes } from './reportsConstants';
 import { scansTypes } from './scansConstants';
 import { sourcesTypes } from './sourcesConstants';
-import * as statusTypes from './statusConstants';
-import * as toastNotificationTypes from './toasNotificationConstants';
-import * as userTypes from './userConstants';
-import * as viewTypes from './viewConstants';
+import { statusTypes } from './statusConstants';
+import { toastNotificationTypes } from './toasNotificationConstants';
+import { userTypes } from './userConstants';
+import { viewTypes } from './viewConstants';
 import { viewPaginationTypes } from './viewPaginationConstants';
-import * as viewToolbarTypes from './viewToolbarConstants';
+import { viewToolbarTypes } from './viewToolbarConstants';
 
 const reduxTypes = {
   aboutModal: aboutModalTypes,

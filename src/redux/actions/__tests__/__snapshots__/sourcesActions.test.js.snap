@@ -3,5 +3,3 @@
 exports[`SourcesActions Should have a defined deleteSource method: deleteSource 1`] = `"DELETE_SOURCE_FULFILLED"`;
 
 exports[`SourcesActions Should have a defined deleteSources method: deleteSources 1`] = `"DELETE_SOURCES_FULFILLED"`;
-
-exports[`SourcesActions Should return response content for getSource method: getSource 1`] = `"GET_SOURCE_FULFILLED"`;

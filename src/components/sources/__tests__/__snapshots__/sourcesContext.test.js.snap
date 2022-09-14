@@ -104,14 +104,6 @@ Array [
         "type": "RESET_DELETE_SOURCE",
       },
       Object {
-        "item": Object {
-          "id": "dolor sit id",
-          "name": "lorem ipsum name",
-        },
-        "type": "DESELECT_ITEM",
-        "viewType": "SOURCES_VIEW",
-      },
-      Object {
         "type": "UPDATE_SOURCES",
       },
     ],

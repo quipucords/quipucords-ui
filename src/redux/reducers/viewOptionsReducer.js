@@ -1,6 +1,5 @@
-import _findIndex from 'lodash/findIndex';
 import _get from 'lodash/get';
-import { reduxHelpers } from '../common/reduxHelpers';
+import { reduxHelpers } from '../common';
 import {
   viewTypes,
   viewPaginationTypes,
@@ -9,7 +8,7 @@ import {
   scansTypes,
   sourcesTypes
 } from '../constants';
-import apiTypes from '../../constants/apiConstants';
+import { apiTypes } from '../../constants/apiConstants';
 
 const initialState = {};
 
@@ -52,12 +51,6 @@ const viewOptionsReducer = (state = initialState, action) => {
       currentPage: Math.min(state[viewType].currentPage, totalPages || 1)
     };
   };
-
-  const selectedIndex = (stateObj, item) =>
-    _findIndex(stateObj.selectedItems, nextSelected => nextSelected.id === _get(item, 'id'));
-
-  const expandedIndex = (stateObj, item) =>
-    _findIndex(stateObj.expandedItems, nextExpanded => nextExpanded.id === _get(item, 'id'));
 
   switch (action.type) {
     case viewToolbarTypes.SET_FILTER_TYPE:
@@ -161,58 +154,6 @@ const viewOptionsReducer = (state = initialState, action) => {
 
     case reduxHelpers.FULFILLED_ACTION(scansTypes.GET_SCANS):
       updatePageCounts(viewTypes.SCANS_VIEW, action.payload.data[apiTypes.API_RESPONSE_SCANS_COUNT]);
-      return { ...state, ...updateState };
-
-    case viewTypes.SELECT_ITEM:
-      // Do nothing if it is already selected
-      if (selectedIndex(state[action.viewType], action.item) !== -1) {
-        return state;
-      }
-
-      updateState[action.viewType] = {
-        ...state[action.viewType],
-        selectedItems: [...state[action.viewType].selectedItems, action.item]
-      };
-      return { ...state, ...updateState };
-
-    case viewTypes.DESELECT_ITEM:
-      const foundIndex = selectedIndex(state[action.viewType], action.item);
-
-      // Do nothing if it is not already selected
-      if (foundIndex === -1) {
-        return state;
-      }
-
-      updateState[action.viewType] = {
-        ...state[action.viewType],
-        selectedItems: [
-          ...state[action.viewType].selectedItems.slice(0, foundIndex),
-          ...state[action.viewType].selectedItems.slice(foundIndex + 1)
-        ]
-      };
-      return { ...state, ...updateState };
-
-    case viewTypes.EXPAND_ITEM:
-      const expandIndex = expandedIndex(state[action.viewType], action.item);
-      let newExpansions;
-
-      if (expandIndex === -1) {
-        newExpansions = [...state[action.viewType].expandedItems];
-      } else {
-        newExpansions = [
-          ...state[action.viewType].expandedItems.slice(0, expandIndex),
-          ...state[action.viewType].expandedItems.slice(expandIndex + 1)
-        ];
-      }
-
-      if (action.expandType) {
-        newExpansions.push({
-          id: action.item.id,
-          expandType: action.expandType
-        });
-      }
-
-      updateState[action.viewType] = { ...state[action.viewType], expandedItems: newExpansions };
       return { ...state, ...updateState };
 
     default:

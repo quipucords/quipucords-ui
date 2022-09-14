@@ -80,16 +80,6 @@ describe('SourcesActions', () => {
     });
   });
 
-  it('Should return response content for getSource method', done => {
-    const store = generateStore();
-    const dispatcher = sourcesActions.getSource();
-
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('getSource');
-      done();
-    });
-  });
-
   it('Should return response content for getSources method', done => {
     const store = generateStore();
     const dispatcher = sourcesActions.getSources();

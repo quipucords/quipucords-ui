@@ -1,3 +1,7 @@
 const ADD_FACTS = 'ADD_FACTS';
 
-export { ADD_FACTS as default, ADD_FACTS };
+const factsTypes = {
+  ADD_FACTS
+};
+
+export { factsTypes as default, factsTypes, ADD_FACTS };

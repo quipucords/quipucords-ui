@@ -1,5 +1,5 @@
 import { aboutModalTypes } from '../constants';
-import { reduxHelpers } from '../common/reduxHelpers';
+import { reduxHelpers } from '../common';
 
 const initialState = {
   show: false

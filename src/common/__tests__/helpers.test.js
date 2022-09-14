@@ -29,12 +29,6 @@ describe('Helpers', () => {
     expect(helpers.UI_VERSION).toMatchSnapshot('ui version');
   });
 
-  it('should support icon references', () => {
-    expect(helpers.sourceTypeIcon('vcenter')).toMatchSnapshot('sourceTypeIcon');
-    expect(helpers.scanTypeIcon('connect')).toMatchSnapshot('scanTypeIcon');
-    expect(helpers.scanStatusIcon('success')).toMatchSnapshot('scanStatusIcon');
-  });
-
   it('should handle basic object updates', () => {
     const definedObj = {};
     expect(helpers.setPropIfDefined(definedObj, ['lorem'], undefined)).toMatchSnapshot('setPropIfDefined undefined');
@@ -47,8 +41,6 @@ describe('Helpers', () => {
   });
 
   it('should handle view related selectors and props updates', () => {
-    expect(helpers.viewPropsChanged({ activeFilters: true }, { activeFilters: false })).toBe(true);
-
     const viewOptions = {
       currentPage: 1,
       pageSize: 10

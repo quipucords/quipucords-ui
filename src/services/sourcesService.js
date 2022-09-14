@@ -25,8 +25,6 @@ const getSources = (id = '', params = {}) =>
     { auth: false }
   );
 
-const getSource = id => getSources(id);
-
 const updateSource = (id, data = {}) =>
   serviceCall({
     method: 'put',
@@ -39,17 +37,7 @@ const sourcesService = {
   deleteSource,
   deleteSources,
   getSources,
-  getSource,
   updateSource
 };
 
-export {
-  sourcesService as default,
-  sourcesService,
-  addSource,
-  deleteSource,
-  deleteSources,
-  getSources,
-  getSource,
-  updateSource
-};
+export { sourcesService as default, sourcesService, addSource, deleteSource, deleteSources, getSources, updateSource };

@@ -1,7 +1,7 @@
 import { statusTypes } from '../constants';
-import { helpers } from '../../common/helpers';
-import { reduxHelpers } from '../common/reduxHelpers';
-import apiTypes from '../../constants/apiConstants';
+import { helpers } from '../../common';
+import { reduxHelpers } from '../common';
+import { apiTypes } from '../../constants/apiConstants';
 
 const initialState = {
   apiVersion: null,

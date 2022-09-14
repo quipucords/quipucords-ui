@@ -96,31 +96,4 @@ describe('ScansSelectors', () => {
 
     expect(scansSelectors.scanJobDetailBySource(state, props)).toMatchSnapshot('scanJobDetailBySource');
   });
-
-  it('Should map a jobs object to consumable props', () => {
-    const state = {};
-
-    const props = {
-      scan: {
-        [apiTypes.API_RESPONSE_SCAN_ID]: 4,
-        [apiTypes.API_RESPONSE_SCAN_NAME]: 'lorem ipsum',
-        [apiTypes.API_RESPONSE_SCAN_JOBS]: [],
-        [apiTypes.API_RESPONSE_SCAN_SOURCES]: [],
-        [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: {
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID]: 42,
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_REPORT_ID]: 3,
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_START_TIME]: '2019-05-03T06:28:54.564Z',
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_END_TIME]: '2019-05-03T06:28:54.564Z',
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS]: 'completed',
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS]: {
-            [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_STATUS_DETAILS_MESSAGE]: 'Job is complete.'
-          },
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_FAILED]: 1,
-          [apiTypes.API_RESPONSE_SCAN_MOST_RECENT_SYS_SCANNED]: 20
-        }
-      }
-    };
-
-    expect(scansSelectors.scanListItem(state, props)).toMatchSnapshot('scanListItem');
-  });
 });
