@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput as PfTextInput } from '@patternfly/react-core';
+import { TextInput as PfTextInput, TextInputTypes } from '@patternfly/react-core';
 import { createMockEvent } from './formHelpers';
 import { helpers } from '../../common';
 
@@ -12,7 +12,6 @@ import { helpers } from '../../common';
  * @fires onMouseUp
  * @fires onChange
  * @param {object} props
- * @param {*|string} props.value
  * @param {string} props.className
  * @param {string} props.id
  * @param {boolean} props.isDisabled
@@ -23,7 +22,9 @@ import { helpers } from '../../common';
  * @param {Function} props.onMouseUp
  * @param {boolean} props.isReadOnly
  * @param {string} props.type
- * @returns {React.ReactNode};
+ * @param {*|string} props.value
+ * @param {object} props.props
+ * @returns {React.ReactNode}
  */
 const TextInput = ({
   className,
@@ -40,7 +41,24 @@ const TextInput = ({
   ...props
 }) => {
   const [updatedValue, setUpdatedValue] = useState(value);
+  const [clearedEvent, setClearedEvent] = useState();
+  const [changeEvent, setChangeEvent] = useState();
 
+  useEffect(() => {
+    if (clearedEvent) {
+      setClearedEvent(null);
+      onClear(clearedEvent);
+    }
+  }, [clearedEvent, onClear]);
+
+  useEffect(() => {
+    if (changeEvent) {
+      setChangeEvent(null);
+      onChange(changeEvent);
+    }
+  }, [changeEvent, onChange]);
+
+  // ToDo: review having to manually set value on escape key
   /**
    * onKeyUp event, provide additional functionality for onClear event.
    *
@@ -48,21 +66,20 @@ const TextInput = ({
    * @param {object} event
    */
   const onTextInputKeyUp = event => {
-    const { currentTarget, keyCode } = event;
+    const { keyCode } = event;
     const clonedEvent = { ...event };
 
     onKeyUp(createMockEvent(event, true));
 
     if (keyCode === 27) {
-      if (type === 'search' && currentTarget.value === '') {
-        onClear(createMockEvent(clonedEvent));
-      } else {
-        setUpdatedValue('');
-        onClear(createMockEvent({ ...clonedEvent, ...{ currentTarget: { ...clonedEvent.currentTarget, value: '' } } }));
-      }
+      setUpdatedValue('');
+      const updatedTarget = clonedEvent.currentTarget;
+      updatedTarget.value = '';
+      setClearedEvent(createMockEvent({ ...clonedEvent, currentTarget: updatedTarget }));
     }
   };
 
+  // ToDo: review use of setTimeout, used for pf icons inside field
   /**
    * onMouseUp event, provide additional functionality for onClear event.
    *
@@ -97,7 +114,7 @@ const TextInput = ({
     const clonedEvent = { ...event };
 
     setUpdatedValue(changedValue);
-    onChange(createMockEvent(clonedEvent));
+    setChangeEvent(createMockEvent(clonedEvent));
   };
 
   const updatedName = name || helpers.generateId();
@@ -109,10 +126,10 @@ const TextInput = ({
       name={updatedName}
       className={`quipucords-form__text-input ${className}`}
       isDisabled={isDisabled || false}
+      isReadOnly={isReadOnly || false}
       onChange={onTextInputChange}
       onKeyUp={onTextInputKeyUp}
       onMouseUp={onTextInputMouseUp}
-      isReadOnly={isReadOnly || false}
       type={type}
       value={updatedValue ?? value ?? ''}
       {...props}
@@ -124,7 +141,8 @@ const TextInput = ({
  * Prop types
  *
  * @type {{onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function, name: string,
- *     className: string, id: string, isDisabled: boolean, onMouseUp: Function, type: string, value: string}}
+ *     className: string, id: string, isDisabled: boolean, onMouseUp: Function, type: string,
+ *     value: string}}
  */
 TextInput.propTypes = {
   className: PropTypes.string,
@@ -136,7 +154,7 @@ TextInput.propTypes = {
   onClear: PropTypes.func,
   onKeyUp: PropTypes.func,
   onMouseUp: PropTypes.func,
-  type: PropTypes.string,
+  type: PropTypes.oneOf([...Object.values(TextInputTypes)]),
   value: PropTypes.string
 };
 
@@ -144,7 +162,8 @@ TextInput.propTypes = {
  * Default props
  *
  * @type {{onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function, name: null,
- *     className: string, id: null, isDisabled: boolean, onMouseUp: Function, type: string, value: string}}
+ *     className: string, id: null, isDisabled: boolean, onMouseUp: Function, type: TextInputTypes.text,
+ *     value: string}}
  */
 TextInput.defaultProps = {
   className: '',
@@ -156,8 +175,8 @@ TextInput.defaultProps = {
   onClear: helpers.noop,
   onKeyUp: helpers.noop,
   onMouseUp: helpers.noop,
-  type: 'text',
+  type: TextInputTypes.text,
   value: ''
 };
 
-export { TextInput as default, TextInput };
+export { TextInput as default, TextInput, TextInputTypes };
