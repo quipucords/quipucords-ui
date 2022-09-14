@@ -72,10 +72,16 @@ const scansReducer = (state = initialState, action) => {
         }
       );
     case scansTypes.DESELECT_SCAN:
+      const itemsToDeselect = {};
+      const deselectItems = (Array.isArray(action.item) && action.item) || [action?.item || {}];
+      deselectItems.forEach(({ id }) => {
+        itemsToDeselect[id] = null;
+      });
+
       return reduxHelpers.setStateProp(
         'selected',
         {
-          [action.item?.id]: null
+          ...itemsToDeselect
         },
         {
           state,

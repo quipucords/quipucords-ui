@@ -1,6 +1,6 @@
 import sourcesReducer from '../sourcesReducer';
 import { sourcesTypes as types } from '../../constants';
-import { reduxHelpers } from '../../common/reduxHelpers';
+import { reduxHelpers } from '../../common';
 
 describe('SourcesReducer', () => {
   it('should return the initial state', () => {
@@ -10,8 +10,6 @@ describe('SourcesReducer', () => {
   it('should handle specific defined types', () => {
     const specificTypes = [
       types.UPDATE_SOURCES,
-      types.CONFIRM_DELETE_SOURCE,
-      types.RESET_DELETE_SOURCE,
       types.SELECT_SOURCE,
       types.DESELECT_SOURCE,
       types.EXPANDED_SOURCE,
@@ -30,7 +28,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined error types', () => {
-    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -57,7 +55,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined pending types', () => {
-    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE];
 
     specificTypes.forEach(value => {
       const dispatched = {
@@ -73,7 +71,7 @@ describe('SourcesReducer', () => {
   });
 
   it('should handle all defined fulfilled types', () => {
-    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE, types.DELETE_SOURCES];
+    const specificTypes = [types.GET_SOURCES, types.DELETE_SOURCE];
 
     specificTypes.forEach(value => {
       const dispatched = {

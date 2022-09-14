@@ -58,16 +58,6 @@ describe('SourcesActions', () => {
     });
   });
 
-  it('Should have a defined deleteSources method', done => {
-    const store = generateStore();
-    const dispatcher = sourcesActions.deleteSources();
-
-    dispatcher(store.dispatch).then(value => {
-      expect(value.action.type).toMatchSnapshot('deleteSources');
-      done();
-    });
-  });
-
   it('Should return response content for getScansSources method', done => {
     const store = generateStore();
     const dispatcher = sourcesActions.getScansSources();

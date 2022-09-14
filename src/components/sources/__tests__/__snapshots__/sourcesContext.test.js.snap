@@ -68,45 +68,16 @@ Array [
 ]
 `;
 
-exports[`SourcesContext should handle deleting a source with a confirmation: dispatch delete a source, confirmation 1`] = `
+exports[`SourcesContext should handle deleting a source with a confirmation: dispatch onDelete 1`] = `
 Array [
   Array [
     Object {
+      "body": undefined,
       "confirmButtonText": "t(form-dialog.label, {\\"context\\":\\"delete\\"})",
-      "heading": "t(form-dialog.confirmation_heading, {\\"context\\":\\"delete-source\\",\\"name\\":\\"lorem ipsum name\\"}, [object Object])",
+      "heading": "t(form-dialog.confirmation_heading, {\\"context\\":\\"delete-source\\",\\"count\\":1,\\"name\\":\\"lorem ipsum name\\"}, [object Object])",
       "onConfirm": [Function],
-      "title": "t(form-dialog.confirmation_title, {\\"context\\":\\"delete-source\\"})",
-      "type": "CONFIRMATION_MODAL_SHOW",
+      "title": "t(form-dialog.confirmation_title, {\\"context\\":\\"delete-source\\",\\"count\\":1})",
     },
-  ],
-  Array [
-    Array [
-      Object {
-        "type": "CONFIRMATION_MODAL_HIDE",
-      },
-    ],
-  ],
-  Array [
-    Object {
-      "payload": Promise {},
-      "type": "DELETE_SOURCE",
-    },
-  ],
-  Array [
-    Array [
-      Object {
-        "alertType": "success",
-        "header": "t(toast-notifications.title, {\\"context\\":\\"deleted-source\\"})",
-        "message": "t(toast-notifications.description, {\\"context\\":\\"deleted-source\\",\\"name\\":\\"lorem ipsum name\\"})",
-        "type": "TOAST_ADD",
-      },
-      Object {
-        "type": "RESET_DELETE_SOURCE",
-      },
-      Object {
-        "type": "UPDATE_SOURCES",
-      },
-    ],
   ],
 ]
 `;
