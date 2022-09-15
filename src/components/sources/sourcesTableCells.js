@@ -22,18 +22,25 @@ import { helpers } from '../../common';
 import { DropdownSelect, SelectButtonVariant, SelectDirection, SelectPosition } from '../dropdownSelect/dropdownSelect';
 
 /**
- * Source description and type icon
+ * Source description and type icon.
  *
  * @param {object} params
- * @param {Array} params.hosts
- * @param {string} params.name
- * @param {string} params.source_type
+ * @alias {Array} params.hosts
+ * @alias {string} params.name
+ * @alias {string} params.sourceType
  * @param {object} options
  * @param {Function} options.t
  * @param {string} options.viewId
  * @returns {React.ReactNode}
  */
-const description = ({ hosts, name, source_type: sourceType } = {}, { t = translate, viewId } = {}) => {
+const description = (
+  {
+    [apiTypes.API_RESPONSE_SOURCE_HOSTS]: hosts,
+    [apiTypes.API_RESPONSE_SOURCE_NAME]: name,
+    [apiTypes.API_RESPONSE_SOURCE_SOURCE_TYPE]: sourceType
+  } = {},
+  { t = translate, viewId } = {}
+) => {
   const itemHostsPopover = (
     <div className="quipucords-sources-popover-scroll">
       {hosts?.length > 1 && (
@@ -81,17 +88,21 @@ const description = ({ hosts, name, source_type: sourceType } = {}, { t = transl
 };
 
 /**
- * Scan status, icon and description
+ * Scan status, icon and description.
  *
  * @param {object} params
- * @param {object} params.connection
+ * @alias {object} params.scan
  * @param {object} options
  * @param {Function} options.t
  * @param {string} options.viewId
  * @returns {React.ReactNode|null}
  */
-const scanStatus = ({ connection: scan = {} } = {}, { t = translate, viewId } = {}) => {
-  const { end_time: endTime, start_time: startTime, status } = scan;
+const scanStatus = ({ [apiTypes.API_RESPONSE_SOURCE_CONNECTION]: scan = {} } = {}, { t = translate, viewId } = {}) => {
+  const {
+    [apiTypes.API_RESPONSE_SOURCE_CONNECTION_END_TIME]: endTime,
+    [apiTypes.API_RESPONSE_SOURCE_CONNECTION_START_TIME]: startTime,
+    [apiTypes.API_RESPONSE_SOURCE_CONNECTION_STATUS]: status
+  } = scan;
   const isPending = status === 'created' || status === 'pending' || status === 'running';
   const scanTime = (isPending && startTime) || endTime;
 
@@ -203,14 +214,14 @@ const credentialsContent = ({ [apiTypes.API_RESPONSE_SOURCE_CREDENTIALS]: source
 };
 
 /**
- * Credentials cell status, and expandable content
+ * Credentials cell status, and expandable content.
  *
  * @param {object} item
  * @param {Array} item.credentials
- * @returns {{content: React.ReactNode, status: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
 const credentialsCellContent = (item = {}) => {
-  const { credentials = [] } = item;
+  const { [apiTypes.API_RESPONSE_SOURCE_CREDENTIALS]: credentials = [] } = item;
   const count = credentials?.length;
 
   return {
@@ -220,17 +231,20 @@ const credentialsCellContent = (item = {}) => {
 };
 
 /**
- * Failed hosts cell and expandable content.
+ * Failed hosts' cell, and expandable content.
  *
  * @param {object} params
- * @param {object} params.connection
- * @param {string} params.id
+ * @alias {object} params.connection
+ * @alias {string} params.id
  * @param {object} options
  * @param {string} options.viewId
- * @returns {{cell: React.ReactNode, content: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
-const failedHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
-  const count = Number.parseInt(connection?.source_systems_failed, 10);
+const failedHostsCellContent = (
+  { [apiTypes.API_RESPONSE_SOURCE_CONNECTION]: connection, [apiTypes.API_RESPONSE_SOURCE_ID]: id } = {},
+  { viewId } = {}
+) => {
+  const count = Number.parseInt(connection?.[apiTypes.API_RESPONSE_SOURCE_CONNECTION_SYS_FAILED], 10);
 
   return {
     content: statusCell({ count, status: ContextIconVariant.failed, viewId }),
@@ -239,17 +253,20 @@ const failedHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
 };
 
 /**
- * Ok hosts cell and expandable content.
+ * Ok hosts' cell, and expandable content.
  *
  * @param {object} params
- * @param {object} params.connection
- * @param {string} params.id
+ * @alias {object} params.connection
+ * @alias {string} params.id
  * @param {object} options
  * @param {string} options.viewId
- * @returns {{cell: React.ReactNode, content: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
-const okHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
-  const count = Number.parseInt(connection?.source_systems_scanned, 10);
+const okHostsCellContent = (
+  { [apiTypes.API_RESPONSE_SOURCE_CONNECTION]: connection, [apiTypes.API_RESPONSE_SOURCE_ID]: id } = {},
+  { viewId } = {}
+) => {
+  const count = Number.parseInt(connection?.[apiTypes.API_RESPONSE_SOURCE_CONNECTION_SYS_SCANNED], 10);
 
   return {
     content: statusCell({ count, status: ContextIconVariant.success, viewId }),
@@ -258,17 +275,20 @@ const okHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
 };
 
 /**
- * Unreachable hosts cell and expandable content.
+ * Unreachable hosts' cell, and expandable content.
  *
  * @param {object} params
- * @param {object} params.connection
- * @param {string} params.id
+ * @alias {object} params.connection
+ * @alias {string} params.id
  * @param {object} options
  * @param {string} options.viewId
- * @returns {{cell: React.ReactNode, content: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
-const unreachableHostsCellContent = ({ connection, id } = {}, { viewId } = {}) => {
-  const count = Number.parseInt(connection?.source_systems_unreachable, 10);
+const unreachableHostsCellContent = (
+  { [apiTypes.API_RESPONSE_SOURCE_CONNECTION]: connection, [apiTypes.API_RESPONSE_SOURCE_ID]: id } = {},
+  { viewId } = {}
+) => {
+  const count = Number.parseInt(connection?.[apiTypes.API_RESPONSE_SOURCE_CONNECTION_SYS_UNREACHABLE], 10);
 
   return {
     content: statusCell({ count, status: ContextIconVariant.unreachable, viewId }),

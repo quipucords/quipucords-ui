@@ -26,6 +26,8 @@ import ScanJobsList from './scanJobsList';
  * Source description and type icon
  *
  * @param {object} params
+ * @alias {string} params.id
+ * @alias {string} params.name
  * @returns {React.ReactNode}
  */
 const description = ({ [apiTypes.API_RESPONSE_SCAN_ID]: id, [apiTypes.API_RESPONSE_SCAN_NAME]: name } = {}) => (
@@ -40,9 +42,10 @@ const description = ({ [apiTypes.API_RESPONSE_SCAN_ID]: id, [apiTypes.API_RESPON
 );
 
 /**
- * Scan status, icon and description
+ * Scan status, icon and description.
  *
  * @param {object} params
+ * @alias {object} params.mostRecent
  * @param {object} options
  * @param {Function} options.t
  * @param {string} options.viewId
@@ -131,13 +134,15 @@ const statusContent = ({ id, status } = {}, { useConnectionResults = false, useI
     )}
   </ScanHostList>
 );
+
 /**
- * Failed hosts cell and expandable content.
+ * Failed hosts' cell, and expandable content.
  *
  * @param {object} params
+ * @alias {object} params.mostRecent
  * @param {object} options
  * @param {string} options.viewId
- * @returns {{cell: React.ReactNode, content: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
 const failedHostsCellContent = (
   { [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent = {} } = {},
@@ -159,12 +164,13 @@ const failedHostsCellContent = (
 };
 
 /**
- * Ok hosts cell and expandable content.
+ * Ok hosts' cell, and expandable content.
  *
  * @param {object} params
+ * @alias {object} params.mostRecent
  * @param {object} options
  * @param {string} options.viewId
- * @returns {{cell: React.ReactNode, content: React.ReactNode}}
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
 const okHostsCellContent = ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent = {} } = {}, { viewId } = {}) => {
   const {
@@ -182,6 +188,16 @@ const okHostsCellContent = ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRece
   };
 };
 
+/**
+ * Sources cell status, and expandable content.
+ *
+ * @param {object} params
+ * @alias {string} params.id
+ * @alias {Array} params.sources
+ * @param {object} options
+ * @param {string} options.viewId
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
+ */
 const sourcesCellContent = (
   { [apiTypes.API_RESPONSE_SCAN_ID]: id, [apiTypes.API_RESPONSE_SCAN_SOURCES]: sources = [] } = {},
   { viewId } = {}
@@ -194,6 +210,17 @@ const sourcesCellContent = (
   };
 };
 
+/**
+ * Scans cell status, and expandable content.
+ *
+ * @param {object} params
+ * @alias {string} params.id
+ * @alias {object} params.mostRecent
+ * @alias {Array} params.scanJobs
+ * @param {object} options
+ * @param {string} options.viewId
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
+ */
 const scansCellContent = (
   {
     [apiTypes.API_RESPONSE_SCAN_ID]: id,

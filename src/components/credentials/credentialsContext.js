@@ -255,7 +255,7 @@ const useGetCredentials = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ credentials }) => credentials?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { results: data = [] } = responseData?.view || {};
+  const { [apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]: data = [] } = responseData?.view || {};
   const query = helpers.createViewQueryObject(viewOptions);
 
   useShallowCompareEffect(() => {
