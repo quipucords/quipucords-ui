@@ -120,14 +120,16 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
         xs={3}
       >
         <Connect(ScanDownload)
-          bsStyle="link"
           downloadId={15}
+          icon={
+            <ContextIcon
+              size="sm"
+              symbol="download"
+            />
+          }
+          variant="link"
         >
-          <ContextIcon
-            size="sm"
-            symbol="download"
-          />
-            Download
+          Download
         </Connect(ScanDownload)>
       </Col>
     </Row>

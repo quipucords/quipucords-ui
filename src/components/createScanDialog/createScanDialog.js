@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button, ButtonVariant, Spinner, Title } from '@patternfly/react-core';
-import { IconSize } from '@patternfly/react-icons';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateIcon,
+  Spinner,
+  Title
+} from '@patternfly/react-core';
 import { FieldLevelHelp, Form } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
@@ -374,10 +382,10 @@ class CreateScanDialog extends React.Component {
           >
             <Form horizontal onSubmit={handleOnSubmit}>
               {pending && (
-                <React.Fragment>
-                  <Spinner isSVG size={IconSize.lg} />
-                  <div className="text-center">Scan updating...</div>
-                </React.Fragment>
+                <EmptyState className="quipucords-empty-state">
+                  <EmptyStateIcon icon={Spinner} />
+                  <Title headingLevel="h3">Scan updating...</Title>
+                </EmptyState>
               )}
               {!pending && this.renderErrorMessage(options)}
               {!pending && this.renderNameSources(options)}

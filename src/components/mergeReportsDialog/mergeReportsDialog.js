@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Spinner, Title } from '@patternfly/react-core';
-import { IconSize } from '@patternfly/react-icons';
+import { Button, ButtonVariant, EmptyState, EmptyStateIcon, Spinner, Title } from '@patternfly/react-core';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
@@ -164,10 +163,10 @@ class MergeReportsDialog extends React.Component {
         actions={this.renderButtons()}
       >
         {pending && (
-          <React.Fragment>
-            <Spinner isSVG size={IconSize.lg} />
-            <div className="text-center">Merging reports...</div>
-          </React.Fragment>
+          <EmptyState className="quipucords-empty-state">
+            <EmptyStateIcon icon={Spinner} />
+            <Title headingLevel="h3">Merging reports...</Title>
+          </EmptyState>
         )}
         {!pending && (
           <div className="merge-reports-body">
