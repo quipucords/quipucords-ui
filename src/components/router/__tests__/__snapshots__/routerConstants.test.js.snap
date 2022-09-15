@@ -5,23 +5,57 @@ exports[`RouterTypes should return specific properties: baseName 1`] = `"/client
 exports[`RouterTypes should return specific properties: routes 1`] = `
 Array [
   Object {
-    "component": [Function],
+    "element": <Sources
+      t={[Function]}
+      useDispatch={[Function]}
+      useGetSources={[Function]}
+      useOnDelete={[Function]}
+      useOnEdit={[Function]}
+      useOnExpand={[Function]}
+      useOnRefresh={[Function]}
+      useOnScan={[Function]}
+      useOnSelect={[Function]}
+      useOnShowAddSourceWizard={[Function]}
+      useSelectors={[Function]}
+      viewId="sources"
+    />,
     "iconClass": "fa fa-crosshairs",
+    "path": "/sources",
     "redirect": true,
     "title": "Sources",
-    "to": "/sources",
   },
   Object {
-    "component": [Function],
+    "element": <Scans
+      t={[Function]}
+      useDispatch={[Function]}
+      useGetScans={[Function]}
+      useOnExpand={[Function]}
+      useOnRefresh={[Function]}
+      useOnScanAction={[Function]}
+      useOnSelect={[Function]}
+      useSelectors={[Function]}
+      viewId="scans"
+    />,
     "iconClass": "pficon pficon-orders",
+    "path": "/scans",
     "title": "Scans",
-    "to": "/scans",
   },
   Object {
-    "component": [Function],
+    "element": <Credentials
+      t={[Function]}
+      useGetCredentials={[Function]}
+      useOnDelete={[Function]}
+      useOnEdit={[Function]}
+      useOnExpand={[Function]}
+      useOnRefresh={[Function]}
+      useOnSelect={[Function]}
+      useOnShowAddSourceWizard={[Function]}
+      useSelectors={[Function]}
+      viewId="credentials"
+    />,
     "iconClass": "fa fa-id-card",
+    "path": "/credentials",
     "title": "Credentials",
-    "to": "/credentials",
   },
 ]
 `;

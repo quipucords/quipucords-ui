@@ -18,7 +18,7 @@ class PageLayout extends React.Component {
         menuType: 'help',
         displayTitle: 'Guides - Install',
         key: 'install',
-        href: './docs/install.html',
+        href: `${(!helpers.DEV_MODE && '.') || ''}/docs/install.html`,
         target: '_blank'
       },
       {
@@ -26,7 +26,7 @@ class PageLayout extends React.Component {
         menuType: 'help',
         displayTitle: 'Guides - Using',
         key: 'use',
-        href: './docs/use.html',
+        href: `${(!helpers.DEV_MODE && '.') || ''}/docs/use.html`,
         target: '_blank'
       },
       { isActive: true, menuType: 'action', displayTitle: 'Logout', key: 'logout', onClick: this.onLogout }
@@ -70,22 +70,22 @@ class PageLayout extends React.Component {
       <React.Fragment>
         <Masthead.Dropdown id="app-help-dropdown" title={<span aria-hidden className="pficon pficon-help" />}>
           {this.menuItems.map(
-            (item, index) =>
-              item.isActive &&
-              item.menuType === 'help' && (
+            ({ isActive, displayTitle, menuType, ...item }, index) =>
+              isActive &&
+              menuType === 'help' && (
                 <MenuItem eventKey={index} {...item}>
-                  {item.displayTitle}
+                  {displayTitle}
                 </MenuItem>
               )
           )}
         </Masthead.Dropdown>
         <Masthead.Dropdown id="app-user-dropdown" title={title}>
           {this.menuItems.map(
-            (item, index) =>
-              item.isActive &&
-              item.menuType === 'action' && (
+            ({ isActive, displayTitle, menuType, ...item }, index) =>
+              isActive &&
+              menuType === 'action' && (
                 <MenuItem eventKey={index} {...item}>
-                  {item.displayTitle}
+                  {displayTitle}
                 </MenuItem>
               )
           )}
@@ -102,7 +102,7 @@ class PageLayout extends React.Component {
 
   renderMenuItems() {
     const { location, menu, isFullPage } = this.props;
-    const activeItem = menu.find(item => item.to.indexOf(location.pathname) > -1);
+    const activeItem = menu.find(item => item.path.indexOf(location.pathname) > -1);
 
     if (isFullPage) {
       return null;
@@ -110,11 +110,11 @@ class PageLayout extends React.Component {
 
     return menu.map(item => (
       <VerticalNav.Item
-        key={item.to}
+        key={item.path}
         title={item.title}
         iconClass={item.iconClass}
         active={item === activeItem || (!activeItem && item.redirect)}
-        onClick={() => this.onNavigate(item.to)}
+        onClick={() => this.onNavigate(item.path)}
       />
     ));
   }

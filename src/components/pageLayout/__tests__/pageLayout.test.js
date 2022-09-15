@@ -1,6 +1,7 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 import { ConnectedPageLayout, PageLayout } from '../pageLayout';
 
 describe('PageLayout Component', () => {
@@ -11,13 +12,15 @@ describe('PageLayout Component', () => {
       user: { session: { authorized: false, username: 'lorem' } }
     });
     const component = shallow(
-      <ConnectedPageLayout>
-        <span className="test">lorem</span>
-      </ConnectedPageLayout>,
+      <BrowserRouter>
+        <ConnectedPageLayout>
+          <span className="test">lorem</span>
+        </ConnectedPageLayout>
+      </BrowserRouter>,
       { context: { store } }
     );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedPageLayout)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component unauthorized', () => {

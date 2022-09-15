@@ -1,6 +1,7 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 import { ConnectedScansEmptyState, ScansEmptyState } from '../scansEmptyState';
 
 describe('ScansEmptyState Component', () => {
@@ -10,11 +11,16 @@ describe('ScansEmptyState Component', () => {
     const store = generateEmptyStore({ scansEmptyState: { sourcesExist: false } });
     const props = {};
 
-    const component = shallow(<ConnectedScansEmptyState {...props} />, {
-      context: { store }
-    });
+    const component = shallow(
+      <BrowserRouter>
+        <ConnectedScansEmptyState {...props} />
+      </BrowserRouter>,
+      {
+        context: { store }
+      }
+    );
 
-    expect(component).toMatchSnapshot('connected');
+    expect(component.find(ConnectedScansEmptyState)).toMatchSnapshot('connected');
   });
 
   it('should render a non-connected component', () => {

@@ -120,63 +120,65 @@ const Credentials = ({
   }
 
   return (
-    <div className="quipucords-view-container">
-      {isActive && (
-        <React.Fragment>
-          <ViewToolbar
-            viewType={reduxTypes.view.CREDENTIALS_VIEW}
-            filterFields={CredentialFilterFields}
-            sortFields={CredentialSortFields}
-            onRefresh={() => onRefresh()}
-            lastRefresh={new Date(date).getTime()}
-            actions={renderToolbarActions()}
-            itemsType="Credential"
-            itemsTypePlural="Credentials"
-            selectedCount={viewOptions.selectedItems?.length}
-            {...viewOptions}
-          />
-          <ViewPaginationRow viewType={reduxTypes.view.CREDENTIALS_VIEW} {...viewOptions} />
-        </React.Fragment>
-      )}
-      <div className="quipucords-list-container">
-        <Table
-          onExpand={onExpand}
-          onSelect={onSelect}
-          rows={data?.map((item, index) => ({
-            isSelected: (selectedRows?.[item.id] && true) || false,
-            item,
-            cells: [
-              {
-                content: credentialsTableCells.description(item),
-                width: 35,
-                dataLabel: t('table.header', { context: ['description'] })
-              },
-              {
-                content: credentialsTableCells.authType(item, { viewId }),
-                dataLabel: t('table.header', { context: ['auth-type'] })
-              },
-              {
-                ...credentialsTableCells.sourcesCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 2,
-                width: 8,
-                dataLabel: t('table.header', { context: ['sources'] })
-              },
-              {
-                style: { textAlign: 'right' },
-                content: credentialsTableCells.actionsCell({
-                  isFirst: index === 0,
-                  isLast: index === data.length - 1,
-                  item,
-                  onEdit: () => onEdit(item),
-                  onDelete: () => onDelete(item)
-                }),
-                isActionCell: true
-              }
-            ]
-          }))}
-        >
-          <CredentialsEmptyState viewId={viewId} onAddSource={onShowAddSourceWizard} />
-        </Table>
+    <div className="quipucords-content">
+      <div className="quipucords-view-container">
+        {isActive && (
+          <React.Fragment>
+            <ViewToolbar
+              viewType={reduxTypes.view.CREDENTIALS_VIEW}
+              filterFields={CredentialFilterFields}
+              sortFields={CredentialSortFields}
+              onRefresh={() => onRefresh()}
+              lastRefresh={new Date(date).getTime()}
+              actions={renderToolbarActions()}
+              itemsType="Credential"
+              itemsTypePlural="Credentials"
+              selectedCount={viewOptions.selectedItems?.length}
+              {...viewOptions}
+            />
+            <ViewPaginationRow viewType={reduxTypes.view.CREDENTIALS_VIEW} {...viewOptions} />
+          </React.Fragment>
+        )}
+        <div className="quipucords-list-container">
+          <Table
+            onExpand={onExpand}
+            onSelect={onSelect}
+            rows={data?.map((item, index) => ({
+              isSelected: (selectedRows?.[item.id] && true) || false,
+              item,
+              cells: [
+                {
+                  content: credentialsTableCells.description(item),
+                  width: 35,
+                  dataLabel: t('table.header', { context: ['description'] })
+                },
+                {
+                  content: credentialsTableCells.authType(item, { viewId }),
+                  dataLabel: t('table.header', { context: ['auth-type'] })
+                },
+                {
+                  ...credentialsTableCells.sourcesCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 2,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['sources'] })
+                },
+                {
+                  style: { textAlign: 'right' },
+                  content: credentialsTableCells.actionsCell({
+                    isFirst: index === 0,
+                    isLast: index === data.length - 1,
+                    item,
+                    onEdit: () => onEdit(item),
+                    onDelete: () => onDelete(item)
+                  }),
+                  isActionCell: true
+                }
+              ]
+            }))}
+          >
+            <CredentialsEmptyState viewId={viewId} onAddSource={onShowAddSourceWizard} />
+          </Table>
+        </div>
       </div>
     </div>
   );

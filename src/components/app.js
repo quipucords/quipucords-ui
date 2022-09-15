@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connectRouter, reduxActions } from '../redux';
-import { helpers } from '../common/helpers';
+import { helpers } from '../common';
 import I18n from './i18n/i18n';
 import Authentication from './authentication/authentication';
 import PageLayout from './pageLayout/pageLayout';
-import Router from './router/router';
+import { Router } from './router/router';
 import ToastNotificationsList from './toastNotificationsList/toastNotificationsList';
 import ConfirmationModal from './confirmationModal/confirmationModal';
 import AboutModal from './aboutModal/aboutModal';
