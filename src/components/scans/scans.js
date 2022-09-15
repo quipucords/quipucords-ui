@@ -105,84 +105,86 @@ const Scans = ({
   }
 
   return (
-    <div className="quipucords-view-container">
-      {isActive && (
-        <React.Fragment>
-          <ViewToolbar
-            viewType={reduxTypes.view.SCANS_VIEW}
-            filterFields={ScanFilterFields}
-            sortFields={ScanSortFields}
-            onRefresh={() => onRefresh()}
-            lastRefresh={new Date(date).getTime()}
-            actions={renderToolbarActions()}
-            itemsType="Scan"
-            itemsTypePlural="Scans"
-            selectedCount={viewOptions.selectedItems?.length}
-            {...viewOptions}
-          />
-          <ViewPaginationRow viewType={reduxTypes.view.SCANS_VIEW} {...viewOptions} />
-        </React.Fragment>
-      )}
-      <div className="quipucords-list-container">
-        <Table
-          onExpand={onExpand}
-          onSelect={onSelect}
-          rows={data?.map((item, index) => ({
-            isSelected: (selectedRows?.[item.id] && true) || false,
-            item,
-            cells: [
-              {
-                content: scansTableCells.description(item),
-                dataLabel: t('table.header', { context: ['description'] })
-              },
-              {
-                content: scansTableCells.scanStatus(item, { viewId }),
-                width: 20,
-                dataLabel: t('table.header', { context: ['scan'] })
-              },
-              {
-                ...scansTableCells.okHostsCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 2,
-                width: 8,
-                dataLabel: t('table.header', { context: ['success', viewId] })
-              },
-              {
-                ...scansTableCells.failedHostsCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 3,
-                width: 8,
-                dataLabel: t('table.header', { context: ['failed', viewId] })
-              },
-              {
-                ...scansTableCells.sourcesCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 4,
-                width: 8,
-                dataLabel: t('table.header', { context: ['sources'] })
-              },
-              {
-                ...scansTableCells.scansCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 5,
-                width: 8,
-                dataLabel: t('table.header', { context: ['scan-jobs'] })
-              },
-              {
-                style: { textAlign: 'right' },
-                content: scansTableCells.actionsCell({
-                  isFirst: index === 0,
-                  isLast: index === data.length - 1,
-                  item,
-                  onCancel: () => onCancel(item),
-                  onDownload: () => onDownload(item),
-                  onRestart: () => onRestart(item),
-                  onPause: () => onPause(item),
-                  onStart: () => onStart(item)
-                }),
-                isActionCell: true
-              }
-            ]
-          }))}
-        >
-          <ScansEmptyState viewId={viewId} />
-        </Table>
+    <div className="quipucords-content">
+      <div className="quipucords-view-container">
+        {isActive && (
+          <React.Fragment>
+            <ViewToolbar
+              viewType={reduxTypes.view.SCANS_VIEW}
+              filterFields={ScanFilterFields}
+              sortFields={ScanSortFields}
+              onRefresh={() => onRefresh()}
+              lastRefresh={new Date(date).getTime()}
+              actions={renderToolbarActions()}
+              itemsType="Scan"
+              itemsTypePlural="Scans"
+              selectedCount={viewOptions.selectedItems?.length}
+              {...viewOptions}
+            />
+            <ViewPaginationRow viewType={reduxTypes.view.SCANS_VIEW} {...viewOptions} />
+          </React.Fragment>
+        )}
+        <div className="quipucords-list-container">
+          <Table
+            onExpand={onExpand}
+            onSelect={onSelect}
+            rows={data?.map((item, index) => ({
+              isSelected: (selectedRows?.[item.id] && true) || false,
+              item,
+              cells: [
+                {
+                  content: scansTableCells.description(item),
+                  dataLabel: t('table.header', { context: ['description'] })
+                },
+                {
+                  content: scansTableCells.scanStatus(item, { viewId }),
+                  width: 20,
+                  dataLabel: t('table.header', { context: ['scan'] })
+                },
+                {
+                  ...scansTableCells.okHostsCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 2,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['success', viewId] })
+                },
+                {
+                  ...scansTableCells.failedHostsCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 3,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['failed', viewId] })
+                },
+                {
+                  ...scansTableCells.sourcesCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 4,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['sources'] })
+                },
+                {
+                  ...scansTableCells.scansCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 5,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['scan-jobs'] })
+                },
+                {
+                  style: { textAlign: 'right' },
+                  content: scansTableCells.actionsCell({
+                    isFirst: index === 0,
+                    isLast: index === data.length - 1,
+                    item,
+                    onCancel: () => onCancel(item),
+                    onDownload: () => onDownload(item),
+                    onRestart: () => onRestart(item),
+                    onPause: () => onPause(item),
+                    onStart: () => onStart(item)
+                  }),
+                  isActionCell: true
+                }
+              ]
+            }))}
+          >
+            <ScansEmptyState viewId={viewId} />
+          </Table>
+        </div>
       </div>
     </div>
   );

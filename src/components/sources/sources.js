@@ -121,81 +121,83 @@ const Sources = ({
   }
 
   return (
-    <div className="quipucords-view-container">
-      {filtersOrSourcesActive && (
-        <React.Fragment>
-          <ViewToolbar
-            viewType={reduxTypes.view.SOURCES_VIEW}
-            filterFields={SourceFilterFields}
-            sortFields={SourceSortFields}
-            onRefresh={() => onRefresh()}
-            lastRefresh={new Date(date).getTime()}
-            actions={renderToolbarActions()}
-            itemsType="Source"
-            itemsTypePlural="Sources"
-            selectedCount={viewOptions.selectedItems?.length}
-            {...viewOptions}
-          />
-          <ViewPaginationRow viewType={reduxTypes.view.SOURCES_VIEW} {...viewOptions} />
-        </React.Fragment>
-      )}
-      <div className="quipucords-list-container">
-        <Table
-          onExpand={onExpand}
-          onSelect={onSelect}
-          rows={data?.map((item, index) => ({
-            isSelected: (selectedRows?.[item.id] && true) || false,
-            source: item,
-            cells: [
-              {
-                content: sourcesTableCells.description(item),
-                dataLabel: t('table.header', { context: ['description'] })
-              },
-              {
-                content: sourcesTableCells.scanStatus(item, { viewId }),
-                width: 20,
-                dataLabel: t('table.header', { context: ['scan'] })
-              },
-              {
-                ...sourcesTableCells.credentialsCellContent(item),
-                isExpanded: expandedRows?.[item.id] === 2,
-                width: 8,
-                dataLabel: t('table.header', { context: ['credentials'] })
-              },
-              {
-                ...sourcesTableCells.okHostsCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 3,
-                width: 8,
-                dataLabel: t('table.header', { context: ['success', viewId] })
-              },
-              {
-                ...sourcesTableCells.failedHostsCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 4,
-                width: 8,
-                dataLabel: t('table.header', { context: ['failed', viewId] })
-              },
-              {
-                ...sourcesTableCells.unreachableHostsCellContent(item, { viewId }),
-                isExpanded: expandedRows?.[item.id] === 5,
-                width: 8,
-                dataLabel: t('table.header', { context: ['unreachable', viewId] })
-              },
-              {
-                content: sourcesTableCells.actionsCell({
-                  isFirst: index === 0,
-                  isLast: index === data.length - 1,
-                  item,
-                  onDelete: () => onDelete(item),
-                  onEdit: () => onEdit(item),
-                  onScan: () => onScan(item)
-                }),
-                isActionCell: true
-              }
-            ]
-          }))}
-        >
-          <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />
-        </Table>
+    <div className="quipucords-content">
+      <div className="quipucords-view-container">
+        {filtersOrSourcesActive && (
+          <React.Fragment>
+            <ViewToolbar
+              viewType={reduxTypes.view.SOURCES_VIEW}
+              filterFields={SourceFilterFields}
+              sortFields={SourceSortFields}
+              onRefresh={() => onRefresh()}
+              lastRefresh={new Date(date).getTime()}
+              actions={renderToolbarActions()}
+              itemsType="Source"
+              itemsTypePlural="Sources"
+              selectedCount={viewOptions.selectedItems?.length}
+              {...viewOptions}
+            />
+            <ViewPaginationRow viewType={reduxTypes.view.SOURCES_VIEW} {...viewOptions} />
+          </React.Fragment>
+        )}
+        <div className="quipucords-list-container">
+          <Table
+            onExpand={onExpand}
+            onSelect={onSelect}
+            rows={data?.map((item, index) => ({
+              isSelected: (selectedRows?.[item.id] && true) || false,
+              source: item,
+              cells: [
+                {
+                  content: sourcesTableCells.description(item),
+                  dataLabel: t('table.header', { context: ['description'] })
+                },
+                {
+                  content: sourcesTableCells.scanStatus(item, { viewId }),
+                  width: 20,
+                  dataLabel: t('table.header', { context: ['scan'] })
+                },
+                {
+                  ...sourcesTableCells.credentialsCellContent(item),
+                  isExpanded: expandedRows?.[item.id] === 2,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['credentials'] })
+                },
+                {
+                  ...sourcesTableCells.okHostsCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 3,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['success', viewId] })
+                },
+                {
+                  ...sourcesTableCells.failedHostsCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 4,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['failed', viewId] })
+                },
+                {
+                  ...sourcesTableCells.unreachableHostsCellContent(item, { viewId }),
+                  isExpanded: expandedRows?.[item.id] === 5,
+                  width: 8,
+                  dataLabel: t('table.header', { context: ['unreachable', viewId] })
+                },
+                {
+                  content: sourcesTableCells.actionsCell({
+                    isFirst: index === 0,
+                    isLast: index === data.length - 1,
+                    item,
+                    onDelete: () => onDelete(item),
+                    onEdit: () => onEdit(item),
+                    onScan: () => onScan(item)
+                  }),
+                  isActionCell: true
+                }
+              ]
+            }))}
+          >
+            <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />
+          </Table>
+        </div>
       </div>
     </div>
   );
