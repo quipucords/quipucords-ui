@@ -249,7 +249,10 @@ const usePoll = ({
   useSelector: useAliasSelector = storeHooks.reactRedux.useSelector,
   useTimeout: useAliasTimeout = useTimeout
 } = {}) => {
-  const updatedSources = useAliasSelector(({ sources }) => sources?.view?.data?.results, []);
+  const updatedSources = useAliasSelector(
+    ({ sources }) => sources?.view?.data?.[apiTypes.API_RESPONSE_SOURCES_RESULTS],
+    []
+  );
   const { update } = useAliasTimeout(() => {
     const filteredSources = updatedSources.filter(
       ({ connection }) =>
@@ -299,7 +302,7 @@ const useGetSources = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ sources }) => sources?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { results: data = [] } = responseData?.view || {};
+  const { [apiTypes.API_RESPONSE_SOURCES_RESULTS]: data = [] } = responseData?.view || {};
   const query = helpers.createViewQueryObject(viewOptions);
 
   useShallowCompareEffect(() => {
