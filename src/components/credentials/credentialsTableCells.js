@@ -21,9 +21,12 @@ import { helpers } from '../../common';
 import { DropdownSelect, SelectButtonVariant, SelectDirection, SelectPosition } from '../dropdownSelect/dropdownSelect';
 
 /**
- * Source description and type icon
+ * Source description and type icon.
  *
  * @param {object} params
+ * @alias {string} params.id
+ * @alias {string} params.name
+ * @alias {string} params.credType
  * @param {object} options
  * @param {Function} options.t
  * @param {string} options.viewId
@@ -52,9 +55,10 @@ const description = (
 );
 
 /**
- * Scan status, icon and description
+ * Scan status, icon and description.
  *
  * @param {object} params
+ * @alias {string} params.sshKeyfile
  * @param {object} options
  * @param {Function} options.t
  * @param {string} options.viewId
@@ -127,6 +131,15 @@ const sourcesContent = ({ [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES]: sources } 
   );
 };
 
+/**
+ * Sources cell status, and expandable content.
+ *
+ * @param {object} item
+ * @param {Array} item.sources
+ * @param {object} options
+ * @param {string} options.viewId
+ * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
+ */
 const sourcesCellContent = (item = {}, { viewId } = {}) => {
   const { [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES]: sources } = item;
   const count = sources?.length;

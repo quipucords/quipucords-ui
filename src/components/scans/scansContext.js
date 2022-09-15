@@ -226,14 +226,14 @@ const usePoll = ({
   useSelector: useAliasSelector = storeHooks.reactRedux.useSelector,
   useTimeout: useAliasTimeout = useTimeout
 } = {}) => {
-  const updatedSources = useAliasSelector(({ scans }) => scans?.view?.data?.results, []);
+  const updatedScans = useAliasSelector(({ scans }) => scans?.view?.data?.[apiTypes.API_RESPONSE_SCANS_RESULTS], []);
   const { update } = useAliasTimeout(() => {
-    const filteredSources = updatedSources.filter(
+    const filteredScans = updatedScans.filter(
       ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent }) =>
         mostRecent?.status === 'created' || mostRecent?.status === 'pending' || mostRecent?.status === 'running'
     );
 
-    return filteredSources.length > 0;
+    return filteredScans.length > 0;
   }, pollInterval);
 
   return update;
@@ -276,7 +276,7 @@ const useGetScans = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ scans }) => scans?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { results: data = [] } = responseData?.view || {};
+  const { [apiTypes.API_RESPONSE_SCANS_RESULTS]: data = [] } = responseData?.view || {};
   const query = helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' });
 
   useShallowCompareEffect(() => {
