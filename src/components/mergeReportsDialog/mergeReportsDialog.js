@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Title } from '@patternfly/react-core';
-import { Icon, Spinner } from 'patternfly-react';
+import { Button, ButtonVariant, Spinner, Title } from '@patternfly/react-core';
+import { IconSize } from '@patternfly/react-icons';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import { helpers } from '../../common/helpers';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
+import { helpers } from '../../common';
 import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 
@@ -131,12 +132,12 @@ class MergeReportsDialog extends React.Component {
     const validCount = this.getValidScans().length;
     const invalidCount = this.getInvalidScans().length;
 
-    let icon = <Icon type="pf" name="info" />;
+    let icon = <ContextIcon symbol={ContextIconVariant.info} />;
     let heading;
     let footer = <span>Once the scan reports are merged, the results will be downloaded to your local machine.</span>;
 
     if (validCount < 2) {
-      icon = <Icon type="pf" name="error-circle-o" />;
+      icon = <ContextIcon symbol={ContextIconVariant.error} />;
 
       heading = (
         <h3 className="merge-reports-heading">
@@ -146,7 +147,7 @@ class MergeReportsDialog extends React.Component {
 
       footer = null;
     } else if (invalidCount > 0) {
-      icon = <Icon type="pf" name="warning-triangle-o" />;
+      icon = <ContextIcon symbol={ContextIconVariant.warning} />;
 
       heading = (
         <h3 className="merge-reports-heading">
@@ -164,7 +165,7 @@ class MergeReportsDialog extends React.Component {
       >
         {pending && (
           <React.Fragment>
-            <Spinner loading size="lg" className="blank-slate-pf-icon" />
+            <Spinner isSVG size={IconSize.lg} />
             <div className="text-center">Merging reports...</div>
           </React.Fragment>
         )}
