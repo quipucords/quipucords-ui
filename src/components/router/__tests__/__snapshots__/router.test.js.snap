@@ -1,29 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Router Component should shallow render a basic component 1`] = `
-<div
-  className="quipucords-content"
+<Routes
+  basename="/client"
 >
-  <Switch>
-    <Route
-      component={[Function]}
-      key="/sources"
-      path="/sources"
-    />
-    <Route
-      component={[Function]}
-      key="/scans"
-      path="/scans"
-    />
-    <Route
-      component={[Function]}
-      key="/credentials"
-      path="/credentials"
-    />
-    <Redirect
-      from="/"
-      to="/sources"
-    />
-  </Switch>
-</div>
+  <Route
+    element={
+      <Sources
+        t={[Function]}
+        useDispatch={[Function]}
+        useGetSources={[Function]}
+        useOnDelete={[Function]}
+        useOnEdit={[Function]}
+        useOnExpand={[Function]}
+        useOnRefresh={[Function]}
+        useOnScan={[Function]}
+        useOnSelect={[Function]}
+        useOnShowAddSourceWizard={[Function]}
+        useSelectors={[Function]}
+        viewId="sources"
+      />
+    }
+    key="/sources"
+    path="/sources"
+  />
+  <Route
+    element={
+      <Scans
+        t={[Function]}
+        useDispatch={[Function]}
+        useGetScans={[Function]}
+        useOnExpand={[Function]}
+        useOnRefresh={[Function]}
+        useOnScanAction={[Function]}
+        useOnSelect={[Function]}
+        useSelectors={[Function]}
+        viewId="scans"
+      />
+    }
+    key="/scans"
+    path="/scans"
+  />
+  <Route
+    element={
+      <Credentials
+        t={[Function]}
+        useGetCredentials={[Function]}
+        useOnDelete={[Function]}
+        useOnEdit={[Function]}
+        useOnExpand={[Function]}
+        useOnRefresh={[Function]}
+        useOnSelect={[Function]}
+        useOnShowAddSourceWizard={[Function]}
+        useSelectors={[Function]}
+        viewId="credentials"
+      />
+    }
+    key="/credentials"
+    path="/credentials"
+  />
+  <Route
+    element={
+      <Navigate
+        replace={true}
+        to="/sources"
+      />
+    }
+    key="redirect"
+    path="*"
+  />
+</Routes>
 `;

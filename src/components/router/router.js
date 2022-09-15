@@ -1,52 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import { baseName, routes } from './routerConstants';
 
-class Router extends React.Component {
-  renderRoutes() {
-    const { routesType } = this.props;
-
-    let redirectRoot = null;
-
-    return {
-      renderRoutes: routesType.map(item => {
-        if (item.disabled) {
-          return null;
+const Router = ({ baseName: routesBaseName, routes: routesList }) => (
+  <Routes basename={routesBaseName}>
+    {routesList.map(({ path, element }) => (
+      <Route key={path} element={element} path={path} />
+    ))}
+    {routesList.length && (
+      <Route
+        key="redirect"
+        path="*"
+        element={
+          <Navigate replace to={routesList.find(({ redirect }) => redirect === true)?.path || routesList?.[0]?.path} />
         }
-
-        if (item.redirect === true) {
-          redirectRoot = <Redirect from="/" to={item.to} />;
-        }
-
-        return (
-          <Route exact={item.hasParameters || item.exact} key={item.to} path={item.to} component={item.component} />
-        );
-      }),
-      redirectRoot
-    };
-  }
-
-  render() {
-    const { renderRoutes, redirectRoot } = this.renderRoutes();
-
-    return (
-      <div className="quipucords-content">
-        <Switch>
-          {renderRoutes}
-          {redirectRoot}
-        </Switch>
-      </div>
-    );
-  }
-}
+      />
+    )}
+  </Routes>
+);
 
 Router.propTypes = {
-  routesType: PropTypes.array
+  baseName: PropTypes.string,
+  routes: PropTypes.array
 };
 
 Router.defaultProps = {
-  routesType: routes
+  baseName,
+  routes
 };
 
 export { Router as default, Router, baseName, routes };

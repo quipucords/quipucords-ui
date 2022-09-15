@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageLayout Component should render a connected component: connected 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<Component>
+  <span
+    className="test"
+  >
+    lorem
+  </span>
+</Component>
 `;
 
 exports[`PageLayout Component should render a non-connected component authorized: non-connected authorized 1`] = `
@@ -61,13 +65,10 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="About"
             divider={false}
             eventKey={0}
             header={false}
-            isActive={true}
             key="about"
-            menuType="help"
             onClick={[Function]}
           >
             About
@@ -75,14 +76,11 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="Guides - Using"
             divider={false}
             eventKey={2}
             header={false}
             href="./docs/use.html"
-            isActive={true}
             key="use"
-            menuType="help"
             target="_blank"
           >
             Guides - Using
@@ -106,13 +104,10 @@ exports[`PageLayout Component should render a non-connected component authorized
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="Logout"
             divider={false}
             eventKey={3}
             header={false}
-            isActive={true}
             key="logout"
-            menuType="action"
             onClick={[Function]}
           >
             Logout
@@ -235,13 +230,10 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="About"
             divider={false}
             eventKey={0}
             header={false}
-            isActive={true}
             key="about"
-            menuType="help"
             onClick={[Function]}
           >
             About
@@ -249,14 +241,11 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="Guides - Using"
             divider={false}
             eventKey={2}
             header={false}
             href="./docs/use.html"
-            isActive={true}
             key="use"
-            menuType="help"
             target="_blank"
           >
             Guides - Using
@@ -280,13 +269,10 @@ exports[`PageLayout Component should render a non-connected component branded: n
           <MenuItem
             bsClass="dropdown"
             disabled={false}
-            displayTitle="Logout"
             divider={false}
             eventKey={3}
             header={false}
-            isActive={true}
             key="logout"
-            menuType="action"
             onClick={[Function]}
           >
             Logout
@@ -363,23 +349,57 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
   menu={
     Array [
       Object {
-        "component": [Function],
+        "element": <Sources
+          t={[Function]}
+          useDispatch={[Function]}
+          useGetSources={[Function]}
+          useOnDelete={[Function]}
+          useOnEdit={[Function]}
+          useOnExpand={[Function]}
+          useOnRefresh={[Function]}
+          useOnScan={[Function]}
+          useOnSelect={[Function]}
+          useOnShowAddSourceWizard={[Function]}
+          useSelectors={[Function]}
+          viewId="sources"
+        />,
         "iconClass": "fa fa-crosshairs",
+        "path": "/sources",
         "redirect": true,
         "title": "Sources",
-        "to": "/sources",
       },
       Object {
-        "component": [Function],
+        "element": <Scans
+          t={[Function]}
+          useDispatch={[Function]}
+          useGetScans={[Function]}
+          useOnExpand={[Function]}
+          useOnRefresh={[Function]}
+          useOnScanAction={[Function]}
+          useOnSelect={[Function]}
+          useSelectors={[Function]}
+          viewId="scans"
+        />,
         "iconClass": "pficon pficon-orders",
+        "path": "/scans",
         "title": "Scans",
-        "to": "/scans",
       },
       Object {
-        "component": [Function],
+        "element": <Credentials
+          t={[Function]}
+          useGetCredentials={[Function]}
+          useOnDelete={[Function]}
+          useOnEdit={[Function]}
+          useOnExpand={[Function]}
+          useOnRefresh={[Function]}
+          useOnSelect={[Function]}
+          useOnShowAddSourceWizard={[Function]}
+          useSelectors={[Function]}
+          viewId="credentials"
+        />,
         "iconClass": "fa fa-id-card",
+        "path": "/credentials",
         "title": "Credentials",
-        "to": "/credentials",
       },
     ]
   }

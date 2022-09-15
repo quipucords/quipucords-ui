@@ -1,6 +1,7 @@
-import Scans from '../scans/scans';
+import React from 'react';
+import { Scans } from '../scans/scans';
 import { Sources } from '../sources/sources';
-import Credentials from '../credentials/credentials';
+import { Credentials } from '../credentials/credentials';
 
 /**
  * Return the application base directory.
@@ -18,21 +19,21 @@ const routes = [
   {
     iconClass: 'fa fa-crosshairs',
     title: 'Sources',
-    to: '/sources',
+    path: '/sources',
     redirect: true,
-    component: Sources
+    element: <Sources />
   },
   {
     iconClass: 'pficon pficon-orders',
     title: 'Scans',
-    to: '/scans',
-    component: Scans
+    path: '/scans',
+    element: <Scans />
   },
   {
     iconClass: 'fa fa-id-card',
     title: 'Credentials',
-    to: '/credentials',
-    component: Credentials
+    path: '/credentials',
+    element: <Credentials />
   }
 ];
 
