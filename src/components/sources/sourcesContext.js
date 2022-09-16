@@ -321,6 +321,22 @@ const useGetSources = ({
   };
 };
 
+/**
+ * Confirm if sources exist
+ *
+ * @param {object} options
+ * @param {Function} options.useGetSources
+ * @returns {boolean}
+ */
+const useSourcesExist = ({ useGetSources: useAliasGetSources = useGetSources } = {}) => {
+  const { fulfilled, data } = useAliasGetSources();
+
+  return {
+    sourcesCount: data?.length ?? 0,
+    hasSources: fulfilled === true && data?.length > 0
+  };
+};
+
 const context = {
   useGetSources,
   useOnDelete,
@@ -329,7 +345,8 @@ const context = {
   useOnRefresh,
   useOnScan,
   useOnSelect,
-  usePoll
+  usePoll,
+  useSourcesExist
 };
 
 export {
@@ -342,5 +359,6 @@ export {
   useOnRefresh,
   useOnScan,
   useOnSelect,
-  usePoll
+  usePoll,
+  useSourcesExist
 };

@@ -1,38 +1,27 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { mount, shallow } from 'enzyme';
-import { BrowserRouter } from 'react-router-dom';
-import { ConnectedScansEmptyState, ScansEmptyState } from '../scansEmptyState';
+import { ScansEmptyState } from '../scansEmptyState';
 
 describe('ScansEmptyState Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({ scansEmptyState: { sourcesExist: false } });
-    const props = {};
-
-    const component = shallow(
-      <BrowserRouter>
-        <ConnectedScansEmptyState {...props} />
-      </BrowserRouter>,
-      {
-        context: { store }
-      }
-    );
-
-    expect(component.find(ConnectedScansEmptyState)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', async () => {
     const props = {
-      sourcesExist: true
+      useSourcesExist: () => ({
+        sourcesCount: 20,
+        hasSources: true
+      })
     };
 
-    let component = mount(<ScansEmptyState {...props} />);
-    expect(component.render()).toMatchSnapshot('non-connected exist');
+    const component = await shallowHookComponent(<ScansEmptyState {...props} />);
+    expect(component).toMatchSnapshot('basic');
+  });
 
-    props.sourcesExist = false;
-    component = mount(<ScansEmptyState {...props} />);
-    expect(component.render()).toMatchSnapshot('non-connected do not exist');
+  it('should render messaging if sources do not exist', async () => {
+    const props = {
+      useSourcesExist: () => ({
+        hasSources: false
+      })
+    };
+
+    const component = await shallowHookComponent(<ScansEmptyState {...props} />);
+    expect(component).toMatchSnapshot('do not exist');
   });
 });
