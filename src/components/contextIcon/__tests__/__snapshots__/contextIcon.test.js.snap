@@ -45,6 +45,14 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 />
 `;
 
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, error 1`] = `
+<ErrorCircleOIcon
+  color="#c9190b"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, failed 1`] = `
 <ErrorCircleOIcon
   color="#c9190b"
@@ -56,6 +64,14 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, idCard 1`] = `
 <IdCardIcon
   color="#151515"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, info 1`] = `
+<InfoCircleIcon
+  color="currentColor"
   noVerticalAlign={false}
   size="sm"
 />
@@ -167,9 +183,25 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 />
 `;
 
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, user 1`] = `
+<UserIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, vcenter 1`] = `
 <PficonVcenterIcon
   color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, warning 1`] = `
+<ExclamationTriangleIcon
+  color="#f0ab00"
   noVerticalAlign={false}
   size="sm"
 />
@@ -182,10 +214,12 @@ Object {
   "completed": "success",
   "created": "pending",
   "download": "download",
+  "error": "failed",
   "failed": "failed",
   "idCard": "idCard",
+  "info": "info",
   "network": "network",
-  "paused": "paused",
+  "paused": "warning",
   "pencil": "pencil",
   "pending": "pending",
   "running": "pending",
@@ -196,7 +230,9 @@ Object {
   "trash": "trash",
   "unknown": "unknown",
   "unreachable": "unreachable",
+  "user": "user",
   "vcenter": "vcenter",
+  "warning": "warning",
 }
 `;
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Masthead, MenuItem, VerticalNav } from 'patternfly-react';
+import { Masthead, MenuItem, VerticalNav } from 'patternfly-react';
 import { connectRouter, reduxActions, reduxTypes, store } from '../../redux';
-import helpers from '../../common/helpers';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
+import { helpers } from '../../common';
 import { routes } from '../router/router';
 import titleImgBrand from '../../styles/images/title-brand.svg';
 import titleImg from '../../styles/images/title.svg';
@@ -62,7 +63,7 @@ class PageLayout extends React.Component {
 
     const title = (
       <React.Fragment>
-        <Icon type="pf" name="user" /> {session && session.username}
+        <ContextIcon symbol={ContextIconVariant.user} /> {session && session.username}
       </React.Fragment>
     );
 

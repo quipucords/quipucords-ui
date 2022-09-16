@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'patternfly-react';
 import { Popover, Tooltip as PFTooltip } from '@patternfly/react-core';
-import helpers from '../../common/helpers';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
+import { helpers } from '../../common';
 
 const Tooltip = ({ children, id, placement, isPopover, content, delayShow }) => {
   const setId = id || helpers.generateId();
@@ -17,14 +17,16 @@ const Tooltip = ({ children, id, placement, isPopover, content, delayShow }) => 
         showClose={false}
         bodyContent={content}
       >
-        <div className="quipucords-popover__wrapper">{children || <Icon type="pf" name="info" />}</div>
+        <div className="quipucords-popover__wrapper">
+          {children || <ContextIcon symbol={ContextIconVariant.info} />}
+        </div>
       </Popover>
     );
   }
 
   return (
     <PFTooltip className="quipucords-tooltip" id={setId} position={placement} content={content} entryDelay={delayShow}>
-      <div className="quipucords-tooltip__wrapper">{children || <Icon type="pf" name="info" />}</div>
+      <div className="quipucords-tooltip__wrapper">{children || <ContextIcon symbol={ContextIconVariant.info} />}</div>
     </PFTooltip>
   );
 };

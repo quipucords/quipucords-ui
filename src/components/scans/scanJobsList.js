@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
+import { Alert, AlertVariant, ButtonVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
 import { Grid } from 'patternfly-react';
 import { IconSize } from '@patternfly/react-icons';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { ContextIcon, ContextIconColors, ContextIconVariant } from '../contextIcon/contextIcon';
-import { helpers } from '../../common/helpers';
+import { helpers } from '../../common';
 import { dictionary } from '../../constants/dictionaryConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import ScanDownload from './scanDownload';
@@ -103,8 +103,13 @@ class ScanJobsList extends React.Component {
                   </Grid.Col>
                   <Grid.Col xs={3} sm={2}>
                     {item.reportId > 0 && (
-                      <ScanDownload downloadName={item.scanName} downloadId={item.reportId} bsStyle="link">
-                        <ContextIcon symbol={ContextIconVariant.download} /> &nbsp;Download
+                      <ScanDownload
+                        downloadName={item.scanName}
+                        downloadId={item.reportId}
+                        icon={<ContextIcon symbol={ContextIconVariant.download} />}
+                        variant={ButtonVariant.link}
+                      >
+                        Download
                       </ScanDownload>
                     )}
                   </Grid.Col>
