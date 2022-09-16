@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, EmptyState, EmptyStateIcon, Spinner, Title } from '@patternfly/react-core';
+import {
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateIcon,
+  Spinner,
+  Title
+} from '@patternfly/react-core';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
@@ -30,14 +38,14 @@ class MergeReportsDialog extends React.Component {
 
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'success',
+          alertType: AlertVariant.success,
           message: <span>Merged report downloaded.</span>
         });
       },
       error => {
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: 'danger',
+          alertType: AlertVariant.danger,
           header: 'Error merging reports',
           message: helpers.getMessageFromResults(error).message
         });
