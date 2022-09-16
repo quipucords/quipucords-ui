@@ -281,12 +281,11 @@ exports[`Scans Component should handle multiple display states, pending, error, 
         variant="compact"
       >
         <ScansEmptyState
-          getScansSources={[Function]}
-          history={Object {}}
-          sourcesCount={0}
-          sourcesExist={false}
           t={[Function]}
           uiShortName="Quipucords"
+          useDispatch={[Function]}
+          useNavigate={[Function]}
+          useSourcesExist={[Function]}
           viewId="scans"
         />
       </Table>
@@ -364,12 +363,11 @@ exports[`Scans Component should render a basic component: basic 1`] = `
         variant="compact"
       >
         <ScansEmptyState
-          getScansSources={[Function]}
-          history={Object {}}
-          sourcesCount={0}
-          sourcesExist={false}
           t={[Function]}
           uiShortName="Quipucords"
+          useDispatch={[Function]}
+          useNavigate={[Function]}
+          useSourcesExist={[Function]}
           viewId="scans"
         />
       </Table>

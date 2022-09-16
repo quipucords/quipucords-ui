@@ -92,5 +92,6 @@ Object {
   "useOnScan": [Function],
   "useOnSelect": [Function],
   "usePoll": [Function],
+  "useSourcesExist": [Function],
 }
 `;
