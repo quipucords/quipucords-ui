@@ -93,7 +93,7 @@ const Sources = ({
       <Button onClick={onShowAddSourceWizard}>{t('table.label', { context: 'add' })}</Button>{' '}
       <Button
         variant={ButtonVariant.secondary}
-        isDisabled={Object.values(selectedRows).filter(val => val !== null).length === 0}
+        isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
         onClick={onScanSources}
       >
         {t('table.label', { context: 'scan' })}
