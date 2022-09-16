@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@patternfly/react-core';
+import { AlertVariant, Button } from '@patternfly/react-core';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common';
 import Tooltip from '../tooltip/tooltip';
@@ -21,14 +21,14 @@ class ScanDownload extends React.Component {
     if (error) {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'danger',
+        alertType: AlertVariant.danger,
         header: 'Error',
         message: helpers.getMessageFromResults(results).message
       });
     } else {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'success',
+        alertType: AlertVariant.success,
         message: (
           <span>
             Report <strong>{(downloadName && `${downloadName} `) || ''}</strong> downloaded.

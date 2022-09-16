@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, ButtonVariant, Title } from '@patternfly/react-core';
+import { Alert, AlertVariant, Button, ButtonVariant, Title } from '@patternfly/react-core';
 import { Form, Grid } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import { helpers } from '../../common/helpers';
+import { helpers } from '../../common';
 import { authDictionary, dictionary } from '../../constants/dictionaryConstants';
 import { DropdownSelect } from '../dropdownSelect/dropdownSelect';
 import { translate } from '../i18n/i18n';
@@ -101,7 +101,7 @@ class CreateCredentialDialog extends React.Component {
     if (show && nextProps.fulfilled && !fulfilled) {
       store.dispatch({
         type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: 'success',
+        alertType: AlertVariant.success,
         message: (
           <span>
             Credential <strong>{nextProps.credential.name}</strong> successfully
