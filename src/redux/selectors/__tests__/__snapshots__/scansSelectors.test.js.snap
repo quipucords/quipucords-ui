@@ -36,10 +36,8 @@ Object {
   "makeScanHostsList": [Function],
   "makeScanJobDetailBySource": [Function],
   "makeScanJobsList": [Function],
-  "makeScansEmptyState": [Function],
   "scanHostsList": [Function],
   "scanJobDetailBySource": [Function],
   "scanJobsList": [Function],
-  "scansEmptyState": [Function],
 }
 `;

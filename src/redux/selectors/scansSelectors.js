@@ -289,36 +289,13 @@ const scanJobsListSelector = createSelector([previousScanJobs], scanJobs => {
 
 const makeScanJobsListSelector = () => scanJobsListSelector;
 
-/**
- * Return a check for sources existing
- *
- * @param {object} state
- * @returns {*}
- */
-const scansEmptyState = state => state.scans.empty;
-
-const scansEmptyStateSelector = createSelector([scansEmptyState], empty => {
-  const sourcesCount = empty?.data?.[apiTypes.API_RESPONSE_SOURCES_COUNT];
-  const sourcesExist = sourcesCount > 0;
-
-  return {
-    ...empty,
-    sourcesCount,
-    sourcesExist
-  };
-});
-
-const makeScansEmptyStateSelector = () => scansEmptyStateSelector;
-
 const scansSelectors = {
   scanHostsList: scanHostsListSelector,
   makeScanHostsList: makeScanHostsListSelector,
   scanJobDetailBySource: scanJobDetailBySourceSelector,
   makeScanJobDetailBySource: makeScanJobDetailBySourceSelector,
   scanJobsList: scanJobsListSelector,
-  makeScanJobsList: makeScanJobsListSelector,
-  scansEmptyState: scansEmptyStateSelector,
-  makeScansEmptyState: makeScansEmptyStateSelector
+  makeScanJobsList: makeScanJobsListSelector
 };
 
 export {
@@ -329,7 +306,5 @@ export {
   scanJobDetailBySourceSelector,
   makeScanJobDetailBySourceSelector,
   scanJobsListSelector,
-  makeScanJobsListSelector,
-  scansEmptyStateSelector,
-  makeScansEmptyStateSelector
+  makeScanJobsListSelector
 };

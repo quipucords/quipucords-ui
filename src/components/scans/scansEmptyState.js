@@ -10,100 +10,92 @@ import {
   Title
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
-import helpers from '../../common/helpers';
-import { connectRouter, reduxActions, reduxSelectors, reduxTypes, store } from '../../redux';
+import { useNavigate } from '../router/routerContext';
+import { useSourcesExist } from '../sources/sourcesContext';
+import { helpers } from '../../common';
+import { reduxTypes, storeHooks } from '../../redux';
 import { translate } from '../i18n/i18n';
 
 /**
  * Return a scans empty state.
+ *
+ * @param {object} props
+ * @param {Function} props.t
+ * @param {Function} props.useNavigate
+ * @param {Function} props.useDispatch
+ * @param {string} props.uiShortName
+ * @param {Function} props.useSourcesExist
+ * @param {string} props.viewId
+ * @returns {React.ReactNode}
  */
-class ScansEmptyState extends React.Component {
-  componentDidMount() {
-    const { getScansSources } = this.props;
+const ScansEmptyState = ({
+  t,
+  useDispatch: useAliasDispatch,
+  useNavigate: useAliasNavigate,
+  uiShortName,
+  useSourcesExist: useAliasSourcesExist,
+  viewId
+}) => {
+  const dispatch = useAliasDispatch();
+  const navigate = useAliasNavigate();
+  const { sourcesCount, hasSources } = useAliasSourcesExist();
 
-    getScansSources();
-  }
-
-  onAddSource = () => {
-    const { history, sourcesExist } = this.props;
-
-    if (sourcesExist) {
-      history.push('/sources');
+  const onAddSource = () => {
+    if (hasSources) {
+      navigate('/sources');
     } else {
-      store.dispatch({
+      dispatch({
         type: reduxTypes.sources.CREATE_SOURCE_SHOW
       });
     }
   };
 
-  render() {
-    const { sourcesCount, t, uiShortName, viewId } = this.props;
-
-    return (
-      <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-        <EmptyStateIcon icon={AddCircleOIcon} />
-        <Title headingLevel="h1">
-          {t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })}
-        </Title>
-        <EmptyStateBody>
-          {t('view.empty-state', { context: ['description', viewId], count: sourcesCount })}
-        </EmptyStateBody>
-        <EmptyStatePrimary>
-          <Button onClick={this.onAddSource}>
-            {t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })}
-          </Button>
-        </EmptyStatePrimary>
-      </EmptyState>
-    );
-  }
-}
+  return (
+    <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+      <EmptyStateIcon icon={AddCircleOIcon} />
+      <Title headingLevel="h1">
+        {t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })}
+      </Title>
+      <EmptyStateBody>
+        {t('view.empty-state', { context: ['description', viewId], count: sourcesCount })}
+      </EmptyStateBody>
+      <EmptyStatePrimary>
+        <Button onClick={onAddSource}>
+          {t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })}
+        </Button>
+      </EmptyStatePrimary>
+    </EmptyState>
+  );
+};
 
 /**
  * Prop types
  *
- * @type {{getScansSources: Function, uiShortName: string, sourcesExist: boolean, viewId: string, t: translate,
- *    history: object, sourcesCount: number}}
+ * @type {{uiShortName: string, viewId: string, t: Function, useSourcesExist: Function, useDispatch: Function,
+ *     useNavigate: Function}}
  */
 ScansEmptyState.propTypes = {
-  getScansSources: PropTypes.func,
-  history: PropTypes.shape({
-    push: PropTypes.func
-  }),
-  sourcesCount: PropTypes.number,
-  sourcesExist: PropTypes.bool,
   t: PropTypes.func,
+  useDispatch: PropTypes.func,
+  useNavigate: PropTypes.func,
   uiShortName: PropTypes.string,
+  useSourcesExist: PropTypes.func,
   viewId: PropTypes.string
 };
 
 /**
  * Default props
  *
- * @type {{getScansSources: Function, uiShortName: string, sourcesExist: boolean, viewId: null, t: translate,
- *    history: {}, sourcesCount: number}}
+ * @type {{uiShortName: string, viewId: null, t: translate, useSourcesExist: Function, useDispatch: Function,
+ *     useNavigate: Function}}
  */
 ScansEmptyState.defaultProps = {
-  getScansSources: helpers.noop,
-  history: {},
-  sourcesCount: 0,
-  sourcesExist: false,
   t: translate,
+  useDispatch: storeHooks.reactRedux.useDispatch,
+  useNavigate,
   uiShortName: helpers.UI_SHORT_NAME,
+  useSourcesExist,
   viewId: null
 };
 
-const mapDispatchToProps = dispatch => ({
-  getScansSources: queryObj => dispatch(reduxActions.sources.getScansSources(queryObj))
-});
-
-const makeMapStateToProps = () => {
-  const scansEmptyState = reduxSelectors.scans.makeScansEmptyState();
-
-  return (state, props) => ({
-    ...scansEmptyState(state, props)
-  });
-};
-
-const ConnectedScansEmptyState = connectRouter(makeMapStateToProps, mapDispatchToProps)(ScansEmptyState);
-
-export { ConnectedScansEmptyState as default, ConnectedScansEmptyState, ScansEmptyState };
+export { ScansEmptyState as default, ScansEmptyState };

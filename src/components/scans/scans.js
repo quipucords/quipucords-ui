@@ -193,9 +193,8 @@ const Scans = ({
 /**
  * Prop types
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function, useOnScan: Function,
- *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
- *     useOnShowAddSourceWizard: Function}}
+ * @type {{useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function, useOnScanAction: Function,
+ *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
  */
 Scans.propTypes = {
   t: PropTypes.func,
@@ -212,9 +211,8 @@ Scans.propTypes = {
 /**
  * Default props
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function, useOnScan: Function,
- *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
- *     useOnShowAddSourceWizard: Function}}
+ * @type {{useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function, useOnScanAction: Function,
+ *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
  */
 Scans.defaultProps = {
   t: translate,
