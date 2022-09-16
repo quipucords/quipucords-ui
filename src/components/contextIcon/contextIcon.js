@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { Spinner } from '@patternfly/react-core';
 import {
   CheckCircleIcon,
+  ClipboardCheckIcon,
+  CrosshairsIcon,
   DisconnectedIcon,
   DownloadIcon,
   ErrorCircleOIcon,
   ExclamationTriangleIcon,
   IdCardIcon,
+  InfoCircleIcon,
   PencilAltIcon,
   PficonNetworkRangeIcon,
   PficonSatelliteIcon,
   PficonVcenterIcon,
   TrashIcon,
   UnknownIcon,
-  IconSize,
-  ClipboardCheckIcon,
-  CrosshairsIcon
+  UserIcon,
+  IconSize
 } from '@patternfly/react-icons';
 import {
   global_Color_dark_100 as gray,
@@ -40,21 +42,26 @@ const ContextIconColors = {
 /**
  * Context icon variants
  *
- * @type {{running: string, canceled: string, paused: string, unreachable: string, success: string, created: string,
- *     pending: string, cancelled: string, completed: string, failed: string}}
+ * @type {{paused: string, unreachable: string, sources: string, created: string, idCard: string, pending: string,
+ *     completed: string, failed: string, error: string, pencil: string, network: string, trash: string, unknown: string,
+ *     running: string, canceled: string, download: string, scans: string, success: string, cancelled: string,
+ *     warning: string, vcenter: string, satellite: string, user: string, info: string}}
  */
 const ContextIconVariant = {
   completed: 'success',
   success: 'success',
+  error: 'failed',
   failed: 'failed',
   canceled: 'failed',
   cancelled: 'failed',
   created: 'pending',
   pending: 'pending',
   running: 'pending',
-  paused: 'paused',
+  paused: 'warning',
+  warning: 'warning',
   download: 'download',
   idCard: 'idCard',
+  info: 'info',
   network: 'network',
   pencil: 'pencil',
   satellite: 'satellite',
@@ -63,6 +70,7 @@ const ContextIconVariant = {
   trash: 'trash',
   unknown: 'unknown',
   unreachable: 'unreachable',
+  user: 'user',
   vcenter: 'vcenter'
 };
 
@@ -106,9 +114,11 @@ const ContextIcon = ({ symbol, ...props }) => {
       return <ErrorCircleOIcon {...{ ...{ color: red.value }, ...props }} />;
     case ContextIconVariant.idCard:
       return <IdCardIcon {...{ ...{ color: gray.value }, ...props }} />;
+    case ContextIconVariant.info:
+      return <InfoCircleIcon {...props} />;
     case ContextIconVariant.network:
       return <PficonNetworkRangeIcon {...props} />;
-    case ContextIconVariant.paused:
+    case ContextIconVariant.warning:
       return <ExclamationTriangleIcon {...{ ...{ color: yellow.value }, ...props }} />;
     case ContextIconVariant.pencil:
       return <PencilAltIcon {...props} />;
@@ -134,6 +144,8 @@ const ContextIcon = ({ symbol, ...props }) => {
       return <TrashIcon {...props} />;
     case ContextIconVariant.unreachable:
       return <DisconnectedIcon {...{ ...{ color: red.value }, ...props }} />;
+    case ContextIconVariant.user:
+      return <UserIcon {...props} />;
     case ContextIconVariant.vcenter:
       return <PficonVcenterIcon {...props} />;
     case ContextIconVariant.unknown:

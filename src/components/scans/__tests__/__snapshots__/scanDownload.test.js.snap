@@ -2,8 +2,11 @@
 
 exports[`ScanDownload Component should handle custom children: custom 1`] = `
 <button
-  class="btn btn-default"
-  id="generatedid-"
+  aria-disabled="false"
+  class="pf-c-button pf-m-primary"
+  data-ouia-component-id="OUIA-Generated-Button-primary-3"
+  data-ouia-component-type="PF4/Button"
+  data-ouia-safe="true"
   title="Download"
   type="button"
 >
@@ -102,12 +105,6 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
             className="quipucords-tooltip__wrapper"
           >
             <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="default"
-              disabled={false}
-              id="generatedid-"
               onClick={[Function]}
               title="Download"
             >
@@ -124,25 +121,30 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
             className="quipucords-tooltip__wrapper"
           >
             <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="default"
-              disabled={false}
-              id="generatedid-"
               onClick={[Function]}
               title="Download"
             >
-              <button
-                className="btn btn-default"
-                disabled={false}
-                id="generatedid-"
+              <ButtonBase
+                innerRef={null}
                 onClick={[Function]}
                 title="Download"
-                type="button"
               >
-                Download
-              </button>
+                <button
+                  aria-disabled={false}
+                  aria-label={null}
+                  className="pf-c-button pf-m-primary"
+                  data-ouia-component-id="OUIA-Generated-Button-primary-4"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe={true}
+                  disabled={false}
+                  onClick={[Function]}
+                  role={null}
+                  title="Download"
+                  type="button"
+                >
+                  Download
+                </button>
+              </ButtonBase>
             </Button>
           </div>
         </FindRefWrapper>
@@ -154,8 +156,11 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
 
 exports[`ScanDownload Component should render a connected component: connected 1`] = `
 <button
-  class="btn btn-default"
-  id="generatedid-"
+  aria-disabled="false"
+  class="pf-c-button pf-m-primary"
+  data-ouia-component-id="OUIA-Generated-Button-primary-1"
+  data-ouia-component-type="PF4/Button"
+  data-ouia-safe="true"
   title="Download"
   type="button"
 >
@@ -165,8 +170,11 @@ exports[`ScanDownload Component should render a connected component: connected 1
 
 exports[`ScanDownload Component should render a non-connected component: non-connected 1`] = `
 <button
-  class="btn btn-default"
-  id="generatedid-"
+  aria-disabled="false"
+  class="pf-c-button pf-m-primary"
+  data-ouia-component-id="OUIA-Generated-Button-primary-2"
+  data-ouia-component-type="PF4/Button"
+  data-ouia-safe="true"
   title="Download"
   type="button"
 >

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'patternfly-react';
+import { Button } from '@patternfly/react-core';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import { helpers } from '../../common/helpers';
+import { helpers } from '../../common';
 import Tooltip from '../tooltip/tooltip';
 
 class ScanDownload extends React.Component {
@@ -42,7 +42,7 @@ class ScanDownload extends React.Component {
     const { children, downloadId, downloadName, getReportsDownload, tooltip, ...props } = this.props;
 
     const button = (
-      <Button id={helpers.generateId()} title="Download" onClick={this.onReportDownload} {...props}>
+      <Button title="Download" onClick={this.onReportDownload} {...props}>
         {children}
       </Button>
     );

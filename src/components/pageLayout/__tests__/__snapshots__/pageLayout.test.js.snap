@@ -92,9 +92,9 @@ exports[`PageLayout Component should render a non-connected component authorized
           noCaret={false}
           title={
             <React.Fragment>
-              <Icon
-                name="user"
-                type="pf"
+              <ContextIcon
+                size="sm"
+                symbol="user"
               />
                
               lorem
@@ -257,9 +257,9 @@ exports[`PageLayout Component should render a non-connected component branded: n
           noCaret={false}
           title={
             <React.Fragment>
-              <Icon
-                name="user"
-                type="pf"
+              <ContextIcon
+                size="sm"
+                symbol="user"
               />
                
               lorem

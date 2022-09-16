@@ -43,6 +43,17 @@ describe('CreateScanDialog Component', () => {
     expect(component.render()).toMatchSnapshot('empty');
   });
 
+  it('should render a component, pending', () => {
+    const props = {
+      pending: true,
+      show: true,
+      sources: [{ name: 'test name' }]
+    };
+
+    const component = mount(<CreateScanDialog {...props} />);
+    expect(component.render()).toMatchSnapshot('pending');
+  });
+
   it('should handle multiple error responses', () => {
     const props = {
       show: true,
