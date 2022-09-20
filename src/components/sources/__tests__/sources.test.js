@@ -64,7 +64,9 @@ describe('Sources Component', () => {
     expect(component).toMatchSnapshot('empty state, no data');
 
     component.setProps({
-      useSelectors: () => [{ activeFilters: ['test filter'] }]
+      useView: () => ({
+        isFilteringActive: true
+      })
     });
 
     expect(component.find(EmptyState)).toMatchSnapshot('empty state, filtering active');

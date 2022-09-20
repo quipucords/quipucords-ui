@@ -1,109 +1,305 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ViewPaginationRow Component should render 1`] = `
-<div
-  class="container-fluid"
->
-  <div
-    class="toolbar-pf row"
+exports[`ViewToolbar Component should handle displaying secondary components, fields: secondary 1`] = `
+<Fragment>
+  <Toolbar
+    className="quipucords-toolbar"
+    clearAllFilters={[Function]}
+    clearFiltersButtonText="t(toolbar.label, {\\"context\\":\\"clear-filters\\"})"
+    collapseListedFiltersBreakpoint="lg"
   >
-    <div
-      class="col-sm-12"
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
     >
-      <form
-        class="toolbar-pf-actions"
+      <ToolbarToggleGroup
+        breakpoint="lg"
+        toggleIcon={
+          <FilterIcon
+            color="currentColor"
+            noVerticalAlign={false}
+            size="sm"
+          />
+        }
       >
-        <div
-          class="filter-pf form-group toolbar-pf-filter"
+        <ForwardRef
+          variant="filter-group"
         >
-          <div
-            class="filter-pf-fields"
+          <ToolbarFilter
+            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})"
+            chips={Array []}
+            deleteChip={[Function]}
+            key="search_by_name"
+            showToolbarItem={true}
           >
-            <div
-              class="input-group"
-            >
-              <input
-                class="form-control"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="form-group"
-        >
-          <div
-            class="quipucords-tooltip__wrapper"
-          >
-            <button
-              class="btn btn-link"
-              type="button"
-            >
-              <span
-                aria-hidden="true"
-                class="fa fa-sort-numeric-asc sort-direction"
-              />
-            </button>
-          </div>
-        </div>
-        <div
-          class="form-group"
-        >
-          <button
-            aria-disabled="false"
-            class="pf-c-button pf-m-link"
-            data-ouia-component-id="OUIA-Generated-Button-link-1"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            type="button"
-          >
-            <span
-              class="pf-c-button__icon pf-m-start"
-            >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 1024 1024"
-                width="1em"
-              >
-                <path
-                  d="M515.8,0 C655.3,0 781.6,58.4 873.4,150.2 L968.9,54.7 C989,34.5 1024,48.8 1024,77.3 L1024,352 C1024,369.7 1009.2,384.1 991.5,384 L716.8,384 C688.3,384 674,349.5 694.2,329.3 L783,240.5 C713.5,171.1 617.8,128 512,128 C300.4,128 128,300.2 128,512 C128,723.8 300.2,896.1 511.9,896 C606.9,896 693.9,861.2 761,803.9 C773.7,793.1 792.6,793.8 804.4,805.6 L849.6,850.9 C862.6,864 861.9,885.4 848,897.6 C758,976.3 640.3,1024 511.7,1024 C229.1,1024 0,797 0,510.7 C0,226.2 235,0 515.8,0"
-                />
-              </svg>
-            </span>
-            <span
-              class="last-refresh-time"
-            >
-              t(refresh-time-button.refreshed, {"context":0,"refresh":0})
-            </span>
-          </button>
-        </div>
-        <div
-          class="toolbar-pf-action-right"
+            <SearchName />
+          </ToolbarFilter>
+        </ForwardRef>
+      </ToolbarToggleGroup>
+      <ToolbarItem
+        key="groupSeparator"
+        variant="separator"
+      />
+      <ToolbarItem
+        key="sortFields"
+        spacer={
+          Object {
+            "default": "spacerSm",
+          }
+        }
+      >
+        <ViewToolbarFieldSort
+          t={[Function]}
+          useOnSelect={[Function]}
+          useView={[Function]}
         />
-      </form>
-      <div
-        class="toolbar-pf-results row"
+      </ToolbarItem>
+      <ToolbarItem
+        key="sortSeparator"
+        variant="separator"
+      />
+      <ToolbarItem
+        key="lastRefresh"
       >
-        <div
-          class="col-sm-12"
+        <RefreshTimeButton
+          lastRefresh={0}
+          onRefresh={[Function]}
+          t={[Function]}
+        />
+      </ToolbarItem>
+      <ToolbarItem
+        alignment={
+          Object {
+            "lg": "alignRight",
+            "md": "alignLeft",
+          }
+        }
+        key="secondaryFields"
+      >
+        dolor sit
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+  <Divider />
+</Fragment>
+`;
+
+exports[`ViewToolbar Component should handle updating toolbar chips: chips 1`] = `
+Object {
+  "categoryName": "t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})",
+  "children": <SearchName />,
+  "chips": Array [
+    "t(toolbar.label_chip, {\\"context\\":\\"lorem ipsum\\"})",
+  ],
+  "deleteChip": [Function],
+  "showToolbarItem": true,
+}
+`;
+
+exports[`ViewToolbar Component should hide categories when a single filter is available: single filter 1`] = `
+<ViewToolbarTextInput
+  debounceTimer={800}
+  filter="search_by_name"
+  t={[Function]}
+  useOnClear={[Function]}
+  useOnSubmit={[Function]}
+  useSelector={[Function]}
+  useView={[Function]}
+>
+  <InputGroup>
+    <div
+      className="pf-c-input-group"
+    >
+      <TextInput
+        aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+        className=""
+        data-test="toolbarSearchName"
+        id={null}
+        isDisabled={false}
+        isReadOnly={false}
+        maxLength={255}
+        name={null}
+        onChange={[Function]}
+        onClear={[Function]}
+        onKeyUp={[Function]}
+        onMouseUp={[Function]}
+        placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+        type="text"
+        value={null}
+      >
+        <TextInput
+          aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+          className="quipucords-form__text-input "
+          data-test="toolbarSearchName"
+          id="generatedid-"
+          isDisabled={false}
+          isReadOnly={false}
+          maxLength={255}
+          name="generatedid-"
+          onChange={[Function]}
+          onKeyUp={[Function]}
+          onMouseUp={[Function]}
+          placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+          type="text"
+          value=""
         >
-          <p
-            class="filter-pf-active-label"
+          <TextInputBase
+            aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+            className="quipucords-form__text-input "
+            data-test="toolbarSearchName"
+            id="generatedid-"
+            innerRef={null}
+            isDisabled={false}
+            isIconSprite={false}
+            isLeftTruncated={false}
+            isReadOnly={false}
+            isRequired={false}
+            maxLength={255}
+            name="generatedid-"
+            onChange={[Function]}
+            onKeyUp={[Function]}
+            onMouseUp={[Function]}
+            ouiaSafe={true}
+            placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+            type="text"
+            validated="default"
+            value=""
           >
-            No Filters
-          </p>
-          <h5
-            class="quipucords-view-count"
-          >
-            200 
-          </h5>
-        </div>
-      </div>
+            <input
+              aria-invalid={false}
+              aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+              className="pf-c-form-control quipucords-form__text-input "
+              data-ouia-component-id="OUIA-Generated-TextInputBase-2"
+              data-ouia-component-type="PF4/TextInput"
+              data-ouia-safe={true}
+              data-test="toolbarSearchName"
+              disabled={false}
+              id="generatedid-"
+              maxLength={255}
+              name="generatedid-"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyUp={[Function]}
+              onMouseUp={[Function]}
+              placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+              readOnly={false}
+              required={false}
+              type="text"
+              value=""
+            />
+          </TextInputBase>
+        </TextInput>
+      </TextInput>
     </div>
-  </div>
-</div>
+  </InputGroup>
+</ViewToolbarTextInput>
+`;
+
+exports[`ViewToolbar Component should render a basic component: basic 1`] = `
+<Fragment>
+  <Toolbar
+    className="quipucords-toolbar"
+    clearAllFilters={[Function]}
+    clearFiltersButtonText="t(toolbar.label, {\\"context\\":\\"clear-filters\\"})"
+    collapseListedFiltersBreakpoint="lg"
+  >
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
+    >
+      <ToolbarToggleGroup
+        breakpoint="lg"
+        toggleIcon={
+          <FilterIcon
+            color="currentColor"
+            noVerticalAlign={false}
+            size="sm"
+          />
+        }
+      >
+        <ForwardRef
+          variant="filter-group"
+        >
+          <ToolbarItem>
+            <ViewToolbarSelectCategory
+              t={[Function]}
+              useOnSelect={[Function]}
+              useSelector={[Function]}
+              useView={[Function]}
+            />
+          </ToolbarItem>
+          <ToolbarFilter
+            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})"
+            chips={Array []}
+            deleteChip={[Function]}
+            key="search_by_name"
+            showToolbarItem={false}
+          >
+            <SearchName />
+          </ToolbarFilter>
+          <ToolbarFilter
+            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_credentials_by_name\\"})"
+            chips={Array []}
+            deleteChip={[Function]}
+            key="search_credentials_by_name"
+            showToolbarItem={false}
+          >
+            <SearchCredentialsName />
+          </ToolbarFilter>
+          <ToolbarFilter
+            categoryName="t(toolbar.label_option, {\\"context\\":\\"source_type\\"})"
+            chips={Array []}
+            deleteChip={[Function]}
+            key="source_type"
+            showToolbarItem={false}
+          >
+            <SourceType />
+          </ToolbarFilter>
+        </ForwardRef>
+      </ToolbarToggleGroup>
+      <ToolbarItem
+        key="groupSeparator"
+        variant="separator"
+      />
+      <ToolbarItem
+        key="sortFields"
+        spacer={
+          Object {
+            "default": "spacerSm",
+          }
+        }
+      >
+        <ViewToolbarFieldSort
+          t={[Function]}
+          useOnSelect={[Function]}
+          useView={[Function]}
+        />
+      </ToolbarItem>
+      <ToolbarItem
+        key="sortSeparator"
+        variant="separator"
+      />
+      <ToolbarItem
+        key="lastRefresh"
+      >
+        <RefreshTimeButton
+          lastRefresh={0}
+          onRefresh={[Function]}
+          t={[Function]}
+        />
+      </ToolbarItem>
+      <ToolbarItem
+        alignment={
+          Object {
+            "lg": "alignRight",
+            "md": "alignLeft",
+          }
+        }
+        key="secondaryFields"
+      />
+    </ToolbarContent>
+  </Toolbar>
+  <Divider />
+</Fragment>
 `;

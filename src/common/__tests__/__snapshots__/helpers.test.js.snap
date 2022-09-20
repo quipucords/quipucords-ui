@@ -64,13 +64,6 @@ Object {
 }
 `;
 
-exports[`Helpers should handle view related selectors and props updates: createViewQueryObject 1`] = `
-Object {
-  "page": 1,
-  "page_size": 10,
-}
-`;
-
 exports[`Helpers should have specific functions: helpers 1`] = `
 Object {
   "DEV_MODE": false,
@@ -85,7 +78,6 @@ Object {
   "UI_VERSION": "0.0.0.0000000",
   "aggregatedError": [Function],
   "copyClipboard": [Function],
-  "createViewQueryObject": [Function],
   "devModeNormalizeCount": [Function],
   "downloadData": [Function],
   "generateId": [Function],

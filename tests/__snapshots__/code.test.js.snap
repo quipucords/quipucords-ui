@@ -5,6 +5,6 @@ Array [
   "common/helpers.js:63:      console.warn('Copy to clipboard failed.', e.message);",
   "redux/common/reduxHelpers.js:15:    console.error(\`Error: Property \${prop} does not exist within the passed state.\`, state);",
   "redux/common/reduxHelpers.js:19:    console.warn(\`Warning: Property \${prop} does not exist within the passed initialState.\`, initialState);",
-  "setupTests.js:159:  console.error = (message, ...args) => {",
+  "setupTests.js:164:  console.error = (message, ...args) => {",
 ]
 `;

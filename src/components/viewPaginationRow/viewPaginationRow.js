@@ -1,63 +1,134 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination, PaginationVariant } from '@patternfly/react-core';
-import { reduxTypes, store } from '../../redux';
+import { reduxTypes, storeHooks } from '../../redux';
+import { useQuery, useView } from '../view/viewContext';
+import { API_QUERY_TYPES } from '../../constants/apiConstants';
+import { helpers } from '../../common';
 
-class ViewPaginationRow extends React.Component {
-  onPerPageSelect = (_e, perPage) => {
-    const { viewType } = this.props;
-    store.dispatch({
-      type: reduxTypes.viewPagination.SET_PER_PAGE,
-      viewType,
-      pageSize: perPage
+/**
+ * Set page
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @param {Function} options.useView
+ * @returns {(function(*): void)|*}
+ */
+const useOnSetPage = ({
+  useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
+  useView: useAliasView = useView
+} = {}) => {
+  const dispatch = useAliasDispatch();
+  const { viewId } = useAliasView();
+
+  return value => {
+    dispatch({
+      type: reduxTypes.view.SET_QUERY,
+      viewId,
+      filter: API_QUERY_TYPES.PAGE,
+      value
     });
   };
+};
 
-  onSetPage = (_e, pageNumber) => {
-    const { viewType } = this.props;
-    store.dispatch({
-      type: reduxTypes.viewPagination.VIEW_PAGE,
-      currentPage: pageNumber,
-      viewType
-    });
+/**
+ * Set entries per page
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @param {Function} options.useView
+ * @returns {(function(*): void)|*}
+ */
+const useOnPerPageSelect = ({
+  useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
+  useView: useAliasView = useView
+} = {}) => {
+  const dispatch = useAliasDispatch();
+  const { viewId } = useAliasView();
+
+  return value => {
+    dispatch([
+      {
+        type: reduxTypes.view.RESET_PAGE,
+        viewId
+      },
+      {
+        type: reduxTypes.view.SET_QUERY,
+        viewId,
+        filter: API_QUERY_TYPES.PAGE_SIZE,
+        value
+      }
+    ]);
   };
+};
 
-  render() {
-    const { currentPage, pageSize, totalCount } = this.props;
+/**
+ * View pagination
+ *
+ * @param {object} props
+ * @param {number} props.totalResults
+ * @param {Function} props.useOnPerPageSelect
+ * @param {Function} props.useOnSetPage
+ * @param {Function} props.useQuery
+ * @returns {React.ReactNode}
+ */
+const ViewPaginationRow = ({
+  totalResults,
+  useOnPerPageSelect: useAliasOnPerPageSelect,
+  useOnSetPage: useAliasOnSetPage,
+  useQuery: useAliasQuery
+}) => {
+  const onPerPageSelect = useAliasOnPerPageSelect();
+  const onSetPage = useAliasOnSetPage();
+  const { [API_QUERY_TYPES.PAGE]: currentPage = 0, [API_QUERY_TYPES.PAGE_SIZE]: pageSize = 0 } = useAliasQuery();
+  let updatedTotalResults = totalResults;
 
-    const itemsStart = (currentPage - 1) * pageSize + 1;
-    const itemsEnd = Math.min(currentPage * pageSize, totalCount);
-
-    return (
-      <Pagination
-        className="quipucords-view__pagination"
-        perPageComponent="button"
-        dropDirection="down"
-        perPage={pageSize}
-        page={currentPage}
-        onSetPage={this.onSetPage}
-        itemCount={totalCount}
-        itemsStart={itemsStart}
-        itemsEnd={itemsEnd}
-        onPerPageSelect={this.onPerPageSelect}
-        variant={PaginationVariant.bottom}
-      />
-    );
+  if (helpers.DEV_MODE) {
+    updatedTotalResults = helpers.devModeNormalizeCount(totalResults);
   }
-}
 
+  const itemsStart = (currentPage - 1) * pageSize + 1;
+  const itemsEnd = Math.min(currentPage * pageSize, updatedTotalResults);
+
+  return (
+    <Pagination
+      className="quipucords-view__pagination"
+      perPageComponent="button"
+      dropDirection="down"
+      perPage={pageSize}
+      page={currentPage}
+      onSetPage={(_, value) => onSetPage(value)}
+      itemCount={updatedTotalResults}
+      itemsStart={itemsStart}
+      itemsEnd={itemsEnd}
+      onPerPageSelect={(_, value) => onPerPageSelect(value)}
+      variant={PaginationVariant.bottom}
+    />
+  );
+};
+
+/**
+ * Prop types
+ *
+ * @type {{totalResults: number, useOnSetPage: Function, useQuery: Function, useOnPerPageSelect: Function}}
+ */
 ViewPaginationRow.propTypes = {
-  viewType: PropTypes.string,
-  currentPage: PropTypes.number,
-  pageSize: PropTypes.number,
-  totalCount: PropTypes.number
+  totalResults: PropTypes.number,
+  useOnPerPageSelect: PropTypes.func,
+  useOnSetPage: PropTypes.func,
+  useQuery: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{totalResults: number, useOnSetPage: Function, useQuery: Function, useOnPerPageSelect: Function}}
+ */
 ViewPaginationRow.defaultProps = {
-  viewType: null,
-  currentPage: 0,
-  pageSize: 0,
-  totalCount: 0
+  totalResults: 0,
+  useOnPerPageSelect,
+  useOnSetPage,
+  useQuery
 };
 
-export { ViewPaginationRow as default, ViewPaginationRow };
+export { ViewPaginationRow as default, ViewPaginationRow, useOnPerPageSelect, useOnSetPage };

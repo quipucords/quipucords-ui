@@ -1,6 +1,5 @@
-import { context, useGetCredentials, useOnDelete, useOnEdit } from '../credentialsContext';
+import { context, useCredentials, useGetCredentials, useOnDelete, useOnEdit } from '../credentialsContext';
 import { apiTypes } from '../../../constants/apiConstants';
-import { reduxTypes } from '../../../redux';
 
 describe('CredentialsContext', () => {
   it('should return specific properties', () => {
@@ -47,27 +46,27 @@ describe('CredentialsContext', () => {
 
   it('should apply a hook for retrieving data from multiple selectors', () => {
     const { result: errorResponse } = shallowHook(() =>
-      useGetCredentials({
+      useCredentials({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
     const { result: pendingResponse } = shallowHook(() =>
-      useGetCredentials({
+      useCredentials({
         useSelectorsResponse: () => ({ pending: true })
       })
     );
 
     const { result: fulfilledResponse } = shallowHook(() =>
-      useGetCredentials({
+      useCredentials({
         useSelectorsResponse: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetCredentials(), {
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useCredentials(), {
       state: {
-        viewOptions: {
-          [reduxTypes.view.SCANS_VIEW]: {}
+        view: {
+          update: {}
         },
         credentials: {
           expanded: {},
@@ -83,7 +82,49 @@ describe('CredentialsContext', () => {
     });
 
     expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
-      'responses'
+      'selector responses'
+    );
+  });
+
+  it('should apply a hook for returning a get response', () => {
+    const { result: errorResponse } = shallowHook(() =>
+      useGetCredentials({
+        useCredentials: () => ({ error: true, message: 'Lorem ipsum' })
+      })
+    );
+
+    const { result: pendingResponse } = shallowHook(() =>
+      useGetCredentials({
+        useCredentials: () => ({ pending: true })
+      })
+    );
+
+    const { result: fulfilledResponse } = shallowHook(() =>
+      useGetCredentials({
+        useCredentials: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
+      })
+    );
+
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetCredentials(), {
+      state: {
+        view: {
+          update: {}
+        },
+        credentials: {
+          expanded: {},
+          selected: {},
+          view: {
+            fulfilled: true,
+            data: {
+              results: ['lorem', 'ipsum']
+            }
+          }
+        }
+      }
+    });
+
+    expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
+      'get responses'
     );
   });
 });

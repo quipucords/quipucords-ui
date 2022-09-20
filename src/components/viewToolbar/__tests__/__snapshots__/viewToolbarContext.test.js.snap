@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToolbarContext should apply a hook for clearing a toolbar field through redux: clear single field 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "type": "RESET_PAGE",
+        "viewId": "lorem",
+      },
+      Object {
+        "filter": "lorem",
+        "type": "SET_QUERY",
+        "value": undefined,
+        "viewId": "lorem",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ToolbarContext should apply a hook for clearing all related toolbar select filters: clear all filter fields 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "type": "RESET_PAGE",
+        "viewId": "lorem",
+      },
+      Object {
+        "filter": "search_by_name",
+        "type": "SET_QUERY",
+        "value": undefined,
+        "viewId": "lorem",
+      },
+      Object {
+        "filter": "search_credentials_by_name",
+        "type": "SET_QUERY",
+        "value": undefined,
+        "viewId": "lorem",
+      },
+      Object {
+        "filter": "source_type",
+        "type": "SET_QUERY",
+        "value": undefined,
+        "viewId": "lorem",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ToolbarContext should return specific properties: specific properties 1`] = `
+Object {
+  "useToolbarFieldClear": [Function],
+  "useToolbarFieldClearAll": [Function],
+}
+`;

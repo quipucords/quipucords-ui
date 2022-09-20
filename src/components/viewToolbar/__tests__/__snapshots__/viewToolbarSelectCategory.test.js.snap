@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewToolbarSelectCategory Component should handle updating the view query through redux state with a component: dispatch type, component 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "currentFilterCategory": "search_by_name",
+        "type": "SET_FILTER",
+        "viewId": undefined,
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "currentFilterCategory": "search_by_name",
+        "type": "SET_FILTER",
+        "viewId": undefined,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ViewToolbarSelectCategory Component should handle updating the view query through redux state with a hook: dispatch type, hook 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "currentFilterCategory": "dolor sit",
+        "type": "SET_FILTER",
+        "viewId": undefined,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ViewToolbarSelectCategory Component should render a basic component: basic 1`] = `
+<DropdownSelect
+  ariaLabel="t(toolbar.label_placeholder, {\\"context\\":\\"filter\\"})"
+  buttonVariant="default"
+  className=""
+  direction="down"
+  id="generatedid-"
+  isDisabled={false}
+  isDropdownButton={false}
+  isInline={true}
+  isToggleText={true}
+  maxHeight={null}
+  name={null}
+  onSelect={[Function]}
+  options={
+    Array [
+      Object {
+        "component": [Function],
+        "selected": true,
+        "title": [Function],
+        "value": "search_by_name",
+      },
+      Object {
+        "component": [Function],
+        "title": [Function],
+        "value": "search_credentials_by_name",
+      },
+      Object {
+        "component": [Function],
+        "title": [Function],
+        "value": "source_type",
+      },
+    ]
+  }
+  placeholder="t(toolbar.label_placeholder, {\\"context\\":\\"filter\\"})"
+  position="left"
+  selectedOptions={null}
+  splitButtonVariant={null}
+  toggleIcon={
+    <FilterIcon
+      color="currentColor"
+      noVerticalAlign={false}
+      size="sm"
+    />
+  }
+  variant="single"
+/>
+`;

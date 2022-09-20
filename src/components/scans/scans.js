@@ -19,30 +19,22 @@ import { Modal, ModalVariant } from '../modal/modal';
 import { Tooltip } from '../tooltip/tooltip';
 import { reduxTypes, storeHooks } from '../../redux';
 import { useView } from '../view/viewContext';
-import ViewToolbar from '../viewToolbar/viewToolbar';
-import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
+import { useToolbarFieldClearAll } from '../viewToolbar/viewToolbarContext';
+import { ViewToolbar } from '../viewToolbar/viewToolbar';
+import { ViewPaginationRow } from '../viewPaginationRow/viewPaginationRow';
 import { ScansEmptyState } from './scansEmptyState';
-import { ScanFilterFields, ScanSortFields } from './scanConstants';
 import { Table } from '../table/table';
 import { scansTableCells } from './scansTableCells';
-import {
-  VIEW_ID,
-  INITIAL_QUERY,
-  useGetScans,
-  useOnExpand,
-  useOnRefresh,
-  useOnScanAction,
-  useOnSelect
-} from './scansContext';
+import { VIEW_ID, INITIAL_QUERY, useGetScans, useOnExpand, useOnScanAction, useOnSelect } from './scansContext';
+import { ScansToolbar } from './scansToolbar';
 import { translate } from '../i18n/i18n';
 
 const CONFIG = {
   viewId: VIEW_ID,
-  initialQuery: INITIAL_QUERY
+  initialQuery: INITIAL_QUERY,
+  toolbar: ScansToolbar
 };
 
-// ToDo: review onMergeReports, renderToolbarActions being standalone with upcoming toolbar updates
-// ToDo: review items being selected and the page polling. Randomized dev data gives the appearance of an issue. Also applies to sources selected items
 /**
  * A scans view.
  *
@@ -50,11 +42,10 @@ const CONFIG = {
  * @param {Function} props.t
  * @param {Function} props.useGetScans
  * @param {Function} props.useOnExpand
- * @param {Function} props.useOnRefresh
  * @param {Function} props.useOnScanAction
  * @param {Function} props.useOnSelect
  * @param {Function} props.useDispatch
- * @param {Function} props.useSelectors
+ * @param {Function} props.useToolbarFieldClearAll
  * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
@@ -62,17 +53,16 @@ const Scans = ({
   t,
   useGetScans: useAliasGetScans,
   useOnExpand: useAliasOnExpand,
-  useOnRefresh: useAliasOnRefresh,
   useOnScanAction: useAliasOnScanAction,
   useOnSelect: useAliasOnSelect,
   useDispatch: useAliasDispatch,
-  useSelectors: useAliasSelectors,
+  useToolbarFieldClearAll: useAliasToolbarFieldClearAll,
   useView: useAliasView
 }) => {
-  const { viewId } = useAliasView();
+  const onToolbarFieldClearAll = useAliasToolbarFieldClearAll();
+  const { isFilteringActive, viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const onExpand = useAliasOnExpand();
-  const onRefresh = useAliasOnRefresh();
   const { onCancel, onDownload, onPause, onRestart, onStart } = useAliasOnScanAction();
   const onSelect = useAliasOnSelect();
   const {
@@ -83,24 +73,10 @@ const Scans = ({
     date,
     data,
     selectedRows = {},
-    expandedRows = {}
+    expandedRows = {},
+    totalResults
   } = useAliasGetScans();
-  const [viewOptions = {}] = useAliasSelectors([
-    ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SCANS_VIEW]
-  ]);
-  const isActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
-
-  /**
-   * Clear toolbar filters
-   *
-   * @event onToolbarFieldClearAll
-   */
-  const onToolbarFieldClearAll = () => {
-    dispatch({
-      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
-      viewType: reduxTypes.view.SCANS_VIEW
-    });
-  };
+  const isActive = isFilteringActive || data?.length > 0 || false;
 
   /**
    * Toolbar actions onScanSources
@@ -159,19 +135,8 @@ const Scans = ({
       <div className="quipucords-view-container">
         {isActive && (
           <React.Fragment>
-            <ViewToolbar
-              viewType={reduxTypes.view.SCANS_VIEW}
-              filterFields={ScanFilterFields}
-              sortFields={ScanSortFields}
-              onRefresh={() => onRefresh()}
-              lastRefresh={new Date(date).getTime()}
-              actions={renderToolbarActions()}
-              itemsType="Scan"
-              itemsTypePlural="Scans"
-              selectedCount={viewOptions.selectedItems?.length}
-              {...viewOptions}
-            />
-            <ViewPaginationRow viewType={reduxTypes.view.SCANS_VIEW} {...viewOptions} />
+            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={renderToolbarActions()} />
+            <ViewPaginationRow totalResults={totalResults} />
           </React.Fragment>
         )}
         <div className="quipucords-list-container">
@@ -257,36 +222,34 @@ const Scans = ({
 /**
  * Prop types
  *
- * @type {{useView: Function, useOnSelect: Function, t: Function, useOnRefresh: Function, useOnScanAction: Function,
- *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
+ * @type {{useOnSelect: Function, useView: Function, t: Function, useOnScanAction: Function,
+ *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useToolbarFieldClearAll: Function}}
  */
 Scans.propTypes = {
   t: PropTypes.func,
   useDispatch: PropTypes.func,
   useGetScans: PropTypes.func,
   useOnExpand: PropTypes.func,
-  useOnRefresh: PropTypes.func,
   useOnScanAction: PropTypes.func,
   useOnSelect: PropTypes.func,
-  useSelectors: PropTypes.func,
+  useToolbarFieldClearAll: PropTypes.func,
   useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{useView: Function, useOnSelect: Function, t: translate, useOnRefresh: Function, useOnScanAction: Function,
- *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
+ * @type {{useOnSelect: Function, useView: Function, t: translate, useOnScanAction: Function,
+ *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useToolbarFieldClearAll: Function}}
  */
 Scans.defaultProps = {
   t: translate,
   useDispatch: storeHooks.reactRedux.useDispatch,
   useGetScans,
   useOnExpand,
-  useOnRefresh,
   useOnScanAction,
   useOnSelect,
-  useSelectors: storeHooks.reactRedux.useSelectors,
+  useToolbarFieldClearAll,
   useView
 };
 

@@ -1,5 +1,5 @@
-import { scansTypes } from '../constants';
-import { scansService } from '../../services';
+import { scansTypes, sourcesTypes } from '../constants';
+import { scansService, sourcesService } from '../../services';
 
 const addScan = data => dispatch =>
   dispatch({
@@ -16,10 +16,18 @@ const addStartScan = id => dispatch =>
 const getScans =
   (query = {}) =>
   dispatch =>
-    dispatch({
-      type: scansTypes.GET_SCANS,
-      payload: scansService.getScans('', query)
-    });
+    Promise.all(
+      dispatch([
+        {
+          type: sourcesTypes.GET_SOURCES,
+          payload: sourcesService.getSources()
+        },
+        {
+          type: scansTypes.GET_SCANS,
+          payload: scansService.getScans('', query)
+        }
+      ])
+    );
 
 const getScanJobs =
   (id, query = {}) =>

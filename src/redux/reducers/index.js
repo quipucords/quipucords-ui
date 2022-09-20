@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import aboutModalReducer from './aboutModalReducer';
 import addSourceWizardReducer from './addSourceWizardReducer';
 import confirmationModalReducer from './confirmationModalReducer';
@@ -12,7 +11,7 @@ import sourcesReducer from './sourcesReducer';
 import statusReducer from './statusReducer';
 import toastNotificationsReducer from './toastNotificationsReducer';
 import userReducer from './userReducer';
-import viewOptionsReducer from './viewOptionsReducer';
+import viewReducer from './viewReducer';
 
 const reducers = {
   aboutModal: aboutModalReducer,
@@ -27,7 +26,7 @@ const reducers = {
   status: statusReducer,
   toastNotifications: toastNotificationsReducer,
   user: userReducer,
-  viewOptions: viewOptionsReducer
+  view: viewReducer
 };
 
 const reduxReducers = combineReducers(reducers);
@@ -47,5 +46,5 @@ export {
   statusReducer,
   toastNotificationsReducer,
   userReducer,
-  viewOptionsReducer
+  viewReducer
 };
