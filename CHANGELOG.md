@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.11.1 (2022-09-22)
+
+### Bug Fixes
+* **build** discovery-174 css font paths ([#170](https://github.com/quipucords/quipucords-ui/pull/170)) ([d616dfb](https://github.com/quipucords/quipucords-ui/commit/d616dfbb30a7ccc71ff822569c58bf443c51eda8))
+
 ## 0.11.0 (2022-09-21)
 
 ### Features
