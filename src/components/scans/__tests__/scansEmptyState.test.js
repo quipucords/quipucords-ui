@@ -4,9 +4,9 @@ import { ScansEmptyState } from '../scansEmptyState';
 describe('ScansEmptyState Component', () => {
   it('should render a basic component', async () => {
     const props = {
-      useSourcesExist: () => ({
-        sourcesCount: 20,
-        hasSources: true
+      useContextGetSources: () => ({
+        totalResults: 20,
+        hasData: true
       })
     };
 
@@ -16,8 +16,8 @@ describe('ScansEmptyState Component', () => {
 
   it('should render messaging if sources do not exist', async () => {
     const props = {
-      useSourcesExist: () => ({
-        hasSources: false
+      useContextGetSources: () => ({
+        hasData: false
       })
     };
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Credentials } from '../credentials';
+import { EmptyState } from '@patternfly/react-core';
+import { Credentials, CONFIG } from '../credentials';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('Credentials Component', () => {
@@ -7,7 +8,8 @@ describe('Credentials Component', () => {
     const props = {
       useGetCredentials: () => ({
         fulfilled: true
-      })
+      }),
+      useView: () => ({ viewId: CONFIG.viewId })
     };
 
     const component = await shallowHookComponent(<Credentials {...props} />);
@@ -59,6 +61,12 @@ describe('Credentials Component', () => {
     };
 
     const component = await shallowHookComponent(<Credentials {...props} />);
-    expect(component.render()).toMatchSnapshot('empty state');
+    expect(component).toMatchSnapshot('empty state, no data');
+
+    component.setProps({
+      useSelectors: () => [{ activeFilters: ['test filter'] }]
+    });
+
+    expect(component.find(EmptyState)).toMatchSnapshot('empty state, filtering active');
   });
 });

@@ -1,7 +1,20 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button, ButtonVariant, EmptyState, Spinner } from '@patternfly/react-core';
-import { IconSize } from '@patternfly/react-icons';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Spinner,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { IconSize, SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import {
   AddCredentialType,
@@ -9,14 +22,17 @@ import {
   SelectPosition
 } from '../addCredentialType/addCredentialType';
 import { reduxTypes, storeHooks } from '../../redux';
+import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
+import { useView } from '../view/viewContext';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import { CredentialsEmptyState } from './credentialsEmptyState';
 import { CredentialFilterFields, CredentialSortFields } from './credentialConstants';
-import { translate } from '../i18n/i18n';
 import { Table } from '../table/table';
 import { credentialsTableCells } from './credentialsTableCells';
 import {
+  VIEW_ID,
+  INITIAL_QUERY,
   useGetCredentials,
   useOnDelete,
   useOnEdit,
@@ -24,15 +40,19 @@ import {
   useOnRefresh,
   useOnSelect
 } from './credentialsContext';
-import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
+import { translate } from '../i18n/i18n';
 
-const VIEW_ID = 'credentials';
+const CONFIG = {
+  viewId: VIEW_ID,
+  initialQuery: INITIAL_QUERY
+};
 
 /**
  * A credentials view.
  *
  * @param {object} props
  * @param {Function} props.t
+ * @param {Function} props.useDispatch
  * @param {Function} props.useGetCredentials
  * @param {Function} props.useOnDelete
  * @param {Function} props.useOnEdit
@@ -41,11 +61,12 @@ const VIEW_ID = 'credentials';
  * @param {Function} props.useOnSelect
  * @param {Function} props.useSelectors
  * @param {Function} props.useOnShowAddSourceWizard
- * @param {string} props.viewId
+ * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
 const Credentials = ({
   t,
+  useDispatch: useAliasDispatch,
   useGetCredentials: useAliasGetCredentials,
   useOnDelete: useAliasOnDelete,
   useOnEdit: useAliasOnEdit,
@@ -54,19 +75,42 @@ const Credentials = ({
   useOnSelect: useAliasOnSelect,
   useSelectors: useAliasSelectors,
   useOnShowAddSourceWizard: useAliasOnShowAddSourceWizard,
-  viewId
+  useView: useAliasView
 }) => {
+  const { viewId } = useAliasView();
+  const dispatch = useAliasDispatch();
   const onExpand = useAliasOnExpand();
   const onRefresh = useAliasOnRefresh();
   const onDelete = useAliasOnDelete();
   const onEdit = useAliasOnEdit();
   const onSelect = useAliasOnSelect();
   const onShowAddSourceWizard = useAliasOnShowAddSourceWizard();
-  const { pending, error, errorMessage, date, data, selectedRows = {}, expandedRows = {} } = useAliasGetCredentials();
+  const {
+    pending,
+    error,
+    errorMessage,
+    fulfilled,
+    date,
+    data,
+    selectedRows = {},
+    expandedRows = {}
+  } = useAliasGetCredentials();
   const [viewOptions = {}] = useAliasSelectors([
     ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.CREDENTIALS_VIEW]
   ]);
   const isActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
+
+  /**
+   * Clear toolbar filters
+   *
+   * @event onToolbarFieldClearAll
+   */
+  const onToolbarFieldClearAll = () => {
+    dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
+      viewType: reduxTypes.view.CREDENTIALS_VIEW
+    });
+  };
 
   /**
    * Toolbar actions onDeleteCredentials
@@ -113,7 +157,10 @@ const Credentials = ({
     return (
       <EmptyState className="quipucords-empty-state__alert">
         <Alert variant={AlertVariant.danger} title={t('view.error', { context: viewId })}>
-          {t('view.error-message', { context: [viewId], message: errorMessage })}
+          {t('view.error-message', {
+            context: [viewId],
+            message: errorMessage
+          })}
         </Alert>
       </EmptyState>
     );
@@ -176,7 +223,21 @@ const Credentials = ({
               ]
             }))}
           >
-            <CredentialsEmptyState viewId={viewId} onAddSource={onShowAddSourceWizard} />
+            {fulfilled && isActive && (
+              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+                <EmptyStateIcon icon={SearchIcon} />
+                <Title size={TitleSizes.lg} headingLevel="h1">
+                  {t('view.empty-state', { context: ['filter', 'title'] })}
+                </Title>
+                <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+                <EmptyStatePrimary>
+                  <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
+                    {t('view.empty-state', { context: ['label', 'clear'] })}
+                  </Button>
+                </EmptyStatePrimary>
+              </EmptyState>
+            )}
+            {fulfilled && !isActive && <CredentialsEmptyState viewId={viewId} onAddSource={onShowAddSourceWizard} />}
           </Table>
         </div>
       </div>
@@ -187,12 +248,13 @@ const Credentials = ({
 /**
  * Prop types
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function,
- *     useOnDelete: Function, useOnExpand: Function, useSelectors: Function, useGetCredentials: Function,
+ * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: Function, useOnRefresh: Function,
+ *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useSelectors: Function, useGetCredentials: Function,
  *     useOnShowAddSourceWizard: Function}}
  */
 Credentials.propTypes = {
   t: PropTypes.func,
+  useDispatch: PropTypes.func,
   useGetCredentials: PropTypes.func,
   useOnDelete: PropTypes.func,
   useOnEdit: PropTypes.func,
@@ -201,18 +263,19 @@ Credentials.propTypes = {
   useOnSelect: PropTypes.func,
   useOnShowAddSourceWizard: PropTypes.func,
   useSelectors: PropTypes.func,
-  viewId: PropTypes.string
+  useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function,
- *     useOnDelete: Function, useOnExpand: Function, useSelectors: Function, useGetCredentials: Function,
+ * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: translate, useOnRefresh: Function,
+ *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useSelectors: Function, useGetCredentials: Function,
  *     useOnShowAddSourceWizard: Function}}
  */
 Credentials.defaultProps = {
   t: translate,
+  useDispatch: storeHooks.reactRedux.useDispatch,
   useGetCredentials,
   useOnDelete,
   useOnEdit,
@@ -221,7 +284,7 @@ Credentials.defaultProps = {
   useOnSelect,
   useOnShowAddSourceWizard,
   useSelectors: storeHooks.reactRedux.useSelectors,
-  viewId: VIEW_ID
+  useView
 };
 
-export { Credentials as default, Credentials, VIEW_ID };
+export { Credentials as default, Credentials, CONFIG };

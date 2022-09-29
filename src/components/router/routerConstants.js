@@ -1,7 +1,8 @@
 import React from 'react';
-import { Scans } from '../scans/scans';
-import { Sources } from '../sources/sources';
-import { Credentials } from '../credentials/credentials';
+import { ViewContext } from '../view/viewContext';
+import { Scans, CONFIG as ScansConfig } from '../scans/scans';
+import { Sources, CONFIG as SourcesConfig } from '../sources/sources';
+import { Credentials, CONFIG as CredentialsConfig } from '../credentials/credentials';
 
 /**
  * Return the application base directory.
@@ -21,19 +22,31 @@ const routes = [
     title: 'Sources',
     path: '/sources',
     redirect: true,
-    element: <Sources />
+    element: (
+      <ViewContext.Provider value={{ ...SourcesConfig }}>
+        <Sources />
+      </ViewContext.Provider>
+    )
   },
   {
     iconClass: 'pficon pficon-orders',
     title: 'Scans',
     path: '/scans',
-    element: <Scans />
+    element: (
+      <ViewContext.Provider value={{ ...ScansConfig }}>
+        <Scans />
+      </ViewContext.Provider>
+    )
   },
   {
     iconClass: 'fa fa-id-card',
     title: 'Credentials',
     path: '/credentials',
-    element: <Credentials />
+    element: (
+      <ViewContext.Provider value={{ ...CredentialsConfig }}>
+        <Credentials />
+      </ViewContext.Provider>
+    )
   }
 ];
 

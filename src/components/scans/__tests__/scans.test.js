@@ -1,5 +1,6 @@
 import React from 'react';
-import { Scans } from '../scans';
+import { EmptyState } from '@patternfly/react-core';
+import { Scans, CONFIG } from '../scans';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('Scans Component', () => {
@@ -7,7 +8,8 @@ describe('Scans Component', () => {
     const props = {
       useGetScans: () => ({
         fulfilled: true
-      })
+      }),
+      useView: () => ({ viewId: CONFIG.viewId })
     };
 
     const component = await shallowHookComponent(<Scans {...props} />);
@@ -59,6 +61,12 @@ describe('Scans Component', () => {
     };
 
     const component = await shallowHookComponent(<Scans {...props} />);
-    expect(component.render()).toMatchSnapshot('empty state');
+    expect(component).toMatchSnapshot('empty state, no data');
+
+    component.setProps({
+      useSelectors: () => [{ activeFilters: ['test filter'] }]
+    });
+
+    expect(component.find(EmptyState)).toMatchSnapshot('empty state, filtering active');
   });
 });

@@ -1,17 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button, ButtonVariant, EmptyState, Spinner } from '@patternfly/react-core';
-import { IconSize } from '@patternfly/react-icons';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Spinner,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { IconSize, SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import { reduxTypes, storeHooks } from '../../redux';
+import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
+import { useView } from '../view/viewContext';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import SourcesEmptyState from './sourcesEmptyState';
 import { SourceFilterFields, SourceSortFields } from './sourceConstants';
-import { translate } from '../i18n/i18n';
 import { Table } from '../table/table';
 import { sourcesTableCells } from './sourcesTableCells';
 import {
+  VIEW_ID,
+  INITIAL_QUERY,
   useGetSources,
   useOnDelete,
   useOnEdit,
@@ -20,9 +36,12 @@ import {
   useOnScan,
   useOnSelect
 } from './sourcesContext';
-import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
+import { translate } from '../i18n/i18n';
 
-const VIEW_ID = 'sources';
+const CONFIG = {
+  viewId: VIEW_ID,
+  initialQuery: INITIAL_QUERY
+};
 
 /**
  * A sources view.
@@ -39,7 +58,7 @@ const VIEW_ID = 'sources';
  * @param {Function} props.useOnShowAddSourceWizard
  * @param {Function} props.useDispatch
  * @param {Function} props.useSelectors
- * @param {string} props.viewId
+ * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
 const Sources = ({
@@ -54,8 +73,9 @@ const Sources = ({
   useOnShowAddSourceWizard: useAliasOnShowAddSourceWizard,
   useDispatch: useAliasDispatch,
   useSelectors: useAliasSelectors,
-  viewId
+  useView: useAliasView
 }) => {
+  const { viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const onDelete = useAliasOnDelete();
   const onEdit = useAliasOnEdit();
@@ -64,13 +84,33 @@ const Sources = ({
   const onScan = useAliasOnScan();
   const onSelect = useAliasOnSelect();
   const onShowAddSourceWizard = useAliasOnShowAddSourceWizard();
-  const { pending, error, errorMessage, date, data, selectedRows = {}, expandedRows = {} } = useAliasGetSources();
+  const {
+    pending,
+    error,
+    errorMessage,
+    fulfilled,
+    date,
+    data,
+    selectedRows = {},
+    expandedRows = {}
+  } = useAliasGetSources();
   const [viewOptions = {}] = useAliasSelectors([
     ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SOURCES_VIEW]
   ]);
-  const filtersOrSourcesActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
+  const isActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
 
-  // ToDo: review onScanSources, renderToolbarActions being standalone with upcoming toolbar updates
+  /**
+   * Clear toolbar filters
+   *
+   * @event onToolbarFieldClearAll
+   */
+  const onToolbarFieldClearAll = () => {
+    dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
+      viewType: reduxTypes.view.SOURCES_VIEW
+    });
+  };
+
   /**
    * Toolbar actions onScanSources
    *
@@ -114,7 +154,10 @@ const Sources = ({
     return (
       <EmptyState className="quipucords-empty-state__alert">
         <Alert variant={AlertVariant.danger} title={t('view.error', { context: viewId })}>
-          {t('view.error-message', { context: [viewId], message: errorMessage })}
+          {t('view.error-message', {
+            context: [viewId],
+            message: errorMessage
+          })}
         </Alert>
       </EmptyState>
     );
@@ -123,7 +166,7 @@ const Sources = ({
   return (
     <div className="quipucords-content">
       <div className="quipucords-view-container">
-        {filtersOrSourcesActive && (
+        {isActive && (
           <React.Fragment>
             <ViewToolbar
               viewType={reduxTypes.view.SOURCES_VIEW}
@@ -195,7 +238,21 @@ const Sources = ({
               ]
             }))}
           >
-            <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />
+            {fulfilled && isActive && (
+              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+                <EmptyStateIcon icon={SearchIcon} />
+                <Title size={TitleSizes.lg} headingLevel="h1">
+                  {t('view.empty-state', { context: ['filter', 'title'] })}
+                </Title>
+                <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+                <EmptyStatePrimary>
+                  <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
+                    {t('view.empty-state', { context: ['label', 'clear'] })}
+                  </Button>
+                </EmptyStatePrimary>
+              </EmptyState>
+            )}
+            {fulfilled && !isActive && <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />}
           </Table>
         </div>
       </div>
@@ -206,9 +263,9 @@ const Sources = ({
 /**
  * Prop types
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function, useOnScan: Function,
- *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
- *     useOnShowAddSourceWizard: Function}}
+ * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: Function, useOnRefresh: Function,
+ *     useOnScan: Function, useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function,
+ *     useSelectors: Function, useOnShowAddSourceWizard: Function}}
  */
 Sources.propTypes = {
   t: PropTypes.func,
@@ -222,15 +279,15 @@ Sources.propTypes = {
   useOnSelect: PropTypes.func,
   useOnShowAddSourceWizard: PropTypes.func,
   useSelectors: PropTypes.func,
-  viewId: PropTypes.string
+  useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{useOnEdit: Function, useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function, useOnScan: Function,
- *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function, useSelectors: Function,
- *     useOnShowAddSourceWizard: Function}}
+ * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: translate, useOnRefresh: Function,
+ *     useOnScan: Function, useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function,
+ *     useSelectors: Function, useOnShowAddSourceWizard: Function}}
  */
 Sources.defaultProps = {
   t: translate,
@@ -244,7 +301,7 @@ Sources.defaultProps = {
   useOnSelect,
   useOnShowAddSourceWizard,
   useSelectors: storeHooks.reactRedux.useSelectors,
-  viewId: VIEW_ID
+  useView
 };
 
-export { Sources as default, Sources, VIEW_ID };
+export { Sources as default, Sources, CONFIG };

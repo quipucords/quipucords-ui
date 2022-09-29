@@ -293,6 +293,18 @@ Array [
         "key": "table.header",
         "match": "t('table.header', { context: ['sources'] })",
       },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
     ],
   },
   Object {
@@ -510,6 +522,18 @@ Array [
         "key": "table.header",
         "match": "t('table.header', { context: ['scan-jobs'] })",
       },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
     ],
   },
   Object {
@@ -534,15 +558,15 @@ Array [
     "keys": Array [
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })",
+        "match": "t('view.empty-state', { context: ['title', viewId], count: totalResults, name: uiShortName })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', viewId], count: sourcesCount })",
+        "match": "t('view.empty-state', { context: ['description', viewId], count: totalResults })",
       },
       Object {
         "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })",
+        "match": "t('view.empty-state', { context: ['label', 'source-navigate'], count: totalResults })",
       },
     ],
   },
@@ -646,6 +670,18 @@ Array [
       Object {
         "key": "table.header",
         "match": "t('table.header', { context: ['unreachable', viewId] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      Object {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
       },
     ],
   },
@@ -839,6 +875,18 @@ Array [
     "key": "table.header",
   },
   Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  Object {
     "file": "./src/components/credentials/credentialsContext.js",
     "key": "form-dialog.confirmation",
   },
@@ -911,6 +959,18 @@ Array [
     "key": "table.header",
   },
   Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  Object {
     "file": "./src/components/scans/scansEmptyState.js",
     "key": "view.empty-state",
   },
@@ -961,6 +1021,18 @@ Array [
   Object {
     "file": "./src/components/sources/sources.js",
     "key": "table.header",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/sources/sources.js",
+    "key": "view.empty-state",
   },
   Object {
     "file": "./src/components/sources/sourcesContext.js",

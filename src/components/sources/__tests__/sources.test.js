@@ -1,5 +1,6 @@
 import React from 'react';
-import { Sources } from '../sources';
+import { EmptyState } from '@patternfly/react-core';
+import { Sources, CONFIG } from '../sources';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('Sources Component', () => {
@@ -7,7 +8,8 @@ describe('Sources Component', () => {
     const props = {
       useGetSources: () => ({
         fulfilled: true
-      })
+      }),
+      useView: () => ({ viewId: CONFIG.viewId })
     };
 
     const component = await shallowHookComponent(<Sources {...props} />);
@@ -59,6 +61,12 @@ describe('Sources Component', () => {
     };
 
     const component = await shallowHookComponent(<Sources {...props} />);
-    expect(component.render()).toMatchSnapshot('empty state');
+    expect(component).toMatchSnapshot('empty state, no data');
+
+    component.setProps({
+      useSelectors: () => [{ activeFilters: ['test filter'] }]
+    });
+
+    expect(component.find(EmptyState)).toMatchSnapshot('empty state, filtering active');
   });
 });

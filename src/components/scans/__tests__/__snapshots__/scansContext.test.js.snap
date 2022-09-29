@@ -9,8 +9,10 @@ Object {
     "errorMessage": "Lorem ipsum",
     "expandedRows": undefined,
     "fulfilled": undefined,
+    "hasData": false,
     "pending": undefined,
     "selectedRows": undefined,
+    "totalResults": 0,
   },
   "fulfilledResponse": Object {
     "data": Array [
@@ -22,8 +24,10 @@ Object {
     "errorMessage": undefined,
     "expandedRows": undefined,
     "fulfilled": true,
+    "hasData": false,
     "pending": undefined,
     "selectedRows": undefined,
+    "totalResults": 0,
   },
   "mockStoreSuccessResponse": Object {
     "data": Array [
@@ -35,8 +39,10 @@ Object {
     "errorMessage": null,
     "expandedRows": Object {},
     "fulfilled": true,
+    "hasData": false,
     "pending": false,
     "selectedRows": Object {},
+    "totalResults": 0,
   },
   "pendingResponse": Object {
     "data": Array [],
@@ -45,8 +51,10 @@ Object {
     "errorMessage": undefined,
     "expandedRows": undefined,
     "fulfilled": undefined,
+    "hasData": false,
     "pending": true,
     "selectedRows": undefined,
+    "totalResults": 0,
   },
 }
 `;
@@ -94,6 +102,14 @@ Array [
 
 exports[`ScansContext should return specific properties: specific properties 1`] = `
 Object {
+  "INITIAL_QUERY": Object {
+    "ordering": "name",
+    "page": 1,
+    "page_size": 10,
+    "scan_type": "inspect",
+  },
+  "VIEW_ID": "scans",
+  "useContextGetScans": [Function],
   "useGetScans": [Function],
   "useOnExpand": [Function],
   "useOnRefresh": [Function],
