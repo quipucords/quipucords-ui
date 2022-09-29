@@ -1,20 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button, ButtonVariant, EmptyState, Spinner } from '@patternfly/react-core';
-import { IconSize } from '@patternfly/react-icons';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateVariant,
+  Spinner,
+  Title,
+  TitleSizes
+} from '@patternfly/react-core';
+import { IconSize, SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
+import { Tooltip } from '../tooltip/tooltip';
 import { reduxTypes, storeHooks } from '../../redux';
+import { useView } from '../view/viewContext';
 import ViewToolbar from '../viewToolbar/viewToolbar';
 import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
 import { ScansEmptyState } from './scansEmptyState';
 import { ScanFilterFields, ScanSortFields } from './scanConstants';
-import { translate } from '../i18n/i18n';
 import { Table } from '../table/table';
 import { scansTableCells } from './scansTableCells';
-import { useGetScans, useOnExpand, useOnRefresh, useOnScanAction, useOnSelect } from './scansContext';
-import { Tooltip } from '../tooltip/tooltip';
+import {
+  VIEW_ID,
+  INITIAL_QUERY,
+  useGetScans,
+  useOnExpand,
+  useOnRefresh,
+  useOnScanAction,
+  useOnSelect
+} from './scansContext';
+import { translate } from '../i18n/i18n';
 
-const VIEW_ID = 'scans';
+const CONFIG = {
+  viewId: VIEW_ID,
+  initialQuery: INITIAL_QUERY
+};
 
 // ToDo: review onMergeReports, renderToolbarActions being standalone with upcoming toolbar updates
 // ToDo: review items being selected and the page polling. Randomized dev data gives the appearance of an issue. Also applies to sources selected items
@@ -30,7 +55,7 @@ const VIEW_ID = 'scans';
  * @param {Function} props.useOnSelect
  * @param {Function} props.useDispatch
  * @param {Function} props.useSelectors
- * @param {string} props.viewId
+ * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
 const Scans = ({
@@ -42,18 +67,40 @@ const Scans = ({
   useOnSelect: useAliasOnSelect,
   useDispatch: useAliasDispatch,
   useSelectors: useAliasSelectors,
-  viewId
+  useView: useAliasView
 }) => {
+  const { viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const onExpand = useAliasOnExpand();
   const onRefresh = useAliasOnRefresh();
   const { onCancel, onDownload, onPause, onRestart, onStart } = useAliasOnScanAction();
   const onSelect = useAliasOnSelect();
-  const { pending, error, errorMessage, date, data, selectedRows = {}, expandedRows = {} } = useAliasGetScans();
+  const {
+    pending,
+    error,
+    errorMessage,
+    fulfilled,
+    date,
+    data,
+    selectedRows = {},
+    expandedRows = {}
+  } = useAliasGetScans();
   const [viewOptions = {}] = useAliasSelectors([
     ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SCANS_VIEW]
   ]);
   const isActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
+
+  /**
+   * Clear toolbar filters
+   *
+   * @event onToolbarFieldClearAll
+   */
+  const onToolbarFieldClearAll = () => {
+    dispatch({
+      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
+      viewType: reduxTypes.view.SCANS_VIEW
+    });
+  };
 
   /**
    * Toolbar actions onScanSources
@@ -98,7 +145,10 @@ const Scans = ({
     return (
       <EmptyState className="quipucords-empty-state__alert">
         <Alert variant={AlertVariant.danger} title={t('view.error', { context: viewId })}>
-          {t('view.error-message', { context: [viewId], message: errorMessage })}
+          {t('view.error-message', {
+            context: [viewId],
+            message: errorMessage
+          })}
         </Alert>
       </EmptyState>
     );
@@ -182,7 +232,21 @@ const Scans = ({
               ]
             }))}
           >
-            <ScansEmptyState viewId={viewId} />
+            {fulfilled && isActive && (
+              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
+                <EmptyStateIcon icon={SearchIcon} />
+                <Title size={TitleSizes.lg} headingLevel="h1">
+                  {t('view.empty-state', { context: ['filter', 'title'] })}
+                </Title>
+                <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
+                <EmptyStatePrimary>
+                  <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
+                    {t('view.empty-state', { context: ['label', 'clear'] })}
+                  </Button>
+                </EmptyStatePrimary>
+              </EmptyState>
+            )}
+            {fulfilled && !isActive && <ScansEmptyState />}
           </Table>
         </div>
       </div>
@@ -193,7 +257,7 @@ const Scans = ({
 /**
  * Prop types
  *
- * @type {{useOnSelect: Function, viewId: string, t: Function, useOnRefresh: Function, useOnScanAction: Function,
+ * @type {{useView: Function, useOnSelect: Function, t: Function, useOnRefresh: Function, useOnScanAction: Function,
  *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
  */
 Scans.propTypes = {
@@ -205,13 +269,13 @@ Scans.propTypes = {
   useOnScanAction: PropTypes.func,
   useOnSelect: PropTypes.func,
   useSelectors: PropTypes.func,
-  viewId: PropTypes.string
+  useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{useOnSelect: Function, viewId: string, t: translate, useOnRefresh: Function, useOnScanAction: Function,
+ * @type {{useView: Function, useOnSelect: Function, t: translate, useOnRefresh: Function, useOnScanAction: Function,
  *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useSelectors: Function}}
  */
 Scans.defaultProps = {
@@ -223,7 +287,7 @@ Scans.defaultProps = {
   useOnScanAction,
   useOnSelect,
   useSelectors: storeHooks.reactRedux.useSelectors,
-  viewId: VIEW_ID
+  useView
 };
 
-export { Scans as default, Scans, VIEW_ID };
+export { Scans as default, Scans, CONFIG };

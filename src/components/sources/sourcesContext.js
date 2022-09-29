@@ -4,10 +4,28 @@ import { AlertVariant, List, ListItem } from '@patternfly/react-core';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useTimeout } from '../../hooks';
-import { apiTypes } from '../../constants/apiConstants';
+import { useConfirmation } from '../../hooks/useConfirmation';
+import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
 import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
-import { useConfirmation } from '../../hooks/useConfirmation';
+
+/**
+ * State context identifier
+ *
+ * @type {string}
+ */
+const VIEW_ID = 'sources';
+
+/**
+ * Charge initial view query
+ *
+ * @type {{'[API_QUERY_TYPES.ORDERING]': string, '[API_QUERY_TYPES.PAGE]': number, '[API_QUERY_TYPES.PAGE_SIZE]': number}}
+ */
+const INITIAL_QUERY = {
+  [API_QUERY_TYPES.ORDERING]: API_QUERY_SORT_TYPES.NAME,
+  [API_QUERY_TYPES.PAGE]: 1,
+  [API_QUERY_TYPES.PAGE_SIZE]: 10
+};
 
 /**
  * Sources action, onDelete.
@@ -302,7 +320,8 @@ const useGetSources = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ sources }) => sources?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { [apiTypes.API_RESPONSE_SOURCES_RESULTS]: data = [] } = responseData?.view || {};
+  const { [apiTypes.API_RESPONSE_SOURCES_COUNT]: totalResults, [apiTypes.API_RESPONSE_SOURCES_RESULTS]: data = [] } =
+    responseData?.view || {};
   const query = helpers.createViewQueryObject(viewOptions);
 
   useShallowCompareEffect(() => {
@@ -316,28 +335,32 @@ const useGetSources = ({
     fulfilled,
     data,
     date,
+    hasData: fulfilled === true && totalResults > 0,
     selectedRows,
-    expandedRows
+    expandedRows,
+    totalResults: totalResults || 0
   };
 };
 
 /**
- * Confirm if sources exist
+ * Get sources in the context of the sources view.
  *
  * @param {object} options
  * @param {Function} options.useGetSources
- * @returns {boolean}
+ * @returns {{date: *, sources: *[], expandedSources: *, pending: boolean, errorMessage: null, fulfilled: boolean, error: boolean, selectedSources: *}}
  */
-const useSourcesExist = ({ useGetSources: useAliasGetSources = useGetSources } = {}) => {
-  const { fulfilled, data } = useAliasGetSources();
+const useContextGetSources = ({ useGetSources: useAliasGetSources = useGetSources } = {}) => {
+  const results = useAliasGetSources();
 
   return {
-    sourcesCount: data?.length ?? 0,
-    hasSources: fulfilled === true && data?.length > 0
+    ...results
   };
 };
 
 const context = {
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetSources,
   useGetSources,
   useOnDelete,
   useOnEdit,
@@ -345,13 +368,15 @@ const context = {
   useOnRefresh,
   useOnScan,
   useOnSelect,
-  usePoll,
-  useSourcesExist
+  usePoll
 };
 
 export {
   context as default,
   context,
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetSources,
   useGetSources,
   useOnDelete,
   useOnEdit,
@@ -359,6 +384,5 @@ export {
   useOnRefresh,
   useOnScan,
   useOnSelect,
-  usePoll,
-  useSourcesExist
+  usePoll
 };

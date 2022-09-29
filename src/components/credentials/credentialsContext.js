@@ -3,10 +3,28 @@ import { useShallowCompareEffect } from 'react-use';
 import { AlertVariant, List, ListItem } from '@patternfly/react-core';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
-import { apiTypes } from '../../constants/apiConstants';
+import { useConfirmation } from '../../hooks/useConfirmation';
+import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
 import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
-import { useConfirmation } from '../../hooks/useConfirmation';
+
+/**
+ * State context identifier
+ *
+ * @type {string}
+ */
+const VIEW_ID = 'credentials';
+
+/**
+ * Charge initial view query
+ *
+ * @type {{'[API_QUERY_TYPES.ORDERING]': string, '[API_QUERY_TYPES.PAGE]': number, '[API_QUERY_TYPES.PAGE_SIZE]': number}}
+ */
+const INITIAL_QUERY = {
+  [API_QUERY_TYPES.ORDERING]: API_QUERY_SORT_TYPES.NAME,
+  [API_QUERY_TYPES.PAGE]: 1,
+  [API_QUERY_TYPES.PAGE_SIZE]: 10
+};
 
 /**
  * Credential action, onDelete.
@@ -255,7 +273,10 @@ const useGetCredentials = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ credentials }) => credentials?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { [apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]: data = [] } = responseData?.view || {};
+  const {
+    [apiTypes.API_RESPONSE_CREDENTIALS_COUNT]: totalResults,
+    [apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]: data = []
+  } = responseData?.view || {};
   const query = helpers.createViewQueryObject(viewOptions);
 
   useShallowCompareEffect(() => {
@@ -269,12 +290,32 @@ const useGetCredentials = ({
     fulfilled,
     data,
     date,
+    hasData: fulfilled === true && totalResults > 0,
     selectedRows,
-    expandedRows
+    expandedRows,
+    totalResults: totalResults || 0
+  };
+};
+
+/**
+ * Get credentials in the context of the credentials view.
+ *
+ * @param {object} options
+ * @param {Function} options.useGetCredentials
+ * @returns {{date: *, data: *[], pending: boolean, errorMessage: null, fulfilled: boolean, selectedRows: *, expandedRows: *, error: boolean}}
+ */
+const useContextGetCredentials = ({ useGetCredentials: useAliasGetCredentials = useGetCredentials } = {}) => {
+  const results = useAliasGetCredentials();
+
+  return {
+    ...results
   };
 };
 
 const context = {
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetCredentials,
   useGetCredentials,
   useOnDelete,
   useOnEdit,
@@ -286,6 +327,9 @@ const context = {
 export {
   context as default,
   context,
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetCredentials,
   useGetCredentials,
   useOnDelete,
   useOnEdit,

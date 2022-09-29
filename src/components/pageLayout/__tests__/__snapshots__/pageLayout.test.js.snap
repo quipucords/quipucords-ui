@@ -349,54 +349,95 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
   menu={
     Array [
       Object {
-        "element": <Sources
-          t={[Function]}
-          useDispatch={[Function]}
-          useGetSources={[Function]}
-          useOnDelete={[Function]}
-          useOnEdit={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnScan={[Function]}
-          useOnSelect={[Function]}
-          useOnShowAddSourceWizard={[Function]}
-          useSelectors={[Function]}
-          viewId="sources"
-        />,
+        "element": <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+              },
+              "viewId": "sources",
+            }
+          }
+        >
+          <Sources
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetSources={[Function]}
+            useOnDelete={[Function]}
+            useOnEdit={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnScan={[Function]}
+            useOnSelect={[Function]}
+            useOnShowAddSourceWizard={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>,
         "iconClass": "fa fa-crosshairs",
         "path": "/sources",
         "redirect": true,
         "title": "Sources",
       },
       Object {
-        "element": <Scans
-          t={[Function]}
-          useDispatch={[Function]}
-          useGetScans={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnScanAction={[Function]}
-          useOnSelect={[Function]}
-          useSelectors={[Function]}
-          viewId="scans"
-        />,
+        "element": <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+                "scan_type": "inspect",
+              },
+              "viewId": "scans",
+            }
+          }
+        >
+          <Scans
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetScans={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnScanAction={[Function]}
+            useOnSelect={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>,
         "iconClass": "pficon pficon-orders",
         "path": "/scans",
         "title": "Scans",
       },
       Object {
-        "element": <Credentials
-          t={[Function]}
-          useGetCredentials={[Function]}
-          useOnDelete={[Function]}
-          useOnEdit={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnSelect={[Function]}
-          useOnShowAddSourceWizard={[Function]}
-          useSelectors={[Function]}
-          viewId="credentials"
-        />,
+        "element": <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+              },
+              "viewId": "credentials",
+            }
+          }
+        >
+          <Credentials
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetCredentials={[Function]}
+            useOnDelete={[Function]}
+            useOnEdit={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnSelect={[Function]}
+            useOnShowAddSourceWizard={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>,
         "iconClass": "fa fa-id-card",
         "path": "/credentials",
         "title": "Credentials",

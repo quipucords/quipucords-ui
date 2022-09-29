@@ -15,55 +15,96 @@ exports[`Router Component should shallow render a basic component 1`] = `
   >
     <Route
       element={
-        <Sources
-          t={[Function]}
-          useDispatch={[Function]}
-          useGetSources={[Function]}
-          useOnDelete={[Function]}
-          useOnEdit={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnScan={[Function]}
-          useOnSelect={[Function]}
-          useOnShowAddSourceWizard={[Function]}
-          useSelectors={[Function]}
-          viewId="sources"
-        />
+        <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+              },
+              "viewId": "sources",
+            }
+          }
+        >
+          <Sources
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetSources={[Function]}
+            useOnDelete={[Function]}
+            useOnEdit={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnScan={[Function]}
+            useOnSelect={[Function]}
+            useOnShowAddSourceWizard={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>
       }
       key="/sources"
       path="/sources"
     />
     <Route
       element={
-        <Scans
-          t={[Function]}
-          useDispatch={[Function]}
-          useGetScans={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnScanAction={[Function]}
-          useOnSelect={[Function]}
-          useSelectors={[Function]}
-          viewId="scans"
-        />
+        <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+                "scan_type": "inspect",
+              },
+              "viewId": "scans",
+            }
+          }
+        >
+          <Scans
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetScans={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnScanAction={[Function]}
+            useOnSelect={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>
       }
       key="/scans"
       path="/scans"
     />
     <Route
       element={
-        <Credentials
-          t={[Function]}
-          useGetCredentials={[Function]}
-          useOnDelete={[Function]}
-          useOnEdit={[Function]}
-          useOnExpand={[Function]}
-          useOnRefresh={[Function]}
-          useOnSelect={[Function]}
-          useOnShowAddSourceWizard={[Function]}
-          useSelectors={[Function]}
-          viewId="credentials"
-        />
+        <Context.Provider
+          value={
+            Object {
+              "initialQuery": Object {
+                "ordering": "name",
+                "page": 1,
+                "page_size": 10,
+              },
+              "viewId": "credentials",
+            }
+          }
+        >
+          <Credentials
+            t={[Function]}
+            useDispatch={[Function]}
+            useGetCredentials={[Function]}
+            useOnDelete={[Function]}
+            useOnEdit={[Function]}
+            useOnExpand={[Function]}
+            useOnRefresh={[Function]}
+            useOnSelect={[Function]}
+            useOnShowAddSourceWizard={[Function]}
+            useSelectors={[Function]}
+            useView={[Function]}
+          />
+        </Context.Provider>
       }
       key="/credentials"
       path="/credentials"
