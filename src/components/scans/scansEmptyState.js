@@ -11,7 +11,8 @@ import {
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
 import { useNavigate } from '../router/routerContext';
-import { useSourcesExist } from '../sources/sourcesContext';
+import { useView } from '../view/viewContext';
+import { useContextGetSources } from '../sources/sourcesContext';
 import { helpers } from '../../common';
 import { reduxTypes, storeHooks } from '../../redux';
 import { translate } from '../i18n/i18n';
@@ -21,27 +22,28 @@ import { translate } from '../i18n/i18n';
  *
  * @param {object} props
  * @param {Function} props.t
- * @param {Function} props.useNavigate
- * @param {Function} props.useDispatch
  * @param {string} props.uiShortName
- * @param {Function} props.useSourcesExist
- * @param {string} props.viewId
+ * @param {Function} props.useContextGetSources
+ * @param {Function} props.useDispatch
+ * @param {Function} props.useNavigate
+ * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
 const ScansEmptyState = ({
   t,
+  uiShortName,
+  useContextGetSources: useAliasContextGetSources,
   useDispatch: useAliasDispatch,
   useNavigate: useAliasNavigate,
-  uiShortName,
-  useSourcesExist: useAliasSourcesExist,
-  viewId
+  useView: useAliasView
 }) => {
+  const { viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const navigate = useAliasNavigate();
-  const { sourcesCount, hasSources } = useAliasSourcesExist();
+  const { totalResults, hasData } = useAliasContextGetSources();
 
   const onAddSource = () => {
-    if (hasSources) {
+    if (hasData) {
       navigate('/sources');
     } else {
       dispatch({
@@ -54,14 +56,14 @@ const ScansEmptyState = ({
     <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={AddCircleOIcon} />
       <Title headingLevel="h1">
-        {t('view.empty-state', { context: ['title', viewId], count: sourcesCount, name: uiShortName })}
+        {t('view.empty-state', { context: ['title', viewId], count: totalResults, name: uiShortName })}
       </Title>
       <EmptyStateBody>
-        {t('view.empty-state', { context: ['description', viewId], count: sourcesCount })}
+        {t('view.empty-state', { context: ['description', viewId], count: totalResults })}
       </EmptyStateBody>
       <EmptyStatePrimary>
         <Button onClick={onAddSource}>
-          {t('view.empty-state', { context: ['label', 'source-navigate'], count: sourcesCount })}
+          {t('view.empty-state', { context: ['label', 'source-navigate'], count: totalResults })}
         </Button>
       </EmptyStatePrimary>
     </EmptyState>
@@ -71,31 +73,31 @@ const ScansEmptyState = ({
 /**
  * Prop types
  *
- * @type {{uiShortName: string, viewId: string, t: Function, useSourcesExist: Function, useDispatch: Function,
+ * @type {{uiShortName: string, useView: Function, t: Function, useContextGetSources: Function, useDispatch: Function,
  *     useNavigate: Function}}
  */
 ScansEmptyState.propTypes = {
   t: PropTypes.func,
+  uiShortName: PropTypes.string,
   useDispatch: PropTypes.func,
   useNavigate: PropTypes.func,
-  uiShortName: PropTypes.string,
-  useSourcesExist: PropTypes.func,
-  viewId: PropTypes.string
+  useContextGetSources: PropTypes.func,
+  useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{uiShortName: string, viewId: null, t: translate, useSourcesExist: Function, useDispatch: Function,
+ * @type {{uiShortName: string, useView: Function, t: translate, useContextGetSources: Function, useDispatch: Function,
  *     useNavigate: Function}}
  */
 ScansEmptyState.defaultProps = {
   t: translate,
+  uiShortName: helpers.UI_SHORT_NAME,
   useDispatch: storeHooks.reactRedux.useDispatch,
   useNavigate,
-  uiShortName: helpers.UI_SHORT_NAME,
-  useSourcesExist,
-  viewId: null
+  useContextGetSources,
+  useView
 };
 
 export { ScansEmptyState as default, ScansEmptyState };

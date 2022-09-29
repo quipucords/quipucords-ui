@@ -3,9 +3,29 @@ import { AlertVariant } from '@patternfly/react-core';
 import { useShallowCompareEffect } from 'react-use';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useTimeout } from '../../hooks';
-import { apiTypes } from '../../constants/apiConstants';
+import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
 import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
+
+/**
+ * State context identifier
+ *
+ * @type {string}
+ */
+const VIEW_ID = 'scans';
+
+/**
+ * Charge initial view query
+ *
+ * @type {{'[API_QUERY_TYPES.ORDERING]': string, '[API_QUERY_TYPES.SCAN_TYPE]': string, '[API_QUERY_TYPES.PAGE]': number,
+ *    '[API_QUERY_TYPES.PAGE_SIZE]': number}}
+ */
+const INITIAL_QUERY = {
+  [API_QUERY_TYPES.ORDERING]: API_QUERY_SORT_TYPES.NAME,
+  [API_QUERY_TYPES.PAGE]: 1,
+  [API_QUERY_TYPES.PAGE_SIZE]: 10,
+  [API_QUERY_TYPES.SCAN_TYPE]: 'inspect'
+};
 
 /**
  * On expand a row facet.
@@ -276,8 +296,9 @@ const useGetScans = ({
   } = useAliasSelectorsResponse({ id: 'view', selector: ({ scans }) => scans?.view });
 
   const [{ date } = {}] = responses?.list || [];
-  const { [apiTypes.API_RESPONSE_SCANS_RESULTS]: data = [] } = responseData?.view || {};
-  const query = helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_SCAN_TYPE]: 'inspect' });
+  const { [apiTypes.API_RESPONSE_SCANS_COUNT]: totalResults, [apiTypes.API_RESPONSE_SCANS_RESULTS]: data = [] } =
+    responseData?.view || {};
+  const query = helpers.createViewQueryObject(viewOptions, { [apiTypes.API_QUERY_TYPES.SCAN_TYPE]: 'inspect' });
 
   useShallowCompareEffect(() => {
     getScans(query)(dispatch);
@@ -290,12 +311,32 @@ const useGetScans = ({
     fulfilled,
     data,
     date,
+    hasData: fulfilled === true && totalResults > 0,
     selectedRows,
-    expandedRows
+    expandedRows,
+    totalResults: totalResults || 0
+  };
+};
+
+/**
+ * Get scans in the context of the scans view.
+ *
+ * @param {object} options
+ * @param {Function} options.useGetScans
+ * @returns {{date: *, data: *[], pending: boolean, errorMessage: null, fulfilled: boolean, selectedRows: *, expandedRows: *, error: boolean}}
+ */
+const useContextGetScans = ({ useGetScans: useAliasGetScans = useGetScans } = {}) => {
+  const results = useAliasGetScans();
+
+  return {
+    ...results
   };
 };
 
 const context = {
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetScans,
   useGetScans,
   useOnExpand,
   useOnRefresh,
@@ -304,4 +345,16 @@ const context = {
   usePoll
 };
 
-export { context as default, context, useGetScans, useOnExpand, useOnRefresh, useOnScanAction, useOnSelect, usePoll };
+export {
+  context as default,
+  context,
+  VIEW_ID,
+  INITIAL_QUERY,
+  useContextGetScans,
+  useGetScans,
+  useOnExpand,
+  useOnRefresh,
+  useOnScanAction,
+  useOnSelect,
+  usePoll
+};

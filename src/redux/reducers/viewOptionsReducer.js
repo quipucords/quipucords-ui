@@ -66,48 +66,35 @@ const viewOptionsReducer = (state = initialState, action) => {
       return { ...state, ...updateState };
 
     case viewToolbarTypes.ADD_FILTER:
-      const currentFilter = state[action.viewType].activeFilters.find(filter => action.filter.field === filter.field);
+      const index = state[action.viewType].activeFilters.findIndex(
+        filter => filter?.field?.id === action.filter?.field?.id
+      );
+      const updatedFilters = [...state[action.viewType].activeFilters];
 
-      if (!currentFilter) {
-        updateState[action.viewType] = {
-          ...state[action.viewType],
-          activeFilters: [...state[action.viewType].activeFilters, action.filter],
-          currentPage: 1
-        };
-      } else if (currentFilter.value === action.filter.value) {
-        // Do nothing if an existing filter has the same value
-        return state;
+      if (index < 0) {
+        updatedFilters.push(action.filter);
       } else {
-        // replace the existing filter
-        const index = state[action.viewType].activeFilters.indexOf(currentFilter);
-        updateState[action.viewType] = {
-          ...state[action.viewType],
-          activeFilters: [
-            ...state[action.viewType].activeFilters.slice(0, index),
-            action.filter,
-            ...state[action.viewType].activeFilters.slice(index + 1)
-          ],
-          currentPage: 1
-        };
+        updatedFilters[index] = action.filter;
       }
+
+      updateState[action.viewType] = {
+        ...state[action.viewType],
+        activeFilters: updatedFilters,
+        currentPage: 1
+      };
 
       return { ...state, ...updateState };
 
     case viewToolbarTypes.REMOVE_FILTER:
-      const index = state[action.viewType].activeFilters.indexOf(action.filter);
-      if (index >= 0) {
-        updateState[action.viewType] = {
-          ...state[action.viewType],
-          activeFilters: [
-            ...state[action.viewType].activeFilters.slice(0, index),
-            ...state[action.viewType].activeFilters.slice(index + 1)
-          ],
-          currentPage: 1
-        };
-        return { ...state, ...updateState };
-      }
-
-      return state;
+      const remainingFilters = state[action.viewType].activeFilters.filter(
+        filter => filter?.field?.id !== action.filter?.field?.id
+      );
+      updateState[action.viewType] = {
+        ...state[action.viewType],
+        activeFilters: remainingFilters,
+        currentPage: 1
+      };
+      return { ...state, ...updateState };
 
     case viewToolbarTypes.CLEAR_FILTERS:
       updateState[action.viewType] = { ...state[action.viewType], activeFilters: [], currentPage: 1 };
