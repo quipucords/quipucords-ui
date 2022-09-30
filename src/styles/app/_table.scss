@@ -21,4 +21,9 @@
     min-height: 4em;
     max-height: 18em;
   }
+
+  &__scan-jobs {
+    margin-top: var(--pf-c-table--m-compact__expandable-row-content--PaddingTop);
+    margin-bottom: var(--pf-c-table--m-compact__expandable-row-content--PaddingBottom);
+  }
 }

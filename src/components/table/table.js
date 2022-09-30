@@ -38,6 +38,7 @@ import { tableHelpers } from './tableHelpers';
  * @param {object} props.componentClassNames
  * @param {boolean} props.isBorders
  * @param {boolean} props.isHeader
+ * @param {boolean} props.isStriped
  * @param {Function} props.onSelect
  * @param {Function} props.onSort
  * @param {Function} props.onExpand
@@ -54,6 +55,7 @@ const Table = ({
   componentClassNames,
   isBorders,
   isHeader,
+  isStriped,
   onSelect,
   onSort,
   onExpand,
@@ -324,6 +326,7 @@ const Table = ({
               {updatedIsExpandableRow && expandedRow && (
                 <Tr className={componentClassNames.tr} isExpanded key={`${rowKey}-expandedrow`}>
                   <Td
+                    noPadding={expandedRow?.props?.noPadding}
                     className={`${componentClassNames.td} ${componentClassNames.tdExpanded} ${componentClassNames.tdExpandedWrapper}`}
                     colSpan={cells.length + ((expand && 1) || 0) + ((select && 1) || 0)}
                   >
@@ -336,6 +339,7 @@ const Table = ({
               {updatedIsExpandableCell && expandedCell && (
                 <Tr className={componentClassNames.tr} isExpanded key={`${rowKey}-expandedcol`}>
                   <Td
+                    noPadding={expandedCell?.props?.noPadding}
                     className={`${componentClassNames.td} ${componentClassNames.tdExpanded} ${componentClassNames.tdExpandedWrapper}`}
                     colSpan={cells.length + ((expand && 1) || 0) + ((select && 1) || 0)}
                   >
@@ -370,6 +374,7 @@ const Table = ({
             aria-label={ariaLabel}
             borders={isBorders}
             className={`${componentClassNames.table} ${className}`}
+            isStriped={isStriped}
             summary={summary}
             variant={variant}
           >
@@ -386,9 +391,9 @@ const Table = ({
 /**
  * Prop types
  *
- * @type {{componentClassNames: object, summary: string, onSort: Function, onExpand: Function, className: string, rows: Array,
- *     isBorders: boolean, ariaLabel: string, onSelect: Function, columnHeaders: Array, children: React.ReactNode, isHeader: boolean,
- *     variant: string}}
+ * @type {{componentClassNames: object, summary: string, onSort: Function, onExpand: Function, className: string, isStriped: boolean,
+ *     rows: Array, isBorders: boolean, ariaLabel: string, onSelect: Function, columnHeaders: Array, children: React.ReactNode,
+ *     isHeader: boolean, variant: string}}
  */
 Table.propTypes = {
   ariaLabel: PropTypes.string,
@@ -423,6 +428,7 @@ Table.propTypes = {
   }),
   isBorders: PropTypes.bool,
   isHeader: PropTypes.bool,
+  isStriped: PropTypes.bool,
   onExpand: PropTypes.func,
   onSelect: PropTypes.func,
   onSort: PropTypes.func,
@@ -454,10 +460,11 @@ Table.propTypes = {
 /**
  * Default props
  *
- * @type {{componentClassNames: {td: string, trExpanded: string, tdExpanded: string, th: string, trExpand: string,
- *     trExpandedContent: string, tdExpandedContent: string, table: string, tr: string, tdExpand: string}, summary: null,
- *     onSort: null, onExpand: null, className: string, rows: *[], isBorders: boolean, ariaLabel: null, onSelect: null,
- *     columnHeaders: *[], children: null, isHeader: boolean, variant: TableVariant.compact}}
+ * @type {{componentClassNames: {tdExpanded: string, trExpand: string, trExpandedContent: string, tdExpandedWrapper: string,
+ *     tdAction: string, tdExpand: string, td: string, trExpanded: string, th: string, tdSelect: string, tdExpandedContent: string,
+ *     table: string, tr: string}, summary: null, onSort: null, onExpand: null, className: string, isStriped: boolean, rows: *[],
+ *     isBorders: boolean, ariaLabel: null, onSelect: null, columnHeaders: *[], children: null, isHeader: boolean,
+ *     variant: TableVariant.compact}}
  */
 Table.defaultProps = {
   ariaLabel: null,
@@ -481,6 +488,7 @@ Table.defaultProps = {
   },
   isBorders: true,
   isHeader: false,
+  isStriped: false,
   onExpand: null,
   onSelect: null,
   onSort: null,
@@ -489,4 +497,4 @@ Table.defaultProps = {
   variant: TableVariant.compact
 };
 
-export { Table as default, Table };
+export { Table as default, Table, TableVariant };

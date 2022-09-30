@@ -234,7 +234,9 @@ const scansCellContent = (
 
   return {
     content: statusCell({ count, status: 'scans', viewId }),
-    expandedContent: (count > 1 && <ScanJobsList key={`jobs-${id}`} id={id} mostRecentId={mostRecentId} />) || undefined
+    expandedContent:
+      (count > 1 && <ScanJobsList key={`jobs-${id}`} id={id} mostRecentId={mostRecentId} />) || undefined,
+    noPadding: true
   };
 };
 
