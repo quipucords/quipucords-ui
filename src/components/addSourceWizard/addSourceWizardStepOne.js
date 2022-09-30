@@ -25,14 +25,14 @@ class AddSourceWizardStepOne extends React.Component {
       <FormState validateOnMount setValues={{ sourceType: type }} validate={this.isStepValid}>
         {({ values, handleOnEvent, handleOnSubmit }) => (
           <Form isHorizontal onSubmit={handleOnSubmit}>
-            <FormGroup label={t('form-dialog.label_select_source-type')}>
+            <FormGroup role="radiogroup" isStack label={t('form-dialog.label', { context: 'source-type' })}>
               <Radio
                 name="sourceType"
                 id="sourceType-network"
                 value="network"
                 checked={values.sourceType === 'network'}
                 onChange={handleOnEvent}
-                label={t('form-dialog.label_network-range')}
+                label={t('form-dialog.label', { context: 'network-range' })}
               />
               <Radio
                 name="sourceType"
@@ -40,7 +40,7 @@ class AddSourceWizardStepOne extends React.Component {
                 value="satellite"
                 checked={values.sourceType === 'satellite'}
                 onChange={handleOnEvent}
-                label={t('form-dialog.label_satellite')}
+                label={t('form-dialog.label', { context: 'satellite' })}
               />
               <Radio
                 name="sourceType"
@@ -48,7 +48,7 @@ class AddSourceWizardStepOne extends React.Component {
                 value="vcenter"
                 checked={values.sourceType === 'vcenter'}
                 onChange={handleOnEvent}
-                label={t('form-dialog.label_vCenter-server')}
+                label={t('form-dialog.label', { context: 'vcenter-server' })}
               />
             </FormGroup>
           </Form>

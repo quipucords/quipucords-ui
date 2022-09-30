@@ -270,16 +270,15 @@ class CreateScanDialog extends React.Component {
         }
       ]);
     };
-    const popover = <p>Deep scanning provides more accurate detection, but will take longer.</p>;
 
     const scanProductsLabel = (
       <div>
-        Deep scan
-        <br />
-        for these
-        <br />
-        products
-        <FieldLevelHelp content={popover} close placement="top" />
+        {t('form-dialog.label', { context: ['deep-scan'] })}
+        <FieldLevelHelp
+          content={<p>{t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })}</p>}
+          close
+          placement="top"
+        />
       </div>
     );
 
@@ -287,40 +286,48 @@ class CreateScanDialog extends React.Component {
       <React.Fragment>
         <FormGroup label={scanProductsLabel} isStack>
           <Checkbox
-            ariaLabel={t('form-dialog.label_jboss_full')}
+            ariaLabel={t('form-dialog.label', { context: ['jboss', 'full'] })}
             name="jbossEap"
             checked={checked.jbossEap}
             onChange={onCheck}
           >
-            <abbr title={t('form-dialog.label_jboss_full')}>{t('form-dialog.label_jboss')}</abbr>
+            <abbr title={t('form-dialog.label', { context: ['jboss', 'full'] })}>
+              {t('form-dialog.label', { context: ['jboss'] })}
+            </abbr>
           </Checkbox>
           <Checkbox
-            ariaLabel={t('form-dialog.label_fuse_full')}
+            ariaLabel={t('form-dialog.label', { context: ['fuse', 'full'] })}
             name="jbossFuse"
             checked={checked.jbossFuse}
             onChange={onCheck}
           >
-            <abbr title="Red Hat Fuse">{t('form-dialog.label_fuse')}</abbr>
+            <abbr title={t('form-dialog.label', { context: ['fuse', 'full'] })}>
+              {t('form-dialog.label', { context: ['fuse'] })}
+            </abbr>
           </Checkbox>
           <Checkbox
-            ariaLabel={t('form-dialog.label_jboss_full')}
+            ariaLabel={t('form-dialog.label', { context: ['jboss-server', 'full'] })}
             name="jbossWs"
             checked={checked.jbossWs}
             onChange={onCheck}
           >
-            <abbr title={t('form-dialog.label_jboss_full')}>{t('form-dialog.label_jboss')}</abbr>
+            <abbr title={t('form-dialog.label', { context: ['jboss-server', 'full'] })}>
+              {t('form-dialog.label', { context: ['jboss-server'] })}
+            </abbr>
           </Checkbox>
           <Checkbox
-            ariaLabel={t('form-dialog.label_decision-manager_full')}
+            ariaLabel={t('form-dialog.label', { context: ['decision-manager', 'full'] })}
             name="jbossBrms"
             checked={checked.jbossBrms}
             onChange={onCheck}
           >
-            <abbr title={t('form-dialog.label_decision-manager_full')}>{t('form-dialog.label_decision-manager')}</abbr>
+            <abbr title={t('form-dialog.label', { context: ['decision-manager', 'full'] })}>
+              {t('form-dialog.label', { context: ['decision-manager'] })}
+            </abbr>
           </Checkbox>
         </FormGroup>
         <FormGroup
-          label={t('form-dialog.label_scan-alt-directories')}
+          label={t('form-dialog.label', { context: 'scan-alt-directories' })}
           error={(touched.scanDirectories && errors.scanDirectories) || submitErrorMessages.scanDirectories}
           errorMessage={submitErrorMessages.scanDirectories || `Directories must begin with a root reference (/)`}
           helperText="Default directories are /, /opt, /app, /home, /usr"

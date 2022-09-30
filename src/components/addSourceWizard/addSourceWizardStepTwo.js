@@ -165,7 +165,7 @@ class AddSourceWizardStepTwo extends React.Component {
 
     return (
       <FormGroup
-        label={t('form-dialog.label_name')}
+        label={t('form-dialog.label', { context: 'name' })}
         error={(touched.name && errors.name) || stepTwoErrorMessages.name}
         errorMessage={stepTwoErrorMessages.name || 'A source name is required'}
       >
@@ -236,7 +236,7 @@ class AddSourceWizardStepTwo extends React.Component {
         return (
           <React.Fragment>
             <FormGroup
-              label={t('form-dialog.label_search-addresses')}
+              label={t('form-dialog.label', { context: 'search-addresses' })}
               error={(touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts}
               errorMessage="A valid IP address or hostname is required"
             >
@@ -260,7 +260,7 @@ class AddSourceWizardStepTwo extends React.Component {
               </Pf3Form.HelpBlock>
             </FormGroup>
             <FormGroup
-              label={t('form-dialog.label_port')}
+              label={t('form-dialog.label', { context: 'port' })}
               error={(touched.port && errors.port) || stepTwoErrorMessages.port}
               errorMessage="Port must be valid"
             >
@@ -293,7 +293,7 @@ class AddSourceWizardStepTwo extends React.Component {
         return (
           <React.Fragment>
             <FormGroup
-              label={t('form-dialog.label_IP-or-host-name')}
+              label={t('form-dialog.label', { context: 'ip-address' })}
               error={
                 (touched.hostsSingle && errors.hosts) ||
                 errors.port ||
@@ -345,7 +345,7 @@ class AddSourceWizardStepTwo extends React.Component {
 
     return (
       <FormGroup
-        label={t('form-dialog.label_credential')}
+        label={t('form-dialog.label', { context: 'credential' })}
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
         errorMessage={stepTwoErrorMessages.credentials || 'A credential is required'}
       >
@@ -418,7 +418,7 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'satellite':
         return (
           <React.Fragment>
-            <FormGroup label={t('form-dialog.label_connection')}>
+            <FormGroup label={t('form-dialog.label', { context: 'connection' })}>
               <DropdownSelect
                 id="optionSslProtocol"
                 isInline={false}
@@ -435,7 +435,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 inline
                 onChange={handleOnEvent}
               >
-                {t('form-dialog.label_verify-ssl-certificate')}
+                {t('form-dialog.label', { context: 'ssl-certificate' })}
               </Pf3Form.Checkbox>
             </FormGroup>
           </React.Fragment>
