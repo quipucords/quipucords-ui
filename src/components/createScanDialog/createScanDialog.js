@@ -18,9 +18,9 @@ import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { CONFIG as sourcesConfig } from '../sources/sources';
 import { FormState } from '../formState/formState';
 import { formHelpers } from '../form/formHelpers';
-import { Checkbox } from '../form/checkbox';
 import { FormGroup } from '../form/formGroup';
 import { TextInput } from '../form/textInput';
+import { Checkbox } from '../form/checkbox';
 import { TextArea, TextAreResizeOrientation } from '../form/textArea';
 import { TouchSpin } from '../touchspin/touchspin';
 import helpers from '../../common/helpers';
@@ -225,7 +225,7 @@ class CreateScanDialog extends React.Component {
   }
 
   renderAdditionalProducts({ checked, errors, handleOnEventCustom, handleOnEvent, touched, values }) {
-    const { submitErrorMessages } = this.props;
+    const { submitErrorMessages, t } = this.props;
 
     const onCheck = event => {
       const element = event.target;
@@ -271,16 +271,14 @@ class CreateScanDialog extends React.Component {
       ]);
     };
 
-    const popover = <p>Deep scanning provides more accurate detection, but will take longer.</p>;
-
     const scanProductsLabel = (
       <div>
-        Deep scan
-        <br />
-        for these
-        <br />
-        products
-        <FieldLevelHelp content={popover} close placement="top" />
+        {t('form-dialog.label', { context: ['deep-scan'] })}
+        <FieldLevelHelp
+          content={<p>{t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })}</p>}
+          close
+          placement="top"
+        />
       </div>
     );
 
@@ -288,30 +286,48 @@ class CreateScanDialog extends React.Component {
       <React.Fragment>
         <FormGroup label={scanProductsLabel} isStack>
           <Checkbox
-            ariaLabel="Red Hat JBoss Enterprise Application Platform"
+            ariaLabel={t('form-dialog.label', { context: ['jboss', 'full'] })}
             name="jbossEap"
             checked={checked.jbossEap}
             onChange={onCheck}
           >
-            <abbr title="Red Hat JBoss Enterprise Application Platform">JBoss EAP</abbr>
-          </Checkbox>
-          <Checkbox ariaLabel="Red Hat Fuse" name="jbossFuse" checked={checked.jbossFuse} onChange={onCheck}>
-            <abbr title="Red Hat Fuse">Fuse</abbr>
-          </Checkbox>
-          <Checkbox ariaLabel="Red Hat JBoss Web Server" name="jbossWs" checked={checked.jbossWs} onChange={onCheck}>
-            <abbr title="Red Hat JBoss Web Server">JBoss Web Server</abbr>
+            <abbr title={t('form-dialog.label', { context: ['jboss', 'full'] })}>
+              {t('form-dialog.label', { context: ['jboss'] })}
+            </abbr>
           </Checkbox>
           <Checkbox
-            ariaLabel="Red Hat Decision Manager, formerly Red Hat JBoss BRMS"
+            ariaLabel={t('form-dialog.label', { context: ['fuse', 'full'] })}
+            name="jbossFuse"
+            checked={checked.jbossFuse}
+            onChange={onCheck}
+          >
+            <abbr title={t('form-dialog.label', { context: ['fuse', 'full'] })}>
+              {t('form-dialog.label', { context: ['fuse'] })}
+            </abbr>
+          </Checkbox>
+          <Checkbox
+            ariaLabel={t('form-dialog.label', { context: ['jboss-server', 'full'] })}
+            name="jbossWs"
+            checked={checked.jbossWs}
+            onChange={onCheck}
+          >
+            <abbr title={t('form-dialog.label', { context: ['jboss-server', 'full'] })}>
+              {t('form-dialog.label', { context: ['jboss-server'] })}
+            </abbr>
+          </Checkbox>
+          <Checkbox
+            ariaLabel={t('form-dialog.label', { context: ['decision-manager', 'full'] })}
             name="jbossBrms"
             checked={checked.jbossBrms}
             onChange={onCheck}
           >
-            <abbr title="Red Hat Decision Manager, formerly Red Hat JBoss BRMS">Decision Manager</abbr>
+            <abbr title={t('form-dialog.label', { context: ['decision-manager', 'full'] })}>
+              {t('form-dialog.label', { context: ['decision-manager'] })}
+            </abbr>
           </Checkbox>
         </FormGroup>
         <FormGroup
-          label="Scan&nbsp;alternate directories"
+          label={t('form-dialog.label', { context: 'scan-alt-directories' })}
           error={(touched.scanDirectories && errors.scanDirectories) || submitErrorMessages.scanDirectories}
           errorMessage={submitErrorMessages.scanDirectories || `Directories must begin with a root reference (/)`}
           helperText="Default directories are /, /opt, /app, /home, /usr"

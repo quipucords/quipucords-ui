@@ -6,6 +6,7 @@ import { connect, store, reduxSelectors, reduxTypes } from '../../redux';
 import { FormGroup } from '../form/formGroup';
 import { FormState } from '../formState/formState';
 import apiTypes from '../../constants/apiConstants';
+import { translate } from '../i18n/i18nHelpers';
 
 class AddSourceWizardStepOne extends React.Component {
   isStepValid = ({ values }) => {
@@ -18,20 +19,20 @@ class AddSourceWizardStepOne extends React.Component {
   };
 
   render() {
-    const { type } = this.props;
+    const { type, t } = this.props;
 
     return (
       <FormState validateOnMount setValues={{ sourceType: type }} validate={this.isStepValid}>
         {({ values, handleOnEvent, handleOnSubmit }) => (
           <Form isHorizontal onSubmit={handleOnSubmit}>
-            <FormGroup role="radiogroup" isStack label="Select source type">
+            <FormGroup role="radiogroup" isStack label={t('form-dialog.label', { context: 'source-type' })}>
               <Radio
                 name="sourceType"
                 id="sourceType-network"
                 value="network"
                 checked={values.sourceType === 'network'}
                 onChange={handleOnEvent}
-                label="Network Range"
+                label={t('form-dialog.label', { context: 'network-range' })}
               />
               <Radio
                 name="sourceType"
@@ -39,7 +40,7 @@ class AddSourceWizardStepOne extends React.Component {
                 value="satellite"
                 checked={values.sourceType === 'satellite'}
                 onChange={handleOnEvent}
-                label="Satellite"
+                label={t('form-dialog.label', { context: 'satellite' })}
               />
               <Radio
                 name="sourceType"
@@ -47,7 +48,7 @@ class AddSourceWizardStepOne extends React.Component {
                 value="vcenter"
                 checked={values.sourceType === 'vcenter'}
                 onChange={handleOnEvent}
-                label="vCenter Server"
+                label={t('form-dialog.label', { context: 'vcenter-server' })}
               />
             </FormGroup>
           </Form>
@@ -58,11 +59,13 @@ class AddSourceWizardStepOne extends React.Component {
 }
 
 AddSourceWizardStepOne.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
+  t: PropTypes.func
 };
 
 AddSourceWizardStepOne.defaultProps = {
-  type: 'network'
+  type: 'network',
+  t: translate
 };
 
 const makeMapStateToProps = () => {
