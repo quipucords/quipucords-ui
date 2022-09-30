@@ -153,6 +153,27 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/addSourceWizard/addSourceWizardStepOne.js",
+    "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'source-type' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'network-range' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'satellite' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'vcenter-server' })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/addSourceWizard/addSourceWizardStepThree.js",
     "keys": Array [
       Object {
@@ -177,6 +198,26 @@ Array [
         "match": "translate('form-dialog.label', { context: ['option', 'disableSsl'] })",
       },
       Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'name' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'search-addresses' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'port' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'ip-address' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'credential' })",
+      },
+      Object {
         "key": "form-dialog.label_placeholder",
         "match": "t('form-dialog.label_placeholder', { context: [ 'add-source', 'credential', multiselectCredentials && 'multi', !availableCredentials.length && 'add' ] })",
       },
@@ -187,6 +228,14 @@ Array [
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'connection' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'ssl-certificate' })",
       },
     ],
   },
@@ -248,6 +297,66 @@ Array [
   Object {
     "file": "./src/components/createScanDialog/createScanDialog.js",
     "keys": Array [
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['deep-scan'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'scan-alt-directories' })",
+      },
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: ['submit', 'create-scan'] })",

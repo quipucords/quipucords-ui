@@ -36,7 +36,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Name
+          t(form-dialog.label, {"context":"name"})
         </span>
       </label>
        
@@ -71,7 +71,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Search addresses
+          t(form-dialog.label, {"context":"search-addresses"})
         </span>
       </label>
        
@@ -107,7 +107,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Port
+          t(form-dialog.label, {"context":"port"})
         </span>
       </label>
        
@@ -143,7 +143,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Credentials
+          t(form-dialog.label, {"context":"credential"})
         </span>
       </label>
        
@@ -293,7 +293,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Name
+          t(form-dialog.label, {"context":"name"})
         </span>
       </label>
        
@@ -328,7 +328,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          IP address or hostname
+          t(form-dialog.label, {"context":"ip-address"})
         </span>
       </label>
        
@@ -363,7 +363,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Credentials
+          t(form-dialog.label, {"context":"credential"})
         </span>
       </label>
        
@@ -470,7 +470,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          Connection
+          t(form-dialog.label, {"context":"connection"})
         </span>
       </label>
        
@@ -542,7 +542,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
           name="optionSslCert"
           type="checkbox"
         />
-        Verify SSL Certificate
+        t(form-dialog.label, {"context":"ssl-certificate"})
       </label>
     </div>
   </div>
@@ -592,7 +592,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         <span
           class="pf-c-form__label-text"
         >
-          Name
+          t(form-dialog.label, {"context":"name"})
         </span>
       </label>
        
@@ -627,7 +627,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         <span
           class="pf-c-form__label-text"
         >
-          Search addresses
+          t(form-dialog.label, {"context":"search-addresses"})
         </span>
       </label>
        
@@ -663,7 +663,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         <span
           class="pf-c-form__label-text"
         >
-          Port
+          t(form-dialog.label, {"context":"port"})
         </span>
       </label>
        
@@ -699,7 +699,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         <span
           class="pf-c-form__label-text"
         >
-          Credentials
+          t(form-dialog.label, {"context":"credential"})
         </span>
       </label>
        
