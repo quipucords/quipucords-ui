@@ -181,36 +181,6 @@ const setPropIfDefined = (obj, props, value) => (obj && value !== undefined ? _s
 const setPropIfTruthy = (obj, props, value) => (obj && value ? _set(obj, props, value) : obj);
 
 /**
- * Generate a consistent query parameter object for views.
- *
- * @param {object} viewOptions
- * @param {object} queryObj
- * @returns {object}
- */
-const createViewQueryObject = (viewOptions, queryObj) => {
-  const queryObject = {
-    ...queryObj
-  };
-
-  if (viewOptions) {
-    if (viewOptions.sortField) {
-      queryObject.ordering = viewOptions.sortAscending ? viewOptions.sortField : `-${viewOptions.sortField}`;
-    }
-
-    if (viewOptions.activeFilters) {
-      viewOptions.activeFilters.forEach(filter => {
-        queryObject[filter.field.id] = filter.field.filterType === 'select' ? filter.value.id : filter.value;
-      });
-    }
-
-    queryObject.page = viewOptions.currentPage;
-    queryObject.page_size = viewOptions.pageSize;
-  }
-
-  return queryObject;
-};
-
-/**
  * A redux helper associated with getting a message from results.
  *
  * @param {object} results
@@ -483,7 +453,6 @@ const helpers = {
   noopTranslate,
   setPropIfDefined,
   setPropIfTruthy,
-  createViewQueryObject,
   getMessageFromResults,
   getStatusFromResults,
   getTimeStampFromResults,

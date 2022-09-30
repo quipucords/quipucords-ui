@@ -12,7 +12,7 @@ import {
 import { AddCircleOIcon } from '@patternfly/react-icons';
 import { useNavigate } from '../router/routerContext';
 import { useView } from '../view/viewContext';
-import { useContextGetSources } from '../sources/sourcesContext';
+import { useSources } from '../sources/sourcesContext';
 import { helpers } from '../../common';
 import { reduxTypes, storeHooks } from '../../redux';
 import { translate } from '../i18n/i18n';
@@ -23,24 +23,24 @@ import { translate } from '../i18n/i18n';
  * @param {object} props
  * @param {Function} props.t
  * @param {string} props.uiShortName
- * @param {Function} props.useContextGetSources
  * @param {Function} props.useDispatch
  * @param {Function} props.useNavigate
+ * @param {Function} props.useSources
  * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
 const ScansEmptyState = ({
   t,
   uiShortName,
-  useContextGetSources: useAliasContextGetSources,
   useDispatch: useAliasDispatch,
   useNavigate: useAliasNavigate,
+  useSources: useAliasSources,
   useView: useAliasView
 }) => {
   const { viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const navigate = useAliasNavigate();
-  const { totalResults, hasData } = useAliasContextGetSources();
+  const { totalResults, hasData } = useAliasSources();
 
   const onAddSource = () => {
     if (hasData) {
@@ -73,7 +73,7 @@ const ScansEmptyState = ({
 /**
  * Prop types
  *
- * @type {{uiShortName: string, useView: Function, t: Function, useContextGetSources: Function, useDispatch: Function,
+ * @type {{uiShortName: string, useView: Function, t: Function, useSources: Function, useDispatch: Function,
  *     useNavigate: Function}}
  */
 ScansEmptyState.propTypes = {
@@ -81,14 +81,14 @@ ScansEmptyState.propTypes = {
   uiShortName: PropTypes.string,
   useDispatch: PropTypes.func,
   useNavigate: PropTypes.func,
-  useContextGetSources: PropTypes.func,
+  useSources: PropTypes.func,
   useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{uiShortName: string, useView: Function, t: translate, useContextGetSources: Function, useDispatch: Function,
+ * @type {{uiShortName: string, useView: Function, t: translate, useSources: Function, useDispatch: Function,
  *     useNavigate: Function}}
  */
 ScansEmptyState.defaultProps = {
@@ -96,7 +96,7 @@ ScansEmptyState.defaultProps = {
   uiShortName: helpers.UI_SHORT_NAME,
   useDispatch: storeHooks.reactRedux.useDispatch,
   useNavigate,
-  useContextGetSources,
+  useSources,
   useView
 };
 

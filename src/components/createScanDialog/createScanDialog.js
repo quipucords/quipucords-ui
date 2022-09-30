@@ -15,6 +15,7 @@ import {
 import { FieldLevelHelp } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
+import { CONFIG as sourcesConfig } from '../sources/sources';
 import { FormState } from '../formState/formState';
 import { formHelpers } from '../form/formHelpers';
 import { Checkbox } from '../form/checkbox';
@@ -148,7 +149,8 @@ class CreateScanDialog extends React.Component {
         });
 
         store.dispatch({
-          type: reduxTypes.sources.UPDATE_SOURCES
+          type: reduxTypes.view.UPDATE_VIEW,
+          viewId: sourcesConfig.viewId
         });
       },
       () => {

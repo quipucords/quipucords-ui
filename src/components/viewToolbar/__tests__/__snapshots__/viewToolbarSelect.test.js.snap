@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewToolbarSelect Component should export select variants and related options: field variants, options 1`] = `
+Object {
+  "SelectFilterVariant": Object {
+    "cred_type": "cred_type",
+    "source_type": "source_type",
+  },
+  "SelectFilterVariantOptions": Object {
+    "cred_type": Array [
+      Object {
+        "title": [Function],
+        "value": "network",
+      },
+      Object {
+        "title": [Function],
+        "value": "satellite",
+      },
+      Object {
+        "title": [Function],
+        "value": "vcenter",
+      },
+    ],
+    "source_type": Array [
+      Object {
+        "title": [Function],
+        "value": "network",
+      },
+      Object {
+        "title": [Function],
+        "value": "satellite",
+      },
+      Object {
+        "title": [Function],
+        "value": "vcenter",
+      },
+    ],
+  },
+}
+`;
+
+exports[`ViewToolbarSelect Component should handle updating the view query through redux state with a component: dispatch type, component 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "type": "RESET_PAGE",
+        "viewId": undefined,
+      },
+      Object {
+        "filter": "cred_type",
+        "type": "SET_QUERY",
+        "value": "network",
+        "viewId": undefined,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ViewToolbarSelect Component should handle updating the view query through redux state with a hook: dispatch type, hook 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "type": "RESET_PAGE",
+        "viewId": undefined,
+      },
+      Object {
+        "filter": "lorem filter",
+        "type": "SET_QUERY",
+        "value": "dolor sit",
+        "viewId": undefined,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`ViewToolbarSelect Component should render a basic component: basic 1`] = `
+<DropdownSelect
+  ariaLabel="t(toolbar.label_placeholder_filter, {\\"context\\":\\"cred_type\\"})"
+  buttonVariant="default"
+  className=""
+  data-test="toolbarSelect_cred_type"
+  direction="down"
+  id="generatedid-"
+  isDisabled={false}
+  isDropdownButton={false}
+  isInline={true}
+  isToggleText={true}
+  maxHeight={null}
+  name={null}
+  onSelect={[Function]}
+  options={
+    Array [
+      Object {
+        "title": [Function],
+        "value": "network",
+      },
+      Object {
+        "title": [Function],
+        "value": "satellite",
+      },
+      Object {
+        "title": [Function],
+        "value": "vcenter",
+      },
+    ]
+  }
+  placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"cred_type\\"})"
+  position="left"
+  selectedOptions={null}
+  splitButtonVariant={null}
+  toggleIcon={null}
+  variant="single"
+/>
+`;

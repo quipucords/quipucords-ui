@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`viewReducer should handle specific defined types: defined type RESET_PAGE 1`] = `
+Object {
+  "result": Object {
+    "filters": Object {},
+    "query": Object {
+      "test_id": Object {
+        "page": 1,
+      },
+    },
+    "update": Object {},
+  },
+  "type": "RESET_PAGE",
+}
+`;
+
+exports[`viewReducer should handle specific defined types: defined type SET_FILTER 1`] = `
+Object {
+  "result": Object {
+    "filters": Object {
+      "test_id": Object {
+        "currentFilterCategory": undefined,
+      },
+    },
+    "query": Object {},
+    "update": Object {},
+  },
+  "type": "SET_FILTER",
+}
+`;
+
+exports[`viewReducer should handle specific defined types: defined type SET_QUERY 1`] = `
+Object {
+  "result": Object {
+    "filters": Object {},
+    "query": Object {
+      "test_id": Object {
+        "undefined": undefined,
+      },
+    },
+    "update": Object {},
+  },
+  "type": "SET_QUERY",
+}
+`;
+
+exports[`viewReducer should handle specific defined types: defined type UPDATE_VIEW 1`] = `
+Object {
+  "result": Object {
+    "filters": Object {},
+    "query": Object {},
+    "update": Object {
+      "test_id": 1654041600000,
+    },
+  },
+  "type": "UPDATE_VIEW",
+}
+`;

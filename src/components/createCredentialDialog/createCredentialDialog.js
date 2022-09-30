@@ -86,7 +86,7 @@ class CreateCredentialDialog extends React.Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
-    const { edit, fulfilled, getCredentials, show, viewOptions } = this.props;
+    const { edit, fulfilled, getCredentials, show } = this.props;
 
     if (!show && nextProps.show) {
       this.resetInitialState(nextProps);
@@ -105,7 +105,7 @@ class CreateCredentialDialog extends React.Component {
       });
 
       this.onCancel();
-      getCredentials(helpers.createViewQueryObject(viewOptions));
+      getCredentials();
     }
   }
 
@@ -466,8 +466,7 @@ CreateCredentialDialog.propTypes = {
   fulfilled: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
-  t: PropTypes.func,
-  viewOptions: PropTypes.object
+  t: PropTypes.func
 };
 
 CreateCredentialDialog.defaultProps = {
@@ -482,8 +481,7 @@ CreateCredentialDialog.defaultProps = {
   fulfilled: false,
   error: false,
   errorMessage: null,
-  t: translate,
-  viewOptions: {}
+  t: translate
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -493,8 +491,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  ...state.credentials.dialog,
-  viewOptions: state.viewOptions[reduxTypes.view.CREDENTIALS_VIEW]
+  ...state.credentials.dialog
 });
 
 const ConnectedCreateCredentialDialog = connect(mapStateToProps, mapDispatchToProps)(CreateCredentialDialog);

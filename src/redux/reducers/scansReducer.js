@@ -1,4 +1,4 @@
-import { scansTypes, sourcesTypes } from '../constants';
+import { scansTypes } from '../constants';
 import { reduxHelpers } from '../common';
 import { helpers } from '../../common';
 
@@ -8,7 +8,6 @@ const initialState = {
     scans: [],
     details: false
   },
-  empty: {},
   connection: {},
   inspection: {},
   job: {},
@@ -114,7 +113,6 @@ const scansReducer = (state = initialState, action) => {
     default:
       return reduxHelpers.generatedPromiseActionReducer(
         [
-          { ref: 'empty', type: sourcesTypes.GET_SCANS_SOURCES },
           { ref: 'connection', type: scansTypes.GET_SCAN_CONNECTION_RESULTS },
           { ref: 'inspection', type: scansTypes.GET_SCAN_INSPECTION_RESULTS },
           { ref: 'job', type: scansTypes.GET_SCAN_JOB },

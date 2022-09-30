@@ -21,7 +21,8 @@ exports[`Scans Component should handle multiple display states, pending, error, 
     className="quipucords-view-container"
   >
     <ViewToolbar
-      actions={
+      lastRefresh={NaN}
+      secondaryFields={
         <Tooltip
           content="t(table.tooltip, {\\"context\\":\\"merge-reports\\"})"
           delayShow={500}
@@ -38,55 +39,18 @@ exports[`Scans Component should handle multiple display states, pending, error, 
           </Button>
         </Tooltip>
       }
-      activeFilters={Array []}
-      filterFields={
-        Array [
-          Object {
-            "filterType": "text",
-            "id": "search_by_name",
-            "placeholder": "Filter by Name",
-            "title": "Name",
-          },
-          Object {
-            "filterType": "text",
-            "id": "search_sources_by_name",
-            "placeholder": "Filter by Source Name",
-            "title": "Source",
-          },
-        ]
-      }
-      filterType={Object {}}
-      filterValue=""
-      itemsType="Scan"
-      itemsTypePlural="Scans"
-      lastRefresh={NaN}
-      onRefresh={[Function]}
-      selectedCount={0}
-      sortAscending={true}
-      sortFields={
-        Array [
-          Object {
-            "id": "name",
-            "isNumeric": false,
-            "title": "Name",
-          },
-          Object {
-            "id": "most_recent_scanjob__start_time",
-            "isNumeric": true,
-            "sortAscending": false,
-            "title": "Most Recent",
-          },
-        ]
-      }
-      sortType={Object {}}
-      totalCount={0}
-      viewType="SCANS_VIEW"
+      t={[Function]}
+      useOnRefresh={[Function]}
+      useSelector={[Function]}
+      useToolbarFieldClear={[Function]}
+      useToolbarFieldClearAll={[Function]}
+      useView={[Function]}
     />
     <ViewPaginationRow
-      currentPage={0}
-      pageSize={0}
-      totalCount={0}
-      viewType="SCANS_VIEW"
+      totalResults={0}
+      useOnPerPageSelect={[Function]}
+      useOnSetPage={[Function]}
+      useQuery={[Function]}
     />
     <div
       className="quipucords-list-container"
@@ -382,9 +346,9 @@ exports[`Scans Component should render a basic component: basic 1`] = `
         <ScansEmptyState
           t={[Function]}
           uiShortName="Quipucords"
-          useContextGetSources={[Function]}
           useDispatch={[Function]}
           useNavigate={[Function]}
+          useSources={[Function]}
           useView={[Function]}
         />
       </Table>
@@ -464,9 +428,9 @@ exports[`Scans Component should return an empty state when there are no scans: e
         <ScansEmptyState
           t={[Function]}
           uiShortName="Quipucords"
-          useContextGetSources={[Function]}
           useDispatch={[Function]}
           useNavigate={[Function]}
+          useSources={[Function]}
           useView={[Function]}
         />
       </Table>

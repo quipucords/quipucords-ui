@@ -47,7 +47,8 @@ Array [
   ],
   Array [
     Object {
-      "type": "UPDATE_SOURCES",
+      "type": "UPDATE_VIEW",
+      "viewId": "sources",
     },
   ],
 ]

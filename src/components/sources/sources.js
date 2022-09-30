@@ -19,10 +19,10 @@ import { Modal, ModalVariant } from '../modal/modal';
 import { reduxTypes, storeHooks } from '../../redux';
 import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
 import { useView } from '../view/viewContext';
-import ViewToolbar from '../viewToolbar/viewToolbar';
-import ViewPaginationRow from '../viewPaginationRow/viewPaginationRow';
-import SourcesEmptyState from './sourcesEmptyState';
-import { SourceFilterFields, SourceSortFields } from './sourceConstants';
+import { useToolbarFieldClearAll } from '../viewToolbar/viewToolbarContext';
+import { ViewToolbar } from '../viewToolbar/viewToolbar';
+import { ViewPaginationRow } from '../viewPaginationRow/viewPaginationRow';
+import { SourcesEmptyState } from './sourcesEmptyState';
 import { Table } from '../table/table';
 import { sourcesTableCells } from './sourcesTableCells';
 import {
@@ -32,15 +32,16 @@ import {
   useOnDelete,
   useOnEdit,
   useOnExpand,
-  useOnRefresh,
   useOnScan,
   useOnSelect
 } from './sourcesContext';
+import { SourcesToolbar } from './sourcesToolbar';
 import { translate } from '../i18n/i18n';
 
 const CONFIG = {
   viewId: VIEW_ID,
-  initialQuery: INITIAL_QUERY
+  initialQuery: INITIAL_QUERY,
+  toolbar: SourcesToolbar
 };
 
 /**
@@ -52,12 +53,11 @@ const CONFIG = {
  * @param {Function} props.useOnDelete
  * @param {Function} props.useOnEdit
  * @param {Function} props.useOnExpand
- * @param {Function} props.useOnRefresh
  * @param {Function} props.useOnScan
  * @param {Function} props.useOnSelect
  * @param {Function} props.useOnShowAddSourceWizard
  * @param {Function} props.useDispatch
- * @param {Function} props.useSelectors
+ * @param {Function} props.useToolbarFieldClearAll
  * @param {Function} props.useView
  * @returns {React.ReactNode}
  */
@@ -67,20 +67,19 @@ const Sources = ({
   useOnDelete: useAliasOnDelete,
   useOnEdit: useAliasOnEdit,
   useOnExpand: useAliasOnExpand,
-  useOnRefresh: useAliasOnRefresh,
   useOnScan: useAliasOnScan,
   useOnSelect: useAliasOnSelect,
   useOnShowAddSourceWizard: useAliasOnShowAddSourceWizard,
   useDispatch: useAliasDispatch,
-  useSelectors: useAliasSelectors,
+  useToolbarFieldClearAll: useAliasToolbarFieldClearAll,
   useView: useAliasView
 }) => {
-  const { viewId } = useAliasView();
+  const onToolbarFieldClearAll = useAliasToolbarFieldClearAll();
+  const { isFilteringActive, viewId } = useAliasView();
   const dispatch = useAliasDispatch();
   const onDelete = useAliasOnDelete();
   const onEdit = useAliasOnEdit();
   const onExpand = useAliasOnExpand();
-  const onRefresh = useAliasOnRefresh();
   const onScan = useAliasOnScan();
   const onSelect = useAliasOnSelect();
   const onShowAddSourceWizard = useAliasOnShowAddSourceWizard();
@@ -92,24 +91,10 @@ const Sources = ({
     date,
     data,
     selectedRows = {},
-    expandedRows = {}
+    expandedRows = {},
+    totalResults
   } = useAliasGetSources();
-  const [viewOptions = {}] = useAliasSelectors([
-    ({ viewOptions: stateViewOptions }) => stateViewOptions[reduxTypes.view.SOURCES_VIEW]
-  ]);
-  const isActive = viewOptions?.activeFilters?.length > 0 || data?.length > 0 || false;
-
-  /**
-   * Clear toolbar filters
-   *
-   * @event onToolbarFieldClearAll
-   */
-  const onToolbarFieldClearAll = () => {
-    dispatch({
-      type: reduxTypes.viewToolbar.CLEAR_FILTERS,
-      viewType: reduxTypes.view.SOURCES_VIEW
-    });
-  };
+  const isActive = isFilteringActive || data?.length > 0 || false;
 
   /**
    * Toolbar actions onScanSources
@@ -168,19 +153,8 @@ const Sources = ({
       <div className="quipucords-view-container">
         {isActive && (
           <React.Fragment>
-            <ViewToolbar
-              viewType={reduxTypes.view.SOURCES_VIEW}
-              filterFields={SourceFilterFields}
-              sortFields={SourceSortFields}
-              onRefresh={() => onRefresh()}
-              lastRefresh={new Date(date).getTime()}
-              actions={renderToolbarActions()}
-              itemsType="Source"
-              itemsTypePlural="Sources"
-              selectedCount={viewOptions.selectedItems?.length}
-              {...viewOptions}
-            />
-            <ViewPaginationRow viewType={reduxTypes.view.SOURCES_VIEW} {...viewOptions} />
+            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={renderToolbarActions()} />
+            <ViewPaginationRow totalResults={totalResults} />
           </React.Fragment>
         )}
         <div className="quipucords-list-container">
@@ -263,9 +237,9 @@ const Sources = ({
 /**
  * Prop types
  *
- * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: Function, useOnRefresh: Function,
- *     useOnScan: Function, useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function,
- *     useSelectors: Function, useOnShowAddSourceWizard: Function}}
+ * @type {{useOnEdit: Function, useOnSelect: Function, useView: Function, t: Function, useOnScan: Function,
+ *     useDispatch: Function, useOnDelete: Function, useOnExpand: Function,
+ *     useToolbarFieldClearAll: Function, useGetSources: Function, useOnShowAddSourceWizard: Function}}
  */
 Sources.propTypes = {
   t: PropTypes.func,
@@ -274,20 +248,19 @@ Sources.propTypes = {
   useOnDelete: PropTypes.func,
   useOnEdit: PropTypes.func,
   useOnExpand: PropTypes.func,
-  useOnRefresh: PropTypes.func,
   useOnScan: PropTypes.func,
   useOnSelect: PropTypes.func,
   useOnShowAddSourceWizard: PropTypes.func,
-  useSelectors: PropTypes.func,
+  useToolbarFieldClearAll: PropTypes.func,
   useView: PropTypes.func
 };
 
 /**
  * Default props
  *
- * @type {{useOnEdit: Function, useView: Function, useOnSelect: Function, t: translate, useOnRefresh: Function,
- *     useOnScan: Function, useDispatch: Function, useOnDelete: Function, useOnExpand: Function, useGetSources: Function,
- *     useSelectors: Function, useOnShowAddSourceWizard: Function}}
+ * @type {{useOnEdit: Function, useOnSelect: Function, useView: Function, t: translate, useOnRefresh: Function,
+ *     useOnScan: Function, useDispatch: Function, useOnDelete: Function, useOnExpand: Function,
+ *     useToolbarFieldClearAll: Function, useGetSources: Function, useOnShowAddSourceWizard: Function}}
  */
 Sources.defaultProps = {
   t: translate,
@@ -296,11 +269,10 @@ Sources.defaultProps = {
   useOnDelete,
   useOnEdit,
   useOnExpand,
-  useOnRefresh,
   useOnScan,
   useOnSelect,
   useOnShowAddSourceWizard,
-  useSelectors: storeHooks.reactRedux.useSelectors,
+  useToolbarFieldClearAll,
   useView
 };
 

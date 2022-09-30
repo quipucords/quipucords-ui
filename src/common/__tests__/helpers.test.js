@@ -40,19 +40,6 @@ describe('Helpers', () => {
     expect(helpers.setPropIfTruthy(truthyObj, ['lorem'], '')).toMatchSnapshot('setPropIfTruthy string');
   });
 
-  it('should handle view related selectors and props updates', () => {
-    const viewOptions = {
-      currentPage: 1,
-      pageSize: 10
-    };
-
-    const queryObj = {
-      page: 2
-    };
-
-    expect(helpers.createViewQueryObject(viewOptions, queryObj)).toMatchSnapshot('createViewQueryObject');
-  });
-
   it('should handle http status less than 400 message from response', () => {
     const payload = {
       data: {},

@@ -15,7 +15,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -48,7 +47,6 @@ Object {
       "pending": false,
       "update": false,
     },
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -71,7 +69,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {
       "error": true,
@@ -104,7 +101,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -137,7 +133,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -170,7 +165,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -198,39 +192,6 @@ Object {
 }
 `;
 
-exports[`ScansReducer should handle all defined error types: rejected types GET_SCANS_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "action": Object {},
-    "connection": Object {},
-    "empty": Object {
-      "error": true,
-      "errorMessage": "ERROR",
-      "errorStatus": 0,
-      "fulfilled": false,
-      "metaData": undefined,
-      "metaId": undefined,
-      "metaQuery": undefined,
-      "pending": false,
-      "update": false,
-    },
-    "expanded": Object {},
-    "inspection": Object {},
-    "job": Object {},
-    "jobs": Object {},
-    "mergeDialog": Object {
-      "details": false,
-      "scans": Array [],
-      "show": false,
-    },
-    "selected": Object {},
-    "update": 0,
-    "view": Object {},
-  },
-  "type": "GET_SCANS_SOURCES_REJECTED",
-}
-`;
-
 exports[`ScansReducer should handle all defined error types: rejected types PAUSE_SCAN 1`] = `
 Object {
   "result": Object {
@@ -246,7 +207,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -279,7 +239,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -312,7 +271,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -348,7 +306,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -384,7 +341,6 @@ Object {
       "pending": false,
       "update": false,
     },
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -407,7 +363,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {
       "data": Object {
@@ -443,7 +398,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -479,7 +433,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -515,7 +468,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -546,42 +498,6 @@ Object {
 }
 `;
 
-exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_SCANS_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "action": Object {},
-    "connection": Object {},
-    "empty": Object {
-      "data": Object {
-        "test": "success",
-      },
-      "date": undefined,
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": true,
-      "metaData": undefined,
-      "metaId": undefined,
-      "metaQuery": undefined,
-      "pending": false,
-      "update": false,
-    },
-    "expanded": Object {},
-    "inspection": Object {},
-    "job": Object {},
-    "jobs": Object {},
-    "mergeDialog": Object {
-      "details": false,
-      "scans": Array [],
-      "show": false,
-    },
-    "selected": Object {},
-    "update": 0,
-    "view": Object {},
-  },
-  "type": "GET_SCANS_SOURCES_FULFILLED",
-}
-`;
-
 exports[`ScansReducer should handle all defined fulfilled types: fulfilled types PAUSE_SCAN 1`] = `
 Object {
   "result": Object {
@@ -600,7 +516,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -636,7 +551,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -672,7 +586,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -704,7 +617,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -736,7 +648,6 @@ Object {
       "pending": true,
       "update": false,
     },
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -759,7 +670,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {
       "error": false,
@@ -791,7 +701,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -823,7 +732,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -855,7 +763,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -882,38 +789,6 @@ Object {
 }
 `;
 
-exports[`ScansReducer should handle all defined pending types: pending types GET_SCANS_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "action": Object {},
-    "connection": Object {},
-    "empty": Object {
-      "error": false,
-      "errorMessage": "",
-      "fulfilled": false,
-      "metaData": undefined,
-      "metaId": undefined,
-      "metaQuery": undefined,
-      "pending": true,
-      "update": false,
-    },
-    "expanded": Object {},
-    "inspection": Object {},
-    "job": Object {},
-    "jobs": Object {},
-    "mergeDialog": Object {
-      "details": false,
-      "scans": Array [],
-      "show": false,
-    },
-    "selected": Object {},
-    "update": 0,
-    "view": Object {},
-  },
-  "type": "GET_SCANS_SOURCES_PENDING",
-}
-`;
-
 exports[`ScansReducer should handle all defined pending types: pending types PAUSE_SCAN 1`] = `
 Object {
   "result": Object {
@@ -928,7 +803,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -960,7 +834,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -992,7 +865,6 @@ Object {
       "update": false,
     },
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1015,7 +887,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1040,7 +911,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {
       "undefined": undefined,
     },
@@ -1065,7 +935,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1088,7 +957,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1111,7 +979,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {
       "undefined": null,
     },
@@ -1136,7 +1003,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1161,7 +1027,6 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
-    "empty": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},

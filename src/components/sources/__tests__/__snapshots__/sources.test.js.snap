@@ -21,7 +21,8 @@ exports[`Sources Component should handle multiple display states, pending, error
     className="quipucords-view-container"
   >
     <ViewToolbar
-      actions={
+      lastRefresh={NaN}
+      secondaryFields={
         <React.Fragment>
           <Button
             onClick={[Function]}
@@ -38,80 +39,18 @@ exports[`Sources Component should handle multiple display states, pending, error
           </Button>
         </React.Fragment>
       }
-      activeFilters={Array []}
-      filterFields={
-        Array [
-          Object {
-            "filterType": "text",
-            "id": "search_by_name",
-            "placeholder": "Filter by Name",
-            "title": "Name",
-          },
-          Object {
-            "filterType": "text",
-            "id": "search_credentials_by_name",
-            "placeholder": "Filter by Credential Name",
-            "title": "Credential",
-          },
-          Object {
-            "filterType": "select",
-            "filterValues": Array [
-              Object {
-                "id": "network",
-                "title": "Network",
-              },
-              Object {
-                "id": "satellite",
-                "title": "Satellite",
-              },
-              Object {
-                "id": "vcenter",
-                "title": "VCenter",
-              },
-            ],
-            "id": "source_type",
-            "placeholder": "Filter by Source Type",
-            "title": "Source Type",
-          },
-        ]
-      }
-      filterType={Object {}}
-      filterValue=""
-      itemsType="Source"
-      itemsTypePlural="Sources"
-      lastRefresh={NaN}
-      onRefresh={[Function]}
-      selectedCount={0}
-      sortAscending={true}
-      sortFields={
-        Array [
-          Object {
-            "id": "name",
-            "isNumeric": false,
-            "title": "Name",
-          },
-          Object {
-            "id": "source_type",
-            "isNumeric": false,
-            "title": "Source Type",
-          },
-          Object {
-            "id": "most_recent_connect_scan__start_time",
-            "isNumeric": true,
-            "sortAscending": false,
-            "title": "Most Recent",
-          },
-        ]
-      }
-      sortType={Object {}}
-      totalCount={0}
-      viewType="SOURCES_VIEW"
+      t={[Function]}
+      useOnRefresh={[Function]}
+      useSelector={[Function]}
+      useToolbarFieldClear={[Function]}
+      useToolbarFieldClearAll={[Function]}
+      useView={[Function]}
     />
     <ViewPaginationRow
-      currentPage={0}
-      pageSize={0}
-      totalCount={0}
-      viewType="SOURCES_VIEW"
+      totalResults={0}
+      useOnPerPageSelect={[Function]}
+      useOnSetPage={[Function]}
+      useQuery={[Function]}
     />
     <div
       className="quipucords-list-container"
