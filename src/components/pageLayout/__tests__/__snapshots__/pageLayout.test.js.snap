@@ -357,6 +357,42 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
                 "page": 1,
                 "page_size": 10,
               },
+              "toolbar": Object {
+                "filterFields": Array [
+                  Object {
+                    "component": [Function],
+                    "selected": true,
+                    "title": [Function],
+                    "value": "search_by_name",
+                  },
+                  Object {
+                    "component": [Function],
+                    "title": [Function],
+                    "value": "search_credentials_by_name",
+                  },
+                  Object {
+                    "component": [Function],
+                    "title": [Function],
+                    "value": "source_type",
+                  },
+                ],
+                "sortFields": Array [
+                  Object {
+                    "selected": true,
+                    "title": [Function],
+                    "value": "name",
+                  },
+                  Object {
+                    "title": [Function],
+                    "value": "source_type",
+                  },
+                  Object {
+                    "isDefaultDescending": true,
+                    "title": [Function],
+                    "value": "most_recent_connect_scan__start_time",
+                  },
+                ],
+              },
               "viewId": "sources",
             }
           }
@@ -368,11 +404,10 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
             useOnDelete={[Function]}
             useOnEdit={[Function]}
             useOnExpand={[Function]}
-            useOnRefresh={[Function]}
             useOnScan={[Function]}
             useOnSelect={[Function]}
             useOnShowAddSourceWizard={[Function]}
-            useSelectors={[Function]}
+            useToolbarFieldClearAll={[Function]}
             useView={[Function]}
           />
         </Context.Provider>,
@@ -391,6 +426,33 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
                 "page_size": 10,
                 "scan_type": "inspect",
               },
+              "toolbar": Object {
+                "filterFields": Array [
+                  Object {
+                    "component": [Function],
+                    "selected": true,
+                    "title": [Function],
+                    "value": "search_by_name",
+                  },
+                  Object {
+                    "component": [Function],
+                    "title": [Function],
+                    "value": "search_sources_by_name",
+                  },
+                ],
+                "sortFields": Array [
+                  Object {
+                    "selected": true,
+                    "title": [Function],
+                    "value": "name",
+                  },
+                  Object {
+                    "isDefaultDescending": true,
+                    "title": [Function],
+                    "value": "most_recent_connect_scan__start_time",
+                  },
+                ],
+              },
               "viewId": "scans",
             }
           }
@@ -400,10 +462,9 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
             useDispatch={[Function]}
             useGetScans={[Function]}
             useOnExpand={[Function]}
-            useOnRefresh={[Function]}
             useOnScanAction={[Function]}
             useOnSelect={[Function]}
-            useSelectors={[Function]}
+            useToolbarFieldClearAll={[Function]}
             useView={[Function]}
           />
         </Context.Provider>,
@@ -420,21 +481,45 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
                 "page": 1,
                 "page_size": 10,
               },
+              "toolbar": Object {
+                "filterFields": Array [
+                  Object {
+                    "component": [Function],
+                    "selected": true,
+                    "title": [Function],
+                    "value": "search_by_name",
+                  },
+                  Object {
+                    "component": [Function],
+                    "title": [Function],
+                    "value": "cred_type",
+                  },
+                ],
+                "sortFields": Array [
+                  Object {
+                    "selected": true,
+                    "title": [Function],
+                    "value": "name",
+                  },
+                  Object {
+                    "title": [Function],
+                    "value": "cred_type",
+                  },
+                ],
+              },
               "viewId": "credentials",
             }
           }
         >
           <Credentials
             t={[Function]}
-            useDispatch={[Function]}
             useGetCredentials={[Function]}
             useOnDelete={[Function]}
             useOnEdit={[Function]}
             useOnExpand={[Function]}
-            useOnRefresh={[Function]}
             useOnSelect={[Function]}
             useOnShowAddSourceWizard={[Function]}
-            useSelectors={[Function]}
+            useToolbarFieldClearAll={[Function]}
             useView={[Function]}
           />
         </Context.Provider>,

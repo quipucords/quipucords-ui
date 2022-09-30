@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SourcesToolbar should have specific properties: SourcesToolbar 1`] = `
+Object {
+  "filterFields": Array [
+    Object {
+      "component": [Function],
+      "selected": true,
+      "title": [Function],
+      "value": "search_by_name",
+    },
+    Object {
+      "component": [Function],
+      "title": [Function],
+      "value": "search_credentials_by_name",
+    },
+    Object {
+      "component": [Function],
+      "title": [Function],
+      "value": "source_type",
+    },
+  ],
+  "sortFields": Array [
+    Object {
+      "selected": true,
+      "title": [Function],
+      "value": "name",
+    },
+    Object {
+      "title": [Function],
+      "value": "source_type",
+    },
+    Object {
+      "isDefaultDescending": true,
+      "title": [Function],
+      "value": "most_recent_connect_scan__start_time",
+    },
+  ],
+}
+`;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalVariant } from '@patternfly/react-core';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
+import { CONFIG as sourcesConfig } from '../sources/sources';
 import { addSourceWizardSteps, editSourceWizardSteps } from './addSourceWizardConstants';
 import { Wizard } from '../wizard/wizard';
 import { useGetAddSource } from './addSourceWizardContext';
@@ -74,7 +75,8 @@ const AddSourceWizard = ({
 
       if (fulfilled) {
         dispatch({
-          type: reduxTypes.sources.UPDATE_SOURCES
+          type: reduxTypes.view.UPDATE_VIEW,
+          viewId: sourcesConfig.viewId
         });
       }
     };

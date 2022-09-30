@@ -4,8 +4,8 @@ import { AlertVariant, List, ListItem } from '@patternfly/react-core';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useConfirmation } from '../../hooks/useConfirmation';
+import { useView } from '../view/viewContext';
 import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
-import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
 
 /**
@@ -35,6 +35,7 @@ const INITIAL_QUERY = {
  * @param {Function} options.useConfirmation
  * @param {Function} options.useDispatch
  * @param {Function} options.useSelectorsResponse
+ * @param {Function} options.useView
  * @returns {(function(*): void)|*}
  */
 const useOnDelete = ({
@@ -42,8 +43,10 @@ const useOnDelete = ({
   t = translate,
   useConfirmation: useAliasConfirmation = useConfirmation,
   useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
-  useSelectorsResponse: useAliasSelectorsResponse = storeHooks.reactRedux.useSelectorsResponse
+  useSelectorsResponse: useAliasSelectorsResponse = storeHooks.reactRedux.useSelectorsResponse,
+  useView: useAliasView = useView
 } = {}) => {
+  const { viewId } = useAliasView();
   const onConfirmation = useAliasConfirmation();
   const [credentialsToDelete, setCredentialsToDelete] = useState([]);
   const dispatch = useAliasDispatch();
@@ -83,7 +86,8 @@ const useOnDelete = ({
           item: credentialsToDelete
         },
         {
-          type: reduxTypes.credentials.UPDATE_CREDENTIALS
+          type: reduxTypes.view.UPDATE_VIEW,
+          viewId
         }
       ]);
 
@@ -111,7 +115,8 @@ const useOnDelete = ({
           item: credentialsToDelete
         },
         {
-          type: reduxTypes.credentials.UPDATE_CREDENTIALS
+          type: reduxTypes.view.UPDATE_VIEW,
+          viewId
         }
       ]);
 
@@ -204,23 +209,6 @@ const useOnExpand = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
 };
 
 /**
- * On refresh view.
- *
- * @param {object} options
- * @param {Function} options.useDispatch
- * @returns {Function}
- */
-const useOnRefresh = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
-  const dispatch = useAliasDispatch();
-
-  return () => {
-    dispatch({
-      type: reduxTypes.credentials.UPDATE_CREDENTIALS
-    });
-  };
-};
-
-/**
  * On select a row.
  *
  * @param {object} options
@@ -240,28 +228,21 @@ const useOnSelect = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
 };
 
 /**
- * Get credentials
+ * Use credentials' response
  *
  * @param {object} options
- * @param {Function} options.getCredentials
- * @param {Function} options.useDispatch
  * @param {Function} options.useSelectors
  * @param {Function} options.useSelectorsResponse
- * @returns {{date: *, data: *[], pending: boolean, errorMessage: null, fulfilled: boolean, selectedRows: *,
- *     expandedRows: *, error: boolean}}
+ * @returns {{date: *, totalResults: (*|number), data: *[], pending: boolean, hasData: boolean, errorMessage: null,
+ *     fulfilled: boolean, selectedRows: *, expandedRows: *, error: boolean}}
  */
-const useGetCredentials = ({
-  getCredentials = reduxActions.credentials.getCredentials,
-  useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
+const useCredentials = ({
   useSelectors: useAliasSelectors = storeHooks.reactRedux.useSelectors,
   useSelectorsResponse: useAliasSelectorsResponse = storeHooks.reactRedux.useSelectorsResponse
 } = {}) => {
-  const dispatch = useAliasDispatch();
-  const [refreshUpdate, selectedRows, expandedRows, viewOptions] = useAliasSelectors([
-    ({ credentials }) => credentials?.update,
+  const [selectedRows, expandedRows] = useAliasSelectors([
     ({ credentials }) => credentials?.selected,
-    ({ credentials }) => credentials?.expanded,
-    ({ viewOptions: stateViewOptions }) => stateViewOptions?.[reduxTypes.view.CREDENTIALS_VIEW]
+    ({ credentials }) => credentials?.expanded
   ]);
   const {
     data: responseData,
@@ -277,11 +258,6 @@ const useGetCredentials = ({
     [apiTypes.API_RESPONSE_CREDENTIALS_COUNT]: totalResults,
     [apiTypes.API_RESPONSE_CREDENTIALS_RESULTS]: data = []
   } = responseData?.view || {};
-  const query = helpers.createViewQueryObject(viewOptions);
-
-  useShallowCompareEffect(() => {
-    getCredentials(null, query)(dispatch);
-  }, [dispatch, getCredentials, query, refreshUpdate]);
 
   return {
     pending,
@@ -298,29 +274,44 @@ const useGetCredentials = ({
 };
 
 /**
- * Get credentials in the context of the credentials view.
+ * Get credentials
  *
  * @param {object} options
- * @param {Function} options.useGetCredentials
- * @returns {{date: *, data: *[], pending: boolean, errorMessage: null, fulfilled: boolean, selectedRows: *, expandedRows: *, error: boolean}}
+ * @param {Function} options.getCredentials
+ * @param {Function} options.useCredentials
+ * @param {Function} options.useDispatch
+ * @param {Function} options.useSelectors
+ * @param {Function} options.useView
+ * @returns {{date: *, data: *[], pending: boolean, errorMessage: null, fulfilled: boolean, selectedRows: *,
+ *     expandedRows: *, error: boolean}}
  */
-const useContextGetCredentials = ({ useGetCredentials: useAliasGetCredentials = useGetCredentials } = {}) => {
-  const results = useAliasGetCredentials();
+const useGetCredentials = ({
+  getCredentials = reduxActions.credentials.getCredentials,
+  useCredentials: useAliasCredentials = useCredentials,
+  useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
+  useSelectors: useAliasSelectors = storeHooks.reactRedux.useSelectors,
+  useView: useAliasView = useView
+} = {}) => {
+  const { query, viewId } = useAliasView();
+  const dispatch = useAliasDispatch();
+  const [refreshUpdate] = useAliasSelectors([({ view }) => view.update?.[viewId]]);
+  const response = useAliasCredentials();
 
-  return {
-    ...results
-  };
+  useShallowCompareEffect(() => {
+    getCredentials(null, query)(dispatch);
+  }, [dispatch, getCredentials, query, refreshUpdate]);
+
+  return response;
 };
 
 const context = {
   VIEW_ID,
   INITIAL_QUERY,
-  useContextGetCredentials,
+  useCredentials,
   useGetCredentials,
   useOnDelete,
   useOnEdit,
   useOnExpand,
-  useOnRefresh,
   useOnSelect
 };
 
@@ -329,11 +320,10 @@ export {
   context,
   VIEW_ID,
   INITIAL_QUERY,
-  useContextGetCredentials,
+  useCredentials,
   useGetCredentials,
   useOnDelete,
   useOnEdit,
   useOnExpand,
-  useOnRefresh,
   useOnSelect
 };

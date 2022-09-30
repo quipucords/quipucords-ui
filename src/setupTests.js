@@ -19,6 +19,11 @@ jest.mock('i18next', () => {
 });
 
 /**
+ * Emulate for component checks
+ */
+jest.mock('lodash/debounce', () => jest.fn);
+
+/**
  * We currently use a wrapper for useSelector, emulate for component checks
  */
 jest.mock('react-redux', () => ({

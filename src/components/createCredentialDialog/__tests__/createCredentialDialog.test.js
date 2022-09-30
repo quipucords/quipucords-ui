@@ -12,7 +12,7 @@ describe('CreateCredentialDialog Component', () => {
   const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
 
   it('should render a connected component', () => {
-    const store = generateEmptyStore({ credentials: { dialog: { show: true } }, viewOptions: {} });
+    const store = generateEmptyStore({ credentials: { dialog: { show: true } } });
 
     const component = mount(
       <Provider store={store}>

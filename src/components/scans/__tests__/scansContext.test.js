@@ -1,6 +1,5 @@
-import { context, useGetScans, useOnScanAction, usePoll } from '../scansContext';
+import { context, useGetScans, useOnScanAction, usePoll, useScans } from '../scansContext';
 import { apiTypes } from '../../../constants/apiConstants';
-import { reduxTypes } from '../../../redux';
 
 describe('ScansContext', () => {
   it('should return specific properties', () => {
@@ -57,27 +56,27 @@ describe('ScansContext', () => {
 
   it('should apply a hook for retrieving data from multiple selectors', () => {
     const { result: errorResponse } = shallowHook(() =>
-      useGetScans({
+      useScans({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
     const { result: pendingResponse } = shallowHook(() =>
-      useGetScans({
+      useScans({
         useSelectorsResponse: () => ({ pending: true })
       })
     );
 
     const { result: fulfilledResponse } = shallowHook(() =>
-      useGetScans({
+      useScans({
         useSelectorsResponse: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetScans(), {
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useScans(), {
       state: {
-        viewOptions: {
-          [reduxTypes.view.SCANS_VIEW]: {}
+        view: {
+          update: {}
         },
         scans: {
           expanded: {},
@@ -93,7 +92,49 @@ describe('ScansContext', () => {
     });
 
     expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
-      'responses'
+      'selector responses'
+    );
+  });
+
+  it('should apply a hook for returning a get response', () => {
+    const { result: errorResponse } = shallowHook(() =>
+      useGetScans({
+        useScans: () => ({ error: true, message: 'Lorem ipsum' })
+      })
+    );
+
+    const { result: pendingResponse } = shallowHook(() =>
+      useGetScans({
+        useScans: () => ({ pending: true })
+      })
+    );
+
+    const { result: fulfilledResponse } = shallowHook(() =>
+      useGetScans({
+        useScans: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
+      })
+    );
+
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetScans(), {
+      state: {
+        view: {
+          update: {}
+        },
+        scans: {
+          expanded: {},
+          selected: {},
+          view: {
+            fulfilled: true,
+            data: {
+              results: ['lorem', 'ipsum']
+            }
+          }
+        }
+      }
+    });
+
+    expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
+      'get responses'
     );
   });
 });

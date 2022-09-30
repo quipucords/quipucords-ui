@@ -58,18 +58,6 @@ describe('SourcesActions', () => {
     });
   });
 
-  it('Should return response content for getScansSources method', done => {
-    const store = generateStore();
-    const dispatcher = sourcesActions.getScansSources();
-
-    dispatcher(store.dispatch).then(() => {
-      const response = store.getState().scans;
-
-      expect(response.empty.fulfilled).toEqual(true);
-      done();
-    });
-  });
-
   it('Should return response content for getSources method', done => {
     const store = generateStore();
     const dispatcher = sourcesActions.getSources();

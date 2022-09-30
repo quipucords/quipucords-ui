@@ -10,9 +10,12 @@ import { translate } from '../i18n/i18n';
  * @type {{title: Function|string, value: string}[]}
  */
 const fieldOptions = [
-  { title: () => translate('form-dialog.label', { context: ['option', 'network'] }), value: 'network' },
-  { title: () => translate('form-dialog.label', { context: ['option', 'satellite'] }), value: 'satellite' },
-  { title: () => translate('form-dialog.label', { context: ['option', 'vcenter'] }), value: 'vcenter' }
+  { title: () => translate('form-dialog.label', { context: ['option', 'network', 'credential'] }), value: 'network' },
+  {
+    title: () => translate('form-dialog.label', { context: ['option', 'satellite', 'credential'] }),
+    value: 'satellite'
+  },
+  { title: () => translate('form-dialog.label', { context: ['option', 'vcenter', 'credential'] }), value: 'vcenter' }
 ];
 
 /**

@@ -4,7 +4,7 @@ import { ScansEmptyState } from '../scansEmptyState';
 describe('ScansEmptyState Component', () => {
   it('should render a basic component', async () => {
     const props = {
-      useContextGetSources: () => ({
+      useSources: () => ({
         totalResults: 20,
         hasData: true
       })
@@ -16,7 +16,7 @@ describe('ScansEmptyState Component', () => {
 
   it('should render messaging if sources do not exist', async () => {
     const props = {
-      useContextGetSources: () => ({
+      useSources: () => ({
         hasData: false
       })
     };

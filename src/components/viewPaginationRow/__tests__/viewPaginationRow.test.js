@@ -1,20 +1,46 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import ViewPaginationRow from '../viewPaginationRow';
-import { viewTypes } from '../../../redux/constants';
+import { ViewPaginationRow, useOnPerPageSelect, useOnSetPage } from '../viewPaginationRow';
+import { API_QUERY_TYPES } from '../../../constants/apiConstants';
+import { store } from '../../../redux';
 
 describe('ViewPaginationRow Component', () => {
-  it('should render', () => {
+  let mockDispatch;
+
+  beforeEach(() => {
+    mockDispatch = jest.spyOn(store, 'dispatch').mockImplementation((type, data) => ({ type, data }));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should render a basic component', async () => {
     const props = {
-      viewType: viewTypes.SCANS_VIEW,
-      currentPage: 1,
-      pageSize: 10,
-      totalCount: 200,
-      totalPages: 20
+      totalResults: 200,
+      useQuery: () => ({ [API_QUERY_TYPES.PAGE]: 1, [API_QUERY_TYPES.PAGE_SIZE]: 10 })
     };
 
-    const component = mount(<ViewPaginationRow {...props} />);
+    const component = await shallowHookComponent(<ViewPaginationRow {...props} />);
+    expect(component.render()).toMatchSnapshot('basic');
+  });
 
-    expect(component.render()).toMatchSnapshot();
+  it('should handle updating the page query through redux state with a hook', async () => {
+    const options = {
+      useView: () => ({ viewId: 'lorem ipsum' })
+    };
+    const { result: onSetPage } = await shallowHook(() => useOnSetPage(options));
+
+    onSetPage(3);
+    expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch set page, hook');
+  });
+
+  it('should handle updating the per-page query through redux state with a hook', async () => {
+    const options = {
+      useView: () => ({ viewId: 'lorem ipsum' })
+    };
+    const { result: onPerPageSelect } = await shallowHook(() => useOnPerPageSelect(options));
+
+    onPerPageSelect(25);
+    expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch per-page, hook');
   });
 });

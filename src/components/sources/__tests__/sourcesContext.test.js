@@ -1,6 +1,5 @@
-import { context, useGetSources, useOnDelete, usePoll } from '../sourcesContext';
+import { context, useGetSources, useOnDelete, usePoll, useSources } from '../sourcesContext';
 import { apiTypes } from '../../../constants/apiConstants';
-import { reduxTypes } from '../../../redux';
 
 describe('SourcesContext', () => {
   it('should return specific properties', () => {
@@ -53,27 +52,27 @@ describe('SourcesContext', () => {
 
   it('should apply a hook for retrieving data from multiple selectors', () => {
     const { result: errorResponse } = shallowHook(() =>
-      useGetSources({
+      useSources({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
     const { result: pendingResponse } = shallowHook(() =>
-      useGetSources({
+      useSources({
         useSelectorsResponse: () => ({ pending: true })
       })
     );
 
     const { result: fulfilledResponse } = shallowHook(() =>
-      useGetSources({
+      useSources({
         useSelectorsResponse: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetSources(), {
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useSources(), {
       state: {
-        viewOptions: {
-          [reduxTypes.view.SOURCES_VIEW]: {}
+        view: {
+          update: {}
         },
         sources: {
           expanded: {},
@@ -89,7 +88,49 @@ describe('SourcesContext', () => {
     });
 
     expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
-      'responses'
+      'selector responses'
+    );
+  });
+
+  it('should apply a hook for returning a get response', () => {
+    const { result: errorResponse } = shallowHook(() =>
+      useGetSources({
+        useSources: () => ({ error: true, message: 'Lorem ipsum' })
+      })
+    );
+
+    const { result: pendingResponse } = shallowHook(() =>
+      useGetSources({
+        useSources: () => ({ pending: true })
+      })
+    );
+
+    const { result: fulfilledResponse } = shallowHook(() =>
+      useGetSources({
+        useSources: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
+      })
+    );
+
+    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetSources(), {
+      state: {
+        view: {
+          update: {}
+        },
+        sources: {
+          expanded: {},
+          selected: {},
+          view: {
+            fulfilled: true,
+            data: {
+              results: ['lorem', 'ipsum']
+            }
+          }
+        }
+      }
+    });
+
+    expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
+      'get responses'
     );
   });
 });

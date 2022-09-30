@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourcesContext should apply a hook for retrieving data from multiple selectors: responses 1`] = `
+exports[`SourcesContext should apply a hook for retrieving data from multiple selectors: selector responses 1`] = `
 Object {
   "errorResponse": Object {
     "data": Array [],
@@ -59,6 +59,44 @@ Object {
 }
 `;
 
+exports[`SourcesContext should apply a hook for returning a get response: get responses 1`] = `
+Object {
+  "errorResponse": Object {
+    "error": true,
+    "message": "Lorem ipsum",
+  },
+  "fulfilledResponse": Object {
+    "data": Object {
+      "view": Object {
+        "results": Array [
+          "dolor",
+          "sit",
+        ],
+      },
+    },
+    "fulfilled": true,
+  },
+  "mockStoreSuccessResponse": Object {
+    "data": Array [
+      "lorem",
+      "ipsum",
+    ],
+    "date": undefined,
+    "error": false,
+    "errorMessage": null,
+    "expandedRows": Object {},
+    "fulfilled": true,
+    "hasData": false,
+    "pending": false,
+    "selectedRows": Object {},
+    "totalResults": 0,
+  },
+  "pendingResponse": Object {
+    "pending": true,
+  },
+}
+`;
+
 exports[`SourcesContext should attempt to poll sources: timeout 1`] = `
 Array [
   Array [
@@ -98,14 +136,13 @@ Object {
     "page_size": 10,
   },
   "VIEW_ID": "sources",
-  "useContextGetSources": [Function],
   "useGetSources": [Function],
   "useOnDelete": [Function],
   "useOnEdit": [Function],
   "useOnExpand": [Function],
-  "useOnRefresh": [Function],
   "useOnScan": [Function],
   "useOnSelect": [Function],
   "usePoll": [Function],
+  "useSources": [Function],
 }
 `;
