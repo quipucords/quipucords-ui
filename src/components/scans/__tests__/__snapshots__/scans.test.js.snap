@@ -78,6 +78,7 @@ exports[`Scans Component should handle multiple display states, pending, error, 
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
@@ -186,6 +187,7 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                   "dataLabel": "t(table.header, {\\"context\\":\\"scan-jobs\\"})",
                   "expandedContent": undefined,
                   "isExpanded": false,
+                  "noPadding": true,
                   "width": 8,
                 },
                 Object {
@@ -336,6 +338,7 @@ exports[`Scans Component should render a basic component: basic 1`] = `
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
@@ -418,6 +421,7 @@ exports[`Scans Component should return an empty state when there are no scans: e
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}

@@ -202,11 +202,8 @@ const credentialsContent = ({ [apiTypes.API_RESPONSE_SOURCE_CREDENTIALS]: source
   return (
     <List isPlain>
       {credentials?.map(credential => (
-        <ListItem
-          key={credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
-          icon={<ContextIcon symbol={ContextIconVariant.idCard} />}
-        >
-          {credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
+        <ListItem key={credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}>
+          <ContextIcon symbol={ContextIconVariant.idCard} /> {credential[apiTypes.API_RESPONSE_SOURCE_CREDENTIALS_NAME]}
         </ListItem>
       ))}
     </List>

@@ -452,6 +452,7 @@ Object {
     </Tbody>,
   ],
   "className": "quipucords-table ",
+  "isStriped": false,
   "summary": "lorem ipsum summary",
   "variant": "compact",
 }
@@ -462,6 +463,7 @@ exports[`Table Component should allow variations in table layout: borders and ta
   aria-label={null}
   borders={false}
   className="quipucords-table "
+  isStriped={false}
   summary={null}
   variant="compact"
 >
@@ -470,6 +472,7 @@ exports[`Table Component should allow variations in table layout: borders and ta
     borders={false}
     className="quipucords-table "
     innerRef={null}
+    isStriped={false}
     summary={null}
     variant="compact"
   >
@@ -596,6 +599,7 @@ Object {
     </Tbody>,
   ],
   "className": "quipucords-table lorem-ipsum-class",
+  "isStriped": false,
   "summary": "lorem ipsum summary",
   "variant": "compact",
 }
@@ -606,6 +610,7 @@ exports[`Table Component should allow variations in table layout: generated rows
   aria-label={null}
   borders={true}
   className="quipucords-table "
+  isStriped={false}
   summary={null}
   variant="compact"
 >
@@ -614,6 +619,7 @@ exports[`Table Component should allow variations in table layout: generated rows
     borders={true}
     className="quipucords-table "
     innerRef={null}
+    isStriped={false}
     summary={null}
     variant="compact"
   >

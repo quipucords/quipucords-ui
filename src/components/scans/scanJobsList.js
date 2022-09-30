@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, AlertVariant, ButtonVariant, EmptyState, EmptyStateVariant, Spinner } from '@patternfly/react-core';
-import { Grid } from 'patternfly-react';
-import { IconSize } from '@patternfly/react-icons';
 import { connect, reduxActions, reduxSelectors } from '../../redux';
 import { ContextIcon, ContextIconColors, ContextIconVariant } from '../contextIcon/contextIcon';
 import { helpers } from '../../common';
-import { dictionary } from '../../constants/dictionaryConstants';
 import { apiTypes } from '../../constants/apiConstants';
 import ScanDownload from './scanDownload';
+import { Table, TableVariant } from '../table/table';
 import { translate } from '../i18n/i18n';
 
 /**
@@ -79,44 +77,74 @@ class ScanJobsList extends React.Component {
 
     return (
       <div className="quipucords-infinite-results">
-        <Grid fluid onScroll={this.onScrollList} className="quipucords-infinite-list">
-          {scanJobsList.map(
-            item =>
-              mostRecentId !== item.id && (
-                <Grid.Row className="fadein" key={item.id}>
-                  <Grid.Col xs={6} sm={3}>
-                    <ContextIcon symbol={ContextIconVariant[item.status]} size={IconSize.sm} />{' '}
-                    {dictionary[item.status] || ''}
-                  </Grid.Col>
-                  <Grid.Col xs={6} sm={3}>
-                    {helpers.getTimeDisplayHowLongAgo(
-                      item.status === 'pending' || item.status === 'running' ? item.startTime : item.endTime
-                    )}
-                  </Grid.Col>
-                  <Grid.Col xs={3} sm={2}>
-                    <ContextIcon symbol={ContextIconVariant.success} color={ContextIconColors.gray} />{' '}
-                    {item.systemsScanned}
-                  </Grid.Col>
-                  <Grid.Col xs={3} sm={2}>
-                    <ContextIcon symbol={ContextIconVariant.failed} color={ContextIconColors.gray} />{' '}
-                    {item.systemsFailed}
-                  </Grid.Col>
-                  <Grid.Col xs={3} sm={2}>
-                    {item.reportId > 0 && (
-                      <ScanDownload
-                        downloadName={item.scanName}
-                        downloadId={item.reportId}
-                        icon={<ContextIcon symbol={ContextIconVariant.download} />}
-                        variant={ButtonVariant.link}
-                      >
-                        Download
-                      </ScanDownload>
-                    )}
-                  </Grid.Col>
-                </Grid.Row>
-              )
-          )}
-        </Grid>
+        <div onScroll={this.onScrollList} className="quipucords-infinite-list">
+          <Table
+            className="quipucords-table__scan-jobs"
+            variant={TableVariant.compact}
+            isBorders={false}
+            rows={scanJobsList
+              .filter(({ id }) => mostRecentId !== id)
+              .map(({ endTime, reportId, scanName, startTime, status, systemsFailed, systemsScanned }) => ({
+                cells: [
+                  {
+                    content: (
+                      <React.Fragment>
+                        <ContextIcon symbol={ContextIconVariant[status]} />{' '}
+                        {t('table.label', { context: ['status', status, 'scan'] })}
+                      </React.Fragment>
+                    ),
+                    dataLabel: t('table.label', { context: ['status', 'scan'] })
+                  },
+                  {
+                    content: (
+                      <React.Fragment>
+                        {helpers.getTimeDisplayHowLongAgo(
+                          status === 'pending' || status === 'running' ? startTime : endTime
+                        )}
+                      </React.Fragment>
+                    ),
+                    dataLabel: t('table.label', { context: ['status', 'time', 'scan'] })
+                  },
+                  {
+                    content: (
+                      <React.Fragment>
+                        <ContextIcon symbol={ContextIconVariant.success} color={ContextIconColors.gray} />{' '}
+                        {systemsScanned}
+                      </React.Fragment>
+                    ),
+                    dataLabel: t('table.label', { context: ['status', 'success'] })
+                  },
+                  {
+                    content: (
+                      <React.Fragment>
+                        <ContextIcon symbol={ContextIconVariant.failed} color={ContextIconColors.gray} />{' '}
+                        {systemsFailed}
+                      </React.Fragment>
+                    ),
+                    dataLabel: t('table.label', { context: ['status', 'failed'] })
+                  },
+                  {
+                    style: { textAlign: 'right' },
+                    isActionCell: true,
+                    content: (
+                      <React.Fragment>
+                        {reportId > 0 && (
+                          <ScanDownload
+                            downloadName={scanName}
+                            downloadId={reportId}
+                            icon={<ContextIcon symbol={ContextIconVariant.download} />}
+                            variant={ButtonVariant.link}
+                          >
+                            {t('table.label', { context: ['action', 'scan', 'download'] })}
+                          </ScanDownload>
+                        )}
+                      </React.Fragment>
+                    )
+                  }
+                ]
+              }))}
+          />
+        </div>
       </div>
     );
   }

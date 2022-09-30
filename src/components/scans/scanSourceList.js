@@ -54,8 +54,8 @@ class ScanSourceList extends React.Component {
         {scanJobList?.map(item => (
           <ListItem key={item.id}>
             <List isPlain>
-              <ListItem icon={<ContextIcon symbol={ContextIconVariant[item.sourceType]} />} key={item.name}>
-                {item.name}
+              <ListItem key={item.name}>
+                <ContextIcon symbol={ContextIconVariant[item.sourceType]} /> {item.name}
               </ListItem>
               <ListItem key={`desc-${item.name}`}>{ScanSourceList.setSourceStatus(item)}</ListItem>
             </List>

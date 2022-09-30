@@ -39,100 +39,121 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
 <div
   className="quipucords-infinite-results"
 >
-  <Grid
-    bsClass="container"
+  <div
     className="quipucords-infinite-list"
-    componentClass="div"
-    fluid={true}
     onScroll={[Function]}
   >
-    <Row
-      bsClass="row"
-      className="fadein"
-      componentClass="div"
-      key="14"
-    >
-      <Col
-        bsClass="col"
-        componentClass="div"
-        sm={3}
-        xs={6}
-      >
-        <ContextIcon
-          size="sm"
-          symbol="success"
-        />
-         
-        Completed
-      </Col>
-      <Col
-        bsClass="col"
-        componentClass="div"
-        sm={3}
-        xs={6}
-      >
-        a day ago
-      </Col>
-      <Col
-        bsClass="col"
-        componentClass="div"
-        sm={2}
-        xs={3}
-      >
-        <ContextIcon
-          color={
-            Object {
-              "name": "--pf-global--Color--dark-100",
-              "value": "#151515",
-              "var": "var(--pf-global--Color--dark-100)",
-            }
-          }
-          size="sm"
-          symbol="success"
-        />
-         
-        10
-      </Col>
-      <Col
-        bsClass="col"
-        componentClass="div"
-        sm={2}
-        xs={3}
-      >
-        <ContextIcon
-          color={
-            Object {
-              "name": "--pf-global--Color--dark-100",
-              "value": "#151515",
-              "var": "var(--pf-global--Color--dark-100)",
-            }
-          }
-          size="sm"
-          symbol="failed"
-        />
-         
-        10
-      </Col>
-      <Col
-        bsClass="col"
-        componentClass="div"
-        sm={2}
-        xs={3}
-      >
-        <Connect(ScanDownload)
-          downloadId={15}
-          icon={
-            <ContextIcon
-              size="sm"
-              symbol="download"
-            />
-          }
-          variant="link"
-        >
-          Download
-        </Connect(ScanDownload)>
-      </Col>
-    </Row>
-  </Grid>
+    <Table
+      ariaLabel={null}
+      className="quipucords-table__scan-jobs"
+      columnHeaders={Array []}
+      componentClassNames={
+        Object {
+          "table": "quipucords-table",
+          "td": "quipucords-table__td",
+          "tdAction": "quipucords-table__td-action",
+          "tdExpand": "quipucords-table__td-expand",
+          "tdExpanded": "quipucords-table__td-expand-expanded",
+          "tdExpandedContent": "quipucords-table__td-expand-content",
+          "tdExpandedWrapper": "quipucords-table__td-expand-wrapper",
+          "tdSelect": "quipucords-table__td-select",
+          "th": "quipucords-table__th",
+          "tr": "quipucords-table__tr",
+          "trExpand": "quipucords-table__tr-expand",
+          "trExpanded": "quipucords-table__tr-expand-expanded",
+          "trExpandedContent": "quipucords-table__tr-expand-content",
+        }
+      }
+      isBorders={false}
+      isHeader={false}
+      isStriped={false}
+      onExpand={null}
+      onSelect={null}
+      onSort={null}
+      rows={
+        Array [
+          Object {
+            "cells": Array [
+              Object {
+                "content": <React.Fragment>
+                  <ContextIcon
+                    size="sm"
+                    symbol="success"
+                  />
+                   
+                  t(table.label_status_completed, {"context":"scan"})
+                </React.Fragment>,
+                "dataLabel": "t(table.label_status, {\\"context\\":\\"scan\\"})",
+              },
+              Object {
+                "content": <React.Fragment>
+                  a day ago
+                </React.Fragment>,
+                "dataLabel": "t(table.label_status_time, {\\"context\\":\\"scan\\"})",
+              },
+              Object {
+                "content": <React.Fragment>
+                  <ContextIcon
+                    color={
+                      Object {
+                        "name": "--pf-global--Color--dark-100",
+                        "value": "#151515",
+                        "var": "var(--pf-global--Color--dark-100)",
+                      }
+                    }
+                    size="sm"
+                    symbol="success"
+                  />
+                   
+                  10
+                </React.Fragment>,
+                "dataLabel": "t(table.label_status, {\\"context\\":\\"success\\"})",
+              },
+              Object {
+                "content": <React.Fragment>
+                  <ContextIcon
+                    color={
+                      Object {
+                        "name": "--pf-global--Color--dark-100",
+                        "value": "#151515",
+                        "var": "var(--pf-global--Color--dark-100)",
+                      }
+                    }
+                    size="sm"
+                    symbol="failed"
+                  />
+                   
+                  10
+                </React.Fragment>,
+                "dataLabel": "t(table.label_status, {\\"context\\":\\"failed\\"})",
+              },
+              Object {
+                "content": <React.Fragment>
+                  <Memo(Connect(ScanDownload))
+                    downloadId={15}
+                    icon={
+                      <ContextIcon
+                        size="sm"
+                        symbol="download"
+                      />
+                    }
+                    variant="link"
+                  >
+                    t(table.label_action_scan, {"context":"download"})
+                  </Memo(Connect(ScanDownload))>
+                </React.Fragment>,
+                "isActionCell": true,
+                "style": Object {
+                  "textAlign": "right",
+                },
+              },
+            ],
+          },
+        ]
+      }
+      summary={null}
+      variant="compact"
+    />
+  </div>
 </div>
 `;

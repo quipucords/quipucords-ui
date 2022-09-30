@@ -78,6 +78,7 @@ exports[`Sources Component should handle multiple display states, pending, error
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
@@ -414,6 +415,7 @@ exports[`Sources Component should render a basic component: basic 1`] = `
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
@@ -494,6 +496,7 @@ exports[`Sources Component should return an empty state when there are no source
         }
         isBorders={true}
         isHeader={false}
+        isStriped={false}
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
