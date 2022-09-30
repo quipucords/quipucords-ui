@@ -603,6 +603,30 @@ Array [
         "key": "view.error-message",
         "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
       },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status, 'scan'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'scan'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'time', 'scan'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'success'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'failed'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
     ],
   },
   Object {

@@ -137,6 +137,7 @@ Object {
     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
   </Tooltip>,
   "expandedContent": undefined,
+  "noPadding": true,
 }
 `;
 
