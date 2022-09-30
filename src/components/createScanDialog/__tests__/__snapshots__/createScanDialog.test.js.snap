@@ -411,11 +411,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   class="pf-c-form__label-text"
                 >
                   <div>
-                    Deep scan
-                    <br />
-                    for these
-                    <br />
-                    products
+                    t(form-dialog.label, {"context":"deep-scan"})
                     <button
                       class="popover-pf-info btn btn-link"
                       type="button"
@@ -438,7 +434,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_jboss_full)"
+                  aria-label="t(form-dialog.label_jboss, {\\"context\\":\\"full\\"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-1"
                   data-ouia-component-type="PF4/Checkbox"
@@ -453,9 +449,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossEap"
                 >
                   <abbr
-                    title="t(form-dialog.label_jboss_full)"
+                    title="t(form-dialog.label_jboss, {\\"context\\":\\"full\\"})"
                   >
-                    t(form-dialog.label_jboss)
+                    t(form-dialog.label, {"context":"jboss"})
                   </abbr>
                 </label>
               </div>
@@ -464,7 +460,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_fuse_full)"
+                  aria-label="t(form-dialog.label_fuse, {\\"context\\":\\"full\\"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-2"
                   data-ouia-component-type="PF4/Checkbox"
@@ -479,9 +475,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossFuse"
                 >
                   <abbr
-                    title="Red Hat Fuse"
+                    title="t(form-dialog.label_fuse, {\\"context\\":\\"full\\"})"
                   >
-                    t(form-dialog.label_fuse)
+                    t(form-dialog.label, {"context":"fuse"})
                   </abbr>
                 </label>
               </div>
@@ -490,7 +486,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_jboss_full)"
+                  aria-label="t(form-dialog.label_jboss-server, {\\"context\\":\\"full\\"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-3"
                   data-ouia-component-type="PF4/Checkbox"
@@ -505,9 +501,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossWs"
                 >
                   <abbr
-                    title="t(form-dialog.label_jboss_full)"
+                    title="t(form-dialog.label_jboss-server, {\\"context\\":\\"full\\"})"
                   >
-                    t(form-dialog.label_jboss)
+                    t(form-dialog.label, {"context":"jboss-server"})
                   </abbr>
                 </label>
               </div>
@@ -516,7 +512,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_decision-manager_full)"
+                  aria-label="t(form-dialog.label_decision-manager, {\\"context\\":\\"full\\"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-4"
                   data-ouia-component-type="PF4/Checkbox"
@@ -531,9 +527,9 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossBrms"
                 >
                   <abbr
-                    title="t(form-dialog.label_decision-manager_full)"
+                    title="t(form-dialog.label_decision-manager, {\\"context\\":\\"full\\"})"
                   >
-                    t(form-dialog.label_decision-manager)
+                    t(form-dialog.label, {"context":"decision-manager"})
                   </abbr>
                 </label>
               </div>
@@ -552,7 +548,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                 <span
                   class="pf-c-form__label-text"
                 >
-                  t(form-dialog.label_scan-alt-directories)
+                  t(form-dialog.label, {"context":"scan-alt-directories"})
                 </span>
               </label>
                
