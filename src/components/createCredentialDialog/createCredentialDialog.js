@@ -6,9 +6,18 @@ import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { helpers } from '../../common';
 import { FormGroup } from '../form/formGroup';
 import { TextInput } from '../form/textInput';
-import { authDictionary, dictionary } from '../../constants/dictionaryConstants';
 import { DropdownSelect } from '../dropdownSelect/dropdownSelect';
 import { translate } from '../i18n/i18n';
+
+/**
+ * Available auth types.
+ *
+ * @type {{sshKey: string, usernamePassword: string}}
+ */
+const authDictionary = {
+  sshKey: 'SSH Key',
+  usernamePassword: 'Username and Password'
+};
 
 /**
  * Generate authentication type options.
@@ -412,7 +421,7 @@ class CreateCredentialDialog extends React.Component {
               className="quipucords-form-control"
               type="text"
               isReadOnly
-              value={dictionary[credentialType] || ''}
+              value={t('form-dialog.label', { context: credentialType })}
             />
           </FormGroup>
           <FormGroup label="Credential Name" error={credentialNameError} errorMessage={credentialNameError}>

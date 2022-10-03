@@ -52,7 +52,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         data-ouia-safe="true"
         id="name"
         name="name"
-        placeholder="Enter a name for the Network source"
+        placeholder="t(form-dialog.label_name_add-source_placeholder, {\\"context\\":\\"network\\"})"
         type="text"
         value=""
       />
@@ -84,14 +84,14 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
         id="hostsMultiple"
         name="hostsMultiple"
-        placeholder="Enter values separated by commas"
+        placeholder="t(form-dialog.label_search-addresses, {\\"context\\":\\"placeholder\\"})"
         rows="5"
       />
-      <span
-        class="help-block"
+      <div
+        class="pf-c-form__helper-text"
       >
-        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
-      </span>
+        t(form-dialog.label_search-addresses, {"context":"help"})
+      </div>
     </div>
   </div>
   <div
@@ -151,8 +151,8 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     <div
       class="pf-c-form__group-control"
     >
-      <span
-        class="input-group"
+      <div
+        class="pf-c-input-group"
       >
         <div
           class="quipucords-select quipucords-select__not-inline"
@@ -201,39 +201,35 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
             </button>
           </div>
         </div>
-        <span
-          class="input-group-btn"
+        <button
+          aria-disabled="false"
+          aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          class="pf-c-button pf-m-control"
+          data-ouia-component-id="OUIA-Generated-Button-control-2"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          type="button"
         >
-          <button
-            aria-disabled="false"
-            aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            class="pf-c-button pf-m-control"
-            data-ouia-component-id="OUIA-Generated-Button-control-2"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            type="button"
+          <span
+            class="pf-c-button__icon pf-m-start"
           >
-            <span
-              class="pf-c-button__icon pf-m-start"
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="1em"
+              role="img"
+              style="vertical-align: -0.125em;"
+              viewBox="0 0 448 512"
+              width="1em"
             >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 448 512"
-                width="1em"
-              >
-                <path
-                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
-            </span>
-          </button>
-        </span>
-      </span>
+              <path
+                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
     </div>
   </div>
   <div
@@ -309,7 +305,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         data-ouia-safe="true"
         id="name"
         name="name"
-        placeholder="Enter a name for the VCenter source"
+        placeholder="t(form-dialog.label_name_add-source_placeholder, {\\"context\\":\\"vcenter\\"})"
         type="text"
         value=""
       />
@@ -328,7 +324,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <span
           class="pf-c-form__label-text"
         >
-          t(form-dialog.label, {"context":"ip-address"})
+          t(form-dialog.label, {"context":"search-address"})
         </span>
       </label>
        
@@ -344,7 +340,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         data-ouia-safe="true"
         id="hostsSingle"
         name="hostsSingle"
-        placeholder="Enter an IP address or hostname (default port is 443)"
+        placeholder="t(form-dialog.label_search-address, {\\"context\\":\\"placeholder\\"})"
         type="text"
         value=""
       />
@@ -371,8 +367,8 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     <div
       class="pf-c-form__group-control"
     >
-      <span
-        class="input-group"
+      <div
+        class="pf-c-input-group"
       >
         <div
           class="quipucords-select quipucords-select__not-inline"
@@ -422,39 +418,35 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
             </button>
           </div>
         </div>
-        <span
-          class="input-group-btn"
+        <button
+          aria-disabled="false"
+          aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          class="pf-c-button pf-m-control"
+          data-ouia-component-id="OUIA-Generated-Button-control-3"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          type="button"
         >
-          <button
-            aria-disabled="false"
-            aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            class="pf-c-button pf-m-control"
-            data-ouia-component-id="OUIA-Generated-Button-control-3"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            type="button"
+          <span
+            class="pf-c-button__icon pf-m-start"
           >
-            <span
-              class="pf-c-button__icon pf-m-start"
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="1em"
+              role="img"
+              style="vertical-align: -0.125em;"
+              viewBox="0 0 448 512"
+              width="1em"
             >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 448 512"
-                width="1em"
-              >
-                <path
-                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
-            </span>
-          </button>
-        </span>
-      </span>
+              <path
+                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
     </div>
   </div>
   <div
@@ -534,16 +526,28 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
     <div
       class="pf-c-form__group-control"
     >
-      <label
-        class="checkbox-inline"
-        title=""
+      <div
+        class="pf-c-check quipucords-form__checkbox "
       >
         <input
+          aria-invalid="false"
+          aria-label="checkbox input"
+          class="pf-c-check__input"
+          data-ouia-component-id="OUIA-Generated-Checkbox-3"
+          data-ouia-component-type="PF4/Checkbox"
+          data-ouia-safe="true"
+          id="optionSslCert"
           name="optionSslCert"
           type="checkbox"
+          value=""
         />
-        t(form-dialog.label, {"context":"ssl-certificate"})
-      </label>
+        <label
+          class="pf-c-check__label"
+          for="optionSslCert"
+        >
+          t(form-dialog.label, {"context":"ssl-certificate"})
+        </label>
+      </div>
     </div>
   </div>
 </form>
@@ -608,7 +612,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         data-ouia-safe="true"
         id="name"
         name="name"
-        placeholder="Enter a name for the Network source"
+        placeholder="t(form-dialog.label_name_add-source_placeholder, {\\"context\\":\\"network\\"})"
         type="text"
         value=""
       />
@@ -640,14 +644,14 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
         id="hostsMultiple"
         name="hostsMultiple"
-        placeholder="Enter values separated by commas"
+        placeholder="t(form-dialog.label_search-addresses, {\\"context\\":\\"placeholder\\"})"
         rows="5"
       />
-      <span
-        class="help-block"
+      <div
+        class="pf-c-form__helper-text"
       >
-        IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.
-      </span>
+        t(form-dialog.label_search-addresses, {"context":"help"})
+      </div>
     </div>
   </div>
   <div
@@ -707,8 +711,8 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
     <div
       class="pf-c-form__group-control"
     >
-      <span
-        class="input-group"
+      <div
+        class="pf-c-input-group"
       >
         <div
           class="quipucords-select quipucords-select__not-inline"
@@ -757,39 +761,35 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
             </button>
           </div>
         </div>
-        <span
-          class="input-group-btn"
+        <button
+          aria-disabled="false"
+          aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          class="pf-c-button pf-m-control"
+          data-ouia-component-id="OUIA-Generated-Button-control-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
+          type="button"
         >
-          <button
-            aria-disabled="false"
-            aria-label="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            class="pf-c-button pf-m-control"
-            data-ouia-component-id="OUIA-Generated-Button-control-1"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            title="t(form-dialog.label, {\\"context\\":\\"add-credential\\"})"
-            type="button"
+          <span
+            class="pf-c-button__icon pf-m-start"
           >
-            <span
-              class="pf-c-button__icon pf-m-start"
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="1em"
+              role="img"
+              style="vertical-align: -0.125em;"
+              viewBox="0 0 448 512"
+              width="1em"
             >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 448 512"
-                width="1em"
-              >
-                <path
-                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
-            </span>
-          </button>
-        </span>
-      </span>
+              <path
+                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
     </div>
   </div>
   <div

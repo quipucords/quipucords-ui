@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Form, ValidatedOptions } from '@patternfly/react-core';
+import { Button, ButtonVariant, Form, InputGroup, ValidatedOptions } from '@patternfly/react-core';
 import { PlusIcon } from '@patternfly/react-icons';
-import { Form as Pf3Form } from 'patternfly-react';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
 import { helpers } from '../../common';
 import { apiTypes } from '../../constants/apiConstants';
-import { dictionary, sslProtocolDictionary } from '../../constants/dictionaryConstants';
 import { FormGroup } from '../form/formGroup';
 import { Checkbox } from '../form/checkbox';
 import { TextArea, TextAreResizeOrientation } from '../form/textArea';
@@ -15,6 +13,18 @@ import { TextInput } from '../form/textInput';
 import { FormState } from '../formState/formState';
 import { DropdownSelect, SelectVariant } from '../dropdownSelect/dropdownSelect';
 import { translate } from '../i18n/i18n';
+
+/**
+ * Available ssl protocol types
+ *
+ * @type {{SSLv23: string, TLSv1: string, TLSv1_2: string, TLSv1_1: string}}
+ */
+const sslProtocolDictionary = {
+  SSLv23: 'SSLv23',
+  TLSv1: 'TLSv1',
+  TLSv1_1: 'TLSv1.1',
+  TLSv1_2: 'TLSv1.2'
+};
 
 /**
  * Generate ssl protocol options.
@@ -167,12 +177,12 @@ class AddSourceWizardStepTwo extends React.Component {
       <FormGroup
         label={t('form-dialog.label', { context: 'name' })}
         error={(touched.name && errors.name) || stepTwoErrorMessages.name}
-        errorMessage={stepTwoErrorMessages.name || 'A source name is required'}
+        errorMessage={stepTwoErrorMessages.name || t('form-dialog.label', { context: ['name', 'add-source', 'error'] })}
       >
         <TextInput
           name="name"
           value={values.name}
-          placeholder={`Enter a name for the ${dictionary[type] || ''} source`}
+          placeholder={t('form-dialog.label', { context: ['name', 'add-source', 'placeholder', type] })}
           onChange={handleOnEvent}
           onClear={handleOnEvent}
           validated={
@@ -238,13 +248,20 @@ class AddSourceWizardStepTwo extends React.Component {
             <FormGroup
               label={t('form-dialog.label', { context: 'search-addresses' })}
               error={(touched.hostsMultiple && errors.hosts) || stepTwoErrorMessages.hosts}
-              errorMessage="A valid IP address or hostname is required"
+              errorMessage={t('form-dialog.label', {
+                context: ['search-addresses', 'error']
+              })}
+              helperText={t('form-dialog.label', {
+                context: ['search-addresses', 'help']
+              })}
             >
               <TextArea
                 name="hostsMultiple"
                 rows={5}
                 value={values.hostsMultiple}
-                placeholder="Enter values separated by commas"
+                placeholder={t('form-dialog.label', {
+                  context: ['search-addresses', 'placeholder']
+                })}
                 onChange={onChangeMultipleHost}
                 onClear={onChangeMultipleHost}
                 resizeOrientation={TextAreResizeOrientation.vertical}
@@ -254,10 +271,6 @@ class AddSourceWizardStepTwo extends React.Component {
                     : ValidatedOptions.default
                 }
               />
-              <Pf3Form.HelpBlock>
-                IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for
-                ranges.
-              </Pf3Form.HelpBlock>
             </FormGroup>
             <FormGroup
               label={t('form-dialog.label', { context: 'port' })}
@@ -283,17 +296,25 @@ class AddSourceWizardStepTwo extends React.Component {
 
       case 'vcenter':
       case 'satellite':
-        const hostPortError = (
-          <React.Fragment>
-            {touched.hostsSingle && errors.hosts && 'A valid IP address or hostname is required '}
-            {errors.port && 'Port must be valid'}
-          </React.Fragment>
-        );
+        const hostPortError = `${
+          (touched.hostsSingle &&
+            errors.hosts &&
+            `${t('form-dialog.label', {
+              context: ['search-address', 'error']
+            })} `) ||
+          ''
+        }${
+          (errors.port &&
+            t('form-dialog.label', {
+              context: ['search-address', 'error', 'port']
+            })) ||
+          ''
+        }`;
 
         return (
           <React.Fragment>
             <FormGroup
-              label={t('form-dialog.label', { context: 'ip-address' })}
+              label={t('form-dialog.label', { context: 'search-address' })}
               error={
                 (touched.hostsSingle && errors.hosts) ||
                 errors.port ||
@@ -301,15 +322,23 @@ class AddSourceWizardStepTwo extends React.Component {
                 stepTwoErrorMessages.port
               }
               errorMessage={
-                (stepTwoErrorMessages.hosts && 'A valid IP address or hostname is required') ||
-                (stepTwoErrorMessages.port && 'Port must be valid') ||
+                (stepTwoErrorMessages.hosts &&
+                  t('form-dialog.label', {
+                    context: ['search-address', 'error']
+                  })) ||
+                (stepTwoErrorMessages.port &&
+                  t('form-dialog.label', {
+                    context: ['search-address', 'error', 'port']
+                  })) ||
                 hostPortError
               }
             >
               <TextInput
                 name="hostsSingle"
                 value={values.hostsSingle}
-                placeholder="Enter an IP address or hostname (default port is 443)"
+                placeholder={t('form-dialog.label', {
+                  context: ['search-address', 'placeholder']
+                })}
                 onChange={onChangeSingleHost}
                 onClear={onChangeSingleHost}
                 validated={
@@ -349,7 +378,7 @@ class AddSourceWizardStepTwo extends React.Component {
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
         errorMessage={stepTwoErrorMessages.credentials || 'A credential is required'}
       >
-        <Pf3Form.InputGroup>
+        <InputGroup>
           <DropdownSelect
             placeholder={t('form-dialog.label_placeholder', {
               context: [
@@ -368,16 +397,14 @@ class AddSourceWizardStepTwo extends React.Component {
             selectedOptions={credentials}
             key={`dropdown-update-${sourceCredentials.length}`}
           />
-          <Pf3Form.InputGroup.Button>
-            <Button
-              variant={ButtonVariant.control}
-              aria-label={t('form-dialog.label', { context: 'add-credential' })}
-              icon={<PlusIcon />}
-              onClick={this.onAddCredential}
-              title={t('form-dialog.label', { context: 'add-credential' })}
-            />
-          </Pf3Form.InputGroup.Button>
-        </Pf3Form.InputGroup>
+          <Button
+            variant={ButtonVariant.control}
+            aria-label={t('form-dialog.label', { context: 'add-credential' })}
+            icon={<PlusIcon />}
+            onClick={this.onAddCredential}
+            title={t('form-dialog.label', { context: 'add-credential' })}
+          />
+        </InputGroup>
       </FormGroup>
     );
   }
@@ -428,15 +455,14 @@ class AddSourceWizardStepTwo extends React.Component {
               />
             </FormGroup>
             <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
-              <Pf3Form.Checkbox
+              <Checkbox
                 name="optionSslCert"
                 checked={checked.optionSslCert || false}
-                disabled={checked.optionDisableSsl}
-                inline
+                isDisabled={checked.optionDisableSsl}
                 onChange={handleOnEvent}
               >
                 {t('form-dialog.label', { context: 'ssl-certificate' })}
-              </Pf3Form.Checkbox>
+              </Checkbox>
             </FormGroup>
           </React.Fragment>
         );
