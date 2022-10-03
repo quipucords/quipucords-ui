@@ -12,7 +12,6 @@ import {
   Title,
   ValidatedOptions
 } from '@patternfly/react-core';
-import { FieldLevelHelp } from 'patternfly-react';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
 import { CONFIG as sourcesConfig } from '../sources/sources';
@@ -23,6 +22,7 @@ import { TextInput } from '../form/textInput';
 import { Checkbox } from '../form/checkbox';
 import { TextArea, TextAreResizeOrientation } from '../form/textArea';
 import { TouchSpin } from '../touchspin/touchspin';
+import { Tooltip } from '../tooltip/tooltip';
 import helpers from '../../common/helpers';
 import apiTypes from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
@@ -273,12 +273,8 @@ class CreateScanDialog extends React.Component {
 
     const scanProductsLabel = (
       <div>
-        {t('form-dialog.label', { context: ['deep-scan'] })}
-        <FieldLevelHelp
-          content={<p>{t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })}</p>}
-          close
-          placement="top"
-        />
+        {t('form-dialog.label', { context: ['deep-scan'] })}{' '}
+        <Tooltip content={<p>{t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })}</p>} />
       </div>
     );
 

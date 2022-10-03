@@ -203,7 +203,27 @@ Array [
       },
       Object {
         "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'placeholder', type] })",
+      },
+      Object {
+        "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: 'search-addresses' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'help'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'placeholder'] })",
       },
       Object {
         "key": "form-dialog.label",
@@ -211,7 +231,27 @@ Array [
       },
       Object {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'ip-address' })",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'search-address' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'placeholder'] })",
       },
       Object {
         "key": "form-dialog.label",
@@ -291,6 +331,10 @@ Array [
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: credentialType })",
       },
     ],
   },

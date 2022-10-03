@@ -3,6 +3,10 @@
   --pf-global--FontSize--md: 0.8rem;
 }
 
+.pf-c-form__helper-text {
+  font-size: var(--pf-global--FontSize--md) !important;
+}
+
 // rcue overrides, remove as part of clean up
 .pf-c-select.pf-m-expanded input[type="radio"],
 .pf-c-select.pf-m-expanded input[type="checkbox"] {
