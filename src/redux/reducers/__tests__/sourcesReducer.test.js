@@ -13,7 +13,8 @@ describe('SourcesReducer', () => {
       types.SELECT_SOURCE,
       types.DESELECT_SOURCE,
       types.EXPANDED_SOURCE,
-      types.NOT_EXPANDED_SOURCE
+      types.NOT_EXPANDED_SOURCE,
+      types.RESET_ACTIONS
     ];
 
     specificTypes.forEach(value => {

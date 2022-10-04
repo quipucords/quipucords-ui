@@ -50,11 +50,7 @@ const useOnDelete = ({
   const onConfirmation = useAliasConfirmation();
   const [credentialsToDelete, setCredentialsToDelete] = useState([]);
   const dispatch = useAliasDispatch();
-  const {
-    data,
-    error: deletedError,
-    fulfilled: deletedFulfilled
-  } = useAliasSelectorsResponse(({ credentials }) => credentials?.deleted);
+  const { data, error, fulfilled } = useAliasSelectorsResponse(({ credentials }) => credentials?.deleted);
   const { errorMessage } = data?.[0] || {};
 
   useShallowCompareEffect(() => {
@@ -65,46 +61,19 @@ const useOnDelete = ({
   }, [credentialsToDelete, deleteCredentials, dispatch]);
 
   useShallowCompareEffect(() => {
-    if (deletedFulfilled && credentialsToDelete.length) {
+    if ((fulfilled && credentialsToDelete.length) || (error && credentialsToDelete.length)) {
       const credentialNames = credentialsToDelete.map(cred => cred[apiTypes.API_RESPONSE_CREDENTIAL_NAME]);
+
       dispatch([
         {
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.success,
+          alertType: (error && AlertVariant.danger) || AlertVariant.success,
           header: t('toast-notifications.title', {
-            context: ['deleted-credential'],
+            context: [(error && 'error') || 'deleted-credential'],
             count: credentialNames.length
           }),
           message: t('toast-notifications.description', {
-            context: ['deleted-credential'],
-            name: credentialNames[0],
-            count: credentialNames.length
-          })
-        },
-        {
-          type: reduxTypes.credentials.DESELECT_CREDENTIAL,
-          item: credentialsToDelete
-        },
-        {
-          type: reduxTypes.view.UPDATE_VIEW,
-          viewId
-        }
-      ]);
-
-      setCredentialsToDelete(() => []);
-    }
-
-    if (deletedError && credentialsToDelete.length) {
-      const credentialNames = credentialsToDelete.map(cred => cred[apiTypes.API_RESPONSE_CREDENTIAL_NAME]);
-      dispatch([
-        {
-          type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.danger,
-          header: t('toast-notifications.title', {
-            context: ['error']
-          }),
-          message: t('toast-notifications.description', {
-            context: ['deleted-credential', 'error'],
+            context: ['deleted-credential', error && 'error'],
             name: credentialNames[0],
             count: credentialNames.length,
             message: errorMessage
@@ -115,6 +84,9 @@ const useOnDelete = ({
           item: credentialsToDelete
         },
         {
+          type: reduxTypes.credentials.RESET_ACTIONS
+        },
+        {
           type: reduxTypes.view.UPDATE_VIEW,
           viewId
         }
@@ -122,7 +94,7 @@ const useOnDelete = ({
 
       setCredentialsToDelete(() => []);
     }
-  }, [credentialsToDelete, deletedError, deletedFulfilled, dispatch, errorMessage, t]);
+  }, [credentialsToDelete, error, fulfilled, dispatch, errorMessage, t]);
 
   /**
    * Confirmation, and state, for deleting a single or multiple credentials

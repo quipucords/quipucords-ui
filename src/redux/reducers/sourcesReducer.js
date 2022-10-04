@@ -12,6 +12,17 @@ const initialState = {
 
 const sourcesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case sourcesTypes.RESET_ACTIONS:
+      return reduxHelpers.setStateProp(
+        null,
+        {
+          deleted: {}
+        },
+        {
+          state,
+          reset: false
+        }
+      );
     case sourcesTypes.UPDATE_SOURCES:
       return reduxHelpers.setStateProp(
         null,
