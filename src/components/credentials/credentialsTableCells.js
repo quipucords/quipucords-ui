@@ -106,7 +106,10 @@ const statusCell = ({ count, status = ContextIconVariant.unknown, t = translate,
  * @param {object} source
  * @returns {React.ReactNode}
  */
-const sourcesContent = ({ [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES]: sources } = {}) => {
+const sourcesContent = ({
+  [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES]: sources,
+  [apiTypes.API_RESPONSE_CREDENTIAL_CRED_TYPE]: credType
+} = {}) => {
   const updatedSources = (sources && [...sources]) || [];
 
   updatedSources.sort((item1, item2) =>
@@ -117,16 +120,16 @@ const sourcesContent = ({ [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES]: sources } 
 
   return (
     <List isPlain>
-      {updatedSources?.map(source => (
-        <ListItem
-          key={source[apiTypes.API_RESPONSE_CREDENTIAL_SOURCES_NAME]}
-          icon={
-            <ContextIcon symbol={ContextIconVariant[source[apiTypes.API_RESPONSE_CREDENTIAL_SOURCES_SOURCE_TYPE]]} />
-          }
-        >
-          {source[apiTypes.API_RESPONSE_CREDENTIAL_SOURCES_NAME]}
-        </ListItem>
-      ))}
+      {updatedSources?.map(
+        ({
+          [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES_NAME]: sourceName,
+          [apiTypes.API_RESPONSE_CREDENTIAL_SOURCES_SOURCE_TYPE]: sourceType
+        }) => (
+          <ListItem key={sourceName}>
+            <ContextIcon symbol={ContextIconVariant[sourceType || credType]} /> {sourceName}
+          </ListItem>
+        )
+      )}
     </List>
   );
 };
