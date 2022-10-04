@@ -52,11 +52,7 @@ const useOnDelete = ({
   const onConfirmation = useAliasConfirmation();
   const [sourcesToDelete, setSourcesToDelete] = useState([]);
   const dispatch = useAliasDispatch();
-  const {
-    data,
-    error: deletedError,
-    fulfilled: deletedFulfilled
-  } = useAliasSelectorsResponse(({ sources }) => sources?.deleted);
+  const { data, error, fulfilled } = useAliasSelectorsResponse(({ sources }) => sources?.deleted);
   const { errorMessage } = data?.[0] || {};
 
   useShallowCompareEffect(() => {
@@ -67,46 +63,19 @@ const useOnDelete = ({
   }, [sourcesToDelete, deleteSources, dispatch]);
 
   useShallowCompareEffect(() => {
-    if (deletedFulfilled && sourcesToDelete.length) {
+    if ((fulfilled && sourcesToDelete.length) || (error && sourcesToDelete.length)) {
       const sourceNames = sourcesToDelete.map(source => source[apiTypes.API_RESPONSE_SOURCE_NAME]);
+
       dispatch([
         {
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.success,
+          alertType: (error && AlertVariant.danger) || AlertVariant.success,
           header: t('toast-notifications.title', {
-            context: ['deleted-source'],
+            context: [(error && 'error') || 'deleted-source'],
             count: sourceNames.length
           }),
           message: t('toast-notifications.description', {
-            context: ['deleted-source'],
-            name: sourceNames[0],
-            count: sourceNames.length
-          })
-        },
-        {
-          type: reduxTypes.sources.DESELECT_SOURCE,
-          item: sourcesToDelete
-        },
-        {
-          type: reduxTypes.view.UPDATE_VIEW,
-          viewId
-        }
-      ]);
-
-      setSourcesToDelete(() => []);
-    }
-
-    if (deletedError && sourcesToDelete.length) {
-      const sourceNames = sourcesToDelete.map(source => source[apiTypes.API_RESPONSE_SOURCE_NAME]);
-      dispatch([
-        {
-          type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.danger,
-          header: t('toast-notifications.title', {
-            context: ['error']
-          }),
-          message: t('toast-notifications.description', {
-            context: ['deleted-source', 'error'],
+            context: ['deleted-source', error && 'error'],
             name: sourceNames[0],
             count: sourceNames.length,
             message: errorMessage
@@ -117,6 +86,9 @@ const useOnDelete = ({
           item: sourcesToDelete
         },
         {
+          type: reduxTypes.sources.RESET_ACTIONS
+        },
+        {
           type: reduxTypes.view.UPDATE_VIEW,
           viewId
         }
@@ -124,7 +96,7 @@ const useOnDelete = ({
 
       setSourcesToDelete(() => []);
     }
-  }, [deletedError, deletedFulfilled, dispatch, errorMessage, sourcesToDelete, t, viewId]);
+  }, [sourcesToDelete, error, fulfilled, dispatch, error, t]);
 
   return sources => {
     const updatedSources = (Array.isArray(sources) && sources) || [sources];

@@ -118,7 +118,7 @@ const useOnScanAction = ({
           }
         ]);
 
-        setUpdatedScan({});
+        setUpdatedScan(() => {});
       }
     }
   }, [dispatch, error, errorMessage, fulfilled, pending, scanContext, scanId, scanName, t, viewId]);
