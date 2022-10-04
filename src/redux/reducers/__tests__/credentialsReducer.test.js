@@ -16,7 +16,8 @@ describe('CredentialsReducer', () => {
       types.NOT_EXPANDED_CREDENTIAL,
       types.CREATE_CREDENTIAL_SHOW,
       types.EDIT_CREDENTIAL_SHOW,
-      types.UPDATE_CREDENTIAL_HIDE
+      types.UPDATE_CREDENTIAL_HIDE,
+      types.RESET_ACTIONS
     ];
 
     specificTypes.forEach(value => {

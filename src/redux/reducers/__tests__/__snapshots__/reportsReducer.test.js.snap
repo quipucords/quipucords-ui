@@ -43,6 +43,7 @@ Object {
     "date": undefined,
     "error": false,
     "errorMessage": "",
+    "errorStatus": undefined,
     "fulfilled": true,
     "metaData": undefined,
     "metaId": undefined,
@@ -63,6 +64,7 @@ Object {
     "date": undefined,
     "error": false,
     "errorMessage": "",
+    "errorStatus": undefined,
     "fulfilled": true,
     "metaData": undefined,
     "metaId": undefined,
@@ -79,6 +81,7 @@ Object {
   "result": Object {
     "error": false,
     "errorMessage": "",
+    "errorStatus": undefined,
     "fulfilled": false,
     "metaData": undefined,
     "metaId": undefined,
@@ -95,6 +98,7 @@ Object {
   "result": Object {
     "error": false,
     "errorMessage": "",
+    "errorStatus": undefined,
     "fulfilled": false,
     "metaData": undefined,
     "metaId": undefined,

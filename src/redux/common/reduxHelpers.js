@@ -69,6 +69,7 @@ const generatedPromiseActionReducer = (types = [], state = {}, action = {}) => {
   const baseState = {
     error: false,
     errorMessage: '',
+    errorStatus: undefined,
     fulfilled: false,
     metaData: action.meta && action.meta.data,
     metaId: action.meta && action.meta.id,

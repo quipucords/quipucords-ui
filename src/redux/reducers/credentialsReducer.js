@@ -19,6 +19,20 @@ const initialState = {
 
 const credentialsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case credentialsTypes.RESET_ACTIONS:
+      return reduxHelpers.setStateProp(
+        null,
+        {
+          deleted: {},
+          dialog: {
+            ...initialState.dialog
+          }
+        },
+        {
+          state,
+          reset: false
+        }
+      );
     case credentialsTypes.UPDATE_CREDENTIALS:
       return reduxHelpers.setStateProp(
         null,

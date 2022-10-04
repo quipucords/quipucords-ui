@@ -56,6 +56,7 @@ Object {
       "date": undefined,
       "error": false,
       "errorMessage": "",
+      "errorStatus": undefined,
       "fulfilled": true,
       "metaData": undefined,
       "metaId": undefined,
@@ -86,6 +87,7 @@ Object {
       "date": undefined,
       "error": false,
       "errorMessage": "",
+      "errorStatus": undefined,
       "fulfilled": true,
       "metaData": undefined,
       "metaId": undefined,
@@ -104,6 +106,7 @@ Object {
     "deleted": Object {
       "error": false,
       "errorMessage": "",
+      "errorStatus": undefined,
       "fulfilled": false,
       "metaData": undefined,
       "metaId": undefined,
@@ -130,6 +133,7 @@ Object {
     "view": Object {
       "error": false,
       "errorMessage": "",
+      "errorStatus": undefined,
       "fulfilled": false,
       "metaData": undefined,
       "metaId": undefined,
@@ -184,6 +188,19 @@ Object {
     "view": Object {},
   },
   "type": "NOT_EXPANDED_SOURCE",
+}
+`;
+
+exports[`SourcesReducer should handle specific defined types: defined type RESET_SOURCE_ACTIONS 1`] = `
+Object {
+  "result": Object {
+    "deleted": Object {},
+    "expanded": Object {},
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "RESET_SOURCE_ACTIONS",
 }
 `;
 

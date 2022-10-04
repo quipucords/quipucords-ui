@@ -465,19 +465,11 @@ Array [
     "keys": Array [
       Object {
         "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['deleted-credential'], count: credentialNames.length })",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
       },
       Object {
         "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-credential'], name: credentialNames[0], count: credentialNames.length })",
-      },
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['error'] })",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-credential', 'error'], name: credentialNames[0], count: credentialNames.length, message: errorMessage })",
+        "match": "t('toast-notifications.description', { context: ['deleted-credential', error && 'error'], name: credentialNames[0], count: credentialNames.length, message: errorMessage })",
       },
       Object {
         "key": "form-dialog.confirmation",
@@ -909,19 +901,11 @@ Array [
     "keys": Array [
       Object {
         "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['deleted-source'], count: sourceNames.length })",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
       },
       Object {
         "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-source'], name: sourceNames[0], count: sourceNames.length })",
-      },
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['error'] })",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-source', 'error'], name: sourceNames[0], count: sourceNames.length, message: errorMessage })",
+        "match": "t('toast-notifications.description', { context: ['deleted-source', error && 'error'], name: sourceNames[0], count: sourceNames.length, message: errorMessage })",
       },
       Object {
         "key": "form-dialog.confirmation",
