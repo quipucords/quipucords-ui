@@ -275,13 +275,17 @@ class AddSourceWizardStepTwo extends React.Component {
             <FormGroup
               label={t('form-dialog.label', { context: 'port' })}
               error={(touched.port && errors.port) || stepTwoErrorMessages.port}
-              errorMessage="Port must be valid"
+              errorMessage={t('form-dialog.label', {
+                context: ['port', 'error']
+              })}
             >
               <TextInput
                 name="port"
                 value={values.port}
                 maxLength={5}
-                placeholder="Default port is 22"
+                placeholder={t('form-dialog.label', {
+                  context: ['port', 'placeholder']
+                })}
                 onChange={handleOnEvent}
                 onClear={handleOnEvent}
                 validated={
@@ -376,7 +380,7 @@ class AddSourceWizardStepTwo extends React.Component {
       <FormGroup
         label={t('form-dialog.label', { context: 'credential' })}
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
-        errorMessage={stepTwoErrorMessages.credentials || 'A credential is required'}
+        errorMessage={stepTwoErrorMessages.credentials || t('form-dialog.label', { context: ['credential', 'error'] })}
       >
         <InputGroup>
           <DropdownSelect
@@ -437,7 +441,9 @@ class AddSourceWizardStepTwo extends React.Component {
         return (
           <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
             <Checkbox name="optionParamiko" checked={checked.optionParamiko || false} onChange={handleOnEvent}>
-              Connect using Paramiko instead of Open <abbr title="Secure Shell">SSH</abbr>
+              {t('form-dialog.label', { context: 'paramiko' }, [
+                <abbr title={t('form-dialog.label', { context: 'ssh' })} />
+              ])}
             </Checkbox>
           </FormGroup>
         );
