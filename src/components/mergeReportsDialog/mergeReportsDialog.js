@@ -24,7 +24,7 @@ class MergeReportsDialog extends React.Component {
   };
 
   onMergeScanResults = () => {
-    const { getReportsDownload, mergeReports } = this.props;
+    const { getReportsDownload, mergeReports, t } = this.props;
     const validReports = { [apiTypes.API_SUBMIT_REPORTS_REPORTS]: this.getValidReportId() };
 
     const mergeThenDownloadReport = async data => {
@@ -39,14 +39,14 @@ class MergeReportsDialog extends React.Component {
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: AlertVariant.success,
-          message: <span>Merged report downloaded.</span>
+          message: <span>{t('toast-notifications.description', { context: ['merge-reports', 'download'] })}</span>
         });
       },
       error => {
         store.dispatch({
           type: reduxTypes.toastNotifications.TOAST_ADD,
           alertType: AlertVariant.danger,
-          header: 'Error merging reports',
+          header: t('toast-notifications.title', { context: ['merge-reports', 'error'] }),
           message: helpers.getMessageFromResults(error).message
         });
       }
@@ -70,15 +70,21 @@ class MergeReportsDialog extends React.Component {
   }
 
   renderValidScans() {
+    const { t } = this.props;
     const validScans = this.getValidScans();
 
     if (validScans.length) {
       return (
         <div>
-          <span>Scans to be included in the merged report:</span>
+          <span>{t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'valid'] })}</span>
           <ul>
-            {validScans.map(scan => (
-              <li key={scan.id}>{scan.name || `ID ${scan.id}`}</li>
+            {validScans.map(({ id, name }) => (
+              <li key={id}>
+                {t('form-dialog.confirmation', {
+                  context: ['body', 'merge-reports', 'list', !name && 'id'],
+                  name: name || id
+                })}
+              </li>
             ))}
           </ul>
         </div>
@@ -89,15 +95,21 @@ class MergeReportsDialog extends React.Component {
   }
 
   renderInvalidScans() {
+    const { t } = this.props;
     const invalidScans = this.getInvalidScans();
 
     if (invalidScans.length) {
       return (
         <div>
-          <span>Failed scans that cannot be included in the merged report:</span>
+          <span>{t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'invalid'] })}</span>
           <ul>
-            {invalidScans.map(scan => (
-              <li key={scan.id}>{scan.name || `ID ${scan.id}`}</li>
+            {invalidScans.map(({ id, name }) => (
+              <li key={id}>
+                {t('form-dialog.confirmation', {
+                  context: ['body', 'merge-reports', 'list', !name && 'id'],
+                  name: name || id
+                })}
+              </li>
             ))}
           </ul>
         </div>
@@ -130,55 +142,52 @@ class MergeReportsDialog extends React.Component {
   }
 
   render() {
-    const { pending, show, scans } = this.props;
+    const { pending, show, scans, t } = this.props;
 
     if (!scans || scans.length === 0) {
       return null;
     }
 
-    const validCount = this.getValidScans().length;
-    const invalidCount = this.getInvalidScans().length;
+    const isValidCount = this.getValidScans().length < 2;
+    const isGreaterValidCount = this.getValidScans().length >= 2;
+    const isInvalidCount = this.getInvalidScans().length > 0;
 
-    let icon = <ContextIcon symbol={ContextIconVariant.info} />;
+    const iconSymbol =
+      (isValidCount && ContextIconVariant.error) ||
+      (isInvalidCount && ContextIconVariant.warning) ||
+      ContextIconVariant.info;
+
     let heading;
-    let footer = <span>Once the scan reports are merged, the results will be downloaded to your local machine.</span>;
-
-    if (validCount < 2) {
-      icon = <ContextIcon symbol={ContextIconVariant.error} />;
-
-      heading = (
-        <h3 className="merge-reports-heading">
-          This action is invalid. You must select at least two scans with successful most recent scans.
-        </h3>
-      );
-
-      footer = null;
-    } else if (invalidCount > 0) {
-      icon = <ContextIcon symbol={ContextIconVariant.warning} />;
-
-      heading = (
-        <h3 className="merge-reports-heading">
-          Warning, only the selected scans with successful most recent scans will be included in the report.
-        </h3>
-      );
+    if (isValidCount || isInvalidCount) {
+      heading = t('form-dialog.confirmation', {
+        context: ['heading', 'merge-reports', (isValidCount && 'valid') || (isInvalidCount && 'invalid')]
+      });
     }
+
+    const footer = isGreaterValidCount && t('form-dialog.confirmation', { context: ['footer', 'merge-reports'] });
 
     return (
       <Modal
         isOpen={show}
         onClose={this.onClose}
-        header={<Title headingLevel="h4">Merge reports</Title>}
+        header={
+          <Title headingLevel="h4">{t('form-dialog.confirmation', { context: ['title', 'merge-reports'] })}</Title>
+        }
         actions={this.renderButtons()}
       >
         {pending && (
           <EmptyState className="quipucords-empty-state">
             <EmptyStateIcon icon={Spinner} />
-            <Title headingLevel="h3">Merging reports...</Title>
+            <Title headingLevel="h3">
+              {t('form-dialog.empty-state', { context: ['title', 'merge-reports', 'pending'] })}
+            </Title>
           </EmptyState>
         )}
         {!pending && (
           <div className="merge-reports-body">
-            <span className="merge-reports-icon">{icon}</span>
+            <span className="merge-reports-icon">
+              <ContextIcon symbol={iconSymbol} />
+            </span>
             <span>
               {heading}
               <div>

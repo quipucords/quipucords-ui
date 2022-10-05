@@ -29,7 +29,7 @@ import { translate } from '../i18n/i18n';
 
 class CreateScanDialog extends React.Component {
   onClose = () => {
-    const { fulfilled } = this.props;
+    const { fulfilled, t } = this.props;
 
     const closeDialog = () => {
       store.dispatch({
@@ -46,10 +46,10 @@ class CreateScanDialog extends React.Component {
     } else {
       store.dispatch({
         type: reduxTypes.confirmationModal.CONFIRMATION_MODAL_SHOW,
-        title: 'Cancel Add Scan',
-        heading: `Are you sure you want to cancel this scan?`,
-        cancelButtonText: 'No',
-        confirmButtonText: 'Yes',
+        title: t('form-dialog.confirmation', { context: ['title', 'add-scan'] }),
+        heading: t('form-dialog.confirmation', { context: ['heading', 'add-scan'] }),
+        cancelButtonText: t('form-dialog.label', { context: 'no' }),
+        confirmButtonText: t('form-dialog.label', { context: 'yes' }),
         onConfirm: closeDialog
       });
     }
@@ -70,7 +70,7 @@ class CreateScanDialog extends React.Component {
   };
 
   onSubmit = ({ checked, values }) => {
-    const { addScan, startScan } = this.props;
+    const { addScan, startScan, t } = this.props;
 
     const scan = {
       [apiTypes.API_SUBMIT_SCAN_NAME]: values.scanName,
@@ -143,7 +143,9 @@ class CreateScanDialog extends React.Component {
           alertType: AlertVariant.success,
           message: (
             <span>
-              Started scan <strong>{values.scanName}</strong>.
+              {t('toast-notifications.description', { context: ['scan-report', 'start'], name: values.scanName }, [
+                <strong />
+              ])}
             </span>
           )
         });
@@ -160,7 +162,10 @@ class CreateScanDialog extends React.Component {
           store.dispatch({
             type: reduxTypes.toastNotifications.TOAST_ADD,
             alertType: AlertVariant.danger,
-            header: `Error creating scan ${values.scanName}`,
+            header: t('toast-notifications.title', {
+              context: ['scan-report', 'start', 'error'],
+              name: values.scanName
+            }),
             message: props.errorMessage
           });
         }
@@ -169,14 +174,14 @@ class CreateScanDialog extends React.Component {
   };
 
   renderNameSources({ values, errors, touched, handleOnEvent }) {
-    const { submitErrorMessages } = this.props;
+    const { submitErrorMessages, t } = this.props;
 
     return (
       <React.Fragment>
         <FormGroup
-          label="Name"
+          label={t('form-dialog.label', { context: 'scan-name' })}
           error={(touched.scanName && errors.scanName) || submitErrorMessages.scanName}
-          errorMessage={submitErrorMessages.scanName || 'A scan name is required'}
+          errorMessage={submitErrorMessages.scanName || t('form-dialog.label', { context: ['scan-name', 'error'] })}
         >
           <TextInput
             type="text"
@@ -184,11 +189,15 @@ class CreateScanDialog extends React.Component {
             name="scanName"
             value={values.scanName}
             maxLength={256}
-            placeholder="Enter a name for the scan"
+            placeholder={t('form-dialog.label', { context: ['scan-name', 'placeholder'] })}
             onChange={handleOnEvent}
           />
         </FormGroup>
-        <FormGroup label="Sources" error={submitErrorMessages.scanSources} errorMessage={submitErrorMessages.scanName}>
+        <FormGroup
+          label={t('form-dialog.label', { context: 'sources' })}
+          error={submitErrorMessages.scanSources}
+          errorMessage={submitErrorMessages.scanName}
+        >
           <TextArea
             className="quipucords-form-control"
             name="displayScanSources"
@@ -203,14 +212,14 @@ class CreateScanDialog extends React.Component {
   }
 
   renderConcurrentScans({ values, handleOnEvent }) {
-    const { submitErrorMessages } = this.props;
+    const { submitErrorMessages, t } = this.props;
 
     return (
       <FormGroup
-        label="Maximum concurrent scans"
+        label={t('form-dialog.label', { context: 'scan-concurrency' })}
         error={submitErrorMessages.scanConcurrency}
         errorMessage={submitErrorMessages.scanConcurrency}
-        helperText="Minimum value 1, maximum value 200"
+        helperText={t('form-dialog.label', { context: ['scan-concurrency', 'help'] })}
         id="scanConcurrency"
       >
         <TouchSpin
@@ -325,15 +334,18 @@ class CreateScanDialog extends React.Component {
         <FormGroup
           label={t('form-dialog.label', { context: 'scan-alt-directories' })}
           error={(touched.scanDirectories && errors.scanDirectories) || submitErrorMessages.scanDirectories}
-          errorMessage={submitErrorMessages.scanDirectories || `Directories must begin with a root reference (/)`}
-          helperText="Default directories are /, /opt, /app, /home, /usr"
+          errorMessage={
+            submitErrorMessages.scanDirectories ||
+            t('form-dialog.label', { context: ['scan-alt-directories', 'error'] })
+          }
+          helperText={t('form-dialog.label', { context: ['scan-alt-directories', 'help'] })}
         >
           <TextArea
             isDisabled={!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs && !checked.jbossBrms}
             name="displayScanDirectories"
             value={values.displayScanDirectories}
             rows={4}
-            placeholder="Optional. Enter values separated by commas"
+            placeholder={t('form-dialog.label', { context: ['scan-alt-directories', 'placeholder'] })}
             onChange={onChangeDirectories}
             resizeOrientation={TextAreResizeOrientation.vertical}
             validated={
@@ -348,11 +360,11 @@ class CreateScanDialog extends React.Component {
   }
 
   renderErrorMessage() {
-    const { error, errorMessage, submitErrorMessages } = this.props;
+    const { error, errorMessage, submitErrorMessages, t } = this.props;
 
     if (error && !Object.keys(submitErrorMessages).length) {
       return (
-        <Alert isInline variant={AlertVariant.danger} title="Error">
+        <Alert isInline variant={AlertVariant.danger} title={t('form-dialog.label', { context: 'error' })}>
           {errorMessage}
         </Alert>
       );
@@ -408,14 +420,16 @@ class CreateScanDialog extends React.Component {
             isOpen={show}
             showClose
             onClose={this.onClose}
-            header={<Title headingLevel="h4">Scan</Title>}
+            header={<Title headingLevel="h4">{t('form-dialog.title', { context: 'create-scan' })}</Title>}
             actions={formActions(handleOnSubmit, isValid)}
           >
             <Form isHorizontal onSubmit={handleOnSubmit}>
               {pending && (
                 <EmptyState className="quipucords-empty-state">
                   <EmptyStateIcon icon={Spinner} />
-                  <Title headingLevel="h3">Scan updating...</Title>
+                  <Title headingLevel="h3">
+                    {t('form-dialog.empty-state', { context: ['title', 'create-scan', 'pending'] })}
+                  </Title>
                 </EmptyState>
               )}
               {!pending && this.renderErrorMessage(options)}
