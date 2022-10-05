@@ -124,7 +124,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         id="port"
         maxlength="5"
         name="port"
-        placeholder="Default port is 22"
+        placeholder="t(form-dialog.label_port, {\\"context\\":\\"placeholder\\"})"
         type="text"
         value=""
       />
@@ -258,12 +258,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
           class="pf-c-check__label"
           for="optionParamiko"
         >
-          Connect using Paramiko instead of Open 
-          <abbr
-            title="Secure Shell"
-          >
-            SSH
-          </abbr>
+          t(form-dialog.label, {"context":"paramiko"}, [object Object])
         </label>
       </div>
     </div>
@@ -684,7 +679,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
         id="port"
         maxlength="5"
         name="port"
-        placeholder="Default port is 22"
+        placeholder="t(form-dialog.label_port, {\\"context\\":\\"placeholder\\"})"
         type="text"
         value=""
       />
@@ -818,12 +813,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
           class="pf-c-check__label"
           for="optionParamiko"
         >
-          Connect using Paramiko instead of Open 
-          <abbr
-            title="Secure Shell"
-          >
-            SSH
-          </abbr>
+          t(form-dialog.label, {"context":"paramiko"}, [object Object])
         </label>
       </div>
     </div>
