@@ -21,15 +21,17 @@ describe('TouchSpin Component', () => {
   it('should handle onchange events', () => {
     const props = {
       name: 'lorem',
-      value: 1
+      value: 1,
+      labelMaxDescription: 'testing max',
+      labelMinDescription: 'testing min'
     };
 
     const component = mount(<TouchSpin {...props} />);
 
-    component.find('button[aria-label="Increase number button"]').simulate('click');
+    component.find(`button[aria-label="${props.labelMaxDescription}"]`).simulate('click');
     expect(component.find(TextInput).props()?.value).toBe(2);
 
-    component.find('button[aria-label="Decrease number button"]').simulate('click');
+    component.find(`button[aria-label="${props.labelMinDescription}"]`).simulate('click');
     expect(component.find(TextInput).props()?.value).toBe(1);
   });
 });

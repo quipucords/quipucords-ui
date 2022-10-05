@@ -29,7 +29,7 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
           data-ouia-component-type="PF4/Title"
           data-ouia-safe="true"
         >
-          Merge reports
+          t(form-dialog.confirmation_title, {"context":"merge-reports"})
         </h4>
       </header>
       <div
@@ -66,7 +66,7 @@ exports[`MergeReportsDialog Component should render a component, pending: pendin
                 data-ouia-component-type="PF4/Title"
                 data-ouia-safe="true"
               >
-                Merging reports...
+                t(form-dialog.empty-state_title_merge-reports, {"context":"pending"})
               </h3>
             </div>
           </div>
@@ -133,7 +133,7 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
           data-ouia-component-type="PF4/Title"
           data-ouia-safe="true"
         >
-          Merge reports
+          t(form-dialog.confirmation_title, {"context":"merge-reports"})
         </h4>
       </header>
       <div
@@ -162,29 +162,25 @@ exports[`MergeReportsDialog Component should render a non-connected component, f
               </svg>
             </span>
             <span>
-              <h3
-                class="merge-reports-heading"
-              >
-                This action is invalid. You must select at least two scans with successful most recent scans.
-              </h3>
+              t(form-dialog.confirmation_heading_merge-reports, {"context":"valid"})
               <div>
                 <div>
                   <span>
-                    Scans to be included in the merged report:
+                    t(form-dialog.confirmation_body_merge-reports, {"context":"valid"})
                   </span>
                   <ul>
                     <li>
-                      lorem
+                      t(form-dialog.confirmation_body_merge-reports, {"context":"list","name":"lorem"})
                     </li>
                   </ul>
                 </div>
                 <div>
                   <span>
-                    Failed scans that cannot be included in the merged report:
+                    t(form-dialog.confirmation_body_merge-reports, {"context":"invalid"})
                   </span>
                   <ul>
                     <li>
-                      ipsum
+                      t(form-dialog.confirmation_body_merge-reports, {"context":"list","name":"ipsum"})
                     </li>
                   </ul>
                 </div>

@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputGroup, Button, TextInput, ButtonVariant } from '@patternfly/react-core';
 import { PlusIcon, MinusIcon } from '@patternfly/react-icons';
-import helpers from '../../common/helpers';
+import { helpers } from '../../common';
+import { translate } from '../i18n/i18n';
 
 // FixMe: remove the eslint-disable
+/**
+ * Touch-spin numeric input
+ */
 class TouchSpin extends React.Component {
   constructor(props) {
     super(props);
@@ -125,7 +129,7 @@ class TouchSpin extends React.Component {
 
   render() {
     const { displayValue, maxValue, minValue } = this.state;
-    const { className, labelMax, labelMaxDescription, labelMin, labelMinDescription, name } = this.props;
+    const { className, labelMax, labelMaxDescription, labelMin, labelMinDescription, name, t } = this.props;
 
     return (
       <div className={`pf-c-number-input ${className}`}>
@@ -137,7 +141,7 @@ class TouchSpin extends React.Component {
             onMouseUp={this.onBlur}
             onMouseLeave={this.onBlur}
             isDisabled={displayValue <= minValue}
-            aria-label={labelMinDescription}
+            aria-label={labelMinDescription || t('form-dialog.label', { context: ['touchspin', 'min'] })}
           >
             {labelMin}
           </Button>
@@ -146,7 +150,7 @@ class TouchSpin extends React.Component {
             name={name}
             value={displayValue}
             onChange={(_, event) => this.onUpdateValue(event)}
-            aria-label="Number Input"
+            aria-label={t('form-dialog.label', { context: ['touchspin', 'input'] })}
           />
           <Button
             variant={ButtonVariant.control}
@@ -155,7 +159,7 @@ class TouchSpin extends React.Component {
             onMouseUp={this.onBlur}
             onMouseLeave={this.onBlur}
             isDisabled={displayValue >= maxValue}
-            aria-label={labelMaxDescription}
+            aria-label={labelMaxDescription || t('form-dialog.label', { context: ['touchspin', 'max'] })}
           >
             {labelMax}
           </Button>
@@ -165,6 +169,13 @@ class TouchSpin extends React.Component {
   }
 }
 
+/**
+ * Prop types
+ *
+ * @type {{labelMaxDescription: string, minValue: number, onChange: Function, t: Function, maxValue: number,
+ *     labelMax: React.ReactNode, name: string, labelMin: React.ReactNode, className: string, labelMinDescription: string,
+ *     value: number}}
+ */
 TouchSpin.propTypes = {
   className: PropTypes.string,
   labelMax: PropTypes.node,
@@ -175,18 +186,26 @@ TouchSpin.propTypes = {
   minValue: PropTypes.number,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  t: PropTypes.func,
   value: PropTypes.number
 };
 
+/**
+ * Default props
+ *
+ * @type {{labelMaxDescription: null, minValue: number, onChange: Function, t: translate, maxValue: number,
+ *     labelMax: React.ReactNode, labelMin: React.ReactNode, className: string, labelMinDescription: null, value: number}}
+ */
 TouchSpin.defaultProps = {
   className: '',
   labelMax: <PlusIcon />,
-  labelMaxDescription: 'Increase number button',
+  labelMaxDescription: null,
   labelMin: <MinusIcon />,
-  labelMinDescription: 'Decrease number button',
+  labelMinDescription: null,
   maxValue: 100,
   minValue: 0,
   onChange: helpers.noop,
+  t: translate,
   value: 50
 };
 
