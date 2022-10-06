@@ -12,6 +12,10 @@ import { translate } from '../i18n/i18n';
 const fieldOptions = [
   { title: () => translate('form-dialog.label', { context: ['option', 'network', 'credential'] }), value: 'network' },
   {
+    title: () => translate('form-dialog.label', { context: ['option', 'openshift', 'credential'] }),
+    value: 'openshift'
+  },
+  {
     title: () => translate('form-dialog.label', { context: ['option', 'satellite', 'credential'] }),
     value: 'satellite'
   },

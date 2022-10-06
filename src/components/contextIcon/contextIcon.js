@@ -11,6 +11,7 @@ import {
   ExclamationTriangleIcon,
   IdCardIcon,
   InfoCircleIcon,
+  OpenshiftIcon,
   PencilAltIcon,
   PficonNetworkRangeIcon,
   PficonSatelliteIcon,
@@ -63,6 +64,7 @@ const ContextIconVariant = {
   idCard: 'idCard',
   info: 'info',
   network: 'network',
+  openshift: 'openshift',
   pencil: 'pencil',
   satellite: 'satellite',
   scans: 'scans',
@@ -118,6 +120,8 @@ const ContextIcon = ({ symbol, ...props }) => {
       return <InfoCircleIcon {...props} />;
     case ContextIconVariant.network:
       return <PficonNetworkRangeIcon {...props} />;
+    case ContextIconVariant.openshift:
+      return <OpenshiftIcon {...props} />;
     case ContextIconVariant.warning:
       return <ExclamationTriangleIcon {...{ ...{ color: yellow.value }, ...props }} />;
     case ContextIconVariant.pencil:
