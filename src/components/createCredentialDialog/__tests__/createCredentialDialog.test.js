@@ -54,6 +54,22 @@ describe('CreateCredentialDialog Component', () => {
     ]).toMatchSnapshot('network');
   });
 
+  it('should handle variations in basic form display for openshift credential type', async () => {
+    const props = {
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'openshift'
+      })
+    };
+
+    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    expect([
+      ...component.find('input').map(item => item.props()),
+      ...component.find(DropdownSelect).map(item => item.props())
+    ]).toMatchSnapshot('openshift');
+  });
+
   it('should handle variations in basic form display for satellite credential type', async () => {
     const props = {
       useCredential: () => ({

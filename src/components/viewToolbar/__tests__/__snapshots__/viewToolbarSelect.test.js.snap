@@ -14,6 +14,10 @@ Object {
       },
       Object {
         "title": [Function],
+        "value": "openshift",
+      },
+      Object {
+        "title": [Function],
         "value": "satellite",
       },
       Object {
@@ -25,6 +29,10 @@ Object {
       Object {
         "title": [Function],
         "value": "network",
+      },
+      Object {
+        "title": [Function],
+        "value": "openshift",
       },
       Object {
         "title": [Function],
@@ -97,6 +105,10 @@ exports[`ViewToolbarSelect Component should render a basic component: basic 1`] 
       Object {
         "title": [Function],
         "value": "network",
+      },
+      Object {
+        "title": [Function],
+        "value": "openshift",
       },
       Object {
         "title": [Function],

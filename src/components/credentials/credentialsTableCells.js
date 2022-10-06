@@ -65,12 +65,15 @@ const description = (
  * @returns {React.ReactNode|null}
  */
 const authType = (
-  { [apiTypes.API_RESPONSE_CREDENTIAL_SSH_KEYFILE]: sshKeyfile } = {},
+  {
+    [apiTypes.API_RESPONSE_CREDENTIAL_AUTH_TOKEN]: authToken,
+    [apiTypes.API_RESPONSE_CREDENTIAL_SSH_KEYFILE]: sshKeyfile
+  } = {},
   { t = translate, viewId } = {}
 ) => (
   <Tooltip content={t('table.label', { context: ['auth', 'tooltip', viewId] })}>
     {t('table.label', {
-      context: ['auth', 'cell', sshKeyfile && 'sshKey']
+      context: ['auth', 'cell', sshKeyfile && 'sshKey', authToken && 'authToken']
     })}
   </Tooltip>
 );
