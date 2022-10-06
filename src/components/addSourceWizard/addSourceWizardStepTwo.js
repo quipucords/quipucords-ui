@@ -300,6 +300,7 @@ class AddSourceWizardStepTwo extends React.Component {
 
       case 'vcenter':
       case 'satellite':
+      case 'openshift':
         const hostPortError = `${
           (touched.hostsSingle &&
             errors.hosts &&
@@ -447,6 +448,7 @@ class AddSourceWizardStepTwo extends React.Component {
             </Checkbox>
           </FormGroup>
         );
+      case 'openshift':
       case 'vcenter':
       case 'satellite':
         return (

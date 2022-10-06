@@ -85,6 +85,14 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 />
 `;
 
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, openshift 1`] = `
+<OpenshiftIcon
+  color="currentColor"
+  noVerticalAlign={false}
+  size="sm"
+/>
+`;
+
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, paused 1`] = `
 <ExclamationTriangleIcon
   color="#f0ab00"
@@ -219,6 +227,7 @@ Object {
   "idCard": "idCard",
   "info": "info",
   "network": "network",
+  "openshift": "openshift",
   "paused": "warning",
   "pencil": "pencil",
   "pending": "pending",

@@ -39,6 +39,10 @@ const authenticationTypeOptions = [
     value: 'sshKey'
   },
   {
+    title: () => translate('form-dialog.label', { context: ['option', 'token'] }),
+    value: 'token'
+  },
+  {
     title: () => translate('form-dialog.label', { context: ['option', 'usernamePassword'] }),
     value: 'usernamePassword',
     selected: true
@@ -81,21 +85,31 @@ const CreateCredentialDialog = ({
   const { onHide } = useAliasOnUpdateCredential();
   const submitCredential = useAliasOnSubmitCredential();
   const isShhKeyfile = credential?.[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && true;
+  const isToken = credential?.[apiTypes.API_QUERY_TYPES.AUTH_TOKEN] && true;
 
   useEffect(() => {
     if (edit && credentialType === 'network' && isShhKeyfile) {
       setAuthType('sshKey');
-    } else {
-      switch (credentialType) {
-        case 'network':
-        case 'satellite':
-        case 'vcenter':
-        default:
-          setAuthType('usernamePassword');
-          break;
-      }
+      return;
     }
-  }, [credentialType, edit, isShhKeyfile]);
+
+    if (edit && credentialType === 'network' && isToken) {
+      setAuthType('token');
+      return;
+    }
+
+    switch (credentialType) {
+      case 'openshift':
+        setAuthType('token');
+        break;
+      case 'network':
+      case 'satellite':
+      case 'vcenter':
+      default:
+        setAuthType('usernamePassword');
+        break;
+    }
+  }, [credentialType, edit, isShhKeyfile, isToken]);
 
   if (!credentialType) {
     return null;
@@ -162,10 +176,12 @@ const CreateCredentialDialog = ({
    * @event onValidateForm
    * @param {object} formState
    * @param {object} formState.values
-   * @returns {{ssh_keyfile: boolean, password: boolean, name: boolean, username: boolean}}
+   * @returns {{ssh_keyfile: boolean, password: boolean, name: boolean, auth_token: boolean, username: boolean}}
    */
   const onValidateForm = ({ values = {} } = {}) => ({
     [apiTypes.API_QUERY_TYPES.NAME]: formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.NAME]),
+    [apiTypes.API_QUERY_TYPES.AUTH_TOKEN]:
+      authType === 'token' && formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]),
     [apiTypes.API_QUERY_TYPES.SSH_KEYFILE]:
       (authType === 'sshKey' && formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE])) ||
       (authType === 'sshKey' && !formHelpers.isFilePath(values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE])),
@@ -217,24 +233,26 @@ const CreateCredentialDialog = ({
           />
         </FormGroup>
       )}
-      <FormGroup
-        label={t('form-dialog.label', { context: ['username'] })}
-        error={touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]}
-        errorMessage={t('form-dialog.label', { context: ['username', 'error'] })}
-      >
-        <TextInput
-          name={apiTypes.API_QUERY_TYPES.USERNAME}
-          value={values[apiTypes.API_QUERY_TYPES.USERNAME]}
-          placeholder={t('form-dialog.label', { context: ['username', 'placeholder'] })}
-          onChange={handleOnEvent}
-          onClear={handleOnEvent}
-          validated={
-            touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]
-              ? ValidatedOptions.error
-              : ValidatedOptions.default
-          }
-        />
-      </FormGroup>
+      {authType !== 'token' && (
+        <FormGroup
+          label={t('form-dialog.label', { context: ['username'] })}
+          error={touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]}
+          errorMessage={t('form-dialog.label', { context: ['username', 'error'] })}
+        >
+          <TextInput
+            name={apiTypes.API_QUERY_TYPES.USERNAME}
+            value={values[apiTypes.API_QUERY_TYPES.USERNAME]}
+            placeholder={t('form-dialog.label', { context: ['username', 'placeholder'] })}
+            onChange={handleOnEvent}
+            onClear={handleOnEvent}
+            validated={
+              touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]
+                ? ValidatedOptions.error
+                : ValidatedOptions.default
+            }
+          />
+        </FormGroup>
+      )}
     </React.Fragment>
   );
 
@@ -286,6 +304,28 @@ const CreateCredentialDialog = ({
               />
             </FormGroup>
           </React.Fragment>
+        );
+      case 'token':
+        return (
+          <FormGroup
+            key="auth_token"
+            label={t('form-dialog.label', { context: ['token', 'create-credential'] })}
+            error={touched[apiTypes.API_QUERY_TYPES.AUTH_TOKEN] && errors[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]}
+            errorMessage={t('form-dialog.label', { context: ['token', 'create-credential', 'error'] })}
+          >
+            <TextInput
+              name={apiTypes.API_QUERY_TYPES.AUTH_TOKEN}
+              value={values[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]}
+              placeholder={t('form-dialog.label', { context: ['token', 'create-credential', 'placeholder'] })}
+              onChange={handleOnEvent}
+              onClear={handleOnEvent}
+              validated={
+                touched[apiTypes.API_QUERY_TYPES.AUTH_TOKEN] && errors[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]
+                  ? ValidatedOptions.error
+                  : ValidatedOptions.default
+              }
+            />
+          </FormGroup>
         );
       case 'usernamePassword':
       default:

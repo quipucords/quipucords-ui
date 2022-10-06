@@ -36,6 +36,14 @@ class AddSourceWizardStepOne extends React.Component {
               />
               <Radio
                 name="sourceType"
+                id="sourceType-openshift"
+                value="openshift"
+                checked={values.sourceType === 'openshift'}
+                onChange={handleOnEvent}
+                label={t('form-dialog.label', { context: 'openshift' })}
+              />
+              <Radio
+                name="sourceType"
                 id="sourceType-satellite"
                 value="satellite"
                 checked={values.sourceType === 'satellite'}
