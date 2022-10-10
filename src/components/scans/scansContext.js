@@ -76,7 +76,7 @@ const useOnScanAction = ({
 } = {}) => {
   const { viewId } = useAliasView();
   const [updatedScan, setUpdatedScan] = useState({});
-  const { id: scanId, name: scanName, context: scanContext } = updatedScan;
+  const { id: scanId, name: scanName, context: scanContext } = updatedScan || {};
   const dispatch = useAliasDispatch();
   const { data, error, fulfilled, pending } = useAliasSelectorsResponse(({ scans }) => scans?.action?.[scanId]);
   const { errorMessage } = data?.[0] || {};
@@ -85,39 +85,35 @@ const useOnScanAction = ({
     if (scanId && !pending) {
       const dispatchList = [];
 
-      if (fulfilled) {
-        dispatchList.push({
-          type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: AlertVariant.success,
-          message: t(
-            'toast-notifications.description',
-            { context: ['scan-report', scanContext], name: scanName || scanId },
-            [<strong />]
-          )
-        });
-      }
-
-      if (error) {
+      if (fulfilled || error) {
         const isWarning = /already\sfinished/i.test(errorMessage);
 
         dispatchList.push({
           type: reduxTypes.toastNotifications.TOAST_ADD,
-          alertType: (isWarning && AlertVariant.warning) || AlertVariant.danger,
-          header: t('toast-notifications.title', { context: [(isWarning && 'warning') || 'error'] }),
+          alertType: (isWarning && AlertVariant.warning) || (error && AlertVariant.danger) || AlertVariant.success,
+          header: error && t('toast-notifications.title', { context: [(isWarning && 'warning') || 'error'] }),
           message:
-            errorMessage || t('toast-notifications.description', { context: [(isWarning && 'warning') || 'error'] })
+            errorMessage ||
+            t(
+              'toast-notifications.description',
+              {
+                context: [isWarning && 'warning', error && 'error', 'scan-report', scanContext],
+                name: scanName || scanId
+              },
+              [<strong />]
+            )
         });
       }
 
       if (dispatchList.length) {
-        dispatch([
-          ...dispatchList,
-          {
+        if (scanContext !== 'download') {
+          dispatchList.push({
             type: reduxTypes.view.UPDATE_VIEW,
             viewId
-          }
-        ]);
+          });
+        }
 
+        dispatch([...dispatchList]);
         setUpdatedScan(() => {});
       }
     }
@@ -146,7 +142,20 @@ const useOnScanAction = ({
     ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent, [apiTypes.API_RESPONSE_SCAN_NAME]: name }) => {
       const id = mostRecent[apiTypes.API_RESPONSE_SCAN_MOST_RECENT_REPORT_ID];
       getReportsDownload(id)(dispatch);
-      setUpdatedScan(() => ({ id, name, context: 'download' }));
+      setUpdatedScan(() => ({ id, name: name || id, context: 'download' }));
+    },
+    [getReportsDownload, dispatch]
+  );
+
+  /**
+   * onDownload for jobs
+   *
+   * @type {Function}
+   */
+  const onDownloadJob = useCallback(
+    ({ [apiTypes.API_RESPONSE_JOB_REPORT_ID]: id, [apiTypes.API_RESPONSE_JOB_NAME]: name }) => {
+      getReportsDownload(id)(dispatch);
+      setUpdatedScan(() => ({ id, name: name || id, context: 'download' }));
     },
     [getReportsDownload, dispatch]
   );
@@ -195,6 +204,7 @@ const useOnScanAction = ({
   return {
     onCancel,
     onDownload,
+    onDownloadJob,
     onPause,
     onRestart,
     onStart

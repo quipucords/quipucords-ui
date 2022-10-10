@@ -753,6 +753,19 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/scans/scanDownload.js",
+    "keys": Array [
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/scans/scanJobsList.js",
     "keys": Array [
       Object {
@@ -858,16 +871,12 @@ Array [
     "file": "./src/components/scans/scansContext.js",
     "keys": Array [
       Object {
-        "key": "toast-notifications.description",
-        "match": "t( 'toast-notifications.description', { context: ['scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
-      },
-      Object {
         "key": "toast-notifications.title",
         "match": "t('toast-notifications.title', { context: [(isWarning && 'warning')",
       },
       Object {
         "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: [(isWarning && 'warning')",
+        "match": "t( 'toast-notifications.description', { context: [isWarning && 'warning', error && 'error', 'scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
       },
     ],
   },

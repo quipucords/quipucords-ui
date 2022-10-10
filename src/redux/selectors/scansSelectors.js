@@ -240,7 +240,7 @@ const scanJobsListSelector = createSelector([previousScanJobs], scanJobs => {
 
   // map results to consumable props
   let newScanJobsList = ((data && data[apiTypes.API_RESPONSE_JOBS_RESULTS]) || []).map(job => {
-    const updatedJob = {};
+    const updatedJob = { _original: job };
 
     helpers.setPropIfDefined(updatedJob, ['endTime'], job[apiTypes.API_RESPONSE_JOB_END_TIME]);
     helpers.setPropIfDefined(updatedJob, ['id'], job[apiTypes.API_RESPONSE_JOB_ID]);

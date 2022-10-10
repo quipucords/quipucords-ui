@@ -4,7 +4,8 @@ import { reportsService } from '../../services';
 const getReportsDownload = id => dispatch =>
   dispatch({
     type: reportsTypes.GET_REPORTS_DOWNLOAD,
-    payload: reportsService.getReportsDownload(id)
+    payload: reportsService.getReportsDownload(id),
+    meta: { id }
   });
 
 const mergeReports = data => dispatch =>

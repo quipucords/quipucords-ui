@@ -84,7 +84,7 @@ class ScanJobsList extends React.Component {
             isBorders={false}
             rows={scanJobsList
               .filter(({ id }) => mostRecentId !== id)
-              .map(({ endTime, reportId, scanName, startTime, status, systemsFailed, systemsScanned }) => ({
+              .map(({ _original, endTime, reportId, startTime, status, systemsFailed, systemsScanned }) => ({
                 cells: [
                   {
                     content: (
@@ -130,8 +130,7 @@ class ScanJobsList extends React.Component {
                       <React.Fragment>
                         {reportId > 0 && (
                           <ScanDownload
-                            downloadName={scanName}
-                            downloadId={reportId}
+                            job={_original}
                             icon={<ContextIcon symbol={ContextIconVariant.download} />}
                             variant={ButtonVariant.link}
                           >
@@ -166,6 +165,7 @@ ScanJobsList.propTypes = {
   pending: PropTypes.bool,
   scanJobsList: PropTypes.arrayOf(
     PropTypes.shape({
+      _original: PropTypes.object,
       endTime: PropTypes.string,
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       reportId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
