@@ -293,15 +293,14 @@ exports[`Scans Component should handle multiple display states, pending, error, 
   t={[Function]}
   variant="medium"
 >
-  <Spinner
-    isSVG={true}
-    size="lg"
-  />
-  <div
-    className="text-center"
-  >
+  <Bullseye>
+    <Spinner
+      isSVG={true}
+      size="lg"
+    />
+       
     t(view.loading, {})
-  </div>
+  </Bullseye>
 </Modal>
 `;
 
