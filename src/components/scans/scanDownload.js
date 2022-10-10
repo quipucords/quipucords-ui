@@ -1,82 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AlertVariant, Button } from '@patternfly/react-core';
-import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import { helpers } from '../../common';
-import Tooltip from '../tooltip/tooltip';
+import { Button } from '@patternfly/react-core';
+import { useOnScanAction } from './scansContext';
+import { Tooltip } from '../tooltip/tooltip';
+import { translate } from '../i18n/i18n';
 
-class ScanDownload extends React.Component {
-  onReportDownload = () => {
-    const { downloadId, getReportsDownload } = this.props;
+/**
+ * Scan job download button
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children
+ * @param {object} props.job
+ * @param {Function} props.t
+ * @param {*} props.tooltip
+ * @param {Function} props.useOnScanAction
+ * @param {object} props.props
+ * @returns {React.ReactNode}
+ */
+const ScanDownload = ({ children, job, t, tooltip, useOnScanAction: useAliasOnScanAction, ...props }) => {
+  const { onDownloadJob } = useAliasOnScanAction();
 
-    getReportsDownload(downloadId).then(
-      () => this.notifyDownloadStatus(false),
-      error => this.notifyDownloadStatus(true, error.message)
-    );
-  };
+  const button = (
+    <Button
+      title={t('table.label', { context: ['action', 'scan', 'download'] })}
+      onClick={() => onDownloadJob(job)}
+      {...props}
+    >
+      {children || t('table.label', { context: ['action', 'scan', 'download'] })}
+    </Button>
+  );
 
-  notifyDownloadStatus(error, results) {
-    const { downloadName } = this.props;
+  return (tooltip && <Tooltip content={tooltip}>{button}</Tooltip>) || button;
+};
 
-    if (error) {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: AlertVariant.danger,
-        header: 'Error',
-        message: helpers.getMessageFromResults(results).message
-      });
-    } else {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: AlertVariant.success,
-        message: (
-          <span>
-            Report <strong>{(downloadName && `${downloadName} `) || ''}</strong> downloaded.
-          </span>
-        )
-      });
-    }
-  }
-
-  render() {
-    const { children, downloadId, downloadName, getReportsDownload, tooltip, ...props } = this.props;
-
-    const button = (
-      <Button title="Download" onClick={this.onReportDownload} {...props}>
-        {children}
-      </Button>
-    );
-
-    return (
-      <React.Fragment>
-        {tooltip && <Tooltip content={tooltip}>{button}</Tooltip>}
-        {!tooltip && button}
-      </React.Fragment>
-    );
-  }
-}
-
+/**
+ * Prop types
+ *
+ * @type {{t: Function, children: React.ReactNode, useOnScanAction: Function, tooltip: string, job: object}}
+ */
 ScanDownload.propTypes = {
   children: PropTypes.node,
   tooltip: PropTypes.string,
-  downloadId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  downloadName: PropTypes.string,
-  getReportsDownload: PropTypes.func
+  job: PropTypes.object.isRequired,
+  t: PropTypes.func,
+  useOnScanAction: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{t: translate, children: React.ReactNode, useOnScanAction: Function, tooltip: string}}
+ */
 ScanDownload.defaultProps = {
-  children: 'Download',
+  children: null,
   tooltip: null,
-  downloadName: null,
-  getReportsDownload: helpers.noop
+  t: translate,
+  useOnScanAction
 };
 
-const mapDispatchToProps = dispatch => ({
-  getReportsDownload: id => dispatch(reduxActions.reports.getReportsDownload(id))
-});
-
-const mapStateToProps = () => ({});
-
-const ConnectedScanDownload = connect(mapStateToProps, mapDispatchToProps)(ScanDownload);
-
-export { ConnectedScanDownload as default, ConnectedScanDownload, ScanDownload };
+export { ScanDownload as default, ScanDownload };

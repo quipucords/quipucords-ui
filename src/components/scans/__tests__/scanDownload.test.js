@@ -1,56 +1,42 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedScanDownload, ScanDownload } from '../scanDownload';
+import { ScanDownload } from '../scanDownload';
+import { apiTypes } from '../../../constants/apiConstants';
 
 describe('ScanDownload Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({});
-
+  it('should render a basic component', async () => {
     const props = {
-      downloadId: 1
+      job: {
+        [apiTypes.API_RESPONSE_JOB_ID]: 1,
+        [apiTypes.API_RESPONSE_JOB_NAME]: 'lorem ipsum'
+      }
     };
 
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedScanDownload {...props} />
-      </Provider>
-    );
-
-    expect(component.render()).toMatchSnapshot('connected');
+    const component = await shallowHookComponent(<ScanDownload {...props} />);
+    expect(component.render()).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component', () => {
+  it('should handle custom children', async () => {
     const props = {
-      downloadId: 1
+      job: {
+        [apiTypes.API_RESPONSE_JOB_ID]: 1,
+        [apiTypes.API_RESPONSE_JOB_NAME]: 'lorem ipsum'
+      }
     };
 
-    const component = mount(<ScanDownload {...props} />);
-
-    expect(component.render()).toMatchSnapshot('non-connected');
-  });
-
-  it('should handle custom children', () => {
-    const props = {
-      downloadId: 1
-    };
-
-    const component = mount(<ScanDownload {...props}>lorem ipsum</ScanDownload>);
-
+    const component = await shallowHookComponent(<ScanDownload {...props}>lorem ipsum</ScanDownload>);
     expect(component.render()).toMatchSnapshot('custom');
   });
 
-  it('should have an optional tooltip', () => {
+  it('should have an optional tooltip', async () => {
     const props = {
-      downloadId: 1,
+      job: {
+        [apiTypes.API_RESPONSE_JOB_ID]: 1,
+        [apiTypes.API_RESPONSE_JOB_NAME]: 'lorem ipsum'
+      },
       tooltip: 'Lorem ipsum dolor sit'
     };
 
-    const component = mount(<ScanDownload {...props} />);
-
+    const component = await shallowHookComponent(<ScanDownload {...props} />);
     expect(component).toMatchSnapshot('tooltip');
   });
 });

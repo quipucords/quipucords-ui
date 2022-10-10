@@ -118,6 +118,7 @@ exports[`ScansContext should handle scan actions with multiple callbacks: callba
 Object {
   "onCancel": [Function],
   "onDownload": [Function],
+  "onDownloadJob": [Function],
   "onPause": [Function],
   "onRestart": [Function],
   "onStart": [Function],
