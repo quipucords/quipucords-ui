@@ -1,83 +1,136 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertActionCloseButton, AlertGroup, AlertVariant } from '@patternfly/react-core';
-import { connect, reduxTypes, store } from '../../redux';
+import { Alert, AlertActionCloseButton, AlertGroup } from '@patternfly/react-core';
+import { reduxTypes, storeHooks } from '../../redux';
 import helpers from '../../common/helpers';
 
 /**
- * Toast notifications list: operates by allowing mutation of the passed/original toast object from state.
+ * Dismiss a toast
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @returns {(function(*): void)|*}
  */
-class ToastNotificationsList extends React.Component {
-  onHover = toast => {
-    store.dispatch({
-      type: reduxTypes.toastNotifications.TOAST_PAUSE,
-      toast
-    });
-  };
+const useOnDismiss = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
+  const dispatch = useAliasDispatch();
 
-  onLeave = toast => {
-    store.dispatch({
-      type: reduxTypes.toastNotifications.TOAST_RESUME,
-      toast
-    });
-  };
-
-  onDismiss = toast => {
-    store.dispatch({
+  return toast => {
+    dispatch({
       type: reduxTypes.toastNotifications.TOAST_REMOVE,
       toast
     });
   };
+};
 
-  render() {
-    const { toasts, timeout } = this.props;
+/**
+ * Hover a toast
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @returns {(function(*): void)|*}
+ */
+const useOnHover = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
+  const dispatch = useAliasDispatch();
 
-    return (
-      <AlertGroup isLiveRegion isToast className="quipucords-toast-notifications__alert-group">
-        {toasts?.map(toast => {
-          if (!toast.removed) {
-            return (
-              <Alert
-                title={toast.header || toast.message}
-                truncateTitle={2}
-                timeout={!toast.paused && timeout}
-                onTimeout={() => this.onDismiss(toast)}
-                variant={toast.alertType}
-                actionClose={<AlertActionCloseButton onClose={() => this.onDismiss(toast)} />}
-                key={helpers.generateId('key')}
-                onMouseEnter={() => this.onHover(toast)}
-                onMouseLeave={() => this.onLeave(toast)}
-              >
-                {(toast.header && toast.message) || ''}
-              </Alert>
-            );
-          }
-          return null;
-        })}
-      </AlertGroup>
-    );
-  }
-}
+  return toast => {
+    dispatch({
+      type: reduxTypes.toastNotifications.TOAST_PAUSE,
+      toast
+    });
+  };
+};
 
+/**
+ * Leave a toast
+ *
+ * @param {object} options
+ * @param {Function} options.useDispatch
+ * @returns {(function(*): void)|*}
+ */
+const useOnLeave = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
+  const dispatch = useAliasDispatch();
+
+  return toast => {
+    dispatch({
+      type: reduxTypes.toastNotifications.TOAST_RESUME,
+      toast
+    });
+  };
+};
+
+/**
+ * Toast notifications list: operates by allowing mutation of the passed/original toast object from state.
+ *
+ * @param {object} props
+ * @param {number} props.timeout
+ * @param {Function} props.useOnDismiss
+ * @param {Function} props.useOnHover
+ * @param {Function} props.useOnLeave
+ * @param {Function} props.useSelector
+ * @returns {React.ReactNode}
+ */
+const ToastNotificationsList = ({
+  timeout,
+  useOnDismiss: useAliasOnDismiss,
+  useOnHover: useAliasOnHover,
+  useOnLeave: useAliasOnLeave,
+  useSelector: useAliasSelector
+}) => {
+  const onDismiss = useAliasOnDismiss();
+  const onHover = useAliasOnHover();
+  const onLeave = useAliasOnLeave();
+  const toasts = useAliasSelector(({ toastNotifications }) => toastNotifications?.toasts, []);
+
+  return (
+    <AlertGroup isLiveRegion isToast className="quipucords-toast-notifications__alert-group">
+      {toasts?.map(toast => {
+        if (!toast.removed) {
+          return (
+            <Alert
+              title={toast.header || toast.message}
+              truncateTitle={2}
+              timeout={!toast.paused && timeout}
+              onTimeout={() => onDismiss(toast)}
+              variant={toast.alertType}
+              actionClose={<AlertActionCloseButton onClose={() => onDismiss(toast)} />}
+              key={helpers.generateId('key')}
+              onMouseEnter={() => onHover(toast)}
+              onMouseLeave={() => onLeave(toast)}
+            >
+              {(toast.header && toast.message) || ''}
+            </Alert>
+          );
+        }
+        return null;
+      })}
+    </AlertGroup>
+  );
+};
+
+/**
+ * Prop types
+ *
+ * @type {{useOnLeave: Function, useSelector: Function, useOnDismiss: Function, useOnHover: Function, timeout: number}}
+ */
 ToastNotificationsList.propTypes = {
-  toasts: PropTypes.arrayOf(
-    PropTypes.shape({
-      alertType: PropTypes.oneOf([...Object.values(AlertVariant)]),
-      header: PropTypes.node,
-      message: PropTypes.node,
-      removed: PropTypes.bool
-    })
-  ),
-  timeout: PropTypes.number
+  timeout: PropTypes.number,
+  useOnDismiss: PropTypes.func,
+  useOnHover: PropTypes.func,
+  useOnLeave: PropTypes.func,
+  useSelector: PropTypes.func
 };
 
+/**
+ * Default props
+ *
+ * @type {{useOnLeave: Function, useSelector: Function, useOnDismiss: Function, useOnHover: Function, timeout: number}}
+ */
 ToastNotificationsList.defaultProps = {
-  toasts: [],
-  timeout: helpers.TOAST_NOTIFICATIONS_TIMEOUT
+  timeout: helpers.TOAST_NOTIFICATIONS_TIMEOUT,
+  useOnDismiss,
+  useOnHover,
+  useOnLeave,
+  useSelector: storeHooks.reactRedux.useSelector
 };
 
-const mapStateToProps = state => ({ ...state.toastNotifications });
-
-const ConnectedToastNotificationsList = connect(mapStateToProps)(ToastNotificationsList);
-
-export { ConnectedToastNotificationsList as default, ConnectedToastNotificationsList, ToastNotificationsList };
+export { ToastNotificationsList as default, ToastNotificationsList, useOnDismiss, useOnHover, useOnLeave };

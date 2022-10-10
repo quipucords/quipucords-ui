@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ToastNotificationsList Component should handle pausing toasts through redux state with a hook: dispatch pausing a toast, hook 1`] = `
+Array [
+  Array [
+    Object {
+      "toast": Object {
+        "mockToast": "lorem ipsum",
+      },
+      "type": "TOAST_PAUSE",
+    },
+  ],
+]
+`;
+
+exports[`ToastNotificationsList Component should handle removing toasts through redux state with a hook: dispatch removing a toast, hook 1`] = `
+Array [
+  Array [
+    Object {
+      "toast": Object {
+        "mockToast": "lorem ipsum",
+      },
+      "type": "TOAST_REMOVE",
+    },
+  ],
+]
+`;
+
+exports[`ToastNotificationsList Component should handle resuming toasts through redux state with a hook: dispatch resuming a toast, hook 1`] = `
+Array [
+  Array [
+    Object {
+      "toast": Object {
+        "mockToast": "lorem ipsum",
+      },
+      "type": "TOAST_RESUME",
+    },
+  ],
+]
+`;
+
 exports[`ToastNotificationsList Component should handle toast variations: variations 1`] = `
 <AlertGroup
   className="quipucords-toast-notifications__alert-group"
@@ -70,4 +109,10 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
 </AlertGroup>
 `;
 
-exports[`ToastNotificationsList Component should shallow render a basic component: basic 1`] = `<Connect(ToastNotificationsList) />`;
+exports[`ToastNotificationsList Component should render a basic component: basic 1`] = `
+<AlertGroup
+  className="quipucords-toast-notifications__alert-group"
+  isLiveRegion={true}
+  isToast={true}
+/>
+`;
