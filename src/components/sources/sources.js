@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Alert,
   AlertVariant,
+  Bullseye,
   Button,
   ButtonVariant,
   EmptyState,
@@ -129,8 +130,9 @@ const Sources = ({
   if (pending) {
     return (
       <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
-        <Spinner isSVG size={IconSize.lg} />
-        <div className="text-center">{t('view.loading', { context: viewId })}</div>
+        <Bullseye>
+          <Spinner isSVG size={IconSize.lg} /> &nbsp; {t('view.loading', { context: viewId })}
+        </Bullseye>
       </Modal>
     );
   }
