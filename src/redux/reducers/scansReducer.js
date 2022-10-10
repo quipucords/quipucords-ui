@@ -1,4 +1,4 @@
-import { scansTypes } from '../constants';
+import { reportsTypes, scansTypes } from '../constants';
 import { reduxHelpers } from '../common';
 import { helpers } from '../../common';
 
@@ -119,7 +119,13 @@ const scansReducer = (state = initialState, action) => {
           { ref: 'jobs', type: scansTypes.GET_SCAN_JOBS },
           {
             ref: 'action',
-            type: [scansTypes.CANCEL_SCAN, scansTypes.PAUSE_SCAN, scansTypes.RESTART_SCAN, scansTypes.START_SCAN]
+            type: [
+              reportsTypes.GET_REPORTS_DOWNLOAD,
+              scansTypes.CANCEL_SCAN,
+              scansTypes.PAUSE_SCAN,
+              scansTypes.RESTART_SCAN,
+              scansTypes.START_SCAN
+            ]
           },
           { ref: 'view', type: scansTypes.GET_SCANS }
         ],

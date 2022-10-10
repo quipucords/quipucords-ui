@@ -32,6 +32,38 @@ Object {
 }
 `;
 
+exports[`ScansReducer should handle all defined error types: rejected types GET_REPORTS_DOWNLOAD 1`] = `
+Object {
+  "result": Object {
+    "action": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "connection": Object {},
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "GET_REPORTS_DOWNLOAD_REJECTED",
+}
+`;
+
 exports[`ScansReducer should handle all defined error types: rejected types GET_SCAN_CONNECTION_RESULTS 1`] = `
 Object {
   "result": Object {
@@ -321,6 +353,42 @@ Object {
     "view": Object {},
   },
   "type": "CANCEL_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types GET_REPORTS_DOWNLOAD 1`] = `
+Object {
+  "result": Object {
+    "action": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "errorStatus": undefined,
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "connection": Object {},
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "GET_REPORTS_DOWNLOAD_FULFILLED",
 }
 `;
 
@@ -641,6 +709,38 @@ Object {
     "view": Object {},
   },
   "type": "CANCEL_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types GET_REPORTS_DOWNLOAD 1`] = `
+Object {
+  "result": Object {
+    "action": Object {
+      "error": false,
+      "errorMessage": "",
+      "errorStatus": undefined,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "connection": Object {},
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "GET_REPORTS_DOWNLOAD_PENDING",
 }
 `;
 

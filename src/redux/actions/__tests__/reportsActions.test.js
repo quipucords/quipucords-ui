@@ -1,7 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
 import moxios from 'moxios';
-import { reportsReducer } from '../../reducers';
+import { reportsReducer, scansReducer } from '../../reducers';
 import { reportsActions } from '..';
 
 describe('ReportsActions', () => {
@@ -9,6 +9,7 @@ describe('ReportsActions', () => {
   const generateStore = () =>
     createStore(
       combineReducers({
+        scans: scansReducer,
         reports: reportsReducer
       }),
       applyMiddleware(...middleware)
@@ -37,9 +38,9 @@ describe('ReportsActions', () => {
     const dispatcher = reportsActions.getReportsDownload();
 
     dispatcher(store.dispatch).then(() => {
-      const response = store.getState().reports;
+      const { action } = store.getState().scans;
 
-      expect(response.fulfilled).toEqual(true);
+      expect(action.fulfilled).toEqual(true);
       done();
     });
   });

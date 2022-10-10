@@ -4,11 +4,7 @@ import { reduxHelpers } from '../common';
 const initialState = {};
 
 const reportsReducer = (state = initialState, action) =>
-  reduxHelpers.generatedPromiseActionReducer(
-    [reportsTypes.GET_REPORTS_DOWNLOAD, reportsTypes.GET_MERGE_REPORT],
-    state,
-    action
-  );
+  reduxHelpers.generatedPromiseActionReducer([reportsTypes.GET_MERGE_REPORT], state, action);
 
 reportsReducer.initialState = initialState;
 

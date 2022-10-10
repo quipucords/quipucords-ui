@@ -129,18 +129,20 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
               },
               Object {
                 "content": <React.Fragment>
-                  <Memo(Connect(ScanDownload))
-                    downloadId={15}
+                  <ScanDownload
                     icon={
                       <ContextIcon
                         size="sm"
                         symbol="download"
                       />
                     }
+                    t={[Function]}
+                    tooltip={null}
+                    useOnScanAction={[Function]}
                     variant="link"
                   >
                     t(table.label_action_scan, {"context":"download"})
-                  </Memo(Connect(ScanDownload))>
+                  </ScanDownload>
                 </React.Fragment>,
                 "isActionCell": true,
                 "style": Object {

@@ -1,5 +1,5 @@
 import { scansReducer } from '../scansReducer';
-import { scansTypes as types } from '../../constants';
+import { reportsTypes, scansTypes as types } from '../../constants';
 import { reduxHelpers } from '../../common';
 
 describe('ScansReducer', () => {
@@ -31,6 +31,7 @@ describe('ScansReducer', () => {
 
   it('should handle all defined error types', () => {
     const specificTypes = [
+      reportsTypes.GET_REPORTS_DOWNLOAD,
       types.GET_SCAN_CONNECTION_RESULTS,
       types.GET_SCAN_INSPECTION_RESULTS,
       types.GET_SCAN_JOB,
@@ -68,6 +69,7 @@ describe('ScansReducer', () => {
 
   it('should handle all defined pending types', () => {
     const specificTypes = [
+      reportsTypes.GET_REPORTS_DOWNLOAD,
       types.GET_SCAN_CONNECTION_RESULTS,
       types.GET_SCAN_INSPECTION_RESULTS,
       types.GET_SCAN_JOB,
@@ -94,6 +96,7 @@ describe('ScansReducer', () => {
 
   it('should handle all defined fulfilled types', () => {
     const specificTypes = [
+      reportsTypes.GET_REPORTS_DOWNLOAD,
       types.GET_SCAN_CONNECTION_RESULTS,
       types.GET_SCAN_INSPECTION_RESULTS,
       types.GET_SCAN_JOB,
