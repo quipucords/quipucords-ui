@@ -46,37 +46,6 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    },
-    "types": [
-      {
-        "type": "feat",
-        "section": "Features"
-      },
-      {
-        "type": "fix",
-        "section": "Bug Fixes"
-      },
-      {
-        "type": "refactor",
-        "section": "Code Refactoring"
-      },
-      {
-        "type": "perf",
-        "section": "Performance Improvements"
-      },
-      {
-        "type": "style",
-        "section": "Styles"
-      },
-      {
-        "type": "build",
-        "section": "Build"
-      }
-    ]
-  },
   "scripts": {
     "api:build": "run-s -l build:pre build:js build:post",
     "api:dev": "sh ./scripts/api.sh -p 5000 -t dev",
@@ -96,7 +65,7 @@
     "build:template-scss": "sass --no-source-map --load-path ./src --load-path ./node_modules ./src/styles/template.scss ./src/styles/.css/index.css",
     "build:template-css-font": "node ./scripts/templateCssPaths.js",
     "build:template-css": "run-s build:template-scss build:template-css-font",
-    "release": "standard-version",
+    "release": "changelog",
     "start": "run-p -l api:dev start:js",
     "start:specs": "open http://localhost:5050/docs/api; run-s api:specs",
     "start:js": "react-scripts start",
@@ -154,8 +123,9 @@
     "sass": "^1.53.0"
   },
   "devDependencies": {
-    "enzyme": "^3.11.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
+    "changelog-light": "^0.1.0",
+    "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.5.0",
@@ -178,7 +148,6 @@
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",
     "redux-mock-store": "^1.5.4",
-    "standard-version": "^9.5.0",
     "swagger-parser": "^10.0.3",
     "swagger-ui-express": "^4.4.0",
     "write-file-webpack-plugin": "^4.5.1",
