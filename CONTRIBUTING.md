@@ -36,7 +36,7 @@ You can also use [Homebrew](https://brew.sh/)
 ## Git process
 ### Commits
 In an effort to continue enhancing future automation around
-[CHANGELOG.md](./CHANGELOG.md) and tagging we make use of [Standard Version](https://github.com/conventional-changelog/standard-version#readme) and [Conventional Commits](https://www.conventionalcommits.org).
+[CHANGELOG.md](./CHANGELOG.md) and tagging we make use of [Changelog Light](https://www.npmjs.com/package/changelog-light) and [Conventional Commits](https://www.conventionalcommits.org).
 
 It's required that commit messaging follow the format
 ```
@@ -52,8 +52,30 @@ For Github issues that looks like
 ```
    <type>[optional scope]: issues/123 <description>
 ```
+### Release process
+The release process currently consists of 
+- Running `$ yarn release`
+- Manually tagging the release commit
 
-Settings for [Standard Version](https://github.com/conventional-changelog/standard-version#readme) can be found in [package.json](./package.json)
+#### Release CHANGELOG updates
+
+##### Run a CHANGELOG check
+To see a recommended semver bump, and confirm what will be generated for [CHANGELOG.md](./CHANGELOG.md)...
+```shell
+$ yarn release --dry-run
+```
+
+##### Run and optionally commit CHANGELOG updates
+Have the tooling **automatically commit** [CHANGELOG.md](./CHANGELOG.md) and [package.json](./package.json) updates
+```shell
+$ yarn release
+```
+
+OR have the tooling **only generate** [CHANGELOG.md](./CHANGELOG.md) and [package.json](./package.json) updates
+```shell
+$ yarn release --commit=false
+```
+
 
 ## Serving Content
 To serve content you'll need to have Docker, Node, and Yarn installed.
