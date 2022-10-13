@@ -4011,10 +4011,10 @@ change-emitter@^0.1.2:
   resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
   integrity sha1-6LL+PX8at9aaMhma/5HqaTFAlRU=
 
-changelog-light@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/changelog-light/-/changelog-light-0.1.0.tgz#bccdf9629e0cc2ce4b5a9b378bd055746c55a1ad"
-  integrity sha512-7IXSY/TGFG4Me7WY2SFrl8LuI8GjSnBxxdHPV5dC2bjhvNdQtS/m9NfRfAToVOig3LhfIvXN9MbIzQLnp3sKWg==
+changelog-light@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/changelog-light/-/changelog-light-0.2.0.tgz#77004ca207e6f9d444b8320913a146ec312c0072"
+  integrity sha512-oluoGG7LhtYsjWuCxHCb/4yc0muv/WlTCMMklh4UyTVH6VAGCtcIIqI/byB0vDQRONojwnWLyv8QizZaI4ErgQ==
   dependencies:
     conventional-commit-types "^3.0.0"
     semver "^7.3.8"
