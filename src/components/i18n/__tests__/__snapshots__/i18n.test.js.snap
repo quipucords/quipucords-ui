@@ -603,7 +603,7 @@ Array [
       },
       Object {
         "key": "table.label",
-        "match": "t('table.label', { context: ['auth', 'cell', sshKeyfile !== '' && 'sshKey', viewId] })",
+        "match": "t('table.label', { context: ['auth', 'cell', sshKeyfile && 'sshKey'] })",
       },
       Object {
         "key": "table.label",
