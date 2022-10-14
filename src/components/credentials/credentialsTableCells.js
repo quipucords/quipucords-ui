@@ -69,7 +69,9 @@ const authType = (
   { t = translate, viewId } = {}
 ) => (
   <Tooltip content={t('table.label', { context: ['auth', 'tooltip', viewId] })}>
-    {t('table.label', { context: ['auth', 'cell', sshKeyfile !== '' && 'sshKey', viewId] })}
+    {t('table.label', {
+      context: ['auth', 'cell', sshKeyfile && 'sshKey']
+    })}
   </Tooltip>
 );
 
