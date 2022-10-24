@@ -4,6 +4,7 @@ import { AlertVariant, List, ListItem } from '@patternfly/react-core';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useConfirmation } from '../../hooks/useConfirmation';
+import { useOnUpdateCredential } from '../createCredentialDialog/createCredentialDialogContext';
 import { useView } from '../view/viewContext';
 import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
@@ -146,18 +147,12 @@ const useOnDelete = ({
  * On edit a credential, show modal.
  *
  * @param {object} options
- * @param {Function} options.useDispatch
+ * @param {Function} options.useOnUpdateCredential
  * @returns {Function}
  */
-const useOnEdit = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch } = {}) => {
-  const dispatch = useAliasDispatch();
-
-  return item => {
-    dispatch({
-      type: reduxTypes.credentials.EDIT_CREDENTIAL_SHOW,
-      credential: item
-    });
-  };
+const useOnEdit = ({ useOnUpdateCredential: useAliasOnUpdateCredential = useOnUpdateCredential } = {}) => {
+  const { onEdit } = useAliasOnUpdateCredential();
+  return onEdit;
 };
 
 /**
