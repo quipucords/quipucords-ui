@@ -1,4 +1,4 @@
-import { context, useCredentials, useGetCredentials, useOnDelete, useOnEdit } from '../credentialsContext';
+import { context, useCredentials, useGetCredentials, useOnDelete } from '../credentialsContext';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('CredentialsContext', () => {
@@ -23,25 +23,6 @@ describe('CredentialsContext', () => {
 
     expect(mockConfirmation.mock.calls).toMatchSnapshot('dispatch onDelete');
     mockConfirmation.mockClear();
-  });
-
-  it('should handle credential actions for onEdit', async () => {
-    const mockDispatch = jest.fn();
-    const mockCredential = {
-      [apiTypes.API_RESPONSE_CREDENTIAL_ID]: 'lorem ipsum base id',
-      [apiTypes.API_RESPONSE_CREDENTIAL_NAME]: 'lorem ipsum name'
-    };
-
-    const { result } = await shallowHook(() =>
-      useOnEdit({
-        useDispatch: () => mockDispatch
-      })
-    );
-
-    result(mockCredential);
-
-    expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch onEdit');
-    mockDispatch.mockClear();
   });
 
   it('should apply a hook for retrieving data from multiple selectors', () => {

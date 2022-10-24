@@ -1,43 +1,88 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import {
-  ConnectedCreateCredentialDialog,
-  CreateCredentialDialog,
-  authenticationTypeOptions
-} from '../createCredentialDialog';
+import { EmptyState } from '@patternfly/react-core';
+import { DropdownSelect } from '../../dropdownSelect/dropdownSelect';
+import { CreateCredentialDialog, authenticationTypeOptions, becomeMethodTypeOptions } from '../createCredentialDialog';
 
 describe('CreateCredentialDialog Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({ credentials: { dialog: { show: true } } });
-
-    const component = mount(
-      <Provider store={store}>
-        <ConnectedCreateCredentialDialog />
-      </Provider>
-    );
-
-    expect(component.render()).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', async () => {
     const props = {
-      show: false
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'network'
+      })
     };
 
-    const component = shallow(<CreateCredentialDialog {...props} />);
-    expect(component.render()).toMatchSnapshot('non-connected');
+    const component = await shallowHookComponent(<CreateCredentialDialog {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should export select options', () => {
-    expect(
-      authenticationTypeOptions.map(({ title, ...option }) => ({
-        ...option,
-        title: (typeof title === 'function' && title()) || title
-      }))
-    ).toMatchSnapshot('options');
+    expect({
+      authenticationTypeOptions,
+      becomeMethodTypeOptions
+    }).toMatchSnapshot('options');
+  });
+
+  it('should handle a pending display state', async () => {
+    const props = {
+      useCredential: () => ({
+        pending: true,
+        show: true,
+        add: true,
+        credentialType: 'satellite'
+      })
+    };
+
+    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    expect(component.find(EmptyState)).toMatchSnapshot('pending');
+  });
+
+  it('should handle variations in basic form display for network credential type', async () => {
+    const props = {
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'network'
+      })
+    };
+
+    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    expect([
+      ...component.find('input').map(item => item.props()),
+      ...component.find(DropdownSelect).map(item => item.props())
+    ]).toMatchSnapshot('network');
+  });
+
+  it('should handle variations in basic form display for satellite credential type', async () => {
+    const props = {
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'satellite'
+      })
+    };
+
+    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    expect([
+      ...component.find('input').map(item => item.props()),
+      ...component.find(DropdownSelect).map(item => item.props())
+    ]).toMatchSnapshot('satellite');
+  });
+
+  it('should handle variations in basic form display for vcenter credential type', async () => {
+    const props = {
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'vcenter'
+      })
+    };
+
+    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    expect([
+      ...component.find('input').map(item => item.props()),
+      ...component.find(DropdownSelect).map(item => item.props())
+    ]).toMatchSnapshot('vcenter');
   });
 });

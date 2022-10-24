@@ -39,6 +39,7 @@
       "as-needed"
     ],
     "class-methods-use-this": 1,
+    "camelcase": 1,
     "comma-dangle": 0,
     "consistent-return": 1,
     "import/extensions": [

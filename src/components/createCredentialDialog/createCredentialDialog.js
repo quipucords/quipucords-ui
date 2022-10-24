@@ -1,513 +1,445 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button, ButtonVariant, Form, Title, ValidatedOptions } from '@patternfly/react-core';
+import {
+  Alert,
+  Button,
+  ButtonVariant,
+  EmptyState,
+  EmptyStateIcon,
+  Form,
+  Spinner,
+  Title,
+  ValidatedOptions
+} from '@patternfly/react-core';
+import { useCredential, useOnSubmitCredential, useOnUpdateCredential } from './createCredentialDialogContext';
 import { Modal } from '../modal/modal';
-import { connect, reduxActions, reduxTypes, store } from '../../redux';
-import { helpers } from '../../common';
+import { DropdownSelect, SelectDirection } from '../dropdownSelect/dropdownSelect';
 import { FormGroup } from '../form/formGroup';
 import { TextInput } from '../form/textInput';
-import { DropdownSelect } from '../dropdownSelect/dropdownSelect';
+import { FormState } from '../formState/formState';
+import { formHelpers } from '../form/formHelpers';
+import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 
 /**
- * Available auth types.
+ * Available method options
  *
- * @type {{sshKey: string, usernamePassword: string}}
+ * @type {string[]}
  */
-const authDictionary = {
-  sshKey: 'SSH Key',
-  usernamePassword: 'Username and Password'
-};
+const becomeMethodTypeOptions = ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'];
 
 /**
  * Generate authentication type options.
  *
- * @type {{title: string|Function, value: *}[]}
+ * @type {{title: Function | React.ReactNode, value: string, selected: boolean}[]}
  */
-const authenticationTypeOptions = Object.keys(authDictionary).map(type => ({
-  title: () => translate('form-dialog.label', { context: ['option', type] }),
-  value: type
-}));
+const authenticationTypeOptions = [
+  {
+    title: () => translate('form-dialog.label', { context: ['option', 'sshKey'] }),
+    value: 'sshKey'
+  },
+  {
+    title: () => translate('form-dialog.label', { context: ['option', 'usernamePassword'] }),
+    value: 'usernamePassword',
+    selected: true
+  }
+];
 
+// ToDo: "sshpassphrase" could be "ssh_passphrase" per the api-spec, investigate since the prior GUI code used "sshpassphrase"
+/**
+ * ToDo: updating a creds password should immediately reset the entire field
+ * When a user attempts to update a cred the password displayed is not decrypted. Existing behavior has the
+ * appearance that any user who updates the field but leaves parts of the old password actually submit a combination
+ * of asterisk characters combined with their updates.
+ */
 /**
  * Create or edit a credential.
+ *
+ * @fires onSetAuthType
+ * @fires onCancel
+ * @fires onSubmit
+ * @fires onValidateForm
+ * @param {object} props
+ * @param {Array} props.authenticationOptions
+ * @param {Array} props.becomeMethodOptions
+ * @param {Function} props.t
+ * @param {Function} props.useCredential
+ * @param {Function} props.useOnSubmitCredential
+ * @param {Function} props.useOnUpdateCredential
+ * @returns {React.ReactNode|null}
  */
-class CreateCredentialDialog extends React.Component {
-  static validateCredentialName(credentialName) {
-    if (!credentialName) {
-      return 'You must enter a credential name';
-    }
+const CreateCredentialDialog = ({
+  authenticationOptions,
+  becomeMethodOptions,
+  t,
+  useCredential: useAliasCredential,
+  useOnSubmitCredential: useAliasOnSubmitCredential,
+  useOnUpdateCredential: useAliasOnUpdateCredential
+}) => {
+  const [authType, setAuthType] = useState();
+  const { show, edit, credential = {}, credentialType, pending, error, errorMessage } = useAliasCredential();
+  const { onHide } = useAliasOnUpdateCredential();
+  const submitCredential = useAliasOnSubmitCredential();
+  const isShhKeyfile = credential?.[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && true;
 
-    if (credentialName.length > 64) {
-      return 'The credential name can only contain up to 64 characters';
+  useEffect(() => {
+    if (edit && credentialType === 'network' && isShhKeyfile) {
+      setAuthType('sshKey');
+    } else {
+      switch (credentialType) {
+        case 'network':
+        case 'satellite':
+        case 'vcenter':
+        default:
+          setAuthType('usernamePassword');
+          break;
+      }
     }
+  }, [credentialType, edit, isShhKeyfile]);
 
-    return '';
+  if (!credentialType) {
+    return null;
   }
 
-  static validateUsername(username) {
-    if (!username || !username.length) {
-      return 'You must enter a user name';
-    }
-
-    return '';
-  }
-
-  static validatePassword(password) {
-    if (!password || !password.length) {
-      return 'You must enter a password';
-    }
-
-    return '';
-  }
-
-  static validateSshKeyFile(keyFile) {
-    const sshKeyFileValidator = new RegExp(/^\/.*$/);
-
-    if (!sshKeyFileValidator.test(keyFile)) {
-      return 'Please enter the full path to the SSH Key File';
-    }
-
-    return '';
-  }
-
-  // ToDo: evaluate "sudo" as the default for becomeMethod
-  initialState = {
-    credentialName: '',
-    credentialType: '',
-    authorizationType: 'usernamePassword',
-    sshKeyFile: '',
-    passphrase: '',
-    username: '',
-    password: '',
-    passwordError: '',
-    becomeMethod: 'sudo',
-    becomeUser: '',
-    becomePassword: '',
-    credentialNameError: '',
-    usernameError: '',
-    sshKeyFileError: '',
-    becomeUserError: '',
-    sshKeyDisabled: false
+  /**
+   * Reset form fields on auth type selection.
+   *
+   * @event onSetAuthType
+   * @param {object} event
+   * @param {*} event.value
+   */
+  const onSetAuthType = ({ value }) => {
+    setAuthType(value);
   };
 
-  state = { ...this.initialState };
+  /**
+   * Hide the dialog
+   *
+   * @event onCancel
+   * @returns {*}
+   */
+  const onCancel = () => onHide();
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { edit, fulfilled, getCredentials, show } = this.props;
-
-    if (!show && nextProps.show) {
-      this.resetInitialState(nextProps);
-    }
-
-    if (show && nextProps.fulfilled && !fulfilled) {
-      store.dispatch({
-        type: reduxTypes.toastNotifications.TOAST_ADD,
-        alertType: AlertVariant.success,
-        message: (
-          <span>
-            Credential <strong>{nextProps.credential.name}</strong> successfully
-            {edit ? ' updated' : ' added'}.
-          </span>
-        )
+  /**
+   * Submit form state to add or update a credential.
+   *
+   * @event onSubmit
+   * @param {object} formState
+   * @param {object} formState.values
+   * @param {object} formState.formState
+   */
+  const onSubmit = ({ values = {}, ...formState } = {}) => {
+    const updatedValues = {};
+    Object.entries(values)
+      .filter(([, value]) => value !== undefined)
+      .forEach(([key, value]) => {
+        updatedValues[key] = value;
       });
 
-      this.onCancel();
-      getCredentials();
-    }
-  }
-
-  onCancel = () => {
-    store.dispatch({
-      type: reduxTypes.credentials.UPDATE_CREDENTIAL_HIDE
-    });
-  };
-
-  onSave = () => {
-    const { addCredential, credential, edit, updateCredential } = this.props;
-    const {
-      authorizationType,
-      becomeMethod,
-      becomePassword,
-      becomeUser,
-      credentialName,
-      credentialType,
-      passphrase,
-      password,
-      sshKeyFile,
-      username
-    } = this.state;
-
-    const submitCredential = {
-      username,
-      name: credentialName
-    };
-
-    if (edit) {
-      submitCredential.id = credential.id;
-    } else {
-      submitCredential.cred_type = credentialType;
-    }
-
-    if (authorizationType === 'sshKey') {
-      submitCredential.ssh_keyfile = sshKeyFile;
-      submitCredential.sshpassphrase = passphrase;
-    } else {
-      submitCredential.password = password;
-    }
-
-    if (credentialType === 'network') {
-      submitCredential.become_method = becomeMethod;
-      if (becomeUser) {
-        submitCredential.become_user = becomeUser;
-      }
-      if (becomePassword) {
-        submitCredential.become_password = becomePassword;
-      }
-    }
-
-    if (edit) {
-      updateCredential(submitCredential.id, submitCredential);
-    } else {
-      addCredential(submitCredential);
-    }
-  };
-
-  onSetAuthType = authType => {
-    this.setState({ authorizationType: authType.value });
-  };
-
-  onUpdateCredentialName = event => {
-    this.setState({
-      credentialName: event.target.value,
-      credentialNameError: CreateCredentialDialog.validateCredentialName(event.target.value)
-    });
-  };
-
-  onUpdateUsername = event => {
-    this.setState({
-      username: event.target.value,
-      usernameError: CreateCredentialDialog.validateUsername(event.target.value)
-    });
-  };
-
-  onUpdatePassword = event => {
-    this.setState({
-      password: event.target.value,
-      passwordError: CreateCredentialDialog.validatePassword(event.target.value)
-    });
-  };
-
-  onUpdateSshKeyFile = event => {
-    this.setState({
-      sshKeyFile: event.target.value,
-      sshKeyFileError: CreateCredentialDialog.validateSshKeyFile(event.target.value)
-    });
-  };
-
-  onUpdatePassphrase = event => {
-    this.setState({
-      passphrase: event.target.value
-    });
-  };
-
-  onSetBecomeMethod = method => {
-    this.setState({
-      becomeMethod: method.value
-    });
-  };
-
-  onUpdateBecomeUser = event => {
-    this.setState({
-      becomeUser: event.target.value
-    });
-  };
-
-  onUpdateBecomePassword = event => {
-    this.setState({
-      becomePassword: event.target.value
-    });
-  };
-
-  resetInitialState(nextProps) {
-    let sshKeyDisabled = true;
-
-    if (nextProps.edit && nextProps.credential) {
-      if (nextProps.credential.cred_type === 'network' || nextProps.credential.ssh_keyfile) {
-        sshKeyDisabled = false;
-      }
-
-      this.setState({
-        credentialName: nextProps.credential.name,
-        credentialType: nextProps.credential.cred_type,
-        authorizationType: nextProps.credential.ssh_keyfile ? 'sshKey' : 'usernamePassword',
-        sshKeyFile: nextProps.credential.ssh_keyfile,
-        passphrase: nextProps.credential.passphrase,
-        username: nextProps.credential.username,
-        password: nextProps.credential.password,
-        becomeMethod: nextProps.credential.become_method,
-        becomeUser: nextProps.credential.become_user,
-        becomePassword: nextProps.credential.become_password,
-        credentialNameError: '',
-        usernameError: '',
-        sshKeyFileError: '',
-        becomeUserError: '',
-        sshKeyDisabled
-      });
-    } else {
-      if (nextProps.credentialType === 'network') {
-        sshKeyDisabled = false;
-      }
-
-      this.setState({
-        ...this.initialState,
-        credentialType: nextProps.credentialType,
-        sshKeyDisabled
-      });
-    }
-  }
-
-  validateForm() {
-    const {
-      credentialName,
-      credentialNameError,
-      username,
-      usernameError,
-      authorizationType,
-      password,
-      passwordError,
-      sshKeyFile,
-      sshKeyFileError
-    } = this.state;
-
-    return (
-      credentialName &&
-      !credentialNameError &&
-      username &&
-      !usernameError &&
-      (authorizationType === 'usernamePassword' ? password && !passwordError : sshKeyFile && !sshKeyFileError)
-    );
-  }
-
-  renderAuthForm() {
-    const { authorizationType, password, sshKeyFile, passphrase, passwordError, sshKeyFileError, sshKeyDisabled } =
-      this.state;
-
-    switch (authorizationType) {
-      case 'usernamePassword':
-        return (
-          <FormGroup label="Password" error={passwordError} errorMessage={passwordError}>
-            <TextInput
-              type="password"
-              value={password}
-              placeholder="Enter Password"
-              onChange={this.onUpdatePassword}
-              validated={passwordError ? ValidatedOptions.error : ValidatedOptions.default}
-            />
-          </FormGroup>
-        );
+    // clean conflicting auth type fields
+    switch (authType) {
       case 'sshKey':
-        if (sshKeyDisabled) {
-          return null;
-        }
+        delete updatedValues[apiTypes.API_QUERY_TYPES.PASSWORD];
+        break;
+      case 'usernamePassword':
+      default:
+        delete updatedValues[apiTypes.API_QUERY_TYPES.SSH_KEYFILE];
+        delete updatedValues[apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE];
+        break;
+    }
 
+    // clean for submitting an edited cred
+    if (edit) {
+      delete updatedValues[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE];
+    }
+
+    submitCredential({ formState, values: updatedValues });
+  };
+
+  /**
+   * Form validator, return an error object against field names using form state.
+   *
+   * @event onValidateForm
+   * @param {object} formState
+   * @param {object} formState.values
+   * @returns {{ssh_keyfile: boolean, password: boolean, name: boolean, username: boolean}}
+   */
+  const onValidateForm = ({ values = {} } = {}) => ({
+    [apiTypes.API_QUERY_TYPES.NAME]: formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.NAME]),
+    [apiTypes.API_QUERY_TYPES.SSH_KEYFILE]:
+      (authType === 'sshKey' && formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE])) ||
+      (authType === 'sshKey' && !formHelpers.isFilePath(values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE])),
+    [apiTypes.API_QUERY_TYPES.PASSWORD]:
+      authType === 'usernamePassword' && formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.PASSWORD]),
+    [apiTypes.API_QUERY_TYPES.USERNAME]:
+      authType === 'usernamePassword' && formHelpers.isEmpty(values[apiTypes.API_QUERY_TYPES.USERNAME])
+  });
+
+  /**
+   * Pass form state and render field(s) common to all credential types.
+   *
+   * @param {object} formState
+   * @param {object} formState.errors
+   * @param {object} formState.touched
+   * @param {object} formState.values
+   * @param {Function} formState.handleOnEvent
+   * @returns {React.ReactNode}
+   */
+  const renderCommonFields = ({ errors, touched, values, handleOnEvent }) => (
+    <React.Fragment>
+      <FormGroup
+        label={t('form-dialog.label', { context: ['name', 'create-credential'] })}
+        error={touched[apiTypes.API_QUERY_TYPES.NAME] && errors[apiTypes.API_QUERY_TYPES.NAME]}
+        errorMessage="You must enter a credential name"
+      >
+        <TextInput
+          id="cred_name"
+          name={apiTypes.API_QUERY_TYPES.NAME}
+          value={values.name}
+          placeholder="Enter a name for the credential"
+          onChange={handleOnEvent}
+          onClear={handleOnEvent}
+          maxLength={64}
+          validated={
+            touched[apiTypes.API_QUERY_TYPES.NAME] && errors[apiTypes.API_QUERY_TYPES.NAME]
+              ? ValidatedOptions.error
+              : ValidatedOptions.default
+          }
+        />
+      </FormGroup>
+      {values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] === 'network' && (
+        <FormGroup label="Authentication Type">
+          <DropdownSelect
+            isInline={false}
+            onSelect={onSetAuthType}
+            options={authenticationOptions}
+            selectedOptions={authType}
+          />
+        </FormGroup>
+      )}
+      <FormGroup
+        label="Username"
+        error={touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]}
+        errorMessage="You must enter a username"
+      >
+        <TextInput
+          name={apiTypes.API_QUERY_TYPES.USERNAME}
+          value={values[apiTypes.API_QUERY_TYPES.USERNAME]}
+          placeholder="Enter Username"
+          onChange={handleOnEvent}
+          onClear={handleOnEvent}
+          validated={
+            touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]
+              ? ValidatedOptions.error
+              : ValidatedOptions.default
+          }
+        />
+      </FormGroup>
+    </React.Fragment>
+  );
+
+  /**
+   * Pass form state and render authentication field(s) against authentication type.
+   *
+   * @param {object} formState
+   * @param {object} formState.errors
+   * @param {object} formState.touched
+   * @param {object} formState.values
+   * @param {Function} formState.handleOnEvent
+   * @returns {React.ReactNode}
+   */
+  const renderAuthFields = ({ errors, touched, values, handleOnEvent } = {}) => {
+    switch (authType) {
+      case 'sshKey':
         return (
           <React.Fragment>
-            <FormGroup label="SSH Key File" error={sshKeyFileError} errorMessage={sshKeyFileError}>
+            <FormGroup
+              key="ssh_keyfile"
+              label="SSH Key File"
+              error={touched[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && errors[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]}
+              errorMessage="Please enter the full path to the SSH Key File"
+            >
               <TextInput
-                type="text"
-                value={sshKeyFile}
-                placeholder="Enter the full path to the SSH key file"
-                onChange={this.onUpdateSshKeyFile}
-                validated={sshKeyFileError ? ValidatedOptions.error : ValidatedOptions.default}
+                name={apiTypes.API_QUERY_TYPES.SSH_KEYFILE}
+                value={values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]}
+                placeholder="Enter a SSH key file path"
+                onChange={handleOnEvent}
+                onClear={handleOnEvent}
+                validated={
+                  touched[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && errors[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]
+                    ? ValidatedOptions.error
+                    : ValidatedOptions.default
+                }
               />
             </FormGroup>
-            <FormGroup label="Passphrase">
-              <TextInput type="password" value={passphrase} placeholder="optional" onChange={this.onUpdatePassphrase} />
+            <FormGroup key="sshpassphrase" label="Passphrase">
+              <TextInput
+                name={apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE}
+                type="password"
+                value={values[apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE]}
+                placeholder="optional"
+                onChange={handleOnEvent}
+                onClear={handleOnEvent}
+              />
             </FormGroup>
           </React.Fragment>
         );
+      case 'usernamePassword':
       default:
-        return null;
+        return (
+          <FormGroup
+            key="password"
+            label="Password"
+            error={touched[apiTypes.API_QUERY_TYPES.PASSWORD] && errors[apiTypes.API_QUERY_TYPES.PASSWORD]}
+            errorMessage="You must enter a password"
+          >
+            <TextInput
+              name={apiTypes.API_QUERY_TYPES.PASSWORD}
+              type="password"
+              value={values[apiTypes.API_QUERY_TYPES.PASSWORD]}
+              placeholder="Enter password"
+              onChange={handleOnEvent}
+              onClear={handleOnEvent}
+              validated={
+                touched[apiTypes.API_QUERY_TYPES.PASSWORD] && errors[apiTypes.API_QUERY_TYPES.PASSWORD]
+                  ? ValidatedOptions.error
+                  : ValidatedOptions.default
+              }
+            />
+          </FormGroup>
+        );
     }
-  }
+  };
 
-  renderNetworkForm() {
-    const { credentialType, becomeMethod, becomeUser, becomePassword, becomeUserError } = this.state;
-    const { becomeMethods } = this.props;
-
-    if (credentialType !== 'network') {
+  /**
+   * Pass form state and render network credential field(s).
+   *
+   * @param {object} formState
+   * @param {object} formState.values
+   * @param {Function} formState.handleOnEvent
+   * @returns {React.ReactNode}
+   */
+  const renderNetworkFields = ({ values, handleOnEvent } = {}) => {
+    if (values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] !== 'network') {
       return null;
     }
 
     return (
       <React.Fragment>
-        <FormGroup label="Become Method">
+        <FormGroup key="become_method" label="Become Method">
           <DropdownSelect
-            id="become-method-select"
+            name={apiTypes.API_QUERY_TYPES.BECOME_METHOD}
             isInline={false}
-            onSelect={this.onSetBecomeMethod}
-            options={becomeMethods}
-            selectedOptions={becomeMethod}
+            onSelect={handleOnEvent}
+            options={becomeMethodOptions}
+            selectedOptions={values[apiTypes.API_QUERY_TYPES.BECOME_METHOD]}
+            direction={SelectDirection.up}
           />
         </FormGroup>
-        <FormGroup label="Become User" error={becomeUserError} errorMessage={becomeUserError}>
+        <FormGroup key="become_user" label="Become User">
           <TextInput
+            name={apiTypes.API_QUERY_TYPES.BECOME_USER}
             type="text"
+            value={values[apiTypes.API_QUERY_TYPES.BECOME_USER]}
             placeholder="optional"
-            value={becomeUser}
-            onChange={this.onUpdateBecomeUser}
-            validated={becomeUserError ? ValidatedOptions.error : ValidatedOptions.default}
+            onChange={handleOnEvent}
+            onClear={handleOnEvent}
           />
         </FormGroup>
-        <FormGroup label="Become Password">
+        <FormGroup key="become_password" label="Become Password">
           <TextInput
+            name={apiTypes.API_QUERY_TYPES.BECOME_PASSWORD}
             type="password"
-            value={becomePassword}
+            value={values[apiTypes.API_QUERY_TYPES.BECOME_PASSWORD]}
             placeholder="optional"
-            onChange={this.onUpdateBecomePassword}
+            onChange={handleOnEvent}
+            onClear={handleOnEvent}
           />
         </FormGroup>
       </React.Fragment>
     );
-  }
+  };
 
-  renderErrorMessage() {
-    const { error, errorMessage } = this.props;
-
-    if (error) {
-      return (
-        <Alert isInline variant="danger" title="Error">
-          {errorMessage}
-        </Alert>
-      );
-    }
-
-    return null;
-  }
-
-  render() {
-    const { show, edit, t } = this.props;
-    const {
-      credentialType,
-      credentialName,
-      authorizationType,
-      username,
-      credentialNameError,
-      usernameError,
-      sshKeyDisabled
-    } = this.state;
-
-    return (
-      <Modal
-        isOpen={show}
-        showClose
-        onClose={this.onCancel}
-        header={<Title headingLevel="h4">{edit ? `View Credential - ${credentialName}` : 'Add Credential'}</Title>}
-        actions={[
-          <Button key="save" onClick={this.onSave} isDisabled={!this.validateForm()}>
-            {t('form-dialog.label', { context: ['submit', 'create-credential'] })}
-          </Button>,
-          <Button key="cancel" variant={ButtonVariant.secondary} autoFocus={edit} onClick={this.onCancel}>
-            {t('form-dialog.label', { context: 'cancel' })}
-          </Button>
-        ]}
-      >
-        {this.renderErrorMessage()}
-        <Form isHorizontal>
-          <FormGroup label="Source Type">
-            <TextInput
-              className="quipucords-form-control"
-              type="text"
-              isReadOnly
-              value={t('form-dialog.label', { context: credentialType })}
-            />
-          </FormGroup>
-          <FormGroup label="Credential Name" error={credentialNameError} errorMessage={credentialNameError}>
-            <TextInput
-              type="text"
-              className="quipucords-form-control"
-              placeholder="Enter a name for the credential"
-              autoFocus={!edit}
-              value={credentialName}
-              onChange={this.onUpdateCredentialName}
-              validated={credentialNameError ? ValidatedOptions.error : ValidatedOptions.default}
-            />
-          </FormGroup>
-          {!sshKeyDisabled && (
-            <FormGroup label="Authentication Type">
-              <DropdownSelect
-                id="auth-type-select"
-                isInline={false}
-                onSelect={this.onSetAuthType}
-                options={authenticationTypeOptions}
-                selectedOptions={authorizationType}
-              />
-            </FormGroup>
+  return (
+    <FormState
+      key={`form-${authType}`}
+      setValues={{ ...credential, [apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE]: credentialType }}
+      validateOnMount={false}
+      validate={onValidateForm}
+      onSubmit={onSubmit}
+    >
+      {({ handleOnSubmit, isValid, values, submitCount, ...options } = {}) => (
+        <Modal
+          isOpen={show}
+          showClose
+          onClose={onCancel}
+          header={<Title headingLevel="h4">{edit ? `View Credential` : 'Add Credential'}</Title>}
+          actions={[
+            <Button key={`save-${submitCount}`} onClick={handleOnSubmit} isDisabled={!isValid}>
+              {t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })}
+            </Button>,
+            <Button key="cancel" variant={ButtonVariant.secondary} autoFocus={edit} onClick={onCancel}>
+              {t('form-dialog.label', { context: 'cancel' })}
+            </Button>
+          ]}
+        >
+          {error && (
+            <div>
+              <Alert isInline variant="danger" title={t('form-dialog.label', { context: 'error' })}>
+                {errorMessage || t('form-dialog.label', { context: ['error', 'description'] })}
+              </Alert>
+              <br />
+            </div>
           )}
-          <FormGroup label="Username" error={usernameError} errorMessage={usernameError}>
-            <TextInput
-              type="text"
-              placeholder="Enter Username"
-              value={username}
-              onChange={this.onUpdateUsername}
-              validated={usernameError ? ValidatedOptions.error : ValidatedOptions.default}
-            />
-          </FormGroup>
-          {this.renderAuthForm()}
-          {this.renderNetworkForm()}
-        </Form>
-      </Modal>
-    );
-  }
-}
+          <Form isHorizontal onSubmit={handleOnSubmit}>
+            {pending && (
+              <EmptyState className="quipucords-empty-state">
+                <EmptyStateIcon icon={Spinner} />
+                <Title headingLevel="h3">{t('form-dialog.empty-state', { context: ['title', 'pending'] })}</Title>
+              </EmptyState>
+            )}
+            {!pending && (
+              <React.Fragment>
+                <FormGroup label="Source Type">
+                  <TextInput
+                    type="text"
+                    isReadOnly
+                    value={t('form-dialog.label', { context: values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] })}
+                  />
+                </FormGroup>
+                {renderCommonFields({ values, ...options })}
+                {renderAuthFields({ values, ...options })}
+                {renderNetworkFields({ values, ...options })}
+              </React.Fragment>
+            )}
+          </Form>
+        </Modal>
+      )}
+    </FormState>
+  );
+};
 
 CreateCredentialDialog.propTypes = {
-  addCredential: PropTypes.func,
-  becomeMethods: PropTypes.arrayOf(PropTypes.string),
-  getCredentials: PropTypes.func,
-  updateCredential: PropTypes.func,
-  credential: PropTypes.object,
-  credentialType: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  show: PropTypes.bool,
-  edit: PropTypes.bool,
-  fulfilled: PropTypes.bool,
-  error: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  t: PropTypes.func
+  authenticationOptions: PropTypes.array,
+  becomeMethodOptions: PropTypes.array,
+  t: PropTypes.func,
+  useCredential: PropTypes.func,
+  useOnSubmitCredential: PropTypes.func,
+  useOnUpdateCredential: PropTypes.func
 };
 
 CreateCredentialDialog.defaultProps = {
-  addCredential: helpers.noop,
-  becomeMethods: ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'],
-  getCredentials: helpers.noop,
-  updateCredential: helpers.noop,
-  credential: {},
-  credentialType: null, // eslint-disable-line react/no-unused-prop-types
-  show: false,
-  edit: false,
-  fulfilled: false,
-  error: false,
-  errorMessage: null,
-  t: translate
+  authenticationOptions: authenticationTypeOptions,
+  becomeMethodOptions: becomeMethodTypeOptions,
+  t: translate,
+  useCredential,
+  useOnSubmitCredential,
+  useOnUpdateCredential
 };
 
-const mapDispatchToProps = dispatch => ({
-  getCredentials: queryObj => dispatch(reduxActions.credentials.getCredentials(null, queryObj)),
-  addCredential: data => dispatch(reduxActions.credentials.addCredential(data)),
-  updateCredential: (id, data) => dispatch(reduxActions.credentials.updateCredential(id, data))
-});
-
-const mapStateToProps = state => ({
-  ...state.credentials.dialog
-});
-
-const ConnectedCreateCredentialDialog = connect(mapStateToProps, mapDispatchToProps)(CreateCredentialDialog);
-
 export {
-  ConnectedCreateCredentialDialog as default,
-  ConnectedCreateCredentialDialog,
+  CreateCredentialDialog as default,
   CreateCredentialDialog,
-  authenticationTypeOptions
+  authenticationTypeOptions,
+  becomeMethodTypeOptions
 };
