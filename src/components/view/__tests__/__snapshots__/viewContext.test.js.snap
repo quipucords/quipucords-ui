@@ -69,6 +69,7 @@ Object {
     "_threadCount": 0,
   },
   "useConfig": [Function],
+  "useInferredContext": [Function],
   "useOnRefresh": [Function],
   "useQuery": [Function],
   "useView": [Function],
