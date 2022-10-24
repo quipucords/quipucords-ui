@@ -2,9 +2,20 @@ import React, { useContext } from 'react';
 import { reduxTypes, storeHooks } from '../../redux';
 import { helpers } from '../../common';
 
+let _viewContextCache = {};
+
 const DEFAULT_CONTEXT = [{}, helpers.noop];
 
 const ViewContext = React.createContext(DEFAULT_CONTEXT);
+
+/**
+ * Use context outside itself.
+ *
+ * @param {object} options
+ * @param {*} options.contextCache
+ * @returns {*}
+ */
+const useInferredContext = ({ contextCache = _viewContextCache } = {}) => contextCache;
 
 /**
  * Get an updated view context.
@@ -67,13 +78,15 @@ const useView = ({
   const config = useAliasConfig();
   const query = useAliasQuery();
   const checkFilters = Object.entries(query).filter(([key, value]) => initialQuery && !(key in initialQuery) && value);
-
-  return {
+  const updatedViewContext = {
     viewId,
     query,
     isFilteringActive: checkFilters.length > 0,
     config
   };
+
+  _viewContextCache = updatedViewContext;
+  return updatedViewContext;
 };
 
 /**
@@ -104,6 +117,7 @@ const context = {
   DEFAULT_CONTEXT,
   useQuery,
   useConfig,
+  useInferredContext,
   useOnRefresh,
   useView,
   useViewContext
@@ -116,6 +130,7 @@ export {
   DEFAULT_CONTEXT,
   useQuery,
   useConfig,
+  useInferredContext,
   useOnRefresh,
   useView,
   useViewContext
