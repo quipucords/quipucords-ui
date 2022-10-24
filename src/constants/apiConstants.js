@@ -1,15 +1,24 @@
 const API_QUERY_TYPES = {
+  AUTH_TOKEN: 'auth_token',
+  BECOME_METHOD: 'become_method',
+  BECOME_PASSWORD: 'become_password',
+  BECOME_USER: 'become_user',
   CREDENTIAL_TYPE: 'cred_type',
+  NAME: 'name',
   ORDERING: 'ordering',
   ORDERING_ASC: 'asc',
   ORDERING_DSC: 'dsc',
   PAGE: 'page',
   PAGE_SIZE: 'page_size',
+  PASSWORD: 'password',
   SCAN_TYPE: 'scan_type',
   SEARCH_CREDENTIALS_NAME: 'search_credentials_by_name',
   SEARCH_NAME: 'search_by_name',
   SEARCH_SOURCES_NAME: 'search_sources_by_name',
-  SOURCE_TYPE: 'source_type'
+  SOURCE_TYPE: 'source_type',
+  SSH_KEYFILE: 'ssh_keyfile',
+  SSH_PASSPHRASE: 'sshpassphrase',
+  USERNAME: 'username'
 };
 
 const API_QUERY_SORT_TYPES = {

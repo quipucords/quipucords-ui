@@ -5,6 +5,7 @@ Object {
   "createMockEvent": [Function],
   "doesNotHaveMinimumCharacters": [Function],
   "isEmpty": [Function],
+  "isFilePath": [Function],
   "isPortValid": [Function],
 }
 `;

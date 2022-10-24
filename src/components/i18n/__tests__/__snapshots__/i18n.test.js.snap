@@ -338,11 +338,19 @@ Array [
     "keys": Array [
       Object {
         "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', type] })",
+        "match": "translate('form-dialog.label', { context: ['option', 'sshKey'] })",
       },
       Object {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', 'create-credential'] })",
+        "match": "translate('form-dialog.label', { context: ['option', 'usernamePassword'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })",
       },
       Object {
         "key": "form-dialog.label",
@@ -350,7 +358,32 @@ Array [
       },
       Object {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: credentialType })",
+        "match": "t('form-dialog.label', { context: 'error' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['error', 'description'] })",
+      },
+      Object {
+        "key": "form-dialog.empty-state",
+        "match": "t('form-dialog.empty-state', { context: ['title', 'pending'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] })",
+      },
+    ],
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialogContext.js",
+    "keys": Array [
+      Object {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['credential', edit && 'edit'] })",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['credential', edit && 'edit'] })",
       },
     ],
   },
@@ -1321,6 +1354,10 @@ Array [
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
     "key": "form-dialog.confirmation",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.empty-state",
   },
   Object {
     "file": "./src/components/createScanDialog/createScanDialog.js",
