@@ -45,6 +45,14 @@ const doesNotHaveMinimumCharacters = (value, characters = 1) =>
 const isEmpty = value => (typeof value !== 'number' && _size(value) < 1) || false;
 
 /**
+ * Confirm string is the start of a path.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+const isFilePath = value => /^\/.*$/.test(value);
+
+/**
  * Confirm the port is valid.
  *
  * @param {string} value
@@ -56,6 +64,7 @@ const formHelpers = {
   createMockEvent,
   doesNotHaveMinimumCharacters,
   isEmpty,
+  isFilePath,
   isPortValid
 };
 
