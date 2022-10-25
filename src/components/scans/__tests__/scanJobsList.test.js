@@ -28,6 +28,15 @@ describe('ScanJobsList Component', () => {
       id: 1,
       scanJobsList: [
         {
+          _original: {
+            endTime: '2019-05-03',
+            id: 14,
+            reportId: 15,
+            startTime: '2019-05-03',
+            status: 'completed',
+            systemsScanned: 10,
+            systemsFailed: 10
+          },
           endTime: '2019-05-03',
           id: 14,
           reportId: 15,
