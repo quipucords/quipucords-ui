@@ -4,9 +4,9 @@
 {% load static %}
 
 {% block includes %}
-  <link rel="stylesheet" href="{% static '/assets/rcue/css/rcue.css' %}">
-  <link rel="stylesheet" href="{% static '/assets/rcue/css/rcue-additions.css' %}">
-  <link rel="stylesheet" href="{% static '/assets/css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/rcue/css/rcue.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/rcue/css/rcue-additions.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
 {% endblock %}
 
 {% block pagetitle %}
@@ -14,11 +14,11 @@
 {% endblock %}
 
 {% block pagelogo %}
-<img src="{% static '/assets/images/logo{{UI_BRAND_LABEL}}.svg' %}" alt="logo" style="height: 40px;"/>
+<img src="{% static 'assets/images/logo{{UI_BRAND_LABEL}}.svg' %}" alt="logo" style="height: 40px;"/>
 {% endblock %}
 
 {% block title %}
-<img class="login-title-img{{UI_BRAND_LABEL}}"  src="{% static '/assets/images/title{{UI_BRAND_LABEL}}.svg' %}" alt="{% trans "{{UI_NAME}}" %}">
+<img class="login-title-img{{UI_BRAND_LABEL}}"  src="{% static 'assets/images/title{{UI_BRAND_LABEL}}.svg' %}" alt="{% trans "{{UI_NAME}}" %}">
 {% endblock %}
 
 {% block content %}
