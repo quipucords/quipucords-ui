@@ -136,6 +136,17 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                         symbol="download"
                       />
                     }
+                    job={
+                      Object {
+                        "endTime": "2019-05-03",
+                        "id": 14,
+                        "reportId": 15,
+                        "startTime": "2019-05-03",
+                        "status": "completed",
+                        "systemsFailed": 10,
+                        "systemsScanned": 10,
+                      }
+                    }
                     t={[Function]}
                     tooltip={null}
                     useOnScanAction={[Function]}
