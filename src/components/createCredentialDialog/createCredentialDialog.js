@@ -190,13 +190,13 @@ const CreateCredentialDialog = ({
       <FormGroup
         label={t('form-dialog.label', { context: ['name', 'create-credential'] })}
         error={touched[apiTypes.API_QUERY_TYPES.NAME] && errors[apiTypes.API_QUERY_TYPES.NAME]}
-        errorMessage="You must enter a credential name"
+        errorMessage={t('form-dialog.label', { context: ['name', 'create-credential', 'error'] })}
       >
         <TextInput
           id="cred_name"
           name={apiTypes.API_QUERY_TYPES.NAME}
           value={values.name}
-          placeholder="Enter a name for the credential"
+          placeholder={t('form-dialog.label', { context: ['name', 'create-credential', 'placeholder'] })}
           onChange={handleOnEvent}
           onClear={handleOnEvent}
           maxLength={64}
@@ -208,7 +208,7 @@ const CreateCredentialDialog = ({
         />
       </FormGroup>
       {values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] === 'network' && (
-        <FormGroup label="Authentication Type">
+        <FormGroup label={t('form-dialog.label', { context: ['auth-type', 'create-credential'] })}>
           <DropdownSelect
             isInline={false}
             onSelect={onSetAuthType}
@@ -218,14 +218,14 @@ const CreateCredentialDialog = ({
         </FormGroup>
       )}
       <FormGroup
-        label="Username"
+        label={t('form-dialog.label', { context: ['username'] })}
         error={touched[apiTypes.API_QUERY_TYPES.USERNAME] && errors[apiTypes.API_QUERY_TYPES.USERNAME]}
-        errorMessage="You must enter a username"
+        errorMessage={t('form-dialog.label', { context: ['username', 'error'] })}
       >
         <TextInput
           name={apiTypes.API_QUERY_TYPES.USERNAME}
           value={values[apiTypes.API_QUERY_TYPES.USERNAME]}
-          placeholder="Enter Username"
+          placeholder={t('form-dialog.label', { context: ['username', 'placeholder'] })}
           onChange={handleOnEvent}
           onClear={handleOnEvent}
           validated={
@@ -255,14 +255,14 @@ const CreateCredentialDialog = ({
           <React.Fragment>
             <FormGroup
               key="ssh_keyfile"
-              label="SSH Key File"
+              label={t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential'] })}
               error={touched[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && errors[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]}
-              errorMessage="Please enter the full path to the SSH Key File"
+              errorMessage={t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'error'] })}
             >
               <TextInput
                 name={apiTypes.API_QUERY_TYPES.SSH_KEYFILE}
                 value={values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]}
-                placeholder="Enter a SSH key file path"
+                placeholder={t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'placeholder'] })}
                 onChange={handleOnEvent}
                 onClear={handleOnEvent}
                 validated={
@@ -272,12 +272,15 @@ const CreateCredentialDialog = ({
                 }
               />
             </FormGroup>
-            <FormGroup key="sshpassphrase" label="Passphrase">
+            <FormGroup
+              key="sshpassphrase"
+              label={t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })}
+            >
               <TextInput
                 name={apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE}
                 type="password"
                 value={values[apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE]}
-                placeholder="optional"
+                placeholder={t('form-dialog.label', { context: ['optional'] })}
                 onChange={handleOnEvent}
                 onClear={handleOnEvent}
               />
@@ -289,15 +292,15 @@ const CreateCredentialDialog = ({
         return (
           <FormGroup
             key="password"
-            label="Password"
+            label={t('form-dialog.label', { context: ['password'] })}
             error={touched[apiTypes.API_QUERY_TYPES.PASSWORD] && errors[apiTypes.API_QUERY_TYPES.PASSWORD]}
-            errorMessage="You must enter a password"
+            errorMessage={t('form-dialog.label', { context: ['password', 'error'] })}
           >
             <TextInput
               name={apiTypes.API_QUERY_TYPES.PASSWORD}
               type="password"
               value={values[apiTypes.API_QUERY_TYPES.PASSWORD]}
-              placeholder="Enter password"
+              placeholder={t('form-dialog.label', { context: ['password', 'placeholder'] })}
               onChange={handleOnEvent}
               onClear={handleOnEvent}
               validated={
@@ -326,7 +329,7 @@ const CreateCredentialDialog = ({
 
     return (
       <React.Fragment>
-        <FormGroup key="become_method" label="Become Method">
+        <FormGroup key="become_method" label={t('form-dialog.label', { context: ['become-method'] })}>
           <DropdownSelect
             name={apiTypes.API_QUERY_TYPES.BECOME_METHOD}
             isInline={false}
@@ -336,22 +339,22 @@ const CreateCredentialDialog = ({
             direction={SelectDirection.up}
           />
         </FormGroup>
-        <FormGroup key="become_user" label="Become User">
+        <FormGroup key="become_user" label={t('form-dialog.label', { context: ['become-user'] })}>
           <TextInput
             name={apiTypes.API_QUERY_TYPES.BECOME_USER}
             type="text"
             value={values[apiTypes.API_QUERY_TYPES.BECOME_USER]}
-            placeholder="optional"
+            placeholder={t('form-dialog.label', { context: ['optional'] })}
             onChange={handleOnEvent}
             onClear={handleOnEvent}
           />
         </FormGroup>
-        <FormGroup key="become_password" label="Become Password">
+        <FormGroup key="become_password" label={t('form-dialog.label', { context: ['become-password'] })}>
           <TextInput
             name={apiTypes.API_QUERY_TYPES.BECOME_PASSWORD}
             type="password"
             value={values[apiTypes.API_QUERY_TYPES.BECOME_PASSWORD]}
-            placeholder="optional"
+            placeholder={t('form-dialog.label', { context: ['optional'] })}
             onChange={handleOnEvent}
             onClear={handleOnEvent}
           />
@@ -373,7 +376,11 @@ const CreateCredentialDialog = ({
           isOpen={show}
           showClose
           onClose={onCancel}
-          header={<Title headingLevel="h4">{edit ? `View Credential` : 'Add Credential'}</Title>}
+          header={
+            <Title headingLevel="h4">
+              {t('form-dialog.title', { context: ['create-credential', edit && 'edit'] })}
+            </Title>
+          }
           actions={[
             <Button key={`save-${submitCount}`} onClick={handleOnSubmit} isDisabled={!isValid}>
               {t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })}
@@ -400,7 +407,7 @@ const CreateCredentialDialog = ({
             )}
             {!pending && (
               <React.Fragment>
-                <FormGroup label="Source Type">
+                <FormGroup label={t('form-dialog.label', { context: ['source-type', 'create-credential'] })}>
                   <TextInput
                     type="text"
                     isReadOnly

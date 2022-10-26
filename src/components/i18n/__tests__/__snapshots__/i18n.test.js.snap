@@ -350,6 +350,86 @@ Array [
       },
       Object {
         "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'placeholder'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['auth-type', 'create-credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username', 'placeholder'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'placeholder'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password', 'error'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password', 'placeholder'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-method'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-user'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-password'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      Object {
+        "key": "form-dialog.title",
+        "match": "t('form-dialog.title', { context: ['create-credential', edit && 'edit'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })",
       },
       Object {
@@ -367,6 +447,10 @@ Array [
       Object {
         "key": "form-dialog.empty-state",
         "match": "t('form-dialog.empty-state', { context: ['title', 'pending'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['source-type', 'create-credential'] })",
       },
       Object {
         "key": "form-dialog.label",
@@ -1354,6 +1438,10 @@ Array [
   Object {
     "file": "./src/components/confirmationModal/confirmationModal.js",
     "key": "form-dialog.confirmation",
+  },
+  Object {
+    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.title",
   },
   Object {
     "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
