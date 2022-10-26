@@ -2,7 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.11.1 (2022-09-22)
+
+## [1.0.0](https://github.com/quipucords/quipucords-ui/compare/184defce82aa3d6b0cb5542ed34e81c581edef71...26b6eb0629537148fe57ffa468b412df3369aa0e) (2022-10-26)
+
+### Performance Improvements
+* **toastNotificationsList** toasts to hooks  ([#180](https://github.com/quipucords/quipucords-ui/pull/180)) ([4dc3331](https://github.com/quipucords/quipucords-ui/commit/4dc33310450c9ad1867873ed98a3caad776c3d0c))
+* **app** app base to hooks  ([#180](https://github.com/quipucords/quipucords-ui/pull/180)) ([eef93d9](https://github.com/quipucords/quipucords-ui/commit/eef93d90604c95b6452e8619638a9e7ba682d426))
+
+### Features
+* **viewContext** discovery-151 context for views  ([#173](https://github.com/quipucords/quipucords-ui/pull/173)) ([55a9e58](https://github.com/quipucords/quipucords-ui/commit/55a9e58bec53fe239c4cfe54108965e90ac15612))
+
+### Code Refactoring
+* **scanDownload** class to function, hooks  ([#180](https://github.com/quipucords/quipucords-ui/pull/180)) ([da5a8c4](https://github.com/quipucords/quipucords-ui/commit/da5a8c490a511c5f1b0c4a3affee56e7604e8faa))
+* **locale** component strings  ([#179](https://github.com/quipucords/quipucords-ui/pull/179)) ([5c22489](https://github.com/quipucords/quipucords-ui/commit/5c224892980329654a36c04db8505ef9fcc7f8c5))
+* **addSourceWizard,createScanDialog** discovery-153 forms  ([#174](https://github.com/quipucords/quipucords-ui/pull/174)) ([0f7e9f7](https://github.com/quipucords/quipucords-ui/commit/0f7e9f7934b3a0b7d17c10a47d012d08d93b23dc))
+* **scanJobsList,sourceList** discovery-154, pf4 table  ([#174](https://github.com/quipucords/quipucords-ui/pull/174)) ([220857c](https://github.com/quipucords/quipucords-ui/commit/220857c23c5a5d58816b1518a81aaa0ff8f2d88c))
+* **addSourceWizard,createScanDialog** locale strings   ([#162](https://github.com/quipucords/quipucords-ui/pull/162)) ([586967a](https://github.com/quipucords/quipucords-ui/commit/586967ab84aa2df2aeec800f993278de189ac388))
+* **viewToolbar** discovery-151 pf4 toolbar  ([#172](https://github.com/quipucords/quipucords-ui/pull/172)) ([c2db2ff](https://github.com/quipucords/quipucords-ui/commit/c2db2ff0b644410aa202c8142fb85d1b0780042c))
+* **createCredentialDialog** discovery-153 pf4 textInput  ([#161](https://github.com/quipucords/quipucords-ui/pull/161)) ([ce1868a](https://github.com/quipucords/quipucords-ui/commit/ce1868ab19c73a7ece67356a037ddea16235b86c))
+* **addSourceWizardStepTwo** discovery-153 pf4 textInput  ([#159](https://github.com/quipucords/quipucords-ui/pull/159)) ([d1192c4](https://github.com/quipucords/quipucords-ui/commit/d1192c43857578b781105cc17a8458ae4c9b5b0d))
+* **textArea** discovery-153 pf4 textArea  ([#158](https://github.com/quipucords/quipucords-ui/pull/158)) ([3358126](https://github.com/quipucords/quipucords-ui/commit/33581267f230ebc0ac2f840f468862ffb67fae9f))
+* **checkbox** discovery-153 pf4 checkbox  ([#155](https://github.com/quipucords/quipucords-ui/pull/155)) ([dd55ac0](https://github.com/quipucords/quipucords-ui/commit/dd55ac09b95be47d720dbcc2b95c8a37537fb88e))
+* **radio** discovery-153 pf4 radio  ([#153](https://github.com/quipucords/quipucords-ui/pull/153)) ([4c99c05](https://github.com/quipucords/quipucords-ui/commit/4c99c05416e08521b3242563ca198884ebb27b4d))
+* **formGroup** discovery-153 pf4 formGroup  ([#150](https://github.com/quipucords/quipucords-ui/pull/150)) ([5f5c4f6](https://github.com/quipucords/quipucords-ui/commit/5f5c4f6d022cbcfbabd159d48e33ccf231150c09))
+* **touchspin** discovery-153 pf4 textInput  ([#147](https://github.com/quipucords/quipucords-ui/pull/147)) ([1be4616](https://github.com/quipucords/quipucords-ui/commit/1be461692e694812728f8da41c000e106b4a4efd))
+
+### Chores
+* **build** discovery-159 generated changelog  ([#181](https://github.com/quipucords/quipucords-ui/pull/181)) ([73939d8](https://github.com/quipucords/quipucords-ui/commit/73939d895cd7ed26f63a10e89650505c907d914d))
+* **deps** bump codecov/codecov-action from 3.1.0 to 3.1.1  ([#176](https://github.com/quipucords/quipucords-ui/pull/176)) ([255bc01](https://github.com/quipucords/quipucords-ui/commit/255bc019d83f11c4a9149c01001b191b13b2e86d))
+* **poll,sourceConstants** clean up unused files  ([#174](https://github.com/quipucords/quipucords-ui/pull/174)) ([48c201d](https://github.com/quipucords/quipucords-ui/commit/48c201dbf6e6bf8f44050c739fc6d90e96ac07ce))
+* **deps** bump classnames from 2.3.1 to 2.3.2  ([#175](https://github.com/quipucords/quipucords-ui/pull/175)) ([d6453af](https://github.com/quipucords/quipucords-ui/commit/d6453af1f19eb3b99b9375e6b9eba9e49625fa8b))
+
+### Bug Fixes
+* **build** discovery-198 replace assets paths  ([#182](https://github.com/quipucords/quipucords-ui/pull/182)) ([26b6eb0](https://github.com/quipucords/quipucords-ui/commit/26b6eb0629537148fe57ffa468b412df3369aa0e))
+* **credentialsTableCells** discovery-197 auth type string  ([#183](https://github.com/quipucords/quipucords-ui/pull/183)) ([68ea5d9](https://github.com/quipucords/quipucords-ui/commit/68ea5d9e4e5907ce35c87254ca315bccc1dfd2ae))
+* **credentials,scans,sources** center pending modal  ([#180](https://github.com/quipucords/quipucords-ui/pull/180)) ([94739bc](https://github.com/quipucords/quipucords-ui/commit/94739bccb499701353bdb0b7678573e8867f14f3))
+* **credentialsContext,sourcesContext** delete messaging  ([#177](https://github.com/quipucords/quipucords-ui/pull/177)) ([5bbc734](https://github.com/quipucords/quipucords-ui/commit/5bbc734efce7f36382c30a7669120703966df8ed))
+* **credentialsTableCells** discovery-154 sources icon  ([#177](https://github.com/quipucords/quipucords-ui/pull/177)) ([0f650d5](https://github.com/quipucords/quipucords-ui/commit/0f650d5adb402dfbefc8c7069f9194a47dd626d4))
+* **formGroup** discovery-153 use validatedOptions  ([#161](https://github.com/quipucords/quipucords-ui/pull/161)) ([68e89a8](https://github.com/quipucords/quipucords-ui/commit/68e89a89a870a1c6f9a99e59e70397ee138550c3))
+* **textInput** discovery-151 state, callback sequence  ([#159](https://github.com/quipucords/quipucords-ui/pull/159)) ([4e2012a](https://github.com/quipucords/quipucords-ui/commit/4e2012a48dfb64b66de9db9bc3347542184fc5a3))
+* **addSourceWizardStepTwo** invalid step check  ([#158](https://github.com/quipucords/quipucords-ui/pull/158)) ([1906783](https://github.com/quipucords/quipucords-ui/commit/190678345662fc8c71f13f6f162647843cdcf172))
+* **touchspin** discovery-153 revert state value  ([#150](https://github.com/quipucords/quipucords-ui/pull/150)) ([dcd8c0b](https://github.com/quipucords/quipucords-ui/commit/dcd8c0b4b765f402a0c8d845e364963c8375b853))
+
+##  0.11.1 (2022-09-22)
 
 ### Bug Fixes
 * **build** discovery-174 css font paths ([#170](https://github.com/quipucords/quipucords-ui/pull/170)) ([d616dfb](https://github.com/quipucords/quipucords-ui/commit/d616dfbb30a7ccc71ff822569c58bf443c51eda8))
