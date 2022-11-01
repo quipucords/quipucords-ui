@@ -527,6 +527,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
         <input
           aria-invalid="false"
           aria-label="checkbox input"
+          checked=""
           class="pf-c-check__input"
           data-ouia-component-id="OUIA-Generated-Checkbox-3"
           data-ouia-component-type="PF4/Checkbox"

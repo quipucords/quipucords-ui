@@ -465,7 +465,7 @@ class AddSourceWizardStepTwo extends React.Component {
             <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
               <Checkbox
                 name="optionSslCert"
-                checked={checked.optionSslCert || false}
+                checked={checked.optionSslCert}
                 isDisabled={checked.optionDisableSsl}
                 onChange={handleOnEvent}
               >
@@ -576,7 +576,7 @@ AddSourceWizardStepTwo.defaultProps = {
   hostsSingle: '',
   id: null,
   name: '',
-  optionSslCert: null,
+  optionSslCert: true,
   optionSslProtocol: 'SSLv23',
   optionDisableSsl: null,
   optionParamiko: null,
