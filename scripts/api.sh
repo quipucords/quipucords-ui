@@ -191,15 +191,11 @@ stageApi()
   local IS_BUILT=$3
   local CONTAINER=$4
 
-  local BUILD_DIR="$(pwd)/build"
-  local CLIENT_VOLUME="/app/quipucords/client"
-  local TEMPLATE_CLIENT_VOLUME="/app/quipucords/quipucords/templates/client"
+  local CLIENT_DIR="$(pwd)/dist/client"
+  local CONTAINER_CLIENT_VOLUME="/app/quipucords/client"
 
-  local TEMPLATE_DIR="$(pwd)/templates/registration"
-  local TEMPLATE_REGISTRATION_VOLUME="/app/quipucords/quipucords/templates/registration"
-
-  local DIST_CLIENT_ASSETS="$(pwd)/dist/client/assets"
-  local CLIENT_ASSETS_VOLUME="/app/quipucords/client/assets"
+  local TEMPLATE_DIR="$(pwd)/dist/templates"
+  local CONTAINER_TEMPLATE_VOLUME="/app/quipucords/quipucords/templates"
 
   if [ "$IS_BUILT" = true ]; then
     CONTAINER=$NAME
@@ -214,7 +210,12 @@ stageApi()
     if [ -z "$(docker ps | grep $NAME)" ]; then
       printf "\n"
       echo "Starting API..."
-      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+      sleep 3
+      docker run -d --rm -p $PORT:443 \
+        -v $CLIENT_DIR:$CONTAINER_CLIENT_VOLUME \
+        -v $TEMPLATE_DIR:$CONTAINER_TEMPLATE_VOLUME \
+        -e QPC_DBMS_HOST=$DB_NAME -e DJANGO_DEBUG=false \
+        --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
     fi
 
     checkContainerRunning $NAME
@@ -301,7 +302,7 @@ stopApi()
   FILE="$(pwd)/.qpc/quipucords/docs/swagger.yml"
 
   QPC_REPO="https://github.com/quipucords/quipucords.git"
-  QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords"
+  QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords:latest"
   MOCK_IMAGE_CONTAINER="palo/swagger-api-mock"
   DATADIR="$(pwd)/.qpc"
   DATADIR_REPO="$(pwd)/.qpc/quipucords"
