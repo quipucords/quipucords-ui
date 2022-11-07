@@ -85,7 +85,7 @@ checkBuildFilesExist()
 #
 startDB()
 {
-  local CONTAINER="postgres:9.6.10"
+  local CONTAINER="postgres:12"
   local NAME=$1
   local DATA="$(pwd)/.container/${NAME}/postgres"
   local DATA_VOLUME="/var/lib/postgresql/data"
