@@ -214,7 +214,7 @@ stageApi()
       docker run -d --rm -p $PORT:443 \
         -v $CLIENT_DIR:$CONTAINER_CLIENT_VOLUME \
         -v $TEMPLATE_DIR:$CONTAINER_TEMPLATE_VOLUME \
-        -e QPC_DBMS_HOST=$DB_NAME -e DJANGO_DEBUG=false \
+        -e QPC_DBMS_HOST=$DB_NAME -e DJANGO_DEBUG=true \
         --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
     fi
 
