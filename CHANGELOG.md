@@ -3,7 +3,21 @@
 All notable changes to this project will be documented in this file.
 
 
-## [1.0.0](https://github.com/quipucords/quipucords-ui/compare/184defce82aa3d6b0cb5542ed34e81c581edef71...26b6eb0629537148fe57ffa468b412df3369aa0e) (2022-10-26)
+
+## [1.1.0](https://github.com/quipucords/quipucords-ui/compare/edc4065f6786b9c332756b2b2a0abbfa70780ad1...1ac30164a170229d95bbacc01169b7674ad5b407) (2022-11-08)
+
+### Features
+* **addSource,createCredential** discovery-203 openshift  ([#185](https://github.com/quipucords/quipucords-ui/pull/185)) ([1ac3016](https://github.com/quipucords/quipucords-ui/commit/1ac30164a170229d95bbacc01169b7674ad5b407))
+* **viewContext** expose inferred context  ([#184](https://github.com/quipucords/quipucords-ui/pull/184)) ([fb57dab](https://github.com/quipucords/quipucords-ui/commit/fb57dab7809a36bfc3a762df37b325c158534d81))
+
+### Code Refactoring
+* **createCredentialDialog** class to function, hooks  ([#184](https://github.com/quipucords/quipucords-ui/pull/184)) ([61c7fec](https://github.com/quipucords/quipucords-ui/commit/61c7fec821fe6102907a59dd30ceb58146b1a46b))
+
+### Bug Fixes
+* **createCredentialDialog** locale strings  ([#185](https://github.com/quipucords/quipucords-ui/pull/185)) ([8490199](https://github.com/quipucords/quipucords-ui/commit/8490199f95798ea7d30e63b1fc83ff4cc688ef56))
+* **scanJobsList** minor test correction  ([#184](https://github.com/quipucords/quipucords-ui/pull/184)) ([6adf7e3](https://github.com/quipucords/quipucords-ui/commit/6adf7e3e313ba40722f9bbc6aeb7a40360327c48))
+
+##  [1.0.0](https://github.com/quipucords/quipucords-ui/compare/184defce82aa3d6b0cb5542ed34e81c581edef71...26b6eb0629537148fe57ffa468b412df3369aa0e) (2022-10-26)
 
 ### Performance Improvements
 * **toastNotificationsList** toasts to hooks  ([#180](https://github.com/quipucords/quipucords-ui/pull/180)) ([4dc3331](https://github.com/quipucords/quipucords-ui/commit/4dc33310450c9ad1867873ed98a3caad776c3d0c))
