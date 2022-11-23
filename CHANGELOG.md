@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 
 
-## [1.1.0](https://github.com/quipucords/quipucords-ui/compare/edc4065f6786b9c332756b2b2a0abbfa70780ad1...1ac30164a170229d95bbacc01169b7674ad5b407) (2022-11-08)
+
+## [1.1.1](https://github.com/quipucords/quipucords-ui/compare/e6537bd5eb5c4cc87a804d69f8155d0bdbda1834...62ced03f639c1f6eeb5285b2528fc524fa0ffd4f) (2022-11-23)
+
+### Bug Fixes
+* **addSourceWizard** discovery-178 sslCert default  (#189) (e6537bd)
+
+##  [1.1.0](https://github.com/quipucords/quipucords-ui/compare/edc4065f6786b9c332756b2b2a0abbfa70780ad1...1ac30164a170229d95bbacc01169b7674ad5b407) (2022-11-08)
 
 ### Features
 * **addSource,createCredential** discovery-203 openshift  ([#185](https://github.com/quipucords/quipucords-ui/pull/185)) ([1ac3016](https://github.com/quipucords/quipucords-ui/commit/1ac30164a170229d95bbacc01169b7674ad5b407))
