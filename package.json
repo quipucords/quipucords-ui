@@ -13,7 +13,7 @@
     "url": "https://github.com/quipucords/quipucords-ui/issues"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "jest": {
     "coverageThreshold": {
