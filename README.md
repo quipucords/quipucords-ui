@@ -7,7 +7,7 @@ Web user interface for [Quipucords](https://github.com/quipucords/quipucords), b
 
 ## Requirements
 Before developing, the basic requirements:
-   * Your system needs to be running [NodeJS version 14+ and NPM](https://nodejs.org/)
+   * Your system needs to be running [NodeJS version 16+ and NPM](https://nodejs.org/)
    * [Docker](https://docs.docker.com/engine/install/)
    * And [Yarn 1.22+](https://yarnpkg.com) for dependency and script management.
 
