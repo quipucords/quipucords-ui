@@ -6,7 +6,7 @@ on:
       - "*"
   pull_request:
 env:
-  COV_NODE_VERSION: 14
+  COV_NODE_VERSION: 16
   UPSTREAM_TAR: quipucords-ui-dist.tar
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       contents: write
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js ${{ matrix.node-version }}
