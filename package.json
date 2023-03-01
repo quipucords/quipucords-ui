@@ -149,7 +149,7 @@
     "react-app-rewired": "^2.2.1",
     "redux-mock-store": "^1.5.4",
     "swagger-parser": "^10.0.3",
-    "swagger-ui-express": "^4.4.0",
+    "swagger-ui-express": "^4.6.2",
     "write-file-webpack-plugin": "^4.5.1",
     "yamljs": "^0.3.0"
   },
