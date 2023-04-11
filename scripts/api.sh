@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #
-#
 # Quick check to see if a container is running
 #
 checkContainerRunning()
@@ -85,7 +84,7 @@ checkBuildFilesExist()
 #
 startDB()
 {
-  local CONTAINER="postgres:9.6.10"
+  local CONTAINER="quay.io/fedora/postgresql-12"
   local NAME=$1
   local DATA="$(pwd)/.container/${NAME}/postgres"
   local DATA_VOLUME="/var/lib/postgresql/data"
@@ -103,10 +102,16 @@ startDB()
   fi
 
   if [ "$STORE_DATA" = true ]; then
-    docker run -d --rm -v $DATA:$DATA_VOLUME -e POSTGRES_PASSWORD=password --name $NAME $CONTAINER >/dev/null
+    EXTRA_ARGS="-v $DATA:$DATA_VOLUME"
   else
-    docker run -d --rm -e POSTGRES_PASSWORD=password --name $NAME $CONTAINER >/dev/null
+    EXTRA_ARGS=""
   fi
+
+  docker run -d --rm $EXTRA_ARGS \
+    -e POSTGRESQL_USER=$POSTGRESQL_USER \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
+    --name $NAME $CONTAINER >/dev/null
 
   checkContainerRunning $NAME
 
@@ -206,15 +211,27 @@ stageApi()
     buildApp $CONTAINER
   else
     docker stop -t 0 $NAME >/dev/null
+    docker rm $NAME >/dev/null
+    docker pull $CONTAINER
   fi
 
   if [ ! "$UPDATE" = true ]; then
     startDB $DB_NAME
-
     if [ -z "$(docker ps | grep $NAME)" ]; then
       printf "\n"
       echo "Starting API..."
-      docker run -d --rm -p $PORT:443 -v $BUILD_DIR:$CLIENT_VOLUME -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+      docker run -d --rm -p $PORT:443 \
+        -v $BUILD_DIR:$CLIENT_VOLUME \
+        -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME \
+        -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME \
+        -e DJANGO_DEBUG=true \
+        -e QPC_DBMS_DATABASE=$POSTGRESQL_DATABASE \
+        -e QPC_DBMS_HOST=$DB_NAME \
+        -e QPC_DBMS_PASSWORD=$POSTGRESQL_PASSWORD \
+        -e QPC_DBMS_PORT=$POSTGRESQL_PORT \
+        -e QPC_DBMS_USER=$POSTGRESQL_USER \
+        --link $DB_NAME:qpc-link \
+        --name $NAME $CONTAINER >/dev/null
     fi
 
     checkContainerRunning $NAME
@@ -301,7 +318,7 @@ stopApi()
   FILE="$(pwd)/.qpc/quipucords/docs/swagger.yml"
 
   QPC_REPO="https://github.com/quipucords/quipucords.git"
-  QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords"
+  QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords:latest"
   MOCK_IMAGE_CONTAINER="palo/swagger-api-mock"
   DATADIR="$(pwd)/.qpc"
   DATADIR_REPO="$(pwd)/.qpc/quipucords"
@@ -310,6 +327,11 @@ stopApi()
 
   DISTDIR_CLIENT="$(pwd)/dist/client"
   DISTDIR_TEMPLATES="$(pwd)/dist/templates"
+
+  POSTGRESQL_USER="qpc"
+  POSTGRESQL_PASSWORD="qpc"
+  POSTGRESQL_DATABASE="qpc"
+  POSTGRESQL_PORT="5432"
 
   BUILT=false
   UPDATE=false
