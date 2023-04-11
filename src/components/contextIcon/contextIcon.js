@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from '@patternfly/react-core';
 import {
+  AnsibleTowerIcon,
   CheckCircleIcon,
   ClipboardCheckIcon,
   CrosshairsIcon,
@@ -73,7 +74,8 @@ const ContextIconVariant = {
   unknown: 'unknown',
   unreachable: 'unreachable',
   user: 'user',
-  vcenter: 'vcenter'
+  vcenter: 'vcenter',
+  ansible: 'ansible'
 };
 
 /**
@@ -110,6 +112,8 @@ const svgSize = size => {
  */
 const ContextIcon = ({ symbol, ...props }) => {
   switch (symbol) {
+    case ContextIconVariant.ansible:
+      return <AnsibleTowerIcon {...props} />;
     case ContextIconVariant.download:
       return <DownloadIcon {...props} />;
     case ContextIconVariant.failed:
