@@ -69,6 +69,10 @@ Array [
       },
       Object {
         "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'ansible', 'credential'] })",
+      },
+      Object {
+        "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: ['placeholder', 'add-credential'] })",
       },
     ],
@@ -178,6 +182,10 @@ Array [
       Object {
         "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: 'vcenter-server' })",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'ansible-server' })",
       },
     ],
   },

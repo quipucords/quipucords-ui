@@ -58,6 +58,14 @@ class AddSourceWizardStepOne extends React.Component {
                 onChange={handleOnEvent}
                 label={t('form-dialog.label', { context: 'vcenter-server' })}
               />
+              <Radio
+                name="sourceType"
+                id="sourceType-ansible"
+                value="ansible"
+                checked={values.sourceType === 'ansible'}
+                onChange={handleOnEvent}
+                label={t('form-dialog.label', { context: 'ansible-server' })}
+              />
             </FormGroup>
           </Form>
         )}

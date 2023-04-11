@@ -301,6 +301,7 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'vcenter':
       case 'satellite':
       case 'openshift':
+      case 'ansible':
         const hostPortError = `${
           (touched.hostsSingle &&
             errors.hosts &&
@@ -451,6 +452,7 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'openshift':
       case 'vcenter':
       case 'satellite':
+      case 'ansible':
         return (
           <React.Fragment>
             <FormGroup label={t('form-dialog.label', { context: 'connection' })}>

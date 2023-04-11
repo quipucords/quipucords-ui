@@ -105,6 +105,7 @@ const CreateCredentialDialog = ({
       case 'network':
       case 'satellite':
       case 'vcenter':
+      case 'ansible':
       default:
         setAuthType('usernamePassword');
         break;
