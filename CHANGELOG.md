@@ -2,8 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/quipucords/quipucords-ui/compare/6cee2723944d9bc7b4b3ded6aca9d5650713fe28...a7e1bddedca77f2ad8f95a8af2e0e858ee6a98ed) (2023-04-14)
 
+### Features
+* **ansible-controller** add support for ansible data source  ([45cee58](https://github.com/quipucords/quipucords-ui/commit/45cee588cdf69395b825b88723e93d76aaa3619d))
 
+### Chores
+* **build** nodejs 14 to 16  ([#197](https://github.com/quipucords/quipucords-ui/pull/197)) ([30bdc9f](https://github.com/quipucords/quipucords-ui/commit/30bdc9f118033ecfd3e852e40d4765ee48c1780a))
+* **deps** ncipollo/release-action from 1.11.2 to 1.12.0  ([#196](https://github.com/quipucords/quipucords-ui/pull/196)) ([823780e](https://github.com/quipucords/quipucords-ui/commit/823780ec9911aaa35581b9c1fde561d0221120d0))
+* **deps-dev** changelog-light from 0.2.1 to 0.2.3  ([#195](https://github.com/quipucords/quipucords-ui/pull/195)) ([b28e1a3](https://github.com/quipucords/quipucords-ui/commit/b28e1a31055433b3149ce2c81606c8dff400503e))
+* **deps** ncipollo/release-action from 1.10.0 to 1.11.2  ([#193](https://github.com/quipucords/quipucords-ui/pull/193)) ([f6e1464](https://github.com/quipucords/quipucords-ui/commit/f6e1464c40d7eec70d6bcc5deb238d83a18734b7))
+
+### Bug Fixes
+* script for stage container ([a7e1bdd](https://github.com/quipucords/quipucords-ui/commit/a7e1bddedca77f2ad8f95a8af2e0e858ee6a98ed))
 
 ## [1.1.1](https://github.com/quipucords/quipucords-ui/compare/e6537bd5eb5c4cc87a804d69f8155d0bdbda1834...62ced03f639c1f6eeb5285b2528fc524fa0ffd4f) (2022-11-23)
 
