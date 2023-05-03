@@ -24,7 +24,7 @@ Once you've installed NodeJS you can use NPM to perform the [Yarn](https://yarnp
 
   ```
   $ npm install yarn -g
-  ``` 
+  ```
 
 You can also use [Homebrew](https://brew.sh/)
 
@@ -53,7 +53,7 @@ For Github issues that looks like
    <type>[optional scope]: issues/123 <description>
 ```
 ### Release process
-The release process currently consists of 
+The release process currently consists of
 - Running `$ yarn release`
 - Manually tagging the release commit
 
@@ -80,6 +80,8 @@ $ yarn release --commit=false
 ## Serving Content
 To serve content you'll need to have Docker, Node, and Yarn installed.
 
+If `yarn start` fails to run and produces an `ERR_OSSL_EVP_UNSUPPORTED` error, try `export NODE_OPTIONS=--openssl-legacy-provider` before calling `yarn start` again. See https://stackoverflow.com/a/69746937 for more details.
+
 Serving content comes in 3 variations
 - `$ yarn start`, Development local run, randomized mock data. The cons to this are the randomized mock data, it gets weird.
 
@@ -87,7 +89,7 @@ Serving content comes in 3 variations
 
   Useful for
    - Local development against randomized mock data generated from the Quipucords API spec.
-  
+
 - `$ yarn start:stage`, Development local run, minimally styled/un-styled login, all while volumed into an API Docker container.
 
   You'll be asked for the default credentials. You should be able to update the associated database, and run actual scans.
@@ -100,12 +102,12 @@ Serving content comes in 3 variations
 
   You'll be asked for the default credentials. You should be able to update the associated database, and run actual scans.
 
-  Useful for 
+  Useful for
    - Testing the GUI build, and avoiding package install problems.
 
 ## Build
 ### dotenv files
-Our current build leverages `dotenv`, or `.env*`, files to apply environment build configuration. 
+Our current build leverages `dotenv`, or `.env*`, files to apply environment build configuration.
 
 There are currently build processes in place that leverage the `.env*.local` files, these files are actively applied in our `.gitignore` in order to avoid build conflicts. They should continue to remain ignored, and not be added to the repository.
 
@@ -117,7 +119,7 @@ Specific uses:
 To test content you'll need to have Node and Yarn installed.
 
 ### Code Coverage Requirements
-Updates that drop coverage below the current threshold will need to have their coverage expanded accordingly before being merged. 
+Updates that drop coverage below the current threshold will need to have their coverage expanded accordingly before being merged.
 
 Settings for the Jest aspect of code coverage can be found in [package.json](./package.json). Settings for the CI reporting level of code coverage
 can be found in [.codecov.yml](./.codecov.yml).
@@ -148,11 +150,11 @@ To run the unit tests with a watch during development you'll need to open an add
   ```
 
 ##### Updating unit test snapshots
-To update snapshots from the terminal run 
+To update snapshots from the terminal run
   ```
   $ yarn test:dev
   ```
-  
+
 From there you'll be presented with a few choices, one of them is "update", you can then hit the "u" key. Once the update script has run you should see additional changed files within Git, make sure to commit them along with your changes, or testing will fail.
 
 #### Integration Testing
@@ -161,7 +163,7 @@ We run "integration-like" checks on build output as a fallback before a code rel
   $ yarn build
   ```
 
-This will compile, and then run the initial build checks. It will either succeed, or fail, depending on changes produced during development, **this is OK, and expected**. 
+This will compile, and then run the initial build checks. It will either succeed, or fail, depending on changes produced during development, **this is OK, and expected**.
 
 ##### Updating integration test snapshots
 To update integration test snapshots from the terminal run
@@ -176,7 +178,7 @@ To check the coverage report from the terminal run
   ```
   $ yarn test
   ```
-  
+
 ##### Code coverage failing to update?
 If you're having trouble getting an accurate code coverage report, or it's failing to provide updated results (i.e. you renamed files) you can try running
   ```
@@ -194,7 +196,7 @@ the Django template files here [./templates/*](./templates/base.html).
 - This templates directory is required as part of the build process. **Removing `./templates` directory will break the production build.**
 - Updating the templates requires minimal understand of html, plus some minor recognition of templating languages. [If needed checkout out the Django template structure reading](https://docs.djangoproject.com/en/2.1/topics/templates/).
 - We use a shell script token string replacement during the build process for the application display name. If you see **[UI_NAME]** within the templates, be aware.
-- [The build script for directly manipulating the templates is here, ./scripts/post.sh](./scripts/post.sh) 
+- [The build script for directly manipulating the templates is here, ./scripts/post.sh](./scripts/post.sh)
 
 ### Documentation, locale and help guides
 [Quipudocs](https://github.com/quipucords/quipudocs) houses our locale and help guide setup through an NPM dependency layout, [see our package.json for Quipudocs](./package.json).
@@ -205,7 +207,7 @@ the Django template files here [./templates/*](./templates/base.html).
 - [The build script for directly manipulating the locale and help guides is here, ./scripts/quipudocs.js](./scripts/quipudocs.js)
 
 ### Brand build
-The brand build updates aspects of the application name across the React and Django templates. 
+The brand build updates aspects of the application name across the React and Django templates.
 To handle a branded aspect of the build, instead of `yarn build`, run
 
    ```
