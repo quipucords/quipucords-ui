@@ -154,7 +154,8 @@
     "yamljs": "^0.3.0"
   },
   "resolutions": {
-    "**/eslint": "7.19.0"
+    "**/eslint": "7.19.0",
+    "decode-uri-component": "^0.3.0"
   },
   "browserslist": {
     "production": [
