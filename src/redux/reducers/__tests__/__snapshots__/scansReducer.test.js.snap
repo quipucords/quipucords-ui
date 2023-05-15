@@ -15,6 +15,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -29,6 +30,39 @@ Object {
     "view": Object {},
   },
   "type": "CANCEL_SCAN_REJECTED",
+}
+`;
+
+exports[`ScansReducer should handle all defined error types: rejected types DELETE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "action": Object {},
+    "connection": Object {},
+    "deleted": Object {
+      "error": true,
+      "errorMessage": "ERROR",
+      "errorStatus": 0,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SCAN_REJECTED",
 }
 `;
 
@@ -47,6 +81,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -79,6 +114,7 @@ Object {
       "pending": false,
       "update": false,
     },
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -101,6 +137,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {
       "error": true,
@@ -133,6 +170,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -165,6 +203,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -197,6 +236,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -239,6 +279,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -271,6 +312,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -303,6 +345,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -339,6 +382,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -353,6 +397,43 @@ Object {
     "view": Object {},
   },
   "type": "CANCEL_SCAN_FULFILLED",
+}
+`;
+
+exports[`ScansReducer should handle all defined fulfilled types: fulfilled types DELETE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "action": Object {},
+    "connection": Object {},
+    "deleted": Object {
+      "data": Object {
+        "test": "success",
+      },
+      "date": undefined,
+      "error": false,
+      "errorMessage": "",
+      "errorStatus": undefined,
+      "fulfilled": true,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": false,
+      "update": false,
+    },
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SCAN_FULFILLED",
 }
 `;
 
@@ -375,6 +456,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -411,6 +493,7 @@ Object {
       "pending": false,
       "update": false,
     },
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -433,6 +516,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {
       "data": Object {
@@ -469,6 +553,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -505,6 +590,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -541,6 +627,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -591,6 +678,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -627,6 +715,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -663,6 +752,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -695,6 +785,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -709,6 +800,39 @@ Object {
     "view": Object {},
   },
   "type": "CANCEL_SCAN_PENDING",
+}
+`;
+
+exports[`ScansReducer should handle all defined pending types: pending types DELETE_SCAN 1`] = `
+Object {
+  "result": Object {
+    "action": Object {},
+    "connection": Object {},
+    "deleted": Object {
+      "error": false,
+      "errorMessage": "",
+      "errorStatus": undefined,
+      "fulfilled": false,
+      "metaData": undefined,
+      "metaId": undefined,
+      "metaQuery": undefined,
+      "pending": true,
+      "update": false,
+    },
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "DELETE_SCAN_PENDING",
 }
 `;
 
@@ -727,6 +851,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -759,6 +884,7 @@ Object {
       "pending": true,
       "update": false,
     },
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -781,6 +907,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {
       "error": false,
@@ -813,6 +940,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {
@@ -845,6 +973,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -877,6 +1006,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -919,6 +1049,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -951,6 +1082,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -983,6 +1115,7 @@ Object {
       "update": false,
     },
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1005,6 +1138,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1029,6 +1163,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {
       "undefined": undefined,
     },
@@ -1053,6 +1188,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1075,6 +1211,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1097,6 +1234,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {
       "undefined": null,
     },
@@ -1116,11 +1254,35 @@ Object {
 }
 `;
 
+exports[`ScansReducer should handle specific defined types: defined type RESET_SCAN_ACTIONS 1`] = `
+Object {
+  "result": Object {
+    "action": Object {},
+    "connection": Object {},
+    "deleted": Object {},
+    "expanded": Object {},
+    "inspection": Object {},
+    "job": Object {},
+    "jobs": Object {},
+    "mergeDialog": Object {
+      "details": false,
+      "scans": Array [],
+      "show": false,
+    },
+    "selected": Object {},
+    "update": 0,
+    "view": Object {},
+  },
+  "type": "RESET_SCAN_ACTIONS",
+}
+`;
+
 exports[`ScansReducer should handle specific defined types: defined type SELECT_SCAN 1`] = `
 Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},
@@ -1145,6 +1307,7 @@ Object {
   "result": Object {
     "action": Object {},
     "connection": Object {},
+    "deleted": Object {},
     "expanded": Object {},
     "inspection": Object {},
     "job": Object {},

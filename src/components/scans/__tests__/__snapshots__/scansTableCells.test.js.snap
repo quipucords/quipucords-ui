@@ -21,7 +21,28 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
   <OverflowMenuContent>
     <OverflowMenuGroup
       groupType="button"
-    />
+    >
+      <Tooltip
+        content="t(table.label, {\\"context\\":\\"delete\\"})"
+        delayShow={500}
+        id={null}
+        isPopover={false}
+        placement="top"
+      >
+        <Button
+          aria-label="t(table.label, {\\"context\\":\\"delete\\"})"
+          className="quipucords-view__row-button"
+          onClick={[Function]}
+          variant="plain"
+        >
+          <TrashIcon
+            color="currentColor"
+            noVerticalAlign={false}
+            size="sm"
+          />
+        </Button>
+      </Tooltip>
+    </OverflowMenuGroup>
   </OverflowMenuContent>
   <OverflowMenuControl>
     <DropdownSelect
@@ -37,7 +58,14 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
       maxHeight={null}
       name={null}
       onSelect={[Function]}
-      options={Array []}
+      options={
+        Array [
+          Object {
+            "title": "t(table.label, {\\"context\\":\\"delete\\"})",
+            "value": "delete",
+          },
+        ]
+      }
       placeholder={
         <EllipsisVIcon
           color="currentColor"

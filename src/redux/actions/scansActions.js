@@ -91,9 +91,19 @@ const restartScan = id => dispatch =>
     meta: { id }
   });
 
+const deleteScan = id => dispatch => {
+  const updatedIds = (Array.isArray(id) && id) || [id];
+
+  return dispatch({
+    type: scansTypes.DELETE_SCAN,
+    payload: Promise.all(updatedIds.map(updatedId => scansService.deleteScan(updatedId)))
+  });
+};
+
 const scansActions = {
   addScan,
   addStartScan,
+  deleteScan,
   getScans,
   getScanJobs,
   getScanJob,
@@ -110,6 +120,7 @@ export {
   scansActions,
   addScan,
   addStartScan,
+  deleteScan,
   getScans,
   getScanJobs,
   getScanJob,

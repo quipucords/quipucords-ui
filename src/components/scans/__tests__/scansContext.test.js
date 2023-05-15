@@ -1,4 +1,4 @@
-import { context, useGetScans, useOnScanAction, usePoll, useScans } from '../scansContext';
+import { context, useGetScans, useOnDelete, useOnScanAction, usePoll, useScans } from '../scansContext';
 import { apiTypes } from '../../../constants/apiConstants';
 
 describe('ScansContext', () => {
@@ -136,5 +136,23 @@ describe('ScansContext', () => {
     expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
       'get responses'
     );
+  });
+
+  it('should handle deleting a scan with a confirmation', async () => {
+    const mockConfirmation = jest.fn();
+    const mockScan = {
+      [apiTypes.API_RESPONSE_SCAN_NAME]: 'lorem ipsum name'
+    };
+
+    const { result } = await shallowHook(() =>
+      useOnDelete({
+        useConfirmation: () => mockConfirmation
+      })
+    );
+
+    result(mockScan);
+
+    expect(mockConfirmation.mock.calls).toMatchSnapshot('dispatch onDelete');
+    mockConfirmation.mockClear();
   });
 });

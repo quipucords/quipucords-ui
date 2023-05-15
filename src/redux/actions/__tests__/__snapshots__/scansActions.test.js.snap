@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScansActions Should return response content for addStartScan method: addStartScan 1`] = `"ADD_START_SCAN_FULFILLED"`;
+
+exports[`ScansActions Should return response content for deleteScan method: deleteScan 1`] = `"DELETE_SCAN_FULFILLED"`;

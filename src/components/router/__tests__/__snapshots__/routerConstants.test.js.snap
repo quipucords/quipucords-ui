@@ -117,6 +117,7 @@ Array [
         t={[Function]}
         useDispatch={[Function]}
         useGetScans={[Function]}
+        useOnDelete={[Function]}
         useOnExpand={[Function]}
         useOnScanAction={[Function]}
         useOnSelect={[Function]}

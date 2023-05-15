@@ -14,6 +14,7 @@ const initialState = {
   jobs: {},
   action: {},
   selected: {},
+  deleted: {},
   expanded: {},
   update: 0,
   view: {}
@@ -26,6 +27,18 @@ const scansReducer = (state = initialState, action) => {
         null,
         {
           update: helpers.getCurrentDate().getTime()
+        },
+        {
+          state,
+          reset: false
+        }
+      );
+
+    case scansTypes.RESET_ACTIONS:
+      return reduxHelpers.setStateProp(
+        null,
+        {
+          deleted: {}
         },
         {
           state,
@@ -127,6 +140,7 @@ const scansReducer = (state = initialState, action) => {
               scansTypes.START_SCAN
             ]
           },
+          { ref: 'deleted', type: scansTypes.DELETE_SCAN },
           { ref: 'view', type: scansTypes.GET_SCANS }
         ],
         state,

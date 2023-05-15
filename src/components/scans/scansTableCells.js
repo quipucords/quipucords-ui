@@ -10,7 +10,7 @@ import {
   OverflowMenuGroup,
   OverflowMenuItem
 } from '@patternfly/react-core';
-import { EllipsisVIcon } from '@patternfly/react-icons';
+import { EllipsisVIcon, TrashIcon } from '@patternfly/react-icons';
 import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 import { ContextIconAction, ContextIconActionVariant } from '../contextIcon/contextIconAction';
 import { Tooltip } from '../tooltip/tooltip';
@@ -258,6 +258,7 @@ const scansCellContent = (
  * @param {object} params.item
  * @param {Function} params.onCancel
  * @param {Function} params.onDownload
+ * @param {Function} params.onDelete
  * @param {Function} params.onRestart
  * @param {Function} params.onPause
  * @param {Function} params.onStart
@@ -273,6 +274,7 @@ const actionsCell = ({
   onRestart = helpers.noop,
   onPause = helpers.noop,
   onStart = helpers.noop,
+  onDelete = helpers.noop,
   t = translate
 } = {}) => {
   const { [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: scan = {} } = item;
@@ -293,6 +295,8 @@ const actionsCell = ({
     switch (value) {
       case 'download':
         return onDownload(item);
+      case 'delete':
+        return onDelete(item);
       case 'created':
       case 'running':
         return onPause(item);
@@ -342,6 +346,22 @@ const actionsCell = ({
       menuItems.push(menuItem(mostRecentStatus));
     }
   }
+
+  menuItems.push({
+    dropdownMenuItem: { title: t('table.label', { context: 'delete' }), value: 'delete' },
+    overflowMenuItem: (
+      <Tooltip content={t('table.label', { context: 'delete' })}>
+        <Button
+          className="quipucords-view__row-button"
+          onClick={() => onDelete(item)}
+          aria-label={t('table.label', { context: 'delete' })}
+          variant={ButtonVariant.plain}
+        >
+          <TrashIcon />
+        </Button>
+      </Tooltip>
+    )
+  });
 
   if (mostRecentReportId) {
     menuItems.push({

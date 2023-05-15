@@ -4,6 +4,7 @@ import { useShallowCompareEffect } from 'react-use';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
 import { useTimeout } from '../../hooks';
 import { useView } from '../view/viewContext';
+import { useConfirmation } from '../../hooks/useConfirmation';
 import { API_QUERY_SORT_TYPES, API_QUERY_TYPES, apiTypes } from '../../constants/apiConstants';
 import { helpers } from '../../common';
 import { translate } from '../i18n/i18n';
@@ -26,6 +27,102 @@ const INITIAL_QUERY = {
   [API_QUERY_TYPES.PAGE]: 1,
   [API_QUERY_TYPES.PAGE_SIZE]: 10,
   [API_QUERY_TYPES.SCAN_TYPE]: 'inspect'
+};
+
+/**
+ * Scan action, onDelete.
+ *
+ * @param {object} options
+ * @param {Function} options.deleteScans
+ * @param {Function} options.t
+ * @param {Function} options.useConfirmation
+ * @param {Function} options.useDispatch
+ * @param {Function} options.useSelectorsResponse
+ * @param {Function} options.useView
+ * @returns {(function(*): void)|*}
+ */
+const useOnDelete = ({
+  deleteScans = reduxActions.scans.deleteScan,
+  t = translate,
+  useConfirmation: useAliasConfirmation = useConfirmation,
+  useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
+  useSelectorsResponse: useAliasSelectorsResponse = storeHooks.reactRedux.useSelectorsResponse,
+  useView: useAliasView = useView
+} = {}) => {
+  const { viewId } = useAliasView();
+  const onConfirmation = useAliasConfirmation();
+  const [scansToDelete, setScansToDelete] = useState([]);
+  const dispatch = useAliasDispatch();
+  const { data, error, fulfilled } = useAliasSelectorsResponse(({ scans }) => scans?.deleted);
+  const { errorMessage } = data?.[0] || {};
+
+  useShallowCompareEffect(() => {
+    if (scansToDelete.length) {
+      const scanIds = scansToDelete.map(scan => scan[apiTypes.API_RESPONSE_SCAN_ID]);
+      deleteScans(scanIds)(dispatch);
+    }
+  }, [scansToDelete, deleteScans, dispatch]);
+
+  useShallowCompareEffect(() => {
+    if ((fulfilled && scansToDelete.length) || (error && scansToDelete.length)) {
+      const scanNames = scansToDelete.map(scan => scan[apiTypes.API_RESPONSE_SCAN_NAME]);
+
+      dispatch([
+        {
+          type: reduxTypes.toastNotifications.TOAST_ADD,
+          alertType: (error && AlertVariant.danger) || AlertVariant.success,
+          header: t('toast-notifications.title', {
+            context: [(error && 'error') || 'deleted-scan'],
+            count: scanNames.length
+          }),
+          message: t('toast-notifications.description', {
+            context: ['deleted-scan', error && 'error'],
+            name: scanNames[0],
+            count: scanNames.length,
+            message: errorMessage
+          })
+        },
+        {
+          type: reduxTypes.scans.DESELECT_SCAN,
+          item: scansToDelete
+        },
+        {
+          type: reduxTypes.scans.RESET_ACTIONS
+        },
+        {
+          type: reduxTypes.view.UPDATE_VIEW,
+          viewId
+        }
+      ]);
+
+      setScansToDelete(() => []);
+    }
+  }, [scansToDelete, error, fulfilled, dispatch, error, t]);
+
+  return scans => {
+    const updatedScans = (Array.isArray(scans) && scans) || [scans];
+
+    onConfirmation({
+      title: t('form-dialog.confirmation', {
+        context: ['title', 'delete-scan'],
+        count: updatedScans.length
+      }),
+      heading: t(
+        'form-dialog.confirmation',
+        {
+          context: ['heading', 'delete-scan'],
+          count: updatedScans.length,
+          name: updatedScans?.[0]?.[apiTypes.API_RESPONSE_SCAN_NAME]
+        },
+        [<strong />]
+      ),
+      body: undefined,
+      confirmButtonText: t('form-dialog.label', {
+        context: ['delete']
+      }),
+      onConfirm: () => setScansToDelete(() => updatedScans)
+    });
+  };
 };
 
 /**
@@ -339,6 +436,7 @@ const context = {
   VIEW_ID,
   INITIAL_QUERY,
   useGetScans,
+  useOnDelete,
   useOnExpand,
   useOnScanAction,
   useOnSelect,
@@ -352,6 +450,7 @@ export {
   VIEW_ID,
   INITIAL_QUERY,
   useGetScans,
+  useOnDelete,
   useOnExpand,
   useOnScanAction,
   useOnSelect,

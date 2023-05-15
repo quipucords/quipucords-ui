@@ -114,6 +114,20 @@ Array [
 ]
 `;
 
+exports[`ScansContext should handle deleting a scan with a confirmation: dispatch onDelete 1`] = `
+Array [
+  Array [
+    Object {
+      "body": undefined,
+      "confirmButtonText": "t(form-dialog.label, {\\"context\\":\\"delete\\"})",
+      "heading": "t(form-dialog.confirmation_heading, {\\"context\\":\\"delete-scan\\",\\"count\\":1,\\"name\\":\\"lorem ipsum name\\"}, [object Object])",
+      "onConfirm": [Function],
+      "title": "t(form-dialog.confirmation_title, {\\"context\\":\\"delete-scan\\",\\"count\\":1})",
+    },
+  ],
+]
+`;
+
 exports[`ScansContext should handle scan actions with multiple callbacks: callbacks 1`] = `
 Object {
   "onCancel": [Function],
@@ -149,6 +163,7 @@ Object {
   },
   "VIEW_ID": "scans",
   "useGetScans": [Function],
+  "useOnDelete": [Function],
   "useOnExpand": [Function],
   "useOnScanAction": [Function],
   "useOnSelect": [Function],

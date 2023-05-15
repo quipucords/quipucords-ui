@@ -115,4 +115,10 @@ describe('ScansActions', () => {
     const { state } = await generateDispatch(dispatcher);
     expect(state.scans.action.lorem.fulfilled).toEqual(true);
   });
+
+  it('Should return response content for deleteScan method', async () => {
+    const dispatcher = scansActions.deleteScan();
+    const { value } = await generateDispatch(dispatcher);
+    expect(value.action.type).toMatchSnapshot('deleteScan');
+  });
 });

@@ -70,7 +70,7 @@ const getInspectionScanResults = (id, params = {}) =>
 const deleteScan = id =>
   serviceCall({
     method: 'delete',
-    url: `${process.env.REACT_APP_SCANS_SERVICE}${id}`
+    url: `${process.env.REACT_APP_SCANS_SERVICE}${id}/`
   });
 
 const startScan = id =>

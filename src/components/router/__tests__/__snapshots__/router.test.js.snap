@@ -127,6 +127,7 @@ exports[`Router Component should shallow render a basic component 1`] = `
             t={[Function]}
             useDispatch={[Function]}
             useGetScans={[Function]}
+            useOnDelete={[Function]}
             useOnExpand={[Function]}
             useOnScanAction={[Function]}
             useOnSelect={[Function]}

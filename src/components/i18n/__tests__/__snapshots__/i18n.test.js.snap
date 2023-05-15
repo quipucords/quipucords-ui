@@ -1021,6 +1021,26 @@ Array [
     "keys": Array [
       Object {
         "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
+      },
+      Object {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-scan', error && 'error'], name: scanNames[0], count: scanNames.length, message: errorMessage })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-scan'], count: updatedScans.length })",
+      },
+      Object {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-scan'], count: updatedScans.length, name: updatedScans?.[0]?.[apiTypes.API_RESPONSE_SCAN_NAME] }, [<strong />] )",
+      },
+      Object {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
+      },
+      Object {
+        "key": "toast-notifications.title",
         "match": "t('toast-notifications.title', { context: [(isWarning && 'warning')",
       },
       Object {
@@ -1089,6 +1109,18 @@ Array [
       Object {
         "key": "table.label",
         "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      Object {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
       },
       Object {
         "key": "table.label",
@@ -1662,6 +1694,14 @@ Array [
   Object {
     "file": "./src/components/scans/scans.js",
     "key": "view.empty-state",
+  },
+  Object {
+    "file": "./src/components/scans/scansContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  Object {
+    "file": "./src/components/scans/scansContext.js",
+    "key": "form-dialog.confirmation",
   },
   Object {
     "file": "./src/components/scans/scansEmptyState.js",

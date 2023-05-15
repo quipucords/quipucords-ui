@@ -15,7 +15,8 @@ describe('ScansReducer', () => {
       types.SELECT_SCAN,
       types.DESELECT_SCAN,
       types.EXPANDED_SCAN,
-      types.NOT_EXPANDED_SCAN
+      types.NOT_EXPANDED_SCAN,
+      types.RESET_ACTIONS
     ];
 
     specificTypes.forEach(value => {
@@ -40,7 +41,8 @@ describe('ScansReducer', () => {
       types.PAUSE_SCAN,
       types.RESTART_SCAN,
       types.START_SCAN,
-      types.GET_SCANS
+      types.GET_SCANS,
+      types.DELETE_SCAN
     ];
 
     specificTypes.forEach(value => {
@@ -78,7 +80,8 @@ describe('ScansReducer', () => {
       types.PAUSE_SCAN,
       types.RESTART_SCAN,
       types.START_SCAN,
-      types.GET_SCANS
+      types.GET_SCANS,
+      types.DELETE_SCAN
     ];
 
     specificTypes.forEach(value => {
@@ -105,7 +108,8 @@ describe('ScansReducer', () => {
       types.PAUSE_SCAN,
       types.RESTART_SCAN,
       types.START_SCAN,
-      types.GET_SCANS
+      types.GET_SCANS,
+      types.DELETE_SCAN
     ];
 
     specificTypes.forEach(value => {

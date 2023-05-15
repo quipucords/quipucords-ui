@@ -26,7 +26,15 @@ import { ViewPaginationRow } from '../viewPaginationRow/viewPaginationRow';
 import { ScansEmptyState } from './scansEmptyState';
 import { Table } from '../table/table';
 import { scansTableCells } from './scansTableCells';
-import { VIEW_ID, INITIAL_QUERY, useGetScans, useOnExpand, useOnScanAction, useOnSelect } from './scansContext';
+import {
+  VIEW_ID,
+  INITIAL_QUERY,
+  useGetScans,
+  useOnExpand,
+  useOnScanAction,
+  useOnSelect,
+  useOnDelete
+} from './scansContext';
 import { ScansToolbar } from './scansToolbar';
 import { translate } from '../i18n/i18n';
 
@@ -42,6 +50,7 @@ const CONFIG = {
  * @param {object} props
  * @param {Function} props.t
  * @param {Function} props.useGetScans
+ * @param {Function} props.useOnDelete
  * @param {Function} props.useOnExpand
  * @param {Function} props.useOnScanAction
  * @param {Function} props.useOnSelect
@@ -53,6 +62,7 @@ const CONFIG = {
 const Scans = ({
   t,
   useGetScans: useAliasGetScans,
+  useOnDelete: useAliasOnDelete,
   useOnExpand: useAliasOnExpand,
   useOnScanAction: useAliasOnScanAction,
   useOnSelect: useAliasOnSelect,
@@ -63,6 +73,7 @@ const Scans = ({
   const onToolbarFieldClearAll = useAliasToolbarFieldClearAll();
   const { isFilteringActive, viewId } = useAliasView();
   const dispatch = useAliasDispatch();
+  const onDelete = useAliasOnDelete();
   const onExpand = useAliasOnExpand();
   const { onCancel, onDownload, onPause, onRestart, onStart } = useAliasOnScanAction();
   const onSelect = useAliasOnSelect();
@@ -188,6 +199,7 @@ const Scans = ({
                     isFirst: index === 0,
                     isLast: index === data.length - 1,
                     item,
+                    onDelete: () => onDelete(item),
                     onCancel: () => onCancel(item),
                     onDownload: () => onDownload(item),
                     onRestart: () => onRestart(item),
@@ -224,13 +236,14 @@ const Scans = ({
 /**
  * Prop types
  *
- * @type {{useOnSelect: Function, useView: Function, t: Function, useOnScanAction: Function,
+ * @type {{useOnSelect: Function, useView: Function, t: Function, useOnScanAction: Function, useOnDelete: Function,
  *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useToolbarFieldClearAll: Function}}
  */
 Scans.propTypes = {
   t: PropTypes.func,
   useDispatch: PropTypes.func,
   useGetScans: PropTypes.func,
+  useOnDelete: PropTypes.func,
   useOnExpand: PropTypes.func,
   useOnScanAction: PropTypes.func,
   useOnSelect: PropTypes.func,
@@ -241,13 +254,14 @@ Scans.propTypes = {
 /**
  * Default props
  *
- * @type {{useOnSelect: Function, useView: Function, t: translate, useOnScanAction: Function,
+ * @type {{useOnSelect: Function, useView: Function, t: translate, useOnScanAction: Function, useOnDelete: Function,
  *     useDispatch: Function, useGetScans: Function, useOnExpand: Function, useToolbarFieldClearAll: Function}}
  */
 Scans.defaultProps = {
   t: translate,
   useDispatch: storeHooks.reactRedux.useDispatch,
   useGetScans,
+  useOnDelete,
   useOnExpand,
   useOnScanAction,
   useOnSelect,
