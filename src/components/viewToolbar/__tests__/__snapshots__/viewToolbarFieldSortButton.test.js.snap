@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ViewToolbarFieldSortButton Component should handle updating the view query through redux state with a component: dispatch type, component 1`] = `
-Array [
-  Array [
-    Array [
-      Object {
+[
+  [
+    [
+      {
         "filter": "ordering",
         "type": "SET_QUERY",
         "value": "hello world",
@@ -16,10 +16,10 @@ Array [
 `;
 
 exports[`ViewToolbarFieldSortButton Component should handle updating the view query through redux state with a hook: dispatch type, hook 1`] = `
-Array [
-  Array [
-    Array [
-      Object {
+[
+  [
+    [
+      {
         "filter": "ordering",
         "type": "SET_QUERY",
         "value": "dolor sit",
@@ -32,7 +32,7 @@ Array [
 
 exports[`ViewToolbarFieldSortButton Component should render a basic component: basic 1`] = `
 <Tooltip
-  content="t(toolbar.label_tooltip_sort, {\\"context\\":\\"asc\\"})"
+  content="t(toolbar.label_tooltip_sort, {"context":"asc"})"
   delayShow={500}
   id={null}
   isPopover={false}

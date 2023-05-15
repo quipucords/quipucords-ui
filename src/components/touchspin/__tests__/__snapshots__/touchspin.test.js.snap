@@ -9,7 +9,7 @@ exports[`TouchSpin Component should render a basic component: basic render 1`] =
   >
     <button
       aria-disabled="false"
-      aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"min\\"})"
+      aria-label="t(form-dialog.label_touchspin, {"context":"min"})"
       class="pf-c-button pf-m-control"
       data-ouia-component-id="OUIA-Generated-Button-control-1"
       data-ouia-component-type="PF4/Button"
@@ -32,7 +32,7 @@ exports[`TouchSpin Component should render a basic component: basic render 1`] =
     </button>
     <input
       aria-invalid="false"
-      aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"input\\"})"
+      aria-label="t(form-dialog.label_touchspin, {"context":"input"})"
       class="pf-c-form-control"
       data-ouia-component-id="OUIA-Generated-TextInputBase-1"
       data-ouia-component-type="PF4/TextInput"
@@ -43,7 +43,7 @@ exports[`TouchSpin Component should render a basic component: basic render 1`] =
     />
     <button
       aria-disabled="false"
-      aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"max\\"})"
+      aria-label="t(form-dialog.label_touchspin, {"context":"max"})"
       class="pf-c-button pf-m-control"
       data-ouia-component-id="OUIA-Generated-Button-control-2"
       data-ouia-component-type="PF4/Button"
@@ -69,7 +69,7 @@ exports[`TouchSpin Component should render a basic component: basic render 1`] =
 `;
 
 exports[`TouchSpin Component should render a basic component: initial props 1`] = `
-Object {
+{
   "className": "",
   "labelMax": <PlusIcon
     color="currentColor"
@@ -93,7 +93,7 @@ Object {
 `;
 
 exports[`TouchSpin Component should render a basic component: initial state 1`] = `
-Object {
+{
   "displayValue": 50,
   "maxValue": 100,
   "minValue": 0,

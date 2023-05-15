@@ -14,7 +14,7 @@ exports[`Authentication Component should render a non-connected component author
 <Authentication
   authorizeUser={[Function]}
   session={
-    Object {
+    {
       "authorized": true,
       "error": false,
       "errorMessage": "",
@@ -33,7 +33,7 @@ exports[`Authentication Component should render a non-connected component author
 
 exports[`Authentication Component should render a non-connected component error: non-connected error 1`] = `
 <Alert
-  title="t(view.error, {\\"context\\":\\"authentication\\"})"
+  title="t(view.error, {"context":"authentication"})"
   variant="danger"
 >
   <div
@@ -63,7 +63,7 @@ exports[`Authentication Component should render a non-connected component error:
             height="1em"
             role="img"
             style={
-              Object {
+              {
                 "verticalAlign": "-0.125em",
               }
             }

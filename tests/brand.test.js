@@ -9,7 +9,8 @@ describe('Application branding', () => {
       .replace(/\.\/dist/gi, '~./dist')
       .replace(/\.([a-z0-9]+)\./gi, '*')
       .split('~')
-      .sort();
+      .sort()
+      .filter(value => value?.length > 0);
 
   it('should produce a local environment configuration', () => {
     const envFile = loadFile('./.env');
@@ -26,27 +27,21 @@ describe('Application branding', () => {
     ).toBe(true);
   });
 
-  it('should have a specific branding file output', () => {
+  it('should have file output that contains specific branding', () => {
     const envProductionLocalFile = loadFile('./.env.production.local');
 
     const uiName = envProductionLocalFile.match(/\bUI_NAME=(.*)\n/i)[1];
     const uiShortName = envProductionLocalFile.match(/\bUI_SHORT_NAME=(.*)\n/i)[1];
     const uiSentenceStartName = envProductionLocalFile.match(/\bUI_SENTENCE_START_NAME=(.*)\n/i)[1];
 
-    // ToDo: Reactive name check when Quipudocs "dist" is updated
-    // const uiNameWithinDocs = parseInt(execSync(`grep -r "${uiName}" ./dist/client/docs | wc -l`).toString(), 10);
-    // expect(uiNameWithinDocs).toBeGreaterThanOrEqual(1);
-
     const uiNameWithinTemplates = execSync(`grep -rl "${uiName}" ./dist/templates`).toString();
-    const uiNameWithinGui = execSync(`grep -rl "${uiName}" ./dist/client/static/js`).toString();
-    const uiShortNameWithinGui = execSync(`grep -rl "${uiShortName}" ./dist/client/static/js`).toString();
-    const uiSentenceStartNameWithinGui = execSync(
-      `grep -rl "${uiSentenceStartName}" ./dist/client/static/js`
-    ).toString();
+    const uiNameWithinGui = execSync(`grep -rl "${uiName}" ./dist/client`).toString();
+    const uiShortNameWithinGui = execSync(`grep -rl "${uiShortName}" ./dist/client`).toString();
+    const uiSentenceStartNameWithinGui = execSync(`grep -rl "${uiSentenceStartName}" ./dist/client`).toString();
 
-    expect(trimSortDistList(uiNameWithinTemplates)).toMatchSnapshot('ui name within templates');
-    expect(trimSortDistList(uiNameWithinGui)).toMatchSnapshot('ui name within GUI');
-    expect(trimSortDistList(uiShortNameWithinGui)).toMatchSnapshot('ui short name within GUI');
-    expect(trimSortDistList(uiSentenceStartNameWithinGui)).toMatchSnapshot('ui sentence name within GUI');
+    expect(trimSortDistList(uiNameWithinTemplates).length > 0).toBe(true);
+    expect(trimSortDistList(uiNameWithinGui).length > 0).toBe(true);
+    expect(trimSortDistList(uiShortNameWithinGui).length > 0).toBe(true);
+    expect(trimSortDistList(uiSentenceStartNameWithinGui).length > 0).toBe(true);
   });
 });

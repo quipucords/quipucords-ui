@@ -41,7 +41,6 @@ class FormState extends React.Component {
     this.touched = {};
     this.checked = FormState.checkedSetValues(props);
 
-    this.refUpdating = false;
     this.refValues =
       props.resetUsingSetValues === true || props.setValuesOnUpdate === true ? _cloneDeep(props.setValues) : null;
 

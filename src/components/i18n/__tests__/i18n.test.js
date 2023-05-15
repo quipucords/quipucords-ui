@@ -1,6 +1,6 @@
 import React from 'react';
 import { readFileSync } from 'fs';
-import glob from 'glob';
+import { globSync } from 'glob';
 import _get from 'lodash/get';
 import enLocales from '../../../../public/locales/en.json';
 import { I18n } from '../i18n';
@@ -15,7 +15,7 @@ import { I18n } from '../i18n';
  */
 const getTranslationKeys = ({ files = './src/**/!(*.test|*.spec).@(js|jsx)', list = ['t', 'translate'] }) => {
   const keys = [];
-  const updatedFiles = glob.sync(files);
+  const updatedFiles = globSync(files);
 
   updatedFiles.forEach(file => {
     const fileContent = readFileSync(file, 'utf-8');

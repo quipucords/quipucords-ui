@@ -17,7 +17,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
   <MastheadMain>
     <MastheadBrand>
       <Brand
-        alt="t(view.brand-image-alt, {\\"name\\":\\"Quipucords\\"})"
+        alt="t(view.brand-image-alt, {"name":"Quipucords"})"
       >
         <source
           srcSet="title-brand.svg"
@@ -37,12 +37,12 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
       >
         <ForwardRef
           alignment={
-            Object {
+            {
               "default": "alignRight",
             }
           }
           spacer={
-            Object {
+            {
               "default": "spacerNone",
               "md": "spacerMd",
             }
@@ -52,7 +52,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
           <ForwardRef
             variant="icon-button-group"
             visibility={
-              Object {
+              {
                 "default": "hidden",
                 "lg": "visible",
               }
@@ -60,7 +60,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
           >
             <ToolbarItem
               visibility={
-                Object {
+                {
                   "default": "hidden",
                   "lg": "visible",
                   "md": "hidden",
@@ -71,13 +71,13 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
                 aria-label="Application launcher"
                 className=""
                 direction="down"
-                favorites={Array []}
+                favorites={[]}
                 favoritesLabel="Favorites"
                 isDisabled={false}
                 isGrouped={false}
                 isOpen={false}
                 items={
-                  Array [
+                  [
                     <ApplicationLauncherItem
                       onClick={[Function]}
                     >
@@ -113,7 +113,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
           </ForwardRef>
           <ToolbarItem
             visibility={
-              Object {
+              {
                 "default": "visible",
                 "lg": "hidden",
               }
@@ -121,7 +121,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
           >
             <Dropdown
               dropdownItems={
-                Array [
+                [
                   <DropdownGroup>
                     <DropdownItem
                       onClick={[Function]}
@@ -179,7 +179,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
         </ForwardRef>
         <ToolbarItem
           visibility={
-            Object {
+            {
               "default": "hidden",
               "lg": "visible",
             }
@@ -187,7 +187,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
         >
           <Dropdown
             dropdownItems={
-              Array [
+              [
                 <DropdownGroup>
                   <DropdownItem
                     onClick={[Function]}
@@ -242,7 +242,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
       <MastheadMain>
         <MastheadBrand>
           <Brand
-            alt="t(view.brand-image-alt, {\\"name\\":\\"Quipucords\\"})"
+            alt="t(view.brand-image-alt, {"name":"Quipucords"})"
           >
             <source
               srcSet="title.svg"
@@ -262,12 +262,12 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
           >
             <ForwardRef
               alignment={
-                Object {
+                {
                   "default": "alignRight",
                 }
               }
               spacer={
-                Object {
+                {
                   "default": "spacerNone",
                   "md": "spacerMd",
                 }
@@ -277,7 +277,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
               <ForwardRef
                 variant="icon-button-group"
                 visibility={
-                  Object {
+                  {
                     "default": "hidden",
                     "lg": "visible",
                   }
@@ -285,7 +285,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
               >
                 <ToolbarItem
                   visibility={
-                    Object {
+                    {
                       "default": "hidden",
                       "lg": "visible",
                       "md": "hidden",
@@ -296,13 +296,13 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                     aria-label="Application launcher"
                     className=""
                     direction="down"
-                    favorites={Array []}
+                    favorites={[]}
                     favoritesLabel="Favorites"
                     isDisabled={false}
                     isGrouped={false}
                     isOpen={false}
                     items={
-                      Array [
+                      [
                         <ApplicationLauncherItem
                           onClick={[Function]}
                         >
@@ -338,7 +338,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
               </ForwardRef>
               <ToolbarItem
                 visibility={
-                  Object {
+                  {
                     "default": "visible",
                     "lg": "hidden",
                   }
@@ -346,7 +346,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
               >
                 <Dropdown
                   dropdownItems={
-                    Array [
+                    [
                       <DropdownGroup>
                         <DropdownItem
                           onClick={[Function]}
@@ -404,7 +404,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             </ForwardRef>
             <ToolbarItem
               visibility={
-                Object {
+                {
                   "default": "hidden",
                   "lg": "visible",
                 }
@@ -412,7 +412,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             >
               <Dropdown
                 dropdownItems={
-                  Array [
+                  [
                     <DropdownGroup>
                       <DropdownItem
                         onClick={[Function]}
@@ -468,7 +468,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             <NavItem
               className="quipucords-navItem"
               component={
-                Object {
+                {
                   "$$typeof": Symbol(react.forward_ref),
                   "render": [Function],
                 }
@@ -484,7 +484,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             <NavItem
               className="quipucords-navItem"
               component={
-                Object {
+                {
                   "$$typeof": Symbol(react.forward_ref),
                   "render": [Function],
                 }
@@ -500,7 +500,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             <NavItem
               className="quipucords-navItem"
               component={
-                Object {
+                {
                   "$$typeof": Symbol(react.forward_ref),
                   "render": [Function],
                 }

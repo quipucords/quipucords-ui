@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SourcesSelectors Should map a source to consumable props: sourceDetail 1`] = `
-Object {
-  "credentials": Array [
+{
+  "credentials": [
     15,
   ],
-  "hosts": Array [
+  "hosts": [
     "192.168.0.1",
   ],
   "hostsMultiple": "192.168.0.1",
@@ -22,11 +22,11 @@ Object {
 `;
 
 exports[`SourcesSelectors Should map a source to consumable props: sourceDetail updated 1`] = `
-Object {
-  "credentials": Array [
+{
+  "credentials": [
     10,
   ],
-  "hosts": Array [
+  "hosts": [
     "192.168.0.1",
   ],
   "hostsMultiple": "192.168.0.1",
@@ -43,19 +43,19 @@ Object {
 `;
 
 exports[`SourcesSelectors Should minimally map an undefined source or properties: sourceDetail properties undefined 1`] = `
-Object {
-  "credentials": Array [],
+{
+  "credentials": [],
 }
 `;
 
 exports[`SourcesSelectors Should minimally map an undefined source or properties: sourceDetail undefined 1`] = `
-Object {
-  "credentials": Array [],
+{
+  "credentials": [],
 }
 `;
 
 exports[`SourcesSelectors Should return specific selectors: selectors 1`] = `
-Object {
+{
   "makeSourceDetail": [Function],
   "sourceDetail": [Function],
 }

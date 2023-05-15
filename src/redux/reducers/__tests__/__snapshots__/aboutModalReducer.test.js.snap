@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddSourceWizardReducer should handle specific defined types: defined type ABOUT_MODAL_HIDE 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "show": false,
   },
   "type": "ABOUT_MODAL_HIDE",
@@ -10,8 +10,8 @@ Object {
 `;
 
 exports[`AddSourceWizardReducer should handle specific defined types: defined type ABOUT_MODAL_SHOW 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "show": true,
   },
   "type": "ABOUT_MODAL_SHOW",

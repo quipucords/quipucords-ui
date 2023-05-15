@@ -3,7 +3,16 @@ import { configure, mount, shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { act } from 'react-dom/test-utils';
 import * as reactRedux from 'react-redux';
+import { setupDotenvFilesForEnv } from './build.dotenv';
 
+/**
+ * Set dotenv params.
+ */
+setupDotenvFilesForEnv({ env: process.env.NODE_ENV });
+
+/**
+ * Set enzyme adapter.
+ */
 configure({ adapter: new Adapter() });
 
 /**

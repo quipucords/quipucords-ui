@@ -5,23 +5,23 @@ exports[`Helpers should handle an undefined http status: 0 message 1`] = `"ERROR
 exports[`Helpers should handle an undefined http status: undefined message 1`] = `"ERROR"`;
 
 exports[`Helpers should handle basic object updates: setPropIfDefined 1`] = `
-Object {
+{
   "lorem": "ipsum",
 }
 `;
 
-exports[`Helpers should handle basic object updates: setPropIfDefined undefined 1`] = `Object {}`;
+exports[`Helpers should handle basic object updates: setPropIfDefined undefined 1`] = `{}`;
 
 exports[`Helpers should handle basic object updates: setPropIfTruthy bool 1`] = `
-Object {
+{
   "lorem": true,
 }
 `;
 
-exports[`Helpers should handle basic object updates: setPropIfTruthy number 1`] = `Object {}`;
+exports[`Helpers should handle basic object updates: setPropIfTruthy number 1`] = `{}`;
 
 exports[`Helpers should handle basic object updates: setPropIfTruthy string 1`] = `
-Object {
+{
   "lorem": true,
 }
 `;
@@ -30,13 +30,13 @@ exports[`Helpers should handle http status 400 level error messages from respons
 
 exports[`Helpers should handle http status 400 level error messages from response: 400 fallback again error message 1`] = `"Request failed with status code XXX"`;
 
-exports[`Helpers should handle http status 400 level error messages from response: 400 fallback error message 1`] = `"{\\"ipsum\\":{\\"sed\\":\\"nulla sed consequat urna\\",\\"dolor\\":{\\"sit\\":\\"sit dolor\\\\nconsequat urna\\",\\"placerat\\":\\"\\"}}}"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 fallback error message 1`] = `"{"ipsum":{"sed":"nulla sed consequat urna","dolor":{"sit":"sit dolor\\nconsequat urna","placerat":""}}}"`;
 
 exports[`Helpers should handle http status 400 level error messages from response: 400 fallback yet again error message 1`] = `"XXX Request failed"`;
 
 exports[`Helpers should handle http status 400 level error messages from response: 400 filtered message 1`] = `"Lorem ipsum dolor sit"`;
 
-exports[`Helpers should handle http status 400 level error messages from response: 400 filtered object message 1`] = `"{\\"sit\\":[\\"sit dolor\\",\\"consequat urna\\"],\\"placerat\\":[{\\"ante\\":\\"sed placerat ante\\"}]"`;
+exports[`Helpers should handle http status 400 level error messages from response: 400 filtered object message 1`] = `"{"sit":["sit dolor","consequat urna"],"placerat":[{"ante":"sed placerat ante"}]"`;
 
 exports[`Helpers should handle http status 500 level error messages from response: 500 level error message 1`] = `"500 Lorem ipsum dolor sit"`;
 
@@ -53,9 +53,9 @@ exports[`Helpers should handle http status less than 400 message from response: 
 exports[`Helpers should handle http status less than 400 message from response: 400 message 1`] = `"Request success XXX"`;
 
 exports[`Helpers should handle use aggregate error, or fallback: emulated aggregate error 1`] = `
-Object {
+{
   "aggregated": [AggregateError: testing aggregated],
-  "errors": Array [
+  "errors": [
     [Error: lorem ipsum],
     [Error: dolor sit],
   ],
@@ -65,7 +65,7 @@ Object {
 `;
 
 exports[`Helpers should have specific functions: helpers 1`] = `
-Object {
+{
   "DEV_MODE": false,
   "POLL_INTERVAL": 120000,
   "PROD_MODE": false,
@@ -97,7 +97,7 @@ Object {
 `;
 
 exports[`Helpers should return a predictable current date: current date 1`] = `
-Object {
+{
   "currentDate": 2022-06-01T00:00:00.000Z,
 }
 `;

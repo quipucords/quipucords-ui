@@ -60,7 +60,7 @@ clean()
 {
   local FILE=$TEMP_FILE
 
-  echo "Cleaning css directories..."
+  echo "Cleaning template build css directories..."
   rm -rf -- "$(pwd)"/src/styles/.css
 
   echo "Cleaning build directories..."
