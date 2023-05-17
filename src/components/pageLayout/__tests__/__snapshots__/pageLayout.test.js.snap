@@ -461,6 +461,7 @@ exports[`PageLayout Component should render a non-connected component unauthoriz
             t={[Function]}
             useDispatch={[Function]}
             useGetScans={[Function]}
+            useOnDelete={[Function]}
             useOnExpand={[Function]}
             useOnScanAction={[Function]}
             useOnSelect={[Function]}
