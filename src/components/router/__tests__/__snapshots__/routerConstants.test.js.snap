@@ -67,10 +67,10 @@ Array [
         useView={[Function]}
       />
     </Context.Provider>,
-    "iconClass": "fa fa-crosshairs",
+    "icon": [Function],
     "path": "/sources",
     "redirect": true,
-    "title": "Sources",
+    "title": "sources",
   },
   Object {
     "element": <Context.Provider
@@ -125,9 +125,9 @@ Array [
         useView={[Function]}
       />
     </Context.Provider>,
-    "iconClass": "pficon pficon-orders",
+    "icon": [Function],
     "path": "/scans",
-    "title": "Scans",
+    "title": "scans",
   },
   Object {
     "element": <Context.Provider
@@ -180,9 +180,9 @@ Array [
         useView={[Function]}
       />
     </Context.Provider>,
-    "iconClass": "fa fa-id-card",
+    "icon": [Function],
     "path": "/credentials",
-    "title": "Credentials",
+    "title": "credentials",
   },
 ]
 `;

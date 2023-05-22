@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
@@ -33,9 +34,11 @@ describe('Authentication Component', () => {
       }
     };
     const component = mount(
-      <Authentication {...props}>
-        <span className="test">lorem</span>
-      </Authentication>
+      <BrowserRouter>
+        <Authentication {...props}>
+          <span className="test">lorem</span>
+        </Authentication>
+      </BrowserRouter>
     );
 
     expect(component.find(Alert)).toMatchSnapshot('non-connected error');

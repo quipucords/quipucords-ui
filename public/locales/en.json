@@ -358,6 +358,7 @@
     "label_tooltip_sort_dsc": "Sort descending"
   },
   "view": {
+    "brand-image-alt": "{{name}} image branding.",
     "empty-state_description_credentials": "Credentials contain authentication information needed to scan a source. A credential includes a username and a password or SSH key. {{name}} uses SSH to connect to servers on the network and uses credentials to access those servers.",
     "empty-state_description_scans": "Select a Source to scan from the Sources page.",
     "empty-state_description_scans_zero": "$t(view.empty-state_description_sources)",
@@ -383,8 +384,17 @@
     "error-message_scan-jobs": "Error retrieving scan jobs: {{message}}",
     "error-message_scans": "Error retrieving scans: {{message}}",
     "error-message_sources": "Error retrieving sources: {{message}}",
+    "label_about": "About",
+    "label_credentials": "Credentials",
+    "label_guides-install": "Guides - Install",
+    "label_guides-using": "Guides - Using",
+    "label_logout": "Logout",
+    "label_scans": "Scans",
+    "label_sources": "Sources",
+    "label_skip-nav": "Skip to content",
     "loading": "Loading...",
     "loading_authentication": "Logging in...",
-    "loading_credentials": "Loading credentials..."
+    "loading_credentials": "Loading credentials...",
+    "skip-content": "Skip to Content"
   }
 }
