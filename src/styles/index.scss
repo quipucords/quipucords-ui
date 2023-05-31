@@ -1,40 +1,19 @@
-// Variables
-$font-path: '~patternfly/dist/fonts/';
-$img-path: '~patternfly/dist/img/';
-$icon-font-path: '~patternfly/dist/fonts/';
-
-@import '~patternfly/dist/css/rcue.css';
-@import '~patternfly/dist/css/rcue-additions.css';
 @import '~@patternfly/react-core/dist/styles/base.css';
-
-// Include patternfly variables before bootstrap variables
-@import '~patternfly/dist/sass/patternfly/variables';
 @import '~@patternfly/patternfly/sass-utilities/all';
 
-// Bootstrap Core variables and mixins
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+html, body, #root {
+  height: 100%;
+}
 
-// Patternfly Core variables and mixins
-@import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
-@import '~patternfly/dist/sass/patternfly/mixins';
-
-@import 'app/vars';
-@import 'app/overrides';
 @import 'app/common';
 @import 'app/aboutModal';
 @import 'app/modal';
-@import 'app/login';
-@import 'app/app';
 @import 'app/dropdownSelect';
 @import 'app/list';
 @import 'app/table';
-@import 'app/forms';
-@import 'app/pageLayout';
 @import 'app/scans';
 @import 'app/toastNotifications';
 @import 'app/tooltip';
-@import 'app/views';
 @import 'app/wizard';
 @import 'app/emptyState';
 @import 'app/patternflyOverrides';
