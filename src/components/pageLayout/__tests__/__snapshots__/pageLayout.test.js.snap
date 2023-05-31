@@ -1,587 +1,536 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageLayout Component should render a connected component: connected 1`] = `
-<Component>
+exports[`PageLayout Component should render a basic component branded: brand 1`] = `
+<Masthead>
+  <MastheadToggle>
+    <PageToggleButton
+      aria-label="Global navigation"
+      variant="plain"
+    >
+      <BarsIcon
+        color="currentColor"
+        noVerticalAlign={false}
+        size="sm"
+      />
+    </PageToggleButton>
+  </MastheadToggle>
+  <MastheadMain>
+    <MastheadBrand>
+      <Brand
+        alt="t(view.brand-image-alt, {\\"name\\":\\"Quipucords\\"})"
+      >
+        <source
+          srcSet="title-brand.svg"
+        />
+      </Brand>
+    </MastheadBrand>
+  </MastheadMain>
+  <MastheadContent>
+    <Toolbar
+      id="toolbar"
+      isFullHeight={true}
+      isStatic={true}
+    >
+      <ToolbarContent
+        isExpanded={false}
+        showClearFiltersButton={false}
+      >
+        <ForwardRef
+          alignment={
+            Object {
+              "default": "alignRight",
+            }
+          }
+          spacer={
+            Object {
+              "default": "spacerNone",
+              "md": "spacerMd",
+            }
+          }
+          variant="icon-button-group"
+        >
+          <ForwardRef
+            variant="icon-button-group"
+            visibility={
+              Object {
+                "default": "hidden",
+                "lg": "visible",
+              }
+            }
+          >
+            <ToolbarItem
+              visibility={
+                Object {
+                  "default": "hidden",
+                  "lg": "visible",
+                  "md": "hidden",
+                }
+              }
+            >
+              <ApplicationLauncher
+                aria-label="Application launcher"
+                className=""
+                direction="down"
+                favorites={Array []}
+                favoritesLabel="Favorites"
+                isDisabled={false}
+                isGrouped={false}
+                isOpen={false}
+                items={
+                  Array [
+                    <ApplicationLauncherItem
+                      onClick={[Function]}
+                    >
+                      t(view.label, {"context":"about"})
+                    </ApplicationLauncherItem>,
+                    <ApplicationLauncherItem
+                      href="./docs/install.html"
+                    >
+                      t(view.label, {"context":"guides-install"})
+                    </ApplicationLauncherItem>,
+                    <ApplicationLauncherItem
+                      href="./docs/use.html"
+                    >
+                      t(view.label, {"context":"guides-using"})
+                    </ApplicationLauncherItem>,
+                  ]
+                }
+                menuAppendTo="inline"
+                onSelect={[Function]}
+                onToggle={[Function]}
+                position="right"
+                searchNoResultsText="No results found"
+                searchPlaceholderText="Filter by name..."
+                toggleIcon={
+                  <QuestionCircleIcon
+                    color="currentColor"
+                    noVerticalAlign={false}
+                    size="sm"
+                  />
+                }
+              />
+            </ToolbarItem>
+          </ForwardRef>
+          <ToolbarItem
+            visibility={
+              Object {
+                "default": "visible",
+                "lg": "hidden",
+              }
+            }
+          >
+            <Dropdown
+              dropdownItems={
+                Array [
+                  <DropdownGroup>
+                    <DropdownItem
+                      onClick={[Function]}
+                    >
+                      t(view.label, {"context":"logout"})
+                    </DropdownItem>
+                  </DropdownGroup>,
+                  <Divider />,
+                  <DropdownItem
+                    onClick={[Function]}
+                  >
+                    <CogIcon
+                      color="currentColor"
+                      noVerticalAlign={false}
+                      size="sm"
+                    />
+                     
+                    t(view.label, {"context":"about"})
+                  </DropdownItem>,
+                  <DropdownItem
+                    href="./docs/install.html"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={false}
+                      size="sm"
+                    />
+                     
+                    t(view.label, {"context":"guides-install"})
+                  </DropdownItem>,
+                  <DropdownItem
+                    href="./docs/use.html"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={false}
+                      size="sm"
+                    />
+                     
+                    t(view.label, {"context":"guides-using"})
+                  </DropdownItem>,
+                ]
+              }
+              isOpen={false}
+              isPlain={true}
+              onSelect={[Function]}
+              position="right"
+              toggle={
+                <KebabToggle
+                  onToggle={[Function]}
+                />
+              }
+            />
+          </ToolbarItem>
+        </ForwardRef>
+        <ToolbarItem
+          visibility={
+            Object {
+              "default": "hidden",
+              "lg": "visible",
+            }
+          }
+        >
+          <Dropdown
+            dropdownItems={
+              Array [
+                <DropdownGroup>
+                  <DropdownItem
+                    onClick={[Function]}
+                  >
+                    t(view.label, {"context":"logout"})
+                  </DropdownItem>
+                </DropdownGroup>,
+              ]
+            }
+            isFullHeight={true}
+            isOpen={false}
+            onSelect={[Function]}
+            toggle={
+              <DropdownToggle
+                icon={
+                  <Avatar
+                    alt="Avatar"
+                    src="avatarImg.svg"
+                  />
+                }
+                onToggle={[Function]}
+              >
+                lorem
+              </DropdownToggle>
+            }
+          />
+        </ToolbarItem>
+      </ToolbarContent>
+    </Toolbar>
+  </MastheadContent>
+</Masthead>
+`;
+
+exports[`PageLayout Component should render a basic component: basic 1`] = `
+<Page
+  defaultManagedSidebarIsOpen={true}
+  getBreakpoint={[Function]}
+  header={
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton
+          aria-label="Global navigation"
+          variant="plain"
+        >
+          <BarsIcon
+            color="currentColor"
+            noVerticalAlign={false}
+            size="sm"
+          />
+        </PageToggleButton>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand>
+          <Brand
+            alt="t(view.brand-image-alt, {\\"name\\":\\"Quipucords\\"})"
+          >
+            <source
+              srcSet="title.svg"
+            />
+          </Brand>
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <Toolbar
+          id="toolbar"
+          isFullHeight={true}
+          isStatic={true}
+        >
+          <ToolbarContent
+            isExpanded={false}
+            showClearFiltersButton={false}
+          >
+            <ForwardRef
+              alignment={
+                Object {
+                  "default": "alignRight",
+                }
+              }
+              spacer={
+                Object {
+                  "default": "spacerNone",
+                  "md": "spacerMd",
+                }
+              }
+              variant="icon-button-group"
+            >
+              <ForwardRef
+                variant="icon-button-group"
+                visibility={
+                  Object {
+                    "default": "hidden",
+                    "lg": "visible",
+                  }
+                }
+              >
+                <ToolbarItem
+                  visibility={
+                    Object {
+                      "default": "hidden",
+                      "lg": "visible",
+                      "md": "hidden",
+                    }
+                  }
+                >
+                  <ApplicationLauncher
+                    aria-label="Application launcher"
+                    className=""
+                    direction="down"
+                    favorites={Array []}
+                    favoritesLabel="Favorites"
+                    isDisabled={false}
+                    isGrouped={false}
+                    isOpen={false}
+                    items={
+                      Array [
+                        <ApplicationLauncherItem
+                          onClick={[Function]}
+                        >
+                          t(view.label, {"context":"about"})
+                        </ApplicationLauncherItem>,
+                        <ApplicationLauncherItem
+                          href="./docs/install.html"
+                        >
+                          t(view.label, {"context":"guides-install"})
+                        </ApplicationLauncherItem>,
+                        <ApplicationLauncherItem
+                          href="./docs/use.html"
+                        >
+                          t(view.label, {"context":"guides-using"})
+                        </ApplicationLauncherItem>,
+                      ]
+                    }
+                    menuAppendTo="inline"
+                    onSelect={[Function]}
+                    onToggle={[Function]}
+                    position="right"
+                    searchNoResultsText="No results found"
+                    searchPlaceholderText="Filter by name..."
+                    toggleIcon={
+                      <QuestionCircleIcon
+                        color="currentColor"
+                        noVerticalAlign={false}
+                        size="sm"
+                      />
+                    }
+                  />
+                </ToolbarItem>
+              </ForwardRef>
+              <ToolbarItem
+                visibility={
+                  Object {
+                    "default": "visible",
+                    "lg": "hidden",
+                  }
+                }
+              >
+                <Dropdown
+                  dropdownItems={
+                    Array [
+                      <DropdownGroup>
+                        <DropdownItem
+                          onClick={[Function]}
+                        >
+                          t(view.label, {"context":"logout"})
+                        </DropdownItem>
+                      </DropdownGroup>,
+                      <Divider />,
+                      <DropdownItem
+                        onClick={[Function]}
+                      >
+                        <CogIcon
+                          color="currentColor"
+                          noVerticalAlign={false}
+                          size="sm"
+                        />
+                         
+                        t(view.label, {"context":"about"})
+                      </DropdownItem>,
+                      <DropdownItem
+                        href="./docs/install.html"
+                      >
+                        <HelpIcon
+                          color="currentColor"
+                          noVerticalAlign={false}
+                          size="sm"
+                        />
+                         
+                        t(view.label, {"context":"guides-install"})
+                      </DropdownItem>,
+                      <DropdownItem
+                        href="./docs/use.html"
+                      >
+                        <HelpIcon
+                          color="currentColor"
+                          noVerticalAlign={false}
+                          size="sm"
+                        />
+                         
+                        t(view.label, {"context":"guides-using"})
+                      </DropdownItem>,
+                    ]
+                  }
+                  isOpen={false}
+                  isPlain={true}
+                  onSelect={[Function]}
+                  position="right"
+                  toggle={
+                    <KebabToggle
+                      onToggle={[Function]}
+                    />
+                  }
+                />
+              </ToolbarItem>
+            </ForwardRef>
+            <ToolbarItem
+              visibility={
+                Object {
+                  "default": "hidden",
+                  "lg": "visible",
+                }
+              }
+            >
+              <Dropdown
+                dropdownItems={
+                  Array [
+                    <DropdownGroup>
+                      <DropdownItem
+                        onClick={[Function]}
+                      >
+                        t(view.label, {"context":"logout"})
+                      </DropdownItem>
+                    </DropdownGroup>,
+                  ]
+                }
+                isFullHeight={true}
+                isOpen={false}
+                onSelect={[Function]}
+                toggle={
+                  <DropdownToggle
+                    icon={
+                      <Avatar
+                        alt="Avatar"
+                        src="avatarImg.svg"
+                      />
+                    }
+                    onToggle={[Function]}
+                  >
+                    lorem
+                  </DropdownToggle>
+                }
+              />
+            </ToolbarItem>
+          </ToolbarContent>
+        </Toolbar>
+      </MastheadContent>
+    </Masthead>
+  }
+  isBreadcrumbWidthLimited={false}
+  isManagedSidebar={true}
+  isNotificationDrawerExpanded={false}
+  mainContainerId="main-content"
+  mainTabIndex={-1}
+  onNotificationDrawerExpand={[Function]}
+  onPageResize={[Function]}
+  sidebar={
+    <PageSidebar
+      nav={
+        <Nav
+          onSelect={[Function]}
+          onToggle={[Function]}
+          ouiaSafe={true}
+          theme="dark"
+        >
+          <NavList
+            ariaLeftScroll="Scroll left"
+            ariaRightScroll="Scroll right"
+          >
+            <NavItem
+              className="quipucords-navItem"
+              component={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                }
+              }
+              icon={<Icon />}
+              id="sources"
+              isActive={false}
+              onClick={[Function]}
+              variant="link"
+            >
+              t(view.label, {"context":"sources"})
+            </NavItem>
+            <NavItem
+              className="quipucords-navItem"
+              component={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                }
+              }
+              icon={<Icon />}
+              id="scans"
+              isActive={false}
+              onClick={[Function]}
+              variant="link"
+            >
+              t(view.label, {"context":"scans"})
+            </NavItem>
+            <NavItem
+              className="quipucords-navItem"
+              component={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                }
+              }
+              icon={<Icon />}
+              id="credentials"
+              isActive={false}
+              onClick={[Function]}
+              variant="link"
+            >
+              t(view.label, {"context":"credentials"})
+            </NavItem>
+          </NavList>
+        </Nav>
+      }
+    />
+  }
+  skipToContent={
+    <SkipToContent
+      href="#main-content"
+      show={false}
+    >
+      t(view.label, {"context":"skip-nav"})
+    </SkipToContent>
+  }
+>
   <span
     className="test"
   >
     lorem
   </span>
-</Component>
-`;
-
-exports[`PageLayout Component should render a non-connected component authorized: non-connected authorized 1`] = `
-<div
-  className="layout-pf layout-pf-fixed fadein"
->
-  <VerticalNav
-    blurDelay={700}
-    blurDisabled={false}
-    dynamicBodyClasses={true}
-    forceHidden={false}
-    hiddenIcons={false}
-    hideMasthead={false}
-    hoverDelay={500}
-    hoverDisabled={false}
-    items={null}
-    masthead={null}
-    onCollapse={null}
-    onExpand={null}
-    onItemBlur={null}
-    onItemClick={null}
-    onItemHover={null}
-    onItemPin={null}
-    onMenuToggleClick={null}
-    onMobileSelection={null}
-    onNavigate={[Function]}
-    persist={true}
-    persistentSecondary={false}
-    pinnableMenus={false}
-    showBadges={false}
-  >
-    <VerticalNav.Masthead>
-      <VerticalNav.Brand
-        href=""
-        iconImg=""
-        img=""
-        onClick={null}
-        title=""
-        titleImg="title.svg"
-      />
-      <VerticalNav.IconBar
-        collapse={true}
-      >
-        <MastheadDropdown
-          className=""
-          id="app-help-dropdown"
-          noCaret={false}
-          title={
-            <span
-              aria-hidden={true}
-              className="pficon pficon-help"
-            />
-          }
-        >
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={0}
-            header={false}
-            key="about"
-            onClick={[Function]}
-          >
-            About
-          </MenuItem>
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={2}
-            header={false}
-            href="./docs/use.html"
-            key="use"
-            target="_blank"
-          >
-            Guides - Using
-          </MenuItem>
-        </MastheadDropdown>
-        <MastheadDropdown
-          className=""
-          id="app-user-dropdown"
-          noCaret={false}
-          title={
-            <React.Fragment>
-              <ContextIcon
-                size="sm"
-                symbol="user"
-              />
-               
-              lorem
-            </React.Fragment>
-          }
-        >
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={3}
-            header={false}
-            key="logout"
-            onClick={[Function]}
-          >
-            Logout
-          </MenuItem>
-        </MastheadDropdown>
-      </VerticalNav.IconBar>
-    </VerticalNav.Masthead>
-    <VerticalNav.Item
-      active={true}
-      iconClass="fa fa-crosshairs"
-      key="/sources"
-      onClick={[Function]}
-      title="Sources"
-    />
-    <VerticalNav.Item
-      iconClass="pficon pficon-orders"
-      key="/scans"
-      onClick={[Function]}
-      title="Scans"
-    />
-    <VerticalNav.Item
-      iconClass="fa fa-id-card"
-      key="/credentials"
-      onClick={[Function]}
-      title="Credentials"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="About"
-      isActive={true}
-      key="about"
-      menuType="help"
-      onClick={[Function]}
-      title="About"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="Guides - Using"
-      href="./docs/use.html"
-      isActive={true}
-      key="use"
-      menuType="help"
-      target="_blank"
-      title="Guides - Using"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="Logout"
-      isActive={true}
-      key="logout"
-      menuType="action"
-      onClick={[Function]}
-      title="Logout"
-    />
-  </VerticalNav>
-  <div
-    className="container-pf-nav-pf-vertical"
-  >
-    <span
-      className="test"
-    >
-      lorem
-    </span>
-  </div>
-</div>
-`;
-
-exports[`PageLayout Component should render a non-connected component branded: non-connected brand 1`] = `
-<div
-  className="layout-pf layout-pf-fixed fadein"
->
-  <VerticalNav
-    blurDelay={700}
-    blurDisabled={false}
-    dynamicBodyClasses={true}
-    forceHidden={false}
-    hiddenIcons={false}
-    hideMasthead={false}
-    hoverDelay={500}
-    hoverDisabled={false}
-    items={null}
-    masthead={null}
-    onCollapse={null}
-    onExpand={null}
-    onItemBlur={null}
-    onItemClick={null}
-    onItemHover={null}
-    onItemPin={null}
-    onMenuToggleClick={null}
-    onMobileSelection={null}
-    onNavigate={[Function]}
-    persist={true}
-    persistentSecondary={false}
-    pinnableMenus={false}
-    showBadges={false}
-  >
-    <VerticalNav.Masthead>
-      <VerticalNav.Brand
-        href=""
-        iconImg=""
-        img=""
-        onClick={null}
-        title=""
-        titleImg="title-brand.svg"
-      />
-      <VerticalNav.IconBar
-        collapse={true}
-      >
-        <MastheadDropdown
-          className=""
-          id="app-help-dropdown"
-          noCaret={false}
-          title={
-            <span
-              aria-hidden={true}
-              className="pficon pficon-help"
-            />
-          }
-        >
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={0}
-            header={false}
-            key="about"
-            onClick={[Function]}
-          >
-            About
-          </MenuItem>
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={2}
-            header={false}
-            href="./docs/use.html"
-            key="use"
-            target="_blank"
-          >
-            Guides - Using
-          </MenuItem>
-        </MastheadDropdown>
-        <MastheadDropdown
-          className=""
-          id="app-user-dropdown"
-          noCaret={false}
-          title={
-            <React.Fragment>
-              <ContextIcon
-                size="sm"
-                symbol="user"
-              />
-               
-              lorem
-            </React.Fragment>
-          }
-        >
-          <MenuItem
-            bsClass="dropdown"
-            disabled={false}
-            divider={false}
-            eventKey={3}
-            header={false}
-            key="logout"
-            onClick={[Function]}
-          >
-            Logout
-          </MenuItem>
-        </MastheadDropdown>
-      </VerticalNav.IconBar>
-    </VerticalNav.Masthead>
-    <VerticalNav.Item
-      active={true}
-      iconClass="fa fa-crosshairs"
-      key="/sources"
-      onClick={[Function]}
-      title="Sources"
-    />
-    <VerticalNav.Item
-      iconClass="pficon pficon-orders"
-      key="/scans"
-      onClick={[Function]}
-      title="Scans"
-    />
-    <VerticalNav.Item
-      iconClass="fa fa-id-card"
-      key="/credentials"
-      onClick={[Function]}
-      title="Credentials"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="About"
-      isActive={true}
-      key="about"
-      menuType="help"
-      onClick={[Function]}
-      title="About"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="Guides - Using"
-      href="./docs/use.html"
-      isActive={true}
-      key="use"
-      menuType="help"
-      target="_blank"
-      title="Guides - Using"
-    />
-    <VerticalNav.Item
-      className="collapsed-nav-item"
-      displayTitle="Logout"
-      isActive={true}
-      key="logout"
-      menuType="action"
-      onClick={[Function]}
-      title="Logout"
-    />
-  </VerticalNav>
-  <div
-    className="container-pf-nav-pf-vertical"
-  >
-    <span
-      className="test"
-    >
-      lorem
-    </span>
-  </div>
-</div>
-`;
-
-exports[`PageLayout Component should render a non-connected component unauthorized: non-connected unauthorized 1`] = `
-<PageLayout
-  history={Object {}}
-  isFullPage={false}
-  location={Object {}}
-  logoutUser={[Function]}
-  menu={
-    Array [
-      Object {
-        "element": <Context.Provider
-          value={
-            Object {
-              "initialQuery": Object {
-                "ordering": "name",
-                "page": 1,
-                "page_size": 10,
-              },
-              "toolbar": Object {
-                "filterFields": Array [
-                  Object {
-                    "component": [Function],
-                    "selected": true,
-                    "title": [Function],
-                    "value": "search_by_name",
-                  },
-                  Object {
-                    "component": [Function],
-                    "title": [Function],
-                    "value": "search_credentials_by_name",
-                  },
-                  Object {
-                    "component": [Function],
-                    "title": [Function],
-                    "value": "source_type",
-                  },
-                ],
-                "sortFields": Array [
-                  Object {
-                    "selected": true,
-                    "title": [Function],
-                    "value": "name",
-                  },
-                  Object {
-                    "title": [Function],
-                    "value": "source_type",
-                  },
-                  Object {
-                    "isDefaultDescending": true,
-                    "title": [Function],
-                    "value": "most_recent_connect_scan__start_time",
-                  },
-                ],
-              },
-              "viewId": "sources",
-            }
-          }
-        >
-          <Sources
-            t={[Function]}
-            useDispatch={[Function]}
-            useGetSources={[Function]}
-            useOnDelete={[Function]}
-            useOnEdit={[Function]}
-            useOnExpand={[Function]}
-            useOnScan={[Function]}
-            useOnSelect={[Function]}
-            useOnShowAddSourceWizard={[Function]}
-            useToolbarFieldClearAll={[Function]}
-            useView={[Function]}
-          />
-        </Context.Provider>,
-        "iconClass": "fa fa-crosshairs",
-        "path": "/sources",
-        "redirect": true,
-        "title": "Sources",
-      },
-      Object {
-        "element": <Context.Provider
-          value={
-            Object {
-              "initialQuery": Object {
-                "ordering": "name",
-                "page": 1,
-                "page_size": 10,
-                "scan_type": "inspect",
-              },
-              "toolbar": Object {
-                "filterFields": Array [
-                  Object {
-                    "component": [Function],
-                    "selected": true,
-                    "title": [Function],
-                    "value": "search_by_name",
-                  },
-                  Object {
-                    "component": [Function],
-                    "title": [Function],
-                    "value": "search_sources_by_name",
-                  },
-                ],
-                "sortFields": Array [
-                  Object {
-                    "selected": true,
-                    "title": [Function],
-                    "value": "name",
-                  },
-                  Object {
-                    "isDefaultDescending": true,
-                    "title": [Function],
-                    "value": "most_recent_connect_scan__start_time",
-                  },
-                ],
-              },
-              "viewId": "scans",
-            }
-          }
-        >
-          <Scans
-            t={[Function]}
-            useDispatch={[Function]}
-            useGetScans={[Function]}
-            useOnDelete={[Function]}
-            useOnExpand={[Function]}
-            useOnScanAction={[Function]}
-            useOnSelect={[Function]}
-            useToolbarFieldClearAll={[Function]}
-            useView={[Function]}
-          />
-        </Context.Provider>,
-        "iconClass": "pficon pficon-orders",
-        "path": "/scans",
-        "title": "Scans",
-      },
-      Object {
-        "element": <Context.Provider
-          value={
-            Object {
-              "initialQuery": Object {
-                "ordering": "name",
-                "page": 1,
-                "page_size": 10,
-              },
-              "toolbar": Object {
-                "filterFields": Array [
-                  Object {
-                    "component": [Function],
-                    "selected": true,
-                    "title": [Function],
-                    "value": "search_by_name",
-                  },
-                  Object {
-                    "component": [Function],
-                    "title": [Function],
-                    "value": "cred_type",
-                  },
-                ],
-                "sortFields": Array [
-                  Object {
-                    "selected": true,
-                    "title": [Function],
-                    "value": "name",
-                  },
-                  Object {
-                    "title": [Function],
-                    "value": "cred_type",
-                  },
-                ],
-              },
-              "viewId": "credentials",
-            }
-          }
-        >
-          <Credentials
-            t={[Function]}
-            useGetCredentials={[Function]}
-            useOnDelete={[Function]}
-            useOnEdit={[Function]}
-            useOnExpand={[Function]}
-            useOnSelect={[Function]}
-            useOnShowAddSourceWizard={[Function]}
-            useToolbarFieldClearAll={[Function]}
-            useView={[Function]}
-          />
-        </Context.Provider>,
-        "iconClass": "fa fa-id-card",
-        "path": "/credentials",
-        "title": "Credentials",
-      },
-    ]
-  }
-  session={
-    Object {
-      "authorized": false,
-      "username": "lorem",
-    }
-  }
-  uiBrand={false}
-  uiName="Quipucords"
->
-  <div
-    className="layout-pf layout-pf-fixed fadein"
-  >
-    <Masthead
-      className=""
-      href="#"
-      iconImg=""
-      middleContent={null}
-      navToggle={false}
-      onNavToggleClick={[Function]}
-      onTitleClick={[Function]}
-      thin={false}
-      title="Quipucords"
-      titleImg="title.svg"
-    >
-      <nav
-        className="navbar navbar-pf-vertical"
-      >
-        <div
-          className="navbar-header"
-        >
-          <a
-            className="navbar-brand"
-            href="#"
-            onClick={[Function]}
-            role="button"
-          >
-            <img
-              alt="Quipucords"
-              className="navbar-brand-name"
-              src="title.svg"
-            />
-          </a>
-        </div>
-      </nav>
-    </Masthead>
-    <div>
-      <span
-        className="test"
-      >
-        lorem
-      </span>
-    </div>
-  </div>
-</PageLayout>
+</Page>
 `;
