@@ -1,12 +1,5 @@
 .quipucords{
   &-modal {
-    h4.pf-c-title.pf-m-md {
-      font-size: 0.9rem;
-    }
-
-    .pf-c-button {
-    }
-
     &__rcue-width {
       div.pf-c-modal-box.pf-m-align-top {
         @media (min-width: $pf-global--breakpoint--md) {

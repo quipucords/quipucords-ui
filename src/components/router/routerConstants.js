@@ -1,8 +1,10 @@
 import React from 'react';
+import { IconSize } from '@patternfly/react-icons';
 import { ViewContext } from '../view/viewContext';
 import { Scans, CONFIG as ScansConfig } from '../scans/scans';
 import { Sources, CONFIG as SourcesConfig } from '../sources/sources';
 import { Credentials, CONFIG as CredentialsConfig } from '../credentials/credentials';
+import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
 
 /**
  * Return the application base directory.
@@ -18,8 +20,10 @@ const baseName = '/client';
  */
 const routes = [
   {
-    iconClass: 'fa fa-crosshairs',
-    title: 'Sources',
+    icon: function Icon() {
+      return <ContextIcon size={IconSize.sm} symbol={ContextIconVariant.sources} />;
+    },
+    title: 'sources',
     path: '/sources',
     redirect: true,
     element: (
@@ -29,8 +33,10 @@ const routes = [
     )
   },
   {
-    iconClass: 'pficon pficon-orders',
-    title: 'Scans',
+    icon: function Icon() {
+      return <ContextIcon size={IconSize.sm} symbol={ContextIconVariant.scans} />;
+    },
+    title: 'scans',
     path: '/scans',
     element: (
       <ViewContext.Provider value={{ ...ScansConfig }}>
@@ -39,8 +45,10 @@ const routes = [
     )
   },
   {
-    iconClass: 'fa fa-id-card',
-    title: 'Credentials',
+    icon: function Icon() {
+      return <ContextIcon color={undefined} size={IconSize.sm} symbol={ContextIconVariant.idCard} />;
+    },
+    title: 'credentials',
     path: '/credentials',
     element: (
       <ViewContext.Provider value={{ ...CredentialsConfig }}>

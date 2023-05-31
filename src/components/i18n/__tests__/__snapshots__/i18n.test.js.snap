@@ -876,6 +876,55 @@ Array [
     ],
   },
   Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "keys": Array [
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['logout'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['about'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-install'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-using'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['about'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-install'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-using'] })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['logout'] })",
+      },
+      Object {
+        "key": "view.brand-image-alt",
+        "match": "t('view.brand-image-alt', { name: uiName })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: title })",
+      },
+      Object {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['skip-nav'] })",
+      },
+    ],
+  },
+  Object {
     "file": "./src/components/refreshTimeButton/refreshTimeButton.js",
     "keys": Array [
       Object {
@@ -1630,6 +1679,46 @@ Array [
   Object {
     "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
     "key": "form-dialog.empty-state",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  Object {
+    "file": "./src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
   },
   Object {
     "file": "./src/components/scanHostList/scanHostList.js",
