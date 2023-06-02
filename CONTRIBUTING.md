@@ -123,24 +123,24 @@ To create release artifacts a maintainer must run the release commit process loc
 
 1. clone the main repository, within the repo confirm you're on the `main` branch and **SYNCED** with `origin` `main`
 1. run
-  1. `$ git checkout main`
-  1. `$ yarn`
-  1. `$ yarn release --dry-run` to confirm the release output version and commits.
-  1. `$ yarn release` to generate the commit and file changes.
+   1. `$ git checkout main`
+   1. `$ yarn`
+   1. `$ yarn release --dry-run` to confirm the release output version and commits.
+   1. `$ yarn release` to generate the commit and file changes.
 
-     >If the version recommended should be different you can run the command with an override version following a semver format
-     >  ```
-     >  $ yarn release --override X.X.X
-     >  ``` 
+      >If the version recommended should be different you can run the command with an override version following a semver format
+      >  ```
+      >  $ yarn release --override X.X.X
+      >  ``` 
 1. Confirm you now have a release commit with the format `chore(release): X.X.X` and there are updates to
-  - [`package.json`](./package.json)
-  - [`CHANGELOG.md`](./CHANGELOG.md)
+   - [`package.json`](./package.json)
+   - [`CHANGELOG.md`](./CHANGELOG.md)
 
    If there are issues with the file updates you can correct them and squish any fixes into the `chore(release): X.X.X` commit
 1. Push the **SINGLE** commit to `origin` `main`
 1. Using the [Quipucords-UI GitHub releases interface](https://github.com/RedHatInsights/quipucords-ui/releases)
-  1. Draft a new release from `main` confirming you are aligned with the `chore(release): X.X.X` commit hash
-  1. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
+   1. Draft a new release from `main` confirming you are aligned with the `chore(release): X.X.X` commit hash
+   1. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
 
    > To avoid issues with inconsistent Git tagging use it is recommended you use the GitHub releases interface.
 
@@ -173,18 +173,18 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
    This will cycle through ALL basic NPM dependencies, running both unit tests, build and local integration checks. If
    any errors are throw the package update is skipped.
 1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
-  - Visually confirm that local development still functions and can be navigated with...
-    1. Start VPN, and make sure Docker/Podman is running.
-    1. Run
-       ```
-       $ yarn start
-       ```
-  - Visually confirm that staging development still functions and can be navigated with...
-    1. Start VPN, and make sure Docker/Podman is running.
-    1. Run
-       ```
-       $ yarn start:stage
-       ```
+   - Visually confirm that local development still functions and can be navigated with...
+      1. Start VPN, and make sure Docker/Podman is running.
+      1. Run
+         ```
+         $ yarn start
+         ```
+   - Visually confirm that staging development still functions and can be navigated with...
+      1. Start VPN, and make sure Docker/Podman is running.
+      1. Run
+         ```
+         $ yarn start:stage
+         ```
 1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
 > If any part of the "basic path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping any package update.
@@ -199,18 +199,18 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
    This will cycle through ALL core NPM dependencies, running both unit tests, build and local integration checks. If
    any errors are throw the package update is skipped.
 1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
-  - Visually confirm that local development still functions and can be navigated with...
-    1. Start VPN, and make sure Docker/Podman is running.
-    1. Run
-       ```
-       $ yarn start
-       ```
+   - Visually confirm that local development still functions and can be navigated with...
+      1. Start VPN, and make sure Docker/Podman is running.
+      1. Run
+         ```
+         $ yarn start
+         ```
   - Visually confirm that staging development still functions and can be navigated with...
-    1. Start VPN, and make sure Docker/Podman is running.
-    1. Run
-       ```
-       $ yarn start:stage
-       ```
+     1. Start VPN, and make sure Docker/Podman is running.
+     1. Run
+        ```
+        $ yarn start:stage
+        ```
 1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
 > If any part of the "core path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping potentially any package update.
@@ -228,12 +228,12 @@ This is the slowest part of package updates. If any packages are skipped during 
 1. Start working your way down the list of `dependencies` and `devDependencies` in [`package.json`](./package.json). It is normal to start on the `dev-dependencies` since the related NPMs support build process. Build process updates, short of a semver major/minor, generally do not break the application.
    > Some text editors fill in the next available NPM package version when you go to modify the package version. If this isn't available you can always use [NPM directly](https://www.npmjs.com/)... start searching =).
 1. After each package version update in [`package.json`](./package.json) you'll run the follow scripts
-  - `$ yarn test`, if it fails you'll need to run `$ yarn test:dev` and update the related tests
-  - `$ yarn build`, if it fails you'll need to run `$ yarn test:integration-dev` and update the related tests
-  - Make sure Docker/Podman is running, then type `$ yarn start`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
-  - Make sure Docker/Podman is running, then type `$ yarn start:stage`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
+   - `$ yarn test`, if it fails you'll need to run `$ yarn test:dev` and update the related tests
+   - `$ yarn build`, if it fails you'll need to run `$ yarn test:integration-dev` and update the related tests
+   - Make sure Docker/Podman is running, then type `$ yarn start`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
+   - Make sure Docker/Podman is running, then type `$ yarn start:stage`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
 1. If the package is now working commit the change and move on to the next package.
-  - If the package fails, or you want to skip the update, take the minimally easy path and remove/delete `node_modules` then rollback `yarn.lock` **BEFORE** you run the next package update.
+   - If the package fails, or you want to skip the update, take the minimally easy path and remove/delete `node_modules` then rollback `yarn.lock` **BEFORE** you run the next package update.
 > There are alternatives to resetting `node_modules`, we're providing the most direct path.
 >
 > Not updating a package is not the end-of-the-world. A package is not going to randomly break because you haven't updated to the latest version.
@@ -393,6 +393,7 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 This is a local run designed to function with minimal resources and a mock API.
 
 1. Confirm you've installed all recommended tooling
+1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, Docker has issues with unescaped parameter strings.
 1. Confirm you've installed resources through yarn
 1. Create a local dotenv file called `.env.local` in the root of Quipucords-UI, and add the following contents
     ```
@@ -446,9 +447,8 @@ This project makes use of reserved DOM attributes and string identifiers used by
 > And it is recommended you coordinate with the testing team before altering these attributes, settings.
 
 1. Attribute `data-test`
-
-  - DOM attributes with `data-test=""` are used by the testing team as a means to identify specific DOM elements.
-  - To use simply place `data-test="[your-id-coordinated-with-testing-team]`" onto a DOM element.
+   - DOM attributes with `data-test=""` are used by the testing team as a means to identify specific DOM elements.
+   - To use simply place `data-test="[your-id-coordinated-with-testing-team]`" onto a DOM element.
 
 </details>
 
