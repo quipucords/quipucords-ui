@@ -161,7 +161,10 @@ Our schedule for updating NPMs
 To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
 
 > It is **highly discouraged** that you rely on updating the `yarn.lock` file only. This creates long-term issues when NPM references in `package.json` potentially require specific
-> dependencies, or have built around specific package functionality that could be inadvertently altered by updating a dependencies' dependency.
+> dependencies, or have built around specific package functionality that could be inadvertently altered by updating a dependencies' dependency. Update `package.json` packages instead.
+>
+> To review where a NPM package resource parent in `package.json` is... within the repo context run `$ npm ls [package name]`. This can help provide you with a dependency tree of resources in `package.json` that should
+> be updated.
 
 ##### Basic NPM updates
 
