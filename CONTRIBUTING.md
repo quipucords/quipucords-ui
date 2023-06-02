@@ -151,7 +151,7 @@ To create release artifacts a maintainer must run the release commit process loc
 
 #### Cycle for updating NPMs
 Our schedule for updating NPMs
-- dependabot running once a week on low level packages that require only testing confirmation to pass
+- dependabot running once a month on low level packages that require only testing confirmation to pass
 - 1x a month: running our aggregated dependency update script for all low level packages that require only testing confirmation
   - `$ yarn build:deps`
 - 1x a month: running updates on NPMs that require additional visual confirmation, this includes...
