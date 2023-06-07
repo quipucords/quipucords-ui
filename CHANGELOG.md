@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/quipucords/quipucords-ui/compare/6ff43b4e466bd75de36f4533d4e0255f9a1b47b9...59b2e37f3fe225c346f2e35174571dcb84bfc98d) (2023-06-07)
+
+### Features
+* **scans** discovery-76 adds delete functionality  ([#208](https://github.com/quipucords/quipucords-ui/pull/208)) ([59b2e37](https://github.com/quipucords/quipucords-ui/commit/59b2e37f3fe225c346f2e35174571dcb84bfc98d))
+
+### Documentation
+* **CONTRIBUTING.md** workaround for ERR_OSSL_EVP_UNSUPPORTED  ([#205](https://github.com/quipucords/quipucords-ui/pull/205)) ([a2f4151](https://github.com/quipucords/quipucords-ui/commit/a2f4151168be0e841000f8ee70db92582f124d63))
+
+### Chores
+* **deps** codecov/codecov-action from 3.1.1 to 3.1.3  ([#202](https://github.com/quipucords/quipucords-ui/pull/202)) ([8d2713a](https://github.com/quipucords/quipucords-ui/commit/8d2713aa79d421ee84e61205225fc980b9ed56f3))
+* **deps-dev** changelog-light from 0.2.3 to 0.3.0  ([#199](https://github.com/quipucords/quipucords-ui/pull/199)) ([258adcc](https://github.com/quipucords/quipucords-ui/commit/258adcc4c703b42d40150cffc5cfbe4b3635bc68))
+
 ## [1.2.0](https://github.com/quipucords/quipucords-ui/compare/6cee2723944d9bc7b4b3ded6aca9d5650713fe28...a7e1bddedca77f2ad8f95a8af2e0e858ee6a98ed) (2023-04-14)
 
 ### Features
