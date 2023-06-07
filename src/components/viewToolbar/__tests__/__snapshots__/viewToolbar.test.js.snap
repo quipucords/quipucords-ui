@@ -5,7 +5,7 @@ exports[`ViewToolbar Component should handle displaying secondary components, fi
   <Toolbar
     className="quipucords-toolbar"
     clearAllFilters={[Function]}
-    clearFiltersButtonText="t(toolbar.label, {\\"context\\":\\"clear-filters\\"})"
+    clearFiltersButtonText="t(toolbar.label, {"context":"clear-filters"})"
     collapseListedFiltersBreakpoint="lg"
   >
     <ToolbarContent
@@ -26,8 +26,8 @@ exports[`ViewToolbar Component should handle displaying secondary components, fi
           variant="filter-group"
         >
           <ToolbarFilter
-            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})"
-            chips={Array []}
+            categoryName="t(toolbar.label_option, {"context":"search_by_name"})"
+            chips={[]}
             deleteChip={[Function]}
             key="search_by_name"
             showToolbarItem={true}
@@ -43,7 +43,7 @@ exports[`ViewToolbar Component should handle displaying secondary components, fi
       <ToolbarItem
         key="sortFields"
         spacer={
-          Object {
+          {
             "default": "spacerSm",
           }
         }
@@ -69,7 +69,7 @@ exports[`ViewToolbar Component should handle displaying secondary components, fi
       </ToolbarItem>
       <ToolbarItem
         alignment={
-          Object {
+          {
             "lg": "alignRight",
             "md": "alignLeft",
           }
@@ -85,11 +85,11 @@ exports[`ViewToolbar Component should handle displaying secondary components, fi
 `;
 
 exports[`ViewToolbar Component should handle updating toolbar chips: chips 1`] = `
-Object {
-  "categoryName": "t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})",
+{
+  "categoryName": "t(toolbar.label_option, {"context":"search_by_name"})",
   "children": <SearchName />,
-  "chips": Array [
-    "t(toolbar.label_chip, {\\"context\\":\\"lorem ipsum\\"})",
+  "chips": [
+    "t(toolbar.label_chip, {"context":"lorem ipsum"})",
   ],
   "deleteChip": [Function],
   "showToolbarItem": true,
@@ -111,7 +111,7 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
       className="pf-c-input-group"
     >
       <TextInput
-        aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+        aria-label="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
         className=""
         data-test="toolbarSearchName"
         id={null}
@@ -123,12 +123,12 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
         onClear={[Function]}
         onKeyUp={[Function]}
         onMouseUp={[Function]}
-        placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+        placeholder="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
         type="text"
         value={null}
       >
         <TextInput
-          aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+          aria-label="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
           className="quipucords-form__text-input "
           data-test="toolbarSearchName"
           id="generatedid-"
@@ -139,12 +139,12 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
           onChange={[Function]}
           onKeyUp={[Function]}
           onMouseUp={[Function]}
-          placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+          placeholder="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
           type="text"
           value=""
         >
           <TextInputBase
-            aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+            aria-label="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
             className="quipucords-form__text-input "
             data-test="toolbarSearchName"
             id="generatedid-"
@@ -160,14 +160,14 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
             onKeyUp={[Function]}
             onMouseUp={[Function]}
             ouiaSafe={true}
-            placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+            placeholder="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
             type="text"
             validated="default"
             value=""
           >
             <input
               aria-invalid={false}
-              aria-label="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+              aria-label="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
               className="pf-c-form-control quipucords-form__text-input "
               data-ouia-component-id="OUIA-Generated-TextInputBase-2"
               data-ouia-component-type="PF4/TextInput"
@@ -182,7 +182,7 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
               onFocus={[Function]}
               onKeyUp={[Function]}
               onMouseUp={[Function]}
-              placeholder="t(toolbar.label_placeholder_filter, {\\"context\\":\\"search_by_name\\"})"
+              placeholder="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
               readOnly={false}
               required={false}
               type="text"
@@ -201,7 +201,7 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
   <Toolbar
     className="quipucords-toolbar"
     clearAllFilters={[Function]}
-    clearFiltersButtonText="t(toolbar.label, {\\"context\\":\\"clear-filters\\"})"
+    clearFiltersButtonText="t(toolbar.label, {"context":"clear-filters"})"
     collapseListedFiltersBreakpoint="lg"
   >
     <ToolbarContent
@@ -230,8 +230,8 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
             />
           </ToolbarItem>
           <ToolbarFilter
-            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_by_name\\"})"
-            chips={Array []}
+            categoryName="t(toolbar.label_option, {"context":"search_by_name"})"
+            chips={[]}
             deleteChip={[Function]}
             key="search_by_name"
             showToolbarItem={false}
@@ -239,8 +239,8 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
             <SearchName />
           </ToolbarFilter>
           <ToolbarFilter
-            categoryName="t(toolbar.label_option, {\\"context\\":\\"search_credentials_by_name\\"})"
-            chips={Array []}
+            categoryName="t(toolbar.label_option, {"context":"search_credentials_by_name"})"
+            chips={[]}
             deleteChip={[Function]}
             key="search_credentials_by_name"
             showToolbarItem={false}
@@ -248,8 +248,8 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
             <SearchCredentialsName />
           </ToolbarFilter>
           <ToolbarFilter
-            categoryName="t(toolbar.label_option, {\\"context\\":\\"source_type\\"})"
-            chips={Array []}
+            categoryName="t(toolbar.label_option, {"context":"source_type"})"
+            chips={[]}
             deleteChip={[Function]}
             key="source_type"
             showToolbarItem={false}
@@ -265,7 +265,7 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
       <ToolbarItem
         key="sortFields"
         spacer={
-          Object {
+          {
             "default": "spacerSm",
           }
         }
@@ -291,7 +291,7 @@ exports[`ViewToolbar Component should render a basic component: basic 1`] = `
       </ToolbarItem>
       <ToolbarItem
         alignment={
-          Object {
+          {
             "lg": "alignRight",
             "md": "alignLeft",
           }

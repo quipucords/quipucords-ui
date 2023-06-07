@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextArea Component should export support constants, types: support 1`] = `
-Object {
-  "TextAreResizeOrientation": Object {
+{
+  "TextAreResizeOrientation": {
     "both": "both",
     "default": undefined,
     "horizontal": "horizontal",
@@ -51,9 +51,9 @@ exports[`TextArea Component should render a basic component: basic component 1`]
 `;
 
 exports[`TextArea Component should return an emulated onChange event: emulated event, change 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
       "currentTarget": <textarea
         aria-invalid="false"
@@ -82,9 +82,9 @@ Array [
 `;
 
 exports[`TextArea Component should return an emulated onClear event on escape: emulated event, esc 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
       "currentTarget": <textarea
         aria-invalid="false"

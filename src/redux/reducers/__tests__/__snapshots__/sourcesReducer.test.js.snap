@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SourcesReducer should handle all defined error types: rejected types DELETE_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {
+{
+  "result": {
+    "deleted": {
       "error": true,
       "errorMessage": "ERROR",
       "errorStatus": 0,
@@ -14,23 +14,23 @@ Object {
       "pending": false,
       "update": false,
     },
-    "expanded": Object {},
-    "selected": Object {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "DELETE_SOURCE_REJECTED",
 }
 `;
 
 exports[`SourcesReducer should handle all defined error types: rejected types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {},
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {
+    "view": {
       "error": true,
       "errorMessage": "ERROR",
       "errorStatus": 0,
@@ -47,10 +47,10 @@ Object {
 `;
 
 exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types DELETE_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {
-      "data": Object {
+{
+  "result": {
+    "deleted": {
+      "data": {
         "test": "success",
       },
       "date": undefined,
@@ -64,24 +64,24 @@ Object {
       "pending": false,
       "update": false,
     },
-    "expanded": Object {},
-    "selected": Object {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "DELETE_SOURCE_FULFILLED",
 }
 `;
 
 exports[`SourcesReducer should handle all defined fulfilled types: fulfilled types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {},
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {
-      "data": Object {
+    "view": {
+      "data": {
         "test": "success",
       },
       "date": undefined,
@@ -101,9 +101,9 @@ Object {
 `;
 
 exports[`SourcesReducer should handle all defined pending types: pending types DELETE_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {
+{
+  "result": {
+    "deleted": {
       "error": false,
       "errorMessage": "",
       "errorStatus": undefined,
@@ -114,23 +114,23 @@ Object {
       "pending": true,
       "update": false,
     },
-    "expanded": Object {},
-    "selected": Object {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "DELETE_SOURCE_PENDING",
 }
 `;
 
 exports[`SourcesReducer should handle all defined pending types: pending types GET_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {},
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {
+    "view": {
       "error": false,
       "errorMessage": "",
       "errorStatus": undefined,
@@ -147,86 +147,86 @@ Object {
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type DESELECT_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {
       "undefined": null,
     },
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "DESELECT_SOURCE",
 }
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type EXPANDED_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {
+{
+  "result": {
+    "deleted": {},
+    "expanded": {
       "undefined": undefined,
     },
-    "selected": Object {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "EXPANDED_SOURCE",
 }
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type NOT_EXPANDED_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {
+{
+  "result": {
+    "deleted": {},
+    "expanded": {
       "undefined": null,
     },
-    "selected": Object {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "NOT_EXPANDED_SOURCE",
 }
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type RESET_SOURCE_ACTIONS 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {},
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {},
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "RESET_SOURCE_ACTIONS",
 }
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type SELECT_SOURCE 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {
       "undefined": undefined,
     },
     "update": 0,
-    "view": Object {},
+    "view": {},
   },
   "type": "SELECT_SOURCE",
 }
 `;
 
 exports[`SourcesReducer should handle specific defined types: defined type UPDATE_SOURCES 1`] = `
-Object {
-  "result": Object {
-    "deleted": Object {},
-    "expanded": Object {},
-    "selected": Object {},
+{
+  "result": {
+    "deleted": {},
+    "expanded": {},
+    "selected": {},
     "update": 1654041600000,
-    "view": Object {},
+    "view": {},
   },
   "type": "UPDATE_SOURCES",
 }

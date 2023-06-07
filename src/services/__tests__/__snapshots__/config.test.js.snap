@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ServiceConfig should have specific properties and methods: specific props and methods 1`] = `
-Array [
+[
   "serviceCall",
   "globalXhrTimeout",
   "serviceConfig",

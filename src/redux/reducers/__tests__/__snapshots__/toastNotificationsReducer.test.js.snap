@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`toastNotificationsReducer should handle adding and removing toast notifications: toast added 1`] = `
-Object {
+{
   "displayedToasts": 2,
-  "toasts": Array [
-    Object {
+  "toasts": [
+    {
       "alertType": "success",
       "header": "Lorem",
       "message": "Lorem ipsum dolor",
       "persistent": undefined,
     },
-    Object {
+    {
       "alertType": "success",
       "header": "Lorem",
       "message": "Lorem ipsum dolor",
@@ -21,17 +21,17 @@ Object {
 `;
 
 exports[`toastNotificationsReducer should handle adding and removing toast notifications: toast removed 1`] = `
-Object {
+{
   "displayedToasts": 2,
-  "toasts": Array [
-    Object {
+  "toasts": [
+    {
       "alertType": "success",
       "header": "Lorem",
       "message": "Lorem ipsum dolor",
       "persistent": undefined,
       "removed": true,
     },
-    Object {
+    {
       "alertType": "success",
       "header": "Lorem",
       "message": "Lorem ipsum dolor",
@@ -42,11 +42,11 @@ Object {
 `;
 
 exports[`toastNotificationsReducer should handle specific defined types: defined type TOAST_ADD 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "displayedToasts": 1,
-    "toasts": Array [
-      Object {
+    "toasts": [
+      {
         "alertType": undefined,
         "header": undefined,
         "message": undefined,
@@ -59,30 +59,30 @@ Object {
 `;
 
 exports[`toastNotificationsReducer should handle specific defined types: defined type TOAST_PAUSE 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "displayedToasts": 0,
-    "toasts": Array [],
+    "toasts": [],
   },
   "type": "TOAST_PAUSE",
 }
 `;
 
 exports[`toastNotificationsReducer should handle specific defined types: defined type TOAST_REMOVE 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "displayedToasts": 0,
-    "toasts": Array [],
+    "toasts": [],
   },
   "type": "TOAST_REMOVE",
 }
 `;
 
 exports[`toastNotificationsReducer should handle specific defined types: defined type TOAST_RESUME 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "displayedToasts": 0,
-    "toasts": Array [],
+    "toasts": [],
   },
   "type": "TOAST_RESUME",
 }

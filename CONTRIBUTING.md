@@ -4,7 +4,8 @@ Contributing encompasses repository specific requirements, and the global [Quipu
 ## Install
 Before developing you'll need to install:
 * [NodeJS and NPM](https://nodejs.org/)
-* [Docker](https://docs.docker.com/engine/install/)
+* [Docker](https://docs.docker.com/desktop/)
+  * Alternatively, you can try [Podman](https://github.com/containers/podman).
 * And [Yarn](https://yarnpkg.com)
 
 ### Docker & Mac

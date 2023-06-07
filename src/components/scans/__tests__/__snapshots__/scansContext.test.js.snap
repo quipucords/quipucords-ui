@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScansContext should apply a hook for retrieving data from multiple selectors: selector responses 1`] = `
-Object {
-  "errorResponse": Object {
-    "data": Array [],
+{
+  "errorResponse": {
+    "data": [],
     "date": undefined,
     "error": true,
     "errorMessage": "Lorem ipsum",
@@ -14,8 +14,8 @@ Object {
     "selectedRows": undefined,
     "totalResults": 0,
   },
-  "fulfilledResponse": Object {
-    "data": Array [
+  "fulfilledResponse": {
+    "data": [
       "dolor",
       "sit",
     ],
@@ -29,23 +29,23 @@ Object {
     "selectedRows": undefined,
     "totalResults": 0,
   },
-  "mockStoreSuccessResponse": Object {
-    "data": Array [
+  "mockStoreSuccessResponse": {
+    "data": [
       "lorem",
       "ipsum",
     ],
     "date": undefined,
     "error": false,
     "errorMessage": null,
-    "expandedRows": Object {},
+    "expandedRows": {},
     "fulfilled": true,
     "hasData": false,
     "pending": false,
-    "selectedRows": Object {},
+    "selectedRows": {},
     "totalResults": 0,
   },
-  "pendingResponse": Object {
-    "data": Array [],
+  "pendingResponse": {
+    "data": [],
     "date": undefined,
     "error": undefined,
     "errorMessage": undefined,
@@ -60,15 +60,15 @@ Object {
 `;
 
 exports[`ScansContext should apply a hook for returning a get response: get responses 1`] = `
-Object {
-  "errorResponse": Object {
+{
+  "errorResponse": {
     "error": true,
     "message": "Lorem ipsum",
   },
-  "fulfilledResponse": Object {
-    "data": Object {
-      "view": Object {
-        "results": Array [
+  "fulfilledResponse": {
+    "data": {
+      "view": {
+        "results": [
           "dolor",
           "sit",
         ],
@@ -76,37 +76,37 @@ Object {
     },
     "fulfilled": true,
   },
-  "mockStoreSuccessResponse": Object {
-    "data": Array [
+  "mockStoreSuccessResponse": {
+    "data": [
       "lorem",
       "ipsum",
     ],
     "date": undefined,
     "error": false,
     "errorMessage": null,
-    "expandedRows": Object {},
+    "expandedRows": {},
     "fulfilled": true,
     "hasData": false,
     "pending": false,
-    "selectedRows": Object {},
+    "selectedRows": {},
     "totalResults": 0,
   },
-  "pendingResponse": Object {
+  "pendingResponse": {
     "pending": true,
   },
 }
 `;
 
 exports[`ScansContext should attempt to poll scans: timeout 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "callback": false,
       "interval": 0,
     },
   ],
-  Array [
-    Object {
+  [
+    {
       "callback": false,
       "interval": 0,
     },
@@ -115,21 +115,21 @@ Array [
 `;
 
 exports[`ScansContext should handle deleting a scan with a confirmation: dispatch onDelete 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "body": undefined,
-      "confirmButtonText": "t(form-dialog.label, {\\"context\\":\\"delete\\"})",
-      "heading": "t(form-dialog.confirmation_heading, {\\"context\\":\\"delete-scan\\",\\"count\\":1,\\"name\\":\\"lorem ipsum name\\"}, [object Object])",
+      "confirmButtonText": "t(form-dialog.label, {"context":"delete"})",
+      "heading": "t(form-dialog.confirmation_heading, {"context":"delete-scan","count":1,"name":"lorem ipsum name"}, [object Object])",
       "onConfirm": [Function],
-      "title": "t(form-dialog.confirmation_title, {\\"context\\":\\"delete-scan\\",\\"count\\":1})",
+      "title": "t(form-dialog.confirmation_title, {"context":"delete-scan","count":1})",
     },
   ],
 ]
 `;
 
 exports[`ScansContext should handle scan actions with multiple callbacks: callbacks 1`] = `
-Object {
+{
   "onCancel": [Function],
   "onDownload": [Function],
   "onDownloadJob": [Function],
@@ -140,10 +140,10 @@ Object {
 `;
 
 exports[`ScansContext should handle scan actions with multiple callbacks: dispatch onStart 1`] = `
-Array [
-  Array [
-    Object {
-      "meta": Object {
+[
+  [
+    {
+      "meta": {
         "id": "lorem ipsum base id",
       },
       "payload": Promise {},
@@ -154,8 +154,8 @@ Array [
 `;
 
 exports[`ScansContext should return specific properties: specific properties 1`] = `
-Object {
-  "INITIAL_QUERY": Object {
+{
+  "INITIAL_QUERY": {
     "ordering": "name",
     "page": 1,
     "page_size": 10,

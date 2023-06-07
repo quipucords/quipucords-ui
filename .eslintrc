@@ -1,37 +1,43 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "es6": true,
-    "node": true,
-    "jest/globals": true
-  },
-  "plugins": [
-    "import",
-    "jest",
-    "jsdoc",
-    "json",
-    "prettier",
-    "react"
-  ],
-  "settings": {
-    "import/external-module-folders": ["public"]
+    "es2022": true,
+    "jest": true
   },
   "extends": [
-    "react-app",
     "airbnb",
     "airbnb/hooks",
     "prettier",
     "plugin:jest/recommended",
     "plugin:jsdoc/recommended"
   ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "plugins": [
+    "import",
+    "jest",
+    "jsdoc",
+    "json",
+    "node",
+    "prettier",
+    "react"
+  ],
+  "settings": {
+    "import/external-module-folders": ["public"],
+    "jsdoc": {}
+  },
   "globals": {
+    "mockObjectProperty": "readonly",
     "mountHook": "readonly",
     "mountHookComponent": "readonly",
     "mountHookWrapper": "readonly",
+    "mockWindowLocation": "readonly",
     "shallowHook": "readonly",
     "shallowHookComponent": "readonly",
-    "shallowHookWrapper": "readonly"
+    "shallowHookWrapper": "readonly",
+    "skipIt": "readonly"
   },
   "rules": {
     "arrow-parens": [
@@ -39,9 +45,9 @@
       "as-needed"
     ],
     "class-methods-use-this": 1,
-    "camelcase": 1,
     "comma-dangle": 0,
     "consistent-return": 1,
+    "default-param-last": 0,
     "import/extensions": [
       "error",
       {
@@ -59,16 +65,46 @@
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
     "jest/no-done-callback": 0,
+    "jest/no-standalone-expect": [
+      2,
+      { "additionalTestBlockFunctions": ["skipIt"] }
+    ],
     "jest/prefer-to-have-length": 0,
+    "jsdoc/check-tag-names": [
+      2,
+      {
+        "definedTags": [
+          "api",
+          "apiDescription",
+          "apiSuccess",
+          "apiSuccessExample",
+          "apiError",
+          "apiErrorExample",
+          "apiMock",
+          "apiParam"
+        ]
+      }
+    ],
+    "jsdoc/no-undefined-types": [2, { "definedTypes": ["html"] }],
+    "jsdoc/require-jsdoc": 2,
+    "jsdoc/require-param": 2,
     "jsdoc/require-param-description": 0,
+    "jsdoc/require-param-name": 2,
+    "jsdoc/require-param-type": 2,
+    "jsdoc/require-property": 2,
     "jsdoc/require-property-description": 0,
+    "jsdoc/require-property-name": 2,
+    "jsdoc/require-property-type": 2,
+    "jsdoc/require-returns": 2,
     "jsdoc/require-returns-description": 0,
+    "jsdoc/require-returns-type": 2,
     "jsdoc/tag-lines": [
       "warn",
       "always",
       {
         "count": 0,
-        "noEndLines": true
+        "applyToEndTag": false,
+        "startLines": 1
       }
     ],
     "max-len": [
@@ -84,8 +120,14 @@
     "no-debugger": 1,
     "no-lonely-if": 1,
     "no-plusplus": 0,
+    "no-promise-executor-return": 1,
+    "no-restricted-exports": [1, {"restrictedNamedExports":  []}],
     "no-restricted-properties": [0, {"object": "Math", "property": "pow"}],
     "no-underscore-dangle": 0,
+    "no-unsafe-optional-chaining": 1,
+    "prefer-exponentiation-operator": 0,
+    "prefer-promise-reject-errors": 1,
+    "prefer-regex-literals": 0,
     "prettier/prettier": [
       "error",
       {
@@ -96,11 +138,16 @@
       }
     ],
     "react/forbid-prop-types": 0,
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
+    "react/jsx-curly-newline": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-fragments": [ 1, "element" ],
     "react/jsx-props-no-spreading": 0,
     "react/jsx-one-expression-per-line": 0,
+    "react/jsx-no-constructed-context-values": 1,
     "react/no-unused-prop-types": 1,
+    "react/no-unstable-nested-components": 0,
+    "react/jsx-no-useless-fragment": 1,
     "react/state-in-constructor": [ 1, "never" ],
     "space-before-function-paren": 0,
     "jsx-a11y/anchor-is-valid": 1,

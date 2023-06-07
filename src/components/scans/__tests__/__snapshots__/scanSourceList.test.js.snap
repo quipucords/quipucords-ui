@@ -103,7 +103,7 @@ exports[`ScanSourceList Component should render a non-connected component error:
   <Alert
     isInline={true}
     isPlain={true}
-    title="t(view.error, {\\"context\\":\\"scan-jobs\\"})"
+    title="t(view.error, {"context":"scan-jobs"})"
     variant="danger"
   >
     t(view.error-message, {"context":"scan-jobs","message":"Lorem Ipsum."})

@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddSourceWizard Component should allow cancelling the wizard: cancel 1`] = `
-Array [
-  Array [
-    Object {
-      "source": Object {
+[
+  [
+    {
+      "source": {
         "source_type": "network",
       },
       "type": "VALID_SOURCE_WIZARD_STEPONE",
     },
   ],
-  Array [
-    Object {
-      "body": "t(form-dialog.confirmation_body_add-source, {\\"context\\":\\" \\"})",
-      "cancelButtonText": "t(form-dialog.label, {\\"context\\":\\"no\\"})",
-      "confirmButtonText": "t(form-dialog.label, {\\"context\\":\\"yes\\"})",
-      "heading": "t(form-dialog.confirmation_heading_add-source, {\\"context\\":\\"\\"})",
+  [
+    {
+      "body": "t(form-dialog.confirmation_body_add-source, {"context":" "})",
+      "cancelButtonText": "t(form-dialog.label, {"context":"no"})",
+      "confirmButtonText": "t(form-dialog.label, {"context":"yes"})",
+      "heading": "t(form-dialog.confirmation_heading_add-source, {"context":""})",
       "onConfirm": [Function],
-      "title": "t(form-dialog.confirmation_title_add-source, {\\"context\\":\\"\\"})",
+      "title": "t(form-dialog.confirmation_title_add-source, {"context":""})",
       "type": "CONFIRMATION_MODAL_SHOW",
       "variant": "medium",
     },
@@ -26,27 +26,27 @@ Array [
 `;
 
 exports[`AddSourceWizard Component should allow closing the wizard on fulfillment: fulfill 1`] = `
-Array [
-  Array [
-    Object {
-      "source": Object {
+[
+  [
+    {
+      "source": {
         "source_type": "network",
       },
       "type": "VALID_SOURCE_WIZARD_STEPONE",
     },
   ],
-  Array [
-    Array [
-      Object {
+  [
+    [
+      {
         "type": "CONFIRMATION_MODAL_HIDE",
       },
-      Object {
+      {
         "type": "UPDATE_SOURCE_HIDE",
       },
     ],
   ],
-  Array [
-    Object {
+  [
+    {
       "type": "UPDATE_VIEW",
       "viewId": "sources",
     },
@@ -63,28 +63,28 @@ exports[`AddSourceWizard Component should display update steps: update 1`] = `
   onClose={[Function]}
   onNext={[Function]}
   steps={
-    Array [
-      Object {
+    [
+      {
         "canJumpTo": false,
         "component": <Memo(Connect(AddSourceWizardStepTwo)) />,
         "enableNext": false,
         "id": 1,
-        "name": "t(form-dialog.title_add-source_step, {\\"context\\":\\"two\\"})",
-        "nextButtonText": "t(form-dialog.label_submit, {\\"context\\":\\"add-source\\"})",
+        "name": "t(form-dialog.title_add-source_step, {"context":"two"})",
+        "nextButtonText": "t(form-dialog.label_submit, {"context":"add-source"})",
       },
-      Object {
+      {
         "canJumpTo": false,
         "component": <Memo(Connect(AddSourceWizardStepThree)) />,
         "enableNext": false,
         "hideBackButton": false,
         "hideCancelButton": false,
         "id": 2,
-        "name": "t(form-dialog.title_add-source_step, {\\"context\\":\\"three\\"})",
-        "nextButtonText": "t(form-dialog.label, {\\"context\\":\\"close\\"})",
+        "name": "t(form-dialog.title_add-source_step, {"context":"three"})",
+        "nextButtonText": "t(form-dialog.label, {"context":"close"})",
       },
     ]
   }
-  title="t(form-dialog.title_add-source, {\\"context\\":\\"edit\\"})"
+  title="t(form-dialog.title_add-source, {"context":"edit"})"
   variant="medium"
 />
 `;
@@ -98,35 +98,35 @@ exports[`AddSourceWizard Component should render a basic component: basic 1`] = 
   onClose={[Function]}
   onNext={[Function]}
   steps={
-    Array [
-      Object {
+    [
+      {
         "canJumpTo": false,
         "component": <Memo(Connect(AddSourceWizardStepOne)) />,
         "enableNext": false,
         "id": 1,
-        "name": "t(form-dialog.title_add-source, {\\"context\\":\\"step\\"})",
+        "name": "t(form-dialog.title_add-source, {"context":"step"})",
       },
-      Object {
+      {
         "canJumpTo": false,
         "component": <Memo(Connect(AddSourceWizardStepTwo)) />,
         "enableNext": false,
         "id": 2,
-        "name": "t(form-dialog.title_add-source_step, {\\"context\\":\\"two\\"})",
-        "nextButtonText": "t(form-dialog.label_submit, {\\"context\\":\\"add-source\\"})",
+        "name": "t(form-dialog.title_add-source_step, {"context":"two"})",
+        "nextButtonText": "t(form-dialog.label_submit, {"context":"add-source"})",
       },
-      Object {
+      {
         "canJumpTo": false,
         "component": <Memo(Connect(AddSourceWizardStepThree)) />,
         "enableNext": false,
         "hideBackButton": false,
         "hideCancelButton": false,
         "id": 3,
-        "name": "t(form-dialog.title_add-source_step, {\\"context\\":\\"three\\"})",
-        "nextButtonText": "t(form-dialog.label, {\\"context\\":\\"close\\"})",
+        "name": "t(form-dialog.title_add-source_step, {"context":"three"})",
+        "nextButtonText": "t(form-dialog.label, {"context":"close"})",
       },
     ]
   }
-  title="t(form-dialog.title, {\\"context\\":\\"add-source\\"})"
+  title="t(form-dialog.title, {"context":"add-source"})"
   variant="medium"
 />
 `;
