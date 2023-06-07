@@ -207,7 +207,7 @@ exports[`Modal Component should allow custom headers and footers: undefined 1`] 
 
 exports[`Modal Component should allow modifying specific and custom props: aria-label 1`] = `
 <Modal
-  actions={Array []}
+  actions={[]}
   appendTo={
     <div
       class="quipucords-modal quipucords-modal__rcue-width"
@@ -235,7 +235,7 @@ exports[`Modal Component should allow modifying specific and custom props: aria-
     containerInfo={<div />}
   >
     <ModalContent
-      actions={Array []}
+      actions={[]}
       aria-describedby=""
       aria-label="dolor sit"
       aria-labelledby=""
@@ -262,7 +262,7 @@ exports[`Modal Component should allow modifying specific and custom props: aria-
 
 exports[`Modal Component should allow modifying specific and custom props: backdrop 1`] = `
 <Modal
-  actions={Array []}
+  actions={[]}
   appendTo={
     <div
       class="quipucords-modal quipucords-modal__hide-backdrop quipucords-modal__rcue-width"
@@ -290,7 +290,7 @@ exports[`Modal Component should allow modifying specific and custom props: backd
     containerInfo={<div />}
   >
     <ModalContent
-      actions={Array []}
+      actions={[]}
       aria-describedby=""
       aria-label="t(modal.aria-label-default)"
       aria-labelledby=""
@@ -317,7 +317,7 @@ exports[`Modal Component should allow modifying specific and custom props: backd
 
 exports[`Modal Component should allow modifying specific and custom props: isContentOnly 1`] = `
 <Modal
-  actions={Array []}
+  actions={[]}
   appendTo={
     <div
       class="quipucords-modal quipucords-modal__hide-backdrop quipucords-modal__rcue-width"
@@ -345,7 +345,7 @@ exports[`Modal Component should allow modifying specific and custom props: isCon
     containerInfo={<div />}
   >
     <ModalContent
-      actions={Array []}
+      actions={[]}
       aria-describedby=""
       aria-label="t(modal.aria-label-default)"
       aria-labelledby=""
@@ -385,7 +385,7 @@ exports[`Modal Component should render a basic component: basic 1`] = `
   variant={null}
 >
   <Modal
-    actions={Array []}
+    actions={[]}
     appendTo={
       <div
         class="quipucords-modal quipucords-modal__rcue-width"
@@ -413,7 +413,7 @@ exports[`Modal Component should render a basic component: basic 1`] = `
       containerInfo={<div />}
     >
       <ModalContent
-        actions={Array []}
+        actions={[]}
         aria-describedby=""
         aria-label="t(modal.aria-label-default)"
         aria-labelledby=""

@@ -24,7 +24,7 @@ exports[`Scans Component should handle multiple display states, pending, error, 
       lastRefresh={NaN}
       secondaryFields={
         <Tooltip
-          content="t(table.tooltip, {\\"context\\":\\"merge-reports\\"})"
+          content="t(table.tooltip, {"context":"merge-reports"})"
           delayShow={500}
           id={null}
           isPopover={false}
@@ -58,9 +58,9 @@ exports[`Scans Component should handle multiple display states, pending, error, 
       <Table
         ariaLabel={null}
         className=""
-        columnHeaders={Array []}
+        columnHeaders={[]}
         componentClassNames={
-          Object {
+          {
             "table": "quipucords-table",
             "td": "quipucords-table__td",
             "tdAction": "quipucords-table__td-action",
@@ -83,10 +83,10 @@ exports[`Scans Component should handle multiple display states, pending, error, 
         onSelect={[Function]}
         onSort={null}
         rows={
-          Array [
-            Object {
-              "cells": Array [
-                Object {
+          [
+            {
+              "cells": [
+                {
                   "content": <Grid
                     hasGutter={false}
                   >
@@ -103,9 +103,9 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                       </div>
                     </GridItem>
                   </Grid>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"description\\"})",
+                  "dataLabel": "t(table.header, {"context":"description"})",
                 },
-                Object {
+                {
                   "content": <Grid
                     hasGutter={false}
                   >
@@ -126,12 +126,12 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                       a day ago
                     </GridItem>
                   </Grid>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"scan\\"})",
+                  "dataLabel": "t(table.header, {"context":"scan"})",
                   "width": 20,
                 },
-                Object {
+                {
                   "content": <Tooltip
-                    content="t(table.label_status_tooltip, {\\"context\\":\\"success\\",\\"count\\":0})"
+                    content="t(table.label_status_tooltip, {"context":"success","count":0})"
                     delayShow={500}
                     id={null}
                     isPopover={false}
@@ -139,14 +139,14 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                   >
                     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
                   </Tooltip>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"success\\"})",
+                  "dataLabel": "t(table.header, {"context":"success"})",
                   "expandedContent": undefined,
                   "isExpanded": false,
                   "width": 8,
                 },
-                Object {
+                {
                   "content": <Tooltip
-                    content="t(table.label_status_tooltip, {\\"context\\":\\"failed\\",\\"count\\":0})"
+                    content="t(table.label_status_tooltip, {"context":"failed","count":0})"
                     delayShow={500}
                     id={null}
                     isPopover={false}
@@ -154,14 +154,14 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                   >
                     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
                   </Tooltip>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"failed\\"})",
+                  "dataLabel": "t(table.header, {"context":"failed"})",
                   "expandedContent": undefined,
                   "isExpanded": false,
                   "width": 8,
                 },
-                Object {
+                {
                   "content": <Tooltip
-                    content="t(table.label_status_tooltip, {\\"context\\":\\"sources\\",\\"count\\":0})"
+                    content="t(table.label_status_tooltip, {"context":"sources","count":0})"
                     delayShow={500}
                     id={null}
                     isPopover={false}
@@ -169,14 +169,14 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                   >
                     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
                   </Tooltip>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"sources\\"})",
+                  "dataLabel": "t(table.header, {"context":"sources"})",
                   "expandedContent": undefined,
                   "isExpanded": false,
                   "width": 8,
                 },
-                Object {
+                {
                   "content": <Tooltip
-                    content="t(table.label_status_tooltip, {\\"context\\":\\"scans\\",\\"count\\":0})"
+                    content="t(table.label_status_tooltip, {"context":"scans","count":0})"
                     delayShow={500}
                     id={null}
                     isPopover={false}
@@ -184,13 +184,13 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                   >
                     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
                   </Tooltip>,
-                  "dataLabel": "t(table.header, {\\"context\\":\\"scan-jobs\\"})",
+                  "dataLabel": "t(table.header, {"context":"scan-jobs"})",
                   "expandedContent": undefined,
                   "isExpanded": false,
                   "noPadding": true,
                   "width": 8,
                 },
-                Object {
+                {
                   "content": <OverflowMenu
                     breakpoint="lg"
                   >
@@ -199,14 +199,14 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                         groupType="button"
                       >
                         <Tooltip
-                          content="t(table.label, {\\"context\\":\\"delete\\"})"
+                          content="t(table.label, {"context":"delete"})"
                           delayShow={500}
                           id={null}
                           isPopover={false}
                           placement="top"
                         >
                           <Button
-                            aria-label="t(table.label, {\\"context\\":\\"delete\\"})"
+                            aria-label="t(table.label, {"context":"delete"})"
                             className="quipucords-view__row-button"
                             onClick={[Function]}
                             variant="plain"
@@ -235,9 +235,9 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                         name={null}
                         onSelect={[Function]}
                         options={
-                          Array [
-                            Object {
-                              "title": "t(table.label, {\\"context\\":\\"delete\\"})",
+                          [
+                            {
+                              "title": "t(table.label, {"context":"delete"})",
                               "value": "delete",
                             },
                           ]
@@ -258,13 +258,13 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                     </OverflowMenuControl>
                   </OverflowMenu>,
                   "isActionCell": true,
-                  "style": Object {
+                  "style": {
                     "textAlign": "right",
                   },
                 },
               ],
               "isSelected": false,
-              "item": Object {
+              "item": {
                 "id": "1",
                 "name": "lorem",
               },
@@ -345,9 +345,9 @@ exports[`Scans Component should render a basic component: basic 1`] = `
       <Table
         ariaLabel={null}
         className=""
-        columnHeaders={Array []}
+        columnHeaders={[]}
         componentClassNames={
-          Object {
+          {
             "table": "quipucords-table",
             "td": "quipucords-table__td",
             "tdAction": "quipucords-table__td-action",
@@ -369,7 +369,7 @@ exports[`Scans Component should render a basic component: basic 1`] = `
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
-        rows={Array []}
+        rows={[]}
         summary={null}
         variant="compact"
       >
@@ -428,9 +428,9 @@ exports[`Scans Component should return an empty state when there are no scans: e
       <Table
         ariaLabel={null}
         className=""
-        columnHeaders={Array []}
+        columnHeaders={[]}
         componentClassNames={
-          Object {
+          {
             "table": "quipucords-table",
             "td": "quipucords-table__td",
             "tdAction": "quipucords-table__td-action",
@@ -452,7 +452,7 @@ exports[`Scans Component should return an empty state when there are no scans: e
         onExpand={[Function]}
         onSelect={[Function]}
         onSort={null}
-        rows={Array []}
+        rows={[]}
         summary={null}
         variant="compact"
       >

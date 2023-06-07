@@ -16,7 +16,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
       src="title-brand.svg"
     />
   }
-  trademark="t(about-modal.copyright, {\\"year\\":\\"2022\\"})"
+  trademark="t(about-modal.copyright, {"year":"2022"})"
 >
   <div
     aria-label="t(about-modal.copy-confirmation)"
@@ -61,14 +61,14 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
 `;
 
 exports[`AboutModal Component should have a copy event that updates state: post copy event 1`] = `
-Object {
+{
   "copied": null,
   "timer": 13,
 }
 `;
 
 exports[`AboutModal Component should have a copy event that updates state: pre copy event 1`] = `
-Object {
+{
   "copied": null,
   "timer": null,
 }

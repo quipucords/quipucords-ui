@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StatusReducer should handle all defined error types: rejected types STATUS_INFO 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "apiVersion": null,
     "build": null,
     "error": true,
@@ -16,8 +16,8 @@ Object {
 `;
 
 exports[`StatusReducer should handle all defined fulfilled types: fulfilled types STATUS_INFO 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "apiVersion": undefined,
     "build": undefined,
     "error": false,
@@ -31,8 +31,8 @@ Object {
 `;
 
 exports[`StatusReducer should handle all defined pending types: pending types STATUS_INFO 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "apiVersion": null,
     "build": null,
     "error": false,

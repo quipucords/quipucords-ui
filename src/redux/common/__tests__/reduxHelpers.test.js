@@ -46,7 +46,7 @@ describe('ReduxHelpers', () => {
           reset: false
         }
       )
-    ).toMatchSnapshot('dont reset state object');
+    ).toMatchSnapshot("don't reset state object");
   });
 
   it('should generate a standard reducer from promise actions', () => {

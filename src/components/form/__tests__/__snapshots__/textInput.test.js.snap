@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextInput Component should export support constants, types: support 1`] = `
-Object {
-  "TextInputTypes": Object {
+{
+  "TextInputTypes": {
     "date": "date",
     "datetimeLocal": "datetime-local",
     "email": "email",
@@ -77,18 +77,18 @@ exports[`TextInput Component should render a basic component: basic component 1`
 `;
 
 exports[`TextInput Component should return a mouseup event on text clear: emulated event, mouseup 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
-      "currentTarget": Object {
+      "currentTarget": {
         "value": "",
       },
       "id": undefined,
       "keyCode": undefined,
       "name": undefined,
       "persist": [Function],
-      "target": Object {},
+      "target": {},
       "value": "",
     },
   ],
@@ -96,9 +96,9 @@ Array [
 `;
 
 exports[`TextInput Component should return an emulated onChange event: emulated event, change 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"
@@ -133,9 +133,9 @@ Array [
 `;
 
 exports[`TextInput Component should return an emulated onClear event on escape with type search: emulated event, esc, type search 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"
@@ -170,9 +170,9 @@ Array [
 `;
 
 exports[`TextInput Component should return an emulated onClear event on escape: emulated event, esc 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"

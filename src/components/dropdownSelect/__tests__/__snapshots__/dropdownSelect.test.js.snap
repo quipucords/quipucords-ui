@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select Component should allow alternate array and object options: key value object 1`] = `
-Array [
-  Object {
+[
+  {
     "0": "i",
     "1": "p",
     "2": "s",
@@ -15,7 +15,7 @@ Array [
     "title": "lorem",
     "value": "ipsum",
   },
-  Object {
+  {
     "0": "w",
     "1": "o",
     "2": "r",
@@ -32,8 +32,8 @@ Array [
 `;
 
 exports[`Select Component should allow alternate array and object options: key value object 2`] = `
-Array [
-  Object {
+[
+  {
     "label": "lorem",
     "selected": true,
     "text": "lorem",
@@ -41,7 +41,7 @@ Array [
     "title": "lorem",
     "value": "ipsum",
   },
-  Object {
+  {
     "label": "hello",
     "selected": true,
     "text": "hello",
@@ -53,8 +53,8 @@ Array [
 `;
 
 exports[`Select Component should allow alternate array and object options: string array 1`] = `
-Array [
-  Object {
+[
+  {
     "label": "lorem",
     "selected": false,
     "text": "lorem",
@@ -62,7 +62,7 @@ Array [
     "title": "lorem",
     "value": "lorem",
   },
-  Object {
+  {
     "label": "ipsum",
     "selected": true,
     "text": "ipsum",
@@ -70,7 +70,7 @@ Array [
     "title": "ipsum",
     "value": "ipsum",
   },
-  Object {
+  {
     "label": "hello",
     "selected": false,
     "text": "hello",
@@ -78,7 +78,7 @@ Array [
     "title": "hello",
     "value": "hello",
   },
-  Object {
+  {
     "label": "world",
     "selected": false,
     "text": "world",
@@ -89,17 +89,17 @@ Array [
 ]
 `;
 
-exports[`Select Component should allow alternate array and object options: undefined options 1`] = `Array []`;
+exports[`Select Component should allow alternate array and object options: undefined options 1`] = `[]`;
 
 exports[`Select Component should allow alternate direction and position options: direction up 1`] = `
-Object {
+{
   "className": "quipucords-select-pf   ",
   "direction": "up",
 }
 `;
 
 exports[`Select Component should allow alternate direction and position options: position right 1`] = `
-Object {
+{
   "className": "quipucords-select-pf quipucords-select-pf__position-down quipucords-select-pf__position-right ",
   "direction": "down",
 }
@@ -121,7 +121,7 @@ exports[`Select Component should allow being disabled with missing options: no o
     customBadgeText={null}
     customContent={null}
     direction="down"
-    favorites={Array []}
+    favorites={[]}
     favoritesLabel="Favorites"
     hasInlineFilter={false}
     hasPlaceholderStyle={true}
@@ -150,7 +150,7 @@ exports[`Select Component should allow being disabled with missing options: no o
     placeholderText="Select option"
     position="left"
     removeSelectionAriaLabel="Remove"
-    selections={Array []}
+    selections={[]}
     shouldResetOnSelect={true}
     toggleAriaLabel="Options menu"
     toggleIcon={null}
@@ -180,7 +180,7 @@ exports[`Select Component should allow being disabled with missing options: opti
     customBadgeText={null}
     customContent={null}
     direction="down"
-    favorites={Array []}
+    favorites={[]}
     favoritesLabel="Favorites"
     hasInlineFilter={false}
     hasPlaceholderStyle={true}
@@ -209,7 +209,7 @@ exports[`Select Component should allow being disabled with missing options: opti
     placeholderText="Select option"
     position="left"
     removeSelectionAriaLabel="Remove"
-    selections={Array []}
+    selections={[]}
     shouldResetOnSelect={true}
     toggleAriaLabel="Options menu"
     toggleIcon={null}
@@ -239,7 +239,7 @@ exports[`Select Component should allow being disabled with missing options: opti
     customBadgeText={null}
     customContent={null}
     direction="down"
-    favorites={Array []}
+    favorites={[]}
     favoritesLabel="Favorites"
     hasInlineFilter={false}
     hasPlaceholderStyle={true}
@@ -268,7 +268,7 @@ exports[`Select Component should allow being disabled with missing options: opti
     placeholderText="Select option"
     position="left"
     removeSelectionAriaLabel="Remove"
-    selections={Array []}
+    selections={[]}
     shouldResetOnSelect={true}
     toggleAriaLabel="Options menu"
     toggleIcon={null}
@@ -283,7 +283,7 @@ exports[`Select Component should allow being disabled with missing options: opti
 `;
 
 exports[`Select Component should allow data- props: data- attributes 1`] = `
-Object {
+{
   "ariaLabel": "Select option",
   "buttonVariant": "default",
   "className": "",
@@ -298,7 +298,7 @@ Object {
   "maxHeight": null,
   "name": null,
   "onSelect": [Function],
-  "options": Array [],
+  "options": [],
   "placeholder": "Select option",
   "position": "left",
   "selectedOptions": null,
@@ -309,34 +309,34 @@ Object {
 `;
 
 exports[`Select Component should allow plain objects as values, and be able to select options based on values within the object: select when option values are objects 1`] = `
-Array [
-  Object {
+[
+  {
     "label": "lorem",
     "selected": false,
     "text": "lorem",
     "textContent": "lorem",
     "title": "lorem",
-    "value": Object {
+    "value": {
       "dolor": "sit",
     },
   },
-  Object {
+  {
     "label": "dolor",
     "selected": false,
     "text": "dolor",
     "textContent": "dolor",
     "title": "dolor",
-    "value": Object {
+    "value": {
       "lorem": "ipsum",
     },
   },
-  Object {
+  {
     "label": "hello",
     "selected": true,
     "text": "hello",
     "textContent": "hello",
     "title": "hello",
-    "value": Object {
+    "value": {
       "hello": "world",
     },
   },
@@ -344,8 +344,8 @@ Array [
 `;
 
 exports[`Select Component should allow selected options to match value or title: value or title match 1`] = `
-Array [
-  Object {
+[
+  {
     "0": "i",
     "1": "p",
     "2": "s",
@@ -358,7 +358,7 @@ Array [
     "title": "lorem",
     "value": "ipsum",
   },
-  Object {
+  {
     "0": "w",
     "1": "o",
     "2": "r",
@@ -371,7 +371,7 @@ Array [
     "title": "hello",
     "value": "world",
   },
-  Object {
+  {
     "0": "s",
     "1": "e",
     "2": "t",
@@ -386,7 +386,7 @@ Array [
 `;
 
 exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, button variants 1`] = `
-Object {
+{
   "isPlain": true,
   "splitButtonVariant": "checkbox",
   "toggleIndicator": null,
@@ -394,45 +394,45 @@ Object {
 `;
 
 exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
 exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, no options, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
 exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, options, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
-exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, placeholder 1`] = `Object {}`;
+exports[`Select Component should apply patternfly dropdown props based on wrapper props: dropdown props, placeholder 1`] = `{}`;
 
 exports[`Select Component should apply patternfly select props based on wrapper props: select props, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
 exports[`Select Component should apply patternfly select props based on wrapper props: select props, no options, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
 exports[`Select Component should apply patternfly select props based on wrapper props: select props, options, disabled 1`] = `
-Object {
+{
   "isDisabled": true,
 }
 `;
 
 exports[`Select Component should apply patternfly select props based on wrapper props: select props, placeholder 1`] = `
-Object {
+{
   "hasPlaceholderStyle": true,
 }
 `;
@@ -598,7 +598,7 @@ exports[`Select Component should render a checkbox select: checkbox select 1`] =
 `;
 
 exports[`Select Component should render an expanded select: expanded 1`] = `
-Array [
+[
   <button
     aria-selected={null}
     className="pf-c-select__menu-item"
@@ -651,12 +651,12 @@ Array [
 `;
 
 exports[`Select Component should return an emulated onchange event, checklist variant: checklist emulated event 1`] = `
-Object {
+{
   "checked": true,
   "id": "test",
   "name": "test",
   "persist": [Function],
-  "selected": Array [
+  "selected": [
     "ipsum",
     "hello",
     "world",
@@ -668,11 +668,11 @@ Object {
 `;
 
 exports[`Select Component should return an emulated onchange event: default emulated event 1`] = `
-Object {
+{
   "id": "test",
   "name": "test",
   "persist": [Function],
-  "selected": Object {
+  "selected": {
     "label": "hello",
     "selected": true,
     "text": "hello",

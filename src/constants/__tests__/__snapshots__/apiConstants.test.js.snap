@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ApiTypes Should have specific API properties: all exports 1`] = `
-Object {
+{
   "API_QUERY_ORDERING": "ordering",
   "API_QUERY_PAGE": "page",
   "API_QUERY_PAGE_SIZE": "page_size",
-  "API_QUERY_SORT_TYPES": Object {
+  "API_QUERY_SORT_TYPES": {
     "CREDENTIAL_TYPE": "cred_type",
     "MOST_RECENT_CONNECT_SCAN_START_TIME": "most_recent_connect_scan__start_time",
     "MOST_RECENT_SCANJOB_START_TIME": "most_recent_scanjob__start_time",
@@ -14,7 +14,7 @@ Object {
   },
   "API_QUERY_SOURCE_TYPE": "source_type",
   "API_QUERY_STATUS": "status",
-  "API_QUERY_TYPES": Object {
+  "API_QUERY_TYPES": {
     "AUTH_TOKEN": "auth_token",
     "BECOME_METHOD": "become_method",
     "BECOME_PASSWORD": "become_password",
@@ -140,11 +140,11 @@ Object {
   "API_SUBMIT_SOURCE_OPTIONS_SSL_PROTOCOL": "ssl_protocol",
   "API_SUBMIT_SOURCE_PORT": "port",
   "API_SUBMIT_SOURCE_SOURCE_TYPE": "source_type",
-  "apiTypes": Object {
+  "apiTypes": {
     "API_QUERY_ORDERING": "ordering",
     "API_QUERY_PAGE": "page",
     "API_QUERY_PAGE_SIZE": "page_size",
-    "API_QUERY_SORT_TYPES": Object {
+    "API_QUERY_SORT_TYPES": {
       "CREDENTIAL_TYPE": "cred_type",
       "MOST_RECENT_CONNECT_SCAN_START_TIME": "most_recent_connect_scan__start_time",
       "MOST_RECENT_SCANJOB_START_TIME": "most_recent_scanjob__start_time",
@@ -153,7 +153,7 @@ Object {
     },
     "API_QUERY_SOURCE_TYPE": "source_type",
     "API_QUERY_STATUS": "status",
-    "API_QUERY_TYPES": Object {
+    "API_QUERY_TYPES": {
       "AUTH_TOKEN": "auth_token",
       "BECOME_METHOD": "become_method",
       "BECOME_PASSWORD": "become_password",
@@ -280,11 +280,11 @@ Object {
     "API_SUBMIT_SOURCE_PORT": "port",
     "API_SUBMIT_SOURCE_SOURCE_TYPE": "source_type",
   },
-  "default": Object {
+  "default": {
     "API_QUERY_ORDERING": "ordering",
     "API_QUERY_PAGE": "page",
     "API_QUERY_PAGE_SIZE": "page_size",
-    "API_QUERY_SORT_TYPES": Object {
+    "API_QUERY_SORT_TYPES": {
       "CREDENTIAL_TYPE": "cred_type",
       "MOST_RECENT_CONNECT_SCAN_START_TIME": "most_recent_connect_scan__start_time",
       "MOST_RECENT_SCANJOB_START_TIME": "most_recent_scanjob__start_time",
@@ -293,7 +293,7 @@ Object {
     },
     "API_QUERY_SOURCE_TYPE": "source_type",
     "API_QUERY_STATUS": "status",
-    "API_QUERY_TYPES": Object {
+    "API_QUERY_TYPES": {
       "AUTH_TOKEN": "auth_token",
       "BECOME_METHOD": "become_method",
       "BECOME_PASSWORD": "become_password",
@@ -424,11 +424,11 @@ Object {
 `;
 
 exports[`ApiTypes Should have specific API properties: default export 1`] = `
-Object {
+{
   "API_QUERY_ORDERING": "ordering",
   "API_QUERY_PAGE": "page",
   "API_QUERY_PAGE_SIZE": "page_size",
-  "API_QUERY_SORT_TYPES": Object {
+  "API_QUERY_SORT_TYPES": {
     "CREDENTIAL_TYPE": "cred_type",
     "MOST_RECENT_CONNECT_SCAN_START_TIME": "most_recent_connect_scan__start_time",
     "MOST_RECENT_SCANJOB_START_TIME": "most_recent_scanjob__start_time",
@@ -437,7 +437,7 @@ Object {
   },
   "API_QUERY_SOURCE_TYPE": "source_type",
   "API_QUERY_STATUS": "status",
-  "API_QUERY_TYPES": Object {
+  "API_QUERY_TYPES": {
     "AUTH_TOKEN": "auth_token",
     "BECOME_METHOD": "become_method",
     "BECOME_PASSWORD": "become_password",

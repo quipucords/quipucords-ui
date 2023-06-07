@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ViewToolbarSelectCategory Component should handle updating the view query through redux state with a component: dispatch type, component 1`] = `
-Array [
-  Array [
-    Array [
-      Object {
+[
+  [
+    [
+      {
         "currentFilterCategory": "search_by_name",
         "type": "SET_FILTER",
         "viewId": undefined,
       },
     ],
   ],
-  Array [
-    Array [
-      Object {
+  [
+    [
+      {
         "currentFilterCategory": "search_by_name",
         "type": "SET_FILTER",
         "viewId": undefined,
@@ -24,10 +24,10 @@ Array [
 `;
 
 exports[`ViewToolbarSelectCategory Component should handle updating the view query through redux state with a hook: dispatch type, hook 1`] = `
-Array [
-  Array [
-    Array [
-      Object {
+[
+  [
+    [
+      {
         "currentFilterCategory": "dolor sit",
         "type": "SET_FILTER",
         "viewId": undefined,
@@ -39,7 +39,7 @@ Array [
 
 exports[`ViewToolbarSelectCategory Component should render a basic component: basic 1`] = `
 <DropdownSelect
-  ariaLabel="t(toolbar.label_placeholder, {\\"context\\":\\"filter\\"})"
+  ariaLabel="t(toolbar.label_placeholder, {"context":"filter"})"
   buttonVariant="default"
   className=""
   direction="down"
@@ -52,26 +52,26 @@ exports[`ViewToolbarSelectCategory Component should render a basic component: ba
   name={null}
   onSelect={[Function]}
   options={
-    Array [
-      Object {
+    [
+      {
         "component": [Function],
         "selected": true,
         "title": [Function],
         "value": "search_by_name",
       },
-      Object {
+      {
         "component": [Function],
         "title": [Function],
         "value": "search_credentials_by_name",
       },
-      Object {
+      {
         "component": [Function],
         "title": [Function],
         "value": "source_type",
       },
     ]
   }
-  placeholder="t(toolbar.label_placeholder, {\\"context\\":\\"filter\\"})"
+  placeholder="t(toolbar.label_placeholder, {"context":"filter"})"
   position="left"
   selectedOptions={null}
   splitButtonVariant={null}

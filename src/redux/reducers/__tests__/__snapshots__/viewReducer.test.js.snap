@@ -1,56 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`viewReducer should handle specific defined types: defined type RESET_PAGE 1`] = `
-Object {
-  "result": Object {
-    "filters": Object {},
-    "query": Object {
-      "test_id": Object {
+{
+  "result": {
+    "filters": {},
+    "query": {
+      "test_id": {
         "page": 1,
       },
     },
-    "update": Object {},
+    "update": {},
   },
   "type": "RESET_PAGE",
 }
 `;
 
 exports[`viewReducer should handle specific defined types: defined type SET_FILTER 1`] = `
-Object {
-  "result": Object {
-    "filters": Object {
-      "test_id": Object {
+{
+  "result": {
+    "filters": {
+      "test_id": {
         "currentFilterCategory": undefined,
       },
     },
-    "query": Object {},
-    "update": Object {},
+    "query": {},
+    "update": {},
   },
   "type": "SET_FILTER",
 }
 `;
 
 exports[`viewReducer should handle specific defined types: defined type SET_QUERY 1`] = `
-Object {
-  "result": Object {
-    "filters": Object {},
-    "query": Object {
-      "test_id": Object {
+{
+  "result": {
+    "filters": {},
+    "query": {
+      "test_id": {
         "undefined": undefined,
       },
     },
-    "update": Object {},
+    "update": {},
   },
   "type": "SET_QUERY",
 }
 `;
 
 exports[`viewReducer should handle specific defined types: defined type UPDATE_VIEW 1`] = `
-Object {
-  "result": Object {
-    "filters": Object {},
-    "query": Object {},
-    "update": Object {
+{
+  "result": {
+    "filters": {},
+    "query": {},
+    "update": {
       "test_id": 1654041600000,
     },
   },

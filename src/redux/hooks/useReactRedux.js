@@ -5,7 +5,7 @@ import { store } from '../store';
 import { helpers } from '../../common';
 
 /**
- * ToDo: Review using react-reduxs useDispatch on package update.
+ * ToDo: Review using react-redux useDispatch on package update.
  * Originally there was an issue with useDispatch in React-Redux v7+ and integrating
  * with custom middleware. Accessing store.dispatch directly bypassed the issue.
  */

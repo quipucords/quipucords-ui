@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScansSelectors Should map a hosts object to consumable props: scanHostsList 1`] = `
-Object {
+{
   "fulfilled": true,
-  "hostsList": Array [
-    Object {
+  "hostsList": [
+    {
       "jobType": "connection",
       "name": "192.168.0.1",
       "status": "success",
     },
-    Object {
+    {
       "jobType": "inspection",
       "name": "192.168.0.1",
       "status": "success",
@@ -20,9 +20,9 @@ Object {
 `;
 
 exports[`ScansSelectors Should map a job object to consumable props and sorted by source: scanJobDetailBySource 1`] = `
-Object {
-  "scanJobList": Array [
-    Object {
+{
+  "scanJobList": [
+    {
       "id": 15,
       "name": "TestSource",
       "sourceType": "network",
@@ -32,7 +32,7 @@ Object {
 `;
 
 exports[`ScansSelectors Should return specific selectors: selectors 1`] = `
-Object {
+{
   "makeScanHostsList": [Function],
   "makeScanJobDetailBySource": [Function],
   "makeScanJobsList": [Function],
