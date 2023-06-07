@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ReportsReducer should handle all defined error types: rejected types GET_MERGE_REPORT 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "error": true,
     "errorMessage": "ERROR",
     "errorStatus": 0,
@@ -18,9 +18,9 @@ Object {
 `;
 
 exports[`ReportsReducer should handle all defined fulfilled types: fulfilled types GET_MERGE_REPORT 1`] = `
-Object {
-  "result": Object {
-    "data": Object {
+{
+  "result": {
+    "data": {
       "test": "success",
     },
     "date": undefined,
@@ -39,8 +39,8 @@ Object {
 `;
 
 exports[`ReportsReducer should handle all defined pending types: pending types GET_MERGE_REPORT 1`] = `
-Object {
-  "result": Object {
+{
+  "result": {
     "error": false,
     "errorMessage": "",
     "errorStatus": undefined,

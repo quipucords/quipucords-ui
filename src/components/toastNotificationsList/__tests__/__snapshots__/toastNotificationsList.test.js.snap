@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToastNotificationsList Component should handle pausing toasts through redux state with a hook: dispatch pausing a toast, hook 1`] = `
-Array [
-  Array [
-    Object {
-      "toast": Object {
+[
+  [
+    {
+      "toast": {
         "mockToast": "lorem ipsum",
       },
       "type": "TOAST_PAUSE",
@@ -14,10 +14,10 @@ Array [
 `;
 
 exports[`ToastNotificationsList Component should handle removing toasts through redux state with a hook: dispatch removing a toast, hook 1`] = `
-Array [
-  Array [
-    Object {
-      "toast": Object {
+[
+  [
+    {
+      "toast": {
         "mockToast": "lorem ipsum",
       },
       "type": "TOAST_REMOVE",
@@ -27,10 +27,10 @@ Array [
 `;
 
 exports[`ToastNotificationsList Component should handle resuming toasts through redux state with a hook: dispatch resuming a toast, hook 1`] = `
-Array [
-  Array [
-    Object {
-      "toast": Object {
+[
+  [
+    {
+      "toast": {
         "mockToast": "lorem ipsum",
       },
       "type": "TOAST_RESUME",

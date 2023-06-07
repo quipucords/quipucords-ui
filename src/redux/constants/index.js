@@ -6,7 +6,7 @@ import { reportsTypes } from './reportsConstants';
 import { scansTypes } from './scansConstants';
 import { sourcesTypes } from './sourcesConstants';
 import { statusTypes } from './statusConstants';
-import { toastNotificationTypes } from './toasNotificationConstants';
+import { toastNotificationTypes } from './toastNotificationConstants';
 import { userTypes } from './userConstants';
 import { viewTypes } from './viewConstants';
 

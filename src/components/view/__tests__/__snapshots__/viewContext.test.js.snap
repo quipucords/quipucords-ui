@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ViewContext should apply a hook for dispatching view updates: dispatch 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "type": "UPDATE_VIEW",
       "viewId": "test id",
     },
@@ -12,7 +12,7 @@ Array [
 `;
 
 exports[`ViewContext should apply a hook for retrieving api queries: query 1`] = `
-Object {
+{
   "dolor": "sit",
   "hello": "world",
   "lorem": "ipsum",
@@ -20,18 +20,18 @@ Object {
 `;
 
 exports[`ViewContext should apply a hook for retrieving view config: config 1`] = `
-Object {
+{
   "toolbar": "lorem ipsum",
 }
 `;
 
 exports[`ViewContext should apply a hook that combines retrieving view queries and config: combined 1`] = `
-Object {
-  "config": Object {
+{
+  "config": {
     "toolbar": "lorem ipsum",
   },
   "isFilteringActive": true,
-  "query": Object {
+  "query": {
     "hello": "world",
   },
   "viewId": "test id",
@@ -39,31 +39,31 @@ Object {
 `;
 
 exports[`ViewContext should return specific properties: specific properties 1`] = `
-Object {
-  "DEFAULT_CONTEXT": Array [
-    Object {},
+{
+  "DEFAULT_CONTEXT": [
+    {},
     [Function],
   ],
-  "ViewContext": Object {
+  "ViewContext": {
     "$$typeof": Symbol(react.context),
-    "Consumer": Object {
+    "Consumer": {
       "$$typeof": Symbol(react.context),
       "_calculateChangedBits": null,
       "_context": [Circular],
     },
-    "Provider": Object {
+    "Provider": {
       "$$typeof": Symbol(react.provider),
       "_context": [Circular],
     },
     "_calculateChangedBits": null,
     "_currentRenderer": null,
     "_currentRenderer2": null,
-    "_currentValue": Array [
-      Object {},
+    "_currentValue": [
+      {},
       [Function],
     ],
-    "_currentValue2": Array [
-      Object {},
+    "_currentValue2": [
+      {},
       [Function],
     ],
     "_threadCount": 0,

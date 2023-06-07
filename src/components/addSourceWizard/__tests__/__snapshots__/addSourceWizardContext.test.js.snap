@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddSourceWizardContext should apply a hook for retrieving data from a selector: dispatch confirmations on hide wizard 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "alertType": "danger",
-      "header": "t(toast-notifications.title_add-source_hidden, {\\"context\\":\\"error\\"})",
-      "message": "t(toast-notifications.description_add-source_hidden, {\\"context\\":\\"error\\"})",
+      "header": "t(toast-notifications.title_add-source_hidden, {"context":"error"})",
+      "message": "t(toast-notifications.description_add-source_hidden, {"context":"error"})",
       "type": "TOAST_ADD",
     },
   ],
-  Array [
-    Object {
+  [
+    {
       "alertType": "success",
-      "header": "t(toast-notifications.title_add-source_hidden, {\\"context\\":\\"\\"})",
-      "message": "t(toast-notifications.description_add-source_hidden, {\\"context\\":\\"\\",\\"name\\":\\"lorem ipsum\\"})",
+      "header": "t(toast-notifications.title_add-source_hidden, {"context":""})",
+      "message": "t(toast-notifications.description_add-source_hidden, {"context":"","name":"lorem ipsum"})",
       "type": "TOAST_ADD",
     },
   ],
@@ -22,9 +22,9 @@ Array [
 `;
 
 exports[`AddSourceWizardContext should apply a hook for retrieving data from a selector: error response 1`] = `
-Object {
-  "data": Object {
-    "messages": Object {},
+{
+  "data": {
+    "messages": {},
   },
   "error": true,
   "show": false,
@@ -32,34 +32,34 @@ Object {
 `;
 
 exports[`AddSourceWizardContext should apply a hook for retrieving data from a selector: error show response 1`] = `
-Object {
-  "data": Object {
-    "messages": Object {},
+{
+  "data": {
+    "messages": {},
   },
   "error": true,
 }
 `;
 
 exports[`AddSourceWizardContext should apply a hook for retrieving data from a selector: success response 1`] = `
-Object {
+{
   "fulfilled": true,
 }
 `;
 
 exports[`AddSourceWizardContext should apply a hook for retrieving data from a selector: success show response 1`] = `
-Object {
+{
   "fulfilled": true,
   "show": false,
-  "source": Object {
+  "source": {
     "name": "lorem ipsum",
   },
 }
 `;
 
 exports[`AddSourceWizardContext should handle an onShowAddSourceWizard event: onColumnSort event, dispatch 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "type": "CREATE_SOURCE_SHOW",
     },
   ],
@@ -67,7 +67,7 @@ Array [
 `;
 
 exports[`AddSourceWizardContext should return specific properties: specific properties 1`] = `
-Object {
+{
   "useGetAddSource": [Function],
   "useOnShowAddSourceWizard": [Function],
 }

@@ -7,7 +7,7 @@ exports[`ScanDownload Component should handle custom children: custom 1`] = `
   data-ouia-component-id="OUIA-Generated-Button-primary-2"
   data-ouia-component-type="PF4/Button"
   data-ouia-safe="true"
-  title="t(table.label_action_scan, {\\"context\\":\\"download\\"})"
+  title="t(table.label_action_scan, {"context":"download"})"
   type="button"
 >
   lorem ipsum
@@ -24,7 +24,7 @@ exports[`ScanDownload Component should have an optional tooltip: tooltip 1`] = `
 >
   <Button
     onClick={[Function]}
-    title="t(table.label_action_scan, {\\"context\\":\\"download\\"})"
+    title="t(table.label_action_scan, {"context":"download"})"
   >
     t(table.label_action_scan, {"context":"download"})
   </Button>
@@ -38,7 +38,7 @@ exports[`ScanDownload Component should render a basic component: basic 1`] = `
   data-ouia-component-id="OUIA-Generated-Button-primary-1"
   data-ouia-component-type="PF4/Button"
   data-ouia-safe="true"
-  title="t(table.label_action_scan, {\\"context\\":\\"download\\"})"
+  title="t(table.label_action_scan, {"context":"download"})"
   type="button"
 >
   t(table.label_action_scan, {"context":"download"})

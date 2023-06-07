@@ -13,7 +13,7 @@ exports[`ScanJobsList Component should render a non-connected component error: e
   <Alert
     isInline={true}
     isPlain={true}
-    title="t(view.error, {\\"context\\":\\"scan-jobs\\"})"
+    title="t(view.error, {"context":"scan-jobs"})"
     variant="danger"
   >
     t(view.error-message, {"context":"scan-jobs","message":"Lorem Ipsum."})
@@ -46,9 +46,9 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
     <Table
       ariaLabel={null}
       className="quipucords-table__scan-jobs"
-      columnHeaders={Array []}
+      columnHeaders={[]}
       componentClassNames={
-        Object {
+        {
           "table": "quipucords-table",
           "td": "quipucords-table__td",
           "tdAction": "quipucords-table__td-action",
@@ -71,10 +71,10 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
       onSelect={null}
       onSort={null}
       rows={
-        Array [
-          Object {
-            "cells": Array [
-              Object {
+        [
+          {
+            "cells": [
+              {
                 "content": <React.Fragment>
                   <ContextIcon
                     size="sm"
@@ -83,19 +83,19 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                    
                   t(table.label_status_completed, {"context":"scan"})
                 </React.Fragment>,
-                "dataLabel": "t(table.label_status, {\\"context\\":\\"scan\\"})",
+                "dataLabel": "t(table.label_status, {"context":"scan"})",
               },
-              Object {
+              {
                 "content": <React.Fragment>
                   a day ago
                 </React.Fragment>,
-                "dataLabel": "t(table.label_status_time, {\\"context\\":\\"scan\\"})",
+                "dataLabel": "t(table.label_status_time, {"context":"scan"})",
               },
-              Object {
+              {
                 "content": <React.Fragment>
                   <ContextIcon
                     color={
-                      Object {
+                      {
                         "name": "--pf-global--Color--dark-100",
                         "value": "#151515",
                         "var": "var(--pf-global--Color--dark-100)",
@@ -107,13 +107,13 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                    
                   10
                 </React.Fragment>,
-                "dataLabel": "t(table.label_status, {\\"context\\":\\"success\\"})",
+                "dataLabel": "t(table.label_status, {"context":"success"})",
               },
-              Object {
+              {
                 "content": <React.Fragment>
                   <ContextIcon
                     color={
-                      Object {
+                      {
                         "name": "--pf-global--Color--dark-100",
                         "value": "#151515",
                         "var": "var(--pf-global--Color--dark-100)",
@@ -125,9 +125,9 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                    
                   10
                 </React.Fragment>,
-                "dataLabel": "t(table.label_status, {\\"context\\":\\"failed\\"})",
+                "dataLabel": "t(table.label_status, {"context":"failed"})",
               },
-              Object {
+              {
                 "content": <React.Fragment>
                   <ScanDownload
                     icon={
@@ -137,7 +137,7 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                       />
                     }
                     job={
-                      Object {
+                      {
                         "endTime": "2019-05-03",
                         "id": 14,
                         "reportId": 15,
@@ -156,7 +156,7 @@ exports[`ScanJobsList Component should render a non-connected component: non-con
                   </ScanDownload>
                 </React.Fragment>,
                 "isActionCell": true,
-                "style": Object {
+                "style": {
                   "textAlign": "right",
                 },
               },

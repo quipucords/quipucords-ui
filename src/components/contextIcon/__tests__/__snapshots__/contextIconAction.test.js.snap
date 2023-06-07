@@ -73,7 +73,7 @@ exports[`ContextIconAction Component should export, and handle icon variants: ic
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: variants 1`] = `
-Object {
+{
   "canceled": "failed",
   "cancelled": "failed",
   "completed": "completed",

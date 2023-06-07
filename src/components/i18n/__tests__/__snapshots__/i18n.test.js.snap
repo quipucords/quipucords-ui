@@ -1,1509 +1,1509 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`I18n Component should generate a predictable locale key output snapshot: key output 1`] = `
-Array [
-  Object {
-    "file": "./src/common/helpers.js",
-    "keys": Array [
-      Object {
-        "key": "",
-        "match": "t(\${updatedKey}\${(updatedValue && \`, \${updatedValue}\`)",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/aboutModal/aboutModal.js",
-    "keys": Array [
-      Object {
-        "key": "about-modal.copyright",
-        "match": "t('about-modal.copyright', { year: currentYear })",
-      },
-      Object {
-        "key": "about-modal.copy-confirmation",
-        "match": "t('about-modal.copy-confirmation')",
-      },
-      Object {
-        "key": "about-modal.username",
-        "match": "t('about-modal.username')",
-      },
-      Object {
-        "key": "about-modal.browser-version",
-        "match": "t('about-modal.browser-version')",
-      },
-      Object {
-        "key": "about-modal.browser-os",
-        "match": "t('about-modal.browser-os')",
-      },
-      Object {
-        "key": "about-modal.server-version",
-        "match": "t('about-modal.server-version')",
-      },
-      Object {
-        "key": "about-modal.ui-version",
-        "match": "t('about-modal.ui-version')",
-      },
-      Object {
-        "key": "about-modal.copy-button",
-        "match": "t('about-modal.copy-button')",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addCredentialType/addCredentialType.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'network', 'credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'openshift', 'credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'satellite', 'credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'vcenter', 'credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'ansible', 'credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['placeholder', 'add-credential'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizard.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.confirmation_title_add-source",
-        "match": "t('form-dialog.confirmation_title_add-source', { context: [pending && 'exit', edit && 'edit'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation_heading_add-source",
-        "match": "t('form-dialog.confirmation_heading_add-source', { context: [pending && 'exit', edit && 'edit'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation_body_add-source",
-        "match": "t('form-dialog.confirmation_body_add-source', { context: [pending && 'exit', edit && 'edit', !pending && EMPTY_CONTEXT] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'no' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'yes' })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "t('form-dialog.title', { context: ['add-source', edit && 'edit'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.title",
-        "match": "translate('form-dialog.title', { context: ['add-source', 'step'] })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['close'] })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['close'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardContext.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.title_add-source_hidden",
-        "match": "t('toast-notifications.title_add-source_hidden', { context: [error && 'error', edit && 'edit'] })",
-      },
-      Object {
-        "key": "toast-notifications.description_add-source_hidden",
-        "match": "t('toast-notifications.description_add-source_hidden', { context: [error && 'error', edit && 'edit'], message: errorMessage, name: source?.[apiTypes.API_SUBMIT_SOURCE_NAME] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardStepOne.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'source-type' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'network-range' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'openshift' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'satellite' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'vcenter-server' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'ansible-server' })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardStepThree.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.empty-state_title_add-source",
-        "match": "t('form-dialog.empty-state_title_add-source', { context: [(error && 'error')",
-      },
-      Object {
-        "key": "form-dialog.empty-state_description_add-source",
-        "match": "t(\`form-dialog.empty-state_description_add-source\`, { context: [(error && 'error')",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', type] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'disableSsl'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'name' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'placeholder', type] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'search-addresses' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-addresses', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-addresses', 'help'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-addresses', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'port' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['port', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['port', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'search-address' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['search-address', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'credential' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['credential', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label_placeholder",
-        "match": "t('form-dialog.label_placeholder', { context: [ 'add-source', 'credential', multiselectCredentials && 'multi', !availableCredentials.length && 'add' ] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'add-credential' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'add-credential' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'paramiko' }, [ <abbr title={t('form-dialog.label', { context: 'ssh' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'connection' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'ssl-certificate' })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/authentication/authentication.js",
-    "keys": Array [
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading', { context: 'authentication' })",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: 'authentication' })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t( 'view.error-message', { context: 'authentication', message: \`\${session.errorMessage.replace(/\\\\.$/, '')",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/confirmationModal/confirmationModal.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['confirm'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['cancel'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['heading'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'sshKey'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'token'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'usernamePassword'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['name', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['auth-type', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['username'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['username', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['username', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['optional'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['token', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['token', 'create-credential', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['token', 'create-credential', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['password'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['password', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['password', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['become-method'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['become-user'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['optional'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['become-password'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['optional'] })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "t('form-dialog.title', { context: ['create-credential', edit && 'edit'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'cancel' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'error' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['error', 'description'] })",
-      },
-      Object {
-        "key": "form-dialog.empty-state",
-        "match": "t('form-dialog.empty-state', { context: ['title', 'pending'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['source-type', 'create-credential'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/createCredentialDialog/createCredentialDialogContext.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['credential', edit && 'edit'] })",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['credential', edit && 'edit'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/createScanDialog/createScanDialog.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'add-scan'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['heading', 'add-scan'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'no' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'yes' })",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['scan-report', 'start'], name: values.scanName }, [ <strong /> ])",
-      },
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['scan-report', 'start', 'error'], name: values.scanName })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'scan-name' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-name', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-name', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'sources' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'scan-concurrency' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-concurrency', 'help'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['deep-scan'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['fuse'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['jboss-server'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['decision-manager'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'scan-alt-directories' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'error'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'help'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'placeholder'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'error' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', 'create-scan'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'cancel' })",
-      },
-      Object {
-        "key": "form-dialog.title",
-        "match": "t('form-dialog.title', { context: 'create-scan' })",
-      },
-      Object {
-        "key": "form-dialog.empty-state",
-        "match": "t('form-dialog.empty-state', { context: ['title', 'create-scan', 'pending'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'add' })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading', { context: viewId })",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: viewId })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['description'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['auth-type'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['sources'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsContext.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: [(error && 'error')",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-credential', error && 'error'], name: credentialNames[0], count: credentialNames.length, message: errorMessage })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-credential'], count: updatedCredentials.length })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-credential'], count: updatedCredentials.length, name: updatedCredentials?.[0]?.[apiTypes.API_RESPONSE_CREDENTIAL_NAME] }, [<strong />] )",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['delete'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsEmptyState.js",
-    "keys": Array [
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: 'title', name: uiShortName })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', viewId], name: uiSentenceStartName })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'sources'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsTableCells.js",
-    "keys": Array [
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: [credType, viewId] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['auth', 'tooltip', viewId] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['auth', 'cell', sshKeyfile && 'sshKey', authToken && 'authToken'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'view' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'view' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'edit' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsToolbar.js",
-    "keys": Array [
-      Object {
+[
+  {
+    "file": "src/components/viewToolbar/viewToolbarTextInput.js",
+    "keys": [
+      {
         "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
       },
-      Object {
+      {
         "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.CREDENTIAL_TYPE] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.CREDENTIAL_TYPE] })",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
       },
     ],
   },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['merge-reports', 'download'] })",
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelectCategory.js",
+    "keys": [
+      {
+        "key": "toolbar.label",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter'] })",
       },
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: ['merge-reports', 'error'] })",
+      {
+        "key": "toolbar.label",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter'] })",
       },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'valid'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'list', !name && 'id'], name: name || id })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'invalid'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'list', !name && 'id'], name: name || id })",
-      },
-      Object {
+    ],
+  },
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelect.js",
+    "keys": [
+      {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'close' })",
+        "match": "translate('form-dialog.label', { context: ['option', 'network'] })",
       },
-      Object {
+      {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['submit', 'merge-reports'] })",
+        "match": "translate('form-dialog.label', { context: ['option', 'openshift'] })",
       },
-      Object {
+      {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'cancel' })",
+        "match": "translate('form-dialog.label', { context: ['option', 'satellite'] })",
       },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['heading', 'merge-reports', (isValidCount && 'valid')",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['footer', 'merge-reports'] })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'merge-reports'] })",
-      },
-      Object {
-        "key": "form-dialog.empty-state",
-        "match": "t('form-dialog.empty-state', { context: ['title', 'merge-reports', 'pending'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/modal/modal.js",
-    "keys": Array [
-      Object {
-        "key": "modal.aria-label-default",
-        "match": "t('modal.aria-label-default')",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "keys": Array [
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['logout'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['about'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-install'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-using'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['about'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-install'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-using'] })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['logout'] })",
-      },
-      Object {
-        "key": "view.brand-image-alt",
-        "match": "t('view.brand-image-alt', { name: uiName })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: title })",
-      },
-      Object {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['skip-nav'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/refreshTimeButton/refreshTimeButton.js",
-    "keys": Array [
-      Object {
-        "key": "refresh-time-button.refreshed",
-        "match": "t('refresh-time-button.refreshed', { context: lastRefresh && 'load', refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scanHostList/scanHostList.js",
-    "keys": Array [
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading')",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: 'scan-hosts' })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['scan-hosts'], message: errorMessage })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scanDownload.js",
-    "keys": Array [
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scanJobsList.js",
-    "keys": Array [
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading')",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: 'scan-jobs' })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', status, 'scan'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'scan'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'time', 'scan'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'success'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'failed'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "keys": Array [
-      Object {
-        "key": "table.tooltip",
-        "match": "t('table.tooltip', { context: ['merge-reports'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['merge-reports'] })",
-      },
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading', { context: viewId })",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: viewId })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['description'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['scan'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['success', viewId] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['failed', viewId] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['sources'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['scan-jobs'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scansContext.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: [(error && 'error')",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-scan', error && 'error'], name: scanNames[0], count: scanNames.length, message: errorMessage })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-scan'], count: updatedScans.length })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-scan'], count: updatedScans.length, name: updatedScans?.[0]?.[apiTypes.API_RESPONSE_SCAN_NAME] }, [<strong />] )",
-      },
-      Object {
+      {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['delete'] })",
+        "match": "translate('form-dialog.label', { context: ['option', 'vcenter'] })",
       },
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: [(isWarning && 'warning')",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t( 'toast-notifications.description', { context: [isWarning && 'warning', error && 'error', 'scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scansEmptyState.js",
-    "keys": Array [
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['title', viewId], count: totalResults, name: uiShortName })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', viewId], count: totalResults })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'source-navigate'], count: totalResults })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scanSourceList.js",
-    "keys": Array [
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading')",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: 'scan-jobs' })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scansTableCells.js",
-    "keys": Array [
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', status, viewId] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', context] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', context] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', context] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/scans/scansToolbar.js",
-    "keys": Array [
-      Object {
+      {
         "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
       },
-      Object {
+      {
         "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_SOURCES_NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.MOST_RECENT_CONNECT_SCAN_START_TIME] })",
+        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
       },
     ],
   },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "keys": Array [
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'add' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'scan' })",
-      },
-      Object {
-        "key": "view.loading",
-        "match": "t('view.loading', { context: viewId })",
-      },
-      Object {
-        "key": "view.error",
-        "match": "t('view.error', { context: viewId })",
-      },
-      Object {
-        "key": "view.error-message",
-        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['description'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['scan'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['credentials'] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['success', viewId] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['failed', viewId] })",
-      },
-      Object {
-        "key": "table.header",
-        "match": "t('table.header', { context: ['unreachable', viewId] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "keys": Array [
-      Object {
-        "key": "toast-notifications.title",
-        "match": "t('toast-notifications.title', { context: [(error && 'error')",
-      },
-      Object {
-        "key": "toast-notifications.description",
-        "match": "t('toast-notifications.description', { context: ['deleted-source', error && 'error'], name: sourceNames[0], count: sourceNames.length, message: errorMessage })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-source'], count: updatedSources.length })",
-      },
-      Object {
-        "key": "form-dialog.confirmation",
-        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-source'], count: updatedSources.length, name: updatedSources?.[0]?.[apiTypes.API_RESPONSE_SOURCE_NAME] }, [<strong />] )",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['delete'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/sources/sourcesEmptyState.js",
-    "keys": Array [
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['title'], name: uiShortName })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['description', viewId] })",
-      },
-      Object {
-        "key": "view.empty-state",
-        "match": "t('view.empty-state', { context: ['label', viewId] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/sources/sourcesTableCells.js",
-    "keys": Array [
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'network-range' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: [sourceType, viewId] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', status, viewId] })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'edit' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'edit' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'scan' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'edit' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'delete' })",
-      },
-      Object {
-        "key": "table.label",
-        "match": "t('table.label', { context: 'Scan' })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
-    "keys": Array [
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SOURCE_TYPE] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.SOURCE_TYPE] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.MOST_RECENT_CONNECT_SCAN_START_TIME] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/table/tableEmpty.js",
-    "keys": Array [
-      Object {
-        "key": "table.empty-state_title",
-        "match": "t('table.empty-state_title', 'No results found')",
-      },
-      Object {
-        "key": "table.empty-state_description",
-        "match": "t('table.empty-state_description', 'Clear all filters and try again.')",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/touchspin/touchspin.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['touchspin', 'min'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['touchspin', 'input'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: ['touchspin', 'max'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbar.js",
-    "keys": Array [
-      Object {
-        "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['chip', categoryValue] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: 'clear-filters' })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarFieldSort.js",
-    "keys": Array [
-      Object {
-        "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['option', 'sort'] })",
-      },
-    ],
-  },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarFieldSortButton.js",
-    "keys": Array [
-      Object {
+  {
+    "file": "src/components/viewToolbar/viewToolbarFieldSortButton.js",
+    "keys": [
+      {
         "key": "toolbar.label",
         "match": "t('toolbar.label', { context: ['tooltip', 'sort', (isDescending && 'dsc')",
       },
     ],
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelect.js",
-    "keys": Array [
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'network'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'openshift'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'satellite'] })",
-      },
-      Object {
-        "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'vcenter'] })",
-      },
-      Object {
+  {
+    "file": "src/components/viewToolbar/viewToolbarFieldSort.js",
+    "keys": [
+      {
         "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
-      },
-      Object {
-        "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
+        "match": "t('toolbar.label', { context: ['option', 'sort'] })",
       },
     ],
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelectCategory.js",
-    "keys": Array [
-      Object {
+  {
+    "file": "src/components/viewToolbar/viewToolbar.js",
+    "keys": [
+      {
         "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter'] })",
+        "match": "t('toolbar.label', { context: ['chip', categoryValue] })",
       },
-      Object {
+      {
         "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter'] })",
+        "match": "t('toolbar.label', { context: 'clear-filters' })",
       },
     ],
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarTextInput.js",
-    "keys": Array [
-      Object {
-        "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
+  {
+    "file": "src/components/touchspin/touchspin.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['touchspin', 'min'] })",
       },
-      Object {
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['touchspin', 'input'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['touchspin', 'max'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/table/tableEmpty.js",
+    "keys": [
+      {
+        "key": "table.empty-state_title",
+        "match": "t('table.empty-state_title', 'No results found')",
+      },
+      {
+        "key": "table.empty-state_description",
+        "match": "t('table.empty-state_description', 'Clear all filters and try again.')",
+      },
+    ],
+  },
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
+    "keys": [
+      {
         "key": "toolbar.label",
-        "match": "t('toolbar.label', { context: ['placeholder', 'filter', filter] })",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SOURCE_TYPE] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.SOURCE_TYPE] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.MOST_RECENT_CONNECT_SCAN_START_TIME] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/sources/sourcesTableCells.js",
+    "keys": [
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'network-range' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: [sourceType, viewId] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status, viewId] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'scan' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'Scan' })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/sources/sourcesEmptyState.js",
+    "keys": [
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['title'], name: uiShortName })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', viewId] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', viewId] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/sources/sourcesContext.js",
+    "keys": [
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-source', error && 'error'], name: sourceNames[0], count: sourceNames.length, message: errorMessage })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-source'], count: updatedSources.length })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-source'], count: updatedSources.length, name: updatedSources?.[0]?.[apiTypes.API_RESPONSE_SOURCE_NAME] }, [<strong />] )",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "keys": [
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'add' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'scan' })",
+      },
+      {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: viewId })",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: viewId })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['credentials'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['success', viewId] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['failed', viewId] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['unreachable', viewId] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scansToolbar.js",
+    "keys": [
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_SOURCES_NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.MOST_RECENT_CONNECT_SCAN_START_TIME] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scansTableCells.js",
+    "keys": [
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status, viewId] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', context] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scansEmptyState.js",
+    "keys": [
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['title', viewId], count: totalResults, name: uiShortName })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', viewId], count: totalResults })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'source-navigate'], count: totalResults })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scansContext.js",
+    "keys": [
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-scan', error && 'error'], name: scanNames[0], count: scanNames.length, message: errorMessage })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-scan'], count: updatedScans.length })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-scan'], count: updatedScans.length, name: updatedScans?.[0]?.[apiTypes.API_RESPONSE_SCAN_NAME] }, [<strong />] )",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
+      },
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(isWarning && 'warning')",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t( 'toast-notifications.description', { context: [isWarning && 'warning', error && 'error', 'scan-report', scanContext], name: scanName || scanId }, [<strong />] )",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "keys": [
+      {
+        "key": "table.tooltip",
+        "match": "t('table.tooltip', { context: ['merge-reports'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['merge-reports'] })",
+      },
+      {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: viewId })",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: viewId })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['success', viewId] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['failed', viewId] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['sources'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['scan-jobs'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scanSourceList.js",
+    "keys": [
+      {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-jobs' })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scanJobsList.js",
+    "keys": [
+      {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-jobs' })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-jobs'], message: errorMessage })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', status, 'scan'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'scan'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'time', 'scan'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'success'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'failed'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scans/scanDownload.js",
+    "keys": [
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['action', 'scan', 'download'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/scanHostList/scanHostList.js",
+    "keys": [
+      {
+        "key": "view.loading",
+        "match": "t('view.loading')",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'scan-hosts' })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: ['scan-hosts'], message: errorMessage })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/refreshTimeButton/refreshTimeButton.js",
+    "keys": [
+      {
+        "key": "refresh-time-button.refreshed",
+        "match": "t('refresh-time-button.refreshed', { context: lastRefresh && 'load', refresh: lastRefresh && helpers.getTimeDisplayHowLongAgo(lastRefresh)",
+      },
+    ],
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "keys": [
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['logout'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['about'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-install'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-using'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['about'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-install'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['guides-using'] })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['logout'] })",
+      },
+      {
+        "key": "view.brand-image-alt",
+        "match": "t('view.brand-image-alt', { name: uiName })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: title })",
+      },
+      {
+        "key": "view.label",
+        "match": "t('view.label', { context: ['skip-nav'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/modal/modal.js",
+    "keys": [
+      {
+        "key": "modal.aria-label-default",
+        "match": "t('modal.aria-label-default')",
+      },
+    ],
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "keys": [
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['merge-reports', 'download'] })",
+      },
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['merge-reports', 'error'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'valid'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'list', !name && 'id'], name: name || id })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'invalid'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['body', 'merge-reports', 'list', !name && 'id'], name: name || id })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'close' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'merge-reports'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['heading', 'merge-reports', (isValidCount && 'valid')",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['footer', 'merge-reports'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'merge-reports'] })",
+      },
+      {
+        "key": "form-dialog.empty-state",
+        "match": "t('form-dialog.empty-state', { context: ['title', 'merge-reports', 'pending'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/credentials/credentialsToolbar.js",
+    "keys": [
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.SEARCH_NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_TYPES.CREDENTIAL_TYPE] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.NAME] })",
+      },
+      {
+        "key": "toolbar.label",
+        "match": "translate('toolbar.label', { context: ['option', API_QUERY_SORT_TYPES.CREDENTIAL_TYPE] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/credentials/credentialsTableCells.js",
+    "keys": [
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: [credType, viewId] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['auth', 'tooltip', viewId] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['auth', 'cell', sshKeyfile && 'sshKey', authToken && 'authToken'] })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'tooltip', status, viewId], count: updatedCount })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: ['status', 'cell', viewId], count: updatedCount }, [ <ContextIcon symbol={status} />, <strong /> ])",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'view' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'view' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'edit' })",
+      },
+      {
+        "key": "table.label",
+        "match": "t('table.label', { context: 'delete' })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/credentials/credentialsEmptyState.js",
+    "keys": [
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: 'title', name: uiShortName })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['description', viewId], name: uiSentenceStartName })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'sources'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/credentials/credentialsContext.js",
+    "keys": [
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: [(error && 'error')",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['deleted-credential', error && 'error'], name: credentialNames[0], count: credentialNames.length, message: errorMessage })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'delete-credential'], count: updatedCredentials.length })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t( 'form-dialog.confirmation', { context: ['heading', 'delete-credential'], count: updatedCredentials.length, name: updatedCredentials?.[0]?.[apiTypes.API_RESPONSE_CREDENTIAL_NAME] }, [<strong />] )",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['delete'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'delete' })",
+      },
+      {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: viewId })",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: viewId })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['description'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['auth-type'] })",
+      },
+      {
+        "key": "table.header",
+        "match": "t('table.header', { context: ['sources'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'title'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['filter', 'description'] })",
+      },
+      {
+        "key": "view.empty-state",
+        "match": "t('view.empty-state', { context: ['label', 'clear'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/createScanDialog/createScanDialog.js",
+    "keys": [
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title', 'add-scan'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['heading', 'add-scan'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'no' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'yes' })",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['scan-report', 'start'], name: values.scanName }, [ <strong /> ])",
+      },
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['scan-report', 'start', 'error'], name: values.scanName })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'scan-name' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-name', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-name', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'sources' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'scan-concurrency' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-concurrency', 'help'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['deep-scan'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['deep-scan', 'tooltip'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['fuse'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['jboss-server'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager', 'full'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['decision-manager'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'scan-alt-directories' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'help'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['scan-alt-directories', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'error' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', 'create-scan'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "t('form-dialog.title', { context: 'create-scan' })",
+      },
+      {
+        "key": "form-dialog.empty-state",
+        "match": "t('form-dialog.empty-state', { context: ['title', 'create-scan', 'pending'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/createCredentialDialog/createCredentialDialogContext.js",
+    "keys": [
+      {
+        "key": "toast-notifications.title",
+        "match": "t('toast-notifications.title', { context: ['credential', edit && 'edit'] })",
+      },
+      {
+        "key": "toast-notifications.description",
+        "match": "t('toast-notifications.description', { context: ['credential', edit && 'edit'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/createCredentialDialog/createCredentialDialog.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'sshKey'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'token'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'usernamePassword'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'create-credential', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['auth-type', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['username', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['token', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['token', 'create-credential', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['token', 'create-credential', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['password', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-method'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-user'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['become-password'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['optional'] })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "t('form-dialog.title', { context: ['create-credential', edit && 'edit'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['submit', edit && 'edit', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'cancel' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'error' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['error', 'description'] })",
+      },
+      {
+        "key": "form-dialog.empty-state",
+        "match": "t('form-dialog.empty-state', { context: ['title', 'pending'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['source-type', 'create-credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/confirmationModal/confirmationModal.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['confirm'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['cancel'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['heading'] })",
+      },
+      {
+        "key": "form-dialog.confirmation",
+        "match": "t('form-dialog.confirmation', { context: ['title'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/authentication/authentication.js",
+    "keys": [
+      {
+        "key": "view.loading",
+        "match": "t('view.loading', { context: 'authentication' })",
+      },
+      {
+        "key": "view.error",
+        "match": "t('view.error', { context: 'authentication' })",
+      },
+      {
+        "key": "view.error-message",
+        "match": "t( 'view.error-message', { context: 'authentication', message: \`\${session.errorMessage.replace(/\\.$/, '')",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', type] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'disableSsl'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'name' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['name', 'add-source', 'placeholder', type] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'search-addresses' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'help'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-addresses', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'port' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['port', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['port', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'search-address' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'error', 'port'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['search-address', 'placeholder'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'credential' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['credential', 'error'] })",
+      },
+      {
+        "key": "form-dialog.label_placeholder",
+        "match": "t('form-dialog.label_placeholder', { context: [ 'add-source', 'credential', multiselectCredentials && 'multi', !availableCredentials.length && 'add' ] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'add-credential' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'paramiko' }, [ <abbr title={t('form-dialog.label', { context: 'ssh' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'connection' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'ssl-certificate' })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardStepThree.js",
+    "keys": [
+      {
+        "key": "form-dialog.empty-state_title_add-source",
+        "match": "t('form-dialog.empty-state_title_add-source', { context: [(error && 'error')",
+      },
+      {
+        "key": "form-dialog.empty-state_description_add-source",
+        "match": "t(\`form-dialog.empty-state_description_add-source\`, { context: [(error && 'error')",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardStepOne.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'source-type' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'network-range' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'openshift' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'satellite' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'vcenter-server' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'ansible-server' })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardContext.js",
+    "keys": [
+      {
+        "key": "toast-notifications.title_add-source_hidden",
+        "match": "t('toast-notifications.title_add-source_hidden', { context: [error && 'error', edit && 'edit'] })",
+      },
+      {
+        "key": "toast-notifications.description_add-source_hidden",
+        "match": "t('toast-notifications.description_add-source_hidden', { context: [error && 'error', edit && 'edit'], message: errorMessage, name: source?.[apiTypes.API_SUBMIT_SOURCE_NAME] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "keys": [
+      {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step'] })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['close'] })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'two'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['submit', 'add-source'] })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "translate('form-dialog.title', { context: ['add-source', 'step', 'three'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['close'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizard.js",
+    "keys": [
+      {
+        "key": "form-dialog.confirmation_title_add-source",
+        "match": "t('form-dialog.confirmation_title_add-source', { context: [pending && 'exit', edit && 'edit'] })",
+      },
+      {
+        "key": "form-dialog.confirmation_heading_add-source",
+        "match": "t('form-dialog.confirmation_heading_add-source', { context: [pending && 'exit', edit && 'edit'] })",
+      },
+      {
+        "key": "form-dialog.confirmation_body_add-source",
+        "match": "t('form-dialog.confirmation_body_add-source', { context: [pending && 'exit', edit && 'edit', !pending && EMPTY_CONTEXT] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'no' })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'yes' })",
+      },
+      {
+        "key": "form-dialog.title",
+        "match": "t('form-dialog.title', { context: ['add-source', edit && 'edit'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/addCredentialType/addCredentialType.js",
+    "keys": [
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'network', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'openshift', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'satellite', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'vcenter', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'ansible', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: ['placeholder', 'add-credential'] })",
+      },
+    ],
+  },
+  {
+    "file": "src/components/aboutModal/aboutModal.js",
+    "keys": [
+      {
+        "key": "about-modal.copyright",
+        "match": "t('about-modal.copyright', { year: currentYear })",
+      },
+      {
+        "key": "about-modal.copy-confirmation",
+        "match": "t('about-modal.copy-confirmation')",
+      },
+      {
+        "key": "about-modal.username",
+        "match": "t('about-modal.username')",
+      },
+      {
+        "key": "about-modal.browser-version",
+        "match": "t('about-modal.browser-version')",
+      },
+      {
+        "key": "about-modal.browser-os",
+        "match": "t('about-modal.browser-os')",
+      },
+      {
+        "key": "about-modal.server-version",
+        "match": "t('about-modal.server-version')",
+      },
+      {
+        "key": "about-modal.ui-version",
+        "match": "t('about-modal.ui-version')",
+      },
+      {
+        "key": "about-modal.copy-button",
+        "match": "t('about-modal.copy-button')",
+      },
+    ],
+  },
+  {
+    "file": "src/common/helpers.js",
+    "keys": [
+      {
+        "key": "",
+        "match": "t(\${updatedKey}\${(updatedValue && \`, \${updatedValue}\`)",
       },
     ],
   },
@@ -1511,458 +1511,458 @@ Array [
 `;
 
 exports[`I18n Component should have locale keys that exist in the default language JSON: predictable missing locale keys 1`] = `
-Array [
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizard.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardConstants.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/addSourceWizard/addSourceWizardStepTwo.js",
-    "key": "form-dialog.label_placeholder",
-  },
-  Object {
-    "file": "./src/components/authentication/authentication.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/authentication/authentication.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/confirmationModal/confirmationModal.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/confirmationModal/confirmationModal.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/createCredentialDialog/createCredentialDialog.js",
-    "key": "form-dialog.empty-state",
-  },
-  Object {
-    "file": "./src/components/createScanDialog/createScanDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/createScanDialog/createScanDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/createScanDialog/createScanDialog.js",
-    "key": "form-dialog.title",
-  },
-  Object {
-    "file": "./src/components/createScanDialog/createScanDialog.js",
-    "key": "form-dialog.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentials.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/credentials/credentialsToolbar.js",
+[
+  {
+    "file": "src/components/viewToolbar/viewToolbarTextInput.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/credentials/credentialsToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarTextInput.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/credentials/credentialsToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelectCategory.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/credentials/credentialsToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelectCategory.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/mergeReportsDialog/mergeReportsDialog.js",
-    "key": "form-dialog.empty-state",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  Object {
-    "file": "./src/components/scanHostList/scanHostList.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/scanHostList/scanHostList.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/scans/scanJobsList.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/scans/scanJobsList.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.tooltip",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scans.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scansContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/scans/scansContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/scans/scansEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scansEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scansEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/scans/scanSourceList.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/scans/scanSourceList.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/scans/scansToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelect.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/scans/scansToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarSelect.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/scans/scansToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarFieldSortButton.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/scans/scansToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbarFieldSort.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.error",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.error-message",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "table.header",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sources.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesContext.js",
-    "key": "form-dialog.confirmation",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesEmptyState.js",
-    "key": "view.empty-state",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
+  {
+    "file": "src/components/viewToolbar/viewToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
-    "key": "toolbar.label",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
-    "key": "toolbar.label",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
-    "key": "toolbar.label",
-  },
-  Object {
-    "file": "./src/components/sources/sourcesToolbar.js",
-    "key": "toolbar.label",
-  },
-  Object {
-    "file": "./src/components/table/tableEmpty.js",
+  {
+    "file": "src/components/table/tableEmpty.js",
     "key": "table.empty-state_title",
   },
-  Object {
-    "file": "./src/components/table/tableEmpty.js",
+  {
+    "file": "src/components/table/tableEmpty.js",
     "key": "table.empty-state_description",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbar.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbar.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarFieldSort.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarFieldSortButton.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelect.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelect.js",
+  {
+    "file": "src/components/sources/sourcesToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelectCategory.js",
+  {
+    "file": "src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/sources/sourcesEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/sources/sourcesContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/sources/sourcesContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/sources/sources.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scansToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarSelectCategory.js",
+  {
+    "file": "src/components/scans/scansToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarTextInput.js",
+  {
+    "file": "src/components/scans/scansToolbar.js",
     "key": "toolbar.label",
   },
-  Object {
-    "file": "./src/components/viewToolbar/viewToolbarTextInput.js",
+  {
+    "file": "src/components/scans/scansToolbar.js",
     "key": "toolbar.label",
+  },
+  {
+    "file": "src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scansEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scansContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/scans/scansContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.tooltip",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scans.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/scans/scanSourceList.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/scans/scanSourceList.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/scans/scanJobsList.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/scans/scanJobsList.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/scanHostList/scanHostList.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/scanHostList/scanHostList.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/pageLayout/pageLayout.js",
+    "key": "view.label",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/mergeReportsDialog/mergeReportsDialog.js",
+    "key": "form-dialog.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentialsToolbar.js",
+    "key": "toolbar.label",
+  },
+  {
+    "file": "src/components/credentials/credentialsToolbar.js",
+    "key": "toolbar.label",
+  },
+  {
+    "file": "src/components/credentials/credentialsToolbar.js",
+    "key": "toolbar.label",
+  },
+  {
+    "file": "src/components/credentials/credentialsToolbar.js",
+    "key": "toolbar.label",
+  },
+  {
+    "file": "src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentialsEmptyState.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentialsContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/credentials/credentialsContext.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "table.header",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/credentials/credentials.js",
+    "key": "view.empty-state",
+  },
+  {
+    "file": "src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/createScanDialog/createScanDialog.js",
+    "key": "form-dialog.empty-state",
+  },
+  {
+    "file": "src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/createCredentialDialog/createCredentialDialog.js",
+    "key": "form-dialog.empty-state",
+  },
+  {
+    "file": "src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/confirmationModal/confirmationModal.js",
+    "key": "form-dialog.confirmation",
+  },
+  {
+    "file": "src/components/authentication/authentication.js",
+    "key": "view.error",
+  },
+  {
+    "file": "src/components/authentication/authentication.js",
+    "key": "view.error-message",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardStepTwo.js",
+    "key": "form-dialog.label_placeholder",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizardConstants.js",
+    "key": "form-dialog.title",
+  },
+  {
+    "file": "src/components/addSourceWizard/addSourceWizard.js",
+    "key": "form-dialog.title",
   },
 ]
 `;

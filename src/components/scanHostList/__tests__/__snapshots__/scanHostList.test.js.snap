@@ -3,7 +3,7 @@
 exports[`ScanHostList Component should render a connected component: connected 1`] = `
 <Connect(ScanHostList)
   filter={
-    Object {
+    {
       "lorem": "ipsum",
     }
   }
@@ -22,7 +22,7 @@ exports[`ScanHostList Component should render a non-connected component error: e
   <Alert
     isInline={true}
     isPlain={true}
-    title="t(view.error, {\\"context\\":\\"scan-hosts\\"})"
+    title="t(view.error, {"context":"scan-hosts"})"
     variant="danger"
   >
     t(view.error-message, {"context":"scan-hosts","message":"Lorem Ipsum."})

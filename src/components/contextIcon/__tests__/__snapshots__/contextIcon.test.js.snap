@@ -36,7 +36,7 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 <Spinner
   isSVG={true}
   style={
-    Object {
+    {
       "display": "inline-block",
       "height": "1em",
       "width": "1em",
@@ -121,7 +121,7 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 <Spinner
   isSVG={true}
   style={
-    Object {
+    {
       "display": "inline-block",
       "height": "1em",
       "width": "1em",
@@ -134,7 +134,7 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 <Spinner
   isSVG={true}
   style={
-    Object {
+    {
       "display": "inline-block",
       "height": "1em",
       "width": "1em",
@@ -224,7 +224,7 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: variants 1`] = `
-Object {
+{
   "ansible": "ansible",
   "canceled": "failed",
   "cancelled": "failed",

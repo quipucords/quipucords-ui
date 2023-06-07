@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TableHelpers parseContent should return a consistent output from multiple types: multiple types 1`] = `
-Object {
+{
   "func": "lorem ipsum",
   "node": <React.Fragment>
     dolor sit
@@ -13,7 +13,7 @@ Object {
 `;
 
 exports[`TableHelpers should have specific functions: tableHelpers 1`] = `
-Object {
+{
   "parseContent": [Function],
   "tableHeader": [Function],
   "tableRows": [Function],
@@ -21,213 +21,213 @@ Object {
 `;
 
 exports[`TableHelpers tableHeader should return parsed table header settings, props: tableHeader 1`] = `
-Object {
-  "basic": Object {
-    "headerRow": Array [],
-    "headerSelectProps": Object {},
+{
+  "basic": {
+    "headerRow": [],
+    "headerSelectProps": {},
   },
-  "columnHeaders": Object {
-    "headerRow": Array [
-      Object {
+  "columnHeaders": {
+    "headerRow": [
+      {
         "content": "lorem",
         "key": "bG9yZW0=-0",
       },
-      Object {
+      {
         "content": "dolor",
-        "data": Object {},
+        "data": {},
         "key": "W29iamVjdCBPYmplY3Rd-1",
-        "props": Object {
+        "props": {
           "dataLabel": undefined,
           "info": undefined,
           "tooltip": undefined,
         },
       },
-      Object {
+      {
         "content": "hello world",
-        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
+        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
       },
-      Object {
+      {
         "content": <React.Fragment>
           hello world
         </React.Fragment>,
         "key": "W29iamVjdCBPYmplY3Rd-3",
       },
     ],
-    "headerSelectProps": Object {},
+    "headerSelectProps": {},
   },
-  "isAllSelected": Object {
-    "headerRow": Array [],
-    "headerSelectProps": Object {},
+  "isAllSelected": {
+    "headerRow": [],
+    "headerSelectProps": {},
   },
-  "isRowExpand": Object {
-    "headerRow": Array [
-      Object {
+  "isRowExpand": {
+    "headerRow": [
+      {
         "content": "lorem",
         "key": "bG9yZW0=-0",
       },
-      Object {
+      {
         "content": "dolor",
-        "data": Object {},
+        "data": {},
         "key": "W29iamVjdCBPYmplY3Rd-1",
-        "props": Object {
+        "props": {
           "dataLabel": undefined,
           "info": undefined,
-          "sort": Object {
+          "sort": {
             "columnIndex": 2,
             "onSort": [Function],
-            "sortBy": Object {
+            "sortBy": {
               "direction": "asc",
             },
           },
           "tooltip": undefined,
         },
       },
-      Object {
+      {
         "content": "hello world",
-        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
+        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
       },
     ],
-    "headerSelectProps": Object {},
+    "headerSelectProps": {},
   },
-  "onSelect": Object {
-    "headerRow": Array [
-      Object {
+  "onSelect": {
+    "headerRow": [
+      {
         "content": "lorem",
         "key": "bG9yZW0=-0",
       },
-      Object {
+      {
         "content": "dolor",
-        "data": Object {},
+        "data": {},
         "key": "W29iamVjdCBPYmplY3Rd-1",
-        "props": Object {
+        "props": {
           "dataLabel": undefined,
           "info": undefined,
           "tooltip": undefined,
         },
       },
-      Object {
+      {
         "content": "hello world",
-        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
+        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
       },
     ],
-    "headerSelectProps": Object {
+    "headerSelectProps": {
       "isSelected": false,
       "onSelect": [Function],
     },
   },
-  "onSort": Object {
-    "headerRow": Array [
-      Object {
+  "onSort": {
+    "headerRow": [
+      {
         "content": "lorem",
         "key": "bG9yZW0=-0",
       },
-      Object {
+      {
         "content": "dolor",
-        "data": Object {},
+        "data": {},
         "key": "W29iamVjdCBPYmplY3Rd-1",
-        "props": Object {
+        "props": {
           "dataLabel": undefined,
           "info": undefined,
-          "sort": Object {
+          "sort": {
             "columnIndex": 1,
             "onSort": [Function],
-            "sortBy": Object {
+            "sortBy": {
               "direction": "asc",
             },
           },
           "tooltip": undefined,
         },
       },
-      Object {
+      {
         "content": "hello world",
-        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
+        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
       },
     ],
-    "headerSelectProps": Object {},
+    "headerSelectProps": {},
   },
 }
 `;
 
 exports[`TableHelpers tableRows should return parsed table body settings, props: tableRows 1`] = `
-Object {
-  "basic": Object {
+{
+  "basic": {
     "isAllSelected": true,
     "isExpandableCell": false,
     "isExpandableRow": false,
     "isSelectTable": false,
-    "rows": Array [],
+    "rows": [],
   },
-  "onExpandCells": Object {
+  "onExpandCells": {
     "isAllSelected": false,
     "isExpandableCell": true,
     "isExpandableRow": false,
     "isSelectTable": false,
-    "rows": Array [
-      Object {
-        "cells": Array [
-          Object {
+    "rows": [
+      {
+        "cells": [
+          {
             "content": "lorem",
             "key": "bG9yZW0=-0-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-0",
         "rowIndex": 0,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "dolor",
             "expandedContent": "sit",
             "isExpanded": true,
             "key": "W29iamVjdCBPYmplY3Rd-1-0",
-            "props": Object {
+            "props": {
               "className": "",
-              "compoundExpand": Object {
+              "compoundExpand": {
                 "isExpanded": true,
                 "onToggle": [Function],
               },
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-1",
         "rowIndex": 1,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "hello world",
-            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
+            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-2",
         "rowIndex": 2,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-3",
@@ -236,21 +236,21 @@ Object {
       },
     ],
   },
-  "onExpandRows": Object {
+  "onExpandRows": {
     "isAllSelected": false,
     "isExpandableCell": false,
     "isExpandableRow": true,
     "isSelectTable": false,
-    "rows": Array [
-      Object {
-        "cells": Array [
-          Object {
+    "rows": [
+      {
+        "cells": [
+          {
             "content": "lorem",
             "key": "bG9yZW0=-0-0",
           },
         ],
-        "data": Object {},
-        "expand": Object {
+        "data": {},
+        "expand": {
           "isExpanded": true,
           "onToggle": [Function],
           "rowIndex": 0,
@@ -260,51 +260,51 @@ Object {
         "rowIndex": 0,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "dolor",
             "key": "W29iamVjdCBPYmplY3Rd-1-0",
-            "props": Object {
+            "props": {
               "className": "",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-1",
         "rowIndex": 1,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "hello world",
-            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
+            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-2",
         "rowIndex": 2,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-3",
@@ -313,26 +313,26 @@ Object {
       },
     ],
   },
-  "onSelect": Object {
+  "onSelect": {
     "isAllSelected": false,
     "isExpandableCell": false,
     "isExpandableRow": false,
     "isSelectTable": true,
-    "rows": Array [
-      Object {
-        "cells": Array [
-          Object {
+    "rows": [
+      {
+        "cells": [
+          {
             "content": "lorem",
             "key": "bG9yZW0=-0-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-0",
         "rowIndex": 0,
-        "select": Object {
-          "cells": Array [
+        "select": {
+          "cells": [
             "lorem",
           ],
           "disable": false,
@@ -341,28 +341,28 @@ Object {
           "rowIndex": 0,
         },
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "dolor",
             "key": "W29iamVjdCBPYmplY3Rd-1-0",
-            "props": Object {
+            "props": {
               "className": "",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-1",
         "rowIndex": 1,
-        "select": Object {
-          "cells": Array [
-            Object {
+        "select": {
+          "cells": [
+            {
               "content": "dolor",
             },
           ],
@@ -372,20 +372,20 @@ Object {
           "rowIndex": 1,
         },
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "hello world",
-            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
+            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-2",
         "rowIndex": 2,
-        "select": Object {
-          "cells": Array [
+        "select": {
+          "cells": [
             [Function],
           ],
           "disable": false,
@@ -394,22 +394,22 @@ Object {
           "rowIndex": 2,
         },
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-3",
         "rowIndex": 3,
-        "select": Object {
-          "cells": Array [
+        "select": {
+          "cells": [
             <React.Fragment>
               hello world
             </React.Fragment>,
@@ -422,71 +422,71 @@ Object {
       },
     ],
   },
-  "rows": Object {
+  "rows": {
     "isAllSelected": false,
     "isExpandableCell": false,
     "isExpandableRow": false,
     "isSelectTable": false,
-    "rows": Array [
-      Object {
-        "cells": Array [
-          Object {
+    "rows": [
+      {
+        "cells": [
+          {
             "content": "lorem",
             "key": "bG9yZW0=-0-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-0",
         "rowIndex": 0,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "dolor",
             "key": "W29iamVjdCBPYmplY3Rd-1-0",
-            "props": Object {
+            "props": {
               "className": "",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-1",
         "rowIndex": 1,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "hello world",
-            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
+            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-2",
         "rowIndex": 2,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-3",
@@ -495,97 +495,97 @@ Object {
       },
     ],
   },
-  "styling": Object {
+  "styling": {
     "isAllSelected": false,
     "isExpandableCell": false,
     "isExpandableRow": false,
     "isSelectTable": false,
-    "rows": Array [
-      Object {
-        "cells": Array [
-          Object {
+    "rows": [
+      {
+        "cells": [
+          {
             "content": "lorem",
             "key": "W29iamVjdCBPYmplY3Rd-0-0",
-            "props": Object {
+            "props": {
               "className": "",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {
+              "style": {
                 "width": "9px",
               },
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-0",
         "rowIndex": 0,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "dolor",
             "key": "W29iamVjdCBPYmplY3Rd-1-0",
-            "props": Object {
+            "props": {
               "className": "",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {
+              "style": {
                 "backgroundColor": "red",
                 "width": "50em",
               },
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-1",
         "rowIndex": 1,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": "hello world",
             "key": "W29iamVjdCBPYmplY3Rd-2-0",
-            "props": Object {
+            "props": {
               "className": " pf-m-width-1",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-2",
         "rowIndex": 2,
         "select": undefined,
       },
-      Object {
-        "cells": Array [
-          Object {
+      {
+        "cells": [
+          {
             "content": <React.Fragment>
               hello world
             </React.Fragment>,
             "key": "W29iamVjdCBPYmplY3Rd-3-0",
-            "props": Object {
+            "props": {
               "className": " pf-m-width-11",
               "dataLabel": undefined,
               "isActionCell": undefined,
               "noPadding": undefined,
-              "style": Object {},
+              "style": {},
             },
           },
         ],
-        "data": Object {},
+        "data": {},
         "expand": undefined,
         "expandedContent": undefined,
         "key": "W29iamVjdCBPYmplY3Rd-3",

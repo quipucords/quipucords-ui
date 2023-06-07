@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table Component should allow expandable cell content: expand cell event 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "cellIndex": 0,
-      "data": Object {
-        "data": Object {
+      "data": {
+        "data": {
           "hello": "world",
         },
       },
@@ -31,12 +31,12 @@ exports[`Table Component should allow expandable cell content: expanded cell 1`]
 `;
 
 exports[`Table Component should allow expandable row content: expand row event 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "cellIndex": -1,
-      "data": Object {
-        "data": Object {
+      "data": {
+        "data": {
           "hello": "world",
         },
       },
@@ -61,7 +61,7 @@ exports[`Table Component should allow expandable row content: expanded row 1`] =
 `;
 
 exports[`Table Component should allow selectable row content: select row content 1`] = `
-Array [
+[
   <input
     aria-label="Select all rows"
     checked={false}
@@ -87,10 +87,10 @@ Array [
 `;
 
 exports[`Table Component should allow selectable row content: select row input 1`] = `
-Array [
-  Array [
-    Object {
-      "data": Object {
+[
+  [
+    {
+      "data": {
         "dataLabel": "testing",
       },
       "isSelected": true,
@@ -102,7 +102,7 @@ Array [
 `;
 
 exports[`Table Component should allow selectable row content: selected row 1`] = `
-Array [
+[
   <input
     aria-label="Select all rows"
     checked={false}
@@ -128,18 +128,18 @@ Array [
 `;
 
 exports[`Table Component should allow sortable content: sort event 1`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "cellIndex": 0,
-      "data": Object {},
+      "data": {},
       "direction": "asc",
     },
   ],
-  Array [
-    Object {
+  [
+    {
       "cellIndex": 0,
-      "data": Object {},
+      "data": {},
       "direction": "desc",
     },
   ],
@@ -151,10 +151,10 @@ exports[`Table Component should allow sortable content: sortable content 1`] = `
   className="quipucords-table__th"
   key="W29iamVjdCBPYmplY3Rd-0"
   sort={
-    Object {
+    {
       "columnIndex": 0,
       "onSort": [Function],
-      "sortBy": Object {
+      "sortBy": {
         "direction": "asc",
       },
     }
@@ -164,10 +164,10 @@ exports[`Table Component should allow sortable content: sortable content 1`] = `
     className="quipucords-table__th"
     innerRef={null}
     sort={
-      Object {
+      {
         "columnIndex": 0,
         "onSort": [Function],
-        "sortBy": Object {
+        "sortBy": {
           "direction": "asc",
         },
       }
@@ -215,7 +215,7 @@ exports[`Table Component should allow sortable content: sortable content 1`] = `
                   height="1em"
                   role="img"
                   style={
-                    Object {
+                    {
                       "verticalAlign": "-0.125em",
                     }
                   }
@@ -241,10 +241,10 @@ exports[`Table Component should allow sortable content: sorted column, asc 1`] =
   className="quipucords-table__th"
   key="W29iamVjdCBPYmplY3Rd-0"
   sort={
-    Object {
+    {
       "columnIndex": 0,
       "onSort": [Function],
-      "sortBy": Object {
+      "sortBy": {
         "direction": "asc",
         "index": 0,
       },
@@ -255,10 +255,10 @@ exports[`Table Component should allow sortable content: sorted column, asc 1`] =
     className="quipucords-table__th"
     innerRef={null}
     sort={
-      Object {
+      {
         "columnIndex": 0,
         "onSort": [Function],
-        "sortBy": Object {
+        "sortBy": {
           "direction": "asc",
           "index": 0,
         },
@@ -307,7 +307,7 @@ exports[`Table Component should allow sortable content: sorted column, asc 1`] =
                   height="1em"
                   role="img"
                   style={
-                    Object {
+                    {
                       "verticalAlign": "-0.125em",
                     }
                   }
@@ -333,10 +333,10 @@ exports[`Table Component should allow sortable content: sorted column, desc 1`] 
   className="quipucords-table__th"
   key="W29iamVjdCBPYmplY3Rd-0"
   sort={
-    Object {
+    {
       "columnIndex": 0,
       "onSort": [Function],
-      "sortBy": Object {
+      "sortBy": {
         "direction": "desc",
         "index": 0,
       },
@@ -347,10 +347,10 @@ exports[`Table Component should allow sortable content: sorted column, desc 1`] 
     className="quipucords-table__th"
     innerRef={null}
     sort={
-      Object {
+      {
         "columnIndex": 0,
         "onSort": [Function],
-        "sortBy": Object {
+        "sortBy": {
           "direction": "desc",
           "index": 0,
         },
@@ -399,7 +399,7 @@ exports[`Table Component should allow sortable content: sorted column, desc 1`] 
                   height="1em"
                   role="img"
                   style={
-                    Object {
+                    {
                       "verticalAlign": "-0.125em",
                     }
                   }
@@ -421,10 +421,10 @@ exports[`Table Component should allow sortable content: sorted column, desc 1`] 
 `;
 
 exports[`Table Component should allow variations in table layout: ariaLabel and summary 1`] = `
-Object {
+{
   "aria-label": "lorem ipsum aria-label",
   "borders": false,
-  "children": Array [
+  "children": [
     false,
     <Tbody>
       <React.Fragment>
@@ -568,10 +568,10 @@ exports[`Table Component should allow variations in table layout: borders and ta
 `;
 
 exports[`Table Component should allow variations in table layout: className and variant 1`] = `
-Object {
+{
   "aria-label": "lorem ipsum aria-label",
   "borders": false,
-  "children": Array [
+  "children": [
     false,
     <Tbody>
       <React.Fragment>

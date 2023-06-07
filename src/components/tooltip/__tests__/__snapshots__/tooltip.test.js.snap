@@ -21,7 +21,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
       distance={25}
       enableFlip={true}
       flipBehavior={
-        Array [
+        [
           "top",
           "right",
           "bottom",
@@ -44,11 +44,11 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           aria-modal="true"
           className="pf-c-popover pf-m-width-auto quipucords-popover"
           focusTrapOptions={
-            Object {
+            {
               "clickOutsideDeactivates": true,
               "fallbackFocus": [Function],
               "returnFocusOnDeactivate": true,
-              "tabbableOptions": Object {
+              "tabbableOptions": {
                 "displayCheck": "none",
               },
             }
@@ -58,7 +58,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           preventScrollOnDeactivate={true}
           role="dialog"
           style={
-            Object {
+            {
               "maxWidth": null,
               "minWidth": null,
               "opacity": 0,
@@ -78,7 +78,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
       }
       popperMatchesTriggerWidth={false}
       positionModifiers={
-        Object {
+        {
           "bottom": "pf-m-bottom",
           "bottom-end": "pf-m-bottom-right",
           "bottom-start": "pf-m-bottom-left",
@@ -136,7 +136,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
       distance={15}
       enableFlip={true}
       flipBehavior={
-        Array [
+        [
           "top",
           "right",
           "bottom",
@@ -164,7 +164,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
           id="test"
           role="tooltip"
           style={
-            Object {
+            {
               "maxWidth": null,
               "opacity": 0,
               "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
@@ -181,7 +181,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
       }
       popperMatchesTriggerWidth={false}
       positionModifiers={
-        Object {
+        {
           "bottom": "pf-m-bottom",
           "bottom-end": "pf-m-bottom-right",
           "bottom-start": "pf-m-bottom-left",

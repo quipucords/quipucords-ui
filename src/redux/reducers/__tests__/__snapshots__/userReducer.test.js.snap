@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`userReducer should handle all defined error types: rejected types USER_AUTH 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": true,
       "errorMessage": "ERROR",
@@ -18,9 +18,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined error types: rejected types USER_INFO 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",
@@ -35,9 +35,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined error types: rejected types USER_LOGOUT 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": true,
       "errorMessage": "ERROR",
@@ -52,9 +52,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_AUTH 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": true,
       "error": false,
       "errorMessage": "",
@@ -69,9 +69,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_INFO 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",
@@ -86,9 +86,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined fulfilled types: fulfilled types USER_LOGOUT 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",
@@ -103,9 +103,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined pending types: pending types USER_AUTH 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",
@@ -120,9 +120,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined pending types: pending types USER_INFO 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",
@@ -137,9 +137,9 @@ Object {
 `;
 
 exports[`userReducer should handle all defined pending types: pending types USER_LOGOUT 1`] = `
-Object {
-  "result": Object {
-    "session": Object {
+{
+  "result": {
+    "session": {
       "authorized": false,
       "error": false,
       "errorMessage": "",

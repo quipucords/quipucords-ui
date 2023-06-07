@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateScanDialog Component should correctly validate data: form invalid 1`] = `
-Object {
+{
   "scanDirectories": true,
   "scanName": true,
 }
 `;
 
 exports[`CreateScanDialog Component should correctly validate data: form valid 1`] = `
-Object {
+{
   "scanDirectories": false,
   "scanName": false,
 }
@@ -265,7 +265,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                 id="scanName"
                 maxlength="256"
                 name="scanName"
-                placeholder="t(form-dialog.label_scan-name, {\\"context\\":\\"placeholder\\"})"
+                placeholder="t(form-dialog.label_scan-name, {"context":"placeholder"})"
                 type="text"
                 value=""
               />
@@ -333,7 +333,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                 >
                   <button
                     aria-disabled="false"
-                    aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"min\\"})"
+                    aria-label="t(form-dialog.label_touchspin, {"context":"min"})"
                     class="pf-c-button pf-m-control"
                     data-ouia-component-id="OUIA-Generated-Button-control-1"
                     data-ouia-component-type="PF4/Button"
@@ -356,7 +356,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   </button>
                   <input
                     aria-invalid="false"
-                    aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"input\\"})"
+                    aria-label="t(form-dialog.label_touchspin, {"context":"input"})"
                     class="pf-c-form-control"
                     data-ouia-component-id="OUIA-Generated-TextInputBase-2"
                     data-ouia-component-type="PF4/TextInput"
@@ -367,7 +367,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   />
                   <button
                     aria-disabled="false"
-                    aria-label="t(form-dialog.label_touchspin, {\\"context\\":\\"max\\"})"
+                    aria-label="t(form-dialog.label_touchspin, {"context":"max"})"
                     class="pf-c-button pf-m-control"
                     data-ouia-component-id="OUIA-Generated-Button-control-2"
                     data-ouia-component-type="PF4/Button"
@@ -442,7 +442,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_jboss, {\\"context\\":\\"full\\"})"
+                  aria-label="t(form-dialog.label_jboss, {"context":"full"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-1"
                   data-ouia-component-type="PF4/Checkbox"
@@ -457,7 +457,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossEap"
                 >
                   <abbr
-                    title="t(form-dialog.label_jboss, {\\"context\\":\\"full\\"})"
+                    title="t(form-dialog.label_jboss, {"context":"full"})"
                   >
                     t(form-dialog.label, {"context":"jboss"})
                   </abbr>
@@ -468,7 +468,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_fuse, {\\"context\\":\\"full\\"})"
+                  aria-label="t(form-dialog.label_fuse, {"context":"full"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-2"
                   data-ouia-component-type="PF4/Checkbox"
@@ -483,7 +483,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossFuse"
                 >
                   <abbr
-                    title="t(form-dialog.label_fuse, {\\"context\\":\\"full\\"})"
+                    title="t(form-dialog.label_fuse, {"context":"full"})"
                   >
                     t(form-dialog.label, {"context":"fuse"})
                   </abbr>
@@ -494,7 +494,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_jboss-server, {\\"context\\":\\"full\\"})"
+                  aria-label="t(form-dialog.label_jboss-server, {"context":"full"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-3"
                   data-ouia-component-type="PF4/Checkbox"
@@ -509,7 +509,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossWs"
                 >
                   <abbr
-                    title="t(form-dialog.label_jboss-server, {\\"context\\":\\"full\\"})"
+                    title="t(form-dialog.label_jboss-server, {"context":"full"})"
                   >
                     t(form-dialog.label, {"context":"jboss-server"})
                   </abbr>
@@ -520,7 +520,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
               >
                 <input
                   aria-invalid="false"
-                  aria-label="t(form-dialog.label_decision-manager, {\\"context\\":\\"full\\"})"
+                  aria-label="t(form-dialog.label_decision-manager, {"context":"full"})"
                   class="pf-c-check__input"
                   data-ouia-component-id="OUIA-Generated-Checkbox-4"
                   data-ouia-component-type="PF4/Checkbox"
@@ -535,7 +535,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                   for="jbossBrms"
                 >
                   <abbr
-                    title="t(form-dialog.label_decision-manager, {\\"context\\":\\"full\\"})"
+                    title="t(form-dialog.label_decision-manager, {"context":"full"})"
                   >
                     t(form-dialog.label, {"context":"decision-manager"})
                   </abbr>
@@ -570,7 +570,7 @@ exports[`CreateScanDialog Component should render a non-connected component: non
                 disabled=""
                 id="displayScanDirectories"
                 name="displayScanDirectories"
-                placeholder="t(form-dialog.label_scan-alt-directories, {\\"context\\":\\"placeholder\\"})"
+                placeholder="t(form-dialog.label_scan-alt-directories, {"context":"placeholder"})"
                 rows="4"
               />
               <div
