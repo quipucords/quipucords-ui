@@ -53,11 +53,13 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
       id="generatedid-"
       isDisabled={false}
       isDropdownButton={true}
+      isFlipEnabled={false}
       isInline={true}
       isToggleText={true}
       maxHeight={null}
       name={null}
       onSelect={[Function]}
+      onSplitButton={[Function]}
       options={
         [
           {

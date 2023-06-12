@@ -8,6 +8,8 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
+  DropdownToggleAction,
+  DropdownToggleCheckbox,
   Select as PfSelect,
   SelectOption as PfSelectOption,
   SelectVariant
@@ -15,12 +17,14 @@ import {
 import _cloneDeep from 'lodash/cloneDeep';
 import _findIndex from 'lodash/findIndex';
 import _isPlainObject from 'lodash/isPlainObject';
+import _memoize from 'lodash/memoize';
+import { createMockEvent } from '../form/formHelpers';
 import { helpers } from '../../common';
 
 /**
  * Dropdown split button variants
  *
- * @type {{checkbox: string, action: string}}
+ * @type {{action: string, checkbox: string}}
  */
 const SplitButtonVariant = {
   action: 'action',
@@ -32,38 +36,36 @@ const SplitButtonVariant = {
  *
  * @type {{secondary: string, default: string, plain: string, text: string, primary: string}}
  */
-const ButtonVariant = {
-  default: 'default',
-  plain: 'plain',
-  primary: 'primary',
-  secondary: 'secondary',
-  text: 'text'
-};
+const ButtonVariant = PfButtonVariant;
 
 /**
  * Pass button variant as a select component option.
  *
- * @type {PfButtonVariant}
+ * @type {{secondary: string, default: string, plain: string, text: string, primary: string}}
  */
-const SelectButtonVariant = PfButtonVariant;
+const SelectButtonVariant = ButtonVariant;
 
 /**
  * Pass direction as select component variant option.
  *
- * @type {DropdownDirection}
+ * @type {{down: string, up: string}}
  */
 const SelectDirection = DropdownDirection;
 
 /**
  * Pass position as select component variant option.
  *
- * @type {DropdownPosition}
+ * @type {{left: string, right: string}}
  */
 const SelectPosition = DropdownPosition;
 
-// FixMe: attributes filtered on PF select component. allow data- attributes
 /**
- * Format options into a consumable array of objects format.
+ * FixMe: attributes on PF select and dropdown components do not allow data- attributes being passed
+ * FixMe: PF dropdown, select attempt to break the ref attribute?
+ * Moving from a class to func wrapper exposes a PF "special props warning", https://bit.ly/2n0hzWo
+ */
+/**
+ * Format options into a consumable array of objects.
  * Note: It is understood that for line 83'ish around "updatedOptions" we dump all values regardless
  * of whether they are plain objects, or not, into updatedOptions. This has been done for speed only,
  * one less check to perform.
@@ -74,7 +76,7 @@ const SelectPosition = DropdownPosition;
  * @param {string|number|Array} params.selectedOptions
  * @param {string} params.variant
  * @param {object} params.props
- * @returns {{options: *[]|*, selected: *[]}}
+ * @returns {{options: Array|any, selected: Array}}
  */
 const formatOptions = ({ selectField = { current: null }, options, selectedOptions, variant, ...props } = {}) => {
   const { current: domElement = {} } = selectField;
@@ -137,8 +139,8 @@ const formatOptions = ({ selectField = { current: null }, options, selectedOptio
     updateSelected = updatedOptions.filter(opt => opt.selected === true).map(opt => opt.title);
   }
 
-  if (domElement?.parentRef?.current) {
-    dataAttributes.forEach(([key, value]) => domElement?.parentRef?.current.setAttribute(key, value));
+  if (domElement?.firstChild) {
+    dataAttributes.forEach(([key, value]) => domElement?.firstChild.setAttribute(key, value));
   }
 
   return {
@@ -156,7 +158,7 @@ const formatOptions = ({ selectField = { current: null }, options, selectedOptio
  * @param {object|Array} params.options
  * @returns {{}}
  */
-const formatSelectProps = ({ isDisabled, placeholder, options } = {}) => {
+const formatSelectProps = _memoize(({ isDisabled, placeholder, options } = {}) => {
   const updatedProps = {};
 
   if (!options || !options.length || isDisabled) {
@@ -168,7 +170,7 @@ const formatSelectProps = ({ isDisabled, placeholder, options } = {}) => {
   }
 
   return updatedProps;
-};
+});
 
 /**
  * Format consistent dropdown button props.
@@ -177,34 +179,56 @@ const formatSelectProps = ({ isDisabled, placeholder, options } = {}) => {
  * @param {boolean} params.isDisabled
  * @param {Array} params.options
  * @param {string} params.buttonVariant
+ * @param {Function} params.onSplitButton
+ * @param {string} params.splitButtonCopy
  * @param {string} params.splitButtonVariant
  * @returns {*}
  */
-const formatButtonProps = ({ isDisabled, options, buttonVariant, splitButtonVariant } = {}) => {
-  const buttonVariantPropLookup = {
-    default: { toggleVariant: 'default' },
-    plain: { isPlain: true, toggleIndicator: null },
-    primary: { toggleVariant: 'primary' },
-    secondary: { toggleVariant: 'secondary' },
-    text: { isText: true }
-  };
+const formatButtonProps = _memoize(
+  ({ isDisabled, options, buttonVariant, onSplitButton, splitButtonCopy, splitButtonVariant } = {}) => {
+    const buttonVariantPropLookup = {
+      default: { toggleVariant: 'default' },
+      plain: { isPlain: true, toggleIndicator: null },
+      primary: { toggleVariant: 'primary' },
+      secondary: { toggleVariant: 'secondary' },
+      text: { isText: true }
+    };
 
-  const splitButtonVariantPropLookup = {
-    action: { splitButtonVariant: 'action' },
-    checkbox: { splitButtonVariant: 'checkbox' }
-  };
+    const splitButtonVariantPropLookup = {
+      action: {
+        splitButtonVariant: 'action',
+        splitButtonItems: [
+          <DropdownToggleAction onClick={onSplitButton} key="toggle-action">
+            {splitButtonCopy}
+          </DropdownToggleAction>
+        ]
+      },
+      checkbox: {
+        splitButtonVariant: 'checkbox',
+        splitButtonItems: [
+          <DropdownToggleCheckbox
+            id={`toggle-action-${splitButtonCopy}`}
+            key="toggle-action"
+            onClick={onSplitButton}
+            aria-label={splitButtonCopy}
+            placeholder={splitButtonCopy}
+          />
+        ]
+      }
+    };
 
-  const updatedProps = {
-    ...buttonVariantPropLookup[buttonVariant],
-    ...splitButtonVariantPropLookup[splitButtonVariant]
-  };
+    const updatedProps = {
+      ...buttonVariantPropLookup[buttonVariant],
+      ...splitButtonVariantPropLookup[splitButtonVariant]
+    };
 
-  if (!options || !options.length || isDisabled) {
-    updatedProps.isDisabled = true;
+    if (!options || !options.length || isDisabled) {
+      updatedProps.isDisabled = true;
+    }
+
+    return updatedProps;
   }
-
-  return updatedProps;
-};
+);
 
 /**
  * FixMe: PF has an inconsistency in how it applies props for the dropdown
@@ -230,6 +254,7 @@ const formatButtonParentProps = (formattedButtonProps = {}) => {
  * for both select and dropdown.
  *
  * @fires onDropdownSelect
+ * @fires onSplitButton
  * @fires onToggle
  * @param {object} props
  * @param {string} props.ariaLabel
@@ -239,11 +264,13 @@ const formatButtonParentProps = (formattedButtonProps = {}) => {
  * @param {string} props.id
  * @param {boolean} props.isDisabled
  * @param {boolean} props.isDropdownButton
+ * @param {boolean} props.isFlipEnabled
  * @param {boolean} props.isInline
  * @param {boolean} props.isToggleText
  * @param {number} props.maxHeight
  * @param {string} props.name
  * @param {Function} props.onSelect
+ * @param {Function} props.onSplitButton
  * @param {object|Array} props.options
  * @param {string} props.placeholder
  * @param {string} props.position
@@ -262,11 +289,13 @@ const DropdownSelect = ({
   id,
   isDisabled,
   isDropdownButton,
+  isFlipEnabled,
   isInline,
   isToggleText,
   maxHeight,
   name,
   onSelect,
+  onSplitButton,
   options: baseOptions,
   placeholder,
   position,
@@ -302,6 +331,17 @@ const DropdownSelect = ({
    */
   const onToggle = expanded => {
     setIsExpanded(expanded);
+  };
+
+  /**
+   * Split button event handler.
+   *
+   * @event onSplitButton
+   * @param {object} event
+   */
+  const onUpdatedSplitButton = event => {
+    const updatedOptions = _cloneDeep(options);
+    onSplitButton({ ...createMockEvent(event), options: updatedOptions }, -1, updatedOptions);
   };
 
   /**
@@ -375,38 +415,44 @@ const DropdownSelect = ({
    * @returns {React.ReactNode}
    */
   const renderDropdownButton = () => (
-    <div ref={selectField}>
-      <Dropdown
-        direction={direction}
-        isOpen={isExpanded}
-        position={position}
-        toggle={
-          <DropdownToggle
-            onToggle={onToggle}
-            {...formatButtonProps({ isDisabled, options, buttonVariant, splitButtonVariant })}
+    <Dropdown
+      direction={direction}
+      isFlipEnabled={isFlipEnabled}
+      isOpen={isExpanded}
+      position={position}
+      toggle={
+        <DropdownToggle
+          onToggle={onToggle}
+          {...formatButtonProps({
+            isDisabled,
+            onSplitButton: onUpdatedSplitButton,
+            options,
+            buttonVariant,
+            splitButtonCopy: placeholder || ariaLabel,
+            splitButtonVariant
+          })}
+        >
+          {(!splitButtonVariant && placeholder) || (!SplitButtonVariant && ariaLabel)}
+        </DropdownToggle>
+      }
+      dropdownItems={
+        options?.map(option => (
+          <DropdownItem
+            onClick={onDropdownSelect}
+            key={window.btoa(`${option.title}-${option.value}`)}
+            id={window.btoa(`${option.title}-${option.value}`)}
+            data-value={(_isPlainObject(option.value) && JSON.stringify([option.value])) || option.value}
+            data-title={option.title}
+            data-description={option.description}
+            description={option.description}
           >
-            {placeholder || ariaLabel}
-          </DropdownToggle>
-        }
-        dropdownItems={
-          options?.map(option => (
-            <DropdownItem
-              onClick={onDropdownSelect}
-              key={window.btoa(`${option.title}-${option.value}`)}
-              id={window.btoa(`${option.title}-${option.value}`)}
-              data-value={(_isPlainObject(option.value) && JSON.stringify([option.value])) || option.value}
-              data-title={option.title}
-              data-description={option.description}
-              description={option.description}
-            >
-              {option.title}
-            </DropdownItem>
-          )) || []
-        }
-        {...formatButtonParentProps({ buttonVariant })}
-        {...props}
-      />
-    </div>
+            {option.title}
+          </DropdownItem>
+        )) || []
+      }
+      {...formatButtonParentProps({ buttonVariant })}
+      {...props}
+    />
   );
 
   /**
@@ -424,6 +470,7 @@ const DropdownSelect = ({
       onToggle={onToggle}
       onSelect={onDropdownSelect}
       selections={selected}
+      isFlipEnabled={isFlipEnabled}
       isOpen={isExpanded}
       toggleIcon={toggleIcon}
       placeholderText={(typeof placeholder === 'string' && placeholder) || undefined}
@@ -464,10 +511,10 @@ const DropdownSelect = ({
 /**
  * Prop types.
  *
- * @type {{toggleIcon: (React.ReactNode|Function), className: string, ariaLabel: string, onSelect: Function, isToggleText: boolean,
- *     isDropdownButton: boolean, maxHeight: number, buttonVariant: string, name: string, options: Array|object,
- *     selectedOptions: Array|number|string, isInline: boolean, id: string, isDisabled: boolean, placeholder: string,
- *     position: string, splitButtonVariant: string, direction: string}}
+ * @type {{isFlipEnabled: boolean, toggleIcon: (React.ReactNode|Function), className: string, onSplitButton: Function, ariaLabel: string,
+ *     onSelect: Function, isToggleText: boolean, isDropdownButton: boolean, maxHeight: number, buttonVariant: string, name: string,
+ *     options: Array|object, selectedOptions: Array|number|string, variant: string, isInline: boolean, id: string, isDisabled: boolean,
+ *     placeholder: string, position: string, splitButtonVariant: string, direction: string}}
  */
 DropdownSelect.propTypes = {
   ariaLabel: PropTypes.string,
@@ -477,11 +524,13 @@ DropdownSelect.propTypes = {
   id: PropTypes.string,
   isDisabled: PropTypes.bool,
   isDropdownButton: PropTypes.bool,
+  isFlipEnabled: PropTypes.bool,
   isInline: PropTypes.bool,
   isToggleText: PropTypes.bool,
   maxHeight: PropTypes.number,
   name: PropTypes.string,
   onSelect: PropTypes.func,
+  onSplitButton: PropTypes.func,
   options: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(
@@ -515,10 +564,10 @@ DropdownSelect.propTypes = {
 /**
  * Default props.
  *
- * @type {{toggleIcon: null, className: string, ariaLabel: string, onSelect: Function, isToggleText: boolean, isDropdownButton: boolean,
- *     maxHeight: null, buttonVariant: string, name: null, options: *[], selectedOptions: null, variant: SelectVariant.single,
- *     isInline: boolean, id: string, isDisabled: boolean, placeholder: string, position: DropdownPosition.left, splitButtonVariant: null,
- *     direction: DropdownDirection.down}}
+ * @type {{isFlipEnabled: boolean, toggleIcon: null, className: string, onSplitButton: Function, ariaLabel: string, onSelect: Function,
+ *     isToggleText: boolean, isDropdownButton: boolean, maxHeight: null, buttonVariant: string, name: null, options: Array,
+ *     selectedOptions: null, variant: SelectVariant.single, isInline: boolean, id: string, isDisabled: boolean, placeholder: string,
+ *     position: string, splitButtonVariant: null, direction: string}}
  */
 DropdownSelect.defaultProps = {
   ariaLabel: 'Select option',
@@ -528,11 +577,13 @@ DropdownSelect.defaultProps = {
   id: helpers.generateId(),
   isDisabled: false,
   isDropdownButton: false,
+  isFlipEnabled: false,
   isInline: true,
   isToggleText: true,
   maxHeight: null,
   name: null,
   onSelect: helpers.noop,
+  onSplitButton: helpers.noop,
   options: [],
   placeholder: 'Select option',
   position: SelectPosition.left,

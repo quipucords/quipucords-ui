@@ -183,7 +183,6 @@ exports[`ViewToolbar Component should hide categories when a single filter is av
               onKeyUp={[Function]}
               onMouseUp={[Function]}
               placeholder="t(toolbar.label_placeholder_filter, {"context":"search_by_name"})"
-              readOnly={false}
               required={false}
               type="text"
               value=""

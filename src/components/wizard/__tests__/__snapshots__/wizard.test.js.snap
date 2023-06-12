@@ -71,6 +71,9 @@ exports[`Wizard Component should render a basic component: basic 1`] = `
           >
             <nav
               class="pf-c-wizard__nav"
+              data-ouia-component-id="OUIA-Generated-WizardNav-1"
+              data-ouia-component-type="PF4/WizardNav"
+              data-ouia-safe="true"
             >
               <ol
                 class="pf-c-wizard__nav-list"
@@ -81,6 +84,9 @@ exports[`Wizard Component should render a basic component: basic 1`] = `
                   <button
                     aria-current="step"
                     class="pf-c-wizard__nav-link pf-m-current"
+                    data-ouia-component-id="OUIA-Generated-WizardNavItem-1"
+                    data-ouia-component-type="PF4/WizardNavItem"
+                    data-ouia-safe="true"
                     id="1"
                   >
                     Lorem
@@ -92,6 +98,9 @@ exports[`Wizard Component should render a basic component: basic 1`] = `
                   <button
                     aria-current="false"
                     class="pf-c-wizard__nav-link"
+                    data-ouia-component-id="OUIA-Generated-WizardNavItem-2"
+                    data-ouia-component-type="PF4/WizardNavItem"
+                    data-ouia-safe="true"
                     id="2"
                   >
                     Ipsum
@@ -103,6 +112,9 @@ exports[`Wizard Component should render a basic component: basic 1`] = `
                   <button
                     aria-current="false"
                     class="pf-c-wizard__nav-link"
+                    data-ouia-component-id="OUIA-Generated-WizardNavItem-3"
+                    data-ouia-component-type="PF4/WizardNavItem"
+                    data-ouia-safe="true"
                     id="3"
                   >
                     Dolor
