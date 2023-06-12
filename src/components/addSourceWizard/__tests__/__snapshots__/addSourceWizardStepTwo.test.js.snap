@@ -25,13 +25,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -60,13 +60,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsMultiple"
       >
         <span
           class="pf-c-form__label-text"
@@ -96,13 +96,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="port"
       >
         <span
           class="pf-c-form__label-text"
@@ -132,13 +132,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="generatedid-"
       >
         <span
           class="pf-c-form__label-text"
@@ -234,7 +234,6 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"
@@ -273,13 +272,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -308,13 +307,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsSingle"
       >
         <span
           class="pf-c-form__label-text"
@@ -343,13 +342,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="generatedid-"
       >
         <span
           class="pf-c-form__label-text"
@@ -446,13 +445,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="optionSslProtocol"
       >
         <span
           class="pf-c-form__label-text"
@@ -516,7 +515,6 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"
@@ -581,13 +579,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -616,13 +614,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsMultiple"
       >
         <span
           class="pf-c-form__label-text"
@@ -652,13 +650,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="port"
       >
         <span
           class="pf-c-form__label-text"
@@ -688,13 +686,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="generatedid-"
       >
         <span
           class="pf-c-form__label-text"
@@ -790,7 +788,6 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"

@@ -3,7 +3,6 @@
 exports[`FormGroup Component should handle multiple error message types: boolean error message 1`] = `
 <div
   class="pf-c-form__group"
-  id="test"
 >
   <div
     class="pf-c-form__group-control"
@@ -17,7 +16,7 @@ exports[`FormGroup Component should handle multiple error message types: boolean
     <div
       aria-live="polite"
       class="pf-c-form__helper-text pf-m-error"
-      id="undefined-helper"
+      id="test-helper"
     >
       Error
     </div>
@@ -28,7 +27,6 @@ exports[`FormGroup Component should handle multiple error message types: boolean
 exports[`FormGroup Component should handle multiple error message types: node error message 1`] = `
 <div
   class="pf-c-form__group"
-  id="test"
 >
   <div
     class="pf-c-form__group-control"
@@ -49,7 +47,6 @@ exports[`FormGroup Component should handle multiple error message types: node er
 exports[`FormGroup Component should handle multiple error message types: string error message 1`] = `
 <div
   class="pf-c-form__group"
-  id="test"
 >
   <div
     class="pf-c-form__group-control"
@@ -63,7 +60,7 @@ exports[`FormGroup Component should handle multiple error message types: string 
     <div
       aria-live="polite"
       class="pf-c-form__helper-text pf-m-error"
-      id="undefined-helper"
+      id="test-helper"
     >
       lorem ipsum
     </div>
@@ -74,13 +71,13 @@ exports[`FormGroup Component should handle multiple error message types: string 
 exports[`FormGroup Component should render a basic component: basic formgroup 1`] = `
 <div
   class="pf-c-form__group"
-  id="test"
 >
   <div
     class="pf-c-form__group-label"
   >
     <label
       class="pf-c-form__label"
+      for="test"
     >
       <span
         class="pf-c-form__label-text"
@@ -106,6 +103,7 @@ exports[`FormGroup Component should render a basic component: basic formgroup 1`
 exports[`FormGroup Component should render a basic component: basic label 1`] = `
 <label
   class="pf-c-form__label"
+  for="test"
 >
   <span
     class="pf-c-form__label-text"
