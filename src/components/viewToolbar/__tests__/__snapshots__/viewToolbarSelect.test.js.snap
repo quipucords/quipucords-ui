@@ -88,18 +88,19 @@ exports[`ViewToolbarSelect Component should handle updating the view query throu
 exports[`ViewToolbarSelect Component should render a basic component: basic 1`] = `
 <DropdownSelect
   ariaLabel="t(toolbar.label_placeholder_filter, {"context":"cred_type"})"
-  buttonVariant="default"
   className=""
   data-test="toolbarSelect_cred_type"
   direction="down"
   id="generatedid-"
   isDisabled={false}
   isDropdownButton={false}
+  isFlipEnabled={false}
   isInline={true}
   isToggleText={true}
   maxHeight={null}
   name={null}
   onSelect={[Function]}
+  onSplitButton={[Function]}
   options={
     [
       {
