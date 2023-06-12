@@ -518,6 +518,7 @@ exports[`Table Component should allow variations in table layout: borders and ta
                     >
                       <td
                         className="undefined quipucords-table__td "
+                        onMouseEnter={[Function]}
                       >
                         dolor
                       </td>
@@ -551,6 +552,7 @@ exports[`Table Component should allow variations in table layout: borders and ta
                     >
                       <td
                         className="undefined quipucords-table__td "
+                        onMouseEnter={[Function]}
                       >
                         sit
                       </td>
@@ -709,6 +711,7 @@ exports[`Table Component should allow variations in table layout: generated rows
                     >
                       <td
                         className="undefined quipucords-table__td "
+                        onMouseEnter={[Function]}
                       >
                         dolor
                       </td>
@@ -742,6 +745,7 @@ exports[`Table Component should allow variations in table layout: generated rows
                     >
                       <td
                         className="undefined quipucords-table__td "
+                        onMouseEnter={[Function]}
                       >
                         sit
                       </td>
