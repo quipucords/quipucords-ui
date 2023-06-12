@@ -34,18 +34,19 @@ exports[`ViewToolbarFieldSort Component should render a basic component: basic 1
 <Fragment>
   <DropdownSelect
     ariaLabel="Select option"
-    buttonVariant="default"
     className=""
     data-test="toolbarSortType"
     direction="down"
     id="generatedid-"
     isDisabled={false}
     isDropdownButton={false}
+    isFlipEnabled={false}
     isInline={true}
     isToggleText={true}
     maxHeight={null}
     name={null}
     onSelect={[Function]}
+    onSplitButton={[Function]}
     options={
       [
         {

@@ -38,7 +38,7 @@ exports[`ViewPaginationRow Component should render a basic component: basic 1`] 
   data-ouia-component-id="OUIA-Generated-Pagination-bottom-1"
   data-ouia-component-type="PF4/Pagination"
   data-ouia-safe="true"
-  id="pagination-options-menu-0"
+  id="options-menu-bottom-pagination"
 >
   <div
     class="pf-c-options-menu"
@@ -53,7 +53,7 @@ exports[`ViewPaginationRow Component should render a basic component: basic 1`] 
       data-ouia-component-id="OUIA-Generated-DropdownToggle-1"
       data-ouia-component-type="PF4/DropdownToggle"
       data-ouia-safe="true"
-      id="pagination-options-menu-toggle-0"
+      id="options-menu-bottom-toggle"
       type="button"
     >
       <span
