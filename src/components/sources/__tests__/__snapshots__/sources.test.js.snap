@@ -273,11 +273,13 @@ exports[`Sources Component should handle multiple display states, pending, error
                         id="generatedid-"
                         isDisabled={false}
                         isDropdownButton={true}
+                        isFlipEnabled={false}
                         isInline={true}
                         isToggleText={true}
                         maxHeight={null}
                         name={null}
                         onSelect={[Function]}
+                        onSplitButton={[Function]}
                         options={
                           [
                             {

@@ -89,6 +89,7 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
                 onSelect={[Function]}
                 onToggle={[Function]}
                 position="right"
+                removeFindDomNode={false}
                 searchNoResultsText="No results found"
                 searchPlaceholderText="Filter by name..."
                 toggleIcon={
@@ -193,6 +194,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
 <Page
   defaultManagedSidebarIsOpen={true}
   getBreakpoint={[Function]}
+  getVerticalBreakpoint={[Function]}
   header={
     <Masthead>
       <MastheadToggle>
@@ -282,6 +284,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                     onSelect={[Function]}
                     onToggle={[Function]}
                     position="right"
+                    removeFindDomNode={false}
                     searchNoResultsText="No results found"
                     searchPlaceholderText="Filter by name..."
                     toggleIcon={

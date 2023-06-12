@@ -8,14 +8,16 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
   novalidate=""
 >
   <div
+    aria-labelledby="pf-random-id-0-legend"
     class="pf-c-form__group"
     id="generatedid-"
     role="radiogroup"
   >
     <div
       class="pf-c-form__group-label"
+      id="pf-random-id-0-legend"
     >
-      <label
+      <span
         class="pf-c-form__label"
       >
         <span
@@ -23,7 +25,7 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
         >
           t(form-dialog.label, {"context":"source-type"})
         </span>
-      </label>
+      </span>
        
     </div>
     <div

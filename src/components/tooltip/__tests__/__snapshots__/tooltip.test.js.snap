@@ -23,12 +23,17 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
       flipBehavior={
         [
           "top",
-          "right",
           "bottom",
           "left",
-          "top",
           "right",
-          "bottom",
+          "top-start",
+          "top-end",
+          "bottom-start",
+          "bottom-end",
+          "left-start",
+          "left-end",
+          "right-start",
+          "right-end",
         ]
       }
       isVisible={false}
@@ -37,7 +42,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
       onTriggerClick={[Function]}
       placement="top"
       popper={
-        <FocusTrap
+        <ForwardRef
           active={false}
           aria-describedby="popover-test-body"
           aria-label=""
@@ -54,7 +59,6 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
             }
           }
           onMouseDown={[Function]}
-          paused={false}
           preventScrollOnDeactivate={true}
           role="dialog"
           style={
@@ -74,7 +78,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
               hello world
             </PopoverBody>
           </PopoverContent>
-        </FocusTrap>
+        </ForwardRef>
       }
       popperMatchesTriggerWidth={false}
       positionModifiers={
@@ -93,6 +97,7 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
+      removeFindDomNode={false}
       trigger={
         <div
           className="quipucords-popover__wrapper"
@@ -196,6 +201,7 @@ exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
           "top-start": "pf-m-top-left",
         }
       }
+      removeFindDomNode={false}
       trigger={
         <div
           className="quipucords-tooltip__wrapper"

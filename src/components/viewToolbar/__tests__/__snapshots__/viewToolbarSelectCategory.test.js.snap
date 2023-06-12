@@ -40,17 +40,18 @@ exports[`ViewToolbarSelectCategory Component should handle updating the view que
 exports[`ViewToolbarSelectCategory Component should render a basic component: basic 1`] = `
 <DropdownSelect
   ariaLabel="t(toolbar.label_placeholder, {"context":"filter"})"
-  buttonVariant="default"
   className=""
   direction="down"
   id="generatedid-"
   isDisabled={false}
   isDropdownButton={false}
+  isFlipEnabled={false}
   isInline={true}
   isToggleText={true}
   maxHeight={null}
   name={null}
   onSelect={[Function]}
+  onSplitButton={[Function]}
   options={
     [
       {
