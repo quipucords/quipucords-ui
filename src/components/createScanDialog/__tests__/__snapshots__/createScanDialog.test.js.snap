@@ -61,7 +61,7 @@ exports[`CreateScanDialog Component should handle multiple error responses: name
 <div
   aria-live="polite"
   class="pf-c-form__helper-text pf-m-error"
-  id="undefined-helper"
+  id="scanName-helper"
 >
   lorem ipsum
 </div>
@@ -237,13 +237,13 @@ exports[`CreateScanDialog Component should render a non-connected component: non
         >
           <div
             class="pf-c-form__group"
-            id="generatedid-"
           >
             <div
               class="pf-c-form__group-label"
             >
               <label
                 class="pf-c-form__label"
+                for="scanName"
               >
                 <span
                   class="pf-c-form__label-text"
@@ -273,13 +273,13 @@ exports[`CreateScanDialog Component should render a non-connected component: non
           </div>
           <div
             class="pf-c-form__group"
-            id="generatedid-"
           >
             <div
               class="pf-c-form__group-label"
             >
               <label
                 class="pf-c-form__label"
+                for="displayScanSources"
               >
                 <span
                   class="pf-c-form__label-text"
@@ -306,13 +306,13 @@ exports[`CreateScanDialog Component should render a non-connected component: non
           </div>
           <div
             class="pf-c-form__group"
-            id="scanConcurrency"
           >
             <div
               class="pf-c-form__group-label"
             >
               <label
                 class="pf-c-form__label"
+                for="scanConcurrency"
               >
                 <span
                   class="pf-c-form__label-text"
@@ -399,13 +399,13 @@ exports[`CreateScanDialog Component should render a non-connected component: non
           </div>
           <div
             class="pf-c-form__group"
-            id="generatedid-"
           >
             <div
               class="pf-c-form__group-label"
             >
               <label
                 class="pf-c-form__label"
+                for="jbossEap"
               >
                 <span
                   class="pf-c-form__label-text"
@@ -545,13 +545,13 @@ exports[`CreateScanDialog Component should render a non-connected component: non
           </div>
           <div
             class="pf-c-form__group"
-            id="generatedid-"
           >
             <div
               class="pf-c-form__group-label"
             >
               <label
                 class="pf-c-form__label"
+                for="displayScanDirectories"
               >
                 <span
                   class="pf-c-form__label-text"
