@@ -7,7 +7,9 @@ Contributing encompasses repository specific requirements, and the global [Quipu
 
 Quipucords-UI makes use of
 - GitHub's fork and pull workflow.
-- A linear commit process and rebasing. GitHub merge commits, and squashing are discouraged in favor of smaller independent commits
+- A linear commit process and rebasing.
+
+> Instead of relying on GitHub merge commits and squashing, we recommend breaking down changes into smaller, independent commits.
 
 > Working directly on the main repository is discouraged.
 
@@ -27,8 +29,8 @@ Linear commit history for Quipucords-UI makes syncing concise
 All development work should be handled through GitHub's fork and pull workflow.
 
 #### Setting up a pull request
-When multiple developers are contributing features development pull requests (PRs) should be opened against the `dev` branch. PRs directly to `main` are discouraged, 
-however, exceptions are allowed as long updates to `main` are also rebased against the `dev` branch.
+When multiple developers are contributing features, development pull requests (PRs) should be opened against the `dev` branch. PRs directly to `main` are discouraged, 
+Exceptions are allowed, but it is important to ensure that updates to the `main` branch are also rebased against the `dev` branch.
 
 > If your pull request work contains any of the following warning signs
 >  - out of sync commits (is not rebased against the `base branch`)
