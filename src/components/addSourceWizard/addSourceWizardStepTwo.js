@@ -318,46 +318,44 @@ class AddSourceWizardStepTwo extends React.Component {
         }`;
 
         return (
-          <React.Fragment>
-            <FormGroup
-              label={t('form-dialog.label', { context: 'search-address' })}
-              error={
+          <FormGroup
+            label={t('form-dialog.label', { context: 'search-address' })}
+            error={
+              (touched.hostsSingle && errors.hosts) ||
+              errors.port ||
+              stepTwoErrorMessages.hosts ||
+              stepTwoErrorMessages.port
+            }
+            errorMessage={
+              (stepTwoErrorMessages.hosts &&
+                t('form-dialog.label', {
+                  context: ['search-address', 'error']
+                })) ||
+              (stepTwoErrorMessages.port &&
+                t('form-dialog.label', {
+                  context: ['search-address', 'error', 'port']
+                })) ||
+              hostPortError
+            }
+          >
+            <TextInput
+              name="hostsSingle"
+              value={values.hostsSingle}
+              placeholder={t('form-dialog.label', {
+                context: ['search-address', 'placeholder']
+              })}
+              onChange={onChangeSingleHost}
+              onClear={onChangeSingleHost}
+              validated={
                 (touched.hostsSingle && errors.hosts) ||
                 errors.port ||
                 stepTwoErrorMessages.hosts ||
                 stepTwoErrorMessages.port
+                  ? ValidatedOptions.error
+                  : ValidatedOptions.default
               }
-              errorMessage={
-                (stepTwoErrorMessages.hosts &&
-                  t('form-dialog.label', {
-                    context: ['search-address', 'error']
-                  })) ||
-                (stepTwoErrorMessages.port &&
-                  t('form-dialog.label', {
-                    context: ['search-address', 'error', 'port']
-                  })) ||
-                hostPortError
-              }
-            >
-              <TextInput
-                name="hostsSingle"
-                value={values.hostsSingle}
-                placeholder={t('form-dialog.label', {
-                  context: ['search-address', 'placeholder']
-                })}
-                onChange={onChangeSingleHost}
-                onClear={onChangeSingleHost}
-                validated={
-                  (touched.hostsSingle && errors.hosts) ||
-                  errors.port ||
-                  stepTwoErrorMessages.hosts ||
-                  stepTwoErrorMessages.port
-                    ? ValidatedOptions.error
-                    : ValidatedOptions.default
-                }
-              />
-            </FormGroup>
-          </React.Fragment>
+            />
+          </FormGroup>
         );
 
       default:

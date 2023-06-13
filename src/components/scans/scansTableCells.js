@@ -323,7 +323,10 @@ const actionsCell = ({
     dropdownMenuItem: { title: t('table.label', { context: ['action', 'scan', context] }), value: context },
     overflowMenuItem: (
       <OverflowMenuItem key={`menuItem-${context}`}>
-        <Tooltip content={t('table.label', { context: ['action', 'scan', context] })}>
+        <Tooltip
+          key={`menuItem-tooltip-${context}`}
+          content={t('table.label', { context: ['action', 'scan', context] })}
+        >
           <Button
             className="quipucords-view__row-button"
             onClick={() => onSelect({ value: context })}
@@ -350,7 +353,7 @@ const actionsCell = ({
   menuItems.push({
     dropdownMenuItem: { title: t('table.label', { context: 'delete' }), value: 'delete' },
     overflowMenuItem: (
-      <Tooltip content={t('table.label', { context: 'delete' })}>
+      <Tooltip key="menuItem-delete" content={t('table.label', { context: 'delete' })}>
         <Button
           className="quipucords-view__row-button"
           onClick={() => onDelete(item)}
