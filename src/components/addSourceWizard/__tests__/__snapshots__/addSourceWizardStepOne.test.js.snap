@@ -8,14 +8,13 @@ exports[`AddSourceWizardStepOne Component should render a non-connected componen
   novalidate=""
 >
   <div
-    aria-labelledby="pf-random-id-0-legend"
+    aria-labelledby="sourceType-network-legend"
     class="pf-c-form__group"
-    id="generatedid-"
     role="radiogroup"
   >
     <div
       class="pf-c-form__group-label"
-      id="pf-random-id-0-legend"
+      id="sourceType-network-legend"
     >
       <span
         class="pf-c-form__label"

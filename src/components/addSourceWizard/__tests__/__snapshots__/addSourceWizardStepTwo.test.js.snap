@@ -25,13 +25,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -60,13 +60,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsMultiple"
       >
         <span
           class="pf-c-form__label-text"
@@ -96,13 +96,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="port"
       >
         <span
           class="pf-c-form__label-text"
@@ -132,13 +132,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="addCredentials"
       >
         <span
           class="pf-c-form__label-text"
@@ -208,6 +208,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
           data-ouia-component-id="OUIA-Generated-Button-control-2"
           data-ouia-component-type="PF4/Button"
           data-ouia-safe="true"
+          id="addCredentials"
           title="t(form-dialog.label, {"context":"add-credential"})"
           type="button"
         >
@@ -234,7 +235,6 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"
@@ -273,13 +273,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -308,13 +308,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsSingle"
       >
         <span
           class="pf-c-form__label-text"
@@ -343,13 +343,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="addCredentials"
       >
         <span
           class="pf-c-form__label-text"
@@ -420,6 +420,7 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
           data-ouia-component-id="OUIA-Generated-Button-control-3"
           data-ouia-component-type="PF4/Button"
           data-ouia-safe="true"
+          id="addCredentials"
           title="t(form-dialog.label, {"context":"add-credential"})"
           type="button"
         >
@@ -446,13 +447,13 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="optionSslProtocol"
       >
         <span
           class="pf-c-form__label-text"
@@ -516,7 +517,6 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"
@@ -581,13 +581,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
 >
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="name"
       >
         <span
           class="pf-c-form__label-text"
@@ -616,13 +616,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="hostsMultiple"
       >
         <span
           class="pf-c-form__label-text"
@@ -652,13 +652,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="port"
       >
         <span
           class="pf-c-form__label-text"
@@ -688,13 +688,13 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-label"
     >
       <label
         class="pf-c-form__label"
+        for="addCredentials"
       >
         <span
           class="pf-c-form__label-text"
@@ -764,6 +764,7 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
           data-ouia-component-id="OUIA-Generated-Button-control-1"
           data-ouia-component-type="PF4/Button"
           data-ouia-safe="true"
+          id="addCredentials"
           title="t(form-dialog.label, {"context":"add-credential"})"
           type="button"
         >
@@ -790,7 +791,6 @@ exports[`AddSourceWizardStepTwo Component should render a non-connected componen
   </div>
   <div
     class="pf-c-form__group"
-    id="generatedid-"
   >
     <div
       class="pf-c-form__group-control"
