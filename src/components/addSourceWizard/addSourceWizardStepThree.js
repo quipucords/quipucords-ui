@@ -19,25 +19,23 @@ import { EMPTY_CONTEXT, translate } from '../i18n/i18n';
  * @returns {React.ReactNode}
  */
 const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name, t }) => (
-  <React.Fragment>
-    <EmptyState className="quipucords-empty-state">
-      {error && <EmptyStateIcon icon={ExclamationCircleIcon} color={red.value} />}
-      {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} color={green.value} />}
-      {pending && <EmptyStateIcon icon={Spinner} />}
-      <Title headingLevel="h3">
-        {t('form-dialog.empty-state_title_add-source', {
-          context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
-          name
-        })}
-      </Title>
-      <EmptyStateBody>
-        {t(`form-dialog.empty-state_description_add-source`, {
-          context: [(error && 'error') || (pending && 'pending'), (!add && pending && 'edit') || EMPTY_CONTEXT],
-          name
-        })}
-      </EmptyStateBody>
-    </EmptyState>
-  </React.Fragment>
+  <EmptyState className="quipucords-empty-state">
+    {error && <EmptyStateIcon icon={ExclamationCircleIcon} color={red.value} />}
+    {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} color={green.value} />}
+    {pending && <EmptyStateIcon icon={Spinner} />}
+    <Title headingLevel="h3">
+      {t('form-dialog.empty-state_title_add-source', {
+        context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
+        name
+      })}
+    </Title>
+    <EmptyStateBody>
+      {t(`form-dialog.empty-state_description_add-source`, {
+        context: [(error && 'error') || (pending && 'pending'), (!add && pending && 'edit') || EMPTY_CONTEXT],
+        name
+      })}
+    </EmptyStateBody>
+  </EmptyState>
 );
 
 /**

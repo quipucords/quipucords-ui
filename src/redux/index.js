@@ -12,8 +12,8 @@ import { reduxTypes } from './constants';
 /**
  * Patch withRouter for legacy components.
  *
- * @param {React.JSXElement} Component
- * @returns {function(*)}
+ * @param {React.ReactNode} Component
+ * @returns {React.ReactNode}
  */
 const withRouter = Component => props => {
   const location = useLocation();
