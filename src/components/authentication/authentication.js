@@ -24,7 +24,7 @@ class Authentication extends React.Component {
     const { children, session, t } = this.props;
 
     if (session.authorized) {
-      return <React.Fragment>{children}</React.Fragment>;
+      return children;
     }
 
     if (session.pending) {
