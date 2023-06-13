@@ -378,6 +378,7 @@ class AddSourceWizardStepTwo extends React.Component {
 
     return (
       <FormGroup
+        fieldId="addCredentials"
         label={t('form-dialog.label', { context: 'credential' })}
         error={(touched.credentials && errors.credentials) || stepTwoErrorMessages.credentials}
         errorMessage={stepTwoErrorMessages.credentials || t('form-dialog.label', { context: ['credential', 'error'] })}
@@ -402,6 +403,7 @@ class AddSourceWizardStepTwo extends React.Component {
             key={`dropdown-update-${sourceCredentials.length}`}
           />
           <Button
+            id="addCredentials"
             variant={ButtonVariant.control}
             aria-label={t('form-dialog.label', { context: 'add-credential' })}
             icon={<PlusIcon />}
