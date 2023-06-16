@@ -200,12 +200,12 @@ the Django template files here [./templates/*](./templates/base.html).
 - [The build script for directly manipulating the templates is here, ./scripts/post.sh](./scripts/post.sh)
 
 ### Documentation, locale and help guides
-[Quipudocs](https://github.com/quipucords/quipudocs) houses our locale and help guide setup through an NPM dependency layout, [see our package.json for Quipudocs](./package.json).
+[Quipudocs](https://github.com/quipucords/quipudocs) houses our locale setup through an NPM dependency layout, [see our package.json for Quipudocs](./package.json).
 
 #### Important!
-- We do not store locale and help guide documentation with the UI repo. Any updates to those locations will be overwritten during the build process.
+- We do not store locale with the UI repo. Any updates to those locations will be overwritten during the build process.
 - To handle locale string replacement during GUI development it is important to utilize fallback strings because of this separation, that GUI code has the appearance of `t(someKey, 'my fallback string'')`.
-- [The build script for directly manipulating the locale and help guides is here, ./scripts/quipudocs.js](./scripts/quipudocs.js)
+- [The build script for directly manipulating the locale is here, ./scripts/quipudocs.js](./scripts/quipudocs.js)
 
 ### Brand build
 The brand build updates aspects of the application name across the React and Django templates.
