@@ -386,8 +386,6 @@
     "error-message_sources": "Error retrieving sources: {{message}}",
     "label_about": "About",
     "label_credentials": "Credentials",
-    "label_guides-install": "Guides - Install",
-    "label_guides-using": "Guides - Using",
     "label_logout": "Logout",
     "label_scans": "Scans",
     "label_sources": "Sources",

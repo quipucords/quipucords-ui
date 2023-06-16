@@ -598,23 +598,7 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "view.label",
-        "match": "t('view.label', { context: ['guides-install'] })",
-      },
-      {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-using'] })",
-      },
-      {
-        "key": "view.label",
         "match": "t('view.label', { context: ['about'] })",
-      },
-      {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-install'] })",
-      },
-      {
-        "key": "view.label",
-        "match": "t('view.label', { context: ['guides-using'] })",
       },
       {
         "key": "view.label",
@@ -1755,22 +1739,6 @@ exports[`I18n Component should have locale keys that exist in the default langua
   {
     "file": "src/components/scanHostList/scanHostList.js",
     "key": "view.error-message",
-  },
-  {
-    "file": "src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  {
-    "file": "src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  {
-    "file": "src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
-  },
-  {
-    "file": "src/components/pageLayout/pageLayout.js",
-    "key": "view.label",
   },
   {
     "file": "src/components/pageLayout/pageLayout.js",
