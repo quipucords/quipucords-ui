@@ -565,8 +565,6 @@ exports[`Distribution should match a specific file output: dist-output 1`] = `
   "./dist/client/assets/rcue/sass/rcue/_variables.scss",
   "./dist/client/assets/rcue/sass/rcue/_vertical-nav.scss",
   "./dist/client/assets/rcue/sass/rcue/_wizard.scss",
-  "./dist/client/docs/install.html",
-  "./dist/client/docs/use.html",
   "./dist/client/favicon.ico",
   "./dist/client/fonts/0140846175072d73db39.woff",
   "./dist/client/fonts/0227c8bb038eaf0264f7.woff2",
