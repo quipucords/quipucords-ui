@@ -83,16 +83,6 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
                     >
                       t(view.label, {"context":"about"})
                     </ApplicationLauncherItem>,
-                    <ApplicationLauncherItem
-                      href="./docs/install.html"
-                    >
-                      t(view.label, {"context":"guides-install"})
-                    </ApplicationLauncherItem>,
-                    <ApplicationLauncherItem
-                      href="./docs/use.html"
-                    >
-                      t(view.label, {"context":"guides-using"})
-                    </ApplicationLauncherItem>,
                   ]
                 }
                 menuAppendTo="inline"
@@ -140,28 +130,6 @@ exports[`PageLayout Component should render a basic component branded: brand 1`]
                     />
                      
                     t(view.label, {"context":"about"})
-                  </DropdownItem>,
-                  <DropdownItem
-                    href="./docs/install.html"
-                  >
-                    <HelpIcon
-                      color="currentColor"
-                      noVerticalAlign={false}
-                      size="sm"
-                    />
-                     
-                    t(view.label, {"context":"guides-install"})
-                  </DropdownItem>,
-                  <DropdownItem
-                    href="./docs/use.html"
-                  >
-                    <HelpIcon
-                      color="currentColor"
-                      noVerticalAlign={false}
-                      size="sm"
-                    />
-                     
-                    t(view.label, {"context":"guides-using"})
                   </DropdownItem>,
                 ]
               }
@@ -308,16 +276,6 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                         >
                           t(view.label, {"context":"about"})
                         </ApplicationLauncherItem>,
-                        <ApplicationLauncherItem
-                          href="./docs/install.html"
-                        >
-                          t(view.label, {"context":"guides-install"})
-                        </ApplicationLauncherItem>,
-                        <ApplicationLauncherItem
-                          href="./docs/use.html"
-                        >
-                          t(view.label, {"context":"guides-using"})
-                        </ApplicationLauncherItem>,
                       ]
                     }
                     menuAppendTo="inline"
@@ -365,28 +323,6 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                         />
                          
                         t(view.label, {"context":"about"})
-                      </DropdownItem>,
-                      <DropdownItem
-                        href="./docs/install.html"
-                      >
-                        <HelpIcon
-                          color="currentColor"
-                          noVerticalAlign={false}
-                          size="sm"
-                        />
-                         
-                        t(view.label, {"context":"guides-install"})
-                      </DropdownItem>,
-                      <DropdownItem
-                        href="./docs/use.html"
-                      >
-                        <HelpIcon
-                          color="currentColor"
-                          noVerticalAlign={false}
-                          size="sm"
-                        />
-                         
-                        t(view.label, {"context":"guides-using"})
                       </DropdownItem>,
                     ]
                   }

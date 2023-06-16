@@ -31,7 +31,7 @@ import {
   ToolbarGroup,
   ToolbarItem
 } from '@patternfly/react-core';
-import { BarsIcon, CogIcon, HelpIcon, QuestionCircleIcon } from '@patternfly/react-icons';
+import { BarsIcon, CogIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import imgAvatar from '@patternfly/react-core/src/components/Avatar/examples/avatarImg.svg';
 import titleImgBrand from '../../styles/images/title-brand.svg';
@@ -132,12 +132,6 @@ const PageLayout = ({
     <Divider key="divider" />,
     <DropdownItem key="about" onClick={() => onAbout()}>
       <CogIcon /> {t('view.label', { context: ['about'] })}
-    </DropdownItem>,
-    <DropdownItem key="guides-install" href={`${(!helpers.DEV_MODE && '.') || ''}/docs/install.html`}>
-      <HelpIcon /> {t('view.label', { context: ['guides-install'] })}
-    </DropdownItem>,
-    <DropdownItem key="guides-using" href={`${(!helpers.DEV_MODE && '.') || ''}/docs/use.html`}>
-      <HelpIcon /> {t('view.label', { context: ['guides-using'] })}
     </DropdownItem>
   ];
 
@@ -149,12 +143,6 @@ const PageLayout = ({
   const appLauncherItems = [
     <ApplicationLauncherItem key="application_about" onClick={() => onAbout()}>
       {t('view.label', { context: ['about'] })}
-    </ApplicationLauncherItem>,
-    <ApplicationLauncherItem key="application_install" href={`${(!helpers.DEV_MODE && '.') || ''}/docs/install.html`}>
-      {t('view.label', { context: ['guides-install'] })}
-    </ApplicationLauncherItem>,
-    <ApplicationLauncherItem key="application_using" href={`${(!helpers.DEV_MODE && '.') || ''}/docs/use.html`}>
-      {t('view.label', { context: ['guides-using'] })}
     </ApplicationLauncherItem>
   ];
 
