@@ -49,7 +49,6 @@ const authenticationTypeOptions = [
   }
 ];
 
-// ToDo: "sshpassphrase" could be "ssh_passphrase" per the api-spec, investigate since the prior GUI code used "sshpassphrase"
 /**
  * ToDo: updating a creds password should immediately reset the entire field
  * When a user attempts to update a cred the password displayed is not decrypted. Existing behavior has the
@@ -292,7 +291,7 @@ const CreateCredentialDialog = ({
               />
             </FormGroup>
             <FormGroup
-              key="sshpassphrase"
+              key="ssh-passphrase"
               label={t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })}
             >
               <TextInput

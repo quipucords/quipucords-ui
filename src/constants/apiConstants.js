@@ -17,7 +17,7 @@ const API_QUERY_TYPES = {
   SEARCH_SOURCES_NAME: 'search_sources_by_name',
   SOURCE_TYPE: 'source_type',
   SSH_KEYFILE: 'ssh_keyfile',
-  SSH_PASSPHRASE: 'sshpassphrase',
+  SSH_PASSPHRASE: 'ssh_passphrase',
   USERNAME: 'username'
 };
 
