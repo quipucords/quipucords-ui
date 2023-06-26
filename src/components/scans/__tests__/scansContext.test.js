@@ -1,6 +1,8 @@
 import { context, useGetScans, useOnDelete, useOnScanAction, usePoll, useScans } from '../scansContext';
 import { apiTypes } from '../../../constants/apiConstants';
 
+jest.mock('axios', () => jest.fn);
+
 describe('ScansContext', () => {
   it('should return specific properties', () => {
     expect(context).toMatchSnapshot('specific properties');

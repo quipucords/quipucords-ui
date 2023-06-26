@@ -63,7 +63,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
 exports[`AboutModal Component should have a copy event that updates state: post copy event 1`] = `
 {
   "copied": null,
-  "timer": 13,
+  "timer": 22,
 }
 `;
 
