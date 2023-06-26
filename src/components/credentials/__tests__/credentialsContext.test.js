@@ -1,6 +1,8 @@
 import { context, useCredentials, useGetCredentials, useOnDelete } from '../credentialsContext';
 import { apiTypes } from '../../../constants/apiConstants';
 
+jest.mock('axios', () => jest.fn);
+
 describe('CredentialsContext', () => {
   it('should return specific properties', () => {
     expect(context).toMatchSnapshot('specific properties');
