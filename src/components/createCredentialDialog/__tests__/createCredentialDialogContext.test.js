@@ -3,6 +3,8 @@ import { context, useOnSubmitCredential, useOnUpdateCredential } from '../create
 import { store } from '../../../redux';
 import { credentialsService } from '../../../services';
 
+jest.mock('axios', () => jest.fn);
+
 describe('CredentialsContext', () => {
   let mockDispatch;
 
