@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.0 (2023-06-29)
+
+
+### Features
+* **pageLayout** discovery-334 update to pf4  (#210) (e670215)
+
+### Documentation
+* **readme,contributing** discovery-330 in-depth workflows  (#214) (2cdc80a)
+
+### Chores
+* **deps** codecov/codecov-action from 3.1.3 to 3.1.4  (#211) (49d468a)
+
+### Builds
+* **docs** DISCOVERY-357 Stop building docs pages  (7b0fa0f)
+* **deps** discovery-330 core npm script  (#213) (2dec3d5)
+* **webpack** discovery-334 webpack 5  (#209) (2fd67e6)
+
+### Bug Fixes
+* **formGroup** discovery-330 pf id to fieldId  (#217) (33b43de)
+* **deps** discovery-330 resolve test warnings  (#216) (20b3303)
+* **deps** discovery-330 pf react-core update  (#216) (f72808b)
+* **deps** discovery-330 npm updates  (#216) (6245917)
+* **createCredential** DISCOVERY-363 Use ssh_passphrase  (#221) (ccd62b7)
+* **pageLayout** DISCOVERY-357 remove quipudocs links  (91ce87f)
+
 ## [1.3.0](https://github.com/quipucords/quipucords-ui/compare/6ff43b4e466bd75de36f4533d4e0255f9a1b47b9...59b2e37f3fe225c346f2e35174571dcb84bfc98d) (2023-06-07)
 
 ### Features
