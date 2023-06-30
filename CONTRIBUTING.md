@@ -1,5 +1,5 @@
 # Contributing
-Contributing encompasses repository specific requirements, and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.md).
+Contributing encompasses repository specific requirements, and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/main/CONTRIBUTING.md).
 
 ## Process
 <details>
