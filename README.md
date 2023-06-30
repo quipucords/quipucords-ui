@@ -1,7 +1,7 @@
 # Quipucords UI
 [![Build Status](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml/badge.svg)](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml)
-[![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
-[![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/master/LICENSE)
+[![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/main/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
+[![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/main/LICENSE)
 
 Web user interface for [Quipucords](https://github.com/quipucords/quipucords), based on [Patternfly](https://www.patternfly.org/)
 
@@ -56,4 +56,4 @@ Run and update unit tests while developing instead of after-the-fact. In a new t
 For in-depth testing guidance review the [contribution guidelines](./CONTRIBUTING.md#testing)
 
 ## Contributing
-Contributing encompasses [repository specific requirements](./CONTRIBUTING.md) and the global [contribution guidelines](https://github.com/quipucords/quipucords/blob/master/CONTRIBUTING.md).
+Contributing encompasses [repository specific requirements](./CONTRIBUTING.md) and the global [contribution guidelines](https://github.com/quipucords/quipucords/blob/main/CONTRIBUTING.md).
