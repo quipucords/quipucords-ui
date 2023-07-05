@@ -5,8 +5,8 @@ updates:
     schedule:
       interval: monthly
       day: monday
-    open-pull-requests-limit: 1
-    target-branch: "dev"
+    open-pull-requests-limit: 3
+    target-branch: "main"
     versioning-strategy: increase
     allow:
       - dependency-type: direct
@@ -14,6 +14,7 @@ updates:
       - dependency-name: "*patternfly*"
       - dependency-name: "*i18next*"
       - dependency-name: "react-router*"
+      - dependency-name: "quipudocs"
     labels:
       - "build"
 
@@ -23,6 +24,6 @@ updates:
       interval: monthly
       day: monday
     open-pull-requests-limit: 2
-    target-branch: "dev"
+    target-branch: "main"
     labels:
       - "build"
