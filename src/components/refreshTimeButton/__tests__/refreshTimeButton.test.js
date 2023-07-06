@@ -1,15 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import RefreshTimeButton from '../refreshTimeButton';
 
 describe('RefreshTimeButton Component', () => {
-  it('should render', () => {
+  it('should render a basic component', () => {
     const props = {
       onRefresh: jest.fn()
     };
 
-    const component = mount(<RefreshTimeButton {...props} />);
-
-    expect(component.render()).toMatchSnapshot();
+    const component = renderComponent(<RefreshTimeButton {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 });

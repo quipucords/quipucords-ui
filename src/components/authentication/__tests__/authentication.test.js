@@ -1,30 +1,26 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { shallow, mount } from 'enzyme';
-import { Alert } from '@patternfly/react-core';
-import { ConnectedAuthentication, Authentication } from '../authentication';
+import { Authentication } from '../authentication';
 
 describe('Authentication Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({
-      user: { session: { authorized: false, error: false, errorMessage: '', pending: false } }
-    });
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedAuthentication>
-          <span className="test">lorem</span>
-        </ConnectedAuthentication>
-      </Provider>
+  it('should render a basic component', () => {
+    const props = {
+      session: {
+        authorized: true,
+        error: false,
+        errorMessage: '',
+        pending: false
+      }
+    };
+    const component = renderComponent(
+      <Authentication {...props}>
+        <span className="test">lorem</span>
+      </Authentication>
     );
 
-    expect(component.find(ConnectedAuthentication)).toMatchSnapshot('connected');
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component error', () => {
+  it('should render a component error', () => {
     const props = {
       session: {
         authorized: false,
@@ -33,15 +29,13 @@ describe('Authentication Component', () => {
         pending: false
       }
     };
-    const component = mount(
-      <BrowserRouter>
-        <Authentication {...props}>
-          <span className="test">lorem</span>
-        </Authentication>
-      </BrowserRouter>
+    const component = renderComponent(
+      <Authentication {...props}>
+        <span className="test">lorem</span>
+      </Authentication>
     );
 
-    expect(component.find(Alert)).toMatchSnapshot('non-connected error');
+    expect(component.find('main')).toMatchSnapshot('error');
   });
 
   it('should render a non-connected component pending', () => {
@@ -53,13 +47,13 @@ describe('Authentication Component', () => {
         pending: true
       }
     };
-    const component = shallow(
+    const component = renderComponent(
       <Authentication {...props}>
         <span className="test">lorem</span>
       </Authentication>
     );
 
-    expect(component).toMatchSnapshot('non-connected pending');
+    expect(component.screen.render()).toMatchSnapshot('pending');
   });
 
   it('should render a non-connected component authorized', () => {
@@ -71,12 +65,12 @@ describe('Authentication Component', () => {
         pending: false
       }
     };
-    const component = mount(
+    const component = renderComponent(
       <Authentication {...props}>
         <span className="test">lorem</span>
       </Authentication>
     );
 
-    expect(component).toMatchSnapshot('non-connected authorized');
+    expect(component.find('.test')).toMatchSnapshot('authorized');
   });
 });

@@ -1,12 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { FormState } from '../formState';
 
 describe('FormState Component', () => {
   it('should render a basic component', () => {
     const props = { setValues: { lorem: 'ipsum' } };
 
-    const component = mount(
+    const component = renderComponent(
       <FormState {...props}>
         {({ values }) => (
           <form>
@@ -19,17 +18,16 @@ describe('FormState Component', () => {
       </FormState>
     );
 
-    const componentInstance = component.instance();
-    expect(componentInstance.props).toMatchSnapshot('initial props');
-    expect(componentInstance.state).toMatchSnapshot('initial state');
+    expect(component.instance.props).toMatchSnapshot('initial props');
+    expect(component.instance.state).toMatchSnapshot('initial state');
 
-    expect(component.render()).toMatchSnapshot('basic render');
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should update handle reset, changes, and submit events while updating state', () => {
     const props = { setValues: { lorem: 'ipsum' }, resetUsingSetValues: true, validate: () => ({}) };
 
-    const component = mount(
+    const component = renderComponent(
       <FormState {...props}>
         {({ values, handleOnEvent, handleOnReset, handleOnSubmit }) => (
           <form onSubmit={handleOnSubmit} onReset={handleOnReset}>
@@ -43,22 +41,22 @@ describe('FormState Component', () => {
       </FormState>
     );
 
-    const componentInstance = component.instance();
+    const componentInstance = component.instance;
 
     componentInstance.onEvent({
       target: { value: 'dolor', name: 'lorem' },
       persist: () => {},
       preventDefault: () => {}
     });
-    expect(component.state()).toMatchSnapshot('onevent');
+    expect(componentInstance.state).toMatchSnapshot('onevent');
     expect(componentInstance.values).toMatchSnapshot('onevent values updated');
 
     componentInstance.onReset({ persist: () => {} });
-    expect(component.state()).toMatchSnapshot('onreset');
+    expect(componentInstance.state).toMatchSnapshot('onreset');
     expect(componentInstance.values).toMatchSnapshot('reset values updated');
 
     componentInstance.onSubmit({ persist: () => {}, preventDefault: () => {} });
-    expect(component.state()).toMatchSnapshot('onsubmit');
+    expect(componentInstance.state).toMatchSnapshot('onsubmit');
   });
 
   it('should do a basic validation check', () => {
@@ -77,7 +75,7 @@ describe('FormState Component', () => {
       }
     };
 
-    const component = mount(
+    const component = renderComponent(
       <FormState {...props}>
         {({ errors, values, handleOnEvent }) => (
           <form>
@@ -91,7 +89,7 @@ describe('FormState Component', () => {
       </FormState>
     );
 
-    const componentInstance = component.instance();
+    const componentInstance = component.instance;
     expect(componentInstance.errors).toMatchSnapshot('initial errors');
 
     const mockEvent = { target: { value: '', id: 'lorem' }, persist: () => {}, preventDefault: () => {} };
@@ -116,7 +114,7 @@ describe('FormState Component', () => {
       }
     };
 
-    const component = mount(
+    const component = renderComponent(
       <FormState {...props}>
         {({ errors, values, handleOnEventCustom }) => (
           <form>
@@ -131,7 +129,7 @@ describe('FormState Component', () => {
       </FormState>
     );
 
-    const componentInstance = component.instance();
+    const componentInstance = component.instance;
     componentInstance.onEventCustom({ name: 'lorem', value: 'woot' });
     expect(componentInstance.values).toMatchSnapshot('single custom event');
 
@@ -157,12 +155,12 @@ describe('FormState Component', () => {
       }
     };
 
-    const component = mount(
+    const component = renderComponent(
       <FormState validateOnmount {...props}>
         {({ values }) => <div>Lorem = {values.lorem}</div>}
       </FormState>
     );
 
-    expect(component.instance().values).toMatchSnapshot('not mutated');
+    expect(component.instance.values).toMatchSnapshot('not mutated');
   });
 });

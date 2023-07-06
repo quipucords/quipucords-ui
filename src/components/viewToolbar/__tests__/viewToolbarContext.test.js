@@ -6,7 +6,7 @@ describe('ToolbarContext', () => {
     expect(context).toMatchSnapshot('specific properties');
   });
 
-  it('should apply a hook for clearing a toolbar field through redux', () => {
+  it('should apply a hook for clearing a toolbar field through redux', async () => {
     const mockDispatch = jest.fn();
     const options = {
       useView: () => ({
@@ -14,14 +14,14 @@ describe('ToolbarContext', () => {
       }),
       useDispatch: () => mockDispatch
     };
-    const { result: onClearField } = shallowHook(() => useToolbarFieldClear(options));
+    const { result: onClearField } = await renderHook(() => useToolbarFieldClear(options));
     onClearField('lorem');
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('clear single field');
     mockDispatch.mockClear();
   });
 
-  it('should apply a hook for clearing all related toolbar select filters', () => {
+  it('should apply a hook for clearing all related toolbar select filters', async () => {
     const mockDispatch = jest.fn();
     const options = {
       useView: () => ({
@@ -32,7 +32,7 @@ describe('ToolbarContext', () => {
       }),
       useDispatch: () => mockDispatch
     };
-    const { result: onClearAllFields } = shallowHook(() => useToolbarFieldClearAll(options));
+    const { result: onClearAllFields } = await renderHook(() => useToolbarFieldClearAll(options));
     onClearAllFields();
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('clear all filter fields');

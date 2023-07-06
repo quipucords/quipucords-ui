@@ -11,8 +11,8 @@ describe('I18nHelpers', () => {
     ExampleComponent.propTypes = {};
     ExampleComponent.defaultProps = {};
 
-    const component = await shallowHookComponent(<ExampleComponent />);
-    expect(component.html()).toMatchSnapshot('translated node');
+    const component = renderComponent(<ExampleComponent />);
+    expect(component).toMatchSnapshot('translated node');
   });
 
   it('should attempt to perform a string replace', () => {

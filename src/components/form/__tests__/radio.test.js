@@ -1,15 +1,12 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import { Radio as PfRadio } from '@patternfly/react-core/dist/js/components/Radio';
 import { Radio } from '../radio';
-import { helpers } from '../../../common';
 
 describe('Radio Component', () => {
   it('should render a basic component', () => {
     const props = {};
 
-    const component = mount(<Radio {...props} />);
-    expect(component.render()).toMatchSnapshot('basic component');
+    const component = renderComponent(<Radio {...props} />);
+    expect(component).toMatchSnapshot('basic component');
   });
 
   it('should handle disabled, checked', () => {
@@ -17,38 +14,38 @@ describe('Radio Component', () => {
       isDisabled: true
     };
 
-    const component = shallow(<Radio {...props} />);
-    expect(component.render()).toMatchSnapshot('disabled');
+    const component = renderComponent(<Radio {...props} />);
+    expect(component).toMatchSnapshot('disabled');
 
-    component.setProps({
+    const componentActive = component.setProps({
       isDisabled: false
     });
-    expect(component.render()).toMatchSnapshot('active');
+    expect(componentActive).toMatchSnapshot('active');
 
-    component.setProps({
+    const componentChecked = component.setProps({
       isDisabled: false,
       isChecked: true
     });
 
-    expect(component.render()).toMatchSnapshot('checked');
+    expect(componentChecked).toMatchSnapshot('checked');
   });
 
   it('should handle children as a label', () => {
     const props = {};
-    const component = mount(<Radio {...props}>lorem ipsum</Radio>);
-    expect(component.render()).toMatchSnapshot('children label radio');
+    const component = renderComponent(<Radio {...props}>lorem ipsum</Radio>);
+    expect(component).toMatchSnapshot('children label radio');
   });
 
-  it('should return an emulated onChange event', done => {
-    const props = {};
-
-    props.onChange = event => {
-      expect(event).toMatchSnapshot('emulated event');
-      done();
+  it('should return an emulated onChange event', () => {
+    const mockOnChange = jest.fn();
+    const props = {
+      onChange: mockOnChange
     };
 
-    const component = shallow(<Radio {...props}>lorem ipsum</Radio>);
-    const mockEvent = { currentTarget: {}, target: {}, persist: helpers.noop };
-    component.find(PfRadio).simulate('change', true, mockEvent);
+    const component = renderComponent(<Radio {...props}>lorem ipsum</Radio>);
+    const input = component.find('input');
+    component.fireEvent.click(input, { currentTarget: {}, target: {} });
+
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 });

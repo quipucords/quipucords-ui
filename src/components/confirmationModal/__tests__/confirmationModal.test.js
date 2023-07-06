@@ -1,7 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { shallow } from 'enzyme';
 import { ConnectedConfirmationModal, ConfirmationModal } from '../confirmationModal';
 
 describe('Confirmation Modal Component', () => {
@@ -19,16 +18,16 @@ describe('Confirmation Modal Component', () => {
         cancelButtonText: 'Cancel'
       }
     });
-    const component = shallow(
+    const component = renderComponent(
       <Provider store={store}>
         <ConnectedConfirmationModal />
       </Provider>
     );
 
-    expect(component.find(ConnectedConfirmationModal)).toMatchSnapshot('connected');
+    expect(component.screen.render()).toMatchSnapshot('connected');
   });
 
-  it('should display a confirmation modal', async () => {
+  it('should display a confirmation modal', () => {
     const onCancel = jest.fn();
     const props = {
       show: true,
@@ -41,47 +40,48 @@ describe('Confirmation Modal Component', () => {
       onCancel
     };
 
-    const component = await mountHookComponent(<ConfirmationModal {...props} />);
-    expect(component.render()).toMatchSnapshot('show');
+    const component = renderComponent(<ConfirmationModal {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('show');
 
-    component.find('button[className="pf-c-button pf-m-secondary"]').simulate('click');
+    const input = component.screen.getByText('Cancel');
+    component.fireEvent.click(input);
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 
-  it('should NOT display a confirmation modal', async () => {
+  it('should NOT display a confirmation modal', () => {
     const props = {
       show: false
     };
 
-    const component = await mountHookComponent(<ConfirmationModal {...props} />);
-    expect(component.render()).toMatchSnapshot('hidden');
+    const component = renderComponent(<ConfirmationModal {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('hidden');
   });
 
-  it('should allow passed children, or specific props', async () => {
+  it('should allow passed children, or specific props', () => {
     const props = {
       show: true,
       heading: 'Lorem ipsum',
       children: 'hello world'
     };
 
-    const component = await mountHookComponent(<ConfirmationModal {...props} />);
-    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('heading');
+    const component = renderComponent(<ConfirmationModal {...props} />);
+    expect(component.screen.getByRole('heading')).toMatchSnapshot('heading');
 
-    component.setProps({
+    const componentBody = component.setProps({
       heading: null,
       body: 'Dolor sit'
     });
 
-    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('body');
+    expect(componentBody.screen.render().querySelector('.pf-c-modal-box__body')).toMatchSnapshot('body');
 
-    component.setProps({
+    const componentChildren = component.setProps({
       body: null
     });
 
-    expect(component.find('.pf-c-modal-box__body').render()).toMatchSnapshot('children');
+    expect(componentChildren.screen.render().querySelector('.pf-c-modal-box__body')).toMatchSnapshot('children');
   });
 
-  it('should allow custom content', async () => {
+  it('should allow custom content', () => {
     const props = {
       show: true,
       isActions: false,
@@ -89,7 +89,7 @@ describe('Confirmation Modal Component', () => {
       isContentOnly: true
     };
 
-    const component = await mountHookComponent(<ConfirmationModal {...props}>lorem ipsum</ConfirmationModal>);
-    expect(component.render()).toMatchSnapshot('custom');
+    const component = renderComponent(<ConfirmationModal {...props}>lorem ipsum</ConfirmationModal>);
+    expect(component.screen.render()).toMatchSnapshot('custom');
   });
 });

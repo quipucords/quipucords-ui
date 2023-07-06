@@ -18,28 +18,29 @@ describe('ViewToolbarSelectCategory Component', () => {
     const props = {
       useView: () => ({ viewId: sourcesConfig.viewId, config: { toolbar: sourcesConfig.toolbar } })
     };
-    const component = await shallowHookComponent(<ViewToolbarSelectCategory {...props} />);
+    const component = await shallowComponent(<ViewToolbarSelectCategory {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should handle updating the view query through redux state with a component', async () => {
+  it('should handle updating the view query through redux state with a component', () => {
     const props = {
       useView: () => ({ viewId: sourcesConfig.viewId, config: { toolbar: sourcesConfig.toolbar } })
     };
 
-    const component = await mountHookComponent(<ViewToolbarSelectCategory {...props} />);
+    const component = renderComponent(<ViewToolbarSelectCategory {...props} />);
+    const input = component.find('button');
+    component.fireEvent.click(input);
 
-    component.find('button').simulate('click');
-    component.update();
-    component.find('button.pf-c-select__menu-item').first().simulate('click');
+    const inputMenuItem = component.find('button.pf-c-select__menu-item');
+    component.fireEvent.click(inputMenuItem);
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, component');
   });
 
   it('should handle updating the view query through redux state with a hook', async () => {
     const options = {};
-    const { result: onSelect } = await shallowHook(() => useOnSelect(options));
+    const { result: onSelect } = await renderHook(() => useOnSelect(options));
 
     onSelect({ value: 'dolor sit' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, hook');

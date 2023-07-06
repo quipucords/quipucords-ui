@@ -1,6 +1,4 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { TextInput } from '@patternfly/react-core';
 import { TouchSpin } from '../touchspin';
 
 describe('TouchSpin Component', () => {
@@ -9,13 +7,8 @@ describe('TouchSpin Component', () => {
       name: 'lorem'
     };
 
-    const component = mount(<TouchSpin {...props} />);
-
-    const componentInstance = component.instance();
-    expect(componentInstance.props).toMatchSnapshot('initial props');
-    expect(componentInstance.state).toMatchSnapshot('initial state');
-
-    expect(component.render()).toMatchSnapshot('basic render');
+    const component = renderComponent(<TouchSpin {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should handle onchange events', () => {
@@ -26,12 +19,14 @@ describe('TouchSpin Component', () => {
       labelMinDescription: 'testing min'
     };
 
-    const component = mount(<TouchSpin {...props} />);
+    const component = renderComponent(<TouchSpin {...props} />);
 
-    component.find(`button[aria-label="${props.labelMaxDescription}"]`).simulate('click');
-    expect(component.find(TextInput).props()?.value).toBe(2);
+    const inputMax = component.find(`button[aria-label="${props.labelMaxDescription}"]`);
+    component.fireEvent.click(inputMax);
+    expect(component.find('input').value).toBe('2');
 
-    component.find(`button[aria-label="${props.labelMinDescription}"]`).simulate('click');
-    expect(component.find(TextInput).props()?.value).toBe(1);
+    const inputMin = component.find(`button[aria-label="${props.labelMinDescription}"]`);
+    component.fireEvent.click(inputMin);
+    expect(component.find('input').value).toBe('1');
   });
 });

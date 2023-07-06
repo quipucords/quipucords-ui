@@ -1,226 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip Component should render a popover: popover 1`] = `
-<Tooltip
-  content="hello world"
-  delayShow={500}
-  id="test"
-  isPopover={true}
-  placement="top"
+exports[`Tooltip Component should render a basic component: basic 1`] = `
+<tooltip
+  props="{
+  "id": "test",
+  "content": "hello world",
+  "children": [
+    {}
+  ],
+  "isPopover": false,
+  "placement": "top",
+  "delayShow": 500
+}"
 >
-  <Popover
-    bodyContent="hello world"
-    className="quipucords-popover"
-    hasAutoWidth={true}
-    id="test"
-    position="top"
-    showClose={false}
+  <div
+    class="quipucords-tooltip__wrapper"
   >
-    <Popper
-      appendTo={[Function]}
-      distance={25}
-      enableFlip={true}
-      flipBehavior={
-        [
-          "top",
-          "bottom",
-          "left",
-          "right",
-          "top-start",
-          "top-end",
-          "bottom-start",
-          "bottom-end",
-          "left-start",
-          "left-end",
-          "right-start",
-          "right-end",
-        ]
-      }
-      isVisible={false}
-      onDocumentClick={[Function]}
-      onDocumentKeyDown={[Function]}
-      onTriggerClick={[Function]}
-      placement="top"
-      popper={
-        <ForwardRef
-          active={false}
-          aria-describedby="popover-test-body"
-          aria-label=""
-          aria-modal="true"
-          className="pf-c-popover pf-m-width-auto quipucords-popover"
-          focusTrapOptions={
-            {
-              "clickOutsideDeactivates": true,
-              "fallbackFocus": [Function],
-              "returnFocusOnDeactivate": true,
-              "tabbableOptions": {
-                "displayCheck": "none",
-              },
-            }
-          }
-          onMouseDown={[Function]}
-          preventScrollOnDeactivate={true}
-          role="dialog"
-          style={
-            {
-              "maxWidth": null,
-              "minWidth": null,
-              "opacity": 0,
-              "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
-            }
-          }
-        >
-          <PopoverArrow />
-          <PopoverContent>
-            <PopoverBody
-              id="popover-test-body"
-            >
-              hello world
-            </PopoverBody>
-          </PopoverContent>
-        </ForwardRef>
-      }
-      popperMatchesTriggerWidth={false}
-      positionModifiers={
-        {
-          "bottom": "pf-m-bottom",
-          "bottom-end": "pf-m-bottom-right",
-          "bottom-start": "pf-m-bottom-left",
-          "left": "pf-m-left",
-          "left-end": "pf-m-left-bottom",
-          "left-start": "pf-m-left-top",
-          "right": "pf-m-right",
-          "right-end": "pf-m-right-bottom",
-          "right-start": "pf-m-right-top",
-          "top": "pf-m-top",
-          "top-end": "pf-m-top-right",
-          "top-start": "pf-m-top-left",
-        }
-      }
-      removeFindDomNode={false}
-      trigger={
-        <div
-          className="quipucords-popover__wrapper"
-        >
-          Test popover
-        </div>
-      }
-      zIndex={9999}
-    >
-      <FindRefWrapper
-        onFoundRef={[Function]}
-      >
-        <div
-          className="quipucords-popover__wrapper"
-        >
-          Test popover
-        </div>
-      </FindRefWrapper>
-    </Popper>
-  </Popover>
-</Tooltip>
+    Test tooltip
+  </div>
+</tooltip>
 `;
 
-exports[`Tooltip Component should render a tooltip: tooltip 1`] = `
-<Tooltip
-  content="hello world"
-  delayShow={500}
-  id="test"
-  isPopover={false}
-  placement="top"
+exports[`Tooltip Component should render a popover: popover 1`] = `
+<tooltip
+  props="{
+  "id": "test",
+  "isPopover": true,
+  "content": "hello world",
+  "children": [
+    {}
+  ],
+  "placement": "top",
+  "delayShow": 500
+}"
 >
-  <Tooltip
-    className="quipucords-tooltip"
-    content="hello world"
-    entryDelay={500}
-    id="test"
-    position="top"
+  <div
+    class="quipucords-popover__wrapper"
   >
-    <Popper
-      appendTo={[Function]}
-      distance={15}
-      enableFlip={true}
-      flipBehavior={
-        [
-          "top",
-          "right",
-          "bottom",
-          "left",
-          "top",
-          "right",
-          "bottom",
-        ]
-      }
-      isVisible={false}
-      onBlur={[Function]}
-      onDocumentClick={false}
-      onDocumentKeyDown={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onPopperMouseEnter={[Function]}
-      onPopperMouseLeave={[Function]}
-      onTriggerEnter={[Function]}
-      placement="top"
-      popper={
-        <div
-          aria-live="off"
-          className="pf-c-tooltip quipucords-tooltip"
-          id="test"
-          role="tooltip"
-          style={
-            {
-              "maxWidth": null,
-              "opacity": 0,
-              "transition": "opacity 300ms cubic-bezier(.54, 1.5, .38, 1.11)",
-            }
-          }
-        >
-          <TooltipArrow />
-          <TooltipContent
-            isLeftAligned={false}
-          >
-            hello world
-          </TooltipContent>
-        </div>
-      }
-      popperMatchesTriggerWidth={false}
-      positionModifiers={
-        {
-          "bottom": "pf-m-bottom",
-          "bottom-end": "pf-m-bottom-right",
-          "bottom-start": "pf-m-bottom-left",
-          "left": "pf-m-left",
-          "left-end": "pf-m-left-bottom",
-          "left-start": "pf-m-left-top",
-          "right": "pf-m-right",
-          "right-end": "pf-m-right-bottom",
-          "right-start": "pf-m-right-top",
-          "top": "pf-m-top",
-          "top-end": "pf-m-top-right",
-          "top-start": "pf-m-top-left",
-        }
-      }
-      removeFindDomNode={false}
-      trigger={
-        <div
-          className="quipucords-tooltip__wrapper"
-        >
-          Test tooltip
-        </div>
-      }
-      zIndex={9999}
-    >
-      <FindRefWrapper
-        onFoundRef={[Function]}
-      >
-        <div
-          className="quipucords-tooltip__wrapper"
-        >
-          Test tooltip
-        </div>
-      </FindRefWrapper>
-    </Popper>
-  </Tooltip>
-</Tooltip>
+    Test popover
+  </div>
+</tooltip>
 `;

@@ -1,23 +1,21 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Title } from '@patternfly/react-core';
 import CredentialsEmptyState from '../credentialsEmptyState';
 
 describe('CredentialsEmptyState Component', () => {
-  it('should render a basic component', () => {
+  it('should render a basic component', async () => {
     const props = {};
 
-    const component = mount(<CredentialsEmptyState {...props} />);
+    const component = await shallowComponent(<CredentialsEmptyState {...props} />);
 
-    expect(component.render()).toMatchSnapshot();
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render the application name', () => {
+  it('should render the application name', async () => {
     const props = {
       uiShortName: 'Ipsum'
     };
 
-    const component = mount(<CredentialsEmptyState {...props} />);
-    expect(component.find(Title)).toMatchSnapshot('application name');
+    const component = await shallowComponent(<CredentialsEmptyState {...props} />);
+    expect(component.render().getByRole('heading')).toMatchSnapshot('application name');
   });
 });

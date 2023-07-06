@@ -1,48 +1,44 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedAboutModal, AboutModal } from '../aboutModal';
+import { AboutModal } from '../aboutModal';
+import { helpers } from '../../../common';
 
 describe('AboutModal Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
+  it('should render a basic component with default props', () => {
+    const props = {
+      show: true,
+      serverVersion: '0.0.0.0000000',
+      username: 'lorem'
+    };
 
-  it('should render a connected component with default props', () => {
-    const store = generateEmptyStore({
-      aboutModal: { show: true },
-      user: { session: { username: 'lorem' } },
-      status: { serverVersion: '0.0.0.0000000' }
-    });
-
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedAboutModal />
-      </Provider>
-    );
-    expect(component.find(ConnectedAboutModal)).toMatchSnapshot('connected');
+    const component = renderComponent(<AboutModal {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component', () => {
+  it('should hide the component', () => {
     const props = {
-      show: false,
+      show: true,
       serverVersion: '0.0.0.0000000',
       username: 'admin'
     };
 
-    const component = mount(<AboutModal {...props} />);
-    expect(component).toMatchSnapshot('hidden modal');
+    const component = renderComponent(<AboutModal {...props} />);
+    const componentHidden = component.setProps({ show: false });
+    expect(componentHidden.screen.render()).toMatchSnapshot('hidden modal');
   });
 
   it('should contain brand', () => {
     const props = {
       show: true,
-      uiBrand: true,
+      uiBrand: false,
       uiName: 'Lorem ipsum',
       uiShortName: 'Ipsum'
     };
 
-    const component = shallow(<AboutModal {...props} />);
-    expect(component).toMatchSnapshot('brand');
+    const component = renderComponent(<AboutModal {...props} />);
+    expect(component.screen.render().querySelectorAll('img')).toMatchSnapshot('no brand');
+
+    const componentBrand = component.setProps({ uiBrand: true });
+    expect(componentBrand.screen.render().querySelectorAll('img')).toMatchSnapshot('brand');
   });
 
   it('should have a copy event that updates state', () => {
@@ -53,11 +49,14 @@ describe('AboutModal Component', () => {
       reset: 100
     };
 
-    const component = mount(<AboutModal {...props} />);
-    expect(component.state()).toMatchSnapshot('pre copy event');
+    const mockCopyClipboard = jest.fn();
+    const spy = jest.spyOn(helpers, 'copyClipboard').mockImplementation(mockCopyClipboard);
+    const component = renderComponent(<AboutModal {...props} />);
 
-    component.find('button[className~="quipucords-about-modal-copy-button"]').simulate('click');
+    const input = component.screen.getByTitle('t(about-modal.copy-button)');
+    component.fireEvent.click(input);
 
-    expect(component.state()).toMatchSnapshot('post copy event');
+    expect(mockCopyClipboard).toHaveBeenCalledTimes(1);
+    spy.mockClear();
   });
 });

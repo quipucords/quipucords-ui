@@ -1,14 +1,12 @@
 import React from 'react';
-import { TextArea as PfTextArea } from '@patternfly/react-core';
 import { TextArea, TextAreResizeOrientation } from '../textArea';
-import { helpers } from '../../../common';
 
 describe('TextArea Component', () => {
-  it('should render a basic component', async () => {
+  it('should render a basic component', () => {
     const props = {};
 
-    const component = await shallowHookComponent(<TextArea {...props} />);
-    expect(component.render()).toMatchSnapshot('basic component');
+    const component = renderComponent(<TextArea {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should export support constants, types', () => {
@@ -20,49 +18,50 @@ describe('TextArea Component', () => {
       isReadOnly: true
     };
 
-    const component = await mountHookComponent(<TextArea {...props} />);
-    expect(component.render()).toMatchSnapshot('readOnly');
+    const component = renderComponent(<TextArea {...props} />);
+    expect(component).toMatchSnapshot('readOnly');
 
-    component.setProps({
+    const componentDisabled = component.setProps({
       isReadOnly: false,
       isDisabled: true
     });
 
-    expect(component.render()).toMatchSnapshot('disabled');
+    expect(componentDisabled).toMatchSnapshot('disabled');
 
-    component.setProps({
+    const componentActive = component.setProps({
       isReadOnly: false,
       isDisabled: false
     });
 
-    expect(component.render()).toMatchSnapshot('active');
+    expect(componentActive).toMatchSnapshot('active');
   });
 
-  it('should return an emulated onChange event', async () => {
-    const mockOnChange = jest.fn();
+  it('should return an emulated onChange event', () => {
     const props = {
-      onChange: mockOnChange,
+      onChange: jest.fn(),
       value: 'lorem ipsum'
     };
 
-    const component = await mountHookComponent(<TextArea {...props} />);
-    const mockEvent = { currentTarget: { value: 'dolor sit' }, persist: helpers.noop };
-    component.find(PfTextArea).simulate('change', 'hello world', mockEvent);
+    const component = renderComponent(<TextArea {...props} />);
+    const input = component.find('textarea');
+    const mockEvent = { target: { value: 'dolor sit' } };
+    component.fireEvent.change(input, mockEvent);
 
-    expect(mockOnChange.mock.calls).toMatchSnapshot('emulated event, change');
+    expect(props.onChange.mock.calls).toMatchSnapshot('emulated event, change');
   });
 
-  it('should return an emulated onClear event on escape', async () => {
-    const mockOnClear = jest.fn();
+  it('should return an emulated onClear event on escape', () => {
     const props = {
-      onClear: mockOnClear,
+      onClear: jest.fn(),
       value: 'lorem ipsum'
     };
 
-    const component = await mountHookComponent(<TextArea {...props} />);
-    const mockEvent = { keyCode: 27, currentTarget: { value: 'lorem ipsum' }, persist: helpers.noop };
-    component.find(PfTextArea).simulate('keyup', mockEvent);
+    const component = renderComponent(<TextArea {...props} />);
+    const input = component.find('textarea');
+    const mockEvent = { keyCode: 27, which: 27, target: { value: '' }, key: 'Escape' };
+    component.fireEvent.keyUp(input, mockEvent);
 
-    expect(mockOnClear.mock.calls).toMatchSnapshot('emulated event, esc');
+    expect(props.onClear).toHaveBeenCalledTimes(1);
+    expect(props.onClear.mock.calls).toMatchSnapshot('emulated event, esc');
   });
 });

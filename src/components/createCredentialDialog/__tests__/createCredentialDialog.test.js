@@ -1,6 +1,4 @@
 import React from 'react';
-import { EmptyState } from '@patternfly/react-core';
-import { DropdownSelect } from '../../dropdownSelect/dropdownSelect';
 import { CreateCredentialDialog, authenticationTypeOptions, becomeMethodTypeOptions } from '../createCredentialDialog';
 
 describe('CreateCredentialDialog Component', () => {
@@ -13,8 +11,8 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await shallowHookComponent(<CreateCredentialDialog {...props} />);
-    expect(component).toMatchSnapshot('basic');
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
   it('should export select options', () => {
@@ -24,7 +22,7 @@ describe('CreateCredentialDialog Component', () => {
     }).toMatchSnapshot('options');
   });
 
-  it('should handle a pending display state', async () => {
+  it('should handle a pending display state', () => {
     const props = {
       useCredential: () => ({
         pending: true,
@@ -34,11 +32,11 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
-    expect(component.find(EmptyState)).toMatchSnapshot('pending');
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
+    expect(component.screen.render().querySelector('.pf-c-modal-box__body')).toMatchSnapshot('pending');
   });
 
-  it('should handle variations in basic form display for network credential type', async () => {
+  it('should handle variations in basic form display for network credential type', () => {
     const props = {
       useCredential: () => ({
         show: true,
@@ -47,14 +45,14 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
     expect([
-      ...component.find('input').map(item => item.props()),
-      ...component.find(DropdownSelect).map(item => item.props())
+      ...component.screen.render().querySelectorAll('input'),
+      ...component.screen.render().querySelectorAll('.quipucords-select')
     ]).toMatchSnapshot('network');
   });
 
-  it('should handle variations in basic form display for openshift credential type', async () => {
+  it('should handle variations in basic form display for openshift credential type', () => {
     const props = {
       useCredential: () => ({
         show: true,
@@ -63,14 +61,14 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
     expect([
-      ...component.find('input').map(item => item.props()),
-      ...component.find(DropdownSelect).map(item => item.props())
+      ...component.screen.render().querySelectorAll('input'),
+      ...component.screen.render().querySelectorAll('.quipucords-select')
     ]).toMatchSnapshot('openshift');
   });
 
-  it('should handle variations in basic form display for satellite credential type', async () => {
+  it('should handle variations in basic form display for satellite credential type', () => {
     const props = {
       useCredential: () => ({
         show: true,
@@ -79,14 +77,14 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
     expect([
-      ...component.find('input').map(item => item.props()),
-      ...component.find(DropdownSelect).map(item => item.props())
+      ...component.screen.render().querySelectorAll('input'),
+      ...component.screen.render().querySelectorAll('.quipucords-select')
     ]).toMatchSnapshot('satellite');
   });
 
-  it('should handle variations in basic form display for vcenter credential type', async () => {
+  it('should handle variations in basic form display for vcenter credential type', () => {
     const props = {
       useCredential: () => ({
         show: true,
@@ -95,10 +93,26 @@ describe('CreateCredentialDialog Component', () => {
       })
     };
 
-    const component = await mountHookComponent(<CreateCredentialDialog {...props} />);
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
     expect([
-      ...component.find('input').map(item => item.props()),
-      ...component.find(DropdownSelect).map(item => item.props())
+      ...component.screen.render().querySelectorAll('input'),
+      ...component.screen.render().querySelectorAll('.quipucords-select')
     ]).toMatchSnapshot('vcenter');
+  });
+
+  it('should handle variations in basic form display for ansible credential type', () => {
+    const props = {
+      useCredential: () => ({
+        show: true,
+        add: true,
+        credentialType: 'ansible'
+      })
+    };
+
+    const component = renderComponent(<CreateCredentialDialog {...props} />);
+    expect([
+      ...component.screen.render().querySelectorAll('input'),
+      ...component.screen.render().querySelectorAll('.quipucords-select')
+    ]).toMatchSnapshot('ansible');
   });
 });

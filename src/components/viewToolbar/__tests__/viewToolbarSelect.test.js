@@ -18,7 +18,7 @@ describe('ViewToolbarSelect Component', () => {
     const props = {
       filter: SelectFilterVariant[API_QUERY_TYPES.CREDENTIAL_TYPE]
     };
-    const component = await shallowHookComponent(<ViewToolbarSelect {...props} />);
+    const component = await shallowComponent(<ViewToolbarSelect {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
@@ -30,23 +30,24 @@ describe('ViewToolbarSelect Component', () => {
     }).toMatchSnapshot('field variants, options');
   });
 
-  it('should handle updating the view query through redux state with a component', async () => {
+  it('should handle updating the view query through redux state with a component', () => {
     const props = {
       filter: SelectFilterVariant[API_QUERY_TYPES.CREDENTIAL_TYPE]
     };
 
-    const component = await mountHookComponent(<ViewToolbarSelect {...props} />);
+    const component = renderComponent(<ViewToolbarSelect {...props} />);
+    const input = component.find('button');
+    component.fireEvent.click(input);
 
-    component.find('button').simulate('click');
-    component.update();
-    component.find('button.pf-c-select__menu-item').first().simulate('click');
+    const inputMenuItem = component.find('button.pf-c-select__menu-item');
+    component.fireEvent.click(inputMenuItem);
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, component');
   });
 
   it('should handle updating the view query through redux state with a hook', async () => {
     const options = {};
-    const { result: onSelect } = await shallowHook(() => useOnSelect('lorem filter', options));
+    const { result: onSelect } = await renderHook(() => useOnSelect('lorem filter', options));
 
     onSelect({ value: 'dolor sit' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, hook');
