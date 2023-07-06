@@ -15,7 +15,6 @@ exports[`Distribution should match a specific file output: dist-output 1`] = `
   "",
   "./dist/client/app*css",
   "./dist/client/app*js",
-  "./dist/client/app*js*txt",
   "./dist/client/assets/css/index.css",
   "./dist/client/assets/images/about-bg.png",
   "./dist/client/assets/images/logo-brand.svg",
