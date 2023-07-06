@@ -1,5 +1,4 @@
 import React from 'react';
-import { ModalContent, Wizard as PfWizard } from '@patternfly/react-core';
 import { Wizard } from '../wizard';
 
 describe('Wizard Component', () => {
@@ -25,23 +24,34 @@ describe('Wizard Component', () => {
       ]
     };
 
-    const component = await mountHookComponent(<Wizard {...props} />);
-    expect(component.find(ModalContent).render()).toMatchSnapshot('basic');
+    const component = renderComponent(<Wizard {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
-  it('should allow modifying specific and custom props', async () => {
+  it('should allow modifying specific and custom props', () => {
     const props = {
       isOpen: true,
-      isForm: true
+      isForm: true,
+      steps: [
+        {
+          id: 1,
+          name: 'Lorem',
+          component: 'lorem'
+        }
+      ]
     };
 
-    const formComponent = await shallowHookComponent(<Wizard {...props} />);
-    expect(formComponent.find(PfWizard).props().className).toMatchSnapshot('isForm');
+    const formComponent = renderComponent(<Wizard {...props} />);
+    expect(formComponent.screen.render().querySelector('.quipucords-wizard').classList).toMatchSnapshot('isForm');
+    formComponent.unmount();
 
     props.isForm = false;
     props.isNavHidden = true;
 
-    const navHiddenComponent = await shallowHookComponent(<Wizard {...props} />);
-    expect(navHiddenComponent.find(PfWizard).props().className).toMatchSnapshot('isNavHidden');
+    const navHiddenComponent = renderComponent(<Wizard {...props} />);
+    expect(navHiddenComponent.screen.render().querySelector('.quipucords-wizard').classList).toMatchSnapshot(
+      'isNavHidden'
+    );
+    navHiddenComponent.unmount();
   });
 });

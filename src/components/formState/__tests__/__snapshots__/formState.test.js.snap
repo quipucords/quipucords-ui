@@ -28,18 +28,32 @@ exports[`FormState Component should handle custom events: single custom event 1`
 }
 `;
 
-exports[`FormState Component should render a basic component: basic render 1`] = `
-<form>
-  <label>
-    Lorem
-    <input
-      name="lorem"
-      readonly=""
-      type="text"
-      value="ipsum"
-    />
-  </label>
-</form>
+exports[`FormState Component should render a basic component: basic 1`] = `
+<formstate
+  props="{
+  "setValues": {
+    "lorem": "ipsum"
+  },
+  "children": [],
+  "resetUsingSetValues": true,
+  "setValuesOnUpdate": false,
+  "setValuesAssumeBoolIsChecked": true,
+  "validateOnMount": false,
+  "validateOnUpdate": false
+}"
+>
+  <form>
+    <label>
+      Lorem
+      <input
+        name="lorem"
+        readonly=""
+        type="text"
+        value="ipsum"
+      />
+    </label>
+  </form>
+</formstate>
 `;
 
 exports[`FormState Component should render a basic component: initial props 1`] = `

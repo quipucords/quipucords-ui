@@ -1,75 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, canceled 1`] = `
-<RedoIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, cancelled 1`] = `
-<RedoIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, completed 1`] = `
-<RedoIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "completed",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, created 1`] = `
-<PauseIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "running",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, failed 1`] = `
-<RedoIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, paused 1`] = `
-<PlayIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "paused",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, pending 1`] = `
-<StopIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "pending",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, play 1`] = `
-<PlayIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "play",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: icon variant, running 1`] = `
-<PauseIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "symbol": "running",
+}
 `;
 
 exports[`ContextIconAction Component should export, and handle icon variants: variants 1`] = `

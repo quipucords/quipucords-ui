@@ -8,7 +8,7 @@ describe('useTimeout', () => {
   it('should apply a hook for useTimeout', async () => {
     const mockCallback = jest.fn();
     const mockSetTimeout = jest.spyOn(global, 'setTimeout');
-    const { result } = await mountHook(() => useTimeout(mockCallback));
+    const { result } = await renderHook(() => useTimeout(mockCallback));
 
     expect(mockSetTimeout).toHaveBeenCalledTimes(2);
     expect(mockCallback).toHaveBeenCalledTimes(1);

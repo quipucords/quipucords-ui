@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { ContextIcon, ContextIconVariant } from '../contextIcon';
 
 describe('ContextIcon Component', () => {
-  it('should render a basic component with default props', () => {
-    const component = shallow(<ContextIcon />);
+  it('should render a basic component with default props', async () => {
+    const component = await shallowComponent(<ContextIcon />);
     expect(component).toMatchSnapshot('basic');
   });
 
@@ -12,8 +11,8 @@ describe('ContextIcon Component', () => {
     expect(ContextIconVariant).toMatchSnapshot('variants');
 
     Object.entries(ContextIconVariant).forEach(([key, value]) => {
-      const component = shallow(<ContextIcon symbol={value} />);
-      expect(component).toMatchSnapshot(`icon variant, ${key}`);
+      const component = renderComponent(<ContextIcon symbol={value} />);
+      expect(component.props).toMatchSnapshot(`icon variant, ${key}`);
     });
   });
 });

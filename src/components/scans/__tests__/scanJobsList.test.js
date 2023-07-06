@@ -1,29 +1,8 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { shallow } from 'enzyme';
-import { ConnectedScanJobsList, ScanJobsList } from '../scanJobsList';
+import { ScanJobsList } from '../scanJobsList';
 
 describe('ScanJobsList Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({ scans: { jobs: {} } });
-
-    const props = {
-      id: 1
-    };
-
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedScanJobsList {...props} />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedScanJobsList)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', () => {
     const props = {
       id: 1,
       scanJobsList: [
@@ -48,18 +27,18 @@ describe('ScanJobsList Component', () => {
       ]
     };
 
-    const component = shallow(<ScanJobsList {...props} />);
-    expect(component).toMatchSnapshot('non-connected');
+    const component = renderComponent(<ScanJobsList {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component error', () => {
+  it('should render a component error', () => {
     const props = {
       id: 1,
       error: true,
       errorMessage: 'Lorem Ipsum.'
     };
 
-    const component = shallow(<ScanJobsList {...props} />);
+    const component = renderComponent(<ScanJobsList {...props} />);
     expect(component).toMatchSnapshot('error');
   });
 
@@ -69,7 +48,7 @@ describe('ScanJobsList Component', () => {
       pending: true
     };
 
-    const component = shallow(<ScanJobsList {...props} />);
+    const component = renderComponent(<ScanJobsList {...props} />);
     expect(component).toMatchSnapshot('pending');
   });
 });

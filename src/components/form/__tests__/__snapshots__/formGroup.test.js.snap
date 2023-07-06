@@ -1,103 +1,198 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormGroup Component should handle multiple error message types: boolean error message 1`] = `
-<div
-  class="pf-c-form__group"
+<formgroup
+  props="{
+  "id": "test",
+  "error": true,
+  "errorMessage": true,
+  "children": [
+    {
+      "props": {
+        "id": "test",
+        "type": "text",
+        "value": "",
+        "readOnly": true
+      },
+      "type": "input"
+    }
+  ],
+  "helperText": null,
+  "fieldId": null
+}"
 >
   <div
-    class="pf-c-form__group-control"
+    class="pf-c-form__group"
   >
-    <input
-      id="test"
-      readonly=""
-      type="text"
-      value=""
-    />
     <div
-      aria-live="polite"
-      class="pf-c-form__helper-text pf-m-error"
-      id="test-helper"
+      class="pf-c-form__group-control"
     >
-      Error
+      <input
+        id="test"
+        readonly=""
+        type="text"
+        value=""
+      />
+      <div
+        aria-live="polite"
+        class="pf-c-form__helper-text pf-m-error"
+        id="test-helper"
+      >
+        Error
+      </div>
     </div>
   </div>
-</div>
+</formgroup>
 `;
 
 exports[`FormGroup Component should handle multiple error message types: node error message 1`] = `
-<div
-  class="pf-c-form__group"
+<formgroup
+  props="{
+  "id": "test",
+  "error": true,
+  "errorMessage": {
+    "type": "span",
+    "key": null,
+    "ref": null,
+    "props": {
+      "children": "lorem ipsum"
+    },
+    "_owner": null,
+    "_store": {}
+  },
+  "children": [
+    {
+      "props": {
+        "id": "test",
+        "type": "text",
+        "value": "",
+        "readOnly": true
+      },
+      "type": "input"
+    }
+  ],
+  "helperText": null,
+  "fieldId": null
+}"
 >
   <div
-    class="pf-c-form__group-control"
+    class="pf-c-form__group"
   >
-    <input
-      id="test"
-      readonly=""
-      type="text"
-      value=""
-    />
-    <span>
-      lorem ipsum
-    </span>
+    <div
+      class="pf-c-form__group-control"
+    >
+      <input
+        id="test"
+        readonly=""
+        type="text"
+        value=""
+      />
+      <span>
+        lorem ipsum
+      </span>
+    </div>
   </div>
-</div>
+</formgroup>
 `;
 
 exports[`FormGroup Component should handle multiple error message types: string error message 1`] = `
-<div
-  class="pf-c-form__group"
+<formgroup
+  props="{
+  "id": "test",
+  "error": true,
+  "errorMessage": "lorem ipsum",
+  "children": [
+    {
+      "props": {
+        "id": "test",
+        "type": "text",
+        "value": "",
+        "readOnly": true
+      },
+      "type": "input"
+    }
+  ],
+  "helperText": null,
+  "fieldId": null
+}"
 >
   <div
-    class="pf-c-form__group-control"
+    class="pf-c-form__group"
   >
-    <input
-      id="test"
-      readonly=""
-      type="text"
-      value=""
-    />
     <div
-      aria-live="polite"
-      class="pf-c-form__helper-text pf-m-error"
-      id="test-helper"
+      class="pf-c-form__group-control"
     >
-      lorem ipsum
+      <input
+        id="test"
+        readonly=""
+        type="text"
+        value=""
+      />
+      <div
+        aria-live="polite"
+        class="pf-c-form__helper-text pf-m-error"
+        id="test-helper"
+      >
+        lorem ipsum
+      </div>
     </div>
   </div>
-</div>
+</formgroup>
 `;
 
 exports[`FormGroup Component should render a basic component: basic formgroup 1`] = `
-<div
-  class="pf-c-form__group"
+<formgroup
+  props="{
+  "label": "test",
+  "id": "test",
+  "children": [
+    {
+      "props": {
+        "id": "test",
+        "type": "text",
+        "value": "",
+        "readOnly": true
+      },
+      "type": "input"
+    }
+  ],
+  "error": null,
+  "errorMessage": null,
+  "helperText": null,
+  "fieldId": null
+}"
 >
   <div
-    class="pf-c-form__group-label"
+    class="pf-c-form__group"
   >
-    <label
-      class="pf-c-form__label"
-      for="test"
+    <div
+      class="pf-c-form__group-label"
     >
-      <span
-        class="pf-c-form__label-text"
+      <label
+        class="pf-c-form__label"
+        for="test"
       >
-        test
-      </span>
-    </label>
-     
+        <span
+          class="pf-c-form__label-text"
+        >
+          test
+        </span>
+      </label>
+       
+    </div>
+    <div
+      class="pf-c-form__group-control"
+    >
+      <input
+        id="test"
+        readonly=""
+        type="text"
+        value=""
+      />
+      
+    </div>
   </div>
-  <div
-    class="pf-c-form__group-control"
-  >
-    <input
-      id="test"
-      readonly=""
-      type="text"
-      value=""
-    />
-  </div>
-</div>
+</formgroup>
 `;
 
 exports[`FormGroup Component should render a basic component: basic label 1`] = `

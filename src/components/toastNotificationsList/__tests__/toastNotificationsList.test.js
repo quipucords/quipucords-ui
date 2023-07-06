@@ -16,7 +16,7 @@ describe('ToastNotificationsList Component', () => {
 
   it('should render a basic component', async () => {
     const props = {};
-    const component = await shallowHookComponent(<ToastNotificationsList {...props} />);
+    const component = await shallowComponent(<ToastNotificationsList {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
@@ -63,13 +63,13 @@ describe('ToastNotificationsList Component', () => {
       useSelector: () => toasts
     };
 
-    const component = await shallowHookComponent(<ToastNotificationsList {...props} />);
+    const component = await shallowComponent(<ToastNotificationsList {...props} />);
     expect(component).toMatchSnapshot('variations');
   });
 
   it('should handle removing toasts through redux state with a hook', async () => {
     const options = {};
-    const { result: onDismiss } = await shallowHook(() => useOnDismiss(options));
+    const { result: onDismiss } = await renderHook(() => useOnDismiss(options));
 
     onDismiss({ mockToast: 'lorem ipsum' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch removing a toast, hook');
@@ -77,7 +77,7 @@ describe('ToastNotificationsList Component', () => {
 
   it('should handle pausing toasts through redux state with a hook', async () => {
     const options = {};
-    const { result: onHover } = await shallowHook(() => useOnHover(options));
+    const { result: onHover } = await renderHook(() => useOnHover(options));
 
     onHover({ mockToast: 'lorem ipsum' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch pausing a toast, hook');
@@ -85,7 +85,7 @@ describe('ToastNotificationsList Component', () => {
 
   it('should handle resuming toasts through redux state with a hook', async () => {
     const options = {};
-    const { result: onLeave } = await shallowHook(() => useOnLeave(options));
+    const { result: onLeave } = await renderHook(() => useOnLeave(options));
 
     onLeave({ mockToast: 'lorem ipsum' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch resuming a toast, hook');

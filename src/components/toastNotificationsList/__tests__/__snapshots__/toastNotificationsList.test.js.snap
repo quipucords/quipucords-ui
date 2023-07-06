@@ -51,21 +51,21 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
         onClose={[Function]}
       />
     }
-    key="key-"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onTimeout={[Function]}
     timeout={8000}
     title="Lorem ipsum"
     truncateTitle={2}
-  />
+  >
+    
+  </Alert>
   <Alert
     actionClose={
       <AlertActionCloseButton
         onClose={[Function]}
       />
     }
-    key="key-"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onTimeout={[Function]}
@@ -73,14 +73,15 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
     title="Dolor sit"
     truncateTitle={2}
     variant="success"
-  />
+  >
+    
+  </Alert>
   <Alert
     actionClose={
       <AlertActionCloseButton
         onClose={[Function]}
       />
     }
-    key="key-"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onTimeout={[Function]}
@@ -97,7 +98,6 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
         onClose={[Function]}
       />
     }
-    key="key-"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onTimeout={[Function]}
@@ -105,7 +105,9 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
     title="PAUSED, Dolor sit"
     truncateTitle={2}
     variant="info"
-  />
+  >
+    
+  </Alert>
 </AlertGroup>
 `;
 
