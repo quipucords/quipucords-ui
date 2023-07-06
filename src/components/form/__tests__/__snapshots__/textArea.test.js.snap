@@ -14,40 +14,88 @@ exports[`TextArea Component should export support constants, types: support 1`] 
 
 exports[`TextArea Component should handle readOnly, disabled: active 1`] = `
 <textarea
-  aria-invalid="false"
-  class="pf-c-form-control quipucords-form__textarea  "
-  id="generatedid-"
-  name="generatedid-"
-/>
+  props="{
+  "isReadOnly": false,
+  "className": "",
+  "id": null,
+  "isDisabled": false,
+  "name": null,
+  "value": "",
+  "children": []
+}"
+>
+  <textarea
+    aria-invalid="false"
+    class="pf-c-form-control quipucords-form__textarea  "
+    id="generatedid-"
+    name="generatedid-"
+  />
+</textarea>
 `;
 
 exports[`TextArea Component should handle readOnly, disabled: disabled 1`] = `
 <textarea
-  aria-invalid="false"
-  class="pf-c-form-control quipucords-form__textarea  "
-  disabled=""
-  id="generatedid-"
-  name="generatedid-"
-/>
+  props="{
+  "isReadOnly": false,
+  "className": "",
+  "id": null,
+  "isDisabled": true,
+  "name": null,
+  "value": "",
+  "children": []
+}"
+>
+  <textarea
+    aria-invalid="false"
+    class="pf-c-form-control quipucords-form__textarea  "
+    disabled=""
+    id="generatedid-"
+    name="generatedid-"
+  />
+</textarea>
 `;
 
 exports[`TextArea Component should handle readOnly, disabled: readOnly 1`] = `
 <textarea
-  aria-invalid="false"
-  class="pf-c-form-control quipucords-form__textarea  "
-  id="generatedid-"
-  name="generatedid-"
-  readonly=""
-/>
+  props="{
+  "isReadOnly": true,
+  "className": "",
+  "id": null,
+  "isDisabled": false,
+  "name": null,
+  "value": "",
+  "children": []
+}"
+>
+  <textarea
+    aria-invalid="false"
+    class="pf-c-form-control quipucords-form__textarea  "
+    id="generatedid-"
+    name="generatedid-"
+    readonly=""
+  />
+</textarea>
 `;
 
-exports[`TextArea Component should render a basic component: basic component 1`] = `
+exports[`TextArea Component should render a basic component: basic 1`] = `
 <textarea
-  aria-invalid="false"
-  class="pf-c-form-control quipucords-form__textarea  "
-  id="generatedid-"
-  name="generatedid-"
-/>
+  props="{
+  "className": "",
+  "id": null,
+  "isDisabled": false,
+  "isReadOnly": false,
+  "name": null,
+  "value": "",
+  "children": []
+}"
+>
+  <textarea
+    aria-invalid="false"
+    class="pf-c-form-control quipucords-form__textarea  "
+    id="generatedid-"
+    name="generatedid-"
+  />
+</textarea>
 `;
 
 exports[`TextArea Component should return an emulated onChange event: emulated event, change 1`] = `
@@ -61,7 +109,7 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
         id="generatedid-"
         name="generatedid-"
       >
-        lorem ipsum
+        dolor sit
       </textarea>,
       "id": "generatedid-",
       "keyCode": undefined,
@@ -73,9 +121,9 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
         id="generatedid-"
         name="generatedid-"
       >
-        lorem ipsum
+        dolor sit
       </textarea>,
-      "value": "lorem ipsum",
+      "value": "dolor sit",
     },
   ],
 ]

@@ -1,97 +1,85 @@
 import React from 'react';
-import { TextInput as PfTextInput, TextInputTypes } from '@patternfly/react-core';
+import { TextInputTypes } from '@patternfly/react-core';
 import { TextInput } from '../textInput';
-import { helpers } from '../../../common';
 
 describe('TextInput Component', () => {
-  it('should render a basic component', async () => {
+  it('should render a basic component', () => {
     const props = {};
 
-    const component = await shallowHookComponent(<TextInput {...props} />);
-    expect(component.render()).toMatchSnapshot('basic component');
+    const component = renderComponent(<TextInput {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should export support constants, types', () => {
     expect({ TextInputTypes }).toMatchSnapshot('support');
   });
 
-  it('should handle readOnly, disabled', async () => {
+  it('should handle readOnly, disabled', () => {
     const props = {
       isReadOnly: true
     };
 
-    const component = await mountHookComponent(<TextInput {...props} />);
-    expect(component.render()).toMatchSnapshot('readOnly');
+    const component = renderComponent(<TextInput {...props} />);
+    expect(component).toMatchSnapshot('readOnly');
 
-    component.setProps({
+    const componentDisabled = component.setProps({
       isReadOnly: false,
       isDisabled: true
     });
 
-    expect(component.render()).toMatchSnapshot('disabled');
+    expect(componentDisabled).toMatchSnapshot('disabled');
 
-    component.setProps({
+    const componentActive = component.setProps({
       isReadOnly: false,
       isDisabled: false
     });
 
-    expect(component.render()).toMatchSnapshot('active');
+    expect(componentActive).toMatchSnapshot('active');
   });
 
-  it('should return an emulated onChange event', async () => {
-    const mockOnChange = jest.fn();
+  it('should return an emulated onChange event', () => {
     const props = {
-      onChange: mockOnChange,
+      onChange: jest.fn(),
       value: 'lorem ipsum'
     };
 
-    const component = await mountHookComponent(<TextInput {...props} />);
-    const mockEvent = { currentTarget: { value: 'dolor sit' }, persist: helpers.noop };
-    component.find(PfTextInput).simulate('change', 'hello world', mockEvent);
+    const component = renderComponent(<TextInput {...props} />);
+    const input = component.find('input');
+    const mockEvent = { target: { value: 'dolor sit' } };
+    component.fireEvent.change(input, mockEvent);
 
-    expect(mockOnChange.mock.calls).toMatchSnapshot('emulated event, change');
+    expect(props.onChange.mock.calls).toMatchSnapshot('emulated event, change');
   });
 
-  it('should return an emulated onClear event on escape', async () => {
-    const mockOnClear = jest.fn();
+  it('should return an emulated onClear event on escape', () => {
     const props = {
-      onClear: mockOnClear,
-      value: 'lorem ipsum'
-    };
-
-    const component = await mountHookComponent(<TextInput {...props} />);
-    const mockEvent = { keyCode: 27, currentTarget: { value: '' }, persist: helpers.noop };
-    component.find(PfTextInput).simulate('keyup', mockEvent);
-
-    expect(mockOnClear.mock.calls).toMatchSnapshot('emulated event, esc');
-  });
-
-  it('should return an emulated onClear event on escape with type search', async () => {
-    const mockOnClear = jest.fn();
-    const props = {
-      onClear: mockOnClear,
+      id: 'test-id',
       value: 'lorem ipsum',
-      type: 'search'
+      onKeyUp: jest.fn(),
+      onClear: jest.fn()
     };
 
-    const component = await mountHookComponent(<TextInput {...props} />);
-    const mockEvent = { keyCode: 27, currentTarget: { value: '' }, persist: helpers.noop };
-    component.find(PfTextInput).simulate('keyup', mockEvent);
+    const component = renderComponent(<TextInput {...props} />);
+    const input = component.find('input');
+    const mockEvent = { target: { value: '' }, keyCode: 27, which: 27, key: 'Escape' };
+    component.fireEvent.keyUp(input, mockEvent);
 
-    expect(mockOnClear.mock.calls).toMatchSnapshot('emulated event, esc, type search');
+    expect(props.onKeyUp).toHaveBeenCalledTimes(1);
+    expect(props.onClear).toHaveBeenCalledTimes(1);
+    expect(props.onClear.mock.calls).toMatchSnapshot('emulated event, esc');
   });
 
-  it('should return a mouseup event on text clear', async () => {
-    const mockOnMouseUp = jest.fn();
+  it('should return a mouseup event on text clear', () => {
     const props = {
-      onMouseUp: mockOnMouseUp,
+      onMouseUp: jest.fn(),
       value: 'lorem ipsum'
     };
 
-    const component = await shallowHookComponent(<TextInput {...props} />);
-    const mockEvent = { currentTarget: { value: '' }, persist: helpers.noop };
-    component.find(PfTextInput).simulate('mouseup', mockEvent);
+    const component = renderComponent(<TextInput {...props} />);
+    const input = component.find('input');
+    const mockEvent = { target: { value: '' } };
+    component.fireEvent.mouseUp(input, mockEvent);
 
-    expect(mockOnMouseUp.mock.calls).toMatchSnapshot('emulated event, mouseup');
+    expect(props.onMouseUp.mock.calls).toMatchSnapshot('emulated event, mouseup');
   });
 });

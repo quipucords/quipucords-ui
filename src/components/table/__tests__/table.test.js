@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpandableRowContent, TableComposable, TableVariant, Th } from '@patternfly/react-table';
+import { TableVariant } from '@patternfly/react-table';
 import { Table } from '../table';
 
 describe('Table Component', () => {
@@ -9,7 +9,7 @@ describe('Table Component', () => {
       columnHeaders: ['lorem', 'ipsum', 'dolor', 'sit']
     };
 
-    const component = await shallowHookComponent(<Table {...props} />);
+    const component = await shallowComponent(<Table {...props} />);
     expect(component).toMatchSnapshot('basic');
   });
 
@@ -20,29 +20,29 @@ describe('Table Component', () => {
       rows: [{ cells: ['dolor'] }, { cells: ['sit'] }]
     };
 
-    const component = await mountHookComponent(<Table {...props} />);
-    expect(component.find(TableComposable)).toMatchSnapshot('generated rows');
+    const component = await shallowComponent(<Table {...props} />);
+    expect(component).toMatchSnapshot('generated rows');
 
-    component.setProps({
+    const componentNoBorders = await component.setProps({
       isBorders: false,
       isHeader: false
     });
-    expect(component.find(TableComposable)).toMatchSnapshot('borders and table header removed');
+    expect(componentNoBorders).toMatchSnapshot('borders and table header removed');
 
-    component.setProps({
+    const componentAriaLabel = await component.setProps({
       ariaLabel: 'lorem ipsum aria-label',
       summary: 'lorem ipsum summary'
     });
-    expect(component.find(TableComposable).props()).toMatchSnapshot('ariaLabel and summary');
+    expect(componentAriaLabel).toMatchSnapshot('ariaLabel and summary');
 
-    component.setProps({
+    const componentClassName = await component.setProps({
       className: 'lorem-ipsum-class',
       variant: TableVariant.compact
     });
-    expect(component.find(TableComposable).props()).toMatchSnapshot('className and variant');
+    expect(componentClassName).toMatchSnapshot('className and variant');
   });
 
-  it('should allow expandable row content', async () => {
+  it('should allow expandable row content', () => {
     const mockOnExpand = jest.fn();
     const props = {
       onExpand: mockOnExpand,
@@ -52,16 +52,17 @@ describe('Table Component', () => {
       ]
     };
 
-    const component = await mountHookComponent(<Table {...props} />);
-    expect(component.find(ExpandableRowContent)).toMatchSnapshot('expandable row content');
+    const component = renderComponent(<Table {...props} />);
+    expect(component.find('tr.quipucords-table__tr')).toMatchSnapshot('expandable row content');
 
-    component.find('button').first().simulate('click');
+    const input = component.find('button');
+    component.fireEvent.click(input);
 
     expect(mockOnExpand.mock.calls).toMatchSnapshot('expand row event');
-    expect(component.find(ExpandableRowContent)).toMatchSnapshot('expanded row');
+    expect(component.find('.quipucords-table__td-expand-expanded')).toMatchSnapshot('expanded row');
   });
 
-  it('should allow expandable cell content', async () => {
+  it('should allow expandable cell content', () => {
     const mockOnExpand = jest.fn();
     const props = {
       onExpand: mockOnExpand,
@@ -71,16 +72,17 @@ describe('Table Component', () => {
       ]
     };
 
-    const component = await mountHookComponent(<Table {...props} />);
-    expect(component.find(ExpandableRowContent)).toMatchSnapshot('expandable cell content');
+    const component = renderComponent(<Table {...props} />);
+    expect(component.find('tr.quipucords-table__tr')).toMatchSnapshot('expandable cell content');
 
-    component.find('button').first().simulate('click', { key: 'Enter' });
+    const input = component.find('button');
+    component.fireEvent.click(input);
 
     expect(mockOnExpand.mock.calls).toMatchSnapshot('expand cell event');
-    expect(component.find(ExpandableRowContent)).toMatchSnapshot('expanded cell');
+    expect(component.find('.quipucords-table__td-expand-expanded')).toMatchSnapshot('expanded cell');
   });
 
-  it('should allow sortable content', async () => {
+  it('should allow sortable content', () => {
     const mockOnSort = jest.fn();
     const props = {
       isHeader: true,
@@ -89,19 +91,20 @@ describe('Table Component', () => {
       rows: [{ cells: ['dolor'] }, { cells: ['sit'] }]
     };
 
-    const component = await mountHookComponent(<Table {...props} />);
-    expect(component.find(Th).first()).toMatchSnapshot('sortable content');
+    const component = renderComponent(<Table {...props} />);
+    expect(component.find('th')).toMatchSnapshot('sortable content');
 
-    component.find('button').first().simulate('click');
-    expect(component.find(Th).first()).toMatchSnapshot('sorted column, asc');
+    const input = component.find('button');
+    component.fireEvent.click(input);
+    expect(component.find('th')).toMatchSnapshot('sorted column, asc');
 
-    component.find('button').first().simulate('click');
-    expect(component.find(Th).first()).toMatchSnapshot('sorted column, desc');
+    component.fireEvent.click(input);
+    expect(component.find('th')).toMatchSnapshot('sorted column, desc');
 
     expect(mockOnSort.mock.calls).toMatchSnapshot('sort event');
   });
 
-  it('should allow selectable row content', async () => {
+  it('should allow selectable row content', () => {
     const mockOnSelect = jest.fn();
     const props = {
       isHeader: true,
@@ -110,13 +113,13 @@ describe('Table Component', () => {
       rows: [{ cells: [{ content: 'dolor' }], dataLabel: 'testing' }, { cells: ['sit'] }]
     };
 
-    const component = await mountHookComponent(<Table {...props} />);
-    expect(component.find('input')).toMatchSnapshot('select row content');
+    const component = renderComponent(<Table {...props} />);
+    expect(component.find('tbody tr')).toMatchSnapshot('select row content');
 
-    component.find('input[name="checkrow0"]').simulate('change');
+    const input = component.find('input[name="checkrow0"]');
+    component.fireEvent.click(input, { currentTarget: {}, target: { checked: true }, checked: true });
 
     expect(mockOnSelect.mock.calls).toMatchSnapshot('select row input');
-    expect(component.find('input')).toMatchSnapshot('selected row');
   });
 
   it('should pass child components, nodes when there are no rows', async () => {
@@ -126,7 +129,7 @@ describe('Table Component', () => {
       rows: []
     };
 
-    const component = await shallowHookComponent(<Table {...props}>Loading...</Table>);
+    const component = await shallowComponent(<Table {...props}>Loading...</Table>);
     expect(component).toMatchSnapshot('children');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { TextInput } from '../../form/textInput';
 import { ViewToolbarTextInput, TextInputFilterVariants, useOnClear, useOnSubmit } from '../viewToolbarTextInput';
 import { API_QUERY_TYPES } from '../../../constants/apiConstants';
 import { store } from '../../../redux/store';
@@ -20,7 +19,7 @@ describe('ViewToolbarTextInput Component', () => {
     const props = {
       filter: TextInputFilterVariants[API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME]
     };
-    const component = await shallowHookComponent(<ViewToolbarTextInput {...props} />);
+    const component = await shallowComponent(<ViewToolbarTextInput {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
@@ -31,21 +30,23 @@ describe('ViewToolbarTextInput Component', () => {
     }).toMatchSnapshot('field variants');
   });
 
-  it('should handle updating the view query through redux state with a component', async () => {
+  it('should handle updating the view query through redux state with a component', () => {
     const props = {
       filter: TextInputFilterVariants[API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME]
     };
 
-    const component = await shallowHookComponent(<ViewToolbarTextInput {...props} />);
-    component.find(TextInput).simulate('change', { value: '' });
-    component.find(TextInput).simulate('keyUp', { value: 'dolor sit' });
+    const component = renderComponent(<ViewToolbarTextInput {...props} />);
+    const input = component.find('input');
+
+    component.fireEvent.change(input, { target: { value: '' } });
+    component.fireEvent.keyUp(input, { target: { value: 'dolor sit' } });
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, component');
   });
 
   it('should handle updating the view query through redux state with a hook', async () => {
     const options = {};
-    const { result: onSelect } = await shallowHook(() => useOnSubmit('lorem filter', options));
+    const { result: onSelect } = await renderHook(() => useOnSubmit('lorem filter', options));
 
     onSelect({ value: 'dolor sit' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, hook');
@@ -55,7 +56,7 @@ describe('ViewToolbarTextInput Component', () => {
     const options = {
       useSelector: () => 'dolor sit'
     };
-    const { result: onClear } = await shallowHook(() => useOnClear('lorem filter', options));
+    const { result: onClear } = await renderHook(() => useOnClear('lorem filter', options));
 
     onClear();
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch onClear, hook');

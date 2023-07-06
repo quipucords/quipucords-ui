@@ -6,7 +6,7 @@ describe('ViewContext', () => {
   });
 
   it('should apply a hook for retrieving api queries', async () => {
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useQuery({
         useSelector: () => ({
           hello: 'world'
@@ -24,7 +24,7 @@ describe('ViewContext', () => {
   });
 
   it('should apply a hook for retrieving view config', async () => {
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useConfig({
         useViewContext: () => ({
           toolbar: 'lorem ipsum'
@@ -36,7 +36,7 @@ describe('ViewContext', () => {
   });
 
   it('should apply a hook that combines retrieving view queries and config', async () => {
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useView({
         useViewContext: () => ({
           initialQuery: {

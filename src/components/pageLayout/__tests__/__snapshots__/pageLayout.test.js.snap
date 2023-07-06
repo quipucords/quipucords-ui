@@ -1,193 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageLayout Component should render a basic component branded: brand 1`] = `
-<Masthead>
-  <MastheadToggle>
-    <PageToggleButton
-      aria-label="Global navigation"
-      variant="plain"
-    >
-      <BarsIcon
-        color="currentColor"
-        noVerticalAlign={false}
-        size="sm"
-      />
-    </PageToggleButton>
-  </MastheadToggle>
-  <MastheadMain>
-    <MastheadBrand>
-      <Brand
-        alt="t(view.brand-image-alt, {"name":"Quipucords"})"
-      >
-        <source
-          srcSet="title-brand.svg"
-        />
-      </Brand>
-    </MastheadBrand>
-  </MastheadMain>
-  <MastheadContent>
-    <Toolbar
-      id="toolbar"
-      isFullHeight={true}
-      isStatic={true}
-    >
-      <ToolbarContent
-        isExpanded={false}
-        showClearFiltersButton={false}
-      >
-        <ForwardRef
-          alignment={
-            {
-              "default": "alignRight",
-            }
-          }
-          spacer={
-            {
-              "default": "spacerNone",
-              "md": "spacerMd",
-            }
-          }
-          variant="icon-button-group"
-        >
-          <ForwardRef
-            variant="icon-button-group"
-            visibility={
-              {
-                "default": "hidden",
-                "lg": "visible",
-              }
-            }
-          >
-            <ToolbarItem
-              visibility={
-                {
-                  "default": "hidden",
-                  "lg": "visible",
-                  "md": "hidden",
-                }
-              }
-            >
-              <ApplicationLauncher
-                aria-label="Application launcher"
-                className=""
-                direction="down"
-                favorites={[]}
-                favoritesLabel="Favorites"
-                isDisabled={false}
-                isGrouped={false}
-                isOpen={false}
-                items={
-                  [
-                    <ApplicationLauncherItem
-                      onClick={[Function]}
-                    >
-                      t(view.label, {"context":"about"})
-                    </ApplicationLauncherItem>,
-                  ]
-                }
-                menuAppendTo="inline"
-                onSelect={[Function]}
-                onToggle={[Function]}
-                position="right"
-                removeFindDomNode={false}
-                searchNoResultsText="No results found"
-                searchPlaceholderText="Filter by name..."
-                toggleIcon={
-                  <QuestionCircleIcon
-                    color="currentColor"
-                    noVerticalAlign={false}
-                    size="sm"
-                  />
-                }
-              />
-            </ToolbarItem>
-          </ForwardRef>
-          <ToolbarItem
-            visibility={
-              {
-                "default": "visible",
-                "lg": "hidden",
-              }
-            }
-          >
-            <Dropdown
-              dropdownItems={
-                [
-                  <DropdownGroup>
-                    <DropdownItem
-                      onClick={[Function]}
-                    >
-                      t(view.label, {"context":"logout"})
-                    </DropdownItem>
-                  </DropdownGroup>,
-                  <Divider />,
-                  <DropdownItem
-                    onClick={[Function]}
-                  >
-                    <CogIcon
-                      color="currentColor"
-                      noVerticalAlign={false}
-                      size="sm"
-                    />
-                     
-                    t(view.label, {"context":"about"})
-                  </DropdownItem>,
-                ]
-              }
-              isOpen={false}
-              isPlain={true}
-              onSelect={[Function]}
-              position="right"
-              toggle={
-                <KebabToggle
-                  onToggle={[Function]}
-                />
-              }
-            />
-          </ToolbarItem>
-        </ForwardRef>
-        <ToolbarItem
-          visibility={
-            {
-              "default": "hidden",
-              "lg": "visible",
-            }
-          }
-        >
-          <Dropdown
-            dropdownItems={
-              [
-                <DropdownGroup>
-                  <DropdownItem
-                    onClick={[Function]}
-                  >
-                    t(view.label, {"context":"logout"})
-                  </DropdownItem>
-                </DropdownGroup>,
-              ]
-            }
-            isFullHeight={true}
-            isOpen={false}
-            onSelect={[Function]}
-            toggle={
-              <DropdownToggle
-                icon={
-                  <Avatar
-                    alt="Avatar"
-                    src="avatarImg.svg"
-                  />
-                }
-                onToggle={[Function]}
-              >
-                lorem
-              </DropdownToggle>
-            }
-          />
-        </ToolbarItem>
-      </ToolbarContent>
-    </Toolbar>
-  </MastheadContent>
-</Masthead>
+<a
+  class="pf-c-masthead__brand"
+  tabindex="0"
+>
+  <picture
+    class="pf-c-brand pf-m-picture"
+  >
+    <source
+      srcset="title-brand.svg"
+    />
+    <img
+      alt="t(view.brand-image-alt, {"name":"Quipucords"})"
+      src=""
+    />
+  </picture>
+</a>
 `;
 
 exports[`PageLayout Component should render a basic component: basic 1`] = `

@@ -1,79 +1,67 @@
 import React from 'react';
-import { Modal as PfModal, ModalContent } from '@patternfly/react-core';
 import { Modal } from '../modal';
 
 describe('Modal Component', () => {
-  it('should render a basic component', async () => {
-    const props = {};
+  it('should render a basic component', () => {
+    const props = {
+      isOpen: true,
+      disableFocusTrap: true
+    };
 
-    const component = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
-    expect(component).toMatchSnapshot('basic');
+    const component = renderComponent(<Modal {...props}>lorem ipsum</Modal>);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
-  it('should allow modifying specific and custom props', async () => {
+  it('should pass specific and custom props', () => {
     const props = {
       backdrop: false
     };
 
-    const backdropComponent = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
-    expect(backdropComponent.find(PfModal)).toMatchSnapshot('backdrop');
+    const component = renderComponent(<Modal {...props}>lorem ipsum</Modal>);
+    expect(component.screen.render()).toMatchSnapshot('backdrop');
 
-    props.backdrop = true;
-    props['aria-label'] = 'dolor sit';
+    const componentAriaLabel = component.setProps({ backdrop: true, 'aria-label': 'dolor sit' });
+    expect(componentAriaLabel.props).toMatchSnapshot('aria-label');
 
-    const ariaLabelComponent = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
-    expect(ariaLabelComponent.find(PfModal)).toMatchSnapshot('aria-label');
-
-    props.backdrop = false;
-    props['aria-label'] = undefined;
-    props.isContentOnly = true;
-
-    const contentComponent = await mountHookComponent(<Modal {...props}>lorem ipsum</Modal>);
-    expect(contentComponent.find(PfModal)).toMatchSnapshot('isContentOnly');
+    const componentContentOnly = component.setProps({ backdrop: true, isContentOnly: true });
+    expect(componentContentOnly.props).toMatchSnapshot('isContentOnly');
   });
 
-  it('should allow custom headers and footers', async () => {
+  it('should allow custom headers and footers', () => {
     // disableFocusTrap for testing only
     const props = {
       isOpen: true,
       disableFocusTrap: true
     };
 
-    const component = await mountHookComponent(<Modal {...props}>hello world</Modal>);
+    props.header = undefined;
+    props.footer = undefined;
+    const componentUndefined = renderComponent(<Modal {...props}>hello world</Modal>);
+    expect(componentUndefined.screen.render()).toMatchSnapshot('undefined');
+    componentUndefined.unmount();
 
-    component.setProps({
-      header: undefined,
-      footer: undefined
-    });
+    props.header = 'lorem ipsum';
+    props.footer = 'dolor sit';
+    const componentString = renderComponent(<Modal {...props}>hello world</Modal>);
+    expect(componentString.screen.render()).toMatchSnapshot('string');
+    componentString.unmount();
 
-    expect(component.find(ModalContent).render()).toMatchSnapshot('undefined');
+    props.header = () => 'lorem ipsum';
+    props.footer = () => 'dolor sit';
+    const componentFunction = renderComponent(<Modal {...props}>hello world</Modal>);
+    expect(componentFunction.screen.render()).toMatchSnapshot('function');
+    componentFunction.unmount();
 
-    component.setProps({
-      header: 'lorem ipsum',
-      footer: 'dolor sit'
-    });
+    props.header = [<React.Fragment key="lorem">lorem ipsum</React.Fragment>];
+    props.footer = [<React.Fragment key="dolor">dolor sit</React.Fragment>];
+    const componentList = renderComponent(<Modal {...props}>hello world</Modal>);
+    expect(componentList.screen.render()).toMatchSnapshot('list');
+    componentList.unmount();
 
-    expect(component.find(ModalContent).render()).toMatchSnapshot('string');
-
-    component.setProps({
-      header: () => 'lorem ipsum',
-      footer: () => 'dolor sit'
-    });
-
-    expect(component.find(ModalContent).render()).toMatchSnapshot('function');
-
-    component.setProps({
-      header: [<React.Fragment key="lorem">lorem ipsum</React.Fragment>],
-      footer: [<React.Fragment key="dolor">dolor sit</React.Fragment>]
-    });
-
-    expect(component.find(ModalContent).render()).toMatchSnapshot('list');
-
-    component.setProps({
-      header: <React.Fragment>lorem ipsum</React.Fragment>,
-      footer: <React.Fragment key="dolor">dolor sit</React.Fragment>
-    });
-
-    expect(component.find(ModalContent).render()).toMatchSnapshot('element');
+    props.header = <React.Fragment>lorem ipsum</React.Fragment>;
+    props.footer = <React.Fragment key="dolor">dolor sit</React.Fragment>;
+    const componentElement = renderComponent(<Modal {...props}>hello world</Modal>);
+    expect(componentElement.screen.render()).toMatchSnapshot('element');
+    componentElement.unmount();
   });
 });

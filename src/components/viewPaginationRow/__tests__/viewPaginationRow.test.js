@@ -20,7 +20,7 @@ describe('ViewPaginationRow Component', () => {
       useQuery: () => ({ [API_QUERY_TYPES.PAGE]: 1, [API_QUERY_TYPES.PAGE_SIZE]: 10 })
     };
 
-    const component = await shallowHookComponent(<ViewPaginationRow {...props} />);
+    const component = await shallowComponent(<ViewPaginationRow {...props} />);
     expect(component.render()).toMatchSnapshot('basic');
   });
 
@@ -28,7 +28,7 @@ describe('ViewPaginationRow Component', () => {
     const options = {
       useView: () => ({ viewId: 'lorem ipsum' })
     };
-    const { result: onSetPage } = await shallowHook(() => useOnSetPage(options));
+    const { result: onSetPage } = await renderHook(() => useOnSetPage(options));
 
     onSetPage(3);
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch set page, hook');
@@ -38,7 +38,7 @@ describe('ViewPaginationRow Component', () => {
     const options = {
       useView: () => ({ viewId: 'lorem ipsum' })
     };
-    const { result: onPerPageSelect } = await shallowHook(() => useOnPerPageSelect(options));
+    const { result: onPerPageSelect } = await renderHook(() => useOnPerPageSelect(options));
 
     onPerPageSelect(25);
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch per-page, hook');

@@ -1,5 +1,4 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { AddCredentialType, fieldOptions, useOnSelect } from '../addCredentialType';
 import { store } from '../../../redux/store';
 
@@ -14,9 +13,9 @@ describe('ToolbarFieldGranularity Component', () => {
     jest.clearAllMocks();
   });
 
-  it('should render a basic component', () => {
+  it('should render a basic component', async () => {
     const props = {};
-    const component = shallow(<AddCredentialType {...props} />);
+    const component = await shallowComponent(<AddCredentialType {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });

@@ -1,35 +1,15 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedCreateScanDialog, CreateScanDialog } from '../createScanDialog';
+import { CreateScanDialog } from '../createScanDialog';
 
 describe('CreateScanDialog Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component with default props', () => {
-    const store = generateEmptyStore({
-      scansEdit: { show: true, sources: [{ name: 'test name' }] }
-    });
-
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedCreateScanDialog />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedCreateScanDialog)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', () => {
     const props = {
       show: true,
       sources: [{ name: 'test name' }]
     };
 
-    const component = mount(<CreateScanDialog {...props} />);
-
-    expect(component.render()).toMatchSnapshot('non-connected');
+    const component = renderComponent(<CreateScanDialog {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
   it('should render nothing if sources are not provided', () => {
@@ -38,9 +18,8 @@ describe('CreateScanDialog Component', () => {
       sources: []
     };
 
-    const component = mount(<CreateScanDialog {...props} />);
-
-    expect(component.render()).toMatchSnapshot('empty');
+    const component = renderComponent(<CreateScanDialog {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('empty');
   });
 
   it('should render a component, pending', () => {
@@ -50,8 +29,8 @@ describe('CreateScanDialog Component', () => {
       sources: [{ name: 'test name' }]
     };
 
-    const component = mount(<CreateScanDialog {...props} />);
-    expect(component.render()).toMatchSnapshot('pending');
+    const component = renderComponent(<CreateScanDialog {...props} />);
+    expect(component.screen.render().querySelector('.pf-c-modal-box__body')).toMatchSnapshot('pending');
   });
 
   it('should handle multiple error responses', () => {
@@ -62,11 +41,11 @@ describe('CreateScanDialog Component', () => {
       errorMessage: 'lorem ipsum'
     };
 
-    const component = mount(<CreateScanDialog {...props} />);
-    expect(component.find('div[className*="danger"]').render()).toMatchSnapshot('basic error');
+    const component = renderComponent(<CreateScanDialog {...props} />);
+    expect(component.screen.getByLabelText('Danger Alert')).toMatchSnapshot('basic error');
 
-    component.setProps({ submitErrorMessages: { scanName: 'lorem ipsum' } });
-    expect(component.find('div[className*="error"]').render()).toMatchSnapshot('named error');
+    const componentNamedError = component.setProps({ submitErrorMessages: { scanName: 'dolor sit' } });
+    expect(componentNamedError.screen.render().querySelectorAll('[id*="scanName"]')).toMatchSnapshot('named error');
   });
 
   it('should correctly validate data', () => {
@@ -75,11 +54,10 @@ describe('CreateScanDialog Component', () => {
       sources: [{ name: 'test name' }]
     };
 
-    const component = mount(<CreateScanDialog {...props} />);
-    const componentInstance = component.instance();
+    const component = renderComponent(<CreateScanDialog {...props} />);
 
     expect(
-      componentInstance.onValidateForm({
+      component.instance.onValidateForm({
         values: {
           scanName: '',
           scanDirectories: ['/ipsum']
@@ -91,7 +69,7 @@ describe('CreateScanDialog Component', () => {
     ).toMatchSnapshot('form invalid');
 
     expect(
-      componentInstance.onValidateForm({
+      component.instance.onValidateForm({
         values: {
           scanName: 'lorem',
           scanDirectories: ['/ipsum']

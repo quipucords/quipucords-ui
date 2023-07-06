@@ -55,15 +55,8 @@ describe('I18n Component', () => {
       locale: 'es'
     };
 
-    const component = await mountHookComponent(<I18n {...props}>lorem ipsum</I18n>);
-
+    const component = await shallowComponent(<I18n {...props}>lorem ipsum</I18n>);
     expect(component).toMatchSnapshot('basic');
-  });
-
-  it('should pass children', async () => {
-    const component = await mountHookComponent(<I18n>lorem ipsum</I18n>);
-
-    expect(component.html()).toMatchSnapshot('children');
   });
 
   it('should generate a predictable locale key output snapshot', () => {

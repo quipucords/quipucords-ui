@@ -18,16 +18,24 @@ describe('ScansContext', () => {
       }
     };
 
-    const { result: confirmCallbacks } = await shallowHook(() =>
-      useOnScanAction({
-        useDispatch: () => mockDispatch
-      })
-    );
+    let confirmCallbacks;
 
-    confirmCallbacks.onStart(mockScan);
+    await renderHook(
+      () =>
+        useOnScanAction({
+          useDispatch: () => mockDispatch
+        }),
+      {
+        callback: ({ result }) => {
+          result.onStart(mockScan);
+          confirmCallbacks = result;
+        }
+      }
+    );
 
     expect(confirmCallbacks).toMatchSnapshot('callbacks');
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch onStart');
+
     mockDispatch.mockClear();
   });
 
@@ -45,8 +53,8 @@ describe('ScansContext', () => {
       }
     };
 
-    await shallowHook(() => usePoll(options));
-    await shallowHook(() =>
+    await renderHook(() => usePoll(options));
+    await renderHook(() =>
       usePoll({
         ...options,
         useSelector: () => []
@@ -56,26 +64,26 @@ describe('ScansContext', () => {
     expect(mockUseTimeout.mock.calls).toMatchSnapshot('timeout');
   });
 
-  it('should apply a hook for retrieving data from multiple selectors', () => {
-    const { result: errorResponse } = shallowHook(() =>
+  it('should apply a hook for retrieving data from multiple selectors', async () => {
+    const { result: errorResponse } = await renderHook(() =>
       useScans({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
-    const { result: pendingResponse } = shallowHook(() =>
+    const { result: pendingResponse } = await renderHook(() =>
       useScans({
         useSelectorsResponse: () => ({ pending: true })
       })
     );
 
-    const { result: fulfilledResponse } = shallowHook(() =>
+    const { result: fulfilledResponse } = await renderHook(() =>
       useScans({
         useSelectorsResponse: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useScans(), {
+    const { result: mockStoreSuccessResponse } = await renderHook(() => useScans(), {
       state: {
         view: {
           update: {}
@@ -98,43 +106,48 @@ describe('ScansContext', () => {
     );
   });
 
-  it('should apply a hook for returning a get response', () => {
-    const { result: errorResponse } = shallowHook(() =>
+  it('should apply a hook for returning a get response', async () => {
+    const { result: errorResponse } = await renderHook(() =>
       useGetScans({
+        useDispatch: () => value => value,
         useScans: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
-    const { result: pendingResponse } = shallowHook(() =>
+    const { result: pendingResponse } = await renderHook(() =>
       useGetScans({
+        useDispatch: () => value => value,
         useScans: () => ({ pending: true })
       })
     );
 
-    const { result: fulfilledResponse } = shallowHook(() =>
+    const { result: fulfilledResponse } = await renderHook(() =>
       useGetScans({
+        useDispatch: () => value => value,
         useScans: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetScans(), {
-      state: {
-        view: {
-          update: {}
-        },
-        scans: {
-          expanded: {},
-          selected: {},
+    const { result: mockStoreSuccessResponse } = await renderHook(
+      () => useGetScans({ useDispatch: () => value => value }),
+      {
+        state: {
           view: {
-            fulfilled: true,
-            data: {
-              results: ['lorem', 'ipsum']
+            update: {}
+          },
+          scans: {
+            expanded: {},
+            selected: {},
+            view: {
+              fulfilled: true,
+              data: {
+                results: ['lorem', 'ipsum']
+              }
             }
           }
         }
       }
-    });
-
+    );
     expect({ errorResponse, fulfilledResponse, pendingResponse, mockStoreSuccessResponse }).toMatchSnapshot(
       'get responses'
     );
@@ -146,7 +159,7 @@ describe('ScansContext', () => {
       [apiTypes.API_RESPONSE_SCAN_NAME]: 'lorem ipsum name'
     };
 
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useOnDelete({
         useConfirmation: () => mockConfirmation
       })

@@ -11,8 +11,8 @@ describe('ScanDownload Component', () => {
       }
     };
 
-    const component = await shallowHookComponent(<ScanDownload {...props} />);
-    expect(component.render()).toMatchSnapshot('basic');
+    const component = await shallowComponent(<ScanDownload {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should handle custom children', async () => {
@@ -23,8 +23,8 @@ describe('ScanDownload Component', () => {
       }
     };
 
-    const component = await shallowHookComponent(<ScanDownload {...props}>lorem ipsum</ScanDownload>);
-    expect(component.render()).toMatchSnapshot('custom');
+    const component = await shallowComponent(<ScanDownload {...props}>lorem ipsum</ScanDownload>);
+    expect(component).toMatchSnapshot('custom');
   });
 
   it('should have an optional tooltip', async () => {
@@ -36,7 +36,7 @@ describe('ScanDownload Component', () => {
       tooltip: 'Lorem ipsum dolor sit'
     };
 
-    const component = await shallowHookComponent(<ScanDownload {...props} />);
+    const component = await shallowComponent(<ScanDownload {...props} />);
     expect(component).toMatchSnapshot('tooltip');
   });
 });

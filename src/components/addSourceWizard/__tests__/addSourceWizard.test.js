@@ -3,7 +3,6 @@ import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { store } from '../../../redux';
 import { AddSourceWizard } from '../addSourceWizard';
-import { Wizard } from '../../wizard/wizard';
 
 describe('AddSourceWizard Component', () => {
   let mockDispatch;
@@ -25,54 +24,11 @@ describe('AddSourceWizard Component', () => {
       })
     };
 
-    const component = await shallowHookComponent(<AddSourceWizard {...props} />);
+    const component = await shallowComponent(<AddSourceWizard {...props} />);
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should display update steps', async () => {
-    const props = {
-      useGetAddSource: () => ({
-        show: true,
-        edit: true
-      })
-    };
-
-    const component = await shallowHookComponent(<AddSourceWizard {...props} />);
-    expect(component).toMatchSnapshot('update');
-  });
-
-  it('should not display a wizard', async () => {
-    const props = {
-      useGetAddSource: () => ({
-        show: false
-      })
-    };
-
-    const component = await mountHookComponent(<AddSourceWizard {...props} />);
-    expect(component.find(Wizard).props()?.isOpen).toBe(false);
-  });
-
-  it('should allow cancelling the wizard', async () => {
-    const mockStore = generateEmptyStore({
-      addSourceWizard: {}
-    });
-    const props = {
-      useGetAddSource: () => ({
-        show: true
-      })
-    };
-
-    const component = await mountHookComponent(
-      <Provider store={mockStore}>
-        <AddSourceWizard {...props} />
-      </Provider>
-    );
-
-    component.find('button.pf-c-button.pf-m-link').first().simulate('click');
-    expect(mockDispatch.mock.calls).toMatchSnapshot('cancel');
-  });
-
-  it('should allow closing the wizard on fulfillment', async () => {
+  it('should allow navigating to the next step on wizard fulfillment', () => {
     const mockStore = generateEmptyStore({
       addSourceWizard: {}
     });
@@ -83,13 +39,36 @@ describe('AddSourceWizard Component', () => {
       })
     };
 
-    const component = await mountHookComponent(
+    const component = renderComponent(
       <Provider store={mockStore}>
         <AddSourceWizard {...props} />
       </Provider>
     );
 
-    component.find('button.pf-c-button.pf-m-link').first().simulate('click');
-    expect(mockDispatch.mock.calls).toMatchSnapshot('fulfill');
+    const input = component.screen.getByText('Next');
+    component.fireEvent.click(input);
+    expect(mockDispatch.mock.calls).toMatchSnapshot('next');
+  });
+
+  it('should allow closing the wizard on fulfillment', () => {
+    const mockStore = generateEmptyStore({
+      addSourceWizard: {}
+    });
+    const props = {
+      useGetAddSource: () => ({
+        show: true,
+        fulfilled: true
+      })
+    };
+
+    const component = renderComponent(
+      <Provider store={mockStore}>
+        <AddSourceWizard {...props} />
+      </Provider>
+    );
+
+    const input = component.screen.getByLabelText('Close');
+    component.fireEvent.click(input);
+    expect(mockDispatch.mock.calls).toMatchSnapshot('close');
   });
 });

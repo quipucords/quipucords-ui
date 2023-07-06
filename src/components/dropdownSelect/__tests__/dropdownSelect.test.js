@@ -13,7 +13,7 @@ import {
 } from '../dropdownSelect';
 
 describe('Select Component', () => {
-  it('should render a basic component', async () => {
+  it('should render a basic component', () => {
     const props = {
       id: 'test',
       options: [
@@ -22,11 +22,11 @@ describe('Select Component', () => {
       ]
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />);
-    expect(component.render()).toMatchSnapshot('basic component');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    expect(component).toMatchSnapshot('basic component');
   });
 
-  it('should render a checkbox select', async () => {
+  it('should render a checkbox select', () => {
     const props = {
       id: 'test',
       options: [
@@ -38,8 +38,8 @@ describe('Select Component', () => {
       placeholder: 'multiselect test'
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />);
-    expect(component.render()).toMatchSnapshot('checkbox select');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    expect(component).toMatchSnapshot('checkbox select');
   });
 
   it('should apply patternfly select props based on wrapper props', () => {
@@ -80,7 +80,7 @@ describe('Select Component', () => {
     expect(formatButtonProps(props)).toMatchSnapshot('dropdown props, button variants');
   });
 
-  it('should allow alternate array and object options', async () => {
+  it('should allow alternate array and object options', () => {
     const props = {
       options: ['lorem', 'ipsum', 'hello', 'world'],
       selectedOptions: ['ipsum']
@@ -107,7 +107,7 @@ describe('Select Component', () => {
     expect(formatOptions(props).options).toMatchSnapshot('undefined options');
   });
 
-  it('should allow plain objects as values, and be able to select options based on values within the object', async () => {
+  it('should allow plain objects as values, and be able to select options based on values within the object', () => {
     const props = {
       options: [
         { title: 'lorem', value: { dolor: 'sit' } },
@@ -120,7 +120,7 @@ describe('Select Component', () => {
     expect(formatOptions(props).options).toMatchSnapshot('select when option values are objects');
   });
 
-  it('should allow selected options to match value or title', async () => {
+  it('should allow selected options to match value or title', () => {
     const props = {
       options: { lorem: 'ipsum', hello: 'world', dolor: 'set' },
       selectedOptions: ['world', 'lorem', 'fail'],
@@ -130,7 +130,7 @@ describe('Select Component', () => {
     expect(formatOptions(props).options).toMatchSnapshot('value or title match');
   });
 
-  it('should return an emulated onchange event', async () => {
+  it('should return an emulated onchange event', () => {
     const mockOnSelect = jest.fn();
     const props = {
       id: 'test',
@@ -139,22 +139,19 @@ describe('Select Component', () => {
       onSelect: mockOnSelect
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />, {
-      callback: ({ component: comp }) => {
-        comp.find('button').simulate('click');
-      }
-    });
+    const component = renderComponent(<DropdownSelect {...props} />);
+    const firstButton = component.find('button');
+    const mockEvent = { currentTarget: {}, target: {} };
+    component.fireEvent.click(firstButton, mockEvent);
 
-    component.find('ul.pf-c-select__menu').find('button').at(2).simulate('click');
+    const anotherButton = component.find('ul.pf-c-select__menu button');
+    component.fireEvent.click(anotherButton, mockEvent);
 
     expect(mockOnSelect).toHaveBeenCalledTimes(1);
-
-    const { currentTarget, options, target, ...rest } = mockOnSelect.mock.calls[0][0];
-    expect(rest).toMatchSnapshot('default emulated event');
-    mockOnSelect.mockClear();
+    expect(mockOnSelect.mock.calls[0][0]).toMatchSnapshot('default emulated event');
   });
 
-  it('should return an emulated onchange event, checklist variant', async () => {
+  it('should return an emulated onchange event, checklist variant', () => {
     const mockOnSelect = jest.fn();
     const props = {
       id: 'test',
@@ -164,47 +161,38 @@ describe('Select Component', () => {
       variant: SelectVariant.checkbox
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />, {
-      callback: ({ component: comp }) => {
-        comp.find('button').simulate('click');
-      }
-    });
+    const component = renderComponent(<DropdownSelect {...props} />);
+    const firstButton = component.find('button');
+    const mockEvent = { currentTarget: {}, target: {} };
+    component.fireEvent.click(firstButton, mockEvent);
 
-    component
-      .find('ul.pf-c-select__menu input.pf-c-check__input')
-      .at(3)
-      .simulate('change', { target: { checked: true } });
+    const firstCheckbox = component.find('ul.pf-c-select__menu input.pf-c-check__input');
+    component.fireEvent.click(firstCheckbox, { target: { checked: true } });
 
     expect(mockOnSelect).toHaveBeenCalledTimes(1);
 
-    component
-      .find('ul.pf-c-select__menu input.pf-c-check__input')
-      .at(2)
-      .simulate('change', { target: { checked: true } });
+    const secondCheckbox = component.querySelectorAll('ul.pf-c-select__menu input.pf-c-check__input')?.[1];
+    component.fireEvent.click(secondCheckbox, { target: { checked: true } });
 
     expect(mockOnSelect).toHaveBeenCalledTimes(2);
-
-    const { currentTarget, options, target, ...rest } = mockOnSelect.mock.calls[1][0];
-    expect(rest).toMatchSnapshot('checklist emulated event');
-    mockOnSelect.mockClear();
+    expect(mockOnSelect.mock.calls[1][0]).toMatchSnapshot('checklist emulated event, last item checked');
   });
 
-  it('should render an expanded select', async () => {
+  it('should render an expanded select', () => {
     const props = {
       id: 'test',
       options: ['lorem', 'ipsum', 'hello', 'world']
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />, {
-      callback: ({ component: comp }) => {
-        comp.find('button').simulate('click');
-      }
-    });
+    const component = renderComponent(<DropdownSelect {...props} />);
+    const firstButton = component.find('button');
+    const mockEvent = { currentTarget: {}, target: {} };
+    component.fireEvent.click(firstButton, mockEvent);
 
-    expect(component.find('ul.pf-c-select__menu').find('button')).toMatchSnapshot('expanded');
+    expect(component.find('ul.pf-c-select__menu')).toMatchSnapshot('expanded');
   });
 
-  it('should disable toggle text', async () => {
+  it('should disable toggle text', () => {
     const props = {
       id: 'test',
       options: ['lorem', 'ipsum'],
@@ -212,74 +200,68 @@ describe('Select Component', () => {
       isToggleText: false
     };
 
-    const component = await shallowHookWrapper(<DropdownSelect {...props} />);
-    expect(component.find('.quipucords-select-pf__no-toggle-text').props().className).toMatchSnapshot('disabled text');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    expect(component.find('.quipucords-select-pf__no-toggle-text').className).toMatchSnapshot('disabled text');
   });
 
-  it('should allow alternate direction and position options', async () => {
+  it('should allow alternate direction and position options', () => {
     const props = {
       id: 'test',
       options: ['lorem', 'ipsum'],
       direction: SelectDirection.up
     };
 
-    const component = await shallowHookWrapper(<DropdownSelect {...props} />);
-    const upLeftProps = component.find('.quipucords-select-pf').props();
-    expect({
-      direction: upLeftProps.direction,
-      className: upLeftProps.className
-    }).toMatchSnapshot('direction up');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    const upLeftProps = component.find('.quipucords-select-pf');
+    expect(upLeftProps.className).toMatchSnapshot('direction up');
 
-    component.setProps({ direction: SelectDirection.down, position: SelectPosition.right });
-    const downRightProps = component.find('.quipucords-select-pf').props();
-    expect({
-      direction: downRightProps.direction,
-      className: downRightProps.className
-    }).toMatchSnapshot('position right');
+    const posRight = component.setProps({ direction: SelectDirection.down, position: SelectPosition.right });
+    const downRightProps = posRight.find('.quipucords-select-pf');
+    expect(downRightProps.className).toMatchSnapshot('position right');
   });
 
-  it('should allow being disabled with missing options', async () => {
+  it('should allow being disabled with missing options', () => {
     const props = {
       id: 'test',
       options: undefined
     };
 
-    const component = await shallowHookWrapper(<DropdownSelect {...props} />);
+    const component = renderComponent(<DropdownSelect {...props} />);
     expect(component).toMatchSnapshot('no options');
 
-    component.setProps({
+    const emptyOptions = component.setProps({
       options: [],
       isDisabled: false
     });
 
-    expect(component).toMatchSnapshot('options, but no content');
+    expect(emptyOptions).toMatchSnapshot('options, but no content');
 
-    component.setProps({
+    const dis = component.setProps({
       options: ['lorem', 'ipsum', 'hello', 'world'],
       isDisabled: true
     });
 
-    expect(component).toMatchSnapshot('options, but disabled');
+    expect(dis).toMatchSnapshot('options, but disabled');
   });
 
-  it('should allow data- props', async () => {
+  it('should allow data- props', () => {
     const props = {
       'data-lorem': 'ipsum',
       'data-dolor-sit': 'dolor sit'
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />);
-    expect(component.props()).toMatchSnapshot('data- attributes');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    expect(component.props).toMatchSnapshot('data- attributes');
   });
 
-  it('should emulate pf dropdown', async () => {
+  it('should emulate pf dropdown', () => {
     const props = {
       isDropdownButton: true,
       buttonVariant: ButtonVariant.secondary,
       options: ['lorem', 'ipsum', 'hello', 'world']
     };
 
-    const component = await mountHookWrapper(<DropdownSelect {...props} />);
-    expect(component.render()).toMatchSnapshot('emulated dropdown');
+    const component = renderComponent(<DropdownSelect {...props} />);
+    expect(component).toMatchSnapshot('emulated dropdown');
   });
 });

@@ -1,7 +1,5 @@
 import React from 'react';
-import { ToolbarFilter } from '@patternfly/react-core';
 import { ViewToolbar } from '../viewToolbar';
-import { ViewToolbarTextInput } from '../viewToolbarTextInput';
 import { API_QUERY_TYPES } from '../../../constants/apiConstants';
 import { CONFIG as sourcesConfig } from '../../sources/sources';
 
@@ -10,12 +8,12 @@ describe('ViewToolbar Component', () => {
     const props = {
       useView: () => ({ viewId: sourcesConfig.viewId, config: { toolbar: sourcesConfig.toolbar } })
     };
-    const component = await shallowHookComponent(<ViewToolbar {...props} />);
+    const component = await shallowComponent(<ViewToolbar {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should hide categories when a single filter is available', async () => {
+  it('should hide categories when a single filter is available', () => {
     const props = {
       useView: () => ({
         viewId: sourcesConfig.viewId,
@@ -24,12 +22,12 @@ describe('ViewToolbar Component', () => {
         }
       })
     };
-    const component = await mountHookComponent(<ViewToolbar {...props} />);
+    const component = renderComponent(<ViewToolbar {...props} />);
 
-    expect(component.find(ViewToolbarTextInput).first()).toMatchSnapshot('single filter');
+    expect(component.querySelectorAll('input[type="text"]')).toMatchSnapshot('single filter');
   });
 
-  it('should handle updating toolbar chips', async () => {
+  it('should handle updating toolbar chips', () => {
     const props = {
       useView: () => ({
         viewId: sourcesConfig.viewId,
@@ -39,9 +37,9 @@ describe('ViewToolbar Component', () => {
         }
       })
     };
-    const component = await shallowHookComponent(<ViewToolbar {...props} />);
+    const component = renderComponent(<ViewToolbar {...props} />);
 
-    expect(component.find(ToolbarFilter).props()).toMatchSnapshot('chips');
+    expect(component.querySelectorAll('.pf-c-chip')).toMatchSnapshot('chips');
   });
 
   it('should handle displaying secondary components, fields', async () => {
@@ -54,7 +52,7 @@ describe('ViewToolbar Component', () => {
       }),
       secondaryFields: <React.Fragment>dolor sit</React.Fragment>
     };
-    const component = await shallowHookComponent(<ViewToolbar {...props} />);
+    const component = await shallowComponent(<ViewToolbar {...props} />);
 
     expect(component).toMatchSnapshot('secondary');
   });

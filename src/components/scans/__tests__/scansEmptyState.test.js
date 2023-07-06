@@ -10,7 +10,7 @@ describe('ScansEmptyState Component', () => {
       })
     };
 
-    const component = await shallowHookComponent(<ScansEmptyState {...props} />);
+    const component = await shallowComponent(<ScansEmptyState {...props} />);
     expect(component).toMatchSnapshot('basic');
   });
 
@@ -21,7 +21,7 @@ describe('ScansEmptyState Component', () => {
       })
     };
 
-    const component = await shallowHookComponent(<ScansEmptyState {...props} />);
+    const component = await shallowComponent(<ScansEmptyState {...props} />);
     expect(component).toMatchSnapshot('do not exist');
   });
 });

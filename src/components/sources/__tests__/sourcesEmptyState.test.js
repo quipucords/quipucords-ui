@@ -1,14 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Title } from '@patternfly/react-core';
 import SourcesEmptyState from '../sourcesEmptyState';
 
 describe('SourcesEmptyState Component', () => {
-  it('should render a basic component', () => {
+  it('should render a basic component', async () => {
     const props = {};
-    const component = mount(<SourcesEmptyState {...props} />);
 
-    expect(component.render()).toMatchSnapshot();
+    const component = await shallowComponent(<SourcesEmptyState {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should render the application name', () => {
@@ -16,7 +14,7 @@ describe('SourcesEmptyState Component', () => {
       uiShortName: 'Ipsum'
     };
 
-    const component = mount(<SourcesEmptyState {...props} />);
-    expect(component.find(Title)).toMatchSnapshot('application name');
+    const component = renderComponent(<SourcesEmptyState {...props} />);
+    expect(component.getByRole('heading')).toMatchSnapshot('application name');
   });
 });
