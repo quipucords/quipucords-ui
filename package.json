@@ -17,9 +17,8 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      ">0.25%",
+      "not dead"
     ],
     "development": [
       "last 1 chrome version",
@@ -105,6 +104,7 @@
   "devDependencies": {
     "@babel/core": "7.22.6",
     "@babel/eslint-parser": "^7.22.6",
+    "@babel/plugin-transform-runtime": "^7.22.5",
     "@babel/preset-env": "^7.22.6",
     "@babel/preset-react": "^7.22.5",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
