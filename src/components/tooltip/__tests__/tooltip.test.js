@@ -1,17 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import Tooltip from '../tooltip';
 
 describe('Tooltip Component', () => {
-  it('should render a tooltip', () => {
+  it('should render a basic component', () => {
     const props = {
       id: 'test',
       content: 'hello world'
     };
 
-    const component = mount(<Tooltip {...props}>Test tooltip</Tooltip>);
-
-    expect(component).toMatchSnapshot('tooltip');
+    const component = renderComponent(<Tooltip {...props}>Test tooltip</Tooltip>);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should render a popover', () => {
@@ -21,8 +19,7 @@ describe('Tooltip Component', () => {
       content: 'hello world'
     };
 
-    const component = mount(<Tooltip {...props}>Test popover</Tooltip>);
-
+    const component = renderComponent(<Tooltip {...props}>Test popover</Tooltip>);
     expect(component).toMatchSnapshot('popover');
   });
 });

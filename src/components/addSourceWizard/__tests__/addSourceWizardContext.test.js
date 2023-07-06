@@ -10,7 +10,7 @@ describe('AddSourceWizardContext', () => {
   it('should apply a hook for retrieving data from a selector', async () => {
     const mockDispatch = jest.spyOn(store, 'dispatch').mockImplementation((type, data) => ({ type, data }));
 
-    const { result: errorResponse } = await mountHook(() =>
+    const { result: errorResponse } = await renderHook(() =>
       useGetAddSource({
         useSelector: () => ({
           error: true,
@@ -24,7 +24,7 @@ describe('AddSourceWizardContext', () => {
 
     expect(errorResponse).toMatchSnapshot('error response');
 
-    const { result: errorShowResponse } = await mountHook(() =>
+    const { result: errorShowResponse } = await renderHook(() =>
       useGetAddSource({
         useSelector: () => ({
           error: true,
@@ -37,7 +37,7 @@ describe('AddSourceWizardContext', () => {
 
     expect(errorShowResponse).toMatchSnapshot('error show response');
 
-    const { result: successResponse } = await mountHook(() =>
+    const { result: successResponse } = await renderHook(() =>
       useGetAddSource({
         useSelector: () => ({
           fulfilled: true
@@ -47,7 +47,7 @@ describe('AddSourceWizardContext', () => {
 
     expect(successResponse).toMatchSnapshot('success response');
 
-    const { result: successShowResponse } = await mountHook(() =>
+    const { result: successShowResponse } = await renderHook(() =>
       useGetAddSource({
         useSelector: () => ({
           fulfilled: true,

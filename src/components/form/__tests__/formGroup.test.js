@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { FormGroup } from '../formGroup';
 import { formHelpers } from '../formHelpers';
 
@@ -7,14 +6,14 @@ describe('FormGroup Component', () => {
   it('should render a basic component', () => {
     const props = { id: 'test' };
 
-    const component = mount(
+    const component = renderComponent(
       <FormGroup label="test" {...props}>
         <input id="test" type="text" value="" readOnly />
       </FormGroup>
     );
 
-    expect(component.render()).toMatchSnapshot('basic formgroup');
-    expect(component.find('label').at(0).render()).toMatchSnapshot('basic label');
+    expect(component).toMatchSnapshot('basic formgroup');
+    expect(component.find('label')).toMatchSnapshot('basic label');
   });
 
   it('should handle multiple error message types', () => {
@@ -24,33 +23,19 @@ describe('FormGroup Component', () => {
       errorMessage: 'lorem ipsum'
     };
 
-    let component = mount(
+    const component = renderComponent(
       <FormGroup {...props}>
         <input id="test" type="text" value="" readOnly />
       </FormGroup>
     );
 
-    expect(component.render()).toMatchSnapshot('string error message');
+    expect(component).toMatchSnapshot('string error message');
 
-    props.errorMessage = true;
+    const componentErrorMessage = component.setProps({ errorMessage: true });
+    expect(componentErrorMessage).toMatchSnapshot('boolean error message');
 
-    component = mount(
-      <FormGroup {...props}>
-        <input id="test" type="text" value="" readOnly />
-      </FormGroup>
-    );
-
-    expect(component.render()).toMatchSnapshot('boolean error message');
-
-    props.errorMessage = <span>lorem ipsum</span>;
-
-    component = mount(
-      <FormGroup {...props}>
-        <input id="test" type="text" value="" readOnly />
-      </FormGroup>
-    );
-
-    expect(component.render()).toMatchSnapshot('node error message');
+    const componentNodeErrorMessage = component.setProps({ errorMessage: <span>lorem ipsum</span> });
+    expect(componentNodeErrorMessage).toMatchSnapshot('node error message');
   });
 
   it('should have isEmpty validation', () => {

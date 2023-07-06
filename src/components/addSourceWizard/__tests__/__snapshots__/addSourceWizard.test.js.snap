@@ -1,31 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddSourceWizard Component should allow cancelling the wizard: cancel 1`] = `
-[
-  [
-    {
-      "source": {
-        "source_type": "network",
-      },
-      "type": "VALID_SOURCE_WIZARD_STEPONE",
-    },
-  ],
-  [
-    {
-      "body": "t(form-dialog.confirmation_body_add-source, {"context":" "})",
-      "cancelButtonText": "t(form-dialog.label, {"context":"no"})",
-      "confirmButtonText": "t(form-dialog.label, {"context":"yes"})",
-      "heading": "t(form-dialog.confirmation_heading_add-source, {"context":""})",
-      "onConfirm": [Function],
-      "title": "t(form-dialog.confirmation_title_add-source, {"context":""})",
-      "type": "CONFIRMATION_MODAL_SHOW",
-      "variant": "medium",
-    },
-  ],
-]
-`;
-
-exports[`AddSourceWizard Component should allow closing the wizard on fulfillment: fulfill 1`] = `
+exports[`AddSourceWizard Component should allow closing the wizard on fulfillment: close 1`] = `
 [
   [
     {
@@ -54,39 +29,17 @@ exports[`AddSourceWizard Component should allow closing the wizard on fulfillmen
 ]
 `;
 
-exports[`AddSourceWizard Component should display update steps: update 1`] = `
-<Wizard
-  className="quipucords-wizard__add-source"
-  isForm={true}
-  isNavHidden={false}
-  isOpen={true}
-  onClose={[Function]}
-  onNext={[Function]}
-  steps={
-    [
-      {
-        "canJumpTo": false,
-        "component": <Memo(Connect(AddSourceWizardStepTwo)) />,
-        "enableNext": false,
-        "id": 1,
-        "name": "t(form-dialog.title_add-source_step, {"context":"two"})",
-        "nextButtonText": "t(form-dialog.label_submit, {"context":"add-source"})",
+exports[`AddSourceWizard Component should allow navigating to the next step on wizard fulfillment: next 1`] = `
+[
+  [
+    {
+      "source": {
+        "source_type": "network",
       },
-      {
-        "canJumpTo": false,
-        "component": <Memo(Connect(AddSourceWizardStepThree)) />,
-        "enableNext": false,
-        "hideBackButton": false,
-        "hideCancelButton": false,
-        "id": 2,
-        "name": "t(form-dialog.title_add-source_step, {"context":"three"})",
-        "nextButtonText": "t(form-dialog.label, {"context":"close"})",
-      },
-    ]
-  }
-  title="t(form-dialog.title_add-source, {"context":"edit"})"
-  variant="medium"
-/>
+      "type": "VALID_SOURCE_WIZARD_STEPONE",
+    },
+  ],
+]
 `;
 
 exports[`AddSourceWizard Component should render a basic component: basic 1`] = `

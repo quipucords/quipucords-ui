@@ -30,7 +30,7 @@ describe('CredentialsContext', () => {
     const mockUseState = jest.spyOn(React, 'useState').mockImplementation(() => [mockCredential, jest.fn()]);
     const mockUseService = jest.spyOn(credentialsService, 'getCredentials').mockImplementation(() => jest.fn());
 
-    const { result } = await mountHook(() =>
+    const { result } = await renderHook(() =>
       useOnSubmitCredential({
         useDispatch: () => mockDispatch,
         useCredential: () => ({ fulfilled: true })
@@ -45,7 +45,7 @@ describe('CredentialsContext', () => {
   });
 
   it('should handle credential actions for onEdit, onHide, onAdd', async () => {
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useOnUpdateCredential({
         useDispatch: () => mockDispatch
       })

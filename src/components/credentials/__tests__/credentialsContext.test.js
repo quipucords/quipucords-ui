@@ -1,9 +1,18 @@
 import { context, useCredentials, useGetCredentials, useOnDelete } from '../credentialsContext';
+import { store } from '../../../redux/store';
 import { apiTypes } from '../../../constants/apiConstants';
 
 jest.mock('axios', () => jest.fn);
 
 describe('CredentialsContext', () => {
+  beforeEach(() => {
+    jest.spyOn(store, 'dispatch').mockImplementation((type, data) => ({ type, data }));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should return specific properties', () => {
     expect(context).toMatchSnapshot('specific properties');
   });
@@ -15,7 +24,7 @@ describe('CredentialsContext', () => {
       [apiTypes.API_RESPONSE_CREDENTIAL_NAME]: 'lorem ipsum name'
     };
 
-    const { result } = await shallowHook(() =>
+    const { result } = await renderHook(() =>
       useOnDelete({
         useConfirmation: () => mockConfirmation
       })
@@ -27,26 +36,26 @@ describe('CredentialsContext', () => {
     mockConfirmation.mockClear();
   });
 
-  it('should apply a hook for retrieving data from multiple selectors', () => {
-    const { result: errorResponse } = shallowHook(() =>
+  it('should apply a hook for retrieving data from multiple selectors', async () => {
+    const { result: errorResponse } = await renderHook(() =>
       useCredentials({
         useSelectorsResponse: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
-    const { result: pendingResponse } = shallowHook(() =>
+    const { result: pendingResponse } = await renderHook(() =>
       useCredentials({
         useSelectorsResponse: () => ({ pending: true })
       })
     );
 
-    const { result: fulfilledResponse } = shallowHook(() =>
+    const { result: fulfilledResponse } = await renderHook(() =>
       useCredentials({
         useSelectorsResponse: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useCredentials(), {
+    const { result: mockStoreSuccessResponse } = await renderHook(() => useCredentials(), {
       state: {
         view: {
           update: {}
@@ -69,26 +78,26 @@ describe('CredentialsContext', () => {
     );
   });
 
-  it('should apply a hook for returning a get response', () => {
-    const { result: errorResponse } = shallowHook(() =>
+  it('should apply a hook for returning a get response', async () => {
+    const { result: errorResponse } = await renderHook(() =>
       useGetCredentials({
         useCredentials: () => ({ error: true, message: 'Lorem ipsum' })
       })
     );
 
-    const { result: pendingResponse } = shallowHook(() =>
+    const { result: pendingResponse } = await renderHook(() =>
       useGetCredentials({
         useCredentials: () => ({ pending: true })
       })
     );
 
-    const { result: fulfilledResponse } = shallowHook(() =>
+    const { result: fulfilledResponse } = await renderHook(() =>
       useGetCredentials({
         useCredentials: () => ({ fulfilled: true, data: { view: { results: ['dolor', 'sit'] } } })
       })
     );
 
-    const { result: mockStoreSuccessResponse } = shallowHook(() => useGetCredentials(), {
+    const { result: mockStoreSuccessResponse } = await renderHook(() => useGetCredentials(), {
       state: {
         view: {
           update: {}

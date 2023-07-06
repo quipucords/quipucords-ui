@@ -1,226 +1,211 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, ansible 1`] = `
-<AnsibleTowerIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "ansible",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, canceled 1`] = `
-<ErrorCircleOIcon
-  color="#c9190b"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, cancelled 1`] = `
-<ErrorCircleOIcon
-  color="#c9190b"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, completed 1`] = `
-<CheckCircleIcon
-  color="#3e8635"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "success",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, created 1`] = `
-<Spinner
-  isSVG={true}
-  style={
-    {
-      "display": "inline-block",
-      "height": "1em",
-      "width": "1em",
-    }
-  }
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "pending",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, download 1`] = `
-<DownloadIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "download",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, error 1`] = `
-<ErrorCircleOIcon
-  color="#c9190b"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, failed 1`] = `
-<ErrorCircleOIcon
-  color="#c9190b"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "failed",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, idCard 1`] = `
-<IdCardIcon
-  color="#151515"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "idCard",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, info 1`] = `
-<InfoCircleIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "info",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, network 1`] = `
-<PficonNetworkRangeIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "network",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, openshift 1`] = `
-<OpenshiftIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "openshift",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, paused 1`] = `
-<ExclamationTriangleIcon
-  color="#f0ab00"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "warning",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, pencil 1`] = `
-<PencilAltIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "pencil",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, pending 1`] = `
-<Spinner
-  isSVG={true}
-  style={
-    {
-      "display": "inline-block",
-      "height": "1em",
-      "width": "1em",
-    }
-  }
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "pending",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, running 1`] = `
-<Spinner
-  isSVG={true}
-  style={
-    {
-      "display": "inline-block",
-      "height": "1em",
-      "width": "1em",
-    }
-  }
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "pending",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, satellite 1`] = `
-<PficonSatelliteIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "satellite",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, scans 1`] = `
-<ClipboardCheckIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "scans",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, sources 1`] = `
-<CrosshairsIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "sources",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, success 1`] = `
-<CheckCircleIcon
-  color="#3e8635"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "success",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, trash 1`] = `
-<TrashIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "trash",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, unknown 1`] = `
-<UnknownIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "unknown",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, unreachable 1`] = `
-<DisconnectedIcon
-  color="#c9190b"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "unreachable",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, user 1`] = `
-<UserIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "user",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, vcenter 1`] = `
-<PficonVcenterIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "vcenter",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, warning 1`] = `
-<ExclamationTriangleIcon
-  color="#f0ab00"
-  noVerticalAlign={false}
-  size="sm"
-/>
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "warning",
+}
 `;
 
 exports[`ContextIcon Component should export, and handle icon variants: variants 1`] = `

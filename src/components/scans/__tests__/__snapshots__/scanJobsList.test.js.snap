@@ -1,172 +1,276 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScanJobsList Component should render a connected component: connected 1`] = `
-<Connect(ScanJobsList)
-  id={1}
-/>
+exports[`ScanJobsList Component should render a basic component: basic 1`] = `
+<scanjobslist
+  props="{
+  "id": 1,
+  "scanJobsList": [
+    {
+      "_original": {
+        "endTime": "2019-05-03",
+        "id": 14,
+        "reportId": 15,
+        "startTime": "2019-05-03",
+        "status": "completed",
+        "systemsScanned": 10,
+        "systemsFailed": 10
+      },
+      "endTime": "2019-05-03",
+      "id": 14,
+      "reportId": 15,
+      "startTime": "2019-05-03",
+      "status": "completed",
+      "systemsScanned": 10,
+      "systemsFailed": 10
+    }
+  ],
+  "error": false,
+  "errorMessage": null,
+  "isMoreResults": false,
+  "mostRecentId": null,
+  "pending": false,
+  "children": []
+}"
+>
+  <div
+    class="quipucords-infinite-results"
+  >
+    <div
+      class="quipucords-infinite-list"
+    >
+      <div
+        class="pf-l-grid"
+      >
+        <div
+          class="pf-l-grid__item pf-m-12-col"
+        >
+          <table
+            class="quipucords-table quipucords-table__scan-jobs pf-c-table pf-m-grid-md pf-m-compact pf-m-no-border-rows"
+            data-ouia-component-id="OUIA-Generated-Table-1"
+            data-ouia-component-type="PF4/Table"
+            data-ouia-safe="true"
+            role="grid"
+          >
+            <tbody
+              class=""
+              role="rowgroup"
+            >
+              <tr
+                class="quipucords-table__tr"
+                data-ouia-component-id="OUIA-Generated-TableRow-1"
+                data-ouia-component-type="PF4/TableRow"
+                data-ouia-safe="true"
+              >
+                <td
+                  class=" quipucords-table__td "
+                  data-label="t(table.label_status, {"context":"scan"})"
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="#3e8635"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 512 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                    />
+                  </svg>
+                   
+                  t(table.label_status_completed, {"context":"scan"})
+                </td>
+                <td
+                  class=" quipucords-table__td "
+                  data-label="t(table.label_status_time, {"context":"scan"})"
+                >
+                  a day ago
+                </td>
+                <td
+                  class=" quipucords-table__td "
+                  data-label="t(table.label_status, {"context":"success"})"
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="[object Object]"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 512 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                    />
+                  </svg>
+                   
+                  10
+                </td>
+                <td
+                  class=" quipucords-table__td "
+                  data-label="t(table.label_status, {"context":"failed"})"
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="[object Object]"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <path
+                      d="M409.5,319 C406.699326,316.168774 402.882413,314.575614 398.9,314.575614 C394.917587,314.575614 391.100674,316.168774 388.3,319 L319,388.3 C316.168774,391.100674 314.575614,394.917587 314.575614,398.9 C314.575614,402.882413 316.168774,406.699326 319,409.5 L421.5,512 L319,614.5 C316.168774,617.300674 314.575614,621.117587 314.575614,625.1 C314.575614,629.082413 316.168774,632.899326 319,635.7 L388.3,705 C391.100674,707.831226 394.917587,709.424386 398.9,709.424386 C402.882413,709.424386 406.699326,707.831226 409.5,705 L512,602.5 L614.5,705 C620.367618,710.877435 629.877455,710.922082 635.8,705.1 L705.1,635.8 C707.926508,632.970191 709.505822,629.128746 709.48721,625.129169 C709.468267,621.129592 707.852954,617.303145 705,614.5 L602.5,512 L705,409.5 C707.821142,406.720523 709.417879,402.93109 709.436648,398.97079 C709.455417,395.01049 707.89467,391.206092 705.1,388.4 L635.8,319 C629.932382,313.122565 620.422545,313.077918 614.5,318.9 L512,421.5 L409.5,319 Z M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 Z M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0 Z"
+                    />
+                  </svg>
+                   
+                  10
+                </td>
+                <td
+                  class=" quipucords-table__td quipucords-table__td-action pf-c-table__action"
+                  style="text-align: right;"
+                >
+                  <button
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-1"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    title="t(table.label_action_scan, {"context":"download"})"
+                    type="button"
+                  >
+                    <span
+                      class="pf-c-button__icon pf-m-start"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 512 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                        />
+                      </svg>
+                    </span>
+                    t(table.label_action_scan, {"context":"download"})
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</scanjobslist>
 `;
 
-exports[`ScanJobsList Component should render a non-connected component error: error 1`] = `
-<EmptyState
-  className="quipucords-empty-state__alert"
+exports[`ScanJobsList Component should render a component error: error 1`] = `
+<scanjobslist
+  props="{
+  "id": 1,
+  "error": true,
+  "errorMessage": "Lorem Ipsum.",
+  "isMoreResults": false,
+  "mostRecentId": null,
+  "pending": false,
+  "scanJobsList": [],
+  "children": []
+}"
 >
-  <Alert
-    isInline={true}
-    isPlain={true}
-    title="t(view.error, {"context":"scan-jobs"})"
-    variant="danger"
+  <div
+    class="pf-c-empty-state quipucords-empty-state__alert"
   >
-    t(view.error-message, {"context":"scan-jobs","message":"Lorem Ipsum."})
-  </Alert>
-</EmptyState>
+    <div
+      class="pf-c-empty-state__content"
+    >
+      <div
+        aria-label="Danger Alert"
+        class="pf-c-alert pf-m-inline pf-m-plain pf-m-danger"
+        data-ouia-component-id="OUIA-Generated-Alert-danger-1"
+        data-ouia-component-type="PF4/Alert"
+        data-ouia-safe="true"
+      >
+        <div
+          class="pf-c-alert__icon"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            height="1em"
+            role="img"
+            style="vertical-align: -0.125em;"
+            viewBox="0 0 512 512"
+            width="1em"
+          >
+            <path
+              d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+            />
+          </svg>
+        </div>
+        <h4
+          class="pf-c-alert__title"
+        >
+          <span
+            class="pf-u-screen-reader"
+          >
+            Danger alert:
+          </span>
+          t(view.error, {"context":"scan-jobs"})
+        </h4>
+        <div
+          class="pf-c-alert__description"
+        >
+          t(view.error-message, {"context":"scan-jobs","message":"Lorem Ipsum."})
+        </div>
+      </div>
+    </div>
+  </div>
+</scanjobslist>
 `;
 
 exports[`ScanJobsList Component should render a non-connected component pending: pending 1`] = `
-<EmptyState
-  className="quipucords-empty-state"
-  variant="large"
->
-  <Spinner
-    isSVG={true}
-    size="sm"
-  />
-   
-  t(view.loading)
-</EmptyState>
-`;
-
-exports[`ScanJobsList Component should render a non-connected component: non-connected 1`] = `
-<div
-  className="quipucords-infinite-results"
+<scanjobslist
+  props="{
+  "id": 1,
+  "pending": true,
+  "error": false,
+  "errorMessage": null,
+  "isMoreResults": false,
+  "mostRecentId": null,
+  "scanJobsList": [],
+  "children": []
+}"
 >
   <div
-    className="quipucords-infinite-list"
-    onScroll={[Function]}
+    class="pf-c-empty-state pf-m-lg quipucords-empty-state"
   >
-    <Table
-      ariaLabel={null}
-      className="quipucords-table__scan-jobs"
-      columnHeaders={[]}
-      componentClassNames={
-        {
-          "table": "quipucords-table",
-          "td": "quipucords-table__td",
-          "tdAction": "quipucords-table__td-action",
-          "tdExpand": "quipucords-table__td-expand",
-          "tdExpanded": "quipucords-table__td-expand-expanded",
-          "tdExpandedContent": "quipucords-table__td-expand-content",
-          "tdExpandedWrapper": "quipucords-table__td-expand-wrapper",
-          "tdSelect": "quipucords-table__td-select",
-          "th": "quipucords-table__th",
-          "tr": "quipucords-table__tr",
-          "trExpand": "quipucords-table__tr-expand",
-          "trExpanded": "quipucords-table__tr-expand-expanded",
-          "trExpandedContent": "quipucords-table__tr-expand-content",
-        }
-      }
-      isBorders={false}
-      isHeader={false}
-      isStriped={false}
-      onExpand={null}
-      onSelect={null}
-      onSort={null}
-      rows={
-        [
-          {
-            "cells": [
-              {
-                "content": <React.Fragment>
-                  <ContextIcon
-                    size="sm"
-                    symbol="success"
-                  />
-                   
-                  t(table.label_status_completed, {"context":"scan"})
-                </React.Fragment>,
-                "dataLabel": "t(table.label_status, {"context":"scan"})",
-              },
-              {
-                "content": <React.Fragment>
-                  a day ago
-                </React.Fragment>,
-                "dataLabel": "t(table.label_status_time, {"context":"scan"})",
-              },
-              {
-                "content": <React.Fragment>
-                  <ContextIcon
-                    color={
-                      {
-                        "name": "--pf-global--Color--dark-100",
-                        "value": "#151515",
-                        "var": "var(--pf-global--Color--dark-100)",
-                      }
-                    }
-                    size="sm"
-                    symbol="success"
-                  />
-                   
-                  10
-                </React.Fragment>,
-                "dataLabel": "t(table.label_status, {"context":"success"})",
-              },
-              {
-                "content": <React.Fragment>
-                  <ContextIcon
-                    color={
-                      {
-                        "name": "--pf-global--Color--dark-100",
-                        "value": "#151515",
-                        "var": "var(--pf-global--Color--dark-100)",
-                      }
-                    }
-                    size="sm"
-                    symbol="failed"
-                  />
-                   
-                  10
-                </React.Fragment>,
-                "dataLabel": "t(table.label_status, {"context":"failed"})",
-              },
-              {
-                "content": <React.Fragment>
-                  <ScanDownload
-                    icon={
-                      <ContextIcon
-                        size="sm"
-                        symbol="download"
-                      />
-                    }
-                    job={
-                      {
-                        "endTime": "2019-05-03",
-                        "id": 14,
-                        "reportId": 15,
-                        "startTime": "2019-05-03",
-                        "status": "completed",
-                        "systemsFailed": 10,
-                        "systemsScanned": 10,
-                      }
-                    }
-                    t={[Function]}
-                    tooltip={null}
-                    useOnScanAction={[Function]}
-                    variant="link"
-                  >
-                    t(table.label_action_scan, {"context":"download"})
-                  </ScanDownload>
-                </React.Fragment>,
-                "isActionCell": true,
-                "style": {
-                  "textAlign": "right",
-                },
-              },
-            ],
-          },
-        ]
-      }
-      summary={null}
-      variant="compact"
-    />
+    <div
+      class="pf-c-empty-state__content"
+    >
+      <svg
+        aria-label="Contents"
+        aria-valuetext="Loading..."
+        class="pf-c-spinner pf-m-sm"
+        role="progressbar"
+        viewBox="0 0 100 100"
+      >
+        <circle
+          class="pf-c-spinner__path"
+          cx="50"
+          cy="50"
+          fill="none"
+          r="45"
+        />
+      </svg>
+       
+      t(view.loading)
+    </div>
   </div>
-</div>
+</scanjobslist>
 `;

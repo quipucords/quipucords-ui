@@ -1,36 +1,8 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedMergeReportsDialog, MergeReportsDialog } from '../mergeReportsDialog';
+import { MergeReportsDialog } from '../mergeReportsDialog';
 
 describe('MergeReportsDialog Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({
-      scans: {
-        mergeDialog: {
-          show: true,
-          scans: [
-            { id: 1, mostRecentStatus: 'completed', mostRecentReportId: 2, name: 'lorem' },
-            { id: 2, mostRecentStatus: 'pending', mostRecentReportId: 2, name: 'ipsum' }
-          ]
-        }
-      }
-    });
-
-    const props = {};
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedMergeReportsDialog {...props} />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedMergeReportsDialog)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component, failure and success', () => {
+  it('should render a basic component', () => {
     const props = {
       show: true,
       scans: [
@@ -39,8 +11,8 @@ describe('MergeReportsDialog Component', () => {
       ]
     };
 
-    const component = mount(<MergeReportsDialog {...props} />);
-    expect(component.render()).toMatchSnapshot('non-connected');
+    const component = renderComponent(<MergeReportsDialog {...props} />);
+    expect(component.screen.render()).toMatchSnapshot('basic');
   });
 
   it('should render a component, pending', () => {
@@ -53,7 +25,7 @@ describe('MergeReportsDialog Component', () => {
       ]
     };
 
-    const component = mount(<MergeReportsDialog {...props} />);
-    expect(component.render()).toMatchSnapshot('pending');
+    const component = renderComponent(<MergeReportsDialog {...props} />);
+    expect(component.screen.render().querySelector('.pf-c-modal-box__body')).toMatchSnapshot('pending');
   });
 });

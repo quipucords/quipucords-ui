@@ -20,38 +20,40 @@ exports[`Sources Component should handle multiple display states, pending, error
   <div
     className="quipucords-view-container"
   >
-    <ViewToolbar
-      lastRefresh={NaN}
-      secondaryFields={
-        <React.Fragment>
-          <Button
-            onClick={[Function]}
-          >
-            t(table.label, {"context":"add"})
-          </Button>
-           
-          <Button
-            isDisabled={true}
-            onClick={[Function]}
-            variant="secondary"
-          >
-            t(table.label, {"context":"scan"})
-          </Button>
-        </React.Fragment>
-      }
-      t={[Function]}
-      useOnRefresh={[Function]}
-      useSelector={[Function]}
-      useToolbarFieldClear={[Function]}
-      useToolbarFieldClearAll={[Function]}
-      useView={[Function]}
-    />
-    <ViewPaginationRow
-      totalResults={0}
-      useOnPerPageSelect={[Function]}
-      useOnSetPage={[Function]}
-      useQuery={[Function]}
-    />
+    <React.Fragment>
+      <ViewToolbar
+        lastRefresh={NaN}
+        secondaryFields={
+          <React.Fragment>
+            <Button
+              onClick={[Function]}
+            >
+              t(table.label, {"context":"add"})
+            </Button>
+             
+            <Button
+              isDisabled={true}
+              onClick={[Function]}
+              variant="secondary"
+            >
+              t(table.label, {"context":"scan"})
+            </Button>
+          </React.Fragment>
+        }
+        t={[Function]}
+        useOnRefresh={[Function]}
+        useSelector={[Function]}
+        useToolbarFieldClear={[Function]}
+        useToolbarFieldClearAll={[Function]}
+        useView={[Function]}
+      />
+      <ViewPaginationRow
+        totalResults={0}
+        useOnPerPageSelect={[Function]}
+        useOnSetPage={[Function]}
+        useQuery={[Function]}
+      />
+    </React.Fragment>
     <div
       className="quipucords-list-container"
     >
@@ -437,31 +439,109 @@ exports[`Sources Component should render a basic component: basic 1`] = `
 `;
 
 exports[`Sources Component should return an empty state when there are no sources: empty state, filtering active 1`] = `
-<EmptyState
-  className="quipucords-empty-state"
-  variant="large"
+<div
+  className="quipucords-content"
 >
-  <EmptyStateIcon
-    icon={[Function]}
-  />
-  <Title
-    headingLevel="h1"
-    size="lg"
+  <div
+    className="quipucords-view-container"
   >
-    t(view.empty-state_filter, {"context":"title"})
-  </Title>
-  <EmptyStateBody>
-    t(view.empty-state_filter, {"context":"description"})
-  </EmptyStateBody>
-  <EmptyStatePrimary>
-    <Button
-      onClick={[Function]}
-      variant="link"
+    <React.Fragment>
+      <ViewToolbar
+        lastRefresh={NaN}
+        secondaryFields={
+          <React.Fragment>
+            <Button
+              onClick={[Function]}
+            >
+              t(table.label, {"context":"add"})
+            </Button>
+             
+            <Button
+              isDisabled={true}
+              onClick={[Function]}
+              variant="secondary"
+            >
+              t(table.label, {"context":"scan"})
+            </Button>
+          </React.Fragment>
+        }
+        t={[Function]}
+        useOnRefresh={[Function]}
+        useSelector={[Function]}
+        useToolbarFieldClear={[Function]}
+        useToolbarFieldClearAll={[Function]}
+        useView={[Function]}
+      />
+      <ViewPaginationRow
+        totalResults={0}
+        useOnPerPageSelect={[Function]}
+        useOnSetPage={[Function]}
+        useQuery={[Function]}
+      />
+    </React.Fragment>
+    <div
+      className="quipucords-list-container"
     >
-      t(view.empty-state_label, {"context":"clear"})
-    </Button>
-  </EmptyStatePrimary>
-</EmptyState>
+      <Table
+        ariaLabel={null}
+        className=""
+        columnHeaders={[]}
+        componentClassNames={
+          {
+            "table": "quipucords-table",
+            "td": "quipucords-table__td",
+            "tdAction": "quipucords-table__td-action",
+            "tdExpand": "quipucords-table__td-expand",
+            "tdExpanded": "quipucords-table__td-expand-expanded",
+            "tdExpandedContent": "quipucords-table__td-expand-content",
+            "tdExpandedWrapper": "quipucords-table__td-expand-wrapper",
+            "tdSelect": "quipucords-table__td-select",
+            "th": "quipucords-table__th",
+            "tr": "quipucords-table__tr",
+            "trExpand": "quipucords-table__tr-expand",
+            "trExpanded": "quipucords-table__tr-expand-expanded",
+            "trExpandedContent": "quipucords-table__tr-expand-content",
+          }
+        }
+        isBorders={true}
+        isHeader={false}
+        isStriped={false}
+        onExpand={[Function]}
+        onSelect={[Function]}
+        onSort={null}
+        rows={[]}
+        summary={null}
+        variant="compact"
+      >
+        <EmptyState
+          className="quipucords-empty-state"
+          variant="large"
+        >
+          <EmptyStateIcon
+            icon={[Function]}
+          />
+          <Title
+            headingLevel="h1"
+            size="lg"
+          >
+            t(view.empty-state_filter, {"context":"title"})
+          </Title>
+          <EmptyStateBody>
+            t(view.empty-state_filter, {"context":"description"})
+          </EmptyStateBody>
+          <EmptyStatePrimary>
+            <Button
+              onClick={[Function]}
+              variant="link"
+            >
+              t(view.empty-state_label, {"context":"clear"})
+            </Button>
+          </EmptyStatePrimary>
+        </EmptyState>
+      </Table>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Sources Component should return an empty state when there are no sources: empty state, no data 1`] = `

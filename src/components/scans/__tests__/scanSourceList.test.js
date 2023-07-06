@@ -1,29 +1,8 @@
 import React from 'react';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import { ConnectedScanSourceList, ScanSourceList } from '../scanSourceList';
+import { ScanSourceList } from '../scanSourceList';
 
 describe('ScanSourceList Component', () => {
-  const generateEmptyStore = (obj = {}) => configureMockStore()(obj);
-
-  it('should render a connected component', () => {
-    const store = generateEmptyStore({ scans: { job: {} } });
-
-    const props = {
-      id: 1
-    };
-
-    const component = shallow(
-      <Provider store={store}>
-        <ConnectedScanSourceList {...props} />
-      </Provider>
-    );
-
-    expect(component.find(ConnectedScanSourceList)).toMatchSnapshot('connected');
-  });
-
-  it('should render a non-connected component', () => {
+  it('should render a basic component', () => {
     const props = {
       id: 1,
       scanJobList: [
@@ -39,29 +18,29 @@ describe('ScanSourceList Component', () => {
       ]
     };
 
-    const component = mount(<ScanSourceList {...props} />);
+    const component = renderComponent(<ScanSourceList {...props} />);
 
-    expect(component.render()).toMatchSnapshot('non-connected');
+    expect(component).toMatchSnapshot('basic');
   });
 
-  it('should render a non-connected component error', () => {
+  it('should render a basic component error', () => {
     const props = {
       id: 1,
       error: true,
       errorMessage: 'Lorem Ipsum.'
     };
 
-    const component = shallow(<ScanSourceList {...props} />);
+    const component = renderComponent(<ScanSourceList {...props} />);
     expect(component).toMatchSnapshot('error');
   });
 
-  it('should render a non-connected component pending', () => {
+  it('should render a basic component pending', () => {
     const props = {
       id: 1,
       pending: true
     };
 
-    const component = shallow(<ScanSourceList {...props} />);
+    const component = renderComponent(<ScanSourceList {...props} />);
     expect(component).toMatchSnapshot('pending');
   });
 
@@ -81,15 +60,15 @@ describe('ScanSourceList Component', () => {
       ]
     };
 
-    let component = shallow(<ScanSourceList {...props} />);
+    const component = renderComponent(<ScanSourceList {...props} />);
     expect(component).toMatchSnapshot('connect status');
 
     props.scanJobList[0].connectTaskStatus = 'completed';
-    component = shallow(<ScanSourceList {...props} />);
-    expect(component).toMatchSnapshot('inspect status');
+    const componentInspect = renderComponent(<ScanSourceList {...props} />);
+    expect(componentInspect).toMatchSnapshot('inspect status');
 
     props.scanJobList[0].inspectTaskStatus = undefined;
-    component = shallow(<ScanSourceList {...props} />);
-    expect(component).toMatchSnapshot('fallback status');
+    const componentFallback = renderComponent(<ScanSourceList {...props} />);
+    expect(componentFallback).toMatchSnapshot('fallback status');
   });
 });

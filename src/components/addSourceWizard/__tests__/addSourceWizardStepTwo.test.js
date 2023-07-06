@@ -1,16 +1,14 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { AddSourceWizardStepTwo, sslProtocolOptions } from '../addSourceWizardStepTwo';
 
 describe('AddSourceWizardStepTwo Component', () => {
-  it('should render a non-connected component', () => {
+  it('should render a basic component', () => {
     const props = {
       type: 'network'
     };
 
-    const component = mount(<AddSourceWizardStepTwo {...props} />);
-
-    expect(component.render()).toMatchSnapshot('non-connected');
+    const component = renderComponent(<AddSourceWizardStepTwo {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
 
   it('should export select options', () => {
@@ -27,12 +25,11 @@ describe('AddSourceWizardStepTwo Component', () => {
       type: 'network'
     };
 
-    let component = mount(<AddSourceWizardStepTwo {...props} />);
-    expect(component.render()).toMatchSnapshot('network');
+    const component = renderComponent(<AddSourceWizardStepTwo {...props} />);
+    expect(component.find('input[name="name"]')).toMatchSnapshot('network');
 
-    props.type = 'vcenter';
-    component = mount(<AddSourceWizardStepTwo {...props} />);
-    expect(component.render()).toMatchSnapshot('vcenter');
+    const componentVCenter = component.setProps({ type: 'vcenter' });
+    expect(componentVCenter.find('input[name="name"]')).toMatchSnapshot('vcenter');
   });
 
   it('should correctly validate and submit data for sources', () => {
@@ -42,8 +39,8 @@ describe('AddSourceWizardStepTwo Component', () => {
     };
 
     const spy = jest.spyOn(AddSourceWizardStepTwo.prototype, 'submitStep');
-    const component = mount(<AddSourceWizardStepTwo {...props} />);
-    const componentInstance = component.instance();
+    const component = renderComponent(<AddSourceWizardStepTwo {...props} />);
+    const componentInstance = component.instance;
 
     expect(
       componentInstance.isStepValid({

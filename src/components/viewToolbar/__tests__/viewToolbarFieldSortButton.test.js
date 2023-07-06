@@ -16,24 +16,25 @@ describe('ViewToolbarFieldSortButton Component', () => {
 
   it('should render a basic component', async () => {
     const props = {};
-    const component = await shallowHookComponent(<ViewToolbarFieldSortButton {...props} />);
+    const component = await shallowComponent(<ViewToolbarFieldSortButton {...props} />);
 
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should handle updating the view query through redux state with a component', async () => {
+  it('should handle updating the view query through redux state with a component', () => {
     const props = {
       useQuery: () => ({ [API_QUERY_TYPES.ORDERING]: '-hello world' })
     };
-    const component = await mountHookComponent(<ViewToolbarFieldSortButton {...props} />);
-    component.find('button').simulate('click');
+    const component = renderComponent(<ViewToolbarFieldSortButton {...props} />);
+    const input = component.find('button');
+    component.fireEvent.click(input);
 
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, component');
   });
 
   it('should handle updating the view query through redux state with a hook', async () => {
     const options = {};
-    const { result: onClick } = await shallowHook(() => useOnClick(options));
+    const { result: onClick } = await renderHook(() => useOnClick(options));
 
     onClick({ value: 'dolor sit' });
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch type, hook');
