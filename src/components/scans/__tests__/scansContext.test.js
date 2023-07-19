@@ -18,20 +18,13 @@ describe('ScansContext', () => {
       }
     };
 
-    let confirmCallbacks;
-
-    await renderHook(
-      () =>
-        useOnScanAction({
-          useDispatch: () => mockDispatch
-        }),
-      {
-        callback: ({ result }) => {
-          result.onStart(mockScan);
-          confirmCallbacks = result;
-        }
-      }
+    const { result: confirmCallbacks } = await renderHook(() =>
+      useOnScanAction({
+        useDispatch: () => mockDispatch
+      })
     );
+
+    confirmCallbacks.onStart(mockScan);
 
     expect(confirmCallbacks).toMatchSnapshot('callbacks');
     expect(mockDispatch.mock.calls).toMatchSnapshot('dispatch onStart');
