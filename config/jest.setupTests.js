@@ -74,6 +74,8 @@ global.screenRender = {
  *
  * @param {React.ReactNode} testComponent
  * @param {object} options
+ * @param {boolean} options.includeInstanceRef The component includes an instance ref for class components. If the component instance
+ *     includes functions, they are wrapped in "act" for convenience.
  * @returns {HTMLElement}
  */
 global.renderComponent = (testComponent, options = {}) => {
@@ -111,7 +113,27 @@ global.renderComponent = (testComponent, options = {}) => {
 
   if (updatedTestComponent?.type?.prototype?.isReactComponent && updatedOptions.includeInstanceRef === true) {
     updatedTestComponent.ref = element => {
-      elementInstance = element;
+      const updatedElement = element;
+
+      if (element) {
+        Object.entries(element).forEach(([key, value]) => {
+          if (typeof value === 'function') {
+            try {
+              updatedElement[key] = (...args) => {
+                let output;
+                act(() => {
+                  output = value.call(element, ...args);
+                });
+                return output;
+              };
+            } catch (e) {
+              //
+            }
+          }
+        });
+
+        elementInstance = updatedElement;
+      }
     };
   }
 
@@ -128,6 +150,7 @@ global.renderComponent = (testComponent, options = {}) => {
   };
 
   const updatedContainer = container;
+  updatedContainer.act = act;
   updatedContainer.screen = global.screenRender;
   updatedContainer.instance = elementInstance;
   updatedContainer.find = selector => container?.querySelector(selector);
@@ -160,12 +183,12 @@ global.renderComponent = (testComponent, options = {}) => {
  *
  * @param {Function} useHook
  * @param {object} options
- * @param {Function} options.callback A result callback fired after the hook in the same context.
- *     An alternative to using the "result" response.
+ * @param {boolean} options.includeInstanceContext The hook result, if it includes functions, is wrapped in "act" for convenience.
  * @param {object} options.state An object representing a mock Redux store's state.
  * @returns {*}
  */
-global.renderHook = async (useHook = Function.prototype, { callback, state } = {}) => {
+global.renderHook = async (useHook = Function.prototype, options = {}) => {
+  const updatedOptions = { includeInstanceContext: true, ...options };
   let result;
   let spyUseSelector;
   let unmountHook;
@@ -180,22 +203,38 @@ global.renderHook = async (useHook = Function.prototype, { callback, state } = {
   };
 
   await act(async () => {
-    if (state) {
-      spyUseSelector = jest.spyOn(reactRedux, 'useSelector').mockImplementation(_ => _(state));
+    if (updatedOptions.state) {
+      spyUseSelector = jest.spyOn(reactRedux, 'useSelector').mockImplementation(_ => _(updatedOptions.state));
     }
     const { unmount: unmountRender } = await render(<Hook />);
     unmountHook = unmountRender;
-
-    if (typeof callback === 'function') {
-      callback({ unmount, result });
-    }
   });
 
-  if (state) {
+  if (updatedOptions.state) {
     spyUseSelector.mockClear();
   }
 
-  return { unmount, result };
+  const updatedResult = result;
+
+  if (result && updatedOptions.includeInstanceContext === true) {
+    Object.entries(result).forEach(([key, value]) => {
+      if (typeof value === 'function') {
+        try {
+          updatedResult[key] = (...args) => {
+            let output;
+            act(() => {
+              output = value.call(result, ...args);
+            });
+            return output;
+          };
+        } catch (e) {
+          //
+        }
+      }
+    });
+  }
+
+  return { unmount, result: updatedResult, act };
 };
 
 /**
@@ -215,8 +254,9 @@ global.shallowComponent = async testComponent => {
   const localRenderHook = async (component, updatedProps) => {
     if (typeof component?.type === 'function') {
       try {
-        const { unmount, result } = await global.renderHook(() =>
-          component.type({ ...component.type.defaultProps, ...component.props, ...updatedProps })
+        const { unmount, result } = await global.renderHook(
+          () => component.type({ ...component.type.defaultProps, ...component.props, ...updatedProps }),
+          { includeInstanceContext: false }
         );
 
         if (!result || typeof result === 'string' || typeof result === 'number') {
