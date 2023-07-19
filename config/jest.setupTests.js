@@ -118,15 +118,17 @@ global.renderComponent = (testComponent, options = {}) => {
       if (element) {
         Object.entries(element).forEach(([key, value]) => {
           if (typeof value === 'function') {
-            updatedElement[key] = (...args) => {
-              let output;
-              act(() => {
-                output = value.call(element, ...args);
-              });
-              return output;
-            };
-          } else {
-            updatedElement[key] = value;
+            try {
+              updatedElement[key] = (...args) => {
+                let output;
+                act(() => {
+                  output = value.call(element, ...args);
+                });
+                return output;
+              };
+            } catch (e) {
+              //
+            }
           }
         });
 
@@ -148,6 +150,7 @@ global.renderComponent = (testComponent, options = {}) => {
   };
 
   const updatedContainer = container;
+  updatedContainer.act = act;
   updatedContainer.screen = global.screenRender;
   updatedContainer.instance = elementInstance;
   updatedContainer.find = selector => container?.querySelector(selector);
@@ -216,20 +219,22 @@ global.renderHook = async (useHook = Function.prototype, options = {}) => {
   if (result && updatedOptions.includeInstanceContext === true) {
     Object.entries(result).forEach(([key, value]) => {
       if (typeof value === 'function') {
-        updatedResult[key] = (...args) => {
-          let output;
-          act(() => {
-            output = value.call(result, ...args);
-          });
-          return output;
-        };
-      } else {
-        updatedResult[key] = value;
+        try {
+          updatedResult[key] = (...args) => {
+            let output;
+            act(() => {
+              output = value.call(result, ...args);
+            });
+            return output;
+          };
+        } catch (e) {
+          //
+        }
       }
     });
   }
 
-  return { unmount, result: updatedResult };
+  return { unmount, result: updatedResult, act };
 };
 
 /**
