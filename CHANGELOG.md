@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.5.0 (2023-08-02)
+
+
+### Documentation
+*  rename master branch to main  (779284f)
+
+### Code Refactoring
+* **testing** react testing, handler context wrappers  (#229) (0a14eca)
+* **testing** migrate from enzyme  (#227) (0e4f798)
+
+### Chores
+* **deps-dev** eslint-plugin-jest from 27.2.2 to 27.2.3  (#232) (45aedde)
+* **deps-dev** bump babel-loader from 9.1.2 to 9.1.3  (#231) (8a8fe46)
+* **dependabot** open pr limit, target branch  (#226) (6244d3b)
+* **deps** npm updates  (#226) (1b4bb76)
+* **deps-dev** bump webpack from 5.86.0 to 5.88.1  (#225) (1a58b43)
+*  remove unused Jenkinsfile  (8c71990)
+
+### Builds
+* **babel** update presets, targets  (06461bd)
+
 ## 1.4.0 (2023-06-29)
 
 
