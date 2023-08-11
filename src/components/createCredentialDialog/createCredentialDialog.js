@@ -226,6 +226,7 @@ const CreateCredentialDialog = ({
       {values[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE] === 'network' && (
         <FormGroup label={t('form-dialog.label', { context: ['auth-type', 'create-credential'] })}>
           <DropdownSelect
+            ouiaId="auth_type"
             isInline={false}
             onSelect={onSetAuthType}
             options={authenticationOptions}
@@ -240,6 +241,7 @@ const CreateCredentialDialog = ({
           errorMessage={t('form-dialog.label', { context: ['username', 'error'] })}
         >
           <TextInput
+            ouiaId="username"
             name={apiTypes.API_QUERY_TYPES.USERNAME}
             value={values[apiTypes.API_QUERY_TYPES.USERNAME]}
             placeholder={t('form-dialog.label', { context: ['username', 'placeholder'] })}
@@ -278,6 +280,7 @@ const CreateCredentialDialog = ({
               errorMessage={t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'error'] })}
             >
               <TextInput
+                ouiaId="ssh_keyfile"
                 name={apiTypes.API_QUERY_TYPES.SSH_KEYFILE}
                 value={values[apiTypes.API_QUERY_TYPES.SSH_KEYFILE]}
                 placeholder={t('form-dialog.label', { context: ['ssh-keyfile', 'create-credential', 'placeholder'] })}
@@ -295,6 +298,7 @@ const CreateCredentialDialog = ({
               label={t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })}
             >
               <TextInput
+                ouiaId="ssh_passphrase"
                 name={apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE}
                 type="password"
                 value={values[apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE]}
@@ -314,6 +318,7 @@ const CreateCredentialDialog = ({
             errorMessage={t('form-dialog.label', { context: ['token', 'create-credential', 'error'] })}
           >
             <TextInput
+              ouiaId="auth_token"
               name={apiTypes.API_QUERY_TYPES.AUTH_TOKEN}
               value={values[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]}
               placeholder={t('form-dialog.label', { context: ['token', 'create-credential', 'placeholder'] })}
@@ -337,6 +342,7 @@ const CreateCredentialDialog = ({
             errorMessage={t('form-dialog.label', { context: ['password', 'error'] })}
           >
             <TextInput
+              ouiaId="password"
               name={apiTypes.API_QUERY_TYPES.PASSWORD}
               type="password"
               value={values[apiTypes.API_QUERY_TYPES.PASSWORD]}
@@ -371,6 +377,7 @@ const CreateCredentialDialog = ({
       <React.Fragment>
         <FormGroup key="become_method" label={t('form-dialog.label', { context: ['become-method'] })}>
           <DropdownSelect
+            ouiaId="become_method"
             name={apiTypes.API_QUERY_TYPES.BECOME_METHOD}
             isInline={false}
             onSelect={handleOnEvent}
@@ -381,6 +388,7 @@ const CreateCredentialDialog = ({
         </FormGroup>
         <FormGroup key="become_user" label={t('form-dialog.label', { context: ['become-user'] })}>
           <TextInput
+            ouiaId="become_method"
             name={apiTypes.API_QUERY_TYPES.BECOME_USER}
             type="text"
             value={values[apiTypes.API_QUERY_TYPES.BECOME_USER]}
@@ -391,6 +399,7 @@ const CreateCredentialDialog = ({
         </FormGroup>
         <FormGroup key="become_password" label={t('form-dialog.label', { context: ['become-password'] })}>
           <TextInput
+            ouiaId="become_password"
             name={apiTypes.API_QUERY_TYPES.BECOME_PASSWORD}
             type="password"
             value={values[apiTypes.API_QUERY_TYPES.BECOME_PASSWORD]}

@@ -72,6 +72,7 @@ exports[`ViewToolbarSelectCategory Component should render a basic component: ba
       },
     ]
   }
+  ouiaId="toolbar_select_category"
   placeholder="t(toolbar.label_placeholder, {"context":"filter"})"
   position="left"
   selectedOptions={null}

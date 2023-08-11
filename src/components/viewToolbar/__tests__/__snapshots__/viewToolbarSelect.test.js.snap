@@ -121,6 +121,7 @@ exports[`ViewToolbarSelect Component should render a basic component: basic 1`] 
       },
     ]
   }
+  ouiaId="toolbarSelect_cred_type"
   placeholder="t(toolbar.label_placeholder_filter, {"context":"cred_type"})"
   position="left"
   selectedOptions={null}

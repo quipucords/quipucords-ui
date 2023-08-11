@@ -48,7 +48,7 @@ const description = (
     </GridItem>
     <GridItem sm={10}>
       <div>
-        <strong>{name || id}</strong>
+        <strong data-test="item_name">{name || id}</strong>
       </div>
     </GridItem>
   </Grid>

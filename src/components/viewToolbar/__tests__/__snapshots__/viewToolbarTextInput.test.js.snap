@@ -82,6 +82,7 @@ exports[`ViewToolbarTextInput Component should render a basic component: basic 1
     onClear={[Function]}
     onKeyUp={[Function]}
     onMouseUp={[Function]}
+    ouiaId="toolbar_search_name"
     placeholder="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
     type="text"
     value={null}

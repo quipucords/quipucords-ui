@@ -25,7 +25,12 @@ class AddSourceWizardStepOne extends React.Component {
       <FormState validateOnMount setValues={{ sourceType: type }} validate={this.isStepValid}>
         {({ values, handleOnEvent, handleOnSubmit }) => (
           <Form isHorizontal onSubmit={handleOnSubmit}>
-            <FormGroup role="radiogroup" isStack label={t('form-dialog.label', { context: 'source-type' })}>
+            <FormGroup
+              role="radiogroup"
+              fieldId="sourceType"
+              isStack
+              label={t('form-dialog.label', { context: 'source-type' })}
+            >
               <Radio
                 name="sourceType"
                 id="sourceType-network"

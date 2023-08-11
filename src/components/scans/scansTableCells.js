@@ -35,7 +35,7 @@ const description = ({ [apiTypes.API_RESPONSE_SCAN_ID]: id, [apiTypes.API_RESPON
     <GridItem sm={2} />
     <GridItem sm={10}>
       <div>
-        <strong>{name || id}</strong>
+        <strong data-test="item_name">{name || id}</strong>
       </div>
     </GridItem>
   </Grid>

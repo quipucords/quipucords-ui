@@ -63,6 +63,7 @@ const ViewToolbarFieldSortButton = ({ t, useOnClick: useAliasOnClick, useQuery: 
         onClick={() => !isEmpty && onClick({ value: updatedDirection })}
         variant={ButtonVariant.plain}
         data-test="toolbarSortButton"
+        ouiaId="toolbar_sort_button"
         {...props}
       >
         {(isDescending && <SortAmountUpIcon />) || <SortAmountDownAltIcon />}

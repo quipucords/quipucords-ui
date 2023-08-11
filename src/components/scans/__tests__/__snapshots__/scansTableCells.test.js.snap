@@ -96,7 +96,9 @@ exports[`ScansTableCells should return consistent cell results: basic descriptio
     sm={10}
   >
     <div>
-      <strong />
+      <strong
+        data-test="item_name"
+      />
     </div>
   </GridItem>
 </Grid>

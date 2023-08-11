@@ -106,6 +106,7 @@ const ViewToolbarSelect = ({
       position={position}
       selectedOptions={selectedOption}
       data-test={`toolbarSelect_${filter}`}
+      ouiaId={`toolbarSelect_${filter}`}
     />
   );
 };

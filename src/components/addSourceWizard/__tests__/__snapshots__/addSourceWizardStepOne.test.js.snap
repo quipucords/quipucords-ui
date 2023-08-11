@@ -12,13 +12,13 @@ exports[`AddSourceWizardStepOne Component should render a basic component: basic
     novalidate=""
   >
     <div
-      aria-labelledby="sourceType-network-legend"
+      aria-labelledby="sourceType-legend"
       class="pf-c-form__group"
       role="radiogroup"
     >
       <div
         class="pf-c-form__group-label"
-        id="sourceType-network-legend"
+        id="sourceType-legend"
       >
         <span
           class="pf-c-form__label"

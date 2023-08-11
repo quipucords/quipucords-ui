@@ -65,6 +65,7 @@ exports[`ViewToolbarFieldSort Component should render a basic component: basic 1
         },
       ]
     }
+    ouiaId="toolbar_sort_type"
     placeholder="t(toolbar.label_option, {"context":"sort"})"
     position="left"
     selectedOptions={null}

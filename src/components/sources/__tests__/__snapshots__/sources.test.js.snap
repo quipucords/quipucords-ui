@@ -112,7 +112,9 @@ exports[`Sources Component should handle multiple display states, pending, error
                       sm={10}
                     >
                       <div>
-                        <strong>
+                        <strong
+                          data-test="item_name"
+                        >
                           lorem
                         </strong>
                       </div>
