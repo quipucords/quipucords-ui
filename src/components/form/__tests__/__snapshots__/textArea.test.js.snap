@@ -21,7 +21,7 @@ exports[`TextArea Component should handle readOnly, disabled: active 1`] = `
   "isDisabled": false,
   "name": null,
   "value": "",
-  "ouiaId": "",
+  "ouiaId": null,
   "children": []
 }"
 >
@@ -44,7 +44,7 @@ exports[`TextArea Component should handle readOnly, disabled: disabled 1`] = `
   "isDisabled": true,
   "name": null,
   "value": "",
-  "ouiaId": "",
+  "ouiaId": null,
   "children": []
 }"
 >
@@ -68,7 +68,7 @@ exports[`TextArea Component should handle readOnly, disabled: readOnly 1`] = `
   "isDisabled": false,
   "name": null,
   "value": "",
-  "ouiaId": "",
+  "ouiaId": null,
   "children": []
 }"
 >
@@ -92,7 +92,7 @@ exports[`TextArea Component should render a basic component: basic 1`] = `
   "isReadOnly": false,
   "name": null,
   "value": "",
-  "ouiaId": "",
+  "ouiaId": null,
   "children": []
 }"
 >

@@ -166,7 +166,7 @@ TextArea.defaultProps = {
   onKeyUp: helpers.noop,
   resizeOrientation: TextAreResizeOrientation.default,
   value: '',
-  ouiaId: ''
+  ouiaId: null
 };
 
 export { TextArea as default, TextArea, TextAreResizeOrientation };

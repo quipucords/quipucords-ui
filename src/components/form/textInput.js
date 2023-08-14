@@ -23,6 +23,7 @@ import { helpers } from '../../common';
  * @param {boolean} props.isReadOnly
  * @param {string} props.type
  * @param {*|string} props.value
+ * @param {string} props.ouiaId
  * @param {object} props.props
  * @returns {React.ReactNode}
  */
@@ -38,6 +39,7 @@ const TextInput = ({
   isReadOnly,
   type,
   value,
+  ouiaId,
   ...props
 }) => {
   const [updatedValue, setUpdatedValue] = useState(value);
@@ -119,6 +121,7 @@ const TextInput = ({
 
   const updatedName = name || helpers.generateId();
   const updatedId = id || updatedName;
+  const updatedOuiaId = ouiaId || updatedName;
 
   return (
     <PfTextInput
@@ -132,6 +135,7 @@ const TextInput = ({
       onMouseUp={onTextInputMouseUp}
       type={type}
       value={updatedValue ?? value ?? ''}
+      ouiaId={updatedOuiaId}
       {...props}
     />
   );
@@ -142,7 +146,7 @@ const TextInput = ({
  *
  * @type {{onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function, name: string,
  *     className: string, id: string, isDisabled: boolean, onMouseUp: Function, type: string,
- *     value: string}}
+ *     value: string, ouiaId: string}}
  */
 TextInput.propTypes = {
   className: PropTypes.string,
@@ -155,7 +159,8 @@ TextInput.propTypes = {
   onKeyUp: PropTypes.func,
   onMouseUp: PropTypes.func,
   type: PropTypes.oneOf([...Object.values(TextInputTypes)]),
-  value: PropTypes.string
+  value: PropTypes.string,
+  ouiaId: PropTypes.string
 };
 
 /**
@@ -163,7 +168,7 @@ TextInput.propTypes = {
  *
  * @type {{onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function, name: null,
  *     className: string, id: null, isDisabled: boolean, onMouseUp: Function, type: TextInputTypes.text,
- *     value: string}}
+ *     value: string, ouiaId: string}}
  */
 TextInput.defaultProps = {
   className: '',
@@ -176,7 +181,8 @@ TextInput.defaultProps = {
   onKeyUp: helpers.noop,
   onMouseUp: helpers.noop,
   type: TextInputTypes.text,
-  value: ''
+  value: '',
+  ouiaId: null
 };
 
 export { TextInput as default, TextInput, TextInputTypes };
