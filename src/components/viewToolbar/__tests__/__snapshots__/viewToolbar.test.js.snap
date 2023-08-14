@@ -131,7 +131,6 @@ NodeList [
     data-ouia-component-id="toolbar_search_name"
     data-ouia-component-type="PF4/TextInput"
     data-ouia-safe="true"
-    data-test="toolbarSearchName"
     id="generatedid-"
     maxlength="255"
     name="generatedid-"

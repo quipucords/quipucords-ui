@@ -39,7 +39,6 @@ exports[`ViewToolbarFieldSortButton Component should render a basic component: b
   placement="right"
 >
   <Button
-    data-test="toolbarSortButton"
     onClick={[Function]}
     ouiaId="toolbar_sort_button"
     variant="plain"

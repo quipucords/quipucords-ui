@@ -154,7 +154,6 @@ const ViewToolbarTextInput = ({
         onKeyUp={onKeyUp}
         value={currentValue}
         placeholder={t('toolbar.label', { context: ['placeholder', 'filter', filter] })}
-        data-test="toolbarSearchName"
         ouiaId="toolbar_search_name"
       />
     </InputGroup>

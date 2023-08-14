@@ -72,7 +72,6 @@ exports[`ViewToolbarTextInput Component should render a basic component: basic 1
   <TextInput
     aria-label="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
     className=""
-    data-test="toolbarSearchName"
     id={null}
     isDisabled={false}
     isReadOnly={false}

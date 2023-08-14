@@ -89,7 +89,6 @@ exports[`ViewToolbarSelect Component should render a basic component: basic 1`] 
 <DropdownSelect
   ariaLabel="t(toolbar.label_placeholder_filter, {"context":"cred_type"})"
   className=""
-  data-test="toolbarSelect_cred_type"
   direction="down"
   id="generatedid-"
   isDisabled={false}

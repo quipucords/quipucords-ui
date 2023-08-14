@@ -35,7 +35,6 @@ exports[`ViewToolbarFieldSort Component should render a basic component: basic 1
   <DropdownSelect
     ariaLabel="Select option"
     className=""
-    data-test="toolbarSortType"
     direction="down"
     id="generatedid-"
     isDisabled={false}
