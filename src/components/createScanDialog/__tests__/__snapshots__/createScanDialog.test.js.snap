@@ -210,9 +210,9 @@ exports[`CreateScanDialog Component should render a basic component: basic 1`] =
                     <textarea
                       aria-invalid="false"
                       class="pf-c-form-control quipucords-form__textarea quipucords-form__textarea-resize-none quipucords-form-control"
+                      data-ouia-component-id="display_scan_sources"
                       id="displayScanSources"
                       name="displayScanSources"
-                      ouiaid="display_scan_sources"
                       readonly=""
                       rows="2"
                     >

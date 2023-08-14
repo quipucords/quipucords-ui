@@ -159,6 +159,7 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
         <textarea
           aria-invalid="false"
           class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
+          data-ouia-component-id="hostsMultiple"
           id="hostsMultiple"
           name="hostsMultiple"
           placeholder="t(form-dialog.label_search-addresses, {"context":"placeholder"})"

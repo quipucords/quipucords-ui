@@ -21,12 +21,14 @@ exports[`TextArea Component should handle readOnly, disabled: active 1`] = `
   "isDisabled": false,
   "name": null,
   "value": "",
+  "ouiaId": "",
   "children": []
 }"
 >
   <textarea
     aria-invalid="false"
     class="pf-c-form-control quipucords-form__textarea  "
+    data-ouia-component-id="generatedid-"
     id="generatedid-"
     name="generatedid-"
   />
@@ -42,12 +44,14 @@ exports[`TextArea Component should handle readOnly, disabled: disabled 1`] = `
   "isDisabled": true,
   "name": null,
   "value": "",
+  "ouiaId": "",
   "children": []
 }"
 >
   <textarea
     aria-invalid="false"
     class="pf-c-form-control quipucords-form__textarea  "
+    data-ouia-component-id="generatedid-"
     disabled=""
     id="generatedid-"
     name="generatedid-"
@@ -64,12 +68,14 @@ exports[`TextArea Component should handle readOnly, disabled: readOnly 1`] = `
   "isDisabled": false,
   "name": null,
   "value": "",
+  "ouiaId": "",
   "children": []
 }"
 >
   <textarea
     aria-invalid="false"
     class="pf-c-form-control quipucords-form__textarea  "
+    data-ouia-component-id="generatedid-"
     id="generatedid-"
     name="generatedid-"
     readonly=""
@@ -86,12 +92,14 @@ exports[`TextArea Component should render a basic component: basic 1`] = `
   "isReadOnly": false,
   "name": null,
   "value": "",
+  "ouiaId": "",
   "children": []
 }"
 >
   <textarea
     aria-invalid="false"
     class="pf-c-form-control quipucords-form__textarea  "
+    data-ouia-component-id="generatedid-"
     id="generatedid-"
     name="generatedid-"
   />
@@ -106,6 +114,7 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
       "currentTarget": <textarea
         aria-invalid="false"
         class="pf-c-form-control quipucords-form__textarea  "
+        data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
       >
@@ -118,6 +127,7 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
       "target": <textarea
         aria-invalid="false"
         class="pf-c-form-control quipucords-form__textarea  "
+        data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
       >
@@ -137,6 +147,7 @@ exports[`TextArea Component should return an emulated onClear event on escape: e
       "currentTarget": <textarea
         aria-invalid="false"
         class="pf-c-form-control quipucords-form__textarea  "
+        data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
       />,
@@ -147,6 +158,7 @@ exports[`TextArea Component should return an emulated onClear event on escape: e
       "target": <textarea
         aria-invalid="false"
         class="pf-c-form-control quipucords-form__textarea  "
+        data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
       />,

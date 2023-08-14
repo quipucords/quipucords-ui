@@ -33,6 +33,7 @@ const TextAreResizeOrientation = {
  * @param {boolean} props.isReadOnly
  * @param {string} props.resizeOrientation
  * @param {*|string} props.value
+ * @param {string} props.ouiaId
  * @param {object} props.props
  * @returns {React.ReactNode}
  */
@@ -47,6 +48,7 @@ const TextArea = ({
   isReadOnly,
   resizeOrientation,
   value,
+  ouiaId,
   ...props
 }) => {
   const [updatedValue, setUpdatedValue] = useState(value);
@@ -104,6 +106,7 @@ const TextArea = ({
 
   const updatedName = name || helpers.generateId();
   const updatedId = id || updatedName;
+  const updatedOuiaId = ouiaId || updatedName;
 
   return (
     <PfTextArea
@@ -120,6 +123,7 @@ const TextArea = ({
         resizeOrientation === TextAreResizeOrientation.none ? TextAreResizeOrientation.default : resizeOrientation
       }
       value={updatedValue ?? value ?? ''}
+      data-ouia-component-id={updatedOuiaId}
       {...props}
     />
   );
@@ -129,7 +133,7 @@ const TextArea = ({
  * Prop types
  *
  * @type {{resizeOrientation: string, onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function,
- *     name: string, className: string, id: string, isDisabled: boolean, value: string}}
+ *     name: string, className: string, id: string, isDisabled: boolean, value: string, ouiaId: string}}
  */
 TextArea.propTypes = {
   className: PropTypes.string,
@@ -141,14 +145,15 @@ TextArea.propTypes = {
   onClear: PropTypes.func,
   onKeyUp: PropTypes.func,
   resizeOrientation: PropTypes.oneOf([...Object.values(TextAreResizeOrientation)]),
-  value: PropTypes.string
+  value: PropTypes.string,
+  ouiaId: PropTypes.string
 };
 
 /**
  * Default props
  *
  * @type {{resizeOrientation: *, onKeyUp: Function, isReadOnly: boolean, onChange: Function, onClear: Function,
- *     name: null, className: string, id: null, isDisabled: boolean, value: string}}
+ *     name: null, className: string, id: null, isDisabled: boolean, value: string, ouiaId: string}}
  */
 TextArea.defaultProps = {
   className: '',
@@ -160,7 +165,8 @@ TextArea.defaultProps = {
   onClear: helpers.noop,
   onKeyUp: helpers.noop,
   resizeOrientation: TextAreResizeOrientation.default,
-  value: ''
+  value: '',
+  ouiaId: ''
 };
 
 export { TextArea as default, TextArea, TextAreResizeOrientation };
