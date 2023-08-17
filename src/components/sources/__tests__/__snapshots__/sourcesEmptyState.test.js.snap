@@ -19,6 +19,7 @@ exports[`SourcesEmptyState Component should render a basic component: basic 1`] 
   <EmptyStatePrimary>
     <Button
       onClick={[Function]}
+      ouiaId="add_source"
     >
       t(view.empty-state, {"context":"label"})
     </Button>

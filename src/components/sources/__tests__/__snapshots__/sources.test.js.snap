@@ -27,6 +27,7 @@ exports[`Sources Component should handle multiple display states, pending, error
           <React.Fragment>
             <Button
               onClick={[Function]}
+              ouiaId="add_source"
             >
               t(table.label, {"context":"add"})
             </Button>
@@ -454,6 +455,7 @@ exports[`Sources Component should return an empty state when there are no source
           <React.Fragment>
             <Button
               onClick={[Function]}
+              ouiaId="add_source"
             >
               t(table.label, {"context":"add"})
             </Button>

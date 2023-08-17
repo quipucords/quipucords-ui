@@ -33,6 +33,7 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
           aria-label="t(table.label, {"context":"delete"})"
           className="quipucords-view__row-button"
           onClick={[Function]}
+          ouiaId="delete"
           variant="plain"
         >
           <TrashIcon

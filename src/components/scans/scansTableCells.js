@@ -359,6 +359,7 @@ const actionsCell = ({
           onClick={() => onDelete(item)}
           aria-label={t('table.label', { context: 'delete' })}
           variant={ButtonVariant.plain}
+          ouiaId="delete"
         >
           <TrashIcon />
         </Button>
@@ -371,7 +372,7 @@ const actionsCell = ({
       dropdownMenuItem: { title: t('table.label', { context: ['action', 'scan', 'download'] }), value: 'download' },
       overflowMenuItem: (
         <OverflowMenuItem key="button-download">
-          <Button onClick={() => onSelect({ value: 'download' })} variant={ButtonVariant.secondary}>
+          <Button onClick={() => onSelect({ value: 'download' })} variant={ButtonVariant.secondary} ouiaId="download">
             {t('table.label', { context: ['action', 'scan', 'download'] })}
           </Button>
         </OverflowMenuItem>

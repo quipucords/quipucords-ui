@@ -56,6 +56,7 @@ const AddCredentialType = ({ options, placeholder, t, useOnSelect: useAliasOnSel
       options={options}
       isDropdownButton
       placeholder={placeholder || t('form-dialog.label', { context: ['placeholder', 'add-credential'] })}
+      ouiaId="add_credential"
     />
   );
 };

@@ -213,6 +213,7 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                             aria-label="t(table.label, {"context":"delete"})"
                             className="quipucords-view__row-button"
                             onClick={[Function]}
+                            ouiaId="delete"
                             variant="plain"
                           >
                             <TrashIcon

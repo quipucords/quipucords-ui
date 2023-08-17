@@ -212,6 +212,7 @@ const CreateCredentialDialog = ({
           id="cred_name"
           name={apiTypes.API_QUERY_TYPES.NAME}
           value={values.name}
+          ouiaId="cred_name"
           placeholder={t('form-dialog.label', { context: ['name', 'create-credential', 'placeholder'] })}
           onChange={handleOnEvent}
           onClear={handleOnEvent}
@@ -388,8 +389,8 @@ const CreateCredentialDialog = ({
         </FormGroup>
         <FormGroup key="become_user" label={t('form-dialog.label', { context: ['become-user'] })}>
           <TextInput
-            ouiaId="become_method"
             name={apiTypes.API_QUERY_TYPES.BECOME_USER}
+            ouiaId="become_user"
             type="text"
             value={values[apiTypes.API_QUERY_TYPES.BECOME_USER]}
             placeholder={t('form-dialog.label', { context: ['optional'] })}
