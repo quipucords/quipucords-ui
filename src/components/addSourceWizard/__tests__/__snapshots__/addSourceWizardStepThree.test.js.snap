@@ -26,6 +26,7 @@ exports[`AccountWizardStepResults Component should render a basic component with
       <svg
         aria-hidden="true"
         class="pf-c-empty-state__icon"
+        data-test-state="error"
         fill="#c9190b"
         height="1em"
         role="img"
@@ -61,6 +62,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
 >
   <EmptyStateIcon
     color="#c9190b"
+    data-test-state="error"
     icon={[Function]}
   />
   <Title
@@ -80,6 +82,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
 >
   <EmptyStateIcon
     color="#c9190b"
+    data-test-state="error"
     icon={[Function]}
   />
   <Title
@@ -99,6 +102,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
 >
   <EmptyStateIcon
     color="#3e8635"
+    data-test-state="fulfilled"
     icon={[Function]}
   />
   <Title
@@ -118,6 +122,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
 >
   <EmptyStateIcon
     color="#3e8635"
+    data-test-state="fulfilled"
     icon={[Function]}
   />
   <Title
@@ -136,6 +141,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   className="quipucords-empty-state"
 >
   <EmptyStateIcon
+    data-test-state="pending"
     icon={[Function]}
   />
   <Title
@@ -154,6 +160,7 @@ exports[`AccountWizardStepResults Component should render a wizard results step 
   className="quipucords-empty-state"
 >
   <EmptyStateIcon
+    data-test-state="pending"
     icon={[Function]}
   />
   <Title

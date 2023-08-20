@@ -20,9 +20,9 @@ import { EMPTY_CONTEXT, translate } from '../i18n/i18n';
  */
 const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name, t }) => (
   <EmptyState className="quipucords-empty-state">
-    {error && <EmptyStateIcon icon={ExclamationCircleIcon} color={red.value} />}
-    {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} color={green.value} />}
-    {pending && <EmptyStateIcon icon={Spinner} />}
+    {error && <EmptyStateIcon icon={ExclamationCircleIcon} data-test-state="error" color={red.value} />}
+    {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} data-test-state="fulfilled" color={green.value} />}
+    {pending && <EmptyStateIcon icon={Spinner} data-test-state="pending" />}
     <Title headingLevel="h3">
       {t('form-dialog.empty-state_title_add-source', {
         context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
