@@ -451,7 +451,12 @@ This project makes use of reserved DOM attributes and string identifiers used by
 > Updating elements with these attributes, or settings, should be done with the knowledge "you are affecting" the testing team's ability to test.
 > And it is recommended you coordinate with the testing team before altering these attributes, settings.
 
-1. Attribute `data-test`
+1. Attribute `data-ouia-component-id`
+   - `data-ouia-component-id=""` is preferred way of identifying elements by testing team.
+   - Most of the time, React prop is `ouiaId`. Some PatternFly elements don't support it, in which case you can use standard DOM prop `data-ouia-component-id`, `data-test`, `name` or `id`.
+   - Use `ouiaId` even if it seems to duplicate value of `name` or another attribute.
+   - See [PatternFly documentation on OUIA](https://www.patternfly.org/developer-resources/open-ui-automation/).
+2. Attribute `data-test`
    - DOM attributes with `data-test=""` are used by the testing team as a means to identify specific DOM elements.
    - To use simply place `data-test="[your-id-coordinated-with-testing-team]`" onto a DOM element.
 
