@@ -140,6 +140,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                       <DropdownGroup>
                         <DropdownItem
                           onClick={[Function]}
+                          ouiaId="logout"
                         >
                           t(view.label, {"context":"logout"})
                         </DropdownItem>
@@ -161,6 +162,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                   isOpen={false}
                   isPlain={true}
                   onSelect={[Function]}
+                  ouiaId="user_dropdown"
                   position="right"
                   toggle={
                     <KebabToggle
@@ -184,6 +186,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                     <DropdownGroup>
                       <DropdownItem
                         onClick={[Function]}
+                        ouiaId="logout"
                       >
                         t(view.label, {"context":"logout"})
                       </DropdownItem>
@@ -193,6 +196,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                 isFullHeight={true}
                 isOpen={false}
                 onSelect={[Function]}
+                ouiaId="user_dropdown"
                 toggle={
                   <DropdownToggle
                     icon={

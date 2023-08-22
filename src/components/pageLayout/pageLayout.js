@@ -125,7 +125,7 @@ const PageLayout = ({
    */
   const smallScreenDropdownItems = [
     <DropdownGroup key="group 2">
-      <DropdownItem key="logout" onClick={() => onLogout()}>
+      <DropdownItem key="logout" onClick={() => onLogout()} ouiaId="logout">
         {t('view.label', { context: ['logout'] })}
       </DropdownItem>
     </DropdownGroup>,
@@ -153,7 +153,7 @@ const PageLayout = ({
    */
   const userDropdownItems = [
     <DropdownGroup key="group 2">
-      <DropdownItem key="group 2 logout" onClick={() => onLogout()}>
+      <DropdownItem key="group 2 logout" onClick={() => onLogout()} ouiaId="logout">
         {t('view.label', { context: ['logout'] })}
       </DropdownItem>
     </DropdownGroup>
@@ -192,6 +192,7 @@ const PageLayout = ({
               toggle={<KebabToggle onToggle={onSmallScreenDropdownToggle} />}
               isOpen={isSmallScreenDropdownOpen}
               dropdownItems={smallScreenDropdownItems}
+              ouiaId="user_dropdown"
             />
           </ToolbarItem>
         </ToolbarGroup>
@@ -206,6 +207,7 @@ const PageLayout = ({
               </DropdownToggle>
             }
             dropdownItems={userDropdownItems}
+            ouiaId="user_dropdown"
           />
         </ToolbarItem>
       </ToolbarContent>

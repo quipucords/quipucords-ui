@@ -180,6 +180,7 @@ class AddSourceWizardStepTwo extends React.Component {
         errorMessage={stepTwoErrorMessages.name || t('form-dialog.label', { context: ['name', 'add-source', 'error'] })}
       >
         <TextInput
+          ouiaId="name"
           name="name"
           value={values.name}
           placeholder={t('form-dialog.label', { context: ['name', 'add-source', 'placeholder', type] })}
@@ -259,6 +260,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 name="hostsMultiple"
                 rows={5}
                 value={values.hostsMultiple}
+                ouiaId="hosts_multiple"
                 placeholder={t('form-dialog.label', {
                   context: ['search-addresses', 'placeholder']
                 })}
@@ -280,6 +282,7 @@ class AddSourceWizardStepTwo extends React.Component {
               })}
             >
               <TextInput
+                ouiaId="port"
                 name="port"
                 value={values.port}
                 maxLength={5}
@@ -339,6 +342,7 @@ class AddSourceWizardStepTwo extends React.Component {
             }
           >
             <TextInput
+              ouiaId="hosts_single"
               name="hostsSingle"
               value={values.hostsSingle}
               placeholder={t('form-dialog.label', {
@@ -401,6 +405,7 @@ class AddSourceWizardStepTwo extends React.Component {
             options={sourceCredentials}
             selectedOptions={credentials}
             key={`dropdown-update-${sourceCredentials.length}`}
+            ouiaId="add_credentials_select"
           />
           <Button
             id="addCredentials"
@@ -409,6 +414,7 @@ class AddSourceWizardStepTwo extends React.Component {
             icon={<PlusIcon />}
             onClick={this.onAddCredential}
             title={t('form-dialog.label', { context: 'add-credential' })}
+            ouiaId="add_credentials_add_new"
           />
         </InputGroup>
       </FormGroup>
@@ -442,7 +448,12 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'network':
         return (
           <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
-            <Checkbox name="optionParamiko" checked={checked.optionParamiko || false} onChange={handleOnEvent}>
+            <Checkbox
+              name="optionParamiko"
+              checked={checked.optionParamiko || false}
+              onChange={handleOnEvent}
+              ouiaId="options_paramiko"
+            >
               {t('form-dialog.label', { context: 'paramiko' }, [
                 <abbr title={t('form-dialog.label', { context: 'ssh' })} />
               ])}
@@ -462,6 +473,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 onSelect={onChangeSslProtocol}
                 options={sslProtocolOptions}
                 selectedOptions={[(checked.optionDisableSsl && 'disableSsl') || values.optionSslProtocol]}
+                ouiaId="options_ssl_protocol"
               />
             </FormGroup>
             <FormGroup error={stepTwoErrorMessages.options} errorMessage={stepTwoErrorMessages.options}>
@@ -470,6 +482,7 @@ class AddSourceWizardStepTwo extends React.Component {
                 checked={checked.optionSslCert}
                 isDisabled={checked.optionDisableSsl}
                 onChange={handleOnEvent}
+                ouiaId="options_ssl_cert"
               >
                 {t('form-dialog.label', { context: 'ssl-certificate' })}
               </Checkbox>

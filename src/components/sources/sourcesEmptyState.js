@@ -29,7 +29,9 @@ const SourcesEmptyState = ({ onAddSource, t, uiShortName, viewId }) => (
     <Title headingLevel="h1">{t('view.empty-state', { context: ['title'], name: uiShortName })}</Title>
     <EmptyStateBody>{t('view.empty-state', { context: ['description', viewId] })}</EmptyStateBody>
     <EmptyStatePrimary>
-      <Button onClick={onAddSource}>{t('view.empty-state', { context: ['label', viewId] })}</Button>
+      <Button onClick={onAddSource} ouiaId="add_source">
+        {t('view.empty-state', { context: ['label', viewId] })}
+      </Button>
     </EmptyStatePrimary>
   </EmptyState>
 );

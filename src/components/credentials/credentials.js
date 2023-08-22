@@ -114,6 +114,7 @@ const Credentials = ({
       <AddCredentialType
         buttonVariant={CredentialButtonVariant.primary}
         position={SelectPosition.right}
+        ouiaId="add_credential"
         placeholder={t('form-dialog.label', { context: 'add' })}
       />{' '}
       <Button

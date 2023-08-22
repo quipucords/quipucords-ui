@@ -48,7 +48,7 @@ class RefreshTimeButton extends React.Component {
     const { lastRefresh, onRefresh, t } = this.props;
 
     return (
-      <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh}>
+      <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh} ouiaId="refresh">
         <span className="last-refresh-time">
           {t('refresh-time-button.refreshed', {
             context: lastRefresh && 'load',
