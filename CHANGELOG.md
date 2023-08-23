@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.5.1 (2023-08-23)
+
+
+### Code Refactoring
+* **testing** DISCOVERY-280 Add attributes to aid UI tests  (#235) (1fe16d5)
+
+### Chores
+* **deps-dev** bump eslint-config-prettier from 8.8.0 to 8.9.0  (#233) (2c0dbe4)
+
 ## 1.5.0 (2023-08-02)
 
 
