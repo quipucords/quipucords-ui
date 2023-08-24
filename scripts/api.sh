@@ -14,12 +14,12 @@ checkContainerRunning()
   while [ $COUNT -le $DURATION ]; do
     sleep $DELAY
     (( COUNT++ ))
-    if [ -z "$(docker ps | grep $CHECKONE)" ]; then
+    if [ -z "$($DOCKER ps | grep $CHECKONE)" ]; then
       break
     fi
   done
 
-  if [ ! -z "$(docker ps | grep $CHECKONE)" ]; then
+  if [ ! -z "$($DOCKER ps | grep $CHECKONE)" ]; then
     printf "${GREEN}Container SUCCESS"
     printf "\n\n${NOCOLOR}"
   else
@@ -90,11 +90,11 @@ startDB()
   local DATA_VOLUME="/var/lib/postgresql/data"
   local STORE_DATA=$2
 
-  docker stop -t 0 $NAME >/dev/null
+  $DOCKER stop -t 0 $NAME >/dev/null
 
-  if [ -z "$(docker images -q $CONTAINER)" ]; then
+  if [ -z "$($DOCKER images -q $CONTAINER)" ]; then
     echo "Setting up QPC DB container"
-    docker pull $CONTAINER
+    $DOCKER pull $CONTAINER
 
     if [ -d "$DATA" ]; then
       rm -rf $DATA/*
@@ -107,7 +107,7 @@ startDB()
     EXTRA_ARGS=""
   fi
 
-  docker run -d --rm $EXTRA_ARGS \
+  $DOCKER run -d --rm $EXTRA_ARGS \
     -e POSTGRESQL_USER=$POSTGRESQL_USER \
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
     -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
@@ -115,10 +115,10 @@ startDB()
 
   checkContainerRunning $NAME
 
-  if [ ! -z "$(docker ps | grep $NAME)" ]; then
-    echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
+  if [ ! -z "$($DOCKER ps | grep $NAME)" ]; then
+    echo "  Container: $($DOCKER ps | grep $NAME | cut -c 1-80)"
     echo "  QPC DB running:"
-    printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
+    printf "  To stop: $ ${GREEN}$DOCKER stop ${NAME}${NOCOLOR}\n"
   fi
 }
 #
@@ -137,14 +137,14 @@ buildApp()
   gitApi
   checkBuildFilesExist
 
-  docker stop -t 0 $CONTAINER >/dev/null
-  docker rmi -f $CONTAINER:latest
+  $DOCKER stop -t 0 $CONTAINER >/dev/null
+  $DOCKER rmi -f $CONTAINER:latest
 
   echo "Setting up QPC container"
 
   cp -rf $DIR_TEMPLATES $REPO_QPC_TEMPLATES
   cp -rf $DIR_CLIENT $REPO_QPC
-  docker build -t $CONTAINER $REPO/.
+  $DOCKER build -t $CONTAINER $REPO/.
 }
 #
 #
@@ -162,23 +162,23 @@ reviewApi()
     CONTAINER=$NAME
     buildApp $CONTAINER
   else
-    docker stop -t 0 $NAME >/dev/null
+    $DOCKER stop -t 0 $NAME >/dev/null
   fi
 
   startDB $DB_NAME
 
-  if [ -z "$(docker ps | grep $NAME)" ]; then
+  if [ -z "$($DOCKER ps | grep $NAME)" ]; then
     printf "\n"
     echo "Starting API..."
-    docker run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
+    $DOCKER run -d --rm -p $PORT:443 -e QPC_DBMS_HOST=$DB_NAME --link $DB_NAME:qpc-link --name $NAME $CONTAINER >/dev/null
   fi
 
   checkContainerRunning $NAME
 
-  if [ ! -z "$(docker ps | grep $NAME)" ]; then
-    echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
+  if [ ! -z "$($DOCKER ps | grep $NAME)" ]; then
+    echo "  Container: $($DOCKER ps | grep $NAME | cut -c 1-80)"
     echo "  QPC API running: https://127.0.0.1:${PORT}/"
-    printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
+    printf "  To stop: $ ${GREEN}$DOCKER stop ${NAME}${NOCOLOR}\n"
   fi
 
   exit 0
@@ -210,17 +210,17 @@ stageApi()
     CONTAINER=$NAME
     buildApp $CONTAINER
   else
-    docker stop -t 0 $NAME >/dev/null
-    docker rm $NAME >/dev/null
-    docker pull $CONTAINER
+    $DOCKER stop -t 0 $NAME >/dev/null
+    $DOCKER rm $NAME >/dev/null
+    $DOCKER pull $CONTAINER
   fi
 
   if [ ! "$UPDATE" = true ]; then
     startDB $DB_NAME
-    if [ -z "$(docker ps | grep $NAME)" ]; then
+    if [ -z "$($DOCKER ps | grep $NAME)" ]; then
       printf "\n"
       echo "Starting API..."
-      docker run -d --rm -p $PORT:443 \
+      $DOCKER run -d --rm -p $PORT:443 \
         -v $BUILD_DIR:$CLIENT_VOLUME \
         -v $BUILD_DIR:$TEMPLATE_CLIENT_VOLUME \
         -v $TEMPLATE_DIR:$TEMPLATE_REGISTRATION_VOLUME \
@@ -236,10 +236,10 @@ stageApi()
 
     checkContainerRunning $NAME
 
-    if [ ! -z "$(docker ps | grep $NAME)" ]; then
-      echo "  Container: $(docker ps | grep $NAME | cut -c 1-80)"
+    if [ ! -z "$($DOCKER ps | grep $NAME)" ]; then
+      echo "  Container: $($DOCKER ps | grep $NAME | cut -c 1-80)"
       echo "  QPC API running: https://localhost:${PORT}/"
-      printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
+      printf "  To stop: $ ${GREEN}$DOCKER stop ${NAME}${NOCOLOR}\n"
     fi
 
     exit 0
@@ -257,27 +257,27 @@ devApi()
   local UPDATE=$3
   local CONTAINER=$4
 
-  docker stop -t 0 $NAME >/dev/null
+  $DOCKER stop -t 0 $NAME >/dev/null
 
-  if [ -z "$(docker images -q $CONTAINER)" ] || [ "$UPDATE" = true ]; then
+  if [ -z "$($DOCKER images -q $CONTAINER)" ] || [ "$UPDATE" = true ]; then
     echo "Setting up development Docker API container"
-    docker pull $CONTAINER
+    $DOCKER pull $CONTAINER
   fi
 
   if [ ! "$UPDATE" = true ]; then
     gitApi
 
-    if [ -z "$(docker ps | grep $CONTAINER)" ]; then
+    if [ -z "$($DOCKER ps | grep $CONTAINER)" ]; then
       echo "Starting development API..."
-      docker run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml" --name $NAME $CONTAINER >/dev/null
+      $DOCKER run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml" --name $NAME $CONTAINER >/dev/null
     fi
 
     checkContainerRunning $NAME
 
-    if [ ! -z "$(docker ps | grep $CONTAINER)" ]; then
-      echo "  Container: $(docker ps | grep $CONTAINER | cut -c 1-80)"
+    if [ ! -z "$($DOCKER ps | grep $CONTAINER)" ]; then
+      echo "  Container: $($DOCKER ps | grep $CONTAINER | cut -c 1-80)"
       echo "  QPC Development API running: http://localhost:$PORT/"
-      printf "  To stop: $ ${GREEN}docker stop ${NAME}${NOCOLOR}\n"
+      printf "  To stop: $ ${GREEN}$DOCKER stop ${NAME}${NOCOLOR}\n"
     fi
 
     exit 0
@@ -303,7 +303,7 @@ runSpecs()
 #
 stopApi()
 {
-  docker stop $(docker ps --filter name="qpc*")
+  $DOCKER stop $($DOCKER ps --filter name="qpc*")
 }
 #
 #
@@ -337,6 +337,8 @@ stopApi()
   UPDATE=false
   CLEAN=false
 
+  DOCKER=""
+
   while getopts p:f:t:cub option;
     do
       case $option in
@@ -349,16 +351,23 @@ stopApi()
       esac
   done
 
-  if [ -z "$(docker -v)" ]; then
-    printf "\n${RED}Docker missing, confirm installation and running.${NOCOLOR}\n"
+  if [ "$(command -v podman)" ]; then
+    DOCKER="podman"
+  elif [ "$(command -v docker)" ]; then
+    DOCKER="docker"
+  fi
+  if [ -z "$DOCKER" ]; then
+    printf "${RED}Missing container tooling. Unable to set \$DOCKER. docker, or podman, is required.${NOCOLOR}\n"
     exit 1
+  else
+    printf "\nFound $DOCKER... ${GREEN}Using container tooling $DOCKER${NOCOLOR}\n"
   fi
 
   if [ "$CLEAN" = true ]; then
     echo "Cleaning everything, Docker and data..."
     printf "${RED}\n"
-    docker system prune -f
-    printf "${GREEN}Docker cleaning success.${NOCOLOR}\n"
+    $DOCKER system prune -f
+    printf "${GREEN}$DOCKER cleaning success.${NOCOLOR}\n"
   fi
 
   case $TYPE in
