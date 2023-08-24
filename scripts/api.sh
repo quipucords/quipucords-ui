@@ -319,7 +319,7 @@ stopApi()
 
   QPC_REPO="https://github.com/quipucords/quipucords.git"
   QPC_IMAGE_CONTAINER="quay.io/quipucords/quipucords:latest"
-  MOCK_IMAGE_CONTAINER="palo/swagger-api-mock"
+  MOCK_IMAGE_CONTAINER="docker.io/palo/swagger-api-mock"
   DATADIR="$(pwd)/.qpc"
   DATADIR_REPO="$(pwd)/.qpc/quipucords"
   DATADIR_REPO_QPC="$(pwd)/.qpc/quipucords/quipucords"
