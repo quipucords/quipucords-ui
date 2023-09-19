@@ -269,7 +269,7 @@ devApi()
 
     if [ -z "$($DOCKER ps | grep $CONTAINER)" ]; then
       echo "Starting development API..."
-      $DOCKER run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml" --name $NAME $CONTAINER >/dev/null
+      $DOCKER run -d --rm -p $PORT:8000 -v "$FILE:/data/swagger.yaml$CONTAINER_CHANGE_LABEL_OPTION" --name $NAME $CONTAINER >/dev/null
     fi
 
     checkContainerRunning $NAME
@@ -338,6 +338,7 @@ stopApi()
   CLEAN=false
 
   DOCKER=""
+  CONTAINER_CHANGE_LABEL_OPTION=""
 
   while getopts p:f:t:cub option;
     do
@@ -353,6 +354,7 @@ stopApi()
 
   if [ "$(command -v podman)" ]; then
     DOCKER="podman"
+    CONTAINER_CHANGE_LABEL_OPTION=":z"
   elif [ "$(command -v docker)" ]; then
     DOCKER="docker"
   fi
