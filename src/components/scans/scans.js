@@ -1,3 +1,7 @@
+/**
+ * Fixme: Temporarily disabling the merge reports button due to broken behavior.
+ * For a full explanation see, DISCOVERY-423
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -111,6 +115,7 @@ const Scans = ({
   const renderToolbarActions = () => (
     <Tooltip content={t('table.tooltip', { context: ['merge-reports'] })}>
       <Button
+        style={{ display: 'none' }}
         variant={ButtonVariant.primary}
         isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
         onClick={onMergeReports}
