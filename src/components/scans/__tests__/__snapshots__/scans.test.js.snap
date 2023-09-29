@@ -34,6 +34,11 @@ exports[`Scans Component should handle multiple display states, pending, error, 
             <Button
               isDisabled={true}
               onClick={[Function]}
+              style={
+                {
+                  "display": "none",
+                }
+              }
               variant="primary"
             >
               t(table.label, {"context":"merge-reports"})
@@ -415,6 +420,11 @@ exports[`Scans Component should return an empty state when there are no scans: e
             <Button
               isDisabled={true}
               onClick={[Function]}
+              style={
+                {
+                  "display": "none",
+                }
+              }
               variant="primary"
             >
               t(table.label, {"context":"merge-reports"})
