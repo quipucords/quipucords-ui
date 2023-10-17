@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.6.0 (2023-10-17)
+
+
+### Features
+* **acs** add support for acs data source  (#251) (e1faafc)
+
+### Code Refactoring
+* **scans** discovery-423 disable scan merge reports  (#243) (12fc5f4)
+
+### Chores
+* **deps-dev** bump eslint from 8.47.0 to 8.50.0  (#246) (62cec9e)
+* **deps-dev** jest-environment-jsdom from 29.6.2 to 29.7.0  (#245) (10949a9)
+* **deps-dev** jest-resolve from 29.6.2 to 29.7.0  (#244) (69ec992)
+* **deps** ncipollo/release-action from 1.12.0 to 1.13.0  (#242) (d43ab54)
+* **deps** npm updates  (#238) (b65a9a3)
+
+### Bug Fixes
+* **scripts** allow podman and docker  (#237) (ae03ebf)
+
 ## 1.5.1 (2023-08-23)
 
 
