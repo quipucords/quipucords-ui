@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ContextIcon Component should export, and handle icon variants: icon variant, acs 1`] = `
+{
+  "children": [],
+  "size": "sm",
+  "symbol": "acs",
+}
+`;
+
 exports[`ContextIcon Component should export, and handle icon variants: icon variant, ansible 1`] = `
 {
   "children": [],
@@ -210,6 +218,7 @@ exports[`ContextIcon Component should export, and handle icon variants: icon var
 
 exports[`ContextIcon Component should export, and handle icon variants: variants 1`] = `
 {
+  "acs": "acs",
   "ansible": "ansible",
   "canceled": "failed",
   "cancelled": "failed",

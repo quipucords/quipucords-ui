@@ -5,6 +5,7 @@ import {
   AnsibleTowerIcon,
   CheckCircleIcon,
   ClipboardCheckIcon,
+  CloudSecurityIcon,
   CrosshairsIcon,
   DisconnectedIcon,
   DownloadIcon,
@@ -75,7 +76,8 @@ const ContextIconVariant = {
   unreachable: 'unreachable',
   user: 'user',
   vcenter: 'vcenter',
-  ansible: 'ansible'
+  ansible: 'ansible',
+  acs: 'acs'
 };
 
 /**
@@ -126,6 +128,8 @@ const ContextIcon = ({ symbol, ...props }) => {
       return <PficonNetworkRangeIcon {...props} />;
     case ContextIconVariant.openshift:
       return <OpenshiftIcon {...props} />;
+    case ContextIconVariant.acs:
+      return <CloudSecurityIcon {...props} />;
     case ContextIconVariant.warning:
       return <ExclamationTriangleIcon {...{ ...{ color: yellow.value }, ...props }} />;
     case ContextIconVariant.pencil:

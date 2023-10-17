@@ -1321,6 +1321,10 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "form-dialog.label",
+        "match": "t('form-dialog.label', { context: 'acs' })",
+      },
+      {
+        "key": "form-dialog.label",
         "match": "t('form-dialog.label', { context: 'satellite' })",
       },
       {
@@ -1426,6 +1430,10 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       {
         "key": "form-dialog.label",
         "match": "translate('form-dialog.label', { context: ['option', 'openshift', 'credential'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'acs', 'credential'] })",
       },
       {
         "key": "form-dialog.label",

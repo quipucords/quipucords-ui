@@ -15,6 +15,7 @@ const fieldOptions = [
     title: () => translate('form-dialog.label', { context: ['option', 'openshift', 'credential'] }),
     value: 'openshift'
   },
+  { title: () => translate('form-dialog.label', { context: ['option', 'acs', 'credential'] }), value: 'acs' },
   {
     title: () => translate('form-dialog.label', { context: ['option', 'satellite', 'credential'] }),
     value: 'satellite'
