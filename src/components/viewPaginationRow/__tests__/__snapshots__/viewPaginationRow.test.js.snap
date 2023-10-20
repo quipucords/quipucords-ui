@@ -127,7 +127,6 @@ exports[`ViewPaginationRow Component should render a basic component: basic 1`] 
             200
           </b>
            
-          
         </span>
         <span
           class="pf-c-options-menu__toggle-icon"

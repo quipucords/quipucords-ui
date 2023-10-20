@@ -10,7 +10,7 @@ describe('useTimeout', () => {
     const mockSetTimeout = jest.spyOn(global, 'setTimeout');
     const { result } = await renderHook(() => useTimeout(mockCallback));
 
-    expect(mockSetTimeout).toHaveBeenCalledTimes(2);
+    expect(mockSetTimeout).toHaveBeenCalledTimes(1);
     expect(mockCallback).toHaveBeenCalledTimes(1);
     expect(result).toMatchSnapshot('timeout');
   });

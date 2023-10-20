@@ -89,12 +89,14 @@ const ToastNotificationsList = ({
             <Alert
               title={toast.header || toast.message}
               truncateTitle={2}
-              timeout={!toast.paused && timeout}
+              timeout={timeout}
               onTimeout={() => onDismiss(toast)}
               variant={toast.alertType}
               actionClose={<AlertActionCloseButton onClose={() => onDismiss(toast)} />}
               key={helpers.generateId('key')}
-              onMouseEnter={() => onHover(toast)}
+              onMouseEnter={() => {
+                window.setTimeout(() => onHover(toast), timeout);
+              }}
               onMouseLeave={() => onLeave(toast)}
             >
               {(toast.header && toast.message) || ''}
