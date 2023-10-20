@@ -1,10 +1,9 @@
 import React from 'react';
-import { IconSize } from '@patternfly/react-icons';
 import { ViewContext } from '../view/viewContext';
 import { Scans, CONFIG as ScansConfig } from '../scans/scans';
 import { Sources, CONFIG as SourcesConfig } from '../sources/sources';
 import { Credentials, CONFIG as CredentialsConfig } from '../credentials/credentials';
-import { ContextIcon, ContextIconVariant } from '../contextIcon/contextIcon';
+import { ContextIcon, ContextIconVariant, IconSize } from '../contextIcon/contextIcon';
 
 /**
  * Return the application base directory.

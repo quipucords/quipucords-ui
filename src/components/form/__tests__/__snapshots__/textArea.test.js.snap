@@ -25,13 +25,16 @@ exports[`TextArea Component should handle readOnly, disabled: active 1`] = `
   "children": []
 }"
 >
-  <textarea
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__textarea  "
-    data-ouia-component-id="generatedid-"
-    id="generatedid-"
-    name="generatedid-"
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-resize-both quipucords-form__textarea  "
+  >
+    <textarea
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      id="generatedid-"
+      name="generatedid-"
+    />
+  </span>
 </textarea>
 `;
 
@@ -48,14 +51,17 @@ exports[`TextArea Component should handle readOnly, disabled: disabled 1`] = `
   "children": []
 }"
 >
-  <textarea
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__textarea  "
-    data-ouia-component-id="generatedid-"
-    disabled=""
-    id="generatedid-"
-    name="generatedid-"
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-resize-both pf-m-disabled quipucords-form__textarea  "
+  >
+    <textarea
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      disabled=""
+      id="generatedid-"
+      name="generatedid-"
+    />
+  </span>
 </textarea>
 `;
 
@@ -72,14 +78,17 @@ exports[`TextArea Component should handle readOnly, disabled: readOnly 1`] = `
   "children": []
 }"
 >
-  <textarea
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__textarea  "
-    data-ouia-component-id="generatedid-"
-    id="generatedid-"
-    name="generatedid-"
-    readonly=""
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-readonly pf-m-resize-both quipucords-form__textarea  "
+  >
+    <textarea
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      id="generatedid-"
+      name="generatedid-"
+      readonly=""
+    />
+  </span>
 </textarea>
 `;
 
@@ -96,13 +105,16 @@ exports[`TextArea Component should render a basic component: basic 1`] = `
   "children": []
 }"
 >
-  <textarea
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__textarea  "
-    data-ouia-component-id="generatedid-"
-    id="generatedid-"
-    name="generatedid-"
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-resize-both quipucords-form__textarea  "
+  >
+    <textarea
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      id="generatedid-"
+      name="generatedid-"
+    />
+  </span>
 </textarea>
 `;
 
@@ -113,7 +125,6 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
       "checked": undefined,
       "currentTarget": <textarea
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__textarea  "
         data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
@@ -126,7 +137,6 @@ exports[`TextArea Component should return an emulated onChange event: emulated e
       "persist": [Function],
       "target": <textarea
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__textarea  "
         data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
@@ -146,7 +156,6 @@ exports[`TextArea Component should return an emulated onClear event on escape: e
       "checked": undefined,
       "currentTarget": <textarea
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__textarea  "
         data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"
@@ -157,7 +166,6 @@ exports[`TextArea Component should return an emulated onClear event on escape: e
       "persist": [Function],
       "target": <textarea
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__textarea  "
         data-ouia-component-id="generatedid-"
         id="generatedid-"
         name="generatedid-"

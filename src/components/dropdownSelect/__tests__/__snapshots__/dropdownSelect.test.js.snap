@@ -91,9 +91,9 @@ exports[`Select Component should allow alternate array and object options: strin
 
 exports[`Select Component should allow alternate array and object options: undefined options 1`] = `[]`;
 
-exports[`Select Component should allow alternate direction and position options: direction up 1`] = `"pf-c-select pf-m-top quipucords-select-pf   "`;
+exports[`Select Component should allow alternate direction and position options: direction up 1`] = `"pf-v5-c-select pf-m-top quipucords-select-pf   "`;
 
-exports[`Select Component should allow alternate direction and position options: position right 1`] = `"pf-c-select quipucords-select-pf quipucords-select-pf__position-down quipucords-select-pf__position-right "`;
+exports[`Select Component should allow alternate direction and position options: position right 1`] = `"pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down quipucords-select-pf__position-right "`;
 
 exports[`Select Component should allow being disabled with missing options: no options 1`] = `
 <dropdownselect
@@ -123,9 +123,9 @@ exports[`Select Component should allow being disabled with missing options: no o
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+      class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
       data-ouia-component-id="OUIA-Generated-Select-single-7"
-      data-ouia-component-type="PF4/Select"
+      data-ouia-component-type="PF5/Select"
       data-ouia-safe="true"
     >
       <button
@@ -133,29 +133,29 @@ exports[`Select Component should allow being disabled with missing options: no o
         aria-haspopup="listbox"
         aria-label="Options menu"
         aria-labelledby=" pf-select-toggle-id-30"
-        class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
+        class="pf-v5-c-select__toggle pf-m-placeholder pf-m-disabled"
         disabled=""
         id="pf-select-toggle-id-30"
         type="button"
       >
         <div
-          class="pf-c-select__toggle-wrapper"
+          class="pf-v5-c-select__toggle-wrapper"
         >
           <span
-            class="pf-c-select__toggle-text"
+            class="pf-v5-c-select__toggle-text"
           >
             Select option
           </span>
         </div>
         <span
-          class="pf-c-select__toggle-arrow"
+          class="pf-v5-c-select__toggle-arrow"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -203,9 +203,9 @@ exports[`Select Component should allow being disabled with missing options: opti
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+      class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
       data-ouia-component-id="OUIA-Generated-Select-single-9"
-      data-ouia-component-type="PF4/Select"
+      data-ouia-component-type="PF5/Select"
       data-ouia-safe="true"
     >
       <button
@@ -213,29 +213,29 @@ exports[`Select Component should allow being disabled with missing options: opti
         aria-haspopup="listbox"
         aria-label="Options menu"
         aria-labelledby=" pf-select-toggle-id-39"
-        class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
+        class="pf-v5-c-select__toggle pf-m-placeholder pf-m-disabled"
         disabled=""
         id="pf-select-toggle-id-39"
         type="button"
       >
         <div
-          class="pf-c-select__toggle-wrapper"
+          class="pf-v5-c-select__toggle-wrapper"
         >
           <span
-            class="pf-c-select__toggle-text"
+            class="pf-v5-c-select__toggle-text"
           >
             Select option
           </span>
         </div>
         <span
-          class="pf-c-select__toggle-arrow"
+          class="pf-v5-c-select__toggle-arrow"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -278,9 +278,9 @@ exports[`Select Component should allow being disabled with missing options: opti
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+      class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
       data-ouia-component-id="OUIA-Generated-Select-single-8"
-      data-ouia-component-type="PF4/Select"
+      data-ouia-component-type="PF5/Select"
       data-ouia-safe="true"
     >
       <button
@@ -288,29 +288,29 @@ exports[`Select Component should allow being disabled with missing options: opti
         aria-haspopup="listbox"
         aria-label="Options menu"
         aria-labelledby=" pf-select-toggle-id-33"
-        class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
+        class="pf-v5-c-select__toggle pf-m-placeholder pf-m-disabled"
         disabled=""
         id="pf-select-toggle-id-33"
         type="button"
       >
         <div
-          class="pf-c-select__toggle-wrapper"
+          class="pf-v5-c-select__toggle-wrapper"
         >
           <span
-            class="pf-c-select__toggle-text"
+            class="pf-v5-c-select__toggle-text"
           >
             Select option
           </span>
         </div>
         <span
-          class="pf-c-select__toggle-arrow"
+          class="pf-v5-c-select__toggle-arrow"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -352,6 +352,69 @@ exports[`Select Component should allow data- props: data- attributes 1`] = `
   "toggleIcon": null,
   "variant": "single",
 }
+`;
+
+exports[`Select Component should allow disabled options: disabled options 1`] = `
+<ul
+  aria-label="Select option"
+  class="pf-v5-c-select__menu"
+  role="listbox"
+>
+  <li
+    class="pf-v5-c-select__menu-wrapper"
+    id="bG9yZW0tbG9yZW0="
+    role="presentation"
+  >
+    <button
+      class="pf-v5-c-select__menu-item"
+      data-title="lorem"
+      data-value="lorem"
+      role="option"
+      type="button"
+    >
+      lorem
+    </button>
+  </li>
+  <li
+    class="pf-v5-c-select__menu-wrapper"
+    id="dW5kZWZpbmVkLWlwc3Vt"
+    role="presentation"
+  >
+    <button
+      class="pf-v5-c-select__menu-item pf-m-disabled"
+      data-value="ipsum"
+      role="option"
+      type="button"
+    />
+  </li>
+  <li
+    class="pf-v5-c-select__menu-wrapper"
+    id="aGVsbG8taGVsbG8="
+    role="presentation"
+  >
+    <button
+      class="pf-v5-c-select__menu-item"
+      data-title="hello"
+      data-value="hello"
+      role="option"
+      type="button"
+    >
+      hello
+    </button>
+  </li>
+  <li
+    class="pf-v5-c-select__menu-wrapper"
+    id="dW5kZWZpbmVkLXdvcmxk"
+    role="presentation"
+  >
+    <button
+      class="pf-v5-c-select__menu-item pf-m-disabled"
+      data-value="world"
+      role="option"
+      type="button"
+    />
+  </li>
+</ul>
 `;
 
 exports[`Select Component should allow plain objects as values, and be able to select options based on values within the object: select when option values are objects 1`] = `
@@ -485,7 +548,7 @@ exports[`Select Component should apply patternfly select props based on wrapper 
 }
 `;
 
-exports[`Select Component should disable toggle text: disabled text 1`] = `"pf-c-select quipucords-select-pf__no-toggle-text quipucords-select-pf__position-down  "`;
+exports[`Select Component should disable toggle text: disabled text 1`] = `"pf-v5-c-select quipucords-select-pf__no-toggle-text quipucords-select-pf__position-down  "`;
 
 exports[`Select Component should emulate pf dropdown: emulated dropdown 1`] = `
 <dropdownselect
@@ -521,36 +584,36 @@ exports[`Select Component should emulate pf dropdown: emulated dropdown 1`] = `
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-dropdown"
+      class="pf-v5-c-dropdown"
       data-ouia-component-id="OUIA-Generated-Dropdown-1"
-      data-ouia-component-type="PF4/Dropdown"
+      data-ouia-component-type="PF5/Dropdown"
       data-ouia-safe="true"
       togglevariant="secondary"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
-        class="pf-c-dropdown__toggle pf-m-secondary"
+        class="pf-v5-c-dropdown__toggle pf-m-secondary"
         data-ouia-component-id="OUIA-Generated-DropdownToggle-1"
-        data-ouia-component-type="PF4/DropdownToggle"
+        data-ouia-component-type="PF5/DropdownToggle"
         data-ouia-safe="true"
         id="pf-dropdown-toggle-id-1"
         type="button"
       >
         <span
-          class="pf-c-dropdown__toggle-text"
+          class="pf-v5-c-dropdown__toggle-text"
         >
           Select option
         </span>
         <span
-          class="pf-c-dropdown__toggle-icon"
+          class="pf-v5-c-dropdown__toggle-icon"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -603,9 +666,9 @@ exports[`Select Component should render a basic component: basic component 1`] =
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+      class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
       data-ouia-component-id="OUIA-Generated-Select-single-1"
-      data-ouia-component-type="PF4/Select"
+      data-ouia-component-type="PF5/Select"
       data-ouia-safe="true"
     >
       <button
@@ -613,28 +676,28 @@ exports[`Select Component should render a basic component: basic component 1`] =
         aria-haspopup="listbox"
         aria-label="Options menu"
         aria-labelledby=" pf-select-toggle-id-1"
-        class="pf-c-select__toggle"
+        class="pf-v5-c-select__toggle"
         id="pf-select-toggle-id-1"
         type="button"
       >
         <div
-          class="pf-c-select__toggle-wrapper"
+          class="pf-v5-c-select__toggle-wrapper"
         >
           <span
-            class="pf-c-select__toggle-text"
+            class="pf-v5-c-select__toggle-text"
           >
             hello
           </span>
         </div>
         <span
-          class="pf-c-select__toggle-arrow"
+          class="pf-v5-c-select__toggle-arrow"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -690,46 +753,46 @@ exports[`Select Component should render a checkbox select: checkbox select 1`] =
     class="quipucords-select quipucords-select__inline"
   >
     <div
-      class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+      class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
       data-ouia-component-id="OUIA-Generated-Select-checkbox-1"
-      data-ouia-component-type="PF4/Select"
+      data-ouia-component-type="PF5/Select"
       data-ouia-safe="true"
     >
       <button
         aria-expanded="false"
         aria-label="Options menu"
         aria-labelledby=" pf-select-toggle-id-3"
-        class="pf-c-select__toggle"
+        class="pf-v5-c-select__toggle"
         id="pf-select-toggle-id-3"
         type="button"
       >
         <div
-          class="pf-c-select__toggle-wrapper"
+          class="pf-v5-c-select__toggle-wrapper"
         >
           <span
-            class="pf-c-select__toggle-text"
+            class="pf-v5-c-select__toggle-text"
           >
             multiselect test
           </span>
           <div
-            class="pf-c-select__toggle-badge"
+            class="pf-v5-c-select__toggle-badge"
           >
             <span
-              class="pf-c-badge pf-m-read"
+              class="pf-v5-c-badge pf-m-read"
             >
               2
             </span>
           </div>
         </div>
         <span
-          class="pf-c-select__toggle-arrow"
+          class="pf-v5-c-select__toggle-arrow"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 320 512"
             width="1em"
           >
@@ -747,16 +810,16 @@ exports[`Select Component should render a checkbox select: checkbox select 1`] =
 exports[`Select Component should render an expanded select: expanded 1`] = `
 <ul
   aria-label="Select option"
-  class="pf-c-select__menu"
+  class="pf-v5-c-select__menu"
   role="listbox"
 >
   <li
-    class="pf-c-select__menu-wrapper"
+    class="pf-v5-c-select__menu-wrapper"
     id="bG9yZW0tbG9yZW0="
     role="presentation"
   >
     <button
-      class="pf-c-select__menu-item"
+      class="pf-v5-c-select__menu-item"
       data-title="lorem"
       data-value="lorem"
       role="option"
@@ -766,12 +829,12 @@ exports[`Select Component should render an expanded select: expanded 1`] = `
     </button>
   </li>
   <li
-    class="pf-c-select__menu-wrapper"
+    class="pf-v5-c-select__menu-wrapper"
     id="aXBzdW0taXBzdW0="
     role="presentation"
   >
     <button
-      class="pf-c-select__menu-item"
+      class="pf-v5-c-select__menu-item"
       data-title="ipsum"
       data-value="ipsum"
       role="option"
@@ -781,12 +844,12 @@ exports[`Select Component should render an expanded select: expanded 1`] = `
     </button>
   </li>
   <li
-    class="pf-c-select__menu-wrapper"
+    class="pf-v5-c-select__menu-wrapper"
     id="aGVsbG8taGVsbG8="
     role="presentation"
   >
     <button
-      class="pf-c-select__menu-item"
+      class="pf-v5-c-select__menu-item"
       data-title="hello"
       data-value="hello"
       role="option"
@@ -796,12 +859,12 @@ exports[`Select Component should render an expanded select: expanded 1`] = `
     </button>
   </li>
   <li
-    class="pf-c-select__menu-wrapper"
+    class="pf-v5-c-select__menu-wrapper"
     id="d29ybGQtd29ybGQ="
     role="presentation"
   >
     <button
-      class="pf-c-select__menu-item"
+      class="pf-v5-c-select__menu-item"
       data-title="world"
       data-value="world"
       role="option"
@@ -819,6 +882,7 @@ exports[`Select Component should return an emulated onchange event, checklist va
   "currentTarget": {
     "checked": false,
     "id": "test",
+    "isDisabled": false,
     "name": "test",
     "options": [
       {
@@ -862,6 +926,7 @@ exports[`Select Component should return an emulated onchange event, checklist va
     "value": "ipsum",
   },
   "id": "test",
+  "isDisabled": false,
   "name": "test",
   "options": [
     {
@@ -905,6 +970,7 @@ exports[`Select Component should return an emulated onchange event, checklist va
   "target": {
     "checked": false,
     "id": "test",
+    "isDisabled": false,
     "name": "test",
     "options": [
       {
@@ -956,6 +1022,7 @@ exports[`Select Component should return an emulated onchange event: default emul
 {
   "currentTarget": {
     "id": "test",
+    "isDisabled": false,
     "name": "test",
     "options": [
       {
@@ -1004,6 +1071,7 @@ exports[`Select Component should return an emulated onchange event: default emul
     "value": "lorem",
   },
   "id": "test",
+  "isDisabled": false,
   "name": "test",
   "options": [
     {
@@ -1051,6 +1119,7 @@ exports[`Select Component should return an emulated onchange event: default emul
   "selectedIndex": 0,
   "target": {
     "id": "test",
+    "isDisabled": false,
     "name": "test",
     "options": [
       {

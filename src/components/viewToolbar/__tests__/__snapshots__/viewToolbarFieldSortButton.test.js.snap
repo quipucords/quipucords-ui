@@ -43,11 +43,7 @@ exports[`ViewToolbarFieldSortButton Component should render a basic component: b
     ouiaId="toolbar_sort_button"
     variant="plain"
   >
-    <SortAmountDownAltIcon
-      color="currentColor"
-      noVerticalAlign={false}
-      size="sm"
-    />
+    <SortAmountDownAltIcon />
   </Button>
 </Tooltip>
 `;

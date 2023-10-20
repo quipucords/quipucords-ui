@@ -196,6 +196,7 @@
     "refreshed_load": "Refreshed {{refresh}}"
   },
   "table": {
+    "ariaLabel": "Inventory table.",
     "header_auth-type": "Authorization type",
     "header_credentials": "Credentials",
     "header_description": "Description",
@@ -289,6 +290,7 @@
     "label_vcenter": "vCenter",
     "label_ansible": "Ansible",
     "label_view": "View",
+    "summary": "A generated table.",
     "tooltip_merge-reports": "Merge selected scan results into a single report"
   },
   "toast-notifications": {

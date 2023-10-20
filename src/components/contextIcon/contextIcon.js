@@ -20,8 +20,7 @@ import {
   PficonVcenterIcon,
   TrashIcon,
   UnknownIcon,
-  UserIcon,
-  IconSize
+  UserIcon
 } from '@patternfly/react-icons';
 import {
   global_Color_dark_100 as gray,
@@ -29,6 +28,13 @@ import {
   global_warning_color_100 as yellow,
   global_danger_color_100 as red
 } from '@patternfly/react-tokens';
+
+/**
+ * Consistent icon sizing.
+ *
+ * @type {{xl, md: string, sm: string, lg: string}}
+ */
+const IconSize = { sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' };
 
 /**
  * Context icon colors, for consistency
@@ -143,7 +149,7 @@ const ContextIcon = ({ symbol, ...props }) => {
         updatedSize.style.width = svgSize(props.size);
       }
 
-      return <Spinner isSVG {...{ ...props, ...updatedSize }} />;
+      return <Spinner {...{ ...props, ...updatedSize }} />;
     case ContextIconVariant.satellite:
       return <PficonSatelliteIcon {...props} />;
     case ContextIconVariant.scans:
@@ -186,4 +192,4 @@ ContextIcon.defaultProps = {
   size: IconSize.sm
 };
 
-export { ContextIcon as default, ContextIcon, ContextIconColors, ContextIconVariant };
+export { ContextIcon as default, ContextIcon, ContextIconColors, ContextIconVariant, IconSize };

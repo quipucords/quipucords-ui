@@ -5,6 +5,39 @@ html, body, #root {
   height: 100%;
 }
 
+// Remap variables, avoid search and replaces.
+$pf-global--breakpoint--sm: $pf-v5-global--breakpoint--sm;
+$pf-global--breakpoint--md: $pf-v5-global--breakpoint--md;
+$pf-global--breakpoint--lg: $pf-v5-global--breakpoint--lg;
+
+.quipucords {
+  // --pf-global--BackgroundColor--light-300: var(--pf-v5-global--BackgroundColor--light-300);
+
+  --pf-global--palette--black-100: var(--pf-v5-global--palette--black-100);
+  --pf-global--palette--black-300: var(--pf-v5-global--palette--black-300);
+  --pf-global--palette--black-700: var(--pf-v5-global--palette--black-700);
+  --pf-global--palette--black-1000: var(--pf-v5-global--palette--black-1000);
+  --pf-global--palette--blue-500: var(--pf-v5-global--palette--blue-500);
+  --pf-global--palette--red-100: var(--pf-v5-global--palette--red-100);
+  --pf-global--palette--white: var(--pf-v5-global--palette--white);
+
+  --pf-global--spacer--sm: var(--pf-v5-global--spacer--sm);
+
+  --pf-c-backdrop--ZIndex: var(--pf-v5-c-backdrop--ZIndex);
+  --pf-c-modal-box__body--PaddingTop: var(--pf-v5-c-modal-box__body--PaddingTop);
+
+  --pf-v5-global--FontSize--md: 0.9rem;
+  --pf-global--FontSize--md: 0.9rem;
+  --pf-global--FontSize--xs: var(--pf-v5-global--FontSize--xs);
+
+  --pf-c-nav__link--m-current--Color: var(--pf-v5-c-nav__link--m-current--Color);
+  --pf-c-nav__link--m-current--BackgroundColor: var(--pf-v5-c-nav__link--m-current--BackgroundColor);
+  --pf-c-page__header--BackgroundColor: var(--pf-v5-c-page__header--BackgroundColor);
+
+  --pf-c-table--m-compact__expandable-row-content--PaddingTop: var(--pf-v5-c-table--m-compact__expandable-row-content--PaddingTop);
+  --pf-c-table--m-compact__expandable-row-content--PaddingBottom: var(--pf-v5-c-table--m-compact__expandable-row-content--PaddingBottom);
+}
+
 @import 'app/common';
 @import 'app/aboutModal';
 @import 'app/modal';
@@ -14,6 +47,7 @@ html, body, #root {
 @import 'app/scans';
 @import 'app/toastNotifications';
 @import 'app/tooltip';
+@import 'app/views';
 @import 'app/wizard';
 @import 'app/emptyState';
 @import 'app/patternflyOverrides';

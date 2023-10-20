@@ -36,11 +36,7 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
           ouiaId="delete"
           variant="plain"
         >
-          <TrashIcon
-            color="currentColor"
-            noVerticalAlign={false}
-            size="sm"
-          />
+          <TrashIcon />
         </Button>
       </Tooltip>
     </OverflowMenuGroup>
@@ -69,13 +65,7 @@ exports[`ScansTableCells should return consistent cell results: basic actionsCel
           },
         ]
       }
-      placeholder={
-        <EllipsisVIcon
-          color="currentColor"
-          noVerticalAlign={false}
-          size="sm"
-        />
-      }
+      placeholder={<EllipsisVIcon />}
       position="right"
       selectedOptions={null}
       splitButtonVariant={null}

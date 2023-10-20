@@ -39,38 +39,40 @@ exports[`ScanJobsList Component should render a basic component: basic 1`] = `
       class="quipucords-infinite-list"
     >
       <div
-        class="pf-l-grid"
+        class="pf-v5-l-grid"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-v5-l-grid__item pf-m-12-col"
         >
           <table
-            class="quipucords-table quipucords-table__scan-jobs pf-c-table pf-m-grid-md pf-m-compact pf-m-no-border-rows"
-            data-ouia-component-id="OUIA-Generated-Table-1"
-            data-ouia-component-type="PF4/Table"
+            class="quipucords-table quipucords-table__scan-jobs pf-v5-c-table pf-m-grid-md pf-m-compact pf-m-no-border-rows"
+            data-ouia-component-id="OUIA-Generated-Table-2"
+            data-ouia-component-type="PF5/Table"
             data-ouia-safe="true"
             role="grid"
           >
             <tbody
-              class=""
+              class="pf-v5-c-table__tbody"
               role="rowgroup"
             >
               <tr
-                class="quipucords-table__tr"
+                class="pf-v5-c-table__tr quipucords-table__tr"
                 data-ouia-component-id="OUIA-Generated-TableRow-1"
-                data-ouia-component-type="PF4/TableRow"
+                data-ouia-component-type="PF5/TableRow"
                 data-ouia-safe="true"
               >
                 <td
-                  class=" quipucords-table__td "
+                  class="pf-v5-c-table__td  quipucords-table__td "
                   data-label="t(table.label_status, {"context":"scan"})"
+                  tabindex="-1"
                 >
                   <svg
                     aria-hidden="true"
-                    fill="#3e8635"
+                    class="pf-v5-svg"
+                    color="#3e8635"
+                    fill="currentColor"
                     height="1em"
                     role="img"
-                    style="vertical-align: -0.125em;"
                     viewBox="0 0 512 512"
                     width="1em"
                   >
@@ -82,21 +84,24 @@ exports[`ScanJobsList Component should render a basic component: basic 1`] = `
                   t(table.label_status_completed, {"context":"scan"})
                 </td>
                 <td
-                  class=" quipucords-table__td "
+                  class="pf-v5-c-table__td  quipucords-table__td "
                   data-label="t(table.label_status_time, {"context":"scan"})"
+                  tabindex="-1"
                 >
                   a day ago
                 </td>
                 <td
-                  class=" quipucords-table__td "
+                  class="pf-v5-c-table__td  quipucords-table__td "
                   data-label="t(table.label_status, {"context":"success"})"
+                  tabindex="-1"
                 >
                   <svg
                     aria-hidden="true"
-                    fill="[object Object]"
+                    class="pf-v5-svg"
+                    color="[object Object]"
+                    fill="currentColor"
                     height="1em"
                     role="img"
-                    style="vertical-align: -0.125em;"
                     viewBox="0 0 512 512"
                     width="1em"
                   >
@@ -108,15 +113,17 @@ exports[`ScanJobsList Component should render a basic component: basic 1`] = `
                   10
                 </td>
                 <td
-                  class=" quipucords-table__td "
+                  class="pf-v5-c-table__td  quipucords-table__td "
                   data-label="t(table.label_status, {"context":"failed"})"
+                  tabindex="-1"
                 >
                   <svg
                     aria-hidden="true"
-                    fill="[object Object]"
+                    class="pf-v5-svg"
+                    color="[object Object]"
+                    fill="currentColor"
                     height="1em"
                     role="img"
-                    style="vertical-align: -0.125em;"
                     viewBox="0 0 1024 1024"
                     width="1em"
                   >
@@ -128,27 +135,28 @@ exports[`ScanJobsList Component should render a basic component: basic 1`] = `
                   10
                 </td>
                 <td
-                  class=" quipucords-table__td quipucords-table__td-action pf-c-table__action"
+                  class="pf-v5-c-table__td  quipucords-table__td quipucords-table__td-action pf-v5-c-table__action"
                   style="text-align: right;"
+                  tabindex="-1"
                 >
                   <button
                     aria-disabled="false"
-                    class="pf-c-button pf-m-link"
+                    class="pf-v5-c-button pf-m-link"
                     data-ouia-component-id="OUIA-Generated-Button-link-1"
-                    data-ouia-component-type="PF4/Button"
+                    data-ouia-component-type="PF5/Button"
                     data-ouia-safe="true"
                     title="t(table.label_action_scan, {"context":"download"})"
                     type="button"
                   >
                     <span
-                      class="pf-c-button__icon pf-m-start"
+                      class="pf-v5-c-button__icon pf-m-start"
                     >
                       <svg
                         aria-hidden="true"
+                        class="pf-v5-svg"
                         fill="currentColor"
                         height="1em"
                         role="img"
-                        style="vertical-align: -0.125em;"
                         viewBox="0 0 512 512"
                         width="1em"
                       >
@@ -184,27 +192,26 @@ exports[`ScanJobsList Component should render a component error: error 1`] = `
 }"
 >
   <div
-    class="pf-c-empty-state quipucords-empty-state__alert"
+    class="pf-v5-c-empty-state quipucords-empty-state__alert"
   >
     <div
-      class="pf-c-empty-state__content"
+      class="pf-v5-c-empty-state__content"
     >
       <div
-        aria-label="Danger Alert"
-        class="pf-c-alert pf-m-inline pf-m-plain pf-m-danger"
+        class="pf-v5-c-alert pf-m-inline pf-m-plain pf-m-danger"
         data-ouia-component-id="OUIA-Generated-Alert-danger-1"
-        data-ouia-component-type="PF4/Alert"
+        data-ouia-component-type="PF5/Alert"
         data-ouia-safe="true"
       >
         <div
-          class="pf-c-alert__icon"
+          class="pf-v5-c-alert__icon"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 512 512"
             width="1em"
           >
@@ -214,17 +221,17 @@ exports[`ScanJobsList Component should render a component error: error 1`] = `
           </svg>
         </div>
         <h4
-          class="pf-c-alert__title"
+          class="pf-v5-c-alert__title"
         >
           <span
-            class="pf-u-screen-reader"
+            class="pf-v5-screen-reader"
           >
             Danger alert:
           </span>
           t(view.error, {"context":"scan-jobs"})
         </h4>
         <div
-          class="pf-c-alert__description"
+          class="pf-v5-c-alert__description"
         >
           t(view.error-message, {"context":"scan-jobs","message":"Lorem Ipsum."})
         </div>
@@ -248,20 +255,20 @@ exports[`ScanJobsList Component should render a non-connected component pending:
 }"
 >
   <div
-    class="pf-c-empty-state pf-m-lg quipucords-empty-state"
+    class="pf-v5-c-empty-state pf-m-lg quipucords-empty-state"
   >
     <div
-      class="pf-c-empty-state__content"
+      class="pf-v5-c-empty-state__content"
     >
       <svg
         aria-label="Contents"
         aria-valuetext="Loading..."
-        class="pf-c-spinner pf-m-sm"
+        class="pf-v5-c-spinner pf-m-sm"
         role="progressbar"
         viewBox="0 0 100 100"
       >
         <circle
-          class="pf-c-spinner__path"
+          class="pf-v5-c-spinner__path"
           cx="50"
           cy="50"
           fill="none"

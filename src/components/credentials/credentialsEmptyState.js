@@ -6,10 +6,10 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
-  EmptyStateSecondaryActions,
   EmptyStateVariant,
-  Title
+  EmptyStateActions,
+  EmptyStateHeader,
+  EmptyStateFooter
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
 import { AddCredentialType, ButtonVariant as CredentialButtonVariant } from '../addCredentialType/addCredentialType';
@@ -28,20 +28,25 @@ import { translate } from '../i18n/i18n';
  * @returns {React.ReactNode}
  */
 const CredentialsEmptyState = ({ onAddSource, t, uiSentenceStartName, uiShortName, viewId }) => (
-  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-    <EmptyStateIcon icon={AddCircleOIcon} />
-    <Title headingLevel="h1">{t('view.empty-state', { context: 'title', name: uiShortName })}</Title>
+  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.lg}>
+    <EmptyStateHeader
+      titleText={<React.Fragment>{t('view.empty-state', { context: 'title', name: uiShortName })}</React.Fragment>}
+      icon={<EmptyStateIcon icon={AddCircleOIcon} />}
+      headingLevel="h1"
+    />
     <EmptyStateBody>
       {t('view.empty-state', { context: ['description', viewId], name: uiSentenceStartName })}
     </EmptyStateBody>
-    <EmptyStatePrimary>
-      <AddCredentialType buttonVariant={CredentialButtonVariant.primary} />
-    </EmptyStatePrimary>
-    <EmptyStateSecondaryActions>
-      <Button variant={ButtonVariant.link} onClick={onAddSource}>
-        {t('view.empty-state', { context: ['label', 'sources'] })}
-      </Button>
-    </EmptyStateSecondaryActions>
+    <EmptyStateFooter>
+      <EmptyStateActions>
+        <AddCredentialType buttonVariant={CredentialButtonVariant.primary} />
+      </EmptyStateActions>
+      <EmptyStateActions>
+        <Button variant={ButtonVariant.link} onClick={onAddSource}>
+          {t('view.empty-state', { context: ['label', 'sources'] })}
+        </Button>
+      </EmptyStateActions>
+    </EmptyStateFooter>
   </EmptyState>
 );
 

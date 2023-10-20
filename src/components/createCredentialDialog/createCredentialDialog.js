@@ -9,7 +9,8 @@ import {
   Form,
   Spinner,
   Title,
-  ValidatedOptions
+  ValidatedOptions,
+  EmptyStateHeader
 } from '@patternfly/react-core';
 import { useCredential, useOnSubmitCredential, useOnUpdateCredential } from './createCredentialDialogContext';
 import { Modal } from '../modal/modal';
@@ -454,8 +455,13 @@ const CreateCredentialDialog = ({
           <Form isHorizontal onSubmit={handleOnSubmit}>
             {pending && (
               <EmptyState className="quipucords-empty-state">
-                <EmptyStateIcon icon={Spinner} />
-                <Title headingLevel="h3">{t('form-dialog.empty-state', { context: ['title', 'pending'] })}</Title>
+                <EmptyStateHeader
+                  titleText={
+                    <React.Fragment>{t('form-dialog.empty-state', { context: ['title', 'pending'] })}</React.Fragment>
+                  }
+                  icon={<EmptyStateIcon icon={Spinner} />}
+                  headingLevel="h3"
+                />
               </EmptyState>
             )}
             {!pending && (

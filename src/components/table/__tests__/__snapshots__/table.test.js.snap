@@ -20,22 +20,23 @@ exports[`Table Component should allow expandable cell content: expand cell event
 
 exports[`Table Component should allow expandable cell content: expandable cell content 1`] = `
 <tr
-  class="quipucords-table__tr"
+  class="pf-v5-c-table__tr quipucords-table__tr"
   data-ouia-component-id="OUIA-Generated-TableRow-4"
-  data-ouia-component-type="PF4/TableRow"
+  data-ouia-component-type="PF5/TableRow"
   data-ouia-safe="true"
 >
   <td
-    class=" quipucords-table__td  pf-c-table__compound-expansion-toggle"
+    class="pf-v5-c-table__td  quipucords-table__td  pf-v5-c-table__compound-expansion-toggle"
+    tabindex="-1"
   >
     <button
       aria-expanded="false"
-      class="pf-c-table__button"
+      class="pf-v5-c-table__button"
       id="expand-toggle-undefined-undefined"
       type="button"
     >
       <span
-        class="pf-c-table__text"
+        class="pf-v5-c-table__text"
       >
         dolor
       </span>
@@ -46,14 +47,15 @@ exports[`Table Component should allow expandable cell content: expandable cell c
 
 exports[`Table Component should allow expandable cell content: expanded cell 1`] = `
 <td
-  class="quipucords-table__td quipucords-table__td-expand-expanded quipucords-table__td-expand-wrapper"
+  class="pf-v5-c-table__td quipucords-table__td quipucords-table__td-expand-expanded quipucords-table__td-expand-wrapper"
   colspan="1"
+  tabindex="-1"
 >
   <div
     class="quipucords-table__td-expand-content"
   >
     <div
-      class="pf-c-table__expandable-row-content"
+      class="pf-v5-c-table__expandable-row-content"
     >
       dolor sit expandable content
     </div>
@@ -81,35 +83,36 @@ exports[`Table Component should allow expandable row content: expand row event 1
 
 exports[`Table Component should allow expandable row content: expandable row content 1`] = `
 <tr
-  class="quipucords-table__tr"
+  class="pf-v5-c-table__tr quipucords-table__tr"
   data-ouia-component-id="OUIA-Generated-TableRow-1"
-  data-ouia-component-type="PF4/TableRow"
+  data-ouia-component-type="PF5/TableRow"
   data-ouia-safe="true"
 >
   <td
-    class="quipucords-table__td quipucords-table__td-expand pf-c-table__toggle"
+    class="pf-v5-c-table__td quipucords-table__td quipucords-table__td-expand pf-v5-c-table__toggle"
+    tabindex="-1"
   >
     <button
       aria-disabled="false"
       aria-expanded="false"
       aria-label="Details"
       aria-labelledby="simple-node0 expand-toggle0"
-      class="pf-c-button pf-m-plain"
+      class="pf-v5-c-button pf-m-plain"
       data-ouia-component-id="OUIA-Generated-Button-plain-1"
-      data-ouia-component-type="PF4/Button"
+      data-ouia-component-type="PF5/Button"
       data-ouia-safe="true"
       id="expand-toggle0"
       type="button"
     >
       <div
-        class="pf-c-table__toggle-icon"
+        class="pf-v5-c-table__toggle-icon"
       >
         <svg
           aria-hidden="true"
+          class="pf-v5-svg"
           fill="currentColor"
           height="1em"
           role="img"
-          style="vertical-align: -0.125em;"
           viewBox="0 0 320 512"
           width="1em"
         >
@@ -121,7 +124,8 @@ exports[`Table Component should allow expandable row content: expandable row con
     </button>
   </td>
   <td
-    class="undefined quipucords-table__td "
+    class="pf-v5-c-table__td undefined quipucords-table__td "
+    tabindex="-1"
   >
     dolor
   </td>
@@ -130,14 +134,15 @@ exports[`Table Component should allow expandable row content: expandable row con
 
 exports[`Table Component should allow expandable row content: expanded row 1`] = `
 <td
-  class="quipucords-table__td quipucords-table__td-expand-expanded quipucords-table__td-expand-wrapper"
+  class="pf-v5-c-table__td quipucords-table__td quipucords-table__td-expand-expanded quipucords-table__td-expand-wrapper"
   colspan="2"
+  tabindex="-1"
 >
   <div
     class="quipucords-table__td-expand-content"
   >
     <div
-      class="pf-c-table__expandable-row-content"
+      class="pf-v5-c-table__expandable-row-content"
     >
       dolor sit expandable content
     </div>
@@ -147,13 +152,14 @@ exports[`Table Component should allow expandable row content: expanded row 1`] =
 
 exports[`Table Component should allow selectable row content: select row content 1`] = `
 <tr
-  class="quipucords-table__tr"
+  class="pf-v5-c-table__tr quipucords-table__tr"
   data-ouia-component-id="OUIA-Generated-TableRow-11"
-  data-ouia-component-type="PF4/TableRow"
+  data-ouia-component-type="PF5/TableRow"
   data-ouia-safe="true"
 >
   <td
-    class="quipucords-table__td quipucords-table__td-select pf-c-table__check"
+    class="pf-v5-c-table__td quipucords-table__td quipucords-table__td-select pf-v5-c-table__check"
+    tabindex="-1"
   >
     <label>
       <input
@@ -164,7 +170,8 @@ exports[`Table Component should allow selectable row content: select row content
     </label>
   </td>
   <td
-    class=" quipucords-table__td "
+    class="pf-v5-c-table__td  quipucords-table__td "
+    tabindex="-1"
   >
     dolor
   </td>
@@ -208,30 +215,31 @@ exports[`Table Component should allow sortable content: sort event 1`] = `
 exports[`Table Component should allow sortable content: sortable content 1`] = `
 <th
   aria-sort="none"
-  class="quipucords-table__th pf-c-table__sort"
+  class="pf-v5-c-table__th quipucords-table__th pf-v5-c-table__sort"
   scope="col"
+  tabindex="-1"
 >
   <button
-    class="pf-c-table__button"
+    class="pf-v5-c-table__button"
     type="button"
   >
     <div
-      class="pf-c-table__button-content"
+      class="pf-v5-c-table__button-content"
     >
       <span
-        class="pf-c-table__text"
+        class="pf-v5-c-table__text"
       >
         lorem ipsum
       </span>
       <span
-        class="pf-c-table__sort-indicator"
+        class="pf-v5-c-table__sort-indicator"
       >
         <svg
           aria-hidden="true"
+          class="pf-v5-svg"
           fill="currentColor"
           height="1em"
           role="img"
-          style="vertical-align: -0.125em;"
           viewBox="0 0 256 512"
           width="1em"
         >
@@ -248,30 +256,31 @@ exports[`Table Component should allow sortable content: sortable content 1`] = `
 exports[`Table Component should allow sortable content: sorted column, asc 1`] = `
 <th
   aria-sort="ascending"
-  class="quipucords-table__th pf-c-table__sort pf-m-selected"
+  class="pf-v5-c-table__th quipucords-table__th pf-v5-c-table__sort pf-m-selected"
   scope="col"
+  tabindex="-1"
 >
   <button
-    class="pf-c-table__button"
+    class="pf-v5-c-table__button"
     type="button"
   >
     <div
-      class="pf-c-table__button-content"
+      class="pf-v5-c-table__button-content"
     >
       <span
-        class="pf-c-table__text"
+        class="pf-v5-c-table__text"
       >
         lorem ipsum
       </span>
       <span
-        class="pf-c-table__sort-indicator"
+        class="pf-v5-c-table__sort-indicator"
       >
         <svg
           aria-hidden="true"
+          class="pf-v5-svg"
           fill="currentColor"
           height="1em"
           role="img"
-          style="vertical-align: -0.125em;"
           viewBox="0 0 256 512"
           width="1em"
         >
@@ -288,30 +297,31 @@ exports[`Table Component should allow sortable content: sorted column, asc 1`] =
 exports[`Table Component should allow sortable content: sorted column, desc 1`] = `
 <th
   aria-sort="descending"
-  class="quipucords-table__th pf-c-table__sort pf-m-selected"
+  class="pf-v5-c-table__th quipucords-table__th pf-v5-c-table__sort pf-m-selected"
   scope="col"
+  tabindex="-1"
 >
   <button
-    class="pf-c-table__button"
+    class="pf-v5-c-table__button"
     type="button"
   >
     <div
-      class="pf-c-table__button-content"
+      class="pf-v5-c-table__button-content"
     >
       <span
-        class="pf-c-table__text"
+        class="pf-v5-c-table__text"
       >
         lorem ipsum
       </span>
       <span
-        class="pf-c-table__sort-indicator"
+        class="pf-v5-c-table__sort-indicator"
       >
         <svg
           aria-hidden="true"
+          class="pf-v5-svg"
           fill="currentColor"
           height="1em"
           role="img"
-          style="vertical-align: -0.125em;"
           viewBox="0 0 256 512"
           width="1em"
         >
@@ -330,11 +340,29 @@ exports[`Table Component should allow variations in table layout: ariaLabel and 
   <GridItem
     span={12}
   >
-    <TableComposable
+    <Table
+      actionsMenuAppendTo="inline"
       aria-label="lorem ipsum aria-label"
       borders={true}
+      canCollapseAll={false}
+      canSelectAll={true}
+      canSortFavorites={true}
       className="quipucords-table "
+      collapseAllAriaLabel=""
+      contentId="expanded-content"
+      dropdownDirection="down"
+      dropdownPosition="right"
+      expandId="expandable-toggle"
+      gridBreakPoint="grid-md"
+      isHeaderSelectDisabled={false}
+      isNested={false}
+      isStickyHeader={false}
       isStriped={false}
+      isTreeTable={false}
+      ouiaSafe={true}
+      role="grid"
+      rowLabeledBy="simple-node"
+      selectVariant="checkbox"
       summary="lorem ipsum summary"
       variant="compact"
     >
@@ -373,7 +401,7 @@ exports[`Table Component should allow variations in table layout: ariaLabel and 
           </Tr>
         </React.Fragment>
       </Tbody>
-    </TableComposable>
+    </Table>
   </GridItem>
 </Grid>
 `;
@@ -383,11 +411,29 @@ exports[`Table Component should allow variations in table layout: borders and ta
   <GridItem
     span={12}
   >
-    <TableComposable
+    <Table
+      actionsMenuAppendTo="inline"
       aria-label={null}
       borders={false}
+      canCollapseAll={false}
+      canSelectAll={true}
+      canSortFavorites={true}
       className="quipucords-table "
+      collapseAllAriaLabel=""
+      contentId="expanded-content"
+      dropdownDirection="down"
+      dropdownPosition="right"
+      expandId="expandable-toggle"
+      gridBreakPoint="grid-md"
+      isHeaderSelectDisabled={false}
+      isNested={false}
+      isStickyHeader={false}
       isStriped={false}
+      isTreeTable={false}
+      ouiaSafe={true}
+      role="grid"
+      rowLabeledBy="simple-node"
+      selectVariant="checkbox"
       summary={null}
       variant="compact"
     >
@@ -415,7 +461,7 @@ exports[`Table Component should allow variations in table layout: borders and ta
           </Tr>
         </React.Fragment>
       </Tbody>
-    </TableComposable>
+    </Table>
   </GridItem>
 </Grid>
 `;
@@ -425,11 +471,29 @@ exports[`Table Component should allow variations in table layout: className and 
   <GridItem
     span={12}
   >
-    <TableComposable
+    <Table
+      actionsMenuAppendTo="inline"
       aria-label={null}
       borders={true}
+      canCollapseAll={false}
+      canSelectAll={true}
+      canSortFavorites={true}
       className="quipucords-table lorem-ipsum-class"
+      collapseAllAriaLabel=""
+      contentId="expanded-content"
+      dropdownDirection="down"
+      dropdownPosition="right"
+      expandId="expandable-toggle"
+      gridBreakPoint="grid-md"
+      isHeaderSelectDisabled={false}
+      isNested={false}
+      isStickyHeader={false}
       isStriped={false}
+      isTreeTable={false}
+      ouiaSafe={true}
+      role="grid"
+      rowLabeledBy="simple-node"
+      selectVariant="checkbox"
       summary={null}
       variant="compact"
     >
@@ -468,7 +532,7 @@ exports[`Table Component should allow variations in table layout: className and 
           </Tr>
         </React.Fragment>
       </Tbody>
-    </TableComposable>
+    </Table>
   </GridItem>
 </Grid>
 `;
@@ -478,11 +542,29 @@ exports[`Table Component should allow variations in table layout: generated rows
   <GridItem
     span={12}
   >
-    <TableComposable
+    <Table
+      actionsMenuAppendTo="inline"
       aria-label={null}
       borders={true}
+      canCollapseAll={false}
+      canSelectAll={true}
+      canSortFavorites={true}
       className="quipucords-table "
+      collapseAllAriaLabel=""
+      contentId="expanded-content"
+      dropdownDirection="down"
+      dropdownPosition="right"
+      expandId="expandable-toggle"
+      gridBreakPoint="grid-md"
+      isHeaderSelectDisabled={false}
+      isNested={false}
+      isStickyHeader={false}
       isStriped={false}
+      isTreeTable={false}
+      ouiaSafe={true}
+      role="grid"
+      rowLabeledBy="simple-node"
+      selectVariant="checkbox"
       summary={null}
       variant="compact"
     >
@@ -521,7 +603,7 @@ exports[`Table Component should allow variations in table layout: generated rows
           </Tr>
         </React.Fragment>
       </Tbody>
-    </TableComposable>
+    </Table>
   </GridItem>
 </Grid>
 `;

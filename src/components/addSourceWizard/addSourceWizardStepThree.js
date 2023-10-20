@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EmptyState, EmptyStateBody, EmptyStateIcon, Spinner, Title } from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, EmptyStateIcon, Spinner, EmptyStateHeader } from '@patternfly/react-core';
 import { OutlinedCheckCircleIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { global_success_color_100 as green, global_danger_color_100 as red } from '@patternfly/react-tokens';
 import { connect, reduxSelectors } from '../../redux';
@@ -23,12 +23,17 @@ const AddSourceWizardStepThree = ({ add, error, fulfilled, pending, name, t }) =
     {error && <EmptyStateIcon icon={ExclamationCircleIcon} data-test-state="error" color={red.value} />}
     {fulfilled && <EmptyStateIcon icon={OutlinedCheckCircleIcon} data-test-state="fulfilled" color={green.value} />}
     {pending && <EmptyStateIcon icon={Spinner} data-test-state="pending" />}
-    <Title headingLevel="h3">
-      {t('form-dialog.empty-state_title_add-source', {
-        context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
-        name
-      })}
-    </Title>
+    <EmptyStateHeader
+      titleText={
+        <React.Fragment>
+          {t('form-dialog.empty-state_title_add-source', {
+            context: [(error && 'error') || (pending && 'pending'), !add && 'edit'],
+            name
+          })}
+        </React.Fragment>
+      }
+      headingLevel="h3"
+    />
     <EmptyStateBody>
       {t(`form-dialog.empty-state_description_add-source`, {
         context: [(error && 'error') || (pending && 'pending'), (!add && pending && 'edit') || EMPTY_CONTEXT],

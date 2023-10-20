@@ -14,9 +14,13 @@ exports[`Tooltip Component should render a basic component: basic 1`] = `
 }"
 >
   <div
-    class="quipucords-tooltip__wrapper"
+    style="display: contents;"
   >
-    Test tooltip
+    <div
+      class="quipucords-tooltip__wrapper"
+    >
+      Test tooltip
+    </div>
   </div>
 </tooltip>
 `;
@@ -35,9 +39,13 @@ exports[`Tooltip Component should render a popover: popover 1`] = `
 }"
 >
   <div
-    class="quipucords-popover__wrapper"
+    style="display: contents;"
   >
-    Test popover
+    <div
+      class="quipucords-popover__wrapper"
+    >
+      Test popover
+    </div>
   </div>
 </tooltip>
 `;

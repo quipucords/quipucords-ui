@@ -3,51 +3,65 @@
 exports[`ScansEmptyState Component should render a basic component: basic 1`] = `
 <EmptyState
   className="quipucords-empty-state"
-  variant="large"
+  variant="lg"
 >
-  <EmptyStateIcon
-    icon={[Function]}
-  />
-  <Title
+  <EmptyStateHeader
     headingLevel="h1"
-  >
-    t(view.empty-state, {"context":"title","count":20,"name":"Quipucords"})
-  </Title>
+    icon={
+      <EmptyStateIcon
+        icon={[Function]}
+      />
+    }
+    titleText={
+      <React.Fragment>
+        t(view.empty-state, {"context":"title","count":20,"name":"Quipucords"})
+      </React.Fragment>
+    }
+  />
   <EmptyStateBody>
     t(view.empty-state, {"context":"description","count":20})
   </EmptyStateBody>
-  <EmptyStatePrimary>
-    <Button
-      onClick={[Function]}
-    >
-      t(view.empty-state_label, {"context":"source-navigate","count":20})
-    </Button>
-  </EmptyStatePrimary>
+  <EmptyStateFooter>
+    <EmptyStateActions>
+      <Button
+        onClick={[Function]}
+      >
+        t(view.empty-state_label, {"context":"source-navigate","count":20})
+      </Button>
+    </EmptyStateActions>
+  </EmptyStateFooter>
 </EmptyState>
 `;
 
 exports[`ScansEmptyState Component should render messaging if sources do not exist: do not exist 1`] = `
 <EmptyState
   className="quipucords-empty-state"
-  variant="large"
+  variant="lg"
 >
-  <EmptyStateIcon
-    icon={[Function]}
-  />
-  <Title
+  <EmptyStateHeader
     headingLevel="h1"
-  >
-    t(view.empty-state, {"context":"title","name":"Quipucords"})
-  </Title>
+    icon={
+      <EmptyStateIcon
+        icon={[Function]}
+      />
+    }
+    titleText={
+      <React.Fragment>
+        t(view.empty-state, {"context":"title","name":"Quipucords"})
+      </React.Fragment>
+    }
+  />
   <EmptyStateBody>
     t(view.empty-state, {"context":"description"})
   </EmptyStateBody>
-  <EmptyStatePrimary>
-    <Button
-      onClick={[Function]}
-    >
-      t(view.empty-state_label, {"context":"source-navigate"})
-    </Button>
-  </EmptyStatePrimary>
+  <EmptyStateFooter>
+    <EmptyStateActions>
+      <Button
+        onClick={[Function]}
+      >
+        t(view.empty-state_label, {"context":"source-navigate"})
+      </Button>
+    </EmptyStateActions>
+  </EmptyStateFooter>
 </EmptyState>
 `;

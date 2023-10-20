@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ApplicationLauncher,
-  ApplicationLauncherItem,
   Avatar,
   Brand,
   Button,
   ButtonVariant,
   Divider,
-  Dropdown,
-  DropdownGroup,
-  DropdownItem,
-  DropdownPosition,
-  DropdownToggle,
-  KebabToggle,
   Masthead,
   MastheadBrand,
   MastheadContent,
@@ -29,11 +21,22 @@ import {
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
-  ToolbarItem
+  ToolbarItem,
+  PageSidebarBody
 } from '@patternfly/react-core';
+import {
+  ApplicationLauncher,
+  ApplicationLauncherItem,
+  Dropdown,
+  DropdownGroup,
+  DropdownItem,
+  DropdownPosition,
+  DropdownToggle,
+  KebabToggle
+} from '@patternfly/react-core/deprecated';
 import { BarsIcon, CogIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import imgAvatar from '@patternfly/react-core/src/components/Avatar/examples/avatarImg.svg';
+import imgAvatar from '@patternfly/react-core/src/components/assets/avatarImg.svg';
 import titleImgBrand from '../../styles/images/title-brand.svg';
 import titleImg from '../../styles/images/title.svg';
 import { storeHooks, reduxActions, reduxTypes } from '../../redux';
@@ -169,7 +172,7 @@ const PageLayout = ({
       <ToolbarContent>
         <ToolbarGroup
           variant="icon-button-group"
-          alignment={{ default: 'alignRight' }}
+          align={{ default: 'alignRight' }}
           spacer={{ default: 'spacerNone', md: 'spacerMd' }}
         >
           <ToolbarGroup variant="icon-button-group" visibility={{ default: 'hidden', lg: 'visible' }}>
@@ -178,7 +181,7 @@ const PageLayout = ({
                 position={DropdownPosition.right}
                 toggleIcon={<QuestionCircleIcon />}
                 onSelect={onAppLauncherSelect}
-                onToggle={onAppLauncherToggle}
+                onToggle={(_event, isOpen) => onAppLauncherToggle(isOpen)}
                 isOpen={isAppLauncherOpen}
                 items={appLauncherItems}
               />
@@ -189,7 +192,7 @@ const PageLayout = ({
               isPlain
               position="right"
               onSelect={onSmallScreenDropdownSelect}
-              toggle={<KebabToggle onToggle={onSmallScreenDropdownToggle} />}
+              toggle={<KebabToggle onToggle={(_event, isOpen) => onSmallScreenDropdownToggle(isOpen)} />}
               isOpen={isSmallScreenDropdownOpen}
               dropdownItems={smallScreenDropdownItems}
               ouiaId="user_dropdown"
@@ -202,7 +205,10 @@ const PageLayout = ({
             onSelect={onUserDropdownSelect}
             isOpen={isUserDropdownOpen}
             toggle={
-              <DropdownToggle icon={<Avatar src={imgAvatar} alt="Avatar" />} onToggle={onUserDropdownToggle}>
+              <DropdownToggle
+                icon={<Avatar src={imgAvatar} alt="Avatar" />}
+                onToggle={(_event, isOpen) => onUserDropdownToggle(isOpen)}
+              >
                 {session?.username}
               </DropdownToggle>
             }
@@ -222,7 +228,7 @@ const PageLayout = ({
         </PageToggleButton>
       </MastheadToggle>
       <MastheadMain>
-        <MastheadBrand>
+        <MastheadBrand component="a">
           <Brand alt={t('view.brand-image-alt', { name: uiName })}>
             <source srcSet={isUiBrand ? titleImgBrand : titleImg} />
           </Brand>
@@ -255,7 +261,11 @@ const PageLayout = ({
     </Nav>
   );
 
-  const sidebar = <PageSidebar nav={pageNav} />;
+  const sidebar = (
+    <PageSidebar>
+      <PageSidebarBody>{pageNav}</PageSidebarBody>
+    </PageSidebar>
+  );
 
   const pageSkipToContent = (
     <SkipToContent href={`#${mainContainerId}`}>{t('view.label', { context: ['skip-nav'] })}</SkipToContent>

@@ -270,6 +270,14 @@ exports[`I18n Component should generate a predictable locale key output snapshot
         "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
       },
       {
+        "key": "table.ariaLabel",
+        "match": "t('table.ariaLabel')",
+      },
+      {
+        "key": "table.summary",
+        "match": "t('table.summary')",
+      },
+      {
         "key": "table.header",
         "match": "t('table.header', { context: ['description'] })",
       },
@@ -449,6 +457,14 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       {
         "key": "view.error-message",
         "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      {
+        "key": "table.ariaLabel",
+        "match": "t('table.ariaLabel')",
+      },
+      {
+        "key": "table.summary",
+        "match": "t('table.summary')",
       },
       {
         "key": "table.header",
@@ -818,6 +834,14 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       {
         "key": "view.error-message",
         "match": "t('view.error-message', { context: [viewId], message: errorMessage })",
+      },
+      {
+        "key": "table.ariaLabel",
+        "match": "t('table.ariaLabel')",
+      },
+      {
+        "key": "table.summary",
+        "match": "t('table.summary')",
       },
       {
         "key": "table.header",

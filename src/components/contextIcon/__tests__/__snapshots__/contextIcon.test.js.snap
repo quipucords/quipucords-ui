@@ -250,8 +250,6 @@ exports[`ContextIcon Component should export, and handle icon variants: variants
 
 exports[`ContextIcon Component should render a basic component with default props: basic 1`] = `
 <UnknownIcon
-  color="currentColor"
-  noVerticalAlign={false}
   size="sm"
 />
 `;

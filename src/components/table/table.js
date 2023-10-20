@@ -3,17 +3,8 @@ import PropTypes from 'prop-types';
 import { useShallowCompareEffect } from 'react-use';
 import _cloneDeep from 'lodash/cloneDeep';
 import { Grid, GridItem } from '@patternfly/react-core';
-import {
-  ExpandableRowContent,
-  SortByDirection,
-  TableComposable,
-  TableVariant,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
-} from '@patternfly/react-table';
+import { ExpandableRowContent, SortByDirection, TableVariant, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Table as PfTable } from '@patternfly/react-table/deprecated';
 import { TableEmpty } from './tableEmpty';
 import { tableHelpers } from './tableHelpers';
 
@@ -370,7 +361,7 @@ const Table = ({
     <Grid>
       <GridItem span={12}>
         {(updatedHeaderAndRows?.bodyRows?.length && (
-          <TableComposable
+          <PfTable
             aria-label={ariaLabel}
             borders={isBorders}
             className={`${componentClassNames.table} ${className}`}
@@ -380,7 +371,7 @@ const Table = ({
           >
             {isHeader && renderHeader()}
             {renderBody()}
-          </TableComposable>
+          </PfTable>
         )) ||
           renderEmpty()}
       </GridItem>

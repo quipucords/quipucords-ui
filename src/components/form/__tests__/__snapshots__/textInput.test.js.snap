@@ -32,17 +32,20 @@ exports[`TextInput Component should handle readOnly, disabled: active 1`] = `
   "children": []
 }"
 >
-  <input
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__text-input "
-    data-ouia-component-id="generatedid-"
-    data-ouia-component-type="PF4/TextInput"
-    data-ouia-safe="true"
-    id="generatedid-"
-    name="generatedid-"
-    type="text"
-    value=""
-  />
+  <span
+    class="pf-v5-c-form-control quipucords-form__text-input "
+  >
+    <input
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      data-ouia-component-type="PF5/TextInput"
+      data-ouia-safe="true"
+      id="generatedid-"
+      name="generatedid-"
+      type="text"
+      value=""
+    />
+  </span>
 </textinput>
 `;
 
@@ -60,18 +63,21 @@ exports[`TextInput Component should handle readOnly, disabled: disabled 1`] = `
   "children": []
 }"
 >
-  <input
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__text-input "
-    data-ouia-component-id="generatedid-"
-    data-ouia-component-type="PF4/TextInput"
-    data-ouia-safe="true"
-    disabled=""
-    id="generatedid-"
-    name="generatedid-"
-    type="text"
-    value=""
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-disabled quipucords-form__text-input "
+  >
+    <input
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      data-ouia-component-type="PF5/TextInput"
+      data-ouia-safe="true"
+      disabled=""
+      id="generatedid-"
+      name="generatedid-"
+      type="text"
+      value=""
+    />
+  </span>
 </textinput>
 `;
 
@@ -89,18 +95,21 @@ exports[`TextInput Component should handle readOnly, disabled: readOnly 1`] = `
   "children": []
 }"
 >
-  <input
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__text-input "
-    data-ouia-component-id="generatedid-"
-    data-ouia-component-type="PF4/TextInput"
-    data-ouia-safe="true"
-    id="generatedid-"
-    name="generatedid-"
-    readonly=""
-    type="text"
-    value=""
-  />
+  <span
+    class="pf-v5-c-form-control pf-m-readonly quipucords-form__text-input "
+  >
+    <input
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      data-ouia-component-type="PF5/TextInput"
+      data-ouia-safe="true"
+      id="generatedid-"
+      name="generatedid-"
+      readonly=""
+      type="text"
+      value=""
+    />
+  </span>
 </textinput>
 `;
 
@@ -118,17 +127,20 @@ exports[`TextInput Component should render a basic component: basic 1`] = `
   "children": []
 }"
 >
-  <input
-    aria-invalid="false"
-    class="pf-c-form-control quipucords-form__text-input "
-    data-ouia-component-id="generatedid-"
-    data-ouia-component-type="PF4/TextInput"
-    data-ouia-safe="true"
-    id="generatedid-"
-    name="generatedid-"
-    type="text"
-    value=""
-  />
+  <span
+    class="pf-v5-c-form-control quipucords-form__text-input "
+  >
+    <input
+      aria-invalid="false"
+      data-ouia-component-id="generatedid-"
+      data-ouia-component-type="PF5/TextInput"
+      data-ouia-safe="true"
+      id="generatedid-"
+      name="generatedid-"
+      type="text"
+      value=""
+    />
+  </span>
 </textinput>
 `;
 
@@ -139,9 +151,8 @@ exports[`TextInput Component should return a mouseup event on text clear: emulat
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="generatedid-"
         name="generatedid-"
@@ -154,9 +165,8 @@ exports[`TextInput Component should return a mouseup event on text clear: emulat
       "persist": [Function],
       "target": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="generatedid-"
         name="generatedid-"
@@ -176,9 +186,8 @@ exports[`TextInput Component should return an emulated onChange event: emulated 
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="generatedid-"
         name="generatedid-"
@@ -191,9 +200,8 @@ exports[`TextInput Component should return an emulated onChange event: emulated 
       "persist": [Function],
       "target": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="generatedid-"
         name="generatedid-"
@@ -213,9 +221,8 @@ exports[`TextInput Component should return an emulated onClear event on escape: 
       "checked": undefined,
       "currentTarget": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="test-id"
         name="generatedid-"
@@ -228,9 +235,8 @@ exports[`TextInput Component should return an emulated onClear event on escape: 
       "persist": [Function],
       "target": <input
         aria-invalid="false"
-        class="pf-c-form-control quipucords-form__text-input "
         data-ouia-component-id="generatedid-"
-        data-ouia-component-type="PF4/TextInput"
+        data-ouia-component-type="PF5/TextInput"
         data-ouia-safe="true"
         id="test-id"
         name="generatedid-"

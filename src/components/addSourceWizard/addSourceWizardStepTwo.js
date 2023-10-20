@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant, Form, InputGroup, ValidatedOptions } from '@patternfly/react-core';
+import { Button, ButtonVariant, Form, InputGroup, ValidatedOptions, InputGroupItem } from '@patternfly/react-core';
 import { PlusIcon } from '@patternfly/react-icons';
 import { connect, store, reduxActions, reduxSelectors, reduxTypes } from '../../redux';
 import { helpers } from '../../common';
@@ -389,34 +389,38 @@ class AddSourceWizardStepTwo extends React.Component {
         errorMessage={stepTwoErrorMessages.credentials || t('form-dialog.label', { context: ['credential', 'error'] })}
       >
         <InputGroup>
-          <DropdownSelect
-            placeholder={t('form-dialog.label_placeholder', {
-              context: [
-                'add-source',
-                'credential',
-                multiselectCredentials && 'multi',
-                !availableCredentials.length && 'add'
-              ]
-            })}
-            id="credentials"
-            isInline={false}
-            disabled={!sourceCredentials.length}
-            variant={(multiselectCredentials && SelectVariant.checkbox) || SelectVariant.single}
-            onSelect={onChangeCredential}
-            options={sourceCredentials}
-            selectedOptions={credentials}
-            key={`dropdown-update-${sourceCredentials.length}`}
-            ouiaId="add_credentials_select"
-          />
-          <Button
-            id="addCredentials"
-            variant={ButtonVariant.control}
-            aria-label={t('form-dialog.label', { context: 'add-credential' })}
-            icon={<PlusIcon />}
-            onClick={this.onAddCredential}
-            title={t('form-dialog.label', { context: 'add-credential' })}
-            ouiaId="add_credentials_add_new"
-          />
+          <InputGroupItem>
+            <DropdownSelect
+              placeholder={t('form-dialog.label_placeholder', {
+                context: [
+                  'add-source',
+                  'credential',
+                  multiselectCredentials && 'multi',
+                  !availableCredentials.length && 'add'
+                ]
+              })}
+              id="credentials"
+              isInline={false}
+              disabled={!sourceCredentials.length}
+              variant={(multiselectCredentials && SelectVariant.checkbox) || SelectVariant.single}
+              onSelect={onChangeCredential}
+              options={sourceCredentials}
+              selectedOptions={credentials}
+              key={`dropdown-update-${sourceCredentials.length}`}
+              ouiaId="add_credentials_select"
+            />
+          </InputGroupItem>
+          <InputGroupItem>
+            <Button
+              id="addCredentials"
+              variant={ButtonVariant.control}
+              aria-label={t('form-dialog.label', { context: 'add-credential' })}
+              icon={<PlusIcon />}
+              onClick={this.onAddCredential}
+              title={t('form-dialog.label', { context: 'add-credential' })}
+              ouiaId="add_credentials_add_new"
+            />
+          </InputGroupItem>
         </InputGroup>
       </FormGroup>
     );

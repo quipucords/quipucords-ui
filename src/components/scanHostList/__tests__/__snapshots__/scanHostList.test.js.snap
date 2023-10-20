@@ -31,7 +31,8 @@ exports[`ScanHostList Component should render a basic component: basic 1`] = `
 }"
 >
   <ul
-    class="pf-c-list pf-m-plain quipucords-infinite-results quipucords-infinite-list"
+    class="pf-v5-c-list pf-m-plain quipucords-infinite-results quipucords-infinite-list"
+    role="list"
   >
     <li
       class=""
@@ -63,27 +64,26 @@ exports[`ScanHostList Component should render a component error: error 1`] = `
 }"
 >
   <div
-    class="pf-c-empty-state quipucords-empty-state__alert"
+    class="pf-v5-c-empty-state quipucords-empty-state__alert"
   >
     <div
-      class="pf-c-empty-state__content"
+      class="pf-v5-c-empty-state__content"
     >
       <div
-        aria-label="Danger Alert"
-        class="pf-c-alert pf-m-inline pf-m-plain pf-m-danger"
+        class="pf-v5-c-alert pf-m-inline pf-m-plain pf-m-danger"
         data-ouia-component-id="OUIA-Generated-Alert-danger-1"
-        data-ouia-component-type="PF4/Alert"
+        data-ouia-component-type="PF5/Alert"
         data-ouia-safe="true"
       >
         <div
-          class="pf-c-alert__icon"
+          class="pf-v5-c-alert__icon"
         >
           <svg
             aria-hidden="true"
+            class="pf-v5-svg"
             fill="currentColor"
             height="1em"
             role="img"
-            style="vertical-align: -0.125em;"
             viewBox="0 0 512 512"
             width="1em"
           >
@@ -93,17 +93,17 @@ exports[`ScanHostList Component should render a component error: error 1`] = `
           </svg>
         </div>
         <h4
-          class="pf-c-alert__title"
+          class="pf-v5-c-alert__title"
         >
           <span
-            class="pf-u-screen-reader"
+            class="pf-v5-screen-reader"
           >
             Danger alert:
           </span>
           t(view.error, {"context":"scan-hosts"})
         </h4>
         <div
-          class="pf-c-alert__description"
+          class="pf-v5-c-alert__description"
         >
           t(view.error-message, {"context":"scan-hosts","message":"Lorem Ipsum."})
         </div>
@@ -129,20 +129,20 @@ exports[`ScanHostList Component should render a component pending: pending 1`] =
 }"
 >
   <div
-    class="pf-c-empty-state pf-m-lg quipucords-empty-state"
+    class="pf-v5-c-empty-state pf-m-lg quipucords-empty-state"
   >
     <div
-      class="pf-c-empty-state__content"
+      class="pf-v5-c-empty-state__content"
     >
       <svg
         aria-label="Contents"
         aria-valuetext="Loading..."
-        class="pf-c-spinner pf-m-sm"
+        class="pf-v5-c-spinner pf-m-sm"
         role="progressbar"
         viewBox="0 0 100 100"
       >
         <circle
-          class="pf-c-spinner__path"
+          class="pf-v5-c-spinner__path"
           cx="50"
           cy="50"
           fill="none"

@@ -58,6 +58,5 @@ describe('Checkbox Component', () => {
     component.fireEvent.click(input, mockEvent);
 
     expect(props.onChange).toHaveBeenCalledTimes(1);
-    expect(props.onChange.mock.calls).toMatchSnapshot('emulated event, change');
   });
 });

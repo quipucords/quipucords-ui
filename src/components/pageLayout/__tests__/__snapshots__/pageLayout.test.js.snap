@@ -1,23 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageLayout Component should render a basic component branded: brand 1`] = `
-<a
-  class="pf-c-masthead__brand"
-  tabindex="0"
->
-  <picture
-    class="pf-c-brand pf-m-picture"
-  >
-    <source
-      srcset="title-brand.svg"
-    />
-    <img
-      alt="t(view.brand-image-alt, {"name":"Quipucords"})"
-      src=""
-    />
-  </picture>
-</a>
-`;
+exports[`PageLayout Component should render a basic component branded: brand 1`] = `null`;
 
 exports[`PageLayout Component should render a basic component: basic 1`] = `
 <Page
@@ -31,15 +14,13 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
           aria-label="Global navigation"
           variant="plain"
         >
-          <BarsIcon
-            color="currentColor"
-            noVerticalAlign={false}
-            size="sm"
-          />
+          <BarsIcon />
         </PageToggleButton>
       </MastheadToggle>
       <MastheadMain>
-        <MastheadBrand>
+        <MastheadBrand
+          component="a"
+        >
           <Brand
             alt="t(view.brand-image-alt, {"name":"Quipucords"})"
           >
@@ -60,7 +41,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             showClearFiltersButton={false}
           >
             <ForwardRef
-              alignment={
+              align={
                 {
                   "default": "alignRight",
                 }
@@ -113,16 +94,9 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                     onSelect={[Function]}
                     onToggle={[Function]}
                     position="right"
-                    removeFindDomNode={false}
                     searchNoResultsText="No results found"
                     searchPlaceholderText="Filter by name..."
-                    toggleIcon={
-                      <QuestionCircleIcon
-                        color="currentColor"
-                        noVerticalAlign={false}
-                        size="sm"
-                      />
-                    }
+                    toggleIcon={<QuestionCircleIcon />}
                   />
                 </ToolbarItem>
               </ForwardRef>
@@ -149,11 +123,7 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
                       <DropdownItem
                         onClick={[Function]}
                       >
-                        <CogIcon
-                          color="currentColor"
-                          noVerticalAlign={false}
-                          size="sm"
-                        />
+                        <CogIcon />
                          
                         t(view.label, {"context":"about"})
                       </DropdownItem>,
@@ -220,13 +190,13 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
   isBreadcrumbWidthLimited={false}
   isManagedSidebar={true}
   isNotificationDrawerExpanded={false}
+  mainComponent="main"
   mainContainerId="main-content"
   mainTabIndex={-1}
   onNotificationDrawerExpand={[Function]}
-  onPageResize={[Function]}
   sidebar={
-    <PageSidebar
-      nav={
+    <PageSidebar>
+      <PageSidebarBody>
         <Nav
           onSelect={[Function]}
           onToggle={[Function]}
@@ -236,6 +206,8 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
           <NavList
             ariaLeftScroll="Scroll left"
             ariaRightScroll="Scroll right"
+            backScrollAriaLabel="Scroll back"
+            forwardScrollAriaLabel="Scroll foward"
           >
             <NavItem
               className="quipucords-navItem"
@@ -287,13 +259,12 @@ exports[`PageLayout Component should render a basic component: basic 1`] = `
             </NavItem>
           </NavList>
         </Nav>
-      }
-    />
+      </PageSidebarBody>
+    </PageSidebar>
   }
   skipToContent={
     <SkipToContent
       href="#main-content"
-      show={false}
     >
       t(view.label, {"context":"skip-nav"})
     </SkipToContent>

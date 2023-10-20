@@ -4,7 +4,7 @@ exports[`AboutModal Component should contain brand: brand 1`] = `
 NodeList [
   <img
     alt="Ipsum"
-    class="pf-c-about-modal-box__brand-image"
+    class="pf-v5-c-about-modal-box__brand-image"
     src="logo-brand.svg"
   />,
   <img
@@ -13,7 +13,7 @@ NodeList [
   />,
   <img
     alt="Ipsum"
-    class="pf-c-about-modal-box__brand-image"
+    class="pf-v5-c-about-modal-box__brand-image"
     src="logo-brand.svg"
   />,
   <img
@@ -27,7 +27,7 @@ exports[`AboutModal Component should contain brand: no brand 1`] = `
 NodeList [
   <img
     alt="Ipsum"
-    class="pf-c-about-modal-box__brand-image"
+    class="pf-v5-c-about-modal-box__brand-image"
     src="logo.svg"
   />,
   <img
@@ -37,173 +37,171 @@ NodeList [
 ]
 `;
 
-exports[`AboutModal Component should hide the component: hidden modal 1`] = `
-<screen>
-  <div>
-    <div />
-  </div>
-</screen>
-`;
+exports[`AboutModal Component should hide the component: hidden modal 1`] = `<screen />`;
 
 exports[`AboutModal Component should render a basic component with default props: basic 1`] = `
 <screen>
   <div>
     <div
-      class="pf-c-backdrop"
+      class="pf-v5-c-backdrop"
     >
       <div
-        class="pf-l-bullseye"
+        class="pf-v5-l-bullseye"
       >
         <div
-          aria-describedby="pf-about-modal-content-0"
           aria-labelledby="pf-about-modal-title-0"
           aria-modal="true"
-          class="pf-c-about-modal-box quipucords-about-modal"
+          class="pf-v5-c-modal-box pf-m-lg"
+          data-ouia-component-id="OUIA-Generated-Modal-large-1"
+          data-ouia-component-type="PF5/ModalContent"
+          data-ouia-safe="true"
+          id="pf-modal-part-0"
           role="dialog"
         >
           <div
-            class="pf-c-about-modal-box__brand"
+            class="pf-v5-c-about-modal-box quipucords-about-modal"
+            style="--pf-v5-c-about-modal-box--BackgroundImage: url(about-bg.png);"
           >
-            <img
-              alt="Quipucords"
-              class="pf-c-about-modal-box__brand-image"
-              src="logo.svg"
-            />
-          </div>
-          <div
-            class="pf-c-about-modal-box__close"
-          >
-            <button
-              aria-disabled="false"
-              aria-label="Close Dialog"
-              class="pf-c-button pf-m-plain"
-              data-ouia-component-id="OUIA-Generated-Button-plain-1"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe="true"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 352 512"
-                width="1em"
-              >
-                <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                />
-              </svg>
-            </button>
-          </div>
-          <div
-            class="pf-c-about-modal-box__header"
-          >
-            <h1
-              class="pf-c-title pf-m-4xl"
-              data-ouia-component-id="OUIA-Generated-Title-1"
-              data-ouia-component-type="PF4/Title"
-              data-ouia-safe="true"
-              id="pf-about-modal-title-0"
+            <div
+              class="pf-v5-c-about-modal-box__brand"
             >
               <img
                 alt="Quipucords"
-                src="title.svg"
+                class="pf-v5-c-about-modal-box__brand-image"
+                src="logo.svg"
               />
-            </h1>
-          </div>
-          <div
-            class="pf-c-about-modal-box__content"
-            id="pf-about-modal-content-0"
-          >
+            </div>
             <div
-              class="pf-c-about-modal-box__body"
+              class="pf-v5-c-about-modal-box__close"
+            >
+              <button
+                aria-disabled="false"
+                aria-label="Close Dialog"
+                class="pf-v5-c-button pf-m-plain"
+                data-ouia-component-id="OUIA-Generated-Button-plain-1"
+                data-ouia-component-type="PF5/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="pf-v5-svg"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  viewBox="0 0 352 512"
+                  width="1em"
+                >
+                  <path
+                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="pf-v5-c-about-modal-box__header"
+            >
+              <h1
+                class="pf-v5-c-title pf-m-4xl"
+                data-ouia-component-id="OUIA-Generated-Title-1"
+                data-ouia-component-type="PF5/Title"
+                data-ouia-safe="true"
+                id="pf-about-modal-title-0"
+              >
+                <img
+                  alt="Quipucords"
+                  src="title.svg"
+                />
+              </h1>
+            </div>
+            <div
+              class="pf-v5-c-about-modal-box__content"
             >
               <div
-                class="pf-c-content"
+                class="pf-v5-c-about-modal-box__body"
               >
                 <div
-                  aria-label="t(about-modal.copy-confirmation)"
-                  aria-live="polite"
-                  class="quipucords-about-modal-list"
-                  tabindex="-1"
+                  class="pf-v5-c-content"
                 >
                   <div
-                    class="pf-c-content"
+                    aria-label="t(about-modal.copy-confirmation)"
+                    aria-live="polite"
+                    class="quipucords-about-modal-list"
+                    tabindex="-1"
                   >
-                    <dl
-                      class=""
+                    <div
+                      class="pf-v5-c-content"
                     >
-                      <dt
+                      <dl
                         class=""
                       >
-                         t(about-modal.username) 
-                      </dt>
-                      <dd
-                        class=""
+                        <dt
+                          class=""
+                        >
+                           t(about-modal.username) 
+                        </dt>
+                        <dd
+                          class=""
+                        >
+                           lorem 
+                        </dd>
+                        <dt
+                          class=""
+                        >
+                           t(about-modal.server-version) 
+                        </dt>
+                        <dd
+                          class=""
+                        >
+                           0.0.0.0000000 
+                        </dd>
+                        <dt
+                          class=""
+                        >
+                           t(about-modal.ui-version) 
+                        </dt>
+                        <dd
+                          class=""
+                        >
+                           0.0.0.0000000 
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                  <div
+                    class="quipucords-about-modal-copy-footer"
+                  >
+                    <button
+                      aria-disabled="false"
+                      class="pf-v5-c-button pf-m-tertiary quipucords-about-modal-copy-button"
+                      data-ouia-component-id="OUIA-Generated-Button-tertiary-1"
+                      data-ouia-component-type="PF5/Button"
+                      data-ouia-safe="true"
+                      title="t(about-modal.copy-button)"
+                      type="button"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="1em"
                       >
-                         lorem 
-                      </dd>
-                      <dt
-                        class=""
-                      >
-                         t(about-modal.server-version) 
-                      </dt>
-                      <dd
-                        class=""
-                      >
-                         0.0.0.0000000 
-                      </dd>
-                      <dt
-                        class=""
-                      >
-                         t(about-modal.ui-version) 
-                      </dt>
-                      <dd
-                        class=""
-                      >
-                         0.0.0.0000000 
-                      </dd>
-                    </dl>
+                        <path
+                          d="M128 184c0-30.879 25.122-56 56-56h136V56c0-13.255-10.745-24-24-24h-80.61C204.306 12.89 183.637 0 160 0s-44.306 12.89-55.39 32H24C10.745 32 0 42.745 0 56v336c0 13.255 10.745 24 24 24h104V184zm32-144c13.255 0 24 10.745 24 24s-10.745 24-24 24-24-10.745-24-24 10.745-24 24-24zm184 248h104v200c0 13.255-10.745 24-24 24H184c-13.255 0-24-10.745-24-24V184c0-13.255 10.745-24 24-24h136v104c0 13.2 10.8 24 24 24zm104-38.059V256h-96v-96h6.059a24 24 0 0 1 16.97 7.029l65.941 65.941a24.002 24.002 0 0 1 7.03 16.971z"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
-                <div
-                  class="quipucords-about-modal-copy-footer"
-                >
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-tertiary quipucords-about-modal-copy-button"
-                    data-ouia-component-id="OUIA-Generated-Button-tertiary-1"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    title="t(about-modal.copy-button)"
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 448 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M128 184c0-30.879 25.122-56 56-56h136V56c0-13.255-10.745-24-24-24h-80.61C204.306 12.89 183.637 0 160 0s-44.306 12.89-55.39 32H24C10.745 32 0 42.745 0 56v336c0 13.255 10.745 24 24 24h104V184zm32-144c13.255 0 24 10.745 24 24s-10.745 24-24 24-24-10.745-24-24 10.745-24 24-24zm184 248h104v200c0 13.255-10.745 24-24 24H184c-13.255 0-24-10.745-24-24V184c0-13.255 10.745-24 24-24h136v104c0 13.2 10.8 24 24 24zm104-38.059V256h-96v-96h6.059a24 24 0 0 1 16.97 7.029l65.941 65.941a24.002 24.002 0 0 1 7.03 16.971z"
-                      />
-                    </svg>
-                  </button>
-                </div>
               </div>
+              <p
+                class="pf-v5-c-about-modal-box__strapline"
+              />
             </div>
-            <p
-              class="pf-c-about-modal-box__strapline"
-            />
           </div>
-          <div
-            class="pf-c-about-modal-box__hero"
-          />
         </div>
       </div>
     </div>

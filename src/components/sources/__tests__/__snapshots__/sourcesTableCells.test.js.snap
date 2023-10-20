@@ -36,11 +36,7 @@ exports[`SourcesTableCells should return consistent cell results: basic actionsC
             onClick={[Function]}
             variant="plain"
           >
-            <PencilAltIcon
-              color="currentColor"
-              noVerticalAlign={false}
-              size="sm"
-            />
+            <PencilAltIcon />
           </Button>
         </Tooltip>
       </OverflowMenuItem>
@@ -58,11 +54,7 @@ exports[`SourcesTableCells should return consistent cell results: basic actionsC
             onClick={[Function]}
             variant="plain"
           >
-            <TrashIcon
-              color="currentColor"
-              noVerticalAlign={false}
-              size="sm"
-            />
+            <TrashIcon />
           </Button>
         </Tooltip>
       </OverflowMenuItem>
@@ -108,13 +100,7 @@ exports[`SourcesTableCells should return consistent cell results: basic actionsC
           },
         ]
       }
-      placeholder={
-        <EllipsisVIcon
-          color="currentColor"
-          noVerticalAlign={false}
-          size="sm"
-        />
-      }
+      placeholder={<EllipsisVIcon />}
       position="right"
       selectedOptions={null}
       splitButtonVariant={null}

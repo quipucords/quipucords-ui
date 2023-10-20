@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputGroup } from '@patternfly/react-core';
+import { InputGroup, InputGroupItem } from '@patternfly/react-core';
 import _debounce from 'lodash/debounce';
 import { reduxTypes, storeHooks } from '../../redux';
 import { useView } from '../view/viewContext';
@@ -147,15 +147,17 @@ const ViewToolbarTextInput = ({
 
   return (
     <InputGroup>
-      <TextInput
-        aria-label={t('toolbar.label', { context: ['placeholder', 'filter', filter] })}
-        maxLength={255}
-        onClear={onClear}
-        onKeyUp={onKeyUp}
-        value={currentValue}
-        placeholder={t('toolbar.label', { context: ['placeholder', 'filter', filter] })}
-        ouiaId="toolbar_search_name"
-      />
+      <InputGroupItem>
+        <TextInput
+          aria-label={t('toolbar.label', { context: ['placeholder', 'filter', filter] })}
+          maxLength={255}
+          onClear={onClear}
+          onKeyUp={onKeyUp}
+          value={currentValue}
+          placeholder={t('toolbar.label', { context: ['placeholder', 'filter', filter] })}
+          ouiaId="toolbar_search_name"
+        />
+      </InputGroupItem>
     </InputGroup>
   );
 };
