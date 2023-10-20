@@ -161,7 +161,6 @@ exports[`AddSourceWizardStepOne Component should render a basic component: basic
             t(form-dialog.label, {"context":"ansible-server"})
           </label>
         </div>
-        
       </div>
     </div>
   </form>

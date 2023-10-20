@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AlertVariant } from '@patternfly/react-core';
 import { useShallowCompareEffect } from 'react-use';
 import { reduxActions, reduxTypes, storeHooks } from '../../redux';
@@ -178,7 +178,7 @@ const useOnScanAction = ({
   const { data, error, fulfilled, pending } = useAliasSelectorsResponse(({ scans }) => scans?.action?.[scanId]);
   const { errorMessage } = data?.[0] || {};
 
-  useEffect(() => {
+  useShallowCompareEffect(() => {
     if (scanId && !pending) {
       const dispatchList = [];
 

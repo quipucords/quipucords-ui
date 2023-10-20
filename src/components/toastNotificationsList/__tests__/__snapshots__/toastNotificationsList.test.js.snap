@@ -101,7 +101,7 @@ exports[`ToastNotificationsList Component should handle toast variations: variat
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onTimeout={[Function]}
-    timeout={false}
+    timeout={8000}
     title="PAUSED, Dolor sit"
     truncateTitle={2}
     variant="info"

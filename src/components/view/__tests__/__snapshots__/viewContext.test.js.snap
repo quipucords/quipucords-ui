@@ -48,14 +48,12 @@ exports[`ViewContext should return specific properties: specific properties 1`] 
     "$$typeof": Symbol(react.context),
     "Consumer": {
       "$$typeof": Symbol(react.context),
-      "_calculateChangedBits": null,
       "_context": [Circular],
     },
     "Provider": {
       "$$typeof": Symbol(react.provider),
       "_context": [Circular],
     },
-    "_calculateChangedBits": null,
     "_currentRenderer": null,
     "_currentRenderer2": null,
     "_currentValue": [
@@ -66,6 +64,8 @@ exports[`ViewContext should return specific properties: specific properties 1`] 
       {},
       [Function],
     ],
+    "_defaultValue": null,
+    "_globalName": null,
     "_threadCount": 0,
   },
   "useConfig": [Function],

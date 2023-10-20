@@ -132,7 +132,6 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
           type="text"
           value=""
         />
-        
       </div>
     </div>
     <div
@@ -206,7 +205,6 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
           type="text"
           value=""
         />
-        
       </div>
     </div>
     <div
@@ -310,7 +308,6 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
             </span>
           </button>
         </div>
-        
       </div>
     </div>
     <div
@@ -341,7 +338,6 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
             t(form-dialog.label, {"context":"paramiko"}, [object Object])
           </label>
         </div>
-        
       </div>
     </div>
   </form>

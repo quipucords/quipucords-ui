@@ -189,7 +189,6 @@ exports[`FormGroup Component should render a basic component: basic formgroup 1`
         type="text"
         value=""
       />
-      
     </div>
   </div>
 </formgroup>
