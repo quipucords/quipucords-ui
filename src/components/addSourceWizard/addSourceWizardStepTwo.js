@@ -304,7 +304,7 @@ class AddSourceWizardStepTwo extends React.Component {
       case 'vcenter':
       case 'satellite':
       case 'openshift':
-      case 'acs':
+      case 'rhacs':
       case 'ansible':
         const hostPortError = `${
           (touched.hostsSingle &&
@@ -462,7 +462,7 @@ class AddSourceWizardStepTwo extends React.Component {
           </FormGroup>
         );
       case 'openshift':
-      case 'acs':
+      case 'rhacs':
       case 'vcenter':
       case 'satellite':
       case 'ansible':

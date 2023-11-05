@@ -86,16 +86,16 @@ exports[`AddSourceWizardStepOne Component should render a basic component: basic
             data-ouia-component-id="OUIA-Generated-Radio-3"
             data-ouia-component-type="PF4/Radio"
             data-ouia-safe="true"
-            id="sourceType-acs"
+            id="sourceType-rhacs"
             name="sourceType"
             type="radio"
-            value="acs"
+            value="rhacs"
           />
           <label
             class="pf-c-radio__label"
-            for="sourceType-acs"
+            for="sourceType-rhacs"
           >
-            t(form-dialog.label, {"context":"acs"})
+            t(form-dialog.label, {"context":"rhacs"})
           </label>
         </div>
         <div
