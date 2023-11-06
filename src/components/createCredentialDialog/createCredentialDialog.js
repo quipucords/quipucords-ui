@@ -99,7 +99,7 @@ const CreateCredentialDialog = ({
 
     switch (credentialType) {
       case 'openshift':
-      case 'acs':
+      case 'rhacs':
         setAuthType('token');
         break;
       case 'network':

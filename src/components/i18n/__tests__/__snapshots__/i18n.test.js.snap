@@ -1321,7 +1321,7 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "form-dialog.label",
-        "match": "t('form-dialog.label', { context: 'acs' })",
+        "match": "t('form-dialog.label', { context: 'rhacs' })",
       },
       {
         "key": "form-dialog.label",
@@ -1433,7 +1433,7 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'acs', 'credential'] })",
+        "match": "translate('form-dialog.label', { context: ['option', 'rhacs', 'credential'] })",
       },
       {
         "key": "form-dialog.label",
