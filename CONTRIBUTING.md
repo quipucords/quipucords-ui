@@ -11,15 +11,10 @@ Quipucords-UI makes use of
 
 > Instead of relying on GitHub merge commits and squashing, we recommend breaking down changes into smaller, independent commits.
 
-> Working directly on the main repository is discouraged.
-
 #### Branch syncing
-Linear commit history for Quipucords-UI makes syncing concise
-- `dev` is always rebased from `main`
-  - typically after a release
-  - or in prep for a fast-forward of `main`
-- `main` is fast-forwarded from `dev`
-  - typically when commits are prepared for release
+Linear commit history for Quipucords-UI simplifies understanding and syncing changes across branches. Do not use merge commits. Always use fast-forward rebase.
+
+New changes must be made in a branch and be submitted via GitHub pull requests. PRs should target merging to `main`.
 
 </details>
 
@@ -29,8 +24,7 @@ Linear commit history for Quipucords-UI makes syncing concise
 All development work should be handled through GitHub's fork and pull workflow.
 
 #### Setting up a pull request
-When multiple developers are contributing features, development pull requests (PRs) should be opened against the `dev` branch. PRs directly to `main` are discouraged,
-Exceptions are allowed, but it is important to ensure that updates to the `main` branch are also rebased against the `dev` branch.
+When multiple developers are contributing features, development pull requests (PRs) should be opened against the `main` branch.
 
 > If your pull request work contains any of the following warning signs
 >  - out of sync commits (is not rebased against the `base branch`)
@@ -94,15 +88,14 @@ For additional information on failures for
 - Pull request code, see [Updating unit tests during development]()
 
 > To resolve failures for any GitHub actions make sure you first review the results of the test by
-clicking the `checks` tab on the related pull request.
-
+> clicking the `checks` tab on the related pull request.
+>
 > Caching for GitHub actions and NPM packages is active. This caching allows subsequent pull request
 > updates to avoid reinstalling yarn dependencies.
 >
 > Occasionally test failures can occur after recent NPM package updates either in the pull request
 > itself or in a prior commit to the pull request. The most common reason for this failure presents when
-> a NPM package has changed its support for different versions of NodeJS and those packages are updated
-> in the `dev` branch.
+> a NPM package has changed its support for different versions of NodeJS.
 >
 > If test failures are happening shortly after a NPM package update you may need to clear the
 > GitHub actions cache and restart the related tests.
@@ -171,7 +164,7 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
 
 ##### Basic NPM updates
 
-1. Clone the repository locally, or bring your fork up-to-date with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Open a terminal instance in the repository context and run
     ```
     $ yarn build:deps
@@ -191,13 +184,13 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
          ```
          $ yarn start:stage
          ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
+1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
 > If any part of the "basic path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping any package update.
 > A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps` this should contain a listing of the skipped packages.
 
 ##### Core NPM updates
-1. Clone the repository locally, or bring your fork up-to-date with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Open a terminal instance in the repository context and run
     ```
     $ yarn build:deps-core
@@ -217,14 +210,14 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
         ```
         $ yarn start:stage
         ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
+1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
 > If any part of the "core path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping potentially any package update.
 > A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps-core` this should contain a listing of the skipped packages.
 
 ##### Manual NPM updates
 This is the slowest part of package updates. If any packages are skipped during the "basic" and "core" automation runs. Those packages will need to be updated manually.
-1. Clone the repository locally, or bring your fork up-to-date, with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date, with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Remove/delete the `node_modules` directory (there may be differences between branches that create package alterations)
 1. Run
    ```
