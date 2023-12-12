@@ -101,7 +101,7 @@ const setupDotenvFilesForEnv = ({
     const OUTPUT_ONLY = process.env[`_${dotenvNamePrefix}_OUTPUT_ONLY`] === 'true';
     const OPEN_PATH =
       process.env[`${dotenvNamePrefix}_OPEN_PATH`] || process.env.OPEN_PATH || undefined;
-    const PORT = process.env[`${dotenvNamePrefix}_PORT`] || process.env.PORT || '3000';
+    const PORT = process.env[`${dotenvNamePrefix}_PORT`] || process.env.PORT || '3001';
     const PUBLIC_PATH =
       process.env[`${dotenvNamePrefix}_PUBLIC_PATH`] || process.env.PUBLIC_PATH || '/';
     const SRC_DIR = path.resolve(

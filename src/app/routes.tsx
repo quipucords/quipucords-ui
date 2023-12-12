@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router';
 import NotFound from '../pages/notFound/NotFound';
+import { Navigate, Redirect } from 'react-router-dom';
 
 const Sources = React.lazy(() => import('../pages/sources/SourcesListView'));
 const Scans = React.lazy(() => import('../pages/scans/ScansListView'));
+const Credentials = React.lazy(() => import('../pages/credentials/CredentialsListView'))
 
 export interface IAppRoute {
   id: string;
@@ -27,7 +29,7 @@ const routes: AppRouteConfig[] = [
     id: 'sources',
     component: <Sources />,
     label: 'Sources',
-    path: '/',
+    path: '/sources',
     title: 'Sources'
   },
   {
@@ -36,6 +38,13 @@ const routes: AppRouteConfig[] = [
     label: 'Scans',
     path: '/scans',
     title: 'Scans'
+  },
+  {
+    id: 'credentials',
+    component: <Credentials />,
+    label: 'Credentials',
+    path: '/credentials',
+    title: 'Credentials'
   }
 ];
 
@@ -50,6 +59,7 @@ const AppRoutes = (): React.ReactElement => (
       {flattenedRoutes.map(route => (
         <Route path={route.path} element={route.component} key={route.id} />
       ))}
+      <Route path="/" element={<Navigate to="/sources" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </React.Suspense>

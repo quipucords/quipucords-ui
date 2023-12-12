@@ -41,7 +41,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       </MastheadToggle>
       <MastheadMain>
         <MastheadBrand>
-          <Brand src={logo} alt="Patterfly Logo" heights={{ default: '36px' }} />
+          <Brand src={logo} alt="Quipucords Logo" heights={{ default: '36px' }} />
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
