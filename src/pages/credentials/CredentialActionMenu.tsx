@@ -7,30 +7,31 @@ import {
   MenuToggleElement
 } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
-import { SourceType } from '../../types';
+import { CredentialType } from '../../types';
 
-interface SourceActionMenuProps {
-  source: SourceType;
-  onDeleteSource: (source: SourceType) => void;
-  onEditSource: (source: SourceType) => void;
+interface CredentialActionMenuProps {
+  credential: CredentialType;
 }
 
-const SourceActionMenu: React.FC<SourceActionMenuProps> = ({
-    source,
-    onDeleteSource,
-    onEditSource
-  }) => {
+const CredentialActionMenu: React.FC<CredentialActionMenuProps> = ({ credential }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
+
+  const onEditCredential = () => {
+    alert(`Edit: ${credential.name}`);
+  };
+  const onDeleteCredential = () => {
+    alert(`Delete: ${credential.name}`);
+  };
 
   return (
     <Dropdown
-      id={`${source.id}_actions`}
+      id={`${credential.id}_actions`}
       isOpen={isOpen}
       onSelect={(e, value) => {
         if (value === 'edit') {
-          onEditSource(source);
+          onEditCredential();
         } else if (value === 'delete') {
-          onDeleteSource(source);
+          onDeleteCredential();
         }
       }}
       onOpenChange={setIsOpen}
@@ -59,4 +60,4 @@ const SourceActionMenu: React.FC<SourceActionMenuProps> = ({
   );
 };
 
-export default SourceActionMenu;
+export default CredentialActionMenu;

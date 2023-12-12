@@ -407,7 +407,7 @@ This is a local run designed to function with minimal resources and a mock API.
    ```
    $ yarn test:dev
    ```
-1. Make sure your browser opened around the domain `https://localhost:3000/`
+1. Make sure your browser opened around the domain `https://localhost:3001/`
 1. Start developing...
 
 #### Start writing code with staging
