@@ -1,48 +1,30 @@
+// For a detailed explanation regarding each configuration property, visit:
+// https://jestjs.io/docs/en/configuration.html
+
 module.exports = {
-  collectCoverageFrom: [
-    "src/**/*.{js,jsx}",
-    "!src/**/.*/**",
-    "!src/index.js",
-    "!src/components/app.js",
-    "!src/components/**/index.js",
-    "!src/common/index.js",
-    "!src/hooks/index.js",
-    "!src/redux/index.js",
-    "!src/redux/store.js",
-    "!src/redux/middleware/**",
-    "!src/redux/actions/index.js",
-    "!src/redux/common/index.js",
-    "!src/redux/hooks/index.js",
-    "!src/redux/reducers/index.js",
-    "!src/redux/selectors/index.js"
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50
-    }
-  },
-  moduleFileExtensions: ['web.js', 'js', 'web.ts', 'ts', 'web.tsx', 'tsx', 'json', 'web.jsx', 'jsx', 'node'],
+  // Automatically clear mock calls and instances between every test
+  clearMocks: true,
+
+  // Indicates whether the coverage information should be collected while executing the test
+  collectCoverage: false,
+
+  // The directory where Jest should output its coverage files
+  coverageDirectory: 'coverage',
+
+  // An array of directory names to be searched recursively up from the requiring module's location
+  moduleDirectories: ['node_modules', '<rootDir>/src'],
+
+  // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js',
+    '@app/(.*)': '<rootDir>/src/app/$1'
   },
-  modulePaths: [],
-  resetMocks: true,
-  roots: ['<rootDir>/src', '<rootDir>/tests'],
-  setupFilesAfterEnv: ['<rootDir>/config/jest.setupTests.js'],
-  testMatch: ['<rootDir>/**/__tests__/**/*.{js,jsx,ts,tsx}', '<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
-  testEnvironment: 'jsdom',
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-    '^.+\\.css$': '<rootDir>/config/jest.transform.style.js',
-    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest.transform.file.js'
-  },
-  transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
-    '^.+\\.module\\.(css|sass|scss)$'
-  ],
-  watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname']
+
+  // A preset that is used as a base for Jest's configuration
+  preset: 'ts-jest/presets/js-with-ts',
+
+  // The test environment that will be used for testing.
+  testEnvironment: 'jsdom'
 };

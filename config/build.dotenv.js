@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const dotenv = require('dotenv');
 const { expand: dotenvExpand } = require('dotenv-expand');
@@ -41,7 +42,9 @@ const setupWebpackDotenvFilesForEnv = ({ directory, env } = {}) => {
   const dotenvWebpackSettings = [];
 
   if (env) {
-    dotenvWebpackSettings.push(setupWebpackDotenvFile(path.resolve(directory, `.env.${env}.local`)));
+    dotenvWebpackSettings.push(
+      setupWebpackDotenvFile(path.resolve(directory, `.env.${env}.local`))
+    );
     dotenvWebpackSettings.push(setupWebpackDotenvFile(path.resolve(directory, `.env.${env}`)));
   }
 
@@ -88,16 +91,19 @@ const setupDotenvFilesForEnv = ({
 
   if (setBuildDefaults) {
     // Core Build
-    const DEV_MODE = process.env[`${dotenvNamePrefix}_DEV_MODE`] || process.env.DEV_MODE || undefined;
+    const DEV_MODE =
+      process.env[`${dotenvNamePrefix}_DEV_MODE`] || process.env.DEV_MODE || undefined;
     const DIST_DIR = path.resolve(
       relativePath,
       process.env[`${dotenvNamePrefix}_DIST_DIR`] || process.env.DIST_DIR || 'dist'
     );
     const HOST = process.env[`${dotenvNamePrefix}_HOST`] || process.env.HOST || 'localhost';
     const OUTPUT_ONLY = process.env[`_${dotenvNamePrefix}_OUTPUT_ONLY`] === 'true';
-    const OPEN_PATH = process.env[`${dotenvNamePrefix}_OPEN_PATH`] || process.env.OPEN_PATH || undefined;
+    const OPEN_PATH =
+      process.env[`${dotenvNamePrefix}_OPEN_PATH`] || process.env.OPEN_PATH || undefined;
     const PORT = process.env[`${dotenvNamePrefix}_PORT`] || process.env.PORT || '3000';
-    const PUBLIC_PATH = process.env[`${dotenvNamePrefix}_PUBLIC_PATH`] || process.env.PUBLIC_PATH || '/';
+    const PUBLIC_PATH =
+      process.env[`${dotenvNamePrefix}_PUBLIC_PATH`] || process.env.PUBLIC_PATH || '/';
     const SRC_DIR = path.resolve(
       relativePath,
       process.env[`${dotenvNamePrefix}_SRC_DIR`] || process.env.SRC_DIR || 'src'

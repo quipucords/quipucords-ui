@@ -1,13 +1,12 @@
-const { merge } = require('webpack-merge');
+/* eslint-disable @typescript-eslint/no-var-requires */
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 const { setupWebpackDotenvFilesForEnv, setupDotenvFilesForEnv } = require('./build.dotenv');
-
 const { NODE_ENV: MODE, _BUILD_RELATIVE_DIRNAME: RELATIVE_DIRNAME } = setupDotenvFilesForEnv({
   env: process.env.NODE_ENV
 });
-
 const webpackCommon = require('./webpack.common');
 
 module.exports = merge(
