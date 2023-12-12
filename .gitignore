@@ -38,6 +38,10 @@ pids
 *.seed
 *.pid.lock
 pr.txt
+stats.json
+storybook-static
+.DS_Store
+.idea
 
 # logs
 dependency-update-log.txt

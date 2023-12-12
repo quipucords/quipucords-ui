@@ -1,11 +1,13 @@
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
-const { rimrafSync } = require('rimraf');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
+const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const svgToMiniDataURI = require('mini-svg-data-uri');
+const { rimrafSync } = require('rimraf');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { setupWebpackDotenvFilesForEnv, setupDotenvFilesForEnv } = require('./build.dotenv');
 
 const {
@@ -29,7 +31,7 @@ rimrafSync(DIST_DIR);
 
 module.exports = () => ({
   entry: {
-    app: path.join(SRC_DIR, 'index.js')
+    app: path.join(SRC_DIR, 'index.tsx')
   },
   output: {
     filename: '[name].bundle.js',
@@ -40,13 +42,16 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.(jsx|js)?$/,
-        include: [SRC_DIR],
+        test: /\.(tsx|ts|jsx)?$/,
         use: [
           {
-            loader: 'babel-loader'
-          }
-        ]
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              experimentalWatchApi: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(svg|ttf|eot|woff|woff2)$/,
@@ -123,6 +128,12 @@ module.exports = () => ({
     })()
   ],
   resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+      }),
+    ],
     symlinks: false,
     cacheWithContext: false
   }
