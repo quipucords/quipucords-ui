@@ -99,6 +99,12 @@ const SourcesListView: React.FunctionComponent = () => {
     setAlerts((prevAlerts) => [...prevAlerts.filter((alert) => alert.key !== key)]);
   };
 
+  enum columnOrderMap {
+    name = "name",
+    connection = "most_recent_connect_scan__start_time",
+    type = "source_type",
+  }
+
   const tableState = useTableState({
     persistTo: 'urlParams',
     isSelectionEnabled: true,
@@ -160,14 +166,12 @@ const SourcesListView: React.FunctionComponent = () => {
       }
     ],
     // Because isSortEnabled is true, TypeScript will require these sort-related properties:
-    sortableColumns: ['name', 'connection', 'type', 'credentials', 'unreachableSystems'],
+    sortableColumns: ['name', 'connection', 'type'],
     initialSort: {
       columnKey: sortColumn as
         | 'name'
         | 'connection'
-        | 'type'
-        | 'credentials'
-        | 'unreachableSystems',
+        | 'type',
       direction: sortDirection as 'asc' | 'desc'
     },
     initialFilterValues: filters ? JSON.parse(filters) : undefined
@@ -187,9 +191,8 @@ const SourcesListView: React.FunctionComponent = () => {
           .map(key => `${key}=${filterValues[key]}`)
           .join('&')
       : null;
-
     const ordering = `${(activeSort?.direction ?? sortDirection) === 'desc' ? '-' : ''}${
-      activeSort?.columnKey ?? sortColumn
+      activeSort?.columnKey ? columnOrderMap[activeSort.columnKey] : sortColumn
     }`;
 
     const query =
