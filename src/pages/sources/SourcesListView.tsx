@@ -328,7 +328,6 @@ const SourcesListView: React.FunctionComponent = () => {
         {/* You can render whatever other custom toolbar items you may need here! */}
         <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
-          <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
           <SimpleDropdown
             label="Add Source"
             variant="primary"
@@ -346,6 +345,7 @@ const SourcesListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'scan' })}
           </Button>
+          <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <ToolbarItem {...paginationToolbarItemProps}>
           <Pagination
