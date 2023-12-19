@@ -6,23 +6,28 @@ import { SourceType } from 'src/types';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 
 export interface AddSourceModalProps {
+    source?: SourceType;
     type: string;
     onClose: () => void;
     onSubmit: (payload) => void;
 }
 
 const AddSourceModal: React.FC<AddSourceModalProps> = ({
+    source,
     type,
     onClose,
     onSubmit
 }) => {
     const [credOptions, setCredOptions] = React.useState<{ value: string, label: string }[]>([]);
-    const [credentials, setCredentials] = React.useState<string[]>([]);
-    const [useParamiko, setUseParamiko] = React.useState<boolean>(false);
-    const [sslVerify, setSslVerify] = React.useState<boolean>(true);
-    const [sslProtocol, setSslProtocol] = React.useState<string>('SSLv23');
+    const [credentials, setCredentials] = React.useState<string[]>(source?.credentials?.map(c => c.id) || []);
+    const [useParamiko, setUseParamiko] = React.useState<boolean>(source?.options?.use_paramiko ?? false);
+    const [sslVerify, setSslVerify] = React.useState<boolean>(source?.options?.ssl_cert_verify ?? true);
+    const [sslProtocol, setSslProtocol] = React.useState<string>(
+        source?.options?.disable_ssl ? "Disable SSL"
+            : source?.options?.ssl_protocol || 'SSLv23'
+    );
 
-    const typeValue = type.split(' ').shift()?.toLowerCase();
+    const typeValue = source?.source_type || type.split(' ').shift()?.toLowerCase();
     const isNetwork = typeValue === "network";
    
     React.useEffect(() => {
@@ -36,7 +41,6 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
 
     const onAdd = (values) => {
         const payload = {
-            "source_type": typeValue,
             "credentials": credentials.map(c => Number(c)),
             "hosts": values['hosts'].split(','),
             "name": values['name'],
@@ -49,7 +53,9 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                 } : 
                 {
                     "use_paramiko": useParamiko
-                }
+                },
+            ...(!source && {"source_type": typeValue}),
+            ...(source && {"id": source.id})
         };
         onSubmit(payload);
     }
@@ -57,11 +63,15 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
     return (
         <Modal
             variant={ModalVariant.small}
-            title={`Add source: ${type}`}
+            title={`${source ? 'Edit' : 'Add'} source: ${type}`}
             isOpen={!!type}
             onClose={onClose}
         >
-            <FormContextProvider>
+            <FormContextProvider initialValues={{
+                'name': source?.name || '',
+                'hosts': source?.hosts?.join(',') || '',
+                'port': source?.port ? String(source.port) : '',
+            }}>
                 {({ setValue, getValue, setError, values, errors }) => (
                     <Form isHorizontal>
                         <FormGroup label="Name" isRequired fieldId="name">
@@ -94,7 +104,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                                         type="text"
                                         id="source-port"
                                         name="port"
-                                        onChange={(ev) => { console.log(credOptions); setValue('port', (ev.target as HTMLInputElement).value) }}
+                                        onChange={(ev) => { setValue('port', (ev.target as HTMLInputElement).value) }}
                                     />
                                     <HelperText>Default port is 22</HelperText>
                                 </FormGroup>
@@ -118,6 +128,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                             <TypeaheadCheckboxes
                                 onChange={setCredentials}
                                 options={credOptions}
+                                selectedOptions={credentials?.map(String) || []}
                             />
                         </FormGroup>
                         {isNetwork ?

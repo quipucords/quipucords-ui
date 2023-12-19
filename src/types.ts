@@ -43,6 +43,12 @@ export type SourceType = {
   exclude_hosts: string[];
   credentials: CredentialType[];
   connection: SourceConnectionType;
+  options?: {
+    ssl_protocol?: string,
+    ssl_cert_verify: boolean,
+    disable_ssl: boolean,
+    use_paramiko?: boolean,
+  }
 };
 
 export type ConnectionType = {
