@@ -664,13 +664,14 @@
     tinycolor2 "^1.6.0"
     yup "^0.32.9"
 
-"@mturley-latest/react-table-batteries@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@mturley-latest/react-table-batteries/-/react-table-batteries-1.0.2.tgz"
-  integrity sha512-f+Z7//5XX2CG06z5Bsdr8wINKpcWqUcN/UD4+8/3NSTwVGCDFCSGBvH7nQEUBQjNKB7+fsuABs1mAjwD8TG6yQ==
+"@mturley-latest/react-table-batteries@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@mturley-latest/react-table-batteries/-/react-table-batteries-1.0.3.tgz#7aa5d70d92fb92f12f54b329bb58698f3c40da74"
+  integrity sha512-pIgHbCoN4e6dYbxdkFF9D0FVaIYIWQNI68du1zCEtTTBe4Dej0hDsNpRLhkpNsg2lcn/i6Fww7OwLEvezscCHg==
   dependencies:
     "@migtools/lib-ui" "^10.0.1"
     "@patternfly/react-core" "^5.1.1"
+    use-deep-compare "^1.1.0"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -3048,7 +3049,7 @@ depd@~1.1.2:
   resolved "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
   integrity sha512-7emPTl6Dpo6JRXOXjLRxck+FlLRX5847cLKEn00PLAgc3g2hTZZgr+e4c2v6QpSmLeFP3n5yUo7ft6avBK/5jQ==
 
-dequal@^2.0.3:
+dequal@2.0.3, dequal@^2.0.3:
   version "2.0.3"
   resolved "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
   integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
@@ -8909,6 +8910,13 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-deep-compare@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-deep-compare/-/use-deep-compare-1.2.0.tgz#0ffb05c4972d0588ae8d6ed10a09042acffb2c16"
+  integrity sha512-AemF4mbYpuCjOl0jIzeZA7kql3/94BPmfHA96wChnvNvFBjrYe8GVGDsb79wNMBCEQpQhnsUiblNNXqc2eoyjQ==
+  dependencies:
+    dequal "2.0.3"
 
 use-sync-external-store@^1.0.0, use-sync-external-store@^1.2.0:
   version "1.2.0"

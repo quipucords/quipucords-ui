@@ -2,10 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ConditionalTableBody,
-  FilterToolbar,
   FilterType,
-  TableHeaderContentWithBatteries,
-  TableRowContentWithBatteries,
   useTablePropHelpers,
   useTableState
 } from '@mturley-latest/react-table-batteries';
@@ -27,10 +24,8 @@ import {
   Modal,
   ModalVariant,
   PageSection,
-  Pagination,
   TextContent,
   Title,
-  Toolbar,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
@@ -41,8 +36,7 @@ import {
   ExclamationCircleIcon,
   ExclamationTriangleIcon
 } from '@patternfly/react-icons';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
@@ -50,11 +44,11 @@ import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
-import useSearchParam from '../../hooks/useSearchParam';
 import { SourceType, ConnectionType, CredentialType } from '../../types';
 import AddSourceModal from './AddSourceModal';
 import SourceActionMenu from './SourceActionMenu';
 import SourcesScanModal from './SourcesScanModal';
+import { useSourcesQuery } from './useSourcesQuery';
 
 const SOURCES_LIST_QUERY = 'sourcesList';
 
@@ -81,13 +75,8 @@ const SourcesListView: React.FunctionComponent = () => {
     failure: ConnectionType[];
     unreachable: ConnectionType[];
   }>({ successful: [], failure: [], unreachable: [] });
-  const [sortColumn] = useSearchParam('sortColumn') || ['name'];
-  const [sortDirection] = useSearchParam('sortDirection') || ['asc'];
-  const [filters] = useSearchParam('filters');
-  const [selectedItems, setSelectedItems] = React.useState<SourceType[]>([]);
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const queryClient = useQueryClient();
-  const currentQuery = React.useRef<string>('');
   const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
 
   const onRefresh = () => {
@@ -102,18 +91,9 @@ const SourcesListView: React.FunctionComponent = () => {
     setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
   };
 
-  enum columnOrderMap {
-    name = 'name',
-    connection = 'most_recent_connect_scan__start_time',
-    type = 'source_type'
-  }
-
   const tableState = useTableState({
     persistTo: 'urlParams',
-    isSelectionEnabled: true,
-    persistenceKeyPrefix: '', // The first Things table on this page.
     columnNames: {
-      // The keys of this object define the inferred generic type `TColumnKey`. See "Unique Identifiers".
       name: 'Name',
       connection: 'Last connected',
       type: 'Type',
@@ -122,109 +102,61 @@ const SourcesListView: React.FunctionComponent = () => {
       scan: ' ',
       actions: ' '
     },
-    isFilterEnabled: true,
-    isSortEnabled: true,
-    isPaginationEnabled: true,
-    // Because isFilterEnabled is true, TypeScript will require these filterCategories:
-    filterCategories: [
-      {
-        key: 'search_by_name',
-        title: 'Name',
-        type: FilterType.search,
-        placeholderText: 'Filter by name'
-      },
-      {
-        key: 'search_credentials_by_name',
-        title: 'Credential name',
-        type: FilterType.search,
-        placeholderText: 'Filter by credential'
-      },
-      {
-        key: 'source_type',
-        title: 'Source type',
-        type: FilterType.select,
-        placeholderText: 'Filter by source type',
-        selectOptions: [
-          {
-            key: 'network',
-            label: 'Network',
-            value: 'network'
-          },
-          {
-            key: 'openshift',
-            label: 'OpenShift',
-            value: 'openshift'
-          },
-          {
-            key: 'satellite',
-            label: 'Satellite',
-            value: 'satellite'
-          },
-          {
-            key: 'vcenter',
-            label: 'vCenter',
-            value: 'vcenter'
-          }
-        ]
-      }
-    ],
-    // Because isSortEnabled is true, TypeScript will require these sort-related properties:
-    sortableColumns: ['name', 'connection', 'type'],
-    initialSort: {
-      columnKey: sortColumn as 'name' | 'connection' | 'type',
-      direction: sortDirection as 'asc' | 'desc'
+    filter: {
+      isEnabled: true,
+      filterCategories: [
+        {
+          key: 'search_by_name',
+          title: 'Name',
+          type: FilterType.search,
+          placeholderText: 'Filter by name'
+        },
+        {
+          key: 'search_credentials_by_name',
+          title: 'Credential name',
+          type: FilterType.search,
+          placeholderText: 'Filter by credential'
+        },
+        {
+          key: 'source_type',
+          title: 'Source type',
+          type: FilterType.select,
+          placeholderText: 'Filter by source type',
+          selectOptions: [
+            {
+              key: 'network',
+              label: 'Network',
+              value: 'network'
+            },
+            {
+              key: 'openshift',
+              label: 'OpenShift',
+              value: 'openshift'
+            },
+            {
+              key: 'satellite',
+              label: 'Satellite',
+              value: 'satellite'
+            },
+            {
+              key: 'vcenter',
+              label: 'vCenter',
+              value: 'vcenter'
+            }
+          ]
+        }
+      ]
     },
-    initialFilterValues: filters ? JSON.parse(filters) : undefined
+    sort: {
+      isEnabled: true,
+      sortableColumns: ['name', 'connection', 'type'],
+      initialSort: { columnKey: 'name', direction: 'asc' }
+    },
+    pagination: { isEnabled: true },
+    selection: { isEnabled: true }
   });
 
-  const token = localStorage.getItem('authToken');
-
-  const {
-    filterState: { filterValues },
-    sortState: { activeSort },
-    paginationState: { pageNumber, itemsPerPage }
-  } = tableState;
-
-  React.useEffect(() => {
-    const filterParams = filterValues
-      ? Object.keys(filterValues)
-          .map(key => `${key}=${filterValues[key]}`)
-          .join('&')
-      : null;
-    const ordering = `${(activeSort?.direction ?? sortDirection) === 'desc' ? '-' : ''}${
-      activeSort?.columnKey ? columnOrderMap[activeSort.columnKey] : sortColumn
-    }`;
-
-    const query =
-      `${process.env.REACT_APP_SOURCES_SERVICE}` +
-      `?` +
-      `ordering=${ordering}` +
-      `&` +
-      `page=${pageNumber}` +
-      `&` +
-      `page-size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}`;
-
-    if (query !== currentQuery.current) {
-      currentQuery.current = query;
-      queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-    }
-  }, [filterValues, activeSort, sortDirection, sortColumn, pageNumber, itemsPerPage, queryClient]);
-
-  const { isLoading, data } = useQuery({
-    queryKey: [SOURCES_LIST_QUERY],
-    refetchOnWindowFocus: !helpers.DEV_MODE,
-    queryFn: () => {
-      return axios
-        .get(currentQuery.current, {
-          headers: { Authorization: `Token ${token}` }
-        })
-        .then(res => {
-          setRefreshTime(new Date());
-          return res.data;
-        })
-        .catch(err => console.error(err));
-    }
-  });
+  const { isLoading, data } = useSourcesQuery({ tableState, setRefreshTime });
 
   let totalResults = data?.count || 0;
   if (helpers.DEV_MODE) {
@@ -235,46 +167,29 @@ const SourcesListView: React.FunctionComponent = () => {
     ...tableState,
     idProperty: 'id',
     isLoading,
-    currentPageItems: (data?.results || []) as SourceType[],
-    totalItemCount: totalResults,
-    selectionState: {
-      selectedItems,
-      setSelectedItems,
-      isItemSelected: (item: SourceType) => !!selectedItems.find(i => i.id === item.id),
-      isItemSelectable: () => true,
-      toggleItemSelected: (item: SourceType) => {
-        const index = selectedItems.findIndex(i => i.id === item.id);
-        if (index > -1) {
-          setSelectedItems(prev => [...prev.slice(0, index), ...prev.slice(index + 1)]);
-        } else {
-          setSelectedItems(prev => [...prev, item]);
-        }
-      },
-      selectMultiple: () => {},
-      areAllSelected: false,
-      selectAll: () => {}
-    }
+    currentPageItems: data?.results || [],
+    totalItemCount: totalResults
   });
 
   const {
-    currentPageItems, // These items have already been paginated.
-    // `numRenderedColumns` is based on the number of columnNames and additional columns needed for
-    // rendering controls related to features like selection, expansion, etc.
-    // It is used as the colSpan when rendering a full-table-wide cell.
+    selection: { selectedItems },
+    currentPageItems,
     numRenderedColumns,
-    // The objects and functions in `propHelpers` correspond to the props needed for specific PatternFly or Tackle
-    // components and are provided to reduce prop-drilling and make the rendering code as short as possible.
-    propHelpers: {
-      toolbarProps,
-      filterToolbarProps,
-      paginationToolbarItemProps,
-      paginationProps,
-      tableProps,
-      getThProps,
-      getTrProps,
-      getTdProps
+    components: {
+      Toolbar,
+      FilterToolbar,
+      PaginationToolbarItem,
+      Pagination,
+      Table,
+      Tbody,
+      Td,
+      Th,
+      Thead,
+      Tr
     }
   } = tableBatteries;
+
+  const token = localStorage.getItem('authToken');
 
   const onCloseConnections = () => {
     setConnectionsSelected(undefined);
@@ -347,9 +262,9 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   const renderToolbar = () => (
-    <Toolbar {...toolbarProps}>
+    <Toolbar>
       <ToolbarContent>
-        <FilterToolbar {...filterToolbarProps} id="client-paginated-example-filters" />
+        <FilterToolbar id="client-paginated-example-filters" />
         {/* You can render whatever other custom toolbar items you may need here! */}
         <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
@@ -371,24 +286,16 @@ const SourcesListView: React.FunctionComponent = () => {
           />{' '}
           <Button
             variant={ButtonVariant.secondary}
-            isDisabled={
-              Object.values(tableBatteries.selectionState.selectedItems).filter(val => val !== null)
-                .length <= 1
-            }
+            isDisabled={Object.values(selectedItems).filter(val => val !== null).length <= 1}
             onClick={onScanSources}
           >
             {t('table.label', { context: 'scan' })}
           </Button>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
-        <ToolbarItem {...paginationToolbarItemProps}>
-          <Pagination
-            variant="top"
-            isCompact
-            {...paginationProps}
-            widgetId="client-paginated-example-pagination"
-          />
-        </ToolbarItem>
+        <PaginationToolbarItem>
+          <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
+        </PaginationToolbarItem>
       </ToolbarContent>
     </Toolbar>
   );
@@ -446,17 +353,15 @@ const SourcesListView: React.FunctionComponent = () => {
   return (
     <PageSection variant="light">
       {renderToolbar()}
-      <Table {...tableProps} aria-label="Example things table" variant="compact">
+      <Table aria-label="Example things table" variant="compact">
         <Thead>
-          <Tr>
-            <TableHeaderContentWithBatteries {...tableBatteries}>
-              <Th {...getThProps({ columnKey: 'name' })} />
-              <Th {...getThProps({ columnKey: 'connection' })} />
-              <Th {...getThProps({ columnKey: 'type' })} />
-              <Th {...getThProps({ columnKey: 'credentials' })} />
-              <Th {...getThProps({ columnKey: 'scan' })} />
-              <Th {...getThProps({ columnKey: 'actions' })} />
-            </TableHeaderContentWithBatteries>
+          <Tr isHeaderRow>
+            <Th columnKey="name" />
+            <Th columnKey="connection" />
+            <Th columnKey="type" />
+            <Th columnKey="credentials" />
+            <Th columnKey="scan" />
+            <Th columnKey="actions" />
           </Tr>
         </Thead>
         <ConditionalTableBody
@@ -474,34 +379,30 @@ const SourcesListView: React.FunctionComponent = () => {
         >
           <Tbody>
             {currentPageItems?.map((source: SourceType, rowIndex) => (
-              <Tr key={source.id} {...getTrProps({ item: source })}>
-                <TableRowContentWithBatteries {...tableBatteries} item={source} rowIndex={rowIndex}>
-                  <Td {...getTdProps({ columnKey: 'name' })}>{source.name}</Td>
-                  <Td {...getTdProps({ columnKey: 'connection' })}>{renderConnection(source)}</Td>
-                  <Td {...getTdProps({ columnKey: 'type' })}>
-                    {SourceTypeLabels[source.source_type]}
-                  </Td>
-                  <Td {...getTdProps({ columnKey: 'credentials' })}>
-                    <Button
-                      variant={ButtonVariant.link}
-                      onClick={() => {
-                        setCredentialsSelected(source.credentials);
-                      }}
-                    >
-                      {source.credentials.length}
-                    </Button>
-                  </Td>
-                  <Td isActionCell {...getTdProps({ columnKey: 'scan' })}>
-                    <Button
-                      isDisabled={source.connection.status === 'pending'}
-                      variant={ButtonVariant.link}
-                      onClick={() => onScanSource(source)}
-                    >
-                      Scan
-                    </Button>
-                  </Td>
-                </TableRowContentWithBatteries>
-                <Td isActionCell {...getTdProps({ columnKey: 'actions' })}>
+              <Tr key={source.id} item={source} rowIndex={rowIndex}>
+                <Td columnKey="name">{source.name}</Td>
+                <Td columnKey="connection">{renderConnection(source)}</Td>
+                <Td columnKey="type">{SourceTypeLabels[source.source_type]}</Td>
+                <Td columnKey="credentials">
+                  <Button
+                    variant={ButtonVariant.link}
+                    onClick={() => {
+                      setCredentialsSelected(source.credentials);
+                    }}
+                  >
+                    {source.credentials.length}
+                  </Button>
+                </Td>
+                <Td isActionCell columnKey="scan">
+                  <Button
+                    isDisabled={source.connection.status === 'pending'}
+                    variant={ButtonVariant.link}
+                    onClick={() => onScanSource(source)}
+                  >
+                    Scan
+                  </Button>
+                </Td>
+                <Td isActionCell columnKey="actions">
                   <SourceActionMenu
                     source={source}
                     onEditSource={onEditSource}
@@ -513,12 +414,7 @@ const SourcesListView: React.FunctionComponent = () => {
           </Tbody>
         </ConditionalTableBody>
       </Table>
-      <Pagination
-        variant="bottom"
-        isCompact
-        {...paginationProps}
-        widgetId="server-paginated-example-pagination"
-      />
+      <Pagination variant="bottom" isCompact widgetId="server-paginated-example-pagination" />
       {!!credentialsSelected.length && (
         <Modal
           variant={ModalVariant.small}
