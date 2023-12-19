@@ -16,10 +16,10 @@ interface SourceActionMenuProps {
 }
 
 const SourceActionMenu: React.FC<SourceActionMenuProps> = ({
-    source,
-    onDeleteSource,
-    onEditSource
-  }) => {
+  source,
+  onDeleteSource,
+  onEditSource
+}) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (

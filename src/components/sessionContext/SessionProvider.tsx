@@ -21,7 +21,9 @@ const initialSessionData = {
   username: null
 };
 
-export const SessionContext = React.createContext<SessionData>({ ...initialSessionData });
+export const SessionContext = React.createContext<SessionData>({
+  ...initialSessionData
+});
 export const useLocale = () => React.useContext(SessionContext).locale;
 export const useUsername = () => React.useContext(SessionContext).username;
 
@@ -34,7 +36,9 @@ const getLocale = () => {
 };
 
 const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [sessionData, setSessionData] = React.useState<SessionData>({ ...initialSessionData });
+  const [sessionData, setSessionData] = React.useState<SessionData>({
+    ...initialSessionData
+  });
 
   React.useEffect(() => {
     const fetchedLocale = getLocale();
@@ -47,7 +51,11 @@ const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
     queryFn: () => {
       return axios.get(process.env.REACT_APP_USER_SERVICE_CURRENT || '').then(res => {
         if (res.data.username) {
-          setSessionData(prev => ({ ...prev, authorized: true, username: res.data.username }));
+          setSessionData(prev => ({
+            ...prev,
+            authorized: true,
+            username: res.data.username
+          }));
         }
       });
     }

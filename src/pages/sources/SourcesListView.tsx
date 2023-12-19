@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   ConditionalTableBody,
   FilterToolbar,
@@ -11,7 +10,6 @@ import {
   useTableState
 } from '@mturley-latest/react-table-batteries';
 import {
-  ActionGroup,
   Alert,
   AlertActionCloseButton,
   AlertGroup,
@@ -19,13 +17,10 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  Checkbox,
   Divider,
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
-  Form,
-  FormGroup,
   Icon,
   List,
   ListItem,
@@ -33,30 +28,33 @@ import {
   ModalVariant,
   PageSection,
   Pagination,
-  TextArea,
   TextContent,
-  TextInput,
   Title,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { CheckCircleIcon, CubesIcon, ExclamationCircleIcon, ExclamationTriangleIcon, WarningTriangleIcon } from '@patternfly/react-icons';
+import {
+  CheckCircleIcon,
+  CubesIcon,
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon
+} from '@patternfly/react-icons';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
+import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import useSearchParam from '../../hooks/useSearchParam';
-import { SourceType } from '../../types';
-import { ConnectionType } from '../../types';
+import { SourceType, ConnectionType, CredentialType } from '../../types';
+import AddSourceModal from './AddSourceModal';
 import SourceActionMenu from './SourceActionMenu';
 import SourcesScanModal from './SourcesScanModal';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
-import AddSourceModal from './AddSourceModal';
 
 const SOURCES_LIST_QUERY = 'sourcesList';
 
@@ -73,12 +71,16 @@ const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [alerts, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  const [credentialsSelected, setCredentialsSelected] = React.useState<any[]>([]);
+  const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialType[]>([]);
   const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
   const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
   const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
-  const [connectionsData, setConnectionsData] = React.useState<{successful: ConnectionType[], failure: ConnectionType[], unreachable: ConnectionType[]}>({successful: [], failure: [], unreachable: []});
+  const [connectionsData, setConnectionsData] = React.useState<{
+    successful: ConnectionType[];
+    failure: ConnectionType[];
+    unreachable: ConnectionType[];
+  }>({ successful: [], failure: [], unreachable: [] });
   const [sortColumn] = useSearchParam('sortColumn') || ['name'];
   const [sortDirection] = useSearchParam('sortDirection') || ['asc'];
   const [filters] = useSearchParam('filters');
@@ -86,24 +88,24 @@ const SourcesListView: React.FunctionComponent = () => {
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const queryClient = useQueryClient();
   const currentQuery = React.useRef<string>('');
-  const emptyConnectionData = {successful: [], failure: [], unreachable: []};
+  const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
 
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
   };
 
   const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
-    setAlerts((prevAlerts) => [...prevAlerts, { title, variant, key }]);
+    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
   };
 
   const removeAlert = (key: React.Key) => {
-    setAlerts((prevAlerts) => [...prevAlerts.filter((alert) => alert.key !== key)]);
+    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
   };
 
   enum columnOrderMap {
-    name = "name",
-    connection = "most_recent_connect_scan__start_time",
-    type = "source_type",
+    name = 'name',
+    connection = 'most_recent_connect_scan__start_time',
+    type = 'source_type'
   }
 
   const tableState = useTableState({
@@ -169,16 +171,13 @@ const SourcesListView: React.FunctionComponent = () => {
     // Because isSortEnabled is true, TypeScript will require these sort-related properties:
     sortableColumns: ['name', 'connection', 'type'],
     initialSort: {
-      columnKey: sortColumn as
-        | 'name'
-        | 'connection'
-        | 'type',
+      columnKey: sortColumn as 'name' | 'connection' | 'type',
       direction: sortDirection as 'asc' | 'desc'
     },
     initialFilterValues: filters ? JSON.parse(filters) : undefined
   });
 
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem('authToken');
 
   const {
     filterState: { filterValues },
@@ -211,12 +210,14 @@ const SourcesListView: React.FunctionComponent = () => {
     }
   }, [filterValues, activeSort, sortDirection, sortColumn, pageNumber, itemsPerPage, queryClient]);
 
-
   const { isLoading, data } = useQuery({
     queryKey: [SOURCES_LIST_QUERY],
     refetchOnWindowFocus: !helpers.DEV_MODE,
     queryFn: () => {
-      return axios.get(currentQuery.current, { headers: {"Authorization": `Token ${token}`}})
+      return axios
+        .get(currentQuery.current, {
+          headers: { Authorization: `Token ${token}` }
+        })
         .then(res => {
           setRefreshTime(new Date());
           return res.data;
@@ -278,57 +279,72 @@ const SourcesListView: React.FunctionComponent = () => {
   const onCloseConnections = () => {
     setConnectionsSelected(undefined);
     setConnectionsData(emptyConnectionData);
-  }
-  const onShowAddSourceWizard = () => {};
+  };
   const onScanSources = () => {};
   const onScanSource = (source: SourceType) => {
     setScanSelected([source]);
   };
-  const onRunScan = (payload) => {
-    axios.post(`https://0.0.0.0:9443/api/v1/scans/`, payload, { headers: {"Authorization": `Token ${token}`}})
-        .then(res => {
-          addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
-          queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-          setScanSelected(undefined);
-        })
-        .catch(err => console.error(err));
+  const onRunScan = payload => {
+    axios
+      .post(`https://0.0.0.0:9443/api/v1/scans/`, payload, {
+        headers: { Authorization: `Token ${token}` }
+      })
+      .then(() => {
+        addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setScanSelected(undefined);
+      })
+      .catch(err => console.error(err));
   };
-  const onAddSource = (payload) => {
-    axios.post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload, { headers: {"Authorization": `Token ${token}`}})
-    .then(res => {
-      addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
-      queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-      setAddSourceModal(undefined);
-    })
-    .catch(err => console.error(err));
-  }
+  const onAddSource = payload => {
+    axios
+      .post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload, {
+        headers: { Authorization: `Token ${token}` }
+      })
+      .then(() => {
+        addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setAddSourceModal(undefined);
+      })
+      .catch(err => console.error(err));
+  };
 
   const onEditSource = (source: SourceType) => {
     setSourceBeingEdited(source);
-  }
+  };
 
   const onSubmitEditedSource = (payload: SourceType) => {
-    axios.put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload, { headers: {"Authorization": `Token ${token}`}})
-    .then(res => {
-      addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
-      queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-      setSourceBeingEdited(undefined);
-    })
-    .catch(err => console.error(err));
-  }
+    axios
+      .put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload, {
+        headers: { Authorization: `Token ${token}` }
+      })
+      .then(() => {
+        addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setSourceBeingEdited(undefined);
+      })
+      .catch(err => console.error(err));
+  };
 
   const onDeleteSource = (source: SourceType) => {
-    axios.delete(`https://0.0.0.0:9443/api/v1/sources/${source.id}/`, { headers: {"Authorization": `Token ${token}`}})
-    .then(res => {
-      addAlert(`Source "${source.name}" deleted successfully`, 'success', getUniqueId());
-      queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-    })
-    .catch(err => {
-      console.error(err);
-      addAlert(`Error removing source ${source.name}. ${err?.response?.data?.detail}`, 'danger', getUniqueId());
-    })
-    .finally(() => setPendingDeleteSource(undefined));
-  }
+    axios
+      .delete(`https://0.0.0.0:9443/api/v1/sources/${source.id}/`, {
+        headers: { Authorization: `Token ${token}` }
+      })
+      .then(() => {
+        addAlert(`Source "${source.name}" deleted successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+      })
+      .catch(err => {
+        console.error(err);
+        addAlert(
+          `Error removing source ${source.name}. ${err?.response?.data?.detail}`,
+          'danger',
+          getUniqueId()
+        );
+      })
+      .finally(() => setPendingDeleteSource(undefined));
+  };
 
   const renderToolbar = () => (
     <Toolbar {...toolbarProps}>
@@ -340,9 +356,18 @@ const SourcesListView: React.FunctionComponent = () => {
           <SimpleDropdown
             label="Add Source"
             variant="primary"
-            dropdownItems={['Network range', 'OpenShift', 'RHACS', 'Satellite', 'vCenter server', 'Ansible controller'].map(type => 
-              <DropdownItem onClick={() => setAddSourceModal(type)}>{type}</DropdownItem>
-            )}
+            dropdownItems={[
+              'Network range',
+              'OpenShift',
+              'RHACS',
+              'Satellite',
+              'vCenter server',
+              'Ansible controller'
+            ].map(type => (
+              <DropdownItem key={type} onClick={() => setAddSourceModal(type)}>
+                {type}
+              </DropdownItem>
+            ))}
           />{' '}
           <Button
             variant={ButtonVariant.secondary}
@@ -367,24 +392,29 @@ const SourcesListView: React.FunctionComponent = () => {
       </ToolbarContent>
     </Toolbar>
   );
-  
+
   const showConnections = (source: SourceType) => {
-    axios.get(`https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`,
-      { headers: {"Authorization": `Token ${token}`}})
-        .then(res => {
-          setConnectionsData({
-            successful: res.data.results.filter((c: { status: string; }) => c.status === 'success'),
-            failure: res.data.results.filter((c: { status: string; }) => c.status === 'failure'),
-            unreachable: res.data.results.filter((c: { status: string; }) => !['success','failure'].includes(c.status))
-          });
-        })
-        .catch(err => console.error(err));
+    axios
+      .get(
+        `https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`,
+        { headers: { Authorization: `Token ${token}` } }
+      )
+      .then(res => {
+        setConnectionsData({
+          successful: res.data.results.filter((c: { status: string }) => c.status === 'success'),
+          failure: res.data.results.filter((c: { status: string }) => c.status === 'failure'),
+          unreachable: res.data.results.filter(
+            (c: { status: string }) => !['success', 'failure'].includes(c.status)
+          )
+        });
+      })
+      .catch(err => console.error(err));
     setConnectionsSelected(source);
   };
 
   const getTimeDisplayHowLongAgo =
     process.env.REACT_APP_ENV !== 'test'
-      ? (timestamp) => moment.utc(timestamp).fromNow()
+      ? timestamp => moment.utc(timestamp).fromNow()
       : () => 'a day ago';
 
   const renderConnection = (source: SourceType): React.ReactNode => {
@@ -401,11 +431,13 @@ const SourcesListView: React.FunctionComponent = () => {
       context: ['status', source.connection.status, 'sources']
     });
     return (
-      <Button variant={ButtonVariant.link} onClick={() => {
-        showConnections(source);
-      }}>
-        <ContextIcon symbol={ContextIconVariant[source.connection.status]} />
-        {' '}{statusString}{' '}
+      <Button
+        variant={ButtonVariant.link}
+        onClick={() => {
+          showConnections(source);
+        }}
+      >
+        <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
         {getTimeDisplayHowLongAgo(scanTime)}
       </Button>
     );
@@ -449,17 +481,32 @@ const SourcesListView: React.FunctionComponent = () => {
                   <Td {...getTdProps({ columnKey: 'type' })}>
                     {SourceTypeLabels[source.source_type]}
                   </Td>
-                  <Td {...getTdProps({ columnKey: 'credentials' })}><Button variant={ButtonVariant.link} onClick={() => {
-                    setCredentialsSelected(source.credentials)
-                  }}>{source.credentials.length}</Button></Td>
+                  <Td {...getTdProps({ columnKey: 'credentials' })}>
+                    <Button
+                      variant={ButtonVariant.link}
+                      onClick={() => {
+                        setCredentialsSelected(source.credentials);
+                      }}
+                    >
+                      {source.credentials.length}
+                    </Button>
+                  </Td>
                   <Td isActionCell {...getTdProps({ columnKey: 'scan' })}>
-                    <Button isDisabled={source.connection.status === "pending"} variant={ButtonVariant.link} onClick={() => onScanSource(source)}>
+                    <Button
+                      isDisabled={source.connection.status === 'pending'}
+                      variant={ButtonVariant.link}
+                      onClick={() => onScanSource(source)}
+                    >
                       Scan
                     </Button>
                   </Td>
                 </TableRowContentWithBatteries>
                 <Td isActionCell {...getTdProps({ columnKey: 'actions' })}>
-                  <SourceActionMenu source={source} onEditSource={onEditSource} onDeleteSource={setPendingDeleteSource} />
+                  <SourceActionMenu
+                    source={source}
+                    onEditSource={onEditSource}
+                    onDeleteSource={setPendingDeleteSource}
+                  />
                 </Td>
               </Tr>
             ))}
@@ -473,76 +520,106 @@ const SourcesListView: React.FunctionComponent = () => {
         widgetId="server-paginated-example-pagination"
       />
       {!!credentialsSelected.length && (
-          <Modal
-            variant={ModalVariant.small}
-            title="Credentials"
-            isOpen={!!credentialsSelected}
-            onClose={() => setCredentialsSelected([])}
-            actions={[
-              <Button key="cancel" variant="secondary" onClick={() => setCredentialsSelected([])}>
-                Close
-              </Button>
-            ]}
-          >
-            <List isPlain isBordered>
-              {credentialsSelected.map((c, i) => (
-                <ListItem>
-                  {c.name}
-                </ListItem>
-              ))}
-            </List>
-          </Modal>
+        <Modal
+          variant={ModalVariant.small}
+          title="Credentials"
+          isOpen={!!credentialsSelected}
+          onClose={() => setCredentialsSelected([])}
+          actions={[
+            <Button key="cancel" variant="secondary" onClick={() => setCredentialsSelected([])}>
+              Close
+            </Button>
+          ]}
+        >
+          <List isPlain isBordered>
+            {credentialsSelected.map(c => (
+              <ListItem key={c.name}>{c.name}</ListItem>
+            ))}
+          </List>
+        </Modal>
       )}
       {connectionsSelected && (
-          <Modal
-            variant={ModalVariant.medium}
-            title={connectionsSelected.name}
-            isOpen={!!connectionsSelected}
-            onClose={onCloseConnections}
-            actions={[
-              <Button key="cancel" variant="secondary" onClick={onCloseConnections}>
-                Close
-              </Button>
-            ]}
-          >
-            <TextContent style={{margin: '1em 0'}}><h5><Icon status="danger"><ExclamationCircleIcon /></Icon> Failed connections</h5></TextContent>
-            <List isPlain isBordered>
-            {connectionsData.failure.length ? connectionsData.failure.map((con) => (
-                <ListItem>{con.name}</ListItem>
-              )) : (<ListItem>N/A</ListItem>)}
-            </List>
-            <TextContent style={{margin: '1em 0'}}><h5><Icon status="warning"><ExclamationTriangleIcon /></Icon> Unreachable systems</h5></TextContent>
-            <List isPlain isBordered>
-            {connectionsData.unreachable.length ? connectionsData.unreachable.map((con) => (
-                <ListItem>{con.name}</ListItem>
-              )) : (<ListItem>N/A</ListItem>)}
-            </List>
-            <TextContent style={{margin: '1em 0'}}><h5><Icon status="success"><CheckCircleIcon /></Icon>  Successful connections</h5></TextContent>
-            <List isPlain isBordered>
-            {connectionsData.successful.length ? connectionsData.successful.map((con) => (
-                <ListItem>{con.name}</ListItem>
-              )) : (<ListItem>N/A</ListItem>)}
-            </List>
-          </Modal>
+        <Modal
+          variant={ModalVariant.medium}
+          title={connectionsSelected.name}
+          isOpen={!!connectionsSelected}
+          onClose={onCloseConnections}
+          actions={[
+            <Button key="cancel" variant="secondary" onClick={onCloseConnections}>
+              Close
+            </Button>
+          ]}
+        >
+          <TextContent style={{ margin: '1em 0' }}>
+            <h5>
+              <Icon status="danger">
+                <ExclamationCircleIcon />
+              </Icon>{' '}
+              Failed connections
+            </h5>
+          </TextContent>
+          <List isPlain isBordered>
+            {connectionsData.failure.length ? (
+              connectionsData.failure.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
+            ) : (
+              <ListItem>N/A</ListItem>
+            )}
+          </List>
+          <TextContent style={{ margin: '1em 0' }}>
+            <h5>
+              <Icon status="warning">
+                <ExclamationTriangleIcon />
+              </Icon>{' '}
+              Unreachable systems
+            </h5>
+          </TextContent>
+          <List isPlain isBordered>
+            {connectionsData.unreachable.length ? (
+              connectionsData.unreachable.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
+            ) : (
+              <ListItem>N/A</ListItem>
+            )}
+          </List>
+          <TextContent style={{ margin: '1em 0' }}>
+            <h5>
+              <Icon status="success">
+                <CheckCircleIcon />
+              </Icon>{' '}
+              Successful connections
+            </h5>
+          </TextContent>
+          <List isPlain isBordered>
+            {connectionsData.successful.length ? (
+              connectionsData.successful.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
+            ) : (
+              <ListItem>N/A</ListItem>
+            )}
+          </List>
+        </Modal>
       )}
 
       {!!pendingDeleteSource && (
-            <Modal
-              variant={ModalVariant.small}
-              title="Permanently delete source"
-              isOpen={!!pendingDeleteSource}
-              onClose={() => setPendingDeleteSource(undefined)}
-              actions={[
-                <Button key="confirm" variant="danger" onClick={() => onDeleteSource(pendingDeleteSource)}>
-                  Delete
-                </Button>,
-                <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
-                  Cancel
-                </Button>
-              ]}
+        <Modal
+          variant={ModalVariant.small}
+          title="Permanently delete source"
+          isOpen={!!pendingDeleteSource}
+          onClose={() => setPendingDeleteSource(undefined)}
+          actions={[
+            <Button
+              key="confirm"
+              variant="danger"
+              onClick={() => onDeleteSource(pendingDeleteSource)}
             >
-              Are you sure you want to delete the source "{pendingDeleteSource.name}"
-            </Modal>
+              Delete
+            </Button>,
+            <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
+              Cancel
+            </Button>
+          ]}
+        >
+          Are you sure you want to delete the source &quot;
+          {pendingDeleteSource.name}&quot;
+        </Modal>
       )}
 
       {sourceBeingEdited && (
@@ -562,10 +639,11 @@ const SourcesListView: React.FunctionComponent = () => {
       )}
 
       {scanSelected && (
-        <SourcesScanModal 
+        <SourcesScanModal
           onClose={() => setScanSelected(undefined)}
           onSubmit={onRunScan}
-          sources={scanSelected} />
+          sources={scanSelected}
+        />
       )}
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ key, variant, title }) => (
@@ -579,10 +657,10 @@ const SourcesListView: React.FunctionComponent = () => {
                 title={title as string}
                 variantLabel={`${variant} alert`}
                 onClose={() => key && removeAlert(key)}
-            />
-          }
-          key={key}
-        />
+              />
+            }
+            key={key}
+          />
         ))}
       </AlertGroup>
     </PageSection>

@@ -4,7 +4,9 @@ import _get from 'lodash/get';
 import _set from 'lodash/set';
 import moment from 'moment';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const aggregatedError = (errors: any, message: any, { name = 'AggregateError' } = {}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { AggregateError, Error } = window as any;
   let err;
 
@@ -21,6 +23,7 @@ const aggregatedError = (errors: any, message: any, { name = 'AggregateError' } 
 
 const copyClipboard = text => {
   let successful;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const win = window as any;
 
   try {
@@ -48,6 +51,7 @@ const copyClipboard = text => {
     successful = null;
 
     if (process.env.REACT_APP_ENV !== 'test') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       console.warn('Copy to clipboard failed.', (e as any).message);
     }
   }
@@ -59,6 +63,7 @@ const devModeNormalizeCount = (count: number, modulus = 100) => Math.abs(count) 
 
 const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/plain') =>
   new Promise((resolve, reject) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const navigator = window.navigator as any;
     try {
       const blob = new Blob([data], { type: fileType });
@@ -79,6 +84,7 @@ const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/pla
 
         setTimeout(() => {
           window.document.body.removeChild(anchorTag);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           window.URL.revokeObjectURL(blob as any);
           resolve({ fileName, data });
         }, 250);
@@ -89,7 +95,9 @@ const downloadData = (data = '', fileName = 'download.txt', fileType = 'text/pla
   });
 
 const generateId = (prefix: string): string =>
-  `${prefix || 'generatedid'}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
+  `${prefix || 'generatedid'}-${
+    (process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''
+  }`;
 
 const noopTranslate = (
   key: string | string[],
@@ -109,12 +117,16 @@ const noopTranslate = (
   })`;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setPropIfDefined = (obj: any, props: PropertyPath, value: any) =>
   obj && value !== undefined ? _set(obj, props, value) : obj;
 
-const setPropIfTruthy = (obj: any, props: PropertyPath, value: any) => (obj && value ? _set(obj, props, value) : obj);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setPropIfTruthy = (obj: any, props: PropertyPath, value: any) =>
+  obj && value ? _set(obj, props, value) : obj;
 
 const getMessageFromResults = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   results: { status: any; statusText: string; message: string; detail: any },
   filter = null
 ) => {
@@ -186,7 +198,8 @@ const getMessageFromResults = (
   const filtered = (messageObjectArrayString, filterField) => {
     const parsed = {};
     const str = JSON.stringify(messageObjectArrayString);
-    const filterFields = (Array.isArray(filterField) && filterField) || (filterField && [filterField]) || [];
+    const filterFields =
+      (Array.isArray(filterField) && filterField) || (filterField && [filterField]) || [];
 
     filterFields.forEach(val => {
       const match = str.match(new RegExp(`"${val}":(\\[(.*?)]]?|{(.*?)}]?|"(.*?)"),?`));
@@ -212,7 +225,8 @@ const getMessageFromResults = (
   };
 
   messages.messages =
-    (filter && filtered(messageResponse || detailResponse, filter)) || getMessages(messageResponse || detailResponse);
+    (filter && filtered(messageResponse || detailResponse, filter)) ||
+    getMessages(messageResponse || detailResponse);
   messages.message = `${displayStatus}${Object.values(messages.messages).join('\n')}`;
 
   if (messages.message === '[object Object]') {
@@ -275,7 +289,9 @@ const UI_SENTENCE_START_NAME = UI_BRAND
   ? process.env.REACT_APP_UI_BRAND_SENTENCE_START_NAME
   : process.env.REACT_APP_UI_SENTENCE_START_NAME;
 
-const UI_SHORT_NAME = UI_BRAND ? process.env.REACT_APP_UI_BRAND_SHORT_NAME : process.env.REACT_APP_UI_SHORT_NAME;
+const UI_SHORT_NAME = UI_BRAND
+  ? process.env.REACT_APP_UI_BRAND_SHORT_NAME
+  : process.env.REACT_APP_UI_SHORT_NAME;
 
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
@@ -285,9 +301,12 @@ const TOAST_NOTIFICATIONS_TIMEOUT =
   undefined;
 
 const POLL_INTERVAL =
-  (process.env.REACT_APP_POLL_INTERVAL && Number.parseInt(process.env.REACT_APP_POLL_INTERVAL, 10)) || undefined;
+  (process.env.REACT_APP_POLL_INTERVAL &&
+    Number.parseInt(process.env.REACT_APP_POLL_INTERVAL, 10)) ||
+  undefined;
 
-const getCurrentDate = () => (TEST_MODE && moment.utc('20220601').toDate()) || moment.utc().toDate();
+const getCurrentDate = () =>
+  (TEST_MODE && moment.utc('20220601').toDate()) || moment.utc().toDate();
 
 const helpers = {
   aggregatedError,

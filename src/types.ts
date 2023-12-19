@@ -44,23 +44,23 @@ export type SourceType = {
   credentials: CredentialType[];
   connection: SourceConnectionType;
   options?: {
-    ssl_protocol?: string,
-    ssl_cert_verify: boolean,
-    disable_ssl: boolean,
-    use_paramiko?: boolean,
-  }
+    ssl_protocol?: string;
+    ssl_cert_verify: boolean;
+    disable_ssl: boolean;
+    use_paramiko?: boolean;
+  };
 };
 
 export type ConnectionType = {
-  name: string,
-  status: string,
+  name: string;
+  status: string;
   source: {
-    id: number,
-    name: string,
-    source_type: string,
-  },
+    id: number;
+    name: string;
+    source_type: string;
+  };
   credentials: {
-    id: number,
-    name: string,
-  },
+    id: number;
+    name: string;
+  };
 };
