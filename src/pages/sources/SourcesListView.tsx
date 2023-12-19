@@ -77,6 +77,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
   const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
+  const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
   const [connectionsData, setConnectionsData] = React.useState<{successful: ConnectionType[], failure: ConnectionType[], unreachable: ConnectionType[]}>({successful: [], failure: [], unreachable: []});
   const [sortColumn] = useSearchParam('sortColumn') || ['name'];
   const [sortDirection] = useSearchParam('sortDirection') || ['asc'];
@@ -215,7 +216,6 @@ const SourcesListView: React.FunctionComponent = () => {
     queryKey: [SOURCES_LIST_QUERY],
     refetchOnWindowFocus: !helpers.DEV_MODE,
     queryFn: () => {
-      console.log(`Query: `, currentQuery.current);
       return axios.get(currentQuery.current, { headers: {"Authorization": `Token ${token}`}})
         .then(res => {
           setRefreshTime(new Date());
@@ -294,7 +294,6 @@ const SourcesListView: React.FunctionComponent = () => {
         .catch(err => console.error(err));
   };
   const onAddSource = (payload) => {
-    console.log('addsource', payload);
     axios.post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload, { headers: {"Authorization": `Token ${token}`}})
     .then(res => {
       addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
@@ -305,7 +304,17 @@ const SourcesListView: React.FunctionComponent = () => {
   }
 
   const onEditSource = (source: SourceType) => {
-    console.log("edit source", source);
+    setSourceBeingEdited(source);
+  }
+
+  const onSubmitEditedSource = (payload: SourceType) => {
+    axios.put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload, { headers: {"Authorization": `Token ${token}`}})
+    .then(res => {
+      addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
+      queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+      setSourceBeingEdited(undefined);
+    })
+    .catch(err => console.error(err));
   }
 
   const onDeleteSource = (source: SourceType) => {
@@ -363,7 +372,6 @@ const SourcesListView: React.FunctionComponent = () => {
     axios.get(`https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`,
       { headers: {"Authorization": `Token ${token}`}})
         .then(res => {
-          console.log(res);
           setConnectionsData({
             successful: res.data.results.filter((c: { status: string; }) => c.status === 'success'),
             failure: res.data.results.filter((c: { status: string; }) => c.status === 'failure'),
@@ -537,6 +545,14 @@ const SourcesListView: React.FunctionComponent = () => {
             </Modal>
       )}
 
+      {sourceBeingEdited && (
+        <AddSourceModal
+          source={sourceBeingEdited}
+          type={sourceBeingEdited.source_type}
+          onClose={() => setSourceBeingEdited(undefined)}
+          onSubmit={onSubmitEditedSource}
+        />
+      )}
       {addSourceModal && (
         <AddSourceModal
           type={addSourceModal}
