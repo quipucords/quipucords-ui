@@ -1,9 +1,5 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import useSearchParam from '../../hooks/useSearchParam';
-import { CredentialType } from '../../types';
 import {
   ConditionalTableBody,
   FilterToolbar,
@@ -13,7 +9,6 @@ import {
   useTablePropHelpers,
   useTableState
 } from '@mturley-latest/react-table-batteries';
-import { helpers } from '../../common';
 import {
   Button,
   ButtonVariant,
@@ -31,9 +26,14 @@ import {
   ToolbarContent,
   ToolbarItem
 } from '@patternfly/react-core';
-import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import { CubesIcon } from '@patternfly/react-icons';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { helpers } from '../../common';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
+import useSearchParam from '../../hooks/useSearchParam';
+import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
 
 const CREDS_LIST_QUERY = 'credentialsList';
@@ -51,7 +51,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   // const [credentialsSelected, setCredentialsSelected] = React.useState<any[]>([]);
-  const [sourcesSelected, setSourcesSelected] = React.useState<any[]>([]);
+  const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [sortColumn] = useSearchParam('sortColumn') || ['name'];
   const [sortDirection] = useSearchParam('sortDirection') || ['asc'];
   const [filters] = useSearchParam('filters');
@@ -63,7 +63,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
   };
 
-    const tableState = useTableState({
+  const tableState = useTableState({
     persistTo: 'urlParams',
     isSelectionEnabled: true,
     persistenceKeyPrefix: '', // The first Things table on this page.
@@ -112,7 +112,7 @@ const CredentialsListView: React.FunctionComponent = () => {
             key: 'rhacs',
             label: 'rhacs',
             value: 'RHACS'
-          },          
+          },
           {
             key: 'satellite',
             label: 'satellite',
@@ -127,14 +127,9 @@ const CredentialsListView: React.FunctionComponent = () => {
       }
     ],
     // Because isSortEnabled is true, TypeScript will require these sort-related properties:
-    sortableColumns: ['name','type', 'auth_type', 'sources', 'updated'],
+    sortableColumns: ['name', 'type', 'auth_type', 'sources', 'updated'],
     initialSort: {
-      columnKey: sortColumn as
-        | 'name'
-        | 'type'
-        | 'auth_type'
-        | 'sources'
-        | 'updated',
+      columnKey: sortColumn as 'name' | 'type' | 'auth_type' | 'sources' | 'updated',
       direction: sortDirection as 'asc' | 'desc'
     },
     initialFilterValues: filters ? JSON.parse(filters) : undefined
@@ -172,7 +167,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     }
   }, [filterValues, activeSort, sortDirection, sortColumn, pageNumber, itemsPerPage, queryClient]);
 
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem('authToken');
 
   const { isLoading, data } = useQuery({
     queryKey: [CREDS_LIST_QUERY],
@@ -180,7 +175,9 @@ const CredentialsListView: React.FunctionComponent = () => {
     queryFn: async () => {
       try {
         console.log(`Query: `, currentQuery.current);
-        const response = await axios.get(currentQuery.current, { headers: { "Authorization": `Token ${token}` } });
+        const response = await axios.get(currentQuery.current, {
+          headers: { Authorization: `Token ${token}` }
+        });
         setRefreshTime(new Date());
         return response.data;
       } catch (error) {
@@ -188,8 +185,8 @@ const CredentialsListView: React.FunctionComponent = () => {
         throw error; // You can choose to throw the error or return a default value here
       }
     }
-  });  
-  
+  });
+
   let totalResults = data?.count || 0;
   if (helpers.DEV_MODE) {
     totalResults = helpers.devModeNormalizeCount(totalResults);
@@ -242,13 +239,18 @@ const CredentialsListView: React.FunctionComponent = () => {
 
   const onShowAddCredentialWizard = () => {};
   const onDeleteSelectedCredentials = () => {
-    const selectedItems = Object.values(tableBatteries.selectionState.selectedItems).filter(val => val !== null);
+    const selectedItems = Object.values(tableBatteries.selectionState.selectedItems).filter(
+      val => val !== null
+    );
     // add logic
     console.log('Deleting selected credentials:', selectedItems);
   };
   const hasSelectedCredentials = () => {
-    return Object.values(tableBatteries.selectionState.selectedItems).filter(val => val !== null).length > 0;
-  };  
+    return (
+      Object.values(tableBatteries.selectionState.selectedItems).filter(val => val !== null)
+        .length > 0
+    );
+  };
 
   const renderToolbar = () => (
     <Toolbar {...toolbarProps}>
@@ -258,15 +260,20 @@ const CredentialsListView: React.FunctionComponent = () => {
         <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
-          <Button className="pf-v5-u-mr-md" onClick={onShowAddCredentialWizard} ouiaId="add_credential">
+          <Button
+            className="pf-v5-u-mr-md"
+            onClick={onShowAddCredentialWizard}
+            ouiaId="add_credential"
+          >
             {t('table.label', { context: 'add' })}
           </Button>{' '}
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedCredentials()}
-            onClick={onDeleteSelectedCredentials}>
+            onClick={onDeleteSelectedCredentials}
+          >
             {t('table.label', { context: 'delete' })}
-        </Button>
+          </Button>
         </ToolbarItem>
         <ToolbarItem {...paginationToolbarItemProps}>
           <Pagination
@@ -303,7 +310,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     const days = Math.floor(hours / 24);
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
-  
+
     if (seconds < 60) {
       return 'Just now';
     } else if (minutes === 1) {
@@ -361,7 +368,11 @@ const CredentialsListView: React.FunctionComponent = () => {
           <Tbody>
             {currentPageItems?.map((credential: CredentialType, rowIndex) => (
               <Tr key={credential.id} {...getTrProps({ item: credential })}>
-                <TableRowContentWithBatteries {...tableBatteries} item={credential} rowIndex={rowIndex}>
+                <TableRowContentWithBatteries
+                  {...tableBatteries}
+                  item={credential}
+                  rowIndex={rowIndex}
+                >
                   <Td {...getTdProps({ columnKey: 'name' })}>{credential.name}</Td>
                   <Td {...getTdProps({ columnKey: 'type' })}>
                     {CredentialTypeLabels[credential.cred_type]}
@@ -372,13 +383,18 @@ const CredentialsListView: React.FunctionComponent = () => {
                       variant={ButtonVariant.link}
                       onClick={() => {
                         if (credential.sources && credential.sources.length > 0) {
-                        setSourcesSelected(credential.sources);
-                      }
+                          setSourcesSelected(credential.sources);
+                        }
                       }}
-                      isDisabled={!credential.sources?.length} > {credential.sources?.length || 0}
+                      isDisabled={!credential.sources?.length}
+                    >
+                      {' '}
+                      {credential.sources?.length || 0}
                     </Button>
                   </Td>
-                  <Td {...getTdProps({ columnKey: 'updated' })}>{getLastUpdated(credential).toString()}</Td>
+                  <Td {...getTdProps({ columnKey: 'updated' })}>
+                    {getLastUpdated(credential).toString()}
+                  </Td>
                 </TableRowContentWithBatteries>
                 <Td isActionCell {...getTdProps({ columnKey: 'actions' })}>
                   <CredentialActionMenu credential={credential} />
@@ -395,29 +411,26 @@ const CredentialsListView: React.FunctionComponent = () => {
         widgetId="server-paginated-example-pagination"
       />
       {!!sourcesSelected.length && (
-          <Modal
-            variant={ModalVariant.small}
-            title="Sources"
-            isOpen={!!sourcesSelected}
-            onClose={() => setSourcesSelected([])}
-            actions={[
-              <Button key="cancel" variant="secondary" onClick={() => setSourcesSelected([])}>
-                Close
-              </Button>
-            ]}
-          >
-            <List isPlain isBordered>
-              {sourcesSelected.map((c, i) => (
-                <ListItem>
-                  {c.name}
-                </ListItem>
-              ))}
-            </List>
-          </Modal>
+        <Modal
+          variant={ModalVariant.small}
+          title="Sources"
+          isOpen={!!sourcesSelected}
+          onClose={() => setSourcesSelected([])}
+          actions={[
+            <Button key="cancel" variant="secondary" onClick={() => setSourcesSelected([])}>
+              Close
+            </Button>
+          ]}
+        >
+          <List isPlain isBordered>
+            {sourcesSelected.map(c => (
+              <ListItem key={c.name}>{c.name}</ListItem>
+            ))}
+          </List>
+        </Modal>
       )}
     </PageSection>
   );
 };
-
 
 export default CredentialsListView;

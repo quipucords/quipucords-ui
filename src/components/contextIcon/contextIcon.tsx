@@ -81,11 +81,10 @@ const ContextIconVariant: { [key: string]: string } = {
   acs: 'acs'
 };
 
-const ContextIcon: React.FC<{ symbol: string; size?: 'sm' | 'md' | 'lg' | 'xl' }> = ({
-  symbol,
-  size,
-  ...props
-}) => {
+const ContextIcon: React.FC<{
+  symbol: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}> = ({ symbol, size, ...props }) => {
   switch (symbol) {
     case ContextIconVariant.ansible:
       return <AnsibleTowerIcon {...props} />;

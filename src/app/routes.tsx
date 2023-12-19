@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import NotFound from '../pages/notFound/NotFound';
-import { Navigate, Redirect } from 'react-router-dom';
 
 const Sources = React.lazy(() => import('../pages/sources/SourcesListView'));
 const Scans = React.lazy(() => import('../pages/scans/ScansListView'));
-const Credentials = React.lazy(() => import('../pages/credentials/CredentialsListView'))
+const Credentials = React.lazy(() => import('../pages/credentials/CredentialsListView'));
 
 export interface IAppRoute {
   id: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { PageSection, Title } from '@patternfly/react-core';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const SOURCES_LIST_QUERY = 'scansList';
