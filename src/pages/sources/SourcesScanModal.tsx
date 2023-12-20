@@ -58,7 +58,7 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
         }}
       >
         {({ setValue, getValue, values }) => (
-          <Form isHorizontal>
+          <Form>
             <FormGroup label="Name" isRequired fieldId="scan-name">
               <TextInput
                 value={getValue('scan-name')}
