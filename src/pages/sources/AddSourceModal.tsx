@@ -92,7 +92,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
         }}
       >
         {({ setValue, getValue, values }) => (
-          <Form isHorizontal>
+          <Form>
             <FormGroup label="Name" isRequired fieldId="name">
               <TextInput
                 value={getValue('name')}
