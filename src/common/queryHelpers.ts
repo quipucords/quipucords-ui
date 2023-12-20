@@ -39,7 +39,7 @@ export const getServiceQueryUrl = <
     `&` +
     `page=${pageNumber}` +
     `&` +
-    `page-size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}`;
+    `page_size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}`;
 
   return query;
 };
