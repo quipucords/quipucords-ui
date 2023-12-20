@@ -265,8 +265,6 @@ const SourcesListView: React.FunctionComponent = () => {
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
-        {/* You can render whatever other custom toolbar items you may need here! */}
-        <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
           <SimpleDropdown
             label="Add Source"
@@ -283,7 +281,9 @@ const SourcesListView: React.FunctionComponent = () => {
                 {type}
               </DropdownItem>
             ))}
-          />{' '}
+          />
+        </ToolbarItem>
+        <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={Object.values(selectedItems).filter(val => val !== null).length <= 1}
@@ -291,6 +291,8 @@ const SourcesListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'scan' })}
           </Button>
+        </ToolbarItem>
+        <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <PaginationToolbarItem>
