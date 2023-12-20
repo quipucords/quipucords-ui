@@ -2,10 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ConditionalTableBody,
-  FilterToolbar,
   FilterType,
-  TableHeaderContentWithBatteries,
-  TableRowContentWithBatteries,
   useTablePropHelpers,
   useTableState
 } from '@mturley-latest/react-table-batteries';
@@ -20,21 +17,17 @@ import {
   Modal,
   ModalVariant,
   PageSection,
-  Pagination,
   Title,
-  Toolbar,
   ToolbarContent,
   ToolbarItem
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
-import useSearchParam from '../../hooks/useSearchParam';
 import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
+import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CREDS_LIST_QUERY = 'credentialsList';
 
@@ -50,14 +43,8 @@ const CredentialTypeLabels = {
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  // const [credentialsSelected, setCredentialsSelected] = React.useState<any[]>([]);
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
-  const [sortColumn] = useSearchParam('sortColumn') || ['name'];
-  const [sortDirection] = useSearchParam('sortDirection') || ['asc'];
-  const [filters] = useSearchParam('filters');
-  const [selectedItems, setSelectedItems] = React.useState<CredentialType[]>([]);
   const queryClient = useQueryClient();
-  const currentQuery = React.useRef<string>('');
 
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
@@ -65,10 +52,7 @@ const CredentialsListView: React.FunctionComponent = () => {
 
   const tableState = useTableState({
     persistTo: 'urlParams',
-    isSelectionEnabled: true,
-    persistenceKeyPrefix: '', // The first Things table on this page.
     columnNames: {
-      // The keys of this object define the inferred generic type `TColumnKey`. See "Unique Identifiers".
       name: 'Name',
       type: 'Type',
       auth_type: 'Authentication type',
@@ -76,116 +60,65 @@ const CredentialsListView: React.FunctionComponent = () => {
       updated: 'Last updated',
       actions: ' '
     },
-    isFilterEnabled: true,
-    isSortEnabled: true,
-    isPaginationEnabled: true,
-    // Because isFilterEnabled is true, TypeScript will require these filterCategories:
-    filterCategories: [
-      {
-        key: 'search_by_name',
-        title: 'Name',
-        type: FilterType.search,
-        placeholderText: 'Filter by name'
-      },
-      {
-        key: 'cred_type',
-        title: 'Credential type',
-        type: FilterType.select,
-        placeholderText: 'Filter by credential type',
-        selectOptions: [
-          {
-            key: 'ansible',
-            label: 'ansible',
-            value: 'Ansible'
-          },
-          {
-            key: 'network',
-            label: 'network',
-            value: 'Network'
-          },
-          {
-            key: 'openshift',
-            label: 'openShift',
-            value: 'Openshift'
-          },
-          {
-            key: 'rhacs',
-            label: 'rhacs',
-            value: 'RHACS'
-          },
-          {
-            key: 'satellite',
-            label: 'satellite',
-            value: 'Satellite'
-          },
-          {
-            key: 'vcenter',
-            label: 'vcenter',
-            value: 'vCenter'
-          }
-        ]
-      }
-    ],
-    // Because isSortEnabled is true, TypeScript will require these sort-related properties:
-    sortableColumns: ['name', 'type', 'auth_type', 'sources', 'updated'],
-    initialSort: {
-      columnKey: sortColumn as 'name' | 'type' | 'auth_type' | 'sources' | 'updated',
-      direction: sortDirection as 'asc' | 'desc'
+    filter: {
+      isEnabled: true,
+      filterCategories: [
+        {
+          key: 'search_by_name',
+          title: 'Name',
+          type: FilterType.search,
+          placeholderText: 'Filter by name'
+        },
+        {
+          key: 'cred_type',
+          title: 'Credential type',
+          type: FilterType.select,
+          placeholderText: 'Filter by credential type',
+          selectOptions: [
+            {
+              key: 'ansible',
+              label: 'ansible',
+              value: 'Ansible'
+            },
+            {
+              key: 'network',
+              label: 'network',
+              value: 'Network'
+            },
+            {
+              key: 'openshift',
+              label: 'openShift',
+              value: 'Openshift'
+            },
+            {
+              key: 'rhacs',
+              label: 'rhacs',
+              value: 'RHACS'
+            },
+            {
+              key: 'satellite',
+              label: 'satellite',
+              value: 'Satellite'
+            },
+            {
+              key: 'vcenter',
+              label: 'vcenter',
+              value: 'vCenter'
+            }
+          ]
+        }
+      ]
     },
-    initialFilterValues: filters ? JSON.parse(filters) : undefined
+    sort: {
+      isEnabled: true,
+      sortableColumns: ['name', 'type', 'auth_type', 'sources', 'updated'],
+      initialSort: { columnKey: 'name', direction: 'asc' }
+    },
+    pagination: { isEnabled: true },
+    selection: { isEnabled: true }
   });
 
-  const {
-    filterState: { filterValues },
-    sortState: { activeSort },
-    paginationState: { pageNumber, itemsPerPage }
-  } = tableState;
-
-  React.useEffect(() => {
-    const filterParams = filterValues
-      ? Object.keys(filterValues)
-          .map(key => `${key}=${filterValues[key]}`)
-          .join('&')
-      : null;
-
-    const ordering = `${(activeSort?.direction ?? sortDirection) === 'desc' ? '-' : ''}${
-      activeSort?.columnKey ?? sortColumn
-    }`;
-
-    const query =
-      `${process.env.REACT_APP_CREDENTIALS_SERVICE}` +
-      `?` +
-      `ordering=${ordering}` +
-      `&` +
-      `page=${pageNumber}` +
-      `&` +
-      `page-size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}`;
-
-    if (query !== currentQuery.current) {
-      currentQuery.current = query;
-      queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
-    }
-  }, [filterValues, activeSort, sortDirection, sortColumn, pageNumber, itemsPerPage, queryClient]);
-
-  const token = localStorage.getItem('authToken');
-
-  const { isLoading, data } = useQuery({
-    queryKey: [CREDS_LIST_QUERY],
-    refetchOnWindowFocus: !helpers.DEV_MODE,
-    queryFn: async () => {
-      try {
-        console.log(`Query: `, currentQuery.current);
-        const response = await axios.get(currentQuery.current, {
-          headers: { Authorization: `Token ${token}` }
-        });
-        setRefreshTime(new Date());
-        return response.data;
-      } catch (error) {
-        console.error(error);
-        throw error; // You can choose to throw the error or return a default value here
-      }
-    }
-  });
+  const { isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
 
   let totalResults = data?.count || 0;
   if (helpers.DEV_MODE) {
@@ -196,66 +129,43 @@ const CredentialsListView: React.FunctionComponent = () => {
     ...tableState,
     idProperty: 'id',
     isLoading,
-    currentPageItems: (data?.results || []) as CredentialType[],
+    currentPageItems: data?.results || [],
     totalItemCount: totalResults,
-    selectionState: {
-      selectedItems,
-      setSelectedItems,
-      isItemSelected: (item: CredentialType) => !!selectedItems.find(i => i.id === item.id),
-      isItemSelectable: () => true,
-      toggleItemSelected: (item: CredentialType) => {
-        const index = selectedItems.findIndex(i => i.id === item.id);
-        if (index > -1) {
-          setSelectedItems(prev => [...prev.slice(0, index), ...prev.slice(index + 1)]);
-        } else {
-          setSelectedItems(prev => [...prev, item]);
-        }
-      },
-      selectMultiple: () => {},
-      areAllSelected: false,
-      selectAll: () => {}
-    }
+    variant: 'compact'
   });
 
   const {
-    currentPageItems, // These items have already been paginated.
-    // `numRenderedColumns` is based on the number of columnNames and additional columns needed for
-    // rendering controls related to features like selection, expansion, etc.
-    // It is used as the colSpan when rendering a full-table-wide cell.
+    selection: { selectedItems },
+    currentPageItems,
     numRenderedColumns,
-    // The objects and functions in `propHelpers` correspond to the props needed for specific PatternFly or Tackle
-    // components and are provided to reduce prop-drilling and make the rendering code as short as possible.
-    propHelpers: {
-      toolbarProps,
-      filterToolbarProps,
-      paginationToolbarItemProps,
-      paginationProps,
-      tableProps,
-      getThProps,
-      getTrProps,
-      getTdProps
+    components: {
+      Toolbar,
+      FilterToolbar,
+      PaginationToolbarItem,
+      Pagination,
+      Table,
+      Tbody,
+      Td,
+      Th,
+      Thead,
+      Tr
     }
   } = tableBatteries;
 
   const onShowAddCredentialWizard = () => {};
   const onDeleteSelectedCredentials = () => {
-    const selectedItems = Object.values(tableBatteries.selectionState.selectedItems).filter(
-      val => val !== null
-    );
+    const itemsToDelete = Object.values(selectedItems).filter(val => val !== null);
     // add logic
-    console.log('Deleting selected credentials:', selectedItems);
+    console.log('Deleting selected credentials:', itemsToDelete);
   };
   const hasSelectedCredentials = () => {
-    return (
-      Object.values(tableBatteries.selectionState.selectedItems).filter(val => val !== null)
-        .length > 0
-    );
+    return Object.values(selectedItems).filter(val => val !== null).length > 0;
   };
 
   const renderToolbar = () => (
-    <Toolbar {...toolbarProps}>
+    <Toolbar>
       <ToolbarContent>
-        <FilterToolbar {...filterToolbarProps} id="client-paginated-example-filters" />
+        <FilterToolbar id="client-paginated-example-filters" />
         {/* You can render whatever other custom toolbar items you may need here! */}
         <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
@@ -275,14 +185,9 @@ const CredentialsListView: React.FunctionComponent = () => {
             {t('table.label', { context: 'delete' })}
           </Button>
         </ToolbarItem>
-        <ToolbarItem {...paginationToolbarItemProps}>
-          <Pagination
-            variant="top"
-            isCompact
-            {...paginationProps}
-            widgetId="client-paginated-example-pagination"
-          />
-        </ToolbarItem>
+        <PaginationToolbarItem>
+          <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
+        </PaginationToolbarItem>
       </ToolbarContent>
     </Toolbar>
   );
@@ -339,17 +244,15 @@ const CredentialsListView: React.FunctionComponent = () => {
   return (
     <PageSection variant="light">
       {renderToolbar()}
-      <Table {...tableProps} aria-label="Example things table" variant="compact">
+      <Table aria-label="Example things table">
         <Thead>
-          <Tr>
-            <TableHeaderContentWithBatteries {...tableBatteries}>
-              <Th {...getThProps({ columnKey: 'name' })} />
-              <Th {...getThProps({ columnKey: 'type' })} />
-              <Th {...getThProps({ columnKey: 'auth_type' })} />
-              <Th {...getThProps({ columnKey: 'sources' })} />
-              <Th {...getThProps({ columnKey: 'updated' })} />
-              <Th {...getThProps({ columnKey: 'actions' })} />
-            </TableHeaderContentWithBatteries>
+          <Tr isHeaderRow>
+            <Th columnKey="name" />
+            <Th columnKey="type" />
+            <Th columnKey="auth_type" />
+            <Th columnKey="sources" />
+            <Th columnKey="updated" />
+            <Th columnKey="actions" />
           </Tr>
         </Thead>
         <ConditionalTableBody
@@ -367,36 +270,26 @@ const CredentialsListView: React.FunctionComponent = () => {
         >
           <Tbody>
             {currentPageItems?.map((credential: CredentialType, rowIndex) => (
-              <Tr key={credential.id} {...getTrProps({ item: credential })}>
-                <TableRowContentWithBatteries
-                  {...tableBatteries}
-                  item={credential}
-                  rowIndex={rowIndex}
-                >
-                  <Td {...getTdProps({ columnKey: 'name' })}>{credential.name}</Td>
-                  <Td {...getTdProps({ columnKey: 'type' })}>
-                    {CredentialTypeLabels[credential.cred_type]}
-                  </Td>
-                  <Td {...getTdProps({ columnKey: 'auth_type' })}>{getAuthType(credential)}</Td>
-                  <Td {...getTdProps({ columnKey: 'sources' })}>
-                    <Button
-                      variant={ButtonVariant.link}
-                      onClick={() => {
-                        if (credential.sources && credential.sources.length > 0) {
-                          setSourcesSelected(credential.sources);
-                        }
-                      }}
-                      isDisabled={!credential.sources?.length}
-                    >
-                      {' '}
-                      {credential.sources?.length || 0}
-                    </Button>
-                  </Td>
-                  <Td {...getTdProps({ columnKey: 'updated' })}>
-                    {getLastUpdated(credential).toString()}
-                  </Td>
-                </TableRowContentWithBatteries>
-                <Td isActionCell {...getTdProps({ columnKey: 'actions' })}>
+              <Tr key={credential.id} item={credential} rowIndex={rowIndex}>
+                <Td columnKey="name">{credential.name}</Td>
+                <Td columnKey="type">{CredentialTypeLabels[credential.cred_type]}</Td>
+                <Td columnKey="auth_type">{getAuthType(credential)}</Td>
+                <Td columnKey="sources">
+                  <Button
+                    variant={ButtonVariant.link}
+                    onClick={() => {
+                      if (credential.sources && credential.sources.length > 0) {
+                        setSourcesSelected(credential.sources);
+                      }
+                    }}
+                    isDisabled={!credential.sources?.length}
+                  >
+                    {' '}
+                    {credential.sources?.length || 0}
+                  </Button>
+                </Td>
+                <Td columnKey="updated">{getLastUpdated(credential).toString()}</Td>
+                <Td isActionCell columnKey="actions">
                   <CredentialActionMenu credential={credential} />
                 </Td>
               </Tr>
@@ -404,12 +297,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           </Tbody>
         </ConditionalTableBody>
       </Table>
-      <Pagination
-        variant="bottom"
-        isCompact
-        {...paginationProps}
-        widgetId="server-paginated-example-pagination"
-      />
+      <Pagination variant="bottom" isCompact widgetId="server-paginated-example-pagination" />
       {!!sourcesSelected.length && (
         <Modal
           variant={ModalVariant.small}
