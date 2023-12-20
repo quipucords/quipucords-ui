@@ -8,7 +8,7 @@ import {
   CrosshairsIcon,
   DisconnectedIcon,
   DownloadIcon,
-  ErrorCircleOIcon,
+  ExclamationCircleIcon,
   ExclamationTriangleIcon,
   IdCardIcon,
   InfoCircleIcon,
@@ -91,7 +91,7 @@ const ContextIcon: React.FC<{
     case ContextIconVariant.download:
       return <DownloadIcon {...props} />;
     case ContextIconVariant.failed:
-      return <ErrorCircleOIcon {...{ ...{ color: red.value }, ...props }} />;
+      return <ExclamationCircleIcon {...{ ...{ color: red.value }, ...props }} />;
     case ContextIconVariant.idCard:
       return <IdCardIcon {...{ ...{ color: gray.value }, ...props }} />;
     case ContextIconVariant.info:
