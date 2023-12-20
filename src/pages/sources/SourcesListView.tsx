@@ -414,7 +414,7 @@ const SourcesListView: React.FunctionComponent = () => {
           </Tbody>
         </ConditionalTableBody>
       </Table>
-      <Pagination variant="bottom" isCompact widgetId="server-paginated-example-pagination" />
+      <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
       {!!credentialsSelected.length && (
         <Modal
           variant={ModalVariant.small}
