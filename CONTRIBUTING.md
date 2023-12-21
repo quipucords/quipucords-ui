@@ -11,15 +11,10 @@ Quipucords-UI makes use of
 
 > Instead of relying on GitHub merge commits and squashing, we recommend breaking down changes into smaller, independent commits.
 
-> Working directly on the main repository is discouraged.
-
 #### Branch syncing
-Linear commit history for Quipucords-UI makes syncing concise
-- `dev` is always rebased from `main`
-  - typically after a release
-  - or in prep for a fast-forward of `main`
-- `main` is fast-forwarded from `dev`
-  - typically when commits are prepared for release
+Linear commit history for Quipucords-UI simplifies understanding and syncing changes across branches. Do not use merge commits. Always use fast-forward rebase.
+
+New changes must be made in a branch and be submitted via GitHub pull requests. PRs should target merging to `main`.
 
 </details>
 
@@ -29,8 +24,7 @@ Linear commit history for Quipucords-UI makes syncing concise
 All development work should be handled through GitHub's fork and pull workflow.
 
 #### Setting up a pull request
-When multiple developers are contributing features, development pull requests (PRs) should be opened against the `dev` branch. PRs directly to `main` are discouraged, 
-Exceptions are allowed, but it is important to ensure that updates to the `main` branch are also rebased against the `dev` branch.
+When multiple developers are contributing features, development pull requests (PRs) should be opened against the `main` branch.
 
 > If your pull request work contains any of the following warning signs
 >  - out of sync commits (is not rebased against the `base branch`)
@@ -94,15 +88,14 @@ For additional information on failures for
 - Pull request code, see [Updating unit tests during development]()
 
 > To resolve failures for any GitHub actions make sure you first review the results of the test by
-clicking the `checks` tab on the related pull request.
-
+> clicking the `checks` tab on the related pull request.
+>
 > Caching for GitHub actions and NPM packages is active. This caching allows subsequent pull request
 > updates to avoid reinstalling yarn dependencies.
 >
 > Occasionally test failures can occur after recent NPM package updates either in the pull request
 > itself or in a prior commit to the pull request. The most common reason for this failure presents when
-> a NPM package has changed its support for different versions of NodeJS and those packages are updated
-> in the `dev` branch.
+> a NPM package has changed its support for different versions of NodeJS.
 >
 > If test failures are happening shortly after a NPM package update you may need to clear the
 > GitHub actions cache and restart the related tests.
@@ -112,39 +105,40 @@ clicking the `checks` tab on the related pull request.
 <details>
 <summary><h3 style="display: inline-block">Releasing code for all environments</h3></summary>
 
-Quipucords-UI makes use of release artifacts.
-
-> After pushing code, or tagging, a repository GitHub action starts the process of creating artifacts.
+quipucords-ui uses GitHub releases, and our GitHub automation automatically builds and attaches artifacts to a release once its tag is created. See [integration.yml](https://github.com/quipucords/quipucords-ui/blob/main/.github/workflows/integration.yml) for implementation details and [Build workflow](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml?query=event%3Apush) for the history of workflow runs.
 
 #### Release artifacts
-To create release artifacts a maintainer must run the release commit process locally.
+To create a new release, use `yarn` to update version details, and open a PR to merge those changes to `main` using the following process.
 
+1. Within the repo, confirm you're on a new branch from the latest `main`, and use `yarn` to update the version:
    ```
-   local main repo, main branch -> release commit -> origin main -> tag -> GitHub action
+   git checkout main && git pull  # to ensure you have the latest changes
+   git checkout -b your-release-branch-name  # please use an appropriate branch name here
+   yarn  # to ensure that packages are installed
+   yarn release --dry-run  # to review the changes before committing them
+   yarn release  # to generate and commit the changes
    ```
 
-1. clone the main repository, within the repo confirm you're on the `main` branch and **SYNCED** with `origin` `main`
-1. run
-   1. `$ git checkout main`
-   1. `$ yarn`
-   1. `$ yarn release --dry-run` to confirm the release output version and commits.
-   1. `$ yarn release` to generate the commit and file changes.
-
-      >If the version recommended should be different you can run the command with an override version following a semver format
-      >  ```
-      >  $ yarn release --override X.X.X
-      >  ``` 
-1. Confirm you now have a release commit with the format `chore(release): X.X.X` and there are updates to
+   > If you disagree with automatic generated version number, you may override it with the > optional `--override` argument:
+   > ```
+   > yarn release --override X.X.X
+   > ```
+2. Confirm you now have a release commit with the format `chore(release): X.X.X` that includes changes to:
    - [`package.json`](./package.json)
    - [`CHANGELOG.md`](./CHANGELOG.md)
 
-   If there are issues with the file updates you can correct them and squish any fixes into the `chore(release): X.X.X` commit
-1. Push the **SINGLE** commit to `origin` `main`
-1. Using the [Quipucords-UI GitHub releases interface](https://github.com/RedHatInsights/quipucords-ui/releases)
-   1. Draft a new release from `main` confirming you are aligned with the `chore(release): X.X.X` commit hash
-   1. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
+   If there are issues with the file updates, please squash or amend any fixes into the single `chore(release): X.X.X` commit.
+3. Push the **SINGLE** commit to a new branch on the remote GitHub origin:
+   ```
+   git push --set-upstream origin your-release-branch-name
+   ```
+4. Open a PR in GitHub for your branch to merge into `main`. Get approvals, and merge.
+5. Using the [GitHub releases page](https://github.com/RedHatInsights/quipucords-ui/releases):
+   1. Draft a new release from `main`, and confirm it references your latest `chore(release): X.X.X` commit hash.
+   2. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
 
-   > To avoid issues with inconsistent Git tagging use it is recommended you use the GitHub releases interface.
+   > To avoid issues with inconsistent tags, please use the GitHub releases interface.
+   > Do not manually create release tags using `git`.
 
 </details>
 
@@ -170,7 +164,7 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
 
 ##### Basic NPM updates
 
-1. Clone the repository locally, or bring your fork up-to-date with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Open a terminal instance in the repository context and run
     ```
     $ yarn build:deps
@@ -190,13 +184,13 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
          ```
          $ yarn start:stage
          ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
+1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
 > If any part of the "basic path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping any package update.
 > A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps` this should contain a listing of the skipped packages.
 
 ##### Core NPM updates
-1. Clone the repository locally, or bring your fork up-to-date with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Open a terminal instance in the repository context and run
     ```
     $ yarn build:deps-core
@@ -216,14 +210,14 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
         ```
         $ yarn start:stage
         ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the development branch.
+1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
 > If any part of the "core path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
 > since future updates will be affected by skipping potentially any package update.
 > A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps-core` this should contain a listing of the skipped packages.
 
 ##### Manual NPM updates
 This is the slowest part of package updates. If any packages are skipped during the "basic" and "core" automation runs. Those packages will need to be updated manually.
-1. Clone the repository locally, or bring your fork up-to-date, with the development branch. [Make sure development tooling is installed](#install-tooling).
+1. Clone the repository locally, or bring your fork up-to-date, with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Remove/delete the `node_modules` directory (there may be differences between branches that create package alterations)
 1. Run
    ```
@@ -304,7 +298,7 @@ Once you've installed NodeJS you can use NPM to perform the [Yarn](https://yarnp
 
   ```
   $ npm install yarn -g
-  ``` 
+  ```
 </details>
 
 <details>
@@ -339,7 +333,7 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 
 
 | dotenv parameter           | definition                                                                                 |
-|----------------------------|--------------------------------------------------------------------------------------------|
+| -------------------------- | ------------------------------------------------------------------------------------------ |
 | REACT_APP_AUTH_TOKEN       | A static string associated with overriding the assumed UI/application token name           |
 | REACT_APP_DEBUG_MIDDLEWARE | A static boolean that activates the console state debugging messages associated with Redux |
 
@@ -349,7 +343,7 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 > Technically all dotenv parameters come across as strings when imported through `process.env`. It is important to cast them accordingly if "type" is required.
 
 | dotenv parameter                                  | definition                                                                                   |
-|---------------------------------------------------|----------------------------------------------------------------------------------------------|
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | REACT_APP_UI_VERSION                              | A dynamic string reference to the build populated package.json version reference             |
 | REACT_APP_UI_NAME                                 | A static string reference similar to the application name                                    |
 | REACT_APP_UI_SHORT_NAME                           | A static string reference to a shortened display version of the application name             |
@@ -364,30 +358,30 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | REACT_APP_TOAST_NOTIFICATIONS_TIMEOUT             | A static number reference to the milliseconds used to hide toast notifications               |
 | REACT_APP_POLL_INTERVAL                           | A static number reference to the milliseconds used in view polling                           |
 | REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG      | A static string reference to the UI/application default locale language                      |
-| REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG_DESC | A static string reference to the UI/application default locale language                      |              
-| REACT_APP_CONFIG_SERVICE_LOCALES                  | A static string reference to a JSON resource for available UI/application locales            |                 
-| REACT_APP_CONFIG_SERVICE_LOCALES_PATH             | A static string reference to the JSON resources for available UI/application locale strings  |            
-| REACT_APP_CONFIG_SERVICE_LOCALES_EXPIRE           | A static number reference to the milliseconds the UI/application locale strings/files expire |                      
-| REACT_APP_CREDENTIALS_SERVICE                     | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_FACTS_SERVICE                           | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_REPORTS_SERVICE                         | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_REPORTS_SERVICE_DETAILS                 | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_REPORTS_SERVICE_DEPLOYMENTS             | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_REPORTS_SERVICE_MERGE                   | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCANS_SERVICE                           | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_START_GET             | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE                       | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_CONNECTION            | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_INSPECTION            | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_PAUSE                 | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_CANCEL                | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_RESTART               | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SCAN_JOBS_SERVICE_MERGE                 | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_SOURCES_SERVICE                         | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_USER_SERVICE                            | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_USER_SERVICE_CURRENT                    | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_USER_SERVICE_LOGOUT                     | A static string reference to the API spec                                                    |                                                 
-| REACT_APP_STATUS_SERVICE                          | A static string reference to the API spec                                                    |                                                 
+| REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG_DESC | A static string reference to the UI/application default locale language                      |
+| REACT_APP_CONFIG_SERVICE_LOCALES                  | A static string reference to a JSON resource for available UI/application locales            |
+| REACT_APP_CONFIG_SERVICE_LOCALES_PATH             | A static string reference to the JSON resources for available UI/application locale strings  |
+| REACT_APP_CONFIG_SERVICE_LOCALES_EXPIRE           | A static number reference to the milliseconds the UI/application locale strings/files expire |
+| REACT_APP_CREDENTIALS_SERVICE                     | A static string reference to the API spec                                                    |
+| REACT_APP_FACTS_SERVICE                           | A static string reference to the API spec                                                    |
+| REACT_APP_REPORTS_SERVICE                         | A static string reference to the API spec                                                    |
+| REACT_APP_REPORTS_SERVICE_DETAILS                 | A static string reference to the API spec                                                    |
+| REACT_APP_REPORTS_SERVICE_DEPLOYMENTS             | A static string reference to the API spec                                                    |
+| REACT_APP_REPORTS_SERVICE_MERGE                   | A static string reference to the API spec                                                    |
+| REACT_APP_SCANS_SERVICE                           | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_START_GET             | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE                       | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_CONNECTION            | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_INSPECTION            | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_PAUSE                 | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_CANCEL                | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_RESTART               | A static string reference to the API spec                                                    |
+| REACT_APP_SCAN_JOBS_SERVICE_MERGE                 | A static string reference to the API spec                                                    |
+| REACT_APP_SOURCES_SERVICE                         | A static string reference to the API spec                                                    |
+| REACT_APP_USER_SERVICE                            | A static string reference to the API spec                                                    |
+| REACT_APP_USER_SERVICE_CURRENT                    | A static string reference to the API spec                                                    |
+| REACT_APP_USER_SERVICE_LOGOUT                     | A static string reference to the API spec                                                    |
+| REACT_APP_STATUS_SERVICE                          | A static string reference to the API spec                                                    |
 
 </details>
 

@@ -77,7 +77,7 @@ const ContextIconVariant = {
   user: 'user',
   vcenter: 'vcenter',
   ansible: 'ansible',
-  acs: 'acs'
+  rhacs: 'rhacs'
 };
 
 /**
@@ -128,7 +128,7 @@ const ContextIcon = ({ symbol, ...props }) => {
       return <PficonNetworkRangeIcon {...props} />;
     case ContextIconVariant.openshift:
       return <OpenshiftIcon {...props} />;
-    case ContextIconVariant.acs:
+    case ContextIconVariant.rhacs:
       return <CloudSecurityIcon {...props} />;
     case ContextIconVariant.warning:
       return <ExclamationTriangleIcon {...{ ...{ color: yellow.value }, ...props }} />;

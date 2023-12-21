@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.6.1 (2023-11-10)
+
+
+### Documentation
+*  stop recommending the "dev" branch  (b8f1f6f)
+*  update CONTRIBUTING release instructions  (370b068)
+
+### Chores
+* **deps-dev** eslint-plugin-jsdoc from 46.5.0 to 46.8.2  (#250) (b525cf9)
+* **deps-dev** cspell from 7.0.1 to 7.3.8  (#253) (42191ed)
+* **deps** actions/checkout from 3 to 4  (#247) (b92ea2a)
+
+### Bug Fixes
+* **rhacs** use appropriate naming conventions  (#258) (28ee440)
+
 ## 1.6.0 (2023-10-17)
 
 
