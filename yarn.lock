@@ -664,10 +664,10 @@
     tinycolor2 "^1.6.0"
     yup "^0.32.9"
 
-"@mturley-latest/react-table-batteries@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@mturley-latest/react-table-batteries/-/react-table-batteries-1.0.3.tgz#7aa5d70d92fb92f12f54b329bb58698f3c40da74"
-  integrity sha512-pIgHbCoN4e6dYbxdkFF9D0FVaIYIWQNI68du1zCEtTTBe4Dej0hDsNpRLhkpNsg2lcn/i6Fww7OwLEvezscCHg==
+"@mturley-latest/react-table-batteries@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@mturley-latest/react-table-batteries/-/react-table-batteries-1.0.4.tgz#c0e9b204e4f76e94d913ab630d4c53d29b110d7f"
+  integrity sha512-KLT/jQb9MF1Jca0Z3HkKt1dj1a9SAB0s/OP3XCCnZ7GAe3pVtogtIIsgA1LY3mbGYSvLwN2MlZHyrgqqDE54IA==
   dependencies:
     "@migtools/lib-ui" "^10.0.1"
     "@patternfly/react-core" "^5.1.1"

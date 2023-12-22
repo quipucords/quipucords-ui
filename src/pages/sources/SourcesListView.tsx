@@ -14,7 +14,6 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  Divider,
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
@@ -195,7 +194,9 @@ const SourcesListView: React.FunctionComponent = () => {
     setConnectionsSelected(undefined);
     setConnectionsData(emptyConnectionData);
   };
-  const onScanSources = () => {};
+  const onScanSources = () => {
+    setScanSelected(selectedItems);
+  };
   const onScanSource = (source: SourceType) => {
     setScanSelected([source]);
   };
@@ -209,7 +210,14 @@ const SourcesListView: React.FunctionComponent = () => {
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setScanSelected(undefined);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        addAlert(
+          `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
+          'danger',
+          getUniqueId()
+        );
+        console.error({err})
+      });
   };
   const onAddSource = payload => {
     axios
