@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import NotFound from '../pages/notFound/NotFound';
+import { Login } from 'src/pages/login/Login';
+import axios from 'axios';
 
 const Sources = React.lazy(() => import('../pages/sources/SourcesListView'));
 const Scans = React.lazy(() => import('../pages/scans/ScansListView'));
@@ -53,16 +55,27 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
   [] as IAppRoute[]
 );
 
-const AppRoutes = (): React.ReactElement => (
-  <React.Suspense fallback={<p> Loading...</p>}>
-    <Routes>
-      {flattenedRoutes.map(route => (
-        <Route path={route.path} element={route.component} key={route.id} />
-      ))}
-      <Route path="/" element={<Navigate to="/sources" replace />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  </React.Suspense>
-);
+const AppRoutes = (): React.ReactElement => {
+  const nav = useNavigate();
+  const location = useLocation();
+
+  axios.get('https://0.0.0.0:9443/api/v1/users/current/').catch(err => {
+    if (location.pathname !== '/login') {
+      nav('/login');
+    }
+  });
+  return (
+    <React.Suspense fallback={<p> Loading...</p>}>
+      <Routes>
+        {flattenedRoutes.map(route => (
+          <Route path={route.path} element={route.component} key={route.id} />
+        ))}
+        <Route path="/" element={<Navigate to="/sources" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </React.Suspense>
+  )
+};
 
 export { AppRoutes, routes };

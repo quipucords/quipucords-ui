@@ -45,11 +45,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
 
   React.useEffect(() => {
     axios
-      .get(`https://0.0.0.0:9443/api/v1/credentials/?cred_type=${typeValue}`, {
-        headers: {
-          Authorization: `Token ${localStorage.getItem('authToken')}`
-        }
-      })
+      .get(`https://0.0.0.0:9443/api/v1/credentials/?cred_type=${typeValue}`)
       .then(res => {
         setCredOptions(res.data.results.map(o => ({ label: o.name, value: '' + o.id })));
       })

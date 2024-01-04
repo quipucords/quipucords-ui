@@ -70,9 +70,7 @@ export const useServiceQuery = <
       try {
         const query = getServiceQueryUrl({ tableState, baseUrl, columnOrderMap });
         console.log(`Query: `, query);
-        const response = await axios.get<ServiceQueryResult<TItem>>(query, {
-          headers: { Authorization: `Token ${localStorage.getItem('authToken')}` }
-        });
+        const response = await axios.get<ServiceQueryResult<TItem>>(query);
         setRefreshTime?.(new Date());
         return response.data;
       } catch (error) {
