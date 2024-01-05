@@ -202,9 +202,7 @@ const SourcesListView: React.FunctionComponent = () => {
   };
   const onRunScan = payload => {
     axios
-      .post(`https://0.0.0.0:9443/api/v1/scans/`, payload, {
-        headers: { Authorization: `Token ${token}` }
-      })
+      .post(`https://0.0.0.0:9443/api/v1/scans/`, payload)
       .then(() => {
         addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
@@ -221,9 +219,7 @@ const SourcesListView: React.FunctionComponent = () => {
   };
   const onAddSource = payload => {
     axios
-      .post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload, {
-        headers: { Authorization: `Token ${token}` }
-      })
+      .post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload)
       .then(() => {
         addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
@@ -238,9 +234,7 @@ const SourcesListView: React.FunctionComponent = () => {
 
   const onSubmitEditedSource = (payload: SourceType) => {
     axios
-      .put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload, {
-        headers: { Authorization: `Token ${token}` }
-      })
+      .put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload)
       .then(() => {
         addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
@@ -251,9 +245,7 @@ const SourcesListView: React.FunctionComponent = () => {
 
   const onDeleteSource = (source: SourceType) => {
     axios
-      .delete(`https://0.0.0.0:9443/api/v1/sources/${source.id}/`, {
-        headers: { Authorization: `Token ${token}` }
-      })
+      .delete(`https://0.0.0.0:9443/api/v1/sources/${source.id}/`)
       .then(() => {
         addAlert(`Source "${source.name}" deleted successfully`, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
@@ -313,8 +305,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const showConnections = (source: SourceType) => {
     axios
       .get(
-        `https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`,
-        { headers: { Authorization: `Token ${token}` } }
+        `https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`
       )
       .then(res => {
         setConnectionsData({

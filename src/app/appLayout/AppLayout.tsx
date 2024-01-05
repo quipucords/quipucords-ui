@@ -106,11 +106,13 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       Skip to Content
     </SkipToContent>
   );
+
+  const isLogin = location.pathname === "/login";
   return (
     <Page
       mainContainerId={pageId}
-      header={Header}
-      sidebar={sidebarOpen && Sidebar}
+      header={!isLogin && Header}
+      sidebar={!isLogin && sidebarOpen && Sidebar}
       skipToContent={PageSkipToContent}
     >
       {children}

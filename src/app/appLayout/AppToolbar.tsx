@@ -13,16 +13,26 @@ import { useUsername } from '../../components/sessionContext/SessionProvider';
 
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import './AppToolbar.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AppToolbar: React.FunctionComponent = () => {
   const [helpOpen, setHelpOpen] = React.useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = React.useState<boolean>(false);
   const [kebabDropdownOpen, setKebabDropdownOpen] = React.useState<boolean>(false);
   const userName = useUsername();
+  const nav = useNavigate();
 
   const onAbout = () => {};
 
-  const onLogout = () => {};
+  const onLogout = () => {
+    axios.put('https://0.0.0.0:9443/api/v1/users/logout/').catch((err) => {
+      console.error('Failed to logout', err);
+    }).finally(() => {
+      localStorage.removeItem('authToken');
+      nav('/login');
+    });
+  };
 
   const onHelpSelect = (
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
