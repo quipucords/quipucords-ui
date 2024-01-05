@@ -64,3 +64,10 @@ export type ConnectionType = {
     name: string;
   };
 };
+
+export type ScanType = {
+  id: number;
+  jobs: any[];
+  most_recent: any;
+  sources: SourceType[];
+};

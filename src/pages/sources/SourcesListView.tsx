@@ -372,7 +372,7 @@ const SourcesListView: React.FunctionComponent = () => {
             <EmptyState variant="sm">
               <EmptyStateIcon icon={CubesIcon} />
               <Title headingLevel="h2" size="lg">
-                No things available
+                No sources available
               </Title>
             </EmptyState>
           }
@@ -396,7 +396,7 @@ const SourcesListView: React.FunctionComponent = () => {
                 </Td>
                 <Td isActionCell columnKey="scan">
                   <Button
-                    isDisabled={source.connection.status === 'pending'}
+                    isDisabled={source.connection?.status === 'pending'}
                     variant={ButtonVariant.link}
                     onClick={() => onScanSource(source)}
                   >
