@@ -169,7 +169,6 @@ const CredentialsListView: React.FunctionComponent = () => {
         {/* You can render whatever other custom toolbar items you may need here! */}
         <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
-          <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
           <Button
             className="pf-v5-u-mr-md"
             onClick={onShowAddCredentialWizard}
@@ -184,6 +183,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'delete' })}
           </Button>
+          <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <PaginationToolbarItem>
           <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
