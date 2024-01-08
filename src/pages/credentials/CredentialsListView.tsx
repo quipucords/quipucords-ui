@@ -297,7 +297,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           </Tbody>
         </ConditionalTableBody>
       </Table>
-      <Pagination variant="bottom" isCompact widgetId="server-paginated-example-pagination" />
+      <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
       {!!sourcesSelected.length && (
         <Modal
           variant={ModalVariant.small}
