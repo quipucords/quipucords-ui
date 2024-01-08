@@ -39,7 +39,8 @@ export const getServiceQueryUrl = <
     `&` +
     `page=${pageNumber}` +
     `&` +
-    `page_size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}`;
+    `page_size=${itemsPerPage}${filterParams ? `&${filterParams}` : ''}` +
+    `${baseUrl?.includes('scans') && '&scan_type=inspect'}`;
 
   return query;
 };
