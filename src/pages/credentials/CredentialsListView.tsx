@@ -166,8 +166,6 @@ const CredentialsListView: React.FunctionComponent = () => {
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
-        {/* You can render whatever other custom toolbar items you may need here! */}
-        <Divider orientation={{ default: 'vertical' }} />
         <ToolbarItem>
           <Button
             className="pf-v5-u-mr-md"
@@ -175,7 +173,9 @@ const CredentialsListView: React.FunctionComponent = () => {
             ouiaId="add_credential"
           >
             {t('table.label', { context: 'add' })}
-          </Button>{' '}
+          </Button>
+          </ToolbarItem>
+        <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedCredentials()}
@@ -183,6 +183,8 @@ const CredentialsListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'delete' })}
           </Button>
+          </ToolbarItem>
+        <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <PaginationToolbarItem>
