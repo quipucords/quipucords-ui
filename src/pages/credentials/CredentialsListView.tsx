@@ -10,6 +10,7 @@ import {
   Button,
   ButtonVariant,
   Divider,
+  DropdownItem,
   EmptyState,
   EmptyStateIcon,
   List,
@@ -28,6 +29,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTim
 import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
 import { useCredentialsQuery } from './useCredentialsQuery';
+import { SimpleDropdown } from 'src/components/SimpleDropdown';
 
 const CREDS_LIST_QUERY = 'credentialsList';
 
@@ -44,6 +46,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
+  const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
   const queryClient = useQueryClient();
 
   const onRefresh = () => {
@@ -167,14 +170,23 @@ const CredentialsListView: React.FunctionComponent = () => {
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
-          <Button
-            className="pf-v5-u-mr-md"
-            onClick={onShowAddCredentialWizard}
-            ouiaId="add_credential"
-          >
-            {t('table.label', { context: 'add' })}
-          </Button>
-          </ToolbarItem>
+          <SimpleDropdown
+            label="Add Credential"
+            variant="primary"
+            dropdownItems={[
+              'Network range',
+              'OpenShift',
+              'RHACS',
+              'Satellite',
+              'vCenter server',
+              'Ansible controller'
+            ].map(type => (
+              <DropdownItem key={type} onClick={() => setAddCredentialModal(type)}>
+                {type}
+              </DropdownItem>
+            ))}
+          />
+        </ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
