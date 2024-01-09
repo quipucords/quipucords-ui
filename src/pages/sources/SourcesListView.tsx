@@ -271,6 +271,15 @@ const SourcesListView: React.FunctionComponent = () => {
       .finally(() => setPendingDeleteSource(undefined));
   };
 
+  const hasSelectedSources = () => {
+    return selectedItems?.length
+  };
+  const onDeleteSelectedSources = () => {
+    const itemsToDelete = Object.values(selectedItems).filter(val => val !== null);
+    // add logic
+    console.log('Deleting selected credentials:', itemsToDelete);
+  };
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
@@ -302,6 +311,15 @@ const SourcesListView: React.FunctionComponent = () => {
             {t('table.label', { context: 'scan' })}
           </Button>
         </ToolbarItem>
+        <ToolbarItem>
+          <Button
+            variant={ButtonVariant.secondary}
+            isDisabled={!hasSelectedSources()}
+            onClick={onDeleteSelectedSources}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>
+          </ToolbarItem>
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
