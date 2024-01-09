@@ -7,12 +7,18 @@ import {
   useTableState
 } from '@mturley-latest/react-table-batteries';
 import {
+  Alert,
+  AlertActionCloseButton,
+  AlertGroup,
+  AlertProps,
+  AlertVariant,
   Button,
   ButtonVariant,
   Divider,
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
+  getUniqueId,
   List,
   ListItem,
   Modal,
@@ -30,6 +36,7 @@ import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
 import { useCredentialsQuery } from './useCredentialsQuery';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
+import axios from 'axios';
 
 const CREDS_LIST_QUERY = 'credentialsList';
 
@@ -44,11 +51,18 @@ const CredentialTypeLabels = {
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const [alerts, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
+  const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
   const queryClient = useQueryClient();
-
+  const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
+    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+  };
+  const removeAlert = (key: React.Key) => {
+    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+  };
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
   };
@@ -156,6 +170,23 @@ const CredentialsListView: React.FunctionComponent = () => {
   } = tableBatteries;
 
   const onShowAddCredentialWizard = () => {};
+  const onDeleteCredential = (credential: CredentialType) => {
+    axios
+      .delete(`https://0.0.0.0:9443/api/v1/credentials/${credential.id}/`)
+      .then(() => {
+        addAlert(`Credential "${credential.name}" deleted successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
+      })
+      .catch(err => {
+        console.error(err);
+        addAlert(
+          `Error removing credential ${credential.name}. ${err?.response?.data?.detail}`,
+          'danger',
+          getUniqueId()
+        );
+      })
+      .finally(() => setPendingDeleteCredential(undefined));
+  };
   const onDeleteSelectedCredentials = () => {
     const itemsToDelete = Object.values(selectedItems).filter(val => val !== null);
     // add logic
@@ -304,7 +335,10 @@ const CredentialsListView: React.FunctionComponent = () => {
                 </Td>
                 <Td columnKey="updated">{getLastUpdated(credential).toString()}</Td>
                 <Td isActionCell columnKey="actions">
-                  <CredentialActionMenu credential={credential} />
+                <CredentialActionMenu
+                    credential={credential}
+                    onDeleteCredential={setPendingDeleteCredential}
+                  />
                 </Td>
               </Tr>
             ))}
@@ -331,6 +365,47 @@ const CredentialsListView: React.FunctionComponent = () => {
           </List>
         </Modal>
       )}
+      {!!pendingDeleteCredential && (
+        <Modal
+          variant={ModalVariant.small}
+          title="Permanently delete credential"
+          isOpen={!!pendingDeleteCredential}
+          onClose={() => setPendingDeleteCredential(undefined)}
+          actions={[
+            <Button
+              key="confirm"
+              variant="danger"
+              onClick={() => onDeleteCredential(pendingDeleteCredential)}
+            >
+              Delete
+            </Button>,
+            <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
+              Cancel
+            </Button>
+          ]}
+        >
+          Are you sure you want to delete the credential &quot;
+          {pendingDeleteCredential.name}&quot;
+        </Modal>
+      )}
+      <AlertGroup isToast isLiveRegion>
+        {alerts.map(({ key, variant, title }) => (
+          <Alert
+            timeout={8000}
+            onTimeout={() => key && removeAlert(key)}
+            variant={AlertVariant[variant || 'info']}
+            title={title}
+            actionClose={
+              <AlertActionCloseButton
+                title={title as string}
+                variantLabel={`${variant} alert`}
+                onClose={() => key && removeAlert(key)}
+              />
+            }
+            key={key}
+          />
+        ))}
+      </AlertGroup>
     </PageSection>
   );
 };
