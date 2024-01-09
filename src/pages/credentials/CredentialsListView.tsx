@@ -111,7 +111,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     },
     sort: {
       isEnabled: true,
-      sortableColumns: ['name', 'type', 'auth_type', 'sources', 'updated'],
+      sortableColumns: ['name', 'type'],
       initialSort: { columnKey: 'name', direction: 'asc' }
     },
     pagination: { isEnabled: true },
