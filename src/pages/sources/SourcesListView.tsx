@@ -123,24 +123,34 @@ const SourcesListView: React.FunctionComponent = () => {
           placeholderText: 'Filter by source type',
           selectOptions: [
             {
+              key: 'ansible',
+              label: 'ansible',
+              value: 'Ansible'
+            },
+            {
               key: 'network',
-              label: 'Network',
-              value: 'network'
+              label: 'network',
+              value: 'Network'
             },
             {
               key: 'openshift',
-              label: 'OpenShift',
-              value: 'openshift'
+              label: 'openShift',
+              value: 'Openshift'
+            },
+            {
+              key: 'rhacs',
+              label: 'rhacs',
+              value: 'RHACS'
             },
             {
               key: 'satellite',
-              label: 'Satellite',
-              value: 'satellite'
+              label: 'satellite',
+              value: 'Satellite'
             },
             {
               key: 'vcenter',
-              label: 'vCenter',
-              value: 'vcenter'
+              label: 'vcenter',
+              value: 'vCenter'
             }
           ]
         }
