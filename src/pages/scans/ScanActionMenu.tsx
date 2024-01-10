@@ -14,10 +14,7 @@ interface ScanActionMenuProps {
   onDeleteScan: (scan: ScanType) => void;
 }
 
-const ScanActionMenu: React.FC<ScanActionMenuProps> = ({
-  scan,
-  onDeleteScan,
-}) => {
+const ScanActionMenu: React.FC<ScanActionMenuProps> = ({ scan, onDeleteScan }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (
