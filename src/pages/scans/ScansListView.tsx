@@ -87,7 +87,7 @@ const ScansListView: React.FunctionComponent = () => {
           title: 'Name',
           type: FilterType.search,
           placeholderText: 'Filter by name'
-        },
+        }
       ]
     },
     sort: {
@@ -148,7 +148,7 @@ const ScansListView: React.FunctionComponent = () => {
           'danger',
           getUniqueId()
         );
-        console.error({ err })
+        console.error({ err });
       });
   };
 
@@ -210,13 +210,14 @@ const ScansListView: React.FunctionComponent = () => {
         }}
       >
         <ContextIcon symbol={ContextIconVariant[scan.most_recent?.status]} />{' '}
-        {scan.most_recent && (<>
-          {scan.most_recent.status === "failed" && 'Scan failed'}
-          {scan.most_recent.status === "completed" && "Last scanned"}
-          {' '}
-          {getTimeDisplayHowLongAgo(scan.most_recent.end_time || scan.most_recent.start_time)}
-        </>)}
-        {!scan.most_recent && ("Scan created")}
+        {scan.most_recent && (
+          <>
+            {scan.most_recent.status === 'failed' && 'Scan failed'}
+            {scan.most_recent.status === 'completed' && 'Last scanned'}{' '}
+            {getTimeDisplayHowLongAgo(scan.most_recent.end_time || scan.most_recent.start_time)}
+          </>
+        )}
+        {!scan.most_recent && 'Scan created'}
       </Button>
     );
   };
@@ -262,10 +263,7 @@ const ScansListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <ScanActionMenu
-                    scan={scan}
-                    onDeleteScan={setPendingDeleteScan}
-                  />
+                  <ScanActionMenu scan={scan} onDeleteScan={setPendingDeleteScan} />
                 </Td>
               </Tr>
             ))}
@@ -273,7 +271,6 @@ const ScansListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
-
       {!!scanSelectedForSources && (
         <Modal
           variant={ModalVariant.small}
@@ -281,7 +278,11 @@ const ScansListView: React.FunctionComponent = () => {
           isOpen={!!scanSelectedForSources}
           onClose={() => setScanSelectedForSources(undefined)}
           actions={[
-            <Button key="cancel" variant="secondary" onClick={() => setScanSelectedForSources(undefined)}>
+            <Button
+              key="cancel"
+              variant="secondary"
+              onClick={() => setScanSelectedForSources(undefined)}
+            >
               Close
             </Button>
           ]}
@@ -292,7 +293,8 @@ const ScansListView: React.FunctionComponent = () => {
             ))}
           </List>
         </Modal>
-      )};
+      )}
+      ;
       {!!scanSelected && (
         <Modal
           variant={ModalVariant.small}
@@ -315,11 +317,7 @@ const ScansListView: React.FunctionComponent = () => {
           isOpen={!!pendingDeleteScan}
           onClose={() => setPendingDeleteScan(undefined)}
           actions={[
-            <Button
-              key="confirm"
-              variant="danger"
-              onClick={() => onDeleteScan(pendingDeleteScan)}
-            >
+            <Button key="confirm" variant="danger" onClick={() => onDeleteScan(pendingDeleteScan)}>
               Delete
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteScan(undefined)}>
@@ -331,7 +329,6 @@ const ScansListView: React.FunctionComponent = () => {
           {pendingDeleteScan.id}&quot;
         </Modal>
       )}
-
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ key, variant, title }) => (
           <Alert

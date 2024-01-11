@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import NotFound from '../pages/notFound/NotFound';
-import { Login } from 'src/pages/login/Login';
 import axios from 'axios';
+import { Login } from '../pages/login/Login';
+import NotFound from '../pages/notFound/NotFound';
 
 const Sources = React.lazy(() => import('../pages/sources/SourcesListView'));
 const Scans = React.lazy(() => import('../pages/scans/ScansListView'));
@@ -75,7 +75,7 @@ const AppRoutes = (): React.ReactElement => {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </React.Suspense>
-  )
+  );
 };
 
 export { AppRoutes, routes };
