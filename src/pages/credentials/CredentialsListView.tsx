@@ -30,12 +30,12 @@ import {
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
+import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
 import { useCredentialsQuery } from './useCredentialsQuery';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import axios from 'axios';
 
 const CREDS_LIST_QUERY = 'credentialsList';
@@ -226,7 +226,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'delete' })}
           </Button>
-          </ToolbarItem>
+        </ToolbarItem>
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>

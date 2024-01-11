@@ -224,7 +224,7 @@ const SourcesListView: React.FunctionComponent = () => {
           'danger',
           getUniqueId()
         );
-        console.error({err})
+        console.error({ err });
       });
   };
   const onAddSource = payload => {
@@ -271,6 +271,12 @@ const SourcesListView: React.FunctionComponent = () => {
       .finally(() => setPendingDeleteSource(undefined));
   };
 
+  const onDeleteSelectedSources = () => {
+    const itemsToDelete = selectedItems?.length;
+    // add logic
+    console.log('Deleting selected credentials:', itemsToDelete);
+  };
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
@@ -302,6 +308,15 @@ const SourcesListView: React.FunctionComponent = () => {
             {t('table.label', { context: 'scan' })}
           </Button>
         </ToolbarItem>
+        <ToolbarItem>
+          <Button
+            variant={ButtonVariant.secondary}
+            isDisabled={!!selectedItems?.length}
+            onClick={onDeleteSelectedSources}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>
+          </ToolbarItem>
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>

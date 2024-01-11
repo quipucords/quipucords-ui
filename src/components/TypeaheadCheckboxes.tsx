@@ -11,7 +11,7 @@ import {
   TextInputGroupUtilities,
   Button
 } from '@patternfly/react-core';
-import TimesIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
+import { TimesIcon } from '@patternfly/react-icons/';
 
 export interface ITypeaheadCheckboxesProps {
   onChange: (selections: string[]) => void;

@@ -107,7 +107,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     </SkipToContent>
   );
 
-  const isLogin = location.pathname === "/login";
+  const isLogin = location.pathname === '/login';
   return (
     <Page
       mainContainerId={pageId}
