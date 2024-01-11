@@ -26,12 +26,15 @@ const AppToolbar: React.FunctionComponent = () => {
   const onAbout = () => {};
 
   const onLogout = () => {
-    axios.put('https://0.0.0.0:9443/api/v1/users/logout/').catch((err) => {
-      console.error('Failed to logout', err);
-    }).finally(() => {
-      localStorage.removeItem('authToken');
-      nav('/login');
-    });
+    axios
+      .put('https://0.0.0.0:9443/api/v1/users/logout/')
+      .catch(err => {
+        console.error('Failed to logout', err);
+      })
+      .finally(() => {
+        localStorage.removeItem('authToken');
+        nav('/login');
+      });
   };
 
   const onHelpSelect = (

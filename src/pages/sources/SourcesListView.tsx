@@ -224,7 +224,7 @@ const SourcesListView: React.FunctionComponent = () => {
           'danger',
           getUniqueId()
         );
-        console.error({err})
+        console.error({ err });
       });
   };
   const onAddSource = payload => {

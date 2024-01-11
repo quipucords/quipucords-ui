@@ -4,16 +4,9 @@ import { CredentialType } from 'src/types';
 
 export const CREDS_LIST_QUERY = 'credentialsList';
 
-type CredentialsColumnKey =
-| 'name'
-| 'type'
-| 'auth_type'
-| 'sources'
-| 'updated'
-| 'actions'
+type CredentialsColumnKey = 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
 
 type CredentialsSortableColumnKey = 'name' | 'type';
-
 
 export const useCredentialsQuery = ({
   tableState,

@@ -26,5 +26,9 @@ module.exports = {
   preset: 'ts-jest/presets/js-with-ts',
 
   // The test environment that will be used for testing.
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+
+  transformIgnorePatterns: [
+    "/node_modules/(?!(string-width|cliui)/)"
+  ]
 };
