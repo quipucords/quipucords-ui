@@ -38,6 +38,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
+import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
@@ -45,7 +46,6 @@ import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { SourceType, ConnectionType, CredentialType } from '../../types';
 import AddSourceModal from './AddSourceModal';
-import SourceActionMenu from './SourceActionMenu';
 import SourcesScanModal from './SourcesScanModal';
 import { useSourcesQuery } from './useSourcesQuery';
 
@@ -426,10 +426,12 @@ const SourcesListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <SourceActionMenu
-                    source={source}
-                    onEditSource={onEditSource}
-                    onDeleteSource={setPendingDeleteSource}
+                  <ActionMenu<SourceType>
+                    item={source}
+                    actions={[
+                      { label: 'Edit', onClick: onEditSource },
+                      { label: 'Delete', onClick: setPendingDeleteSource }
+                    ]}
                   />
                 </Td>
               </Tr>

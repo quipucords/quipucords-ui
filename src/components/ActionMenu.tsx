@@ -7,33 +7,24 @@ import {
   MenuToggleElement
 } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
-import { CredentialType } from '../../types';
 
-interface CredentialActionMenuProps {
-  credential: CredentialType;
-  onDeleteCredential: (credential: CredentialType) => void;
+interface ActionMenuProps<T> {
+  item: T;
+  actions: { label: string; onClick: (item: T) => void }[];
 }
 
-const CredentialActionMenu: React.FC<CredentialActionMenuProps> = ({
-  credential,
-  onDeleteCredential
-}) => {
+const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (
     <Dropdown
-      id={`${credential.id}_actions`}
       isOpen={isOpen}
-      onSelect={(e, value) => {
-        if (value === 'delete') {
-          onDeleteCredential(credential);
-        }
-      }}
       onOpenChange={setIsOpen}
+      onSelect={() => setIsOpen(false)}
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
         <MenuToggle
           ref={toggleRef}
-          aria-label="credential actions"
+          aria-label="Action Menu Toggle"
           variant="plain"
           onClick={() => setIsOpen(prev => !prev)}
           isExpanded={isOpen}
@@ -44,15 +35,20 @@ const CredentialActionMenu: React.FC<CredentialActionMenuProps> = ({
       shouldFocusToggleOnSelect
     >
       <DropdownList>
-        <DropdownItem value="edit" key="edit">
-          Edit
-        </DropdownItem>
-        <DropdownItem value="delete" key="delete">
-          Delete
-        </DropdownItem>
+        {actions.map(a => (
+          <DropdownItem
+            value={a.label}
+            key={a.label}
+            onClick={() => {
+              a.onClick(item);
+            }}
+          >
+            {a.label}
+          </DropdownItem>
+        ))}
       </DropdownList>
     </Dropdown>
   );
 };
 
-export default CredentialActionMenu;
+export default ActionMenu;
