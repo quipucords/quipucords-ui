@@ -30,11 +30,11 @@ import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
+import ActionMenu from 'src/components/ActionMenu';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { ScanType } from '../../types';
-import ScanActionMenu from './ScanActionMenu';
 import { useScansQuery } from './useScansQuery';
 
 const SCANS_LIST_QUERY = 'scansList';
@@ -253,10 +253,12 @@ const ScansListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <ScanActionMenu
-                    scan={scan}
-                    onDeleteScan={setPendingDeleteScan}
-                    onScanScan={onRunScan}
+                  <ActionMenu<ScanType>
+                    item={scan}
+                    actions={[
+                      { label: 'Delete', onClick: setPendingDeleteScan },
+                      { label: 'Rescan', onClick: onRunScan }
+                    ]}
                   />
                 </Td>
               </Tr>

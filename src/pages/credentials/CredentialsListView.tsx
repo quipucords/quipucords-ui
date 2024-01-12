@@ -30,11 +30,11 @@ import {
 import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
-import CredentialActionMenu from './CredentialActionMenu';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CREDS_LIST_QUERY = 'credentialsList';
@@ -333,9 +333,9 @@ const CredentialsListView: React.FunctionComponent = () => {
                 </Td>
                 <Td columnKey="updated">{getLastUpdated(credential).toString()}</Td>
                 <Td isActionCell columnKey="actions">
-                  <CredentialActionMenu
-                    credential={credential}
-                    onDeleteCredential={setPendingDeleteCredential}
+                  <ActionMenu<CredentialType>
+                    item={credential}
+                    actions={[{ label: 'Delete', onClick: setPendingDeleteCredential }]}
                   />
                 </Td>
               </Tr>
