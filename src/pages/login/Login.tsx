@@ -15,11 +15,11 @@ export const Login: React.FunctionComponent = () => {
 
   axios
     .get('https://0.0.0.0:9443/api/v1/users/current/')
-    .then(res => {
+    .then(() => {
       //already logged in..
       nav('/');
     })
-    .catch(err => {
+    .catch(() => {
       //this is good, catch the error and let them log in
     });
 

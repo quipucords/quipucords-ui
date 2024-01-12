@@ -14,7 +14,6 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  Divider,
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
@@ -30,13 +29,13 @@ import {
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
 import CredentialActionMenu from './CredentialActionMenu';
 import { useCredentialsQuery } from './useCredentialsQuery';
-import axios from 'axios';
 
 const CREDS_LIST_QUERY = 'credentialsList';
 
@@ -169,7 +168,6 @@ const CredentialsListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const onShowAddCredentialWizard = () => {};
   const onDeleteCredential = (credential: CredentialType) => {
     axios
       .delete(`https://0.0.0.0:9443/api/v1/credentials/${credential.id}/`)
@@ -335,7 +333,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                 </Td>
                 <Td columnKey="updated">{getLastUpdated(credential).toString()}</Td>
                 <Td isActionCell columnKey="actions">
-                <CredentialActionMenu
+                  <CredentialActionMenu
                     credential={credential}
                     onDeleteCredential={setPendingDeleteCredential}
                   />
@@ -346,6 +344,25 @@ const CredentialsListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
+      {!!addCredentialModal && (
+        <Modal
+          variant={ModalVariant.small}
+          title="Add"
+          isOpen={!!addCredentialModal}
+          onClose={() => setAddCredentialModal(undefined)}
+          actions={[
+            <Button
+              key="cancel"
+              variant="secondary"
+              onClick={() => setAddCredentialModal(undefined)}
+            >
+              Close
+            </Button>
+          ]}
+        >
+          Placeholder - add {addCredentialModal}
+        </Modal>
+      )}
       {!!sourcesSelected.length && (
         <Modal
           variant={ModalVariant.small}
@@ -379,7 +396,11 @@ const CredentialsListView: React.FunctionComponent = () => {
             >
               Delete
             </Button>,
-            <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
+            <Button
+              key="cancel"
+              variant="link"
+              onClick={() => setPendingDeleteCredential(undefined)}
+            >
               Cancel
             </Button>
           ]}

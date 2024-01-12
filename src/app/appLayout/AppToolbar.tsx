@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Dropdown,
   DropdownItem,
@@ -9,12 +10,10 @@ import {
   ToolbarItem
 } from '@patternfly/react-core';
 import { EllipsisVIcon, QuestionCircleIcon } from '@patternfly/react-icons';
+import axios from 'axios';
 import { useUsername } from '../../components/sessionContext/SessionProvider';
-
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import './AppToolbar.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const AppToolbar: React.FunctionComponent = () => {
   const [helpOpen, setHelpOpen] = React.useState<boolean>(false);

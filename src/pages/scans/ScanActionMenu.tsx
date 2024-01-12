@@ -12,9 +12,10 @@ import { ScanType } from '../../types';
 interface ScanActionMenuProps {
   scan: ScanType;
   onDeleteScan: (scan: ScanType) => void;
+  onScanScan: (scan: ScanType) => void;
 }
 
-const ScanActionMenu: React.FC<ScanActionMenuProps> = ({ scan, onDeleteScan }) => {
+const ScanActionMenu: React.FC<ScanActionMenuProps> = ({ scan, onDeleteScan, onScanScan }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (
@@ -24,6 +25,8 @@ const ScanActionMenu: React.FC<ScanActionMenuProps> = ({ scan, onDeleteScan }) =
       onSelect={(e, value) => {
         if (value === 'delete') {
           onDeleteScan(scan);
+        } else if (value === 'scan') {
+          onScanScan(scan);
         }
       }}
       onOpenChange={setIsOpen}
@@ -41,6 +44,9 @@ const ScanActionMenu: React.FC<ScanActionMenuProps> = ({ scan, onDeleteScan }) =
       shouldFocusToggleOnSelect
     >
       <DropdownList>
+        <DropdownItem value="scan" key="scan">
+          Rescan
+        </DropdownItem>
         <DropdownItem value="delete" key="delete">
           Delete
         </DropdownItem>

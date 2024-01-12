@@ -14,34 +14,24 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  DropdownItem,
   EmptyState,
   EmptyStateIcon,
-  Icon,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
-  TextContent,
   Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  CubesIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon
-} from '@patternfly/react-icons';
+import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
-import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { ScanType } from '../../types';
 import ScanActionMenu from './ScanActionMenu';
@@ -57,7 +47,6 @@ const ScansListView: React.FunctionComponent = () => {
   const [scanSelectedForSources, setScanSelectedForSources] = React.useState<ScanType>();
   const [pendingDeleteScan, setPendingDeleteScan] = React.useState<ScanType>();
   const queryClient = useQueryClient();
-  const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
 
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
@@ -132,24 +121,28 @@ const ScansListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const token = localStorage.getItem('authToken');
+  const onDeleteSelectedItems = () => {
+    // add logic
+    console.log('Deleting selected credentials:', selectedItems);
+  };
 
   const onRunScan = payload => {
-    axios
-      .post(`https://0.0.0.0:9443/api/v1/scans/`, payload)
-      .then(() => {
-        addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
-        setScanSelected(undefined);
-      })
-      .catch(err => {
-        addAlert(
-          `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
-          'danger',
-          getUniqueId()
-        );
-        console.error({ err });
-      });
+    console.log('run scan:', payload);
+    // axios
+    //   .post(process.env.REACT_APP_SCANS_SERVICE, payload)
+    //   .then(() => {
+    //     addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
+    //     queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
+    //     setScanSelected(undefined);
+    //   })
+    //   .catch(err => {
+    //     addAlert(
+    //       `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
+    //       'danger',
+    //       getUniqueId()
+    //     );
+    //     console.error({ err });
+    //   });
   };
 
   const onDeleteScan = (scan: ScanType) => {
@@ -175,6 +168,15 @@ const ScansListView: React.FunctionComponent = () => {
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
+          <Button
+            variant={ButtonVariant.secondary}
+            isDisabled={!selectedItems?.length}
+            onClick={onDeleteSelectedItems}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <PaginationToolbarItem>
@@ -190,18 +192,6 @@ const ScansListView: React.FunctionComponent = () => {
       : () => 'a day ago';
 
   const renderConnection = (scan: ScanType): React.ReactNode => {
-    // if (!scan?.connection) {
-    //   return null;
-    // }
-    // const isPending =
-    //   scan.connection.status === 'created' ||
-    //   scan.connection.status === 'pending' ||
-    //   scan.connection.status === 'running';
-    // const scanTime = (isPending && scan.connection.start_time) || scan.connection.end_time;
-
-    // const statusString = i18nHelpers.translate(t, 'table.label', {
-    //   context: ['status', scan.connection.status, 'scans']
-    // });
     return (
       <Button
         variant={ButtonVariant.link}
@@ -263,7 +253,11 @@ const ScansListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <ScanActionMenu scan={scan} onDeleteScan={setPendingDeleteScan} />
+                  <ScanActionMenu
+                    scan={scan}
+                    onDeleteScan={setPendingDeleteScan}
+                    onScanScan={onRunScan}
+                  />
                 </Td>
               </Tr>
             ))}
@@ -294,7 +288,6 @@ const ScansListView: React.FunctionComponent = () => {
           </List>
         </Modal>
       )}
-      ;
       {!!scanSelected && (
         <Modal
           variant={ModalVariant.small}
@@ -318,7 +311,7 @@ const ScansListView: React.FunctionComponent = () => {
           onClose={() => setPendingDeleteScan(undefined)}
           actions={[
             <Button key="confirm" variant="danger" onClick={() => onDeleteScan(pendingDeleteScan)}>
-              Delete
+              {t('form-dialog.label_delete', { context: 'delete' })}
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteScan(undefined)}>
               Cancel

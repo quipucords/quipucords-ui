@@ -198,8 +198,6 @@ const SourcesListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const token = localStorage.getItem('authToken');
-
   const onCloseConnections = () => {
     setConnectionsSelected(undefined);
     setConnectionsData(emptyConnectionData);
@@ -272,9 +270,8 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   const onDeleteSelectedSources = () => {
-    const itemsToDelete = selectedItems?.length;
     // add logic
-    console.log('Deleting selected credentials:', itemsToDelete);
+    console.log('Deleting selected credentials:', selectedItems);
   };
 
   const renderToolbar = () => (
@@ -311,12 +308,12 @@ const SourcesListView: React.FunctionComponent = () => {
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
-            isDisabled={!!selectedItems?.length}
+            isDisabled={!selectedItems?.length}
             onClick={onDeleteSelectedSources}
           >
             {t('table.label', { context: 'delete' })}
           </Button>
-          </ToolbarItem>
+        </ToolbarItem>
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>

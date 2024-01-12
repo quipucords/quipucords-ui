@@ -67,7 +67,22 @@ export type ConnectionType = {
 
 export type ScanType = {
   id: number;
-  jobs: any[];
-  most_recent: any;
+  jobs: { id: number; report_id?: number }[];
+  most_recent: {
+    end_time: string;
+    id: number;
+    report_id?: number;
+    scan_type: string;
+    start_time: string;
+    status: string;
+    status_details: {
+      job_status_message: string;
+    };
+    system_fingerprint_count: number;
+    systems_count: number;
+    systems_failed: number;
+    systems_scanned: number;
+    systems_unreachable: number;
+  };
   sources: SourceType[];
 };
