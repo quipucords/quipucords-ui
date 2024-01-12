@@ -16,7 +16,7 @@ interface CredentialActionMenuProps {
 
 const CredentialActionMenu: React.FC<CredentialActionMenuProps> = ({
   credential,
-  onDeleteCredential,
+  onDeleteCredential
 }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
@@ -26,7 +26,7 @@ const CredentialActionMenu: React.FC<CredentialActionMenuProps> = ({
       isOpen={isOpen}
       onSelect={(e, value) => {
         if (value === 'delete') {
-          onDeleteCredential(credential)
+          onDeleteCredential(credential);
         }
       }}
       onOpenChange={setIsOpen}
