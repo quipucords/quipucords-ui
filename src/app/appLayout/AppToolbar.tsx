@@ -1,15 +1,20 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  Checkbox,
   Dropdown,
   DropdownItem,
+  Icon,
   MenuToggle,
+  Radio,
+  ToggleGroup,
+  ToggleGroupItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem
 } from '@patternfly/react-core';
-import { EllipsisVIcon, QuestionCircleIcon } from '@patternfly/react-icons';
+import { EllipsisVIcon, MoonIcon, QuestionCircleIcon, SunIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import { useUsername } from '../../components/sessionContext/SessionProvider';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
@@ -19,6 +24,20 @@ const AppToolbar: React.FunctionComponent = () => {
   const [helpOpen, setHelpOpen] = React.useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = React.useState<boolean>(false);
   const [kebabDropdownOpen, setKebabDropdownOpen] = React.useState<boolean>(false);
+  const [isDarkTheme, setIsDarkTheme] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  const applyTheme = (isDark) => {
+    const htmlElement = document.getElementsByTagName('html')[0];
+    if (htmlElement) {
+      if (isDark) {
+        htmlElement.classList.add('pf-v5-theme-dark');
+      } else {
+        htmlElement.classList.remove('pf-v5-theme-dark');
+      }
+    }
+  };
+  applyTheme(isDarkTheme);
+
   const userName = useUsername();
   const nav = useNavigate();
 
@@ -66,6 +85,18 @@ const AppToolbar: React.FunctionComponent = () => {
             variant="icon-button-group"
             visibility={{ default: 'hidden', lg: 'visible' }}
           >
+            <ToolbarItem>
+              <ToggleGroup aria-label="Dark theme toggle group">
+                <ToggleGroupItem aria-label="light theme toggle" icon={<Icon size="md"><SunIcon /></Icon>} isSelected={!isDarkTheme} onChange={() => {
+                  setIsDarkTheme(false);
+                  applyTheme(false);
+                }} />
+                <ToggleGroupItem aria-label="dark theme toggle" icon={<Icon size="md"><MoonIcon /></Icon>} isSelected={isDarkTheme} onChange={() => {
+                  setIsDarkTheme(true);
+                  applyTheme(true);
+                }} />
+              </ToggleGroup>
+            </ToolbarItem>
             <ToolbarItem>
               <Dropdown
                 popperProps={{ position: 'right' }}
