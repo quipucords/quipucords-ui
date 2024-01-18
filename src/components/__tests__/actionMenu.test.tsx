@@ -1,120 +1,118 @@
 import React from 'react';
-import ActionMenu from '../ActionMenu';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import ActionMenu from '../ActionMenu';
 import '@testing-library/jest-dom';
 
 test('renders proper dom including elipse icon', () => {
-    const item = { foo: 'bar' };
-    const actionClicked = (_item: {foo: string}) => {};
-    const { asFragment } = render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  const { asFragment } = render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
+  );
+  expect(asFragment()).toMatchSnapshot();
+});
 
-  test('actions will not show before button is clicked', () => {
-    const user = userEvent.setup();
-
-    const item = { foo: 'bar' };
-    const actionClicked = (_item: {foo: string}) => {};
-    const { queryByText } = render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+test('actions will not show before button is clicked', () => {
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  const { queryByText } = render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    expect(queryByText("Delete")).toBeNull();
-  });
+  );
+  expect(queryByText('Delete')).toBeNull();
+});
 
-  test('actions will show after button is clicked', async () => {
-    const user = userEvent.setup();
+test('actions will show after button is clicked', async () => {
+  const user = userEvent.setup();
 
-    const item = { foo: 'bar' };
-    const actionClicked = (_item: {foo: string}) => {};
-    render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    const toggleButton = await screen.findByLabelText('Action Menu Toggle');
-    await user.click(toggleButton);
-    expect(screen.getByText("Delete")).toBeVisible();
-  });
+  );
+  const toggleButton = await screen.findByLabelText('Action Menu Toggle');
+  await user.click(toggleButton);
+  expect(screen.getByText('Delete')).toBeVisible();
+});
 
-  test('snapshot matches after opening the action menu', async () => {
-    const user = userEvent.setup();
+test('snapshot matches after opening the action menu', async () => {
+  const user = userEvent.setup();
 
-    const item = { foo: 'bar' };
-    const actionClicked = (_item: {foo: string}) => {};
-    const { asFragment } = render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  const { asFragment } = render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    const toggleButton = await screen.findByLabelText('Action Menu Toggle');
-    await user.click(toggleButton);
-    expect(asFragment()).toMatchSnapshot();
-  });
+  );
+  const toggleButton = await screen.findByLabelText('Action Menu Toggle');
+  await user.click(toggleButton);
+  expect(asFragment()).toMatchSnapshot();
+});
 
-  test('action callback should get called when clicked', async () => {
-    const user = userEvent.setup();
+test('action callback should get called when clicked', async () => {
+  const user = userEvent.setup();
 
-    const item = { foo: 'bar' };
-    const actionClicked = jest.fn();
-    render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    expect(actionClicked).toHaveBeenCalledTimes(0);
-    const toggleButton = await screen.findByLabelText('Action Menu Toggle');
-    await user.click(toggleButton);
-    const deleteButton = await screen.findByText("Delete");
-    await user.click(deleteButton);
-    expect(actionClicked).toHaveBeenCalledTimes(1);
-  });
+  );
+  expect(actionClicked).toHaveBeenCalledTimes(0);
+  const toggleButton = await screen.findByLabelText('Action Menu Toggle');
+  await user.click(toggleButton);
+  const deleteButton = await screen.findByText('Delete');
+  await user.click(deleteButton);
+  expect(actionClicked).toHaveBeenCalledTimes(1);
+});
 
-  test('action menu closes after selection', async () => {
-    const user = userEvent.setup();
+test('action menu closes after selection', async () => {
+  const user = userEvent.setup();
 
-    const item = { foo: 'bar' };
-    const actionClicked = jest.fn();
-    render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    const toggleButton = await screen.findByLabelText('Action Menu Toggle');
-    await user.click(toggleButton);
-    const deleteButton = await screen.findByText("Delete");
-    expect(deleteButton).toBeVisible();
-    await user.click(deleteButton);
-    expect(deleteButton).not.toBeVisible();
-  });
+  );
+  const toggleButton = await screen.findByLabelText('Action Menu Toggle');
+  await user.click(toggleButton);
+  const deleteButton = await screen.findByText('Delete');
+  expect(deleteButton).toBeVisible();
+  await user.click(deleteButton);
+  expect(deleteButton).not.toBeVisible();
+});
 
-  test('action menu closes if toggle is clicked again', async () => {
-    const user = userEvent.setup();
+test('action menu closes if toggle is clicked again', async () => {
+  const user = userEvent.setup();
 
-    const item = { foo: 'bar' };
-    const actionClicked = jest.fn();
-    render(
-        <ActionMenu<{ foo: string }>
-        item={item}
-        actions={[{ label: 'Delete', onClick: actionClicked }]}
+  const item = { foo: 'bar' };
+  const actionClicked = jest.fn();
+  render(
+    <ActionMenu<{ foo: string }>
+      item={item}
+      actions={[{ label: 'Delete', onClick: actionClicked }]}
     />
-    );
-    const toggleButton = await screen.findByLabelText('Action Menu Toggle');
-    await user.click(toggleButton);
-    const deleteButton = await screen.findByText("Delete");
-    expect(deleteButton).toBeVisible();
-    await user.click(toggleButton);
-    expect(deleteButton).not.toBeVisible();
-  });
+  );
+  const toggleButton = await screen.findByLabelText('Action Menu Toggle');
+  await user.click(toggleButton);
+  const deleteButton = await screen.findByText('Delete');
+  expect(deleteButton).toBeVisible();
+  await user.click(toggleButton);
+  expect(deleteButton).not.toBeVisible();
+});
