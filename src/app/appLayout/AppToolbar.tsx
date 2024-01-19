@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Checkbox,
   Dropdown,
   DropdownItem,
   Icon,
   MenuToggle,
-  Radio,
   ToggleGroup,
   ToggleGroupItem,
   Toolbar,
@@ -24,9 +22,11 @@ const AppToolbar: React.FunctionComponent = () => {
   const [helpOpen, setHelpOpen] = React.useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = React.useState<boolean>(false);
   const [kebabDropdownOpen, setKebabDropdownOpen] = React.useState<boolean>(false);
-  const [isDarkTheme, setIsDarkTheme] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const [isDarkTheme, setIsDarkTheme] = React.useState(
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
 
-  const applyTheme = (isDark) => {
+  const applyTheme = isDark => {
     const htmlElement = document.getElementsByTagName('html')[0];
     if (htmlElement) {
       if (isDark) {
@@ -87,14 +87,32 @@ const AppToolbar: React.FunctionComponent = () => {
           >
             <ToolbarItem>
               <ToggleGroup aria-label="Dark theme toggle group">
-                <ToggleGroupItem aria-label="light theme toggle" icon={<Icon size="md"><SunIcon /></Icon>} isSelected={!isDarkTheme} onChange={() => {
-                  setIsDarkTheme(false);
-                  applyTheme(false);
-                }} />
-                <ToggleGroupItem aria-label="dark theme toggle" icon={<Icon size="md"><MoonIcon /></Icon>} isSelected={isDarkTheme} onChange={() => {
-                  setIsDarkTheme(true);
-                  applyTheme(true);
-                }} />
+                <ToggleGroupItem
+                  aria-label="light theme toggle"
+                  icon={
+                    <Icon size="md">
+                      <SunIcon />
+                    </Icon>
+                  }
+                  isSelected={!isDarkTheme}
+                  onChange={() => {
+                    setIsDarkTheme(false);
+                    applyTheme(false);
+                  }}
+                />
+                <ToggleGroupItem
+                  aria-label="dark theme toggle"
+                  icon={
+                    <Icon size="md">
+                      <MoonIcon />
+                    </Icon>
+                  }
+                  isSelected={isDarkTheme}
+                  onChange={() => {
+                    setIsDarkTheme(true);
+                    applyTheme(true);
+                  }}
+                />
               </ToggleGroup>
             </ToolbarItem>
             <ToolbarItem>

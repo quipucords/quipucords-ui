@@ -24,7 +24,10 @@ export const SimpleDropdown: React.FC<ISimpleDropdownProps> = ({
     <Dropdown
       isOpen={isOpen}
       onOpenChange={isOpen => setIsOpen(isOpen)}
-      onSelect={onSelect}
+      onSelect={() => {
+        setIsOpen(false);
+        onSelect && onSelect();
+      }}
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
         <MenuToggle
           isFullWidth={isFullWidth}
