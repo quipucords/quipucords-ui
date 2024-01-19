@@ -48,6 +48,7 @@ import { SourceType, ConnectionType, CredentialType } from '../../types';
 import AddSourceModal from './AddSourceModal';
 import SourcesScanModal from './SourcesScanModal';
 import { useSourcesQuery } from './useSourcesQuery';
+import { ConnectionsModal } from './ConnectionsModal';
 
 const SOURCES_LIST_QUERY = 'sourcesList';
 
@@ -460,63 +461,11 @@ const SourcesListView: React.FunctionComponent = () => {
         </Modal>
       )}
       {connectionsSelected && (
-        <Modal
-          variant={ModalVariant.medium}
-          title={connectionsSelected.name}
-          isOpen={!!connectionsSelected}
+        <ConnectionsModal
+          source={connectionsSelected}
+          connections={connectionsData}
           onClose={onCloseConnections}
-          actions={[
-            <Button key="cancel" variant="secondary" onClick={onCloseConnections}>
-              Close
-            </Button>
-          ]}
-        >
-          <TextContent style={{ margin: '1em 0' }}>
-            <h5>
-              <Icon status="danger">
-                <ExclamationCircleIcon />
-              </Icon>{' '}
-              Failed connections
-            </h5>
-          </TextContent>
-          <List isPlain isBordered>
-            {connectionsData.failure.length ? (
-              connectionsData.failure.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
-            ) : (
-              <ListItem>N/A</ListItem>
-            )}
-          </List>
-          <TextContent style={{ margin: '1em 0' }}>
-            <h5>
-              <Icon status="warning">
-                <ExclamationTriangleIcon />
-              </Icon>{' '}
-              Unreachable systems
-            </h5>
-          </TextContent>
-          <List isPlain isBordered>
-            {connectionsData.unreachable.length ? (
-              connectionsData.unreachable.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
-            ) : (
-              <ListItem>N/A</ListItem>
-            )}
-          </List>
-          <TextContent style={{ margin: '1em 0' }}>
-            <h5>
-              <Icon status="success">
-                <CheckCircleIcon />
-              </Icon>{' '}
-              Successful connections
-            </h5>
-          </TextContent>
-          <List isPlain isBordered>
-            {connectionsData.successful.length ? (
-              connectionsData.successful.map(con => <ListItem key={con.name}>{con.name}</ListItem>)
-            ) : (
-              <ListItem>N/A</ListItem>
-            )}
-          </List>
-        </Modal>
+        />
       )}
 
       {!!pendingDeleteSource && (
