@@ -757,6 +757,11 @@
     read-package-json-fast "^3.0.0"
     which "^3.0.0"
 
+"@patternfly/patternfly@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-5.1.0.tgz#1c02dff6785d87c222de8a5944b960dd6c0de760"
+  integrity sha512-wzVgL/0xPsmuRKWc6lMNEo5gDcTUtyU231eJSBTapOKXiwBOv2flvLEHPYLO6oDYXO+hwUrVgbcZFWMd1UlLwA==
+
 "@patternfly/react-core@^5.0.0", "@patternfly/react-core@^5.1.1", "@patternfly/react-core@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-5.1.2.tgz#dcf643ce369452565bc471e2fe4e597182400306"
