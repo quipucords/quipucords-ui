@@ -17,24 +17,17 @@ import {
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
-  Icon,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
-  TextContent,
   Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  CubesIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon
-} from '@patternfly/react-icons';
+import { CubesIcon } from '@patternfly/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import moment from 'moment';
@@ -45,10 +38,10 @@ import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/co
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { SourceType, ConnectionType, CredentialType } from '../../types';
-import AddSourceModal from './AddSourceModal';
-import SourcesScanModal from './SourcesScanModal';
+import AddSourceModal from './components/AddSourceModal';
+import { ConnectionsModal } from './components/ConnectionsModal';
+import SourcesScanModal from './components/SourcesScanModal';
 import { useSourcesQuery } from './useSourcesQuery';
-import { ConnectionsModal } from './ConnectionsModal';
 
 const SOURCES_LIST_QUERY = 'sourcesList';
 
