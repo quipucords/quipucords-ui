@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.6.2 (2024-01-22)
+
+
+### Chores
+*  add .noai to disable Jetbrains AI Assistant  (40f06a8)
+* **deps** bump redux from 4.2.1 to 5.0.1  (#279) (14901ba)
+* **deps-dev** bump npm-check-updates from 16.13.1 to 16.14.12  (#280) (41406a0)
+* **deps-dev** bump @babel/preset-env from 7.22.10 to 7.23.5  (#264) (3d66168)
+* **deps-dev** bump glob from 10.3.3 to 10.3.10  (#256) (352fe42)
+* **deps** bump actions/setup-node from 3 to 4  (#255) (d73828d)
+* **deps** bump actions/github-script from 6 to 7  (#262) (73585fd)
+* **deps-dev** bump sass from 1.66.1 to 1.69.5  (#257) (00a285f)
+
 ## 1.6.1 (2023-11-10)
 
 
