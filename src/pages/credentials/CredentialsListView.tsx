@@ -1,3 +1,11 @@
+/**
+ * Credentials List View Component
+ *
+ * This component displays a table of credentials, allowing users to view, filter, and manage credentials.
+ * It provides features like adding credentials, deleting selected credentials, and refreshing the data.
+ *
+ ** @module CredentialsListView
+ */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,14 +18,12 @@ import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
-  AlertProps,
   AlertVariant,
   Button,
   ButtonVariant,
   DropdownItem,
   EmptyState,
   EmptyStateIcon,
-  getUniqueId,
   List,
   ListItem,
   Modal,
@@ -25,19 +31,20 @@ import {
   PageSection,
   Title,
   ToolbarContent,
-  ToolbarItem
+  ToolbarItem,
+  getUniqueId
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
+import { API_CREDS_LIST_QUERY } from 'src/constants/apiConstants';
+import useCredentialApi from 'src/hooks/api/useCredentialApi';
+import useAlerts from 'src/hooks/useAlerts';
+import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
 import { useCredentialsQuery } from './useCredentialsQuery';
-
-const CREDS_LIST_QUERY = 'credentialsList';
 
 const CredentialTypeLabels = {
   ansible: 'Ansible Controller',
@@ -50,20 +57,51 @@ const CredentialTypeLabels = {
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
-  const [alerts, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
-  const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
-  const queryClient = useQueryClient();
-  const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
-  };
-  const removeAlert = (key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
-  };
+  const {
+    deleteCredential,
+    onDeleteSelectedCredentials,
+    pendingDeleteCredential,
+    setPendingDeleteCredential
+  } = useCredentialApi();
+  const { queryClient } = useQueryClientConfig();
+  const { alerts, addAlert, removeAlert } = useAlerts();
+
+  /**
+   * Invalidates the query cache for the creds list, triggering a refresh.
+   */
   const onRefresh = () => {
-    queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
+    queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+  };
+
+  /**
+   * Deletes the pending credential and handles success, error, and cleanup operations.
+   */
+  const onDeleteCredential = () => {
+    deleteCredential()
+      .then(() => {
+        addAlert(
+          `Credential "${pendingDeleteCredential?.name}" deleted successfully`,
+          'success',
+          getUniqueId()
+        );
+        onRefresh();
+      })
+      .catch(err => {
+        console.log(err);
+        let errorDetail = '';
+        if (err?.response?.data) {
+          errorDetail += JSON.stringify(err.response.data);
+        }
+        addAlert(
+          `Error removing credential ${pendingDeleteCredential?.name}. ${errorDetail}`,
+          'danger',
+          getUniqueId()
+        );
+      })
+      .finally(() => setPendingDeleteCredential(undefined));
   };
 
   const tableState = useTableState({
@@ -168,28 +206,6 @@ const CredentialsListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const onDeleteCredential = (credential: CredentialType) => {
-    axios
-      .delete(`https://0.0.0.0:9443/api/v1/credentials/${credential.id}/`)
-      .then(() => {
-        addAlert(`Credential "${credential.name}" deleted successfully`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [CREDS_LIST_QUERY] });
-      })
-      .catch(err => {
-        console.error(err);
-        addAlert(
-          `Error removing credential ${credential.name}. ${err?.response?.data?.detail}`,
-          'danger',
-          getUniqueId()
-        );
-      })
-      .finally(() => setPendingDeleteCredential(undefined));
-  };
-  const onDeleteSelectedCredentials = () => {
-    const itemsToDelete = Object.values(selectedItems).filter(val => val !== null);
-    // add logic
-    console.log('Deleting selected credentials:', itemsToDelete);
-  };
   const hasSelectedCredentials = () => {
     return Object.values(selectedItems).filter(val => val !== null).length > 0;
   };
@@ -389,11 +405,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           isOpen={!!pendingDeleteCredential}
           onClose={() => setPendingDeleteCredential(undefined)}
           actions={[
-            <Button
-              key="confirm"
-              variant="danger"
-              onClick={() => onDeleteCredential(pendingDeleteCredential)}
-            >
+            <Button key="confirm" variant="danger" onClick={() => onDeleteCredential()}>
               Delete
             </Button>,
             <Button

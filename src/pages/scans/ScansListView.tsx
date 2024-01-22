@@ -1,3 +1,11 @@
+/**
+ * ScansListView Component
+ *
+ * This component provides a view for managing scans, including adding, running and deleting scans,
+ * and also managing reports.
+ *
+ * @module ScansListView
+ */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,7 +18,6 @@ import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
-  AlertProps,
   AlertVariant,
   Button,
   ButtonVariant,
@@ -27,37 +34,85 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import moment from 'moment';
 import ActionMenu from 'src/components/ActionMenu';
+import { API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
+import useScanApi from 'src/hooks/api/useScanApi';
+import useAlerts from 'src/hooks/useAlerts';
+import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { ScanType } from '../../types';
 import { useScansQuery } from './useScansQuery';
 
-const SCANS_LIST_QUERY = 'scansList';
-
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
-  const [alerts, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  const [scanSelected, setScanSelected] = React.useState<ScanType>();
   const [scanSelectedForSources, setScanSelectedForSources] = React.useState<ScanType>();
-  const [pendingDeleteScan, setPendingDeleteScan] = React.useState<ScanType>();
-  const queryClient = useQueryClient();
+  const {
+    deleteScan,
+    onDeleteSelectedScans,
+    pendingDeleteScan,
+    setPendingDeleteScan,
+    scanSelected,
+    setScanSelected
+  } = useScanApi();
+  const { queryClient } = useQueryClientConfig();
+  const { alerts, addAlert, removeAlert } = useAlerts();
 
+  /**
+   * Invalidates the query cache for the scan list, triggering a refresh.
+   */
   const onRefresh = () => {
-    queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
+    queryClient.invalidateQueries({ queryKey: [API_SCANS_LIST_QUERY] });
   };
 
-  const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+  /**
+   * Deletes the pending scan and handles success, error, and cleanup operations.
+   */
+  const onDeleteScan = () => {
+    deleteScan()
+      .then(() => {
+        addAlert(`Scan "${pendingDeleteScan?.id}" deleted successfully`, 'success', getUniqueId());
+        onRefresh();
+      })
+      .catch(err => {
+        console.log(err);
+        let errorDetail = '';
+        if (err?.response?.data) {
+          errorDetail += JSON.stringify(err.response.data);
+        }
+        addAlert(
+          `Error removing scan ${pendingDeleteScan?.id}. ${errorDetail}`,
+          'danger',
+          getUniqueId()
+        );
+      })
+      .finally(() => setPendingDeleteScan(undefined));
   };
 
-  const removeAlert = (key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+  /**
+   * Initiates a scan for the provided source, handles success, error, and cleanup operations.
+   *
+   * @param source - source information to start the scan.
+   */
+  const onRunScan = source => {
+    console.log('run scan:', source);
+    // runScan(payload);
+    // .then( () => {
+    //   addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
+    //   queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+    //   setScanSelected(undefined);
+    // })
+    // .catch(err => {
+    //   console.error({ err });
+    //   addAlert(
+    //     `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
+    //     'danger',
+    //     getUniqueId()
+    //   );
+    // });
   };
 
   const tableState = useTableState({
@@ -121,48 +176,6 @@ const ScansListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const onDeleteSelectedItems = () => {
-    // add logic
-    console.log('Deleting selected credentials:', selectedItems);
-  };
-
-  const onRunScan = payload => {
-    console.log('run scan:', payload);
-    // axios
-    //   .post(process.env.REACT_APP_SCANS_SERVICE, payload)
-    //   .then(() => {
-    //     addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
-    //     queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
-    //     setScanSelected(undefined);
-    //   })
-    //   .catch(err => {
-    //     addAlert(
-    //       `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
-    //       'danger',
-    //       getUniqueId()
-    //     );
-    //     console.error({ err });
-    //   });
-  };
-
-  const onDeleteScan = (scan: ScanType) => {
-    axios
-      .delete(`https://0.0.0.0:9443/api/v1/scans/${scan.id}/`)
-      .then(() => {
-        addAlert(`Scan "${scan.id}" deleted successfully`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SCANS_LIST_QUERY] });
-      })
-      .catch(err => {
-        console.error(err);
-        addAlert(
-          `Error removing scan ${scan.id}. ${err?.response?.data?.detail}`,
-          'danger',
-          getUniqueId()
-        );
-      })
-      .finally(() => setPendingDeleteScan(undefined));
-  };
-
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
@@ -171,7 +184,7 @@ const ScansListView: React.FunctionComponent = () => {
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!selectedItems?.length}
-            onClick={onDeleteSelectedItems}
+            onClick={onDeleteSelectedScans}
           >
             {t('table.label', { context: 'delete' })}
           </Button>
@@ -312,7 +325,7 @@ const ScansListView: React.FunctionComponent = () => {
           isOpen={!!pendingDeleteScan}
           onClose={() => setPendingDeleteScan(undefined)}
           actions={[
-            <Button key="confirm" variant="danger" onClick={() => onDeleteScan(pendingDeleteScan)}>
+            <Button key="confirm" variant="danger" onClick={() => onDeleteScan()}>
               {t('form-dialog.label_delete', { context: 'delete' })}
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteScan(undefined)}>
