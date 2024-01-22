@@ -21,17 +21,6 @@ if (process.env.NODE_ENV !== 'production') {
 const root = ReactDOM.createRoot(document.getElementById('root') as Element);
 const queryClient = new QueryClient();
 
-//TODO: just to get token manually until we have login screen
-// axios
-//   .post('https://0.0.0.0:9443/api/v1/token/', {
-//     username: 'admin',
-//     password: 'pleasechangethispassword'
-//   })
-//   .then(res => {
-//     localStorage.setItem('authToken', res.data.token);
-//     console.log('Token', res.data.token);
-//   });
-
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

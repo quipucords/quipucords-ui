@@ -1,3 +1,10 @@
+/**
+ * Add Source Modal Component
+ *
+ * This component displays a modal for adding or editing a source of a specific type. It provides
+ * a form to input source details including name, hosts, port, credential, and SSL settings.
+ *
+ */
 import * as React from 'react';
 import {
   ActionGroup,
@@ -43,15 +50,30 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
   const typeValue = source?.source_type || type.split(' ').shift()?.toLowerCase();
   const isNetwork = typeValue === 'network';
 
+  /**
+   * Fetch Credentials Options Effect
+   *
+   * This effect is used to fetch a list of credential options based on a specific credential type.
+   *
+   * @param {string} typeValue - The credential type value to filter the options.
+   */
   React.useEffect(() => {
     axios
-      .get(`https://0.0.0.0:9443/api/v1/credentials/?cred_type=${typeValue}`)
+      .get(`${process.env.REACT_APP_CREDENTIALS_SERVICE}?cred_type=${typeValue}`)
       .then(res => {
         setCredOptions(res.data.results.map(o => ({ label: o.name, value: '' + o.id })));
       })
       .catch(err => console.error(err));
   }, []);
 
+  /**
+   * Handle Add Action
+   *
+   * This function is responsible for handling the "Add" action, which includes creating a payload
+   * with the provided values and submitting it.
+   *
+   * @param {object} values - An object containing the input values for the new item.
+   */
   const onAdd = values => {
     const payload = {
       credentials: credentials.map(c => Number(c)),

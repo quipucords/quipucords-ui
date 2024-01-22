@@ -1,3 +1,11 @@
+/**
+ * SourcesListView Component
+ *
+ * This component provides a view for managing sources, including adding, editing, and deleting sources,
+ * initiating scans, and displaying source-related information.
+ *
+ * @module SourcesListView
+ */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,7 +18,6 @@ import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
-  AlertProps,
   AlertVariant,
   Button,
   ButtonVariant,
@@ -28,25 +35,25 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import moment from 'moment';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
+import { API_SOURCES_LIST_QUERY } from 'src/constants/apiConstants';
+import useSourceApi from 'src/hooks/api/useSourceApi';
+import useAlerts from 'src/hooks/useAlerts';
+import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
-import { SourceType, ConnectionType, CredentialType } from '../../types';
+import { CredentialType, SourceType } from '../../types';
 import AddSourceModal from './components/AddSourceModal';
 import { ConnectionsModal } from './components/ConnectionsModal';
 import SourcesScanModal from './components/SourcesScanModal';
-import { useSourcesQuery } from './useSourcesQuery';
-
-const SOURCES_LIST_QUERY = 'sourcesList';
+import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
 const SourceTypeLabels = {
-  acs: 'ACS',
+  acs: 'RHACS',
   ansible: 'Ansible Controller',
   network: 'Network',
   openshift: 'OpenShift',
@@ -56,32 +63,156 @@ const SourceTypeLabels = {
 
 const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
-  const [alerts, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialType[]>([]);
-  const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
-  const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
-  const [addSourceModal, setAddSourceModal] = React.useState<string>();
-  const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
-  const [connectionsData, setConnectionsData] = React.useState<{
-    successful: ConnectionType[];
-    failure: ConnectionType[];
-    unreachable: ConnectionType[];
-  }>({ successful: [], failure: [], unreachable: [] });
-  const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
-  const queryClient = useQueryClient();
-  const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
+  const {
+    runScan,
+    addSource,
+    submitEditedSource,
+    deleteSource,
+    showConnections,
+    onEditSource,
+    onScanSources,
+    scanSelected,
+    setScanSelected,
+    onDeleteSelectedSources,
+    onCloseConnections,
+    onScanSource,
+    addSourceModal,
+    setAddSourceModal,
+    setConnectionsData,
+    sourceBeingEdited,
+    setSourceBeingEdited,
+    pendingDeleteSource,
+    setPendingDeleteSource,
+    connectionsData,
+    connectionsSelected,
+    setConnectionsSelected
+  } = useSourceApi();
 
+  const { queryClient } = useQueryClientConfig();
+
+  const { alerts, addAlert, removeAlert } = useAlerts();
+
+  /**
+   * Invalidates the query cache for the sources list, triggering a refresh.
+   */
   const onRefresh = () => {
-    queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+    queryClient.invalidateQueries({ queryKey: [API_SOURCES_LIST_QUERY] });
   };
 
-  const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+  /**
+   * Deletes the pending source and handles success, error, and cleanup operations.
+   */
+  const onDeleteSource = () => {
+    deleteSource()
+      .then(() => {
+        addAlert(
+          `Source "${pendingDeleteSource?.name}" deleted successfully`,
+          'success',
+          getUniqueId()
+        );
+        onRefresh();
+      })
+      .catch(err => {
+        console.log(err);
+        let errorDetail = '';
+        if (err?.response?.data) {
+          errorDetail += JSON.stringify(err.response.data);
+        }
+        addAlert(
+          `Error removing source ${pendingDeleteSource?.name}. ${errorDetail}`,
+          'danger',
+          getUniqueId()
+        );
+      })
+      .finally(() => setPendingDeleteSource(undefined));
   };
 
-  const removeAlert = (key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+  /**
+   * Submits edited source data, handles success, error, and cleanup operations.
+   *
+   * @param {SourceType} payload - The payload containing updated source information.
+   */
+  const onSubmitEditedSource = (payload: SourceType) => {
+    submitEditedSource(payload)
+      .then(() => {
+        addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setSourceBeingEdited(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        addAlert(
+          `There was a problem while editing your source. ${JSON.stringify(err?.response?.data)}`,
+          'danger',
+          getUniqueId()
+        );
+      });
+  };
+
+  /**
+   * Initiates a scan for the provided source, handles success, error, and cleanup operations.
+   *
+   * @param {SourceType} payload - The payload containing source information to start the scan.
+   */
+  const onRunScan = (payload: SourceType) => {
+    runScan(payload)
+      .then(() => {
+        addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setScanSelected(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        addAlert(
+          `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
+          'danger',
+          getUniqueId()
+        );
+      });
+  };
+
+  /**
+   * Adds a new source using the provided payload, handles success, error, and cleanup operations.
+   *
+   * @param {SourceType} payload - The payload containing information for the new source to be added.
+   */
+  const onAddSource = (payload: SourceType) => {
+    addSource(payload)
+      .then(() => {
+        addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+        setAddSourceModal(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        addAlert(
+          `Error adding source. ${JSON.stringify(err?.response?.data)}`,
+          'danger',
+          getUniqueId()
+        );
+      });
+  };
+
+  /**
+   * Retrieves connection information related to a source, updates connection data, and selects the source.
+   *
+   * @param {SourceType} source - The source for which to retrieve connection information.
+   */
+  const onShowConnections = (source: SourceType) => {
+    showConnections(source)
+      .then(res => {
+        setConnectionsData({
+          successful: res.data.results.filter((c: { status: string }) => c.status === 'success'),
+          failure: res.data.results.filter((c: { status: string }) => c.status === 'failure'),
+          unreachable: res.data.results.filter(
+            (c: { status: string }) => !['success', 'failure'].includes(c.status)
+          )
+        });
+      })
+      .catch(err => console.error(err));
+    setConnectionsSelected(source);
   };
 
   const tableState = useTableState({
@@ -192,82 +323,6 @@ const SourcesListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
-  const onCloseConnections = () => {
-    setConnectionsSelected(undefined);
-    setConnectionsData(emptyConnectionData);
-  };
-  const onScanSources = () => {
-    setScanSelected(selectedItems);
-  };
-  const onScanSource = (source: SourceType) => {
-    setScanSelected([source]);
-  };
-  const onRunScan = payload => {
-    axios
-      .post(`https://0.0.0.0:9443/api/v1/scans/`, payload)
-      .then(() => {
-        addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setScanSelected(undefined);
-      })
-      .catch(err => {
-        addAlert(
-          `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
-          'danger',
-          getUniqueId()
-        );
-        console.error({ err });
-      });
-  };
-  const onAddSource = payload => {
-    axios
-      .post(`https://0.0.0.0:9443/api/v1/sources/?scan=true`, payload)
-      .then(() => {
-        addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setAddSourceModal(undefined);
-      })
-      .catch(err => console.error(err));
-  };
-
-  const onEditSource = (source: SourceType) => {
-    setSourceBeingEdited(source);
-  };
-
-  const onSubmitEditedSource = (payload: SourceType) => {
-    axios
-      .put(`https://0.0.0.0:9443/api/v1/sources/${payload.id}`, payload)
-      .then(() => {
-        addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setSourceBeingEdited(undefined);
-      })
-      .catch(err => console.error(err));
-  };
-
-  const onDeleteSource = (source: SourceType) => {
-    axios
-      .delete(`https://0.0.0.0:9443/api/v1/sources/${source.id}/`)
-      .then(() => {
-        addAlert(`Source "${source.name}" deleted successfully`, 'success', getUniqueId());
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-      })
-      .catch(err => {
-        console.error(err);
-        addAlert(
-          `Error removing source ${source.name}. ${err?.response?.data?.detail}`,
-          'danger',
-          getUniqueId()
-        );
-      })
-      .finally(() => setPendingDeleteSource(undefined));
-  };
-
-  const onDeleteSelectedSources = () => {
-    // add logic
-    console.log('Deleting selected credentials:', selectedItems);
-  };
-
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
@@ -318,24 +373,6 @@ const SourcesListView: React.FunctionComponent = () => {
     </Toolbar>
   );
 
-  const showConnections = (source: SourceType) => {
-    axios
-      .get(
-        `https://0.0.0.0:9443/api/v1/jobs/${source.connection.id}/connection/?page=1&page_size=1000&ordering=name&source_type=${source.id}`
-      )
-      .then(res => {
-        setConnectionsData({
-          successful: res.data.results.filter((c: { status: string }) => c.status === 'success'),
-          failure: res.data.results.filter((c: { status: string }) => c.status === 'failure'),
-          unreachable: res.data.results.filter(
-            (c: { status: string }) => !['success', 'failure'].includes(c.status)
-          )
-        });
-      })
-      .catch(err => console.error(err));
-    setConnectionsSelected(source);
-  };
-
   const getTimeDisplayHowLongAgo =
     process.env.REACT_APP_ENV !== 'test'
       ? timestamp => moment.utc(timestamp).fromNow()
@@ -358,7 +395,7 @@ const SourcesListView: React.FunctionComponent = () => {
       <Button
         variant={ButtonVariant.link}
         onClick={() => {
-          showConnections(source);
+          onShowConnections(source);
         }}
       >
         <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
@@ -468,11 +505,7 @@ const SourcesListView: React.FunctionComponent = () => {
           isOpen={!!pendingDeleteSource}
           onClose={() => setPendingDeleteSource(undefined)}
           actions={[
-            <Button
-              key="confirm"
-              variant="danger"
-              onClick={() => onDeleteSource(pendingDeleteSource)}
-            >
+            <Button key="confirm" variant="danger" onClick={() => onDeleteSource()}>
               Delete
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
