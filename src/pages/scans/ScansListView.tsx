@@ -34,7 +34,6 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import moment from 'moment';
 import ActionMenu from 'src/components/ActionMenu';
 import { API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
 import useScanApi from 'src/hooks/api/useScanApi';
@@ -60,6 +59,7 @@ const ScansListView: React.FunctionComponent = () => {
   } = useScanApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
+  const { getTimeDisplayHowLongAgo } = helpers;
 
   /**
    * Invalidates the query cache for the scan list, triggering a refresh.
@@ -198,11 +198,6 @@ const ScansListView: React.FunctionComponent = () => {
       </ToolbarContent>
     </Toolbar>
   );
-
-  const getTimeDisplayHowLongAgo =
-    process.env.REACT_APP_ENV !== 'test'
-      ? timestamp => moment.utc(timestamp).fromNow()
-      : () => 'a day ago';
 
   const renderConnection = (scan: ScanType): React.ReactNode => {
     return (

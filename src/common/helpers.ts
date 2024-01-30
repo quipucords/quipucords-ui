@@ -3,6 +3,7 @@ import { PropertyPath } from 'lodash';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
 import moment from 'moment';
+import { CredentialType } from 'src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const aggregatedError = (errors: any, message: any, { name = 'AggregateError' } = {}) => {
@@ -247,16 +248,41 @@ const getStatusFromResults = results => {
   return status;
 };
 
+/**
+ * Retrieves a timestamp from HTTP response headers or returns a default one for testing.
+ *
+ * @param {object} results - The HTTP response results containing headers.
+ * @returns {string} - A formatted timestamp in 'YYYYMMDD_HHmmss' format.
+ */
 const getTimeStampFromResults =
   process.env.REACT_APP_ENV !== 'test'
     ? results => moment(_get(results, 'headers.date', Date.now())).format('YYYYMMDD_HHmmss')
     : () => '20190225_164640';
 
-const getTimeDisplayHowLongAgo =
-  process.env.REACT_APP_ENV !== 'test'
-    ? timestamp => moment.utc(timestamp).utcOffset(moment().utcOffset()).fromNow()
-    : () => 'a day ago';
+/**
+ * Calculates and returns a human-readable time difference from a given timestamp.
+ *
+ * @param {string} timestamp - The timestamp in ISO 8601 format.
+ * @returns {string} - A string representing the time difference, e.g., "2 hours ago".
+ */
+const getTimeDisplayHowLongAgo = timestamp => {
+  if (!moment.utc(timestamp).isValid()) {
+    throw new Error('Invalid timestamp');
+  }
+  try {
+    return moment.utc(timestamp).utcOffset(moment().utcOffset()).fromNow();
+  } catch (error) {
+    console.error('Error occurred in getTimeDisplayHowLongAgo:', error);
+    return 'Error';
+  }
+};
 
+/**
+ * Checks if a given string represents a valid IP address.
+ *
+ * @param {string} name - The input string to be checked.
+ * @returns {boolean} - True if the string is a valid IP address, otherwise false.
+ */
 const isIpAddress = (name: string): boolean => {
   const vals = name.split('.');
   if (vals.length === 4) {
@@ -265,6 +291,12 @@ const isIpAddress = (name: string): boolean => {
   return false;
 };
 
+/**
+ * Converts a string representation of an IP address to its numeric value.
+ *
+ * @param {string} name - The input string containing an IP address.
+ * @returns {number} - The numeric value of the IP address.
+ */
 const ipAddressValue = (name: string): number => {
   const values = name.split('.');
   return (
@@ -273,6 +305,30 @@ const ipAddressValue = (name: string): number => {
     parseInt(values[2], 10) * 0x100 +
     parseInt(values[3], 10)
   );
+};
+
+enum authType {
+  UsernameAndPassword = 'Username and Password',
+  Token = 'Token',
+  SSHKeyFile = 'SSH Key file'
+}
+
+/**
+ * Determines the authentication type based on a CredentialType object.
+ *
+ * @param {CredentialType} credential - The CredentialType object representing authentication information.
+ * @returns {string} - A string indicating the authentication type, e.g., "Username and Password".
+ */
+const getAuthType = (credential: CredentialType): authType => {
+  if (credential.username && credential.password) {
+    return authType.UsernameAndPassword;
+  } else if (credential.auth_token) {
+    return authType.Token;
+  } else if (credential.ssh_keyfile) {
+    return authType.SSHKeyFile;
+  } else {
+    throw new Error('Unknown credential type');
+  }
 };
 
 const DEV_MODE = process.env.REACT_APP_ENV === 'development';
@@ -310,6 +366,7 @@ const getCurrentDate = () =>
 
 const helpers = {
   aggregatedError,
+  authType,
   copyClipboard,
   devModeNormalizeCount,
   downloadData,
@@ -317,6 +374,7 @@ const helpers = {
   noopTranslate,
   setPropIfDefined,
   setPropIfTruthy,
+  getAuthType,
   getMessageFromResults,
   getStatusFromResults,
   getTimeStampFromResults,
