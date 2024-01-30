@@ -68,6 +68,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   } = useCredentialApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
+  const { getAuthType, getTimeDisplayHowLongAgo } = helpers;
 
   /**
    * Invalidates the query cache for the creds list, triggering a refresh.
@@ -250,55 +251,6 @@ const CredentialsListView: React.FunctionComponent = () => {
       </ToolbarContent>
     </Toolbar>
   );
-  const getAuthType = (credential: CredentialType): string => {
-    if (credential.username && credential.password) {
-      return 'Username and Password';
-    } else if (credential.ssh_key) {
-      return 'SSH Key';
-    } else if (credential.auth_token) {
-      return 'Token';
-    } else if (credential.ssh_keyfile) {
-      return 'SSH Key file';
-    } else {
-      return 'Unknown'; // Default value or handle as needed
-    }
-  };
-
-  const getLastUpdated = (credential: CredentialType): string => {
-    const now = new Date();
-    const lastUpdated = credential.updated_at || credential.created_at || now;
-    const timeDifference = now.getTime() - new Date(lastUpdated).getTime();
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(days / 365);
-
-    if (seconds < 60) {
-      return 'Just now';
-    } else if (minutes === 1) {
-      return 'A minute ago';
-    } else if (minutes < 60) {
-      return `${minutes} minutes ago`;
-    } else if (hours === 1) {
-      return 'An hour ago';
-    } else if (hours < 24) {
-      return `${hours} hours ago`;
-    } else if (days === 1) {
-      return 'Yesterday';
-    } else if (days < 30) {
-      return `${days} days ago`;
-    } else if (months === 1) {
-      return 'A month ago';
-    } else if (months < 12) {
-      return `${months} months ago`;
-    } else if (years === 1) {
-      return 'A year ago';
-    } else {
-      return `${years} years ago`;
-    }
-  };
 
   return (
     <PageSection variant="light">
@@ -347,7 +299,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                     {credential.sources?.length || 0}
                   </Button>
                 </Td>
-                <Td columnKey="updated">{getLastUpdated(credential).toString()}</Td>
+                <Td columnKey="updated">{getTimeDisplayHowLongAgo(credential.updated_at)}</Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}

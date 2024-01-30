@@ -7,7 +7,6 @@ export type CredentialType = {
   username: string;
   password: string;
   ssh_keyfile: string;
-  ssh_key: string;
   auth_token: string;
   ssh_passphrase: string;
   become_method: string;
