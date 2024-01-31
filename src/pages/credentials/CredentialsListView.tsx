@@ -46,15 +46,6 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTim
 import { CredentialType, SourceType } from '../../types';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
-const CredentialTypeLabels = {
-  ansible: 'Ansible Controller',
-  network: 'Network',
-  openshift: 'OpenShift',
-  rhacs: 'RHACS',
-  satellite: 'Satellite',
-  vcenter: 'vCenter Server'
-};
-
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
@@ -69,6 +60,16 @@ const CredentialsListView: React.FunctionComponent = () => {
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { getAuthType, getTimeDisplayHowLongAgo } = helpers;
+
+  /** Fetches the translated label for a credential type.
+   *
+   * @param {string} credentialType - The cred type identifier.
+   * @returns {string} Translated label for the given source type.
+   */
+  const getTranslatedCredentialTypeLabel = credentialType => {
+    const labelKey = `dataSource.${credentialType}`;
+    return t(labelKey);
+  };
 
   /**
    * Invalidates the query cache for the creds list, triggering a refresh.
@@ -283,7 +284,7 @@ const CredentialsListView: React.FunctionComponent = () => {
             {currentPageItems?.map((credential: CredentialType, rowIndex) => (
               <Tr key={credential.id} item={credential} rowIndex={rowIndex}>
                 <Td columnKey="name">{credential.name}</Td>
-                <Td columnKey="type">{CredentialTypeLabels[credential.cred_type]}</Td>
+                <Td columnKey="type">{getTranslatedCredentialTypeLabel(credential.cred_type)}</Td>
                 <Td columnKey="auth_type">{getAuthType(credential)}</Td>
                 <Td columnKey="sources">
                   <Button
