@@ -51,15 +51,6 @@ import { ConnectionsModal } from './components/ConnectionsModal';
 import SourcesScanModal from './components/SourcesScanModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
-const SourceTypeLabels = {
-  acs: 'RHACS',
-  ansible: 'Ansible Controller',
-  network: 'Network',
-  openshift: 'OpenShift',
-  satellite: 'Satellite',
-  vcenter: 'vCenter Server'
-};
-
 const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
@@ -92,6 +83,16 @@ const SourcesListView: React.FunctionComponent = () => {
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { getTimeDisplayHowLongAgo } = helpers;
 
+  /** Fetches the translated label for a source type.
+   *
+   * @param {string} sourceType - The source type identifier.
+   * @returns {string} Translated label for the given source type.
+   */
+  const getTranslatedSourceTypeLabel = sourceType => {
+    const labelKey = `dataSource.${sourceType}`;
+    return t(labelKey);
+  };
+
   /**
    * Invalidates the query cache for the sources list, triggering a refresh.
    */
@@ -105,24 +106,21 @@ const SourcesListView: React.FunctionComponent = () => {
   const onDeleteSource = () => {
     deleteSource()
       .then(() => {
-        addAlert(
-          `Source "${pendingDeleteSource?.name}" deleted successfully`,
-          'success',
-          getUniqueId()
-        );
+        const successMessage = t('toast-notifications.description', {
+          context: 'deleted-source',
+          name: pendingDeleteSource?.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         onRefresh();
       })
       .catch(err => {
         console.log(err);
-        let errorDetail = '';
-        if (err?.response?.data) {
-          errorDetail += JSON.stringify(err.response.data);
-        }
-        addAlert(
-          `Error removing source ${pendingDeleteSource?.name}. ${errorDetail}`,
-          'danger',
-          getUniqueId()
-        );
+        const errorMessage = t('toast-notifications.description', {
+          context: 'deleted-source_error',
+          name: pendingDeleteSource?.name,
+          message: err.response.data.detail
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       })
       .finally(() => setPendingDeleteSource(undefined));
   };
@@ -135,17 +133,20 @@ const SourcesListView: React.FunctionComponent = () => {
   const onSubmitEditedSource = (payload: SourceType) => {
     submitEditedSource(payload)
       .then(() => {
-        addAlert(`${payload.name} updated successfully`, 'success', getUniqueId());
+        const successMessage = t('toast-notifications.description', {
+          context: 'add-source_hidden_edit',
+          name: pendingDeleteSource?.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setSourceBeingEdited(undefined);
       })
       .catch(err => {
         console.error({ err });
-        addAlert(
-          `There was a problem while editing your source. ${JSON.stringify(err?.response?.data)}`,
-          'danger',
-          getUniqueId()
-        );
+        const errorMessage = t('toast-notifications.title', {
+          context: 'add-source_hidden_error_edit'
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       });
   };
 
@@ -157,17 +158,22 @@ const SourcesListView: React.FunctionComponent = () => {
   const onRunScan = (payload: SourceType) => {
     runScan(payload)
       .then(() => {
-        addAlert(`${payload.name} started to scan`, 'success', getUniqueId());
+        const successMessage = t('toast-notifications.description', {
+          context: 'scan-report_play',
+          name: payload.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setScanSelected(undefined);
       })
       .catch(err => {
         console.error({ err });
-        addAlert(
-          `Error starting scan. ${JSON.stringify(err?.response?.data)}`,
-          'danger',
-          getUniqueId()
-        );
+        const errorMessage = t('toast-notifications.description', {
+          context: 'starting-scan-error',
+          name: payload.name,
+          message: JSON.stringify(err?.response?.data.name)
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       });
   };
 
@@ -179,17 +185,23 @@ const SourcesListView: React.FunctionComponent = () => {
   const onAddSource = (payload: SourceType) => {
     addSource(payload)
       .then(() => {
-        addAlert(`${payload.name} added successfully`, 'success', getUniqueId());
+        const successMessage = t('toast-notifications.description', {
+          context: 'add-source_hidden',
+          name: payload.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setAddSourceModal(undefined);
       })
       .catch(err => {
         console.error({ err });
-        addAlert(
-          `Error adding source. ${JSON.stringify(err?.response?.data)}`,
-          'danger',
-          getUniqueId()
-        );
+        console.log(JSON.stringify(err?.response?.data));
+        const errorMessage = t('toast-notifications', {
+          context: 'title_add-source_hidden_error',
+          name: payload.name,
+          message: JSON.stringify(err?.response?.data)
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       });
   };
 
@@ -213,14 +225,23 @@ const SourcesListView: React.FunctionComponent = () => {
     setConnectionsSelected(source);
   };
 
+  /**
+   * Initializes table state with URL persistence, defining columns, filters, sorting, pagination, and selection.
+   * Features include:
+   * - Column names for 'name', 'connection', 'type', 'credentials', and 'unreachableSystems', plus placeholders.
+   * - Filters for name, credential search, and source type with specific options.
+   * - Sortable columns with initial sort on 'name'.
+   * - Enabled pagination and selection.
+   * Uses `useTableState` hook for state management based on provided configurations.
+   */
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
-      name: 'Name',
-      connection: 'Last connected',
-      type: 'Type',
-      credentials: 'Credentials',
-      unreachableSystems: 'Unreachable systems',
+      name: t('table.header', { context: 'name' }),
+      connection: t('table.label', { context: 'status_completed_sources' }),
+      type: t('table.header', { context: 'type' }),
+      credentials: t('table.header', { context: 'credentials' }),
+      unreachableSystems: t('table.header', { context: 'unreachable' }),
       scan: ' ',
       actions: ' '
     },
@@ -229,51 +250,51 @@ const SourcesListView: React.FunctionComponent = () => {
       filterCategories: [
         {
           key: 'search_by_name',
-          title: 'Name',
+          title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
-          placeholderText: 'Filter by name'
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
         },
         {
           key: 'search_credentials_by_name',
-          title: 'Credential name',
+          title: t('toolbar.label', { context: 'option_search_credentials_by_name' }),
           type: FilterType.search,
-          placeholderText: 'Filter by credential'
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_cred_type' })
         },
         {
           key: 'source_type',
-          title: 'Source type',
+          title: t('toolbar.label', { context: 'option_source_type' }),
           type: FilterType.select,
-          placeholderText: 'Filter by source type',
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_source_type' }),
           selectOptions: [
             {
               key: 'ansible',
               label: 'ansible',
-              value: 'Ansible'
+              value: t('toolbar.label', { context: 'chip_ansible' })
             },
             {
               key: 'network',
               label: 'network',
-              value: 'Network'
+              value: t('toolbar.label', { context: 'chip_network' })
             },
             {
               key: 'openshift',
               label: 'openShift',
-              value: 'Openshift'
+              value: t('toolbar.label', { context: 'chip_openshift' })
             },
             {
               key: 'rhacs',
               label: 'rhacs',
-              value: 'RHACS'
+              value: t('toolbar.label', { context: 'chip_rhacs' })
             },
             {
               key: 'satellite',
               label: 'satellite',
-              value: 'Satellite'
+              value: t('toolbar.label', { context: 'chip_satellite' })
             },
             {
               key: 'vcenter',
               label: 'vcenter',
-              value: 'vCenter'
+              value: t('toolbar.label', { context: 'chip_vcenter' })
             }
           ]
         }
@@ -295,6 +316,13 @@ const SourcesListView: React.FunctionComponent = () => {
     totalResults = helpers.devModeNormalizeCount(totalResults);
   }
 
+  /**
+   * Configures 'batteries' table with `useTablePropHelpers` by extending `tableState` for:
+   * - Item identification (`idProperty: 'id'`)
+   * - Loading status (`isLoading`)
+   * - Current page data (`currentPageItems`)
+   * - Pagination control (`totalItemCount`)
+   */
   const tableBatteries = useTablePropHelpers({
     ...tableState,
     idProperty: 'id',
@@ -327,15 +355,15 @@ const SourcesListView: React.FunctionComponent = () => {
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
           <SimpleDropdown
-            label="Add Source"
+            label={t('view.empty-state_label_sources')}
             variant="primary"
             dropdownItems={[
-              'Network range',
-              'OpenShift',
-              'RHACS',
-              'Satellite',
-              'vCenter server',
-              'Ansible controller'
+              t('dataSource.network'),
+              t('dataSource.openshift'),
+              t('dataSource.rhacs'),
+              t('dataSource.satellite'),
+              t('dataSource.vcenter'),
+              t('dataSource.ansible')
             ].map(type => (
               <DropdownItem key={type} onClick={() => setAddSourceModal(type)}>
                 {type}
@@ -429,7 +457,7 @@ const SourcesListView: React.FunctionComponent = () => {
               <Tr key={source.id} item={source} rowIndex={rowIndex}>
                 <Td columnKey="name">{source.name}</Td>
                 <Td columnKey="connection">{renderConnection(source)}</Td>
-                <Td columnKey="type">{SourceTypeLabels[source.source_type]}</Td>
+                <Td columnKey="type">{getTranslatedSourceTypeLabel(source.source_type)}</Td>
                 <Td columnKey="credentials">
                   <Button
                     variant={ButtonVariant.link}
@@ -453,8 +481,11 @@ const SourcesListView: React.FunctionComponent = () => {
                   <ActionMenu<SourceType>
                     item={source}
                     actions={[
-                      { label: 'Edit', onClick: onEditSource },
-                      { label: 'Delete', onClick: setPendingDeleteSource }
+                      { label: t('table.label', { context: 'edit' }), onClick: onEditSource },
+                      {
+                        label: t('table.label', { context: 'delete' }),
+                        onClick: setPendingDeleteSource
+                      }
                     ]}
                   />
                 </Td>
@@ -494,7 +525,7 @@ const SourcesListView: React.FunctionComponent = () => {
       {!!pendingDeleteSource && (
         <Modal
           variant={ModalVariant.small}
-          title="Permanently delete source"
+          title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
           isOpen={!!pendingDeleteSource}
           onClose={() => setPendingDeleteSource(undefined)}
           actions={[

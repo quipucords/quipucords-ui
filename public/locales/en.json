@@ -196,6 +196,8 @@
     "refreshed_load": "Refreshed {{refresh}}"
   },
   "table": {
+    "header_name": "Name",
+    "header_type": "Type",
     "header_auth-type": "Authorization type",
     "header_credentials": "Credentials",
     "header_description": "Description",
@@ -293,8 +295,8 @@
   },
   "toast-notifications": {
     "description": "{{context}}",
-    "description_add-source_hidden": "Source {{name}} was created",
-    "description_add-source_hidden_edit": "Source {{name}} was updated",
+    "description_add-source_hidden": "Source {{name}} was created.",
+    "description_add-source_hidden_edit": "Source {{name}} was successfully updated.",
     "description_add-source_hidden_error": "{{message}}",
     "description_add-source_hidden_error_edit": "{{message}}",
     "description_credential": "Credential was added",
@@ -303,7 +305,7 @@
     "description_deleted-credential_other": "Deleted credentials {{name}} and more",
     "description_deleted-credential_error": "Error removing credential {{name}}. {{message}}",
     "description_deleted-credential_error_other": "Error removing credentials {{name}} and more. {{message}}",
-    "description_deleted-source": "Deleted source {{name}}.",
+    "description_deleted-source": "Source {{name}} deleted successfully.",
     "description_deleted-source_other": "Deleted sources {{name}} and more",
     "description_deleted-source_error": "Error removing source {{name}}. {{message}}",
     "description_deleted-source_error_other": "Error removing sources {{name}} and more. {{message}}",
@@ -313,18 +315,19 @@
     "description_scan-report_download": "Report <0>{{name}}</0> downloaded",
     "description_scan-report_paused": "Scan <0>{{name}}</0> paused",
     "description_scan-report_restart": "Scan <0>{{name}}</0> resumed",
-    "description_scan-report_play": "Scan <0>{{name}}</0> started",
+    "description_scan-report_play": "Scan {{name}} started.",
     "description_scan-report_start": "$t(toast-notifications.description_scan-report_play)",
     "description_deleted-scan": "Deleted scan {{name}}.",
     "description_deleted-scan_error": "Error removing scan {{name}}. {{message}}",
+    "description_starting-scan_error": "Error starting scan {{name}}. {{message}}",
     "description_warning": "Application warning",
     "title": "Notification",
     "title_credential": "Success adding credential",
     "title_credential_edit": "Success updating credential",
     "title_add-source_hidden": "Success creating source",
     "title_add-source_hidden_edit": "Success updating source",
-    "title_add-source_hidden_error": "Error creating source",
-    "title_add-source_hidden_error_edit": "Error updating source",
+    "title_add-source_hidden_error": "Error creating source {{ name }}. {{ message }}",
+    "title_add-source_hidden_error_edit": "Error updating source.",
     "title_deleted-credential": "Success deleting credential",
     "title_deleted-credential_other": "Success deleting credentials",
     "title_deleted-source": "Success deleting source",
@@ -400,5 +403,13 @@
     "loading_authentication": "Logging in...",
     "loading_credentials": "Loading credentials...",
     "skip-content": "Skip to Content"
+  },
+  "dataSource": {
+    "rhacs": "RHACS",
+    "ansible": "Ansible Controller",
+    "network": "Network",
+    "openshift": "OpenShift",
+    "satellite": "Satellite",
+    "vcenter": "vCenter Server"
   }
 }
