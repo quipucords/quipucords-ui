@@ -37,7 +37,11 @@ import {
 import { CubesIcon } from '@patternfly/react-icons';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
-import { API_CREDS_LIST_QUERY } from 'src/constants/apiConstants';
+import {
+  API_CREDS_LIST_QUERY,
+  API_DATA_SOURCE_TYPES,
+  API_QUERY_TYPES
+} from 'src/constants/apiConstants';
 import useCredentialApi from 'src/hooks/api/useCredentialApi';
 import useAlerts from 'src/hooks/useAlerts';
 import useQueryClientConfig from 'src/services/queryClientConfig';
@@ -84,82 +88,90 @@ const CredentialsListView: React.FunctionComponent = () => {
   const onDeleteCredential = () => {
     deleteCredential()
       .then(() => {
-        addAlert(
-          `Credential "${pendingDeleteCredential?.name}" deleted successfully`,
-          'success',
-          getUniqueId()
-        );
+        const successMessage = t('toast-notifications.description', {
+          context: 'deleted-credential',
+          name: pendingDeleteCredential?.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         onRefresh();
       })
       .catch(err => {
         console.log(err);
-        let errorDetail = '';
-        if (err?.response?.data) {
-          errorDetail += JSON.stringify(err.response.data);
-        }
-        addAlert(
-          `Error removing credential ${pendingDeleteCredential?.name}. ${errorDetail}`,
-          'danger',
-          getUniqueId()
-        );
+        const errorMessage = t('toast-notifications.description', {
+          context: 'deleted-credential_error',
+          name: pendingDeleteCredential?.name,
+          message: err.response.data.detail
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       })
       .finally(() => setPendingDeleteCredential(undefined));
   };
 
+  /**
+   * Initializes table state with URL persistence, including configurations for columns, filters, sorting, pagination, and selection.
+   *
+   * Features:
+   * - Column definitions: 'name', 'type', 'auth_type', 'sources', 'updated', with actions placeholder.
+   * - Filters for name and credential type, with selectable options for data source types.
+   * - Sortable columns with 'name' as default sort field.
+   * - Pagination and selection enabled for enhanced table interaction.
+   *
+   * Utilizes `useTableState` hook for state management based on these configurations.
+   */
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
-      name: 'Name',
-      type: 'Type',
-      auth_type: 'Authentication type',
-      sources: 'Sources',
-      updated: 'Last updated',
+      name: t('table.header', { context: 'name' }),
+      type: t('table.header', { context: 'type' }),
+      auth_type: t('table.header', { context: 'auth-type' }),
+      sources: t('table.header', { context: 'sources' }),
+      updated: t('table.header', { context: 'last-updated' }),
       actions: ' '
     },
     filter: {
       isEnabled: true,
       filterCategories: [
         {
-          key: 'search_by_name',
-          title: 'Name',
+          key: API_QUERY_TYPES.SEARCH_NAME,
+          title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
-          placeholderText: 'Filter by name'
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
         },
         {
-          key: 'cred_type',
-          title: 'Credential type',
+          key: API_QUERY_TYPES.CREDENTIAL_TYPE,
+          title: t('toolbar.label', { context: 'option_cred_type' }),
           type: FilterType.select,
-          placeholderText: 'Filter by credential type',
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_cred_type' }),
           selectOptions: [
             {
-              key: 'ansible',
-              label: 'ansible',
-              value: 'Ansible'
+              key: API_DATA_SOURCE_TYPES.ANSIBLE,
+              label: API_DATA_SOURCE_TYPES.ANSIBLE,
+              value: t('toolbar.label', { context: 'chip_ansible' })
             },
             {
-              key: 'network',
-              label: 'network',
-              value: 'Network'
+              key: API_DATA_SOURCE_TYPES.NETWORK,
+              label: API_DATA_SOURCE_TYPES.NETWORK,
+              value: t('toolbar.label', { context: 'chip_network' })
             },
             {
-              key: 'openshift',
-              label: 'openShift',
-              value: 'Openshift'
+              key: API_DATA_SOURCE_TYPES.OPENSHIFT,
+              label: API_DATA_SOURCE_TYPES.OPENSHIFT,
+              value: t('toolbar.label', { context: 'chip_openshift' })
             },
             {
-              key: 'rhacs',
-              label: 'rhacs',
-              value: 'RHACS'
+              key: API_DATA_SOURCE_TYPES.RHACS,
+              label: API_DATA_SOURCE_TYPES.RHACS,
+              value: t('toolbar.label', { context: 'chip_rhacs' })
             },
             {
-              key: 'satellite',
-              label: 'satellite',
-              value: 'Satellite'
+              key: API_DATA_SOURCE_TYPES.SATELLITE,
+              label: API_DATA_SOURCE_TYPES.SATELLITE,
+              value: t('toolbar.label', { context: 'chip_satellite' })
             },
             {
-              key: 'vcenter',
-              label: 'vcenter',
-              value: 'vCenter'
+              key: API_DATA_SOURCE_TYPES.VCENTER,
+              label: API_DATA_SOURCE_TYPES.VCENTER,
+              value: t('toolbar.label', { context: 'chip_vcenter' })
             }
           ]
         }
@@ -218,15 +230,15 @@ const CredentialsListView: React.FunctionComponent = () => {
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
           <SimpleDropdown
-            label="Add Credential"
+            label={t('view.empty-state_label_credentials')}
             variant="primary"
             dropdownItems={[
-              'Network range',
-              'OpenShift',
-              'RHACS',
-              'Satellite',
-              'vCenter server',
-              'Ansible controller'
+              t('dataSource.network'),
+              t('dataSource.openshift'),
+              t('dataSource.rhacs'),
+              t('dataSource.satellite'),
+              t('dataSource.vcenter'),
+              t('dataSource.ansible')
             ].map(type => (
               <DropdownItem key={type} onClick={() => setAddCredentialModal(type)}>
                 {type}
@@ -335,7 +347,7 @@ const CredentialsListView: React.FunctionComponent = () => {
       {!!sourcesSelected.length && (
         <Modal
           variant={ModalVariant.small}
-          title="Sources"
+          title={t('form-dialog.label', { context: 'sources' })}
           isOpen={!!sourcesSelected}
           onClose={() => setSourcesSelected([])}
           actions={[
@@ -354,7 +366,7 @@ const CredentialsListView: React.FunctionComponent = () => {
       {!!pendingDeleteCredential && (
         <Modal
           variant={ModalVariant.small}
-          title="Permanently delete credential"
+          title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
           isOpen={!!pendingDeleteCredential}
           onClose={() => setPendingDeleteCredential(undefined)}
           actions={[

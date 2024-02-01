@@ -21,6 +21,15 @@ const API_QUERY_TYPES = {
   USERNAME: 'username'
 };
 
+const API_DATA_SOURCE_TYPES = {
+  ANSIBLE: 'ansible',
+  NETWORK: 'network',
+  OPENSHIFT: 'openshift',
+  RHACS: 'rhacs',
+  SATELLITE: 'satellite',
+  VCENTER: 'vcenter'
+};
+
 const API_QUERY_SORT_TYPES = {
   CREDENTIAL_TYPE: 'cred_type',
   MOST_RECENT_CONNECT_SCAN_START_TIME: 'most_recent_connect_scan__start_time',
@@ -159,6 +168,7 @@ const API_CREDS_LIST_QUERY = 'credentialsList';
 const API_SCANS_LIST_QUERY = 'scansList';
 
 const apiTypes = {
+  API_DATA_SOURCE_TYPES,
   API_QUERY_TYPES,
   API_QUERY_SORT_TYPES,
   API_QUERY_PAGE,
@@ -278,6 +288,7 @@ const apiTypes = {
 export {
   apiTypes as default,
   apiTypes,
+  API_DATA_SOURCE_TYPES,
   API_QUERY_TYPES,
   API_QUERY_SORT_TYPES,
   API_QUERY_PAGE,
