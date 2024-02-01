@@ -37,7 +37,11 @@ import {
 import { CubesIcon } from '@patternfly/react-icons';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
-import { API_SOURCES_LIST_QUERY } from 'src/constants/apiConstants';
+import {
+  API_DATA_SOURCE_TYPES,
+  API_QUERY_TYPES,
+  API_SOURCES_LIST_QUERY
+} from 'src/constants/apiConstants';
 import useSourceApi from 'src/hooks/api/useSourceApi';
 import useAlerts from 'src/hooks/useAlerts';
 import useQueryClientConfig from 'src/services/queryClientConfig';
@@ -249,51 +253,51 @@ const SourcesListView: React.FunctionComponent = () => {
       isEnabled: true,
       filterCategories: [
         {
-          key: 'search_by_name',
+          key: API_QUERY_TYPES.SEARCH_NAME,
           title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
         },
         {
-          key: 'search_credentials_by_name',
+          key: API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME,
           title: t('toolbar.label', { context: 'option_search_credentials_by_name' }),
           type: FilterType.search,
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_cred_type' })
         },
         {
-          key: 'source_type',
+          key: API_QUERY_TYPES.SOURCE_TYPE,
           title: t('toolbar.label', { context: 'option_source_type' }),
           type: FilterType.select,
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_source_type' }),
           selectOptions: [
             {
-              key: 'ansible',
-              label: 'ansible',
+              key: API_DATA_SOURCE_TYPES.ANSIBLE,
+              label: API_DATA_SOURCE_TYPES.ANSIBLE,
               value: t('toolbar.label', { context: 'chip_ansible' })
             },
             {
-              key: 'network',
-              label: 'network',
+              key: API_DATA_SOURCE_TYPES.NETWORK,
+              label: API_DATA_SOURCE_TYPES.NETWORK,
               value: t('toolbar.label', { context: 'chip_network' })
             },
             {
-              key: 'openshift',
-              label: 'openShift',
+              key: API_DATA_SOURCE_TYPES.OPENSHIFT,
+              label: API_DATA_SOURCE_TYPES.OPENSHIFT,
               value: t('toolbar.label', { context: 'chip_openshift' })
             },
             {
-              key: 'rhacs',
-              label: 'rhacs',
+              key: API_DATA_SOURCE_TYPES.RHACS,
+              label: API_DATA_SOURCE_TYPES.RHACS,
               value: t('toolbar.label', { context: 'chip_rhacs' })
             },
             {
-              key: 'satellite',
-              label: 'satellite',
+              key: API_DATA_SOURCE_TYPES.SATELLITE,
+              label: API_DATA_SOURCE_TYPES.SATELLITE,
               value: t('toolbar.label', { context: 'chip_satellite' })
             },
             {
-              key: 'vcenter',
-              label: 'vcenter',
+              key: API_DATA_SOURCE_TYPES.VCENTER,
+              label: API_DATA_SOURCE_TYPES.VCENTER,
               value: t('toolbar.label', { context: 'chip_vcenter' })
             }
           ]
@@ -498,7 +502,7 @@ const SourcesListView: React.FunctionComponent = () => {
       {!!credentialsSelected.length && (
         <Modal
           variant={ModalVariant.small}
-          title="Credentials"
+          title={t('view.label', { context: 'credentials' })}
           isOpen={!!credentialsSelected}
           onClose={() => setCredentialsSelected([])}
           actions={[
@@ -530,10 +534,10 @@ const SourcesListView: React.FunctionComponent = () => {
           onClose={() => setPendingDeleteSource(undefined)}
           actions={[
             <Button key="confirm" variant="danger" onClick={() => onDeleteSource()}>
-              Delete
+              {t('form-dialog.label', { context: 'delete' })}
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
-              Cancel
+              {t('form-dialog.label', { context: 'cancel' })}
             </Button>
           ]}
         >

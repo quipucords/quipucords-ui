@@ -35,7 +35,7 @@ import {
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import ActionMenu from 'src/components/ActionMenu';
-import { API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
+import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
 import useScanApi from 'src/hooks/api/useScanApi';
 import useAlerts from 'src/hooks/useAlerts';
 import useQueryClientConfig from 'src/services/queryClientConfig';
@@ -74,20 +74,21 @@ const ScansListView: React.FunctionComponent = () => {
   const onDeleteScan = () => {
     deleteScan()
       .then(() => {
-        addAlert(`Scan "${pendingDeleteScan?.id}" deleted successfully`, 'success', getUniqueId());
+        const successMessage = t('toast-notifications.description', {
+          context: 'deleted-scan',
+          name: pendingDeleteScan?.id
+        });
+        addAlert(successMessage, 'success', getUniqueId());
         onRefresh();
       })
       .catch(err => {
         console.log(err);
-        let errorDetail = '';
-        if (err?.response?.data) {
-          errorDetail += JSON.stringify(err.response.data);
-        }
-        addAlert(
-          `Error removing scan ${pendingDeleteScan?.id}. ${errorDetail}`,
-          'danger',
-          getUniqueId()
-        );
+        const errorMessage = t('toast-notifications.description', {
+          context: 'deleted-scan_error',
+          name: pendingDeleteScan?.id,
+          message: err.response.data.detail
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
       })
       .finally(() => setPendingDeleteScan(undefined));
   };
@@ -115,22 +116,25 @@ const ScansListView: React.FunctionComponent = () => {
     // });
   };
 
+  /**
+   * Configures table state for scan results, with URL persistence. Includes columns for scan ID, last scanned, sources, and actions. Enables name-based filtering, sorting by ID or last scanned, pagination, and row selection. Utilizes `useTableState` for setup.
+   */
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
-      id: 'Scan ID',
-      most_recent: 'Last scanned',
-      sources: 'Sources',
+      id: t('table.header', { context: 'scan-id' }),
+      most_recent: t('table.header', { context: 'last-scanned' }),
+      sources: t('table.header', { context: 'sources' }),
       actions: ' '
     },
     filter: {
       isEnabled: true,
       filterCategories: [
         {
-          key: 'search_by_name',
-          title: 'Name',
+          key: API_QUERY_TYPES.SEARCH_NAME,
+          title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
-          placeholderText: 'Filter by name'
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
         }
       ]
     },
@@ -210,12 +214,14 @@ const ScansListView: React.FunctionComponent = () => {
         <ContextIcon symbol={ContextIconVariant[scan.most_recent?.status]} />{' '}
         {scan.most_recent && (
           <>
-            {scan.most_recent.status === 'failed' && 'Scan failed'}
-            {scan.most_recent.status === 'completed' && 'Last scanned'}{' '}
+            {scan.most_recent.status === 'failed' &&
+              t('table.label', { context: 'status_failed_scans' })}
+            {scan.most_recent.status === 'completed' &&
+              t('table.label', { context: 'status_completed_scans' })}{' '}
             {getTimeDisplayHowLongAgo(scan.most_recent.end_time || scan.most_recent.start_time)}
           </>
         )}
-        {!scan.most_recent && 'Scan created'}
+        {!scan.most_recent && t('table.label', { context: 'status_scans' })}
       </Button>
     );
   };
@@ -264,8 +270,11 @@ const ScansListView: React.FunctionComponent = () => {
                   <ActionMenu<ScanType>
                     item={scan}
                     actions={[
-                      { label: 'Delete', onClick: setPendingDeleteScan },
-                      { label: 'Rescan', onClick: onRunScan }
+                      {
+                        label: t('table.label', { context: 'delete' }),
+                        onClick: setPendingDeleteScan
+                      },
+                      { label: t('table.label', { context: 'rescan' }), onClick: onRunScan }
                     ]}
                   />
                 </Td>
@@ -278,7 +287,7 @@ const ScansListView: React.FunctionComponent = () => {
       {!!scanSelectedForSources && (
         <Modal
           variant={ModalVariant.small}
-          title="Sources"
+          title={t('view.label', { context: 'sources' })}
           isOpen={!!scanSelectedForSources}
           onClose={() => setScanSelectedForSources(undefined)}
           actions={[
@@ -301,7 +310,7 @@ const ScansListView: React.FunctionComponent = () => {
       {!!scanSelected && (
         <Modal
           variant={ModalVariant.small}
-          title={`Scan: ${scanSelected.id}`}
+          title={t('view.label', { context: 'scans-ids', name: scanSelected.id })}
           isOpen={!!scanSelected}
           onClose={() => setScanSelected(undefined)}
           actions={[
@@ -316,15 +325,15 @@ const ScansListView: React.FunctionComponent = () => {
       {!!pendingDeleteScan && (
         <Modal
           variant={ModalVariant.small}
-          title="Permanently delete scan"
+          title={t('form-dialog.confirmation', { context: 'title_delete-scan' })}
           isOpen={!!pendingDeleteScan}
           onClose={() => setPendingDeleteScan(undefined)}
           actions={[
             <Button key="confirm" variant="danger" onClick={() => onDeleteScan()}>
-              {t('form-dialog.label_delete', { context: 'delete' })}
+              {t('form-dialog.label', { context: 'delete' })}
             </Button>,
             <Button key="cancel" variant="link" onClick={() => setPendingDeleteScan(undefined)}>
-              Cancel
+              {t('form-dialog.label', { context: 'cancel' })}
             </Button>
           ]}
         >
