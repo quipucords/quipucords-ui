@@ -45,6 +45,21 @@ const useScanApi = () => {
     console.log('Deleting selected scans:', selectedItems);
   };
 
+  /**
+   * Gets a list of scan jobs for a specific scan id
+   */
+  const getScanJobs = (scanId: number) => {
+    return axios.get(`${process.env.REACT_APP_SCANS_SERVICE}${scanId}/jobs/`);
+  }
+
+  const downloadReport = (reportId: number) => {
+    return axios({
+      url: `${process.env.REACT_APP_REPORTS_SERVICE}${reportId}/`,
+      method: 'GET',
+      responseType: 'blob',
+    });
+  }
+
   return {
     deleteScan,
     onDeleteSelectedScans,
@@ -52,7 +67,9 @@ const useScanApi = () => {
     pendingDeleteScan,
     setPendingDeleteScan,
     scanSelected,
-    setScanSelected
+    setScanSelected,
+    getScanJobs,
+    downloadReport,
   };
 };
 export default useScanApi;

@@ -42,20 +42,25 @@ import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
-import { ScanType } from '../../types';
+import { ScanJobType, ScanType } from '../../types';
 import { useScansQuery } from './useScansQuery';
+import { ScansModal } from './components/ScansModal';
+import FileDownload from 'js-file-download';
 
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [scanSelectedForSources, setScanSelectedForSources] = React.useState<ScanType>();
+  const [scanJobs, setScanJobs] = React.useState<ScanJobType[]>();
   const {
     deleteScan,
     onDeleteSelectedScans,
     pendingDeleteScan,
     setPendingDeleteScan,
     scanSelected,
-    setScanSelected
+    setScanSelected,
+    getScanJobs,
+    downloadReport,
   } = useScanApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
@@ -209,6 +214,9 @@ const ScansListView: React.FunctionComponent = () => {
         variant={ButtonVariant.link}
         onClick={() => {
           setScanSelected(scan);
+          getScanJobs(scan.id).then(res => {
+            setScanJobs(res.data.results);
+          });
         }}
       >
         <ContextIcon symbol={ContextIconVariant[scan.most_recent?.status]} />{' '}
@@ -308,19 +316,24 @@ const ScansListView: React.FunctionComponent = () => {
         </Modal>
       )}
       {!!scanSelected && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('view.label', { context: 'scans-ids', name: scanSelected.id })}
-          isOpen={!!scanSelected}
-          onClose={() => setScanSelected(undefined)}
-          actions={[
-            <Button key="cancel" variant="secondary" onClick={() => setScanSelected(undefined)}>
-              Close
-            </Button>
-          ]}
-        >
-          Placeholder. This should have a list of times this scan has ran.
-        </Modal>
+        <ScansModal scan={scanSelected} scanJobs={scanJobs}
+          onDownload={(reportId) => {
+            downloadReport(reportId).then( (res) => {
+              addAlert(`Report "${reportId}" downloaded`, 'success', getUniqueId());
+              FileDownload(
+                res.data,
+                `report_id_${reportId}_${new Date().toISOString().replace('T','_').replace(/[^\d_]/g,'')}.tar.gz`
+              );
+            }).catch( (err) => {
+              console.error(err);
+              addAlert(`Report "${reportId}" failed to download. ${JSON.stringify(err.response.data)}`, 'danger', getUniqueId())
+            });
+          }}
+          onClose={() => {
+            setScanSelected(undefined);
+            setScanJobs(undefined);
+          }
+        } />
       )}
       {!!pendingDeleteScan && (
         <Modal

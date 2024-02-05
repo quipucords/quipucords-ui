@@ -90,3 +90,79 @@ export type ScanType = {
   };
   sources: SourceType[];
 };
+
+export type ScanJobType = {
+  id: number,
+  scan: {
+      id: number,
+      name: string
+  },
+  sources: [
+      {
+          id: number,
+          name: string,
+          source_type: string
+      }
+  ],
+  scan_type: string,
+  status: string,
+  status_message: string,
+  tasks: [
+      {
+          sequence_number: number,
+          source: number,
+          scan_type: string,
+          status: string,
+          status_message: string,
+          systems_count: number,
+          systems_scanned: number,
+          systems_failed: number,
+          systems_unreachable: number,
+          start_time: Date,
+          end_time: Date
+      },
+      {
+          sequence_number: number,
+          source: number,
+          scan_type: string,
+          status: string,
+          status_message: string,
+          systems_count: number,
+          systems_scanned: number,
+          systems_failed: number,
+          systems_unreachable: number,
+          start_time: Date,
+          end_time: Date
+      },
+      {
+          sequence_number: number,
+          scan_type: string,
+          status: string,
+          status_message: string,
+          systems_count: number,
+          systems_scanned: number,
+          systems_failed: number,
+          systems_unreachable: number,
+          start_time: Date,
+          end_time: Date,
+          system_fingerprint_count: number
+      }
+  ],
+  options: {
+      max_concurrency: number,
+      enabled_extended_product_search: {
+          jboss_eap: false,
+          jboss_fuse: false,
+          jboss_brms: false,
+          jboss_ws: false
+      }
+  },
+  report_id: number,
+  start_time: Date,
+  end_time: Date,
+  systems_count: number,
+  systems_scanned: number,
+  systems_failed: number,
+  systems_unreachable: number,
+  system_fingerprint_count: number
+}
