@@ -215,6 +215,8 @@
     "header_unreachable_sources": "Unreachable hosts",
     "label_network-range": "Network Range",
     "label": "{{context}}",
+    "label_scan_time": "Scan time",
+    "label_scan_result": "Scan result",
     "label_action_scan": "Start scan",
     "label_action_scan_canceled": "Retry scan",
     "label_action_scan_cancelled": "Retry scan",
