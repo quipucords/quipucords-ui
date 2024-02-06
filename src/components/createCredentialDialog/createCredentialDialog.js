@@ -165,7 +165,9 @@ const CreateCredentialDialog = ({
 
     // clean for submitting an edited cred
     if (edit) {
+      delete updatedValues[apiTypes.API_QUERY_TYPES.CREATED_AT];
       delete updatedValues[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE];
+      delete updatedValues[apiTypes.API_QUERY_TYPES.UPDATED_AT];
     }
 
     submitCredential({ formState, values: updatedValues });
