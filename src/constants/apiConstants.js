@@ -3,6 +3,7 @@ const API_QUERY_TYPES = {
   BECOME_METHOD: 'become_method',
   BECOME_PASSWORD: 'become_password',
   BECOME_USER: 'become_user',
+  CREATED_AT: 'created_at',
   CREDENTIAL_TYPE: 'cred_type',
   NAME: 'name',
   ORDERING: 'ordering',
@@ -18,7 +19,8 @@ const API_QUERY_TYPES = {
   SOURCE_TYPE: 'source_type',
   SSH_KEYFILE: 'ssh_keyfile',
   SSH_PASSPHRASE: 'ssh_passphrase',
-  USERNAME: 'username'
+  USERNAME: 'username',
+  UPDATED_AT: 'updated_at'
 };
 
 const API_QUERY_SORT_TYPES = {
