@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.6.3 (2024-02-07)
+
+
+### Chores
+*  add 'yarn audit' GitHub workflow  (3f79bc9)
+* **deps-dev** bump mini-css-extract-plugin from 2.7.6 to 2.7.7  (#307) (3277868)
+* **deps** bump codecov/codecov-action from 3.1.4 to 4.0.0  (#309) (4a7d81f)
+
+### Bug Fixes
+* **credentials** DISCOVERY-534 Don't try to update ro fields  (6533547)
+
 ## 1.6.2 (2024-01-22)
 
 
