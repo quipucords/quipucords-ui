@@ -3,6 +3,8 @@
  *
  * @param params Object containing `tableState` for query configuration and `setRefreshTime` for refresh control.
  * @returns Query result with data, loading status, and errors.
+ *
+ * @module useCredentialsQuery
  */
 import { TableState } from '@mturley-latest/react-table-batteries';
 import { useServiceQuery } from 'src/common/queryHelpers';

@@ -1,3 +1,8 @@
+/**
+ * Utilizes PatternFly for a responsive toolbar with theme toggling, help, and user logout functionality.
+ * It auto-detects theme preference, provides a dropdown for help and user actions, and manages session state for logout.
+ * @module AppToolbar
+ */
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {

@@ -1,3 +1,12 @@
+/**
+ * Utilizes a custom hook to query and manage source data for presentation in a table, integrating sorting, pagination, and refresh functionality.
+ * Leverages the `useServiceQuery` hook for API interactions, adapting to table state changes and facilitating efficient data retrieval and display.
+ *
+ * @param params Object containing `tableState` for handling table configurations and `setRefreshTime` for updating refresh timestamps.
+ * @returns A query hook result providing source data, loading states, and error handling.
+ *
+ * @module useSourcesQuery
+ */
 import { TableState } from '@mturley-latest/react-table-batteries';
 import { useServiceQuery } from 'src/common/queryHelpers';
 import { SourceType } from 'src/types';

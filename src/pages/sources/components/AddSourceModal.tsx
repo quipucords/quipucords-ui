@@ -3,7 +3,7 @@
  *
  * This component displays a modal for adding or editing a source of a specific type. It provides
  * a form to input source details including name, hosts, port, credential, and SSL settings.
- *
+ * @module AddSourceModal
  */
 import * as React from 'react';
 import {
