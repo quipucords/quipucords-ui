@@ -1,3 +1,7 @@
+/**
+ * Declaration of module types for various file types such as images, CSS, audio files,
+ * and document files. This allows TypeScript to recognize and import these file types without type errors.
+ */
 declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';

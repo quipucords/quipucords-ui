@@ -1,3 +1,8 @@
+/**
+ * Offers utilities for error handling, clipboard copying, data download, ID generation, and property setting. Includes
+ * helpers for API response processing, IP address validation, authentication type determination, and UI environment settings.
+ * @module helpers
+ */
 import React from 'react';
 import { PropertyPath } from 'lodash';
 import _get from 'lodash/get';

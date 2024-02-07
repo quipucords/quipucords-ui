@@ -1,3 +1,9 @@
+/**
+ * Provides hooks and utility functions for building and executing service queries with pagination, filtering,
+ * and sorting capabilities, integrating with `react-table-batteries` and `react-query`. Supports constructing query URLs
+ * and performing data fetching with automatic refresh control in development mode.
+ * @module queryHelpers
+ */
 import { TableState } from '@mturley-latest/react-table-batteries';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';

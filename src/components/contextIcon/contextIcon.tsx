@@ -1,3 +1,8 @@
+/**
+ * Provides a React component for rendering context-specific icons based on status or type, using PatternFly icons
+ * and styling tokens for color consistency. Supports various icon sizes and custom props for additional configuration.
+ * @module contextIcon
+ */
 import * as React from 'react';
 import { Spinner } from '@patternfly/react-core';
 import {

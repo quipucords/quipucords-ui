@@ -1,3 +1,8 @@
+/**
+ * Displays a button indicating the last data refresh time, dynamically updating. Uses `react-i18next` for i18n support and
+ * intervals to refresh the display time. Suitable for live data contexts in UIs.
+ * @module RefreshTimeButton
+ */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@patternfly/react-core';

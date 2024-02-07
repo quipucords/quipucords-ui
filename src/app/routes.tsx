@@ -1,3 +1,8 @@
+/**
+ * Manages application routes with lazy loading for efficient performance. Includes navigation to 'Sources', 'Scans',
+ * 'Credentials', a default redirect, and authentication check redirecting unauthenticated users to the login page.
+ * @module routes
+ */
 import * as React from 'react';
 import { Route, Routes } from 'react-router';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
