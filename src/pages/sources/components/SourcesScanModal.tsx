@@ -1,3 +1,9 @@
+/**
+ * Modal component for setting up scans with options for deep scans and concurrency. Allows specifying products for deep scanning
+ * and custom directories. Uses PatternFly for UI elements.
+ *
+ * @module SourcesScanModal
+ */
 import * as React from 'react';
 import {
   ActionGroup,

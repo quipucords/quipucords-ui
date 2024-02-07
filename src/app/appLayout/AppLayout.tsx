@@ -1,3 +1,10 @@
+/**
+ * Provides the main layout for the application using PatternFly, incorporating a header, navigation sidebar,
+ * and content area. It dynamically adjusts navigation based on routing, supports a toggleable sidebar, and
+ * ensures accessibility with a "Skip to Content" link. Excludes header and sidebar on the login page for a
+ * simplified UI.
+ * @module AppLayout
+ */
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {

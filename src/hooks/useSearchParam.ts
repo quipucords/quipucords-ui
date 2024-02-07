@@ -1,3 +1,8 @@
+/**
+ * A custom hook for managing URL search parameters with React Router, allowing for getting and setting values with ease.
+ * Supports default values, optional replacement of the history stack, and automatic unsetting of parameters when set to their default value.
+ * @module useSearchParam
+ */
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 

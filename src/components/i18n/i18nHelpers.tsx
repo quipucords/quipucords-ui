@@ -1,3 +1,9 @@
+/**
+ * Provides utilities for translating text within React components using `react-i18next`. Includes a function for handling translations
+ * with dynamic values and custom components, and a constant for cases where translation context is intentionally empty.
+ * Streamlines integration of i18n in React applications, ensuring flexibility and support for complex translation scenarios.
+ * @module i18nHelpers
+ */
 import React from 'react';
 import { Trans } from 'react-i18next';
 import i18next, { TFunction } from 'i18next';

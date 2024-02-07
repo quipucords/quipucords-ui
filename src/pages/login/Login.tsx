@@ -1,3 +1,8 @@
+/**
+ * Provides a login interface, handling user authentication with visual feedback. Uses PatternFly for UI and Axios for API requests,
+ * redirecting on successful login or displaying errors on failure.
+ * @module Login
+ */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginForm, LoginPage } from '@patternfly/react-core';

@@ -1,3 +1,8 @@
+/**
+ * Implements a multi-select typeahead component with checkboxes, enabling users to filter and select multiple options.
+ * Utilizes PatternFly for UI consistency and accessibility.
+ * @module TypeaheadCheckboxes
+ */
 import React from 'react';
 import {
   Select,
