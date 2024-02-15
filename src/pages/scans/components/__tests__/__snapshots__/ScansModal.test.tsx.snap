@@ -62,7 +62,7 @@ exports[`Modal Modal 0 jobs populates properly 1`] = `
               <span
                 class="pf-v5-c-modal-box__title-text"
               >
-                Scan: 123
+                view.label-{"context":"scans-ids","name":123}
               </span>
             </h1>
           </header>
@@ -251,7 +251,7 @@ exports[`Modal Modal 1 job populates properly 1`] = `
               <span
                 class="pf-v5-c-modal-box__title-text"
               >
-                Scan: 123
+                view.label-{"context":"scans-ids","name":123}
               </span>
             </h1>
           </header>
@@ -495,7 +495,7 @@ exports[`Modal Modal loading screen populates properly 1`] = `
               <span
                 class="pf-v5-c-modal-box__title-text"
               >
-                Scan: 123
+                view.label-{"context":"scans-ids","name":123}
               </span>
             </h1>
           </header>
@@ -618,7 +618,7 @@ exports[`Modal Modal multiple jobs populates properly 1`] = `
               <span
                 class="pf-v5-c-modal-box__title-text"
               >
-                Scan: 123
+                view.label-{"context":"scans-ids","name":123}
               </span>
             </h1>
           </header>
