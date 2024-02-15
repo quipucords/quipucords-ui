@@ -10,7 +10,7 @@ import { KeyTypes } from '@patternfly/react-core';
 jest.mock('react-i18next', () => ({
     useTranslation: () => {
         return {
-            t: (str) => str,
+            t: (str, obj) => `${str}-${JSON.stringify(obj)}`,
         }
     }
 }))
@@ -70,7 +70,7 @@ describe('Modal', () => {
 
         render(<ScansModal {...props} />);
 
-        expect(screen.getByText(`Scan: ${props.scan.id}`)).toBeInTheDocument();
+        expect(screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`)).toBeInTheDocument();
     });
     test('Modal loading screen populates properly', async () => {
         const user = userEvent.setup();
@@ -101,7 +101,7 @@ describe('Modal', () => {
 
         render(<ScansModal {...props} />);
 
-        await user.type(screen.getByText(`Scan: ${props.scan.id}`), `{${KeyTypes.Escape}}`);
+        await user.type(screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`), `{${KeyTypes.Escape}}`);
         expect(props.onClose).toHaveBeenCalled();
     });
     test('Modal shows the close button', () => {
