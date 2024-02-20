@@ -22,13 +22,16 @@ import {
   Button,
   ButtonVariant,
   EmptyState,
+  EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
   EmptyStateIcon,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
-  Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
@@ -46,6 +49,7 @@ import { ScanJobType, ScanType } from '../../types';
 import { useScansQuery } from './useScansQuery';
 import { ScansModal } from './components/ScansModal';
 import FileDownload from 'js-file-download';
+import { useNavigate } from 'react-router-dom';
 
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -65,6 +69,7 @@ const ScansListView: React.FunctionComponent = () => {
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { getTimeDisplayHowLongAgo } = helpers;
+  const nav = useNavigate();
 
   /**
    * Invalidates the query cache for the scan list, triggering a refresh.
@@ -250,11 +255,16 @@ const ScansListView: React.FunctionComponent = () => {
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
-            <EmptyState variant="sm">
-              <EmptyStateIcon icon={CubesIcon} />
-              <Title headingLevel="h2" size="lg">
-                No scans available
-              </Title>
+            <EmptyState>
+              <EmptyStateHeader headingLevel="h4" titleText="No scans available" icon={<EmptyStateIcon icon={CubesIcon} />} />
+              <EmptyStateBody>
+                Create a scan from the Sources page by selecting an individual source or multiple sources.
+              </EmptyStateBody>
+              <EmptyStateFooter>
+                <EmptyStateActions>
+                  <Button onClick={() => nav('/')} variant="primary">View Sources page</Button>
+                </EmptyStateActions>
+              </EmptyStateFooter>
             </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
