@@ -32,7 +32,6 @@ import {
   Modal,
   ModalVariant,
   PageSection,
-  Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
