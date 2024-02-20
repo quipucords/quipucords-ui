@@ -23,18 +23,21 @@ import {
   ButtonVariant,
   DropdownItem,
   EmptyState,
+  EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
   EmptyStateIcon,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
-  Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { CubesIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import {
@@ -353,27 +356,31 @@ const SourcesListView: React.FunctionComponent = () => {
     }
   } = tableBatteries;
 
+  const renderAddSourceButton = () => (
+    <SimpleDropdown
+      label={t('view.empty-state_label_sources')}
+      variant="primary"
+      dropdownItems={[
+        t('dataSource.network'),
+        t('dataSource.openshift'),
+        t('dataSource.rhacs'),
+        t('dataSource.satellite'),
+        t('dataSource.vcenter'),
+        t('dataSource.ansible')
+      ].map(type => (
+        <DropdownItem key={type} onClick={() => setAddSourceModal(type)}>
+          {type}
+        </DropdownItem>
+      ))}
+    />
+  );
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
-          <SimpleDropdown
-            label={t('view.empty-state_label_sources')}
-            variant="primary"
-            dropdownItems={[
-              t('dataSource.network'),
-              t('dataSource.openshift'),
-              t('dataSource.rhacs'),
-              t('dataSource.satellite'),
-              t('dataSource.vcenter'),
-              t('dataSource.ansible')
-            ].map(type => (
-              <DropdownItem key={type} onClick={() => setAddSourceModal(type)}>
-                {type}
-              </DropdownItem>
-            ))}
-          />
+          {renderAddSourceButton()}
         </ToolbarItem>
         <ToolbarItem>
           <Button
@@ -447,12 +454,17 @@ const SourcesListView: React.FunctionComponent = () => {
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
-            <EmptyState variant="sm">
-              <EmptyStateIcon icon={CubesIcon} />
-              <Title headingLevel="h2" size="lg">
-                No sources available
-              </Title>
-            </EmptyState>
+            <EmptyState>
+            <EmptyStateHeader headingLevel="h4" titleText="No available source" icon={<EmptyStateIcon icon={PlusCircleIcon} />} />
+            <EmptyStateBody>
+              Begin by adding a source. A source contains a colleciton of network information, including systems management solution information, IP address, or host names, in addition to SSH ports and credentails.
+            </EmptyStateBody>
+            <EmptyStateFooter>
+              <EmptyStateActions>
+                {renderAddSourceButton()}
+              </EmptyStateActions>
+            </EmptyStateFooter>
+          </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
         >
