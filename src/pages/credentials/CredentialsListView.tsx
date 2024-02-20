@@ -23,18 +23,21 @@ import {
   ButtonVariant,
   DropdownItem,
   EmptyState,
+  EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
   EmptyStateIcon,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
-  Title,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { CubesIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from 'src/components/ActionMenu';
 import { SimpleDropdown } from 'src/components/SimpleDropdown';
 import {
@@ -224,27 +227,31 @@ const CredentialsListView: React.FunctionComponent = () => {
     return Object.values(selectedItems).filter(val => val !== null).length > 0;
   };
 
+  const renderAddCredsButton = () => (
+    <SimpleDropdown
+      label={t('view.empty-state_label_credentials')}
+      variant="primary"
+      dropdownItems={[
+        t('dataSource.network'),
+        t('dataSource.openshift'),
+        t('dataSource.rhacs'),
+        t('dataSource.satellite'),
+        t('dataSource.vcenter'),
+        t('dataSource.ansible')
+      ].map(type => (
+        <DropdownItem key={type} onClick={() => setAddCredentialModal(type)}>
+          {type}
+        </DropdownItem>
+      ))}
+    />
+  );
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
-          <SimpleDropdown
-            label={t('view.empty-state_label_credentials')}
-            variant="primary"
-            dropdownItems={[
-              t('dataSource.network'),
-              t('dataSource.openshift'),
-              t('dataSource.rhacs'),
-              t('dataSource.satellite'),
-              t('dataSource.vcenter'),
-              t('dataSource.ansible')
-            ].map(type => (
-              <DropdownItem key={type} onClick={() => setAddCredentialModal(type)}>
-                {type}
-              </DropdownItem>
-            ))}
-          />
+          {renderAddCredsButton()}
         </ToolbarItem>
         <ToolbarItem>
           <Button
@@ -283,12 +290,17 @@ const CredentialsListView: React.FunctionComponent = () => {
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
-            <EmptyState variant="sm">
-              <EmptyStateIcon icon={CubesIcon} />
-              <Title headingLevel="h2" size="lg">
-                No things available
-              </Title>
-            </EmptyState>
+            <EmptyState>
+            <EmptyStateHeader headingLevel="h4" titleText="No available credential" icon={<EmptyStateIcon icon={PlusCircleIcon} />} />
+            <EmptyStateBody>
+              A credential contains authentication information needed to scan a source. A credential includes a username and a password or SSH key. The quipucords tool uses SSH to connect to servers on the network and uses credentials to access those servers.
+            </EmptyStateBody>
+            <EmptyStateFooter>
+              <EmptyStateActions>
+                {renderAddCredsButton()}
+              </EmptyStateActions>
+            </EmptyStateFooter>
+          </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
         >
