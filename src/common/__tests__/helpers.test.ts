@@ -7,7 +7,7 @@ import moment from 'moment';
 import { CredentialType } from 'src/types';
 import helpers from '../helpers';
 
-const { getTimeDisplayHowLongAgo, getAuthType, authType } = helpers;
+const { getTimeDisplayHowLongAgo, getAuthType, authType, deriveAuthType } = helpers;
 
 it('should return the correct time difference when the timestamp is in the past', () => {
   const timestamp = moment().subtract(2, 'hours').toISOString();
@@ -131,4 +131,22 @@ it('should throw an error when credential has no authentication information', ()
   expect(() => {
     getAuthType(credential);
   }).toThrow('Unknown credential type');
+});
+
+it('should return "Token" when typeValue is "openshift"', () => {
+  const typeValue = 'openshift';
+  const result = deriveAuthType(typeValue);
+  expect(result).toBe('Token');
+});
+
+it('should return "Token" when typeValue is "rhacs"', () => {
+  const typeValue = 'rhacs';
+  const result = deriveAuthType(typeValue);
+  expect(result).toBe('Token');
+});
+
+it('should return "Username and Password" when typeValue is "network"', () => {
+  const typeValue = 'network';
+  const result = deriveAuthType(typeValue);
+  expect(result).toBe('Username and Password');
 });

@@ -11,6 +11,17 @@ import { CredentialType } from 'src/types';
 
 const useCredentialApi = () => {
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
+  const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
+
+  /**
+   * Executes a POST request to add a credential, optionally triggering a scan.
+   *
+   * @param {CredentialType} payload - The payload containing information about the credential to be added.
+   * @returns {AxiosResponse} - The Axios response object representing the result of the request.
+   */
+  const addCredential = (payload: CredentialType) => {
+    return axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE}`, payload);
+  };
 
   /**
    * Executes a DELETE request to delete a credential.
@@ -34,9 +45,12 @@ const useCredentialApi = () => {
   };
 
   return {
+    addCredentialModal,
+    addCredential,
     deleteCredential,
     onDeleteSelectedCredentials,
     pendingDeleteCredential,
+    setAddCredentialModal,
     setPendingDeleteCredential
   };
 };
