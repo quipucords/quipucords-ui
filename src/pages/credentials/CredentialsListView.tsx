@@ -65,7 +65,11 @@ const CredentialsListView: React.FunctionComponent = () => {
     pendingDeleteCredential,
     setPendingDeleteCredential,
     addCredentialModal,
-    setAddCredentialModal
+    setAddCredentialModal,
+    submitEditedCredential,
+    onEditCredential,
+    credentialBeingEdited,
+    setCredentialBeingEdited
   } = useCredentialApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
@@ -139,6 +143,31 @@ const CredentialsListView: React.FunctionComponent = () => {
         addAlert(errorMessage, 'danger', getUniqueId());
       })
       .finally(() => setPendingDeleteCredential(undefined));
+  };
+
+  /**
+   * Submits edited credential data, handles success, error, and cleanup operations.
+   *
+   * @param {CredentialType} payload - The payload containing updated credential information.
+   */
+  const onSubmitEditedCredential = (payload: CredentialType) => {
+    submitEditedCredential(payload)
+      .then(() => {
+        const successMessage = t('toast-notifications.description', {
+          context: 'add-credential_hidden_edit',
+          name: pendingDeleteCredential?.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+        setCredentialBeingEdited(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        const errorMessage = t('toast-notifications.title', {
+          context: 'add-credential_hidden_error_edit'
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
+      });
   };
 
   /**
@@ -362,7 +391,10 @@ const CredentialsListView: React.FunctionComponent = () => {
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}
-                    actions={[{ label: 'Delete', onClick: setPendingDeleteCredential }]}
+                    actions={[
+                      { label: t('table.label', { context: 'edit' }), onClick: onEditCredential },
+                      { label: 'Delete', onClick: setPendingDeleteCredential }
+                    ]}
                   />
                 </Td>
               </Tr>
@@ -433,14 +465,14 @@ const CredentialsListView: React.FunctionComponent = () => {
         </Modal>
       )}
 
-      {/* {credentialBeingEdited && (
+      {credentialBeingEdited && (
         <AddCredentialModal
           credential={credentialBeingEdited}
           type={credentialBeingEdited.cred_type}
           onClose={() => setCredentialBeingEdited(undefined)}
-          onSubmit={onSubmitEditedS}
+          onSubmit={onSubmitEditedCredential}
         />
-      )} */}
+      )}
       {addCredentialModal && (
         <AddCredentialModal
           type={addCredentialModal}
