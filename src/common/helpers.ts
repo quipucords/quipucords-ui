@@ -336,6 +336,23 @@ const getAuthType = (credential: CredentialType): authType => {
   }
 };
 
+/**
+ * Derive Authentication Type
+ *
+ * This function derives the authentication type based on the provided type value.
+ *
+ * @returns {string} The derived authentication type.
+ */
+const deriveAuthType = typeValue => {
+  switch (typeValue) {
+    case 'openshift':
+    case 'rhacs':
+      return 'Token';
+    default:
+      return 'Username and Password';
+  }
+};
+
 const DEV_MODE = process.env.REACT_APP_ENV === 'development';
 
 const PROD_MODE = process.env.REACT_APP_ENV === 'production';
@@ -386,6 +403,7 @@ const helpers = {
   getTimeDisplayHowLongAgo,
   isIpAddress,
   ipAddressValue,
+  deriveAuthType,
   DEV_MODE,
   POLL_INTERVAL,
   PROD_MODE,

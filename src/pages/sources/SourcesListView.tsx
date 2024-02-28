@@ -203,8 +203,8 @@ const SourcesListView: React.FunctionComponent = () => {
       .catch(err => {
         console.error({ err });
         console.log(JSON.stringify(err?.response?.data));
-        const errorMessage = t('toast-notifications', {
-          context: 'title_add-source_hidden_error',
+        const errorMessage = t('toast-notifications.title', {
+          context: 'add-source_hidden_error',
           name: payload.name,
           message: JSON.stringify(err?.response?.data)
         });

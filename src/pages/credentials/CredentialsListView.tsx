@@ -51,18 +51,25 @@ import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
+import AddCredentialModal from './components/AddCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
-  const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
   const {
+    addCredential,
     deleteCredential,
     onDeleteSelectedCredentials,
     pendingDeleteCredential,
-    setPendingDeleteCredential
+    setPendingDeleteCredential,
+    addCredentialModal,
+    setAddCredentialModal,
+    submitEditedCredential,
+    onEditCredential,
+    credentialBeingEdited,
+    setCredentialBeingEdited
   } = useCredentialApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
@@ -76,6 +83,34 @@ const CredentialsListView: React.FunctionComponent = () => {
   const getTranslatedCredentialTypeLabel = credentialType => {
     const labelKey = `dataSource.${credentialType}`;
     return t(labelKey);
+  };
+
+  /**
+   * Adds a new credential using the provided payload, handles success, error, and cleanup operations.
+   *
+   * @param {CredentialType} payload - The payload containing information for the new credential to be added.
+   */
+  const onAddCredential = (payload: CredentialType) => {
+    addCredential(payload)
+      .then(() => {
+        const successMessage = t('toast-notifications.description', {
+          context: 'add-source_hidden',
+          name: payload.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+        setAddCredentialModal(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        console.log(JSON.stringify(err?.response?.data));
+        const errorMessage = t('toast-notifications.title', {
+          context: 'add-source_hidden_error',
+          name: payload.name,
+          message: JSON.stringify(err?.response?.data)
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
+      });
   };
 
   /**
@@ -108,6 +143,31 @@ const CredentialsListView: React.FunctionComponent = () => {
         addAlert(errorMessage, 'danger', getUniqueId());
       })
       .finally(() => setPendingDeleteCredential(undefined));
+  };
+
+  /**
+   * Submits edited credential data, handles success, error, and cleanup operations.
+   *
+   * @param {CredentialType} payload - The payload containing updated credential information.
+   */
+  const onSubmitEditedCredential = (payload: CredentialType) => {
+    submitEditedCredential(payload)
+      .then(() => {
+        const successMessage = t('toast-notifications.description', {
+          context: 'add-credential_hidden_edit',
+          name: pendingDeleteCredential?.name
+        });
+        addAlert(successMessage, 'success', getUniqueId());
+        queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+        setCredentialBeingEdited(undefined);
+      })
+      .catch(err => {
+        console.error({ err });
+        const errorMessage = t('toast-notifications.title', {
+          context: 'add-credential_hidden_error_edit'
+        });
+        addAlert(errorMessage, 'danger', getUniqueId());
+      });
   };
 
   /**
@@ -250,9 +310,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
-        <ToolbarItem>
-          {renderAddCredsButton()}
-        </ToolbarItem>
+        <ToolbarItem>{renderAddCredsButton()}</ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
@@ -291,16 +349,21 @@ const CredentialsListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
             <EmptyState>
-            <EmptyStateHeader headingLevel="h4" titleText="No available credential" icon={<EmptyStateIcon icon={PlusCircleIcon} />} />
-            <EmptyStateBody>
-              A credential contains authentication information needed to scan a source. A credential includes a username and a password or SSH key. The quipucords tool uses SSH to connect to servers on the network and uses credentials to access those servers.
-            </EmptyStateBody>
-            <EmptyStateFooter>
-              <EmptyStateActions>
-                {renderAddCredsButton()}
-              </EmptyStateActions>
-            </EmptyStateFooter>
-          </EmptyState>
+              <EmptyStateHeader
+                headingLevel="h4"
+                titleText="No available credential"
+                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
+              />
+              <EmptyStateBody>
+                A credential contains authentication information needed to scan a source. A
+                credential includes a username and a password or SSH key. The quipucords tool uses
+                SSH to connect to servers on the network and uses credentials to access those
+                servers.
+              </EmptyStateBody>
+              <EmptyStateFooter>
+                <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
+              </EmptyStateFooter>
+            </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
         >
@@ -328,7 +391,10 @@ const CredentialsListView: React.FunctionComponent = () => {
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}
-                    actions={[{ label: 'Delete', onClick: setPendingDeleteCredential }]}
+                    actions={[
+                      { label: t('table.label', { context: 'edit' }), onClick: onEditCredential },
+                      { label: 'Delete', onClick: setPendingDeleteCredential }
+                    ]}
                   />
                 </Td>
               </Tr>
@@ -397,6 +463,22 @@ const CredentialsListView: React.FunctionComponent = () => {
           Are you sure you want to delete the credential &quot;
           {pendingDeleteCredential.name}&quot;
         </Modal>
+      )}
+
+      {credentialBeingEdited && (
+        <AddCredentialModal
+          credential={credentialBeingEdited}
+          type={credentialBeingEdited.cred_type}
+          onClose={() => setCredentialBeingEdited(undefined)}
+          onSubmit={onSubmitEditedCredential}
+        />
+      )}
+      {addCredentialModal && (
+        <AddCredentialModal
+          type={addCredentialModal}
+          onClose={() => setAddCredentialModal(undefined)}
+          onSubmit={onAddCredential}
+        />
       )}
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ key, variant, title }) => (
