@@ -125,8 +125,5 @@
     "react-redux": "^8.1.2",
     "react-router-dom": "6.4.0",
     "sirv-cli": "^2.0.2"
-  },
-  "resolutions": {
-    "jackspeak": "2.1.1"
   }
 }
