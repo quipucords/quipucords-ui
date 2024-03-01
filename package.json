@@ -134,7 +134,7 @@
     "eslint-webpack-plugin": "^4.0.1",
     "glob": "^10.3.10",
     "html-replace-webpack-plugin": "^2.6.0",
-    "html-webpack-plugin": "^5.5.3",
+    "html-webpack-plugin": "^5.6.0",
     "jest": "29.6.2",
     "jest-environment-jsdom": "29.7.0",
     "jest-resolve": "29.7.0",
