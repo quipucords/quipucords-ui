@@ -33,6 +33,13 @@ export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
+    id: 'credentials',
+    component: <Credentials />,
+    label: 'Credentials',
+    path: '/credentials',
+    title: 'Credentials'
+  },
+  {
     id: 'sources',
     component: <Sources />,
     label: 'Sources',
@@ -45,13 +52,6 @@ const routes: AppRouteConfig[] = [
     label: 'Scans',
     path: '/scans',
     title: 'Scans'
-  },
-  {
-    id: 'credentials',
-    component: <Credentials />,
-    label: 'Credentials',
-    path: '/credentials',
-    title: 'Credentials'
   }
 ];
 
