@@ -124,6 +124,13 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                 }}
               />
             </FormGroup>
+            <FormGroup label="Credentials" fieldId="credentials" isRequired>
+              <TypeaheadCheckboxes
+                onChange={setCredentials}
+                options={credOptions}
+                selectedOptions={credentials?.map(String) || []}
+              />
+            </FormGroup>
             {isNetwork ? (
               <>
                 <FormGroup label="Search addresses" isRequired fieldId="hosts">
@@ -166,13 +173,6 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                 <HelperText>Enter an IP address or hostname (Default port is 443)</HelperText>
               </FormGroup>
             )}
-            <FormGroup label="Credential" fieldId="credentials" isRequired>
-              <TypeaheadCheckboxes
-                onChange={setCredentials}
-                options={credOptions}
-                selectedOptions={credentials?.map(String) || []}
-              />
-            </FormGroup>
             {isNetwork ? (
               <FormGroup label="" fieldId="paramiko">
                 <Checkbox
