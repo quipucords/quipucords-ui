@@ -79,7 +79,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
       credentials: credentials.map(c => Number(c)),
       hosts: values['hosts'].split(','),
       name: values['name'],
-      port: !isNetwork ? '443' : values['port'] || '22',
+      port: values['port'] || (isNetwork ? '22' : '443'),
       options: !isNetwork
         ? {
             ssl_cert_verify: sslProtocol !== 'Disable SSL' && sslVerify,
@@ -162,16 +162,31 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                 </FormGroup>
               </>
             ) : (
-              <FormGroup label="IP address or hostname" isRequired fieldId="hosts">
-                <TextInput
-                  value={getValue('hosts')}
-                  onChange={(_ev, val) => setValue('hosts', val)}
-                  isRequired
-                  id="source-hosts"
-                  name="hosts"
-                />
-                <HelperText>Enter an IP address or hostname (Default port is 443)</HelperText>
-              </FormGroup>
+              <>
+                <FormGroup label="IP address or hostname" isRequired fieldId="hosts">
+                  <TextInput
+                    value={getValue('hosts')}
+                    onChange={(_ev, val) => setValue('hosts', val)}
+                    isRequired
+                    id="source-hosts"
+                    name="hosts"
+                  />
+                  <HelperText>Enter an IP address or hostname</HelperText>
+                </FormGroup>
+                <FormGroup label="Port" fieldId="port">
+                  <TextInput
+                    value={getValue('port')}
+                    placeholder="Optional"
+                    type="text"
+                    id="source-port"
+                    name="port"
+                    onChange={ev => {
+                      setValue('port', (ev.target as HTMLInputElement).value);
+                    }}
+                  />
+                  <HelperText>Default port is 443</HelperText>
+                </FormGroup>
+              </>
             )}
             {isNetwork ? (
               <FormGroup label="" fieldId="paramiko">
