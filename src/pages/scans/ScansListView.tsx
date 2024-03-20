@@ -8,6 +8,7 @@
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import {
   ConditionalTableBody,
   FilterType,
@@ -36,7 +37,8 @@ import {
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { CubesIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon } from '@patternfly/react-icons';
+import FileDownload from 'js-file-download';
 import ActionMenu from 'src/components/ActionMenu';
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
 import useScanApi from 'src/hooks/api/useScanApi';
@@ -46,10 +48,8 @@ import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
 import { ScanJobType, ScanType } from '../../types';
-import { useScansQuery } from './useScansQuery';
 import { ScansModal } from './components/ScansModal';
-import FileDownload from 'js-file-download';
-import { useNavigate } from 'react-router-dom';
+import { useScansQuery } from './useScansQuery';
 
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -64,7 +64,7 @@ const ScansListView: React.FunctionComponent = () => {
     scanSelected,
     setScanSelected,
     getScanJobs,
-    downloadReport,
+    downloadReport
   } = useScanApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
@@ -256,13 +256,20 @@ const ScansListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
             <EmptyState>
-              <EmptyStateHeader headingLevel="h4" titleText="No scans available" icon={<EmptyStateIcon icon={CubesIcon} />} />
+              <EmptyStateHeader
+                headingLevel="h4"
+                titleText="No scans available"
+                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
+              />
               <EmptyStateBody>
-                Create a scan from the Sources page by selecting an individual source or multiple sources.
+                Create a scan from the Sources page by selecting an individual source or multiple
+                sources.
               </EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>
-                  <Button onClick={() => nav('/')} variant="primary">View Sources page</Button>
+                  <Button onClick={() => nav('/')} variant="primary">
+                    View Sources page
+                  </Button>
                 </EmptyStateActions>
               </EmptyStateFooter>
             </EmptyState>
@@ -326,24 +333,35 @@ const ScansListView: React.FunctionComponent = () => {
         </Modal>
       )}
       {!!scanSelected && (
-        <ScansModal scan={scanSelected} scanJobs={scanJobs}
-          onDownload={(reportId) => {
-            downloadReport(reportId).then( (res) => {
-              addAlert(`Report "${reportId}" downloaded`, 'success', getUniqueId());
-              FileDownload(
-                res.data,
-                `report_id_${reportId}_${new Date().toISOString().replace('T','_').replace(/[^\d_]/g,'')}.tar.gz`
-              );
-            }).catch( (err) => {
-              console.error(err);
-              addAlert(`Report "${reportId}" failed to download. ${JSON.stringify(err.response.data)}`, 'danger', getUniqueId())
-            });
+        <ScansModal
+          scan={scanSelected}
+          scanJobs={scanJobs}
+          onDownload={reportId => {
+            downloadReport(reportId)
+              .then(res => {
+                addAlert(`Report "${reportId}" downloaded`, 'success', getUniqueId());
+                FileDownload(
+                  res.data,
+                  `report_id_${reportId}_${new Date()
+                    .toISOString()
+                    .replace('T', '_')
+                    .replace(/[^\d_]/g, '')}.tar.gz`
+                );
+              })
+              .catch(err => {
+                console.error(err);
+                addAlert(
+                  `Report "${reportId}" failed to download. ${JSON.stringify(err.response.data)}`,
+                  'danger',
+                  getUniqueId()
+                );
+              });
           }}
           onClose={() => {
             setScanSelected(undefined);
             setScanJobs(undefined);
-          }
-        } />
+          }}
+        />
       )}
       {!!pendingDeleteScan && (
         <Modal
