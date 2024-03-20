@@ -379,9 +379,7 @@ const SourcesListView: React.FunctionComponent = () => {
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
-        <ToolbarItem>
-          {renderAddSourceButton()}
-        </ToolbarItem>
+        <ToolbarItem>{renderAddSourceButton()}</ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
@@ -455,16 +453,20 @@ const SourcesListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
             <EmptyState>
-            <EmptyStateHeader headingLevel="h4" titleText="No available source" icon={<EmptyStateIcon icon={PlusCircleIcon} />} />
-            <EmptyStateBody>
-              Begin by adding a source. A source contains a colleciton of network information, including systems management solution information, IP address, or host names, in addition to SSH ports and credentails.
-            </EmptyStateBody>
-            <EmptyStateFooter>
-              <EmptyStateActions>
-                {renderAddSourceButton()}
-              </EmptyStateActions>
-            </EmptyStateFooter>
-          </EmptyState>
+              <EmptyStateHeader
+                headingLevel="h4"
+                titleText="No sources available"
+                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
+              />
+              <EmptyStateBody>
+                Begin by adding a source. A source contains a collection of network information,
+                including systems management solution information, IP addresses, or host names, in
+                addition to SSH ports and credentials.
+              </EmptyStateBody>
+              <EmptyStateFooter>
+                <EmptyStateActions>{renderAddSourceButton()}</EmptyStateActions>
+              </EmptyStateFooter>
+            </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
         >
