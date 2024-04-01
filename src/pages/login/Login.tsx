@@ -19,7 +19,7 @@ export const Login: React.FunctionComponent = () => {
   const nav = useNavigate();
 
   axios
-    .get('https://0.0.0.0:9443/api/v1/users/current/')
+    .get(`${process.env.REACT_APP_USER_SERVICE_CURRENT}`)
     .then(() => {
       //already logged in..
       nav('/');
@@ -44,7 +44,7 @@ export const Login: React.FunctionComponent = () => {
     if (username && password) {
       const noInteceptAxios = axios.create();
       noInteceptAxios
-        .post('https://0.0.0.0:9443/api/v1/token/', {
+        .post(`${process.env.REACT_APP_AUTH_TOKEN_SERVICE}`, {
           username: username,
           password: password
         })

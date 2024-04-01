@@ -50,7 +50,7 @@ const AppToolbar: React.FunctionComponent = () => {
 
   const onLogout = () => {
     axios
-      .put('https://0.0.0.0:9443/api/v1/users/logout/')
+      .put(`${process.env.REACT_APP_USER_SERVICE_LOGOUT}`)
       .catch(err => {
         console.error('Failed to logout', err);
       })
