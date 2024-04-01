@@ -64,7 +64,7 @@ const AppRoutes = (): React.ReactElement => {
   const nav = useNavigate();
   const location = useLocation();
 
-  axios.get('https://0.0.0.0:9443/api/v1/users/current/').catch(() => {
+  axios.get(`${process.env.REACT_APP_USER_SERVICE_CURRENT}`).catch(() => {
     if (location.pathname !== '/login') {
       nav('/login');
     }

@@ -382,6 +382,7 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | REACT_APP_USER_SERVICE_CURRENT                    | A static string reference to the API spec                                                    |
 | REACT_APP_USER_SERVICE_LOGOUT                     | A static string reference to the API spec                                                    |
 | REACT_APP_STATUS_SERVICE                          | A static string reference to the API spec                                                    |
+| REACT_APP_AUTH_TOKEN_SERVICE                          | A static string reference to the API spec                                                    |
 
 </details>
 
