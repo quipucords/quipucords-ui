@@ -3,7 +3,7 @@
  * and content area. It dynamically adjusts navigation based on routing, supports a toggleable sidebar, and
  * ensures accessibility with a "Skip to Content" link. Excludes header and sidebar on the login page for a
  * simplified UI.
- * @module AppLayout
+ * @module appLayout
  */
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -25,9 +25,9 @@ import {
   SkipToContent
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
-import logo from '../bgimages/title.svg';
+import logo from '../bgImages/title.svg';
 import { IAppRoute, IAppRouteGroup, routes } from '../routes';
-import AppToolbar from './AppToolbar';
+import AppToolbar from './appToolbar';
 
 interface IAppLayout {
   children: React.ReactNode;

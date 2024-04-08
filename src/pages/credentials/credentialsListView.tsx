@@ -4,7 +4,7 @@
  * This component displays a table of credentials, allowing users to view, filter, and manage credentials.
  * It provides features like adding credentials, deleting selected credentials, and refreshing the data.
  *
- ** @module CredentialsListView
+ ** @module credentialsListView
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -38,8 +38,8 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
-import ActionMenu from 'src/components/ActionMenu';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
+import ActionMenu from 'src/components/actionMenu';
+import { SimpleDropdown } from 'src/components/simpleDropdown';
 import {
   API_CREDS_LIST_QUERY,
   API_DATA_SOURCE_TYPES,
@@ -49,7 +49,7 @@ import useCredentialApi from 'src/hooks/api/useCredentialApi';
 import useAlerts from 'src/hooks/useAlerts';
 import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
-import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
 import { useCredentialsQuery } from './useCredentialsQuery';
 

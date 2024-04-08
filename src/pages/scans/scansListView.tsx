@@ -4,7 +4,7 @@
  * This component provides a view for managing scans, including adding, running and deleting scans,
  * and also managing reports.
  *
- * @module ScansListView
+ * @module scansListView
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,16 +39,16 @@ import {
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import FileDownload from 'js-file-download';
-import ActionMenu from 'src/components/ActionMenu';
+import ActionMenu from 'src/components/actionMenu';
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
 import useScanApi from 'src/hooks/api/useScanApi';
 import useAlerts from 'src/hooks/useAlerts';
 import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
-import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { ScanJobType, ScanType } from '../../types';
-import { ScansModal } from './components/ScansModal';
+import { ScansModal } from './components/scansModal';
 import { useScansQuery } from './useScansQuery';
 
 const ScansListView: React.FunctionComponent = () => {

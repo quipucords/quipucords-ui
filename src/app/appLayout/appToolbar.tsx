@@ -1,7 +1,7 @@
 /**
  * Utilizes PatternFly for a responsive toolbar with theme toggling, help, and user logout functionality.
  * It auto-detects theme preference, provides a dropdown for help and user actions, and manages session state for logout.
- * @module AppToolbar
+ * @module appToolbar
  */
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +19,9 @@ import {
 } from '@patternfly/react-core';
 import { EllipsisVIcon, MoonIcon, QuestionCircleIcon, SunIcon } from '@patternfly/react-icons';
 import axios from 'axios';
-import { useUsername } from '../../components/sessionContext/SessionProvider';
+import { useUsername } from '../../components/sessionContext/sessionProvider';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
-import './AppToolbar.css';
+import './appToolbar.css';
 
 const AppToolbar: React.FunctionComponent = () => {
   const [helpOpen, setHelpOpen] = React.useState<boolean>(false);

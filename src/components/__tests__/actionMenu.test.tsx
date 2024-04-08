@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ActionMenu from '../ActionMenu';
+import ActionMenu from '../actionMenu';
 import '@testing-library/jest-dom';
 
 test('renders proper dom including elipse icon', () => {

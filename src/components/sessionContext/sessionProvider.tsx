@@ -1,7 +1,7 @@
 /**
  * Provides a React context for session data including authorization status, error information, locale, and username.
  * Utilizes `react-query` for fetching session information and manages session state across the application.
- * @module SessionProvider
+ * @module sessionProvider
  */
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
