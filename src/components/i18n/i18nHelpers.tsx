@@ -7,7 +7,7 @@
 import React from 'react';
 import { Trans } from 'react-i18next';
 import i18next, { TFunction } from 'i18next';
-import { helpers } from '../../common';
+import { helpers } from '../../helpers';
 
 const EMPTY_CONTEXT: string = 'LOCALE_EMPTY_CONTEXT';
 
