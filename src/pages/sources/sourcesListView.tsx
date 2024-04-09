@@ -4,7 +4,7 @@
  * This component provides a view for managing sources, including adding, editing, and deleting sources,
  * initiating scans, and displaying source-related information.
  *
- * @module SourcesListView
+ * @module sourcesListView
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -38,8 +38,8 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
-import ActionMenu from 'src/components/ActionMenu';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
+import ActionMenu from 'src/components/actionMenu';
+import { SimpleDropdown } from 'src/components/simpleDropdown';
 import {
   API_DATA_SOURCE_TYPES,
   API_QUERY_TYPES,
@@ -51,11 +51,11 @@ import useQueryClientConfig from 'src/services/queryClientConfig';
 import { helpers } from '../../common';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
-import { RefreshTimeButton } from '../../components/refreshTimeButton/RefreshTimeButton';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { CredentialType, SourceType } from '../../types';
-import AddSourceModal from './components/AddSourceModal';
-import { ConnectionsModal } from './components/ConnectionsModal';
-import SourcesScanModal from './components/SourcesScanModal';
+import AddSourceModal from './components/addSourceModal';
+import { ConnectionsModal } from './components/connectionsModal';
+import SourcesScanModal from './components/sourcesScanModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
 const SourcesListView: React.FunctionComponent = () => {

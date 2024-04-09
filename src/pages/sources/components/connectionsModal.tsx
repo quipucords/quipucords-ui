@@ -1,7 +1,7 @@
 /**
  * A modal component displaying connection statuses (successful, failed, unreachable) for a source. Utilizes expandable lists and status icons for clarity.
  *
- * @module ConnectionsModal
+ * @module connectionsModal
  */
 import React from 'react';
 import { Modal, ModalVariant, Button, Icon, List, ListItem } from '@patternfly/react-core';
@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
 import { SourceType, ConnectionType } from 'src/types';
-import './ConnectionsModal.css';
+import './connectionsModal.css';
 
 export interface ConnectionsModalProps {
   source: SourceType;

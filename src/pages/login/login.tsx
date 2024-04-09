@@ -1,14 +1,14 @@
 /**
  * Provides a login interface, handling user authentication with visual feedback. Uses PatternFly for UI and Axios for API requests,
  * redirecting on successful login or displaying errors on failure.
- * @module Login
+ * @module login
  */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import axios from 'axios';
-import bgImage from '../../styles/images/about-bg.png';
+import bgImage from '../../styles/images/aboutBg.png';
 
 export const Login: React.FunctionComponent = () => {
   const [showHelperText, setShowHelperText] = React.useState(false);

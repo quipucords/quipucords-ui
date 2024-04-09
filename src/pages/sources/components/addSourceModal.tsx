@@ -3,7 +3,7 @@
  *
  * This component displays a modal for adding or editing a source of a specific type. It provides
  * a form to input source details including name, hosts, port, credential, and SSL settings.
- * @module AddSourceModal
+ * @module addSourceModal
  */
 import * as React from 'react';
 import {
@@ -21,8 +21,8 @@ import {
   TextInput
 } from '@patternfly/react-core';
 import axios from 'axios';
-import { SimpleDropdown } from 'src/components/SimpleDropdown';
-import { TypeaheadCheckboxes } from 'src/components/TypeaheadCheckboxes';
+import { SimpleDropdown } from 'src/components/simpleDropdown';
+import { TypeaheadCheckboxes } from 'src/components/typeaheadCheckboxes';
 import { SourceType } from 'src/types';
 
 export interface AddSourceModalProps {
