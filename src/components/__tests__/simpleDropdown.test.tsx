@@ -3,7 +3,7 @@ import { DropdownItem } from '@patternfly/react-core';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { SimpleDropdown } from '../SimpleDropdown';
+import { SimpleDropdown } from '../simpleDropdown';
 
 const exampleItems = ['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL'];
 

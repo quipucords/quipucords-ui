@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-// const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { merge } = require('webpack-merge');
 const { setupWebpackDotenvFilesForEnv, setupDotenvFilesForEnv } = require('./build.dotenv');
@@ -20,11 +20,12 @@ module.exports = merge(
       ...setupWebpackDotenvFilesForEnv({
         directory: RELATIVE_DIRNAME,
         env: MODE
+      }),
+      new ESLintPlugin({
+        context: SRC_DIR,
+        failOnError: false,
+        extensions: ['js', 'jsx', 'ts', 'tsx']
       })
-      // new ESLintPlugin({
-      //   context: SRC_DIR,
-      //   failOnError: false
-      // })
     ]
   },
   webpackCommon(),
@@ -39,7 +40,7 @@ module.exports = merge(
       historyApiFallback: true,
       hot: true,
       devMiddleware: {
-        stats: 'errors-only',
+        stats: 'errors-warnings',
         writeToDisk: false
       },
       client: {

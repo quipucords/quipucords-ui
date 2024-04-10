@@ -2,11 +2,11 @@ name: Build Container Image
 
 on:
   push:
-    branches: [ v2-rewrite ]
+    branches: [ v2-alpha ]
     tags:
       - '*'
   pull_request:
-    branches: [ v2-rewrite ]
+    branches: [ v2-alpha ]
 
 env:
   STABLE_TAG: ${{ github.event_name == 'push' && github.ref_name || format('pr-{0}', github.event.pull_request.number) }}

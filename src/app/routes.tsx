@@ -7,12 +7,12 @@ import * as React from 'react';
 import { Route, Routes } from 'react-router';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Login } from '../pages/login/Login';
-import NotFound from '../pages/notFound/NotFound';
+import { Login } from '../pages/login/login';
+import NotFound from '../pages/notFound/notFound';
 
-const Sources = React.lazy(() => import('../pages/sources/SourcesListView'));
-const Scans = React.lazy(() => import('../pages/scans/ScansListView'));
-const Credentials = React.lazy(() => import('../pages/credentials/CredentialsListView'));
+const Sources = React.lazy(() => import('../pages/sources/sourcesListView'));
+const Scans = React.lazy(() => import('../pages/scans/scansListView'));
+const Credentials = React.lazy(() => import('../pages/credentials/credentialsListView'));
 
 export interface IAppRoute {
   id: string;
