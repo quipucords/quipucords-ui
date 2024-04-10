@@ -34,7 +34,7 @@ const RefreshTimeButton: React.FC<RefreshTimeButtonProps> = ({ lastRefresh = 0, 
       clearInterval(pollingInterval.current);
       pollingInterval.current = undefined;
     };
-  }, [lastRefresh]);
+  }, [lastRefresh, getTimeDisplayHowLongAgo]);
 
   return (
     <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh} ouiaId="refresh">

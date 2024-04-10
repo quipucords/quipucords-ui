@@ -5,7 +5,7 @@
  */
 import moment from 'moment';
 import { CredentialType } from 'src/types';
-import helpers from '../helpers';
+import { helpers } from '../helpers';
 
 const { getTimeDisplayHowLongAgo, getAuthType, authType } = helpers;
 

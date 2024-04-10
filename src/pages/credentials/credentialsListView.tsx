@@ -250,9 +250,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     <Toolbar>
       <ToolbarContent>
         <FilterToolbar id="client-paginated-example-filters" />
-        <ToolbarItem>
-          {renderAddCredsButton()}
-        </ToolbarItem>
+        <ToolbarItem> {renderAddCredsButton()}</ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
@@ -291,16 +289,21 @@ const CredentialsListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           noDataEmptyState={
             <EmptyState>
-            <EmptyStateHeader headingLevel="h4" titleText="No available credential" icon={<EmptyStateIcon icon={PlusCircleIcon} />} />
-            <EmptyStateBody>
-              A credential contains authentication information needed to scan a source. A credential includes a username and a password or SSH key. The quipucords tool uses SSH to connect to servers on the network and uses credentials to access those servers.
-            </EmptyStateBody>
-            <EmptyStateFooter>
-              <EmptyStateActions>
-                {renderAddCredsButton()}
-              </EmptyStateActions>
-            </EmptyStateFooter>
-          </EmptyState>
+              <EmptyStateHeader
+                headingLevel="h4"
+                titleText="No available credential"
+                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
+              />
+              <EmptyStateBody>
+                A credential contains authentication information needed to scan a source.A
+                credential includes a username and a password or SSH key. The quipucords tool uses
+                SSH to connect to servers on the network and uses credentials to access those
+                servers.
+              </EmptyStateBody>
+              <EmptyStateFooter>
+                <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
+              </EmptyStateFooter>
+            </EmptyState>
           }
           numRenderedColumns={numRenderedColumns}
         >

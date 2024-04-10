@@ -50,15 +50,15 @@ const useScanApi = () => {
    */
   const getScanJobs = (scanId: number) => {
     return axios.get(`${process.env.REACT_APP_SCANS_SERVICE}${scanId}/jobs/`);
-  }
+  };
 
   const downloadReport = (reportId: number) => {
     return axios({
       url: `${process.env.REACT_APP_REPORTS_SERVICE}${reportId}/`,
       method: 'GET',
-      responseType: 'blob',
+      responseType: 'blob'
     });
-  }
+  };
 
   return {
     deleteScan,
@@ -69,7 +69,7 @@ const useScanApi = () => {
     scanSelected,
     setScanSelected,
     getScanJobs,
-    downloadReport,
+    downloadReport
   };
 };
 export default useScanApi;
