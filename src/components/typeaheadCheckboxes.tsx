@@ -73,7 +73,7 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
     setSelectOptions(newSelectOptions);
     setFocusedItemIndex(null);
     setActiveItem(null);
-  }, [inputValue]);
+  }, [inputValue, isOpen, options]);
 
   const handleMenuArrowKeys = (key: string) => {
     let indexToFocus;
@@ -154,7 +154,7 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
 
   React.useEffect(() => {
     setActivePlaceholder(selected.length ? `${selected.length} items selected` : placeholder);
-  }, [selected]);
+  }, [selected, placeholder]);
 
   const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
     <MenuToggle

@@ -8,9 +8,7 @@ import {
   EmptyStateIcon,
   Modal,
   ModalVariant,
-  Spinner,
-  Text,
-  TextContent
+  Spinner
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
@@ -48,25 +46,27 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
   const formatDate = (date: Date) => {
     return moment.utc(date).tz('America/New_York').format('DD MMMM Y, h:MM A z');
   };
-  // const isJobSelected = (job: ScanJobType) => { return selectedJobs.includes(job.id); };
-  // const isJobSelectable = (job: ScanJobType) => { return true || job.status === "completed"; };
-  // const selectableJobs = scanJobs ? scanJobs.filter(isJobSelectable) : [];
-  // const onSelectJob = (job: ScanJobType, rowIndex: number, isSelecting: boolean) => {
-  //     setSelectedJobs((prevSelected) => {
-  //         const otherSelected = prevSelected.filter((j) => j !== job.id);
-  //         return isSelecting && isJobSelectable(job) ? [...otherSelected, job.id] : otherSelected;
-  //       });
-  // };
-  // const areAllJobsSelected = false;
 
-  // const selectAllJobs = (isSelecting: boolean = true) => {
-  //     setSelectedJobs(isSelecting ? selectableJobs.map((j) => j.id) : []);
-  // };
-
-  const getSortableRowValues = (scanJob: ScanJobType): (Date | string)[] => {
-    const { end_time, status } = scanJob;
-    return [end_time, status];
+  /* ToDo: This code is for future use around Discovery-437. If it isn't used when the issue has resolved remove it
+ *
+  const isJobSelected = (job: ScanJobType) => { return selectedJobs.includes(job.id); };
+  const isJobSelectable = (job: ScanJobType) => { return true || job.status === "completed"; };
+  const selectableJobs = scanJobs ? scanJobs.filter(isJobSelectable) : [];
+  const onSelectJob = (job: ScanJobType, rowIndex: number, isSelecting: boolean) => {
+      setSelectedJobs((prevSelected) => {
+          const otherSelected = prevSelected.filter((j) => j !== job.id);
+          return isSelecting && isJobSelectable(job) ? [...otherSelected, job.id] : otherSelected;
+        });
   };
+  const areAllJobsSelected = false;
+
+  const selectAllJobs = (isSelecting: boolean = true) => {
+      setSelectedJobs(isSelecting ? selectableJobs.map((j) => j.id) : []);
+  };
+  const getSortableRowValues = (scanJob: ScanJobType): (Date | string)[] => {
+  const { end_time, status } = scanJob;
+  return [end_time, status];
+};
 
   let sortedJobs = scanJobs;
   if (activeSortIndex !== undefined && scanJobs) {
@@ -79,7 +79,7 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
       }
       return (bValue as string)?.localeCompare(aValue as string);
     });
-  }
+  }*/
 
   return (
     <Modal
@@ -109,7 +109,7 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
               </Tr>
             </Thead>
             <Tbody>
-              {scanJobs.map((job, rowIndex) => (
+              {scanJobs.map(job => (
                 <Tr key={job.id}>
                   {/* <Td
                                         select={{

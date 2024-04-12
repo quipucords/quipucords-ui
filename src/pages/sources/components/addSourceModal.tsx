@@ -64,7 +64,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
         setCredOptions(res.data.results.map(o => ({ label: o.name, value: '' + o.id })));
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [typeValue]);
 
   /**
    * Handle Add Action
