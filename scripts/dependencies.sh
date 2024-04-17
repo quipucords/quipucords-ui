@@ -10,14 +10,14 @@
 
   echo "Reset existing build dependencies..."
   rm -rf -- ./node_modules
-  yarn install
+  npm install
 
   echo "Confirm and update build dependencies..."
 
-  DEPS_UPDATE=$(ncu "$@");
+  DEPS_UPDATE=$(npm outdated "$@");
   echo "$DEPS_UPDATE"
 
-  DEPS_LOG=$(ncu);
+  DEPS_LOG=$(npm outdated);
   echo $DEPS_LOG
 
   printf "${YELLOW}Generate dependency log...${NOCOLOR}"
@@ -27,3 +27,4 @@
   printf "${GREEN}COMPLETED${NOCOLOR}\n"
   printf "${YELLOW}Log generated at ./dependency-update-log.txt${NOCOLOR}\n"
 }
+
