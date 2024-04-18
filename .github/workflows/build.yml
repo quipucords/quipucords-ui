@@ -37,6 +37,8 @@ jobs:
           labels: |
             ${{ env.EXPIRATION_LABEL }}
             quipucords.backend.git_sha=${{ github.sha }}
+          extra-args: |
+            --ulimit nofile=4096:4096
 
       - name: Push To quay.io
         # Forks that do not set secrets and override the variables may fail this step.
