@@ -5,10 +5,8 @@ RUN dnf update -y && dnf clean all
 
 # install dependencies in a separate layer to save dev time
 WORKDIR /app
-COPY package.json package-lock.json . 
-RUN npm install
-
 COPY . .
+RUN npm install
 RUN npm run build
 
 FROM registry.access.redhat.com/ubi9/nginx-122
