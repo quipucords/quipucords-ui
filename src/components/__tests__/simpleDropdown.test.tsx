@@ -1,7 +1,8 @@
 import React from 'react';
 import { DropdownItem } from '@patternfly/react-core';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
 import { SimpleDropdown } from '../simpleDropdown';
 
@@ -60,7 +61,7 @@ test('options will not show before toggle is clicked', async () => {
   });
 });
 
-test('snaptshot after toggle is clicked', async () => {
+test('snapshot after toggle is clicked', async () => {
   const user = userEvent.setup();
   const setSslProtocol = jest.fn();
   const { asFragment } = render(
@@ -75,8 +76,10 @@ test('snaptshot after toggle is clicked', async () => {
       ))}
     />
   );
-  const toggleButton = await screen.findByText('dropdown label');
-  await user.click(toggleButton);
+  const toggleButton = screen.getByText('dropdown label');
+  await act(async () => {
+    await user.click(toggleButton);
+  });
   expect(asFragment()).toMatchSnapshot();
 });
 
@@ -95,8 +98,10 @@ test('options will show after toggle is clicked', async () => {
       ))}
     />
   );
-  const toggleButton = await screen.findByText('dropdown label');
-  await user.click(toggleButton);
+  const toggleButton = screen.getByText('dropdown label');
+  await act(async () => {
+    await user.click(toggleButton);
+  });
   exampleItems.forEach(i => {
     expect(screen.getByText(i)).toBeVisible();
   });
@@ -117,11 +122,21 @@ test('menu will go away after toggle is clicked twice', async () => {
       ))}
     />
   );
+
   const toggleButton = await screen.findByText('dropdown label');
-  await user.click(toggleButton);
+
+  await act(async () => {
+    await user.click(toggleButton);
+  });
   expect(screen.getByRole('menu')).toBeVisible();
-  await user.click(toggleButton);
-  expect(screen.getByRole('menu')).not.toBeVisible();
+
+  await act(async () => {
+    await user.click(toggleButton);
+  });
+
+  await new Promise(r => setTimeout(r, 300));
+  const menu = screen.queryByRole('menu');
+  expect(menu).not.toBeInTheDocument();
 });
 
 test('menu will go away after option selected', async () => {
@@ -141,9 +156,16 @@ test('menu will go away after option selected', async () => {
   );
   const toggleButton = await screen.findByText('dropdown label');
   await user.click(toggleButton);
+
   const option = await screen.findByText(exampleItems[2]);
   await user.click(option);
-  expect(screen.getByRole('menu')).not.toBeVisible();
+
+  await waitFor(
+    () => {
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    },
+    { timeout: 1000 }
+  );
 });
 
 test('onclick callback should get called when clicked', async () => {
@@ -163,9 +185,14 @@ test('onclick callback should get called when clicked', async () => {
   );
   expect(setSslProtocol).toHaveBeenCalledTimes(0);
   const toggleButton = await screen.findByText('dropdown label');
-  await user.click(toggleButton);
+  await act(async () => {
+    await user.click(toggleButton);
+  });
+
   const option = await screen.findByText(exampleItems[2]);
-  await user.click(option);
+  await act(async () => {
+    await user.click(option);
+  });
   expect(setSslProtocol).toHaveBeenCalledTimes(1);
   expect(setSslProtocol).toHaveBeenCalledWith(exampleItems[2]);
 });

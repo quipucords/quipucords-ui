@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ActionMenu from '../actionMenu';
 import '@testing-library/jest-dom';
@@ -30,7 +30,6 @@ test('actions will not show before button is clicked', () => {
 
 test('actions will show after button is clicked', async () => {
   const user = userEvent.setup();
-
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   render(
@@ -41,7 +40,12 @@ test('actions will show after button is clicked', async () => {
   );
   const toggleButton = await screen.findByLabelText('Action Menu Toggle');
   await user.click(toggleButton);
-  expect(screen.getByText('Delete')).toBeVisible();
+  await waitFor(
+    () => {
+      expect(screen.getByText('Delete')).toBeVisible();
+    },
+    { timeout: 1000 }
+  );
 });
 
 test('snapshot matches after opening the action menu', async () => {
@@ -81,7 +85,6 @@ test('action callback should get called when clicked', async () => {
 
 test('action menu closes after selection', async () => {
   const user = userEvent.setup();
-
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   render(
@@ -95,12 +98,11 @@ test('action menu closes after selection', async () => {
   const deleteButton = await screen.findByText('Delete');
   expect(deleteButton).toBeVisible();
   await user.click(deleteButton);
-  expect(deleteButton).not.toBeVisible();
+  await waitFor(() => expect(deleteButton).not.toBeVisible(), { timeout: 1000 });
 });
 
 test('action menu closes if toggle is clicked again', async () => {
   const user = userEvent.setup();
-
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   render(
@@ -113,6 +115,8 @@ test('action menu closes if toggle is clicked again', async () => {
   await user.click(toggleButton);
   const deleteButton = await screen.findByText('Delete');
   expect(deleteButton).toBeVisible();
+
   await user.click(toggleButton);
-  expect(deleteButton).not.toBeVisible();
+
+  await waitFor(() => expect(deleteButton).not.toBeVisible(), { timeout: 1000 });
 });

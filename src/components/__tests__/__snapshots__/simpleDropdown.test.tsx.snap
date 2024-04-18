@@ -38,7 +38,7 @@ exports[`renders proper dom snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`snaptshot after toggle is clicked 1`] = `
+exports[`snapshot after toggle is clicked 1`] = `
 <DocumentFragment>
   <button
     aria-expanded="true"

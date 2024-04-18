@@ -30,5 +30,7 @@ module.exports = {
 
   transformIgnorePatterns: [
     "/node_modules/(?!(string-width|cliui)/)"
-  ]
+  ],
+
+  roots: ['src']
 };
