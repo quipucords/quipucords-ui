@@ -4,11 +4,12 @@ set -e
 
 # on podman, host.containers.internal resolves to the host. this is equivalent to
 # host.docker.internal for docker.
-export QUIPUCORDS_API_URL="${QUIPUCORDS_API_URL:-https://host.containers.internal:9443}"
+export QUIPUCORDS_SERVER_URL="${QUIPUCORDS_SERVER_URL:-http://host.containers.internal:8000}"
 CERTS_PATH="/opt/app-root/certs"
 
 # verify if user provided certificates exist or create a self signed certificate.
 mkdir -p ${CERTS_PATH}
+
 if ([ -f "${CERTS_PATH}/server.key" ] && [ -f "${CERTS_PATH}/server.crt" ]); then
     echo "Using user provided certificates..."
     openssl rsa -in "${CERTS_PATH}/server.key" -check
@@ -26,5 +27,9 @@ else
     exit 1
 fi
 
-envsubst "\$QUIPUCORDS_API_URL" < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+envsubst "\$QUIPUCORDS_APP_PORT,\$QUIPUCORDS_APP_ENABLE_V2UI,\$QUIPUCORDS_SERVER_URL" \
+    < /etc/nginx/nginx.conf.template \
+    > /etc/nginx/nginx.conf
+
+mkdir -p /var/log/nginx
 nginx -g "daemon off;"
