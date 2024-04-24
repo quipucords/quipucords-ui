@@ -378,7 +378,7 @@ This project makes use of reserved DOM attributes and string identifiers used by
 <details>
 <summary><h3 style="display: inline-block">Directory and build structure</h3></summary>
 
-This repository has interdependency on the [Quipucords responsitory](https://github.com/quipucords/quipucords).
+This repository has interdependency on the [Quipucords repository](https://github.com/quipucords/quipucords).
 
 #### Django templates, login and logout
 In order to have GUI developer access to the login and logout aspects of [Quipucords](https://github.com/quipucords/quipucords) we store

@@ -44,7 +44,7 @@ exports[`TableHelpers tableHeader should return parsed table header settings, pr
       },
       {
         "content": "hello world",
-        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
+        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
       },
       {
         "content": <React.Fragment>
@@ -84,7 +84,7 @@ exports[`TableHelpers tableHeader should return parsed table header settings, pr
       },
       {
         "content": "hello world",
-        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
+        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
       },
     ],
     "headerSelectProps": {},
@@ -107,7 +107,7 @@ exports[`TableHelpers tableHeader should return parsed table header settings, pr
       },
       {
         "content": "hello world",
-        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
+        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
       },
     ],
     "headerSelectProps": {
@@ -140,7 +140,7 @@ exports[`TableHelpers tableHeader should return parsed table header settings, pr
       },
       {
         "content": "hello world",
-        "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgcmV0dXJuICdoZWxsbyB3b3JsZCc7CiAgICAgICAgfQ==-2",
+        "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2",
       },
     ],
     "headerSelectProps": {},
@@ -208,7 +208,7 @@ exports[`TableHelpers tableRows should return parsed table body settings, props:
         "cells": [
           {
             "content": "hello world",
-            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
+            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
           },
         ],
         "data": {},
@@ -285,7 +285,7 @@ exports[`TableHelpers tableRows should return parsed table body settings, props:
         "cells": [
           {
             "content": "hello world",
-            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
+            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
           },
         ],
         "data": {},
@@ -376,7 +376,7 @@ exports[`TableHelpers tableRows should return parsed table body settings, props:
         "cells": [
           {
             "content": "hello world",
-            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
+            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
           },
         ],
         "data": {},
@@ -467,7 +467,7 @@ exports[`TableHelpers tableRows should return parsed table body settings, props:
         "cells": [
           {
             "content": "hello world",
-            "key": "ZnVuY3Rpb24gKCkgewogICAgICAgICAgICByZXR1cm4gJ2hlbGxvIHdvcmxkJzsKICAgICAgICAgIH0=-2-0",
+            "key": "KCkgPT4gJ2hlbGxvIHdvcmxkJw==-2-0",
           },
         ],
         "data": {},
