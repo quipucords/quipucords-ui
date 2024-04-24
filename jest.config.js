@@ -25,12 +25,12 @@ module.exports = {
   // A preset that is used as a base for Jest's configuration
   preset: 'ts-jest/presets/js-with-ts',
 
+  roots: ['src'],
+
   // The test environment that will be used for testing.
   testEnvironment: 'jsdom',
 
   transformIgnorePatterns: [
     "/node_modules/(?!(string-width|cliui)/)"
-  ],
-
-  roots: ['src']
+  ]
 };

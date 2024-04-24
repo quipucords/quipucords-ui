@@ -172,6 +172,7 @@ exports[`Modal Modal 0 jobs populates properly 1`] = `
                   </th>
                   <th
                     class="pf-v5-c-table__th"
+                    scope="col"
                     tabindex="-1"
                   />
                 </tr>
@@ -361,6 +362,7 @@ exports[`Modal Modal 1 job populates properly 1`] = `
                   </th>
                   <th
                     class="pf-v5-c-table__th"
+                    scope="col"
                     tabindex="-1"
                   />
                 </tr>
@@ -728,6 +730,7 @@ exports[`Modal Modal multiple jobs populates properly 1`] = `
                   </th>
                   <th
                     class="pf-v5-c-table__th"
+                    scope="col"
                     tabindex="-1"
                   />
                 </tr>

@@ -77,9 +77,7 @@ test('snapshot after toggle is clicked', async () => {
     />
   );
   const toggleButton = screen.getByText('dropdown label');
-  await act(async () => {
-    await user.click(toggleButton);
-  });
+  await act(() => user.click(toggleButton));
   expect(asFragment()).toMatchSnapshot();
 });
 
@@ -99,9 +97,7 @@ test('options will show after toggle is clicked', async () => {
     />
   );
   const toggleButton = screen.getByText('dropdown label');
-  await act(async () => {
-    await user.click(toggleButton);
-  });
+  await act(() => user.click(toggleButton));
   exampleItems.forEach(i => {
     expect(screen.getByText(i)).toBeVisible();
   });
@@ -123,20 +119,14 @@ test('menu will go away after toggle is clicked twice', async () => {
     />
   );
 
-  const toggleButton = await screen.findByText('dropdown label');
+  const toggleButton = await screen.getByText('dropdown label');
 
   await act(async () => {
-    await user.click(toggleButton);
+    user.click(toggleButton);
+    await new Promise(r => setTimeout(r, 300)); // simulate delay
+    user.click(toggleButton);
   });
-  expect(screen.getByRole('menu')).toBeVisible();
-
-  await act(async () => {
-    await user.click(toggleButton);
-  });
-
-  await new Promise(r => setTimeout(r, 300));
-  const menu = screen.queryByRole('menu');
-  expect(menu).not.toBeInTheDocument();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
 test('menu will go away after option selected', async () => {
@@ -154,11 +144,11 @@ test('menu will go away after option selected', async () => {
       ))}
     />
   );
-  const toggleButton = await screen.findByText('dropdown label');
-  await user.click(toggleButton);
+  const toggleButton = await screen.getByText('dropdown label');
+  await act(() => user.click(toggleButton));
 
-  const option = await screen.findByText(exampleItems[2]);
-  await user.click(option);
+  const option = await screen.getByText(exampleItems[2]);
+  await act(() => user.click(option));
 
   await waitFor(
     () => {
@@ -184,15 +174,11 @@ test('onclick callback should get called when clicked', async () => {
     />
   );
   expect(setSslProtocol).toHaveBeenCalledTimes(0);
-  const toggleButton = await screen.findByText('dropdown label');
-  await act(async () => {
-    await user.click(toggleButton);
-  });
+  const toggleButton = await screen.getByText('dropdown label');
+  await act(() => user.click(toggleButton));
 
-  const option = await screen.findByText(exampleItems[2]);
-  await act(async () => {
-    await user.click(option);
-  });
+  const option = await screen.getByText(exampleItems[2]);
+  await act(() => user.click(option));
   expect(setSslProtocol).toHaveBeenCalledTimes(1);
   expect(setSslProtocol).toHaveBeenCalledWith(exampleItems[2]);
 });
