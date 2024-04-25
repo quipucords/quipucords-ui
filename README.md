@@ -10,8 +10,8 @@ Web user interface for [Quipucords](https://github.com/quipucords/quipucords), b
 ### Requirements
 Before developing, the basic requirements:
  * Your system needs to be running [NodeJS version 18+ and NPM](https://nodejs.org/)
- * [Docker](https://docs.docker.com/desktop/)
-   * Alternatively, you can try [Podman](https://github.com/containers/podman).
+ * [podman desktop](https://podman-desktop.io/)
+   * Alternatively, you can try [Docker](https://docs.docker.com/desktop/).
  * And [Yarn](https://yarnpkg.com) for dependency and script management.
 
 For in-depth tooling install guidance see the [contribution guidelines](./CONTRIBUTING.md#install-tooling)
@@ -34,7 +34,7 @@ This is the base context for running a local UI against a mock API.
     ```
     REACT_APP_DEBUG_MIDDLEWARE=true
    ```
-1. Make sure Docker/Podman is running
+1. Make sure podman desktop, or Docker, is running
 1. In a terminal instance that uses the repo context... Run
    ```
    $ yarn start

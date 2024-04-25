@@ -7,6 +7,7 @@ const {
   NODE_ENV: MODE,
   _BUILD_DIST_DIR: DIST_DIR,
   _BUILD_HOST: HOST,
+  _BUILD_OPEN_PATH: OPEN_PATH,
   _BUILD_RELATIVE_DIRNAME: RELATIVE_DIRNAME,
   _BUILD_PORT: PORT,
   _BUILD_SRC: SRC_DIR
@@ -37,25 +38,33 @@ module.exports = merge(
       })
     ],
     devServer: {
+      ...(OPEN_PATH && { open: [OPEN_PATH] }),
       host: HOST,
       port: PORT,
       compress: true,
       historyApiFallback: true,
       hot: true,
       devMiddleware: {
-        stats: 'errors-only',
+        stats: 'errors-warnings',
         writeToDisk: true
       },
       client: {
         overlay: false,
-        progress: false
+        progress: true
       },
       static: {
         directory: DIST_DIR
       },
       watchFiles: {
         paths: ['src/**/*', 'public/**/*']
-      }
+      },
+      proxy: [
+        {
+          context: ['/api'],
+          target: 'https://0.0.0.0:9443',
+          secure: false
+        }
+      ]
     }
   }
 );
