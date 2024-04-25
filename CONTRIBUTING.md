@@ -147,76 +147,11 @@ To create a new release, use `yarn` to update version details, and open a PR to 
 
 #### Cycle for updating NPMs
 Our schedule for updating NPMs
-- dependabot running once a month on low level packages that require only testing confirmation to pass
-- 1x a month: running our aggregated dependency update script for all low level packages that require only testing confirmation
-  - `$ yarn build:deps`
-- 1x a month: running updates on NPMs that require additional visual confirmation, this includes...
-  - dependency-name: "@patternfly/*"
-
-#### Process for updating NPMs
-To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
-
-> It is **highly discouraged** that you rely on updating the `yarn.lock` file only. This creates long-term issues when NPM references in `package.json` potentially require specific
-> dependencies, or have built around specific package functionality that could be inadvertently altered by updating a dependencies' dependency. Update `package.json` packages instead.
->
-> To review where a NPM package resource parent in `package.json` is... within the repo context run `$ npm ls [package name]`. This can help provide you with a dependency tree of resources in `package.json` that should
-> be updated.
-
-##### Basic NPM updates
-
-1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
-1. Open a terminal instance in the repository context and run
-    ```
-    $ yarn build:deps
-    ```
-   This will cycle through ALL basic NPM dependencies, running both unit tests, build and local integration checks. If
-   any errors are throw the package update is skipped.
-1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
-   - Visually confirm that local development still functions and can be navigated with...
-      1. Make sure podman desktop is running.
-      1. Run
-         ```
-         $ yarn start
-         ```
-   - Visually confirm that staging development still functions and can be navigated with...
-     1. Make sure podman desktop is running.
-      1. Run
-         ```
-         $ yarn start:stage
-         ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
-> If any part of the "basic path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
-> since future updates will be affected by skipping any package update.
-> A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps` this should contain a listing of the skipped packages.
-
-##### Core NPM updates
-1. Clone the repository locally, or bring your fork up-to-date with the `main` branch. [Make sure development tooling is installed](#install-tooling).
-1. Open a terminal instance in the repository context and run
-    ```
-    $ yarn build:deps-core
-    ```
-   This will cycle through ALL core NPM dependencies, running both unit tests, build and local integration checks. If
-   any errors are throw the package update is skipped.
-1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
-   - Visually confirm that local development still functions and can be navigated with...
-      1. Make sure podman desktop is running.
-      1. Run
-         ```
-         $ yarn start
-         ```
-  - Visually confirm that staging development still functions and can be navigated with...
-     1. Make sure podman desktop is running.
-     1. Run
-        ```
-        $ yarn start:stage
-        ```
-1. After you've confirmed everything is functioning correctly, check and commit the related changes to `package.json` and `yarn.lock`, then open a pull request towards the `main` branch.
-> If any part of the "core path" process fails you'll need to figure out which NPM is the offender and remove it from the update. OR resolve to fix the issue
-> since future updates will be affected by skipping potentially any package update.
-> A `dependency-update-log.txt" file is generated in the root of the repository after each run of `$ yarn build:deps-core` this should contain a listing of the skipped packages.
+- dependabot running multiple times a month on minor and patch level packages that typically only require testing confirmation to pass
+- dependabot running multiple times a month on major level packages that require an in-depth review
 
 ##### Manual NPM updates
-This is the slowest part of package updates. If any packages are skipped during the "basic" and "core" automation runs. Those packages will need to be updated manually.
+This is the slowest part of package updates. Some packages will need to be updated manually.
 1. Clone the repository locally, or bring your fork up-to-date, with the `main` branch. [Make sure development tooling is installed](#install-tooling).
 1. Remove/delete the `node_modules` directory (there may be differences between branches that create package alterations)
 1. Run
