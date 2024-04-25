@@ -4,7 +4,6 @@ Containerfile
 
 # dependencies
 node_modules/
-.yarn-integrity
 
 # coverage
 lib-cov
@@ -52,8 +51,6 @@ dependency-update-log.txt
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 api-debug*
 
 .vscode

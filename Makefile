@@ -10,5 +10,5 @@ all: help
 
 build-container:
 	podman build \
-		-t $(QUIPUCORDS_UI_CONTAINER_TAG) .
+		-t $(QUIPUCORDS_UI_CONTAINER_TAG) --ulimit nofile=4096:4096 .
 
