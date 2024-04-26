@@ -31,7 +31,7 @@ checkContainerRunning()
 }
 #
 #
-# Clean podman/docker
+# Clean container tooling
 #
 cleanApi()
 {
@@ -116,12 +116,10 @@ stageApi()
 
   if [ "$(command -v podman)" ]; then
     PODMAN="podman"
-  elif [ "$(command -v PODMAN)" ]; then
-    PODMAN="docker"
   fi
 
   if [ -z "$PODMAN" ]; then
-    printf "${RED}Missing container tooling. Unable to set \$PODMAN. podman, or docker, is required.${NOCOLOR}\n"
+    printf "${RED}Missing container tooling. Unable to set \$PODMAN. podman, is required.${NOCOLOR}\n"
     exit 1
   else
     printf "\nFound $PODMAN... ${GREEN}Using container tooling $PODMAN${NOCOLOR}\n"

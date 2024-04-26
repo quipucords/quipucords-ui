@@ -173,13 +173,13 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
    any errors are throw the package update is skipped.
 1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
    - Visually confirm that local development still functions and can be navigated with...
-      1. Make sure podman desktop, or Docker, is running.
+      1. Make sure podman desktop is running.
       1. Run
          ```
          $ yarn start
          ```
    - Visually confirm that staging development still functions and can be navigated with...
-     1. Make sure podman desktop, or Docker, is running.
+     1. Make sure podman desktop is running.
       1. Run
          ```
          $ yarn start:stage
@@ -199,13 +199,13 @@ To update packages in bulk there are 2 pre-defined paths, "basic" and "core".
    any errors are throw the package update is skipped.
 1. After the updates have completed **YOU MUST VISUALLY CONFIRM** the updates were successful by running both local development start scripts.
    - Visually confirm that local development still functions and can be navigated with...
-      1. Make sure podman desktop, or Docker, is running.
+      1. Make sure podman desktop is running.
       1. Run
          ```
          $ yarn start
          ```
   - Visually confirm that staging development still functions and can be navigated with...
-     1. Make sure podman desktop, or Docker, is running.
+     1. Make sure podman desktop is running.
      1. Run
         ```
         $ yarn start:stage
@@ -229,8 +229,8 @@ This is the slowest part of package updates. If any packages are skipped during 
 1. After each package version update in [`package.json`](./package.json) you'll run the follow scripts
    - `$ yarn test`, if it fails you'll need to run `$ yarn test:dev` and update the related tests
    - `$ yarn build`, if it fails you'll need to run `$ yarn test:integration-dev` and update the related tests
-   - Make sure podman desktop, or Docker, is running, then type `$ yarn start`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
-   - Make sure podman desktop, or Docker, is running, then type `$ yarn start:stage`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
+   - Make sure podman desktop is running, then type `$ yarn start`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
+   - Make sure podman desktop is running, then type `$ yarn start:stage`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
 1. If the package is now working commit the change and move on to the next package.
    - If the package fails, or you want to skip the update, take the minimally easy path and remove/delete `node_modules` then rollback `yarn.lock` **BEFORE** you run the next package update.
 > There are alternatives to resetting `node_modules`, we're providing the most direct path.
@@ -264,7 +264,6 @@ This is the slowest part of package updates. If any packages are skipped during 
 Before developing you'll need to install:
 * [NodeJS and NPM](https://nodejs.org/)
 * [podman desktop](https://podman-desktop.io/)
-  * Alternatively, you can try [Docker](https://docs.docker.com/desktop/).
 * And [Yarn](https://yarnpkg.com)
 
 #### OS support
@@ -377,13 +376,13 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 This is a local run designed to function with minimal resources and a mock API.
 
 1. Confirm you've installed all recommended tooling
-1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, Docker has issues with unescaped parameter strings.
+1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
 1. Confirm you've installed resources through yarn
 1. Create a local dotenv file called `.env.local` in the root of Quipucords-UI, and add the following contents
     ```
     REACT_APP_DEBUG_MIDDLEWARE=true
     ```
-1. Make sure podman desktop, or Docker, is running
+1. Make sure podman desktop is running
 1. Open a couple of instances of Terminal and run...
    ```
    $ yarn start
@@ -399,13 +398,13 @@ This is a local run designed to function with minimal resources and a mock API.
 This is an authenticated local run that has the ability to run against a containerized API.
 
 1. Confirm you've installed all recommended tooling
-1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, Docker has issues with unescaped parameter strings.
+1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
 1. Confirm you've installed resources through yarn
 1. Create a local dotenv file called `.env.local` in the root of Quipucords-UI, and add the following contents
     ```
     REACT_APP_DEBUG_MIDDLEWARE=true
     ```
-1. Make sure podman desktop, or Docker, is running
+1. Make sure podman desktop is running
 1. Open a couple of instances of Terminal and run...
     ```
     $ yarn start:stage
