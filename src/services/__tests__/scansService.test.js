@@ -17,7 +17,7 @@ describe('ScansService', () => {
   });
 
   it('should export a specific number of methods and classes', () => {
-    expect(Object.keys(scansService)).toHaveLength(14);
+    expect(Object.keys(scansService)).toHaveLength(12);
   });
 
   it('should have specific methods', () => {
@@ -32,9 +32,7 @@ describe('ScansService', () => {
     expect(scansService.getInspectionScanResults).toBeDefined();
     expect(scansService.deleteScan).toBeDefined();
     expect(scansService.startScan).toBeDefined();
-    expect(scansService.pauseScan).toBeDefined();
     expect(scansService.cancelScan).toBeDefined();
-    expect(scansService.restartScan).toBeDefined();
   });
 
   it('should return promises for every method', done => {

@@ -146,13 +146,11 @@ const useOnExpand = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
 };
 
 /**
- * Report/scan actions cancel, pause, restart, start, and download.
+ * Report/scan actions cancel, start, and download.
  *
  * @param {object} options
  * @param {Function} options.cancelScan
  * @param {Function} options.getReportsDownload
- * @param {Function} options.pauseScan
- * @param {Function} options.restartScan
  * @param {Function} options.startScan
  * @param {Function} options.t
  * @param {Function} options.useDispatch
@@ -163,8 +161,6 @@ const useOnExpand = ({ useDispatch: useAliasDispatch = storeHooks.reactRedux.use
 const useOnScanAction = ({
   cancelScan = reduxActions.scans.cancelScan,
   getReportsDownload = reduxActions.reports.getReportsDownload,
-  pauseScan = reduxActions.scans.pauseScan,
-  restartScan = reduxActions.scans.restartScan,
   startScan = reduxActions.scans.startScan,
   t = translate,
   useDispatch: useAliasDispatch = storeHooks.reactRedux.useDispatch,
@@ -258,34 +254,6 @@ const useOnScanAction = ({
   );
 
   /**
-   * onPause for scanning
-   *
-   * @type {Function}
-   */
-  const onPause = useCallback(
-    ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent, [apiTypes.API_RESPONSE_SCAN_NAME]: name }) => {
-      const id = mostRecent[apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID];
-      pauseScan(id)(dispatch);
-      setUpdatedScan(() => ({ id, name, context: 'paused' }));
-    },
-    [pauseScan, dispatch]
-  );
-
-  /**
-   * onRestart for scanning
-   *
-   * @type {Function}
-   */
-  const onRestart = useCallback(
-    ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRecent, [apiTypes.API_RESPONSE_SCAN_NAME]: name }) => {
-      const id = mostRecent[apiTypes.API_RESPONSE_SCAN_MOST_RECENT_ID];
-      restartScan(id)(dispatch);
-      setUpdatedScan(() => ({ id, name, context: 'restart' }));
-    },
-    [restartScan, dispatch]
-  );
-
-  /**
    * onStart for scanning
    *
    * @type {Function}
@@ -302,8 +270,6 @@ const useOnScanAction = ({
     onCancel,
     onDownload,
     onDownloadJob,
-    onPause,
-    onRestart,
     onStart
   };
 };

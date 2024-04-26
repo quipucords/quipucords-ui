@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PauseIcon, PlayIcon, RedoIcon, StopIcon } from '@patternfly/react-icons';
+import { PlayIcon, StopIcon } from '@patternfly/react-icons';
 
 /**
  * Context icon variants
@@ -32,11 +32,9 @@ const ContextIconAction = ({ symbol, ...props }) => {
   switch (symbol) {
     case ContextIconActionVariant.completed:
     case ContextIconActionVariant.failed:
-      return <RedoIcon {...props} />;
-    case ContextIconActionVariant.running:
-      return <PauseIcon {...props} />;
     case ContextIconActionVariant.paused:
       return <PlayIcon {...props} />;
+    case ContextIconActionVariant.running:
     case ContextIconActionVariant.pending:
       return <StopIcon {...props} />;
     default:

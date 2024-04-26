@@ -132,13 +132,7 @@ const scansReducer = (state = initialState, action) => {
           { ref: 'jobs', type: scansTypes.GET_SCAN_JOBS },
           {
             ref: 'action',
-            type: [
-              reportsTypes.GET_REPORTS_DOWNLOAD,
-              scansTypes.CANCEL_SCAN,
-              scansTypes.PAUSE_SCAN,
-              scansTypes.RESTART_SCAN,
-              scansTypes.START_SCAN
-            ]
+            type: [reportsTypes.GET_REPORTS_DOWNLOAD, scansTypes.CANCEL_SCAN, scansTypes.START_SCAN]
           },
           { ref: 'deleted', type: scansTypes.DELETE_SCAN },
           { ref: 'view', type: scansTypes.GET_SCANS }
