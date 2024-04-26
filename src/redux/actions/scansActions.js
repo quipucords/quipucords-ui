@@ -70,24 +70,10 @@ const startScan = id => dispatch =>
     meta: { id }
   });
 
-const pauseScan = id => dispatch =>
-  dispatch({
-    type: scansTypes.PAUSE_SCAN,
-    payload: scansService.pauseScan(id),
-    meta: { id }
-  });
-
 const cancelScan = id => dispatch =>
   dispatch({
     type: scansTypes.CANCEL_SCAN,
     payload: scansService.cancelScan(id),
-    meta: { id }
-  });
-
-const restartScan = id => dispatch =>
-  dispatch({
-    type: scansTypes.RESTART_SCAN,
-    payload: scansService.restartScan(id),
     meta: { id }
   });
 
@@ -110,9 +96,7 @@ const scansActions = {
   getConnectionScanResults,
   getInspectionScanResults,
   startScan,
-  pauseScan,
-  cancelScan,
-  restartScan
+  cancelScan
 };
 
 export {
@@ -127,7 +111,5 @@ export {
   getConnectionScanResults,
   getInspectionScanResults,
   startScan,
-  pauseScan,
-  cancelScan,
-  restartScan
+  cancelScan
 };

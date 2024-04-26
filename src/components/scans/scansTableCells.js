@@ -242,14 +242,6 @@ const scansCellContent = (
 
 // FixMe: PF Overflow menu is attempting state updates on unmounted components
 /**
- * FixMe: Older issue associated with displaying both "pause" and "cancel" after a user restarts a scan.
- * Basically, in testing you can't immediately pause a scan, or multiple scans, or the API throws an error.
- * Because of this we only display the "cancel"/"stop" button. Or at least that's what the old code was
- * doing, pre-refactor. Hitting refresh should display both buttons. If this gets fixed the condition to
- * modify is associated with...
- *     mostRecentStatus === 'created' || mostRecentStatus === 'running'
- */
-/**
  * Action cell content
  *
  * @param {object} params
@@ -259,8 +251,6 @@ const scansCellContent = (
  * @param {Function} params.onCancel
  * @param {Function} params.onDownload
  * @param {Function} params.onDelete
- * @param {Function} params.onRestart
- * @param {Function} params.onPause
  * @param {Function} params.onStart
  * @param {Function} params.t
  * @returns {React.ReactNode}
@@ -271,8 +261,6 @@ const actionsCell = ({
   item = {},
   onCancel = helpers.noop,
   onDownload = helpers.noop,
-  onRestart = helpers.noop,
-  onPause = helpers.noop,
   onStart = helpers.noop,
   onDelete = helpers.noop,
   t = translate
@@ -299,9 +287,7 @@ const actionsCell = ({
         return onDelete(item);
       case 'created':
       case 'running':
-        return onPause(item);
       case 'paused':
-        return onRestart(item);
       case 'pending':
         return onCancel(item);
       case 'completed':
@@ -343,11 +329,7 @@ const actionsCell = ({
   const menuItems = [];
 
   if (mostRecentStatus) {
-    if (mostRecentStatus === 'created' || mostRecentStatus === 'running') {
-      menuItems.push(menuItem(ContextIconActionVariant.running), menuItem(ContextIconActionVariant.pending));
-    } else {
-      menuItems.push(menuItem(mostRecentStatus));
-    }
+    menuItems.push(menuItem(mostRecentStatus));
   }
 
   menuItems.push({

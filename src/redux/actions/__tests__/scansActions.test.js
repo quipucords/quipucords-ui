@@ -95,22 +95,8 @@ describe('ScansActions', () => {
     expect(state.scans.action.lorem.fulfilled).toEqual(true);
   });
 
-  it('Should return response content for pauseScan method', async () => {
-    const dispatcher = scansActions.pauseScan('lorem');
-
-    const { state } = await generateDispatch(dispatcher);
-    expect(state.scans.action.lorem.fulfilled).toEqual(true);
-  });
-
   it('Should return response content for cancelScan method', async () => {
     const dispatcher = scansActions.cancelScan('lorem');
-
-    const { state } = await generateDispatch(dispatcher);
-    expect(state.scans.action.lorem.fulfilled).toEqual(true);
-  });
-
-  it('Should return response content for restartScan method', async () => {
-    const dispatcher = scansActions.restartScan('lorem');
 
     const { state } = await generateDispatch(dispatcher);
     expect(state.scans.action.lorem.fulfilled).toEqual(true);

@@ -38,8 +38,6 @@ describe('ScansReducer', () => {
       types.GET_SCAN_JOB,
       types.GET_SCAN_JOBS,
       types.CANCEL_SCAN,
-      types.PAUSE_SCAN,
-      types.RESTART_SCAN,
       types.START_SCAN,
       types.GET_SCANS,
       types.DELETE_SCAN
@@ -77,8 +75,6 @@ describe('ScansReducer', () => {
       types.GET_SCAN_JOB,
       types.GET_SCAN_JOBS,
       types.CANCEL_SCAN,
-      types.PAUSE_SCAN,
-      types.RESTART_SCAN,
       types.START_SCAN,
       types.GET_SCANS,
       types.DELETE_SCAN
@@ -105,8 +101,6 @@ describe('ScansReducer', () => {
       types.GET_SCAN_JOB,
       types.GET_SCAN_JOBS,
       types.CANCEL_SCAN,
-      types.PAUSE_SCAN,
-      types.RESTART_SCAN,
       types.START_SCAN,
       types.GET_SCANS,
       types.DELETE_SCAN

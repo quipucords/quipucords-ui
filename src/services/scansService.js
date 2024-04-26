@@ -79,22 +79,10 @@ const startScan = id =>
     url: process.env.REACT_APP_SCAN_JOBS_SERVICE_START_GET.replace('{0}', id)
   });
 
-const pauseScan = id =>
-  serviceCall({
-    method: 'put',
-    url: process.env.REACT_APP_SCAN_JOBS_SERVICE_PAUSE.replace('{0}', id)
-  });
-
 const cancelScan = id =>
   serviceCall({
     method: 'put',
     url: process.env.REACT_APP_SCAN_JOBS_SERVICE_CANCEL.replace('{0}', id)
-  });
-
-const restartScan = id =>
-  serviceCall({
-    method: 'put',
-    url: process.env.REACT_APP_SCAN_JOBS_SERVICE_RESTART.replace('{0}', id)
   });
 
 const scansService = {
@@ -109,9 +97,7 @@ const scansService = {
   getInspectionScanResults,
   deleteScan,
   startScan,
-  pauseScan,
-  cancelScan,
-  restartScan
+  cancelScan
 };
 
 export {
@@ -128,7 +114,5 @@ export {
   getInspectionScanResults,
   deleteScan,
   startScan,
-  pauseScan,
-  cancelScan,
-  restartScan
+  cancelScan
 };

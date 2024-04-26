@@ -80,7 +80,7 @@ const Scans = ({
   const dispatch = useAliasDispatch();
   const onDelete = useAliasOnDelete();
   const onExpand = useAliasOnExpand();
-  const { onCancel, onDownload, onPause, onRestart, onStart } = useAliasOnScanAction();
+  const { onCancel, onDownload, onStart } = useAliasOnScanAction();
   const onSelect = useAliasOnSelect();
   const {
     pending,
@@ -208,8 +208,6 @@ const Scans = ({
                     onDelete: () => onDelete(item),
                     onCancel: () => onCancel(item),
                     onDownload: () => onDownload(item),
-                    onRestart: () => onRestart(item),
-                    onPause: () => onPause(item),
                     onStart: () => onStart(item)
                   }),
                   isActionCell: true
