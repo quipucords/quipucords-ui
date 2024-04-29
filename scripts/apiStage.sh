@@ -54,7 +54,9 @@ stopApi()
 #
 openLogin()
 {
-  LOGIN="https://127.0.0.1:9443/login/"
+  local HOST=$1
+  local PORT=$2
+  local LOGIN="https://${HOST}:${PORT}/login/"
   xdg-open $LOGIN || open $LOGIN
 }
 #
@@ -63,10 +65,11 @@ openLogin()
 #
 stageApi()
 {
-  local PORT=$1
-  local PASSWORD=$2
-  local NAME=$3
-  local CONTAINER=$4
+  local HOST=$1
+  local PORT=$2
+  local PASSWORD=$3
+  local NAME=$4
+  local CONTAINER=$5
 
   $PODMAN stop -t 0 $NAME
   $PODMAN rm $NAME
@@ -96,9 +99,9 @@ stageApi()
   checkContainerRunning $NAME
 
   if [ ! -z "$($PODMAN ps | grep $NAME)" ]; then
-    openLogin
+    openLogin $HOST $PORT
     echo "  Container: $($PODMAN ps | grep $NAME | cut -c 1-80)"
-    echo "  QPC container running: https://127.0.0.1:${PORT}/"
+    echo "  QPC container running: https://${HOST}:${PORT}/"
     printf "  To stop: $ ${GREEN}$PODMAN stop ${NAME}${NOCOLOR}\n"
   fi
 
@@ -113,6 +116,7 @@ stageApi()
   GREEN="\e[32m"
   NOCOLOR="\e[39m"
 
+  HOST="127.0.0.1"
   PORT=9443
   PASSWORD="1_2_3_4_5_"
   CONTAINER="quay.io/quipucords/quipucords:latest"
@@ -141,7 +145,7 @@ stageApi()
     clean )
       cleanApi;;
     stage )
-      stageApi $PORT $PASSWORD "qpc-stage" $CONTAINER;;
+      stageApi $HOST $PORT $PASSWORD "qpc-stage" $CONTAINER;;
     stopApi )
       stopApi;;
   esac
