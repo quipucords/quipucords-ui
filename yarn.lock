@@ -12345,10 +12345,6 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
-"quipudocs@git+https://github.com/quipucords/quipudocs.git#^0.9.1":
-  version "0.9.1"
-  resolved "git+https://github.com/quipucords/quipudocs.git#254a3ef8cb75e6792e7366e8b7497cae70d2aa68"
-
 qw@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/qw/-/qw-1.0.2.tgz#0c31a6f810320a91c58b05198679427103b03c4a"

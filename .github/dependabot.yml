@@ -14,7 +14,6 @@ updates:
       - dependency-name: "*patternfly*"
       - dependency-name: "*i18next*"
       - dependency-name: "react-router*"
-      - dependency-name: "quipudocs"
     labels:
       - "build"
 
