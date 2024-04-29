@@ -28,7 +28,7 @@
   },
   "scripts": {
     "api:dev": "node ./scripts/apiDev.js --port 8000 --file https://raw.githubusercontent.com/quipucords/quipucords/master/docs/swagger.yml",
-    "api:spec": "open https://petstore.swagger.io/?url=https://raw.githubusercontent.com/quipucords/quipucords/master/docs/swagger.yml",
+    "api:spec": "SPEC=https://petstore.swagger.io/?url=https://raw.githubusercontent.com/quipucords/quipucords/master/docs/swagger.yml; xdg-open $SPEC || open $SPEC",
     "api:stage": "sh ./scripts/apiStage.sh -p 9443 -t stage",
     "api:stage-clean": "sh ./scripts/apiStage.sh -t clean",
     "api:stage-stop": "sh ./scripts/apiStage.sh -t stopApi",
