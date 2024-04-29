@@ -79,7 +79,7 @@ stageApi()
   if [ -z "$($PODMAN ps | grep $NAME)" ]; then
     printf "\n"
     echo "Starting API, this could take a minute..."
-    MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
+    local MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
 
     $PODMAN run -itd --rm \
       -e QPC_SERVER_PASSWORD=$PASSWORD \
@@ -98,7 +98,7 @@ stageApi()
   if [ ! -z "$($PODMAN ps | grep $NAME)" ]; then
     openLogin
     echo "  Container: $($PODMAN ps | grep $NAME | cut -c 1-80)"
-    echo "  QPC container running: https://localhost:${PORT}/"
+    echo "  QPC container running: https://127.0.0.1:${PORT}/"
     printf "  To stop: $ ${GREEN}$PODMAN stop ${NAME}${NOCOLOR}\n"
   fi
 
