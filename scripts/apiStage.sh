@@ -50,6 +50,15 @@ stopApi()
 }
 #
 #
+# open login
+#
+openLogin()
+{
+  LOGIN="https://127.0.0.1:9443/login/"
+  xdg-open $LOGIN || open $LOGIN
+}
+#
+#
 # Run stage/dev setup, used for local development against the latest API, partially working login
 #
 stageApi()
@@ -70,13 +79,15 @@ stageApi()
   if [ -z "$($PODMAN ps | grep $NAME)" ]; then
     printf "\n"
     echo "Starting API, this could take a minute..."
+    MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
+
     $PODMAN run -itd --rm \
       -e QPC_SERVER_PASSWORD=$PASSWORD \
       -e QPC_DBMS=sqlite \
       -p $PORT:443 \
-      -v "${HOME}"/.local/share/discovery/log/:/var/log \
-      -v "${HOME}"/.local/share/discovery/data/:/var/data \
-      -v "${HOME}"/.local/share/discovery/sshkeys/:/sshkeys \
+      -v "${HOME}"/.local/share/discovery/log/:/var/log"$MOUNT_ARGS" \
+      -v "${HOME}"/.local/share/discovery/data/:/var/data"$MOUNT_ARGS" \
+      -v "${HOME}"/.local/share/discovery/sshkeys/:/sshkeys"$MOUNT_ARGS" \
       --tls-verify=false \
       --name $NAME \
       $CONTAINER
@@ -85,6 +96,7 @@ stageApi()
   checkContainerRunning $NAME
 
   if [ ! -z "$($PODMAN ps | grep $NAME)" ]; then
+    openLogin
     echo "  Container: $($PODMAN ps | grep $NAME | cut -c 1-80)"
     echo "  QPC container running: https://localhost:${PORT}/"
     printf "  To stop: $ ${GREEN}$PODMAN stop ${NAME}${NOCOLOR}\n"

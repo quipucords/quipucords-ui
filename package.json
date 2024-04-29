@@ -49,7 +49,7 @@
     "start:js": "export NODE_ENV=development; webpack serve --config ./config/webpack.dev.js",
     "start:js-stage": "export NODE_ENV=development; webpack serve --config ./config/webpack.stage.js",
     "start:dev": "npm start",
-    "start:stage": "open https://localhost:9443/login/; run-p -l api:stage start:js-stage",
+    "start:stage": "run-p -l api:stage start:js-stage",
     "test": "export NODE_ENV=test; run-s test:lint test:ci",
     "test:ci": "export CI=true; jest ./src --coverage",
     "test:clearCache": "jest --clearCache",
