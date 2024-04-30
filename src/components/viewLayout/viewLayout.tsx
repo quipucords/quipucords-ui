@@ -25,7 +25,7 @@ import {
   SkipToContent
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
-import logo from 'src/images/title.svg';
+import logo from '../../images/title.svg';
 import { IAppRoute, IAppRouteGroup, routes } from '../../routes';
 import AppToolbar from './viewLayoutToolbar';
 

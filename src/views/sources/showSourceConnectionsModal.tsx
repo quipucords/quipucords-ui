@@ -11,7 +11,7 @@ import {
   CheckCircleIcon
 } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
-import { SourceType, ConnectionType } from 'src/types/types';
+import { SourceType, ConnectionType } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
 export interface ConnectionsModalProps {

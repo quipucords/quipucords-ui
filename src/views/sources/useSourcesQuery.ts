@@ -8,8 +8,8 @@
  * @module useSourcesQuery
  */
 import { TableState } from '@mturley-latest/react-table-batteries';
-import { useServiceQuery } from 'src/helpers/queryHelpers';
-import { SourceType } from 'src/types/types';
+import { useServiceQuery } from '../../helpers/queryHelpers';
+import { SourceType } from '../../types/types';
 
 export const SOURCES_LIST_QUERY = 'sourcesList';
 

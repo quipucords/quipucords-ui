@@ -7,7 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@patternfly/react-core';
 import { RebootingIcon } from '@patternfly/react-icons';
-import { helpers } from 'src/helpers/helpers';
+import { helpers } from '../../helpers';
 
 type RefreshTimeButtonProps = {
   lastRefresh: number;

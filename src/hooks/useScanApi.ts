@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import axios from 'axios';
-import { ScanType } from 'src/types/types';
+import { ScanType } from '../types/types';
 
 const useScanApi = () => {
   const [pendingDeleteScan, setPendingDeleteScan] = React.useState<ScanType>();

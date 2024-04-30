@@ -13,7 +13,7 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
 import moment from 'moment-timezone';
-import { ScanJobType, ScanType } from 'src/types/types';
+import { ScanJobType, ScanType } from '../../types/types';
 
 export interface ScansModalProps {
   scan: ScanType;

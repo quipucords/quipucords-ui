@@ -7,7 +7,7 @@
 import { TableState } from '@mturley-latest/react-table-batteries';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import helpers from 'src/helpers';
+import { helpers } from './helpers';
 
 export const getServiceQueryUrl = <
   TItem,

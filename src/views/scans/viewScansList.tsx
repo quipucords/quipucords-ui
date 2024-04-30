@@ -39,15 +39,15 @@ import {
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import FileDownload from 'js-file-download';
-import ActionMenu from 'src/components/actionMenu/actionMenu';
-import { ContextIcon, ContextIconVariant } from 'src/components/contextIcon/contextIcon';
-import { RefreshTimeButton } from 'src/components/refreshTimeButton/refreshTimeButton';
-import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from 'src/constants/apiConstants';
-import useAlerts from 'src/hooks/useAlerts';
-import useScanApi from 'src/hooks/useScanApi';
-import useQueryClientConfig from 'src/queryClientConfig';
-import { ScanJobType, ScanType } from 'src/types/types';
+import ActionMenu from '../../components/actionMenu/actionMenu';
+import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
+import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
+import useAlerts from '../../hooks/useAlerts';
+import useScanApi from '../../hooks/useScanApi';
+import useQueryClientConfig from '../../queryClientConfig';
+import { ScanJobType, ScanType } from '../../types/types';
 import { ScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
 

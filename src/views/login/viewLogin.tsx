@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import axios from 'axios';
-import bgImage from 'src/images/aboutBg.png';
+import bgImage from '../../images/aboutBg.png';
 
 export const Login: React.FunctionComponent = () => {
   const [showHelperText, setShowHelperText] = React.useState(false);

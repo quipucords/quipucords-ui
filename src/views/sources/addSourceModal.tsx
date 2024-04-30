@@ -21,9 +21,9 @@ import {
   TextInput
 } from '@patternfly/react-core';
 import axios from 'axios';
-import { SimpleDropdown } from 'src/components/simpleDropdown/simpleDropdown';
-import { TypeaheadCheckboxes } from 'src/components/typeAheadCheckboxes/typeaheadCheckboxes';
-import { SourceType } from 'src/types/types';
+import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
+import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
+import { SourceType } from '../../types/types';
 
 export interface AddSourceModalProps {
   source?: SourceType;

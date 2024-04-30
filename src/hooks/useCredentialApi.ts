@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import axios from 'axios';
-import { CredentialType } from 'src/types/types';
+import { CredentialType } from '../types/types';
 
 const useCredentialApi = () => {
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();

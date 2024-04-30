@@ -8,7 +8,7 @@ import { PropertyPath } from 'lodash';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
 import moment from 'moment';
-import { CredentialType } from 'src/types/types';
+import { CredentialType } from '../types/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const aggregatedError = (errors: any, message: any, { name = 'AggregateError' } = {}) => {

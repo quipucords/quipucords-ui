@@ -4,7 +4,7 @@
  * Validates accuracy and consistency of information display helpers. Includes various input scenarios and formatting checks.
  */
 import moment from 'moment';
-import { CredentialType } from 'src/types/types';
+import { CredentialType } from '../../types/types';
 import { helpers } from '../helpers';
 
 const { getTimeDisplayHowLongAgo, getAuthType, authType } = helpers;

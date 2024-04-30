@@ -9,7 +9,7 @@
  */
 import React from 'react';
 import axios from 'axios';
-import { ConnectionType, SourceType } from 'src/types/types';
+import { ConnectionType, SourceType } from '../types/types';
 
 const useSourceApi = () => {
   const [scanSelected, setScanSelected] = React.useState<SourceType[]>();

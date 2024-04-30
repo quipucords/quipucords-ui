@@ -38,17 +38,17 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
+import ActionMenu from '../../components/actionMenu/actionMenu';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
+import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import {
   API_CREDS_LIST_QUERY,
   API_DATA_SOURCE_TYPES,
   API_QUERY_TYPES
-} from 'src/constants/apiConstants';
-import useAlerts from 'src/hooks/useAlerts';
-import useCredentialApi from 'src/hooks/useCredentialApi';
-import ActionMenu from '../../components/actionMenu/actionMenu';
-import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
-import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
+} from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
+import useAlerts from '../../hooks/useAlerts';
+import useCredentialApi from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
 import { useCredentialsQuery } from './useCredentialsQuery';

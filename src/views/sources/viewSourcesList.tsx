@@ -38,21 +38,21 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
-import ActionMenu from 'src/components/actionMenu/actionMenu';
-import { ContextIcon, ContextIconVariant } from 'src/components/contextIcon/contextIcon';
-import { i18nHelpers } from 'src/components/i18n/i18nHelpers';
-import { RefreshTimeButton } from 'src/components/refreshTimeButton/refreshTimeButton';
-import { SimpleDropdown } from 'src/components/simpleDropdown/simpleDropdown';
+import ActionMenu from '../../components/actionMenu/actionMenu';
+import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
+import { i18nHelpers } from '../../components/i18n/i18nHelpers';
+import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
+import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import {
   API_DATA_SOURCE_TYPES,
   API_QUERY_TYPES,
   API_SOURCES_LIST_QUERY
-} from 'src/constants/apiConstants';
-import { helpers } from 'src/helpers';
-import useAlerts from 'src/hooks/useAlerts';
-import useSourceApi from 'src/hooks/useSourceApi';
-import useQueryClientConfig from 'src/queryClientConfig';
-import { CredentialType, SourceType } from 'src/types/types';
+} from '../../constants/apiConstants';
+import { helpers } from '../../helpers';
+import useAlerts from '../../hooks/useAlerts';
+import useSourceApi from '../../hooks/useSourceApi';
+import useQueryClientConfig from '../../queryClientConfig';
+import { CredentialType, SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
 import SourcesScanModal from './addSourcesScanModal';
 import { ConnectionsModal } from './showSourceConnectionsModal';
