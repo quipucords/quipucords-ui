@@ -52,7 +52,14 @@ module.exports = merge(
       },
       watchFiles: {
         paths: ['src/**/*', 'public/**/*']
-      }
+      },
+      proxy: [
+        {
+          context: ['/credentials', '/jobs', '/ping', '/reports', '/sources', '/scans', '/status', '/token', '/users'],
+          target: 'http://0.0.0.0:8000',
+          secure: false
+        }
+      ]
     },
     plugins: [
       new MiniCssExtractPlugin({
