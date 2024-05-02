@@ -41,6 +41,7 @@ module.exports = merge(
       ...(OPEN_PATH && { open: [OPEN_PATH] }),
       host: HOST,
       port: PORT,
+      server: 'https',
       compress: true,
       historyApiFallback: true,
       hot: true,
