@@ -6,7 +6,7 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { helpers } from '../../common';
+import { helpers } from '../../helpers';
 
 const WHO_AM_I_QUERY = 'whoami';
 
