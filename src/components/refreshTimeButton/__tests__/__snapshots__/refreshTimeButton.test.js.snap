@@ -9,21 +9,21 @@ exports[`RefreshTimeButton Component should render a basic component: basic 1`] 
 >
   <button
     aria-disabled="false"
-    class="pf-c-button pf-m-link"
+    class="pf-v5-c-button pf-m-link"
     data-ouia-component-id="refresh"
-    data-ouia-component-type="PF4/Button"
+    data-ouia-component-type="PF5/Button"
     data-ouia-safe="true"
     type="button"
   >
     <span
-      class="pf-c-button__icon pf-m-start"
+      class="pf-v5-c-button__icon pf-m-start"
     >
       <svg
         aria-hidden="true"
+        class="pf-v5-svg"
         fill="currentColor"
         height="1em"
         role="img"
-        style="vertical-align: -0.125em;"
         viewBox="0 0 1024 1024"
         width="1em"
       >

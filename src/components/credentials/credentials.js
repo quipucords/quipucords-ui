@@ -9,13 +9,13 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   EmptyStateVariant,
   Spinner,
-  Title,
-  TitleSizes
+  EmptyStateActions,
+  EmptyStateHeader,
+  EmptyStateFooter
 } from '@patternfly/react-core';
-import { IconSize, SearchIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import {
   AddCredentialType,
@@ -40,6 +40,7 @@ import {
   useOnSelect
 } from './credentialsContext';
 import { CredentialsToolbar } from './credentialsToolbar';
+import { IconSize } from '../contextIcon/contextIcon';
 import { translate } from '../i18n/i18n';
 
 const CONFIG = {
@@ -106,32 +107,30 @@ const Credentials = ({
 
   /**
    * Return toolbar actions.
-   *
-   * @returns {React.ReactNode}
    */
-  const renderToolbarActions = () => (
-    <React.Fragment>
-      <AddCredentialType
-        buttonVariant={CredentialButtonVariant.primary}
-        position={SelectPosition.right}
-        ouiaId="add_credential"
-        placeholder={t('form-dialog.label', { context: 'add' })}
-      />{' '}
-      <Button
-        variant={ButtonVariant.secondary}
-        isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
-        onClick={onDeleteCredentials}
-      >
-        {t('form-dialog.label', { context: 'delete' })}
-      </Button>
-    </React.Fragment>
-  );
+  const toolbarActions = [
+    <AddCredentialType
+      key="secondaryAddCredential"
+      buttonVariant={CredentialButtonVariant.primary}
+      position={SelectPosition.right}
+      ouiaId="add_credential"
+      placeholder={t('form-dialog.label', { context: 'add' })}
+    />,
+    <Button
+      key="secondaryDeleteCredential"
+      variant={ButtonVariant.secondary}
+      isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
+      onClick={onDeleteCredentials}
+    >
+      {t('form-dialog.label', { context: 'delete' })}
+    </Button>
+  ];
 
   if (pending) {
     return (
       <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
         <Bullseye>
-          <Spinner isSVG size={IconSize.lg} /> &nbsp; {t('view.loading', { context: viewId })}
+          <Spinner size={IconSize.lg} /> &nbsp; {t('view.loading', { context: viewId })}
         </Bullseye>
       </Modal>
     );
@@ -155,12 +154,14 @@ const Credentials = ({
       <div className="quipucords-view-container">
         {isActive && (
           <React.Fragment>
-            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={renderToolbarActions()} />
+            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={toolbarActions} />
             <ViewPaginationRow totalResults={totalResults} />
           </React.Fragment>
         )}
         <div className="quipucords-list-container">
           <Table
+            ariaLabel={t('table.ariaLabel')}
+            summary={t('table.summary')}
             onExpand={onExpand}
             onSelect={onSelect}
             rows={data?.map((item, index) => ({
@@ -197,17 +198,20 @@ const Credentials = ({
             }))}
           >
             {fulfilled && isActive && (
-              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-                <EmptyStateIcon icon={SearchIcon} />
-                <Title size={TitleSizes.lg} headingLevel="h1">
-                  {t('view.empty-state', { context: ['filter', 'title'] })}
-                </Title>
+              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.lg}>
+                <EmptyStateHeader
+                  titleText={<React.Fragment>{t('view.empty-state', { context: ['filter', 'title'] })}</React.Fragment>}
+                  icon={<EmptyStateIcon icon={SearchIcon} />}
+                  headingLevel="h1"
+                />
                 <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
-                <EmptyStatePrimary>
-                  <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
-                    {t('view.empty-state', { context: ['label', 'clear'] })}
-                  </Button>
-                </EmptyStatePrimary>
+                <EmptyStateFooter>
+                  <EmptyStateActions>
+                    <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
+                      {t('view.empty-state', { context: ['label', 'clear'] })}
+                    </Button>
+                  </EmptyStateActions>
+                </EmptyStateFooter>
               </EmptyState>
             )}
             {fulfilled && !isActive && <CredentialsEmptyState viewId={viewId} onAddSource={onShowAddSourceWizard} />}

@@ -22,10 +22,12 @@ exports[`FormGroup Component should handle multiple error message types: boolean
 }"
 >
   <div
-    class="pf-c-form__group"
+    class="pf-v5-c-form__group"
+    helpertextinvalid="Error"
+    validated="error"
   >
     <div
-      class="pf-c-form__group-control"
+      class="pf-v5-c-form__group-control"
     >
       <input
         id="test"
@@ -33,13 +35,6 @@ exports[`FormGroup Component should handle multiple error message types: boolean
         type="text"
         value=""
       />
-      <div
-        aria-live="polite"
-        class="pf-c-form__helper-text pf-m-error"
-        id="test-helper"
-      >
-        Error
-      </div>
     </div>
   </div>
 </formgroup>
@@ -76,10 +71,12 @@ exports[`FormGroup Component should handle multiple error message types: node er
 }"
 >
   <div
-    class="pf-c-form__group"
+    class="pf-v5-c-form__group"
+    helpertextinvalid="[object Object]"
+    validated="error"
   >
     <div
-      class="pf-c-form__group-control"
+      class="pf-v5-c-form__group-control"
     >
       <input
         id="test"
@@ -87,9 +84,6 @@ exports[`FormGroup Component should handle multiple error message types: node er
         type="text"
         value=""
       />
-      <span>
-        lorem ipsum
-      </span>
     </div>
   </div>
 </formgroup>
@@ -117,10 +111,12 @@ exports[`FormGroup Component should handle multiple error message types: string 
 }"
 >
   <div
-    class="pf-c-form__group"
+    class="pf-v5-c-form__group"
+    helpertextinvalid="lorem ipsum"
+    validated="error"
   >
     <div
-      class="pf-c-form__group-control"
+      class="pf-v5-c-form__group-control"
     >
       <input
         id="test"
@@ -128,13 +124,6 @@ exports[`FormGroup Component should handle multiple error message types: string 
         type="text"
         value=""
       />
-      <div
-        aria-live="polite"
-        class="pf-c-form__helper-text pf-m-error"
-        id="test-helper"
-      >
-        lorem ipsum
-      </div>
     </div>
   </div>
 </formgroup>
@@ -163,17 +152,19 @@ exports[`FormGroup Component should render a basic component: basic formgroup 1`
 }"
 >
   <div
-    class="pf-c-form__group"
+    class="pf-v5-c-form__group"
+    helpertextinvalid=""
+    validated="default"
   >
     <div
-      class="pf-c-form__group-label"
+      class="pf-v5-c-form__group-label"
     >
       <label
-        class="pf-c-form__label"
+        class="pf-v5-c-form__label"
         for="test"
       >
         <span
-          class="pf-c-form__label-text"
+          class="pf-v5-c-form__label-text"
         >
           test
         </span>
@@ -181,7 +172,7 @@ exports[`FormGroup Component should render a basic component: basic formgroup 1`
        
     </div>
     <div
-      class="pf-c-form__group-control"
+      class="pf-v5-c-form__group-control"
     >
       <input
         id="test"
@@ -196,11 +187,11 @@ exports[`FormGroup Component should render a basic component: basic formgroup 1`
 
 exports[`FormGroup Component should render a basic component: basic label 1`] = `
 <label
-  class="pf-c-form__label"
+  class="pf-v5-c-form__label"
   for="test"
 >
   <span
-    class="pf-c-form__label-text"
+    class="pf-v5-c-form__label-text"
   >
     test
   </span>

@@ -77,10 +77,4 @@ exports[`ContextIconAction Component should export, and handle icon variants: va
 }
 `;
 
-exports[`ContextIconAction Component should render a basic component with default props: basic 1`] = `
-<PlayIcon
-  color="currentColor"
-  noVerticalAlign={false}
-  size="sm"
-/>
-`;
+exports[`ContextIconAction Component should render a basic component with default props: basic 1`] = `<PlayIcon />`;

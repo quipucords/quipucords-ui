@@ -69,22 +69,24 @@ exports[`ViewToolbarTextInput Component should handle updating the view query th
 
 exports[`ViewToolbarTextInput Component should render a basic component: basic 1`] = `
 <InputGroup>
-  <TextInput
-    aria-label="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
-    className=""
-    id={null}
-    isDisabled={false}
-    isReadOnly={false}
-    maxLength={255}
-    name={null}
-    onChange={[Function]}
-    onClear={[Function]}
-    onKeyUp={[Function]}
-    onMouseUp={[Function]}
-    ouiaId="toolbar_search_name"
-    placeholder="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
-    type="text"
-    value={null}
-  />
+  <InputGroupItem>
+    <TextInput
+      aria-label="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
+      className=""
+      id={null}
+      isDisabled={false}
+      isReadOnly={false}
+      maxLength={255}
+      name={null}
+      onChange={[Function]}
+      onClear={[Function]}
+      onKeyUp={[Function]}
+      onMouseUp={[Function]}
+      ouiaId="toolbar_search_name"
+      placeholder="t(toolbar.label_placeholder_filter, {"context":"search_credentials_by_name"})"
+      type="text"
+      value={null}
+    />
+  </InputGroupItem>
 </InputGroup>
 `;

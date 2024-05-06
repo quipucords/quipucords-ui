@@ -10,7 +10,8 @@ import {
   Form,
   Spinner,
   Title,
-  ValidatedOptions
+  ValidatedOptions,
+  EmptyStateHeader
 } from '@patternfly/react-core';
 import { Modal } from '../modal/modal';
 import { connect, reduxActions, reduxTypes, store } from '../../redux';
@@ -429,10 +430,15 @@ class CreateScanDialog extends React.Component {
             <Form isHorizontal onSubmit={handleOnSubmit}>
               {pending && (
                 <EmptyState className="quipucords-empty-state">
-                  <EmptyStateIcon icon={Spinner} />
-                  <Title headingLevel="h3">
-                    {t('form-dialog.empty-state', { context: ['title', 'create-scan', 'pending'] })}
-                  </Title>
+                  <EmptyStateHeader
+                    titleText={
+                      <React.Fragment>
+                        {t('form-dialog.empty-state', { context: ['title', 'create-scan', 'pending'] })}
+                      </React.Fragment>
+                    }
+                    icon={<EmptyStateIcon icon={Spinner} />}
+                    headingLevel="h3"
+                  />
                 </EmptyState>
               )}
               {!pending && this.renderErrorMessage(options)}

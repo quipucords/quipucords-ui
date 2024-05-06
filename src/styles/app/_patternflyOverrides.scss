@@ -1,5 +1,5 @@
 .quipucords {
-  --pf-global--FontSize--md: 0.9rem;
+  // --pf-global--FontSize--md: 0.9rem;
 }
 
 .pf-c-form__helper-text {
@@ -15,15 +15,12 @@
 
 .quipucords-navItem {
   button.quipucords-navItem {
-    color: var(--pf-c-nav__link--m-current--Color);
+    color: inherit;
+
 
     .pf-c-button__icon {
-      color: var(--pf-c-nav__link--m-current--BackgroundColor);
+      color: inherit;
       margin-right: 1em;
-    }
-
-    &.pf-m-current .pf-c-button__icon {
-      color: var(--pf-c-page__header--BackgroundColor);
     }
   }
 }

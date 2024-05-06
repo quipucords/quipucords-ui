@@ -5,9 +5,10 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   EmptyStateVariant,
-  Title
+  EmptyStateActions,
+  EmptyStateHeader,
+  EmptyStateFooter
 } from '@patternfly/react-core';
 import { AddCircleOIcon } from '@patternfly/react-icons';
 import helpers from '../../common/helpers';
@@ -24,15 +25,20 @@ import { translate } from '../i18n/i18n';
  * @returns {React.ReactNode}
  */
 const SourcesEmptyState = ({ onAddSource, t, uiShortName, viewId }) => (
-  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-    <EmptyStateIcon icon={AddCircleOIcon} />
-    <Title headingLevel="h1">{t('view.empty-state', { context: ['title'], name: uiShortName })}</Title>
+  <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.lg}>
+    <EmptyStateHeader
+      titleText={<React.Fragment>{t('view.empty-state', { context: ['title'], name: uiShortName })}</React.Fragment>}
+      icon={<EmptyStateIcon icon={AddCircleOIcon} />}
+      headingLevel="h1"
+    />
     <EmptyStateBody>{t('view.empty-state', { context: ['description', viewId] })}</EmptyStateBody>
-    <EmptyStatePrimary>
-      <Button onClick={onAddSource} ouiaId="add_source">
-        {t('view.empty-state', { context: ['label', viewId] })}
-      </Button>
-    </EmptyStatePrimary>
+    <EmptyStateFooter>
+      <EmptyStateActions>
+        <Button onClick={onAddSource} ouiaId="add_source">
+          {t('view.empty-state', { context: ['label', viewId] })}
+        </Button>
+      </EmptyStateActions>
+    </EmptyStateFooter>
   </EmptyState>
 );
 

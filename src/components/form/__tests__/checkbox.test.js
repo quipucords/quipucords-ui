@@ -48,8 +48,9 @@ describe('Checkbox Component', () => {
   });
 
   it('should return an emulated onChange event', () => {
+    const mockOnChange = jest.fn();
     const props = {
-      onChange: jest.fn()
+      onChange: mockOnChange
     };
 
     const component = renderComponent(<Checkbox {...props}>lorem ipsum</Checkbox>);
@@ -57,7 +58,7 @@ describe('Checkbox Component', () => {
     const mockEvent = { currentTarget: {}, target: {}, checked: true, persist: helpers.noop };
     component.fireEvent.click(input, mockEvent);
 
-    expect(props.onChange).toHaveBeenCalledTimes(1);
-    expect(props.onChange.mock.calls).toMatchSnapshot('emulated event, change');
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(mockOnChange.mock.calls).toMatchSnapshot('emulated event');
   });
 });

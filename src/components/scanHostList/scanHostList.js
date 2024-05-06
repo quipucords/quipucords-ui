@@ -73,8 +73,8 @@ class ScanHostList extends React.Component {
 
     if (pending) {
       return (
-        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-          <Spinner isSVG size="sm" /> {t('view.loading')}
+        <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.lg}>
+          <Spinner size="sm" /> {t('view.loading')}
         </EmptyState>
       );
     }

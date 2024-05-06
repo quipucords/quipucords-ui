@@ -107,9 +107,15 @@ const ViewToolbar = ({
           <ToolbarItem key="lastRefresh">
             <RefreshTimeButton onRefresh={onRefresh} lastRefresh={lastRefresh} />
           </ToolbarItem>
-          <ToolbarItem key="secondaryFields" alignment={{ lg: 'alignRight', md: 'alignLeft' }}>
-            {secondaryFields}
-          </ToolbarItem>
+          <ToolbarGroup
+            key="secondaryFields"
+            align={{ lg: 'alignRight', md: 'alignLeft' }}
+            spacer={{ default: 'spacerSm' }}
+          >
+            {secondaryFields.map(field => (
+              <ToolbarItem key={field.key}>{field}</ToolbarItem>
+            ))}
+          </ToolbarGroup>
         </ToolbarContent>
       </Toolbar>
       <Divider />
@@ -118,7 +124,7 @@ const ViewToolbar = ({
 };
 
 ViewToolbar.propTypes = {
-  secondaryFields: PropTypes.node,
+  secondaryFields: PropTypes.array,
   lastRefresh: PropTypes.number,
   t: PropTypes.func,
   useOnRefresh: PropTypes.func,

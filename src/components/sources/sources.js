@@ -9,13 +9,13 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   EmptyStateVariant,
   Spinner,
-  Title,
-  TitleSizes
+  EmptyStateActions,
+  EmptyStateHeader,
+  EmptyStateFooter
 } from '@patternfly/react-core';
-import { IconSize, SearchIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 import { Modal, ModalVariant } from '../modal/modal';
 import { reduxTypes, storeHooks } from '../../redux';
 import { useOnShowAddSourceWizard } from '../addSourceWizard/addSourceWizardContext';
@@ -37,6 +37,7 @@ import {
   useOnSelect
 } from './sourcesContext';
 import { SourcesToolbar } from './sourcesToolbar';
+import { IconSize } from '../contextIcon/contextIcon';
 import { translate } from '../i18n/i18n';
 
 const CONFIG = {
@@ -111,29 +112,26 @@ const Sources = ({
 
   /**
    * Return toolbar actions.
-   *
-   * @returns {React.ReactNode}
    */
-  const renderToolbarActions = () => (
-    <React.Fragment>
-      <Button onClick={onShowAddSourceWizard} ouiaId="add_source">
-        {t('table.label', { context: 'add' })}
-      </Button>{' '}
-      <Button
-        variant={ButtonVariant.secondary}
-        isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
-        onClick={onScanSources}
-      >
-        {t('table.label', { context: 'scan' })}
-      </Button>
-    </React.Fragment>
-  );
+  const toolbarActions = [
+    <Button key="secondaryAddSource" onClick={onShowAddSourceWizard} ouiaId="add_source">
+      {t('table.label', { context: 'add' })}
+    </Button>,
+    <Button
+      key="secondaryScanSource"
+      variant={ButtonVariant.secondary}
+      isDisabled={Object.values(selectedRows).filter(val => val !== null).length <= 1}
+      onClick={onScanSources}
+    >
+      {t('table.label', { context: 'scan' })}
+    </Button>
+  ];
 
   if (pending) {
     return (
       <Modal variant={ModalVariant.medium} backdrop={false} isOpen disableFocusTrap>
         <Bullseye>
-          <Spinner isSVG size={IconSize.lg} /> &nbsp; {t('view.loading', { context: viewId })}
+          <Spinner size={IconSize.lg} /> &nbsp; {t('view.loading', { context: viewId })}
         </Bullseye>
       </Modal>
     );
@@ -157,12 +155,14 @@ const Sources = ({
       <div className="quipucords-view-container">
         {isActive && (
           <React.Fragment>
-            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={renderToolbarActions()} />
+            <ViewToolbar lastRefresh={new Date(date).getTime()} secondaryFields={toolbarActions} />
             <ViewPaginationRow totalResults={totalResults} />
           </React.Fragment>
         )}
         <div className="quipucords-list-container">
           <Table
+            ariaLabel={t('table.ariaLabel')}
+            summary={t('table.summary')}
             onExpand={onExpand}
             onSelect={onSelect}
             rows={data?.map((item, index) => ({
@@ -217,17 +217,20 @@ const Sources = ({
             }))}
           >
             {fulfilled && isActive && (
-              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.large}>
-                <EmptyStateIcon icon={SearchIcon} />
-                <Title size={TitleSizes.lg} headingLevel="h1">
-                  {t('view.empty-state', { context: ['filter', 'title'] })}
-                </Title>
+              <EmptyState className="quipucords-empty-state" variant={EmptyStateVariant.lg}>
+                <EmptyStateHeader
+                  titleText={<React.Fragment>{t('view.empty-state', { context: ['filter', 'title'] })}</React.Fragment>}
+                  icon={<EmptyStateIcon icon={SearchIcon} />}
+                  headingLevel="h1"
+                />
                 <EmptyStateBody>{t('view.empty-state', { context: ['filter', 'description'] })}</EmptyStateBody>
-                <EmptyStatePrimary>
-                  <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
-                    {t('view.empty-state', { context: ['label', 'clear'] })}
-                  </Button>
-                </EmptyStatePrimary>
+                <EmptyStateFooter>
+                  <EmptyStateActions>
+                    <Button variant={ButtonVariant.link} onClick={onToolbarFieldClearAll}>
+                      {t('view.empty-state', { context: ['label', 'clear'] })}
+                    </Button>
+                  </EmptyStateActions>
+                </EmptyStateFooter>
               </EmptyState>
             )}
             {fulfilled && !isActive && <SourcesEmptyState onAddSource={onShowAddSourceWizard} viewId={viewId} />}

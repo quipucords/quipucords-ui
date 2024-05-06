@@ -42,7 +42,7 @@ describe('CreateScanDialog Component', () => {
     };
 
     const component = renderComponent(<CreateScanDialog {...props} />);
-    expect(component.screen.getByLabelText('Danger Alert')).toMatchSnapshot('basic error');
+    expect(component.screen.render().querySelector('.pf-v5-c-alert')).toMatchSnapshot('basic error');
 
     const componentNamedError = component.setProps({ submitErrorMessages: { scanName: 'dolor sit' } });
     expect(componentNamedError.screen.render().querySelectorAll('[id*="scanName"]')).toMatchSnapshot('named error');

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Pagination, PaginationVariant } from '@patternfly/react-core';
+import { Pagination } from '@patternfly/react-core';
 import { reduxTypes, storeHooks } from '../../redux';
 import { useQuery, useView } from '../view/viewContext';
 import { API_QUERY_TYPES } from '../../constants/apiConstants';
@@ -93,7 +93,6 @@ const ViewPaginationRow = ({
   return (
     <Pagination
       className="quipucords-view__pagination"
-      perPageComponent="button"
       dropDirection="down"
       perPage={pageSize}
       page={currentPage}
@@ -102,7 +101,6 @@ const ViewPaginationRow = ({
       itemsStart={itemsStart}
       itemsEnd={itemsEnd}
       onPerPageSelect={(_, value) => onPerPageSelect(value)}
-      variant={PaginationVariant.bottom}
     />
   );
 };

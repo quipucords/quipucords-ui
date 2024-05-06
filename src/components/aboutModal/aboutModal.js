@@ -18,6 +18,7 @@ import logoImg from '../../styles/images/logo.svg';
 import titleImg from '../../styles/images/title.svg';
 import logoImgBrand from '../../styles/images/logo-brand.svg';
 import titleImgBrand from '../../styles/images/title-brand.svg';
+import backgroundImageSrc from '../../styles/images/about-bg.png';
 
 /**
  * About modal, display application information.
@@ -98,6 +99,7 @@ class AboutModal extends React.Component {
     return (
       <PfAboutModal
         className="quipucords-about-modal"
+        backgroundImageSrc={backgroundImageSrc}
         isOpen={props.show}
         onClose={props.onHide}
         productName={props.productTitle}

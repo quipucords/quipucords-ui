@@ -44,10 +44,10 @@ const Checkbox = ({
    * onChange event, provide restructured event.
    *
    * @event onCheckboxChange
-   * @param {boolean} eventChecked
    * @param {object} event
+   * @param {boolean} eventChecked
    */
-  const onCheckboxChange = (eventChecked, event) => {
+  const onCheckboxChange = (event, eventChecked) => {
     const mockEvent = {
       ...createMockEvent(event),
       id: updatedId,

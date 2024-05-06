@@ -109,10 +109,10 @@ const TextInput = ({
    * onChange event, provide restructured event.
    *
    * @event onChange
-   * @param {string} changedValue
    * @param {object} event
+   * @param {string} changedValue
    */
-  const onTextInputChange = (changedValue, event) => {
+  const onTextInputChange = (event, changedValue) => {
     const clonedEvent = { ...event };
 
     setUpdatedValue(changedValue);
@@ -129,13 +129,13 @@ const TextInput = ({
       name={updatedName}
       className={`quipucords-form__text-input ${className}`}
       isDisabled={isDisabled || false}
-      isReadOnly={isReadOnly || false}
       onChange={onTextInputChange}
       onKeyUp={onTextInputKeyUp}
       onMouseUp={onTextInputMouseUp}
       type={type}
       value={updatedValue ?? value ?? ''}
       ouiaId={updatedOuiaId}
+      readOnlyVariant={(isReadOnly && 'default') || undefined}
       {...props}
     />
   );

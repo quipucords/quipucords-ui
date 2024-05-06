@@ -3,17 +3,21 @@
 exports[`TableEmpty Component should render a basic component: basic 1`] = `
 <Bullseye>
   <EmptyState
-    variant="small"
+    variant="sm"
   >
-    <EmptyStateIcon
-      icon={[Function]}
-    />
-    <Title
+    <EmptyStateHeader
       headingLevel="h2"
-      size="lg"
-    >
-      t(table.empty-state_title, No results found)
-    </Title>
+      icon={
+        <EmptyStateIcon
+          icon={[Function]}
+        />
+      }
+      titleText={
+        <React.Fragment>
+          t(table.empty-state_title, No results found)
+        </React.Fragment>
+      }
+    />
     <EmptyStateBody>
       t(table.empty-state_description, Clear all filters and try again.)
     </EmptyStateBody>

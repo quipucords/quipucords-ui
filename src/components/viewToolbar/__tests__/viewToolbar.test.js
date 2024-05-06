@@ -50,7 +50,7 @@ describe('ViewToolbar Component', () => {
           toolbar: { filterFields: [sourcesConfig.toolbar.filterFields[0]] }
         }
       }),
-      secondaryFields: <React.Fragment>dolor sit</React.Fragment>
+      secondaryFields: [<React.Fragment>dolor sit</React.Fragment>]
     };
     const component = await shallowComponent(<ViewToolbar {...props} />);
 

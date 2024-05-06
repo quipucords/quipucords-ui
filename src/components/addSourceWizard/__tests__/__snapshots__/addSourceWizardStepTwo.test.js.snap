@@ -21,9 +21,8 @@ exports[`AddSourceWizardStepTwo Component should correctly validate and submit d
 exports[`AddSourceWizardStepTwo Component should display different forms for source types: network 1`] = `
 <input
   aria-invalid="false"
-  class="pf-c-form-control quipucords-form__text-input "
   data-ouia-component-id="name"
-  data-ouia-component-type="PF4/TextInput"
+  data-ouia-component-type="PF5/TextInput"
   data-ouia-safe="true"
   id="name"
   name="name"
@@ -36,9 +35,8 @@ exports[`AddSourceWizardStepTwo Component should display different forms for sou
 exports[`AddSourceWizardStepTwo Component should display different forms for source types: vcenter 1`] = `
 <input
   aria-invalid="false"
-  class="pf-c-form-control quipucords-form__text-input "
   data-ouia-component-id="name"
-  data-ouia-component-type="PF4/TextInput"
+  data-ouia-component-type="PF5/TextInput"
   data-ouia-safe="true"
   id="name"
   name="name"
@@ -96,21 +94,23 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
 }"
 >
   <form
-    class="pf-c-form pf-m-horizontal"
+    class="pf-v5-c-form pf-m-horizontal"
     novalidate=""
   >
     <div
-      class="pf-c-form__group"
+      class="pf-v5-c-form__group"
+      helpertextinvalid="Error"
+      validated="default"
     >
       <div
-        class="pf-c-form__group-label"
+        class="pf-v5-c-form__group-label"
       >
         <label
-          class="pf-c-form__label"
+          class="pf-v5-c-form__label"
           for="name"
         >
           <span
-            class="pf-c-form__label-text"
+            class="pf-v5-c-form__label-text"
           >
             t(form-dialog.label, {"context":"name"})
           </span>
@@ -118,34 +118,40 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
          
       </div>
       <div
-        class="pf-c-form__group-control"
+        class="pf-v5-c-form__group-control"
       >
-        <input
-          aria-invalid="false"
-          class="pf-c-form-control quipucords-form__text-input "
-          data-ouia-component-id="name"
-          data-ouia-component-type="PF4/TextInput"
-          data-ouia-safe="true"
-          id="name"
-          name="name"
-          placeholder="t(form-dialog.label_name_add-source_placeholder, {"context":"network"})"
-          type="text"
-          value=""
-        />
+        <span
+          class="pf-v5-c-form-control quipucords-form__text-input "
+        >
+          <input
+            aria-invalid="false"
+            data-ouia-component-id="name"
+            data-ouia-component-type="PF5/TextInput"
+            data-ouia-safe="true"
+            id="name"
+            name="name"
+            placeholder="t(form-dialog.label_name_add-source_placeholder, {"context":"network"})"
+            type="text"
+            value=""
+          />
+        </span>
       </div>
     </div>
     <div
-      class="pf-c-form__group"
+      class="pf-v5-c-form__group"
+      helpertext="[object Object]"
+      helpertextinvalid="Error"
+      validated="default"
     >
       <div
-        class="pf-c-form__group-label"
+        class="pf-v5-c-form__group-label"
       >
         <label
-          class="pf-c-form__label"
+          class="pf-v5-c-form__label"
           for="hostsMultiple"
         >
           <span
-            class="pf-c-form__label-text"
+            class="pf-v5-c-form__label-text"
           >
             t(form-dialog.label, {"context":"search-addresses"})
           </span>
@@ -153,36 +159,36 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
          
       </div>
       <div
-        class="pf-c-form__group-control"
+        class="pf-v5-c-form__group-control"
       >
-        <textarea
-          aria-invalid="false"
-          class="pf-c-form-control quipucords-form__textarea   pf-m-resize-vertical"
-          data-ouia-component-id="hosts_multiple"
-          id="hostsMultiple"
-          name="hostsMultiple"
-          placeholder="t(form-dialog.label_search-addresses, {"context":"placeholder"})"
-          rows="5"
-        />
-        <div
-          class="pf-c-form__helper-text"
+        <span
+          class="pf-v5-c-form-control pf-m-resize-vertical quipucords-form__textarea  "
         >
-          t(form-dialog.label_search-addresses, {"context":"help"})
-        </div>
+          <textarea
+            aria-invalid="false"
+            data-ouia-component-id="hosts_multiple"
+            id="hostsMultiple"
+            name="hostsMultiple"
+            placeholder="t(form-dialog.label_search-addresses, {"context":"placeholder"})"
+            rows="5"
+          />
+        </span>
       </div>
     </div>
     <div
-      class="pf-c-form__group"
+      class="pf-v5-c-form__group"
+      helpertextinvalid="Error"
+      validated="default"
     >
       <div
-        class="pf-c-form__group-label"
+        class="pf-v5-c-form__group-label"
       >
         <label
-          class="pf-c-form__label"
+          class="pf-v5-c-form__label"
           for="port"
         >
           <span
-            class="pf-c-form__label-text"
+            class="pf-v5-c-form__label-text"
           >
             t(form-dialog.label, {"context":"port"})
           </span>
@@ -190,35 +196,40 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
          
       </div>
       <div
-        class="pf-c-form__group-control"
+        class="pf-v5-c-form__group-control"
       >
-        <input
-          aria-invalid="false"
-          class="pf-c-form-control quipucords-form__text-input "
-          data-ouia-component-id="port"
-          data-ouia-component-type="PF4/TextInput"
-          data-ouia-safe="true"
-          id="port"
-          maxlength="5"
-          name="port"
-          placeholder="t(form-dialog.label_port, {"context":"placeholder"})"
-          type="text"
-          value=""
-        />
+        <span
+          class="pf-v5-c-form-control quipucords-form__text-input "
+        >
+          <input
+            aria-invalid="false"
+            data-ouia-component-id="port"
+            data-ouia-component-type="PF5/TextInput"
+            data-ouia-safe="true"
+            id="port"
+            maxlength="5"
+            name="port"
+            placeholder="t(form-dialog.label_port, {"context":"placeholder"})"
+            type="text"
+            value=""
+          />
+        </span>
       </div>
     </div>
     <div
-      class="pf-c-form__group"
+      class="pf-v5-c-form__group"
+      helpertextinvalid="Error"
+      validated="default"
     >
       <div
-        class="pf-c-form__group-label"
+        class="pf-v5-c-form__group-label"
       >
         <label
-          class="pf-c-form__label"
+          class="pf-v5-c-form__label"
           for="addCredentials"
         >
           <span
-            class="pf-c-form__label-text"
+            class="pf-v5-c-form__label-text"
           >
             t(form-dialog.label, {"context":"credential"})
           </span>
@@ -226,105 +237,115 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
          
       </div>
       <div
-        class="pf-c-form__group-control"
+        class="pf-v5-c-form__group-control"
       >
         <div
-          class="pf-c-input-group"
+          class="pf-v5-c-input-group"
         >
           <div
-            class="quipucords-select quipucords-select__not-inline"
+            class="pf-v5-c-input-group__item"
           >
             <div
-              class="pf-c-select quipucords-select-pf quipucords-select-pf__position-down  "
-              data-ouia-component-id="add_credentials_select"
-              data-ouia-component-type="PF4/Select"
-              data-ouia-safe="true"
+              class="quipucords-select quipucords-select__not-inline"
             >
-              <button
-                aria-expanded="false"
-                aria-label="Options menu"
-                aria-labelledby=" pf-select-toggle-id-1"
-                class="pf-c-select__toggle pf-m-placeholder pf-m-disabled"
-                disabled=""
-                id="pf-select-toggle-id-1"
-                type="button"
+              <div
+                class="pf-v5-c-select quipucords-select-pf quipucords-select-pf__position-down  "
+                data-ouia-component-id="add_credentials_select"
+                data-ouia-component-type="PF5/Select"
+                data-ouia-safe="true"
               >
-                <div
-                  class="pf-c-select__toggle-wrapper"
+                <button
+                  aria-expanded="false"
+                  aria-label="Options menu"
+                  aria-labelledby=" pf-select-toggle-id-1"
+                  class="pf-v5-c-select__toggle pf-m-placeholder pf-m-disabled"
+                  disabled=""
+                  id="pf-select-toggle-id-1"
+                  type="button"
                 >
+                  <div
+                    class="pf-v5-c-select__toggle-wrapper"
+                  >
+                    <span
+                      class="pf-v5-c-select__toggle-text"
+                    >
+                      t(form-dialog.label_placeholder_add-source_credential_multi, {"context":"add"})
+                    </span>
+                  </div>
                   <span
-                    class="pf-c-select__toggle-text"
+                    class="pf-v5-c-select__toggle-arrow"
                   >
-                    t(form-dialog.label_placeholder_add-source_credential_multi, {"context":"add"})
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 320 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                      />
+                    </svg>
                   </span>
-                </div>
-                <span
-                  class="pf-c-select__toggle-arrow"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 320 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                    />
-                  </svg>
-                </span>
-              </button>
+                </button>
+              </div>
             </div>
           </div>
-          <button
-            aria-disabled="false"
-            aria-label="t(form-dialog.label, {"context":"add-credential"})"
-            class="pf-c-button pf-m-control"
-            data-ouia-component-id="add_credentials_add_new"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            id="addCredentials"
-            title="t(form-dialog.label, {"context":"add-credential"})"
-            type="button"
+          <div
+            class="pf-v5-c-input-group__item"
           >
-            <span
-              class="pf-c-button__icon pf-m-start"
+            <button
+              aria-disabled="false"
+              aria-label="t(form-dialog.label, {"context":"add-credential"})"
+              class="pf-v5-c-button pf-m-control"
+              data-ouia-component-id="add_credentials_add_new"
+              data-ouia-component-type="PF5/Button"
+              data-ouia-safe="true"
+              id="addCredentials"
+              title="t(form-dialog.label, {"context":"add-credential"})"
+              type="button"
             >
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 448 512"
-                width="1em"
+              <span
+                class="pf-v5-c-button__icon pf-m-start"
               >
-                <path
-                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
-            </span>
-          </button>
+                <svg
+                  aria-hidden="true"
+                  class="pf-v5-svg"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  viewBox="0 0 448 512"
+                  width="1em"
+                >
+                  <path
+                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div
-      class="pf-c-form__group"
+      class="pf-v5-c-form__group"
+      helpertextinvalid=""
+      validated="default"
     >
       <div
-        class="pf-c-form__group-control"
+        class="pf-v5-c-form__group-control"
       >
         <div
-          class="pf-c-check quipucords-form__checkbox "
+          class="pf-v5-c-check quipucords-form__checkbox "
         >
           <input
             aria-invalid="false"
             aria-label="checkbox input"
-            class="pf-c-check__input"
+            class="pf-v5-c-check__input"
             data-ouia-component-id="options_paramiko"
-            data-ouia-component-type="PF4/Checkbox"
+            data-ouia-component-type="PF5/Checkbox"
             data-ouia-safe="true"
             id="optionParamiko"
             name="optionParamiko"
@@ -332,7 +353,7 @@ exports[`AddSourceWizardStepTwo Component should render a basic component: basic
             value=""
           />
           <label
-            class="pf-c-check__label"
+            class="pf-v5-c-check__label"
             for="optionParamiko"
           >
             t(form-dialog.label, {"context":"paramiko"}, [object Object])

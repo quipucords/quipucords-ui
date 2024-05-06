@@ -77,13 +77,7 @@ exports[`ViewToolbarSelectCategory Component should render a basic component: ba
   position="left"
   selectedOptions={null}
   splitButtonVariant={null}
-  toggleIcon={
-    <FilterIcon
-      color="currentColor"
-      noVerticalAlign={false}
-      size="sm"
-    />
-  }
+  toggleIcon={<FilterIcon />}
   variant="single"
 />
 `;

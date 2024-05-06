@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useMount, useUnmount } from 'react-use';
-import { Modal as PfModal, ModalProps, ModalVariant } from '@patternfly/react-core';
+import { Modal as PfModal, ModalVariant } from '@patternfly/react-core';
 import classNames from 'classnames';
 import { translate } from '../i18n/i18n';
 
@@ -21,7 +21,7 @@ import { translate } from '../i18n/i18n';
  * @param {boolean} props.showClose
  * @param {Function} props.t
  * @param {string} props.variant
- * @param {ModalProps} props.props
+ * @param {object} props.props
  * @returns {React.ReactNode}
  */
 const Modal = ({

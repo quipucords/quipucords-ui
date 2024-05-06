@@ -94,10 +94,10 @@ const TextArea = ({
    * onChange event, provide restructured event.
    *
    * @event onChange
-   * @param {string} changedValue
    * @param {object} event
+   * @param {string} changedValue
    */
-  const onTextInputChange = (changedValue, event) => {
+  const onTextInputChange = (event, changedValue) => {
     const clonedEvent = { ...event };
 
     setUpdatedValue(changedValue);
@@ -116,7 +116,6 @@ const TextArea = ({
         (resizeOrientation === TextAreResizeOrientation.none && 'quipucords-form__textarea-resize-none') || ''
       } ${className}`}
       isDisabled={isDisabled || false}
-      isReadOnly={isReadOnly || false}
       onChange={onTextInputChange}
       onKeyUp={onTextAreaKeyUp}
       resizeOrientation={
@@ -124,6 +123,7 @@ const TextArea = ({
       }
       value={updatedValue ?? value ?? ''}
       data-ouia-component-id={updatedOuiaId}
+      readOnlyVariant={(isReadOnly && 'default') || undefined}
       {...props}
     />
   );

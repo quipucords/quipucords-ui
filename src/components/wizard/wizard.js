@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalVariant, Wizard as PfWizard } from '@patternfly/react-core';
+import { ModalVariant } from '@patternfly/react-core';
+import { Wizard as PfWizard } from '@patternfly/react-core/deprecated';
 import classNames from 'classnames';
 import { Modal } from '../modal/modal';
 

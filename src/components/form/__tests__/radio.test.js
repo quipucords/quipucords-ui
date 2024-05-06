@@ -47,5 +47,6 @@ describe('Radio Component', () => {
     component.fireEvent.click(input, { currentTarget: {}, target: {} });
 
     expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(mockOnChange.mock.calls).toMatchSnapshot('emulated event');
   });
 });
