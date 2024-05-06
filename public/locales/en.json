@@ -70,8 +70,6 @@
     "label_connection": "Connection",
     "label_credential": "Credential",
     "label_credential_error": "A credential is required",
-    "label_decision-manager": "Decision Manager",
-    "label_decision-manager_full": "Red Hat Decision Manager, formerly Red Hat JBoss BRMS",
     "label_deep-scan": "Deep scan for these products",
     "label_deep-scan_tooltip": "Deep scanning provides more accurate detection, but will take longer.",
     "label_delete": "Delete",
