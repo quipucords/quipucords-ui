@@ -50,10 +50,10 @@ const Radio = ({
    * onChange event, provide restructured event.
    *
    * @event onRadioChange
-   * @param {boolean} eventChecked
    * @param {object} event
+   * @param {boolean} eventChecked
    */
-  const onRadioChange = (eventChecked, event) => {
+  const onRadioChange = (event, eventChecked) => {
     const mockEvent = {
       ...createMockEvent(event),
       id: updatedId,

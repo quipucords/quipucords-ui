@@ -135,3 +135,42 @@ exports[`Checkbox Component should render a basic component: basic 1`] = `
   </div>
 </checkbox>
 `;
+
+exports[`Checkbox Component should return an emulated onChange event: emulated event 1`] = `
+[
+  [
+    {
+      "checked": true,
+      "currentTarget": <input
+        aria-invalid="false"
+        aria-label="checkbox input"
+        class="pf-v5-c-check__input"
+        data-ouia-component-id="OUIA-Generated-Checkbox-7"
+        data-ouia-component-type="PF5/Checkbox"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="checkbox"
+        value=""
+      />,
+      "id": "generatedid-",
+      "keyCode": undefined,
+      "name": "generatedid-",
+      "persist": [Function],
+      "target": <input
+        aria-invalid="false"
+        aria-label="checkbox input"
+        class="pf-v5-c-check__input"
+        data-ouia-component-id="OUIA-Generated-Checkbox-7"
+        data-ouia-component-type="PF5/Checkbox"
+        data-ouia-safe="true"
+        id="generatedid-"
+        name="generatedid-"
+        type="checkbox"
+        value=""
+      />,
+      "value": undefined,
+    },
+  ],
+]
+`;

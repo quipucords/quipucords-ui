@@ -94,10 +94,10 @@ const TextArea = ({
    * onChange event, provide restructured event.
    *
    * @event onChange
-   * @param {string} changedValue
    * @param {object} event
+   * @param {string} changedValue
    */
-  const onTextInputChange = (changedValue, event) => {
+  const onTextInputChange = (event, changedValue) => {
     const clonedEvent = { ...event };
 
     setUpdatedValue(changedValue);
@@ -116,7 +116,7 @@ const TextArea = ({
         (resizeOrientation === TextAreResizeOrientation.none && 'quipucords-form__textarea-resize-none') || ''
       } ${className}`}
       isDisabled={isDisabled || false}
-      onChange={(event, changedValue) => onTextInputChange(changedValue, event)}
+      onChange={onTextInputChange}
       onKeyUp={onTextAreaKeyUp}
       resizeOrientation={
         resizeOrientation === TextAreResizeOrientation.none ? TextAreResizeOrientation.default : resizeOrientation
