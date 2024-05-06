@@ -181,8 +181,6 @@ exports[`Scans Component should handle multiple display states, pending, error, 
                     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
                   </Tooltip>,
                   "dataLabel": "t(table.header, {"context":"sources"})",
-                  "expandedContent": undefined,
-                  "isExpanded": false,
                   "width": 8,
                 },
                 {

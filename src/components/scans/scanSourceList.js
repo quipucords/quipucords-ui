@@ -8,6 +8,8 @@ import { translate } from '../i18n/i18n';
 
 /**
  * Return a scan jobs listing for "sources".
+ *
+ * @deprecated
  */
 class ScanSourceList extends React.Component {
   static setSourceStatus(source) {

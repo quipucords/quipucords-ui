@@ -189,7 +189,6 @@ const Scans = ({
                 },
                 {
                   ...scansTableCells.sourcesCellContent(item, { viewId }),
-                  isExpanded: expandedRows?.[item.id] === 4,
                   width: 8,
                   dataLabel: t('table.header', { context: ['sources'] })
                 },

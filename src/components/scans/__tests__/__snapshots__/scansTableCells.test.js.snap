@@ -175,7 +175,6 @@ exports[`ScansTableCells should return consistent cell results: basic sourcesCel
   >
     t(table.label_status, {"context":"cell","count":0}, [object Object],[object Object])
   </Tooltip>,
-  "expandedContent": undefined,
 }
 `;
 
