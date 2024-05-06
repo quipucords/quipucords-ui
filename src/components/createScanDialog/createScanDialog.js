@@ -61,7 +61,7 @@ class CreateScanDialog extends React.Component {
 
     errors.scanName = formHelpers.isEmpty(values.scanName);
 
-    if (!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs && !checked.jbossBrms) {
+    if (!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs) {
       errors.scanDirectories = !formHelpers.isEmpty(values.scanDirectories);
     } else {
       errors.scanDirectories = values.scanDirectories.filter(dir => !/^\//.test(dir)).length > 0;
@@ -82,16 +82,6 @@ class CreateScanDialog extends React.Component {
       scan,
       [apiTypes.API_SUBMIT_SCAN_OPTIONS, apiTypes.API_SUBMIT_SCAN_OPTIONS_MAX_CONCURRENCY],
       values.scanConcurrency
-    );
-
-    helpers.setPropIfDefined(
-      scan,
-      [
-        apiTypes.API_SUBMIT_SCAN_OPTIONS,
-        apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH,
-        apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH_BRMS
-      ],
-      checked.jbossBrms
     );
 
     helpers.setPropIfDefined(
@@ -124,7 +114,7 @@ class CreateScanDialog extends React.Component {
       checked.jbossWs
     );
 
-    if (checked.jbossEap || checked.jbossFuse || checked.jbossWs || checked.jbossBrms) {
+    if (checked.jbossEap || checked.jbossFuse || checked.jbossWs) {
       scan[apiTypes.API_SUBMIT_SCAN_OPTIONS][apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH][
         apiTypes.API_SUBMIT_SCAN_OPTIONS_EXTENDED_SEARCH_DIRS
       ] = values.scanDirectories;
@@ -245,7 +235,7 @@ class CreateScanDialog extends React.Component {
 
       isChecked[element.name] = element.checked;
 
-      if (!isChecked.jbossEap && !isChecked.jbossFuse && !isChecked.jbossWs && !isChecked.jbossBrms) {
+      if (!isChecked.jbossEap && !isChecked.jbossFuse && !isChecked.jbossWs) {
         handleOnEventCustom([
           {
             name: 'scanDirectories',
@@ -323,16 +313,6 @@ class CreateScanDialog extends React.Component {
               {t('form-dialog.label', { context: ['jboss-server'] })}
             </abbr>
           </Checkbox>
-          <Checkbox
-            ariaLabel={t('form-dialog.label', { context: ['decision-manager', 'full'] })}
-            name="jbossBrms"
-            checked={checked.jbossBrms}
-            onChange={onCheck}
-          >
-            <abbr title={t('form-dialog.label', { context: ['decision-manager', 'full'] })}>
-              {t('form-dialog.label', { context: ['decision-manager'] })}
-            </abbr>
-          </Checkbox>
         </FormGroup>
         <FormGroup
           label={t('form-dialog.label', { context: 'scan-alt-directories' })}
@@ -344,7 +324,7 @@ class CreateScanDialog extends React.Component {
           helperText={t('form-dialog.label', { context: ['scan-alt-directories', 'help'] })}
         >
           <TextArea
-            isDisabled={!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs && !checked.jbossBrms}
+            isDisabled={!checked.jbossEap && !checked.jbossFuse && !checked.jbossWs}
             name="displayScanDirectories"
             ouiaId="display_scan_directories"
             value={values.displayScanDirectories}
@@ -412,7 +392,6 @@ class CreateScanDialog extends React.Component {
           jbossEap: false,
           jbossFuse: false,
           jbossWs: false,
-          jbossBrms: false,
           scanName: '',
           scanSources: sources.map(item => item.id)
         }}
