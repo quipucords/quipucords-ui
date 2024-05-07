@@ -19,7 +19,6 @@ import { apiTypes } from '../../constants/apiConstants';
 import { translate } from '../i18n/i18n';
 import { helpers } from '../../common';
 import { DropdownSelect, SelectButtonVariant, SelectDirection, SelectPosition } from '../dropdownSelect/dropdownSelect';
-import ScanSourceList from './scanSourceList';
 import ScanJobsList from './scanJobsList';
 
 /**
@@ -198,15 +197,11 @@ const okHostsCellContent = ({ [apiTypes.API_RESPONSE_SCAN_MOST_RECENT]: mostRece
  * @param {string} options.viewId
  * @returns {{expandedContent: (React.ReactNode|undefined), content: React.ReactNode}}
  */
-const sourcesCellContent = (
-  { [apiTypes.API_RESPONSE_SCAN_ID]: id, [apiTypes.API_RESPONSE_SCAN_SOURCES]: sources = [] } = {},
-  { viewId } = {}
-) => {
+const sourcesCellContent = ({ [apiTypes.API_RESPONSE_SCAN_SOURCES]: sources = [] } = {}, { viewId } = {}) => {
   const count = sources?.length;
 
   return {
-    content: statusCell({ count, status: 'sources', viewId }),
-    expandedContent: (count && <ScanSourceList key={`sources-${id}`} id={id} />) || undefined
+    content: statusCell({ count, status: 'sources', viewId })
   };
 };
 
