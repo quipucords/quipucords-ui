@@ -166,6 +166,10 @@ const CreateCredentialDialog = ({
 
     // clean for submitting an edited cred
     if (edit) {
+      delete updatedValues[apiTypes.API_QUERY_TYPES.AUTH_TOKEN];
+      delete updatedValues[apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE];
+      delete updatedValues[apiTypes.API_QUERY_TYPES.BECOME_PASSWORD];
+      delete updatedValues[apiTypes.API_QUERY_TYPES.PASSWORD];
       delete updatedValues[apiTypes.API_QUERY_TYPES.CREATED_AT];
       delete updatedValues[apiTypes.API_QUERY_TYPES.CREDENTIAL_TYPE];
       delete updatedValues[apiTypes.API_QUERY_TYPES.UPDATED_AT];
@@ -303,6 +307,7 @@ const CreateCredentialDialog = ({
               label={t('form-dialog.label', { context: ['ssh-passphrase', 'create-credential'] })}
             >
               <TextInput
+                isDisabled={edit}
                 ouiaId="ssh_passphrase"
                 name={apiTypes.API_QUERY_TYPES.SSH_PASSPHRASE}
                 type="password"
@@ -323,6 +328,7 @@ const CreateCredentialDialog = ({
             errorMessage={t('form-dialog.label', { context: ['token', 'create-credential', 'error'] })}
           >
             <TextInput
+              isDisabled={edit}
               ouiaId="auth_token"
               name={apiTypes.API_QUERY_TYPES.AUTH_TOKEN}
               value={values[apiTypes.API_QUERY_TYPES.AUTH_TOKEN]}
@@ -347,6 +353,7 @@ const CreateCredentialDialog = ({
             errorMessage={t('form-dialog.label', { context: ['password', 'error'] })}
           >
             <TextInput
+              isDisabled={edit}
               ouiaId="password"
               name={apiTypes.API_QUERY_TYPES.PASSWORD}
               type="password"
@@ -404,6 +411,7 @@ const CreateCredentialDialog = ({
         </FormGroup>
         <FormGroup key="become_password" label={t('form-dialog.label', { context: ['become-password'] })}>
           <TextInput
+            isDisabled={edit}
             ouiaId="become_password"
             name={apiTypes.API_QUERY_TYPES.BECOME_PASSWORD}
             type="password"

@@ -24,7 +24,7 @@ const getCredentials = (id = '', params = {}) =>
 
 const updateCredential = (id, data = {}) =>
   serviceCall({
-    method: 'put',
+    method: 'patch',
     url: `${process.env.REACT_APP_CREDENTIALS_SERVICE}${id}/`,
     data
   });
