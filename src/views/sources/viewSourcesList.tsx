@@ -88,7 +88,6 @@ const SourcesListView: React.FunctionComponent = () => {
   } = useSourceApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
-  const { getTimeDisplayHowLongAgo } = helpers;
 
   /** Fetches the translated label for a source type.
    *
@@ -318,11 +317,6 @@ const SourcesListView: React.FunctionComponent = () => {
 
   const { isLoading, data } = useSourcesQuery({ tableState, setRefreshTime });
 
-  let totalResults = data?.count || 0;
-  if (helpers.DEV_MODE) {
-    totalResults = helpers.devModeNormalizeCount(totalResults);
-  }
-
   /**
    * Configures 'batteries' table with `useTablePropHelpers` by extending `tableState` for:
    * - Item identification (`idProperty: 'id'`)
@@ -335,7 +329,7 @@ const SourcesListView: React.FunctionComponent = () => {
     idProperty: 'id',
     isLoading,
     currentPageItems: data?.results || [],
-    totalItemCount: totalResults
+    totalItemCount: helpers.normalizeTotal(data)
   });
 
   const {
@@ -429,7 +423,7 @@ const SourcesListView: React.FunctionComponent = () => {
         }}
       >
         <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
-        {getTimeDisplayHowLongAgo(scanTime)}
+        {helpers.getTimeDisplayHowLongAgo(scanTime)}
       </Button>
     );
   };

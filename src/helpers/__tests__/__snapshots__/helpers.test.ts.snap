@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAuthType should return a credential type: credentialTypes 1`] = `
+[
+  "Username and Password",
+  "Token",
+  "SSH Key file",
+]
+`;
+
+exports[`should return a timestamp estimate: timestamps 1`] = `
+[
+  "a few seconds ago",
+  "a month ago",
+  "a day ago",
+]
+`;

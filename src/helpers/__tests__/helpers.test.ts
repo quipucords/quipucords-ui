@@ -3,132 +3,132 @@
  *
  * Validates accuracy and consistency of information display helpers. Includes various input scenarios and formatting checks.
  */
+import React from 'react';
 import moment from 'moment';
-import { CredentialType } from '../../types/types';
 import { helpers } from '../helpers';
 
-const { getTimeDisplayHowLongAgo, getAuthType, authType } = helpers;
-
-it('should return the correct time difference when the timestamp is in the past', () => {
-  const timestamp = moment().subtract(2, 'hours').toISOString();
-  const timeAgo = getTimeDisplayHowLongAgo(timestamp);
-  const expectedTimeAgo = '2 hours ago';
-  expect(timeAgo).toBe(expectedTimeAgo);
+it(`should return a timestamp estimate`, () => {
+  expect([
+    helpers.getTimeDisplayHowLongAgo(moment().subtract(30, 'seconds')),
+    helpers.getTimeDisplayHowLongAgo(moment().subtract(1, 'month')),
+    helpers.getTimeDisplayHowLongAgo(moment().subtract(25, 'hours'))
+  ]).toMatchSnapshot('timestamps');
 });
 
-it('should return "a few seconds ago" for a timestamp that is less than a minute old', () => {
-  const timestamp = moment().subtract(30, 'seconds').toISOString();
-  const timeAgo = getTimeDisplayHowLongAgo(timestamp);
-  expect(timeAgo).toBe('a few seconds ago');
+it(`should throw an error if the timestamp is not valid`, () => {
+  expect(() => helpers.getTimeDisplayHowLongAgo(null)).toThrow(`Invalid timestamp: null`);
+  expect(() => helpers.getTimeDisplayHowLongAgo(undefined)).toThrow(`Invalid timestamp: undefined`);
+  expect(() => helpers.getTimeDisplayHowLongAgo('')).toThrow(`Invalid timestamp: `);
 });
 
-it('should return "a minute ago" for a timestamp that is exactly one minute old', () => {
-  const timestamp = moment().subtract(1, 'minute').toISOString();
-  const timeAgo = getTimeDisplayHowLongAgo(timestamp);
-  expect(timeAgo).toBe('a minute ago');
+describe('getAuthType', () => {
+  const generateAuthType = partialCredential =>
+    helpers.getAuthType({
+      id: 'mockId',
+      name: 'mockName',
+      created_at: new Date(),
+      updated_at: new Date(),
+      cred_type: 'mockCredType',
+      username: undefined,
+      password: undefined,
+      ssh_keyfile: undefined,
+      auth_token: undefined,
+      ssh_passphrase: undefined,
+      become_method: undefined,
+      become_user: undefined,
+      become_password: undefined,
+      sources: [],
+      ...partialCredential
+    });
+
+  it(`should return a credential type`, () => {
+    expect([
+      generateAuthType({ username: 'testUser', password: 'testPassword' }),
+      generateAuthType({ auth_token: 'mockToken' }),
+      generateAuthType({ ssh_keyfile: 'mockSSH' })
+    ]).toMatchSnapshot('credentialTypes');
+  });
+
+  it('should throw an error when credential has no authentication information', () => {
+    expect(() => {
+      generateAuthType({});
+    }).toThrow('Unknown credential type');
+  });
 });
 
-it('should return "a month ago" for a timestamp that is more than a month old', () => {
-  const timestamp = moment().subtract(1, 'month').subtract(1, 'day').toISOString();
-  const timeAgo = getTimeDisplayHowLongAgo(timestamp);
-  expect(timeAgo).toBe('a month ago');
+describe('noopTranslate', () => {
+  it('should format key, value, and components into a string', () => {
+    const key = 'testKey';
+    const value = 'testValue';
+    const components = [
+      React.createElement('div', { key: '1' }, 'Component 1'),
+      React.createElement('span', { key: '2' }, 'Component 2')
+    ];
+
+    const result = helpers.noopTranslate(key, value, components);
+
+    expect(result).toBe(`t(${key}, ${value}, ${components})`);
+  });
+
+  it('should handle array keys and values', () => {
+    const key = ['key1', 'key2'];
+    const value = ['value1', 'value2'];
+
+    const result = helpers.noopTranslate(key, value, []);
+
+    expect(result).toBe(`t([key1,key2], [value1,value2])`);
+  });
+
+  it('should handle empty components', () => {
+    const key = 'testKey';
+    const value = 'testValue';
+
+    const result = helpers.noopTranslate(key, value, []);
+
+    expect(result).toBe(`t(${key}, ${value})`);
+  });
 });
 
-it('should return "a day ago" for a timestamp that is more than 24 hours old', () => {
-  const timestamp = moment().subtract(25, 'hours').toISOString();
-  const timeAgo = getTimeDisplayHowLongAgo(timestamp);
-  expect(timeAgo).toBe('a day ago');
+describe('formatDate', () => {
+  it('should format the date correctly in UTC', () => {
+    const date = new Date('2022-01-01T12:00:00Z');
+    const formattedDate = helpers.formatDate(date);
+
+    expect(formattedDate).toBe('01 January 2022, 12:00 PM UTC');
+  });
 });
 
-it('should throw an error if the given timestamp is not a valid date', () => {
-  const timestamp = 'invalid';
-  expect(() => {
-    getTimeDisplayHowLongAgo(timestamp);
-  }).toThrow('Invalid timestamp');
+it('should normalize total values', () => {
+  expect(helpers.normalizeTotal({ count: 142 }, true, undefined)).toBe(42);
+  expect(helpers.normalizeTotal({}, true, undefined)).toBe(0);
+  expect(helpers.normalizeTotal({ count: 142 }, false, undefined)).toBe(142);
+  expect(helpers.normalizeTotal({ count: 142 }, true, 50)).toBe(42);
 });
 
-it('should return AuthType.UsernameAndPassword when credential has username and password', () => {
-  const mockCredential: CredentialType = {
-    id: 'mockId',
-    name: 'mockName',
-    created_at: new Date(),
-    updated_at: new Date(),
-    cred_type: 'mockCredType',
-    username: 'testUser',
-    password: 'testPassword',
-    ssh_keyfile: '',
-    auth_token: '',
-    ssh_passphrase: '',
-    become_method: '',
-    become_user: '',
-    become_password: '',
-    sources: []
-  };
-  const result = getAuthType(mockCredential);
-  expect(result).toBe(authType.UsernameAndPassword);
-});
+describe('downloadData', () => {
+  it('downloads data as a file', async () => {
+    const data = 'Test data';
+    const fileName = 'test.txt';
 
-it('should return AuthType.Token when credential has auth_token', () => {
-  const mockCredential: CredentialType = {
-    id: 'mockId',
-    name: 'mockName',
-    created_at: new Date(),
-    updated_at: new Date(),
-    cred_type: 'mockCredType',
-    username: '',
-    password: '',
-    ssh_keyfile: '',
-    auth_token: 'mockToken',
-    ssh_passphrase: '',
-    become_method: '',
-    become_user: '',
-    become_password: '',
-    sources: []
-  };
-  const result = getAuthType(mockCredential);
-  expect(result).toBe(authType.Token);
-});
+    // test the navigator check
+    const msSaveBlobMock = jest.fn();
+    (navigator as Navigator).msSaveBlob = msSaveBlobMock;
+    await helpers.downloadData(data, fileName);
+    expect(msSaveBlobMock).toHaveBeenCalledWith(expect.any(Blob), 'test.txt');
 
-it('should return AuthType.SSHKeyFile when credential has ssh_keyfile', () => {
-  const mockCredential: CredentialType = {
-    id: 'mockId',
-    name: 'mockName',
-    created_at: new Date(),
-    updated_at: new Date(),
-    cred_type: 'mockCredType',
-    username: '',
-    password: '',
-    ssh_keyfile: 'mockSSH',
-    auth_token: '',
-    ssh_passphrase: '',
-    become_method: '',
-    become_user: '',
-    become_password: '',
-    sources: []
-  };
-  const result = getAuthType(mockCredential);
-  expect(result).toBe(authType.SSHKeyFile);
-});
+    // test the "not navigator" check
+    (navigator as Navigator).msSaveBlob = undefined;
+    const appendChild = jest.spyOn(document.body, 'appendChild');
+    const removeChild = jest.spyOn(document.body, 'removeChild');
+    const createObjectURLMock = jest.fn();
+    const revokeObjectURLMock = jest.fn();
+    window.URL.createObjectURL = createObjectURLMock;
+    window.URL.revokeObjectURL = revokeObjectURLMock;
 
-it('should throw an error when credential has no authentication information', () => {
-  const credential: CredentialType = {
-    id: '1',
-    name: 'Test Credential',
-    created_at: new Date(),
-    updated_at: new Date(),
-    cred_type: 'test',
-    username: '',
-    password: '',
-    ssh_keyfile: '',
-    auth_token: '',
-    ssh_passphrase: '',
-    become_method: '',
-    become_user: '',
-    become_password: '',
-    sources: []
-  };
-
-  expect(() => {
-    getAuthType(credential);
-  }).toThrow('Unknown credential type');
+    await helpers.downloadData(data, fileName, 'text/csv');
+    expect(createObjectURLMock).toHaveBeenCalledWith(expect.any(Blob));
+    expect(appendChild).toHaveBeenCalledTimes(1);
+    expect(removeChild).toHaveBeenCalledTimes(1);
+    expect(revokeObjectURLMock).toHaveBeenCalledWith(expect.any(String));
+  });
 });
