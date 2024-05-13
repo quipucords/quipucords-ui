@@ -66,7 +66,6 @@ const CredentialsListView: React.FunctionComponent = () => {
   } = useCredentialApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
-  const { getAuthType, getTimeDisplayHowLongAgo } = helpers;
 
   /** Fetches the translated label for a credential type.
    *
@@ -191,17 +190,12 @@ const CredentialsListView: React.FunctionComponent = () => {
 
   const { isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
 
-  let totalResults = data?.count || 0;
-  if (helpers.DEV_MODE) {
-    totalResults = helpers.devModeNormalizeCount(totalResults);
-  }
-
   const tableBatteries = useTablePropHelpers({
     ...tableState,
     idProperty: 'id',
     isLoading,
     currentPageItems: data?.results || [],
-    totalItemCount: totalResults,
+    totalItemCount: helpers.normalizeTotal(data),
     variant: 'compact'
   });
 
@@ -312,7 +306,7 @@ const CredentialsListView: React.FunctionComponent = () => {
               <Tr key={credential.id} item={credential} rowIndex={rowIndex}>
                 <Td columnKey="name">{credential.name}</Td>
                 <Td columnKey="type">{getTranslatedCredentialTypeLabel(credential.cred_type)}</Td>
-                <Td columnKey="auth_type">{getAuthType(credential)}</Td>
+                <Td columnKey="auth_type">{helpers.getAuthType(credential)}</Td>
                 <Td columnKey="sources">
                   <Button
                     variant={ButtonVariant.link}
@@ -327,7 +321,9 @@ const CredentialsListView: React.FunctionComponent = () => {
                     {credential.sources?.length || 0}
                   </Button>
                 </Td>
-                <Td columnKey="updated">{getTimeDisplayHowLongAgo(credential.updated_at)}</Td>
+                <Td columnKey="updated">
+                  {helpers.getTimeDisplayHowLongAgo(credential.updated_at)}
+                </Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}

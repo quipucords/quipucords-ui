@@ -38,7 +38,6 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
-import FileDownload from 'js-file-download';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
@@ -68,7 +67,6 @@ const ScansListView: React.FunctionComponent = () => {
   } = useScanApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
-  const { getTimeDisplayHowLongAgo } = helpers;
   const nav = useNavigate();
 
   /**
@@ -159,17 +157,12 @@ const ScansListView: React.FunctionComponent = () => {
 
   const { isLoading, data } = useScansQuery({ tableState, setRefreshTime });
 
-  let totalResults = data?.count || 0;
-  if (helpers.DEV_MODE) {
-    totalResults = helpers.devModeNormalizeCount(totalResults);
-  }
-
   const tableBatteries = useTablePropHelpers({
     ...tableState,
     idProperty: 'id',
     isLoading,
     currentPageItems: data?.results || [],
-    totalItemCount: totalResults
+    totalItemCount: helpers.normalizeTotal(data)
   });
 
   const {
@@ -231,7 +224,9 @@ const ScansListView: React.FunctionComponent = () => {
               t('table.label', { context: 'status_failed_scans' })}
             {scan.most_recent.status === 'completed' &&
               t('table.label', { context: 'status_completed_scans' })}{' '}
-            {getTimeDisplayHowLongAgo(scan.most_recent.end_time || scan.most_recent.start_time)}
+            {helpers.getTimeDisplayHowLongAgo(
+              scan.most_recent.end_time || scan.most_recent.start_time
+            )}
           </>
         )}
         {!scan.most_recent && t('table.label', { context: 'status_scans' })}
@@ -340,12 +335,13 @@ const ScansListView: React.FunctionComponent = () => {
             downloadReport(reportId)
               .then(res => {
                 addAlert(`Report "${reportId}" downloaded`, 'success', getUniqueId());
-                FileDownload(
+                helpers.downloadData(
                   res.data,
                   `report_id_${reportId}_${new Date()
                     .toISOString()
                     .replace('T', '_')
-                    .replace(/[^\d_]/g, '')}.tar.gz`
+                    .replace(/[^\d_]/g, '')}.tar.gz`,
+                  'application/gzip'
                 );
               })
               .catch(err => {
