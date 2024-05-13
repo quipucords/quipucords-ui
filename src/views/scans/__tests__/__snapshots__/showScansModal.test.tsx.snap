@@ -382,7 +382,7 @@ exports[`Modal Modal 1 job populates properly 1`] = `
                     data-label="Scan Time"
                     tabindex="-1"
                   >
-                    30 August 2017, 8:08 AM EDT
+                    30 August 2017, 12:19 PM UTC
                   </td>
                   <td
                     class="pf-v5-c-table__td"
@@ -750,7 +750,7 @@ exports[`Modal Modal multiple jobs populates properly 1`] = `
                     data-label="Scan Time"
                     tabindex="-1"
                   >
-                    30 August 2017, 8:08 AM EDT
+                    30 August 2017, 12:19 PM UTC
                   </td>
                   <td
                     class="pf-v5-c-table__td"
@@ -804,7 +804,7 @@ exports[`Modal Modal multiple jobs populates properly 1`] = `
                     data-label="Scan Time"
                     tabindex="-1"
                   >
-                    30 October 2020, 6:10 PM EDT
+                    30 October 2020, 10:06 PM UTC
                   </td>
                   <td
                     class="pf-v5-c-table__td"

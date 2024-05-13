@@ -16,9 +16,8 @@ type RefreshTimeButtonProps = {
 
 const RefreshTimeButton: React.FC<RefreshTimeButtonProps> = ({ lastRefresh = 0, onRefresh }) => {
   const { t } = useTranslation();
-  const { getTimeDisplayHowLongAgo } = helpers;
   const [refresh, setRefresh] = React.useState<string | null>(
-    lastRefresh ? getTimeDisplayHowLongAgo(lastRefresh) : null
+    lastRefresh ? helpers.getTimeDisplayHowLongAgo(lastRefresh) : null
   );
 
   const pollingInterval = React.useRef<NodeJS.Timeout>();
@@ -26,7 +25,7 @@ const RefreshTimeButton: React.FC<RefreshTimeButtonProps> = ({ lastRefresh = 0, 
   React.useEffect(() => {
     pollingInterval.current = setInterval(() => {
       if (lastRefresh) {
-        setRefresh(getTimeDisplayHowLongAgo(lastRefresh));
+        setRefresh(helpers.getTimeDisplayHowLongAgo(lastRefresh));
       }
     }, 3000);
 
@@ -34,7 +33,7 @@ const RefreshTimeButton: React.FC<RefreshTimeButtonProps> = ({ lastRefresh = 0, 
       clearInterval(pollingInterval.current);
       pollingInterval.current = undefined;
     };
-  }, [lastRefresh, getTimeDisplayHowLongAgo]);
+  }, [lastRefresh]);
 
   return (
     <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh} ouiaId="refresh">
