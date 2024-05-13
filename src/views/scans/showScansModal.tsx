@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, ThProps } from '@patternfly/react-table';
-import moment from 'moment-timezone';
+import { helpers } from '../../helpers';
 import { ScanJobType, ScanType } from '../../types/types';
 
 export interface ScansModalProps {
@@ -42,10 +42,6 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
     },
     columnIndex
   });
-
-  const formatDate = (date: Date) => {
-    return moment.utc(date).tz('America/New_York').format('DD MMMM Y, h:MM A z');
-  };
 
   /* ToDo: This code is for future use around Discovery-437. If it isn't used when the issue has resolved remove it
  *
@@ -119,7 +115,9 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
                                             isDisabled: !isJobSelectable(job)
                                         }}
                                     /> */}
-                  <Td dataLabel="Scan Time">{job.end_time ? formatDate(job.end_time) : ''}</Td>
+                  <Td dataLabel="Scan Time">
+                    {job.end_time ? helpers.formatDate(job.end_time) : ''}
+                  </Td>
                   <Td dataLabel="Scan Result">{job.status}</Td>
                   <Td dataLabel="Download" isActionCell>
                     {job.report_id && (
