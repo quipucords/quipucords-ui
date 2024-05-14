@@ -41,11 +41,19 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'rhacs'] })",
+      },
+      {
+        "key": "form-dialog.label",
         "match": "translate('form-dialog.label', { context: ['option', 'satellite'] })",
       },
       {
         "key": "form-dialog.label",
         "match": "translate('form-dialog.label', { context: ['option', 'vcenter'] })",
+      },
+      {
+        "key": "form-dialog.label",
+        "match": "translate('form-dialog.label', { context: ['option', 'ansible'] })",
       },
       {
         "key": "toolbar.label",

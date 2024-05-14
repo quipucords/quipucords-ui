@@ -18,11 +18,19 @@ exports[`ViewToolbarSelect Component should export select variants and related o
       },
       {
         "title": [Function],
+        "value": "rhacs",
+      },
+      {
+        "title": [Function],
         "value": "satellite",
       },
       {
         "title": [Function],
         "value": "vcenter",
+      },
+      {
+        "title": [Function],
+        "value": "ansible",
       },
     ],
     "source_type": [
@@ -36,11 +44,19 @@ exports[`ViewToolbarSelect Component should export select variants and related o
       },
       {
         "title": [Function],
+        "value": "rhacs",
+      },
+      {
+        "title": [Function],
         "value": "satellite",
       },
       {
         "title": [Function],
         "value": "vcenter",
+      },
+      {
+        "title": [Function],
+        "value": "ansible",
       },
     ],
   },
@@ -112,11 +128,19 @@ exports[`ViewToolbarSelect Component should render a basic component: basic 1`] 
       },
       {
         "title": [Function],
+        "value": "rhacs",
+      },
+      {
+        "title": [Function],
         "value": "satellite",
       },
       {
         "title": [Function],
         "value": "vcenter",
+      },
+      {
+        "title": [Function],
+        "value": "ansible",
       },
     ]
   }

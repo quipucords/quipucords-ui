@@ -14,8 +14,10 @@ import { translate } from '../i18n/i18n';
 const credentialSourceTypeFieldOptions = [
   { title: () => translate('form-dialog.label', { context: ['option', 'network'] }), value: 'network' },
   { title: () => translate('form-dialog.label', { context: ['option', 'openshift'] }), value: 'openshift' },
+  { title: () => translate('form-dialog.label', { context: ['option', 'rhacs'] }), value: 'rhacs' },
   { title: () => translate('form-dialog.label', { context: ['option', 'satellite'] }), value: 'satellite' },
-  { title: () => translate('form-dialog.label', { context: ['option', 'vcenter'] }), value: 'vcenter' }
+  { title: () => translate('form-dialog.label', { context: ['option', 'vcenter'] }), value: 'vcenter' },
+  { title: () => translate('form-dialog.label', { context: ['option', 'ansible'] }), value: 'ansible' }
 ];
 
 /**
