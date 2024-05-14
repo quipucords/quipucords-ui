@@ -86,6 +86,7 @@ const CreateCredentialDialog = ({
   const submitCredential = useAliasOnSubmitCredential();
   const isShhKeyfile = credential?.[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && true;
   const isToken = credential?.[apiTypes.API_QUERY_TYPES.AUTH_TOKEN] && true;
+  const networkAuthenticationOptions = authenticationOptions.filter(item => item.value !== 'token');
 
   useEffect(() => {
     if (edit && credentialType === 'network' && isShhKeyfile) {
@@ -238,7 +239,7 @@ const CreateCredentialDialog = ({
             ouiaId="auth_type"
             isInline={false}
             onSelect={onSetAuthType}
-            options={authenticationOptions}
+            options={networkAuthenticationOptions}
             selectedOptions={authType}
           />
         </FormGroup>
