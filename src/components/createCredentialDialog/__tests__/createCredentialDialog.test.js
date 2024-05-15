@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateCredentialDialog, authenticationTypeOptions, becomeMethodTypeOptions } from '../createCredentialDialog';
+import { CreateCredentialDialog, becomeMethodTypeOptions } from '../createCredentialDialog';
 
 describe('CreateCredentialDialog Component', () => {
   it('should render a basic component', async () => {
@@ -17,7 +17,6 @@ describe('CreateCredentialDialog Component', () => {
 
   it('should export select options', () => {
     expect({
-      authenticationTypeOptions,
       becomeMethodTypeOptions
     }).toMatchSnapshot('options');
   });
