@@ -1032,10 +1032,6 @@ exports[`I18n Component should generate a predictable locale key output snapshot
       },
       {
         "key": "form-dialog.label",
-        "match": "translate('form-dialog.label', { context: ['option', 'token'] })",
-      },
-      {
-        "key": "form-dialog.label",
         "match": "translate('form-dialog.label', { context: ['option', 'usernamePassword'] })",
       },
       {

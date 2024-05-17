@@ -30,27 +30,6 @@ import { translate } from '../i18n/i18n';
 const becomeMethodTypeOptions = ['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'];
 
 /**
- * Generate authentication type options.
- *
- * @type {{title: Function | React.ReactNode, value: string, selected: boolean}[]}
- */
-const authenticationTypeOptions = [
-  {
-    title: () => translate('form-dialog.label', { context: ['option', 'sshKey'] }),
-    value: 'sshKey'
-  },
-  {
-    title: () => translate('form-dialog.label', { context: ['option', 'token'] }),
-    value: 'token'
-  },
-  {
-    title: () => translate('form-dialog.label', { context: ['option', 'usernamePassword'] }),
-    value: 'usernamePassword',
-    selected: true
-  }
-];
-
-/**
  * ToDo: updating a creds password should immediately reset the entire field
  * When a user attempts to update a cred the password displayed is not decrypted. Existing behavior has the
  * appearance that any user who updates the field but leaves parts of the old password actually submit a combination
@@ -64,7 +43,6 @@ const authenticationTypeOptions = [
  * @fires onSubmit
  * @fires onValidateForm
  * @param {object} props
- * @param {Array} props.authenticationOptions
  * @param {Array} props.becomeMethodOptions
  * @param {Function} props.t
  * @param {Function} props.useCredential
@@ -73,7 +51,6 @@ const authenticationTypeOptions = [
  * @returns {React.ReactNode|null}
  */
 const CreateCredentialDialog = ({
-  authenticationOptions,
   becomeMethodOptions,
   t,
   useCredential: useAliasCredential,
@@ -86,6 +63,17 @@ const CreateCredentialDialog = ({
   const submitCredential = useAliasOnSubmitCredential();
   const isShhKeyfile = credential?.[apiTypes.API_QUERY_TYPES.SSH_KEYFILE] && true;
   const isToken = credential?.[apiTypes.API_QUERY_TYPES.AUTH_TOKEN] && true;
+  const networkAuthenticationOptions = [
+    {
+      title: () => translate('form-dialog.label', { context: ['option', 'sshKey'] }),
+      value: 'sshKey'
+    },
+    {
+      title: () => translate('form-dialog.label', { context: ['option', 'usernamePassword'] }),
+      value: 'usernamePassword',
+      selected: true
+    }
+  ];
 
   useEffect(() => {
     if (edit && credentialType === 'network' && isShhKeyfile) {
@@ -238,7 +226,7 @@ const CreateCredentialDialog = ({
             ouiaId="auth_type"
             isInline={false}
             onSelect={onSetAuthType}
-            options={authenticationOptions}
+            options={networkAuthenticationOptions}
             selectedOptions={authType}
           />
         </FormGroup>
@@ -494,7 +482,6 @@ const CreateCredentialDialog = ({
 };
 
 CreateCredentialDialog.propTypes = {
-  authenticationOptions: PropTypes.array,
   becomeMethodOptions: PropTypes.array,
   t: PropTypes.func,
   useCredential: PropTypes.func,
@@ -503,7 +490,6 @@ CreateCredentialDialog.propTypes = {
 };
 
 CreateCredentialDialog.defaultProps = {
-  authenticationOptions: authenticationTypeOptions,
   becomeMethodOptions: becomeMethodTypeOptions,
   t: translate,
   useCredential,
@@ -511,9 +497,4 @@ CreateCredentialDialog.defaultProps = {
   useOnUpdateCredential
 };
 
-export {
-  CreateCredentialDialog as default,
-  CreateCredentialDialog,
-  authenticationTypeOptions,
-  becomeMethodTypeOptions
-};
+export { CreateCredentialDialog as default, CreateCredentialDialog, becomeMethodTypeOptions };
