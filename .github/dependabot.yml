@@ -14,9 +14,25 @@ updates:
       - dependency-name: "*patternfly*"
       - dependency-name: "*i18next*"
       - dependency-name: "react-router*"
-      - dependency-name: "quipudocs"
     labels:
       - "build"
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      dependencies-patch:
+        dependency-type: "production"
+        update-types:
+          - "patch"
+      dependencies-minor:
+        dependency-type: "production"
+        update-types:
+          - "minor"
 
   - package-ecosystem: github-actions
     directory: /
@@ -27,3 +43,6 @@ updates:
     target-branch: "main"
     labels:
       - "build"
+    commit-message:
+      prefix: "build"
+      include: "scope"
