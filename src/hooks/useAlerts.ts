@@ -1,43 +1,39 @@
 /**
- * This custom React Hook provides functions to manage alerts in your application.
- * It allows you to add and remove alerts with specific titles, variants, and unique keys.
+ * This Hook provides functions to manage alerts.
+ * It allows you to add and remove alerts using PatternFly's AlertProps and unique IDs.
  * @module useAlerts
  */
 import React from 'react';
 import { AlertProps } from '@patternfly/react-core';
 
 const useAlerts = () => {
-  const [alert, setAlerts] = React.useState<Partial<AlertProps>[]>([]);
+  const [alerts, setAlerts] = React.useState<AlertProps[]>([]);
 
   /**
-   * Add an Alert
+   * Adds a new alert or multiple alerts to the list.
    *
-   * This function adds an alert to the list of alerts.
-   *
-   * @param {string} title - The title or content of the alert.
-   * @param {AlertProps['variant']} variant - The variant or style of the alert (e.g., 'success', 'danger').
-   * @param {React.Key} key - A unique key to identify the alert.
+   * @param {AlertProps | AlertProps[]} options - The alert object or array of alert objects containing properties like `id`, `title`, `variant`, etc.
    */
-  const addAlert = (title: string, variant: AlertProps['variant'], key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+  const addAlert = (options: AlertProps | AlertProps[]) => {
+    setAlerts(prevAlerts => [...prevAlerts, ...((Array.isArray(options) && options) || [options])]);
   };
 
   /**
-   * Remove an Alert by Key
+   * Removes the first alert whose properties include the given value.
    *
-   * This function removes an alert from the list of alerts based on its unique key.
+   * This function removes the first alert matching the provided value in any property.
    *
-   * @param {React.Key} key - The unique key of the alert to be removed.
+   * @param {unknown} value - The value to match in the alert's properties.
    */
-  const removeAlert = (key: React.Key) => {
-    setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+  const removeAlert = (value: unknown) => {
+    setAlerts(prevAlerts => [...prevAlerts.filter(alert => !Object.values(alert).includes(value))]);
   };
 
   return {
     removeAlert,
     addAlert,
-    alerts: alert
+    alerts
   };
 };
 
-export default useAlerts;
+export { useAlerts as default, useAlerts };

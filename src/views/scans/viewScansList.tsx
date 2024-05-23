@@ -43,7 +43,7 @@ import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/co
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
-import useAlerts from '../../hooks/useAlerts';
+import { useAlerts } from '../../hooks/useAlerts';
 import useScanApi from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { ScanJobType, ScanType } from '../../types/types';
@@ -86,7 +86,7 @@ const ScansListView: React.FunctionComponent = () => {
           context: 'deleted-scan',
           name: pendingDeleteScan?.id
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({ title: successMessage, variant: 'success', key: getUniqueId() });
         onRefresh();
       })
       .catch(err => {
@@ -96,7 +96,7 @@ const ScansListView: React.FunctionComponent = () => {
           name: pendingDeleteScan?.id,
           message: err.response.data.detail
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({ title: errorMessage, variant: 'danger', key: getUniqueId() });
       })
       .finally(() => setPendingDeleteScan(undefined));
   };
@@ -334,7 +334,11 @@ const ScansListView: React.FunctionComponent = () => {
           onDownload={reportId => {
             downloadReport(reportId)
               .then(res => {
-                addAlert(`Report "${reportId}" downloaded`, 'success', getUniqueId());
+                addAlert({
+                  title: `Report "${reportId}" downloaded`,
+                  variant: 'success',
+                  key: getUniqueId()
+                });
                 helpers.downloadData(
                   res.data,
                   `report_id_${reportId}_${new Date()
@@ -346,11 +350,11 @@ const ScansListView: React.FunctionComponent = () => {
               })
               .catch(err => {
                 console.error(err);
-                addAlert(
-                  `Report "${reportId}" failed to download. ${JSON.stringify(err.response.data)}`,
-                  'danger',
-                  getUniqueId()
-                );
+                addAlert({
+                  title: `Report "${reportId}" failed to download. ${JSON.stringify(err.response.data)}`,
+                  variant: 'danger',
+                  key: getUniqueId()
+                });
               });
           }}
           onClose={() => {
@@ -379,20 +383,21 @@ const ScansListView: React.FunctionComponent = () => {
         </Modal>
       )}
       <AlertGroup isToast isLiveRegion>
-        {alerts.map(({ key, variant, title }) => (
+        {alerts.map(({ id, variant, title }) => (
           <Alert
             timeout={8000}
-            onTimeout={() => key && removeAlert(key)}
+            onTimeout={() => id && removeAlert(id)}
             variant={AlertVariant[variant || 'info']}
             title={title}
             actionClose={
               <AlertActionCloseButton
                 title={title as string}
                 variantLabel={`${variant} alert`}
-                onClose={() => key && removeAlert(key)}
+                onClose={() => id && removeAlert(id)}
               />
             }
-            key={key}
+            id={id}
+            key={id || getUniqueId()}
           />
         ))}
       </AlertGroup>

@@ -49,7 +49,7 @@ import {
   API_SOURCES_LIST_QUERY
 } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
-import useAlerts from '../../hooks/useAlerts';
+import { useAlerts } from '../../hooks/useAlerts';
 import useSourceApi from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
@@ -116,7 +116,11 @@ const SourcesListView: React.FunctionComponent = () => {
           context: 'deleted-source',
           name: pendingDeleteSource?.name
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({
+          title: successMessage,
+          variant: 'success',
+          key: getUniqueId()
+        });
         onRefresh();
       })
       .catch(err => {
@@ -126,7 +130,11 @@ const SourcesListView: React.FunctionComponent = () => {
           name: pendingDeleteSource?.name,
           message: err.response.data.detail
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({
+          title: errorMessage,
+          variant: 'danger',
+          key: getUniqueId()
+        });
       })
       .finally(() => setPendingDeleteSource(undefined));
   };
@@ -143,7 +151,11 @@ const SourcesListView: React.FunctionComponent = () => {
           context: 'add-source_hidden_edit',
           name: pendingDeleteSource?.name
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({
+          title: successMessage,
+          variant: 'success',
+          key: getUniqueId()
+        });
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setSourceBeingEdited(undefined);
       })
@@ -152,7 +164,11 @@ const SourcesListView: React.FunctionComponent = () => {
         const errorMessage = t('toast-notifications.title', {
           context: 'add-source_hidden_error_edit'
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({
+          title: errorMessage,
+          variant: 'danger',
+          key: getUniqueId()
+        });
       });
   };
 
@@ -168,7 +184,11 @@ const SourcesListView: React.FunctionComponent = () => {
           context: 'scan-report_play',
           name: payload.name
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({
+          title: successMessage,
+          variant: 'success',
+          key: getUniqueId()
+        });
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setScanSelected(undefined);
       })
@@ -179,7 +199,11 @@ const SourcesListView: React.FunctionComponent = () => {
           name: payload.name,
           message: JSON.stringify(err?.response?.data.name)
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({
+          title: errorMessage,
+          variant: 'danger',
+          key: getUniqueId()
+        });
       });
   };
 
@@ -195,7 +219,11 @@ const SourcesListView: React.FunctionComponent = () => {
           context: 'add-source_hidden',
           name: payload.name
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({
+          title: successMessage,
+          variant: 'success',
+          key: getUniqueId()
+        });
         queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
         setAddSourceModal(undefined);
       })
@@ -207,7 +235,11 @@ const SourcesListView: React.FunctionComponent = () => {
           name: payload.name,
           message: JSON.stringify(err?.response?.data)
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({
+          title: errorMessage,
+          variant: 'danger',
+          key: getUniqueId()
+        });
       });
   };
 
@@ -578,20 +610,21 @@ const SourcesListView: React.FunctionComponent = () => {
         />
       )}
       <AlertGroup isToast isLiveRegion>
-        {alerts.map(({ key, variant, title }) => (
+        {alerts.map(({ id, variant, title }) => (
           <Alert
             timeout={8000}
-            onTimeout={() => key && removeAlert(key)}
+            onTimeout={() => id && removeAlert(id)}
             variant={AlertVariant[variant || 'info']}
             title={title}
             actionClose={
               <AlertActionCloseButton
                 title={title as string}
                 variantLabel={`${variant} alert`}
-                onClose={() => key && removeAlert(key)}
+                onClose={() => id && removeAlert(id)}
               />
             }
-            key={key}
+            id={id}
+            key={id || getUniqueId()}
           />
         ))}
       </AlertGroup>
