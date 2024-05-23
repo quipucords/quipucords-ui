@@ -43,7 +43,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
-import useAlerts from '../../hooks/useAlerts';
+import { useAlerts } from '../../hooks/useAlerts';
 import useCredentialApi from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
@@ -87,7 +87,11 @@ const CredentialsListView: React.FunctionComponent = () => {
           context: 'deleted-credential',
           name: pendingDeleteCredential?.name
         });
-        addAlert(successMessage, 'success', getUniqueId());
+        addAlert({
+          title: successMessage,
+          variant: 'success',
+          id: getUniqueId()
+        });
         onRefresh();
       })
       .catch(err => {
@@ -97,7 +101,11 @@ const CredentialsListView: React.FunctionComponent = () => {
           name: pendingDeleteCredential?.name,
           message: err.response.data.detail
         });
-        addAlert(errorMessage, 'danger', getUniqueId());
+        addAlert({
+          title: errorMessage,
+          variant: 'danger',
+          id: getUniqueId()
+        });
       })
       .finally(() => setPendingDeleteCredential(undefined));
   };
@@ -370,20 +378,21 @@ const CredentialsListView: React.FunctionComponent = () => {
         </Modal>
       )}
       <AlertGroup isToast isLiveRegion>
-        {alerts.map(({ key, variant, title }) => (
+        {alerts.map(({ id, variant, title }) => (
           <Alert
             timeout={8000}
-            onTimeout={() => key && removeAlert(key)}
+            onTimeout={() => id && removeAlert(id)}
             variant={AlertVariant[variant || 'info']}
             title={title}
             actionClose={
               <AlertActionCloseButton
                 title={title as string}
                 variantLabel={`${variant} alert`}
-                onClose={() => key && removeAlert(key)}
+                onClose={() => id && removeAlert(id)}
               />
             }
-            key={key}
+            id={id}
+            key={id || getUniqueId()}
           />
         ))}
       </AlertGroup>

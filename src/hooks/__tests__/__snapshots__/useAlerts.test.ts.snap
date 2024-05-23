@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useAlerts should add an alert and verify it is in the alerts list: single alert list 1`] = `
+[
+  {
+    "id": "alert-1",
+    "title": "Test Alert",
+    "variant": "success",
+  },
+]
+`;
+
+exports[`useAlerts should allow removing alerts by any property: removed alerts list 1`] = `
+[
+  {
+    "id": "dolor",
+    "title": "sit",
+    "variant": "success",
+  },
+]
+`;
