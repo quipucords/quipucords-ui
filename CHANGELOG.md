@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.0](https://github.com/quipucords/quipucords-ui/compare/9be872b5fe7a7f734561bd56d54b6fa770f0f1e7...766c02aa4588a62deb2577a75caa31a8032b2ee4) (2024-05-30)
+
+
+### Continuous Integrations
+*  ds-661 dependabot groups for bulk updates ([#346](https://github.com/quipucords/quipucords-ui/pull/346)) ([11a892f](https://github.com/quipucords/quipucords-ui/commit/11a892fcefacf2d48e7dc653124b300f8fcd23d7))
+
+### Code Refactoring
+* **createScanDialog** ds-674 drop support for brms  ([91dd7eb](https://github.com/quipucords/quipucords-ui/commit/91dd7ebdffa0f9d46fcf017bd4b4e74883eb5248))
+*  ds-390 remove pause, restart scans ([#350](https://github.com/quipucords/quipucords-ui/pull/350)) ([d040f9a](https://github.com/quipucords/quipucords-ui/commit/d040f9ac7b5ee142948378ad6d2ed8d1186e2fd6))
+
+### Chores
+* **deps** bump actions/cache from 3 to 4  ([e7b89b2](https://github.com/quipucords/quipucords-ui/commit/e7b89b2a2f5255abd1cafec2da84fcc735013862))
+
+### Builds
+*  ds-663 https for local staging ([#350](https://github.com/quipucords/quipucords-ui/pull/350)) ([c2bcac7](https://github.com/quipucords/quipucords-ui/commit/c2bcac708cec9e9f9c0953cc6bac2f3075cac290))
+* **deps** ds-661 move to i18next-http-backend ([#362](https://github.com/quipucords/quipucords-ui/pull/362)) ([f8815d1](https://github.com/quipucords/quipucords-ui/commit/f8815d1ffb1051cdf29056605e785a36b3edbc52))
+* **deps-dev** bump group with 2 updates ([#364](https://github.com/quipucords/quipucords-ui/pull/364)) ([8776248](https://github.com/quipucords/quipucords-ui/commit/8776248ea61f66087d9e082b9bcc81926ff93f71))
+* **deps** bump react-redux ([#363](https://github.com/quipucords/quipucords-ui/pull/363)) ([879a6a7](https://github.com/quipucords/quipucords-ui/commit/879a6a71bf5c22268930dd845e19d358801e598a))
+* **deps** ds-661 pf5 package updates ([#349](https://github.com/quipucords/quipucords-ui/pull/349)) ([92c48b2](https://github.com/quipucords/quipucords-ui/commit/92c48b2fb432a0bab5ccadb3d32fdf473ee59e5a))
+* **deps** ds-661 npm updates ([#347](https://github.com/quipucords/quipucords-ui/pull/347)) ([0ec60db](https://github.com/quipucords/quipucords-ui/commit/0ec60dbdf8368ba5677717d6982804423bc648ab))
+* **deps** ds-661 migrate to react 18 ([#347](https://github.com/quipucords/quipucords-ui/pull/347)) ([90a6be3](https://github.com/quipucords/quipucords-ui/commit/90a6be3c6951909a8ffdeae4b0601ab0dd456c3e))
+*  ds-663 update local run, staging run for podman ([#345](https://github.com/quipucords/quipucords-ui/pull/345)) ([88b3dd5](https://github.com/quipucords/quipucords-ui/commit/88b3dd5bd073727ba634db3e5fdce9d24270ecc2))
+
+### Bug Fixes
+* **credentials** ds-681 hide token in network ([#369](https://github.com/quipucords/quipucords-ui/pull/369)) ([766c02a](https://github.com/quipucords/quipucords-ui/commit/766c02aa4588a62deb2577a75caa31a8032b2ee4))
+* **viewToolbar** dsc-682 add missing types to filter  ([6863500](https://github.com/quipucords/quipucords-ui/commit/6863500f00cc243cff8e669e2f913422e3490ee4))
+* **credentials** ds-205 disable edit for encrypted fields ([#367](https://github.com/quipucords/quipucords-ui/pull/367)) ([9a87cd4](https://github.com/quipucords/quipucords-ui/commit/9a87cd43b78d5d64721b59c275fda0c7cfebc688))
+* **scans** ds-98 disable expandable sources ([#365](https://github.com/quipucords/quipucords-ui/pull/365)) ([f9f0305](https://github.com/quipucords/quipucords-ui/commit/f9f03053438614c098fc9942e41d83c0446f6bea))
+
 ## 1.6.3 (2024-02-07)
 
 
