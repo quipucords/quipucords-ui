@@ -48,7 +48,7 @@ import {
 } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import useCredentialApi from '../../hooks/useCredentialApi';
+import { useCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
 import { useCredentialsQuery } from './useCredentialsQuery';

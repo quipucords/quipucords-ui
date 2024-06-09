@@ -41,4 +41,4 @@ const useCredentialApi = () => {
   };
 };
 
-export default useCredentialApi;
+export { useCredentialApi as default, useCredentialApi };
