@@ -50,7 +50,7 @@ import {
 } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import useSourceApi from '../../hooks/useSourceApi';
+import { useSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
