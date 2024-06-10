@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apiHelpers should handle error messages from an object: extractErrorMessage 1`] = `
+{
+  "concatenate error messages from an object": "Error message 1
+Error message 2",
+  "filter out falsy values": "Error message 1
+Error message 2",
+  "handle arrays of error messages": "Error message 1
+Error message 2",
+  "handle nested arrays of error messages": "Error message 1
+Error message 2,Error message 3",
+  "handle objects with mixed types of values": "Error message 1
+Error message 2
+Error message 3
+[object Object]",
+  "return "Unknown error" for undefined input": "Unknown error",
+}
+`;

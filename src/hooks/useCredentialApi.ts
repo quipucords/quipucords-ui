@@ -23,7 +23,7 @@ type ApiDeleteCredentialSuccessType = {
   skipped?: { credential: number; sources: number[] }[];
 };
 
-type ApiDeleteCredentialErrorType = {
+type ApiCredentialErrorType = {
   detail?: string;
   message: string;
 };
@@ -105,21 +105,24 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         variant: 'success',
         id: helpers.generateId()
       });
-
       return;
     },
     [onAddAlert, t]
   );
 
   const callbackError = useCallback(
-    ({ message, response }: AxiosError<ApiDeleteCredentialErrorType>, updatedCredentials: CredentialType[]) => {
-      const errorMessage = t('toast-notifications.description', {
-        context: 'deleted-credential_error',
-        count: updatedCredentials.length,
-        name: updatedCredentials.map(({ name }) => name).join(', '),
-        message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
+    ({ message, response }: AxiosError<ApiCredentialErrorType>, updatedCredentials: CredentialType[]) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'deleted-credential_error',
+          count: updatedCredentials.length,
+          name: updatedCredentials.map(({ name }) => name).join(', '),
+          message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
+        }),
+        variant: 'danger',
+        id: helpers.generateId()
       });
-      onAddAlert({ title: errorMessage, variant: 'danger', id: helpers.generateId() });
+      return;
     },
     [onAddAlert, t]
   );
@@ -127,9 +130,9 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   const deleteCredentials = useCallback(
     async (credential: CredentialType | CredentialType[]) => {
       const updatedCredentials = (Array.isArray(credential) && credential) || [credential];
+      let response;
       try {
-        const response = await apiCall(updatedCredentials.map(({ id }) => id));
-        callbackSuccess(response, updatedCredentials);
+        response = await apiCall(updatedCredentials.map(({ id }) => id));
       } catch (error) {
         if (isAxiosError(error)) {
           return callbackError(error, updatedCredentials);
@@ -138,6 +141,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
           console.error(error);
         }
       }
+      return callbackSuccess(response, updatedCredentials);
     },
     [apiCall, callbackSuccess, callbackError]
   );

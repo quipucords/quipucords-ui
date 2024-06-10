@@ -1,0 +1,333 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useAddSourceApi should attempt an api call to add sources: apiCall 1`] = `
+[
+  [
+    "/api/v1/sources/",
+    {
+      "name": "Lorem",
+    },
+    {
+      "params": {
+        "scan": true,
+      },
+    },
+  ],
+]
+`;
+
+exports[`useAddSourceApi should handle errors while attempting to add a source: addSources, error 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.title",
+        {
+          "context": "add-source_hidden_error",
+          "message": "Unknown error",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useAddSourceApi should handle success while attempting to add a source: addSources, success 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "add-source_hidden",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteSourceApi should attempt an api call to delete sources: apiCall 1`] = `
+[
+  [
+    "/api/v1/sources/bulk_delete/",
+    {
+      "ids": [
+        456,
+        789,
+      ],
+    },
+  ],
+]
+`;
+
+exports[`useDeleteSourceApi should handle errors while attempting to delete single and multiple credentials: deleteSources, error 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 1,
+          "message": "Mock error",
+          "name": "lorem ipsum dolor sit",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 2,
+          "message": "Mock error",
+          "name": "lorem ipsum, dolor sit",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteSourceApi should handle success while attempting to delete single and multiple sources: deleteSources, success 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source",
+          "count": 1,
+          "name": "lorem ipsum dolor sit",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source",
+          "count": 2,
+          "name": "lorem ipsum, dolor sit",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteSourceApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 2,
+          "message": "Lorem ipsum",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 2,
+          "message": "Dolor sit",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 2,
+          "message": "Amet",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source_error",
+          "count": 2,
+          "message": "Unknown error",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteSourceApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "skipped-source",
+          "count": 2,
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-sources-skipped-sources",
+          "count": 1,
+          "deleted_names": "Ipsum",
+          "skipped_names": "Lorem",
+        },
+      ],
+      "variant": "warning",
+    },
+  ],
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-source",
+          "count": 2,
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useEditSourceApi should attempt an api call to edit sources: apiCall 1`] = `
+[
+  [
+    "/api/v1/sources/123/",
+    {
+      "id": 123,
+      "name": "Lorem",
+    },
+  ],
+]
+`;
+
+exports[`useEditSourceApi should handle errors while attempting to edit a source: editSources, error 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.title",
+        {
+          "context": "add-source_hidden_error_edit",
+          "message": "Unknown error",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useEditSourceApi should handle success while attempting to edit a source: editSources, success 1`] = `
+[
+  [
+    {
+      "id": "generatedid-",
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "add-source_hidden_edit",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useShowConnectionsApi should attempt an api call to show connections: apiCall 1`] = `
+[
+  [
+    "/api/v1/jobs/456/connection/?page=1&page_size=1000&ordering=name&source_type=123",
+  ],
+]
+`;
+
+exports[`useShowConnectionsApi should handle success while fetching connections: showConnections success 1`] = `
+[
+  [
+    {
+      "failure": [
+        {
+          "name": "Connection 2",
+          "status": "failure",
+        },
+      ],
+      "successful": [
+        {
+          "name": "Connection 1",
+          "status": "success",
+        },
+      ],
+      "unreachable": [
+        {
+          "name": "Connection 3",
+          "status": "unreachable",
+        },
+      ],
+    },
+  ],
+]
+`;

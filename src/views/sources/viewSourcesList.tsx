@@ -46,9 +46,15 @@ import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import useSourceApi from '../../hooks/useSourceApi';
+import {
+  useSourceApi,
+  useDeleteSourceApi,
+  useEditSourceApi,
+  useShowConnectionsApi,
+  useAddSourceApi
+} from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { CredentialType, SourceType } from '../../types/types';
+import { ConnectionType, CredentialType, SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
 import SourcesScanModal from './addSourcesScanModal';
 import { ConnectionsModal } from './showSourceConnectionsModal';
@@ -58,32 +64,23 @@ const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialType[]>([]);
-  const {
-    runScan,
-    addSource,
-    submitEditedSource,
-    deleteSource,
-    showConnections,
-    onEditSource,
-    onScanSources,
-    scanSelected,
-    setScanSelected,
-    onDeleteSelectedSources,
-    onCloseConnections,
-    onScanSource,
-    addSourceModal,
-    setAddSourceModal,
-    setConnectionsData,
-    sourceBeingEdited,
-    setSourceBeingEdited,
-    pendingDeleteSource,
-    setPendingDeleteSource,
-    connectionsData,
-    connectionsSelected,
-    setConnectionsSelected
-  } = useSourceApi();
+  const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
+  const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
+  const [addSourceModal, setAddSourceModal] = React.useState<string>();
+  const [connectionsData, setConnectionsData] = React.useState<{
+    successful: ConnectionType[];
+    failure: ConnectionType[];
+    unreachable: ConnectionType[];
+  }>({ successful: [], failure: [], unreachable: [] });
+  const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
+  const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
+  const { runScan, onScanSources, scanSelected, setScanSelected, onScanSource } = useSourceApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
+  const { deleteSources } = useDeleteSourceApi(addAlert);
+  const { addSources } = useAddSourceApi(addAlert);
+  const { editSources } = useEditSourceApi(addAlert);
+  const { showConnections } = useShowConnectionsApi(setConnectionsData);
 
   /**
    * Fetches the translated label for a source type.
@@ -104,69 +101,20 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   /**
-   * Deletes the pending source and handles success, error, and cleanup operations.
+   * Sets the source that is currently being edited.
+   *
+   * @param {SourceType} source - The source to be set as the one being edited.
    */
-  const onDeleteSource = () => {
-    deleteSource()
-      .then(() => {
-        const successMessage = t('toast-notifications.description', {
-          context: 'deleted-source',
-          name: pendingDeleteSource?.name
-        });
-        addAlert({
-          title: successMessage,
-          variant: 'success',
-          id: getUniqueId()
-        });
-        onRefresh();
-      })
-      .catch(err => {
-        console.log(err);
-        const errorMessage = t('toast-notifications.description', {
-          context: 'deleted-source_error',
-          name: pendingDeleteSource?.name,
-          message: err.response.data.detail
-        });
-        addAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
-      })
-      .finally(() => setPendingDeleteSource(undefined));
+  const onEditSource = (source: SourceType) => {
+    setSourceBeingEdited(source);
   };
 
   /**
-   * Submits edited source data, handles success, error, and cleanup operations.
-   *
-   * @param {SourceType} payload - The payload containing updated source information.
+   * Closes the connections view by resetting selected connections and clearing connection data.
    */
-  const onSubmitEditedSource = (payload: SourceType) => {
-    submitEditedSource(payload)
-      .then(() => {
-        const successMessage = t('toast-notifications.description', {
-          context: 'add-source_hidden_edit',
-          name: pendingDeleteSource?.name
-        });
-        addAlert({
-          title: successMessage,
-          variant: 'success',
-          id: getUniqueId()
-        });
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setSourceBeingEdited(undefined);
-      })
-      .catch(err => {
-        console.error({ err });
-        const errorMessage = t('toast-notifications.title', {
-          context: 'add-source_hidden_error_edit'
-        });
-        addAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
-      });
+  const onCloseConnections = () => {
+    setConnectionsSelected(undefined);
+    setConnectionsData(emptyConnectionData);
   };
 
   /**
@@ -202,60 +150,6 @@ const SourcesListView: React.FunctionComponent = () => {
           id: getUniqueId()
         });
       });
-  };
-
-  /**
-   * Adds a new source using the provided payload, handles success, error, and cleanup operations.
-   *
-   * @param {SourceType} payload - The payload containing information for the new source to be added.
-   */
-  const onAddSource = (payload: SourceType) => {
-    addSource(payload)
-      .then(() => {
-        const successMessage = t('toast-notifications.description', {
-          context: 'add-source_hidden',
-          name: payload.name
-        });
-        addAlert({
-          title: successMessage,
-          variant: 'success',
-          id: getUniqueId()
-        });
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setAddSourceModal(undefined);
-      })
-      .catch(err => {
-        console.error({ err });
-        console.log(JSON.stringify(err?.response?.data));
-        const errorMessage = t('toast-notifications', {
-          context: 'title_add-source_hidden_error',
-          name: payload.name,
-          message: JSON.stringify(err?.response?.data)
-        });
-        addAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
-      });
-  };
-
-  /**
-   * Retrieves connection information related to a source, updates connection data, and selects the source.
-   *
-   * @param {SourceType} source - The source for which to retrieve connection information.
-   */
-  const onShowConnections = (source: SourceType) => {
-    showConnections(source)
-      .then(res => {
-        setConnectionsData({
-          successful: res.data.results.filter((c: { status: string }) => c.status === 'success'),
-          failure: res.data.results.filter((c: { status: string }) => c.status === 'failure'),
-          unreachable: res.data.results.filter((c: { status: string }) => !['success', 'failure'].includes(c.status))
-        });
-      })
-      .catch(err => console.error(err));
-    setConnectionsSelected(source);
   };
 
   /**
@@ -366,6 +260,10 @@ const SourcesListView: React.FunctionComponent = () => {
     components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
   } = tableBatteries;
 
+  const hasSelectedSources = () => {
+    return Object.values(selectedItems).filter(val => val !== null).length > 0;
+  };
+
   const renderAddSourceButton = () => (
     <SimpleDropdown
       label={t('view.empty-state_label_sources')}
@@ -402,8 +300,8 @@ const SourcesListView: React.FunctionComponent = () => {
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
-            isDisabled={!selectedItems?.length}
-            onClick={onDeleteSelectedSources}
+            isDisabled={!hasSelectedSources()}
+            onClick={() => deleteSources(selectedItems).finally(() => onRefresh())}
           >
             {t('table.label', { context: 'delete' })}
           </Button>
@@ -435,7 +333,8 @@ const SourcesListView: React.FunctionComponent = () => {
       <Button
         variant={ButtonVariant.link}
         onClick={() => {
-          onShowConnections(source);
+          showConnections(source);
+          setConnectionsSelected(source);
         }}
       >
         <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
@@ -544,39 +443,60 @@ const SourcesListView: React.FunctionComponent = () => {
       {connectionsSelected && (
         <ConnectionsModal source={connectionsSelected} connections={connectionsData} onClose={onCloseConnections} />
       )}
-
-      {!!pendingDeleteSource && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
-          isOpen={!!pendingDeleteSource}
-          onClose={() => setPendingDeleteSource(undefined)}
-          actions={[
-            <Button key="confirm" variant="danger" onClick={() => onDeleteSource()}>
-              {t('form-dialog.label', { context: 'delete' })}
-            </Button>,
-            <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
-              {t('form-dialog.label', { context: 'cancel' })}
-            </Button>
-          ]}
-        >
-          Are you sure you want to delete the source &quot;
-          {pendingDeleteSource.name}&quot;
-        </Modal>
-      )}
-
-      {sourceBeingEdited && (
-        <AddSourceModal
-          source={sourceBeingEdited}
-          type={sourceBeingEdited.source_type}
-          onClose={() => setSourceBeingEdited(undefined)}
-          onSubmit={onSubmitEditedSource}
-        />
-      )}
-      {addSourceModal && (
-        <AddSourceModal type={addSourceModal} onClose={() => setAddSourceModal(undefined)} onSubmit={onAddSource} />
-      )}
-
+      <Modal
+        variant={ModalVariant.small}
+        title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
+        isOpen={pendingDeleteSource !== undefined}
+        onClose={() => setPendingDeleteSource(undefined)}
+        actions={[
+          <Button
+            key="confirm"
+            variant="danger"
+            onClick={() => {
+              if (pendingDeleteSource) {
+                deleteSources(pendingDeleteSource).finally(() => {
+                  setPendingDeleteSource(undefined);
+                  onRefresh();
+                });
+              }
+            }}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>,
+          <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        ]}
+      >
+        {t('form-dialog.confirmation_heading', {
+          context: 'delete-source',
+          name: pendingDeleteSource?.name
+        })}
+      </Modal>
+      {/* TODO: Simplify add/edit sources functionality * check PR #380 for details */}
+      <AddSourceModal
+        isOpen={sourceBeingEdited !== undefined}
+        source={sourceBeingEdited}
+        sourceType={sourceBeingEdited?.source_type}
+        onClose={() => setSourceBeingEdited(undefined)}
+        onSubmit={(payload: SourceType) =>
+          editSources(payload).finally(() => {
+            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+            setSourceBeingEdited(undefined);
+          })
+        }
+      />
+      <AddSourceModal
+        isOpen={addSourceModal !== undefined}
+        sourceType={addSourceModal}
+        onClose={() => setAddSourceModal(undefined)}
+        onSubmit={(payload: SourceType) =>
+          addSources(payload).finally(() => {
+            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+            setAddSourceModal(undefined);
+          })
+        }
+      />
       {scanSelected && (
         <SourcesScanModal onClose={() => setScanSelected(undefined)} onSubmit={onRunScan} sources={scanSelected} />
       )}

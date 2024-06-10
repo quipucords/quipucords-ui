@@ -23,10 +23,12 @@ const props = {
   onDownload: jest.fn(),
   scanJobs: undefined
 };
+
 const propsWithZeroScanJobs = {
   ...props,
   scanJobs: []
 };
+
 const propsWithOneScanJob = {
   ...props,
   scanJobs: [
@@ -38,6 +40,7 @@ const propsWithOneScanJob = {
     }
   ] as ScanJobType[]
 };
+
 const propsWithScanJobs = {
   ...props,
   scanJobs: [
@@ -61,9 +64,9 @@ describe('Modal', () => {
     render(<ScansModal {...props} />);
     expect(document.createElement).toHaveBeenCalledWith('div');
   });
+
   test('Modal title populates based on scan id', async () => {
     render(<ScansModal {...props} />);
-
     expect(screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`)).toBeInTheDocument();
   });
 
@@ -72,21 +75,25 @@ describe('Modal', () => {
     expect(screen.getByText('Loading scans')).toBeInTheDocument();
     expect(baseElement).toMatchSnapshot();
   });
+
   test('Modal 0 jobs populates properly', async () => {
     const { baseElement } = render(<ScansModal {...propsWithZeroScanJobs} />);
     expect(screen.getByText('0 scans have run')).toBeInTheDocument();
     expect(baseElement).toMatchSnapshot();
   });
+
   test('Modal 1 job populates properly', async () => {
     const { baseElement } = render(<ScansModal {...propsWithOneScanJob} />);
     expect(screen.getByText('1 scan has run')).toBeInTheDocument();
     expect(baseElement).toMatchSnapshot();
   });
+
   test('Modal multiple jobs populates properly', async () => {
     const { baseElement } = render(<ScansModal {...propsWithScanJobs} />);
     expect(screen.getByText('2 scans have run')).toBeInTheDocument();
     expect(baseElement).toMatchSnapshot();
   });
+
   test('Modal closes with escape', async () => {
     const user = userEvent.setup();
     render(<ScansModal {...props} />);
@@ -96,15 +103,18 @@ describe('Modal', () => {
     );
     expect(props.onClose).toHaveBeenCalled();
   });
+
   test('Modal shows the close button', () => {
     render(<ScansModal {...props} />);
     expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
   });
+
   test('Modal clicking close button calls onClose', async () => {
     render(<ScansModal {...props} />);
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(props.onClose).toHaveBeenCalled();
   });
+
   test('Modal clicking download button calls onDownload with proper report id', async () => {
     render(<ScansModal {...propsWithScanJobs} />);
     await userEvent.click(screen.getAllByText('Download')[0]);
