@@ -148,4 +148,4 @@ const useSourceApi = () => {
   };
 };
 
-export default useSourceApi;
+export { useSourceApi as default, useSourceApi };
