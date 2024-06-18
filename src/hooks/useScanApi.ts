@@ -72,4 +72,4 @@ const useScanApi = () => {
     downloadReport
   };
 };
-export default useScanApi;
+export { useScanApi as default, useScanApi };

@@ -44,7 +44,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import useScanApi from '../../hooks/useScanApi';
+import { useScanApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { ScanJobType, ScanType } from '../../types/types';
 import { ScansModal } from './showScansModal';
