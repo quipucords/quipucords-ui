@@ -1,10 +1,10 @@
 import { act, renderHook } from '@testing-library/react';
-import axios from 'axios';
-import { CredentialType } from 'src/types/types';
-import { useCredentialApi } from '../useCredentialApi';
+import axios, { AxiosError } from 'axios';
+import { CredentialType, SourceType } from 'src/types/types';
+import { useDeleteCredentialApi } from '../useCredentialApi';
 
-const mockCredential: CredentialType = {
-  id: '123',
+const mockCredential1: CredentialType = {
+  id: 1,
   name: 'Test Credential',
   created_at: new Date(),
   updated_at: new Date(),
@@ -20,17 +20,61 @@ const mockCredential: CredentialType = {
   sources: []
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mockAxios = (method: 'post' | 'put' | 'delete' | 'get', url: string, response: any) => {
-  axios[method] = jest.fn().mockResolvedValue(response);
+const mockSource: SourceType = {
+  id: 3,
+  name: 'Test Source',
+  port: 8080,
+  source_type: 'test',
+  hosts: ['localhost'],
+  exclude_hosts: [],
+  credentials: [],
+  connection: {
+    id: 123,
+    end_time: '2024-06-10T10:00:00Z',
+    report_id: 1,
+    source_systems_count: 0,
+    source_systems_failed: 0,
+    source_systems_scanned: 0,
+    source_systems_unreachable: 0,
+    start_time: '2024-06-10T09:00:00Z',
+    status: 'active',
+    status_details: {
+      job_status_message: 'Scan in progress'
+    },
+    systems_count: 0,
+    systems_scanned: 0,
+    systems_failed: 0
+  },
+  options: { ssl_cert_verify: true, disable_ssl: false }
 };
 
-describe('useCredentialApi', () => {
+const mockCredential2: CredentialType = {
+  id: 2,
+  name: 'Test Credential',
+  created_at: new Date(),
+  updated_at: new Date(),
+  cred_type: 'Test Type',
+  username: 'testuser',
+  password: 'testpassword',
+  ssh_keyfile: 'testkeyfile',
+  auth_token: 'testtoken',
+  ssh_passphrase: 'testpassphrase',
+  become_method: 'testmethod',
+  become_user: 'testuser',
+  become_password: 'testpassword',
+  sources: [mockSource]
+};
+
+jest.mock('axios');
+
+describe('useDeleteCredentialApi', () => {
+  let mockOnAddAlert: jest.Mock;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let result: any;
 
   beforeEach(() => {
-    const hook = renderHook(() => useCredentialApi());
+    mockOnAddAlert = jest.fn();
+    const hook = renderHook(() => useDeleteCredentialApi(mockOnAddAlert));
     result = hook.result;
   });
 
@@ -38,45 +82,59 @@ describe('useCredentialApi', () => {
     jest.clearAllMocks();
   });
 
-  it('should successfully delete a credential when provided', async () => {
-    mockAxios('delete', `${process.env.REACT_APP_CREDENTIALS_SERVICE}123/`, { status: 200 });
+  it('successfully deletes credentials (no attached sources)', async () => {
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
+      data: { skipped: [], deleted: ['1'] }
+    });
 
     await act(async () => {
-      await result.current.deleteCredential(mockCredential);
+      await result.current.deleteCredentials(mockCredential1);
     });
 
-    expect(axios.delete).toHaveBeenCalledWith(`${process.env.REACT_APP_CREDENTIALS_SERVICE}123/`);
+    expect(axios.post).toHaveBeenCalledWith(
+      `${process.env.REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE}`,
+      { ids: [mockCredential1.id] }
+    );
+    expect(mockOnAddAlert).toHaveBeenCalledWith(expect.objectContaining({ variant: 'success' }));
   });
 
-  it('should return an Axios response object when deleting a credential', async () => {
-    const axiosResponse = { data: 'Deleted credential successfully', status: 200 };
-
-    mockAxios('delete', `${process.env.REACT_APP_CREDENTIALS_SERVICE}123/`, axiosResponse);
-
-    const deleteResult = await result.current.deleteCredential(mockCredential);
-
-    expect(deleteResult).toEqual(axiosResponse);
-  });
-
-  it('should set the pending delete credential', () => {
-    act(() => {
-      result.current.setPendingDeleteCredential(mockCredential);
+  it('shows warning alert (some deleted, some skipped)', async () => {
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
+      data: { skipped: [mockCredential2.id], deleted: [mockCredential1.id] }
     });
-
-    expect(result.current.pendingDeleteCredential).toEqual(mockCredential);
-  });
-
-  it('should delete a credential using pendingDeleteCredential if no credential is provided', async () => {
-    act(() => {
-      result.current.setPendingDeleteCredential(mockCredential);
-    });
-
-    mockAxios('delete', `${process.env.REACT_APP_CREDENTIALS_SERVICE}123/`, { status: 200 });
 
     await act(async () => {
-      await result.current.deleteCredential();
+      await result.current.deleteCredentials([mockCredential2, mockCredential1]);
     });
 
-    expect(axios.delete).toHaveBeenCalledWith(`${process.env.REACT_APP_CREDENTIALS_SERVICE}123/`);
+    expect(mockOnAddAlert).toHaveBeenCalledWith(expect.objectContaining({ variant: 'warning' }));
+  });
+
+  it('shows error alert (all skipped)', async () => {
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
+      data: { skipped: [{ credential: mockCredential2.id }], deleted: [] }
+    });
+
+    await act(async () => {
+      await result.current.deleteCredentials(mockCredential2);
+    });
+
+    expect(mockOnAddAlert).toHaveBeenCalledWith(expect.objectContaining({ variant: 'danger' }));
+  });
+
+  it('should handle Axios errors gracefully', async () => {
+    const error = new AxiosError('Request failed with status code 400');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (error as any).response = {
+      status: 400,
+      data: { detail: 'Request failed with status code 400' }
+    };
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockRejectedValue(error);
+
+    await act(async () => {
+      await result.current.deleteCredentials(mockCredential1);
+    });
+
+    expect(mockOnAddAlert).toHaveBeenCalledWith(expect.objectContaining({ variant: 'danger' }));
   });
 });
