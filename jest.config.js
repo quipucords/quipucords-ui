@@ -27,6 +27,8 @@ module.exports = {
 
   roots: ['src'],
 
+  setupFilesAfterEnv: ['<rootDir>/config/jest.setupTests.js'],
+
   // The test environment that will be used for testing.
   testEnvironment: 'jsdom',
 
