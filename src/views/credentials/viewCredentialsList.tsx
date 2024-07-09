@@ -345,37 +345,36 @@ const CredentialsListView: React.FunctionComponent = () => {
           </List>
         </Modal>
       )}
-      {!!pendingDeleteCredential && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
-          isOpen={!!pendingDeleteCredential}
-          onClose={() => setPendingDeleteCredential(undefined)}
-          actions={[
-            <Button
-              key="confirm"
-              variant="danger"
-              onClick={() =>
+      <Modal
+        variant={ModalVariant.small}
+        title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
+        isOpen={pendingDeleteCredential !== undefined}
+        onClose={() => setPendingDeleteCredential(undefined)}
+        actions={[
+          <Button
+            key="confirm"
+            variant="danger"
+            onClick={() => {
+              if (pendingDeleteCredential) {
                 deleteCredentials(pendingDeleteCredential).finally(() => {
-                  setPendingDeleteCredential(undefined), onRefresh();
-                })
+                  setPendingDeleteCredential(undefined);
+                  onRefresh();
+                });
               }
-            >
-              {t('table.label', { context: 'delete' })}
-            </Button>,
-            <Button
-              key="cancel"
-              variant="link"
-              onClick={() => setPendingDeleteCredential(undefined)}
-            >
-              Cancel
-            </Button>
-          ]}
-        >
-          Are you sure you want to delete the credential &quot;
-          {pendingDeleteCredential.name}&quot;
-        </Modal>
-      )}
+            }}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>,
+          <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        ]}
+      >
+        {t('form-dialog.confirmation_heading', {
+          context: 'delete-credential',
+          name: pendingDeleteCredential?.name
+        })}
+      </Modal>
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
           <Alert

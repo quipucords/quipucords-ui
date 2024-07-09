@@ -5,26 +5,63 @@
  *
  * @param {Function} onAddAlert - Callback function to add an alert to the UI.
  * @returns {Object} An object containing functions:
- *   - `apiDeleteCredentials(ids)`: Function to make the API call for deleting credentials with the given IDs.
+ *   - `apiCall(ids)`: Function to make the API call for deleting credentials with the given IDs.
  *   - `deleteCredentials(credential)`: Function to handle the entire credential deletion process (API call, response handling, and alerts).
  */
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AlertProps, getUniqueId } from '@patternfly/react-core';
-import axios, { AxiosError } from 'axios';
+import { AlertProps } from '@patternfly/react-core';
+import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios';
+import { helpers } from '../helpers';
 import { CredentialType } from '../types/types';
+
+type ApiDeleteCredentialSuccessType = {
+  message: string;
+  deleted?: number[];
+  missing?: number[];
+  skipped?: { credential: number; sources: number[] }[];
+};
+
+type ApiDeleteCredentialErrorType = {
+  detail?: string;
+  message: string;
+};
 
 const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
 
-  const apiDeleteCredentials = useCallback((ids: CredentialType['id'][]) => {
-    return axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE}`, { ids });
-  }, []);
+  const apiCall = useCallback(
+    (ids: CredentialType['id'][]): Promise<AxiosResponse<ApiDeleteCredentialSuccessType>> =>
+      axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE}`, { ids }),
+    []
+  );
 
-  const handleDeleteResponse = useCallback(
-    (response, updatedCredentials) => {
+  const callbackSuccess = useCallback(
+    (
+      response: AxiosResponse<ApiDeleteCredentialSuccessType>,
+      updatedCredentials: CredentialType[]
+    ) => {
+      const { data } = response;
+
+      const deletedNames = data?.deleted
+        ?.map(id => updatedCredentials.find(cred => id === cred.id)?.name)
+        .filter(Boolean)
+        .join(', ');
+
+      const skippedNames = data?.skipped
+        ?.map(({ credential }) => updatedCredentials.find(cred => credential === cred.id)?.name)
+        .filter(Boolean)
+        .join(', ');
+
+      const missingNames = data?.missing
+        ?.map(id => updatedCredentials.find(cred => id === cred.id)?.name)
+        .filter(Boolean)
+        .join(', ');
+
+      const missingCredsMsg = 'The following credentials could not be found:' + missingNames;
+
       // All credentials were deleted successfully
-      if (response.data.skipped.length === 0) {
+      if (data?.deleted?.length === updatedCredentials.length) {
         const credentialCount = updatedCredentials.length;
         const context = credentialCount === 1 ? 'deleted-credential' : 'deleted-credentials';
         const successMessage = t('toast-notifications.description', {
@@ -34,65 +71,72 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         onAddAlert({
           title: successMessage,
           variant: 'success',
-          id: getUniqueId()
+          id: helpers.generateId()
         });
-      } else if (response.data.deleted.length > 0) {
-        // Some credentials deleted, some skipped
-        const deletedNames = response.data.deleted
-          .map(id => updatedCredentials.find(cred => cred.id === id)?.name)
-          .filter(Boolean);
+        return;
+      }
 
-        const skippedNames = response.data.skipped
-          .map(item => updatedCredentials.find(cred => cred.id === item.credential)?.name)
-          .filter(Boolean);
+      // No credentials deleted, either all skipped or all missing
+      if (
+        data?.skipped?.length === updatedCredentials.length ||
+        data?.missing?.length === updatedCredentials.length
+      ) {
+        if (data?.skipped?.length === updatedCredentials.length) {
+          const countValues = data?.skipped?.length === 1 ? 'Credential' : 'Credentials';
+          const errorMessage = t('toast-notifications.description', {
+            context: 'skipped-credentials',
+            name: skippedNames,
+            credential_count: countValues
+          });
+          onAddAlert({
+            title: errorMessage,
+            variant: 'danger',
+            id: helpers.generateId()
+          });
+          return;
+        }
+        {
+          console.log(missingCredsMsg);
+          return;
+        }
+      }
 
+      // Some credentials deleted, some skipped or missing
+      if (data?.deleted?.length && data?.skipped?.length) {
+        const skippedCountValues = data?.skipped?.length === 1 ? 'Credential' : 'Credentials';
         const successMessage = t('toast-notifications.description', {
           context: 'deleted-credentials-skipped-credentials',
-          name: deletedNames.join(', '),
-          name_error: skippedNames.join(', ')
+          deleted_names: deletedNames,
+          skipped_names: skippedNames,
+          skipped_count: skippedCountValues
         });
         onAddAlert({
           title: successMessage,
           variant: 'warning',
-          id: getUniqueId()
+          id: helpers.generateId()
         });
-      } else {
-        // No credentials deleted, all skipped
-        const skippedNames = response.data.skipped
-          .map(item => updatedCredentials.find(cred => cred.id === item.credential)?.name)
-          .filter(Boolean);
-
-        const errorMessage = t('toast-notifications.description', {
-          context: 'skipped-credentials',
-          name: skippedNames.join(', ')
-        });
-        onAddAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
+        if (data?.missing?.length) {
+          console.log(missingCredsMsg);
+          return;
+        }
       }
     },
     [onAddAlert, t]
   );
 
-  const handleDeleteError = useCallback(
-    (error: unknown, updatedCredentials: CredentialType[]) => {
-      console.error('Error deleting credentials:', error);
-      // Type assertion to narrow down error type
-      const axiosError = error as AxiosError & {
-        response: { data: { detail?: string; message?: string } };
-      };
+  const callbackError = useCallback(
+    (
+      { message, response }: AxiosError<ApiDeleteCredentialErrorType>,
+      updatedCredentials: CredentialType[]
+    ) => {
+      const errorCountValues = updatedCredentials.length === 1 ? 'credential' : 'credentials';
       const errorMessage = t('toast-notifications.description', {
         context: 'deleted-credential_error',
+        error_count: errorCountValues,
         name: updatedCredentials.map(({ name }) => name).join(', '),
-        message:
-          axiosError.response?.data?.detail ||
-          axiosError.response?.data?.message ||
-          axiosError.message ||
-          'Unknown error'
+        message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
       });
-      onAddAlert({ title: errorMessage, variant: 'danger', id: getUniqueId() });
+      onAddAlert({ title: errorMessage, variant: 'danger', id: helpers.generateId() });
     },
     [onAddAlert, t]
   );
@@ -101,17 +145,24 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
     async (credential: CredentialType | CredentialType[]) => {
       const updatedCredentials = (Array.isArray(credential) && credential) || [credential];
       try {
-        const response = await apiDeleteCredentials(updatedCredentials.map(({ id }) => id));
-        handleDeleteResponse(response, updatedCredentials);
+        const response = await apiCall(updatedCredentials.map(({ id }) => id));
+        callbackSuccess(response, updatedCredentials);
       } catch (error) {
-        handleDeleteError(error, updatedCredentials);
+        if (isAxiosError(error)) {
+          return callbackError(error, updatedCredentials);
+        }
+        if (!helpers.TEST_MODE) {
+          console.error(error);
+        }
       }
     },
-    [apiDeleteCredentials, handleDeleteResponse, handleDeleteError]
+    [apiCall, callbackSuccess, callbackError]
   );
 
   return {
-    apiDeleteCredentials,
+    apiCall,
+    callbackError,
+    callbackSuccess,
     deleteCredentials
   };
 };
