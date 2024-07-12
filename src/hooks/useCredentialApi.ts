@@ -58,14 +58,13 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         .filter(Boolean)
         .join(', ');
 
-      const missingCredsMsg = 'The following credentials could not be found:' + missingNames;
+      const missingCredsMsg = `The following credentials could not be found: ${missingNames}`;
 
       // All credentials were deleted successfully
       if (data?.deleted?.length === updatedCredentials.length) {
-        const credentialCount = updatedCredentials.length;
-        const context = credentialCount === 1 ? 'deleted-credential' : 'deleted-credentials';
         const successMessage = t('toast-notifications.description', {
-          context: context,
+          context: 'deleted-credential',
+          count: updatedCredentials.length,
           name: updatedCredentials.map(({ name }) => name).join(', ')
         });
         onAddAlert({
@@ -82,33 +81,29 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         data?.missing?.length === updatedCredentials.length
       ) {
         if (data?.skipped?.length === updatedCredentials.length) {
-          const countValues = data?.skipped?.length === 1 ? 'Credential' : 'Credentials';
           const errorMessage = t('toast-notifications.description', {
-            context: 'skipped-credentials',
+            context: 'skipped-credential',
             name: skippedNames,
-            credential_count: countValues
+            count: data?.skipped?.length
           });
           onAddAlert({
             title: errorMessage,
             variant: 'danger',
             id: helpers.generateId()
           });
-          return;
-        }
-        {
+        } else {
           console.log(missingCredsMsg);
-          return;
         }
+        return;
       }
 
       // Some credentials deleted, some skipped or missing
       if (data?.deleted?.length && data?.skipped?.length) {
-        const skippedCountValues = data?.skipped?.length === 1 ? 'Credential' : 'Credentials';
         const successMessage = t('toast-notifications.description', {
           context: 'deleted-credentials-skipped-credentials',
           deleted_names: deletedNames,
           skipped_names: skippedNames,
-          skipped_count: skippedCountValues
+          count: data?.skipped?.length
         });
         onAddAlert({
           title: successMessage,
