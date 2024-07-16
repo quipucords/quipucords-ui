@@ -2,6 +2,31 @@
 
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
-  "",
+  "app/App.tsx:25:        console.error('Failed to set config', error);",
+  "app/appLayout/AppToolbar.tsx:55:        console.error('Failed to logout', err);",
+  "app/appLayout/AppToolbar.tsx:68:    console.log('selected', value);",
+  "app/appLayout/AppToolbar.tsx:77:    console.log('selected', value);",
+  "common/helpers.ts:61:      console.warn('Copy to clipboard failed.', (e as any).message);",
+  "common/helpers.ts:280:    console.error('Error occurred in getTimeDisplayHowLongAgo:', error);",
+  "common/queryHelpers.ts:79:        console.log(\`Query: \`, query);",
+  "common/queryHelpers.ts:84:        console.error(error);",
+  "hooks/api/useCredentialApi.ts:33:    console.log('Deleting selected credentials:', selectedItems);",
+  "hooks/api/useScanApi.ts:45:    console.log('Deleting selected scans:', selectedItems);",
+  "hooks/api/useSourceApi.ts:96:    console.log('Deleting selected sources:', selectedItems);",
+  "pages/credentials/CredentialsListView.tsx:102:        console.log(err);",
+  "pages/login/Login.tsx:60:                console.error('Failed to set config', error);",
+  "pages/login/Login.tsx:67:          console.error({ err });",
+  "pages/scans/ScansListView.tsx:95:        console.log(err);",
+  "pages/scans/ScansListView.tsx:112:    console.log('run scan:', source);",
+  "pages/scans/ScansListView.tsx:120:    //   console.error({ err });",
+  "pages/scans/ScansListView.tsx:352:                console.error(err);",
+  "pages/scans/components/ScansModal.tsx:76:      console.log({ aValue, bValue });",
+  "pages/sources/SourcesListView.tsx:124:        console.log(err);",
+  "pages/sources/SourcesListView.tsx:152:        console.error({ err });",
+  "pages/sources/SourcesListView.tsx:177:        console.error({ err });",
+  "pages/sources/SourcesListView.tsx:204:        console.error({ err });",
+  "pages/sources/SourcesListView.tsx:205:        console.log(JSON.stringify(err?.response?.data));",
+  "pages/sources/SourcesListView.tsx:231:      .catch(err => console.error(err));",
+  "pages/sources/components/AddSourceModal.tsx:66:      .catch(err => console.error(err));",
 ]
 `;
