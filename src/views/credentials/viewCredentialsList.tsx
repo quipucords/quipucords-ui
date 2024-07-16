@@ -48,7 +48,7 @@ import {
 } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import useCredentialApi from '../../hooks/useCredentialApi';
+import { useDeleteCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { CredentialType, SourceType } from '../../types/types';
 import { useCredentialsQuery } from './useCredentialsQuery';
@@ -58,14 +58,10 @@ const CredentialsListView: React.FunctionComponent = () => {
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
-  const {
-    deleteCredential,
-    onDeleteSelectedCredentials,
-    pendingDeleteCredential,
-    setPendingDeleteCredential
-  } = useCredentialApi();
+  const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
+  const { addAlert, alerts, removeAlert } = useAlerts();
+  const { deleteCredentials } = useDeleteCredentialApi(addAlert);
   const { queryClient } = useQueryClientConfig();
-  const { alerts, addAlert, removeAlert } = useAlerts();
 
   /** Fetches the translated label for a credential type.
    *
@@ -82,39 +78,6 @@ const CredentialsListView: React.FunctionComponent = () => {
    */
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-  };
-
-  /**
-   * Deletes the pending credential and handles success, error, and cleanup operations.
-   */
-  const onDeleteCredential = () => {
-    deleteCredential()
-      .then(() => {
-        const successMessage = t('toast-notifications.description', {
-          context: 'deleted-credential',
-          name: pendingDeleteCredential?.name
-        });
-        addAlert({
-          title: successMessage,
-          variant: 'success',
-          id: getUniqueId()
-        });
-        onRefresh();
-      })
-      .catch(err => {
-        console.log(err);
-        const errorMessage = t('toast-notifications.description', {
-          context: 'deleted-credential_error',
-          name: pendingDeleteCredential?.name,
-          message: err.response.data.detail
-        });
-        addAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
-      })
-      .finally(() => setPendingDeleteCredential(undefined));
   };
 
   /**
@@ -257,7 +220,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedCredentials()}
-            onClick={onDeleteSelectedCredentials}
+            onClick={() => deleteCredentials(selectedItems).finally(() => onRefresh())}
           >
             {t('table.label', { context: 'delete' })}
           </Button>
@@ -382,29 +345,36 @@ const CredentialsListView: React.FunctionComponent = () => {
           </List>
         </Modal>
       )}
-      {!!pendingDeleteCredential && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
-          isOpen={!!pendingDeleteCredential}
-          onClose={() => setPendingDeleteCredential(undefined)}
-          actions={[
-            <Button key="confirm" variant="danger" onClick={() => onDeleteCredential()}>
-              Delete
-            </Button>,
-            <Button
-              key="cancel"
-              variant="link"
-              onClick={() => setPendingDeleteCredential(undefined)}
-            >
-              Cancel
-            </Button>
-          ]}
-        >
-          Are you sure you want to delete the credential &quot;
-          {pendingDeleteCredential.name}&quot;
-        </Modal>
-      )}
+      <Modal
+        variant={ModalVariant.small}
+        title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
+        isOpen={pendingDeleteCredential !== undefined}
+        onClose={() => setPendingDeleteCredential(undefined)}
+        actions={[
+          <Button
+            key="confirm"
+            variant="danger"
+            onClick={() => {
+              if (pendingDeleteCredential) {
+                deleteCredentials(pendingDeleteCredential).finally(() => {
+                  setPendingDeleteCredential(undefined);
+                  onRefresh();
+                });
+              }
+            }}
+          >
+            {t('table.label', { context: 'delete' })}
+          </Button>,
+          <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        ]}
+      >
+        {t('form-dialog.confirmation_heading', {
+          context: 'delete-credential',
+          name: pendingDeleteCredential?.name
+        })}
+      </Modal>
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
           <Alert
