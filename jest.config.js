@@ -1,21 +1,5 @@
 module.exports = {
-  collectCoverageFrom: [
-    "src/**/*.{js,jsx}",
-    "!src/**/.*/**",
-    "!src/index.js",
-    "!src/components/app.js",
-    "!src/components/**/index.js",
-    "!src/common/index.js",
-    "!src/hooks/index.js",
-    "!src/redux/index.js",
-    "!src/redux/store.js",
-    "!src/redux/middleware/**",
-    "!src/redux/actions/index.js",
-    "!src/redux/common/index.js",
-    "!src/redux/hooks/index.js",
-    "!src/redux/reducers/index.js",
-    "!src/redux/selectors/index.js"
-  ],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/.*/**', '!src/**/**/index.{ts,tsx}'],
   coverageThreshold: {
     global: {
       branches: 50,
@@ -33,10 +17,10 @@ module.exports = {
   resetMocks: true,
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   setupFilesAfterEnv: ['<rootDir>/config/jest.setupTests.js'],
-  testMatch: ['<rootDir>/**/__tests__/**/*.{js,jsx,ts,tsx}', '<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
+  testMatch: ['<rootDir>/**/__tests__/**/*.{ts,tsx}', '<rootDir>/**/*.{spec,test}.{ts,tsx}'],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/ts-jest',
     '^.+\\.css$': '<rootDir>/config/jest.transform.style.js',
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest.transform.file.js'
   },

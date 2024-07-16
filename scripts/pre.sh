@@ -29,7 +29,6 @@ brand()
     SENTENCE_START_NAME="$(readDotEnv "REACT_APP_UI_BRAND_SENTENCE_START_NAME" "$(pwd)/.env")"
   fi
 
-  # todo: look at exporting these values, appears npm-run-all may spawn subshells that interfere with exporting
   echo UI_BRAND="$BRAND" >> $FILE;
   echo UI_NAME="$NAME" >> $FILE;
   echo UI_SHORT_NAME="$SHORT_NAME" >> $FILE;
@@ -60,13 +59,9 @@ clean()
 {
   local FILE=$TEMP_FILE
 
-  echo "Cleaning template build css directories..."
-  rm -rf -- "$(pwd)"/src/styles/.css
-
   echo "Cleaning build directories..."
   rm -rf -- "$(pwd)"/build
-  rm -rf -- "$(pwd)"/dist
-  rm $FILE
+  rm -f $FILE
 }
 #
 #

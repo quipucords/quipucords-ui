@@ -1,6 +1,5 @@
 # dependencies
 node_modules/
-.yarn-integrity
 
 # coverage
 lib-cov
@@ -38,12 +37,19 @@ pids
 *.seed
 *.pid.lock
 pr.txt
+stats.json
+storybook-static
+.DS_Store
+.idea
 
 # logs
 dependency-update-log.txt
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 api-debug*
+
+.vscode
+
+# local files
+var/
