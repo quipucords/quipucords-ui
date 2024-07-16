@@ -148,6 +148,15 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
     }
   });
 
+/**
+ * Generate a random ID.
+ *
+ * @param {string} prefix
+ * @returns {string}
+ */
+const generateId = (prefix = 'generatedid') =>
+  `${prefix}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
+
 const PROD_MODE = process.env.REACT_APP_ENV === 'production';
 
 const TEST_MODE = process.env.REACT_APP_ENV === 'test';
@@ -156,6 +165,7 @@ const helpers = {
   authType,
   downloadData,
   noopTranslate,
+  generateId,
   getAuthType,
   getTimeDisplayHowLongAgo,
   formatDate,

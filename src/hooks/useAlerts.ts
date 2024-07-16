@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { type AlertProps } from '@patternfly/react-core';
+import { helpers } from '../helpers';
 
 const useAlerts = () => {
   const [alerts, setAlerts] = React.useState<AlertProps[]>([]);
@@ -17,7 +18,12 @@ const useAlerts = () => {
    *     like `id`, `title`, `variant`, etc.
    */
   const addAlert = (options: AlertProps | AlertProps[]) => {
-    setAlerts(prevAlerts => [...prevAlerts, ...((Array.isArray(options) && options) || [options])]);
+    const updatedOptions = ((Array.isArray(options) && options) || [options]).map(options => ({
+      ...options,
+      id: options.id || helpers.generateId()
+    }));
+
+    setAlerts(prevAlerts => [...prevAlerts, ...updatedOptions]);
   };
 
   /**

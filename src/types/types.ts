@@ -4,7 +4,7 @@
  * network sources and their connections, as well as comprehensive information about scans and their outcomes.
  */
 export type CredentialType = {
-  id: string;
+  id: number;
   name: string;
   created_at: Date;
   updated_at: Date;

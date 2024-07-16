@@ -35,7 +35,7 @@ export interface AddSourceModalProps {
 
 const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, onSubmit }) => {
   const [credOptions, setCredOptions] = React.useState<{ value: string; label: string }[]>([]);
-  const [credentials, setCredentials] = React.useState<string[]>(source?.credentials?.map(c => c.id) || []);
+  const [credentials, setCredentials] = React.useState<number[]>(source?.credentials?.map(c => c.id) || []);
   const [useParamiko, setUseParamiko] = React.useState<boolean>(source?.options?.use_paramiko ?? false);
   const [sslVerify, setSslVerify] = React.useState<boolean>(source?.options?.ssl_cert_verify ?? true);
   const [sslProtocol, setSslProtocol] = React.useState<string>(
@@ -121,7 +121,11 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
             </FormGroup>
             <FormGroup label="Credentials" fieldId="credentials" isRequired>
               <TypeaheadCheckboxes
-                onChange={setCredentials}
+                onChange={(selections: string[]) => {
+                  const selectedIds = selections.map(Number);
+                  const validIds = selectedIds.filter(id => !isNaN(id));
+                  setCredentials(validIds);
+                }}
                 options={credOptions}
                 selectedOptions={credentials?.map(String) || []}
               />
