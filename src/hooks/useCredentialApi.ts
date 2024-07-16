@@ -121,10 +121,9 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
       { message, response }: AxiosError<ApiDeleteCredentialErrorType>,
       updatedCredentials: CredentialType[]
     ) => {
-      const errorCountValues = updatedCredentials.length === 1 ? 'credential' : 'credentials';
       const errorMessage = t('toast-notifications.description', {
         context: 'deleted-credential_error',
-        error_count: errorCountValues,
+        count: updatedCredentials.length,
         name: updatedCredentials.map(({ name }) => name).join(', '),
         message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
       });
