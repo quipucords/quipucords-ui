@@ -22,6 +22,11 @@ it(`should throw an error if the timestamp is not valid`, () => {
   expect(() => helpers.getTimeDisplayHowLongAgo('')).toThrow(`Invalid timestamp: `);
 });
 
+it('should support generated strings and flags', () => {
+  expect(helpers.generateId()).toBe('generatedid-');
+  expect(helpers.generateId('lorem')).toBe('lorem-');
+});
+
 describe('getAuthType', () => {
   const generateAuthType = partialCredential =>
     helpers.getAuthType({
