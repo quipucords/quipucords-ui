@@ -60,61 +60,58 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
 
       const missingCredsMsg = `The following credentials could not be found: ${missingNames}`;
 
-      // All credentials were deleted successfully
-      if (data?.deleted?.length === updatedCredentials.length) {
-        const successMessage = t('toast-notifications.description', {
-          context: 'deleted-credential',
-          count: updatedCredentials.length,
-          name: updatedCredentials.map(({ name }) => name).join(', ')
-        });
-        onAddAlert({
-          title: successMessage,
-          variant: 'success',
-          id: helpers.generateId()
-        });
-        return;
-      }
-
       // No credentials deleted, either all skipped or all missing
       if (
         data?.skipped?.length === updatedCredentials.length ||
         data?.missing?.length === updatedCredentials.length
       ) {
-        if (data?.skipped?.length === updatedCredentials.length) {
-          const errorMessage = t('toast-notifications.description', {
+        onAddAlert({
+          title: t('toast-notifications.description', {
             context: 'skipped-credential',
             name: skippedNames,
             count: data?.skipped?.length
-          });
-          onAddAlert({
-            title: errorMessage,
-            variant: 'danger',
-            id: helpers.generateId()
-          });
-        } else {
+          }),
+          variant: 'danger',
+          id: helpers.generateId()
+        });
+
+        if (data?.missing?.length) {
           console.log(missingCredsMsg);
         }
         return;
       }
 
       // Some credentials deleted, some skipped or missing
-      if (data?.deleted?.length && data?.skipped?.length) {
-        const successMessage = t('toast-notifications.description', {
-          context: 'deleted-credentials-skipped-credentials',
-          deleted_names: deletedNames,
-          skipped_names: skippedNames,
-          count: data?.skipped?.length
-        });
+      if (data?.skipped?.length || data?.missing?.length) {
         onAddAlert({
-          title: successMessage,
+          title: t('toast-notifications.description', {
+            context: 'deleted-credentials-skipped-credentials',
+            deleted_names: deletedNames,
+            skipped_names: skippedNames,
+            count: data?.skipped?.length
+          }),
           variant: 'warning',
           id: helpers.generateId()
         });
+
         if (data?.missing?.length) {
           console.log(missingCredsMsg);
-          return;
         }
+        return;
       }
+
+      // All credentials were deleted successfully
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'deleted-credential',
+          count: updatedCredentials.length,
+          name: updatedCredentials.map(({ name }) => name).join(', ')
+        }),
+        variant: 'success',
+        id: helpers.generateId()
+      });
+
+      return;
     },
     [onAddAlert, t]
   );

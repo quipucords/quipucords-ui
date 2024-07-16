@@ -313,7 +313,7 @@
     "description_deleted-credentials-skipped-credentials_other": "The following could be successfully deleted: {{deleted_names}}. Credentials {{skipped_names}} could not be deleted due to attached sources.",
     "description_skipped-credential_one": "Credential {{name}} could not be deleted due to an attached source.",
     "description_skipped-credential_other": "Credentials {{name}} could not be deleted due to attached sources.",
-    "description_deleted-credential_error": "Error removing {{error_count}} {{name}}. {{message}}",
+    "description_deleted-credential_error": "Error removing credential {{name}}. {{message}}",
     "description_deleted-credential_error_other": "Error removing credentials {{name}} and more. {{message}}",
     "description_deleted-source": "Source {{name}} deleted successfully.",
     "description_deleted-source_other": "Deleted sources {{name}} and more",
