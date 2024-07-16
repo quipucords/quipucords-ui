@@ -4,11 +4,13 @@
     "adipiscing",
     "amet",
     "bezier",
+    "bgimages",
     "brms",
     "creds",
     "crosshairs",
     "describedby",
     "elit",
+    "generatedid",
     "labelledby",
     "mturley",
     "nocolor",
@@ -26,6 +28,7 @@
     "tbody",
     "thead",
     "touchspin",
+    "vals",
     "valuetext"
   ]
 }

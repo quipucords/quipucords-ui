@@ -1,15 +1,19 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { App } from './app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ReactDOM from 'react-dom/client';
+import App from './app/App';
 
-/**
- * Find root element within HTML template
- */
-const element = document.getElementById('root');
+const root = ReactDOM.createRoot(document.getElementById('root') as Element);
+const queryClient = new QueryClient();
 
-/**
- * Attach application to the root element,
- */
-if (element) {
-  createRoot(element).render(<App />);
-}
+root.render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      {/* <SessionProvider> TODO: possibly add this back in when we do login/auth stuff */}
+      <App />
+      {/* </SessionProvider> */}
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </React.StrictMode>
+);
