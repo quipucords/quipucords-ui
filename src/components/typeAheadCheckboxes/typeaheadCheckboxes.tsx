@@ -1,6 +1,7 @@
 /**
  * Implements a multi-select typeahead component with checkboxes, enabling users to filter and select multiple options.
  * Utilizes PatternFly for UI consistency and accessibility.
+ *
  * @module typeaheadCheckboxes
  */
 import React from 'react';
@@ -8,9 +9,9 @@ import {
   Select,
   SelectOption,
   SelectList,
-  SelectOptionProps,
+  type SelectOptionProps,
   MenuToggle,
-  MenuToggleElement,
+  type MenuToggleElement,
   TextInputGroup,
   TextInputGroupMain,
   TextInputGroupUtilities,
@@ -99,9 +100,7 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
 
       setFocusedItemIndex(indexToFocus);
       const focusedItem = selectOptions.filter(option => !option.isDisabled)[indexToFocus];
-      setActiveItem(
-        `select-multi-typeahead-checkbox-${String(focusedItem.value).replace(' ', '-')}`
-      );
+      setActiveItem(`select-multi-typeahead-checkbox-${String(focusedItem.value).replace(' ', '-')}`);
     }
   };
 
@@ -157,13 +156,7 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
   }, [selected, placeholder]);
 
   const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
-    <MenuToggle
-      variant="typeahead"
-      onClick={onToggleClick}
-      innerRef={toggleRef}
-      isExpanded={isOpen}
-      isFullWidth
-    >
+    <MenuToggle variant="typeahead" onClick={onToggleClick} innerRef={toggleRef} isExpanded={isOpen} isFullWidth>
       <TextInputGroup isPlain>
         <TextInputGroupMain
           value={inputValue}

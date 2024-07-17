@@ -1,5 +1,6 @@
 /**
- * Defines constants for API queries, responses, and types, standardizing access to API parameters and ensuring consistency in data handling.
+ * Defines constants for API queries, responses, and types,
+ * standardizing access to API parameters and ensuring consistency in data handling.
  */
 const API_QUERY_TYPES = {
   AUTH_TOKEN: 'auth_token',

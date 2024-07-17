@@ -1,19 +1,16 @@
 /**
  * Provides hooks and utility functions for building and executing service queries with pagination, filtering,
- * and sorting capabilities, integrating with `react-table-batteries` and `react-query`. Supports constructing query URLs
- * and performing data fetching with automatic refresh control in development mode.
+ * and sorting capabilities, integrating with `react-table-batteries` and `react-query`.
+ * Supports constructing query URLs and performing data fetching with automatic refresh control in development mode.
+ *
  * @module queryHelpers
  */
-import { TableState } from '@mturley-latest/react-table-batteries';
+import { type TableState } from '@mturley-latest/react-table-batteries';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { helpers } from './helpers';
 
-export const getServiceQueryUrl = <
-  TItem,
-  TColumnKey extends string,
-  TSortableColumnKey extends TColumnKey
->({
+export const getServiceQueryUrl = <TItem, TColumnKey extends string, TSortableColumnKey extends TColumnKey>({
   tableState: {
     filter: { filterValues },
     sort: { activeSort, initialSort },
@@ -33,9 +30,7 @@ export const getServiceQueryUrl = <
     : null;
 
   const ordering = `${(activeSort?.direction ?? initialSort?.direction) === 'desc' ? '-' : ''}${
-    activeSort?.columnKey
-      ? columnOrderMap?.[activeSort.columnKey] || activeSort.columnKey
-      : initialSort?.columnKey
+    activeSort?.columnKey ? columnOrderMap?.[activeSort.columnKey] || activeSort.columnKey : initialSort?.columnKey
   }`;
 
   const query =
@@ -53,11 +48,7 @@ export const getServiceQueryUrl = <
 
 export type ServiceQueryResult<TItem> = { count: number; results: TItem[] };
 
-export const useServiceQuery = <
-  TItem,
-  TColumnKey extends string,
-  TSortableColumnKey extends TColumnKey
->({
+export const useServiceQuery = <TItem, TColumnKey extends string, TSortableColumnKey extends TColumnKey>({
   queryKey,
   baseUrl,
   columnOrderMap,

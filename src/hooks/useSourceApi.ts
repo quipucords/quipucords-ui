@@ -61,9 +61,7 @@ const useSourceApi = () => {
    * @returns {AxiosResponse} - The Axios response object representing the result of the request.
    */
   const deleteSource = (source?: SourceType) => {
-    return axios.delete(
-      `${process.env.REACT_APP_SOURCES_SERVICE}${(source || pendingDeleteSource)?.id}/`
-    );
+    return axios.delete(`${process.env.REACT_APP_SOURCES_SERVICE}${(source || pendingDeleteSource)?.id}/`);
   };
 
   /**

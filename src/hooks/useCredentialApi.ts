@@ -3,6 +3,7 @@
  *
  * This hook provides functions for for interacting with credential-related API calls,
  * including adding,editing and deleting credentials and managing selected credentials.
+ *
  * @module useCredentialApi
  */
 import React from 'react';
@@ -15,13 +16,12 @@ const useCredentialApi = () => {
   /**
    * Executes a DELETE request to delete a credential.
    *
-   * @param {CredentialType} [credential] - (Optional) The credential to be deleted. If not provided, it uses `pendingDeleteCredential`.
+   * @param {CredentialType} [credential] - (Optional) The credential to be deleted. If not provided, it uses
+   *     `pendingDeleteCredential`.
    * @returns {AxiosResponse} - The Axios response object representing the result of the request.
    */
   const deleteCredential = (credential?: CredentialType) => {
-    return axios.delete(
-      `${process.env.REACT_APP_CREDENTIALS_SERVICE}${(credential || pendingDeleteCredential)?.id}/`
-    );
+    return axios.delete(`${process.env.REACT_APP_CREDENTIALS_SERVICE}${(credential || pendingDeleteCredential)?.id}/`);
   };
 
   /**

@@ -2,6 +2,7 @@
  * A React component wrapper for initializing and providing an i18n context for internationalizing an application.
  * Utilizes `i18next` and `i18next-xhr-backend` for loading translations and dynamically changing languages based
  * on user preference or environment settings. Supports fallback languages and custom loading paths for language files.
+ *
  * @module I18n
  */
 import React, { useState, useEffect } from 'react';

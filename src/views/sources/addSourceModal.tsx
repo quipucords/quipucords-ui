@@ -3,6 +3,7 @@
  *
  * This component displays a modal for adding or editing a source of a specific type. It provides
  * a form to input source details including name, hosts, port, credential, and SSL settings.
+ *
  * @module addSourceModal
  */
 import * as React from 'react';
@@ -34,15 +35,9 @@ export interface AddSourceModalProps {
 
 const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, onSubmit }) => {
   const [credOptions, setCredOptions] = React.useState<{ value: string; label: string }[]>([]);
-  const [credentials, setCredentials] = React.useState<string[]>(
-    source?.credentials?.map(c => c.id) || []
-  );
-  const [useParamiko, setUseParamiko] = React.useState<boolean>(
-    source?.options?.use_paramiko ?? false
-  );
-  const [sslVerify, setSslVerify] = React.useState<boolean>(
-    source?.options?.ssl_cert_verify ?? true
-  );
+  const [credentials, setCredentials] = React.useState<string[]>(source?.credentials?.map(c => c.id) || []);
+  const [useParamiko, setUseParamiko] = React.useState<boolean>(source?.options?.use_paramiko ?? false);
+  const [sslVerify, setSslVerify] = React.useState<boolean>(source?.options?.ssl_cert_verify ?? true);
   const [sslProtocol, setSslProtocol] = React.useState<string>(
     source?.options?.disable_ssl ? 'Disable SSL' : source?.options?.ssl_protocol || 'SSLv23'
   );
@@ -132,7 +127,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
               />
             </FormGroup>
             {isNetwork ? (
-              <>
+              <React.Fragment>
                 <FormGroup label="Search addresses" isRequired fieldId="hosts">
                   <TextArea
                     placeholder="Enter values separated by commas"
@@ -143,8 +138,8 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                     name="hosts"
                   />
                   <HelperText>
-                    Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR
-                    or Ansible notation for ranges.
+                    Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation
+                    for ranges.
                   </HelperText>
                 </FormGroup>
                 <FormGroup label="Port" fieldId="port">
@@ -160,9 +155,9 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                   />
                   <HelperText>Default port is 22</HelperText>
                 </FormGroup>
-              </>
+              </React.Fragment>
             ) : (
-              <>
+              <React.Fragment>
                 <FormGroup label="IP address or hostname" isRequired fieldId="hosts">
                   <TextInput
                     value={getValue('hosts')}
@@ -186,7 +181,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                   />
                   <HelperText>Default port is 443</HelperText>
                 </FormGroup>
-              </>
+              </React.Fragment>
             )}
             {isNetwork ? (
               <FormGroup label="" fieldId="paramiko">
@@ -199,19 +194,17 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                 />
               </FormGroup>
             ) : (
-              <>
+              <React.Fragment>
                 <FormGroup label="Connection" fieldId="connection">
                   <SimpleDropdown
                     isFullWidth
                     label={sslProtocol}
                     variant={'default'}
-                    dropdownItems={['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL'].map(
-                      s => (
-                        <DropdownItem key={s} onClick={() => setSslProtocol(s)}>
-                          {s}
-                        </DropdownItem>
-                      )
-                    )}
+                    dropdownItems={['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL'].map(s => (
+                      <DropdownItem key={s} onClick={() => setSslProtocol(s)}>
+                        {s}
+                      </DropdownItem>
+                    ))}
                   />
                 </FormGroup>
                 <FormGroup label="" fieldId="ssl_verify">
@@ -224,7 +217,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
                     onChange={(_ev, ch) => setSslVerify(ch)}
                   />
                 </FormGroup>
-              </>
+              </React.Fragment>
             )}
 
             <ActionGroup>

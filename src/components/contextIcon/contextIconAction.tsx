@@ -1,6 +1,7 @@
 /**
  * Renders action-specific icons (play, pause, stop, redo) based on the provided status symbol,
  * leveraging PatternFly icons. Designed for intuitive control and feedback in UI interactions.
+ *
  * @module contextIconAction
  */
 import React from 'react';

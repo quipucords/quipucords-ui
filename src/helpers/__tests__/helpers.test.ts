@@ -1,7 +1,8 @@
 /**
  * Tests for Display Helpers
  *
- * Validates accuracy and consistency of information display helpers. Includes various input scenarios and formatting checks.
+ * Validates accuracy and consistency of information display helpers. Includes various input scenarios and formatting
+ * checks.
  */
 import React from 'react';
 import moment from 'moment';

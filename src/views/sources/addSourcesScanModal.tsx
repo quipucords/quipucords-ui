@@ -1,6 +1,6 @@
 /**
- * Modal component for setting up scans with options for deep scans and concurrency. Allows specifying products for deep scanning
- * and custom directories. Uses PatternFly for UI elements.
+ * Modal component for setting up scans with options for deep scans and concurrency.
+ * Allows specifying products for deep scanning and custom directories. Uses PatternFly for UI elements.
  *
  * @module sourcesScanModal
  */
@@ -79,22 +79,13 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
               />
             </FormGroup>
             <FormGroup label="Sources" isRequired fieldId="scan-sources">
-              <TextArea
-                value={getValue('scan-sources')}
-                isDisabled
-                isRequired
-                id="scan-sources"
-                name="scan-sources"
-              />
+              <TextArea value={getValue('scan-sources')} isDisabled isRequired id="scan-sources" name="scan-sources" />
             </FormGroup>
             <FormGroup label="Maximum concurrent scans" fieldId="scan-max-concurrent">
               <NumberInput
                 value={Number(getValue('scan-max-concurrent'))}
                 onMinus={() =>
-                  setValue(
-                    'scan-max-concurrent',
-                    '' + Math.max(1, Number(getValue('scan-max-concurrent')) - 1)
-                  )
+                  setValue('scan-max-concurrent', '' + Math.max(1, Number(getValue('scan-max-concurrent')) - 1))
                 }
                 onChange={ev =>
                   setValue(
@@ -103,10 +94,7 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
                   )
                 }
                 onPlus={() =>
-                  setValue(
-                    'scan-max-concurrent',
-                    '' + Math.min(200, Number(getValue('scan-max-concurrent')) + 1)
-                  )
+                  setValue('scan-max-concurrent', '' + Math.min(200, Number(getValue('scan-max-concurrent')) + 1))
                 }
                 inputName="input"
                 inputAriaLabel="number input"

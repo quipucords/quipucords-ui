@@ -2,16 +2,11 @@
  * A generic dropdown menu component for actions, utilizing PatternFly components. It allows for actions to be specified
  * per item, with each action having a label and an onClick handler. This component is flexible for use with various
  * item types and action configurations.
+ *
  * @module actionMenu
  */
 import * as React from 'react';
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownList,
-  MenuToggle,
-  MenuToggleElement
-} from '@patternfly/react-core';
+import { Dropdown, DropdownItem, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
 
 interface ActionMenuProps<T> {

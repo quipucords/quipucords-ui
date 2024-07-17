@@ -1,7 +1,7 @@
 /**
- * Defines TypeScript types for handling credentials, source connections, sources, connections, and scans within the application.
- * These types include detailed structures for data related to authentication credentials, network sources and their connections,
- * as well as comprehensive information about scans and their outcomes.
+ * Defines TypeScript types for handling credentials, source connections, sources, connections, and scans within the
+ * application. These types include detailed structures for data related to authentication credentials,
+ * network sources and their connections, as well as comprehensive information about scans and their outcomes.
  */
 export type CredentialType = {
   id: string;
