@@ -21,9 +21,7 @@ const useScanApi = () => {
    * @returns {AxiosResponse} - The Axios response object representing the result of the request.
    */
   const deleteScan = (scan?: ScanType) => {
-    return axios.delete(
-      `${process.env.REACT_APP_SCANS_SERVICE}${(scan || pendingDeleteScan)?.id}/`
-    );
+    return axios.delete(`${process.env.REACT_APP_SCANS_SERVICE}${(scan || pendingDeleteScan)?.id}/`);
   };
 
   /**

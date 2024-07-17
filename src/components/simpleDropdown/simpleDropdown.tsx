@@ -2,10 +2,11 @@
  * A simplified dropdown component using PatternFly, designed for basic dropdown needs. It supports customizable
  * labels, items, accessibility options, and styling variants. The component is flexible, allowing for optional
  * full-width display and an onSelect callback for additional interaction handling.
+ *
  * @module simpleDropdown
  */
 import React, { useState } from 'react';
-import { Dropdown, DropdownList, MenuToggle, MenuToggleElement } from '@patternfly/react-core';
+import { Dropdown, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
 
 export interface ISimpleDropdownProps {
   label: string;

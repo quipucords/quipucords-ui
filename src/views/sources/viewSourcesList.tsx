@@ -43,11 +43,7 @@ import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/co
 import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
-import {
-  API_DATA_SOURCE_TYPES,
-  API_QUERY_TYPES,
-  API_SOURCES_LIST_QUERY
-} from '../../constants/apiConstants';
+import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import useAlerts from '../../hooks/useAlerts';
 import useSourceApi from '../../hooks/useSourceApi';
@@ -89,7 +85,8 @@ const SourcesListView: React.FunctionComponent = () => {
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
 
-  /** Fetches the translated label for a source type.
+  /**
+   * Fetches the translated label for a source type.
    *
    * @param {string} sourceType - The source type identifier.
    * @returns {string} Translated label for the given source type.
@@ -222,9 +219,7 @@ const SourcesListView: React.FunctionComponent = () => {
         setConnectionsData({
           successful: res.data.results.filter((c: { status: string }) => c.status === 'success'),
           failure: res.data.results.filter((c: { status: string }) => c.status === 'failure'),
-          unreachable: res.data.results.filter(
-            (c: { status: string }) => !['success', 'failure'].includes(c.status)
-          )
+          unreachable: res.data.results.filter((c: { status: string }) => !['success', 'failure'].includes(c.status))
         });
       })
       .catch(err => console.error(err));
@@ -336,18 +331,7 @@ const SourcesListView: React.FunctionComponent = () => {
     selection: { selectedItems },
     currentPageItems,
     numRenderedColumns,
-    components: {
-      Toolbar,
-      FilterToolbar,
-      PaginationToolbarItem,
-      Pagination,
-      Table,
-      Tbody,
-      Td,
-      Th,
-      Thead,
-      Tr
-    }
+    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
   } = tableBatteries;
 
   const renderAddSourceButton = () => (
@@ -453,9 +437,8 @@ const SourcesListView: React.FunctionComponent = () => {
                 icon={<EmptyStateIcon icon={PlusCircleIcon} />}
               />
               <EmptyStateBody>
-                Begin by adding a source. A source contains a collection of network information,
-                including systems management solution information, IP addresses, or host names, in
-                addition to SSH ports and credentials.
+                Begin by adding a source. A source contains a collection of network information, including systems
+                management solution information, IP addresses, or host names, in addition to SSH ports and credentials.
               </EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddSourceButton()}</EmptyStateActions>
@@ -527,11 +510,7 @@ const SourcesListView: React.FunctionComponent = () => {
         </Modal>
       )}
       {connectionsSelected && (
-        <ConnectionsModal
-          source={connectionsSelected}
-          connections={connectionsData}
-          onClose={onCloseConnections}
-        />
+        <ConnectionsModal source={connectionsSelected} connections={connectionsData} onClose={onCloseConnections} />
       )}
 
       {!!pendingDeleteSource && (
@@ -563,19 +542,11 @@ const SourcesListView: React.FunctionComponent = () => {
         />
       )}
       {addSourceModal && (
-        <AddSourceModal
-          type={addSourceModal}
-          onClose={() => setAddSourceModal(undefined)}
-          onSubmit={onAddSource}
-        />
+        <AddSourceModal type={addSourceModal} onClose={() => setAddSourceModal(undefined)} onSubmit={onAddSource} />
       )}
 
       {scanSelected && (
-        <SourcesScanModal
-          onClose={() => setScanSelected(undefined)}
-          onSubmit={onRunScan}
-          sources={scanSelected}
-        />
+        <SourcesScanModal onClose={() => setScanSelected(undefined)} onSubmit={onRunScan} sources={scanSelected} />
       )}
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ key, variant, title }) => (

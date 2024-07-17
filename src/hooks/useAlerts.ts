@@ -1,10 +1,11 @@
 /**
  * This custom React Hook provides functions to manage alerts in your application.
  * It allows you to add and remove alerts with specific titles, variants, and unique keys.
+ *
  * @module useAlerts
  */
 import React from 'react';
-import { AlertProps } from '@patternfly/react-core';
+import { type AlertProps } from '@patternfly/react-core';
 
 const useAlerts = () => {
   const [alert, setAlerts] = React.useState<Partial<AlertProps>[]>([]);

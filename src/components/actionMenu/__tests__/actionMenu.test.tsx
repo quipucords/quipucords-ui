@@ -8,10 +8,7 @@ test('renders proper dom including ellipsis icon', () => {
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   const { asFragment } = render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
+    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
   );
   expect(asFragment()).toMatchSnapshot();
 });
@@ -20,10 +17,7 @@ test('actions will not show before button is clicked', () => {
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   const { queryByText } = render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
+    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
   );
   expect(queryByText('Delete')).toBeNull();
 });
@@ -32,12 +26,7 @@ test('actions will show after button is clicked', async () => {
   const user = userEvent.setup();
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
-  render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
-  );
+  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
   const toggleButton = screen.getByLabelText('Action Menu Toggle');
   await act(() => user.click(toggleButton));
 
@@ -50,10 +39,7 @@ test('snapshot matches after opening the action menu', async () => {
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
   const { asFragment } = render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
+    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
   );
   const toggleButton = screen.getByLabelText('Action Menu Toggle');
   await act(() => user.click(toggleButton));
@@ -66,12 +52,7 @@ test('action callback should get called when clicked', async () => {
 
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
-  render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
-  );
+  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
   expect(actionClicked).toHaveBeenCalledTimes(0);
 
   const toggleButton = screen.getByLabelText('Action Menu Toggle');
@@ -87,12 +68,7 @@ test('action menu closes after selection', async () => {
   const user = userEvent.setup();
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
-  render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
-  );
+  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
   const toggleButton = screen.getByLabelText('Action Menu Toggle');
   await act(() => user.click(toggleButton));
 
@@ -107,12 +83,7 @@ test('action menu closes if toggle is clicked again', async () => {
   const user = userEvent.setup();
   const item = { foo: 'bar' };
   const actionClicked = jest.fn();
-  render(
-    <ActionMenu<{ foo: string }>
-      item={item}
-      actions={[{ label: 'Delete', onClick: actionClicked }]}
-    />
-  );
+  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
   const toggleButton = screen.getByLabelText('Action Menu Toggle');
   await act(() => user.click(toggleButton));
 

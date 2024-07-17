@@ -4,7 +4,7 @@
  * This component displays a table of credentials, allowing users to view, filter, and manage credentials.
  * It provides features like adding credentials, deleting selected credentials, and refreshing the data.
  *
- ** @module credentialsListView
+ *@module credentialsListView
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -41,11 +41,7 @@ import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
-import {
-  API_CREDS_LIST_QUERY,
-  API_DATA_SOURCE_TYPES,
-  API_QUERY_TYPES
-} from '../../constants/apiConstants';
+import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import useAlerts from '../../hooks/useAlerts';
 import useCredentialApi from '../../hooks/useCredentialApi';
@@ -58,16 +54,13 @@ const CredentialsListView: React.FunctionComponent = () => {
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
-  const {
-    deleteCredential,
-    onDeleteSelectedCredentials,
-    pendingDeleteCredential,
-    setPendingDeleteCredential
-  } = useCredentialApi();
+  const { deleteCredential, onDeleteSelectedCredentials, pendingDeleteCredential, setPendingDeleteCredential } =
+    useCredentialApi();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
 
-  /** Fetches the translated label for a credential type.
+  /**
+   * Fetches the translated label for a credential type.
    *
    * @param {string} credentialType - The cred type identifier.
    * @returns {string} Translated label for the given source type.
@@ -110,7 +103,8 @@ const CredentialsListView: React.FunctionComponent = () => {
   };
 
   /**
-   * Initializes table state with URL persistence, including configurations for columns, filters, sorting, pagination, and selection.
+   * Initializes table state with URL persistence, including configurations for columns, filters, sorting, pagination,
+   * and selection.
    *
    * Features:
    * - Column definitions: 'name', 'type', 'auth_type', 'sources', 'updated', with actions placeholder.
@@ -203,18 +197,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     selection: { selectedItems },
     currentPageItems,
     numRenderedColumns,
-    components: {
-      Toolbar,
-      FilterToolbar,
-      PaginationToolbarItem,
-      Pagination,
-      Table,
-      Tbody,
-      Td,
-      Th,
-      Thead,
-      Tr
-    }
+    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
   } = tableBatteries;
 
   const hasSelectedCredentials = () => {
@@ -289,10 +272,9 @@ const CredentialsListView: React.FunctionComponent = () => {
                 icon={<EmptyStateIcon icon={PlusCircleIcon} />}
               />
               <EmptyStateBody>
-                A credential contains authentication information needed to scan a source.A
-                credential includes a username and a password or SSH key. The quipucords tool uses
-                SSH to connect to servers on the network and uses credentials to access those
-                servers.
+                A credential contains authentication information needed to scan a source.A credential includes a
+                username and a password or SSH key. The quipucords tool uses SSH to connect to servers on the network
+                and uses credentials to access those servers.
               </EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
@@ -321,9 +303,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                     {credential.sources?.length || 0}
                   </Button>
                 </Td>
-                <Td columnKey="updated">
-                  {helpers.getTimeDisplayHowLongAgo(credential.updated_at)}
-                </Td>
+                <Td columnKey="updated">{helpers.getTimeDisplayHowLongAgo(credential.updated_at)}</Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}
@@ -343,11 +323,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           isOpen={!!addCredentialModal}
           onClose={() => setAddCredentialModal(undefined)}
           actions={[
-            <Button
-              key="cancel"
-              variant="secondary"
-              onClick={() => setAddCredentialModal(undefined)}
-            >
+            <Button key="cancel" variant="secondary" onClick={() => setAddCredentialModal(undefined)}>
               Close
             </Button>
           ]}
@@ -384,11 +360,7 @@ const CredentialsListView: React.FunctionComponent = () => {
             <Button key="confirm" variant="danger" onClick={() => onDeleteCredential()}>
               Delete
             </Button>,
-            <Button
-              key="cancel"
-              variant="link"
-              onClick={() => setPendingDeleteCredential(undefined)}
-            >
+            <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
               Cancel
             </Button>
           ]}

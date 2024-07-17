@@ -64,9 +64,7 @@ describe('Modal', () => {
   test('Modal title populates based on scan id', async () => {
     render(<ScansModal {...props} />);
 
-    expect(
-      screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`)
-    ).toBeInTheDocument();
+    expect(screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`)).toBeInTheDocument();
   });
 
   test('Modal loading screen populates properly', async () => {

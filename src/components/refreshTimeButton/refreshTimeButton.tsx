@@ -1,6 +1,8 @@
 /**
- * Displays a button indicating the last data refresh time, dynamically updating. Uses `react-i18next` for i18n support and
- * intervals to refresh the display time. Suitable for live data contexts in UIs.
+ * Displays a button indicating the last data refresh time, dynamically updating.
+ * Uses `react-i18next` for i18n support and intervals to refresh the display time. Suitable for live data contexts in
+ * UIs.
+ *
  * @module refreshTimeButton
  */
 import React from 'react';

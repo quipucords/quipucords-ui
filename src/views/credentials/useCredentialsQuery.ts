@@ -6,7 +6,7 @@
  *
  * @module useCredentialsQuery
  */
-import { TableState } from '@mturley-latest/react-table-batteries';
+import { type TableState } from '@mturley-latest/react-table-batteries';
 import { API_CREDS_LIST_QUERY } from '../../constants/apiConstants';
 import { useServiceQuery } from '../../helpers/queryHelpers';
 import { CredentialType } from '../../types/types';

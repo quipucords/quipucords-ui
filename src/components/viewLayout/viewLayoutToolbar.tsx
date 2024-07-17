@@ -1,6 +1,8 @@
 /**
  * Utilizes PatternFly for a responsive toolbar with theme toggling, help, and user logout functionality.
- * It auto-detects theme preference, provides a dropdown for help and user actions, and manages session state for logout.
+ * It auto-detects theme preference, provides a dropdown for help and user actions, and manages session state for
+ * logout.
+ *
  * @module appToolbar
  */
 import * as React from 'react';
@@ -86,10 +88,7 @@ const AppToolbar: React.FunctionComponent = () => {
           align={{ default: 'alignRight' }}
           spacer={{ default: 'spacerNone', md: 'spacerMd' }}
         >
-          <ToolbarGroup
-            variant="icon-button-group"
-            visibility={{ default: 'hidden', lg: 'visible' }}
-          >
+          <ToolbarGroup variant="icon-button-group" visibility={{ default: 'hidden', lg: 'visible' }}>
             <ToolbarItem>
               <ToggleGroup aria-label="Dark theme toggle group">
                 <ToggleGroupItem
