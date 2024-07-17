@@ -1,0 +1,59 @@
+# dockerignore exclusives
+Containerfile
+.dockerignore
+
+# dependencies
+node_modules/
+
+# coverage
+lib-cov
+coverage
+.nyc_output
+
+# optional
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+
+# build & production
+build
+dist/
+public/assets
+
+.css
+templates/client
+styles/*.css
+src/styles/css
+src/styles/.css
+public/locales/*.json
+!public/locales/locales.json
+!public/locales/en.json
+!public/icons/
+
+# misc
+.qpc
+.container
+!.env
+.env*.local
+pids
+*.pid
+*.seed
+*.pid.lock
+pr.txt
+stats.json
+storybook-static
+.DS_Store
+.idea
+
+# logs
+dependency-update-log.txt
+logs
+*.log
+npm-debug.log*
+api-debug*
+
+.vscode
+
+# local files
+var/
