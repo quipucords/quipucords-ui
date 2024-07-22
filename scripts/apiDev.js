@@ -1,8 +1,8 @@
-const { join } = require('path');
 const { execSync } = require('child_process');
 const { existsSync, mkdirSync, statSync, writeFileSync } = require('fs');
-const mockApi = require('swagger-mock-api');
+const { join } = require('path');
 const express = require('express');
+const mockApi = require('swagger-mock-api');
 
 /**
  * Basic colors for console output
