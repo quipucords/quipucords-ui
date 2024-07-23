@@ -1,6 +1,5 @@
 # Quipucords UI
 [![Build Status](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml/badge.svg)](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml)
-[![codecov](https://codecov.io/gh/quipucords/quipucords-ui/branch/main/graph/badge.svg)](https://codecov.io/gh/quipucords/quipucords-ui)
 [![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/main/LICENSE)
 
 Web user interface for [Quipucords](https://github.com/quipucords/quipucords), based on [Patternfly](https://www.patternfly.org/)
