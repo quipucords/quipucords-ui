@@ -17,7 +17,7 @@ env:
   REGISTRY: ${{ vars.REGISTRY || 'quay.io' }}
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
