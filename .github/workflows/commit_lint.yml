@@ -5,7 +5,7 @@ env:
   BRANCH: ${{ github.base_ref }}
 
 jobs:
-  Checks:
+  Commits:
     runs-on: ubuntu-latest
     strategy:
       matrix:

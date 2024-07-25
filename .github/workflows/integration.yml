@@ -10,7 +10,7 @@ env:
   UPSTREAM_TAR: quipucords-ui-dist.tar
 
 jobs:
-  Checks:
+  Integration:
     runs-on: ubuntu-latest
     permissions:
       # required for releasing artifacts
