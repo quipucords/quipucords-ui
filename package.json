@@ -40,7 +40,7 @@
     "test:dev": "export NODE_ENV=test; run-s test:lint test:local",
     "test:integration": "jest --roots=./tests",
     "test:integration-dev": "jest --roots=./tests --watchAll",
-    "test:lint": "eslint --ext=json --ext=ts --ext=tsx ./src",
+    "test:lint": "eslint --ext=json --ext=ts --ext=tsx ./src ./public",
     "test:lint-fix": "npm run test:lint -- --fix",
     "test:local": "jest --roots=./src --watch",
     "test:spell-support": "cspell ./README.md ./config/README.md ./CONTRIBUTING.md './scripts/*.js' './config/*.js' './tests/*.ts*' --config ./config/cspell.config.json",

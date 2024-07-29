@@ -242,7 +242,7 @@
     "description_scan-report_play": "Scan {{name}} started.",
     "description_scan-report_start": "$t(toast-notifications.description_scan-report_play)",
     "title_add-source_hidden_error": "Error creating source {{ name }}. {{ message }}",
-    "title_add-source_hidden_error_edit": "Error updating source.",
+    "title_add-source_hidden_error_edit": "Error updating source."
   },
   "toolbar": {
     "label_chip": "{{context}}",
