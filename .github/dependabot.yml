@@ -3,36 +3,42 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: monthly
+      interval: weekly
       day: monday
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     target-branch: "main"
     versioning-strategy: increase
     allow:
       - dependency-type: direct
     ignore:
       - dependency-name: "*patternfly*"
-      - dependency-name: "*i18next*"
-      - dependency-name: "react-router*"
     labels:
       - "build"
     commit-message:
       prefix: "build"
       include: "scope"
     groups:
-      dev-dependencies:
+      dev-deps:
         dependency-type: "development"
         update-types:
           - "minor"
           - "patch"
-      dependencies-patch:
+      dev-deps-major:
+        dependency-type: "development"
+        update-types:
+          - "major"
+      deps-patch:
         dependency-type: "production"
         update-types:
           - "patch"
-      dependencies-minor:
+      deps-minor:
         dependency-type: "production"
         update-types:
           - "minor"
+      deps-major:
+        dependency-type: "production"
+        update-types:
+          - "major"
 
   - package-ecosystem: github-actions
     directory: /
