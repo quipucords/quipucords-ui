@@ -8,7 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
 import { use as i18nextUse, changeLanguage } from 'i18next';
-import XHR from 'i18next-xhr-backend';
+import XHR from 'i18next-http-backend';
 import { helpers } from '../../helpers';
 import { EMPTY_CONTEXT, translate } from './i18nHelpers';
 
