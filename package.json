@@ -66,7 +66,7 @@
     "react-router-dom": "6.25.1"
   },
   "devDependencies": {
-    "@tanstack/react-query-devtools": "^5.51.21",
+    "@tanstack/react-query-devtools": "^5.51.23",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
@@ -77,15 +77,15 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "changelog-light": "^2.0.0",
-    "cspell": "^8.13.1",
+    "changelog-light": "^2.0.1",
+    "cspell": "^8.13.2",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-comment-length": "^1.7.3",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^28.7.0",
+    "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-jsdoc": "^48.11.0",
-    "eslint-plugin-json": "^4.0.0",
+    "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -99,6 +99,6 @@
     "prettier": "^3.3.3",
     "swagger-mock-api": "^1.6.0",
     "ts-jest": "^29.2.4",
-    "weldable": "^3.1.0"
+    "weldable": "^3.1.1"
   }
 }
