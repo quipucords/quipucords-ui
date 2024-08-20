@@ -265,7 +265,6 @@ describe('useShowConnectionsApi', () => {
     });
 
     await showConnections({ id: 123, connection: { id: 456 } });
-
     expect(setConnectionsData.mock.calls).toMatchSnapshot('showConnections success');
   });
 
@@ -274,7 +273,6 @@ describe('useShowConnectionsApi', () => {
     jest.spyOn(axios, 'get').mockRejectedValue({ isAxiosError: true, message: 'Mock error' });
 
     await showConnections({ id: 123, connection: { id: 456 } });
-
     expect(setConnectionsData.mock.calls).toMatchSnapshot('showConnections error');
   });
 });
