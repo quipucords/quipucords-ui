@@ -477,7 +477,6 @@ const SourcesListView: React.FunctionComponent = () => {
       <AddSourceModal
         isOpen={sourceBeingEdited !== undefined}
         source={sourceBeingEdited}
-        sourceType={sourceBeingEdited?.source_type}
         onClose={() => setSourceBeingEdited(undefined)}
         onSubmit={(payload: SourceType) =>
           editSources(payload).finally(() => {
