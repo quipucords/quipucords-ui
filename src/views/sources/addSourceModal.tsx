@@ -29,7 +29,7 @@ import { SourceType } from '../../types/types';
 export interface AddSourceModalProps {
   isOpen: boolean;
   source?: SourceType;
-  sourceType: string | undefined;
+  sourceType?: string;
   onClose: () => void;
   onSubmit: (payload) => void;
 }
