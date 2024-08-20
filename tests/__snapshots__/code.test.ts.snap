@@ -8,7 +8,6 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "components/viewLayout/viewLayoutToolbar.tsx:79:    console.log('selected', value);",
   "helpers/queryHelpers.ts:70:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:75:        console.error(error);",
-  "hooks/__tests__/useSourceApi.test.ts:284:    expect(console.error).toHaveBeenCalledWith(mockError);",
   "hooks/useCredentialApi.ts:74:          console.log(missingCredsMsg);",
   "hooks/useCredentialApi.ts:93:          console.log(missingCredsMsg);",
   "hooks/useCredentialApi.ts:141:          console.error(error);",
