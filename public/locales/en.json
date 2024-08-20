@@ -7,7 +7,7 @@
     "confirmation_title_delete-credential_other": "Delete Credentials",
     "confirmation_title_delete-source": "Delete Source",
     "confirmation_title_delete-source_other": "Delete Sources",
-    "confirmation_heading_delete-source": "Are you sure you want to delete the source <0>{{name}}</0>?",
+    "confirmation_heading_delete-source": "Are you sure you want to delete the source {{name}}?",
     "confirmation_heading_delete-source_other": "Are you sure you want to delete the following sources?",
     "label": "{{context}}",
     "label_rhacs": "RHACS",
@@ -231,8 +231,12 @@
     "description_skipped-credential_other": "Credentials {{name}} could not be deleted due to attached sources.",
     "description_deleted-credential_error": "Error removing credential {{name}}. {{message}}",
     "description_deleted-credential_error_other": "Error removing credentials {{name}} and more. {{message}}",
-    "description_deleted-source": "Source {{name}} deleted successfully.",
-    "description_deleted-source_other": "Deleted sources {{name}} and more",
+    "description_skipped-source_one": "Source {{name}} could not be deleted due to an attached scan.",
+    "description_skipped-source_other": "Sources {{name}} could not be deleted due to attached scans.",
+    "description_deleted-sources-skipped-sources_one": "The following could be successfully deleted: {{deleted_names}}. Source {{skipped_names}} could not be deleted due to an attached scan.",
+    "description_deleted-sources-skipped-sources_other": "The following could be successfully deleted: {{deleted_names}}. Sources {{skipped_names}} could not be deleted due to attached scans.",
+    "description_deleted-source_one": "Source {{name}} was successfully deleted.",
+    "description_deleted-source_other": "Sources {{name}} were successfully deleted.",
     "description_deleted-source_error": "Error removing source {{name}}. {{message}}",
     "description_deleted-source_error_other": "Error removing sources {{name}} and more. {{message}}",
     "description_scan-report_canceled": "Scan <0>{{name}}</0> stopped",
@@ -242,7 +246,7 @@
     "description_scan-report_play": "Scan {{name}} started.",
     "description_scan-report_start": "$t(toast-notifications.description_scan-report_play)",
     "title_add-source_hidden_error": "Error creating source {{ name }}. {{ message }}",
-    "title_add-source_hidden_error_edit": "Error updating source."
+    "title_add-source_hidden_error_edit": "Error updating source {{ name }}. {{ message }}"
   },
   "toolbar": {
     "label_chip": "{{context}}",

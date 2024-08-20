@@ -27,13 +27,14 @@ import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeah
 import { SourceType } from '../../types/types';
 
 export interface AddSourceModalProps {
+  isOpen: boolean;
   source?: SourceType;
-  type: string;
+  sourceType?: string;
   onClose: () => void;
   onSubmit: (payload) => void;
 }
 
-const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, onSubmit }) => {
+const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceType, onClose, onSubmit }) => {
   const [credOptions, setCredOptions] = React.useState<{ value: string; label: string }[]>([]);
   const [credentials, setCredentials] = React.useState<number[]>(source?.credentials?.map(c => c.id) || []);
   const [useParamiko, setUseParamiko] = React.useState<boolean>(source?.options?.use_paramiko ?? false);
@@ -42,33 +43,18 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
     source?.options?.disable_ssl ? 'Disable SSL' : source?.options?.ssl_protocol || 'SSLv23'
   );
 
-  const typeValue = source?.source_type || type.split(' ').shift()?.toLowerCase();
-  const isNetwork = typeValue === 'network';
+  const sourceTypeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
+  const isNetwork = sourceTypeValue === 'network';
 
-  /**
-   * Fetch Credentials Options Effect
-   *
-   * This effect is used to fetch a list of credential options based on a specific credential type.
-   *
-   * @param {string} typeValue - The credential type value to filter the options.
-   */
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_CREDENTIALS_SERVICE}?cred_type=${typeValue}`)
+      .get(`${process.env.REACT_APP_CREDENTIALS_SERVICE}?cred_type=${sourceTypeValue}`)
       .then(res => {
         setCredOptions(res.data.results.map(o => ({ label: o.name, value: '' + o.id })));
       })
       .catch(err => console.error(err));
-  }, [typeValue]);
+  }, [sourceTypeValue]);
 
-  /**
-   * Handle Add Action
-   *
-   * This function is responsible for handling the "Add" action, which includes creating a payload
-   * with the provided values and submitting it.
-   *
-   * @param {object} values - An object containing the input values for the new item.
-   */
   const onAdd = values => {
     const payload = {
       credentials: credentials.map(c => Number(c)),
@@ -84,7 +70,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
         : {
             use_paramiko: useParamiko
           },
-      ...(!source && { source_type: typeValue }),
+      ...(!source && { source_type: sourceTypeValue }),
       ...(source && { id: source.id })
     };
     onSubmit(payload);
@@ -93,8 +79,8 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ source, type, onClose, 
   return (
     <Modal
       variant={ModalVariant.small}
-      title={`${source ? 'Edit' : 'Add'} source: ${type}`}
-      isOpen={!!type}
+      title={`${source ? 'Edit' : 'Add'} source: ${sourceType}`}
+      isOpen={isOpen}
       onClose={onClose}
     >
       <FormContextProvider

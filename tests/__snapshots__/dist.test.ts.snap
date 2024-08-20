@@ -3,10 +3,10 @@
 exports[`Build distribution should match a specific file output: dist-output 1`] = `
 [
   "",
-  "./build/362*css",
-  "./build/362*js",
   "./build/401*js",
   "./build/468*js",
+  "./build/641*css",
+  "./build/641*js",
   "./build/701*js",
   "./build/app*css",
   "./build/app*js",
