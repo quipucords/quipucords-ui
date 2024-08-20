@@ -56,8 +56,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
             name: skippedNames,
             count: data?.skipped?.length
           }),
-          variant: 'danger',
-          id: helpers.generateId()
+          variant: 'danger'
         });
 
         if (data?.missing?.length) {
@@ -75,8 +74,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
             skipped_names: skippedNames,
             count: data?.skipped?.length
           }),
-          variant: 'warning',
-          id: helpers.generateId()
+          variant: 'warning'
         });
 
         if (data?.missing?.length) {
@@ -92,8 +90,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           count: updatedSources.length,
           name: updatedSources.map(({ name }) => name).join(', ')
         }),
-        variant: 'success',
-        id: helpers.generateId()
+        variant: 'success'
       });
       return;
     },
@@ -109,8 +106,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           name: updatedSources.map(({ name }) => name).join(', '),
           message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
         }),
-        variant: 'danger',
-        id: helpers.generateId()
+        variant: 'danger'
       });
       return;
     },
@@ -160,8 +156,7 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           context: 'add-source_hidden',
           name: response?.data?.name
         }),
-        variant: 'success',
-        id: helpers.generateId()
+        variant: 'success'
       });
       return;
     },
@@ -176,8 +171,7 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           name: name,
           message: apiHelpers.extractErrorMessage(error?.response?.data)
         }),
-        variant: 'danger',
-        id: helpers.generateId()
+        variant: 'danger'
       });
       return;
     },
@@ -226,8 +220,7 @@ const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           context: 'add-source_hidden_edit',
           name: response.data.name
         }),
-        variant: 'success',
-        id: helpers.generateId()
+        variant: 'success'
       });
       return;
     },
@@ -242,8 +235,7 @@ const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
           name: name,
           message: apiHelpers.extractErrorMessage(error?.response?.data)
         }),
-        variant: 'danger',
-        id: helpers.generateId()
+        variant: 'danger'
       });
       return;
     },

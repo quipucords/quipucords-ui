@@ -20,7 +20,6 @@ exports[`useAddSourceApi should handle errors while attempting to add a source: 
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.title",
         {
@@ -39,7 +38,6 @@ exports[`useAddSourceApi should handle success while attempting to add a source:
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -71,7 +69,6 @@ exports[`useDeleteSourceApi should handle errors while attempting to delete sing
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -86,7 +83,6 @@ exports[`useDeleteSourceApi should handle errors while attempting to delete sing
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -106,7 +102,6 @@ exports[`useDeleteSourceApi should handle success while attempting to delete sin
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -120,7 +115,6 @@ exports[`useDeleteSourceApi should handle success while attempting to delete sin
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -139,7 +133,6 @@ exports[`useDeleteSourceApi should process an API error response: callbackError 
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -154,7 +147,6 @@ exports[`useDeleteSourceApi should process an API error response: callbackError 
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -169,7 +161,6 @@ exports[`useDeleteSourceApi should process an API error response: callbackError 
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -184,7 +175,6 @@ exports[`useDeleteSourceApi should process an API error response: callbackError 
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -204,7 +194,6 @@ exports[`useDeleteSourceApi should process an API success response: callbackSucc
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -218,7 +207,6 @@ exports[`useDeleteSourceApi should process an API success response: callbackSucc
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -233,7 +221,6 @@ exports[`useDeleteSourceApi should process an API success response: callbackSucc
   ],
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {
@@ -264,7 +251,6 @@ exports[`useEditSourceApi should handle errors while attempting to edit a source
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.title",
         {
@@ -283,7 +269,6 @@ exports[`useEditSourceApi should handle success while attempting to edit a sourc
 [
   [
     {
-      "id": "generatedid-",
       "title": [
         "toast-notifications.description",
         {

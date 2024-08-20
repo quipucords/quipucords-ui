@@ -66,8 +66,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
             name: skippedNames,
             count: data?.skipped?.length
           }),
-          variant: 'danger',
-          id: helpers.generateId()
+          variant: 'danger'
         });
 
         if (data?.missing?.length) {
@@ -85,8 +84,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
             skipped_names: skippedNames,
             count: data?.skipped?.length
           }),
-          variant: 'warning',
-          id: helpers.generateId()
+          variant: 'warning'
         });
 
         if (data?.missing?.length) {
@@ -102,8 +100,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
           count: updatedCredentials.length,
           name: updatedCredentials.map(({ name }) => name).join(', ')
         }),
-        variant: 'success',
-        id: helpers.generateId()
+        variant: 'success'
       });
       return;
     },
@@ -119,8 +116,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
           name: updatedCredentials.map(({ name }) => name).join(', '),
           message: response?.data?.detail || response?.data?.message || message || 'Unknown error'
         }),
-        variant: 'danger',
-        id: helpers.generateId()
+        variant: 'danger'
       });
       return;
     },
