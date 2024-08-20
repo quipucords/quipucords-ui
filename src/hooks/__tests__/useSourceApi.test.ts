@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import axios from 'axios';
 import { useDeleteSourceApi, useAddSourceApi, useEditSourceApi, useShowConnectionsApi } from '../useSourceApi';
 
@@ -205,7 +205,7 @@ describe('useEditSourceApi', () => {
     const { apiCall } = hookResult;
     const spyAxios = jest.spyOn(axios, 'put');
 
-    apiCall({ id: 123, name: 'Lorem' });
+    apiCall({ id: 123, name: 'Lorem' }).catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
   });
 
@@ -264,23 +264,17 @@ describe('useShowConnectionsApi', () => {
       }
     });
 
-    await act(async () => {
-      await showConnections({ id: 123, connection: { id: 456 } });
-    });
+    await showConnections({ id: 123, connection: { id: 456 } });
 
     expect(setConnectionsData.mock.calls).toMatchSnapshot('showConnections success');
   });
 
-  it.skip('should handle errors while fetching connections', async () => {
+  it('should handle errors while fetching connections', async () => {
     const { showConnections } = hookResult;
-    const mockError = new Error('Mock error');
-    jest.spyOn(axios, 'get').mockRejectedValue(mockError);
+    jest.spyOn(axios, 'get').mockRejectedValue({ isAxiosError: true, message: 'Mock error' });
 
-    await act(async () => {
-      await showConnections({ id: 123, connection: { id: 456 } });
-    });
+    await showConnections({ id: 123, connection: { id: 456 } });
 
     expect(setConnectionsData.mock.calls).toMatchSnapshot('showConnections error');
-    expect(console.error).toHaveBeenCalledWith(mockError);
   });
 });

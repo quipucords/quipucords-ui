@@ -305,6 +305,8 @@ exports[`useShowConnectionsApi should attempt an api call to show connections: a
 ]
 `;
 
+exports[`useShowConnectionsApi should handle errors while fetching connections: showConnections error 1`] = `[]`;
+
 exports[`useShowConnectionsApi should handle success while fetching connections: showConnections success 1`] = `
 [
   [
