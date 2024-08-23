@@ -122,6 +122,14 @@
     "title_create-credential_edit": "View credential",
     "title_create-scan": "Scan"
   },
+  "login": {
+    "description": "Welcome! This inspection and reporting tool is designed to identify and report environment data, or facts, such as the number of physical and virtual systems on a network, their operating systems, and other configuration data.",
+    "label_login": "Log in",
+    "label_username": "Username",
+    "label_password": "Password",
+    "invalid": "Invalid login credentials.",
+    "title": "Log in to your account"
+  },
   "refresh-time-button": {
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"

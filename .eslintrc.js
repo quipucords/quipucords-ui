@@ -17,7 +17,14 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jest/recommended'
   ],
-  overrides: [],
+  overrides: [
+    {
+      files: ['*.json'],
+      rules: {
+        'max-len': 0
+      }
+    }
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json'

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should attempt to use the login service: submit 1`] = `
+[
+  [
+    {
+      "password": "ipsum",
+      "username": "lorem",
+    },
+  ],
+]
+`;
+
+exports[`Login should render a basic component: basic 1`] = `
+<LoginPage
+  backgroundImgSrc="aboutBg.png"
+  className="fadein"
+  loginTitle="t([
+  "login.title"
+])"
+  textContent="t([
+  "login.description"
+])"
+>
+  <LoginForm
+    helperText="t([
+  "login.invalid"
+])"
+    helperTextIcon={<ExclamationCircleIcon />}
+    isValidPassword={true}
+    isValidUsername={true}
+    loginButtonLabel="t([
+  "login.label",
+  {
+    "context": "login"
+  }
+])"
+    onChangePassword={[Function]}
+    onChangeUsername={[Function]}
+    onLoginButtonClick={[Function]}
+    passwordLabel="t([
+  "login.label",
+  {
+    "context": "password"
+  }
+])"
+    passwordValue=""
+    showHelperText={false}
+    usernameLabel="t([
+  "login.label",
+  {
+    "context": "username"
+  }
+])"
+    usernameValue=""
+  />
+</LoginPage>
+`;
+
+exports[`Login should render authorized children: logged in 1`] = `"Lorem ipsum"`;

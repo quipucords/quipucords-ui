@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewToolbar should attempt to load and display a username: user 1`] = `
+<div
+  class="quipucords-toolbar__user-dropdown"
+>
+  <span
+    class="pf-v5-c-avatar"
+  />
+  Dolor sit
+</div>
+`;
+
+exports[`ViewToolbar should render a basic component: basic 1`] = `
+<Toolbar
+  id="toolbar"
+  isFullHeight={true}
+  isStatic={true}
+>
+  <ToolbarContent
+    isExpanded={false}
+    showClearFiltersButton={false}
+  >
+    <ForwardRef
+      align={
+        {
+          "default": "alignRight",
+        }
+      }
+      spacer={
+        {
+          "default": "spacerNone",
+          "md": "spacerMd",
+        }
+      }
+      variant="icon-button-group"
+    >
+      <ForwardRef
+        variant="icon-button-group"
+        visibility={
+          {
+            "default": "hidden",
+            "lg": "visible",
+          }
+        }
+      >
+        <ToolbarItem>
+          <ToggleGroup
+            aria-label="Dark theme toggle group"
+          >
+            <ToggleGroupItem
+              aria-label="light theme toggle"
+              icon={
+                <Icon
+                  size="md"
+                >
+                  <SunIcon />
+                </Icon>
+              }
+              isSelected={true}
+              onChange={[Function]}
+            />
+            <ToggleGroupItem
+              aria-label="dark theme toggle"
+              icon={
+                <Icon
+                  size="md"
+                >
+                  <MoonIcon />
+                </Icon>
+              }
+              onChange={[Function]}
+            />
+          </ToggleGroup>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Dropdown
+            isOpen={false}
+            onOpenChange={[Function]}
+            onSelect={[Function]}
+            popperProps={
+              {
+                "position": "right",
+              }
+            }
+            toggle={[Function]}
+          >
+            <DropdownItem
+              onClick={[Function]}
+              value="about"
+            >
+              About
+            </DropdownItem>
+          </Dropdown>
+        </ToolbarItem>
+      </ForwardRef>
+      <ToolbarItem
+        visibility={
+          {
+            "default": "visible",
+            "lg": "hidden",
+          }
+        }
+      >
+        <Dropdown
+          isOpen={false}
+          isPlain={true}
+          onOpenChange={[Function]}
+          onSelect={[Function]}
+          ouiaId="user_dropdown"
+          popperProps={
+            {
+              "position": "right",
+            }
+          }
+          toggle={[Function]}
+        >
+          <DropdownItem
+            onClick={[Function]}
+            value="logout"
+          >
+            Logout
+          </DropdownItem>
+        </Dropdown>
+      </ToolbarItem>
+    </ForwardRef>
+    <ToolbarItem
+      visibility={
+        {
+          "default": "hidden",
+          "lg": "visible",
+        }
+      }
+    >
+      <Dropdown
+        isOpen={false}
+        onOpenChange={[Function]}
+        onSelect={[Function]}
+        ouiaId="user_dropdown"
+        toggle={[Function]}
+      >
+        <DropdownItem
+          onClick={[Function]}
+          value="logout"
+        >
+          Logout
+        </DropdownItem>
+      </Dropdown>
+    </ToolbarItem>
+  </ToolbarContent>
+</Toolbar>
+`;

@@ -5,17 +5,14 @@
  * @module routes
  */
 import * as React from 'react';
-import { Route, Routes } from 'react-router';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Login } from './views/login/viewLogin';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from './views/notFound/notFound';
 
 const Sources = React.lazy(() => import('./views/sources/viewSourcesList'));
 const Scans = React.lazy(() => import('./views/scans/viewScansList'));
 const Credentials = React.lazy(() => import('./views/credentials/viewCredentialsList'));
 
-export interface IAppRoute {
+interface IAppRoute {
   id: string;
   label?: string; // Excluding the label will exclude the route from the nav sidebar in appLayout
   component: React.ReactNode;
@@ -24,13 +21,13 @@ export interface IAppRoute {
   routes?: undefined;
 }
 
-export interface IAppRouteGroup {
+interface IAppRouteGroup {
   id: string;
   label: string;
   routes: IAppRoute[];
 }
 
-export type AppRouteConfig = IAppRoute | IAppRouteGroup;
+type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
@@ -61,27 +58,16 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
   [] as IAppRoute[]
 );
 
-const AppRoutes = (): React.ReactElement => {
-  const nav = useNavigate();
-  const location = useLocation();
+const AppRoutes = () => (
+  <React.Suspense fallback={<p> Loading...</p>}>
+    <Routes>
+      {flattenedRoutes.map(route => (
+        <Route path={route.path} element={route.component} key={route.id} />
+      ))}
+      <Route path="/" element={<Navigate to="/sources" replace />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </React.Suspense>
+);
 
-  axios.get(`${process.env.REACT_APP_USER_SERVICE_CURRENT}`).catch(() => {
-    if (location.pathname !== '/login') {
-      nav('/login');
-    }
-  });
-  return (
-    <React.Suspense fallback={<p> Loading...</p>}>
-      <Routes>
-        {flattenedRoutes.map(route => (
-          <Route path={route.path} element={route.component} key={route.id} />
-        ))}
-        <Route path="/" element={<Navigate to="/sources" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </React.Suspense>
-  );
-};
-
-export { AppRoutes, routes };
+export { AppRoutes as default, AppRoutes, routes, type IAppRoute, type IAppRouteGroup, type AppRouteConfig };

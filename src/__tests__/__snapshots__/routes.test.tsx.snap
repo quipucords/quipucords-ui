@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Routes should render a basic component: basic 1`] = `
+<React.Suspense
+  fallback={
+    <p>
+       Loading...
+    </p>
+  }
+>
+  <Routes>
+    <Route
+      element={<UNDEFINED />}
+      path="/credentials"
+    />
+    <Route
+      element={<UNDEFINED />}
+      path="/sources"
+    />
+    <Route
+      element={<UNDEFINED />}
+      path="/scans"
+    />
+    <Route
+      element={
+        <Navigate
+          replace={true}
+          to="/sources"
+        />
+      }
+      path="/"
+    />
+    <Route
+      element={<NotFound />}
+      path="*"
+    />
+  </Routes>
+</React.Suspense>
+`;

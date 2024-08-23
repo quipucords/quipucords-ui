@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallowComponent } from '../../config/jest.setupTests';
-import { App } from '../app';
+import { AppRoutes as Routes } from '../routes';
 
-describe('App', () => {
+describe('Routes', () => {
   it('should render a basic component', async () => {
     const props = {};
-    const component = await shallowComponent(<App {...props} />);
+    const component = await shallowComponent(<Routes {...props} />);
     expect(component).toMatchSnapshot('basic');
   });
 });

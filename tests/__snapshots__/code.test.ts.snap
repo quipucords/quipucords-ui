@@ -2,15 +2,17 @@
 
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
-  "app.tsx:26:        console.error('Failed to set config', error);",
-  "components/viewLayout/viewLayoutToolbar.tsx:57:        console.error('Failed to logout', err);",
-  "components/viewLayout/viewLayoutToolbar.tsx:70:    console.log('selected', value);",
-  "components/viewLayout/viewLayoutToolbar.tsx:79:    console.log('selected', value);",
+  "components/viewLayout/viewLayoutToolbar.tsx:64:    console.log('selected', value);",
+  "components/viewLayout/viewLayoutToolbar.tsx:72:    console.log('selected', value);",
   "helpers/queryHelpers.ts:70:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:75:        console.error(error);",
   "hooks/useCredentialApi.ts:73:          console.log(missingCredsMsg);",
   "hooks/useCredentialApi.ts:91:          console.log(missingCredsMsg);",
   "hooks/useCredentialApi.ts:137:          console.error(error);",
+  "hooks/useLoginApi.ts:58:          console.error(error);",
+  "hooks/useLoginApi.ts:99:        console.error(error);",
+  "hooks/useLoginApi.ts:137:        console.error(error);",
+  "hooks/useLoginApi.ts:165:        console.error('Invalid token, unable to parse format');",
   "hooks/useScanApi.ts:67:          console.error(error);",
   "hooks/useScanApi.ts:140:          console.error(error);",
   "hooks/useScanApi.ts:186:        console.log(missingScansMsg);",
@@ -23,8 +25,6 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "hooks/useSourceApi.ts:127:          console.error(error);",
   "hooks/useSourceApi.ts:191:          console.error(error);",
   "hooks/useSourceApi.ts:255:          console.error(error);",
-  "views/login/viewLogin.tsx:61:                console.error('Failed to set config', error);",
-  "views/login/viewLogin.tsx:68:          console.error({ err });",
   "views/scans/showScansModal.tsx:70:      console.log({ aValue, bValue });",
   "views/sources/addSourceModal.tsx:55:      .catch(err => console.error(err));",
 ]
