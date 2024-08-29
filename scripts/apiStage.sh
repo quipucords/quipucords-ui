@@ -47,6 +47,7 @@ cleanApi()
 stopApi()
 {
   $PODMAN stop -t 0 $($PODMAN ps --filter name="qpc*")
+  $PODMAN network rm -f -t 0 qpc-stage-network
 }
 #
 #
@@ -64,6 +65,13 @@ stageApi()
   $PODMAN rm $NAME
   $PODMAN pull $CONTAINER
 
+  $PODMAN stop -t 0 qpc-redis
+  $PODMAN rm qpc-redis
+  $PODMAN pull redis:6-alpine
+
+  $PODMAN network rm -f -t 0 qpc-stage-network
+  $PODMAN network create qpc-stage-network
+
   mkdir -p "${HOME}/.local/share/discovery/log"
   mkdir -p "${HOME}/.local/share/discovery/data"
   mkdir -p "${HOME}/.local/share/discovery/sshkeys"
@@ -74,9 +82,17 @@ stageApi()
     local MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
 
     $PODMAN run -itd --rm \
-      -e QPC_SERVER_PASSWORD=$PASSWORD \
-      -e QPC_DBMS=sqlite \
-      -p $PORT:443 \
+      --network qpc-stage-network \
+      -p 6379:6379 \
+      --name qpc-redis \
+      redis:6-alpine
+
+    $PODMAN run -itd --rm \
+      --network qpc-stage-network \
+      -e QUIPUCORDS_SERVER_PASSWORD=$PASSWORD \
+      -e QUIPUCORDS_DBMS=sqlite \
+      -e REDIS_HOST=qpc-redis \
+      -p $PORT:8000 \
       -v "${HOME}"/.local/share/discovery/log/:/var/log"$MOUNT_ARGS" \
       -v "${HOME}"/.local/share/discovery/data/:/var/data"$MOUNT_ARGS" \
       -v "${HOME}"/.local/share/discovery/sshkeys/:/sshkeys"$MOUNT_ARGS" \
@@ -89,7 +105,7 @@ stageApi()
 
   if [ ! -z "$($PODMAN ps | grep $NAME)" ]; then
     echo "  Container: $($PODMAN ps | grep $NAME | cut -c 1-80)"
-    echo "  QPC container running: https://${HOST}:${PORT}/"
+    echo "  QPC container running: http://${HOST}:${PORT}/"
     printf "  To stop: $ ${GREEN}$PODMAN stop ${NAME}${NOCOLOR}\n"
   fi
 
@@ -105,7 +121,7 @@ stageApi()
   NOCOLOR="\e[39m"
 
   HOST="127.0.0.1"
-  PORT=9443
+  PORT=8000
   PASSWORD="1_2_3_4_5_"
   CONTAINER="quay.io/quipucords/quipucords:latest"
   PODMAN=""

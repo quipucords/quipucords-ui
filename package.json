@@ -31,7 +31,7 @@
     "start": "export PROTOCOL=http; export HOST=127.0.0.1; export PORT=${PORT:-3000}; export MOCK_PORT=${MOCK_PORT:-3030}; run-p -l api:dev start:js start:open",
     "start:js": "export NODE_ENV=development; weldable -l ts -x ./config/webpack.dev.js",
     "start:open": "xdg-open $PROTOCOL://$HOST:$PORT/login || open $PROTOCOL://$HOST:$PORT/login",
-    "start:stage": "export PROTOCOL=https; export HOST=127.0.0.1; export PORT=${PORT:-3000}; export MOCK_PORT=${MOCK_PORT:-9443}; run-p -l api:stage start:js start:open",
+    "start:stage": "export PROTOCOL=http; export HOST=127.0.0.1; export PORT=${PORT:-3000}; export MOCK_PORT=${MOCK_PORT:-8000}; run-p -l api:stage start:js start:open",
     "test": "export NODE_ENV=test; run-s test:ci-lint test:ci-build test:ci-coverage",
     "test:ci-build": "run-s build",
     "test:ci-coverage": "export CI=true; jest ./src --coverage",
