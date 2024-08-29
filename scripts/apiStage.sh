@@ -74,8 +74,8 @@ stageApi()
     local MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
 
     $PODMAN run -itd --rm \
-      -e QPC_SERVER_PASSWORD=$PASSWORD \
-      -e QPC_DBMS=sqlite \
+      -e QUIPUCORDS_SERVER_PASSWORD=$PASSWORD \
+      -e QUIPUCORDS_DBMS=sqlite \
       -p $PORT:443 \
       -v "${HOME}"/.local/share/discovery/log/:/var/log"$MOUNT_ARGS" \
       -v "${HOME}"/.local/share/discovery/data/:/var/data"$MOUNT_ARGS" \
