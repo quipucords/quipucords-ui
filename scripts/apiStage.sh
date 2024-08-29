@@ -3,8 +3,7 @@
 #
 # Quick check to see if a container is running
 #
-checkContainerRunning()
-{
+checkContainerRunning() {
   local CHECKONE=$1
   local COUNT=1
   local DURATION=10
@@ -14,7 +13,7 @@ checkContainerRunning()
 
   while [ $COUNT -le $DURATION ]; do
     sleep $DELAY
-    (( COUNT++ ))
+    ((COUNT++))
     if [ -z "$($PODMAN ps | grep $CHECKONE)" ]; then
       break
     fi
@@ -33,8 +32,7 @@ checkContainerRunning()
 #
 # Clean container tooling
 #
-cleanApi()
-{
+cleanApi() {
   echo "Cleaning everything, \$PODMAN and data..."
   printf "${RED}\n"
   $PODMAN system prune -f
@@ -44,16 +42,15 @@ cleanApi()
 #
 # Stop all QPC containers
 #
-stopApi()
-{
+stopApi() {
   $PODMAN stop -t 0 $($PODMAN ps --filter name="qpc*")
+  $PODMAN network rm -f -t 0 qpc-stage-network
 }
 #
 #
 # Run stage/dev setup, used for local development against the latest API, partially working login
 #
-stageApi()
-{
+stageApi() {
   local HOST=$1
   local PORT=$2
   local PASSWORD=$3
@@ -63,6 +60,13 @@ stageApi()
   $PODMAN stop -t 0 $NAME
   $PODMAN rm $NAME
   $PODMAN pull $CONTAINER
+
+  $PODMAN stop -t 0 qpc-redis
+  $PODMAN rm qpc-redis
+  $PODMAN pull registry.redhat.io/rhel9/redis-6:latest
+
+  $PODMAN network rm -f -t 0 qpc-stage-network
+  $PODMAN network create qpc-stage-network
 
   mkdir -p "${HOME}/.local/share/discovery/log"
   mkdir -p "${HOME}/.local/share/discovery/data"
@@ -74,8 +78,16 @@ stageApi()
     local MOUNT_ARGS=$([[ "$OSTYPE" == "darwin"* ]] && echo "" || echo ":z")
 
     $PODMAN run -itd --rm \
+      --network qpc-stage-network \
+      -p 6379:6379 \
+      --name qpc-redis \
+      registry.redhat.io/rhel9/redis-6:latest
+
+    $PODMAN run -itd --rm \
+      --network qpc-stage-network \
       -e QUIPUCORDS_SERVER_PASSWORD=$PASSWORD \
       -e QUIPUCORDS_DBMS=sqlite \
+      -e REDIS_HOST=qpc-redis \
       -p $PORT:443 \
       -v "${HOME}"/.local/share/discovery/log/:/var/log"$MOUNT_ARGS" \
       -v "${HOME}"/.local/share/discovery/data/:/var/data"$MOUNT_ARGS" \
@@ -110,13 +122,12 @@ stageApi()
   CONTAINER="quay.io/quipucords/quipucords:latest"
   PODMAN=""
 
-  while getopts p:t:w:c option;
-    do
-      case $option in
-        p ) PORT=$OPTARG;;
-        t ) TYPE="$OPTARG";;
-        w ) PASSWORD="$OPTARG";;
-      esac
+  while getopts p:t:w:c option; do
+    case $option in
+    p) PORT=$OPTARG ;;
+    t) TYPE="$OPTARG" ;;
+    w) PASSWORD="$OPTARG" ;;
+    esac
   done
 
   if [ "$(command -v podman)" ]; then
@@ -131,11 +142,14 @@ stageApi()
   fi
 
   case $TYPE in
-    clean )
-      cleanApi;;
-    stage )
-      stageApi $HOST $PORT $PASSWORD "qpc-stage" $CONTAINER;;
-    stopApi )
-      stopApi;;
+  clean)
+    cleanApi
+    ;;
+  stage)
+    stageApi $HOST $PORT $PASSWORD "qpc-stage" $CONTAINER
+    ;;
+  stopApi)
+    stopApi
+    ;;
   esac
 }
