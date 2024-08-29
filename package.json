@@ -99,6 +99,6 @@
     "prettier": "^3.3.3",
     "swagger-mock-api": "^1.6.0",
     "ts-jest": "^29.2.4",
-    "weldable": "^3.1.1"
+    "weldable": "^3.1.2"
   }
 }
