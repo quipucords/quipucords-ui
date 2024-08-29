@@ -67,7 +67,7 @@ stageApi()
 
   $PODMAN stop -t 0 qpc-redis
   $PODMAN rm qpc-redis
-  $PODMAN pull registry.redhat.io/rhel9/redis-6:latest
+  $PODMAN pull redis:6-alpine
 
   $PODMAN network rm -f -t 0 qpc-stage-network
   $PODMAN network create qpc-stage-network
@@ -85,7 +85,7 @@ stageApi()
       --network qpc-stage-network \
       -p 6379:6379 \
       --name qpc-redis \
-      registry.redhat.io/rhel9/redis-6:latest
+      redis:6-alpine
 
     $PODMAN run -itd --rm \
       --network qpc-stage-network \
