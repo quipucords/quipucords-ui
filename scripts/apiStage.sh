@@ -3,7 +3,8 @@
 #
 # Quick check to see if a container is running
 #
-checkContainerRunning() {
+checkContainerRunning()
+{
   local CHECKONE=$1
   local COUNT=1
   local DURATION=10
@@ -13,7 +14,7 @@ checkContainerRunning() {
 
   while [ $COUNT -le $DURATION ]; do
     sleep $DELAY
-    ((COUNT++))
+    (( COUNT++ ))
     if [ -z "$($PODMAN ps | grep $CHECKONE)" ]; then
       break
     fi
@@ -32,7 +33,8 @@ checkContainerRunning() {
 #
 # Clean container tooling
 #
-cleanApi() {
+cleanApi()
+{
   echo "Cleaning everything, \$PODMAN and data..."
   printf "${RED}\n"
   $PODMAN system prune -f
@@ -42,7 +44,8 @@ cleanApi() {
 #
 # Stop all QPC containers
 #
-stopApi() {
+stopApi()
+{
   $PODMAN stop -t 0 $($PODMAN ps --filter name="qpc*")
   $PODMAN network rm -f -t 0 qpc-stage-network
 }
@@ -50,7 +53,8 @@ stopApi() {
 #
 # Run stage/dev setup, used for local development against the latest API, partially working login
 #
-stageApi() {
+stageApi()
+{
   local HOST=$1
   local PORT=$2
   local PASSWORD=$3
@@ -122,12 +126,13 @@ stageApi() {
   CONTAINER="quay.io/quipucords/quipucords:latest"
   PODMAN=""
 
-  while getopts p:t:w:c option; do
-    case $option in
-    p) PORT=$OPTARG ;;
-    t) TYPE="$OPTARG" ;;
-    w) PASSWORD="$OPTARG" ;;
-    esac
+  while getopts p:t:w:c option;
+    do
+      case $option in
+        p ) PORT=$OPTARG;;
+        t ) TYPE="$OPTARG";;
+        w ) PASSWORD="$OPTARG";;
+      esac
   done
 
   if [ "$(command -v podman)" ]; then
@@ -142,14 +147,11 @@ stageApi() {
   fi
 
   case $TYPE in
-  clean)
-    cleanApi
-    ;;
-  stage)
-    stageApi $HOST $PORT $PASSWORD "qpc-stage" $CONTAINER
-    ;;
-  stopApi)
-    stopApi
-    ;;
+    clean )
+      cleanApi;;
+    stage )
+      stageApi $HOST $PORT $PASSWORD "qpc-stage" $CONTAINER;;
+    stopApi )
+      stopApi;;
   esac
 }
