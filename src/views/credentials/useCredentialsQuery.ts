@@ -9,7 +9,7 @@
 import { type TableState } from '@mturley-latest/react-table-batteries';
 import { API_CREDS_LIST_QUERY } from '../../constants/apiConstants';
 import { useServiceQuery } from '../../helpers/queryHelpers';
-import { CredentialType } from '../../types/types';
+import { type CredentialType } from '../../types/types';
 
 type CredentialsColumnKey = 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
 

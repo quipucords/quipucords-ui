@@ -3,7 +3,7 @@ import { KeyTypes } from '@patternfly/react-core';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { ScanJobType, ScanType } from '../../../types/types';
+import { type Scan, type ScanJobType } from '../../../types/types';
 import { ScansModal } from '../showScansModal';
 
 jest.mock('react-i18next', () => ({

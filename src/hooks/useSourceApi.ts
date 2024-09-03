@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { type AlertProps } from '@patternfly/react-core';
 import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
 import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
-import { SourceType } from '../types/types';
+import { type SourceType } from '../types/types';
 
 type ApiDeleteSourceSuccessType = {
   message: string;

@@ -24,7 +24,7 @@ import {
 import axios from 'axios';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
-import { SourceType } from '../../types/types';
+import { type SourceType } from '../../types/types';
 
 export interface AddSourceModalProps {
   isOpen: boolean;
