@@ -13,10 +13,10 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, type ThProps } from '@patternfly/react-table';
 import { helpers } from '../../helpers';
-import { ScanJobType, ScanType } from '../../types/types';
+import { type Scan, type ScanJobType } from '../../types/types';
 
 export interface ScansModalProps {
-  scan: ScanType;
+  scan: Scan;
   scanJobs?: ScanJobType[];
   onDownload: (number) => void;
   onClose: () => void;
@@ -78,7 +78,7 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
   return (
     <Modal
       variant={ModalVariant.medium}
-      title={t('view.label', { context: 'scans-ids', name: scan.id })}
+      title={t('view.label', { context: 'scans-names', name: scan.name })}
       isOpen
       onClose={onClose}
     >

@@ -65,7 +65,7 @@ exports[`useDeleteSourceApi should attempt an api call to delete sources: apiCal
 ]
 `;
 
-exports[`useDeleteSourceApi should handle errors while attempting to delete single and multiple credentials: deleteSources, error 1`] = `
+exports[`useDeleteSourceApi should handle errors while attempting to delete single and multiple sources: deleteSources, error 1`] = `
 [
   [
     {
@@ -277,43 +277,6 @@ exports[`useEditSourceApi should handle success while attempting to edit a sourc
         },
       ],
       "variant": "success",
-    },
-  ],
-]
-`;
-
-exports[`useShowConnectionsApi should attempt an api call to show connections: apiCall 1`] = `
-[
-  [
-    "/api/v1/jobs/456/connection/?page=1&page_size=1000&ordering=name&source_type=123",
-  ],
-]
-`;
-
-exports[`useShowConnectionsApi should handle errors while fetching connections: showConnections error 1`] = `[]`;
-
-exports[`useShowConnectionsApi should handle success while fetching connections: showConnections success 1`] = `
-[
-  [
-    {
-      "failure": [
-        {
-          "name": "Connection 2",
-          "status": "failure",
-        },
-      ],
-      "successful": [
-        {
-          "name": "Connection 1",
-          "status": "success",
-        },
-      ],
-      "unreachable": [
-        {
-          "name": "Connection 3",
-          "status": "unreachable",
-        },
-      ],
     },
   ],
 ]

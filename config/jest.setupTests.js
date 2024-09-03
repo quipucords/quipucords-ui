@@ -24,3 +24,8 @@ jest.mock('react-i18next', () => ({
   ...jest.requireActual('react-i18next'),
   useTranslation: () => ({ t: (...args) => args })
 }));
+
+/**
+ * Emulate global for URL. A part of downloading files.
+ */
+global.URL.createObjectURL = jest.fn();

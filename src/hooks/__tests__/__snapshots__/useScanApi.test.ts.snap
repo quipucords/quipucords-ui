@@ -1,0 +1,565 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useCreateScanApi should attempt an api call to create a scan: apiCall 1`] = `
+[
+  [
+    "/api/v1/scans/",
+    {
+      "name": "Lorem",
+    },
+  ],
+]
+`;
+
+exports[`useCreateScanApi should handle errors while attempting to create a scan: createScans, error 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_created_error",
+          "message": "Unknown error",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useCreateScanApi should handle success while attempting to create a scan: createScans, success 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_created",
+          "name": undefined,
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useCreateScanApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_created_error",
+          "message": "Dolor sit",
+          "name": "Lorem Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useCreateScanApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_created",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteScanApi should attempt an api call to delete scans: apiCall 1`] = `
+[
+  [
+    "/api/v1/scans/bulk_delete/",
+    {
+      "ids": [
+        456,
+        789,
+      ],
+    },
+  ],
+]
+`;
+
+exports[`useDeleteScanApi should handle errors while attempting to delete single and multiple scans: deleteScans, error 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 1,
+          "message": "Mock error",
+          "name": "lorem ipsum dolor sit",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 2,
+          "message": "Mock error",
+          "name": "lorem ipsum, dolor sit",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteScanApi should handle success while attempting to delete single and multiple scans: deleteScans, success 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan",
+          "count": 1,
+          "name": "lorem ipsum dolor sit",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan",
+          "count": 2,
+          "name": "lorem ipsum, dolor sit",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteScanApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 2,
+          "message": "Lorem ipsum",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 2,
+          "message": "Dolor sit",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 2,
+          "message": "Amet",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan_error",
+          "count": 2,
+          "message": "Unknown error",
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDeleteScanApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "deleted-scan",
+          "count": 2,
+          "name": "Lorem, Ipsum",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDownloadReportApi should attempt an API call to download a report: apiCall 1`] = `
+[
+  [
+    "/api/v1/reports/123/",
+    {
+      "responseType": "blob",
+    },
+  ],
+]
+`;
+
+exports[`useDownloadReportApi should handle errors while attempting to download a report: downloadReport, error 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "report_download_error",
+          "message": "Unknown error",
+          "name": 123,
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDownloadReportApi should handle success while attempting to download a report: downloadReport, success 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "report_downloaded",
+          "name": 123,
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useDownloadReportApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "report_download_error",
+          "message": "Dolor sit",
+          "name": 123,
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useDownloadReportApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "report_downloaded",
+          "name": 123,
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useGetScanJobsApi should attempt an api call to retrieve a scanJob: apiCall 1`] = `
+[
+  [
+    "/api/v1/scans/1/jobs/",
+  ],
+]
+`;
+
+exports[`useGetScanJobsApi should handle errors while attempting to retrieve a scanJob: getScanJobs, error 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-jobs_fetch_error",
+          "id": 1,
+          "message": "Unknown error",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useGetScanJobsApi should handle success while attempting to retrieve a scanJob: getScanJobs, success 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-jobs_fetched",
+          "count": undefined,
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useGetScanJobsApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-jobs_fetch_error",
+          "id": 1,
+          "message": "Dolor sit",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useGetScanJobsApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-jobs_fetched",
+          "count": 1,
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useRunScanApi should attempt an API call to run a scan: apiCall 1`] = `
+[
+  [
+    "/api/v1/scans/123/jobs/",
+  ],
+]
+`;
+
+exports[`useRunScanApi should handle errors while attempting to run a scan: runScans, error 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play_error",
+          "message": "Unknown error",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play_error",
+          "message": "Unknown error",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useRunScanApi should handle success while attempting to run a scan: runScans, success 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useRunScanApi should process an API error response: callbackError 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play_error",
+          "message": "Dolor sit",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useRunScanApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    {
+      "title": [
+        "toast-notifications.description",
+        {
+          "context": "scan-report_play",
+          "name": "Lorem",
+        },
+      ],
+      "variant": "success",
+    },
+  ],
+]
+`;
+
+exports[`useShowConnectionsApi should attempt an api call to show connections: apiCall 1`] = `
+[
+  [
+    "/api/v1/jobs/456/connection/",
+    {
+      "params": {
+        "ordering": "name",
+        "page": 1,
+        "page_size": 1000,
+        "source_type": 123,
+      },
+    },
+  ],
+]
+`;
+
+exports[`useShowConnectionsApi should handle errors while fetching connections: showConnections error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useShowConnectionsApi should handle success while fetching connections: showConnections success 1`] = `
+{
+  "failed": [],
+  "successful": [],
+  "unreachable": [],
+}
+`;
+
+exports[`useShowConnectionsApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useShowConnectionsApi should process an API success response: callbackSuccess 1`] = `
+{
+  "failed": [
+    {
+      "name": "Connection 2",
+      "status": "failed",
+    },
+  ],
+  "successful": [
+    {
+      "name": "Connection 1",
+      "status": "success",
+    },
+  ],
+  "unreachable": [
+    {
+      "name": "Connection 3",
+      "status": "unreachable",
+    },
+  ],
+}
+`;

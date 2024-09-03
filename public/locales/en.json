@@ -244,6 +244,17 @@
     "description_scan-report_paused": "Scan <0>{{name}}</0> paused",
     "description_scan-report_restart": "Scan <0>{{name}}</0> resumed",
     "description_scan-report_play": "Scan {{name}} started.",
+    "description_scan-report_play_error": "There was an error while starting scan {{name}}: {{message}}.",
+    "description_scan-report_created": "Scan {{name}} was created",
+    "description_scan-report_created_error": "There was an error while creating scan {{name}}.",
+    "description_deleted-scan_one": "Scan {{name}} was successfully deleted.",
+    "description_deleted-scan_other": "Scans {{name}} were successfully deleted.",
+    "description_deleted-scan_error": "Error removing scan {{name}}. {{message}}",
+    "description_deleted-scan_error_other": "Error removing scans {{name}} and more. {{message}}",
+    "description_scan-jobs_fetched": "Connection information displayed successfully.",
+    "description_scan-jobs_fetched_error": "Error displaying connection information. {{message}",
+    "description_report_downloaded": "Report {{name}} downloaded successfully.",
+    "description_report_downloaded_error": "Failed to download report {{name}}: {{message}}",
     "description_scan-report_start": "$t(toast-notifications.description_scan-report_play)",
     "title_add-source_hidden_error": "Error creating source {{ name }}. {{ message }}",
     "title_add-source_hidden_error_edit": "Error updating source {{ name }}. {{ message }}"
@@ -280,7 +291,7 @@
     "empty-state_label_credentials": "Add Credential",
     "empty-state_label_sources": "Add Source",
     "label_credentials": "Credentials",
-    "label_scans-ids": "Scans: {name}",
+    "label_scans-names": "Scans: {{name}}",
     "label_sources": "Sources"
   },
   "dataSource": {
