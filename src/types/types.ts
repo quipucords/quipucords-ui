@@ -69,28 +69,6 @@ export type ConnectionType = {
   };
 };
 
-export type ScanType = {
-  id: number;
-  jobs: { id: number; report_id?: number }[];
-  most_recent: {
-    end_time: string;
-    id: number;
-    report_id?: number;
-    scan_type: string;
-    start_time: string;
-    status: string;
-    status_details: {
-      job_status_message: string;
-    };
-    system_fingerprint_count: number;
-    systems_count: number;
-    systems_failed: number;
-    systems_scanned: number;
-    systems_unreachable: number;
-  };
-  sources: SourceType[];
-};
-
 export type ScanJobType = {
   id: number;
   scan: {
@@ -165,4 +143,85 @@ export type ScanJobType = {
   systems_failed: number;
   systems_unreachable: number;
   system_fingerprint_count: number;
+};
+
+export type ScanJobsResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: ScanJobType[];
+};
+
+export type ScanDisableOptionalProducts = {
+  jboss_eap: boolean;
+  jboss_fuse: boolean;
+  jboss_ws: boolean;
+};
+
+export type ScanExtendedSearchProducts = {
+  jboss_eap: boolean;
+  jboss_fuse: boolean;
+  jboss_ws: boolean;
+  search_directories: string[];
+};
+
+export type ScanOptions = {
+  max_concurrency: number;
+  disabled_optional_products: ScanDisableOptionalProducts;
+  enabled_extended_product_search: ScanExtendedSearchProducts;
+};
+
+export type scanJob = {
+  id: number;
+  report_id: number;
+};
+
+export type StatusDetails = {
+  job_status_message: string;
+};
+
+export type MostRecentScan = {
+  id: number;
+  report_id: number;
+  start_time: string;
+  end_time: string;
+  systems_count: number;
+  systems_scanned: number;
+  systems_failed: number;
+  systems_unreachable: number;
+  systems_fingerprint_count: number;
+  status: string;
+  scan_type: 'inspect' | 'connect';
+  status_details: StatusDetails;
+};
+
+export type Scan = {
+  id: number;
+  name: string;
+  scan_type: 'inspect' | 'connect';
+  options: ScanOptions;
+  sources: SourceType[];
+  jobs?: scanJob[];
+  most_recent?: MostRecentScan;
+};
+
+export type Task = {
+  sequence_number: number;
+  source: number;
+  scan_type: string;
+  status: string;
+  status_message: string;
+  systems_count: number;
+  systems_scanned: number;
+  systems_failed: number;
+  systems_unreachable: number;
+  start_time: Date;
+  end_time: Date;
+  system_fingerprint_count?: number; // Optional
+};
+
+export type Connections = {
+  successful: ConnectionType[];
+  failed: ConnectionType[];
+  unreachable: ConnectionType[];
 };

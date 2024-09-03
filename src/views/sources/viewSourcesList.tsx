@@ -46,15 +46,10 @@ import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import {
-  useSourceApi,
-  useDeleteSourceApi,
-  useEditSourceApi,
-  useShowConnectionsApi,
-  useAddSourceApi
-} from '../../hooks/useSourceApi';
+import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
+import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { ConnectionType, CredentialType, SourceType } from '../../types/types';
+import { type Connections, type CredentialType, type Scan, type SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
 import SourcesScanModal from './addSourcesScanModal';
 import { ConnectionsModal } from './showSourceConnectionsModal';
@@ -64,23 +59,20 @@ const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialType[]>([]);
+  const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
-  const [connectionsData, setConnectionsData] = React.useState<{
-    successful: ConnectionType[];
-    failure: ConnectionType[];
-    unreachable: ConnectionType[];
-  }>({ successful: [], failure: [], unreachable: [] });
   const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
-  const emptyConnectionData = { successful: [], failure: [], unreachable: [] };
-  const { runScan, onScanSources, scanSelected, setScanSelected, onScanSource } = useSourceApi();
+  const emptyConnectionData: Connections = { successful: [], failed: [], unreachable: [] };
+  const [connectionsData, setConnectionsData] = React.useState<Connections>(emptyConnectionData);
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteSources } = useDeleteSourceApi(addAlert);
   const { addSources } = useAddSourceApi(addAlert);
   const { editSources } = useEditSourceApi(addAlert);
-  const { showConnections } = useShowConnectionsApi(setConnectionsData);
+  const { showConnections } = useShowConnectionsApi();
+  const { runScans } = useRunScanApi(addAlert);
 
   /**
    * Fetches the translated label for a source type.
@@ -118,38 +110,21 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   /**
-   * Initiates a scan for the provided source, handles success, error, and cleanup operations.
+   * Sets the selected sources for scanning.
    *
-   * @param {SourceType} payload - The payload containing source information to start the scan.
+   * @param {SourceType[]} sources - An array of source items to be selected for scanning.
    */
-  const onRunScan = (payload: SourceType) => {
-    runScan(payload)
-      .then(() => {
-        const successMessage = t('toast-notifications.description', {
-          context: 'scan-report_play',
-          name: payload.name
-        });
-        addAlert({
-          title: successMessage,
-          variant: 'success',
-          id: getUniqueId()
-        });
-        queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-        setScanSelected(undefined);
-      })
-      .catch(err => {
-        console.error({ err });
-        const errorMessage = t('toast-notifications.description', {
-          context: 'starting-scan-error',
-          name: payload.name,
-          message: JSON.stringify(err?.response?.data.name)
-        });
-        addAlert({
-          title: errorMessage,
-          variant: 'danger',
-          id: getUniqueId()
-        });
-      });
+  const onScanSources = (sources: SourceType[]) => {
+    setScanSelected(sources);
+  };
+
+  /**
+   * Sets a single source for scanning as the selected source.
+   *
+   * @param {SourceType} source - The source to be selected for scanning.
+   */
+  const onScanSource = (source: SourceType) => {
+    setScanSelected([source]);
   };
 
   /**
@@ -292,7 +267,7 @@ const SourcesListView: React.FunctionComponent = () => {
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={Object.values(selectedItems).filter(val => val !== null).length <= 1}
-            onClick={onScanSources}
+            onClick={() => onScanSources(selectedItems)}
           >
             {t('table.label', { context: 'scan' })}
           </Button>
@@ -316,7 +291,7 @@ const SourcesListView: React.FunctionComponent = () => {
     </Toolbar>
   );
 
-  const renderConnection = (source: SourceType): React.ReactNode => {
+  const renderConnection = (source: SourceType) => {
     if (!source?.connection) {
       return null;
     }
@@ -333,7 +308,7 @@ const SourcesListView: React.FunctionComponent = () => {
       <Button
         variant={ButtonVariant.link}
         onClick={() => {
-          showConnections(source);
+          showConnections(source).then(success => setConnectionsData(success));
           setConnectionsSelected(source);
         }}
       >
@@ -421,28 +396,40 @@ const SourcesListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
-      {!!credentialsSelected.length && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('view.label', { context: 'credentials' })}
-          isOpen={!!credentialsSelected}
-          onClose={() => setCredentialsSelected([])}
-          actions={[
-            <Button key="cancel" variant="secondary" onClick={() => setCredentialsSelected([])}>
-              Close
-            </Button>
-          ]}
-        >
-          <List isPlain isBordered>
-            {credentialsSelected.map(c => (
-              <ListItem key={c.name}>{c.name}</ListItem>
-            ))}
-          </List>
-        </Modal>
-      )}
-      {connectionsSelected && (
-        <ConnectionsModal source={connectionsSelected} connections={connectionsData} onClose={onCloseConnections} />
-      )}
+      <Modal
+        variant={ModalVariant.small}
+        title={t('view.label', { context: 'credentials' })}
+        isOpen={credentialsSelected.length > 0}
+        onClose={() => setCredentialsSelected([])}
+        actions={[
+          <Button
+            key="confirm"
+            variant="danger"
+            onClick={() => {
+              // Add your specific action if needed
+              setCredentialsSelected([]);
+            }}
+          >
+            {t('table.label', { context: 'close' })}
+          </Button>,
+          <Button key="cancel" variant="link" onClick={() => setCredentialsSelected([])}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        ]}
+      >
+        <List isPlain isBordered>
+          {credentialsSelected.map(c => (
+            <ListItem key={c.name}>{c.name}</ListItem>
+          ))}
+        </List>
+        {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+      </Modal>
+      <ConnectionsModal
+        isOpen={connectionsSelected !== undefined}
+        source={connectionsSelected}
+        connections={connectionsData}
+        onClose={onCloseConnections}
+      />
       <Modal
         variant={ModalVariant.small}
         title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
@@ -496,9 +483,16 @@ const SourcesListView: React.FunctionComponent = () => {
           })
         }
       />
-      {scanSelected && (
-        <SourcesScanModal onClose={() => setScanSelected(undefined)} onSubmit={onRunScan} sources={scanSelected} />
-      )}
+      <SourcesScanModal
+        onClose={() => setScanSelected(undefined)}
+        onSubmit={(payload: Scan) =>
+          runScans(payload).finally(() => {
+            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+            setScanSelected(undefined);
+          })
+        }
+        sources={scanSelected ?? []}
+      />
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
           <Alert

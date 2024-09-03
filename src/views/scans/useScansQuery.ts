@@ -9,26 +9,26 @@
  */
 import { type TableState } from '@mturley-latest/react-table-batteries';
 import { useServiceQuery } from '../../helpers/queryHelpers';
-import { ScanType } from '../../types/types';
+import { type Scan } from '../../types/types';
 
 export const SCANS_LIST_QUERY = 'scansList';
 
-type ScansColumnKey = 'id' | 'most_recent' | 'sources' | 'actions';
+type ScansColumnKey = 'name' | 'most_recent' | 'sources' | 'actions';
 
-type ScansSortableColumnKey = 'id' | 'most_recent';
+type ScansSortableColumnKey = 'name' | 'most_recent';
 
 export const useScansQuery = ({
   tableState,
   setRefreshTime
 }: {
-  tableState: TableState<ScanType, ScansColumnKey, ScansSortableColumnKey>;
+  tableState: TableState<Scan, ScansColumnKey, ScansSortableColumnKey>;
   setRefreshTime: (date: Date) => void;
 }) =>
-  useServiceQuery<ScanType, ScansColumnKey, ScansSortableColumnKey>({
+  useServiceQuery<Scan, ScansColumnKey, ScansSortableColumnKey>({
     queryKey: [SCANS_LIST_QUERY],
     baseUrl: process.env.REACT_APP_SCANS_SERVICE,
     columnOrderMap: {
-      id: 'id',
+      name: 'name',
       most_recent: 'most_recent_connect_scan__start_time'
     },
     tableState,

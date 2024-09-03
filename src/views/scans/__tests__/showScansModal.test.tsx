@@ -18,7 +18,7 @@ jest.spyOn(document, 'createElement');
 jest.spyOn(document.body, 'addEventListener');
 
 const props = {
-  scan: { id: 123 } as ScanType,
+  scan: { id: 123 } as Scan,
   onClose: jest.fn(),
   onDownload: jest.fn(),
   scanJobs: undefined

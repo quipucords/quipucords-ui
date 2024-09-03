@@ -8,20 +8,17 @@ import React from 'react';
 import { Modal, ModalVariant, Button, Icon, List, ListItem } from '@patternfly/react-core';
 import { ExclamationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
-import { SourceType, ConnectionType } from '../../types/types';
+import { type SourceType, type Connections } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
 export interface ConnectionsModalProps {
-  source: SourceType;
+  isOpen: boolean;
+  source: SourceType | undefined;
   onClose: () => void;
-  connections: {
-    successful: ConnectionType[];
-    failure: ConnectionType[];
-    unreachable: ConnectionType[];
-  };
+  connections: Connections;
 }
 
-export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ source, onClose, connections }) => {
+export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ isOpen, source, onClose, connections }) => {
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const toggle = section => {
     const index = expanded.indexOf(section);
@@ -34,8 +31,8 @@ export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ source, onCl
   return (
     <Modal
       variant={ModalVariant.small}
-      title={source.name}
-      isOpen={!!source}
+      title={source?.name}
+      isOpen={isOpen}
       onClose={onClose}
       actions={[
         <Button key="cancel" variant="secondary" onClick={onClose}>
