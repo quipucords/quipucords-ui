@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import moment, { type MomentInput } from 'moment';
-import { CredentialType } from '../types/types';
+import { type CredentialType } from '../types/types';
 
 /**
  * Generates a translation key for internationalization.

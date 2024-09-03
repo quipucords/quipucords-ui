@@ -46,7 +46,7 @@ import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useDeleteCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { CredentialType, SourceType } from '../../types/types';
+import { type CredentialType, type SourceType } from '../../types/types';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {

@@ -19,7 +19,7 @@ import {
   TextArea,
   TextInput
 } from '@patternfly/react-core';
-import { SourceType } from '../../types/types';
+import { type SourceType } from '../../types/types';
 
 export interface SourcesScanModalProps {
   sources: SourceType[];
