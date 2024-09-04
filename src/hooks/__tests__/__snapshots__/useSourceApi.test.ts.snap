@@ -20,14 +20,14 @@ exports[`useAddSourceApi should handle errors while attempting to add a source: 
 [
   [
     {
-      "title": [
-        "toast-notifications.title",
-        {
-          "context": "add-source_hidden_error",
-          "message": "Unknown error",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.title",
+  {
+    "context": "add-source_hidden_error",
+    "name": "Lorem",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -38,13 +38,13 @@ exports[`useAddSourceApi should handle success while attempting to add a source:
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "add-source_hidden",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "add-source_hidden",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -69,29 +69,29 @@ exports[`useDeleteSourceApi should handle errors while attempting to delete sing
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 1,
-          "message": "Mock error",
-          "name": "lorem ipsum dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 1,
+    "name": "lorem ipsum dolor sit",
+    "message": "Mock error"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 2,
-          "message": "Mock error",
-          "name": "lorem ipsum, dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 2,
+    "name": "lorem ipsum, dolor sit",
+    "message": "Mock error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -102,27 +102,27 @@ exports[`useDeleteSourceApi should handle success while attempting to delete sin
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source",
-          "count": 1,
-          "name": "lorem ipsum dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source",
+    "count": 1,
+    "name": "lorem ipsum dolor sit"
+  }
+])",
       "variant": "success",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source",
-          "count": 2,
-          "name": "lorem ipsum, dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source",
+    "count": 2,
+    "name": "lorem ipsum, dolor sit"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -133,57 +133,57 @@ exports[`useDeleteSourceApi should process an API error response: callbackError 
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 2,
-          "message": "Lorem ipsum",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Lorem ipsum"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 2,
-          "message": "Dolor sit",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 2,
-          "message": "Amet",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Amet"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source_error",
-          "count": 2,
-          "message": "Unknown error",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -194,41 +194,41 @@ exports[`useDeleteSourceApi should process an API success response: callbackSucc
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "skipped-source",
-          "count": 2,
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "skipped-source",
+    "name": "Lorem, Ipsum",
+    "count": 2
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-sources-skipped-sources",
-          "count": 1,
-          "deleted_names": "Ipsum",
-          "skipped_names": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-sources-skipped-sources",
+    "deleted_names": "Ipsum",
+    "skipped_names": "Lorem",
+    "count": 1
+  }
+])",
       "variant": "warning",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-source",
-          "count": 2,
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-source",
+    "count": 2,
+    "name": "Lorem, Ipsum"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -251,14 +251,14 @@ exports[`useEditSourceApi should handle errors while attempting to edit a source
 [
   [
     {
-      "title": [
-        "toast-notifications.title",
-        {
-          "context": "add-source_hidden_error_edit",
-          "message": "Unknown error",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.title",
+  {
+    "context": "add-source_hidden_error_edit",
+    "name": "Lorem",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -269,13 +269,13 @@ exports[`useEditSourceApi should handle success while attempting to edit a sourc
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "add-source_hidden_edit",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "add-source_hidden_edit",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],

@@ -22,7 +22,7 @@ jest.mock('i18next', () => {
  */
 jest.mock('react-i18next', () => ({
   ...jest.requireActual('react-i18next'),
-  useTranslation: () => ({ t: (...args) => args })
+  useTranslation: () => ({ t: (...args) => `t(${JSON.stringify(args, null, 2)})` })
 }));
 
 /**

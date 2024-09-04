@@ -15,14 +15,14 @@ exports[`useCreateScanApi should handle errors while attempting to create a scan
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_created_error",
-          "message": "Unknown error",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_created_error",
+    "name": "Lorem",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -33,13 +33,12 @@ exports[`useCreateScanApi should handle success while attempting to create a sca
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_created",
-          "name": undefined,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_created"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -50,14 +49,14 @@ exports[`useCreateScanApi should process an API error response: callbackError 1`
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_created_error",
-          "message": "Dolor sit",
-          "name": "Lorem Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_created_error",
+    "name": "Lorem Ipsum",
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -68,13 +67,13 @@ exports[`useCreateScanApi should process an API success response: callbackSucces
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_created",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_created",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -99,29 +98,29 @@ exports[`useDeleteScanApi should handle errors while attempting to delete single
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 1,
-          "message": "Mock error",
-          "name": "lorem ipsum dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 1,
+    "name": "lorem ipsum dolor sit",
+    "message": "Mock error"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 2,
-          "message": "Mock error",
-          "name": "lorem ipsum, dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 2,
+    "name": "lorem ipsum, dolor sit",
+    "message": "Mock error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -132,27 +131,27 @@ exports[`useDeleteScanApi should handle success while attempting to delete singl
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan",
-          "count": 1,
-          "name": "lorem ipsum dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan",
+    "count": 1,
+    "name": "lorem ipsum dolor sit"
+  }
+])",
       "variant": "success",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan",
-          "count": 2,
-          "name": "lorem ipsum, dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan",
+    "count": 2,
+    "name": "lorem ipsum, dolor sit"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -163,57 +162,57 @@ exports[`useDeleteScanApi should process an API error response: callbackError 1`
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 2,
-          "message": "Lorem ipsum",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Lorem ipsum"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 2,
-          "message": "Dolor sit",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 2,
-          "message": "Amet",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Amet"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan_error",
-          "count": 2,
-          "message": "Unknown error",
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan_error",
+    "count": 2,
+    "name": "Lorem, Ipsum",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -224,14 +223,14 @@ exports[`useDeleteScanApi should process an API success response: callbackSucces
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "deleted-scan",
-          "count": 2,
-          "name": "Lorem, Ipsum",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "deleted-scan",
+    "count": 2,
+    "name": "Lorem, Ipsum"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -253,14 +252,14 @@ exports[`useDownloadReportApi should handle errors while attempting to download 
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "report_download_error",
-          "message": "Unknown error",
-          "name": 123,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_download_error",
+    "name": 123,
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -271,13 +270,13 @@ exports[`useDownloadReportApi should handle success while attempting to download
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "report_downloaded",
-          "name": 123,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_downloaded",
+    "name": 123
+  }
+])",
       "variant": "success",
     },
   ],
@@ -288,14 +287,14 @@ exports[`useDownloadReportApi should process an API error response: callbackErro
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "report_download_error",
-          "message": "Dolor sit",
-          "name": 123,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_download_error",
+    "name": 123,
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -306,13 +305,13 @@ exports[`useDownloadReportApi should process an API success response: callbackSu
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "report_downloaded",
-          "name": 123,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_downloaded",
+    "name": 123
+  }
+])",
       "variant": "success",
     },
   ],
@@ -331,14 +330,14 @@ exports[`useGetScanJobsApi should handle errors while attempting to retrieve a s
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-jobs_fetch_error",
-          "id": 1,
-          "message": "Unknown error",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-jobs_fetch_error",
+    "id": 1,
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -349,13 +348,12 @@ exports[`useGetScanJobsApi should handle success while attempting to retrieve a 
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-jobs_fetched",
-          "count": undefined,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-jobs_fetched"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -366,14 +364,14 @@ exports[`useGetScanJobsApi should process an API error response: callbackError 1
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-jobs_fetch_error",
-          "id": 1,
-          "message": "Dolor sit",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-jobs_fetch_error",
+    "id": 1,
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -384,13 +382,13 @@ exports[`useGetScanJobsApi should process an API success response: callbackSucce
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-jobs_fetched",
-          "count": 1,
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-jobs_fetched",
+    "count": 1
+  }
+])",
       "variant": "success",
     },
   ],
@@ -409,27 +407,27 @@ exports[`useRunScanApi should handle errors while attempting to run a scan: runS
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play_error",
-          "message": "Unknown error",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play_error",
+    "name": "Lorem",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play_error",
-          "message": "Unknown error",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play_error",
+    "name": "Lorem",
+    "message": "Unknown error"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -440,25 +438,25 @@ exports[`useRunScanApi should handle success while attempting to run a scan: run
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],
@@ -469,14 +467,14 @@ exports[`useRunScanApi should process an API error response: callbackError 1`] =
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play_error",
-          "message": "Dolor sit",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play_error",
+    "name": "Lorem",
+    "message": "Dolor sit"
+  }
+])",
       "variant": "danger",
     },
   ],
@@ -487,13 +485,13 @@ exports[`useRunScanApi should process an API success response: callbackSuccess 1
 [
   [
     {
-      "title": [
-        "toast-notifications.description",
-        {
-          "context": "scan-report_play",
-          "name": "Lorem",
-        },
-      ],
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play",
+    "name": "Lorem"
+  }
+])",
       "variant": "success",
     },
   ],
