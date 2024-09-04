@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { type AlertProps } from '@patternfly/react-core';
 import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
 import { helpers } from '../helpers';
+import apiHelpers from '../helpers/apiHelpers';
 import { type CredentialType } from '../types/types';
 
 type ApiDeleteCredentialSuccessType = {
@@ -150,4 +151,132 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-export { useDeleteCredentialApi as default, useDeleteCredentialApi };
+const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
+  const { t } = useTranslation();
+
+  const apiCall = useCallback(
+    (payload: CredentialType): Promise<AxiosResponse<CredentialType>> =>
+      axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE}`, payload),
+    []
+  );
+
+  const callbackSuccess = useCallback(
+    (response: AxiosResponse<CredentialType>) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'add-credential',
+          name: response?.data?.name
+        }),
+        variant: 'success'
+      });
+      return;
+    },
+    [onAddAlert, t]
+  );
+
+  const callbackError = useCallback(
+    (error: AxiosError<ApiCredentialErrorType>, name: string) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'add-credential_error',
+          name: name,
+          message: apiHelpers.extractErrorMessage(error?.response?.data)
+        }),
+        variant: 'danger'
+      });
+      return;
+    },
+    [onAddAlert, t]
+  );
+
+  const addCredentials = useCallback(
+    async (payload: CredentialType) => {
+      let response;
+      try {
+        response = await apiCall(payload);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          return callbackError(error, payload.name);
+        }
+        if (!helpers.TEST_MODE) {
+          console.error(error);
+        }
+      }
+      return callbackSuccess(response);
+    },
+    [apiCall, callbackSuccess, callbackError]
+  );
+
+  return {
+    apiCall,
+    callbackError,
+    callbackSuccess,
+    addCredentials
+  };
+};
+
+const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
+  const { t } = useTranslation();
+
+  const apiCall = useCallback(
+    (payload: CredentialType): Promise<AxiosResponse<CredentialType>> =>
+      axios.put(`${process.env.REACT_APP_CREDENTIALS_SERVICE}${payload.id}/`, payload),
+    []
+  );
+
+  const callbackSuccess = useCallback(
+    (response: AxiosResponse<CredentialType>) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'credential_edit',
+          name: response?.data?.name
+        }),
+        variant: 'success'
+      });
+      return;
+    },
+    [onAddAlert, t]
+  );
+
+  const callbackError = useCallback(
+    (error: AxiosError<ApiCredentialErrorType>, name: string) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'credential_edit_error',
+          name: name,
+          message: apiHelpers.extractErrorMessage(error?.response?.data)
+        }),
+        variant: 'danger'
+      });
+      return;
+    },
+    [onAddAlert, t]
+  );
+
+  const editCredentials = useCallback(
+    async (payload: CredentialType) => {
+      let response;
+      try {
+        response = await apiCall(payload);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          return callbackError(error, payload.name);
+        }
+        if (!helpers.TEST_MODE) {
+          console.error(error);
+        }
+      }
+      return callbackSuccess(response);
+    },
+    [apiCall, callbackSuccess, callbackError]
+  );
+
+  return {
+    apiCall,
+    callbackError,
+    callbackSuccess,
+    editCredentials
+  };
+};
+
+export { useDeleteCredentialApi, useAddCredentialApi, useEditCredentialApi };

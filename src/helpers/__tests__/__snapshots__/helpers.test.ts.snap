@@ -4,7 +4,7 @@ exports[`getAuthType should return a credential type: credentialTypes 1`] = `
 [
   "Username and Password",
   "Token",
-  "SSH Key file",
+  "SSH Key",
 ]
 `;
 

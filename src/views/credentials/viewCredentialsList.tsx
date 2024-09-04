@@ -44,9 +44,10 @@ import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import { useDeleteCredentialApi } from '../../hooks/useCredentialApi';
+import { useAddCredentialApi, useDeleteCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type CredentialType, type SourceType } from '../../types/types';
+import { AddCredentialModal } from './addCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {
@@ -57,6 +58,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
   const { addAlert, alerts, removeAlert } = useAlerts();
   const { deleteCredentials } = useDeleteCredentialApi(addAlert);
+  const { addCredentials } = useAddCredentialApi(addAlert);
   const { queryClient } = useQueryClientConfig();
 
   /**
@@ -291,40 +293,33 @@ const CredentialsListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
-      {!!addCredentialModal && (
-        <Modal
-          variant={ModalVariant.small}
-          title="Add"
-          isOpen={!!addCredentialModal}
-          onClose={() => setAddCredentialModal(undefined)}
-          actions={[
-            <Button key="cancel" variant="secondary" onClick={() => setAddCredentialModal(undefined)}>
-              Close
-            </Button>
-          ]}
-        >
-          Placeholder - add {addCredentialModal}
-        </Modal>
-      )}
-      {!!sourcesSelected.length && (
-        <Modal
-          variant={ModalVariant.small}
-          title={t('form-dialog.label', { context: 'sources' })}
-          isOpen={!!sourcesSelected}
-          onClose={() => setSourcesSelected([])}
-          actions={[
-            <Button key="cancel" variant="secondary" onClick={() => setSourcesSelected([])}>
-              Close
-            </Button>
-          ]}
-        >
-          <List isPlain isBordered>
-            {sourcesSelected.map(c => (
-              <ListItem key={c.name}>{c.name}</ListItem>
-            ))}
-          </List>
-        </Modal>
-      )}
+      <Modal
+        variant={ModalVariant.small}
+        title={t('form-dialog.label', { context: 'sources' })}
+        isOpen={sourcesSelected.length > 0}
+        onClose={() => setSourcesSelected([])}
+        actions={[
+          <Button
+            key="confirm"
+            variant="danger"
+            onClick={() => {
+              setSourcesSelected([]);
+            }}
+          >
+            {t('table.label', { context: 'close' })}
+          </Button>,
+          <Button key="cancel" variant="link" onClick={() => setSourcesSelected([])}>
+            {t('form-dialog.label', { context: 'cancel' })}
+          </Button>
+        ]}
+      >
+        <List isPlain isBordered>
+          {sourcesSelected.map(c => (
+            <ListItem key={c.name}>{c.name}</ListItem>
+          ))}
+        </List>
+        {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+      </Modal>
       <Modal
         variant={ModalVariant.small}
         title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
@@ -355,6 +350,17 @@ const CredentialsListView: React.FunctionComponent = () => {
           name: pendingDeleteCredential?.name
         })}
       </Modal>
+      <AddCredentialModal
+        isOpen={addCredentialModal !== undefined}
+        credentialType={addCredentialModal}
+        onClose={() => setAddCredentialModal(undefined)}
+        onSubmit={(payload: CredentialType) =>
+          addCredentials(payload).finally(() => {
+            queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+            setAddCredentialModal(undefined);
+          })
+        }
+      />
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
           <Alert

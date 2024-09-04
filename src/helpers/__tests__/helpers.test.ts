@@ -41,7 +41,7 @@ describe('getAuthType', () => {
       cred_type: 'mockCredType',
       username: undefined,
       password: undefined,
-      ssh_keyfile: undefined,
+      ssh_key: undefined,
       auth_token: undefined,
       ssh_passphrase: undefined,
       become_method: undefined,
@@ -55,7 +55,7 @@ describe('getAuthType', () => {
     expect([
       generateAuthType({ username: 'testUser', password: 'testPassword' }),
       generateAuthType({ auth_token: 'mockToken' }),
-      generateAuthType({ ssh_keyfile: 'mockSSH' })
+      generateAuthType({ ssh_key: 'mockSSH' })
     ]).toMatchSnapshot('credentialTypes');
   });
 
