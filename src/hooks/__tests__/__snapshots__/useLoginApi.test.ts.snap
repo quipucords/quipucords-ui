@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useGetSetAuthApi should attempt a call to get a token: getToken 1`] = `
+[
+  [
+    "user",
+  ],
+]
+`;
+
+exports[`useGetSetAuthApi should process an interceptor error: interceptorError 1`] = `undefined`;
+
+exports[`useGetSetAuthApi should process an interceptor success: interceptorSuccess 1`] = `
+{
+  "headers": {
+    "Authorization": "Token Dolor sit",
+  },
+  "url": "//mock-url",
+}
+`;
+
+exports[`useGetSetAuthApi should process an interceptor success: interceptorSuccess, token service 1`] = `
+{
+  "headers": {
+    "Authorization": "",
+  },
+  "url": "/api/v1/token/",
+}
+`;
+
+exports[`useLoginApi should attempt an api call to login: apiCall 1`] = `
+[
+  [
+    "/api/v1/token/",
+    {
+      "password": "123456",
+      "username": "lorem",
+    },
+  ],
+]
+`;
+
+exports[`useLoginApi should handle errors while attempting to login a user: login, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useLoginApi should handle success while attempting to login a user: login, success 1`] = `undefined`;
+
+exports[`useLoginApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useLoginApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    "user",
+    "RG9sb3Igc2l0",
+    {
+      "expires": 0.5,
+    },
+  ],
+]
+`;
+
+exports[`useLogoutApi should attempt an api call to logout: apiCall 1`] = `
+[
+  [
+    "/api/v1/users/logout/",
+  ],
+]
+`;
+
+exports[`useLogoutApi should handle errors while attempting to logout a user: logout, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useLogoutApi should handle success while attempting to logout a user: logout, success 1`] = `undefined`;
+
+exports[`useLogoutApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useLogoutApi should process an API success response: callbackSuccess 1`] = `
+[
+  [
+    "user",
+  ],
+]
+`;
+
+exports[`useUserApi should attempt an api call to get a user: apiCall 1`] = `
+[
+  [
+    "/api/v1/users/current/",
+  ],
+]
+`;
+
+exports[`useUserApi should handle errors while attempting to get a user: getUser, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useUserApi should handle success while attempting to get a user: getUser, success 1`] = `undefined`;
+
+exports[`useUserApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useUserApi should process an API success response: callbackSuccess 1`] = `"Lorem ipsum"`;

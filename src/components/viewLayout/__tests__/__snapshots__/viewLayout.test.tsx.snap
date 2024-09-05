@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewLayout should render a basic component: basic 1`] = `
+<Page
+  defaultManagedSidebarIsOpen={true}
+  getBreakpoint={[Function]}
+  getVerticalBreakpoint={[Function]}
+  header={
+    <Masthead>
+      <MastheadToggle>
+        <Button
+          aria-label="Global navigation"
+          onClick={[Function]}
+          variant="plain"
+        >
+          <BarsIcon />
+        </Button>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand>
+          <Brand
+            alt="Quipucords Logo"
+            heights={
+              {
+                "default": "36px",
+              }
+            }
+            src="title.svg"
+          />
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <AppToolbar />
+      </MastheadContent>
+    </Masthead>
+  }
+  isBreadcrumbWidthLimited={false}
+  isManagedSidebar={false}
+  isNotificationDrawerExpanded={false}
+  mainComponent="main"
+  mainContainerId="primary-app-container"
+  mainTabIndex={-1}
+  onNotificationDrawerExpand={[Function]}
+  sidebar={
+    <PageSidebar
+      theme="dark"
+    >
+      <PageSidebarBody>
+        <Nav
+          id="nav-primary-simple"
+          onSelect={[Function]}
+          onToggle={[Function]}
+          ouiaSafe={true}
+          theme="dark"
+        >
+          <NavList
+            ariaLeftScroll="Scroll left"
+            ariaRightScroll="Scroll right"
+            backScrollAriaLabel="Scroll back"
+            forwardScrollAriaLabel="Scroll forward"
+            id="nav-list-simple"
+          >
+            <NavItem
+              id="Credentials-0"
+              isActive={false}
+            >
+              <NavLink
+                to="/credentials"
+              >
+                Credentials
+              </NavLink>
+            </NavItem>
+            <NavItem
+              id="Sources-1"
+              isActive={false}
+            >
+              <NavLink
+                to="/sources"
+              >
+                Sources
+              </NavLink>
+            </NavItem>
+            <NavItem
+              id="Scans-2"
+              isActive={false}
+            >
+              <NavLink
+                to="/scans"
+              >
+                Scans
+              </NavLink>
+            </NavItem>
+          </NavList>
+        </Nav>
+      </PageSidebarBody>
+    </PageSidebar>
+  }
+  skipToContent={
+    <SkipToContent
+      href="#primary-app-container"
+      onClick={[Function]}
+    >
+      Skip to Content
+    </SkipToContent>
+  }
+>
+  Lorem ipsum
+</Page>
+`;

@@ -5,8 +5,7 @@
  *
  * @module appToolbar
  */
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import {
   Dropdown,
   DropdownItem,
@@ -20,18 +19,30 @@ import {
   ToolbarItem
 } from '@patternfly/react-core';
 import { EllipsisVIcon, MoonIcon, QuestionCircleIcon, SunIcon } from '@patternfly/react-icons';
-import axios from 'axios';
-import { useUsername } from '../sessionContext/sessionProvider';
+import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import './viewLayoutToolbar.css';
 
-const AppToolbar: React.FunctionComponent = () => {
-  const [helpOpen, setHelpOpen] = React.useState<boolean>(false);
-  const [userDropdownOpen, setUserDropdownOpen] = React.useState<boolean>(false);
-  const [kebabDropdownOpen, setKebabDropdownOpen] = React.useState<boolean>(false);
-  const [isDarkTheme, setIsDarkTheme] = React.useState(
+interface AppToolbarProps {
+  useLogout?: typeof useLogoutApi;
+  useUser?: typeof useUserApi;
+}
+
+const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUser = useUserApi }) => {
+  const { logout: onLogout } = useLogout();
+  const { getUser } = useUser();
+  const [userName, setUserName] = useState<string>();
+  const [helpOpen, setHelpOpen] = useState<boolean>(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
+  const [kebabDropdownOpen, setKebabDropdownOpen] = useState<boolean>(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
+
+  useEffect(() => {
+    getUser().then(username => setUserName(username));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const applyTheme = isDark => {
     const htmlElement = document.getElementsByTagName('html')[0];
@@ -45,28 +56,12 @@ const AppToolbar: React.FunctionComponent = () => {
   };
   applyTheme(isDarkTheme);
 
-  const userName = useUsername();
-  const nav = useNavigate();
-
   const onAbout = () => {};
-
-  const onLogout = () => {
-    axios
-      .put(`${process.env.REACT_APP_USER_SERVICE_LOGOUT}`)
-      .catch(err => {
-        console.error('Failed to logout', err);
-      })
-      .finally(() => {
-        localStorage.removeItem('authToken');
-        nav('/login');
-      });
-  };
 
   const onHelpSelect = (
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
     value: string | number | undefined
   ) => {
-    // eslint-disable-next-line no-console
     console.log('selected', value);
     setHelpOpen(false);
   };
@@ -75,7 +70,6 @@ const AppToolbar: React.FunctionComponent = () => {
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
     value: string | number | undefined
   ) => {
-    // eslint-disable-next-line no-console
     console.log('selected', value);
     setUserDropdownOpen(false);
   };
@@ -201,4 +195,4 @@ const AppToolbar: React.FunctionComponent = () => {
   );
 };
 
-export default AppToolbar;
+export { AppToolbar as default, AppToolbar, type AppToolbarProps };
