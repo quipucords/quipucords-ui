@@ -41,6 +41,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
 
   useEffect(() => {
     getUser().then(username => setUserName(username));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const applyTheme = isDark => {

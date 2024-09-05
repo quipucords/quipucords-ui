@@ -2,8 +2,8 @@
 
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
-  "components/viewLayout/viewLayoutToolbar.tsx:64:    console.log('selected', value);",
-  "components/viewLayout/viewLayoutToolbar.tsx:72:    console.log('selected', value);",
+  "components/viewLayout/viewLayoutToolbar.tsx:65:    console.log('selected', value);",
+  "components/viewLayout/viewLayoutToolbar.tsx:73:    console.log('selected', value);",
   "helpers/queryHelpers.ts:70:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:75:        console.error(error);",
   "hooks/useCredentialApi.ts:73:          console.log(missingCredsMsg);",

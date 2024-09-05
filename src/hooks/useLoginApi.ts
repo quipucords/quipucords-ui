@@ -204,6 +204,7 @@ const useGetSetAuthApi = () => {
   useEffect(() => {
     setInterceptors();
     getToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

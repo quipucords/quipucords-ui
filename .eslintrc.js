@@ -23,6 +23,12 @@ module.exports = {
       rules: {
         'max-len': 0
       }
+    },
+    {
+      files: ['*.test.ts*'],
+      rules: {
+        'prefer-promise-reject-errors': 0
+      }
     }
   ],
   parser: '@typescript-eslint/parser',
