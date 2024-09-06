@@ -301,9 +301,12 @@
   "view": {
     "empty-state_label_credentials": "Add Credential",
     "empty-state_label_sources": "Add Source",
+    "empty-state_title_not-found": "404 Page not found",
+    "empty-state_description_not-found": "Page not found",
     "label_credentials": "Credentials",
     "label_scans-names": "Scans: {{name}}",
-    "label_sources": "Sources"
+    "label_sources": "Sources",
+    "label_not-found_home": "Take me home"
   },
   "dataSource": {
     "rhacs": "RHACS",
