@@ -1,6 +1,7 @@
 import React, { act } from 'react';
 import { render, renderHook } from '@testing-library/react';
 import { dotenv } from 'weldable';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Set dotenv params.
@@ -42,7 +43,8 @@ jest.mock('react-router-dom', () => ({
     const MockNavLink = (...props) => <a {...props} />;
     return <MockNavLink {...args} />;
   },
-  useLocation: () => ({ pathname: '/' })
+  useLocation: () => ({ pathname: '/' }),
+  useNavigate: () => jest.fn()
 }));
 
 /**

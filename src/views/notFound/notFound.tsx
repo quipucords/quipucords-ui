@@ -5,7 +5,8 @@
  *
  * @module notFound
  */
-import * as React from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
   Button,
@@ -18,30 +19,25 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 
-const NotFound: React.FunctionComponent = () => {
-  const GoHomeBtn = () => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-      navigate('/');
-    };
-    return <Button onClick={handleClick}>Take me home</Button>;
-  };
+const NotFound: React.FC = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <PageSection>
       <EmptyState variant="full">
         <EmptyStateHeader
-          titleText="404 Page not found"
+          titleText={t('view.empty-state_title_not-found')}
           icon={<EmptyStateIcon icon={ExclamationTriangleIcon} />}
           headingLevel="h1"
         />
-        <EmptyStateBody>Page not found</EmptyStateBody>
+        <EmptyStateBody>{t('view.empty-state_description_not-found')}</EmptyStateBody>
         <EmptyStateFooter>
-          <GoHomeBtn />
+          <Button onClick={() => navigate('/')}>{t('view.label_not-found_home')}</Button>
         </EmptyStateFooter>
       </EmptyState>
     </PageSection>
   );
 };
 
-export default NotFound;
+export { NotFound as default, NotFound };
