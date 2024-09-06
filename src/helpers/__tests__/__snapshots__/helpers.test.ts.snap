@@ -8,7 +8,7 @@ exports[`getAuthType should return a credential type: credentialTypes 1`] = `
 ]
 `;
 
-exports[`should return a timestamp estimate: timestamps 1`] = `
+exports[`getTimeDisplayHowLongAgo should return a timestamp estimate: timestamps 1`] = `
 [
   "a few seconds ago",
   "a month ago",
