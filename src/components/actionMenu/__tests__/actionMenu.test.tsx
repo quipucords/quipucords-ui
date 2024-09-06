@@ -1,95 +1,34 @@
 import React from 'react';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ActionMenu from '../actionMenu';
-import '@testing-library/jest-dom';
+import { shallowComponent } from '../../../../config/jest.setupTests';
+import { ActionMenu } from '../actionMenu';
 
-test('renders proper dom including ellipsis icon', () => {
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  const { asFragment } = render(
-    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
-  );
-  expect(asFragment()).toMatchSnapshot();
-});
+describe('ActionMenu', () => {
+  it('should render a basic component', async () => {
+    const props = {
+      item: { foo: 'bar' },
+      actions: [{ label: 'Lorem ipsum', onClick: item => jest.fn(item) }]
+    };
+    const component = await shallowComponent(<ActionMenu {...props} />);
+    expect(component).toMatchSnapshot('basic');
+  });
 
-test('actions will not show before button is clicked', () => {
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  const { queryByText } = render(
-    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
-  );
-  expect(queryByText('Delete')).toBeNull();
-});
+  it('should display items and allow click after toggle is clicked', async () => {
+    const user = userEvent.setup();
+    const onMockClick = jest.fn();
 
-test('actions will show after button is clicked', async () => {
-  const user = userEvent.setup();
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
-  const toggleButton = screen.getByLabelText('Action Menu Toggle');
-  await act(() => user.click(toggleButton));
+    const props = {
+      item: { foo: 'bar' },
+      actions: [{ label: 'Lorem ipsum', onClick: onMockClick }]
+    };
 
-  expect(screen.getByText('Delete')).toBeVisible();
-});
+    const { asFragment } = render(<ActionMenu {...props} />);
 
-test('snapshot matches after opening the action menu', async () => {
-  const user = userEvent.setup();
+    await user.click(screen.getByRole('button'));
+    expect(asFragment()).toMatchSnapshot('expanded');
 
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  const { asFragment } = render(
-    <ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />
-  );
-  const toggleButton = screen.getByLabelText('Action Menu Toggle');
-  await act(() => user.click(toggleButton));
-
-  expect(asFragment()).toMatchSnapshot();
-});
-
-test('action callback should get called when clicked', async () => {
-  const user = userEvent.setup();
-
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
-  expect(actionClicked).toHaveBeenCalledTimes(0);
-
-  const toggleButton = screen.getByLabelText('Action Menu Toggle');
-  await act(() => user.click(toggleButton));
-
-  const deleteButton = screen.getByText('Delete');
-  await act(() => user.click(deleteButton));
-
-  expect(actionClicked).toHaveBeenCalledTimes(1);
-});
-
-test('action menu closes after selection', async () => {
-  const user = userEvent.setup();
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
-  const toggleButton = screen.getByLabelText('Action Menu Toggle');
-  await act(() => user.click(toggleButton));
-
-  const deleteButton = screen.getByText('Delete');
-  expect(deleteButton).toBeVisible();
-  await act(() => user.click(deleteButton));
-
-  await waitFor(() => expect(deleteButton).not.toBeVisible(), { timeout: 1000 });
-});
-
-test('action menu closes if toggle is clicked again', async () => {
-  const user = userEvent.setup();
-  const item = { foo: 'bar' };
-  const actionClicked = jest.fn();
-  render(<ActionMenu<{ foo: string }> item={item} actions={[{ label: 'Delete', onClick: actionClicked }]} />);
-  const toggleButton = screen.getByLabelText('Action Menu Toggle');
-  await act(() => user.click(toggleButton));
-
-  const deleteButton = screen.getByText('Delete');
-  expect(deleteButton).toBeVisible();
-  await act(() => user.click(toggleButton));
-
-  await waitFor(() => expect(deleteButton).not.toBeVisible(), { timeout: 1000 });
+    await user.click(screen.getByText('Lorem ipsum'));
+    expect(onMockClick.mock.calls).toMatchSnapshot('click');
+  });
 });

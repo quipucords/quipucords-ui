@@ -5,17 +5,17 @@
  *
  * @module actionMenu
  */
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Dropdown, DropdownItem, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
 
-interface ActionMenuProps<T> {
+interface ActionMenuProps<T = unknown> {
   item: T;
   actions: { label: string; onClick: (item: T) => void }[];
 }
 
 const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Dropdown
@@ -52,4 +52,4 @@ const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
   );
 };
 
-export default ActionMenu;
+export { ActionMenu as default, ActionMenu, type ActionMenuProps };
