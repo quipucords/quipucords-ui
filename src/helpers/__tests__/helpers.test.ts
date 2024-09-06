@@ -8,23 +8,27 @@ import React from 'react';
 import moment from 'moment';
 import { helpers } from '../helpers';
 
-it(`should return a timestamp estimate`, () => {
-  expect([
-    helpers.getTimeDisplayHowLongAgo(moment().subtract(30, 'seconds')),
-    helpers.getTimeDisplayHowLongAgo(moment().subtract(1, 'month')),
-    helpers.getTimeDisplayHowLongAgo(moment().subtract(25, 'hours'))
-  ]).toMatchSnapshot('timestamps');
+describe('getTimeDisplayHowLongAgo', () => {
+  it(`should return a timestamp estimate`, () => {
+    expect([
+      helpers.getTimeDisplayHowLongAgo(moment().subtract(30, 'seconds')),
+      helpers.getTimeDisplayHowLongAgo(moment().subtract(1, 'month')),
+      helpers.getTimeDisplayHowLongAgo(moment().subtract(25, 'hours'))
+    ]).toMatchSnapshot('timestamps');
+  });
+
+  it(`should throw an error if the timestamp is not valid`, () => {
+    expect(() => helpers.getTimeDisplayHowLongAgo(null)).toThrow(`Invalid timestamp: null`);
+    expect(() => helpers.getTimeDisplayHowLongAgo(undefined)).toThrow(`Invalid timestamp: undefined`);
+    expect(() => helpers.getTimeDisplayHowLongAgo('')).toThrow(`Invalid timestamp: `);
+  });
 });
 
-it(`should throw an error if the timestamp is not valid`, () => {
-  expect(() => helpers.getTimeDisplayHowLongAgo(null)).toThrow(`Invalid timestamp: null`);
-  expect(() => helpers.getTimeDisplayHowLongAgo(undefined)).toThrow(`Invalid timestamp: undefined`);
-  expect(() => helpers.getTimeDisplayHowLongAgo('')).toThrow(`Invalid timestamp: `);
-});
-
-it('should support generated strings and flags', () => {
-  expect(helpers.generateId()).toBe('generatedid-');
-  expect(helpers.generateId('lorem')).toBe('lorem-');
+describe('generateId', () => {
+  it('should support generated strings and flags', () => {
+    expect(helpers.generateId()).toBe('generatedid-');
+    expect(helpers.generateId('lorem')).toBe('lorem-');
+  });
 });
 
 describe('getAuthType', () => {
@@ -104,11 +108,13 @@ describe('formatDate', () => {
   });
 });
 
-it('should normalize total values', () => {
-  expect(helpers.normalizeTotal({ count: 142 }, true, undefined)).toBe(42);
-  expect(helpers.normalizeTotal({}, true, undefined)).toBe(0);
-  expect(helpers.normalizeTotal({ count: 142 }, false, undefined)).toBe(142);
-  expect(helpers.normalizeTotal({ count: 142 }, true, 50)).toBe(42);
+describe('normalizeTotal', () => {
+  it('should normalize total values', () => {
+    expect(helpers.normalizeTotal({ count: 142 }, true, undefined)).toBe(42);
+    expect(helpers.normalizeTotal({}, true, undefined)).toBe(0);
+    expect(helpers.normalizeTotal({ count: 142 }, false, undefined)).toBe(142);
+    expect(helpers.normalizeTotal({ count: 142 }, true, 50)).toBe(42);
+  });
 });
 
 describe('downloadData', () => {
@@ -124,6 +130,12 @@ describe('downloadData', () => {
 
     // test the "not navigator" check
     (navigator as Navigator).msSaveBlob = undefined;
+
+    const mockElementClick = jest.fn();
+    const mockCreateElement = document.createElement('a');
+    mockCreateElement.click = mockElementClick;
+    jest.spyOn(document, 'createElement').mockImplementation(() => mockCreateElement);
+
     const appendChild = jest.spyOn(document.body, 'appendChild');
     const removeChild = jest.spyOn(document.body, 'removeChild');
     const createObjectURLMock = jest.fn();
@@ -135,6 +147,7 @@ describe('downloadData', () => {
     expect(createObjectURLMock).toHaveBeenCalledWith(expect.any(Blob));
     expect(appendChild).toHaveBeenCalledTimes(1);
     expect(removeChild).toHaveBeenCalledTimes(1);
+    expect(mockElementClick).toHaveBeenCalledTimes(1);
     expect(revokeObjectURLMock).toHaveBeenCalledWith(expect.any(String));
   });
 });
