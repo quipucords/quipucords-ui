@@ -7,10 +7,9 @@
  */
 import React, { useState, useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
-import { use as i18nextUse, changeLanguage } from 'i18next';
+import i18next from 'i18next';
 import XHR from 'i18next-http-backend';
 import { helpers } from '../../helpers';
-import { EMPTY_CONTEXT, translate } from './i18nHelpers';
 
 interface I18nProps {
   children: React.ReactNode;
@@ -19,17 +18,21 @@ interface I18nProps {
   locale?: string | null;
 }
 
-const I18n: React.FunctionComponent<I18nProps> = ({
+// ToDo: Prop locale should be replaced by a hook that attempts to use native browser locale instead
+const I18n: React.FC<I18nProps> = ({
   fallbackLng = process.env.REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG,
   loadPath = process.env.REACT_APP_CONFIG_SERVICE_LOCALES_PATH,
   locale = null,
   children
 }) => {
-  const [initialized, setInitialized] = useState(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    let canceled = false;
-    i18nextUse(XHR)
+  /**
+   * Initialize i18next
+   */
+  useEffect(() => {
+    i18next
+      .use(XHR)
       .use(initReactI18next)
       .init({
         backend: {
@@ -44,16 +47,16 @@ const I18n: React.FunctionComponent<I18nProps> = ({
           useSuspense: false
         }
       })
-      .then(() => {
-        if (!canceled) {
-          setInitialized(true);
-        }
-      })
-      .catch(() => {});
+      .then(
+        () => setInitialized(true),
+        () => setInitialized(false)
+      );
+
     return () => {
-      canceled = false;
+      setInitialized(false);
     };
-  }, [fallbackLng, loadPath]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * Update locale.
@@ -61,17 +64,14 @@ const I18n: React.FunctionComponent<I18nProps> = ({
   useEffect(() => {
     if (initialized && locale) {
       try {
-        changeLanguage(locale);
+        i18next.changeLanguage(locale);
       } catch (e) {
         //
       }
     }
   }, [initialized, locale]);
 
-  if (!initialized) {
-    return null;
-  }
-  return children;
+  return (initialized && children) || null;
 };
 
-export { I18n as default, EMPTY_CONTEXT, translate };
+export { I18n as default, I18n, I18nProps };
