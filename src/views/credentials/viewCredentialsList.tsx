@@ -21,7 +21,6 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  DropdownItem,
   EmptyState,
   EmptyStateActions,
   EmptyStateBody,
@@ -185,6 +184,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     <SimpleDropdown
       label={t('view.empty-state_label_credentials')}
       variant="primary"
+      onSelect={item => setAddCredentialModal(item)}
       dropdownItems={[
         t('dataSource.network'),
         t('dataSource.openshift'),
@@ -192,11 +192,7 @@ const CredentialsListView: React.FunctionComponent = () => {
         t('dataSource.satellite'),
         t('dataSource.vcenter'),
         t('dataSource.ansible')
-      ].map(type => (
-        <DropdownItem key={type} onClick={() => setAddCredentialModal(type)}>
-          {type}
-        </DropdownItem>
-      ))}
+      ]}
     />
   );
 

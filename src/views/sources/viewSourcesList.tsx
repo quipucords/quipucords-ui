@@ -21,7 +21,6 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  DropdownItem,
   EmptyState,
   EmptyStateActions,
   EmptyStateBody,
@@ -243,6 +242,7 @@ const SourcesListView: React.FunctionComponent = () => {
     <SimpleDropdown
       label={t('view.empty-state_label_sources')}
       variant="primary"
+      onSelect={item => setAddSourceModal(item)}
       dropdownItems={[
         t('dataSource.network'),
         t('dataSource.openshift'),
@@ -250,11 +250,7 @@ const SourcesListView: React.FunctionComponent = () => {
         t('dataSource.satellite'),
         t('dataSource.vcenter'),
         t('dataSource.ansible')
-      ].map(type => (
-        <DropdownItem key={type} onClick={() => setAddSourceModal(type)}>
-          {type}
-        </DropdownItem>
-      ))}
+      ]}
     />
   );
 

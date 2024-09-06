@@ -6,22 +6,29 @@
  * @module simpleDropdown
  */
 import React, { useState } from 'react';
-import { Dropdown, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownList,
+  MenuToggle,
+  type MenuToggleElement,
+  type MenuToggleProps
+} from '@patternfly/react-core';
 
-export interface ISimpleDropdownProps {
+interface SimpleDropdownProps {
   label: string;
-  dropdownItems?: React.ReactNode[];
+  dropdownItems?: string[];
   ariaLabel?: string;
-  onSelect?: () => void;
-  variant: 'default' | 'plain' | 'primary' | 'secondary';
+  onSelect?: (item: string) => void;
+  variant?: MenuToggleProps['variant'];
   isFullWidth?: boolean;
 }
 
-export const SimpleDropdown: React.FC<ISimpleDropdownProps> = ({
+const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   label,
   dropdownItems,
-  ariaLabel,
-  onSelect,
+  ariaLabel = 'Dropdown menu',
+  onSelect = Function.prototype,
   variant,
   isFullWidth
 }) => {
@@ -33,7 +40,6 @@ export const SimpleDropdown: React.FC<ISimpleDropdownProps> = ({
       onOpenChange={isOpen => setIsOpen(isOpen)}
       onSelect={() => {
         setIsOpen(false);
-        onSelect && onSelect();
       }}
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
         <MenuToggle
@@ -42,14 +48,23 @@ export const SimpleDropdown: React.FC<ISimpleDropdownProps> = ({
           isExpanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
           variant={variant}
-          aria-label={ariaLabel || 'Dropdown menu'}
+          aria-label={ariaLabel}
           isDisabled={!dropdownItems || dropdownItems.length === 0}
         >
           {label}
         </MenuToggle>
       )}
     >
-      <DropdownList>{dropdownItems}</DropdownList>
+      <DropdownList>
+        {Array.isArray(dropdownItems) &&
+          dropdownItems.map(item => (
+            <DropdownItem key={item} onClick={() => onSelect(item)}>
+              {item}
+            </DropdownItem>
+          ))}
+      </DropdownList>
     </Dropdown>
   );
 };
+
+export { SimpleDropdown as default, SimpleDropdown, type SimpleDropdownProps };

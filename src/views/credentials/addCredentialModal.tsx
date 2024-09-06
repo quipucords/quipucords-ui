@@ -4,17 +4,7 @@
  * @module AddCredentialModal
  */
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  ActionGroup,
-  Button,
-  DropdownItem,
-  Form,
-  FormGroup,
-  Modal,
-  ModalVariant,
-  TextArea,
-  TextInput
-} from '@patternfly/react-core';
+import { ActionGroup, Button, Form, FormGroup, Modal, ModalVariant, TextArea, TextInput } from '@patternfly/react-core';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { type CredentialType } from '../../types/types';
 
@@ -122,18 +112,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
           label={authType}
           variant="default"
           isFullWidth
+          onSelect={item => setAuthType(item)}
           dropdownItems={
-            typeValue === 'network'
-              ? ['Username and Password', 'SSH Key'].map(s => (
-                  <DropdownItem key={s} component="button" onClick={() => setAuthType(s)}>
-                    {s}
-                  </DropdownItem>
-                ))
-              : ['Token', 'Username and Password'].map(s => (
-                  <DropdownItem key={s} component="button" onClick={() => setAuthType(s)}>
-                    {s}
-                  </DropdownItem>
-                ))
+            (typeValue === 'network' && ['Username and Password', 'SSH Key']) || ['Token', 'Username and Password']
           }
         />
       </FormGroup>
@@ -216,20 +197,8 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             label={formData?.become_method || 'Select option'}
             variant="default"
             isFullWidth
-            dropdownItems={[
-              <DropdownItem key="none" component="button" onClick={() => handleInputChange('become_method', '')}>
-                Select option
-              </DropdownItem>,
-              ...['sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas'].map(method => (
-                <DropdownItem
-                  key={method}
-                  component="button"
-                  onClick={() => handleInputChange('become_method', method)}
-                >
-                  {method}
-                </DropdownItem>
-              ))
-            ]}
+            onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
+            dropdownItems={['Select option', 'sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas']}
           />
         </FormGroup>
         <FormGroup label="Become User" fieldId="become_user">
