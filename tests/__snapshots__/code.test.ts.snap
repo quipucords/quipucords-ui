@@ -27,7 +27,7 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "hooks/useSourceApi.ts:127:          console.error(error);",
   "hooks/useSourceApi.ts:191:          console.error(error);",
   "hooks/useSourceApi.ts:255:          console.error(error);",
-  "views/scans/showScansModal.tsx:70:      console.log({ aValue, bValue });",
+  "views/scans/showScansModal.tsx:77:      console.log({ aValue, bValue });",
   "views/sources/addSourceModal.tsx:54:      .catch(err => console.error(err));",
 ]
 `;

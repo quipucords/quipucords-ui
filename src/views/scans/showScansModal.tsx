@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Bullseye,
@@ -15,18 +15,25 @@ import { Table, Thead, Tr, Th, Tbody, Td, type ThProps } from '@patternfly/react
 import { helpers } from '../../helpers';
 import { type Scan, type ScanJobType } from '../../types/types';
 
-export interface ScansModalProps {
-  scan: Scan;
-  scanJobs?: ScanJobType[];
-  onDownload: (number) => void;
-  onClose: () => void;
+interface ShowScansModalProps {
+  isOpen: boolean;
+  scan?: Pick<Scan, 'name'>;
+  scanJobs?: Pick<ScanJobType, 'id' | 'end_time' | 'report_id' | 'status'>[];
+  onDownload?: (number) => void;
+  onClose?: () => void;
 }
 
-export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownload, onClose }) => {
+const ShowScansModal: React.FC<ShowScansModalProps> = ({
+  isOpen,
+  scan,
+  scanJobs,
+  onDownload = Function.prototype,
+  onClose = Function.prototype
+}) => {
   const { t } = useTranslation();
-  const [activeSortIndex, setActiveSortIndex] = React.useState<number | undefined>();
-  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | undefined>();
-  // const [selectedJobs, setSelectedJobs] = React.useState<number[]>([]);
+  const [activeSortIndex, setActiveSortIndex] = useState<number | undefined>();
+  const [activeSortDirection, setActiveSortDirection] = useState<'asc' | 'desc' | undefined>();
+  // const [selectedJobs, setSelectedJobs] = useState<number[]>([]);
 
   const getSortParams = (columnIndex: number): ThProps['sort'] => ({
     sortBy: {
@@ -78,11 +85,11 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
   return (
     <Modal
       variant={ModalVariant.medium}
-      title={t('view.label', { context: 'scans-names', name: scan.name })}
-      isOpen
-      onClose={onClose}
+      title={t('view.label', { context: 'scans-names', name: scan?.name })}
+      isOpen={isOpen}
+      onClose={() => onClose()}
     >
-      {scanJobs && (
+      {(scanJobs && (
         <React.Fragment>
           <div>
             {scanJobs?.length} scan{scanJobs?.length === 1 ? ' has' : 's have'} run
@@ -97,9 +104,13 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
                                         isSelected: areAllJobsSelected
                                     }}
                                 /> */}
-                <Th sort={getSortParams(0)}>Scan Time</Th>
-                <Th sort={getSortParams(1)}>Scan Result</Th>
-                <Th></Th>
+                <Th aria-labelledby="Sort by column" sort={getSortParams(0)}>
+                  Scan Time
+                </Th>
+                <Th aria-labelledby="Sort by column" sort={getSortParams(1)}>
+                  Scan Result
+                </Th>
+                <Th screenReaderText="Download column"></Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -127,8 +138,7 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
             </Tbody>
           </Table>
         </React.Fragment>
-      )}
-      {!scanJobs && (
+      )) || (
         <Bullseye>
           <EmptyState>
             <EmptyStateHeader titleText="Loading scans" headingLevel="h2" icon={<EmptyStateIcon icon={Spinner} />} />
@@ -138,3 +148,5 @@ export const ScansModal: React.FC<ScansModalProps> = ({ scan, scanJobs, onDownlo
     </Modal>
   );
 };
+
+export { ShowScansModal as default, ShowScansModal, type ShowScansModalProps };

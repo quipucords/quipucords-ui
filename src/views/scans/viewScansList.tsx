@@ -47,7 +47,7 @@ import { useAlerts } from '../../hooks/useAlerts';
 import { useDeleteScanApi, useDownloadReportApi, useGetScanJobsApi, useRunScanApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type Scan, type ScanJobType } from '../../types/types';
-import { ScansModal } from './showScansModal';
+import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
 
 const ScansListView: React.FunctionComponent = () => {
@@ -275,17 +275,16 @@ const ScansListView: React.FunctionComponent = () => {
           {scanSelectedForSources?.sources.map(s => <ListItem key={s.id}>{s.name}</ListItem>)}
         </List>
       </Modal>
-      {scanSelected && (
-        <ScansModal
-          scan={scanSelected}
-          scanJobs={scanJobs}
-          onDownload={downloadReport}
-          onClose={() => {
-            setScanSelected(undefined);
-            setScanJobs(undefined);
-          }}
-        />
-      )}
+      <ShowScansModal
+        scan={scanSelected}
+        scanJobs={scanJobs}
+        isOpen={scanSelected !== undefined}
+        onDownload={downloadReport}
+        onClose={() => {
+          setScanSelected(undefined);
+          setScanJobs(undefined);
+        }}
+      />
       <Modal
         variant={ModalVariant.small}
         title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
