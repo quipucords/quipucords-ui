@@ -50,7 +50,7 @@ import useQueryClientConfig from '../../queryClientConfig';
 import { type Connections, type CredentialType, type Scan, type SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
 import SourcesScanModal from './addSourcesScanModal';
-import { ConnectionsModal } from './showSourceConnectionsModal';
+import { ShowConnectionsModal } from './showSourceConnectionsModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
 const SourcesListView: React.FunctionComponent = () => {
@@ -417,7 +417,7 @@ const SourcesListView: React.FunctionComponent = () => {
         </List>
         {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
       </Modal>
-      <ConnectionsModal
+      <ShowConnectionsModal
         isOpen={connectionsSelected !== undefined}
         source={connectionsSelected}
         connections={connectionsData}

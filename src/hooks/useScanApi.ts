@@ -4,7 +4,7 @@ import { type AlertProps } from '@patternfly/react-core';
 import axios, { AxiosError, type AxiosResponse, isAxiosError, type AxiosRequestConfig } from 'axios';
 import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
-import { type Scan, type ScanJobType, type ScanJobsResponse, type SourceType } from '../types/types';
+import { type Scan, type ScanJobType, type ScanJobsResponse, type SourceType, type Connections } from '../types/types';
 
 type ApiDeleteScanSuccessType = {
   message: string;
@@ -378,7 +378,7 @@ const useShowConnectionsApi = () => {
   }, []);
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse) => ({
+    (response: AxiosResponse): Connections => ({
       successful: response?.data?.results?.filter((c: { status: string }) => c.status === 'success') || [],
       failed: response?.data?.results?.filter((c: { status: string }) => c.status === 'failed') || [],
       unreachable:
