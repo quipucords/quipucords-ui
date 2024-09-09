@@ -11,7 +11,6 @@ import {
   ActionGroup,
   Button,
   Checkbox,
-  DropdownItem,
   Form,
   FormContextProvider,
   FormGroup,
@@ -190,11 +189,8 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceT
                     isFullWidth
                     label={sslProtocol}
                     variant={'default'}
-                    dropdownItems={['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL'].map(s => (
-                      <DropdownItem key={s} onClick={() => setSslProtocol(s)}>
-                        {s}
-                      </DropdownItem>
-                    ))}
+                    onSelect={item => setSslProtocol(item)}
+                    dropdownItems={['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL']}
                   />
                 </FormGroup>
                 <FormGroup label="" fieldId="ssl_verify">
