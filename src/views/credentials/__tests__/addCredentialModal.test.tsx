@@ -97,8 +97,13 @@ describe('CredentialFormFields', () => {
   });
 
   it('should render specific to authType for type openshift', async () => {
-    const openshiftSshKey = await shallowComponent(<CredentialFormFields typeValue="openshift" authType="SSH Key" />);
-    expect(openshiftSshKey).toMatchSnapshot('openshift, SSH Key');
+    const openshiftUsernamePassword = await shallowComponent(
+      <CredentialFormFields typeValue="openshift" authType="Username and Password" />
+    );
+    expect(openshiftUsernamePassword).toMatchSnapshot('openshift, "Username and Password"');
+
+    const openshiftToken = await shallowComponent(<CredentialFormFields typeValue="openshift" authType="Token" />);
+    expect(openshiftToken).toMatchSnapshot('openshift, "Token"');
   });
 
   it('should call handlers for setAuthType and handleInputChange', async () => {
