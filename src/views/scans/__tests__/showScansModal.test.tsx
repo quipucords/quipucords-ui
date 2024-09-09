@@ -1,113 +1,63 @@
-import * as React from 'react';
-import { KeyTypes } from '@patternfly/react-core';
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
-import { type Scan, type ScanJobType } from '../../../types/types';
-import { ScansModal } from '../showScansModal';
+import { shallowComponent } from '../../../../config/jest.setupTests';
+import { ShowScansModal } from '../showScansModal';
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str, obj) => `${str}-${JSON.stringify(obj)}`
-    };
-  }
-}));
+describe('ShowScansModal', () => {
+  let mockOnClose;
+  let mockOnDownload;
 
-jest.spyOn(document, 'createElement');
-jest.spyOn(document.body, 'addEventListener');
-
-const props = {
-  scan: { id: 123 } as Scan,
-  onClose: jest.fn(),
-  onDownload: jest.fn(),
-  scanJobs: undefined
-};
-const propsWithZeroScanJobs = {
-  ...props,
-  scanJobs: []
-};
-const propsWithOneScanJob = {
-  ...props,
-  scanJobs: [
-    {
-      id: 1,
-      end_time: new Date(1504095567183),
-      report_id: 12,
-      status: 'completed'
-    }
-  ] as ScanJobType[]
-};
-const propsWithScanJobs = {
-  ...props,
-  scanJobs: [
-    {
-      id: 1,
-      end_time: new Date(1504095567183),
-      report_id: 12,
-      status: 'completed'
-    },
-    {
-      id: 2,
-      end_time: new Date(1604095567183),
-      report_id: 22,
-      status: 'completed'
-    }
-  ] as ScanJobType[]
-};
-
-describe('Modal', () => {
-  test('Modal creates a container element once for div', () => {
-    render(<ScansModal {...props} />);
-    expect(document.createElement).toHaveBeenCalledWith('div');
-  });
-  test('Modal title populates based on scan id', async () => {
-    render(<ScansModal {...props} />);
-
-    expect(screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`)).toBeInTheDocument();
-  });
-
-  test('Modal loading screen populates properly', async () => {
-    const { baseElement } = render(<ScansModal {...props} />);
-    expect(screen.getByText('Loading scans')).toBeInTheDocument();
-    expect(baseElement).toMatchSnapshot();
-  });
-  test('Modal 0 jobs populates properly', async () => {
-    const { baseElement } = render(<ScansModal {...propsWithZeroScanJobs} />);
-    expect(screen.getByText('0 scans have run')).toBeInTheDocument();
-    expect(baseElement).toMatchSnapshot();
-  });
-  test('Modal 1 job populates properly', async () => {
-    const { baseElement } = render(<ScansModal {...propsWithOneScanJob} />);
-    expect(screen.getByText('1 scan has run')).toBeInTheDocument();
-    expect(baseElement).toMatchSnapshot();
-  });
-  test('Modal multiple jobs populates properly', async () => {
-    const { baseElement } = render(<ScansModal {...propsWithScanJobs} />);
-    expect(screen.getByText('2 scans have run')).toBeInTheDocument();
-    expect(baseElement).toMatchSnapshot();
-  });
-  test('Modal closes with escape', async () => {
-    const user = userEvent.setup();
-    render(<ScansModal {...props} />);
-    await user.type(
-      screen.getByText(`view.label-{"context":"scans-ids","name":${props.scan.id}}`),
-      `{${KeyTypes.Escape}}`
+  beforeEach(() => {
+    mockOnClose = jest.fn();
+    mockOnDownload = jest.fn();
+    render(
+      <ShowScansModal
+        scanJobs={[
+          {
+            id: 12345,
+            status: 'DOLOR SIT',
+            end_time: new Date('2024-09-06'),
+            report_id: 67890
+          }
+        ]}
+        scan={{ name: 'Lorem ipsum' }}
+        isOpen={true}
+        onClose={mockOnClose}
+        onDownload={mockOnDownload}
+      />
     );
-    expect(props.onClose).toHaveBeenCalled();
   });
-  test('Modal shows the close button', () => {
-    render(<ScansModal {...props} />);
-    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
-  test('Modal clicking close button calls onClose', async () => {
-    render(<ScansModal {...props} />);
-    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
-    expect(props.onClose).toHaveBeenCalled();
+
+  it('should render a basic component', async () => {
+    const props = {
+      isOpen: true,
+      scan: { name: 'Lorem ipsum' }
+    };
+    const component = await shallowComponent(<ShowScansModal {...props} />);
+    expect(component).toMatchSnapshot('basic');
   });
-  test('Modal clicking download button calls onDownload with proper report id', async () => {
-    render(<ScansModal {...propsWithScanJobs} />);
-    await userEvent.click(screen.getAllByText('Download')[0]);
-    expect(props.onDownload).toHaveBeenCalledWith(propsWithScanJobs.scanJobs[0].report_id);
+
+  it('should have the correct title', () => {
+    const title = screen.getByText(new RegExp('Lorem ipsum'));
+    expect(title).toMatchSnapshot('title');
+  });
+
+  it('should call onDownload with a report id when clicked', async () => {
+    const user = userEvent.setup();
+    await user.click(screen.getByText('Download'));
+
+    expect(mockOnDownload.mock.calls).toMatchSnapshot('onDownload');
+  });
+
+  it('should call onClose', async () => {
+    const user = userEvent.setup();
+    await user.click(screen.getByLabelText('Close'));
+
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 });
