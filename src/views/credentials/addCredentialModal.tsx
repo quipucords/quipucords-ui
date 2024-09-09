@@ -34,6 +34,7 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     become_user: '',
     name: '',
     ssh_key: '',
+    ssh_passphrase: '',
     become_password: '',
     authenticationType: '',
     auth_token: '',
@@ -159,39 +160,6 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             onChange={event => handleInputChange('password', (event.target as HTMLInputElement).value)}
           />
         </FormGroup>
-      </React.Fragment>
-    )}
-
-    {/* SSH Key input */}
-    {authType === 'SSH Key' && (
-      <React.Fragment>
-        <FormGroup label="Username" isRequired fieldId="username">
-          <TextInput
-            value={formData?.username}
-            isRequired
-            placeholder="Enter username"
-            id="credential-username"
-            name="username"
-            onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
-          />
-        </FormGroup>
-        <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
-          <TextArea
-            value={formData?.ssh_key}
-            placeholder="Enter SSH Key"
-            isRequired
-            id="credential-ssh-key"
-            name="ssh_key"
-            onChange={event => handleInputChange('ssh_key', event.target.value)}
-            rows={10}
-          />
-        </FormGroup>
-      </React.Fragment>
-    )}
-
-    {/* Network specific fields */}
-    {typeValue === 'network' && (
-      <React.Fragment>
         <FormGroup label="Become Method" fieldId="become_method">
           <SimpleDropdown
             label={formData?.become_method || 'Select option'}
@@ -219,6 +187,43 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="become_password"
             name="become_password"
             onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
+          />
+        </FormGroup>
+      </React.Fragment>
+    )}
+
+    {/* SSH Key input */}
+    {authType === 'SSH Key' && (
+      <React.Fragment>
+        <FormGroup label="Username" isRequired fieldId="username">
+          <TextInput
+            value={formData?.username}
+            isRequired
+            placeholder="Enter username"
+            id="credential-username"
+            name="username"
+            onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
+          />
+        </FormGroup>
+        <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
+          <TextArea
+            value={formData?.ssh_key}
+            placeholder="Enter SSH Key"
+            isRequired
+            id="credential-ssh-key"
+            name="ssh_key"
+            onChange={event => handleInputChange('ssh_key', event.target.value)}
+            rows={10}
+          />
+        </FormGroup>
+        <FormGroup label="SSH passphrase" fieldId="ssh_passphrase">
+          <TextInput
+            value={formData?.ssh_passphrase}
+            placeholder="Enter SSH passphrase (optional)"
+            type="password"
+            id="ssh_passphrase"
+            name="ssh_passphrase"
+            onChange={event => handleInputChange('ssh_passphrase', (event.target as HTMLInputElement).value)}
           />
         </FormGroup>
       </React.Fragment>
