@@ -39,7 +39,6 @@ import {
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
-import { i18nHelpers } from '../../components/i18n/i18nHelpers';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
@@ -297,9 +296,7 @@ const SourcesListView: React.FunctionComponent = () => {
       source.connection.status === 'running';
     const scanTime = (isPending && source.connection.start_time) || source.connection.end_time;
 
-    const statusString = i18nHelpers.translate(t, 'table.label', {
-      context: ['status', source.connection.status, 'sources']
-    });
+    const statusString = t(`table.label_status_${source.connection.status}`, { context: 'sources' });
     return (
       <Button
         variant={ButtonVariant.link}
