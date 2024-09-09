@@ -4,38 +4,47 @@
  *
  * @module connectionsModal
  */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Modal, ModalVariant, Button, Icon, List, ListItem } from '@patternfly/react-core';
 import { ExclamationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
 import { type SourceType, type Connections } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
-export interface ConnectionsModalProps {
+interface ShowConnectionsModalProps {
   isOpen: boolean;
-  source: SourceType | undefined;
-  onClose: () => void;
+  source?: Pick<SourceType, 'name'>;
+  onClose?: () => void;
   connections: Connections;
 }
 
-export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ isOpen, source, onClose, connections }) => {
-  const [expanded, setExpanded] = React.useState<string[]>([]);
-  const toggle = section => {
-    const index = expanded.indexOf(section);
-    const newExpanded =
-      index >= 0
-        ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)]
-        : [...expanded, section];
-    setExpanded(newExpanded);
-  };
+const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
+  isOpen,
+  source,
+  onClose = Function.prototype,
+  connections
+}) => {
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const onToggle = useCallback(
+    section => {
+      const index = expanded.indexOf(section);
+      const newExpanded =
+        index >= 0
+          ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)]
+          : [...expanded, section];
+      setExpanded(newExpanded);
+    },
+    [expanded]
+  );
+
   return (
     <Modal
       variant={ModalVariant.small}
       title={source?.name}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={() => onClose()}
       actions={[
-        <Button key="cancel" variant="secondary" onClick={onClose}>
+        <Button key="cancel" variant="secondary" onClick={() => onClose()}>
           Close
         </Button>
       ]}
@@ -78,7 +87,7 @@ export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ isOpen, sour
                   expand={{
                     rowIndex,
                     isExpanded: expanded.includes(obj.category),
-                    onToggle: () => toggle(obj.category),
+                    onToggle: () => onToggle(obj.category),
                     expandId: `${obj.category}-expandable`
                   }}
                 />
@@ -91,11 +100,10 @@ export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ isOpen, sour
                 <Td>
                   <ExpandableRowContent>
                     <List isPlain>
-                      {connections[obj.category]?.length ? (
-                        connections[obj.category].map(con => <ListItem key={con.name}>{con.name}</ListItem>)
-                      ) : (
-                        <ListItem>N/A</ListItem>
-                      )}
+                      {(connections[obj.category]?.length &&
+                        connections[obj.category].map(connection => (
+                          <ListItem key={connection.name}>{connection.name}</ListItem>
+                        ))) || <ListItem>N/A</ListItem>}
                     </List>
                   </ExpandableRowContent>
                 </Td>
@@ -107,3 +115,5 @@ export const ConnectionsModal: React.FC<ConnectionsModalProps> = ({ isOpen, sour
     </Modal>
   );
 };
+
+export { ShowConnectionsModal as default, ShowConnectionsModal, type ShowConnectionsModalProps };

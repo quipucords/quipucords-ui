@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShowConnectionsModal should have the correct title: title 1`] = `
+<span
+  class="pf-v5-c-modal-box__title-text"
+>
+  Lorem ipsum
+</span>
+`;
+
+exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
+<Modal
+  actions={
+    [
+      <Button
+        onClick={[Function]}
+        variant="secondary"
+      >
+        Close
+      </Button>,
+    ]
+  }
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="Lorem ipsum"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="small"
+>
+  <Table
+    aria-label="Connections lists"
+  >
+    <Tbody
+      isExpanded={false}
+    >
+      <Tr>
+        <Td
+          expand={
+            {
+              "expandId": "failed-expandable",
+              "isExpanded": false,
+              "onToggle": [Function],
+              "rowIndex": 0,
+            }
+          }
+          width={10}
+        />
+        <Td
+          width={10}
+        >
+          <Icon
+            status="danger"
+          >
+            <ExclamationCircleIcon />
+          </Icon>
+        </Td>
+        <Td
+          width={80}
+        >
+          Failed connections
+        </Td>
+      </Tr>
+      <Tr
+        isExpanded={false}
+      >
+        <Td />
+        <Td />
+        <Td>
+          <ExpandableRowContent>
+            <List
+              isPlain={true}
+            >
+              <ListItem>
+                Amet
+              </ListItem>
+            </List>
+          </ExpandableRowContent>
+        </Td>
+      </Tr>
+    </Tbody>
+    <Tbody
+      isExpanded={false}
+    >
+      <Tr>
+        <Td
+          expand={
+            {
+              "expandId": "unreachable-expandable",
+              "isExpanded": false,
+              "onToggle": [Function],
+              "rowIndex": 1,
+            }
+          }
+          width={10}
+        />
+        <Td
+          width={10}
+        >
+          <Icon
+            status="warning"
+          >
+            <ExclamationTriangleIcon />
+          </Icon>
+        </Td>
+        <Td
+          width={80}
+        >
+          Unreachable systems
+        </Td>
+      </Tr>
+      <Tr
+        isExpanded={false}
+      >
+        <Td />
+        <Td />
+        <Td>
+          <ExpandableRowContent>
+            <List
+              isPlain={true}
+            >
+              <ListItem>
+                Ipsum
+              </ListItem>
+            </List>
+          </ExpandableRowContent>
+        </Td>
+      </Tr>
+    </Tbody>
+    <Tbody
+      isExpanded={false}
+    >
+      <Tr>
+        <Td
+          expand={
+            {
+              "expandId": "successful-expandable",
+              "isExpanded": false,
+              "onToggle": [Function],
+              "rowIndex": 2,
+            }
+          }
+          width={10}
+        />
+        <Td
+          width={10}
+        >
+          <Icon
+            status="success"
+          >
+            <CheckCircleIcon />
+          </Icon>
+        </Td>
+        <Td
+          width={80}
+        >
+          Successful connections
+        </Td>
+      </Tr>
+      <Tr
+        isExpanded={false}
+      >
+        <Td />
+        <Td />
+        <Td>
+          <ExpandableRowContent>
+            <List
+              isPlain={true}
+            >
+              <ListItem>
+                Dolor sit
+              </ListItem>
+            </List>
+          </ExpandableRowContent>
+        </Td>
+      </Tr>
+    </Tbody>
+  </Table>
+</Modal>
+`;

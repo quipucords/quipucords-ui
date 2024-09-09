@@ -221,7 +221,7 @@ export type Task = {
 };
 
 export type Connections = {
-  successful: ConnectionType[];
-  failed: ConnectionType[];
-  unreachable: ConnectionType[];
+  successful: Pick<ConnectionType, 'name'>[];
+  failed: Pick<ConnectionType, 'name'>[];
+  unreachable: Pick<ConnectionType, 'name'>[];
 };
