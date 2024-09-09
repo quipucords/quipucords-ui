@@ -4,7 +4,7 @@
  *
  * @module typeaheadCheckboxes
  */
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Select,
   SelectOption,
@@ -19,33 +19,33 @@ import {
 } from '@patternfly/react-core';
 import { TimesIcon } from '@patternfly/react-icons/';
 
-export interface ITypeaheadCheckboxesProps {
-  onChange: (selections: string[]) => void;
+interface TypeaheadCheckboxesProps {
+  onChange?: (selections: string[]) => void;
   options: { value: string; label: string }[];
   selectedOptions?: string[];
   placeholder?: string;
 }
 
-export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
-  onChange,
+const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
+  onChange = Function.prototype,
   options,
   selectedOptions = [],
   placeholder = '0 items selected'
 }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState<string>('');
-  const [selected, setSelected] = React.useState<string[]>(selectedOptions || []);
-  const [selectOptions, setSelectOptions] = React.useState<SelectOptionProps[]>(options);
-  const [focusedItemIndex, setFocusedItemIndex] = React.useState<number | null>(null);
-  const [activeItem, setActiveItem] = React.useState<string | null>(null);
-  const [activePlaceholder, setActivePlaceholder] = React.useState(placeholder);
-  const textInputRef = React.useRef<HTMLInputElement>();
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [selected, setSelected] = useState<string[]>(selectedOptions || []);
+  const [selectOptions, setSelectOptions] = useState<SelectOptionProps[]>(options);
+  const [focusedItemIndex, setFocusedItemIndex] = useState<number | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activePlaceholder, setActivePlaceholder] = useState(placeholder);
+  const textInputRef = useRef<HTMLInputElement>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectOptions(options);
   }, [options]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let newSelectOptions: SelectOptionProps[] = options;
 
     // Filter menu items based on the text input value when one exists
@@ -151,7 +151,7 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
     textInputRef.current?.focus();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setActivePlaceholder(selected.length ? `${selected.length} items selected` : placeholder);
   }, [selected, placeholder]);
 
@@ -221,3 +221,5 @@ export const TypeaheadCheckboxes: React.FC<ITypeaheadCheckboxesProps> = ({
     </Select>
   );
 };
+
+export { TypeaheadCheckboxes as default, TypeaheadCheckboxes, type TypeaheadCheckboxesProps };

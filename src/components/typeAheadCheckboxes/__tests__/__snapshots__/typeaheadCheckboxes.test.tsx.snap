@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TypeaheadCheckboxes should render a basic component: basic 1`] = `
+<Select
+  id="multi-typeahead-checkbox-select"
+  isOpen={false}
+  onOpenChange={[Function]}
+  onSelect={[Function]}
+  role="menu"
+  selected={[]}
+  toggle={[Function]}
+>
+  <SelectList
+    id="select-multi-typeahead-checkbox-listbox"
+  >
+    <SelectOption
+      hasCheckbox={true}
+      id="select-multi-typeahead-ipsum"
+      isFocused={false}
+      isSelected={false}
+      label="Lorem"
+      value="ipsum"
+    >
+      Lorem
+    </SelectOption>
+  </SelectList>
+</Select>
+`;
