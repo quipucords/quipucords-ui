@@ -6,7 +6,7 @@
  *
  * @module addSourceModal
  */
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActionGroup,
   Button,
@@ -20,39 +20,57 @@ import {
   TextArea,
   TextInput
 } from '@patternfly/react-core';
-import axios from 'axios';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
+import { helpers } from '../../helpers';
+import { useGetCredentialsApi } from '../../hooks/useCredentialApi';
 import { type SourceType } from '../../types/types';
 
-export interface AddSourceModalProps {
+interface AddSourceModalProps {
   isOpen: boolean;
   source?: SourceType;
   sourceType?: string;
-  onClose: () => void;
-  onSubmit: (payload) => void;
+  onClose?: () => void;
+  onSubmit?: (payload) => void;
+  useGetCredentials?: typeof useGetCredentialsApi;
 }
 
-const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceType, onClose, onSubmit }) => {
-  const [credOptions, setCredOptions] = React.useState<{ value: string; label: string }[]>([]);
-  const [credentials, setCredentials] = React.useState<number[]>(source?.credentials?.map(c => c.id) || []);
-  const [useParamiko, setUseParamiko] = React.useState<boolean>(source?.options?.use_paramiko ?? false);
-  const [sslVerify, setSslVerify] = React.useState<boolean>(source?.options?.ssl_cert_verify ?? true);
-  const [sslProtocol, setSslProtocol] = React.useState<string>(
+const AddSourceModal: React.FC<AddSourceModalProps> = ({
+  isOpen,
+  source,
+  sourceType,
+  onClose = Function.prototype,
+  onSubmit = Function.prototype,
+  useGetCredentials = useGetCredentialsApi
+}) => {
+  const { getCredentials } = useGetCredentials();
+  const [credOptions, setCredOptions] = useState<{ value: string; label: string }[] | []>([]);
+  const [credentials, setCredentials] = useState<number[]>(source?.credentials?.map(c => c.id) || []);
+  const [useParamiko, setUseParamiko] = useState<boolean>(source?.options?.use_paramiko ?? false);
+  const [sslVerify, setSslVerify] = useState<boolean>(source?.options?.ssl_cert_verify ?? true);
+  const [sslProtocol, setSslProtocol] = useState<string>(
     source?.options?.disable_ssl ? 'Disable SSL' : source?.options?.ssl_protocol || 'SSLv23'
   );
 
   const sourceTypeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
   const isNetwork = sourceTypeValue === 'network';
 
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_CREDENTIALS_SERVICE}?cred_type=${sourceTypeValue}`)
-      .then(res => {
-        setCredOptions(res.data.results.map(o => ({ label: o.name, value: '' + o.id })));
+  useEffect(() => {
+    getCredentials({
+      params: {
+        cred_type: sourceTypeValue
+      }
+    })
+      .then(response => {
+        const updatedOptions = response?.data?.results?.map(({ name, id }) => ({ label: name, value: `${id}` }));
+        setCredOptions(updatedOptions || []);
       })
-      .catch(err => console.error(err));
-  }, [sourceTypeValue]);
+      .catch(err => {
+        if (!helpers.TEST_MODE) {
+          console.error(err);
+        }
+      });
+  }, [getCredentials, sourceTypeValue]);
 
   const onAdd = values => {
     const payload = {
@@ -80,7 +98,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceT
       variant={ModalVariant.small}
       title={`${source ? 'Edit' : 'Add'} source: ${sourceType}`}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={() => onClose()}
     >
       <FormContextProvider
         initialValues={{
@@ -210,7 +228,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceT
               <Button variant="primary" onClick={() => onAdd({ ...values })}>
                 Save
               </Button>
-              <Button variant="link" onClick={onClose}>
+              <Button variant="link" onClick={() => onClose()}>
                 Cancel
               </Button>
             </ActionGroup>
@@ -221,4 +239,4 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({ isOpen, source, sourceT
   );
 };
 
-export default AddSourceModal;
+export { AddSourceModal as default, AddSourceModal, type AddSourceModalProps };
