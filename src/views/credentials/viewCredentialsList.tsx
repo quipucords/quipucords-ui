@@ -43,7 +43,7 @@ import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import { useAddCredentialApi, useDeleteCredentialApi } from '../../hooks/useCredentialApi';
+import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type CredentialType, type SourceType } from '../../types/types';
 import { AddCredentialModal } from './addCredentialModal';
@@ -55,9 +55,11 @@ const CredentialsListView: React.FunctionComponent = () => {
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
+  const [credentialBeingEdited, setCredentialBeingEdited] = React.useState<CredentialType>();
   const { addAlert, alerts, removeAlert } = useAlerts();
   const { deleteCredentials } = useDeleteCredentialApi(addAlert);
   const { addCredentials } = useAddCredentialApi(addAlert);
+  const { editCredentials } = useEditCredentialApi(addAlert);
   const { queryClient } = useQueryClientConfig();
 
   /**
@@ -76,6 +78,15 @@ const CredentialsListView: React.FunctionComponent = () => {
    */
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+  };
+
+  /**
+   * Sets the credential that is being currently edited.
+   *
+   * @param {CredentialType} credential - The credential to be set as the one being edited.
+   */
+  const onEditCredential = (credential: CredentialType) => {
+    setCredentialBeingEdited(credential);
   };
 
   /**
@@ -280,7 +291,10 @@ const CredentialsListView: React.FunctionComponent = () => {
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
                     item={credential}
-                    actions={[{ label: 'Delete', onClick: setPendingDeleteCredential }]}
+                    actions={[
+                      { label: t('table.label', { context: 'edit' }), onClick: onEditCredential },
+                      { label: t('table.label', { context: 'delete' }), onClick: setPendingDeleteCredential }
+                    ]}
                   />
                 </Td>
               </Tr>
@@ -346,6 +360,17 @@ const CredentialsListView: React.FunctionComponent = () => {
           name: pendingDeleteCredential?.name
         })}
       </Modal>
+      <AddCredentialModal
+        isOpen={credentialBeingEdited !== undefined}
+        credential={credentialBeingEdited}
+        onClose={() => setCredentialBeingEdited(undefined)}
+        onSubmit={(payload: CredentialType) =>
+          editCredentials(payload).finally(() => {
+            queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+            setCredentialBeingEdited(undefined);
+          })
+        }
+      />
       <AddCredentialModal
         isOpen={addCredentialModal !== undefined}
         credentialType={addCredentialModal}
