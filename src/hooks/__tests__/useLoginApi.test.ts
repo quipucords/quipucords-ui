@@ -179,10 +179,17 @@ describe('useUserApi', () => {
 });
 
 describe('useGetSetAuthApi', () => {
+  const mockLogoutCallback = jest.fn();
   let hookResult;
 
   beforeEach(() => {
-    const hook = renderHook(() => useGetSetAuthApi());
+    const mockLogoutApi = () => ({
+      callbackSuccess: mockLogoutCallback,
+      callbackError: jest.fn(),
+      apiCall: jest.fn(),
+      logout: jest.fn()
+    });
+    const hook = renderHook(() => useGetSetAuthApi({ useLogout: mockLogoutApi }));
     hookResult = hook?.result?.current;
   });
 
@@ -198,24 +205,39 @@ describe('useGetSetAuthApi', () => {
     expect(spyCookie.mock.calls).toMatchSnapshot('getToken');
   });
 
-  it('should process an interceptor success', () => {
-    const { interceptorSuccess } = hookResult;
+  it('should process an interceptor request success', async () => {
+    const { interceptorRequestSuccess } = hookResult;
 
     jest.spyOn(cookies, 'get').mockReturnValueOnce('RG9sb3Igc2l0');
     const mockConfig = { headers: {}, url: '//mock-url' };
-    act(() => interceptorSuccess(mockConfig));
-    expect(mockConfig).toMatchSnapshot('interceptorSuccess');
+    act(() => interceptorRequestSuccess(mockConfig));
+    expect(mockConfig).toMatchSnapshot('interceptorRequestSuccess');
 
     jest.spyOn(cookies, 'get').mockReturnValueOnce('');
     const mockConfigTokenService = { headers: {}, url: `${process.env.REACT_APP_USER_SERVICE_AUTH_TOKEN}` };
-    act(() => interceptorSuccess(mockConfigTokenService));
-    expect(mockConfigTokenService).toMatchSnapshot('interceptorSuccess, token service');
+    act(() => interceptorRequestSuccess(mockConfigTokenService));
+    expect(mockConfigTokenService).toMatchSnapshot('interceptorRequestSuccess, token service');
   });
 
-  it('should process an interceptor error', async () => {
-    const { interceptorError } = hookResult;
+  it('should process an interceptor response success', async () => {
+    const { interceptorResponseSuccess } = hookResult;
 
-    await expect(interceptorError()).rejects.toMatchSnapshot('interceptorError');
+    await expect(interceptorResponseSuccess()).toMatchSnapshot('interceptorResponseSuccess');
+  });
+
+  it('should process interceptor request errors', async () => {
+    const { interceptorRequestError } = hookResult;
+
+    await expect(interceptorRequestError()).rejects.toMatchSnapshot('interceptorRequestError');
+  });
+
+  it('should process interceptor response errors', async () => {
+    const { interceptorResponseError } = hookResult;
+
+    await expect(interceptorResponseError()).rejects.toMatchSnapshot('interceptorResponseError');
+
+    await interceptorResponseError({ response: { status: 401 } });
+    expect(mockLogoutCallback).toHaveBeenCalledTimes(1);
   });
 
   it('should return an authorization value on mount', async () => {

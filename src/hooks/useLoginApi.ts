@@ -151,7 +151,8 @@ const useUserApi = () => {
 /**
  * Get initial token. Apply and set token for all Axios request interceptors, global authorization
  */
-const useGetSetAuthApi = () => {
+const useGetSetAuthApi = ({ useLogout = useLogoutApi }: { useLogout?: typeof useLogoutApi } = {}) => {
+  const { callbackSuccess: revokeToken } = useLogout();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
   const getToken = useCallback(() => {
@@ -176,7 +177,7 @@ const useGetSetAuthApi = () => {
     return parsedToken;
   }, []);
 
-  const interceptorSuccess = useCallback(
+  const interceptorRequestSuccess = useCallback(
     config => {
       const headerToken = getToken();
 
@@ -194,12 +195,26 @@ const useGetSetAuthApi = () => {
     [getToken]
   );
 
-  const interceptorError = useCallback(error => Promise.reject(error), []);
+  const interceptorRequestError = useCallback(error => Promise.reject(error), []);
 
-  const setInterceptors = useCallback(
-    () => axios.interceptors.request.use(interceptorSuccess, interceptorError),
-    [interceptorError, interceptorSuccess]
+  const interceptorResponseSuccess = useCallback(config => config, []);
+
+  const interceptorResponseError = useCallback(
+    error => {
+      if (error?.response?.status === 401) {
+        setIsAuthorized(false);
+        return revokeToken();
+      }
+
+      return Promise.reject(error);
+    },
+    [revokeToken]
   );
+
+  const setInterceptors = useCallback(() => {
+    axios.interceptors.request.use(interceptorRequestSuccess, interceptorRequestError);
+    axios.interceptors.response.use(interceptorResponseSuccess, interceptorResponseError);
+  }, [interceptorResponseError, interceptorResponseSuccess, interceptorRequestError, interceptorRequestSuccess]);
 
   useEffect(() => {
     setInterceptors();
@@ -210,8 +225,10 @@ const useGetSetAuthApi = () => {
   return {
     getToken,
     isAuthorized,
-    interceptorError,
-    interceptorSuccess,
+    interceptorResponseError,
+    interceptorResponseSuccess,
+    interceptorRequestError,
+    interceptorRequestSuccess,
     setInterceptors
   };
 };
