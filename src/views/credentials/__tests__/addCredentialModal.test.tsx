@@ -106,6 +106,21 @@ describe('CredentialFormFields', () => {
     expect(openshiftToken).toMatchSnapshot('openshift, "Token"');
   });
 
+  it('should render vcenter form appropriately', async () => {
+    const vcenter = await shallowComponent(<CredentialFormFields typeValue="vcenter" />);
+    expect(vcenter).toMatchSnapshot('vcenter, "Username and Password"');
+  });
+
+  it('should render satellite form appropriately', async () => {
+    const satellite = await shallowComponent(<CredentialFormFields typeValue="satellite" />);
+    expect(satellite).toMatchSnapshot('satellite, "Username and Password"');
+  });
+
+  it('should render ansible form appropriately', async () => {
+    const ansible = await shallowComponent(<CredentialFormFields typeValue="ansible" />);
+    expect(ansible).toMatchSnapshot('ansible, "Username and Password"');
+  });
+
   it('should call handlers for setAuthType and handleInputChange', async () => {
     const mockHandleInputChange = jest.fn();
     const mockSetAuthType = jest.fn();

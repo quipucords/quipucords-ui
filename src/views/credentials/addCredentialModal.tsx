@@ -170,35 +170,6 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             onChange={event => handleInputChange('password', (event.target as HTMLInputElement).value)}
           />
         </FormGroup>
-        <FormGroup label="Become Method" fieldId="become_method">
-          <SimpleDropdown
-            label={formData?.become_method || 'Select option'}
-            variant="default"
-            isFullWidth
-            onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
-            dropdownItems={['Select option', 'sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas']}
-          />
-        </FormGroup>
-        <FormGroup label="Become User" fieldId="become_user">
-          <TextInput
-            value={formData?.become_user}
-            placeholder="Enter become user (optional)"
-            type="text"
-            id="become_user"
-            name="become_user"
-            onChange={event => handleInputChange('become_user', (event.target as HTMLInputElement).value)}
-          />
-        </FormGroup>
-        <FormGroup label="Become Password" fieldId="become_password">
-          <TextInput
-            value={formData?.become_password}
-            placeholder="Enter become password (optional)"
-            type="password"
-            id="become_password"
-            name="become_password"
-            onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
-          />
-        </FormGroup>
       </React.Fragment>
     )}
 
@@ -241,9 +212,43 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
         </FormGroup>
       </React.Fragment>
     )}
+
+    {/* Render "Become" fields only if network is selected and authType is Username/Password or SSH Key */}
+    {typeValue === 'network' && (
+      <React.Fragment>
+        <FormGroup label="Become Method" fieldId="become_method">
+          <SimpleDropdown
+            label={formData?.become_method || 'Select option'}
+            variant="default"
+            isFullWidth
+            onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
+            dropdownItems={['Select option', 'sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas']}
+          />
+        </FormGroup>
+        <FormGroup label="Become User" fieldId="become_user">
+          <TextInput
+            value={formData?.become_user}
+            placeholder="Enter become user (optional)"
+            type="text"
+            id="become_user"
+            name="become_user"
+            onChange={event => handleInputChange('become_user', (event.target as HTMLInputElement).value)}
+          />
+        </FormGroup>
+        <FormGroup label="Become Password" fieldId="become_password">
+          <TextInput
+            value={formData?.become_password}
+            placeholder="Enter become password (optional)"
+            type="password"
+            id="become_password"
+            name="become_password"
+            onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
+          />
+        </FormGroup>
+      </React.Fragment>
+    )}
   </React.Fragment>
 );
-
 const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   isOpen,
   credential,
