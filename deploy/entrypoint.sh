@@ -5,6 +5,7 @@ set -e
 # on podman, host.containers.internal resolves to the host. this is equivalent to
 # host.docker.internal for docker.
 export QUIPUCORDS_SERVER_URL="${QUIPUCORDS_SERVER_URL:-http://host.containers.internal:8000}"
+export QUIPUCORDS_APP_PORT="${QUIPUCORDS_APP_PORT:-9443}"
 CERTS_PATH="/opt/app-root/certs"
 
 # verify if user provided certificates exist or create a self signed certificate.
