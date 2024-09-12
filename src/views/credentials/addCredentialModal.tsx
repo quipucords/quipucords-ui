@@ -4,7 +4,17 @@
  * @module AddCredentialModal
  */
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActionGroup, Button, Form, FormGroup, Modal, ModalVariant, TextArea, TextInput } from '@patternfly/react-core';
+import {
+  ActionGroup,
+  Button,
+  Form,
+  FormGroup,
+  FormHelperText,
+  Modal,
+  ModalVariant,
+  TextArea,
+  TextInput
+} from '@patternfly/react-core';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { type CredentialType } from '../../types/types';
 
@@ -208,13 +218,16 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
         <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
           <TextArea
             value={formData?.ssh_key}
-            placeholder="Enter SSH Key"
+            placeholder="Enter private SSH Key"
             isRequired
             id="credential-ssh-key"
             name="ssh_key"
             onChange={event => handleInputChange('ssh_key', event.target.value)}
             rows={10}
           />
+          <FormHelperText>
+            Please paste your private SSH key here. This key will be used to authenticate your access to the system.
+          </FormHelperText>
         </FormGroup>
         <FormGroup label="SSH passphrase" fieldId="ssh_passphrase">
           <TextInput
