@@ -332,13 +332,10 @@ const SourcesListView: React.FunctionComponent = () => {
             <EmptyState>
               <EmptyStateHeader
                 headingLevel="h4"
-                titleText="No sources available"
+                titleText={t('view.empty-state', { context: 'sources_title' })}
                 icon={<EmptyStateIcon icon={PlusCircleIcon} />}
               />
-              <EmptyStateBody>
-                Begin by adding a source. A source contains a collection of network information, including systems
-                management solution information, IP addresses, or host names, in addition to SSH ports and credentials.
-              </EmptyStateBody>
+              <EmptyStateBody>{t('view.empty-state', { context: 'sources_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddSourceButton()}</EmptyStateActions>
               </EmptyStateFooter>

@@ -64,7 +64,7 @@ const AppRoutes = () => (
       {flattenedRoutes.map(route => (
         <Route path={route.path} element={route.component} key={route.id} />
       ))}
-      <Route path="/" element={<Navigate to="/sources" replace />} />
+      <Route path="/" element={<Navigate to="/credentials" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </React.Suspense>
