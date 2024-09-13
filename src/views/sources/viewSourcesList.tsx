@@ -49,7 +49,7 @@ import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hoo
 import useQueryClientConfig from '../../queryClientConfig';
 import { type Connections, type CredentialType, type Scan, type SourceType } from '../../types/types';
 import AddSourceModal from './addSourceModal';
-import SourcesScanModal from './addSourcesScanModal';
+import { AddSourcesScanModal } from './addSourcesScanModal';
 import { ShowConnectionsModal } from './showSourceConnectionsModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
@@ -473,7 +473,8 @@ const SourcesListView: React.FunctionComponent = () => {
           })
         }
       />
-      <SourcesScanModal
+      <AddSourcesScanModal
+        isOpen={scanSelected !== undefined}
         onClose={() => setScanSelected(undefined)}
         onSubmit={(payload: Scan) =>
           runScans(payload).finally(() => {
@@ -481,7 +482,7 @@ const SourcesListView: React.FunctionComponent = () => {
             setScanSelected(undefined);
           })
         }
-        sources={scanSelected ?? []}
+        sources={scanSelected}
       />
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
