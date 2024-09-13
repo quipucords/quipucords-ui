@@ -6,7 +6,7 @@ RUN dnf update -y && dnf clean all
 # install dependencies in a separate layer to save dev time
 WORKDIR /app
 COPY package.json package-lock.json .
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . .
 RUN npm run build
