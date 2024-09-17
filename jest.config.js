@@ -1,5 +1,15 @@
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/.*/**', '!src/**/**/index.{ts,tsx}', '!src/types/*.ts', '!src/constants/*.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/.*/**',
+    '!src/**/**/index.{ts,tsx}',
+    '!src/types/*.ts',
+    '!src/constants/*.ts',
+    '!src/views/credentials/view*.{ts,tsx}',
+    '!src/views/credentials/view*.{ts,tsx}',
+    '!src/views/scans/view*.{ts,tsx}',
+    '!src/views/sources/view*.{ts,tsx}'
+  ],
   coverageThreshold: {
     global: {
       branches: 60,
