@@ -193,15 +193,13 @@ const ScansListView: React.FunctionComponent = () => {
             <EmptyState>
               <EmptyStateHeader
                 headingLevel="h4"
-                titleText="No scans available"
+                titleText={t('view.empty-state', { context: 'scans_title' })}
                 icon={<EmptyStateIcon icon={PlusCircleIcon} />}
               />
-              <EmptyStateBody>
-                Create a scan from the Sources page by selecting an individual source or multiple sources.
-              </EmptyStateBody>
+              <EmptyStateBody>{t('view.empty-state', { context: 'scans_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>
-                  <Button onClick={() => nav('/')} variant="primary">
+                  <Button onClick={() => nav('/sources')} variant="primary">
                     View Sources page
                   </Button>
                 </EmptyStateActions>

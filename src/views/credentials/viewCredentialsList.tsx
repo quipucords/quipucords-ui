@@ -241,14 +241,10 @@ const CredentialsListView: React.FunctionComponent = () => {
             <EmptyState>
               <EmptyStateHeader
                 headingLevel="h4"
-                titleText="No available credential"
+                titleText={t('view.empty-state', { context: 'credentials_title' })}
                 icon={<EmptyStateIcon icon={PlusCircleIcon} />}
               />
-              <EmptyStateBody>
-                A credential contains authentication information needed to scan a source.A credential includes a
-                username and a password or SSH key. The quipucords tool uses SSH to connect to servers on the network
-                and uses credentials to access those servers.
-              </EmptyStateBody>
+              <EmptyStateBody>{t('view.empty-state', { context: 'credentials_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
               </EmptyStateFooter>
