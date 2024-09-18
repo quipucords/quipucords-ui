@@ -257,15 +257,12 @@ const ScansListView: React.FunctionComponent = () => {
         actions={[
           <Button
             key="confirm"
-            variant="danger"
+            variant="secondary"
             onClick={() => {
               setScanSelectedForSources(undefined);
             }}
           >
             {t('table.label', { context: 'close' })}
-          </Button>,
-          <Button key="cancel" variant="link" onClick={() => setScanSelectedForSources(undefined)}>
-            {t('form-dialog.label', { context: 'cancel' })}
           </Button>
         ]}
       >

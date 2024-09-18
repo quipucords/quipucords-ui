@@ -394,16 +394,12 @@ const SourcesListView: React.FunctionComponent = () => {
         actions={[
           <Button
             key="confirm"
-            variant="danger"
+            variant="secondary"
             onClick={() => {
-              // Add your specific action if needed
               setCredentialsSelected([]);
             }}
           >
             {t('table.label', { context: 'close' })}
-          </Button>,
-          <Button key="cancel" variant="link" onClick={() => setCredentialsSelected([])}>
-            {t('form-dialog.label', { context: 'cancel' })}
           </Button>
         ]}
       >

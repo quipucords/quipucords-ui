@@ -156,6 +156,7 @@
     "label_auth_cell_authToken": "Token",
     "label_auth_cell_sshKey": "SSH Key",
     "label_auth_tooltip": "Authorization type",
+    "label_close": "Close",
     "label_delete": "Delete",
     "label_edit": "Edit",
     "label_network": "Network",
