@@ -87,7 +87,9 @@ const normalizeTotal = (
 enum authType {
   UsernameAndPassword = 'Username and Password',
   Token = 'Token',
-  SSHKey = 'SSH Key'
+  SSHKey = 'SSH Key',
+  SSHKeyFile = 'SSH Key File',
+  Unknown = 'Unknown credential type'
 }
 
 /**
@@ -96,17 +98,19 @@ enum authType {
  * @param {CredentialType} credential - The CredentialType object representing authentication information.
  * @returns {string} - A string indicating the authentication type, e.g., "Username and Password".
  */
-const getAuthType = ({ username, password, auth_token, ssh_key }: CredentialType): authType => {
-  if (username && password) {
-    return authType.UsernameAndPassword;
+const getAuthType = ({ auth_type }: CredentialType): authType => {
+  switch (auth_type) {
+    case 'password':
+      return authType.UsernameAndPassword;
+    case 'auth_token':
+      return authType.Token;
+    case 'ssh_key':
+      return authType.SSHKey;
+    case 'ssh_keyfile':
+      return authType.SSHKeyFile;
+    default:
+      return authType.Unknown;
   }
-  if (auth_token) {
-    return authType.Token;
-  }
-  if (ssh_key) {
-    return authType.SSHKey;
-  }
-  throw new Error('Unknown credential type');
 };
 
 /**

@@ -18,6 +18,7 @@ export type CredentialType = {
   become_user: string;
   become_password: string;
   sources: SourceType[];
+  auth_type: string;
 };
 
 export type SourceConnectionType = {

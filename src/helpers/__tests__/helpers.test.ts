@@ -48,21 +48,19 @@ describe('getAuthType', () => {
       become_user: undefined,
       become_password: undefined,
       sources: [],
+      auth_type: undefined,
       ...partialCredential
     });
 
   it(`should return a credential type`, () => {
     expect([
-      generateAuthType({ username: 'testUser', password: 'testPassword' }),
-      generateAuthType({ auth_token: 'mockToken' }),
-      generateAuthType({ ssh_key: 'mockSSH' })
+      generateAuthType({ auth_type: 'password' }),
+      generateAuthType({ auth_type: 'auth_token' }),
+      generateAuthType({ auth_type: 'ssh_key' }),
+      generateAuthType({ auth_type: 'ssh_keyfile' }),
+      generateAuthType({ auth_type: 'lorem' }),
+      generateAuthType({ auth_type: 'ipsum' })
     ]).toMatchSnapshot('credentialTypes');
-  });
-
-  it('should throw an error when credential has no authentication information', () => {
-    expect(() => {
-      generateAuthType({});
-    }).toThrow('Unknown credential type');
   });
 });
 
