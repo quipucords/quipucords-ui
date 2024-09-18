@@ -1,6 +1,11 @@
 import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../useCredentialApi';
+import {
+  useAddCredentialApi,
+  useDeleteCredentialApi,
+  useEditCredentialApi,
+  useGetCredentialsApi
+} from '../useCredentialApi';
 
 describe('useDeleteCredentialApi', () => {
   let mockOnAddAlert;
@@ -272,5 +277,66 @@ describe('useEditCredentialApi', () => {
     );
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
+  });
+
+  describe('useGetCredentialsApi', () => {
+    let hookResult;
+
+    beforeEach(() => {
+      const hook = renderHook(() => useGetCredentialsApi());
+      hookResult = hook?.result?.current;
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should attempt an api call to retrieve credentials', () => {
+      const { apiCall } = hookResult;
+      const spyAxios = jest.spyOn(axios, 'get');
+
+      apiCall().catch(Function.prototype);
+      expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
+    });
+
+    it('should handle success while attempting to retrieve credentials', async () => {
+      const { getCredentials } = hookResult;
+      jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+
+      await expect(getCredentials()).resolves.toMatchSnapshot('getCredentials, success');
+    });
+
+    it('should handle errors while attempting to retrieve credentials', async () => {
+      const { getCredentials } = hookResult;
+      jest.spyOn(axios, 'get').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
+
+      await expect(getCredentials()).rejects.toMatchSnapshot('getCredentials, error');
+    });
+
+    it('should process an API success response', () => {
+      const { callbackSuccess } = hookResult;
+
+      expect(
+        callbackSuccess({
+          data: {
+            results: [{ name: 'Lorem', id: '1' }]
+          }
+        })
+      ).toMatchSnapshot('callbackSuccess');
+    });
+
+    it('should process an API error response', async () => {
+      const { callbackError } = hookResult;
+
+      await expect(
+        callbackError({
+          response: {
+            data: {
+              message: 'Dolor sit'
+            }
+          }
+        })
+      ).rejects.toMatchSnapshot('callbackError');
+    });
   });
 });

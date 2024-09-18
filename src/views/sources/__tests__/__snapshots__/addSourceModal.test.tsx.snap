@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddSourceModal should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
+[
+  [
+    {
+      "credentials": [],
+      "hosts": [
+        "",
+      ],
+      "name": "Test Source",
+      "options": {
+        "use_paramiko": false,
+      },
+      "port": "22",
+      "source_type": "network",
+    },
+  ],
+]
+`;
+
+exports[`AddSourceModal should have the correct title: title 1`] = `
+<span
+  class="pf-v5-c-modal-box__title-text"
+>
+  Add source: network
+</span>
+`;
+
+exports[`AddSourceModal should render a basic component: basic 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="Add source: undefined"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="small"
+>
+  <FormContextProvider
+    initialValues={
+      {
+        "hosts": "",
+        "name": "",
+        "port": "",
+      }
+    }
+  >
+    [Function]
+  </FormContextProvider>
+</Modal>
+`;

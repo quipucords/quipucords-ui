@@ -12,7 +12,7 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { type AlertProps } from '@patternfly/react-core';
-import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
+import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse, isAxiosError } from 'axios';
 import { helpers } from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
 import { type CredentialType } from '../types/types';
@@ -22,6 +22,13 @@ type ApiDeleteCredentialSuccessType = {
   deleted?: number[];
   missing?: number[];
   skipped?: { credential: number; sources: number[] }[];
+};
+
+type ApiGetCredentialsSuccessType = {
+  count?: number;
+  next?: string | null;
+  previous?: string | null;
+  results?: CredentialType[];
 };
 
 type ApiCredentialErrorType = {
@@ -279,4 +286,43 @@ const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-export { useDeleteCredentialApi, useAddCredentialApi, useEditCredentialApi };
+const useGetCredentialsApi = () => {
+  const apiCall = useCallback(
+    (config: AxiosRequestConfig = {}): Promise<AxiosResponse<ApiGetCredentialsSuccessType>> =>
+      axios.get(`${process.env.REACT_APP_CREDENTIALS_SERVICE}`, config),
+    []
+  );
+
+  const callbackSuccess = useCallback((response: AxiosResponse<ApiGetCredentialsSuccessType>) => {
+    return response;
+  }, []);
+
+  const callbackError = useCallback((error: AxiosError<ApiCredentialErrorType>) => Promise.reject(error), []);
+
+  const getCredentials = useCallback(
+    async (config: AxiosRequestConfig = {}) => {
+      let response;
+      try {
+        response = await apiCall(config);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          return callbackError(error);
+        }
+        if (!helpers.TEST_MODE) {
+          console.error(error);
+        }
+      }
+      return callbackSuccess(response);
+    },
+    [apiCall, callbackSuccess, callbackError]
+  );
+
+  return {
+    apiCall,
+    callbackError,
+    callbackSuccess,
+    getCredentials
+  };
+};
+
+export { useDeleteCredentialApi, useAddCredentialApi, useEditCredentialApi, useGetCredentialsApi };

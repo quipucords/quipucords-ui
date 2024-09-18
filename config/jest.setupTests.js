@@ -1,7 +1,6 @@
 import React, { act } from 'react';
 import { render, renderHook } from '@testing-library/react';
 import { dotenv } from 'weldable';
-import { useNavigate } from 'react-router-dom';
 
 /**
  * Set dotenv params.
