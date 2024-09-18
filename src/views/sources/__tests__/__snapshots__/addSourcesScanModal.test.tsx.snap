@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddSourceModal should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
+[
+  [
+    {
+      "name": "Test Scan",
+      "options": {
+        "enabled_extended_product_search": {
+          "jboss_brms": false,
+          "jboss_eap": false,
+          "jboss_fuse": false,
+          "jboss_ws": false,
+          "search_directories": undefined,
+        },
+        "max_concurrency": "25",
+      },
+      "sources": undefined,
+    },
+  ],
+]
+`;
+
+exports[`AddSourceModal should have the correct title: title 1`] = `
+<span
+  class="pf-v5-c-modal-box__title-text"
+>
+  Scan
+</span>
+`;
+
+exports[`AddSourceModal should render a basic component: basic 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="Scan"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="small"
+>
+  <FormContextProvider
+    initialValues={
+      {
+        "scan-max-concurrent": "25",
+        "scan-sources": "",
+      }
+    }
+  >
+    [Function]
+  </FormContextProvider>
+</Modal>
+`;

@@ -4,7 +4,7 @@
  *
  * @module sourcesScanModal
  */
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   ActionGroup,
   Button,
@@ -21,14 +21,20 @@ import {
 } from '@patternfly/react-core';
 import { type SourceType } from '../../types/types';
 
-export interface SourcesScanModalProps {
-  sources: SourceType[];
-  onClose: () => void;
-  onSubmit: (payload) => void;
+interface AddSourcesScanModalProps {
+  isOpen: boolean;
+  sources?: SourceType[];
+  onClose?: () => void;
+  onSubmit?: (payload) => void;
 }
 
-const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, onSubmit }) => {
-  const [deepScans, setDeepScans] = React.useState<string[]>([]);
+const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
+  isOpen,
+  sources,
+  onClose = Function.prototype,
+  onSubmit = Function.prototype
+}) => {
+  const [deepScans, setDeepScans] = useState<string[]>([]);
 
   const onDeepScanChange = (option, checked) => {
     if (checked) {
@@ -37,10 +43,11 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
       setDeepScans(deepScans.filter(o => o !== option));
     }
   };
+
   const onScan = values => {
     const payload = {
       name: values['scan-name'],
-      sources: sources.map(s => s.id),
+      sources: sources?.map(s => s.id),
       options: {
         max_concurrency: values['scan-max-concurrent'],
         enabled_extended_product_search: {
@@ -56,10 +63,10 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
   };
 
   return (
-    <Modal variant={ModalVariant.small} title="Scan" isOpen={!!sources?.length} onClose={onClose}>
+    <Modal variant={ModalVariant.small} title="Scan" isOpen={isOpen} onClose={() => onClose()}>
       <FormContextProvider
         initialValues={{
-          'scan-sources': sources.map(s => s.name).join(', '),
+          'scan-sources': sources?.map(s => s.name).join(', ') || '',
           'scan-max-concurrent': '25'
         }}
       >
@@ -139,7 +146,7 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
               <Button variant="primary" onClick={() => onScan({ ...values, deepScans })}>
                 Save
               </Button>
-              <Button variant="link" onClick={onClose}>
+              <Button variant="link" onClick={() => onClose()}>
                 Cancel
               </Button>
             </ActionGroup>
@@ -150,4 +157,4 @@ const SourcesScanModal: React.FC<SourcesScanModalProps> = ({ sources, onClose, o
   );
 };
 
-export default SourcesScanModal;
+export { AddSourcesScanModal as default, AddSourcesScanModal, type AddSourcesScanModalProps };
