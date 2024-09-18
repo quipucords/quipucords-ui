@@ -165,8 +165,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     idProperty: 'id',
     isLoading,
     currentPageItems: data?.results || [],
-    totalItemCount: helpers.normalizeTotal(data),
-    variant: 'compact'
+    totalItemCount: helpers.normalizeTotal(data)
   });
 
   const {
@@ -223,7 +222,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   return (
     <PageSection variant="light">
       {renderToolbar()}
-      <Table aria-label="Example things table">
+      <Table aria-label="Example things table" variant="compact">
         <Thead>
           <Tr isHeaderRow>
             <Th columnKey="name" />
