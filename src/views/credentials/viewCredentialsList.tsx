@@ -293,15 +293,12 @@ const CredentialsListView: React.FunctionComponent = () => {
         actions={[
           <Button
             key="confirm"
-            variant="danger"
+            variant="secondary"
             onClick={() => {
               setSourcesSelected([]);
             }}
           >
             {t('table.label', { context: 'close' })}
-          </Button>,
-          <Button key="cancel" variant="link" onClick={() => setSourcesSelected([])}>
-            {t('form-dialog.label', { context: 'cancel' })}
           </Button>
         ]}
       >
