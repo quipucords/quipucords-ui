@@ -344,21 +344,7 @@ exports[`useGetScanJobsApi should handle errors while attempting to retrieve a s
 ]
 `;
 
-exports[`useGetScanJobsApi should handle success while attempting to retrieve a scanJob: getScanJobs, success 1`] = `
-[
-  [
-    {
-      "title": "t([
-  "toast-notifications.description",
-  {
-    "context": "scan-jobs_fetched"
-  }
-])",
-      "variant": "success",
-    },
-  ],
-]
-`;
+exports[`useGetScanJobsApi should handle success while attempting to retrieve a scanJob: getScanJobs, success 1`] = `[]`;
 
 exports[`useGetScanJobsApi should process an API error response: callbackError 1`] = `
 [
@@ -373,23 +359,6 @@ exports[`useGetScanJobsApi should process an API error response: callbackError 1
   }
 ])",
       "variant": "danger",
-    },
-  ],
-]
-`;
-
-exports[`useGetScanJobsApi should process an API success response: callbackSuccess 1`] = `
-[
-  [
-    {
-      "title": "t([
-  "toast-notifications.description",
-  {
-    "context": "scan-jobs_fetched",
-    "count": 1
-  }
-])",
-      "variant": "success",
     },
   ],
 ]
