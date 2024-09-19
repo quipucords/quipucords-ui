@@ -15,7 +15,7 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "hooks/useLoginApi.ts:58:          console.error(error);",
   "hooks/useLoginApi.ts:99:        console.error(error);",
   "hooks/useLoginApi.ts:137:        console.error(error);",
-  "hooks/useLoginApi.ts:165:        console.error('Invalid token, unable to parse format');",
+  "hooks/useLoginApi.ts:166:        console.error('Invalid token, unable to parse format');",
   "hooks/useScanApi.ts:67:          console.error(error);",
   "hooks/useScanApi.ts:140:          console.error(error);",
   "hooks/useScanApi.ts:186:        console.log(missingScansMsg);",

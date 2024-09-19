@@ -8,9 +8,7 @@ exports[`useGetSetAuthApi should attempt a call to get a token: getToken 1`] = `
 ]
 `;
 
-exports[`useGetSetAuthApi should process an interceptor error: interceptorError 1`] = `undefined`;
-
-exports[`useGetSetAuthApi should process an interceptor success: interceptorSuccess 1`] = `
+exports[`useGetSetAuthApi should process an interceptor request success: interceptorRequestSuccess 1`] = `
 {
   "headers": {
     "Authorization": "Token Dolor sit",
@@ -19,7 +17,7 @@ exports[`useGetSetAuthApi should process an interceptor success: interceptorSucc
 }
 `;
 
-exports[`useGetSetAuthApi should process an interceptor success: interceptorSuccess, token service 1`] = `
+exports[`useGetSetAuthApi should process an interceptor request success: interceptorRequestSuccess, token service 1`] = `
 {
   "headers": {
     "Authorization": "",
@@ -27,6 +25,12 @@ exports[`useGetSetAuthApi should process an interceptor success: interceptorSucc
   "url": "/api/v1/token/",
 }
 `;
+
+exports[`useGetSetAuthApi should process an interceptor response success: interceptorResponseSuccess 1`] = `undefined`;
+
+exports[`useGetSetAuthApi should process interceptor request errors: interceptorRequestError 1`] = `undefined`;
+
+exports[`useGetSetAuthApi should process interceptor response errors: interceptorResponseError 1`] = `undefined`;
 
 exports[`useLoginApi should attempt an api call to login: apiCall 1`] = `
 [
