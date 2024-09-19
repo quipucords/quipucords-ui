@@ -118,32 +118,32 @@ const CredentialsListView: React.FunctionComponent = () => {
             {
               key: API_DATA_SOURCE_TYPES.ANSIBLE,
               label: API_DATA_SOURCE_TYPES.ANSIBLE,
-              value: t('toolbar.label', { context: 'chip_ansible' })
+              value: t('dataSource.ansible')
             },
             {
               key: API_DATA_SOURCE_TYPES.NETWORK,
               label: API_DATA_SOURCE_TYPES.NETWORK,
-              value: t('toolbar.label', { context: 'chip_network' })
+              value: t('dataSource.network')
             },
             {
               key: API_DATA_SOURCE_TYPES.OPENSHIFT,
               label: API_DATA_SOURCE_TYPES.OPENSHIFT,
-              value: t('toolbar.label', { context: 'chip_openshift' })
+              value: t('dataSource.openshift')
             },
             {
               key: API_DATA_SOURCE_TYPES.RHACS,
               label: API_DATA_SOURCE_TYPES.RHACS,
-              value: t('toolbar.label', { context: 'chip_rhacs' })
+              value: t('dataSource.rhacs')
             },
             {
               key: API_DATA_SOURCE_TYPES.SATELLITE,
               label: API_DATA_SOURCE_TYPES.SATELLITE,
-              value: t('toolbar.label', { context: 'chip_satellite' })
+              value: t('dataSource.satellite')
             },
             {
               key: API_DATA_SOURCE_TYPES.VCENTER,
               label: API_DATA_SOURCE_TYPES.VCENTER,
-              value: t('toolbar.label', { context: 'chip_vcenter' })
+              value: t('dataSource.vcenter')
             }
           ]
         }
