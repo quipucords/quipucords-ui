@@ -23,7 +23,7 @@ exports[`AddSourceModal should have the correct title: title 1`] = `
 <span
   class="pf-v5-c-modal-box__title-text"
 >
-  Add source: network
+  Add Source: network
 </span>
 `;
 
@@ -41,21 +41,177 @@ exports[`AddSourceModal should render a basic component: basic 1`] = `
   ouiaSafe={true}
   position="default"
   showClose={true}
-  title="Add source: undefined"
+  title="Add Source: "
   titleIconVariant={null}
   titleLabel=""
   variant="small"
 >
-  <FormContextProvider
-    initialValues={
-      {
-        "hosts": "",
-        "name": "",
-        "port": "",
-      }
-    }
-  >
-    [Function]
-  </FormContextProvider>
+  <SourceForm
+    onClose={[Function]}
+    onSubmit={[Function]}
+  />
 </Modal>
+`;
+
+exports[`SourceForm should render a basic component: basic 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 443
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`useSourceForm should allow editing a source: formData, edit 1`] = `
+{
+  "credentials": [],
+  "hosts": "",
+  "name": "lorem",
+  "port": "456",
+  "sslProtocol": "SSLv23",
+  "sslVerify": true,
+  "useParamiko": false,
+}
+`;
+
+exports[`useSourceForm should initialize formData correctly: formData 1`] = `
+{
+  "credentials": [],
+  "hosts": "",
+  "name": "",
+  "port": "",
+  "sslProtocol": "SSLv23",
+  "sslVerify": true,
+  "useParamiko": false,
+}
 `;
