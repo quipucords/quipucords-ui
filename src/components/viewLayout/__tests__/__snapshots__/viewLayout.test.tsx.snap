@@ -19,14 +19,22 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
       <MastheadMain>
         <MastheadBrand>
           <Brand
-            alt="Quipucords Logo"
+            alt="t([
+  "view.alt-logo",
+  {
+    "name": "Quipucords"
+  }
+])"
             heights={
               {
                 "default": "36px",
               }
             }
-            src="title.svg"
-          />
+          >
+            <source
+              srcSet="title.svg"
+            />
+          </Brand>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
@@ -106,4 +114,21 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
 >
   Lorem ipsum
 </Page>
+`;
+
+exports[`ViewLayout should render a brand component: brand 1`] = `
+NodeList [
+  <source
+    srcset="titleBrand.svg"
+  />,
+  <img
+    alt="t([
+  "view.alt-logo",
+  {
+    "name": "Discovery"
+  }
+])"
+    src=""
+  />,
+]
 `;

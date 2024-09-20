@@ -7,6 +7,7 @@
  * @module appLayout
  */
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   Brand,
@@ -26,16 +27,22 @@ import {
   SkipToContent
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
-import logo from '../../images/title.svg';
+import { helpers } from '../../helpers';
+import titleImg from '../../images/title.svg';
+import titleImgBrand from '../../images/titleBrand.svg';
 import { IAppRoute, IAppRouteGroup, routes } from '../../routes';
 import { AppToolbar } from './viewLayoutToolbar';
 
 interface AppLayoutProps {
   children: React.ReactNode;
+  isBrand?: boolean;
+  uiName?: string;
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children, isBrand = helpers.UI_BRAND, uiName = helpers.UI_NAME }) => {
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
+
   const Header = (
     <Masthead>
       <MastheadToggle>
@@ -45,7 +52,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       </MastheadToggle>
       <MastheadMain>
         <MastheadBrand>
-          <Brand src={logo} alt="Quipucords Logo" heights={{ default: '36px' }} />
+          <Brand alt={t('view.alt-logo', { name: uiName })} heights={{ default: '36px' }}>
+            <source srcSet={((isBrand && titleImgBrand) || titleImg) as string} />
+          </Brand>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>

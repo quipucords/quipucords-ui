@@ -22,7 +22,7 @@
     "api:stage-clean": "sh ./scripts/apiStage.sh -t clean",
     "api:stage-stop": "sh ./scripts/apiStage.sh -t stopApi",
     "build": "run-s -l build:pre build:js build:post",
-    "build:brand": "run-s -l build:pre-brand build:js build:post",
+    "build:brand": "export UI_BRAND=true; run-s -l build:pre-brand build:js build:post",
     "build:js": "export NODE_ENV=production; weldable -l ts -x ./config/webpack.prod.js",
     "build:post": "bash ./scripts/post.sh",
     "build:pre": "bash ./scripts/pre.sh",
