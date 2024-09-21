@@ -364,6 +364,16 @@ exports[`useGetScanJobsApi should process an API error response: callbackError 1
 ]
 `;
 
+exports[`useGetScanJobsApi should process an API success response: callbackSuccess 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
 exports[`useRunScanApi should attempt an API call to run a scan: apiCall 1`] = `
 [
   [
