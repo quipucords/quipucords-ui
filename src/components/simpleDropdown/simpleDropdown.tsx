@@ -15,9 +15,15 @@ import {
   type MenuToggleProps
 } from '@patternfly/react-core';
 
+interface SimpleDropdownItemProps {
+  item: string;
+  ouiaId?: number | string;
+}
+
 interface SimpleDropdownProps {
   label: string;
-  dropdownItems?: string[];
+  menuToggleOuiaId?: number | string;
+  dropdownItems?: SimpleDropdownItemProps[];
   ariaLabel?: string;
   onSelect?: (item: string) => void;
   variant?: MenuToggleProps['variant'];
@@ -26,6 +32,7 @@ interface SimpleDropdownProps {
 
 const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   label,
+  menuToggleOuiaId,
   dropdownItems,
   ariaLabel = 'Dropdown menu',
   onSelect = Function.prototype,
@@ -50,6 +57,7 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
           variant={variant}
           aria-label={ariaLabel}
           isDisabled={!dropdownItems || dropdownItems.length === 0}
+          data-ouia-component-id={menuToggleOuiaId}
         >
           {label}
         </MenuToggle>
@@ -57,8 +65,8 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
     >
       <DropdownList>
         {Array.isArray(dropdownItems) &&
-          dropdownItems.map(item => (
-            <DropdownItem key={item} onClick={() => onSelect(item)}>
+          dropdownItems.map(({ item, ouiaId }) => (
+            <DropdownItem key={item} onClick={() => onSelect(item)} ouiaId={ouiaId}>
               {item}
             </DropdownItem>
           ))}

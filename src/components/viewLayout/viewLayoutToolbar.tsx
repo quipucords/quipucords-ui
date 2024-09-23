@@ -152,13 +152,13 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                   onClick={() => setKebabDropdownOpen(prev => !prev)}
                   isExpanded={kebabDropdownOpen}
                   style={{ width: 'auto' }}
+                  data-ouia-component-id="user_dropdown_button"
                 >
                   <EllipsisVIcon />
                 </MenuToggle>
               )}
-              ouiaId="user_dropdown"
             >
-              <DropdownItem value="logout" onClick={onLogout}>
+              <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
                 Logout
               </DropdownItem>
             </Dropdown>
@@ -169,7 +169,6 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
             onSelect={onUserDropdownSelect}
             onOpenChange={(isOpen: boolean) => setUserDropdownOpen(isOpen)}
             isOpen={userDropdownOpen}
-            ouiaId="user_dropdown"
             toggle={toggleRef => (
               <MenuToggle
                 aria-label="Toggle"
@@ -177,6 +176,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                 variant="plain"
                 onClick={() => setUserDropdownOpen(prev => !prev)}
                 isExpanded={userDropdownOpen}
+                data-ouia-component-id="user_dropdown_button"
               >
                 <div className="quipucords-toolbar__user-dropdown">
                   <span className="pf-v5-c-avatar" />
@@ -185,7 +185,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
               </MenuToggle>
             )}
           >
-            <DropdownItem value="logout" onClick={onLogout}>
+            <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
               Logout
             </DropdownItem>
           </Dropdown>

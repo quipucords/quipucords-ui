@@ -95,7 +95,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
             {scanJobs?.length} scan{scanJobs?.length === 1 ? ' has' : 's have'} run
           </div>
           <br />
-          <Table aria-label="Scan jobs table">
+          <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
             <Thead>
               <Tr>
                 {/* <Th

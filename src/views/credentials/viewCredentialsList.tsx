@@ -182,15 +182,16 @@ const CredentialsListView: React.FunctionComponent = () => {
   const renderAddCredsButton = () => (
     <SimpleDropdown
       label={t('view.empty-state_label_credentials')}
+      menuToggleOuiaId="add_credential_button"
       variant="primary"
       onSelect={item => setAddCredentialModal(item)}
       dropdownItems={[
-        t('dataSource.network'),
-        t('dataSource.openshift'),
-        t('dataSource.rhacs'),
-        t('dataSource.satellite'),
-        t('dataSource.vcenter'),
-        t('dataSource.ansible')
+        { item: t('dataSource.network'), ouiaId: 'network' },
+        { item: t('dataSource.openshift'), ouiaId: 'openshift' },
+        { item: t('dataSource.rhacs'), ouiaId: 'rhacs' },
+        { item: t('dataSource.satellite'), ouiaId: 'satellite' },
+        { item: t('dataSource.vcenter'), ouiaId: 'vcenter' },
+        { item: t('dataSource.ansible'), ouiaId: 'ansible' }
       ]}
     />
   );

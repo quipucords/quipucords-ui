@@ -107,7 +107,6 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
           isPlain={true}
           onOpenChange={[Function]}
           onSelect={[Function]}
-          ouiaId="user_dropdown"
           popperProps={
             {
               "position": "right",
@@ -116,6 +115,7 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
           toggle={[Function]}
         >
           <DropdownItem
+            data-ouia-component-id="logout"
             onClick={[Function]}
             value="logout"
           >
@@ -136,10 +136,10 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
         isOpen={false}
         onOpenChange={[Function]}
         onSelect={[Function]}
-        ouiaId="user_dropdown"
         toggle={[Function]}
       >
         <DropdownItem
+          data-ouia-component-id="logout"
           onClick={[Function]}
           value="logout"
         >
