@@ -298,13 +298,15 @@ describe('useGetScanJobsApi', () => {
   it('should process an API success response', () => {
     const { callbackSuccess } = hookResult;
 
-    callbackSuccess({
-      data: {
-        results: [{ name: 'Lorem', id: '1' }]
-      }
-    });
-
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackSuccess');
+    expect(
+      callbackSuccess({
+        response: {
+          data: {
+            message: 'Dolor sit'
+          }
+        }
+      })
+    ).toMatchSnapshot('callbackSuccess');
   });
 
   it('should process an API error response', () => {

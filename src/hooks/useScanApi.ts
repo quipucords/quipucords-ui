@@ -242,19 +242,9 @@ const useGetScanJobsApi = (onAddAlert: (alert: AlertProps) => void) => {
     []
   );
 
-  const callbackSuccess = useCallback(
-    (response: AxiosResponse<ScanJobsResponse>) => {
-      onAddAlert({
-        title: t('toast-notifications.description', {
-          context: 'scan-jobs_fetched',
-          count: response?.data?.results?.length
-        }),
-        variant: 'success'
-      });
-      return response;
-    },
-    [onAddAlert, t]
-  );
+  const callbackSuccess = useCallback((response: AxiosResponse<ScanJobsResponse>) => {
+    return response;
+  }, []);
 
   const callbackError = useCallback(
     (error: AxiosError<ApiScanErrorType>, scanId: number) => {
