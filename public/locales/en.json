@@ -317,7 +317,7 @@
   "dataSource": {
     "rhacs": "RHACS",
     "ansible": "Ansible Controller",
-    "network": "Network",
+    "network": "Network range",
     "openshift": "OpenShift",
     "satellite": "Satellite",
     "vcenter": "vCenter Server"
