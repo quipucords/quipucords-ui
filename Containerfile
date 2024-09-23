@@ -28,3 +28,11 @@ RUN chown ${NGINX_USER} -R /licenses /opt/app-root/
 USER ${NGINX_USER}
 
 CMD ["/bin/bash", "/opt/app-root/entrypoint.sh"]
+
+LABEL com.redhat.component="discovery-ui-container" \
+    description="Discovery UI" \
+    io.k8s.description="Discovery UI" \
+    io.k8s.display-name="discovery-ui" \
+    io.openshift.tags="discovery" \
+    name="discovery/discovery-ui-rhel9" \
+    summary="Discovery UI"
