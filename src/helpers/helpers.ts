@@ -10,6 +10,36 @@ import moment, { type MomentInput } from 'moment';
 import { type CredentialType } from '../types/types';
 
 /**
+ * Is dev mode active.
+ * Associated with using the NPM script "start" and "start:stage". See dotenv config files for activation.
+ */
+const DEV_MODE = process.env.REACT_APP_ENV === 'development';
+
+/**
+ * Is prod mode active.
+ * Associated with production builds. See dotenv config files for activation.
+ */
+const PROD_MODE = process.env.REACT_APP_ENV === 'production';
+
+/**
+ * Is test mode active.
+ * Associated with running unit tests. See dotenv config files for activation.
+ */
+const TEST_MODE = process.env.REACT_APP_ENV === 'test';
+
+/**
+ * Is UI application name active.
+ * See dotenv config files for updating. See npm build brand script for applying this value.
+ */
+const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
+
+/**
+ * UI coded name, brand dependent.
+ * See dotenv config files for updating.
+ */
+const UI_NAME = (UI_BRAND && process.env.REACT_APP_UI_BRAND_NAME) || `${process.env.REACT_APP_UI_NAME}`;
+
+/**
  * Generates a translation key for internationalization.
  *
  * @param {string | string[]} key - The translation key(s).
@@ -35,8 +65,6 @@ const noopTranslate = (
     (updatedComponents && `, ${updatedComponents}`) || ''
   })`;
 };
-
-const DEV_MODE = process.env.REACT_APP_ENV === 'development';
 
 /**
  * Calculates and returns a human-readable time difference from a given timestamp.
@@ -161,10 +189,6 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
 const generateId = (prefix = 'generatedid') =>
   `${prefix}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
 
-const PROD_MODE = process.env.REACT_APP_ENV === 'production';
-
-const TEST_MODE = process.env.REACT_APP_ENV === 'test';
-
 const helpers = {
   authType,
   downloadData,
@@ -176,7 +200,9 @@ const helpers = {
   normalizeTotal,
   DEV_MODE,
   PROD_MODE,
-  TEST_MODE
+  TEST_MODE,
+  UI_BRAND,
+  UI_NAME
 };
 
 export { helpers as default, helpers };

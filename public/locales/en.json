@@ -299,6 +299,7 @@
     "label_tooltip_sort_dsc": "Sort descending"
   },
   "view": {
+    "alt-logo": "{{name}} logo",
     "empty-state_label_credentials": "Add Credential",
     "empty-state_label_sources": "Add Source",
     "empty-state_title_not-found": "404 Page not found",

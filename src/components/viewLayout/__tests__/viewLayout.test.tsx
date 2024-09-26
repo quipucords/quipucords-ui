@@ -10,4 +10,14 @@ describe('ViewLayout', () => {
     const component = await shallowComponent(<ViewLayout {...props} />);
     expect(component).toMatchSnapshot('basic');
   });
+
+  it('should render a brand component', async () => {
+    const props = {
+      children: 'Lorem ipsum',
+      isBrand: true,
+      uiName: 'Discovery'
+    };
+    const component = await shallowComponent(<ViewLayout {...props} />);
+    expect(component.querySelectorAll('[alt*="Discovery"],source')).toMatchSnapshot('brand');
+  });
 });

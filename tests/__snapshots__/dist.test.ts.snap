@@ -28,6 +28,7 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
   "./build/fonts/e0f30d27bec7c8dbb6fc.woff2",
   "./build/fonts/e4faf134e53e0f37296b.woff2",
   "./build/fonts/ed292ec87cce0d76fd3c.woff2",
+  "./build/images/032b764e59d78db07b56.svg",
   "./build/images/c0ce9e7676e8e8f83167.png",
   "./build/images/e78a57c31c986962302a.svg",
   "./build/index.html",
