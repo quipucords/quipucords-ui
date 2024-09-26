@@ -8,9 +8,10 @@ const { setBranding } = require('./webpack.common');
  * test files. After the dynamic update and build we attempt a git clean up from "./scripts/post.sh".
  * Git clean up can be removed if the build is limited to specific environments other than development.
  *
- * @param filePath
- * @param addConfiguration
- * @param encoding
+ * @param {object} params
+ * @param {string} params.filePath
+ * @param {object} params.addConfiguration
+ * @param {string} params.encoding
  */
 const updateTsConfig = ({ filePath, addConfiguration, encoding = 'utf8' } = {}) => {
   try {
@@ -29,10 +30,7 @@ module.exports = ({ RELATIVE_DIRNAME, REACT_APP_UI_BRAND, REACT_APP_UI_BRAND_NAM
   updateTsConfig({
     filePath: path.resolve(RELATIVE_DIRNAME, 'tsconfig.json'),
     addConfiguration: {
-      exclude: [
-        '**/*.test.ts',
-        '**/*.test.tsx'
-      ]
+      exclude: ['**/*.test.ts', '**/*.test.tsx']
     }
   });
 
