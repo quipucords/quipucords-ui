@@ -1,4 +1,5 @@
 FROM registry.access.redhat.com/ubi9/nodejs-18 as npm_builder
+ARG QUIPUCORDS_BRANDED="false"
 # Become root before installing anything
 USER root
 RUN dnf update -y && dnf clean all
@@ -9,7 +10,7 @@ COPY package.json package-lock.json .
 RUN npm install --omit=dev
 
 COPY . .
-RUN npm run build
+RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
 FROM registry.access.redhat.com/ubi9/nginx-122
 # original NGINX user; update if the number ever change
