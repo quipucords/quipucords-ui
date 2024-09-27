@@ -2,8 +2,6 @@ FROM registry.access.redhat.com/ubi9/nodejs-18 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 # Become root before installing anything
 USER root
-RUN dnf update -y && dnf clean all
-
 # install dependencies in a separate layer to save dev time
 WORKDIR /app
 COPY package.json package-lock.json .
