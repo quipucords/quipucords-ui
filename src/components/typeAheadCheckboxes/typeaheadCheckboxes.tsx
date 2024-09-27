@@ -24,13 +24,15 @@ interface TypeaheadCheckboxesProps {
   options: { value: string; label: string }[];
   selectedOptions?: string[];
   placeholder?: string;
+  menuToggleOuiaId?: number | string;
 }
 
 const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   onChange = Function.prototype,
   options,
   selectedOptions = [],
-  placeholder = '0 items selected'
+  placeholder = '0 items selected',
+  menuToggleOuiaId
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -156,7 +158,14 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   }, [selected, placeholder]);
 
   const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
-    <MenuToggle variant="typeahead" onClick={onToggleClick} innerRef={toggleRef} isExpanded={isOpen} isFullWidth>
+    <MenuToggle
+      variant="typeahead"
+      onClick={onToggleClick}
+      innerRef={toggleRef}
+      isExpanded={isOpen}
+      isFullWidth
+      data-ouia-component-id={menuToggleOuiaId}
+    >
       <TextInputGroup isPlain>
         <TextInputGroupMain
           value={inputValue}
@@ -171,6 +180,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
           role="combobox"
           isExpanded={isOpen}
           aria-controls="select-multi-typeahead-checkbox-listbox"
+          data-ouia-component-id="credentials_list_input"
         />
         <TextInputGroupUtilities>
           {selected.length > 0 && (
@@ -182,6 +192,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
                 textInputRef?.current?.focus();
               }}
               aria-label="Clear input value"
+              ouiaId="credentials_list_toggle_button"
             >
               <TimesIcon aria-hidden />
             </Button>

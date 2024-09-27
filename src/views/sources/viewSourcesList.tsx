@@ -240,15 +240,16 @@ const SourcesListView: React.FunctionComponent = () => {
   const renderAddSourceButton = () => (
     <SimpleDropdown
       label={t('view.empty-state_label_sources')}
+      menuToggleOuiaId="add_source_button"
       variant="primary"
       onSelect={item => setAddSourceModal(item)}
       dropdownItems={[
-        t('dataSource.network'),
-        t('dataSource.openshift'),
-        t('dataSource.rhacs'),
-        t('dataSource.satellite'),
-        t('dataSource.vcenter'),
-        t('dataSource.ansible')
+        { item: t('dataSource.network'), ouiaId: 'network' },
+        { item: t('dataSource.openshift'), ouiaId: 'openshift' },
+        { item: t('dataSource.rhacs'), ouiaId: 'rhacs' },
+        { item: t('dataSource.satellite'), ouiaId: 'satellite' },
+        { item: t('dataSource.vcenter'), ouiaId: 'vcenter' },
+        { item: t('dataSource.ansible'), ouiaId: 'ansible' }
       ]}
     />
   );
@@ -364,6 +365,7 @@ const SourcesListView: React.FunctionComponent = () => {
                     isDisabled={source.connection?.status === 'pending'}
                     variant={ButtonVariant.link}
                     onClick={() => onScanSource(source)}
+                    ouiaId="scan_button"
                   >
                     Scan
                   </Button>

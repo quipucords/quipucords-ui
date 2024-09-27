@@ -83,6 +83,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
                 onChange={ev => {
                   setValue('scan-name', (ev.target as HTMLInputElement).value);
                 }}
+                ouiaId="name"
               />
             </FormGroup>
             <FormGroup label="Sources" isRequired fieldId="scan-sources">
@@ -107,6 +108,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
                 inputAriaLabel="number input"
                 minusBtnAriaLabel="minus"
                 plusBtnAriaLabel="plus"
+                data-ouia-component-id="scan_concurrency"
               />
             </FormGroup>
             <FormGroup
@@ -128,6 +130,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
                   id={`deep-scan-${o.value}`}
                   isChecked={deepScans.includes(o.value)}
                   onChange={(_ev, ch) => onDeepScanChange(o.value, ch)}
+                  ouiaId={`options_${o.value}`}
                 />
               ))}
             </FormGroup>
@@ -138,6 +141,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
                   onChange={(_ev, val) => setValue('scan-alt-scan', val)}
                   id="scan-alt-scan"
                   name="scan-alt-scan"
+                  data-ouia-component-id="scan_alt_dirs"
                 />
                 <HelperText>Default: directories are /./opt./app./home/usr</HelperText>
               </FormGroup>

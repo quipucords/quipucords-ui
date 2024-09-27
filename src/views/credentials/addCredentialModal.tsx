@@ -113,6 +113,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
         id="credential-name"
         name="name"
         onChange={event => handleInputChange('name', (event.target as HTMLInputElement).value)}
+        ouiaId="cred_name"
       />
     </FormGroup>
 
@@ -121,11 +122,18 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
       <FormGroup label="Authentication Type" fieldId="auth_type">
         <SimpleDropdown
           label={authType}
+          menuToggleOuiaId="auth_type"
           variant="default"
           isFullWidth
           onSelect={item => setAuthType(item)}
           dropdownItems={
-            (typeValue === 'network' && ['Username and Password', 'SSH Key']) || ['Token', 'Username and Password']
+            (typeValue === 'network' && [
+              { item: 'Username and Password', ouiaId: 'password' },
+              { item: 'SSH Key', ouiaId: 'ssh_key' }
+            ]) || [
+              { item: 'Token', ouiaId: 'auth_token' },
+              { item: 'Username and Password', ouiaId: 'password' }
+            ]
           }
         />
       </FormGroup>
@@ -142,6 +150,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
           id="credential-token"
           name="auth_token"
           onChange={event => handleInputChange('auth_token', (event.target as HTMLInputElement).value)}
+          ouiaId="auth_token"
         />
       </FormGroup>
     )}
@@ -157,6 +166,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="credential-username"
             name="username"
             onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
+            ouiaId="username"
           />
         </FormGroup>
         <FormGroup label="Password" isRequired fieldId="password">
@@ -168,6 +178,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="credential-password"
             name="password"
             onChange={event => handleInputChange('password', (event.target as HTMLInputElement).value)}
+            ouiaId="password"
           />
         </FormGroup>
       </React.Fragment>
@@ -184,6 +195,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="credential-username"
             name="username"
             onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
+            ouiaId="username"
           />
         </FormGroup>
         <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
@@ -195,6 +207,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="ssh_key"
             onChange={event => handleInputChange('ssh_key', event.target.value)}
             rows={10}
+            data-ouia-component-id="ssh_key"
           />
           <FormHelperText>
             Please paste your private SSH key here. This key will be used to authenticate your access to the system.
@@ -208,6 +221,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="ssh_passphrase"
             name="ssh_passphrase"
             onChange={event => handleInputChange('ssh_passphrase', (event.target as HTMLInputElement).value)}
+            ouiaId="ssh_passphrase"
           />
         </FormGroup>
       </React.Fragment>
@@ -219,10 +233,21 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
         <FormGroup label="Become Method" fieldId="become_method">
           <SimpleDropdown
             label={formData?.become_method || 'Select option'}
+            menuToggleOuiaId="become_method"
             variant="default"
             isFullWidth
             onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
-            dropdownItems={['Select option', 'sudo', 'su', 'pbrun', 'pfexec', 'doas', 'dzdo', 'ksu', 'runas']}
+            dropdownItems={[
+              { item: 'Select option', ouiaId: 'default' },
+              { item: 'sudo', ouiaId: 'sudo' },
+              { item: 'su', ouiaId: 'su' },
+              { item: 'pbrun', ouiaId: 'pbrun' },
+              { item: 'pfexec', ouiaId: 'pfexec' },
+              { item: 'doas', ouiaId: 'doas' },
+              { item: 'dzdo', ouiaId: 'dzdo' },
+              { item: 'ksu', ouiaId: 'ksu' },
+              { item: 'runas', ouiaId: 'runas' }
+            ]}
           />
         </FormGroup>
         <FormGroup label="Become User" fieldId="become_user">
@@ -233,6 +258,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="become_user"
             name="become_user"
             onChange={event => handleInputChange('become_user', (event.target as HTMLInputElement).value)}
+            ouiaId="become_user"
           />
         </FormGroup>
         <FormGroup label="Become Password" fieldId="become_password">
@@ -243,6 +269,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             id="become_password"
             name="become_password"
             onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
+            ouiaId="become_password"
           />
         </FormGroup>
       </React.Fragment>

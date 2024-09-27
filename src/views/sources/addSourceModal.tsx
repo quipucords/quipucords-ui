@@ -120,6 +120,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                 onChange={ev => {
                   setValue('name', (ev.target as HTMLInputElement).value);
                 }}
+                ouiaId="name"
               />
             </FormGroup>
             <FormGroup label="Credentials" fieldId="credentials" isRequired>
@@ -131,6 +132,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                 }}
                 options={credOptions}
                 selectedOptions={credentials?.map(String) || []}
+                menuToggleOuiaId="add_credentials_select"
               />
             </FormGroup>
             {isNetwork ? (
@@ -143,6 +145,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     isRequired
                     id="source-hosts"
                     name="hosts"
+                    data-ouia-component-id="hosts_multiple"
                   />
                   <HelperText>
                     Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation
@@ -159,6 +162,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     onChange={ev => {
                       setValue('port', (ev.target as HTMLInputElement).value);
                     }}
+                    ouiaId="port"
                   />
                   <HelperText>Default port is 22</HelperText>
                 </FormGroup>
@@ -172,6 +176,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     isRequired
                     id="source-hosts"
                     name="hosts"
+                    ouiaId="hosts_single"
                   />
                   <HelperText>Enter an IP address or hostname</HelperText>
                 </FormGroup>
@@ -185,6 +190,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     onChange={ev => {
                       setValue('port', (ev.target as HTMLInputElement).value);
                     }}
+                    ouiaId="port"
                   />
                   <HelperText>Default port is 443</HelperText>
                 </FormGroup>
@@ -198,6 +204,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                   id="paramiko"
                   isChecked={useParamiko}
                   onChange={(_ev, ch) => setUseParamiko(ch)}
+                  ouiaId="options_paramiko"
                 />
               </FormGroup>
             ) : (
@@ -206,9 +213,16 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                   <SimpleDropdown
                     isFullWidth
                     label={sslProtocol}
+                    menuToggleOuiaId="options_ssl_protocol"
                     variant={'default'}
                     onSelect={item => setSslProtocol(item)}
-                    dropdownItems={['SSLv23', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'Disable SSL']}
+                    dropdownItems={[
+                      { item: 'SSLv23', ouiaId: 'sslv23' },
+                      { item: 'TLSv1', ouiaId: 'tlsv1' },
+                      { item: 'TLSv1.1', ouiaId: 'tlsv11' },
+                      { item: 'TLSv1.2', ouiaId: 'tlsv12' },
+                      { item: 'Disable SSL', ouiaId: 'disable_ssl' }
+                    ]}
                   />
                 </FormGroup>
                 <FormGroup label="" fieldId="ssl_verify">
@@ -219,6 +233,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     isDisabled={sslProtocol === 'Disable SSL'}
                     isChecked={sslProtocol !== 'Disable SSL' && sslVerify}
                     onChange={(_ev, ch) => setSslVerify(ch)}
+                    ouiaId="options_ssl_cert"
                   />
                 </FormGroup>
               </React.Fragment>
