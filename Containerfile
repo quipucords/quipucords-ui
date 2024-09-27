@@ -7,7 +7,10 @@ RUN dnf update -y && dnf clean all
 # install dependencies in a separate layer to save dev time
 WORKDIR /app
 COPY package.json package-lock.json .
-RUN npm install --omit=dev
+RUN npm ci \
+    --no-audit \
+    --legacy-peer-deps \
+    --omit=dev
 
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
