@@ -21,6 +21,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { t } = useTranslation();
   const { isAuthorized } = useGetSetAuth();
   const { login } = useLogin();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isLoginError, setIsLoginError] = useState<boolean>(false);
   const [isValidUsername, setIsValidUsername] = useState(true);
@@ -49,18 +50,24 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     ) => {
       event.preventDefault();
 
-      if (username && password) {
-        login({ username, password }).then(
-          () => {
-            setIsLoggedIn(true);
-          },
-          () => {
-            setIsLoginError(true);
-          }
-        );
+      if (!isLoading && username && password) {
+        setIsLoading(true);
+
+        login({ username, password })
+          .then(
+            () => {
+              setIsLoggedIn(true);
+            },
+            () => {
+              setIsLoginError(true);
+            }
+          )
+          .finally(() => {
+            setIsLoading(false);
+          });
       }
     },
-    [login]
+    [isLoading, login]
   );
 
   if (isLoggedIn) {
@@ -75,6 +82,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
       backgroundImgSrc={bgImage}
     >
       <LoginForm
+        style={{ opacity: (isLoading && 0.5) || 1 }}
         showHelperText={isLoginError}
         helperText={t('login.invalid')}
         helperTextIcon={<ExclamationCircleIcon />}
