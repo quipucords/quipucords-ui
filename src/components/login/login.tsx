@@ -10,6 +10,7 @@ import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
 import bgImage from '../../images/aboutBg.png';
+import apiHelpers from '../../helpers/apiHelpers';
 
 interface LoginProps {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { login } = useLogin();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isLoginError, setIsLoginError] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string | undefined>(undefined);
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [username, setUsername] = useState<string>('');
@@ -58,8 +59,8 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
             () => {
               setIsLoggedIn(true);
             },
-            () => {
-              setIsLoginError(true);
+            error => {
+              setLoginError(apiHelpers.extractErrorMessage(error));
             }
           )
           .finally(() => {
@@ -83,8 +84,8 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     >
       <LoginForm
         style={{ opacity: (isLoading && 0.5) || 1 }}
-        showHelperText={isLoginError}
-        helperText={t('login.invalid')}
+        showHelperText={loginError !== undefined}
+        helperText={loginError || t('login.invalid')}
         helperTextIcon={<ExclamationCircleIcon />}
         usernameLabel={t('login.label', { context: 'username' })}
         usernameValue={username}
