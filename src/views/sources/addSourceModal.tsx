@@ -29,7 +29,6 @@ interface AddSourceModalProps {
   isOpen: boolean;
   source?: SourceType;
   sourceType?: string;
-  sourceName?: string;
   onClose?: () => void;
   onSubmit?: (payload: any) => void;
 }
@@ -76,7 +75,7 @@ const useSourceForm = ({
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
         useParamiko: source?.options?.use_paramiko || false,
-        sslVerify: source?.options?.ssl_cert_verify !== undefined ? source.options.ssl_cert_verify : true,
+        sslVerify: source?.options?.ssl_cert_verify ?? true,
         sslProtocol: (source?.options?.disable_ssl && 'Disable SSL') || source?.options?.ssl_protocol || 'SSLv23',
         name: source?.name || '',
         hosts: source?.hosts?.join(',') || '',
@@ -305,20 +304,17 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
   isOpen,
   source,
   sourceType,
-  sourceName,
   onClose = () => {},
   onSubmit = () => {}
-}) => {
-  return (
-    <Modal
-      variant={ModalVariant.small}
-      title={source ? `Edit Source: ${sourceName || ''}` : `Add Source: ${sourceType || ''}`}
-      isOpen={isOpen}
-      onClose={() => onClose()}
-    >
-      <SourceForm source={source} sourceType={sourceType} onClose={onClose} onSubmit={onSubmit} />
-    </Modal>
-  );
-};
+}) => (
+  <Modal
+    variant={ModalVariant.small}
+    title={(source && `Edit Source: ${source.name || ''}`) || `Add Source: ${sourceType || ''}`}
+    isOpen={isOpen}
+    onClose={() => onClose()}
+  >
+    <SourceForm source={source} sourceType={sourceType} onClose={onClose} onSubmit={onSubmit} />
+  </Modal>
+);
 
 export { AddSourceModal as default, AddSourceModal, SourceForm, useSourceForm, type AddSourceModalProps };
