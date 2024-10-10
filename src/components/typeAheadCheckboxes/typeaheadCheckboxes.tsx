@@ -50,6 +50,10 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   }, [options]);
 
   useEffect(() => {
+    setSelected(selectedOptions);
+  }, [selectedOptions]);
+
+  useEffect(() => {
     let newSelectOptions: SelectOptionProps[] = options;
 
     // Filter menu items based on the text input value when one exists
