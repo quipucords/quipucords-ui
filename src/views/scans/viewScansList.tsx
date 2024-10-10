@@ -279,6 +279,18 @@ const ScansListView: React.FunctionComponent = () => {
           setScanSelected(undefined);
           setScanJobs(undefined);
         }}
+        actions={[
+          <Button
+            key="close"
+            variant="secondary"
+            onClick={() => {
+              setScanSelected(undefined); // Close the modal when this is clicked
+              setScanJobs(undefined);
+            }}
+          >
+            {t('table.label', { context: 'close' })}
+          </Button>
+        ]}
       />
       <Modal
         variant={ModalVariant.small}
