@@ -77,11 +77,19 @@ exports[`SourceForm should render a basic component: basic 1`] = `
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
       options={[]}
       selectedOptions={[]}
     />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
   </FormGroup>
   <React.Fragment>
     <FormGroup
