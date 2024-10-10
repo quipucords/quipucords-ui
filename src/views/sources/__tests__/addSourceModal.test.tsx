@@ -1,9 +1,9 @@
 import React, { act } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
-import { AddSourceModal } from '../addSourceModal';
+import { AddSourceModal, SourceForm, useSourceForm } from '../addSourceModal';
 
 describe('AddSourceModal', () => {
   let mockOnClose;
@@ -12,10 +12,10 @@ describe('AddSourceModal', () => {
   beforeEach(async () => {
     jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
 
-    await act(async () => {
-      mockOnClose = jest.fn();
-      mockOnSubmit = jest.fn();
-      await render(
+    mockOnClose = jest.fn();
+    mockOnSubmit = jest.fn();
+    await act(() => {
+      render(
         <AddSourceModal
           isOpen={true}
           sourceType="network"
@@ -54,5 +54,53 @@ describe('AddSourceModal', () => {
     await user.click(screen.getByText('Cancel'));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('useSourceForm', () => {
+  beforeEach(() => {
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should initialize formData correctly', async () => {
+    const result = renderHook(() => useSourceForm({ sourceType: 'network' })).result;
+    await act(() => expect(result.current.formData).toMatchSnapshot('formData'));
+  });
+
+  it('should allow editing a source', async () => {
+    const result = renderHook(() =>
+      useSourceForm({
+        source: {
+          id: 123,
+          name: 'lorem',
+          port: 456,
+          source_type: 'openshift'
+        }
+      })
+    ).result;
+
+    await act(() => expect(result.current.formData).toMatchSnapshot('formData, edit'));
+  });
+
+  it('should update and filter formData when handleInputChange is called', async () => {
+    const result = renderHook(() => useSourceForm({ sourceType: 'network' })).result;
+    const mockValue = 'Lorem ipsum';
+
+    await act(() => result.current.handleInputChange('name', mockValue));
+    expect(result.current.formData.name).toBe(mockValue);
+
+    const filteredData = result.current.filterFormData();
+    expect(filteredData.name).toBe(mockValue);
+  });
+});
+
+describe('SourceForm', () => {
+  it('should render a basic component', async () => {
+    const component = await shallowComponent(<SourceForm />);
+    expect(component).toMatchSnapshot('basic');
   });
 });
