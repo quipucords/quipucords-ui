@@ -25,6 +25,7 @@ interface TypeaheadCheckboxesProps {
   selectedOptions?: string[];
   placeholder?: string;
   menuToggleOuiaId?: number | string;
+  maxSelections?: number;
 }
 
 const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
@@ -32,7 +33,8 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   options,
   selectedOptions = [],
   placeholder = '0 items selected',
-  menuToggleOuiaId
+  menuToggleOuiaId,
+  maxSelections = Infinity
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -46,6 +48,10 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   useEffect(() => {
     setSelectOptions(options);
   }, [options]);
+
+  useEffect(() => {
+    setSelected(selectedOptions);
+  }, [selectedOptions]);
 
   useEffect(() => {
     let newSelectOptions: SelectOptionProps[] = options;
@@ -143,11 +149,18 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
 
   const onSelect = (value: string) => {
     if (value && value !== 'no results') {
-      const newSelected = selected.includes(value)
-        ? selected.filter(selection => selection !== value)
-        : [...selected, value];
-      onChange(newSelected);
-      setSelected(newSelected);
+      if (!selected.includes(value)) {
+        if (selected.length >= maxSelections) {
+          return;
+        }
+        const newSelected = [...selected, value];
+        onChange(newSelected);
+        setSelected(newSelected);
+      } else {
+        const newSelected = selected.filter(selection => selection !== value);
+        onChange(newSelected);
+        setSelected(newSelected);
+      }
     }
 
     textInputRef.current?.focus();
