@@ -14,6 +14,7 @@ import {
   Form,
   FormGroup,
   HelperText,
+  HelperTextItem,
   Modal,
   ModalVariant,
   TextArea,
@@ -174,20 +175,19 @@ const SourceForm: React.FC<SourceFormProps> = ({
       <FormGroup label="Credentials" fieldId="credentials" isRequired>
         <TypeaheadCheckboxes
           onChange={(selections: string[]) => {
-            const selectedIds = selections.map(Number);
-            const validIds = selectedIds.filter(id => !isNaN(id));
-
-            // If the user selects more than one credential, display a warning
-            if (!isNetwork && validIds.length > 1) {
-              alert('Only one credential can be selected for this source type.');
-            } else {
-              handleInputChange('credentials', validIds);
-            }
+            const validIds = selections.map(Number).filter(id => !isNaN(id));
+            handleInputChange('credentials', validIds);
           }}
           options={credOptions}
           selectedOptions={formData?.credentials?.map(String) || []}
           menuToggleOuiaId="add_credentials_select"
+          maxSelections={isNetwork ? Infinity : 1} // Limit selection to 1 for non-network sources
         />
+        {!isNetwork && (
+          <HelperText>
+            <HelperTextItem variant="warning">Only one credential can be selected for this source type.</HelperTextItem>
+          </HelperText>
+        )}
       </FormGroup>
       {isNetwork ? (
         <React.Fragment>
