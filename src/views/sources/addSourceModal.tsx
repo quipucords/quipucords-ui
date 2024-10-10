@@ -75,7 +75,7 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
   const onAdd = values => {
     const payload = {
       credentials: credentials.map(c => Number(c)),
-      hosts: values['hosts'].split(','),
+      hosts: helpers.normalizeHosts(values['hosts']),
       name: values['name'],
       port: values['port'] || (isNetwork ? '22' : '443'),
       options: !isNetwork
