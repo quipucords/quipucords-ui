@@ -121,7 +121,7 @@ const useSourceForm = ({
       return {
         name: name,
         credentials: credentials?.map(c => Number(c)),
-        hosts: hosts?.split(','),
+        hosts: helpers.normalizeHosts(hosts),
         port: port || (isOpenshift && '6443') || (isNetwork && '22') || '443',
         options: !isNetwork
           ? {

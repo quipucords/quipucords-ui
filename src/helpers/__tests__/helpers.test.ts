@@ -125,6 +125,36 @@ describe('formatDate', () => {
   });
 });
 
+describe('normalizeHosts', () => {
+  it('should accept values separated by space', () => {
+    const input = '127.0.0.1 127.0.0.2';
+    const expected = ['127.0.0.1', '127.0.0.2'];
+
+    expect(helpers.normalizeHosts(input)).toEqual(expected);
+  });
+
+  it('should accept values separated by newline (\\n)', () => {
+    const input = '127.0.0.1\n127.0.0.2';
+    const expected = ['127.0.0.1', '127.0.0.2'];
+
+    expect(helpers.normalizeHosts(input)).toEqual(expected);
+  });
+
+  it('should accept values separated by newline (\\r)', () => {
+    const input = '127.0.0.1\r127.0.0.2';
+    const expected = ['127.0.0.1', '127.0.0.2'];
+
+    expect(helpers.normalizeHosts(input)).toEqual(expected);
+  });
+
+  it('should filter out empty values', () => {
+    const input = '127.0.0.1\n 127.0.0.2 ';
+    const expected = ['127.0.0.1', '127.0.0.2'];
+
+    expect(helpers.normalizeHosts(input)).toEqual(expected);
+  });
+});
+
 describe('normalizeTotal', () => {
   it('should normalize total values', () => {
     expect(helpers.normalizeTotal({ count: 142 }, true, undefined)).toBe(42);
