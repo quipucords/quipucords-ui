@@ -8,9 +8,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import apiHelpers from '../../helpers/apiHelpers';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
 import bgImage from '../../images/aboutBg.png';
-import apiHelpers from '../../helpers/apiHelpers';
 
 interface LoginProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { login } = useLogin();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [loginError, setLoginError] = useState<string | undefined>(undefined);
+  const [loginError, setLoginError] = useState<string | undefined>();
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [username, setUsername] = useState<string>('');
@@ -60,7 +60,10 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
               setIsLoggedIn(true);
             },
             error => {
-              setLoginError(apiHelpers.extractErrorMessage(error));
+              setLoginError(
+                (error?.status === 400 && t('login.error', { context: error.status })) ||
+                  apiHelpers.extractErrorMessage(error)
+              );
             }
           )
           .finally(() => {

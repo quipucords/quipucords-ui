@@ -46,6 +46,11 @@ exports[`Login should render a basic component: basic 1`] = `
 ])"
     passwordValue=""
     showHelperText={false}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
     usernameLabel="t([
   "login.label",
   {

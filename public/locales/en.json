@@ -124,6 +124,7 @@
   },
   "login": {
     "description": "Welcome! This inspection and reporting tool is designed to identify and report environment data, or facts, such as the number of physical and virtual systems on a network, their operating systems, and other configuration data.",
+    "error_400": "Unable to log in with provided credentials.",
     "label_login": "Log in",
     "label_username": "Username",
     "label_password": "Password",
