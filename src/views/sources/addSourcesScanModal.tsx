@@ -51,7 +51,6 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
       options: {
         max_concurrency: values['scan-max-concurrent'],
         enabled_extended_product_search: {
-          jboss_brms: deepScans.includes('jboss_brms'),
           jboss_eap: deepScans.includes('jboss_eap'),
           jboss_fuse: deepScans.includes('jboss_fuse'),
           jboss_ws: deepScans.includes('jboss_ws'),
@@ -121,8 +120,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
               {[
                 { label: 'JBoss EAP', value: 'jboss_eap' },
                 { label: 'Fuse', value: 'jboss_fuse' },
-                { label: 'JBoss web server', value: 'jboss_ws' },
-                { label: 'Decision manager', value: 'jboss_brms' }
+                { label: 'JBoss web server', value: 'jboss_ws' }
               ].map(o => (
                 <Checkbox
                   key={`deep-scan-${o.value}`}
