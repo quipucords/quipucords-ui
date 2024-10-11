@@ -61,7 +61,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
             },
             error => {
               setLoginError(
-                (error?.status === 400 && t('login.error', { context: error.status })) ||
+                (error?.status === 400 && t('login.error', { context: error?.status })) ||
                   apiHelpers.extractErrorMessage(error)
               );
             }
