@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import apiHelpers from '../../helpers/apiHelpers';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
 import bgImage from '../../images/aboutBg.png';
 
@@ -21,8 +22,9 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { t } = useTranslation();
   const { isAuthorized } = useGetSetAuth();
   const { login } = useLogin();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isLoginError, setIsLoginError] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string | undefined>();
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [username, setUsername] = useState<string>('');
@@ -49,18 +51,27 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     ) => {
       event.preventDefault();
 
-      if (username && password) {
-        login({ username, password }).then(
-          () => {
-            setIsLoggedIn(true);
-          },
-          () => {
-            setIsLoginError(true);
-          }
-        );
+      if (!isLoading && username && password) {
+        setIsLoading(true);
+
+        login({ username, password })
+          .then(
+            () => {
+              setIsLoggedIn(true);
+            },
+            error => {
+              setLoginError(
+                (error?.status === 400 && t('login.error', { context: error?.status })) ||
+                  apiHelpers.extractErrorMessage(error)
+              );
+            }
+          )
+          .finally(() => {
+            setIsLoading(false);
+          });
       }
     },
-    [login]
+    [isLoading, login]
   );
 
   if (isLoggedIn) {
@@ -75,8 +86,9 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
       backgroundImgSrc={bgImage}
     >
       <LoginForm
-        showHelperText={isLoginError}
-        helperText={t('login.invalid')}
+        style={{ opacity: (isLoading && 0.5) || 1 }}
+        showHelperText={loginError !== undefined}
+        helperText={loginError || t('login.invalid')}
         helperTextIcon={<ExclamationCircleIcon />}
         usernameLabel={t('login.label', { context: 'username' })}
         usernameValue={username}
