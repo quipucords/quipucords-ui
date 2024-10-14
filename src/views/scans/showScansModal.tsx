@@ -21,6 +21,7 @@ interface ShowScansModalProps {
   scanJobs?: Pick<ScanJobType, 'id' | 'end_time' | 'report_id' | 'status'>[];
   onDownload?: (number) => void;
   onClose?: () => void;
+  actions?: React.ReactNode[];
 }
 
 const ShowScansModal: React.FC<ShowScansModalProps> = ({
@@ -28,7 +29,8 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
   scan,
   scanJobs,
   onDownload = Function.prototype,
-  onClose = Function.prototype
+  onClose = Function.prototype,
+  actions
 }) => {
   const { t } = useTranslation();
   const [activeSortIndex, setActiveSortIndex] = useState<number | undefined>();
@@ -88,6 +90,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
       title={t('view.label', { context: 'scans-names', name: scan?.name })}
       isOpen={isOpen}
       onClose={() => onClose()}
+      {...(actions && { actions })}
     >
       {(scanJobs && (
         <React.Fragment>
