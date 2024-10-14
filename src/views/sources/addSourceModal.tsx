@@ -201,14 +201,14 @@ const SourceForm: React.FC<SourceFormProps> = ({
               placeholder="Enter values separated by commas"
               value={formData?.hosts}
               onChange={event => handleInputChange('hosts', event.target.value)}
+              validated={helpers.validateHosts(formData?.hosts, Infinity)}
               isRequired
               id="source-hosts"
               name="hosts"
               data-ouia-component-id="hosts_multiple"
             />
             <HelperText>
-              Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for
-              ranges.
+              Type IP addresses, IP ranges, and DNS host names. Use CIDR or Ansible notation for ranges.
             </HelperText>
           </FormGroup>
           <FormGroup label="Port" fieldId="port">
@@ -231,6 +231,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               value={formData?.hosts}
               onChange={event => handleInputChange('hosts', (event.target as HTMLInputElement).value)}
               isRequired
+              validated={helpers.validateHosts(formData?.hosts, 1)}
               id="source-hosts"
               name="hosts"
               ouiaId="hosts_single"

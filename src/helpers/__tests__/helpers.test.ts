@@ -5,6 +5,7 @@
  * checks.
  */
 import React from 'react';
+import { ValidatedOptions } from '@patternfly/react-core';
 import moment from 'moment';
 import { helpers } from '../helpers';
 
@@ -152,6 +153,46 @@ describe('normalizeHosts', () => {
     const expected = ['127.0.0.1', '127.0.0.2'];
 
     expect(helpers.normalizeHosts(input)).toEqual(expected);
+  });
+});
+
+describe('validateHosts', () => {
+  // values copied from backend test
+  // quipucords/tests/api/source/test_source.py::TestSource::test_create_valid_hosts
+  it.each([
+    ['10.10.181.9'],
+    ['10.10.181.9/16'],
+    ['10.10.128.[1:25]'],
+    ['10.10.[1:20].25'],
+    ['10.10.[1:20].[1:25]'],
+    ['localhost'],
+    ['my_cool_underscore.com'],
+    ['bgimages.com'],
+    ['my_rhel[a:d].company.com'],
+    ['my_rhel[120:400].company.com'],
+    ['my-rhel[a:d].company.com'],
+    ['my-rhel[120:400].company.com'],
+    ['my-rh_el[120:400].comp_a-ny.com']
+  ])('should accept valid host [%s]', host => {
+    expect(helpers.validateHosts(host, Infinity)).toBe(ValidatedOptions.default);
+  });
+
+  it('should reject empty hosts', () => {
+    const input = ',,';
+
+    expect(helpers.validateHosts(input, Infinity)).toBe(ValidatedOptions.error);
+  });
+
+  it('should reject multiple hosts when only one is allowed', () => {
+    const input = '127.0.0.1 127.0.0.2';
+
+    expect(helpers.validateHosts(input, 1)).toBe(ValidatedOptions.error);
+  });
+
+  it('should reject too long host', () => {
+    const input = 'a'.repeat(400);
+
+    expect(helpers.validateHosts(input, Infinity)).toBe(ValidatedOptions.error);
   });
 });
 
