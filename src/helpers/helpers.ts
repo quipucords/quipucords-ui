@@ -119,7 +119,7 @@ const normalizeHosts = (data?: string) =>
  * @param {number} maxHosts - maximum number of hosts that the field should allow.
  * @returns ValidatedOptions
  */
-const validateHosts = (data: string | undefined, maxHosts: number) => {
+const validateHosts = (data: string | undefined, maxHosts: number = Infinity) => {
   const hostValid = (value: string) => {
     // maximum hostname length is 253 ASCII characters, but we need some extra space for ranges
     if (value.length > 300) {
@@ -141,15 +141,15 @@ const validateHosts = (data: string | undefined, maxHosts: number) => {
 
   const normalizedHosts = normalizeHosts(data);
 
-  if (!normalizedHosts!.length) {
+  if (!normalizedHosts?.length) {
     return ValidatedOptions.error;
   }
 
-  if (normalizedHosts!.length > maxHosts) {
+  if (normalizedHosts?.length > maxHosts) {
     return ValidatedOptions.error;
   }
 
-  if (normalizedHosts!.some(host => !hostValid(host))) {
+  if (normalizedHosts?.some(host => !hostValid(host))) {
     return ValidatedOptions.error;
   }
 
