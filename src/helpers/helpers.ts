@@ -105,12 +105,16 @@ const formatDate = (date: Date) => moment.utc(date).format('DD MMMM Y, h:mm A z'
  * @param {string} data - host textarea content.
  * @returns Array of host values which will be submitted to backend.
  */
-const normalizeHosts = (data?: string) =>
-  data
-    ?.trim()
-    ?.replaceAll(/\\n|\\r|\s/g, ',')
-    ?.split(',')
-    ?.filter(Boolean);
+const normalizeHosts = (data?: string) => {
+  if (!data) {
+    return [];
+  }
+  return data
+    .trim()
+    .replaceAll(/\\n|\\r|\s/g, ',')
+    .split(',')
+    .filter(Boolean);
+};
 
 /**
  * Validates hosts textarea content.
@@ -141,15 +145,15 @@ const validateHosts = (data: string | undefined, maxHosts: number = Infinity) =>
 
   const normalizedHosts = normalizeHosts(data);
 
-  if (!normalizedHosts?.length) {
+  if (!normalizedHosts.length) {
     return ValidatedOptions.error;
   }
 
-  if (normalizedHosts?.length > maxHosts) {
+  if (normalizedHosts.length > maxHosts) {
     return ValidatedOptions.error;
   }
 
-  if (normalizedHosts?.some(host => !hostValid(host))) {
+  if (normalizedHosts.some(host => !hostValid(host))) {
     return ValidatedOptions.error;
   }
 

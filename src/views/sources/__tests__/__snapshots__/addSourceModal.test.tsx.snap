@@ -101,8 +101,7 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
-        validated="error"
-        value=""
+        validated="default"
       />
       <HelperText>
         Enter an IP address or hostname
@@ -268,7 +267,7 @@ exports[`useSourceForm should allow editing a source: formData, edit 1`] = `
 exports[`useSourceForm should initialize formData correctly: formData 1`] = `
 {
   "credentials": [],
-  "hosts": "",
+  "hosts": undefined,
   "name": "",
   "port": "",
   "sslProtocol": "SSLv23",

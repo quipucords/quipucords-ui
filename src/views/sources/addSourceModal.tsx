@@ -59,7 +59,7 @@ const useSourceForm = ({
     sslVerify: true,
     sslProtocol: 'SSLv23',
     name: '',
-    hosts: '',
+    hosts: undefined,
     port: ''
   };
 
