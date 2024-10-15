@@ -7,7 +7,6 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
       "name": "Test Scan",
       "options": {
         "enabled_extended_product_search": {
-          "jboss_brms": false,
           "jboss_eap": false,
           "jboss_fuse": false,
           "jboss_ws": false,

@@ -132,7 +132,6 @@ export type ScanJobType = {
     enabled_extended_product_search: {
       jboss_eap: false;
       jboss_fuse: false;
-      jboss_brms: false;
       jboss_ws: false;
     };
   };
