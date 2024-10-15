@@ -2,8 +2,9 @@
 
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
-  "components/viewLayout/viewLayoutToolbar.tsx:65:    console.log('selected', value);",
-  "components/viewLayout/viewLayoutToolbar.tsx:73:    console.log('selected', value);",
+  "components/aboutModal/aboutModal.tsx:45:        error => console.error(\`About status error: \${error} \`)",
+  "components/viewLayout/viewLayoutToolbar.tsx:69:    console.log('selected', value);",
+  "components/viewLayout/viewLayoutToolbar.tsx:77:    console.log('selected', value);",
   "helpers/queryHelpers.ts:70:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:75:        console.error(error);",
   "hooks/useCredentialApi.ts:81:          console.log(missingCredsMsg);",
@@ -28,6 +29,7 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "hooks/useSourceApi.ts:127:          console.error(error);",
   "hooks/useSourceApi.ts:191:          console.error(error);",
   "hooks/useSourceApi.ts:255:          console.error(error);",
+  "hooks/useStatusApi.ts:38:        console.error(error);",
   "views/scans/showScansModal.tsx:79:      console.log({ aValue, bValue });",
   "views/sources/addSourceModal.tsx:106:          console.error(err);",
 ]

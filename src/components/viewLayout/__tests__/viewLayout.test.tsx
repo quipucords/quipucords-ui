@@ -14,7 +14,7 @@ describe('ViewLayout', () => {
   it('should render a brand component', async () => {
     const props = {
       children: 'Lorem ipsum',
-      isBrand: true,
+      titleImg: 'titleBrand.svg',
       uiName: 'Discovery'
     };
     const component = await shallowComponent(<ViewLayout {...props} />);

@@ -12,70 +12,100 @@ exports[`ViewToolbar should attempt to load and display a username: user 1`] = `
 `;
 
 exports[`ViewToolbar should render a basic component: basic 1`] = `
-<Toolbar
-  id="toolbar"
-  isFullHeight={true}
-  isStatic={true}
->
-  <ToolbarContent
-    isExpanded={false}
-    showClearFiltersButton={false}
+<React.Fragment>
+  <Toolbar
+    id="toolbar"
+    isFullHeight={true}
+    isStatic={true}
   >
-    <ForwardRef
-      align={
-        {
-          "default": "alignRight",
-        }
-      }
-      spacer={
-        {
-          "default": "spacerNone",
-          "md": "spacerMd",
-        }
-      }
-      variant="icon-button-group"
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
     >
       <ForwardRef
-        variant="icon-button-group"
-        visibility={
+        align={
           {
-            "default": "hidden",
-            "lg": "visible",
+            "default": "alignRight",
           }
         }
+        spacer={
+          {
+            "default": "spacerNone",
+            "md": "spacerMd",
+          }
+        }
+        variant="icon-button-group"
       >
-        <ToolbarItem>
-          <ToggleGroup
-            aria-label="Dark theme toggle group"
-          >
-            <ToggleGroupItem
-              aria-label="light theme toggle"
-              icon={
-                <Icon
-                  size="md"
-                >
-                  <SunIcon />
-                </Icon>
+        <ForwardRef
+          variant="icon-button-group"
+          visibility={
+            {
+              "default": "hidden",
+              "lg": "visible",
+            }
+          }
+        >
+          <ToolbarItem>
+            <ToggleGroup
+              aria-label="Dark theme toggle group"
+            >
+              <ToggleGroupItem
+                aria-label="light theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <SunIcon />
+                  </Icon>
+                }
+                isSelected={true}
+                onChange={[Function]}
+              />
+              <ToggleGroupItem
+                aria-label="dark theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <MoonIcon />
+                  </Icon>
+                }
+                onChange={[Function]}
+              />
+            </ToggleGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Dropdown
+              isOpen={false}
+              onOpenChange={[Function]}
+              onSelect={[Function]}
+              popperProps={
+                {
+                  "position": "right",
+                }
               }
-              isSelected={true}
-              onChange={[Function]}
-            />
-            <ToggleGroupItem
-              aria-label="dark theme toggle"
-              icon={
-                <Icon
-                  size="md"
-                >
-                  <MoonIcon />
-                </Icon>
-              }
-              onChange={[Function]}
-            />
-          </ToggleGroup>
-        </ToolbarItem>
-        <ToolbarItem>
+              toggle={[Function]}
+            >
+              <DropdownItem
+                onClick={[Function]}
+                value="about"
+              >
+                About
+              </DropdownItem>
+            </Dropdown>
+          </ToolbarItem>
+        </ForwardRef>
+        <ToolbarItem
+          visibility={
+            {
+              "default": "visible",
+              "lg": "hidden",
+            }
+          }
+        >
           <Dropdown
             isOpen={false}
+            isPlain={true}
             onOpenChange={[Function]}
             onSelect={[Function]}
             popperProps={
@@ -86,10 +116,11 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
             toggle={[Function]}
           >
             <DropdownItem
+              data-ouia-component-id="logout"
               onClick={[Function]}
-              value="about"
+              value="logout"
             >
-              About
+              Logout
             </DropdownItem>
           </Dropdown>
         </ToolbarItem>
@@ -97,21 +128,15 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
       <ToolbarItem
         visibility={
           {
-            "default": "visible",
-            "lg": "hidden",
+            "default": "hidden",
+            "lg": "visible",
           }
         }
       >
         <Dropdown
           isOpen={false}
-          isPlain={true}
           onOpenChange={[Function]}
           onSelect={[Function]}
-          popperProps={
-            {
-              "position": "right",
-            }
-          }
           toggle={[Function]}
         >
           <DropdownItem
@@ -123,30 +148,11 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
           </DropdownItem>
         </Dropdown>
       </ToolbarItem>
-    </ForwardRef>
-    <ToolbarItem
-      visibility={
-        {
-          "default": "hidden",
-          "lg": "visible",
-        }
-      }
-    >
-      <Dropdown
-        isOpen={false}
-        onOpenChange={[Function]}
-        onSelect={[Function]}
-        toggle={[Function]}
-      >
-        <DropdownItem
-          data-ouia-component-id="logout"
-          onClick={[Function]}
-          value="logout"
-        >
-          Logout
-        </DropdownItem>
-      </Dropdown>
-    </ToolbarItem>
-  </ToolbarContent>
-</Toolbar>
+    </ToolbarContent>
+  </Toolbar>
+  <AboutModal
+    isOpen={false}
+    onClose={[Function]}
+  />
+</React.Fragment>
 `;

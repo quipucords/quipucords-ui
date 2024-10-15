@@ -7,6 +7,8 @@
  */
 import React from 'react';
 import moment, { type MomentInput } from 'moment';
+import titleImg from '../images/title.svg';
+import titleImgBrand from '../images/titleBrand.svg';
 import { type CredentialType } from '../types/types';
 
 /**
@@ -38,6 +40,12 @@ const UI_BRAND = process.env.REACT_APP_UI_BRAND === 'true';
  * See dotenv config files for updating.
  */
 const UI_NAME = (UI_BRAND && process.env.REACT_APP_UI_BRAND_NAME) || `${process.env.REACT_APP_UI_NAME}`;
+
+/**
+ * UI packaged application version, with generated hash.
+ * See dotenv config files for updating. See build scripts for generated hash.
+ */
+const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
 /**
  * Generates a translation key for internationalization.
@@ -189,20 +197,38 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
 const generateId = (prefix = 'generatedid') =>
   `${prefix}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
 
+/**
+ * Return a consistent current date
+ *
+ * @returns {string|Date}
+ */
+const getCurrentDate = () => (TEST_MODE && moment.utc('20241001').toDate()) || moment.utc().toDate();
+
+/**
+ * Return a consistent title image
+ *
+ * @param {boolean} isBrand
+ * @returns {string}
+ */
+const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || titleImg) as string;
+
 const helpers = {
   authType,
   downloadData,
   noopTranslate,
   generateId,
   getAuthType,
+  getCurrentDate,
   getTimeDisplayHowLongAgo,
+  getTitleImg,
   formatDate,
   normalizeTotal,
   DEV_MODE,
   PROD_MODE,
   TEST_MODE,
   UI_BRAND,
-  UI_NAME
+  UI_NAME,
+  UI_VERSION
 };
 
 export { helpers as default, helpers };

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useStatusApi should attempt an api call to get a status: apiCall 1`] = `
+[
+  [
+    "/api/v1/status/",
+  ],
+]
+`;
+
+exports[`useStatusApi should handle errors while attempting to get a status: getStatus, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useStatusApi should handle success while attempting to get a status: getStatus, success 1`] = `undefined`;
+
+exports[`useStatusApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useStatusApi should process an API success response: callbackSuccess 1`] = `
+{
+  "api_version": "lorem ipsum",
+  "server_version": "dolor sit",
+}
+`;
