@@ -400,6 +400,14 @@ describe('useRunScanApi', () => {
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
   });
+
+  it('should handle missing scan ID and trigger custom error', async () => {
+    const { runScans } = hookResult;
+    mockCreateScan.mockResolvedValue({});
+
+    await runScans({ name: 'Lorem' });
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, no ID returned');
+  });
 });
 
 describe('useDownloadReportApi', () => {
