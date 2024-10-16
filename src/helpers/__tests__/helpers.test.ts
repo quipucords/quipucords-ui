@@ -64,6 +64,25 @@ describe('getAuthType', () => {
   });
 });
 
+describe('getCurrentDate', () => {
+  it('should return a predictable current date', () => {
+    const currentDate = helpers.getCurrentDate();
+    expect({ currentDate }).toMatchSnapshot('current date');
+  });
+});
+
+describe('getTitleImg', () => {
+  it('should return a title image', () => {
+    const titleImg = helpers.getTitleImg();
+    expect({ titleImg }).toMatchSnapshot('title image');
+  });
+
+  it('should return a brand title image', () => {
+    const titleImg = helpers.getTitleImg(true);
+    expect({ titleImg }).toMatchSnapshot('brand title image');
+  });
+});
+
 describe('noopTranslate', () => {
   it('should format key, value, and components into a string', () => {
     const key = 'testKey';

@@ -1,4 +1,12 @@
 {
+  "about": {
+    "browser-os": "Browser OS",
+    "browser-version": "Browser Version",
+    "copyright": "Copyright (c) {{year}} Red Hat Inc.",
+    "server-version": "Server Version",
+    "ui-version": "UI Version",
+    "username": "Username"
+  },
   "form-dialog": {
     "confirmation_heading_delete-scan": "Are you sure you want to delete the scan <0>{{name}}</0>?",
     "confirmation_heading_delete-credential": "Are you sure you want to delete the credential {{name}}?",

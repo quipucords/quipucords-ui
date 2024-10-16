@@ -11,10 +11,28 @@ exports[`getAuthType should return a credential type: credentialTypes 1`] = `
 ]
 `;
 
+exports[`getCurrentDate should return a predictable current date: current date 1`] = `
+{
+  "currentDate": 2024-10-01T00:00:00.000Z,
+}
+`;
+
 exports[`getTimeDisplayHowLongAgo should return a timestamp estimate: timestamps 1`] = `
 [
   "a few seconds ago",
   "a month ago",
   "a day ago",
 ]
+`;
+
+exports[`getTitleImg should return a brand title image: brand title image 1`] = `
+{
+  "titleImg": "titleBrand.svg",
+}
+`;
+
+exports[`getTitleImg should return a title image: title image 1`] = `
+{
+  "titleImg": "title.svg",
+}
 `;

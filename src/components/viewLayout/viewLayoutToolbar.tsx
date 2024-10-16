@@ -22,6 +22,7 @@ import { EllipsisVIcon, MoonIcon, QuestionCircleIcon, SunIcon } from '@patternfl
 import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import './viewLayoutToolbar.css';
+import AboutModal from '../aboutModal/aboutModal';
 
 interface AppToolbarProps {
   useLogout?: typeof useLogoutApi;
@@ -33,6 +34,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
   const { getUser } = useUser();
   const [userName, setUserName] = useState<string>();
   const [helpOpen, setHelpOpen] = useState<boolean>(false);
+  const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
   const [kebabDropdownOpen, setKebabDropdownOpen] = useState<boolean>(false);
   const [isDarkTheme, setIsDarkTheme] = useState(
@@ -56,7 +58,9 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
   };
   applyTheme(isDarkTheme);
 
-  const onAbout = () => {};
+  const onAbout = () => setAboutOpen(true);
+
+  const onAboutClose = () => setAboutOpen(false);
 
   const onHelpSelect = (
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
@@ -75,86 +79,114 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
   };
 
   return (
-    <Toolbar id="toolbar" isFullHeight isStatic>
-      <ToolbarContent>
-        <ToolbarGroup
-          variant="icon-button-group"
-          align={{ default: 'alignRight' }}
-          spacer={{ default: 'spacerNone', md: 'spacerMd' }}
-        >
-          <ToolbarGroup variant="icon-button-group" visibility={{ default: 'hidden', lg: 'visible' }}>
-            <ToolbarItem>
-              <ToggleGroup aria-label="Dark theme toggle group">
-                <ToggleGroupItem
-                  aria-label="light theme toggle"
-                  icon={
-                    <Icon size="md">
-                      <SunIcon />
-                    </Icon>
-                  }
-                  isSelected={!isDarkTheme}
-                  onChange={() => {
-                    setIsDarkTheme(false);
-                    applyTheme(false);
-                  }}
-                />
-                <ToggleGroupItem
-                  aria-label="dark theme toggle"
-                  icon={
-                    <Icon size="md">
-                      <MoonIcon />
-                    </Icon>
-                  }
-                  isSelected={isDarkTheme}
-                  onChange={() => {
-                    setIsDarkTheme(true);
-                    applyTheme(true);
-                  }}
-                />
-              </ToggleGroup>
-            </ToolbarItem>
-            <ToolbarItem>
+    <React.Fragment>
+      <Toolbar id="toolbar" isFullHeight isStatic>
+        <ToolbarContent>
+          <ToolbarGroup
+            variant="icon-button-group"
+            align={{ default: 'alignRight' }}
+            spacer={{ default: 'spacerNone', md: 'spacerMd' }}
+          >
+            <ToolbarGroup variant="icon-button-group" visibility={{ default: 'hidden', lg: 'visible' }}>
+              <ToolbarItem>
+                <ToggleGroup aria-label="Dark theme toggle group">
+                  <ToggleGroupItem
+                    aria-label="light theme toggle"
+                    icon={
+                      <Icon size="md">
+                        <SunIcon />
+                      </Icon>
+                    }
+                    isSelected={!isDarkTheme}
+                    onChange={() => {
+                      setIsDarkTheme(false);
+                      applyTheme(false);
+                    }}
+                  />
+                  <ToggleGroupItem
+                    aria-label="dark theme toggle"
+                    icon={
+                      <Icon size="md">
+                        <MoonIcon />
+                      </Icon>
+                    }
+                    isSelected={isDarkTheme}
+                    onChange={() => {
+                      setIsDarkTheme(true);
+                      applyTheme(true);
+                    }}
+                  />
+                </ToggleGroup>
+              </ToolbarItem>
+              <ToolbarItem>
+                <Dropdown
+                  popperProps={{ position: 'right' }}
+                  onSelect={onHelpSelect}
+                  onOpenChange={(isOpen: boolean) => setHelpOpen(isOpen)}
+                  isOpen={helpOpen}
+                  toggle={toggleRef => (
+                    <MenuToggle
+                      aria-label="Toggle"
+                      ref={toggleRef}
+                      variant="plain"
+                      onClick={() => setHelpOpen(prev => !prev)}
+                      isExpanded={helpOpen}
+                    >
+                      <QuestionCircleIcon />
+                    </MenuToggle>
+                  )}
+                >
+                  <DropdownItem onClick={onAbout} value="about">
+                    About
+                  </DropdownItem>
+                </Dropdown>
+              </ToolbarItem>
+            </ToolbarGroup>
+            <ToolbarItem visibility={{ default: 'visible', lg: 'hidden' }}>
               <Dropdown
+                isPlain
                 popperProps={{ position: 'right' }}
-                onSelect={onHelpSelect}
-                onOpenChange={(isOpen: boolean) => setHelpOpen(isOpen)}
-                isOpen={helpOpen}
+                onSelect={onUserDropdownSelect}
+                onOpenChange={(isOpen: boolean) => setKebabDropdownOpen(isOpen)}
+                isOpen={kebabDropdownOpen}
                 toggle={toggleRef => (
                   <MenuToggle
                     aria-label="Toggle"
                     ref={toggleRef}
                     variant="plain"
-                    onClick={() => setHelpOpen(prev => !prev)}
-                    isExpanded={helpOpen}
+                    onClick={() => setKebabDropdownOpen(prev => !prev)}
+                    isExpanded={kebabDropdownOpen}
+                    style={{ width: 'auto' }}
+                    data-ouia-component-id="user_dropdown_button"
                   >
-                    <QuestionCircleIcon />
+                    <EllipsisVIcon />
                   </MenuToggle>
                 )}
               >
-                <DropdownItem onClick={onAbout} value="about">
-                  About
+                <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
+                  Logout
                 </DropdownItem>
               </Dropdown>
             </ToolbarItem>
           </ToolbarGroup>
-          <ToolbarItem visibility={{ default: 'visible', lg: 'hidden' }}>
+          <ToolbarItem visibility={{ default: 'hidden', lg: 'visible' }}>
             <Dropdown
-              isPlain
-              popperProps={{ position: 'right' }}
               onSelect={onUserDropdownSelect}
-              onOpenChange={(isOpen: boolean) => setKebabDropdownOpen(isOpen)}
-              isOpen={kebabDropdownOpen}
+              onOpenChange={(isOpen: boolean) => setUserDropdownOpen(isOpen)}
+              isOpen={userDropdownOpen}
               toggle={toggleRef => (
                 <MenuToggle
                   aria-label="Toggle"
                   ref={toggleRef}
                   variant="plain"
-                  onClick={() => setKebabDropdownOpen(prev => !prev)}
-                  isExpanded={kebabDropdownOpen}
-                  style={{ width: 'auto' }}
+                  onClick={() => setUserDropdownOpen(prev => !prev)}
+                  isExpanded={userDropdownOpen}
                   data-ouia-component-id="user_dropdown_button"
                 >
-                  <EllipsisVIcon />
+                  <div className="quipucords-toolbar__user-dropdown">
+                    <span className="pf-v5-c-avatar" />
+                    {userName}
+                  </div>
                 </MenuToggle>
               )}
             >
@@ -163,35 +195,10 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
-        </ToolbarGroup>
-        <ToolbarItem visibility={{ default: 'hidden', lg: 'visible' }}>
-          <Dropdown
-            onSelect={onUserDropdownSelect}
-            onOpenChange={(isOpen: boolean) => setUserDropdownOpen(isOpen)}
-            isOpen={userDropdownOpen}
-            toggle={toggleRef => (
-              <MenuToggle
-                aria-label="Toggle"
-                ref={toggleRef}
-                variant="plain"
-                onClick={() => setUserDropdownOpen(prev => !prev)}
-                isExpanded={userDropdownOpen}
-                data-ouia-component-id="user_dropdown_button"
-              >
-                <div className="quipucords-toolbar__user-dropdown">
-                  <span className="pf-v5-c-avatar" />
-                  {userName}
-                </div>
-              </MenuToggle>
-            )}
-          >
-            <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
-              Logout
-            </DropdownItem>
-          </Dropdown>
-        </ToolbarItem>
-      </ToolbarContent>
-    </Toolbar>
+        </ToolbarContent>
+      </Toolbar>
+      <AboutModal isOpen={aboutOpen} onClose={onAboutClose} />
+    </React.Fragment>
   );
 };
 
