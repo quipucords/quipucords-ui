@@ -303,9 +303,11 @@ const CredentialsListView: React.FunctionComponent = () => {
         ]}
       >
         <List isPlain isBordered>
-          {sourcesSelected.map(c => (
-            <ListItem key={c.name}>{c.name}</ListItem>
-          ))}
+          {sourcesSelected
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(c => (
+              <ListItem key={c.name}>{c.name}</ListItem>
+            ))}
         </List>
         {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
       </Modal>
