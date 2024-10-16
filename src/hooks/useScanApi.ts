@@ -128,9 +128,18 @@ const useRunScanApi = (
         const scanId = (isRescan && payload?.id?.toString()) || (await createScans(payload))?.id?.toString();
 
         if (!scanId) {
-          throw new Error(`${(isRescan && 'Rescan') || 'Scan'} failed, no ID returned`);
+          const customError = new Error('No ID returned');
+          Object.assign(customError, {
+            isAxiosError: true,
+            response: {
+              data: {
+                message: 'No ID returned',
+                detail: 'The scan or rescan operation did not return an ID.'
+              }
+            }
+          });
+          throw customError;
         }
-
         await apiCall(scanId);
       } catch (error) {
         if (isAxiosError(error)) {

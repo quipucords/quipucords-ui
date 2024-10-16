@@ -77,8 +77,8 @@ export const useServiceQuery = <TItem, TColumnKey extends string, TSortableColum
         setRefreshTime?.(new Date());
         return response.data;
       } catch (error) {
-        console.error(error);
-        throw error; // You can choose to throw the error or return a default value here
+        console.error('Error during data fetching:', error);
+        return { count: 0, results: [] } as ServiceQueryResult<TItem>;
       }
     }
   });

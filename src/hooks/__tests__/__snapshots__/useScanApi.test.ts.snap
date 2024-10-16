@@ -413,6 +413,24 @@ exports[`useRunScanApi should handle errors while attempting to run a scan: runS
 ]
 `;
 
+exports[`useRunScanApi should handle missing scan ID and trigger custom error: runScans, no ID returned 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "scan-report_play_error",
+    "name": "Lorem",
+    "message": "No ID returned\\nThe scan or rescan operation did not return an ID."
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
 exports[`useRunScanApi should handle success while attempting to run a scan: runScans, success 1`] = `
 [
   [
