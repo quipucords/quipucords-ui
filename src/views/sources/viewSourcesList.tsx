@@ -158,7 +158,7 @@ const SourcesListView: React.FunctionComponent = () => {
           key: API_QUERY_TYPES.SEARCH_CREDENTIALS_NAME,
           title: t('toolbar.label', { context: 'option_search_credentials_by_name' }),
           type: FilterType.search,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_cred_type' })
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_credentials_by_name' })
         },
         {
           key: API_QUERY_TYPES.SOURCE_TYPE,
