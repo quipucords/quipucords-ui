@@ -69,6 +69,7 @@ const useSourceForm = ({
 
   const typeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
   const isNetwork = typeValue === 'network';
+  const isOpenshift = typeValue === 'openshift';
 
   // Edit props, reset state on unmount
   useEffect(() => {
@@ -121,7 +122,7 @@ const useSourceForm = ({
         name: name,
         credentials: credentials?.map(c => Number(c)),
         hosts: hosts?.split(','),
-        port: port || (isNetwork ? '22' : '443'),
+        port: port || (isOpenshift && '6443') || (isNetwork && '22') || '443',
         options: !isNetwork
           ? {
               ssl_cert_verify: sslProtocol !== 'Disable SSL' && sslVerify,
@@ -135,13 +136,14 @@ const useSourceForm = ({
         ...(source && { id: source.id })
       };
     },
-    [isNetwork, formData, source, typeValue]
+    [isNetwork, isOpenshift, formData, source, typeValue]
   );
 
   return {
     credOptions,
     formData,
     isNetwork,
+    isOpenshift,
     handleInputChange,
     filterFormData,
     typeValue
@@ -155,7 +157,10 @@ const SourceForm: React.FC<SourceFormProps> = ({
   onSubmit = () => {},
   useForm = useSourceForm
 }) => {
-  const { formData, isNetwork, credOptions, handleInputChange, filterFormData } = useForm({ sourceType, source });
+  const { formData, isNetwork, isOpenshift, credOptions, handleInputChange, filterFormData } = useForm({
+    sourceType,
+    source
+  });
   const onAdd = () => onSubmit(filterFormData());
 
   return (
@@ -242,7 +247,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
-            <HelperText>Default port is 443</HelperText>
+            <HelperText>Default port is {isOpenshift ? '6443' : '443'}</HelperText>
           </FormGroup>
         </React.Fragment>
       )}

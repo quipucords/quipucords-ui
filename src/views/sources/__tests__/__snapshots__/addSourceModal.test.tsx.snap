@@ -123,7 +123,8 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         value=""
       />
       <HelperText>
-        Default port is 443
+        Default port is 
+        443
       </HelperText>
     </FormGroup>
   </React.Fragment>
@@ -198,6 +199,59 @@ exports[`SourceForm should render a basic component: basic 1`] = `
     </Button>
   </ActionGroup>
 </Form>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, ansible 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 
+  443
+</div>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, network 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 22
+</div>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, openshift 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 
+  6443
+</div>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, rhacs 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 
+  443
+</div>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, satellite 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 
+  443
+</div>
+`;
+
+exports[`SourceForm should render specifics to different source types: form, vcenter 1`] = `
+<div
+  class="pf-v5-c-helper-text"
+>
+  Default port is 
+  443
+</div>
 `;
 
 exports[`useSourceForm should allow editing a source: formData, edit 1`] = `
