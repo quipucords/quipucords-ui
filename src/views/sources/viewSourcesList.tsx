@@ -39,6 +39,7 @@ import {
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
+import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
@@ -209,7 +210,7 @@ const SourcesListView: React.FunctionComponent = () => {
     selection: { isEnabled: true }
   });
 
-  const { isLoading, data } = useSourcesQuery({ tableState, setRefreshTime });
+  const { isError, isLoading, data } = useSourcesQuery({ tableState, setRefreshTime });
 
   /**
    * Configures 'batteries' table with `useTablePropHelpers` by extending `tableState` for:
@@ -327,8 +328,10 @@ const SourcesListView: React.FunctionComponent = () => {
           </Tr>
         </Thead>
         <ConditionalTableBody
+          isError={isError}
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
+          errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'sources' })} />}
           noDataEmptyState={
             <EmptyState>
               <EmptyStateHeader
