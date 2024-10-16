@@ -93,6 +93,12 @@ const ScansListView: React.FunctionComponent = () => {
           title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
+        },
+        {
+          key: API_QUERY_TYPES.SEARCH_SOURCES_NAME,
+          title: t('toolbar.label', { context: 'option_search_sources_by_name' }),
+          type: FilterType.search,
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_sources_by_name' })
         }
       ]
     },
