@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { shallowComponent } from '../../../../config/jest.setupTests';
-import { ShowScansModal } from '../showScansModal';
+import { ShowScansModal, getScanTime } from '../showScansModal';
 
 describe('ShowScansModal', () => {
   let mockOnClose;
@@ -17,6 +17,7 @@ describe('ShowScansModal', () => {
           {
             id: 12345,
             status: 'DOLOR SIT',
+            start_time: new Date('2024-09-06'),
             end_time: new Date('2024-09-06'),
             report_id: 67890
           }
@@ -59,5 +60,25 @@ describe('ShowScansModal', () => {
     await user.click(screen.getByLabelText('Close'));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('getScanTime', () => {
+  it('should return end_time when it is present', () => {
+    const job = {
+      start_time: new Date('2024-10-17'),
+      end_time: new Date('2024-10-18')
+    };
+    const result = getScanTime(job);
+    expect(result).toMatchSnapshot('end time present');
+  });
+
+  it('should return start_time when end_time is absent', () => {
+    const job = {
+      end_time: null,
+      start_time: new Date('2024-10-17')
+    };
+    const result = getScanTime(job);
+    expect(result).toMatchSnapshot('end time absent');
   });
 });

@@ -62,3 +62,7 @@ exports[`ShowScansModal should render a basic component: basic 1`] = `
   </Bullseye>
 </Modal>
 `;
+
+exports[`getScanTime should return end_time when it is present: end time present 1`] = `"18 October 2024, 12:00 AM UTC"`;
+
+exports[`getScanTime should return start_time when end_time is absent: end time absent 1`] = `"17 October 2024, 12:00 AM UTC"`;
