@@ -137,7 +137,7 @@ export type ScanJobType = {
   };
   report_id: number;
   start_time: Date;
-  end_time: Date;
+  end_time?: Date;
   systems_count: number;
   systems_scanned: number;
   systems_failed: number;
