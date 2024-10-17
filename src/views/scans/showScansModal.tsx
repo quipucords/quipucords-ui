@@ -18,7 +18,7 @@ import { type Scan, type ScanJobType } from '../../types/types';
 interface ShowScansModalProps {
   isOpen: boolean;
   scan?: Pick<Scan, 'name'>;
-  scanJobs?: Pick<ScanJobType, 'id' | 'end_time' | 'report_id' | 'status'>[];
+  scanJobs?: Pick<ScanJobType, 'id' | 'start_time' | 'report_id' | 'status' | 'end_time'>[];
   onDownload?: (report_id: number) => void;
   onClose?: () => void;
   actions?: React.ReactNode[];
@@ -35,7 +35,6 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
   const { t } = useTranslation();
   const [activeSortIndex, setActiveSortIndex] = useState<number | undefined>();
   const [activeSortDirection, setActiveSortDirection] = useState<'asc' | 'desc' | undefined>();
-  // const [selectedJobs, setSelectedJobs] = useState<number[]>([]);
 
   const getSortParams = (columnIndex: number): ThProps['sort'] => ({
     sortBy: {
@@ -49,40 +48,6 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
     },
     columnIndex
   });
-
-  /* ToDo: This code is for future use around Discovery-437. If it isn't used when the issue has resolved remove it
- *
-  const isJobSelected = (job: ScanJobType) => { return selectedJobs.includes(job.id); };
-  const isJobSelectable = (job: ScanJobType) => { return true || job.status === "completed"; };
-  const selectableJobs = scanJobs ? scanJobs.filter(isJobSelectable) : [];
-  const onSelectJob = (job: ScanJobType, rowIndex: number, isSelecting: boolean) => {
-      setSelectedJobs((prevSelected) => {
-          const otherSelected = prevSelected.filter((j) => j !== job.id);
-          return isSelecting && isJobSelectable(job) ? [...otherSelected, job.id] : otherSelected;
-        });
-  };
-  const areAllJobsSelected = false;
-
-  const selectAllJobs = (isSelecting: boolean = true) => {
-      setSelectedJobs(isSelecting ? selectableJobs.map((j) => j.id) : []);
-  };
-  const getSortableRowValues = (scanJob: ScanJobType): (Date | string)[] => {
-  const { end_time, status } = scanJob;
-  return [end_time, status];
-};
-
-  let sortedJobs = scanJobs;
-  if (activeSortIndex !== undefined && scanJobs) {
-    sortedJobs = scanJobs.sort((a, b) => {
-      const aValue = getSortableRowValues(a)[activeSortIndex];
-      const bValue = getSortableRowValues(b)[activeSortIndex];
-      console.log({ aValue, bValue });
-      if (activeSortDirection === 'asc') {
-        return (aValue as string)?.localeCompare(bValue as string);
-      }
-      return (bValue as string)?.localeCompare(aValue as string);
-    });
-  }*/
 
   return (
     <Modal
@@ -101,12 +66,6 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
           <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
             <Thead>
               <Tr>
-                {/* <Th
-                                    select={{
-                                        onSelect: (_event, isSelecting) => selectAllJobs(isSelecting),
-                                        isSelected: areAllJobsSelected
-                                    }}
-                                /> */}
                 <Th aria-labelledby="Sort by column" sort={getSortParams(0)}>
                   Scan Time
                 </Th>
@@ -119,15 +78,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
             <Tbody>
               {scanJobs.map(job => (
                 <Tr key={job.id}>
-                  {/* <Td
-                                        select={{
-                                            rowIndex,
-                                            onSelect: (_event, isSelecting) => onSelectJob(job, rowIndex, isSelecting),
-                                            isSelected: isJobSelected(job),
-                                            isDisabled: !isJobSelectable(job)
-                                        }}
-                                    /> */}
-                  <Td dataLabel="Scan Time">{job.end_time ? helpers.formatDate(job.end_time) : ''}</Td>
+                  <Td dataLabel="Scan Time">{helpers.formatDate(job.end_time || job.start_time)}</Td>
                   <Td dataLabel="Scan Result">{job.status}</Td>
                   <Td dataLabel="Download" isActionCell>
                     {job.report_id && job.end_time && (

@@ -17,6 +17,7 @@ describe('ShowScansModal', () => {
           {
             id: 12345,
             status: 'DOLOR SIT',
+            start_time: new Date('2024-09-06'),
             end_time: new Date('2024-09-06'),
             report_id: 67890
           }
