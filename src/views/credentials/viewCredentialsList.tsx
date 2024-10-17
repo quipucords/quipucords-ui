@@ -38,6 +38,7 @@ import {
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
+import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '../../constants/apiConstants';
@@ -158,7 +159,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     selection: { isEnabled: true }
   });
 
-  const { isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
+  const { isError, isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
 
   const tableBatteries = useTablePropHelpers({
     ...tableState,
@@ -235,8 +236,10 @@ const CredentialsListView: React.FunctionComponent = () => {
           </Tr>
         </Thead>
         <ConditionalTableBody
+          isError={isError}
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
+          errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'credentials' })} />}
           noDataEmptyState={
             <EmptyState>
               <EmptyStateHeader
