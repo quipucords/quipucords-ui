@@ -60,10 +60,15 @@ export const useServiceQuery = <TItem, TColumnKey extends string, TSortableColum
   columnOrderMap?: Record<TSortableColumnKey, string>;
   tableState: TableState<TItem, TColumnKey, TSortableColumnKey>;
   setRefreshTime?: (date: Date) => void;
-}) =>
-  useQuery<ServiceQueryResult<TItem>>({
+}) => {
+  const pollInterval = process.env.REACT_APP_POLL_INTERVAL
+    ? Number.parseInt(process.env.REACT_APP_POLL_INTERVAL, 10)
+    : undefined;
+
+  return useQuery<ServiceQueryResult<TItem>>({
     queryKey: [...queryKey, tableState.cacheKey],
     refetchOnWindowFocus: !helpers.DEV_MODE,
+    refetchInterval: pollInterval,
     queryFn: async () => {
       try {
         const query = getServiceQueryUrl({ tableState, baseUrl, columnOrderMap });
@@ -77,3 +82,4 @@ export const useServiceQuery = <TItem, TColumnKey extends string, TSortableColum
       }
     }
   });
+};
