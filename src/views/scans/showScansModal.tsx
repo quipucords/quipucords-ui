@@ -49,6 +49,13 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
     columnIndex
   });
 
+  // Sort scanJobs by scan time (latest first)
+  const sortedScanJobs = (scanJobs || []).sort((a, b) => {
+    const timeA = a.end_time ? new Date(a.end_time).getTime() : new Date(a.start_time).getTime();
+    const timeB = b.end_time ? new Date(b.end_time).getTime() : new Date(b.start_time).getTime();
+    return timeB - timeA; // Sort in descending order (latest first)
+  });
+
   return (
     <Modal
       variant={ModalVariant.medium}
@@ -57,10 +64,10 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
       onClose={() => onClose()}
       {...(actions && { actions })}
     >
-      {(scanJobs && (
+      {(sortedScanJobs.length && (
         <React.Fragment>
           <div>
-            {scanJobs?.length} scan{scanJobs?.length === 1 ? ' has' : 's have'} run
+            {sortedScanJobs.length} scan{sortedScanJobs.length === 1 ? ' has' : 's have'} run
           </div>
           <br />
           <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
@@ -76,7 +83,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
               </Tr>
             </Thead>
             <Tbody>
-              {scanJobs.map(job => (
+              {sortedScanJobs.map(job => (
                 <Tr key={job.id}>
                   <Td dataLabel="Scan Time">{helpers.formatDate(job.end_time || job.start_time)}</Td>
                   <Td dataLabel="Scan Result">{job.status}</Td>
