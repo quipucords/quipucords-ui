@@ -273,7 +273,9 @@ const ScansListView: React.FunctionComponent = () => {
         ]}
       >
         <List isPlain isBordered>
-          {scanSelectedForSources?.sources.map(s => <ListItem key={s.id}>{s.name}</ListItem>)}
+          {scanSelectedForSources?.sources
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(s => <ListItem key={s.id}>{s.name}</ListItem>)}
         </List>
       </Modal>
       <ShowScansModal
