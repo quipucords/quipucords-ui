@@ -29,7 +29,7 @@ export const useScansQuery = ({
     baseUrl: process.env.REACT_APP_SCANS_SERVICE,
     columnOrderMap: {
       name: 'name',
-      most_recent: 'most_recent_connect_scan__start_time'
+      most_recent: 'most_recent_scanjob__start_time'
     },
     tableState,
     setRefreshTime
