@@ -6,6 +6,7 @@
  * @module helpers
  */
 import React from 'react';
+import { ValidatedOptions } from '@patternfly/react-core';
 import moment, { type MomentInput } from 'moment';
 import titleImg from '../images/title.svg';
 import titleImgBrand from '../images/titleBrand.svg';
@@ -110,6 +111,50 @@ const normalizeHosts = (data?: string) =>
     ?.replaceAll(/\\n|\\r|\s/g, ',')
     ?.split(',')
     ?.filter(Boolean);
+
+/**
+ * Validates hosts textarea content.
+ *
+ * @param {string} data - host textarea content.
+ * @param {number} maxHosts - maximum number of hosts that the field should allow.
+ * @returns ValidatedOptions
+ */
+const validateHosts = (data: string | undefined, maxHosts: number) => {
+  const hostValid = (value: string) => {
+    // maximum hostname length is 253 ASCII characters, but we need some extra space for ranges
+    if (value.length > 300) {
+      return false;
+    }
+
+    const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(\/\d{1,2})?$/;
+    const hostRegex = /[a-zA-Z0-9][a-zA-Z0-9-_.]*/;
+    const hostNumericRangeRegex = /[a-zA-Z0-9][a-zA-Z0-9-_.]*\[[0-9]+:[0-9]+\]*[a-zA-Z0-9-_.]*/;
+    const hostAlphaRangeRegex = /[a-zA-Z0-9][a-zA-Z0-9-_.]*\[[a-zA-Z]{1}:[a-zA-Z]{1}\][a-zA-Z0-9-_.]*/;
+
+    const allRegexes = [ipRegex, hostRegex, hostNumericRangeRegex, hostAlphaRangeRegex];
+    return allRegexes.some(re => new RegExp(re).test(value));
+  };
+
+  if (data === undefined) {
+    return ValidatedOptions.default;
+  }
+
+  const normalizedHosts = normalizeHosts(data);
+
+  if (!normalizedHosts!.length) {
+    return ValidatedOptions.error;
+  }
+
+  if (normalizedHosts!.length > maxHosts) {
+    return ValidatedOptions.error;
+  }
+
+  if (normalizedHosts!.some(host => !hostValid(host))) {
+    return ValidatedOptions.error;
+  }
+
+  return ValidatedOptions.default;
+};
 
 /**
  * Normalizes a total count to a non-negative number less than a given modulus,
@@ -237,6 +282,7 @@ const helpers = {
   formatDate,
   normalizeHosts,
   normalizeTotal,
+  validateHosts,
   DEV_MODE,
   PROD_MODE,
   TEST_MODE,

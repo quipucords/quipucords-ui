@@ -101,6 +101,7 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
