@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage should allow a custom title and description: custom 1`] = `
+<EmptyState
+  variant="full"
+>
+  <EmptyStateIcon
+    icon={[Function]}
+  />
+  <Title
+    headingLevel="h2"
+    size="lg"
+  >
+    Lorem ipsum
+  </Title>
+  <EmptyStateBody>
+    Dolor sit
+  </EmptyStateBody>
+</EmptyState>
+`;
+
+exports[`ErrorMessage should render a basic component: basic 1`] = `
+<EmptyState
+  variant="full"
+>
+  <EmptyStateIcon
+    icon={[Function]}
+  />
+  <Title
+    headingLevel="h2"
+    size="lg"
+  >
+    t([
+  "view.error",
+  {
+    "context": "title",
+    "appName": "Quipucords"
+  }
+])
+  </Title>
+  <EmptyStateBody>
+    t([
+  "view.error",
+  {
+    "context": "description"
+  }
+])
+  </EmptyStateBody>
+</EmptyState>
+`;

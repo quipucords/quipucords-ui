@@ -40,6 +40,7 @@ import {
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
+import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
@@ -111,7 +112,7 @@ const ScansListView: React.FunctionComponent = () => {
     selection: { isEnabled: true }
   });
 
-  const { isLoading, data } = useScansQuery({ tableState, setRefreshTime });
+  const { isError, isLoading, data } = useScansQuery({ tableState, setRefreshTime });
 
   const tableBatteries = useTablePropHelpers({
     ...tableState,
@@ -193,8 +194,10 @@ const ScansListView: React.FunctionComponent = () => {
           </Tr>
         </Thead>
         <ConditionalTableBody
+          isError={isError}
           isLoading={isLoading}
           isNoData={currentPageItems.length === 0}
+          errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'scans' })} />}
           noDataEmptyState={
             <EmptyState>
               <EmptyStateHeader
