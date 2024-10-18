@@ -16,6 +16,7 @@ import {
   TextInput
 } from '@patternfly/react-core';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
+import helpers from '../../helpers';
 import { type CredentialType } from '../../types/types';
 
 interface AddCredentialModalProps {
@@ -57,8 +58,10 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
   const [authType, setAuthType] = useState('');
 
   useEffect(() => {
-    // this could also be a helper, for testing
     const deriveAuthType = () => {
+      if (credential) {
+        return helpers.getAuthType(credential);
+      }
       switch (typeValue) {
         case 'openshift':
         case 'rhacs':
