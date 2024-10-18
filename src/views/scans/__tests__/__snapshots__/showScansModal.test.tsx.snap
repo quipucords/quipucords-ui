@@ -47,18 +47,63 @@ exports[`ShowScansModal should render a basic component: basic 1`] = `
   titleLabel=""
   variant="medium"
 >
-  <Bullseye>
-    <EmptyState>
-      <EmptyStateHeader
-        headingLevel="h2"
-        icon={
-          <EmptyStateIcon
-            icon={[Function]}
+  <React.Fragment>
+    <div>
+      0
+       scan
+      s have
+       run
+    </div>
+    <br />
+    <Table
+      aria-label="Scan jobs table"
+      ouiaId="scan_jobs_table"
+    >
+      <Thead>
+        <Tr>
+          <Th
+            aria-labelledby="Sort by column"
+            sort={
+              {
+                "columnIndex": 0,
+                "onSort": [Function],
+                "sortBy": {
+                  "defaultDirection": "asc",
+                  "direction": undefined,
+                  "index": undefined,
+                },
+              }
+            }
+          >
+            Scan Time
+          </Th>
+          <Th
+            aria-labelledby="Sort by column"
+            sort={
+              {
+                "columnIndex": 1,
+                "onSort": [Function],
+                "sortBy": {
+                  "defaultDirection": "asc",
+                  "direction": undefined,
+                  "index": undefined,
+                },
+              }
+            }
+          >
+            Scan Result
+          </Th>
+          <Th
+            screenReaderText="Download column"
           />
-        }
-        titleText="Loading scans"
-      />
-    </EmptyState>
-  </Bullseye>
+        </Tr>
+      </Thead>
+      <Tbody />
+    </Table>
+  </React.Fragment>
 </Modal>
 `;
+
+exports[`getScanTime should return end_time when it is present: end time present 1`] = `"18 October 2024, 12:00 AM UTC"`;
+
+exports[`getScanTime should return start_time when end_time is absent: end time absent 1`] = `"17 October 2024, 12:00 AM UTC"`;
