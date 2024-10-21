@@ -306,7 +306,6 @@ const SourcesListView: React.FunctionComponent = () => {
           showConnections(source)
             .then(success => setConnectionsData(success))
             .catch(err => {
-              setConnectionsData(emptyConnectionData);
               if (!helpers.TEST_MODE) {
                 console.error(err);
               }
