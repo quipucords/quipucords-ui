@@ -188,6 +188,7 @@
     "label_status_pending": "In progress",
     "label_status_running": "In progress",
     "label_status_paused": "Paused",
+    "label_status_not_started_sources": "Scan not started",
     "label_status_completed_scan": "Completed",
     "label_status_completed_sources": "Last connected",
     "label_status_failed_sources": "Connection failed",

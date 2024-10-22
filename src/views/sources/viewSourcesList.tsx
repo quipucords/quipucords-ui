@@ -290,7 +290,7 @@ const SourcesListView: React.FunctionComponent = () => {
 
   const renderConnection = (source: SourceType) => {
     if (!source?.connection) {
-      return null;
+      return t('table.label_status_not_started', { context: 'sources' });
     }
     const isPending =
       source.connection.status === 'created' ||
