@@ -303,7 +303,13 @@ const SourcesListView: React.FunctionComponent = () => {
       <Button
         variant={ButtonVariant.link}
         onClick={() => {
-          showConnections(source).then(success => setConnectionsData(success));
+          showConnections(source)
+            .then(success => setConnectionsData(success))
+            .catch(err => {
+              if (!helpers.TEST_MODE) {
+                console.error(err);
+              }
+            });
           setConnectionsSelected(source);
         }}
       >
