@@ -19,7 +19,7 @@ interface ShowScansModalProps {
   isOpen: boolean;
   scan?: Pick<Scan, 'name'>;
   scanJobs?: Pick<ScanJobType, 'id' | 'end_time' | 'report_id' | 'status'>[];
-  onDownload?: (number) => void;
+  onDownload?: (report_id: number) => void;
   onClose?: () => void;
   actions?: React.ReactNode[];
 }
@@ -130,7 +130,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
                   <Td dataLabel="Scan Time">{job.end_time ? helpers.formatDate(job.end_time) : ''}</Td>
                   <Td dataLabel="Scan Result">{job.status}</Td>
                   <Td dataLabel="Download" isActionCell>
-                    {job.report_id && (
+                    {job.report_id && job.end_time && (
                       <Button onClick={() => onDownload(job.report_id)} icon={<DownloadIcon />} variant="link">
                         Download
                       </Button>
