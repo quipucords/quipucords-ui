@@ -157,29 +157,36 @@ const ScansListView: React.FunctionComponent = () => {
     </Toolbar>
   );
 
-  const renderConnection = (scan: Scan) => (
-    <Button
-      variant={ButtonVariant.link}
-      onClick={() => {
-        setScanSelected(scan);
-        getScanJobs(scan.id).then(res => {
-          setScanJobs(res?.data.results);
-        });
-      }}
-    >
-      <ContextIcon
-        symbol={scan.most_recent ? ContextIconVariant[scan.most_recent.status] : ContextIconVariant['defaultStatus']}
-      />
-      {scan.most_recent && (
+  const renderConnection = (scan: Scan) => {
+    if (!scan.most_recent) {
+      return (
         <React.Fragment>
+          <ContextIcon symbol={ContextIconVariant['off']} /> {t('table.label', { context: 'status_scans' })}
+        </React.Fragment>
+      );
+    }
+    return (
+      <Button
+        variant={ButtonVariant.link}
+        onClick={() => {
+          setScanSelected(scan);
+          getScanJobs(scan.id).then(res => {
+            setScanJobs(res?.data.results);
+          });
+        }}
+      >
+        <ContextIcon
+          symbol={scan.most_recent ? ContextIconVariant[scan.most_recent.status] : ContextIconVariant['unknown']}
+        />
+        <React.Fragment>
+          {' '}
           {scan.most_recent.status === 'failed' && t('table.label', { context: 'status_failed_scans' })}
           {scan.most_recent.status === 'completed' && t('table.label', { context: 'status_completed_scans' })}{' '}
           {helpers.getTimeDisplayHowLongAgo(scan.most_recent.end_time || scan.most_recent.start_time)}
         </React.Fragment>
-      )}
-      {!scan.most_recent && t('table.label', { context: 'status_scans' })}
-    </Button>
-  );
+      </Button>
+    );
+  };
 
   return (
     <PageSection variant="light">
