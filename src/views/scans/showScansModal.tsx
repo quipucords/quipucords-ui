@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Bullseye,
@@ -27,7 +27,7 @@ interface ShowScansModalProps {
 const ShowScansModal: React.FC<ShowScansModalProps> = ({
   isOpen,
   scan,
-  scanJobs,
+  scanJobs = [],
   onDownload = Function.prototype,
   onClose = Function.prototype,
   actions
@@ -35,6 +35,32 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
   const { t } = useTranslation();
   const [activeSortIndex, setActiveSortIndex] = useState<number | undefined>();
   const [activeSortDirection, setActiveSortDirection] = useState<'asc' | 'desc' | undefined>();
+  const [sortedScanJobs, setSortedScanJobs] = useState(scanJobs);
+
+  useEffect(() => {
+    setSortedScanJobs(scanJobs);
+  }, [scanJobs]);
+
+  const getSortValue = (job: Pick<ScanJobType, 'start_time' | 'end_time' | 'status'>, index: number) => {
+    if (index === 0) {
+      return new Date(job.end_time || job.start_time).getTime();
+    }
+    if (index === 1) {
+      return job.status;
+    }
+    return '';
+  };
+
+  const sortJobs = (jobs: typeof scanJobs, index: number, direction: 'asc' | 'desc') => {
+    return [...jobs].sort((a, b) => {
+      const valA = getSortValue(a, index);
+      const valB = getSortValue(b, index);
+
+      if (valA === valB) return 0; // Handle equal values
+
+      return direction === 'asc' ? (valA > valB ? 1 : -1) : valA < valB ? 1 : -1;
+    });
+  };
 
   const getSortParams = (columnIndex: number): ThProps['sort'] => ({
     sortBy: {
@@ -45,15 +71,9 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
     onSort: (_event, index, direction) => {
       setActiveSortIndex(index);
       setActiveSortDirection(direction);
+      setSortedScanJobs(prevJobs => sortJobs(prevJobs, index, direction));
     },
     columnIndex
-  });
-
-  // Sort scanJobs by scan time (latest first)
-  const sortedScanJobs = (scanJobs || []).sort((a, b) => {
-    const timeA = a.end_time ? new Date(a.end_time).getTime() : new Date(a.start_time).getTime();
-    const timeB = b.end_time ? new Date(b.end_time).getTime() : new Date(b.start_time).getTime();
-    return timeB - timeA; // Sort in descending order (latest first)
   });
 
   return (
@@ -64,7 +84,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
       onClose={() => onClose()}
       {...(actions && { actions })}
     >
-      {(sortedScanJobs.length && (
+      {sortedScanJobs.length ? (
         <React.Fragment>
           <div>
             {sortedScanJobs.length} scan{sortedScanJobs.length === 1 ? ' has' : 's have'} run
@@ -73,12 +93,8 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
           <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
             <Thead>
               <Tr>
-                <Th aria-labelledby="Sort by column" sort={getSortParams(0)}>
-                  Scan Time
-                </Th>
-                <Th aria-labelledby="Sort by column" sort={getSortParams(1)}>
-                  Scan Result
-                </Th>
+                <Th sort={getSortParams(0)}>Scan Time</Th>
+                <Th sort={getSortParams(1)}>Scan Result</Th>
                 <Th screenReaderText="Download column"></Th>
               </Tr>
             </Thead>
@@ -99,7 +115,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
             </Tbody>
           </Table>
         </React.Fragment>
-      )) || (
+      ) : (
         <Bullseye>
           <EmptyState>
             <EmptyStateHeader titleText="Loading scans" headingLevel="h2" icon={<EmptyStateIcon icon={Spinner} />} />
