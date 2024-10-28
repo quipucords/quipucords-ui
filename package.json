@@ -70,7 +70,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.1",
-    "react-router-dom": "6.26.1",
+    "react-router-dom": "6.27.0",
     "weldable": "^3.2.0"
   },
   "devDependencies": {
