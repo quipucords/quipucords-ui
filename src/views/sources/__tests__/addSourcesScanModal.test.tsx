@@ -11,7 +11,7 @@ describe('AddSourceModal', () => {
   beforeEach(async () => {
     await act(async () => {
       mockOnClose = jest.fn();
-      mockOnSubmit = jest.fn();
+      mockOnSubmit = jest.fn(() => Promise.resolve({}));
       await render(<AddSourcesScanModal isOpen={true} onClose={mockOnClose} onSubmit={mockOnSubmit} />);
     });
   });

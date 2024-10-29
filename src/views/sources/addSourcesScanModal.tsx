@@ -19,13 +19,13 @@ import {
   TextArea,
   TextInput
 } from '@patternfly/react-core';
-import { type SourceType } from '../../types/types';
+import { type Scan, type SourceType } from '../../types/types';
 
 interface AddSourcesScanModalProps {
   isOpen: boolean;
   sources?: SourceType[];
   onClose?: () => void;
-  onSubmit?: (payload) => void;
+  onSubmit?: (payload: Scan) => Promise<void>;
 }
 
 const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
@@ -35,6 +35,11 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
   onSubmit = Function.prototype
 }) => {
   const [deepScans, setDeepScans] = useState<string[]>([]);
+
+  const onCloseModal = () => {
+    setDeepScans([]);
+    onClose();
+  };
 
   const onDeepScanChange = (option, checked) => {
     if (checked) {
@@ -58,11 +63,13 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
         }
       }
     };
-    onSubmit(payload);
+    onSubmit(payload).finally(() => {
+      setDeepScans([]);
+    });
   };
 
   return (
-    <Modal variant={ModalVariant.small} title="Scan" isOpen={isOpen} onClose={() => onClose()}>
+    <Modal variant={ModalVariant.small} title="Scan" isOpen={isOpen} onClose={() => onCloseModal()}>
       <FormContextProvider
         initialValues={{
           'scan-sources': sources?.map(s => s.name).join(', ') || '',
@@ -148,7 +155,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
               <Button variant="primary" onClick={() => onScan({ ...values, deepScans })}>
                 Save
               </Button>
-              <Button variant="link" onClick={() => onClose()}>
+              <Button variant="link" onClick={() => onCloseModal()}>
                 Cancel
               </Button>
             </ActionGroup>
