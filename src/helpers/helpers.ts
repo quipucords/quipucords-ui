@@ -99,12 +99,13 @@ const getTimeDisplayHowLongAgo = (timestamp: MomentInput, { devMode = DEV_MODE }
 const formatDate = (date: Date) => moment.utc(date).format('DD MMMM Y, h:mm A z');
 
 /**
- * Normalizes hosts textarea content into array that can be submitted to backend.
+ * Normalizes comma-separated textarea content into array that can be submitted to backend.
+ * Used by hosts and search_directories fields.
  *
  * @param {string} data - host textarea content.
  * @returns Array of host values which will be submitted to backend.
  */
-const normalizeHosts = (data?: string) =>
+const normalizeCommaSeparated = (data?: string) =>
   data
     ?.trim()
     ?.replaceAll(/\\n|\\r|\s/g, ',')
@@ -235,7 +236,7 @@ const helpers = {
   getTimeDisplayHowLongAgo,
   getTitleImg,
   formatDate,
-  normalizeHosts,
+  normalizeCommaSeparated,
   normalizeTotal,
   DEV_MODE,
   PROD_MODE,
