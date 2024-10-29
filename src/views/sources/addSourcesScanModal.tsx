@@ -19,6 +19,7 @@ import {
   TextArea,
   TextInput
 } from '@patternfly/react-core';
+import { helpers } from '../../helpers';
 import { type Scan, type SourceType } from '../../types/types';
 
 interface AddSourcesScanModalProps {
@@ -59,7 +60,7 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
           jboss_eap: deepScans.includes('jboss_eap'),
           jboss_fuse: deepScans.includes('jboss_fuse'),
           jboss_ws: deepScans.includes('jboss_ws'),
-          search_directories: values['scan-alt-scan']?.split(',')
+          search_directories: helpers.normalizeCommaSeparated(values['scan-alt-scan'])
         }
       }
     };
