@@ -227,7 +227,7 @@ const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
 
   const apiCall = useCallback(
     (payload: CredentialType): Promise<AxiosResponse<CredentialType>> =>
-      axios.put(`${process.env.REACT_APP_CREDENTIALS_SERVICE}${payload.id}/`, payload),
+      axios.patch(`${process.env.REACT_APP_CREDENTIALS_SERVICE}${payload.id}/`, payload),
     []
   );
 
