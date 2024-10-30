@@ -182,8 +182,8 @@ describe('useAddSourceApi', () => {
     const { addSources } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await addSources({ name: 'Lorem' });
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('addSources, error');
+    await expect(addSources({ name: 'Lorem' })).rejects.toMatchSnapshot('addSources, error');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('addSources, alert error');
   });
 });
 
@@ -225,7 +225,7 @@ describe('useEditSourceApi', () => {
     const { editSources } = hookResult;
     jest.spyOn(axios, 'put').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await editSources({ name: 'Lorem', id: '123' });
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('editSources, error');
+    await expect(editSources({ name: 'Lorem', id: '123' })).rejects.toMatchSnapshot('editSources, error');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('editSources, alert error');
   });
 });

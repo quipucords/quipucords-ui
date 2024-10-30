@@ -354,10 +354,16 @@ const CredentialsListView: React.FunctionComponent = () => {
         credentialType={addCredentialModal}
         onClose={() => setAddCredentialModal(undefined)}
         onSubmit={(payload: CredentialType) =>
-          addCredentials(payload).finally(() => {
-            queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-            setAddCredentialModal(undefined);
-          })
+          addCredentials(payload)
+            .then(() => {
+              queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+              setAddCredentialModal(undefined);
+            })
+            .catch(err => {
+              if (!helpers.TEST_MODE) {
+                console.error(err);
+              }
+            })
         }
       />
       <AlertGroup isToast isLiveRegion>

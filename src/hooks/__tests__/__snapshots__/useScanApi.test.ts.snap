@@ -11,7 +11,7 @@ exports[`useCreateScanApi should attempt an api call to create a scan: apiCall 1
 ]
 `;
 
-exports[`useCreateScanApi should handle errors while attempting to create a scan: createScans, error 1`] = `
+exports[`useCreateScanApi should handle errors while attempting to create a scan: createScans, alert error 1`] = `
 [
   [
     {
@@ -27,6 +27,13 @@ exports[`useCreateScanApi should handle errors while attempting to create a scan
     },
   ],
 ]
+`;
+
+exports[`useCreateScanApi should handle errors while attempting to create a scan: createScans, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
 `;
 
 exports[`useCreateScanApi should handle success while attempting to create a scan: createScans, success 1`] = `
@@ -46,6 +53,16 @@ exports[`useCreateScanApi should handle success while attempting to create a sca
 `;
 
 exports[`useCreateScanApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useCreateScanApi should process an API error response: callbackError, alert 1`] = `
 [
   [
     {
@@ -382,7 +399,7 @@ exports[`useRunScanApi should attempt an API call to run a scan: apiCall 1`] = `
 ]
 `;
 
-exports[`useRunScanApi should handle errors while attempting to run a scan: runScans, error 1`] = `
+exports[`useRunScanApi should handle errors while attempting to run a scan: runScans, error alert 1`] = `
 [
   [
     {
@@ -413,7 +430,23 @@ exports[`useRunScanApi should handle errors while attempting to run a scan: runS
 ]
 `;
 
-exports[`useRunScanApi should handle missing scan ID and trigger custom error: runScans, no ID returned 1`] = `
+exports[`useRunScanApi should handle errors while attempting to run a scan: runScans, with id error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useRunScanApi should handle errors while attempting to run a scan: runScans, without id error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useRunScanApi should handle missing scan ID and trigger custom error: runScans, no ID returned 1`] = `[Error: No ID returned]`;
+
+exports[`useRunScanApi should handle missing scan ID and trigger custom error: runScans, no ID returned, alert 1`] = `
 [
   [
     {
@@ -461,6 +494,16 @@ exports[`useRunScanApi should handle success while attempting to run a scan: run
 `;
 
 exports[`useRunScanApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useRunScanApi should process an API error response: callbackError, alert 1`] = `
 [
   [
     {

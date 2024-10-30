@@ -474,10 +474,16 @@ const SourcesListView: React.FunctionComponent = () => {
         source={sourceBeingEdited}
         onClose={() => setSourceBeingEdited(undefined)}
         onSubmit={(payload: SourceType) =>
-          editSources(payload).finally(() => {
-            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-            setSourceBeingEdited(undefined);
-          })
+          editSources(payload)
+            .then(() => {
+              queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+              setSourceBeingEdited(undefined);
+            })
+            .catch(err => {
+              if (!helpers.TEST_MODE) {
+                console.error(err);
+              }
+            })
         }
       />
       <AddSourceModal
@@ -485,20 +491,32 @@ const SourcesListView: React.FunctionComponent = () => {
         sourceType={addSourceModal}
         onClose={() => setAddSourceModal(undefined)}
         onSubmit={(payload: SourceType) =>
-          addSources(payload).finally(() => {
-            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-            setAddSourceModal(undefined);
-          })
+          addSources(payload)
+            .then(() => {
+              queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+              setAddSourceModal(undefined);
+            })
+            .catch(err => {
+              if (!helpers.TEST_MODE) {
+                console.error(err);
+              }
+            })
         }
       />
       <AddSourcesScanModal
         isOpen={scanSelected !== undefined}
         onClose={() => setScanSelected(undefined)}
         onSubmit={(payload: Scan) =>
-          runScans(payload).finally(() => {
-            queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-            setScanSelected(undefined);
-          })
+          runScans(payload)
+            .then(() => {
+              queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
+              setScanSelected(undefined);
+            })
+            .catch(err => {
+              if (!helpers.TEST_MODE) {
+                console.error(err);
+              }
+            })
         }
         sources={scanSelected}
       />
