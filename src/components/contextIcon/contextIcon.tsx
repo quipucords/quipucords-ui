@@ -18,6 +18,7 @@ import {
   ExclamationTriangleIcon,
   IdCardIcon,
   InfoCircleIcon,
+  OffIcon,
   OpenshiftIcon,
   PencilAltIcon,
   PficonNetworkRangeIcon,
@@ -73,6 +74,7 @@ const ContextIconVariant: { [key: string]: string } = {
   idCard: 'idCard',
   info: 'info',
   network: 'network',
+  off: 'off',
   openshift: 'openshift',
   pencil: 'pencil',
   satellite: 'satellite',
@@ -104,6 +106,8 @@ const ContextIcon: React.FC<{
       return <InfoCircleIcon {...props} />;
     case ContextIconVariant.network:
       return <PficonNetworkRangeIcon {...props} />;
+    case ContextIconVariant.off:
+      return <OffIcon {...props} />;
     case ContextIconVariant.openshift:
       return <OpenshiftIcon {...props} />;
     case ContextIconVariant.acs:

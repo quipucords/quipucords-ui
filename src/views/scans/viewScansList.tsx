@@ -160,6 +160,7 @@ const ScansListView: React.FunctionComponent = () => {
   const renderConnection = (scan: Scan) => (
     <Button
       variant={ButtonVariant.link}
+      isDisabled={!scan.most_recent}
       onClick={() => {
         setScanSelected(scan);
         getScanJobs(scan.id).then(res => {
@@ -168,8 +169,8 @@ const ScansListView: React.FunctionComponent = () => {
       }}
     >
       <ContextIcon
-        symbol={scan.most_recent ? ContextIconVariant[scan.most_recent.status] : ContextIconVariant['defaultStatus']}
-      />
+        symbol={scan.most_recent ? ContextIconVariant[scan.most_recent.status] : ContextIconVariant['off']}
+      />{' '}
       {scan.most_recent && (
         <React.Fragment>
           {scan.most_recent.status === 'failed' && t('table.label', { context: 'status_failed_scans' })}
