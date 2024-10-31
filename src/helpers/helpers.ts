@@ -130,6 +130,10 @@ const validateHosts = (data: string | undefined, maxHosts: number = Infinity) =>
       return false;
     }
 
+    if (['.', '-', '_', ':'].some(lastChar => value.endsWith(lastChar))) {
+      return false;
+    }
+
     const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(\/\d{1,2})?$/;
     const hostRegex = /[a-zA-Z0-9][a-zA-Z0-9-_.]*/;
     const hostNumericRangeRegex = /[a-zA-Z0-9][a-zA-Z0-9-_.]*\[[0-9]+:[0-9]+\]*[a-zA-Z0-9-_.]*/;

@@ -157,9 +157,9 @@ describe('normalizeHosts', () => {
 });
 
 describe('validateHosts', () => {
-  // values copied from backend test
-  // quipucords/tests/api/source/test_source.py::TestSource::test_create_valid_hosts
   it.each([
+    // values copied from backend test
+    // quipucords/tests/api/source/test_source.py::TestSource::test_create_valid_hosts
     ['10.10.181.9'],
     ['10.10.181.9/16'],
     ['10.10.128.[1:25]'],
@@ -172,9 +172,37 @@ describe('validateHosts', () => {
     ['my_rhel[120:400].company.com'],
     ['my-rhel[a:d].company.com'],
     ['my-rhel[120:400].company.com'],
-    ['my-rh_el[120:400].comp_a-ny.com']
+    ['my-rh_el[120:400].comp_a-ny.com'],
+    // values copied from old implementatiom
+    // src/components/addSourceWizard/__tests__/addSourceWizardStepTwo.test.js
+    ['l'],
+    ['l-l'],
+    ['l_l'],
+    ['0.0.0.[12:24]'],
+    ['0.0.0.12/15'], // this used to be considered invalid
+    ['0.0.0.12/16'],
+    ['0.0.0.12/17'],
+    ['0.0.0.12/18'],
+    ['0.0.0.12/19'],
+    ['0.0.0.12/20'],
+    ['0.0.0.12/21'],
+    ['0.0.0.12/22'],
+    ['0.0.0.12/23'],
+    ['0.0.0.12/24'],
+    ['0.0.0.12/25'],
+    ['0.0.0.12/26'],
+    ['0.0.0.12/27'],
+    ['0.0.0.12/28'],
+    ['0.0.0.12/29'],
+    ['0.0.0.12/30'],
+    ['0.0.0.12/31'],
+    ['0.0.0.12/32']
   ])('should accept valid host [%s]', host => {
     expect(helpers.validateHosts(host, Infinity)).toBe(ValidatedOptions.default);
+  });
+
+  it.each([['l.'], ['l-'], ['l_'], ['0.0.0.0:']])('should reject invalid host [%s]', host => {
+    expect(helpers.validateHosts(host, Infinity)).toBe(ValidatedOptions.error);
   });
 
   it('should reject empty hosts', () => {
