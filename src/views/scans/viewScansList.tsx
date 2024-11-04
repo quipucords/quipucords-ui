@@ -123,7 +123,7 @@ const ScansListView: React.FunctionComponent = () => {
   });
 
   const {
-    selection: { selectedItems },
+    selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
     components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
@@ -140,6 +140,7 @@ const ScansListView: React.FunctionComponent = () => {
             onClick={() =>
               deleteScans(selectedItems).finally(() => {
                 setPendingDeleteScan(undefined);
+                setSelectedItems([]);
                 onRefresh();
               })
             }

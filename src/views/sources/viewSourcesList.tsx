@@ -228,7 +228,7 @@ const SourcesListView: React.FunctionComponent = () => {
   });
 
   const {
-    selection: { selectedItems },
+    selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
     components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
@@ -273,7 +273,12 @@ const SourcesListView: React.FunctionComponent = () => {
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedSources()}
-            onClick={() => deleteSources(selectedItems).finally(() => onRefresh())}
+            onClick={() =>
+              deleteSources(selectedItems).finally(() => {
+                setSelectedItems([]);
+                onRefresh();
+              })
+            }
           >
             {t('table.label', { context: 'delete' })}
           </Button>
