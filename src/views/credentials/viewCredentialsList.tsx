@@ -170,7 +170,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   });
 
   const {
-    selection: { selectedItems },
+    selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
     components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
@@ -206,7 +206,12 @@ const CredentialsListView: React.FunctionComponent = () => {
           <Button
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedCredentials()}
-            onClick={() => deleteCredentials(selectedItems).finally(() => onRefresh())}
+            onClick={() =>
+              deleteCredentials(selectedItems).finally(() => {
+                setSelectedItems([]);
+                onRefresh();
+              })
+            }
           >
             {t('table.label', { context: 'delete' })}
           </Button>
