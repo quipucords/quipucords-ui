@@ -38,6 +38,10 @@ interface CredentialFormFieldsProps {
   handleInputChange?: (field: string, value: string) => void;
 }
 
+const USER_PASS = 'Username and Password';
+const TOKEN = 'Token';
+const SSH_KEY = 'SSH Key';
+
 const useCredentialForm = (credentialType: string | undefined, credential?: CredentialType) => {
   const initialFormState: CredentialFormType = {
     password: '',
@@ -62,9 +66,9 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
       switch (typeValue) {
         case 'openshift':
         case 'rhacs':
-          return 'Token';
+          return TOKEN;
         default:
-          return 'Username and Password';
+          return USER_PASS;
       }
     };
 
@@ -98,7 +102,7 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
 
 const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
   formData,
-  authType = 'Username and Password',
+  authType = USER_PASS,
   typeValue = 'network',
   setAuthType = Function.prototype,
   handleInputChange = Function.prototype
@@ -128,11 +132,11 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
           onSelect={item => setAuthType(item)}
           dropdownItems={
             (typeValue === 'network' && [
-              { item: 'Username and Password', ouiaId: 'password' },
-              { item: 'SSH Key', ouiaId: 'ssh_key' }
+              { item: USER_PASS, ouiaId: 'password' },
+              { item: SSH_KEY, ouiaId: 'ssh_key' }
             ]) || [
-              { item: 'Token', ouiaId: 'auth_token' },
-              { item: 'Username and Password', ouiaId: 'password' }
+              { item: TOKEN, ouiaId: 'auth_token' },
+              { item: USER_PASS, ouiaId: 'password' }
             ]
           }
         />
