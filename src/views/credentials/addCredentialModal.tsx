@@ -13,8 +13,11 @@ import {
   Modal,
   ModalVariant,
   TextArea,
-  TextInput
+  TextInput,
+  HelperText,
+  HelperTextItem
 } from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { type CredentialType } from '../../types/types';
 
@@ -32,6 +35,7 @@ interface CredentialFormType extends Partial<CredentialType> {
 
 interface CredentialFormFieldsProps {
   formData?: CredentialFormType;
+  errors?: CredentialFormType;
   authType?: string;
   typeValue?: string;
   setAuthType?: (credentialType: string) => void;
@@ -56,9 +60,33 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     username: ''
   };
   const [formData, setFormData] = useState<CredentialFormType>(initialFormState);
+  const [errors, setAllErrors] = useState<CredentialFormType>({});
+  const [canSubmit, setCanSubmit] = useState(false);
+
+  const setError = (fieldName: string, errorMessage: string) => {
+    setAllErrors({ ...errors, [fieldName]: errorMessage });
+  };
 
   const typeValue = credential?.cred_type || credentialType?.split(' ')?.shift()?.toLowerCase() || '';
-  const [authType, setAuthType] = useState('');
+  const [authType, _setAuthType] = useState('');
+
+  const setAuthType = (value: string) => {
+    _setAuthType(value);
+    // Dirty workaround for clearing errors when changing auth type
+    // The ideal solution would be cleaning up only errors not relevant after the change
+    setAllErrors({});
+  };
+
+  const getRequiredFields = useCallback(() => {
+    switch (authType) {
+      case SSH_KEY:
+        return ['name', 'username', 'ssh_key'];
+      case TOKEN:
+        return ['name', 'auth_token'];
+      default:
+        return ['name', 'username', 'password'];
+    }
+  }, [authType]);
 
   useEffect(() => {
     // this could also be a helper, for testing
@@ -71,8 +99,7 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
           return USER_PASS;
       }
     };
-
-    setAuthType(deriveAuthType());
+    _setAuthType(deriveAuthType());
     setFormData(prev => ({ ...prev, ...credential }));
 
     return () => {
@@ -80,11 +107,27 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     };
   }, [typeValue, credential]);
 
+  useEffect(() => {
+    console.log(getRequiredFields());
+    const requiredFieldsFilled = getRequiredFields()
+      .map(field => (formData[field] ? true : false))
+      .every(v => v === true);
+    const noErrors = Object.values(errors)
+      .map(v => (v ? true : false))
+      .every(v => v === false);
+    setCanSubmit(requiredFieldsFilled && noErrors);
+  }, [formData, authType, errors, getRequiredFields]);
+
   const handleInputChange = useCallback(
     (field: string, value: string) => {
       setFormData({ ...formData, [field]: value });
+      if (getRequiredFields().includes(field) && value === '') {
+        setError(field, 'This field is required.');
+      } else {
+        setError(field, '');
+      }
     },
-    [formData]
+    [formData, getRequiredFields]
   );
 
   const filterFormData = (data: CredentialFormType) =>
@@ -92,16 +135,21 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
 
   return {
     formData,
+    errors,
     authType,
     typeValue,
+    canSubmit,
     setAuthType,
     handleInputChange,
-    filterFormData
+    filterFormData,
+    setError,
+    setAllErrors
   };
 };
 
 const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
   formData,
+  errors,
   authType = USER_PASS,
   typeValue = 'network',
   setAuthType = Function.prototype,
@@ -118,7 +166,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
         name="name"
         onChange={event => handleInputChange('name', (event.target as HTMLInputElement).value)}
         ouiaId="cred_name"
+        validated={errors?.name ? 'error' : 'default'}
       />
+      {ErrorFragment(errors?.name)}
     </FormGroup>
 
     {/* Render Authentication Type dropdown only if needed based on the credential type */}
@@ -144,7 +194,7 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
     )}
 
     {/* Conditional rendering for Token input */}
-    {authType === 'Token' && (
+    {authType === TOKEN && (
       <FormGroup label="Token" isRequired fieldId="auth_token">
         <TextInput
           value={formData?.auth_token}
@@ -155,12 +205,14 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
           name="auth_token"
           onChange={event => handleInputChange('auth_token', (event.target as HTMLInputElement).value)}
           ouiaId="auth_token"
+          validated={errors?.auth_token ? 'error' : 'default'}
         />
+        {ErrorFragment(errors?.auth_token)}
       </FormGroup>
     )}
 
     {/* Username and Password fields */}
-    {authType === 'Username and Password' && (
+    {authType === USER_PASS && (
       <React.Fragment>
         <FormGroup label="Username" isRequired fieldId="username">
           <TextInput
@@ -171,7 +223,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="username"
             onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
             ouiaId="username"
+            validated={errors?.username ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.username)}
         </FormGroup>
         <FormGroup label="Password" isRequired fieldId="password">
           <TextInput
@@ -183,7 +237,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="password"
             onChange={event => handleInputChange('password', (event.target as HTMLInputElement).value)}
             ouiaId="password"
+            validated={errors?.password ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.password)}
         </FormGroup>
       </React.Fragment>
     )}
@@ -200,7 +256,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="username"
             onChange={event => handleInputChange('username', (event.target as HTMLInputElement).value)}
             ouiaId="username"
+            validated={errors?.username ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.username)}
         </FormGroup>
         <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
           <TextArea
@@ -212,10 +270,12 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             onChange={event => handleInputChange('ssh_key', event.target.value)}
             rows={10}
             data-ouia-component-id="ssh_key"
+            validated={errors?.ssh_key ? 'error' : 'default'}
           />
           <FormHelperText>
             Please paste your private SSH key here. This key will be used to authenticate your access to the system.
           </FormHelperText>
+          {ErrorFragment(errors?.ssh_key)}
         </FormGroup>
         <FormGroup label="SSH passphrase" fieldId="ssh_passphrase">
           <TextInput
@@ -226,7 +286,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="ssh_passphrase"
             onChange={event => handleInputChange('ssh_passphrase', (event.target as HTMLInputElement).value)}
             ouiaId="ssh_passphrase"
+            validated={errors?.ssh_passphrase ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.ssh_passphrase)}
         </FormGroup>
       </React.Fragment>
     )}
@@ -263,7 +325,9 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="become_user"
             onChange={event => handleInputChange('become_user', (event.target as HTMLInputElement).value)}
             ouiaId="become_user"
+            validated={errors?.become_user ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.become_user)}
         </FormGroup>
         <FormGroup label="Become Password" fieldId="become_password">
           <TextInput
@@ -274,12 +338,34 @@ const CredentialFormFields: React.FC<CredentialFormFieldsProps> = ({
             name="become_password"
             onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
             ouiaId="become_password"
+            validated={errors?.become_password ? 'error' : 'default'}
           />
+          {ErrorFragment(errors?.become_password)}
         </FormGroup>
       </React.Fragment>
     )}
   </React.Fragment>
 );
+
+const ErrorFragment = (errorMessage: string | undefined) => {
+  if (errorMessage) {
+    return (
+      <FormHelperText>
+        <HelperText>
+          <HelperTextItem
+            variant={errorMessage ? 'error' : 'default'}
+            {...(errorMessage && { icon: <ExclamationCircleIcon /> })}
+          >
+            {errorMessage}
+          </HelperTextItem>
+        </HelperText>
+      </FormHelperText>
+    );
+  } else {
+    return null;
+  }
+};
+
 const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   isOpen,
   credential,
@@ -287,12 +373,10 @@ const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   onClose = Function.prototype,
   onSubmit = Function.prototype
 }) => {
-  const { formData, authType, typeValue, setAuthType, handleInputChange, filterFormData } = useCredentialForm(
-    credentialType,
-    credential
-  );
-
-  const onAdd = () => {
+  const { formData, errors, authType, typeValue, canSubmit, setAuthType, handleInputChange, filterFormData } =
+    useCredentialForm(credentialType, credential);
+  const onAdd = e => {
+    e.preventDefault();
     const payload = {
       ...formData,
       cred_type: typeValue,
@@ -312,13 +396,14 @@ const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
       <Form>
         <CredentialFormFields
           formData={formData}
+          errors={errors}
           authType={authType}
           typeValue={typeValue}
           setAuthType={setAuthType}
           handleInputChange={handleInputChange}
         />
         <ActionGroup>
-          <Button variant="primary" onClick={onAdd}>
+          <Button variant="primary" onClick={onAdd} isDisabled={!canSubmit}>
             Save
           </Button>
           <Button variant="link" onClick={() => onClose()}>
