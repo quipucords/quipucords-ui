@@ -19,7 +19,7 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
-import { type CredentialType } from '../../types/types';
+import { type CredentialErrorType, type CredentialType } from '../../types/types';
 
 interface AddCredentialModalProps {
   isOpen: boolean;
@@ -27,6 +27,8 @@ interface AddCredentialModalProps {
   credentialType?: string;
   onClose?: () => void;
   onSubmit?: (payload: any) => void;
+  errors?: CredentialErrorType;
+  setFormErrors?: any;
 }
 
 interface CredentialFormType extends Partial<CredentialType> {
@@ -35,7 +37,7 @@ interface CredentialFormType extends Partial<CredentialType> {
 
 interface CredentialFormFieldsProps {
   formData?: CredentialFormType;
-  errors?: CredentialFormType;
+  errors?: CredentialErrorType;
   authType?: string;
   typeValue?: string;
   setAuthType?: (credentialType: string) => void;
@@ -46,7 +48,12 @@ const USER_PASS = 'Username and Password';
 const TOKEN = 'Token';
 const SSH_KEY = 'SSH Key';
 
-const useCredentialForm = (credentialType: string | undefined, credential?: CredentialType) => {
+const useCredentialForm = (
+  credentialType: string | undefined,
+  credential?: CredentialType,
+  errors?: CredentialErrorType,
+  setFormErrors?: any
+) => {
   const initialFormState: CredentialFormType = {
     password: '',
     become_user: '',
@@ -60,11 +67,10 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     username: ''
   };
   const [formData, setFormData] = useState<CredentialFormType>(initialFormState);
-  const [errors, setAllErrors] = useState<CredentialFormType>({});
   const [canSubmit, setCanSubmit] = useState(false);
 
   const setError = (fieldName: string, errorMessage: string) => {
-    setAllErrors({ ...errors, [fieldName]: errorMessage });
+    setFormErrors({ ...errors, [fieldName]: errorMessage });
   };
 
   const typeValue = credential?.cred_type || credentialType?.split(' ')?.shift()?.toLowerCase() || '';
@@ -74,7 +80,7 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     _setAuthType(value);
     // Dirty workaround for clearing errors when changing auth type
     // The ideal solution would be cleaning up only errors not relevant after the change
-    setAllErrors({});
+    setFormErrors(Object());
   };
 
   const getRequiredFields = useCallback(() => {
@@ -108,11 +114,10 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
   }, [typeValue, credential]);
 
   useEffect(() => {
-    console.log(getRequiredFields());
     const requiredFieldsFilled = getRequiredFields()
       .map(field => (formData[field] ? true : false))
       .every(v => v === true);
-    const noErrors = Object.values(errors)
+    const noErrors = Object.values(errors || {})
       .map(v => (v ? true : false))
       .every(v => v === false);
     setCanSubmit(requiredFieldsFilled && noErrors);
@@ -142,8 +147,7 @@ const useCredentialForm = (credentialType: string | undefined, credential?: Cred
     setAuthType,
     handleInputChange,
     filterFormData,
-    setError,
-    setAllErrors
+    setError
   };
 };
 
@@ -370,11 +374,13 @@ const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   isOpen,
   credential,
   credentialType,
+  errors,
+  setFormErrors,
   onClose = Function.prototype,
   onSubmit = Function.prototype
 }) => {
-  const { formData, errors, authType, typeValue, canSubmit, setAuthType, handleInputChange, filterFormData } =
-    useCredentialForm(credentialType, credential);
+  const { formData, authType, typeValue, canSubmit, setAuthType, handleInputChange, filterFormData } =
+    useCredentialForm(credentialType, credential, errors, setFormErrors);
   const onAdd = e => {
     e.preventDefault();
     const payload = {

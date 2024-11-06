@@ -191,7 +191,7 @@ const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'danger'
       });
-      return;
+      return Promise.reject(error);
     },
     [onAddAlert, t]
   );

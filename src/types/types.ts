@@ -21,6 +21,20 @@ export type CredentialType = {
   auth_type: string;
 };
 
+export type CredentialErrorType = {
+  name: string;
+  cred_type: string;
+  username: string;
+  password: string;
+  ssh_key: string;
+  auth_token: string;
+  ssh_passphrase: string;
+  become_method: string;
+  become_user: string;
+  become_password: string;
+  auth_type: string;
+};
+
 export type SourceConnectionType = {
   end_time: string;
   id: number;

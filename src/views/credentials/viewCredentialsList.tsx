@@ -46,7 +46,7 @@ import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useAddCredentialApi, useDeleteCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type CredentialType, type SourceType } from '../../types/types';
+import { type CredentialErrorType, type CredentialType, type SourceType } from '../../types/types';
 import { AddCredentialModal } from './addCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
@@ -60,6 +60,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const { deleteCredentials } = useDeleteCredentialApi(addAlert);
   const { addCredentials } = useAddCredentialApi(addAlert);
   const { queryClient } = useQueryClientConfig();
+  const [formErrors, setFormErrors] = React.useState<CredentialErrorType>(Object);
 
   /**
    * Fetches the translated label for a credential type.
@@ -345,14 +346,49 @@ const CredentialsListView: React.FunctionComponent = () => {
         })}
       </Modal>
       <AddCredentialModal
+        errors={formErrors}
+        setFormErrors={setFormErrors}
         isOpen={addCredentialModal !== undefined}
         credentialType={addCredentialModal}
-        onClose={() => setAddCredentialModal(undefined)}
+        onClose={() => {
+          setAddCredentialModal(undefined);
+          setFormErrors(Object());
+        }}
         onSubmit={(payload: CredentialType) =>
-          addCredentials(payload).finally(() => {
-            queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-            setAddCredentialModal(undefined);
-          })
+          addCredentials(payload).then(
+            () => {
+              queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+              setAddCredentialModal(undefined);
+            },
+            error => {
+              // only handle client errors
+              if (error?.response?.status >= 400 && error.response?.status < 500) {
+                // these are the exact "keys" of type CredentialErrorType - it
+                // would be nice if we could simply extract them
+                const expectedKeys = [
+                  'name',
+                  'cred_type',
+                  'username',
+                  'password',
+                  'ssh_key',
+                  'auth_token',
+                  'ssh_passphrase',
+                  'become_method',
+                  'become_user',
+                  'become_password',
+                  'auth_type'
+                ];
+                // filter out alien keys like "non_field_errors" key
+                const fieldErrors = expectedKeys.reduce((obj, key) => {
+                  if (key in error.response.data) {
+                    obj[key] = error.response.data[key];
+                  }
+                  return obj;
+                }, {});
+                setFormErrors({ ...formErrors, ...fieldErrors });
+              }
+            }
+          )
         }
       />
       <AlertGroup isToast isLiveRegion>
