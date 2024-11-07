@@ -22,17 +22,21 @@ import {
   EmptyStateFooter,
   EmptyStateHeader,
   EmptyStateIcon,
+  Flex,
+  InputGroup,
+  InputGroupItem,
   List,
   ListItem,
   Modal,
   ModalVariant,
   PageSection,
+  TextInput,
   ToolbarContent,
   ToolbarItem,
   Tooltip,
   getUniqueId
 } from '@patternfly/react-core';
-import { PlusCircleIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon, UndoIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
@@ -59,6 +63,90 @@ import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
 
+const Playground: React.FunctionComponent = () => {
+  const [apiResponse, setApiResponse] = React.useState({ has_secret: true });
+  const [payload, setPayload] = React.useState({});
+  const [allowEditing, setAllowEditing] = React.useState(!apiResponse.has_secret);
+
+  const toggleHasSecret = () => {
+    setApiResponse({ has_secret: !apiResponse.has_secret });
+  };
+
+  React.useEffect(() => {
+    setAllowEditing(!apiResponse.has_secret);
+    // if (apiResponse.has_secret) {
+    //   setPayload({})
+    // }
+  }, [apiResponse]);
+
+  React.useEffect(() => {
+    if (allowEditing) {
+      setPayload({"secret": ""})
+    } else {
+      setPayload({})
+    }
+  }, [allowEditing]);
+
+  const doUndoButton = (hasSecret: boolean, allowEdit: boolean, toggleAllowEdit: any) => {
+    if (hasSecret) {
+      return (
+        <InputGroupItem>
+          <Button
+            variant="control"
+            onClick={() => {
+              toggleAllowEdit(!allowEdit);
+            }}
+          >
+            <UndoIcon />
+          </Button>
+        </InputGroupItem>
+      );
+    } else {
+      return <React.Fragment></React.Fragment>;
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <Flex>
+        <Flex direction={{ default: 'column' }}>
+          <Flex>Api response</Flex>
+          <Flex>
+            <Button onClick={toggleHasSecret}>Toggle</Button>
+          </Flex>
+          <Flex>
+            <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+          </Flex>
+        </Flex>
+        <Flex direction={{ default: 'column' }}>
+          <Flex>Payload</Flex>
+          <Flex>
+            <Button onClick={() => setPayload({})}>Reset payload</Button>
+          </Flex>
+          <Flex>
+            <pre>{JSON.stringify(payload, null, 2)}</pre>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      <InputGroup>
+        {doUndoButton(apiResponse.has_secret, allowEditing, setAllowEditing)}
+        <InputGroupItem>
+          <TextInput
+            type="password"
+            isDisabled={!allowEditing}
+            placeholder={allowEditing ? '' : '<ENCRYPTED>'}
+            value={payload?.secret ? payload.secret : ""}
+            onChange={e => {
+              setPayload({ secret: e.target.value });
+            }}
+          ></TextInput>
+        </InputGroupItem>
+      </InputGroup>
+    </React.Fragment>
+  );
+};
+
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
@@ -75,6 +163,7 @@ const ScansListView: React.FunctionComponent = () => {
   const { downloadReport } = useDownloadReportApi(addAlert);
   const { getAggregateReport } = useGetAggregateReportApi(addAlert);
   const nav = useNavigate();
+  const [playgroundOpen, setPlayground] = React.useState<boolean>(false);
 
   /**
    * Invalidates the query cache for the scan list, triggering a refresh.
@@ -160,6 +249,15 @@ const ScansListView: React.FunctionComponent = () => {
         </ToolbarItem>
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button
+            onClick={() => {
+              setPlayground(!playgroundOpen);
+            }}
+          >
+            Open Playground
+          </Button>
         </ToolbarItem>
         <PaginationToolbarItem>
           <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
@@ -301,6 +399,14 @@ const ScansListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
+      <Modal
+        variant={ModalVariant.large}
+        title={'PLAYGROUND'}
+        isOpen={playgroundOpen}
+        onClose={() => setPlayground(false)}
+      >
+        <Playground />
+      </Modal>
       <Modal
         variant={ModalVariant.small}
         title={t('view.label', { context: 'sources' })}
