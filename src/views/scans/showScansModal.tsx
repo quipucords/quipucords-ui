@@ -131,7 +131,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
                   <Td dataLabel="Scan Time">{helpers.formatDate(job.end_time || job.start_time)}</Td>
                   <Td dataLabel="Scan Result">{job.status}</Td>
                   <Td dataLabel="Download" isActionCell>
-                    {job.report_id && job.end_time && (
+                    {helpers.canDownloadReport(job) && (
                       <Button onClick={() => onDownload(job.report_id)} icon={<DownloadIcon />} variant="link">
                         Download
                       </Button>
