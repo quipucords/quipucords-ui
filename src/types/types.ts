@@ -174,12 +174,16 @@ export type ScanOptions = {
 export type scanJob = {
   id: number;
   report_id: number;
+  status: string;
 };
 
 export type StatusDetails = {
   job_status_message: string;
 };
 
+// TODO: the object returned from the API representing scanJob and MostRecentScan are the same;
+// consider this in a future refactor. Also, MostRecentScan is a ScanJob, not a scan. Yeah, quipucords
+// is confusing...
 export type MostRecentScan = {
   id: number;
   report_id: number;

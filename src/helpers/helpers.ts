@@ -9,7 +9,7 @@ import React from 'react';
 import moment, { type MomentInput } from 'moment';
 import titleImg from '../images/title.svg';
 import titleImgBrand from '../images/titleBrand.svg';
-import { type CredentialType } from '../types/types';
+import { type CredentialType, type MostRecentScan, type scanJob } from '../types/types';
 
 /**
  * Is dev mode active.
@@ -226,8 +226,22 @@ const getCurrentDate = () => (TEST_MODE && moment.utc('20241001').toDate()) || m
  */
 const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || titleImg) as string;
 
+/**
+ * Return if a report associated with given ScanJob can be downloaded
+ *
+ * @param {scanJob | MostRecentScan} job
+ * @returns {boolean}
+ */
+const canDownloadReport = (job?: scanJob | MostRecentScan) => {
+  if (job && job.status === 'completed' && job.report_id) {
+    return true;
+  }
+  return false;
+};
+
 const helpers = {
   authType,
+  canDownloadReport,
   downloadData,
   noopTranslate,
   generateId,
