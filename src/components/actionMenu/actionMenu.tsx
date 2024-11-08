@@ -11,7 +11,7 @@ import { EllipsisVIcon } from '@patternfly/react-icons';
 
 interface ActionMenuProps<T = unknown> {
   item: T;
-  actions: { label: string; onClick: (item: T) => void }[];
+  actions: { label: string; onClick: (item: T) => void; disabled?: boolean }[];
 }
 
 const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
@@ -43,6 +43,7 @@ const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
             onClick={() => {
               a.onClick(item);
             }}
+            isDisabled={a.disabled}
           >
             {a.label}
           </DropdownItem>

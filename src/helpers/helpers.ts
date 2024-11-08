@@ -232,12 +232,8 @@ const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || title
  * @param {scanJob | MostRecentScan} job
  * @returns {boolean}
  */
-const canDownloadReport = (job?: scanJob | MostRecentScan) => {
-  if (job && job.status === 'completed' && job.report_id) {
-    return true;
-  }
-  return false;
-};
+const canDownloadReport = (job?: scanJob | MostRecentScan) =>
+  job?.status === 'completed' && job?.report_id !== undefined;
 
 const helpers = {
   authType,
