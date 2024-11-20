@@ -49,7 +49,7 @@ const useCreateScanApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'danger'
       });
-      return;
+      return Promise.reject(error);
     },
     [onAddAlert, t]
   );
@@ -117,7 +117,7 @@ const useRunScanApi = (
         }),
         variant: 'danger'
       });
-      return;
+      return Promise.reject(error);
     },
     [onAddAlert, t]
   );

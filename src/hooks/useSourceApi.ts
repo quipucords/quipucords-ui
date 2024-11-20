@@ -173,7 +173,7 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'danger'
       });
-      return;
+      return Promise.reject(error);
     },
     [onAddAlert, t]
   );
@@ -237,7 +237,7 @@ const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'danger'
       });
-      return;
+      return Promise.reject(error);
     },
     [onAddAlert, t]
   );

@@ -225,8 +225,8 @@ describe('useCreateScanApi', () => {
     const { createScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await createScans({ name: 'Lorem' });
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('createScans, error');
+    await expect(createScans({ name: 'Lorem' })).rejects.toMatchSnapshot('createScans, error');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('createScans, alert error');
   });
 
   it('should process an API success response', () => {
@@ -239,21 +239,23 @@ describe('useCreateScanApi', () => {
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackSuccess');
   });
 
-  it('should process an API error response', () => {
+  it('should process an API error response', async () => {
     const { callbackError } = hookResult;
 
-    callbackError(
-      {
-        response: {
-          data: {
-            message: 'Dolor sit'
+    await expect(
+      callbackError(
+        {
+          response: {
+            data: {
+              message: 'Dolor sit'
+            }
           }
-        }
-      },
-      'Lorem Ipsum'
-    );
+        },
+        'Lorem Ipsum'
+      )
+    ).rejects.toMatchSnapshot('callbackError');
 
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError, alert');
   });
 });
 
@@ -369,11 +371,11 @@ describe('useRunScanApi', () => {
     const { runScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await runScans({ name: 'Lorem' });
-    await runScans({ id: '123', name: 'Lorem' }, true);
+    await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, without id error');
+    await expect(runScans({ id: '123', name: 'Lorem' }, true)).rejects.toMatchSnapshot('runScans, with id error');
 
     expect(mockCreateScan).toHaveBeenCalledTimes(1);
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, error');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, error alert');
   });
 
   it('should process an API success response', () => {
@@ -384,29 +386,30 @@ describe('useRunScanApi', () => {
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackSuccess');
   });
 
-  it('should process an API error response', () => {
+  it('should process an API error response', async () => {
     const { callbackError } = hookResult;
 
-    callbackError(
-      {
-        response: {
-          data: {
-            message: 'Dolor sit'
+    await expect(
+      callbackError(
+        {
+          response: {
+            data: {
+              message: 'Dolor sit'
+            }
           }
-        }
-      },
-      'Lorem'
-    );
-
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
+        },
+        'Lorem'
+      )
+    ).rejects.toMatchSnapshot('callbackError');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError, alert');
   });
 
   it('should handle missing scan ID and trigger custom error', async () => {
     const { runScans } = hookResult;
     mockCreateScan.mockResolvedValue({});
 
-    await runScans({ name: 'Lorem' });
-    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, no ID returned');
+    await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, no ID returned');
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, no ID returned, alert');
   });
 });
 

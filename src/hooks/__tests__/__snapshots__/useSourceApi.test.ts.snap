@@ -16,7 +16,7 @@ exports[`useAddSourceApi should attempt an api call to add sources: apiCall 1`] 
 ]
 `;
 
-exports[`useAddSourceApi should handle errors while attempting to add a source: addSources, error 1`] = `
+exports[`useAddSourceApi should handle errors while attempting to add a source: addSources, alert error 1`] = `
 [
   [
     {
@@ -32,6 +32,13 @@ exports[`useAddSourceApi should handle errors while attempting to add a source: 
     },
   ],
 ]
+`;
+
+exports[`useAddSourceApi should handle errors while attempting to add a source: addSources, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
 `;
 
 exports[`useAddSourceApi should handle success while attempting to add a source: addSources, success 1`] = `
@@ -247,7 +254,7 @@ exports[`useEditSourceApi should attempt an api call to edit sources: apiCall 1`
 ]
 `;
 
-exports[`useEditSourceApi should handle errors while attempting to edit a source: editSources, error 1`] = `
+exports[`useEditSourceApi should handle errors while attempting to edit a source: editSources, alert error 1`] = `
 [
   [
     {
@@ -263,6 +270,13 @@ exports[`useEditSourceApi should handle errors while attempting to edit a source
     },
   ],
 ]
+`;
+
+exports[`useEditSourceApi should handle errors while attempting to edit a source: editSources, error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
 `;
 
 exports[`useEditSourceApi should handle success while attempting to edit a source: editSources, success 1`] = `
