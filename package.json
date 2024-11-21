@@ -24,6 +24,7 @@
     "build": "run-s -l build:pre build:js build:post",
     "build:brand": "export UI_BRAND=true; run-s -l build:pre build:js build:post",
     "build:js": "export NODE_ENV=production; weldable -l ts -x ./config/webpack.prod.js",
+    "build:eject": "echo \"Outputing webpack config. Remember to move files and scripts into place, and manually remove the weldable package.\"; weldable --standalone",
     "build:post": "bash ./scripts/post.sh",
     "build:pre": "bash ./scripts/pre.sh",
     "release": "changelog --link-url https://github.com/quipucords/quipucords-ui.git",
