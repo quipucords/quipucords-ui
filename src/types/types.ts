@@ -19,6 +19,11 @@ export type CredentialType = {
   become_password: string;
   sources: SourceType[];
   auth_type: string;
+  has_password?: boolean;
+  has_ssh_key?: boolean;
+  has_ssh_passphrase?: boolean;
+  has_become_password?: boolean;
+  has_auth_token?: boolean;
 };
 
 export type SourceConnectionType = {

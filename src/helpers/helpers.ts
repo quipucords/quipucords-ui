@@ -148,7 +148,7 @@ enum authType {
  * @param {CredentialType} credential - The CredentialType object representing authentication information.
  * @returns {string} - A string indicating the authentication type, e.g., "Username and Password".
  */
-const getAuthType = ({ auth_type }: CredentialType): authType => {
+const getAuthType = ({ auth_type }: Partial<CredentialType>): authType => {
   switch (auth_type) {
     case 'password':
       return authType.UsernameAndPassword;

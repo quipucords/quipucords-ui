@@ -9,9 +9,16 @@ import React, { useState } from 'react';
 import { Dropdown, DropdownItem, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
 
+type Action<T> = {
+  label: string;
+  onClick: (item: T) => void;
+  disabled?: boolean;
+  ouiaId?: string; // Optional ouiaId for E2E testing
+};
+
 interface ActionMenuProps<T = unknown> {
   item: T;
-  actions: { label: string; onClick: (item: T) => void; disabled?: boolean }[];
+  actions: Action<T>[];
 }
 
 const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
@@ -40,6 +47,7 @@ const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
           <DropdownItem
             value={a.label}
             key={a.label}
+            ouiaId={a.ouiaId}
             onClick={() => {
               a.onClick(item);
             }}
