@@ -334,6 +334,8 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 #### Start writing code with local run
 This is a local run designed to function with minimal resources and a mock API.
 
+> There may be limitations to running this emulated API. Check with the team to understand any current limitations.
+
 1. Confirm you've installed all recommended tooling
 1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
 1. Confirm you've installed resources through npm
@@ -350,6 +352,8 @@ This is a local run designed to function with minimal resources and a mock API.
 
 #### Start writing code with staging
 This is an authenticated local run that has the ability to run against a containerized API.
+
+> There may be limitations to running this emulated API. Check with the team to understand any current limitations.
 
 1. Confirm you've installed all recommended tooling
 1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
