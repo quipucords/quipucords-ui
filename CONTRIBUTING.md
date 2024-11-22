@@ -6,10 +6,8 @@ Contributing encompasses repository specific requirements, and the global [Quipu
 <summary><h3 style="display: inline-block">Using Git</h3></summary>
 
 Quipucords-UI makes use of
-- GitHub's fork and pull workflow.
+- Both branch work inside the main repository and GitHub's fork and pull workflow
 - A linear commit process and rebasing.
-
-> Instead of relying on GitHub merge commits and squashing, we recommend breaking down changes into smaller, independent commits.
 
 #### Branch syncing
 Linear commit history for Quipucords-UI simplifies understanding and syncing changes across branches. Do not use merge commits. Always use fast-forward rebase.
@@ -20,8 +18,6 @@ New changes must be made in a branch and be submitted via GitHub pull requests. 
 
 <details>
 <summary><h3 style="display: inline-block">Pull request workflow, and testing</h3></summary>
-
-All development work should be handled through GitHub's fork and pull workflow.
 
 #### Setting up a pull request
 When multiple developers are contributing features, development pull requests (PRs) should be opened against the `main` branch.
@@ -45,7 +41,7 @@ to provide consistent history and help generate [CHANGELOG.md](./CHANGELOG.md) u
 
 Commit messages follow three basic guidelines
 - No more than `65` characters for the first line
-- If your pull request has more than a single commit you should include the pull request number in your message using the below format. This additional copy is not counted towards the `65` character limit.
+- If your pull request has more than a single commit it is recommended, for notes and tracking, you include the pull request number in your message using the below format. This additional copy is not counted towards the `65` character limit.
   ```
   [message] (#1234)
   ```
@@ -63,35 +59,30 @@ Commit messages follow three basic guidelines
     - Basic types include `feat` (feature), `fix`, `chore`, `build`.
     - See [conventional commit types](https://www.conventionalcommits.org/) for additional types.
   - Scope = **optional** area of code affected.
-    - Can be a directory or filenames
+    - Can be a directory, filenames, or a generalized type
     - Does not have to encompass all file names affected
   - Issue number = the Jira issue number
-    - Currently, the prefix `dis-[issue number]` can be used in place of `discovery-[issue number]`
-  - Description = what the commit work encompasses
+    - Currently, the prefix `ds-[issue number]` can be used in place of `discovery-[issue number]`
+  - Description = what the commit work encompasses. You can expand your description in the commit message body
 
   Example
   ```
-  feat(scans): dis-123 activate foo against bar
+  feat(scans): ds-123 activate foo against bar
   ```
 > Not all commits need an issue number. But it is encouraged you attempt to associate
 > a commit with an issue for tracking. In a scenario where no issue is available
-> exceptions can be made for `fix`, `chore`, and `build`.
+> exceptions can be made for `fix`, `chore`, and `build`. But this is for tracking and
+> can benefit followup development efforts.
 
 #### Pull request test failures
-Creating a pull request activates the following checks through GitHub actions.
-- Commit message linting, see [commit_lint.yml](./.github/workflows/commit_lint.yml)
-- Pull request code linting, unit tests and repo-level integration tests, see [integration.yml](./.github/workflows/integration.yml)
-
-For additional information on failures for
-- Commit messages, see [Pull request commits, messaging](#pull-request-commits-messaging)
-- Code documentation, see [Updating code documentation]()
-- Pull request code, see [Updating unit tests during development]()
+Creating a pull request activates multiple checks through GitHub actions. [These actions can be located
+here](./.github/workflows/)
 
 > To resolve failures for any GitHub actions make sure you first review the results of the test by
 > clicking the `checks` tab on the related pull request.
 >
 > Caching for GitHub actions and NPM packages is active. This caching allows subsequent pull request
-> updates to avoid reinstalling yarn dependencies.
+> updates to avoid reinstalling npm dependencies.
 >
 > Occasionally test failures can occur after recent NPM package updates either in the pull request
 > itself or in a prior commit to the pull request. The most common reason for this failure presents when
@@ -99,6 +90,36 @@ For additional information on failures for
 >
 > If test failures are happening shortly after a NPM package update you may need to clear the
 > GitHub actions cache and restart the related tests.
+
+##### Audit failures
+Quipucords UI utilizes a unique script to highlight priority NPM audit alerts on production level packages. Below is a path based on past instances of this check failing.
+
+The process for a security when the NPM package is maintained
+1. Determine what the security alert is regarding.
+   - It's a false positive OR legitimate... both processes are the same
+      - There are times when facets of packages get an alert but the end compiled result doesn't actually get exposed in production. This can be ignored to a degree, but...
+      - First, attempt to reset the `package-lock.json`. Doing this will auto-magically `patch` dependencies based on the use of `^`. Follow these steps
+        1. simply deleting the lockfile
+        1. using the correct version of NodeJS, look at the `engine` requirement in [`package.json`](./package.json) if you're unsure
+        1. then running `$ npm install` again
+        1. confirm the lockfile actually patched questionable `prod deps` by running `$ npm audit`.
+           - if the audit check is still firing then there's no need to check/commit the lockfile back in, skip the last step
+           - look for updated major and minor package updates with a fallback towards, making a contribution for the resource to help resolve your issue (just remember different teams different schedules), replacing the package, or copying/writing your own replacement (just because you copy it, that doesn't mean the security issue goes away)
+        1. check/commit the updated lockfile back in 
+      - Finally, as mentioned above you may need to consider alternatives if you were unable to resolve the audit. Alternatives include in no specific order or preference
+         - You may consider relaxing the audit check
+         - Making a contribution to the package
+         - Finding an alternative package
+         - Maintaining the code yourself
+
+
+The process for a security when the NPM package is NOT maintained
+1. Run through the exact same process as noted underneath the `maintained packages` list
+2. Replace the package as soon as possible.
+   - The patch process noted above will only work for so long until it doesn't
+   - The package won't randomly break beyond the addition of the security audit
+   - The team has an issue they need to resolve instead of waiting
+
 
 </details>
 
@@ -108,37 +129,34 @@ For additional information on failures for
 quipucords-ui uses GitHub releases, and our GitHub automation automatically builds and attaches artifacts to a release once its tag is created. See [integration.yml](https://github.com/quipucords/quipucords-ui/blob/main/.github/workflows/integration.yml) for implementation details and [Build workflow](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml?query=event%3Apush) for the history of workflow runs.
 
 #### Release artifacts
-To create a new release, use `yarn` to update version details, and open a PR to merge those changes to `main` using the following process.
+To create a new release, use `npm` to update version details, and open a PR to merge those changes to `main` using the following process.
 
-1. Within the repo, confirm you're on a new branch from the latest `main`, and use `yarn` to update the version:
+1. Within the repo, confirm you're on a new branch from the latest `main` updates, and use `npm` to update the version:
    ```
-   git checkout main && git pull  # to ensure you have the latest changes
-   git checkout -b your-release-branch-name  # please use an appropriate branch name here
-   yarn  # to ensure that packages are installed
-   yarn release --dry-run  # to review the changes before committing them
-   yarn release  # to generate and commit the changes
+   $ npm install                                # to ensure that packages are installed
+   $ npm run release -- --dry-run               # to review the changes before committing them
+   $ npm run release                            # to generate and commit the changes
    ```
 
    > If you disagree with automatic generated version number, you may override it with the > optional `--override` argument:
    > ```
-   > yarn release --override X.X.X
+   > $ npm run release -- --override X.X.X
    > ```
-2. Confirm you now have a release commit with the format `chore(release): X.X.X` that includes changes to:
+2. You still need to confirm you now have a release commit with the format `chore(release): X.X.X` that includes changes to:
    - [`package.json`](./package.json)
+   - [`package-lock.json`](./package-lock.json)
    - [`CHANGELOG.md`](./CHANGELOG.md)
 
-   If there are issues with the file updates, please squash or amend any fixes into the single `chore(release): X.X.X` commit.
-3. Push the **SINGLE** commit to a new branch on the remote GitHub origin:
-   ```
-   git push --set-upstream origin your-release-branch-name
-   ```
-4. Open a PR in GitHub for your branch to merge into `main`. Get approvals, and merge.
-5. Using the [GitHub releases page](https://github.com/RedHatInsights/quipucords-ui/releases):
+   If there are issues with the file updates, squash or amend any fixes into the single `chore(release): X.X.X` commit.
+3. Then push the **SINGLE** commit and open a PR in GitHub for your branch to merge into `main`. Get necessary approvals, and merge.
+   
+   > The git hash for the linking inside CHANGELOG.md does NOT require the git hash of the release commit.
+4. Using the [GitHub releases page](https://github.com/RedHatInsights/quipucords-ui/releases):
    1. Draft a new release from `main`, and confirm it references your latest `chore(release): X.X.X` commit hash.
    2. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
 
-   > To avoid issues with inconsistent tags, please use the GitHub releases interface.
-   > Do not manually create release tags using `git`.
+   > To avoid issues with inconsistent tags, please use the GitHub releases interface,
+   > instead of manually creating release tags using `git`.
 
 </details>
 
@@ -151,23 +169,28 @@ Our schedule for updating NPMs
 - dependabot running multiple times a month on major level packages that require an in-depth review
 
 ##### Manual NPM updates
-This is the slowest part of package updates. Some packages will need to be updated manually.
-1. Clone the repository locally, or bring your fork up-to-date, with the `main` branch. [Make sure development tooling is installed](#install-tooling).
+> It is **highly discouraged** that you rely on updating ANY `lock` file ONLY recommendations. This creates long-term issues when NPM references in `package.json` potentially require specific
+> dependencies, or have built around specific package functionality that could be inadvertently altered by updating a dependencies' dependency. `lock` file
+> updates should only be leveraged under certain conditions.
+
+This is the slowest part of package updates. If any packages are skipped during the "basic" and "core" automation runs. Those packages will need to be updated manually.
+1. Clone the repository locally, or bring your fork up-to-date with the development branch. [Make sure development tooling is installed](#install-tooling).
 1. Remove/delete the `node_modules` directory (there may be differences between branches that create package alterations)
 1. Run
    ```
-   $ yarn
+   $ npm install
    ```
    To re-install the baseline packages.
-1. Start working your way down the list of `dependencies` and `devDependencies` in [`package.json`](./package.json). It is normal to start on the `dev-dependencies` since the related NPMs support build process. Build process updates, short of a semver major/minor, generally do not break the application.
+1. Start working your way down the list of `dependencies` and `devDependencies` in [`package.json`](./package.json). It is normal to start on the `dev-dependencies` since the related NPMs support build process updates at more consistent intervals without breaking the application.
    > Some text editors fill in the next available NPM package version when you go to modify the package version. If this isn't available you can always use [NPM directly](https://www.npmjs.com/)... start searching =).
-1. After each package version update in [`package.json`](./package.json) you'll run the follow scripts
-   - `$ yarn test`, if it fails you'll need to run `$ yarn test:dev` and update the related tests
-   - `$ yarn build`, if it fails you'll need to run `$ yarn test:integration-dev` and update the related tests
-   - Make sure podman desktop is running, then type `$ yarn start`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
-   - Make sure podman desktop is running, then type `$ yarn start:stage`. Confirm that staging run is still accessible and that no design alterations have happened. Fix accordingly.
+1. After each package version update in [`package.json`](./package.json) you'll run the following scripts
+  - `$ npm test`, if it fails you'll need to do one, two, or all of the following 
+     - edit files for related linting and/or type errors 
+     - run `$ npm run test:dev` and update the related unit tests
+     - run `$ npm run test:integration-dev` and update the related tests
+  - `$ npm start`, confirm that local run is still accessible and that no design alterations have happened. Fix accordingly.
 1. If the package is now working commit the change and move on to the next package.
-   - If the package fails, or you want to skip the update, take the minimally easy path and remove/delete `node_modules` then rollback `yarn.lock` **BEFORE** you run the next package update.
+  - If the package fails, or you want to skip the update, take the minimally easy path and remove/delete `node_modules` then rollback `package-lock.json` **BEFORE** you run the next package update.
 > There are alternatives to resetting `node_modules`, we're providing the most direct path.
 >
 > Not updating a package is not the end-of-the-world. A package is not going to randomly break because you haven't updated to the latest version.
@@ -185,11 +208,34 @@ This is the slowest part of package updates. Some packages will need to be updat
     - [`./config`](./config)
     - [`./scripts/post.sh`](./scripts/post.sh)
     - [`./scripts/pre.sh`](./scripts/pre.sh)
+- Scripts for servers
+   - [`apiDev.js`](./scripts/apiDev.js) - A Swagger/OpenAPI spec mock tool. Version limited. If a migration to the next OpenAPI spec is needed this tool needs to be updated, replaced, or removed
+   - [`apiStage.js`](./scripts/apiStage.js) - A podman based local run
 - GitHub Actions
   - Action files
     - [`./.github/workflows`](.github/workflows)
   - Related script files
     - [`./.scripts/actions.commit.js`](./scripts/actions.commit.js)
+
+#### Webpack
+The build utilizes a `Webpack` wrapper package called [`weldable`](https://www.npmjs.com/package/weldable). This package consolidates the package installs needed to compile output to save time and effort.
+
+[`weldable`](https://www.npmjs.com/package/weldable) can be removed and replaced with the direct NPM packages if necessary.
+
+##### Remove weldable
+To remove
+1. run the npm script `$ npm run build:eject`
+
+This will output
+- An updated `package.json`.
+   - the `weldable` package reference in your `dependencies` will still need to be removed
+   - A consolidated webpack configuration file. This may still need to be moved to the desired location.
+   - And NPM script updates that reference the consolidated webpack configuration file. If the webpack file is moved these scripts will need to be updated.
+
+If you change your mind, simply delete the updates and [`weldable`](https://www.npmjs.com/package/weldable) should remain in place.
+
+> It's important to note that `weldable` is currently being used under "production" dependencies in `package.json`. If 
+> `weldable` is removed you'll need to determine which packages need to be relocated from `dev-dependencies` to "production" level dependencies
 </details>
 
 ## Development
@@ -198,11 +244,11 @@ This is the slowest part of package updates. Some packages will need to be updat
 
 Before developing you'll need to install:
 * [NodeJS and NPM](https://nodejs.org/)
+  * Yarn install is now discouraged. There are dependency install issues with Yarn `1.x.x` versions.
 * [podman desktop](https://podman-desktop.io/)
-* And [Yarn](https://yarnpkg.com)
 
 #### OS support
-The tooling for Quipucords-UI is `Mac OS` centered.
+The tooling is `Mac OS` centered.
 
 While some aspects of the tooling have been expanded for Linux there may still be issues. It is encouraged that OS tooling
 changes are contributed back while maintaining existing `Mac OS` functionality.
@@ -210,29 +256,15 @@ changes are contributed back while maintaining existing `Mac OS` functionality.
 If you are unable to test additional OS support it is imperative that code reviews take place before integrating/merging build changes.
 
 #### NodeJS and NPM
-The Quipucords-UI build attempts to align to the current NodeJS LTS version. It is possible to test future versions of NodeJS LTS. See CI Testing for more detail.
+The build attempts to align to the current NodeJS LTS version. It is possible to test future versions of NodeJS LTS. See CI Testing for more detail.
 
-#### Yarn
-Once you've installed NodeJS you can use NPM to perform the [Yarn](https://yarnpkg.com) install
-
-  ```
-  $ npm install yarn -g
-  ```
+NPM is automatically packaged with your NodeJS install.
 </details>
 
 <details>
 <summary><h3 style="display: inline-block">dotenv file setup</h3></summary>
 
 "dotenv" files contain shared configuration settings across the Quipucords-UI code and build structure. These settings are imported through [helpers](./src/common/helpers.js), or through other various `process.env.[dotenv parameter names]` within the code or build.
-
-#### Setup basic dotenv files
-Before you can start any local development you need to relax permissions associated with the platform. This
-affects various aspects of both `local` and `stage` development.
-
-1. Create a local dotenv file in the root of `Quipucords-UI` called `.env.local` and add the following contents
-    ```
-    REACT_APP_DEBUG_MIDDLEWARE=true
-    ```
 
 #### Advanced dotenv files
 The dotenv files are structured to cascade each additional dotenv file settings from a root `.env` file.
@@ -246,62 +278,53 @@ The dotenv files are structured to cascade each additional dotenv file settings 
  .env -> .env.test = testing framework settings that enhances the base .env settings file
 ```
 
-##### Current directly available _developer/debugging/test_ dotenv parameters
-
-> Technically all dotenv parameters come across as strings when imported through `process.env`. It is important to cast them accordingly if "type" is required.
-
-
-| dotenv parameter           | definition                                                                                 |
-| -------------------------- | ------------------------------------------------------------------------------------------ |
-| REACT_APP_AUTH_TOKEN       | A static string associated with overriding the assumed UI/application token name           |
-| REACT_APP_DEBUG_MIDDLEWARE | A static boolean that activates the console state debugging messages associated with Redux |
-
-
 ##### Current directly available _build_ dotenv parameters
 
 > Technically all dotenv parameters come across as strings when imported through `process.env`. It is important to cast them accordingly if "type" is required.
 
-| dotenv parameter                                  | definition                                                                                   |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| REACT_APP_UI_VERSION                              | A dynamic string reference to the build populated package.json version reference             |
-| REACT_APP_UI_NAME                                 | A static string reference similar to the application name                                    |
-| REACT_APP_UI_SHORT_NAME                           | A static string reference to a shortened display version of the application name             |
-| REACT_APP_UI_SENTENCE_START_NAME                  | A static string reference to the "sentence start" application name                           |
-| REACT_APP_UI_BRAND_NAME                           | A static string reference similar to the official application name                           |
-| REACT_APP_UI_BRAND_SHORT_NAME                     | A static string reference to a shortened official display version of the application name    |
-| REACT_APP_UI_BRAND_SENTENCE_START_NAME            | A static string reference to the official "sentence start" application name                  |
-| REACT_APP_UI_BRAND                                | A dynamic boolean reference used in building the official brand version of Quipucords-UI     |
-| REACT_APP_AUTH_TOKEN                              | A static string reference to the authentication token                                        |
-| REACT_APP_AUTH_HEADER                             | A static string reference to the authentication header                                       |
-| REACT_APP_AJAX_TIMEOUT                            | A static number reference to the milliseconds used to timeout API requests                   |
-| REACT_APP_TOAST_NOTIFICATIONS_TIMEOUT             | A static number reference to the milliseconds used to hide toast notifications               |
-| REACT_APP_POLL_INTERVAL                           | A static number reference to the milliseconds used in view polling                           |
-| REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG      | A static string reference to the UI/application default locale language                      |
-| REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG_DESC | A static string reference to the UI/application default locale language                      |
-| REACT_APP_CONFIG_SERVICE_LOCALES                  | A static string reference to a JSON resource for available UI/application locales            |
-| REACT_APP_CONFIG_SERVICE_LOCALES_PATH             | A static string reference to the JSON resources for available UI/application locale strings  |
-| REACT_APP_CONFIG_SERVICE_LOCALES_EXPIRE           | A static number reference to the milliseconds the UI/application locale strings/files expire |
-| REACT_APP_CREDENTIALS_SERVICE                     | A static string reference to the API spec                                                    |
-| REACT_APP_FACTS_SERVICE                           | A static string reference to the API spec                                                    |
-| REACT_APP_REPORTS_SERVICE                         | A static string reference to the API spec                                                    |
-| REACT_APP_REPORTS_SERVICE_DETAILS                 | A static string reference to the API spec                                                    |
-| REACT_APP_REPORTS_SERVICE_DEPLOYMENTS             | A static string reference to the API spec                                                    |
-| REACT_APP_REPORTS_SERVICE_MERGE                   | A static string reference to the API spec                                                    |
-| REACT_APP_SCANS_SERVICE                           | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_START_GET             | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE                       | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_CONNECTION            | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_INSPECTION            | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_PAUSE                 | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_CANCEL                | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_RESTART               | A static string reference to the API spec                                                    |
-| REACT_APP_SCAN_JOBS_SERVICE_MERGE                 | A static string reference to the API spec                                                    |
-| REACT_APP_SOURCES_SERVICE                         | A static string reference to the API spec                                                    |
-| REACT_APP_USER_SERVICE                            | A static string reference to the API spec                                                    |
-| REACT_APP_USER_SERVICE_CURRENT                    | A static string reference to the API spec                                                    |
-| REACT_APP_USER_SERVICE_LOGOUT                     | A static string reference to the API spec                                                    |
-| REACT_APP_STATUS_SERVICE                          | A static string reference to the API spec                                                    |
-| REACT_APP_AUTH_TOKEN_SERVICE                          | A static string reference to the API spec                                                    |
+| dotenv parameter                                      | definition                                                                                                                |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| HTML_INDEX_DIR                                        | A relative path string reference used by the webpack build to reference where the HTML index file is located              |
+| STATIC_DIR                                            | A relative path string reference used by the webpack build to reference where static resource files are located           |
+| DIST_DIR                                              | A relative path string reference used by the webpack build to reference where webpack should place it's compiled output   |
+| REACT_APP_UI_VERSION                                  | A dynamic string reference to the build populated package.json version reference                                          |
+| REACT_APP_UI_NAME                                     | A static string reference similar to the application name                                                                 |
+| REACT_APP_UI_SHORT_NAME                               | A static string reference to a shortened display version of the application name                                          |
+| REACT_APP_UI_BRAND_NAME                               | A static string reference similar to the official application name                                                        |
+| REACT_APP_UI_BRAND_SHORT_NAME                         | A static string reference to a shortened official display version of the application name                                 |
+| REACT_APP_UI_BRAND                                    | A dynamic boolean reference used in building the official brand version of Quipucords-UI                                  |
+| REACT_APP_TEMPLATE_UI_NAME                            | A dynamic string reference used in building the official brand version of Quipucords-UI. Applies the HTML title attribute |
+| REACT_APP_AUTH_COOKIE                                 | A static string reference to the UI/application authentication cookie name                                                |
+| REACT_APP_AUTH_COOKIE_EXPIRES                         | A static number reference to the UI/application authentication cookie expiration in day (24 hour) increments              |
+| ~~REACT_APP_AJAX_TIMEOUT~~                            | A legacy parameter. A static number associated with the milliseconds ALL AJAX/XHR/Fetch calls timeout.                    |
+| REACT_APP_POLL_INTERVAL                               | A static number reference to the milliseconds used in view polling                                                        |
+| REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG          | A static string reference to the UI/application default locale language                                                   |
+| ~~REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG_DESC~~ | A legacy parameter. A static string reference to the UI/application default locale language                               |
+| REACT_APP_CONFIG_SERVICE_LOCALES                      | A static string reference to a JSON resource for available UI/application locales                                         |
+| REACT_APP_CONFIG_SERVICE_LOCALES_PATH                 | A static string reference to the JSON resources for available UI/application locale strings                               |
+| ~~REACT_APP_CONFIG_SERVICE_LOCALES_EXPIRE~~           | A legacy parameter. A static number reference to the milliseconds the UI/application locale strings/files expire          |
+| REACT_APP_CREDENTIALS_SERVICE                         | A static string reference to the API spec                                                                                 |
+| REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE             | A static string reference to the API spec                                                                                 |
+| REACT_APP_FACTS_SERVICE                               | A static string reference to the API spec                                                                                 |
+| REACT_APP_REPORTS_SERVICE                             | A static string reference to the API spec                                                                                 |
+| ~~REACT_APP_REPORTS_SERVICE_DETAILS~~                 | A legacy parameter. A static string reference to the API spec                                                             |
+| ~~REACT_APP_REPORTS_SERVICE_DEPLOYMENTS~~             | A legacy parameter. A static string reference to the API spec                                                             |
+| ~~REACT_APP_REPORTS_SERVICE_MERGE~~                   | A legacy parameter. A static string reference to the API spec                                                             |
+| REACT_APP_SCANS_SERVICE                               | A static string reference to the API spec                                                                                 |
+| REACT_APP_SCANS_SERVICE_BULK_DELETE                   | A static string reference to the API spec                                                                                 |
+| ~~REACT_APP_SCAN_JOBS_SERVICE_START_GET~~             | A legacy parameter. A static string reference to the API spec                                                             |
+| REACT_APP_SCAN_JOBS_SERVICE                           | A static string reference to the API spec                                                                                 |
+| ~~REACT_APP_SCAN_JOBS_SERVICE_CONNECTION~~            | A legacy parameter. A static string reference to the API spec                                                             |
+| ~~REACT_APP_SCAN_JOBS_SERVICE_INSPECTION~~            | A legacy parameter. A static string reference to the API spec                                                             |
+| ~~REACT_APP_SCAN_JOBS_SERVICE_CANCEL~~                | A legacy parameter. A static string reference to the API spec                                                             |
+| ~~REACT_APP_SCAN_JOBS_SERVICE_MERGE~~                 | A legacy parameter. A static string reference to the API spec                                                             |
+| REACT_APP_SOURCES_SERVICE                             | A static string reference to the API spec                                                                                 |
+| REACT_APP_SOURCES_SERVICE_BULK_DELETE                 | A static string reference to the API spec                                                                                 |
+| REACT_APP_USER_SERVICE_AUTH_TOKEN                     | A static string reference to the API spec                                                                                 |
+| REACT_APP_USER_SERVICE_CURRENT                        | A static string reference to the API spec                                                                                 |
+| REACT_APP_USER_SERVICE_LOGOUT                         | A static string reference to the API spec                                                                                 |
+| REACT_APP_STATUS_SERVICE                              | A static string reference to the API spec                                                                                 |
+
 
 </details>
 
@@ -311,21 +334,18 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 #### Start writing code with local run
 This is a local run designed to function with minimal resources and a mock API.
 
+> There may be limitations to running this emulated API. Check with the team to understand any current limitations.
+
 1. Confirm you've installed all recommended tooling
 1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
-1. Confirm you've installed resources through yarn
-1. Create a local dotenv file called `.env.local` in the root of Quipucords-UI, and add the following contents
-    ```
-    REACT_APP_DEBUG_MIDDLEWARE=true
-    ```
-1. Make sure podman desktop is running
+1. Confirm you've installed resources through npm
 1. Open a couple of instances of Terminal and run...
    ```
-   $ yarn start
+   $ npm start
    ```
    and, optionally,
    ```
-   $ yarn test:dev
+   $ npm run test:dev
    ```
 1. Make sure your browser opened around the domain `https://localhost:3000/`
 1. Start developing...
@@ -333,25 +353,23 @@ This is a local run designed to function with minimal resources and a mock API.
 #### Start writing code with staging
 This is an authenticated local run that has the ability to run against a containerized API.
 
+> There may be limitations to running this emulated API. Check with the team to understand any current limitations.
+
 1. Confirm you've installed all recommended tooling
 1. Confirm the repository name has no blank spaces in it. If it does replace that blank with a dash or underscore, the container tooling may have issues with unescaped parameter strings.
-1. Confirm you've installed resources through yarn
-1. Create a local dotenv file called `.env.local` in the root of Quipucords-UI, and add the following contents
-    ```
-    REACT_APP_DEBUG_MIDDLEWARE=true
-    ```
+1. Confirm you've installed resources through npm
 1. Make sure podman desktop is running
 1. Open a couple of instances of Terminal and run...
     ```
-    $ yarn start:stage
+    $ npm run start:stage
     ```
    and, optionally,
     ```
-    $ yarn test:dev
+    $ npm run test:dev
     ```
-1. Make sure you open your browser around the domain `https://localhost:3000/`
+1. Make sure you open your browser around the domain `https://localhost:3000/`. Loading can take up to and beyond a minute to download necessary resources.
    > You may have to scroll, but the terminal output will have some available domains for you to pick from.
-1. Log in. (You'll need mock credentials, reach out to the development team)
+1. Log in. (You'll need mock credentials, reach out to the development team if you're unsure)
 1. Start developing...
 
 </details>
@@ -365,14 +383,11 @@ This project makes use of reserved DOM attributes and string identifiers used by
 > Updating elements with these attributes, or settings, should be done with the knowledge "you are affecting" the testing team's ability to test.
 > And it is recommended you coordinate with the testing team before altering these attributes, settings.
 
-1. Attribute `data-ouia-component-id`
-   - `data-ouia-component-id=""` is preferred way of identifying elements by testing team.
-   - Most of the time, React prop is `ouiaId`. Some PatternFly elements don't support it, in which case you can use standard DOM prop `data-ouia-component-id`, `data-test`, `name` or `id`.
+1. Attribute `data-ouia-component-id`, or `ouiaId` attributes
+   - this is the preferred way of identifying elements for the testing team
+   - Most of the time, React prop is `ouiaId`. Some PatternFly elements don't support it, in which case you can use standard DOM prop `data-ouia-component-id`, `name` or `id`, or consult with the testing team for the preferred alternative.
    - Use `ouiaId` even if it seems to duplicate value of `name` or another attribute.
    - See [PatternFly documentation on OUIA](https://www.patternfly.org/developer-resources/open-ui-automation/).
-2. Attribute `data-test`
-   - DOM attributes with `data-test=""` are used by the testing team as a means to identify specific DOM elements.
-   - To use simply place `data-test="[your-id-coordinated-with-testing-team]`" onto a DOM element.
 
 </details>
 
@@ -381,21 +396,11 @@ This project makes use of reserved DOM attributes and string identifiers used by
 
 This repository has interdependency on the [Quipucords repository](https://github.com/quipucords/quipucords).
 
-#### Django templates, login and logout
-In order to have GUI developer access to the login and logout aspects of [Quipucords](https://github.com/quipucords/quipucords) we store
-the Django template files here [./templates/*](./templates/base.html).
-
-> Important!
-> - This templates directory is required as part of the build process. **Removing `./templates` directory will break the production build.**
-> - Updating the templates requires minimal understand of html, plus some minor recognition of templating languages. [If needed checkout out the Django template structure reading](https://docs.djangoproject.com/en/2.1/topics/templates/).
-> - We use a shell script token string replacement during the build process for the application display name. If you see **[UI_NAME]** within the templates, be aware.
-> - [The build script for directly manipulating the templates is here, ./scripts/post.sh](./scripts/post.sh)
-
 #### Brand build
-The brand build updates aspects of the application name across the React and Django templates, think Quipucords versus Discovery.
-To handle a branded aspect of the build, instead of `$ yarn build` run
+The brand build updates aspects of the application name across the React components and views, think Quipucords versus Discovery.
+To handle a branded aspect of the build, instead of `$ npm run build` run
    ```
-   $ yarn build:brand
+   $ npm run build:brand
    ```
 </details>
 
@@ -409,30 +414,16 @@ Once you have made the dotenv file and/or changes, like the below "debug" flags,
 
 *Any changes you make to the `.env.local` file should be ignored with `.gitignore`.*
 
-#### Debugging Redux
-This project makes use of React & Redux. To enable Redux browser console logging add the following line to your `.env.local` file.
-  ```
-  REACT_APP_DEBUG_MIDDLEWARE=true
-  ```
-</details>
-
-<details>
-<summary><h3 style="display: inline-block">Testing</h3></summary>
-
-> Blindly updating unit test snapshots is not recommended. Within this code-base snapshots have been created
-> to specifically call out when updates happen. If a snapshot is updating, and it is unexpected, this is our first
-> line of checks against bugs/issues.
-
 #### Unit testing
 To run the unit tests with a watch during development you'll need to open an additional terminal instance, then run
   ```
-  $ yarn test:dev
+  $ npm run test:dev
   ```
 
 ##### Updating test snapshots
 To update snapshots from the terminal run
   ```
-  $ yarn test:dev
+  $ npm run test:dev
   ```
 
 From there you'll be presented with a few choices, one of them is "update", you can then hit the "u" key. Once the update script has run you should see additional changed files within Git, make sure to commit them along with your changes or continuous integration testing will fail.
@@ -440,25 +431,25 @@ From there you'll be presented with a few choices, one of them is "update", you 
 ##### Checking code coverage
 To check the coverage report from the terminal run
   ```
-  $ yarn test
+  $ npm run test
   ```
 
 ##### Code coverage failing to update?
 If you're having trouble getting an accurate code coverage report, or it's failing to provide updated results (i.e. you renamed files) you can try running
   ```
-  $ yarn test:clearCache
+  $ npm run test:clearCache
   ```
 
 #### Integration-like testing
 To run tests associated with checking build output run
    ```
-   $ yarn build
-   $ yarn test:integration
+   $ npm run build
+   $ npm run test:integration
    ```
 
 ##### Updating integration-like test snapshots
 To update snapshots from the terminal run
   ```
-  $ yarn test:integration-dev
+  $ npm run test:integration-dev
   ```
 </details>
