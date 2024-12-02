@@ -29,6 +29,7 @@
     "build:pre": "bash ./scripts/pre.sh",
     "release": "changelog --link-url https://github.com/quipucords/quipucords-ui.git",
     "start": "export PROTOCOL=http; export HOST=127.0.0.1; export PORT=${PORT:-3000}; export MOCK_PORT=${MOCK_PORT:-3030}; run-p -l api:dev start:js start:open",
+    "start:using-server": "export PROTOCOL=${QUIPUCORDS_SERVER_PROTOCOL:-https}; export HOST=${QUIPUCORDS_SERVER_HOST:-127.0.0.1}; export PORT=${PORT:-3000}; export MOCK_PORT=${QUIPUCORDS_SERVER_PORT:-9443}; run-p -l start:js start:open",
     "start:js": "export NODE_ENV=development; weldable -l ts -x ./config/webpack.dev.js",
     "start:open": "xdg-open $PROTOCOL://$HOST:$PORT/ || open $PROTOCOL://$HOST:$PORT/",
     "start:stage": "export PROTOCOL=http; export HOST=127.0.0.1; export PORT=${PORT:-3000}; export MOCK_PORT=${MOCK_PORT:-8000}; run-p -l api:stage start:js start:open",
