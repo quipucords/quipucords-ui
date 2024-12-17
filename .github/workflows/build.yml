@@ -36,7 +36,7 @@ jobs:
             ./Containerfile
           labels: |
             ${{ env.EXPIRATION_LABEL }}
-            quipucords.backend.git_sha=${{ github.sha }}
+            quipucords.frontend.git_sha=${{ github.sha }}
           extra-args: |
             --ulimit nofile=4096:4096
 
