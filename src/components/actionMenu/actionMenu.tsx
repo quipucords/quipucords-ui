@@ -36,6 +36,7 @@ const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
           variant="plain"
           onClick={() => setIsOpen(prev => !prev)}
           isExpanded={isOpen}
+          data-ouia-component-id="action_menu_toggle"
         >
           <EllipsisVIcon />
         </MenuToggle>

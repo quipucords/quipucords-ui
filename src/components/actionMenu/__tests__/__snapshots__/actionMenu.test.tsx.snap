@@ -16,6 +16,7 @@ exports[`ActionMenu should display items and allow click after toggle is clicked
     aria-expanded="true"
     aria-label="Action Menu Toggle"
     class="pf-v5-c-menu-toggle pf-m-expanded pf-m-plain"
+    data-ouia-component-id="action_menu_toggle"
     type="button"
   >
     <svg

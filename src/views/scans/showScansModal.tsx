@@ -120,8 +120,12 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
           <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
             <Thead>
               <Tr>
-                <Th sort={getSortParams(0)}>Scan Time</Th>
-                <Th sort={getSortParams(1)}>Scan Result</Th>
+                <Th sort={getSortParams(0)} data-ouia-component-id="header_scan_time">
+                  Scan Time
+                </Th>
+                <Th sort={getSortParams(1)} data-ouia-component-id="header_scan_result">
+                  Scan Result
+                </Th>
                 <Th screenReaderText="Download column"></Th>
               </Tr>
             </Thead>

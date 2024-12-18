@@ -240,7 +240,8 @@ const ScansListView: React.FunctionComponent = () => {
                     actions={[
                       {
                         label: t('table.label', { context: 'delete' }),
-                        onClick: setPendingDeleteScan
+                        onClick: setPendingDeleteScan,
+                        ouiaId: 'delete'
                       },
                       {
                         label: t('table.label', { context: 'rescan' }),
@@ -249,7 +250,8 @@ const ScansListView: React.FunctionComponent = () => {
                             queryClient.invalidateQueries({ queryKey: [API_SCANS_LIST_QUERY] });
                             setScanSelected(undefined);
                           });
-                        }
+                        },
+                        ouiaId: 'rescan'
                       },
                       {
                         label: t('table.label', { context: 'download' }),
@@ -258,7 +260,8 @@ const ScansListView: React.FunctionComponent = () => {
                           if (scan?.most_recent) {
                             downloadReport(scan.most_recent.report_id);
                           }
-                        }
+                        },
+                        ouiaId: 'download'
                       }
                     ]}
                   />
