@@ -75,6 +75,9 @@
     "react-router-dom": "6.26.1",
     "weldable": "^3.2.0"
   },
+  "overrides": {
+    "axios": "$axios"
+  },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
