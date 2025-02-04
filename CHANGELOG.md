@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.12.0](https://github.com/quipucords/quipucords-ui/compare/73c90b235eaa716014d95af370f963dc397e11b4...eb6d142887f980ac191bc3be9b62a5b200a3845c) (2025-02-04)
+
+
+### Tests
+*  add ouiaId to make reports downloading easier  ([d1e533a](https://github.com/quipucords/quipucords-ui/commit/d1e533acf6b1575824f9d351c8b663c0d85b7fbb))
+
+### Continuous Integrations
+* **konflux** upgrade arm build to a instance with more memory  ([eb6d142](https://github.com/quipucords/quipucords-ui/commit/eb6d142887f980ac191bc3be9b62a5b200a3845c))
+* **konflux** multi-arch support  ([3c1936a](https://github.com/quipucords/quipucords-ui/commit/3c1936a1e37de9c39b9555538a646eac356b7b70))
+* **konflux** add missing versions to tekton tasks  ([3f5b000](https://github.com/quipucords/quipucords-ui/commit/3f5b0001a0e2fc013bbb713a6c42861649c688a8))
+* **konflux** update tekton tasks  ([53238d6](https://github.com/quipucords/quipucords-ui/commit/53238d67f0f1805aaddc16b763b4ef0ef8cca6c1))
+* **konflux** make labels customizable  ([8e94966](https://github.com/quipucords/quipucords-ui/commit/8e94966226309f4a00c4e86cef27bbe7f6f7a47f))
+* **konflux** build source image  ([5d82175](https://github.com/quipucords/quipucords-ui/commit/5d821751a004bbcc4aaf5bbfc863c5c8d62b44f2))
+* **konflux** setup prefetch-dependencies step  ([36508d7](https://github.com/quipucords/quipucords-ui/commit/36508d7d0c6776c36c2de72746d0afe5bf2956b3))
+* **konflux** disable update of dnf packages  ([61883bb](https://github.com/quipucords/quipucords-ui/commit/61883bb852cf5079483d4efae7d2e87728e5b322))
+* **konflux** enable hermetic build  ([bf53cef](https://github.com/quipucords/quipucords-ui/commit/bf53cefc76e01a6744eb7b03acb271dcdc9501c7))
+* **konflux** use branded version  ([5bdc5c1](https://github.com/quipucords/quipucords-ui/commit/5bdc5c1229eb267a31b856152110dab186e86e7a))
+* **konflux** add labels  ([d390733](https://github.com/quipucords/quipucords-ui/commit/d390733fdbfa3f76516923016eda8b09d4902ae1))
+* **konflux** add /licenses folder for konflux  ([10ab37f](https://github.com/quipucords/quipucords-ui/commit/10ab37fdcb286692f03baddda01376b4dc4bb0b2))
+
+### Chores
+* **deps** update konflux references  ([e5ca59a](https://github.com/quipucords/quipucords-ui/commit/e5ca59a757cb512f39cbce15670f29f2e16c0e90))
+* **deps** update konflux references  ([4151525](https://github.com/quipucords/quipucords-ui/commit/41515259c541d694996745667b70f8c2e1ef564b))
+* **build** ds-748 use correct container label  ([d270259](https://github.com/quipucords/quipucords-ui/commit/d270259e5671d1f0135551e01eb9691b0f01be28))
+
+### Builds
+* **deps** bump path-to-regexp and express  ([f249d2b](https://github.com/quipucords/quipucords-ui/commit/f249d2b11e90dc0c84ed1de7899e23029fe9c7c8))
+* **deps** bump axios  ([63aa8d9](https://github.com/quipucords/quipucords-ui/commit/63aa8d9f6ec12d7d9749a7db0ee30bbc8851891d))
+* **konflux** lock base image by digest  ([70c033e](https://github.com/quipucords/quipucords-ui/commit/70c033e0e158cf585bc6b251172ceadcb5f77992))
+*  add a utility script to make development easier  ([72347e7](https://github.com/quipucords/quipucords-ui/commit/72347e7b7fd9d8c0c0a3fa97f5f0f4dcd224ed0f))
+*  onboard to konflux  ([cac26fd](https://github.com/quipucords/quipucords-ui/commit/cac26fddf6b60be8a1184013793aa24770e7b1a8))
+
 ## [1.11.0](https://github.com/quipucords/quipucords-ui/compare/ecfb69c27dd0344d75f8192adf72b19e71ef924d...8412af81f71f9afb62f715e7f86b21cb77ae62ee) (2024-12-02)
 
 
