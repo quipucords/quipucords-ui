@@ -44,3 +44,5 @@ LABEL com.redhat.component=${REDHAT_COMPONENT} \
     io.openshift.tags=${OCP_TAGS} \
     name=${K8S_NAME} \
     summary=${K8S_DESCRIPTION}
+LABEL version=1.11.0
+LABEL version_minor=1.11
