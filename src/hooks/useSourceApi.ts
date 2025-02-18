@@ -145,7 +145,7 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
 
   const apiCall = useCallback(
     (payload: SourceType): Promise<AxiosResponse<SourceType>> =>
-      axios.post(`${process.env.REACT_APP_SOURCES_SERVICE}`, payload, { params: { scan: true } }),
+      axios.post(`${process.env.REACT_APP_SOURCES_SERVICE}`, payload),
     []
   );
 

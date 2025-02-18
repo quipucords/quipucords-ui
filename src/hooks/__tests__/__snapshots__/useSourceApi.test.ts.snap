@@ -7,11 +7,6 @@ exports[`useAddSourceApi should attempt an api call to add sources: apiCall 1`] 
     {
       "name": "Lorem",
     },
-    {
-      "params": {
-        "scan": true,
-      },
-    },
   ],
 ]
 `;
