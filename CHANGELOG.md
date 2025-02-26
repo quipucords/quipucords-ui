@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.13.0](https://github.com/quipucords/quipucords-ui/compare/4e0e966249d68cb3b1b4a910e4a332af6b751834...8db9cd2a92386b1b2448de343de00a3f64f1cc10) (2025-02-26)
+
+
+### Documentation
+*  remove unnecessary GitHub templates  ([14e216c](https://github.com/quipucords/quipucords-ui/commit/14e216c6745ed427b37059072043acdf1357d4c8))
+
+### Continuous Integrations
+* **github-actions** disable unecessary step publishing upstream assets  ([0b8c1b1](https://github.com/quipucords/quipucords-ui/commit/0b8c1b10aaef89088e25e25c4d9290b18ee93481))
+* **konflux** disable sast-coverity-check  ([c24ab9e](https://github.com/quipucords/quipucords-ui/commit/c24ab9e49c1757d972c1773576c3f89322955f2a))
+*  drop commit lint action  ([fc00c43](https://github.com/quipucords/quipucords-ui/commit/fc00c43e0d588ddbb4df745dd92593e097ccd48a))
+* **konflux** make snyk results available on ui  ([d5d28b8](https://github.com/quipucords/quipucords-ui/commit/d5d28b862644a7364be127f06a554d59d4673a46))
+
+### Code Refactoring
+*  creating a Source should not create a connect-type ScanJob  ([febb083](https://github.com/quipucords/quipucords-ui/commit/febb083c07eed42b26e9a05a6ae9dfc85422aab7))
+
+### Chores
+* **deps** update konflux references  ([5f66368](https://github.com/quipucords/quipucords-ui/commit/5f663686e70a7d0b44bbd91c84031277a88f61d7))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to e73b92e  ([19708c2](https://github.com/quipucords/quipucords-ui/commit/19708c265920ff079fbef563ff38898ff0e71c43))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-18 docker digest to a2cc112  ([b558539](https://github.com/quipucords/quipucords-ui/commit/b55853938f50ccfec265e8d537cfb43ad7db4673))
+* **deps** update konflux references  ([49a2d16](https://github.com/quipucords/quipucords-ui/commit/49a2d166b18f6abec117d62e57dce9dc613d2c65))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-18 docker digest to 07c63a0  ([f6a4532](https://github.com/quipucords/quipucords-ui/commit/f6a45326af83acf6fb3a3a63fd6ac7a8fae4ba01))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 069d130  ([cc21f71](https://github.com/quipucords/quipucords-ui/commit/cc21f71898688d43b3a131b1aa54ed453fcab8ca))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to c6cb099  ([608d58f](https://github.com/quipucords/quipucords-ui/commit/608d58f5298315230f3a419567b5b1367bec6251))
+
+### Builds
+*  bump node version to 22  ([8db9cd2](https://github.com/quipucords/quipucords-ui/commit/8db9cd2a92386b1b2448de343de00a3f64f1cc10))
+
+### Bug Fixes
+*  undo change made by mistake  ([df9c133](https://github.com/quipucords/quipucords-ui/commit/df9c133247f5852d37d98580a8557a7f7aeb3931))
+
 ## [1.12.0](https://github.com/quipucords/quipucords-ui/compare/73c90b235eaa716014d95af370f963dc397e11b4...eb6d142887f980ac191bc3be9b62a5b200a3845c) (2025-02-04)
 
 
