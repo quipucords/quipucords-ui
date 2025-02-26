@@ -5,9 +5,6 @@ on:
     tags:
       - "*"
   pull_request:
-env:
-  COV_NODE_VERSION: 20
-  UPSTREAM_TAR: quipucords-ui-dist.tar
 
 jobs:
   Integration:
@@ -42,21 +39,3 @@ jobs:
         run: npm run test:ci-build
       - name: Unit tests
         run: npm run test:ci-coverage
-      - name: Compress upstream assets
-        if: ${{ success() && startsWith(matrix.node-version, env.COV_NODE_VERSION) && startsWith(github.ref, 'refs/tags/') }}
-        run: |
-          tar -cf ${UPSTREAM_TAR} build
-          gzip -f --best ${UPSTREAM_TAR}
-      - name: Release artifacts
-        uses: ncipollo/release-action@v1.13.0
-        if: ${{ success() && startsWith(matrix.node-version, env.COV_NODE_VERSION) && startsWith(github.ref, 'refs/tags/') }}
-        with:
-          artifacts: "${{ env.UPSTREAM_TAR }}.gz"
-          # set allow updates so we can create releases to trigger this
-          allowUpdates: true
-          # don't override what's set on the release
-          omitBodyDuringUpdate: true
-          omitNameDuringUpdate: true
-          omitPrereleaseDuringUpdate: true
-          # required for publishing artifacts and updating the release
-          token: ${{ secrets.GITHUB_TOKEN }}
