@@ -8,7 +8,7 @@ Web user interface for [Quipucords](https://github.com/quipucords/quipucords), b
 
 ### Requirements
 Before developing, the basic requirements:
- * Your system needs to be running [NodeJS version 18+ and NPM](https://nodejs.org/)
+ * Your system needs to be running [NodeJS version 22+ and NPM](https://nodejs.org/)
     * Yarn install is discouraged. There are dependency install issues with Yarn `1.x.x` versions.
  * [podman desktop](https://podman-desktop.io/)
 
