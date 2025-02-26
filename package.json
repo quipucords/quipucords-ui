@@ -13,7 +13,7 @@
     "url": "https://github.com/quipucords/quipucords-ui/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "api:dev": "node ./scripts/apiDev.js --port $MOCK_PORT --file https://raw.githubusercontent.com/quipucords/quipucords/master/docs/swagger.yml",
