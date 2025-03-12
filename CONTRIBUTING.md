@@ -129,6 +129,11 @@ The process for a security when the NPM package is NOT maintained
 quipucords-ui uses GitHub releases, and our GitHub automation automatically builds and attaches artifacts to a release once its tag is created. See [integration.yml](https://github.com/quipucords/quipucords-ui/blob/main/.github/workflows/integration.yml) for implementation details and [Build workflow](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml?query=event%3Apush) for the history of workflow runs.
 
 #### Release artifacts
+
+> [!WARNING]  
+> Since the release of the "new" UI (1.11+), quipucords-ui, quipucords-installer and quipucords SHOULD be synced. The sync doesn't need to 
+> match all the way down to patch level, though. Just matching down to minor (X.Y instead of X.Y.Z) is fine.
+
 To create a new release, use `npm` to update version details, and open a PR to merge those changes to `main` using the following process.
 
 1. Within the repo, confirm you're on a new branch from the latest `main` updates, and use `npm` to update the version:
