@@ -252,13 +252,20 @@ Before developing you'll need to install:
   * Yarn install is now discouraged. There are dependency install issues with Yarn `1.x.x` versions.
 * [podman desktop](https://podman-desktop.io/)
 
-#### OS support
-The tooling is `Mac OS` centered.
+#### macOS build requirements
 
-While some aspects of the tooling have been expanded for Linux there may still be issues. It is encouraged that OS tooling
-changes are contributed back while maintaining existing `Mac OS` functionality.
+If you are building on macOS, you need to install `skopeo`, a modern version of `make`, and a modern version of `sed`. The default `make` and `sed` versions included by Apple in macOS are too old and incompatible with our build commands. If using Homebrew (`brew`), run the following:
 
-If you are unable to test additional OS support it is imperative that code reviews take place before integrating/merging build changes.
+```sh
+brew install make gnu-sed skopeo
+```
+
+After installing `make`, put the updated version earlier on your `PATH` or always remember to use `gmake` instead of `make` when invoking Make targets in this project. For example:
+
+```sh
+# optionally put this in your shell rc file or add to local environment:
+PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+```
 
 #### NodeJS and NPM
 The build attempts to align to the current NodeJS LTS version. It is possible to test future versions of NodeJS LTS. See CI Testing for more detail.
