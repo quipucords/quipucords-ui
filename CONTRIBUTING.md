@@ -129,6 +129,11 @@ The process for a security when the NPM package is NOT maintained
 quipucords-ui uses GitHub releases, and our GitHub automation automatically builds and attaches artifacts to a release once its tag is created. See [integration.yml](https://github.com/quipucords/quipucords-ui/blob/main/.github/workflows/integration.yml) for implementation details and [Build workflow](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml?query=event%3Apush) for the history of workflow runs.
 
 #### Release artifacts
+
+> [!WARNING]  
+> Since the release of the "new" UI (1.11+), quipucords-ui, quipucords-installer and quipucords SHOULD be synced. The sync doesn't need to 
+> match all the way down to patch level, though. Just matching down to minor (X.Y instead of X.Y.Z) is fine.
+
 To create a new release, use `npm` to update version details, and open a PR to merge those changes to `main` using the following process.
 
 1. Within the repo, confirm you're on a new branch from the latest `main` updates, and use `npm` to update the version:
@@ -247,13 +252,20 @@ Before developing you'll need to install:
   * Yarn install is now discouraged. There are dependency install issues with Yarn `1.x.x` versions.
 * [podman desktop](https://podman-desktop.io/)
 
-#### OS support
-The tooling is `Mac OS` centered.
+#### macOS build requirements
 
-While some aspects of the tooling have been expanded for Linux there may still be issues. It is encouraged that OS tooling
-changes are contributed back while maintaining existing `Mac OS` functionality.
+If you are building on macOS, you need to install `skopeo`, a modern version of `make`, and a modern version of `sed`. The default `make` and `sed` versions included by Apple in macOS are too old and incompatible with our build commands. If using Homebrew (`brew`), run the following:
 
-If you are unable to test additional OS support it is imperative that code reviews take place before integrating/merging build changes.
+```sh
+brew install make gnu-sed skopeo
+```
+
+After installing `make`, put the updated version earlier on your `PATH` or always remember to use `gmake` instead of `make` when invoking Make targets in this project. For example:
+
+```sh
+# optionally put this in your shell rc file or add to local environment:
+PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+```
 
 #### NodeJS and NPM
 The build attempts to align to the current NodeJS LTS version. It is possible to test future versions of NodeJS LTS. See CI Testing for more detail.
@@ -325,6 +337,18 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | REACT_APP_USER_SERVICE_LOGOUT                         | A static string reference to the API spec                                                                                 |
 | REACT_APP_STATUS_SERVICE                              | A static string reference to the API spec                                                                                 |
 
+#### Updating non-npm dependencies
+
+Since the migration to [konflux](https://konflux-ci.dev/docs/) as our downstream build system, base images in
+our Containerfile MUST have the sha256 digest explicitly set. As part of the routine to update dependencies,
+those digests must be updated as well.
+
+In general, Renovate/Minkmaker automatic PRs should be able to keep the base images on the Containerfile in sync.
+However, if a manual bump is required, there's a make target that shall take care of it. Just run
+
+`make lock-baseimages`
+
+This command has `podman`, `skopeo` and GNU `sed` as dependencies.
 
 </details>
 
