@@ -319,7 +319,7 @@ const ScansListView: React.FunctionComponent = () => {
       />
       <Modal
         variant={ModalVariant.small}
-        title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
+        title={t('form-dialog.confirmation', { context: 'title_delete-scan' })}
         isOpen={pendingDeleteScan !== undefined}
         onClose={() => setPendingDeleteScan(undefined)}
         actions={[
@@ -343,7 +343,7 @@ const ScansListView: React.FunctionComponent = () => {
         ]}
       >
         {t('form-dialog.confirmation_heading', {
-          context: 'delete-source',
+          context: 'delete-scan',
           name: pendingDeleteScan?.name
         })}
         {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
