@@ -8,13 +8,14 @@
     "username": "Username"
   },
   "form-dialog": {
-    "confirmation_heading_delete-scan": "Are you sure you want to delete the scan <0>{{name}}</0>?",
+    "confirmation_heading_delete-scan": "Are you sure you want to delete the scan {{name}}?",
     "confirmation_heading_delete-credential": "Are you sure you want to delete the credential {{name}}?",
     "confirmation_heading_delete-credential_other": "Are you sure you want to delete the following credentials?",
     "confirmation_title_delete-credential": "Delete Credential",
     "confirmation_title_delete-credential_other": "Delete Credentials",
     "confirmation_title_delete-source": "Delete Source",
     "confirmation_title_delete-source_other": "Delete Sources",
+    "confirmation_title_delete-scan": "Delete Scan",
     "confirmation_heading_delete-source": "Are you sure you want to delete the source {{name}}?",
     "confirmation_heading_delete-source_other": "Are you sure you want to delete the following sources?",
     "label": "{{context}}",
