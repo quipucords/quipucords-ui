@@ -16,6 +16,7 @@ env:
   IMAGE_NAME: ${{ vars.IMAGE_NAME || 'quipucords/quipucords-ui' }}
   REGISTRY: ${{ vars.REGISTRY || 'quay.io' }}
 
+
 jobs:
   build-amd64:
     runs-on: ubuntu-latest
