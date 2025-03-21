@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
 
   build-arm64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Clone repository
@@ -63,11 +63,6 @@ jobs:
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0  # fetches all commits/tags
-
-      - name: Install qemu dependency
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-user-static
 
       - name: Build arm64 image
         id: build-image-arm64
@@ -101,6 +96,11 @@ jobs:
     needs: [build-amd64, build-arm64]
 
     steps:
+      - name: Define Image Tag
+        id: define-image-tag
+        shell: bash
+        run: echo "IMAGE_TAG=${{ env.STABLE_TAG == 'main' && 'latest' || env.STABLE_TAG }}" >> "${GITHUB_ENV}"
+
       - name: Push Manifest
         id: push-manifest
         uses: pixelfederation/gh-action-manifest-tool@v0.1.7
@@ -111,3 +111,13 @@ jobs:
           template: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-ARCH
           target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
+      - name: Push Versioned Manifest
+        id: push-versioned-manifest
+        if: contains( env.RELEASE_TAG, '.' )
+        uses: pixelfederation/gh-action-manifest-tool@v0.1.7
+        with:
+          username: ${{ secrets.QUAYIO_USERNAME }}
+          password: ${{ secrets.QUAYIO_PASSWORD }}
+          platforms: linux/amd64,linux/arm64
+          template: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.STABLE_TAG }}-ARCH
+          target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.STABLE_TAG }}
