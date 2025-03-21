@@ -17,21 +17,23 @@ env:
   REGISTRY: ${{ vars.REGISTRY || 'quay.io' }}
 
 jobs:
-  Build:
+  build-amd64:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4
+        id: clone-repository-amd64
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0  # fetches all commits/tags
 
-      - name: Build image
-        id: build-image
+      - name: Build amd64 image
+        id: build-image-amd64
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ env.STABLE_TAG }} ${{ env.STABLE_TAG == 'main' && 'latest' || '' }}
+          archs: amd64
+          tags: ${{ env.STABLE_TAG }}-amd64 ${{ env.STABLE_TAG == 'main' && 'latest' || '' }}
           containerfiles: |
             ./Containerfile
           labels: |
@@ -40,13 +42,72 @@ jobs:
           extra-args: |
             --ulimit nofile=4096:4096
 
-      - name: Push To quay.io
+      - name: Push amd64 To quay.io
         # Forks that do not set secrets and override the variables may fail this step.
+        id: push-image-amd64
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.build-image.outputs.tags }}
+          tags: ${{ steps.build-image-amd64.outputs.tags }}
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
         continue-on-error: true
+
+  build-arm64:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        id: clone-repository-arm64
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0  # fetches all commits/tags
+
+      - name: Install qemu dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build arm64 image
+        id: build-image-arm64
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          archs: arm64
+          tags: ${{ env.STABLE_TAG }}-arm64 ${{ env.STABLE_TAG == 'main' && 'latest' || '' }}
+          containerfiles: |
+            ./Containerfile
+          labels: |
+            ${{ env.EXPIRATION_LABEL }}
+            quipucords.frontend.git_sha=${{ github.sha }}
+          extra-args: |
+            --ulimit nofile=4096:4096
+
+      - name: Push arm64 To quay.io
+        # Forks that do not set secrets and override the variables may fail this step.
+        id: push-image-arm64
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ steps.build-image-arm64.outputs.tags }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.QUAYIO_USERNAME }}
+          password: ${{ secrets.QUAYIO_PASSWORD }}
+        continue-on-error: true
+
+  push-manifest:
+    runs-on: ubuntu-latest
+    needs: [build-amd64, build-arm64]
+
+    steps:
+      - name: Push Manifest
+        id: push-manifest
+        uses: pixelfederation/gh-action-manifest-tool@v0.1.7
+        with:
+          username: ${{ secrets.QUAYIO_USERNAME }}
+          password: ${{ secrets.QUAYIO_PASSWORD }}
+          platforms: linux/amd64,linux/arm64
+          template: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-ARCH
+          target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
