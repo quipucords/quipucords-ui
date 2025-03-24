@@ -93,6 +93,16 @@ const AboutModal: React.FC<AboutModalProps> = ({
               </TextListItem>
             </React.Fragment>
           )}
+          {stats?.platform.machine && (
+            <React.Fragment>
+              <TextListItem className={loadingClassName} component="dt">
+                {t('about.server-cpu-arch')}
+              </TextListItem>
+              <TextListItem className={loadingClassName} component="dd">
+                {stats.platform.machine}
+              </TextListItem>
+            </React.Fragment>
+          )}
         </TextList>
       </TextContent>
     </PfAboutModal>

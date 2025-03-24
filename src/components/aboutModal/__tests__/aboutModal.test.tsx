@@ -12,7 +12,9 @@ describe('AboutModal Component', () => {
   });
 
   it('should attempt to display username, status data', async () => {
-    const mockGetStatus = jest.fn().mockResolvedValue({ server_version: '0.0.0.12345678' });
+    const mockGetStatus = jest
+      .fn()
+      .mockResolvedValue({ server_version: '0.0.0.12345678', platform: { machine: 'i386' } });
     const mockUseStatusApi = jest.fn().mockReturnValue({ getStatus: mockGetStatus });
     const mockGetUser = jest.fn().mockResolvedValue('lorem ipsum');
     const mockUseUserApi = jest.fn().mockReturnValue({ getUser: mockGetUser });
@@ -28,10 +30,14 @@ describe('AboutModal Component', () => {
 
   it('should call onClose', async () => {
     const mockOnClose = jest.fn();
+    const mockGetStatus = jest
+      .fn()
+      .mockResolvedValue({ server_version: '0.0.0.12345678', platform: { machine: 'i386' } });
+    const mockUseStatusApi = jest.fn().mockReturnValue({ getStatus: mockGetStatus });
     const props = {
       isOpen: true,
       useUser: jest.fn().mockReturnValue({ getUser: jest.fn().mockResolvedValue('lorem ipsum') }),
-      useStatus: jest.fn().mockReturnValue({ getStatus: jest.fn().mockResolvedValue({}) }),
+      useStatus: mockUseStatusApi,
       onClose: mockOnClose
     };
 

@@ -3,6 +3,7 @@
     "browser-os": "Browser OS",
     "browser-version": "Browser Version",
     "copyright": "Copyright (c) {{year}} Red Hat Inc.",
+    "server-cpu-arch": "Server Architecture",
     "server-version": "Server Version",
     "ui-version": "UI Version",
     "username": "Username"

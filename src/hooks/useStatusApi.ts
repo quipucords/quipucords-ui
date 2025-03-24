@@ -2,8 +2,13 @@ import { useCallback } from 'react';
 import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
 import helpers from '../helpers';
 
+type ApiStatusPlatformType = {
+  machine: string;
+};
+
 type ApiStatusSuccessType = {
   server_version: string;
+  platform: ApiStatusPlatformType;
 };
 
 type ApiStatusErrorType = {
