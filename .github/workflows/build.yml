@@ -52,7 +52,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
-        continue-on-error: true
 
   build-arm64:
     runs-on: ubuntu-24.04-arm
@@ -89,7 +88,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
-        continue-on-error: true
 
   push-manifest:
     runs-on: ubuntu-latest
