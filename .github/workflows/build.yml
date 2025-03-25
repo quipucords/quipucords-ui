@@ -33,7 +33,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: amd64
-          tags: ${{ env.STABLE_TAG }}-amd64 ${{ env.STABLE_TAG == 'main' && 'latest' || '' }}
+          tags: ${{ env.STABLE_TAG }}-amd64 ${{ env.STABLE_TAG == 'main' && 'latest-amd64' || '' }}
           containerfiles: |
             ./Containerfile
           labels: |
@@ -52,7 +52,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
-        continue-on-error: true
 
   build-arm64:
     runs-on: ubuntu-24.04-arm
@@ -70,7 +69,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: arm64
-          tags: ${{ env.STABLE_TAG }}-arm64 ${{ env.STABLE_TAG == 'main' && 'latest' || '' }}
+          tags: ${{ env.STABLE_TAG }}-arm64 ${{ env.STABLE_TAG == 'main' && 'latest-arm64' || '' }}
           containerfiles: |
             ./Containerfile
           labels: |
@@ -89,7 +88,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
-        continue-on-error: true
 
   push-manifest:
     runs-on: ubuntu-latest
@@ -110,14 +108,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           template: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-ARCH
           target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-
-      - name: Push Versioned Manifest
-        id: push-versioned-manifest
-        if: contains( env.RELEASE_TAG, '.' )
-        uses: pixelfederation/gh-action-manifest-tool@v0.1.7
-        with:
-          username: ${{ secrets.QUAYIO_USERNAME }}
-          password: ${{ secrets.QUAYIO_PASSWORD }}
-          platforms: linux/amd64,linux/arm64
-          template: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.STABLE_TAG }}-ARCH
-          target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.STABLE_TAG }}
