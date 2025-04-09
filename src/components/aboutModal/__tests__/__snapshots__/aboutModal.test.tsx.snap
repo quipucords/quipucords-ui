@@ -65,6 +65,22 @@ exports[`AboutModal Component should attempt to display username, status data: u
           0.0.0.12345678
         </TextListItem>
       </React.Fragment>
+      <React.Fragment>
+        <TextListItem
+          className=""
+          component="dt"
+        >
+          t([
+  "about.server-cpu-arch"
+])
+        </TextListItem>
+        <TextListItem
+          className=""
+          component="dd"
+        >
+          i386
+        </TextListItem>
+      </React.Fragment>
     </TextList>
   </TextContent>
 </AboutModal>

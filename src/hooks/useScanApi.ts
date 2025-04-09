@@ -125,7 +125,14 @@ const useRunScanApi = (
   const runScans = useCallback(
     async (payload: Scan, isRescan = false) => {
       try {
-        const scanId = (isRescan && payload?.id?.toString()) || (await createScans(payload))?.id?.toString();
+        const scanId =
+          (isRescan && payload?.id?.toString()) ||
+          (await createScans(payload)
+            .then(result => result?.id?.toString())
+            .catch(() => {
+              const customError = new Error('Failed to create scan');
+              throw customError;
+            }));
 
         if (!scanId) {
           const customError = new Error('No ID returned');
@@ -148,6 +155,7 @@ const useRunScanApi = (
         if (!helpers.TEST_MODE) {
           console.error(error);
         }
+        return Promise.reject(error);
       }
       return callbackSuccess(payload.name);
     },

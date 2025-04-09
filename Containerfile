@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:651d11f5cf1e15419a6cba03d9d231c74a4e5947617aabbe5763b56331ed05d9 as npm_builder
+FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:ae0a4313f9e709e370998b76f51e57622799c5a3155446276db5953dbcaedc05 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 # Become root before installing anything
 USER root
@@ -13,7 +13,7 @@ RUN npm ci \
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-124@sha256:13f67b06a15b83bc86a64113f42dbda04161edf54608356af7a6e62ec0b32673
+FROM registry.access.redhat.com/ubi9/nginx-124@sha256:4dd6bce207c829ee5e66b8e02218ce8d315345893611b1241ead6cb0f36fa89e
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
 ARG K8S_NAME="quipucords/quipucords-ui"
