@@ -55,7 +55,7 @@
     "@patternfly/react-icons": "5.3.2",
     "@patternfly/react-styles": "5.3.1",
     "@patternfly/react-table": "5.3.4",
-    "@tanstack/react-query": "^5.55.4",
+    "@tanstack/react-query": "^5.74.0",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
@@ -71,7 +71,7 @@
     "npm-run-all": "^4.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^15.0.1",
+    "react-i18next": "^15.4.1",
     "react-router-dom": "6.26.1",
     "weldable": "^3.2.0"
   },
