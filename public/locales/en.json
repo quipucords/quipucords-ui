@@ -141,6 +141,26 @@
     "invalid": "Invalid login credentials.",
     "title": "Log in to your account"
   },
+  "modal": {
+    "title_scan-summary": "Scan summary",
+    "subtitle_scan-id": "Scan ID: {{value}}",
+    "label": "{{context}}",
+    "label_ansible_hosts_all": "Ansible hosts all:",
+    "label_instances_hypervisor": "Instances hypervisor:",
+    "label_instances_physical": "Instances physical:",
+    "label_instances_virtual": "Instances virtual:",
+    "label_openshift_cores": "OpenShift cores:",
+    "label_socket_pairs": "Socket pairs:",
+    "label_system_creation_date_average": "System creation date average:",
+    "label_vmware_hosts": "VMware hosts:",
+    "label_inspect_result_status_failed": "Inspect failed:",
+    "label_inspect_result_status_success": "Inspect success:",
+    "label_inspect_result_status_unknown": "Inspect unknown:",
+    "label_inspect_result_status_unreachable": "Inspect unreachable:",
+    "label_missing_pem_files": "Missing pem files:",
+    "label_missing_system_creation_date": "Missing system creation date:",
+    "label_missing_system_purpose": "Missing system purpose:"
+  },
   "refresh-time-button": {
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"
@@ -231,6 +251,7 @@
     "label_status_tooltip_success_sources_other": "{{count}} Successful Authentications",
     "label_status_tooltip_unreachable": "{{count}} Unreachable System",
     "label_status_tooltip_unreachable_other": "{{count}} Unreachable Systems",
+    "label_summary": "$t(modal.title_scan-summary)",
     "label_vcenter": "vCenter",
     "label_ansible": "Ansible",
     "label_view": "View",
