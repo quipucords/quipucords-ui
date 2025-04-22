@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShowAggregateReportModal should have a consistent content: content 1`] = `
+[
+  <span
+    class="pf-v5-c-description-list__text"
+  >
+    t([
+  "modal.label",
+  {
+    "context": "ansible_hosts_all"
+  }
+])
+  </span>,
+  <span
+    class="pf-v5-c-description-list__text"
+  >
+    t([
+  "modal.label",
+  {
+    "context": "instances_virtual"
+  }
+])
+  </span>,
+]
+`;
+
+exports[`ShowAggregateReportModal should have a consistent title: title 1`] = `
+<span
+  class="pf-v5-c-modal-box__title-text"
+>
+  t([
+  "modal.title",
+  {
+    "context": "scan-summary"
+  }
+])
+</span>
+`;
+
+exports[`ShowAggregateReportModal should render a basic component: basic 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "modal.title",
+  {
+    "context": "scan-summary"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="small"
+>
+  <Title
+    className="pf-v5-u-mb-lg"
+    headingLevel="h2"
+    size="md"
+  >
+    t([
+  "modal.subtitle",
+  {
+    "context": "scan-id"
+  }
+])
+  </Title>
+  <DescriptionList
+    isCompact={true}
+    isFluid={true}
+    isHorizontal={true}
+  />
+</Modal>
+`;
+
+exports[`formatSortFilterReportStats should apply date formatting to a specific property: date 1`] = `
+[
+  [
+    "system_creation_date_average",
+    "24 April 2025, 12:00 AM UTC",
+  ],
+]
+`;
+
+exports[`formatSortFilterReportStats should filter alternate properties: filtered 1`] = `
+[
+  [
+    "ansible_hosts_all",
+    "2",
+  ],
+]
+`;
+
+exports[`formatSortFilterReportStats should handle a missing report: missing 1`] = `[]`;
+
+exports[`formatSortFilterReportStats should handle misuse: misuse 1`] = `[]`;
+
+exports[`formatSortFilterReportStats should sort properties: sort 1`] = `
+[
+  [
+    "ansible_hosts_all",
+    "2",
+  ],
+  [
+    "instances_virtual",
+    "5",
+  ],
+  [
+    "missing_pem_files",
+    "5",
+  ],
+  [
+    "system_creation_date_average",
+    "24 April 2025, 12:00 AM UTC",
+  ],
+]
+`;
+
+exports[`statsFilter should be a list of consistent display properties: list 1`] = `
+[
+  "ansible_hosts_all",
+  "instances_hypervisor",
+  "instances_physical",
+  "instances_virtual",
+  "openshift_cores",
+  "socket_pairs",
+  "system_creation_date_average",
+  "vmware_hosts",
+  "inspect_result_status_failed",
+  "inspect_result_status_success",
+  "inspect_result_status_unknown",
+  "inspect_result_status_unreachable",
+  "missing_pem_files",
+  "missing_system_creation_date",
+  "missing_system_purpose",
+]
+`;

@@ -45,9 +45,16 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
-import { useDeleteScanApi, useDownloadReportApi, useGetScanJobsApi, useRunScanApi } from '../../hooks/useScanApi';
+import {
+  useDeleteScanApi,
+  useDownloadReportApi,
+  useGetAggregateReportApi,
+  useGetScanJobsApi,
+  useRunScanApi
+} from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type Scan, type ScanJobType } from '../../types/types';
+import { type ReportsAggregateResponse, type Scan, type ScanJobType } from '../../types/types';
+import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
 
@@ -58,12 +65,14 @@ const ScansListView: React.FunctionComponent = () => {
   const [scanSelected, setScanSelected] = React.useState<Scan>();
   const [scanJobs, setScanJobs] = React.useState<ScanJobType[]>();
   const [pendingDeleteScan, setPendingDeleteScan] = React.useState<Scan>();
+  const [aggregateReport, setAggregateReport] = React.useState<{ id: number; report: ReportsAggregateResponse }>();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteScans } = useDeleteScanApi(addAlert);
   const { runScans } = useRunScanApi(addAlert);
   const { getScanJobs } = useGetScanJobsApi(addAlert);
   const { downloadReport } = useDownloadReportApi(addAlert);
+  const { getAggregateReport } = useGetAggregateReportApi(addAlert);
   const nav = useNavigate();
 
   /**
@@ -239,6 +248,22 @@ const ScansListView: React.FunctionComponent = () => {
                     item={scan}
                     actions={[
                       {
+                        label: t('table.label', { context: 'summary' }),
+                        disabled: !helpers.canAccessMostRecentReport(scan?.most_recent),
+                        onClick: () => {
+                          if (scan?.most_recent) {
+                            getAggregateReport(scan.most_recent.report_id)
+                              .then(setAggregateReport)
+                              .catch(err => {
+                                if (!helpers.TEST_MODE) {
+                                  console.error(err);
+                                }
+                              });
+                          }
+                        },
+                        ouiaId: 'summary'
+                      },
+                      {
                         label: t('table.label', { context: 'delete' }),
                         onClick: setPendingDeleteScan,
                         ouiaId: 'delete'
@@ -311,6 +336,24 @@ const ScansListView: React.FunctionComponent = () => {
             onClick={() => {
               setScanSelected(undefined); // Close the modal when this is clicked
               setScanJobs(undefined);
+            }}
+          >
+            {t('table.label', { context: 'close' })}
+          </Button>
+        ]}
+      />
+      <ShowAggregateReportModal
+        report={aggregateReport}
+        isOpen={aggregateReport !== undefined}
+        onClose={() => {
+          setAggregateReport(undefined);
+        }}
+        actions={[
+          <Button
+            key="close"
+            variant="secondary"
+            onClick={() => {
+              setAggregateReport(undefined); // Close the modal when this is clicked
             }}
           >
             {t('table.label', { context: 'close' })}
