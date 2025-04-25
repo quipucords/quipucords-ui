@@ -625,7 +625,8 @@ spec:
       optional: true
     - name: netrc
       optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-discovery-ui
   workspaces:
   - name: git-auth
     secret:
