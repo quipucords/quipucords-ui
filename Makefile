@@ -22,6 +22,8 @@ help:
 	@echo "  help                          to show this message"
 	@echo "  build-container               to build the container image for the quipucords UI"
 	@echo "  lock-baseimages               update the digests of base images on the Containerfile"
+	@echo "  update-konflux-pipeline       patch konflux pipeline with latest images"
+	@echo "  update-lockfiles       	   update all (but package-lock.json) lockfiles"
 
 all: help
 
@@ -44,3 +46,13 @@ lock-baseimages:
 		$(SED) -i "s/^\(FROM $${escaped_img}@sha256:\)[[:alnum:]]*/\1$${updated_sha}/g" Containerfile; \
 	done; \
 	echo "$${separator}"
+
+update-konflux-pipeline:
+	@if which pipeline-patcher > /dev/null 2>&1; then \
+		pipeline-patcher bump-task-refs .; \
+	else \
+		echo "'pipeline-patcher' not found in PATH; Refer to https://github.com/simonbaird/konflux-pipeline-patcher/blob/main/README.md."; \
+		exit 1; \
+	fi
+
+update-lockfiles: lock-baseimages update-konflux-pipeline
