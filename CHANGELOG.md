@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.14.0](https://github.com/quipucords/quipucords-ui/compare/d1b6a7af69f0861e73bbc024d48d79f349d33f27...268a2c6f0f01e87a2fdc05d02236ba22384549f0) (2025-04-29)
+
+
+### Tests
+*  enable timestamps in logs for internal CI ([#612](https://github.com/quipucords/quipucords-ui/pull/612)) ([bab2dfa](https://github.com/quipucords/quipucords-ui/commit/bab2dfa313307f786279f859dd3f5aeb30f9226f))
+
+### Performance Improvements
+* **lock-baseimages** speed up make lock-baseimages  ([a6eaefd](https://github.com/quipucords/quipucords-ui/commit/a6eaefd195c86947124a12c28c28b830dd020c70))
+
+### Features
+* **about** dsc-857 show CPU architecture  ([e437cc9](https://github.com/quipucords/quipucords-ui/commit/e437cc96f97106dd0c389ed4b72c52c5f54ff32a))
+
+### Documentation
+*  update CSpell custom dictionary  ([61bbe27](https://github.com/quipucords/quipucords-ui/commit/61bbe27c618f3f2e448410cf4e76e52126f08621))
+*  macOS devs need to upgrade or install make, sed, and skopeo  ([2254f32](https://github.com/quipucords/quipucords-ui/commit/2254f32ac327644edfad162e2431c00fd07afef6))
+
+### Continuous Integrations
+* **konflux** build pipeline service account migration  ([f254b44](https://github.com/quipucords/quipucords-ui/commit/f254b44e27eada85812631c822333b9263b00db0))
+* **konflux** dynamically set version labels  ([be5c017](https://github.com/quipucords/quipucords-ui/commit/be5c017518678ce0628379604a412be17611c785))
+* **konflux** add sast-unicode-check task  ([ce3d2ce](https://github.com/quipucords/quipucords-ui/commit/ce3d2ce8078839f8588379ad1e28fc29927ab97c))
+
+### Chores
+* **deps** update quay.io/konflux-ci/yq latest docker digest to 2d22666  ([5c4037d](https://github.com/quipucords/quipucords-ui/commit/5c4037dc1c2e3f85123634dc0674c92bb0d40021))
+* **deps** update konflux references  ([967f89b](https://github.com/quipucords/quipucords-ui/commit/967f89baeb7b0cb5ab39ebaa61c466ca6b63c0f2))
+* **deps** update konflux references  ([ea3e1e0](https://github.com/quipucords/quipucords-ui/commit/ea3e1e00abb2253d569c94fd1185600dc1a8cf58))
+* **deps** update quay.io/konflux-ci/yq latest docker digest to 06e98f3  ([aeaa54b](https://github.com/quipucords/quipucords-ui/commit/aeaa54bbd42e9151d270c682df82ce27e8318b8e))
+*  add disclaimer about versioning  ([636b3d0](https://github.com/quipucords/quipucords-ui/commit/636b3d00cf48f6fa0aa0e1892fd246a4fabc9e0f))
+* **deps** update konflux references  ([30ca03b](https://github.com/quipucords/quipucords-ui/commit/30ca03b3f9e847d345448d4560640fb5ba4a43c1))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 13f67b0  ([fc07c48](https://github.com/quipucords/quipucords-ui/commit/fc07c488d14f7ec85fb6c03720bcc671c4744b83))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 651d11f  ([46363af](https://github.com/quipucords/quipucords-ui/commit/46363afdafde7d2135ebd264713f37ef7986587f))
+* **deps** update konflux references  ([be2d56f](https://github.com/quipucords/quipucords-ui/commit/be2d56fe2f1054bceb1282d35332665af458a3cb))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 5982c87  ([87e1130](https://github.com/quipucords/quipucords-ui/commit/87e1130b5d44f6fe05f9860e0f93f026c8ad0fb8))
+
+### Builds
+*  make update-lockfiles  ([268a2c6](https://github.com/quipucords/quipucords-ui/commit/268a2c6f0f01e87a2fdc05d02236ba22384549f0))
+*  make update-lockfiles  ([ce0f10f](https://github.com/quipucords/quipucords-ui/commit/ce0f10fb5fa19abe47eed29a38202d74b90cc158))
+*  add update-konflux-pipeline and update-lockfiles targets  ([1cc34b9](https://github.com/quipucords/quipucords-ui/commit/1cc34b963e7552a5c696f0cb5c2e80c5a066d6c5))
+*  Use buildah for multi arch manifests ([#610](https://github.com/quipucords/quipucords-ui/pull/610)) ([6d58816](https://github.com/quipucords/quipucords-ui/commit/6d58816fe33747037766a7c077c3c3ec7871b904))
+*  make lock-baseimages  ([b8a9bd5](https://github.com/quipucords/quipucords-ui/commit/b8a9bd5fb1d0c0173cd8d7271572d9b66159a715))
+*  add make target for locking base images  ([56b0c4e](https://github.com/quipucords/quipucords-ui/commit/56b0c4ed808bfbc9208b48943c266b1871346a99))
+
+### Bug Fixes
+* **scan** dsc-859 Display only one toast when scan can't be created  ([72c52e7](https://github.com/quipucords/quipucords-ui/commit/72c52e72d3514ed7bd62eb6fa54f996444e26323))
+* **scans** dsc-891 Use "scan" in scan removal dialog  ([b7b11ad](https://github.com/quipucords/quipucords-ui/commit/b7b11adec6d2d895ac39772dc3de3f14dd9bf78f))
+* **deps** patch vulnerability in axios  ([30f952d](https://github.com/quipucords/quipucords-ui/commit/30f952d31270002df743da57b201e2e61cb2f722))
+
 ## [1.13.0](https://github.com/quipucords/quipucords-ui/compare/4e0e966249d68cb3b1b4a910e4a332af6b751834...8db9cd2a92386b1b2448de343de00a3f64f1cc10) (2025-02-26)
 
 
