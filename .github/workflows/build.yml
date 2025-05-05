@@ -35,7 +35,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: amd64
-          tags: ${{ env.STABLE_TAG }}-amd64 ${{ env.STABLE_TAG == 'main' && 'latest-amd64' || '' }}
+          tags: ${{ env.STABLE_TAG != 'main' && format('{0}-amd64', env.STABLE_TAG) || 'latest-amd64' }}
           containerfiles: |
             ./Containerfile
           labels: |
@@ -70,7 +70,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: arm64
-          tags: ${{ env.STABLE_TAG }}-arm64 ${{ env.STABLE_TAG == 'main' && 'latest-arm64' || '' }}
+          tags: ${{ env.STABLE_TAG != 'main' && format('{0}-arm64', env.STABLE_TAG) || 'latest-arm64' }}
           containerfiles: |
             ./Containerfile
           labels: |
