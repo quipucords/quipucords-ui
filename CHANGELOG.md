@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.14.1](https://github.com/quipucords/quipucords-ui/compare/b2f539c0ac02f7fc701c60bec18e2c60a76904c6...dafb6479475ba8c9b4a5f8a7c27ee3725ee2250e) (2025-05-07)
+
+
+### Continuous Integrations
+* **konflux** fail if the labels are not in the required format  ([1730969](https://github.com/quipucords/quipucords-ui/commit/17309694c2d0ce25db7f656efba3961e4ca05d69))
+
+### Builds
+*  make update-lockfiles  ([dafb647](https://github.com/quipucords/quipucords-ui/commit/dafb6479475ba8c9b4a5f8a7c27ee3725ee2250e))
+*  stop pushing `main` container tags (but continue pushing `latest`)  ([9666e71](https://github.com/quipucords/quipucords-ui/commit/9666e71a9ec184b9b954c1491560eb1f6ca7e8cf))
+
 ## [1.14.0](https://github.com/quipucords/quipucords-ui/compare/d1b6a7af69f0861e73bbc024d48d79f349d33f27...268a2c6f0f01e87a2fdc05d02236ba22384549f0) (2025-04-29)
 
 
