@@ -335,6 +335,92 @@ exports[`useDownloadReportApi should process an API success response: callbackSu
 ]
 `;
 
+exports[`useGetAggregateReportApi should attempt an api call to show an aggregate report summary: apiCall 1`] = `
+[
+  [
+    "/api/v1/reports/123/aggregate/",
+  ],
+]
+`;
+
+exports[`useGetAggregateReportApi should handle errors while attempting to get a summary: getAggregateReport error 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useGetAggregateReportApi should handle errors while attempting to get a summary: getAggregateReport, error alert 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_aggregate_error",
+    "name": 123,
+    "message": "Unknown error"
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useGetAggregateReportApi should handle success while attempting to get a summary: getAggregateReport success 1`] = `
+{
+  "id": 123,
+  "report": undefined,
+}
+`;
+
+exports[`useGetAggregateReportApi should process an API error response: callbackError 1`] = `
+{
+  "response": {
+    "data": {
+      "message": "Dolor sit",
+    },
+  },
+}
+`;
+
+exports[`useGetAggregateReportApi should process an API error response: callbackError, alert 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_aggregate_error",
+    "name": 123,
+    "message": "Dolor sit"
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useGetAggregateReportApi should process an API success response: callbackSuccess 1`] = `
+{
+  "id": 123,
+  "report": {
+    "diagnostics": {
+      "inspect_result_status_failed": 0,
+      "inspect_result_status_success": 5,
+      "inspect_result_status_unknown": 0,
+    },
+    "results": {
+      "ansible_hosts_all": 1,
+      "ansible_hosts_in_database": 1,
+      "ansible_hosts_in_jobs": 0,
+    },
+  },
+}
+`;
+
 exports[`useGetScanJobsApi should attempt an api call to retrieve a scanJob: apiCall 1`] = `
 [
   [
