@@ -277,6 +277,7 @@
     "description_deleted-scan_error": "Error removing scan {{name}}. {{message}}",
     "description_deleted-scan_error_other": "Error removing scans {{name}} and more. {{message}}",
     "description_scan-jobs_fetched_error": "Error displaying connection information. {{message}",
+    "description_report_aggregate_error": "Failed to display report {{name}} scan summary: {{message}}",
     "description_report_downloaded": "Report {{name}} downloaded successfully.",
     "description_report_downloaded_error": "Failed to download report {{name}}: {{message}}",
     "description_scan-report_start": "$t(toast-notifications.description_scan-report_play)",
