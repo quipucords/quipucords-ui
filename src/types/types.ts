@@ -157,6 +157,32 @@ export type ScanJobsResponse = {
   results: ScanJobType[];
 };
 
+export type ReportAggregateResultsType = {
+  ansible_hosts_all: number;
+  instances_hypervisor: number;
+  instances_physical: number;
+  instances_virtual: number;
+  openshift_cores: number;
+  socket_pairs: number;
+  system_creation_date_average: Date;
+  vmware_hosts: number;
+};
+
+export type ReportAggregateDiagnosticsType = {
+  inspect_result_status_failed: number;
+  inspect_result_status_success: number;
+  inspect_result_status_unknown: number;
+  inspect_result_status_unreachable: number;
+  missing_pem_files: number;
+  missing_system_creation_date: number;
+  missing_system_purpose: number;
+};
+
+export type ReportsAggregateResponse = {
+  results: ReportAggregateResultsType;
+  diagnostics: ReportAggregateDiagnosticsType;
+};
+
 export type ScanDisableOptionalProducts = {
   jboss_eap: boolean;
   jboss_fuse: boolean;
