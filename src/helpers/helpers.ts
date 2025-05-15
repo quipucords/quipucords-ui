@@ -227,17 +227,17 @@ const getCurrentDate = () => (TEST_MODE && moment.utc('20241001').toDate()) || m
 const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || titleImg) as string;
 
 /**
- * Return if a report associated with given ScanJob can be downloaded
+ * Return if a report associated with given ScanJob can be downloaded, or a summary can be accessed.
  *
  * @param {scanJob | MostRecentScan} job
  * @returns {boolean}
  */
-const canDownloadReport = (job?: scanJob | MostRecentScan) =>
+const canAccessMostRecentReport = (job?: scanJob | MostRecentScan) =>
   job?.status === 'completed' && job?.report_id !== undefined;
 
 const helpers = {
   authType,
-  canDownloadReport,
+  canAccessMostRecentReport,
   downloadData,
   noopTranslate,
   generateId,
