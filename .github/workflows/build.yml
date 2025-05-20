@@ -99,6 +99,11 @@ jobs:
         shell: bash
         run: echo "IMAGE_TAG=${{ env.STABLE_TAG == 'main' && 'latest' || env.STABLE_TAG }}" >> "${GITHUB_ENV}"
 
+      - name: Define Release Tag
+        id: define-release-tag
+        shell: bash
+        run: echo "RELEASE_TAG=$([[ ${GITHUB_REF_NAME} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] && echo ${GITHUB_REF_NAME%.[0-9]*} || echo)" >> "$GITHUB_ENV"
+
       - name: Login to Registry
         id: login-to-registry
         shell: bash
@@ -119,6 +124,27 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.QUAYIO_USERNAME }}
+          password: ${{ secrets.QUAYIO_PASSWORD }}
+
+      - name: Create Release Manifest
+        id: create-release-manifest
+        if: contains( env.RELEASE_TAG, '.' )
+        shell: bash
+        run:  |
+              echo "Creating Release manifest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_TAG }} ..."
+              buildah manifest create --all ${{ env.IMAGE_NAME }}:${{ env.RELEASE_TAG }} \
+                ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-amd64 \
+                ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-arm64
+
+      - name: Push Release Manifest
+        id: push-release-manifest
+        if: contains( env.RELEASE_TAG, '.' )
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ env.RELEASE_TAG }}
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_PASSWORD }}
