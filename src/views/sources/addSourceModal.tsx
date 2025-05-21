@@ -73,6 +73,18 @@ const useSourceForm = ({
   const isNetwork = typeValue === 'network';
   const isOpenshift = typeValue === 'openshift';
 
+  const getCleanedSourceData = (formData: Record<string, any>) => {
+    const cleanedData = { ...formData };
+
+    Object.entries(cleanedData).forEach(([key, value]) => {
+      if (value === '') {
+        delete cleanedData[key];
+      }
+    });
+
+    return cleanedData;
+  };
+
   // Edit props, reset state on unmount
   useEffect(() => {
     if (source) {
@@ -121,7 +133,7 @@ const useSourceForm = ({
   const filterFormData = useCallback(
     (data = formData) => {
       const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
-      return {
+      const payload = {
         name: name,
         credentials: credentials?.map(c => Number(c)),
         hosts: helpers.normalizeCommaSeparated(hosts),
@@ -139,6 +151,7 @@ const useSourceForm = ({
         ...(!source && { source_type: typeValue }),
         ...(source && { id: source.id })
       };
+      return getCleanedSourceData(payload);
     },
     [isNetwork, isOpenshift, formData, source, typeValue]
   );
@@ -150,7 +163,8 @@ const useSourceForm = ({
     isOpenshift,
     handleInputChange,
     filterFormData,
-    typeValue
+    typeValue,
+    getCleanedSourceData
   };
 };
 

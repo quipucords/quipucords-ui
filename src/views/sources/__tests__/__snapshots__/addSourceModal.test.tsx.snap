@@ -1254,7 +1254,6 @@ exports[`useSourceForm should include proxy_url in the filtered formData for non
 {
   "credentials": [],
   "hosts": [],
-  "name": "",
   "options": {
     "disable_ssl": false,
     "ssl_cert_verify": true,
