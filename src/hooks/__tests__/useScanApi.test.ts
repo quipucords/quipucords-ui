@@ -4,6 +4,7 @@ import {
   useCreateScanApi,
   useDeleteScanApi,
   useDownloadReportApi,
+  useGetAggregateReportApi,
   useGetScanJobsApi,
   useRunScanApi,
   useShowConnectionsApi
@@ -410,6 +411,89 @@ describe('useRunScanApi', () => {
 
     await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, no ID returned');
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, no ID returned, alert');
+  });
+});
+
+describe('useGetAggregateReportApi', () => {
+  let mockOnAddAlert;
+  let hookResult;
+
+  beforeEach(() => {
+    mockOnAddAlert = jest.fn();
+    const hook = renderHook(() => useGetAggregateReportApi(mockOnAddAlert));
+    hookResult = hook?.result?.current;
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should attempt an api call to show an aggregate report summary', () => {
+    const { apiCall } = hookResult;
+    const spyAxios = jest.spyOn(axios, 'get');
+
+    apiCall(123);
+    expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
+  });
+
+  it('should handle success while attempting to get a summary', async () => {
+    const { getAggregateReport } = hookResult;
+    jest.spyOn(axios, 'get').mockResolvedValue({});
+
+    const response = await getAggregateReport(123);
+    expect(response).toMatchSnapshot('getAggregateReport success');
+  });
+
+  it('should handle errors while attempting to get a summary', async () => {
+    const { getAggregateReport } = hookResult;
+    jest.spyOn(axios, 'get').mockRejectedValue({ isAxiosError: true, message: 'Mock error' });
+
+    await expect(getAggregateReport(123)).rejects.toMatchSnapshot('getAggregateReport error');
+
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('getAggregateReport, error alert');
+  });
+
+  it('should process an API success response', () => {
+    const { callbackSuccess } = hookResult;
+
+    expect(
+      callbackSuccess(
+        {
+          data: {
+            results: {
+              ansible_hosts_all: 1,
+              ansible_hosts_in_database: 1,
+              ansible_hosts_in_jobs: 0
+            },
+            diagnostics: {
+              inspect_result_status_failed: 0,
+              inspect_result_status_success: 5,
+              inspect_result_status_unknown: 0
+            }
+          }
+        },
+        123
+      )
+    ).toMatchSnapshot('callbackSuccess');
+  });
+
+  it('should process an API error response', async () => {
+    const { callbackError } = hookResult;
+
+    await expect(
+      callbackError(
+        {
+          response: {
+            data: {
+              message: 'Dolor sit'
+            }
+          }
+        },
+        123
+      )
+    ).rejects.toMatchSnapshot('callbackError');
+
+    expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError, alert');
   });
 });
 
