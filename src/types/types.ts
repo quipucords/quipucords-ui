@@ -59,6 +59,7 @@ export type SourceType = {
     disable_ssl: boolean;
     use_paramiko?: boolean;
   };
+  proxy_url?: string;
 };
 
 export type ConnectionType = {
