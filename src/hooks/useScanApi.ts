@@ -4,7 +4,14 @@ import { type AlertProps } from '@patternfly/react-core';
 import axios, { AxiosError, type AxiosResponse, isAxiosError, type AxiosRequestConfig } from 'axios';
 import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
-import { type Scan, type ScanJobType, type ScanJobsResponse, type SourceType, type Connections } from '../types/types';
+import {
+  type Scan,
+  type ScanJobType,
+  type ScanJobsResponse,
+  type SourceType,
+  type Connections,
+  type ReportsAggregateResponse
+} from '../types/types';
 
 type ApiDeleteScanSuccessType = {
   message: string;
@@ -304,6 +311,65 @@ const useGetScanJobsApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
+const useGetAggregateReportApi = (onAddAlert: (alert: AlertProps) => void) => {
+  const { t } = useTranslation();
+
+  const apiCall = useCallback(
+    (reportId: number): Promise<AxiosResponse<ReportsAggregateResponse>> =>
+      axios.get(`${process.env.REACT_APP_REPORTS_SERVICE}${reportId}/aggregate/`),
+    []
+  );
+
+  const callbackSuccess = useCallback(
+    (response: AxiosResponse<ReportsAggregateResponse>, reportId: number) => ({
+      id: reportId,
+      report: response.data
+    }),
+    []
+  );
+
+  const callbackError = useCallback(
+    (error: AxiosError<ApiScanErrorType>, reportId: number) => {
+      onAddAlert({
+        title: t('toast-notifications.description', {
+          context: 'report_aggregate_error',
+          name: reportId,
+          message: apiHelpers.extractErrorMessage(error?.response?.data)
+        }),
+        variant: 'danger'
+      });
+
+      return Promise.reject(error);
+    },
+    [onAddAlert, t]
+  );
+
+  const getAggregateReport = useCallback(
+    async (reportId: number) => {
+      let response;
+      try {
+        response = await apiCall(reportId);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          return callbackError(error, reportId);
+        }
+        if (!helpers.TEST_MODE) {
+          console.error(error);
+        }
+      }
+      return callbackSuccess(response, reportId);
+    },
+    [apiCall, callbackSuccess, callbackError]
+  );
+
+  return {
+    apiCall,
+    callbackSuccess,
+    callbackError,
+    getAggregateReport
+  };
+};
+
 const useDownloadReportApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
 
@@ -426,6 +492,7 @@ export {
   useCreateScanApi,
   useRunScanApi,
   useDeleteScanApi,
+  useGetAggregateReportApi,
   useGetScanJobsApi,
   useDownloadReportApi,
   useShowConnectionsApi
