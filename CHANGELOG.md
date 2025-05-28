@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.14.2](https://github.com/quipucords/quipucords-ui/compare/142abbe6fd530a14295101c19a3c9db56a986755...68a4c57d1cc02b347585e1dd4d809309e325bbf4) (2025-05-28)
+
+
+### Continuous Integrations
+* **konflux** adjust pipeline to support discovery release workflow  ([a13a43e](https://github.com/quipucords/quipucords-ui/commit/a13a43eea8b06a33885b08e1d7fed5577c6b1656))
+
+### Builds
+*  make update-lockfiles  ([68a4c57](https://github.com/quipucords/quipucords-ui/commit/68a4c57d1cc02b347585e1dd4d809309e325bbf4))
+*  Missing x.y release container image ([#631](https://github.com/quipucords/quipucords-ui/pull/631)) ([8ce67c5](https://github.com/quipucords/quipucords-ui/commit/8ce67c5ebbb9761655f4aee63ef7114d4bc684b7))
+
 ## [1.14.1](https://github.com/quipucords/quipucords-ui/compare/b2f539c0ac02f7fc701c60bec18e2c60a76904c6...dafb6479475ba8c9b4a5f8a7c27ee3725ee2250e) (2025-05-07)
 
 
