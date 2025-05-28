@@ -98,7 +98,7 @@ const ShowAggregateReportModal: React.FC<ShowAggregateReportModalProps> = ({
       <DescriptionList isHorizontal isFluid isCompact>
         {stats.map(([key, value]) => {
           return (
-            <DescriptionListGroup key={key}>
+            <DescriptionListGroup data-ouia-component-id={key} key={key}>
               <DescriptionListTerm>{t('modal.label', { context: key })}</DescriptionListTerm>
               <DescriptionListDescription>{value}</DescriptionListDescription>
             </DescriptionListGroup>
