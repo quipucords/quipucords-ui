@@ -26,6 +26,22 @@ import { helpers } from '../../helpers';
 import { useGetCredentialsApi } from '../../hooks/useCredentialApi';
 import { type SourceType } from '../../types/types';
 
+const SSL_PROTOCOL_LABELS_TO_VALUES: Record<string, string> = {
+  SSLv23: 'SSLv23',
+  TLSv1: 'TLSv1',
+  'TLSv1.1': 'TLSv1_1',
+  'TLSv1.2': 'TLSv1_2',
+  'Disable SSL': 'disable'
+};
+
+const SSL_PROTOCOL_VALUES_TO_LABELS: Record<string, string> = {
+  SSLv23: 'SSLv23',
+  TLSv1: 'TLSv1',
+  TLSv1_1: 'TLSv1.1',
+  TLSv1_2: 'TLSv1.2',
+  disable: 'Disable SSL'
+};
+
 interface AddSourceModalProps {
   isOpen: boolean;
   source?: SourceType;
@@ -76,9 +92,11 @@ const useSourceForm = ({
     if (source) {
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
-        useParamiko: source?.options?.use_paramiko || false,
-        sslVerify: source?.options?.ssl_cert_verify ?? true,
-        sslProtocol: (source?.options?.disable_ssl && 'Disable SSL') || source?.options?.ssl_protocol || 'SSLv23',
+        useParamiko: source?.use_paramiko || false,
+        sslVerify: source?.ssl_cert_verify ?? true,
+        sslProtocol: source?.disable_ssl
+          ? 'Disable SSL'
+          : SSL_PROTOCOL_VALUES_TO_LABELS[source?.ssl_protocol || 'SSLv23'],
         name: source?.name || '',
         hosts: source?.hosts?.join(',') || '',
         port: source?.port?.toString() || ''
@@ -118,23 +136,29 @@ const useSourceForm = ({
   const filterFormData = useCallback(
     (data = formData) => {
       const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port } = data;
-      return {
-        name: name,
+      const payload: any = {
+        name,
         credentials: credentials?.map(c => Number(c)),
         hosts: helpers.normalizeCommaSeparated(hosts),
         port: port || (isOpenshift && '6443') || (isNetwork && '22') || '443',
-        options: !isNetwork
-          ? {
-              ssl_cert_verify: sslProtocol !== 'Disable SSL' && sslVerify,
-              disable_ssl: sslProtocol === 'Disable SSL',
-              ...(sslProtocol !== 'Disable SSL' && { ssl_protocol: sslProtocol })
-            }
-          : {
-              use_paramiko: useParamiko
-            },
         ...(!source && { source_type: typeValue }),
         ...(source && { id: source.id })
       };
+
+      if (!isNetwork) {
+        const apiValue = SSL_PROTOCOL_LABELS_TO_VALUES[sslProtocol];
+        if (apiValue !== 'disable') {
+          payload.ssl_protocol = apiValue;
+          payload.ssl_cert_verify = sslVerify;
+          payload.disable_ssl = false;
+        } else {
+          payload.disable_ssl = true;
+        }
+      } else {
+        payload.use_paramiko = useParamiko;
+      }
+
+      return payload;
     },
     [isNetwork, isOpenshift, formData, source, typeValue]
   );
