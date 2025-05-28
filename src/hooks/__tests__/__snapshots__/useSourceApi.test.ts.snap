@@ -3,7 +3,7 @@
 exports[`useAddSourceApi should attempt an api call to add sources: apiCall 1`] = `
 [
   [
-    "/api/v1/sources/",
+    "/api/v2/sources/",
     {
       "name": "Lorem",
     },
@@ -240,7 +240,7 @@ exports[`useDeleteSourceApi should process an API success response: callbackSucc
 exports[`useEditSourceApi should attempt an api call to edit sources: apiCall 1`] = `
 [
   [
-    "/api/v1/sources/123/",
+    "/api/v2/sources/123/",
     {
       "id": 123,
       "name": "Lorem",
