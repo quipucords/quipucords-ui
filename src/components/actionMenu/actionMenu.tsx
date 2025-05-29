@@ -6,7 +6,14 @@
  * @module actionMenu
  */
 import React, { useState } from 'react';
-import { Dropdown, DropdownItem, DropdownList, MenuToggle, type MenuToggleElement } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownList,
+  MenuToggle,
+  type MenuToggleElement,
+  type PopperProps
+} from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
 
 type Action<T> = {
@@ -19,14 +26,16 @@ type Action<T> = {
 interface ActionMenuProps<T = unknown> {
   item: T;
   actions: Action<T>[];
+  popperProps?: Partial<PopperProps>;
 }
 
-const ActionMenu = <T,>({ item, actions }: ActionMenuProps<T>) => {
+const ActionMenu = <T,>({ item, actions, popperProps }: ActionMenuProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Dropdown
       isOpen={isOpen}
+      popperProps={popperProps}
       onOpenChange={setIsOpen}
       onSelect={() => setIsOpen(false)}
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
