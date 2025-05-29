@@ -294,6 +294,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                 <Td columnKey="updated">{helpers.getTimeDisplayHowLongAgo(credential.updated_at)}</Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<CredentialType>
+                    popperProps={{ position: 'right' }}
                     item={credential}
                     actions={[
                       {

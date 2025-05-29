@@ -390,6 +390,7 @@ const SourcesListView: React.FunctionComponent = () => {
                 </Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<SourceType>
+                    popperProps={{ position: 'right' }}
                     item={source}
                     actions={[
                       { label: t('table.label', { context: 'edit' }), onClick: onEditSource, ouiaId: 'edit-source' },
