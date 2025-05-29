@@ -245,6 +245,7 @@ const ScansListView: React.FunctionComponent = () => {
                 </Td>
                 <Td isActionCell columnKey="actions">
                   <ActionMenu<Scan>
+                    popperProps={{ position: 'right' }}
                     item={scan}
                     actions={[
                       {
