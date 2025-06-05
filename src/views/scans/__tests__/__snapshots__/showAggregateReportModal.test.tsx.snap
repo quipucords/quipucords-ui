@@ -86,7 +86,7 @@ exports[`formatSortFilterReportStats should apply date formatting to a specific 
 [
   [
     "system_creation_date_average",
-    "24 April 2025, 12:00 AM UTC",
+    "24 April 2025",
   ],
 ]
 `;
@@ -120,7 +120,7 @@ exports[`formatSortFilterReportStats should sort properties: sort 1`] = `
   ],
   [
     "system_creation_date_average",
-    "24 April 2025, 12:00 AM UTC",
+    "24 April 2025",
   ],
 ]
 `;
