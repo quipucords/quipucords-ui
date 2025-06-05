@@ -64,7 +64,7 @@ const formatSortFilterReportStats = (
     .sort(([aKey], [bKey]) => aKey.localeCompare(bKey))
     .map(([key, value]) => {
       const updatedValue = (
-        (key === 'system_creation_date_average' && helpers.formatDate(value as Date)) ||
+        (key === 'system_creation_date_average' && helpers.formatDate(value as Date, 'DD MMMM Y')) ||
         value
       )?.toString();
 

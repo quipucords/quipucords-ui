@@ -91,12 +91,13 @@ const getTimeDisplayHowLongAgo = (timestamp: MomentInput, { devMode = DEV_MODE }
 };
 
 /**
- * Formats the given date in UTC as 'DD MMMM Y, h:mm A z'.
+ * Formats the given date in UTC. By default uses 'DD MMMM Y, h:mm A z'.
  *
  * @param {Date} date - The date to format.
+ * @param {string} format - moment format specifier
  * @returns {string} The formatted date string.
  */
-const formatDate = (date: Date) => moment.utc(date).format('DD MMMM Y, h:mm A z');
+const formatDate = (date: Date, format = 'DD MMMM Y, h:mm A z') => moment.utc(date).format(format);
 
 /**
  * Normalizes comma-separated textarea content into array that can be submitted to backend.
