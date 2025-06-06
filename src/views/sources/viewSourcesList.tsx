@@ -392,10 +392,11 @@ const SourcesListView: React.FunctionComponent = () => {
                   <ActionMenu<SourceType>
                     item={source}
                     actions={[
-                      { label: t('table.label', { context: 'edit' }), onClick: onEditSource },
+                      { label: t('table.label', { context: 'edit' }), onClick: onEditSource, ouiaId: 'edit-source' },
                       {
                         label: t('table.label', { context: 'delete' }),
-                        onClick: setPendingDeleteSource
+                        onClick: setPendingDeleteSource,
+                        ouiaId: 'delete-source'
                       }
                     ]}
                   />
