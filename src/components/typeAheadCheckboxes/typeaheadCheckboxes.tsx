@@ -205,7 +205,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
                 textInputRef?.current?.focus();
               }}
               aria-label="Clear input value"
-              ouiaId="credentials_list_toggle_button"
+              ouiaId="credentials_list_clear_button"
             >
               <TimesIcon aria-hidden />
             </Button>
