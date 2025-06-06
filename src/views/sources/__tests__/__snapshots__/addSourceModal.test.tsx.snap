@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddSourceModal should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
+exports[`AddSourceModal-network should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
 [
   [
     {
       "credentials": [],
       "hosts": [],
       "name": "Test Source",
-      "options": {
-        "use_paramiko": false,
-      },
       "port": "22",
       "source_type": "network",
+      "use_paramiko": false,
     },
   ],
 ]
 `;
 
-exports[`AddSourceModal should have the correct title: title 1`] = `
+exports[`AddSourceModal-network should have the correct title: title 1`] = `
 <span
   class="pf-v5-c-modal-box__title-text"
 >
@@ -25,7 +23,7 @@ exports[`AddSourceModal should have the correct title: title 1`] = `
 </span>
 `;
 
-exports[`AddSourceModal should render a basic component: basic 1`] = `
+exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 <Modal
   actions={[]}
   appendTo={[Function]}
@@ -250,18 +248,6 @@ exports[`SourceForm should render specifics to different source types: form, vce
   Default port is 
   443
 </div>
-`;
-
-exports[`useSourceForm should allow editing a source: formData, edit 1`] = `
-{
-  "credentials": [],
-  "hosts": "",
-  "name": "lorem",
-  "port": "456",
-  "sslProtocol": "SSLv23",
-  "sslVerify": true,
-  "useParamiko": false,
-}
 `;
 
 exports[`useSourceForm should initialize formData correctly: formData 1`] = `
