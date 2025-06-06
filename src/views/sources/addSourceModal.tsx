@@ -2,7 +2,7 @@
  * Add Source Modal Component
  *
  * This component displays a modal for adding or editing a source of a specific type. It provides
- * a form to input source details including name, hosts, port, credential, and SSL settings.
+ * a form to input source details including name, hosts, port, credential, proxy URL and SSL settings.
  *
  * @module addSourceModal
  */
@@ -46,6 +46,7 @@ interface SourceFormType {
   name?: string;
   hosts?: string;
   port?: string;
+  proxy_url?: string;
 }
 
 const useSourceForm = ({
@@ -60,7 +61,8 @@ const useSourceForm = ({
     sslProtocol: 'SSLv23',
     name: '',
     hosts: '',
-    port: ''
+    port: '',
+    proxy_url: ''
   };
 
   const { getCredentials } = useGetCredentials();
@@ -71,17 +73,30 @@ const useSourceForm = ({
   const isNetwork = typeValue === 'network';
   const isOpenshift = typeValue === 'openshift';
 
+  const getCleanedSourceData = (formData: Record<string, any>) => {
+    const cleanedData = { ...formData };
+
+    Object.entries(cleanedData).forEach(([key, value]) => {
+      if (value === '') {
+        delete cleanedData[key];
+      }
+    });
+
+    return cleanedData;
+  };
+
   // Edit props, reset state on unmount
   useEffect(() => {
     if (source) {
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
-        useParamiko: source?.options?.use_paramiko || false,
-        sslVerify: source?.options?.ssl_cert_verify ?? true,
-        sslProtocol: (source?.options?.disable_ssl && 'Disable SSL') || source?.options?.ssl_protocol || 'SSLv23',
+        useParamiko: source?.use_paramiko || false,
+        sslVerify: source?.ssl_cert_verify ?? true,
+        sslProtocol: (source?.disable_ssl && 'Disable SSL') || source?.ssl_protocol || 'SSLv23',
         name: source?.name || '',
         hosts: source?.hosts?.join(',') || '',
-        port: source?.port?.toString() || ''
+        port: source?.port?.toString() || '',
+        proxy_url: source?.proxy_url || ''
       });
     }
 
@@ -117,24 +132,26 @@ const useSourceForm = ({
 
   const filterFormData = useCallback(
     (data = formData) => {
-      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port } = data;
-      return {
-        name: name,
+      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
+      const payload = {
+        name,
         credentials: credentials?.map(c => Number(c)),
         hosts: helpers.normalizeCommaSeparated(hosts),
         port: port || (isOpenshift && '6443') || (isNetwork && '22') || '443',
-        options: !isNetwork
+        ...(!source && { source_type: typeValue }),
+        ...(source && { id: source.id }),
+        ...(isNetwork
           ? {
-              ssl_cert_verify: sslProtocol !== 'Disable SSL' && sslVerify,
-              disable_ssl: sslProtocol === 'Disable SSL',
-              ...(sslProtocol !== 'Disable SSL' && { ssl_protocol: sslProtocol })
+              use_paramiko: useParamiko
             }
           : {
-              use_paramiko: useParamiko
-            },
-        ...(!source && { source_type: typeValue }),
-        ...(source && { id: source.id })
+              ssl_cert_verify: sslProtocol !== 'Disable SSL' && Boolean(sslVerify),
+              disable_ssl: sslProtocol === 'Disable SSL',
+              ...(sslProtocol !== 'Disable SSL' && { ssl_protocol: sslProtocol?.trim() }),
+              ...(proxy_url && { proxy_url })
+            })
       };
+      return getCleanedSourceData(payload);
     },
     [isNetwork, isOpenshift, formData, source, typeValue]
   );
@@ -146,7 +163,8 @@ const useSourceForm = ({
     isOpenshift,
     handleInputChange,
     filterFormData,
-    typeValue
+    typeValue,
+    getCleanedSourceData
   };
 };
 
@@ -232,6 +250,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('hosts', (event.target as HTMLInputElement).value)}
               isRequired
               id="source-hosts"
+              data-testid="input-host"
               name="hosts"
               ouiaId="hosts_single"
             />
@@ -243,11 +262,25 @@ const SourceForm: React.FC<SourceFormProps> = ({
               placeholder="Optional"
               type="text"
               id="source-port"
+              data-testid="input-port"
               name="port"
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
             <HelperText>Default port is {isOpenshift ? '6443' : '443'}</HelperText>
+          </FormGroup>
+          <FormGroup label="Proxy URL" fieldId="proxy_url">
+            <TextInput
+              value={formData?.proxy_url || ''}
+              placeholder="Optional"
+              type="text"
+              id="proxy-url"
+              data-testid="input-proxy"
+              name="proxy_url"
+              onChange={event => handleInputChange('proxy_url', (event.target as HTMLInputElement).value || undefined)}
+              ouiaId="proxy_url"
+            />
+            <HelperText>Specify a proxy in the format protocol://host:port (if required).</HelperText>
           </FormGroup>
         </React.Fragment>
       )}

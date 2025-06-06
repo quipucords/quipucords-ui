@@ -50,15 +50,14 @@ export type SourceType = {
   port: number;
   source_type: string;
   hosts: string[];
-  exclude_hosts: string[];
+  exclude_hosts: string[] | null;
   credentials: CredentialType[];
   connection: SourceConnectionType;
-  options?: {
-    ssl_protocol?: string;
-    ssl_cert_verify: boolean;
-    disable_ssl: boolean;
-    use_paramiko?: boolean;
-  };
+  ssl_protocol?: string;
+  ssl_cert_verify?: boolean;
+  disable_ssl?: boolean;
+  use_paramiko?: boolean;
+  proxy_url?: string;
 };
 
 export type ConnectionType = {
