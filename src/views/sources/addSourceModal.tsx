@@ -2,7 +2,7 @@
  * Add Source Modal Component
  *
  * This component displays a modal for adding or editing a source of a specific type. It provides
- * a form to input source details including name, hosts, port, credential, and SSL settings.
+ * a form to input source details including name, hosts, port, credential, proxy URL and SSL settings.
  *
  * @module addSourceModal
  */
@@ -62,6 +62,7 @@ interface SourceFormType {
   name?: string;
   hosts?: string;
   port?: string;
+  proxy_url?: string;
 }
 
 const useSourceForm = ({
@@ -76,7 +77,8 @@ const useSourceForm = ({
     sslProtocol: 'SSLv23',
     name: '',
     hosts: '',
-    port: ''
+    port: '',
+    proxy_url: ''
   };
 
   const { getCredentials } = useGetCredentials();
@@ -86,6 +88,18 @@ const useSourceForm = ({
   const typeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
   const isNetwork = typeValue === 'network';
   const isOpenshift = typeValue === 'openshift';
+
+  const getCleanedSourceData = (formData: Record<string, any>) => {
+    const cleanedData = { ...formData };
+
+    Object.entries(cleanedData).forEach(([key, value]) => {
+      if (value === '') {
+        delete cleanedData[key];
+      }
+    });
+
+    return cleanedData;
+  };
 
   // Edit props, reset state on unmount
   useEffect(() => {
@@ -99,7 +113,8 @@ const useSourceForm = ({
           : SSL_PROTOCOL_VALUES_TO_LABELS[source?.ssl_protocol || 'SSLv23'],
         name: source?.name || '',
         hosts: source?.hosts?.join(',') || '',
-        port: source?.port?.toString() || ''
+        port: source?.port?.toString() || '',
+        proxy_url: source?.proxy_url || ''
       });
     }
 
@@ -135,7 +150,7 @@ const useSourceForm = ({
 
   const filterFormData = useCallback(
     (data = formData) => {
-      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port } = data;
+      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
       const payload: any = {
         name,
         credentials: credentials?.map(c => Number(c)),
@@ -154,13 +169,16 @@ const useSourceForm = ({
         } else {
           payload.disable_ssl = true;
         }
+        if (proxy_url) {
+          payload.proxy_url = proxy_url;
+        }
       } else {
         payload.use_paramiko = useParamiko;
       }
 
-      return payload;
+      return getCleanedSourceData(payload);
     },
-    [isNetwork, isOpenshift, formData, source, typeValue]
+    [isNetwork, isOpenshift, formData, source, typeValue, getCleanedSourceData]
   );
 
   return {
@@ -256,6 +274,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('hosts', (event.target as HTMLInputElement).value)}
               isRequired
               id="source-hosts"
+              data-testid="input-host"
               name="hosts"
               ouiaId="hosts_single"
             />
@@ -267,11 +286,25 @@ const SourceForm: React.FC<SourceFormProps> = ({
               placeholder="Optional"
               type="text"
               id="source-port"
+              data-testid="input-port"
               name="port"
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
             <HelperText>Default port is {isOpenshift ? '6443' : '443'}</HelperText>
+          </FormGroup>
+          <FormGroup label="Proxy URL" fieldId="proxy_url">
+            <TextInput
+              value={formData?.proxy_url || ''}
+              placeholder="Optional"
+              type="text"
+              id="proxy-url"
+              data-testid="input-proxy"
+              name="proxy_url"
+              onChange={event => handleInputChange('proxy_url', (event.target as HTMLInputElement).value || undefined)}
+              ouiaId="proxy_url"
+            />
+            <HelperText>Specify a proxy in the format protocol://host:port (if required).</HelperText>
           </FormGroup>
         </React.Fragment>
       )}
