@@ -49,6 +49,129 @@ exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 </Modal>
 `;
 
+exports[`AddSourceModalWithProxy should update proxy_url and submit it: onSubmit with proxy_url 1`] = `
+[
+  [
+    {
+      "credentials": [],
+      "disable_ssl": false,
+      "hosts": [
+        "192.168.0.1",
+      ],
+      "name": "Test Source",
+      "port": "8443",
+      "proxy_url": "http://proxy.example.com:8888",
+      "source_type": "openshift",
+      "ssl_cert_verify": true,
+      "ssl_protocol": "SSLv23",
+    },
+  ],
+]
+`;
+
+exports[`SourceForm should not render proxy_url field for network sources: proxy_url presence, network 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={Infinity}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="Search addresses"
+    >
+      <TextArea
+        data-ouia-component-id="hosts_multiple"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        placeholder="Enter values separated by commas"
+        value=""
+      />
+      <HelperText>
+        Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for ranges.
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 22
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <FormGroup
+    fieldId="paramiko"
+    label=""
+  >
+    <Checkbox
+      className=""
+      id="paramiko"
+      isChecked={false}
+      isDisabled={false}
+      isLabelWrapped={false}
+      isRequired={false}
+      isValid={true}
+      label="Connect using Paramiko instead of Open SSH"
+      onChange={[Function]}
+      ouiaId="options_paramiko"
+      ouiaSafe={true}
+    />
+  </FormGroup>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
 exports[`SourceForm should render a basic component: basic 1`] = `
 <Form>
   <FormGroup
@@ -94,6 +217,7 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       label="IP address or hostname"
     >
       <TextInput
+        data-testid="input-host"
         id="source-hosts"
         isRequired={true}
         name="hosts"
@@ -110,6 +234,7 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       label="Port"
     >
       <TextInput
+        data-testid="input-port"
         id="source-port"
         name="port"
         onChange={[Function]}
@@ -121,6 +246,864 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       <HelperText>
         Default port is 
         443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, ansible 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={1}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        data-testid="input-host"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        data-testid="input-port"
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 
+        443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, openshift 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={1}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        data-testid="input-host"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        data-testid="input-port"
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 
+        6443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, rhacs 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={1}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        data-testid="input-host"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        data-testid="input-port"
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 
+        443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, satellite 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={1}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        data-testid="input-host"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        data-testid="input-port"
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 
+        443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
+      </HelperText>
+    </FormGroup>
+  </React.Fragment>
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
+      label="Connection"
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="Verify SSL certificate"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
+  <ActionGroup>
+    <Button
+      onClick={[Function]}
+      variant="primary"
+    >
+      Save
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="link"
+    >
+      Cancel
+    </Button>
+  </ActionGroup>
+</Form>
+`;
+
+exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, vcenter 1`] = `
+<Form>
+  <FormGroup
+    fieldId="name"
+    isRequired={true}
+    label="Name"
+  >
+    <TextInput
+      id="source-name"
+      isRequired={true}
+      name="name"
+      onChange={[Function]}
+      ouiaId="name"
+      placeholder="Enter a name for the source"
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    fieldId="credentials"
+    isRequired={true}
+    label="Credentials"
+  >
+    <TypeaheadCheckboxes
+      maxSelections={1}
+      menuToggleOuiaId="add_credentials_select"
+      onChange={[Function]}
+      options={[]}
+      selectedOptions={[]}
+    />
+    <HelperText>
+      <HelperTextItem
+        variant="warning"
+      >
+        Only one credential can be selected for this source type.
+      </HelperTextItem>
+    </HelperText>
+  </FormGroup>
+  <React.Fragment>
+    <FormGroup
+      fieldId="hosts"
+      isRequired={true}
+      label="IP address or hostname"
+    >
+      <TextInput
+        data-testid="input-host"
+        id="source-hosts"
+        isRequired={true}
+        name="hosts"
+        onChange={[Function]}
+        ouiaId="hosts_single"
+        value=""
+      />
+      <HelperText>
+        Enter an IP address or hostname
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="port"
+      label="Port"
+    >
+      <TextInput
+        data-testid="input-port"
+        id="source-port"
+        name="port"
+        onChange={[Function]}
+        ouiaId="port"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Default port is 
+        443
+      </HelperText>
+    </FormGroup>
+    <FormGroup
+      fieldId="proxy_url"
+      label="Proxy URL"
+    >
+      <TextInput
+        data-testid="input-proxy"
+        id="proxy-url"
+        name="proxy_url"
+        onChange={[Function]}
+        ouiaId="proxy_url"
+        placeholder="Optional"
+        type="text"
+        value=""
+      />
+      <HelperText>
+        Specify a proxy in the format protocol://host:port (if required).
       </HelperText>
     </FormGroup>
   </React.Fragment>
@@ -250,12 +1233,26 @@ exports[`SourceForm should render specifics to different source types: form, vce
 </div>
 `;
 
+exports[`useSourceForm should include proxy_url in the filtered formData for non-network types: filteredData with proxy_url 1`] = `
+{
+  "credentials": [],
+  "disable_ssl": false,
+  "hosts": [],
+  "port": "6443",
+  "proxy_url": "https://proxy.mycompany.com:443",
+  "source_type": "openshift",
+  "ssl_cert_verify": true,
+  "ssl_protocol": "SSLv23",
+}
+`;
+
 exports[`useSourceForm should initialize formData correctly: formData 1`] = `
 {
   "credentials": [],
   "hosts": "",
   "name": "",
   "port": "",
+  "proxy_url": "",
   "sslProtocol": "SSLv23",
   "sslVerify": true,
   "useParamiko": false,
