@@ -131,6 +131,45 @@ describe('AddSourceModal-openshift', () => {
   });
 });
 
+describe('AddSourceModalWithProxy', () => {
+  let mockOnClose;
+  let mockOnSubmit;
+
+  beforeEach(async () => {
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+
+    mockOnClose = jest.fn();
+    mockOnSubmit = jest.fn();
+    await act(() => {
+      render(
+        <AddSourceModal
+          isOpen={true}
+          sourceType="openshift"
+          source={undefined}
+          onClose={mockOnClose}
+          onSubmit={mockOnSubmit}
+        />
+      );
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should update proxy_url and submit it', async () => {
+    const user = userEvent.setup();
+
+    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test Source');
+    await user.type(screen.getByTestId('input-host'), '192.168.0.1');
+    await user.type(screen.getByTestId('input-port'), '8443');
+    await user.type(screen.getByTestId('input-proxy'), 'http://proxy.example.com:8888');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(mockOnSubmit.mock.calls).toMatchSnapshot('onSubmit with proxy_url');
+  });
+});
+
 describe('useSourceForm', () => {
   beforeEach(() => {
     jest.spyOn(axios, 'get').mockResolvedValue({
@@ -206,6 +245,22 @@ describe('useSourceForm', () => {
     expect(payload.ssl_cert_verify).toBe(true);
     expect(payload.disable_ssl).toBe(false);
   });
+
+  it('should include proxy_url in the filtered formData for non-network types', async () => {
+    const { result } = renderHook(() =>
+      useSourceForm({
+        sourceType: 'openshift'
+      })
+    );
+
+    await act(() => {
+      result.current.handleInputChange('proxy_url', 'https://proxy.mycompany.com:443');
+    });
+
+    const filteredData = result.current.filterFormData();
+    expect(filteredData.proxy_url).toBe('https://proxy.mycompany.com:443');
+    expect(filteredData).toMatchSnapshot('filteredData with proxy_url');
+  });
 });
 
 describe('SourceForm', () => {
@@ -222,5 +277,26 @@ describe('SourceForm', () => {
       const portHelperText = portFormGroup.querySelector('.pf-v5-c-helper-text');
       expect(portHelperText).toMatchSnapshot(`form, ${type}`);
     }
+  });
+
+  it('should render proxy_url field for non-network sources', async () => {
+    const sourceTypes = ['openshift', 'rhacs', 'ansible', 'satellite', 'vcenter'];
+
+    for (const type of sourceTypes) {
+      const component = await shallowComponent(<SourceForm sourceType={type} />);
+      const proxyInput = component.querySelector('#proxy-url');
+
+      expect(proxyInput).toBeTruthy();
+      expect(proxyInput?.getAttribute('placeholder')).toBe('Optional');
+      expect(component).toMatchSnapshot(`proxy_url presence, ${type}`);
+    }
+  });
+
+  it('should not render proxy_url field for network sources', async () => {
+    const component = await shallowComponent(<SourceForm sourceType="network" />);
+    const proxyInput = component.querySelector('#proxy-url');
+
+    expect(proxyInput).toBeNull();
+    expect(component).toMatchSnapshot(`proxy_url presence, network`);
   });
 });
