@@ -35,6 +35,7 @@ import {
   PageSection,
   ToolbarContent,
   ToolbarItem,
+  Tooltip,
   getUniqueId
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
@@ -244,53 +245,55 @@ const ScansListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <ActionMenu<Scan>
-                    popperProps={{ position: 'right' }}
-                    item={scan}
-                    actions={[
-                      {
-                        label: t('table.label', { context: 'summary' }),
-                        disabled: !helpers.canAccessMostRecentReport(scan?.most_recent),
-                        onClick: () => {
-                          if (scan?.most_recent) {
-                            getAggregateReport(scan.most_recent.report_id)
-                              .then(setAggregateReport)
-                              .catch(err => {
-                                if (!helpers.TEST_MODE) {
-                                  console.error(err);
-                                }
-                              });
-                          }
+                  <Tooltip content={t('table.tooltip_action_menu')}>
+                    <ActionMenu<Scan>
+                      popperProps={{ position: 'right' }}
+                      item={scan}
+                      actions={[
+                        {
+                          label: t('table.label', { context: 'summary' }),
+                          disabled: !helpers.canAccessMostRecentReport(scan?.most_recent),
+                          onClick: () => {
+                            if (scan?.most_recent) {
+                              getAggregateReport(scan.most_recent.report_id)
+                                .then(setAggregateReport)
+                                .catch(err => {
+                                  if (!helpers.TEST_MODE) {
+                                    console.error(err);
+                                  }
+                                });
+                            }
+                          },
+                          ouiaId: 'summary'
                         },
-                        ouiaId: 'summary'
-                      },
-                      {
-                        label: t('table.label', { context: 'delete' }),
-                        onClick: setPendingDeleteScan,
-                        ouiaId: 'delete'
-                      },
-                      {
-                        label: t('table.label', { context: 'rescan' }),
-                        onClick: () => {
-                          runScans(scan, true).finally(() => {
-                            queryClient.invalidateQueries({ queryKey: [API_SCANS_LIST_QUERY] });
-                            setScanSelected(undefined);
-                          });
+                        {
+                          label: t('table.label', { context: 'delete' }),
+                          onClick: setPendingDeleteScan,
+                          ouiaId: 'delete'
                         },
-                        ouiaId: 'rescan'
-                      },
-                      {
-                        label: t('table.label', { context: 'download' }),
-                        disabled: !helpers.canAccessMostRecentReport(scan?.most_recent),
-                        onClick: () => {
-                          if (scan?.most_recent) {
-                            downloadReport(scan.most_recent.report_id);
-                          }
+                        {
+                          label: t('table.label', { context: 'rescan' }),
+                          onClick: () => {
+                            runScans(scan, true).finally(() => {
+                              queryClient.invalidateQueries({ queryKey: [API_SCANS_LIST_QUERY] });
+                              setScanSelected(undefined);
+                            });
+                          },
+                          ouiaId: 'rescan'
                         },
-                        ouiaId: 'download'
-                      }
-                    ]}
-                  />
+                        {
+                          label: t('table.label', { context: 'download' }),
+                          disabled: !helpers.canAccessMostRecentReport(scan?.most_recent),
+                          onClick: () => {
+                            if (scan?.most_recent) {
+                              downloadReport(scan.most_recent.report_id);
+                            }
+                          },
+                          ouiaId: 'download'
+                        }
+                      ]}
+                    />
+                  </Tooltip>
                 </Td>
               </Tr>
             ))}
