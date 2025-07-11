@@ -256,6 +256,7 @@
     "label_ansible": "Ansible",
     "label_view": "View",
     "summary": "A generated table.",
+    "tooltip_action_menu": "More options",
     "tooltip_merge-reports": "Merge selected scan results into a single report"
   },
   "toast-notifications": {
