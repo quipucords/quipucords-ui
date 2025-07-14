@@ -56,7 +56,7 @@ exports[`useAddSourceApi should handle success while attempting to add a source:
 exports[`useDeleteSourceApi should attempt an api call to delete sources: apiCall 1`] = `
 [
   [
-    "/api/v1/sources/bulk_delete/",
+    "/api/v2/sources/bulk_delete/",
     {
       "ids": [
         456,
