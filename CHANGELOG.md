@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/quipucords/quipucords-ui/compare/26384921cab9bf1cdc63d939eded0fd655b315d6...69d4afe444d39a54d1b029b4efdbb9c35f8a8402) (2025-07-14)
+
+
+### Tests
+*  add/fix ouiaId  ([b7cddb1](https://github.com/quipucords/quipucords-ui/commit/b7cddb1109ac43f4810de7ec28b6bdbc9081a432))
+
+### Features
+* **viewScansList** add a tooltip identifying Scan ActionMenu  ([b5fc9ac](https://github.com/quipucords/quipucords-ui/commit/b5fc9acba1f9cee220c5b813759a3ec775201eb2))
+* **sources** migrate create/edit flow to API V2  ([56cd163](https://github.com/quipucords/quipucords-ui/commit/56cd163cc33304c89551c324eb00e170303f331e))
+* **showAggregateReportModal** dsc-762 aggregate report summary  ([06485e4](https://github.com/quipucords/quipucords-ui/commit/06485e48605dbd9ad4442a13a87c767a5e97d7e1))
+* **useScanApi** dsc-762 aggregate report api hook  ([5dfa8ff](https://github.com/quipucords/quipucords-ui/commit/5dfa8ff1882ec45f983cb827db421eb21d36f479))
+
+### Code Refactoring
+* **helpers** dsc-762 rename canDownloadReport  ([cdafe60](https://github.com/quipucords/quipucords-ui/commit/cdafe6062afc14a7c48d5823480c415bd5474aee))
+
+### Builds
+*  make update-lockfiles  ([69d4afe](https://github.com/quipucords/quipucords-ui/commit/69d4afe444d39a54d1b029b4efdbb9c35f8a8402))
+*  add GitHub PR check to forbid "fixup!" commits  ([cbfd31a](https://github.com/quipucords/quipucords-ui/commit/cbfd31a4b4f874c87e4b6519a6bc802f3cac78d9))
+*  make update-lockfiles  ([b22cebc](https://github.com/quipucords/quipucords-ui/commit/b22cebcbf440a4482c38742bcfc7c0ef409acec8))
+
+### Bug Fixes
+* **actionMenu** dsc-846 expose popperProps  ([4175e52](https://github.com/quipucords/quipucords-ui/commit/4175e52a0708c3254e814789760e325b44c7546c))
+* **showAggregateReportModal** Display date only  ([e483df0](https://github.com/quipucords/quipucords-ui/commit/e483df0ae7b893426c24182f40d3c9896e45b07c))
+* **showAggregateReportModal** dsc-762 test identifier  ([125af2f](https://github.com/quipucords/quipucords-ui/commit/125af2f87c795a62d23c370a13f5a9dc45c582c4))
+
 ## [1.14.2](https://github.com/quipucords/quipucords-ui/compare/142abbe6fd530a14295101c19a3c9db56a986755...68a4c57d1cc02b347585e1dd4d809309e325bbf4) (2025-05-28)
 
 
