@@ -3,8 +3,6 @@
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
   "components/aboutModal/aboutModal.tsx:45:        error => console.error(\`About status error: \${error} \`)",
-  "components/viewLayout/viewLayoutToolbar.tsx:69:    console.log('selected', value);",
-  "components/viewLayout/viewLayoutToolbar.tsx:77:    console.log('selected', value);",
   "helpers/queryHelpers.ts:75:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:80:        console.error('Error during data fetching:', error);",
   "hooks/useCredentialApi.ts:81:          console.log(missingCredsMsg);",
