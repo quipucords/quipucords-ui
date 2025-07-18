@@ -129,6 +129,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                       variant="plain"
                       onClick={() => setHelpOpen(prev => !prev)}
                       isExpanded={helpOpen}
+                      data-ouia-component-id="help_menu_toggle"
                     >
                       <QuestionCircleIcon />
                     </MenuToggle>
@@ -195,7 +196,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
           </ToolbarItem>
         </ToolbarContent>
       </Toolbar>
-      <AboutModal isOpen={aboutOpen} onClose={onAboutClose} />
+      <AboutModal isOpen={aboutOpen} onClose={onAboutClose} useUser={useUser} />
     </React.Fragment>
   );
 };
