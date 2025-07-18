@@ -66,8 +66,13 @@ describe('useCredentialForm', () => {
     jest.clearAllMocks();
   });
 
+  it('should work without formData', async () => {
+    const { result } = renderHook(() => useCredentialForm());
+    await act(() => expect(result.current.formData).toMatchSnapshot('emptyFormData'));
+  });
+
   it('should initialize formData correctly', async () => {
-    const result = renderHook(() => useCredentialForm({ credentialType: 'network' })).result;
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
     await act(() => expect(result.current.formData).toMatchSnapshot('formData'));
   });
 
@@ -96,7 +101,7 @@ describe('useCredentialForm', () => {
   });
 
   it('should update and filter formData when handleInputChange is called', () => {
-    const result = renderHook(() => useCredentialForm({ credentialType: 'network' })).result;
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
     const mockValue = 'Lorem ipsum';
 
     act(() => result.current.handleInputChange('name', mockValue));
@@ -104,6 +109,17 @@ describe('useCredentialForm', () => {
 
     const filteredData = result.current.filterFormData();
     expect(filteredData.name).toBe(mockValue);
+  });
+
+  it('should support implausible case of credential without a name', async () => {
+    const { result } = renderHook(() =>
+      useCredentialForm({
+        credential: {
+          id: 123
+        }
+      })
+    );
+    expect(result.current.formData).toMatchSnapshot('formData no name, edit');
   });
 
   it('should allow editing a credential', async () => {
@@ -129,7 +145,7 @@ describe('CredentialForm', () => {
 
   it('should render specific to authType for type network', async () => {
     const mockUseForm = jest.fn();
-    mockUseForm.mockReturnValue({ authType: 'SSH Key' });
+    mockUseForm.mockReturnValue({ authType: 'SSH Key', typeValue: 'network' });
     const props = {
       credentialType: 'network',
       useForm: mockUseForm
@@ -137,7 +153,7 @@ describe('CredentialForm', () => {
     const networkSshKey = await shallowComponent(<CredentialForm {...props} />);
     expect(networkSshKey).toMatchSnapshot('network, SSH Key');
 
-    mockUseForm.mockReturnValue({ authType: 'Username and Password' });
+    mockUseForm.mockReturnValue({ authType: 'Username and Password', typeValue: 'network' });
     props.useForm = mockUseForm;
     const networkUsernamePassword = await shallowComponent(<CredentialForm {...props} />);
     expect(networkUsernamePassword).toMatchSnapshot('network, Username and Password');
@@ -145,7 +161,7 @@ describe('CredentialForm', () => {
 
   it('should render specific to authType for type openshift', async () => {
     const mockUseForm = jest.fn();
-    mockUseForm.mockReturnValue({ authType: 'Username and Password' });
+    mockUseForm.mockReturnValue({ authType: 'Username and Password', typeValue: 'openshift' });
     const props = {
       credentialType: 'openshift',
       useForm: mockUseForm
@@ -153,7 +169,7 @@ describe('CredentialForm', () => {
     const openshiftUsernamePassword = await shallowComponent(<CredentialForm {...props} />);
     expect(openshiftUsernamePassword).toMatchSnapshot('openshift, "Username and Password"');
 
-    mockUseForm.mockReturnValue({ authType: 'Token' });
+    mockUseForm.mockReturnValue({ authType: 'Token', typeValue: 'openshift' });
     props.useForm = mockUseForm;
     const openshiftToken = await shallowComponent(<CredentialForm {...props} />);
     expect(openshiftToken).toMatchSnapshot('openshift, "Token"');
@@ -172,7 +188,7 @@ describe('CredentialForm', () => {
     expect(rhacs).toMatchSnapshot('rhacs, "Token"');
   });
 
-  it('should call handlers for setAuthType and handleInputChange', async () => {
+  it('should call handlers for setAuthType and handleInputChange - Username and Password', async () => {
     const mockHandleInputChange = jest.fn();
     const mockSetAuthType = jest.fn();
     const mockOnSubmit = jest.fn();
@@ -194,6 +210,9 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
+    await user.type(screen.getByPlaceholderText('Enter username'), 'discovery');
+    await user.type(screen.getByPlaceholderText('Enter password'), 'secret!');
+
     await user.click(screen.getByText('Username and Password'));
     await user.click(screen.getByText('SSH Key'));
     expect(mockSetAuthType.mock.calls).toMatchSnapshot('setAuthType');
@@ -201,7 +220,148 @@ describe('CredentialForm', () => {
     await user.click(screen.getByText('Select option'));
     await user.click(screen.getByText('sudo'));
     expect(mockHandleInputChange).toHaveBeenCalledWith('become_method', 'sudo');
+
+    await user.type(screen.getByPlaceholderText(/become user/), 'root');
+    await user.type(screen.getByPlaceholderText(/become password/), 'secure secret!');
+
     expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
+  });
+
+  it('should call handlers for handleInputChange - SSH Key', async () => {
+    const mockHandleInputChange = jest.fn();
+
+    render(
+      <CredentialForm
+        credentialType="network"
+        useForm={() => ({
+          formData: { name: '', auth_token: '', username: '', password: '' },
+          authType: 'SSH Key',
+          typeValue: 'network',
+          setAuthType: jest.fn(),
+          handleInputChange: mockHandleInputChange,
+          filterFormData: jest.fn()
+        })}
+      />
+    );
+
+    const user = userEvent.setup();
+
+    await user.type(screen.getByPlaceholderText('Enter username'), 'discovery');
+    await user.type(screen.getByPlaceholderText('Enter private SSH Key'), 'ssh key file content');
+    await user.type(screen.getByPlaceholderText(/SSH passphrase/), 'secret!');
+
+    expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
+  });
+
+  it('should call handlers for setAuthType and handleInputChange - Token', async () => {
+    const mockHandleInputChange = jest.fn();
+
+    render(
+      <CredentialForm
+        credentialType="rhacs"
+        useForm={() => ({
+          formData: { name: '', auth_token: '', username: '', password: '' },
+          authType: 'Token',
+          typeValue: 'rhacs',
+          setAuthType: jest.fn(),
+          handleInputChange: mockHandleInputChange,
+          filterFormData: jest.fn()
+        })}
+      />
+    );
+
+    const user = userEvent.setup();
+
+    await user.type(screen.getByPlaceholderText('Enter Token'), 'super secret API token');
+
+    expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
+  });
+
+  it('should work with default onClose', async () => {
+    const { container } = render(
+      <CredentialForm
+        credentialType="network"
+        useForm={() => ({
+          formData: { name: '', auth_token: '', username: '', password: '' },
+          authType: 'Username and Password',
+          typeValue: 'network',
+          setAuthType: jest.fn(),
+          handleInputChange: jest.fn(),
+          filterFormData: jest.fn()
+        })}
+      />
+    );
+
+    const user = userEvent.setup();
+
+    await user.click(screen.getByText('Cancel'));
+
+    expect(container.innerHTML).toMatchSnapshot('onClose');
+  });
+
+  it('should work with default onSubmit', async () => {
+    const { container } = render(
+      <CredentialForm
+        credentialType="network"
+        useForm={() => ({
+          formData: { name: '', auth_token: '', username: '', password: '' },
+          authType: 'Username and Password',
+          typeValue: 'network',
+          setAuthType: jest.fn(),
+          handleInputChange: jest.fn(),
+          filterFormData: jest.fn()
+        })}
+      />
+    );
+
+    const user = userEvent.setup();
+
+    await user.click(screen.getByText('Save'));
+
+    expect(container.innerHTML).toMatchSnapshot('onSave');
+  });
+
+  it('should submit updated credential data', async () => {
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      id: 123,
+      name: 'Old credential name',
+      created_at: new Date(),
+      updated_at: new Date(),
+      cred_type: 'network',
+      username: 'discovery',
+      password: '',
+      has_password: true,
+      ssh_key: '',
+      auth_token: '',
+      ssh_passphrase: '',
+      become_method: '',
+      become_user: '',
+      become_password: '',
+      sources: [],
+      auth_type: 'password'
+    };
+
+    const { container } = render(
+      <CredentialForm credential={credential} credentialType="network" onSubmit={mockOnSubmit} />
+    );
+
+    const user = userEvent.setup();
+
+    const nameInput = screen.getByPlaceholderText('Enter a name for the credential');
+    await user.click(nameInput);
+    await user.keyboard('{Control>}a{/Control}');
+    await user.keyboard('{Backspace}');
+    await user.type(nameInput, 'Test changing name');
+    await user.click(screen.getByText('Save'));
+
+    expect(container.innerHTML).toMatchSnapshot('edit credential form, after');
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: 123,
+        name: 'Test changing name'
+      })
+    );
   });
 });
 

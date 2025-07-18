@@ -45,7 +45,7 @@
     "test:lint-fix": "npm run test:lint -- --fix",
     "test:local": "jest --roots=./src --watch",
     "test:spell-support": "cspell ./README.md ./config/README.md ./CONTRIBUTING.md './scripts/*.js' './config/*.js' './tests/*.ts*' --config ./config/cspell.config.json",
-    "test:spell": "cspell './public/locales/**/en*json' './public/index.html' './src/**/*.ts*' --config ./config/cspell.config.json",
+    "test:spell": "cspell './public/locales/**/en*json' './public/index.html' './src/**/*.ts*' '!./src/**/*.test.*.snap' --config ./config/cspell.config.json",
     "test:types": "tsc --noEmit"
   },
   "dependencies": {
