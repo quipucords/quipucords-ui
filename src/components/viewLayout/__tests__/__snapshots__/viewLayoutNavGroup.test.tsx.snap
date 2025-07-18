@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ViewLayout should render a basic component: basic 1`] = `
+exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
 <Page
   defaultManagedSidebarIsOpen={true}
   getBreakpoint={[Function]}
@@ -80,22 +80,10 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
               </NavLink>
             </NavItem>
             <NavItem
-              id="Sources-1"
+              id="Scans-1"
               isActive={false}
             >
-              <NavLink
-                to="/sources"
-              >
-                Sources
-              </NavLink>
-            </NavItem>
-            <NavItem
-              id="Scans-2"
-              isActive={false}
-            >
-              <NavLink
-                to="/scans"
-              >
+              <NavLink>
                 Scans
               </NavLink>
             </NavItem>
@@ -115,21 +103,4 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
 >
   Lorem ipsum
 </Page>
-`;
-
-exports[`ViewLayout should render a brand component: brand 1`] = `
-NodeList [
-  <source
-    srcset="titleBrand.svg"
-  />,
-  <img
-    alt="t([
-  "view.alt-logo",
-  {
-    "name": "Discovery"
-  }
-])"
-    src=""
-  />,
-]
 `;

@@ -21,15 +21,7 @@ interface IAppRoute {
   routes?: undefined;
 }
 
-interface IAppRouteGroup {
-  id: string;
-  label: string;
-  routes: IAppRoute[];
-}
-
-type AppRouteConfig = IAppRoute | IAppRouteGroup;
-
-const routes: AppRouteConfig[] = [
+const routes: IAppRoute[] = [
   {
     id: 'credentials',
     component: <Credentials />,
@@ -70,4 +62,4 @@ const AppRoutes = () => (
   </React.Suspense>
 );
 
-export { AppRoutes as default, AppRoutes, routes, type IAppRoute, type IAppRouteGroup, type AppRouteConfig };
+export { AppRoutes as default, AppRoutes, routes, type IAppRoute };
