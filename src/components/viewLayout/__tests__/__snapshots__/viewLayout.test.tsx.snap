@@ -11,6 +11,7 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
         <Button
           aria-label="Global navigation"
           onClick={[Function]}
+          ouiaId="global-navigation"
           variant="plain"
         >
           <BarsIcon />

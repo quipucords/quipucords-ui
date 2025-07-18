@@ -48,7 +48,12 @@ const AppLayout: React.FC<AppLayoutProps> = ({
   const Header = (
     <Masthead>
       <MastheadToggle>
-        <Button variant="plain" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Global navigation">
+        <Button
+          variant="plain"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Global navigation"
+          ouiaId="global-navigation"
+        >
           <BarsIcon />
         </Button>
       </MastheadToggle>
