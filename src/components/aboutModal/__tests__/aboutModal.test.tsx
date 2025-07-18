@@ -28,6 +28,24 @@ describe('AboutModal Component', () => {
     expect(component).toMatchSnapshot('username and status');
   });
 
+  it('should log on error', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const mockGetStatus = jest.fn().mockRejectedValue({ message: 'Server error' });
+    const mockUseStatusApi = jest.fn().mockReturnValue({ getStatus: mockGetStatus });
+    const mockGetUser = jest.fn().mockResolvedValue('lorem ipsum');
+    const mockUseUserApi = jest.fn().mockReturnValue({ getUser: mockGetUser });
+    const props = {
+      isOpen: true,
+      useUser: mockUseUserApi,
+      useStatus: mockUseStatusApi
+    };
+
+    const component = await shallowComponent(<AboutModal {...props} />);
+    expect(component).toMatchSnapshot('api error');
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+    consoleSpy.mockRestore();
+  });
+
   it('should call onClose', async () => {
     const mockOnClose = jest.fn();
     const mockGetStatus = jest

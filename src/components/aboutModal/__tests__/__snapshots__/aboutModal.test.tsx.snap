@@ -86,6 +86,60 @@ exports[`AboutModal Component should attempt to display username, status data: u
 </AboutModal>
 `;
 
+exports[`AboutModal Component should log on error: api error 1`] = `
+<AboutModal
+  aria-label="Quipucords"
+  backgroundImageSrc="aboutBg.png"
+  brandImageAlt="Quipucords"
+  brandImageSrc="title.svg"
+  isOpen={true}
+  onClose={[Function]}
+  trademark="t([
+  "about.copyright",
+  {
+    "year": "2024"
+  }
+])"
+>
+  <TextContent
+    className="fadein"
+  >
+    <TextList
+      component="dl"
+    >
+      <React.Fragment>
+        <TextListItem
+          component="dt"
+        >
+          t([
+  "about.username"
+])
+        </TextListItem>
+        <TextListItem
+          component="dd"
+        >
+          lorem ipsum
+        </TextListItem>
+      </React.Fragment>
+      <React.Fragment>
+        <TextListItem
+          component="dt"
+        >
+          t([
+  "about.ui-version"
+])
+        </TextListItem>
+        <TextListItem
+          component="dd"
+        >
+          0.0.0.0000000
+        </TextListItem>
+      </React.Fragment>
+    </TextList>
+  </TextContent>
+</AboutModal>
+`;
+
 exports[`AboutModal Component should render a basic component: basic 1`] = `
 <AboutModal
   aria-label="Quipucords"
