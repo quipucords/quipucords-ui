@@ -10,16 +10,13 @@ jest.mock('../../../helpers/queryHelpers', () => ({
 }));
 import { useServiceQuery } from '../../../helpers/queryHelpers';
 import { type CredentialType } from '../../../types/types';
-import { useCredentialsQuery } from '../useCredentialsQuery';
-
-type CredentialsColumnKey = 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
-type CredentialsSortableColumnKey = 'name' | 'type';
+import {
+  type CredentialsColumnKey,
+  type CredentialsSortableColumnKey,
+  useCredentialsQuery
+} from '../useCredentialsQuery';
 
 describe('useCredentialsQuery', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should call useServiceQuery with correct parameters', () => {
     const mockSetRefreshTime = jest.fn();
     const mockTableState = {} as TableState<CredentialType, CredentialsColumnKey, CredentialsSortableColumnKey>;

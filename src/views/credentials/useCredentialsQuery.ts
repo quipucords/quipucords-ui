@@ -16,7 +16,7 @@ type CredentialsColumnKey = 'name' | 'type' | 'auth_type' | 'sources' | 'updated
 type CredentialsSortableColumnKey = 'name' | 'type';
 
 /** Fetches and manages credentials data based on table state. */
-export const useCredentialsQuery = ({
+const useCredentialsQuery = ({
   tableState,
   setRefreshTime
 }: {
@@ -33,3 +33,10 @@ export const useCredentialsQuery = ({
     tableState,
     setRefreshTime
   });
+
+export {
+  useCredentialsQuery as default,
+  useCredentialsQuery,
+  type CredentialsColumnKey,
+  type CredentialsSortableColumnKey
+};
