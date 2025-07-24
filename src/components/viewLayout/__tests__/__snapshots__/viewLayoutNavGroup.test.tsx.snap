@@ -79,36 +79,14 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
                 Credentials
               </NavLink>
             </NavItem>
-            <NavExpandable
-              className=""
-              groupId={null}
+            <NavItem
               id="Scans-1"
               isActive={false}
-              isExpanded={false}
-              srText=""
-              title="Scans"
             >
-              <NavItem
-                id="Results-0"
-                isActive={false}
-              >
-                <NavLink
-                  to="/scans-results"
-                >
-                  Results
-                </NavLink>
-              </NavItem>
-              <NavItem
-                id="Running-1"
-                isActive={false}
-              >
-                <NavLink
-                  to="/scans-running"
-                >
-                  Running
-                </NavLink>
-              </NavItem>
-            </NavExpandable>
+              <NavLink>
+                Scans
+              </NavLink>
+            </NavItem>
           </NavList>
         </Nav>
       </PageSidebarBody>
