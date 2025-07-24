@@ -153,6 +153,7 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
   <AboutModal
     isOpen={false}
     onClose={[Function]}
+    useUser={[Function]}
   />
 </React.Fragment>
 `;
