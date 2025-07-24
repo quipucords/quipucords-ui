@@ -37,9 +37,9 @@ global.URL.createObjectURL = jest.fn();
  */
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  NavLink: (...args) => {
+  NavLink: args => {
     // eslint-disable-next-line jsx-a11y/anchor-has-content
-    const MockNavLink = (...props) => <a {...props} />;
+    const MockNavLink = props => <a {...props} />;
     return <MockNavLink {...args} />;
   },
   useLocation: () => ({ pathname: '/' }),
