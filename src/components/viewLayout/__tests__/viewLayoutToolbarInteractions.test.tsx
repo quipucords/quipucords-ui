@@ -16,15 +16,6 @@ jest.mock('../../../hooks/useStatusApi', () => ({
 import { AppToolbar as ViewToolbar } from '../viewLayoutToolbar';
 
 describe('ViewToolbar interactions', () => {
-  beforeEach(async () => {
-    // eslint-disable-next-line
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should change color theme', async () => {
     const user = userEvent.setup();
     const mockGetUser = jest.fn().mockResolvedValue('Dolor sit');

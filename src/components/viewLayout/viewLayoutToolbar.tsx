@@ -64,17 +64,15 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
 
   const onHelpSelect = (
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
-    value: string | number | undefined
+    _value: string | number | undefined
   ) => {
-    console.log('selected', value);
     setHelpOpen(false);
   };
 
   const onUserDropdownSelect = (
     _event: React.MouseEvent<Element, MouseEvent> | undefined,
-    value: string | number | undefined
+    _value: string | number | undefined
   ) => {
-    console.log('selected', value);
     setUserDropdownOpen(false);
   };
 

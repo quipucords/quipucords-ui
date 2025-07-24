@@ -52,6 +52,12 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 1,
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_'
+      }
+    ],
     'arrow-parens': ['error', 'as-needed'],
     'class-methods-use-this': 1,
     'comma-dangle': 0,
