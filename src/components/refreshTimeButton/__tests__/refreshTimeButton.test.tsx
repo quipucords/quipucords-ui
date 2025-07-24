@@ -11,12 +11,8 @@ describe('RefreshTimeButton', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     jest.setSystemTime(new Date(MOCKED_CURRENT_TIME));
-    const originalMomentUtcOffset = moment.prototype.utcOffset;
     jest.spyOn(moment.prototype, 'utcOffset').mockImplementation(function (this: moment.Moment, offset: unknown) {
-      if (offset !== undefined) {
-        return originalMomentUtcOffset.apply(this, [offset]);
-      }
-      return 0;
+      return offset !== undefined ? this : 0;
     });
   });
 
