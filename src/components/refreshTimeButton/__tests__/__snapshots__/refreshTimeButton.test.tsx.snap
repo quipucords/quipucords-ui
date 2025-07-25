@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RefreshTimeButton should render a basic component: basic 1`] = `
+<Button
+  icon={<RebootingIcon />}
+  onClick={[Function]}
+  ouiaId="refresh"
+  variant="link"
+>
+  <span
+    className="last-refresh-time"
+  >
+    t([
+  "refresh-time-button.refreshed",
+  {
+    "context": "load",
+    "refresh": "7 days ago"
+  }
+])
+  </span>
+</Button>
+`;
+
+exports[`RefreshTimeButton should render component without refresh time set: no refresh set 1`] = `
+<Button
+  icon={<RebootingIcon />}
+  onClick={[Function]}
+  ouiaId="refresh"
+  variant="link"
+>
+  <span
+    className="last-refresh-time"
+  >
+    t([
+  "refresh-time-button.refreshed",
+  {
+    "context": 0,
+    "refresh": 0
+  }
+])
+  </span>
+</Button>
+`;

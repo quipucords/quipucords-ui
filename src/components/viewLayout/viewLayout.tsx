@@ -18,7 +18,6 @@ import {
   MastheadMain,
   MastheadToggle,
   Nav,
-  NavExpandable,
   NavItem,
   NavList,
   Page,
@@ -28,7 +27,7 @@ import {
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
-import { IAppRoute, IAppRouteGroup, routes } from '../../routes';
+import { IAppRoute, routes } from '../../routes';
 import { AppToolbar } from './viewLayoutToolbar';
 
 interface AppLayoutProps {
@@ -48,7 +47,12 @@ const AppLayout: React.FC<AppLayoutProps> = ({
   const Header = (
     <Masthead>
       <MastheadToggle>
-        <Button variant="plain" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Global navigation">
+        <Button
+          variant="plain"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Global navigation"
+          ouiaId="global-navigation"
+        >
           <BarsIcon />
         </Button>
       </MastheadToggle>
@@ -73,24 +77,11 @@ const AppLayout: React.FC<AppLayoutProps> = ({
     </NavItem>
   );
 
-  const renderNavGroup = (group: IAppRouteGroup, groupIndex: number) => (
-    <NavExpandable
-      key={`${group.label}-${groupIndex}`}
-      id={`${group.label}-${groupIndex}`}
-      title={group.label}
-      isActive={group.routes.some(route => route.path === location.pathname)}
-    >
-      {group.routes.map((route, idx) => route.label && renderNavItem(route, idx))}
-    </NavExpandable>
-  );
-
   // FixMe: PF spelling bug in attr "forwardScrollAriaLabel"
   const Navigation = (
     <Nav id="nav-primary-simple" theme="dark">
       <NavList id="nav-list-simple" forwardScrollAriaLabel="Scroll forward">
-        {routes.map(
-          (route, idx) => route.label && (!route.routes ? renderNavItem(route, idx) : renderNavGroup(route, idx))
-        )}
+        {routes.map((route, idx) => route.label && renderNavItem(route, idx))}
       </NavList>
     </Nav>
   );
