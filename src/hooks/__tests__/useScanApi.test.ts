@@ -328,6 +328,19 @@ describe('useGetScanJobsApi', () => {
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
   });
+
+  it('should call axios with page_size=1000 query parameter', () => {
+    const { apiCall } = hookResult;
+    const spyAxios = jest.spyOn(axios, 'get');
+
+    const scanId = 123;
+    apiCall(scanId);
+
+    expect(spyAxios).toHaveBeenCalledTimes(1);
+    expect(spyAxios).toHaveBeenCalledWith(`/api/v1/scans/123/jobs/`, {
+      params: { page_size: 1000 }
+    });
+  });
 });
 
 describe('useRunScanApi', () => {
