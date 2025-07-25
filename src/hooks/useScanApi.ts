@@ -262,7 +262,7 @@ const useGetScanJobsApi = (onAddAlert: (alert: AlertProps) => void) => {
 
   const apiCall = useCallback(
     (scanId: number): Promise<AxiosResponse<ScanJobsResponse>> =>
-      axios.get(`${process.env.REACT_APP_SCANS_SERVICE}${scanId}/jobs/`),
+      axios.get(`${process.env.REACT_APP_SCANS_SERVICE}${scanId}/jobs/`, { params: { page_size: 1000 } }),
     []
   );
 
