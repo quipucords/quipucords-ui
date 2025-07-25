@@ -425,6 +425,11 @@ exports[`useGetScanJobsApi should attempt an api call to retrieve a scanJob: api
 [
   [
     "/api/v1/scans/1/jobs/",
+    {
+      "params": {
+        "page_size": 1000,
+      },
+    },
   ],
 ]
 `;
