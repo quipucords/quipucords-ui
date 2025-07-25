@@ -13,7 +13,7 @@ RUN npm ci \
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-124@sha256:dccc713fd31160a77dd9fc0ba1032c64d3d4a68bd24e6128ec115df713847b6c
+FROM registry.access.redhat.com/ubi9/nginx-124@sha256:9afdbf36dfc8204878f058f77dcc8c869d58af5aa9a10122c5f15e1038659439
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
 ARG K8S_NAME="quipucords/quipucords-ui"
