@@ -19,7 +19,7 @@ type SourcesColumnKey = 'name' | 'connection' | 'type' | 'actions' | 'credential
 
 type SourcesSortableColumnKey = 'name' | 'connection' | 'type';
 
-export const useSourcesQuery = ({
+const useSourcesQuery = ({
   tableState,
   setRefreshTime
 }: {
@@ -37,3 +37,5 @@ export const useSourcesQuery = ({
     tableState,
     setRefreshTime
   });
+
+export { useSourcesQuery as default, useSourcesQuery, type SourcesColumnKey, type SourcesSortableColumnKey };
