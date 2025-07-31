@@ -31,4 +31,37 @@ describe('ActionMenu', () => {
     await user.click(screen.getByText('Lorem ipsum'));
     expect(onMockClick.mock.calls).toMatchSnapshot('click');
   });
+
+  it('should display tooltip', async () => {
+    const user = userEvent.setup();
+    const onMockClick = jest.fn();
+    const tooltipProps = { content: 'dolor sit' };
+
+    const props = {
+      item: { foo: 'bar' },
+      actions: [{ label: 'Lorem ipsum', onClick: onMockClick, tooltipProps: tooltipProps }]
+    };
+
+    render(<ActionMenu {...props} />);
+
+    await user.click(screen.getByRole('button'));
+    await user.hover(screen.getByText('Lorem ipsum'));
+    expect(document.body).toMatchSnapshot('hover');
+  });
+
+  it('should not allow to click disabled item', async () => {
+    const user = userEvent.setup();
+    const onMockClick = jest.fn();
+
+    const props = {
+      item: { foo: 'bar' },
+      actions: [{ label: 'Lorem ipsum', onClick: onMockClick, disabled: true }]
+    };
+
+    render(<ActionMenu {...props} />);
+
+    await user.click(screen.getByRole('button'));
+    await user.click(screen.getByText('Lorem ipsum'));
+    expect(onMockClick).not.toHaveBeenCalled();
+  });
 });

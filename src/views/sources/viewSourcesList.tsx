@@ -85,6 +85,14 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   /**
+   * Indicates if source has any associated scans or not.
+   *
+   * @param {SourceType} source - The cred type identifier.
+   * @returns {boolean} Translated label for the given source type.
+   */
+  const sourceHasConnection = (source: SourceType) => !!source?.connection;
+
+  /**
    * Invalidates the query cache for the sources list, triggering a refresh.
    */
   const onRefresh = () => {
@@ -294,7 +302,7 @@ const SourcesListView: React.FunctionComponent = () => {
   );
 
   const renderConnection = (source: SourceType) => {
-    if (!source?.connection) {
+    if (!sourceHasConnection(source)) {
       return (
         <Button variant={ButtonVariant.link} isDisabled={true}>
           <ContextIcon symbol="off" /> {t('table.label_status_not_started', { context: 'sources' })}
@@ -396,8 +404,12 @@ const SourcesListView: React.FunctionComponent = () => {
                       { label: t('table.label', { context: 'edit' }), onClick: onEditSource, ouiaId: 'edit-source' },
                       {
                         label: t('table.label', { context: 'delete' }),
+                        disabled: sourceHasConnection(source),
                         onClick: setPendingDeleteSource,
-                        ouiaId: 'delete-source'
+                        ouiaId: 'delete-source',
+                        ...(sourceHasConnection(source) && {
+                          tooltipProps: { content: t('table.label', { context: 'edit-disabled-source' }) }
+                        })
                       }
                     ]}
                   />

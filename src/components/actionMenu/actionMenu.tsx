@@ -12,7 +12,8 @@ import {
   DropdownList,
   MenuToggle,
   type MenuToggleElement,
-  type PopperProps
+  type PopperProps,
+  type TooltipProps
 } from '@patternfly/react-core';
 import { EllipsisVIcon } from '@patternfly/react-icons';
 
@@ -21,6 +22,7 @@ type Action<T> = {
   onClick: (item: T) => void;
   disabled?: boolean;
   ouiaId?: string; // Optional ouiaId for E2E testing
+  tooltipProps?: TooltipProps;
 };
 
 interface ActionMenuProps<T = unknown> {
@@ -61,7 +63,8 @@ const ActionMenu = <T,>({ item, actions, popperProps }: ActionMenuProps<T>) => {
             onClick={() => {
               a.onClick(item);
             }}
-            isDisabled={a.disabled}
+            isAriaDisabled={a.disabled}
+            tooltipProps={a.tooltipProps}
           >
             {a.label}
           </DropdownItem>

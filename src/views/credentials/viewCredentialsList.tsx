@@ -75,6 +75,14 @@ const CredentialsListView: React.FunctionComponent = () => {
   };
 
   /**
+   * Indicates if credential has any associated sources or not.
+   *
+   * @param {CredentialType} credential - The cred type identifier.
+   * @returns {boolean} Translated label for the given source type.
+   */
+  const credentialHasSources = (credential: CredentialType) => credential?.sources?.length;
+
+  /**
    * Invalidates the query cache for the creds list, triggering a refresh.
    */
   const onRefresh = () => {
@@ -285,7 +293,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                         setSourcesSelected(credential.sources);
                       }
                     }}
-                    isDisabled={!credential.sources?.length}
+                    isDisabled={!credentialHasSources(credential)}
                   >
                     {' '}
                     {credential.sources?.length || 0}
@@ -304,8 +312,12 @@ const CredentialsListView: React.FunctionComponent = () => {
                       },
                       {
                         label: t('table.label', { context: 'delete' }),
+                        disabled: !!credentialHasSources(credential),
                         onClick: setPendingDeleteCredential,
-                        ouiaId: 'delete-credential'
+                        ouiaId: 'delete-credential',
+                        ...(credentialHasSources(credential) && {
+                          tooltipProps: { content: t('table.label', { context: 'edit-disabled-credential' }) }
+                        })
                       }
                     ]}
                   />

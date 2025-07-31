@@ -190,6 +190,8 @@
     "label_close": "Close",
     "label_delete": "Delete",
     "label_edit": "Edit",
+    "label_edit-disabled-credential": "Credential cannot be deleted because it is used by one or more sources",
+    "label_edit-disabled-source": "Source cannot be deleted because it is used by one or more scans",
     "label_network": "Network",
     "label_openshift": "OpenShift",
     "label_satellite": "Satellite",
