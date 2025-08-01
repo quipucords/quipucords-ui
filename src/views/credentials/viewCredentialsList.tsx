@@ -13,7 +13,7 @@ import {
   FilterType,
   useTablePropHelpers,
   useTableState
-} from '@mturley-latest/react-table-batteries';
+} from '../../vendor/react-table-batteries';
 import {
   Alert,
   AlertActionCloseButton,

@@ -5,7 +5,7 @@
  *
  * @module queryHelpers
  */
-import { type TableState } from '@mturley-latest/react-table-batteries';
+import { type TableState } from '../vendor/react-table-batteries';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { helpers } from './helpers';

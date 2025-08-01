@@ -9,7 +9,7 @@
  *
  * @module useSourcesQuery
  */
-import { type TableState } from '@mturley-latest/react-table-batteries';
+import { type TableState } from '../../vendor/react-table-batteries';
 import { useServiceQuery } from '../../helpers/queryHelpers';
 import { type SourceType } from '../../types/types';
 
