@@ -146,6 +146,6 @@ export const useTablePropHelpers = <
 
   return {
     ...batteriesWithoutComponents,
-    components: useTableComponents(batteriesWithoutComponents)
+    components: useTableComponents() as any
   };
 };

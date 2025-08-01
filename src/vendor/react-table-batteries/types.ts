@@ -1,19 +1,16 @@
 import React from 'react';
 import { TableProps, TbodyProps, TdProps, ThProps, TheadProps, TrProps } from '@patternfly/react-table';
 import {
-  UseClientFilterDerivedStateArgs,
   UseFilterPropHelpersExternalArgs,
   FilterState,
   FilterStateArgs
 } from './hooks/filtering';
 import {
-  UseClientSortDerivedStateArgs,
   UseSortPropHelpersExternalArgs,
   SortState,
   SortStateArgs
 } from './hooks/sorting';
 import {
-  UseClientPaginationDerivedStateArgs,
   UsePaginationPropHelpersExternalArgs,
   PaginationState,
   PaginationStateArgs
@@ -37,11 +34,6 @@ import { DisallowCharacters, DiscriminatedArgs, MergedArgs } from './type-utils'
 import { FilterToolbarProps } from './tackle2-ui-legacy/components/FilterToolbar';
 import { ToolbarBulkSelectorProps } from './tackle2-ui-legacy/components/ToolbarBulkSelector';
 import {
-  TdWithBatteriesProps,
-  ThWithBatteriesProps,
-  ToolbarBulkSelectorWithBatteriesProps,
-  TrWithBatteriesBodyRowProps,
-  TrWithBatteriesHeaderRowProps
 } from './components';
 
 // Generic type params used here:
@@ -219,14 +211,7 @@ export interface TableState<
  * - Also used indirectly by the useClientTableBatteries shorthand hook.
  * - Requires state and API data in scope (or just API data if using useClientTableBatteries).
  */
-export type UseClientTableDerivedStateArgs<
-  TItem,
-  TColumnKey extends string,
-  TSortableColumnKey extends TColumnKey,
-  TFilterCategoryKey extends string = string
-> = UseClientFilterDerivedStateArgs<TItem, TFilterCategoryKey> &
-  UseClientSortDerivedStateArgs<TItem, TSortableColumnKey> &
-  UseClientPaginationDerivedStateArgs<TItem>;
+// UseClientTableDerivedStateArgs removed (client-side features not used)
 // There is no ClientSelectionDerivedStateArgs type because selection derived state is always local and internal to useTablePropHelpers
 // There is no ClientExpansionDerivedStateArgs type because expansion derived state is always local and internal to useTablePropHelpers
 // There is no ClientActiveItemDerivedStateArgs type because active item derived state is always local and internal to useTablePropHelpers
@@ -429,14 +414,14 @@ export type TableBatteries<
        * @see TrWithBatteriesProps
        */
       Tr: React.ForwardRefExoticComponent<
-        Omit<TrWithBatteriesHeaderRowProps, 'ref'> | Omit<TrWithBatteriesBodyRowProps<TItem>, 'ref'>
+        any
       >;
       /**
        * A wrapper for the PF Th component which automatically injects props from batteries.propHelpers.getThProps
        * Takes the same props as the normal PF Th plus a `columnKey` prop: the column associated with this cell.
        * @see ThWithBatteriesProps
        */
-      Th: React.ForwardRefExoticComponent<Omit<ThWithBatteriesProps<TColumnKey>, 'ref'>>;
+      Th: React.ForwardRefExoticComponent<any>;
       /**
        * A direct reference to the PF Tbody component, included here with the other components for convenience.
        * No injected props are currently necessary for Tbody. If that changes in the future,
@@ -448,7 +433,7 @@ export type TableBatteries<
        * Takes the same props as the normal PF Td plus a `columnKey` prop: the column associated with this cell.
        * @see TdWithBatteriesProps
        */
-      Td: React.ForwardRefExoticComponent<Omit<TdWithBatteriesProps<TColumnKey>, 'ref'>>;
+      Td: React.ForwardRefExoticComponent<any>;
       /**
        * A wrapper for the PF Toolbar component which automatically injects props from batteries.propHelpers.toolbarProps
        * Takes the same props as the normal PF Toolbar with no additional batteries-specific props.
@@ -459,7 +444,7 @@ export type TableBatteries<
        * Takes the same props as the normal ToolbarBulkSelector with no additional batteries-specific props.
        * However, all props are made optional because defaults for them are provided by propHelpers.
        */
-      ToolbarBulkSelector: React.FC<ToolbarBulkSelectorWithBatteriesProps<TItem>>;
+      ToolbarBulkSelector: React.FC<any>;
       /**
        * A wrapper for the deprecated FilterToolbar component which automatically injects props from batteries.propHelpers.filterToolbarProps
        * Takes the same props as the normal FilterToolbar with no additional batteries-specific props.
@@ -496,7 +481,7 @@ export type UseClientTableBatteriesArgs<
   // Include all args for useTableState
   UseTableStateArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey, TPersistenceKeyPrefix> &
     // Include args for useClientTableDerivedState that aren't under feature sub-objects
-    Omit<UseClientTableDerivedStateArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey>, TableFeature> &
+    Omit<any, TableFeature> &
     // Include args for useTablePropHelpers that aren't under feature sub-objects or provided by useTableState or useClientTableDerivedState
     Omit<
       UseTablePropHelpersArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey, TPersistenceKeyPrefix>,
@@ -508,7 +493,7 @@ export type UseClientTableBatteriesArgs<
     Partial<{
       [key in TableFeature]: Omit<
         (key extends 'filter' | 'sort' | 'pagination'
-          ? UseClientTableDerivedStateArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey>[key]
+          ? any[key]
           : unknown) &
           UseTablePropHelpersArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey>[key],
         keyof TableState<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey, TPersistenceKeyPrefix>[key]
