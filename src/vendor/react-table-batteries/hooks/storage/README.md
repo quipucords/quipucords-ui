@@ -1,0 +1,1 @@
+This module was vendored away from https://github.com/migtools/lib-ui and is licensed as Apache-2.0.
