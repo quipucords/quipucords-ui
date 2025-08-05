@@ -1,4 +1,4 @@
-# Quipucords UI
+# Quipucords UI and others
 [![Build Status](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml/badge.svg)](https://github.com/quipucords/quipucords-ui/actions/workflows/integration.yml)
 [![License](https://img.shields.io/github/license/quipucords/quipucords-ui.svg)](https://github.com/quipucords/quipucords-ui/blob/main/LICENSE)
 
