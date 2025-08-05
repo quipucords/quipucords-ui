@@ -6,7 +6,7 @@ on:
     tags:
       - '*'
   pull_request:
-    branches: [ main ]
+    branches: [main, 'release/*']
 
 env:
   # Forks that do not set secrets and override the variables may fail build steps using them.
