@@ -9,12 +9,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ConditionalTableBody,
-  FilterType,
-  useTablePropHelpers,
-  useTableState
-} from '@mturley-latest/react-table-batteries';
-import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
@@ -49,6 +43,12 @@ import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
 import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type Connections, type CredentialType, type Scan, type SourceType } from '../../types/types';
+import {
+  ConditionalTableBody,
+  FilterType,
+  useTablePropHelpers,
+  useTableState
+} from '../../vendor/react-table-batteries';
 import AddSourceModal from './addSourceModal';
 import { AddSourcesScanModal } from './addSourcesScanModal';
 import { ShowConnectionsModal } from './showSourceConnectionsModal';

@@ -9,12 +9,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ConditionalTableBody,
-  FilterType,
-  useTablePropHelpers,
-  useTableState
-} from '@mturley-latest/react-table-batteries';
-import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
@@ -47,6 +41,12 @@ import { useAlerts } from '../../hooks/useAlerts';
 import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type CredentialType, type SourceType } from '../../types/types';
+import {
+  ConditionalTableBody,
+  FilterType,
+  useTablePropHelpers,
+  useTableState
+} from '../../vendor/react-table-batteries';
 import { AddCredentialModal } from './addCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 

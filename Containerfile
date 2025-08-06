@@ -7,7 +7,6 @@ WORKDIR /app
 COPY package.json package-lock.json .
 RUN npm ci \
     --no-audit \
-    --legacy-peer-deps \
     --omit=dev
 
 COPY . .

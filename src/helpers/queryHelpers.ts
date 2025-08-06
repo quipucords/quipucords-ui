@@ -5,9 +5,9 @@
  *
  * @module queryHelpers
  */
-import { type TableState } from '@mturley-latest/react-table-batteries';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { type TableState } from '../vendor/react-table-batteries';
 import { helpers } from './helpers';
 
 export const getServiceQueryUrl = <TItem, TColumnKey extends string, TSortableColumnKey extends TColumnKey>({
