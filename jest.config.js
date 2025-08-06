@@ -5,6 +5,7 @@ module.exports = {
     '!src/**/**/index.{ts,tsx}',
     '!src/types/*.ts',
     '!src/constants/*.ts',
+    '!src/vendor/**',
     '!src/views/credentials/view*.{ts,tsx}',
     '!src/views/credentials/view*.{ts,tsx}',
     '!src/views/scans/view*.{ts,tsx}',

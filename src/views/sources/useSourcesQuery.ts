@@ -9,9 +9,9 @@
  *
  * @module useSourcesQuery
  */
-import { type TableState } from '@mturley-latest/react-table-batteries';
 import { useServiceQuery } from '../../helpers/queryHelpers';
 import { type SourceType } from '../../types/types';
+import { type TableState } from '../../vendor/react-table-batteries';
 
 export const SOURCES_LIST_QUERY = 'sourcesList';
 

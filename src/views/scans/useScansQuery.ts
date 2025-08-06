@@ -7,9 +7,9 @@
  *
  * @module useScansQuery
  */
-import { type TableState } from '@mturley-latest/react-table-batteries';
 import { useServiceQuery } from '../../helpers/queryHelpers';
 import { type Scan } from '../../types/types';
+import { type TableState } from '../../vendor/react-table-batteries';
 
 export const SCANS_LIST_QUERY = 'scansList';
 

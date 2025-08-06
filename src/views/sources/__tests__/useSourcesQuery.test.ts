@@ -1,4 +1,3 @@
-import { type TableState } from '@mturley-latest/react-table-batteries';
 import { renderHook } from '@testing-library/react';
 jest.mock('../../../helpers/queryHelpers', () => ({
   useServiceQuery: jest.fn(() => ({
@@ -10,6 +9,7 @@ jest.mock('../../../helpers/queryHelpers', () => ({
 }));
 import { useServiceQuery } from '../../../helpers/queryHelpers';
 import { type SourceType } from '../../../types/types';
+import { type TableState } from '../../../vendor/react-table-batteries';
 import { type SourcesColumnKey, type SourcesSortableColumnKey, useSourcesQuery } from '../useSourcesQuery';
 
 describe('useSourcesQuery', () => {

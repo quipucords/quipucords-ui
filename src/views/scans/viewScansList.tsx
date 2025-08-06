@@ -10,12 +10,6 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
-  ConditionalTableBody,
-  FilterType,
-  useTablePropHelpers,
-  useTableState
-} from '@mturley-latest/react-table-batteries';
-import {
   Alert,
   AlertActionCloseButton,
   AlertGroup,
@@ -55,6 +49,12 @@ import {
 } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type ReportsAggregateResponse, type Scan, type ScanJobType } from '../../types/types';
+import {
+  ConditionalTableBody,
+  FilterType,
+  useTablePropHelpers,
+  useTableState
+} from '../../vendor/react-table-batteries';
 import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
