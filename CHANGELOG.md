@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/quipucords/quipucords-ui/compare/acf4633d1dab7cc3a280164c9a24ccc99b6d8d2f...5438fe792547b3b486196df948e6b753b36fceba) (2025-08-06)
+
+
+### Builds
+*  bump task-source-build-oci-ta to 0.3  ([5438fe7](https://github.com/quipucords/quipucords-ui/commit/5438fe792547b3b486196df948e6b753b36fceba))
+*  Include quay builds on release branches  ([6c299c4](https://github.com/quipucords/quipucords-ui/commit/6c299c4d75caebc992cfef130f0831d4709af583))
+*  make update-lockfiles  ([55956cb](https://github.com/quipucords/quipucords-ui/commit/55956cb78db5aa4d29e4bf7ca1fde18298f21073))
+
+### Bug Fixes
+* **deps** patch various vulnerabilities  ([c4bbb1b](https://github.com/quipucords/quipucords-ui/commit/c4bbb1b278034b390dcd3319588f53e09569f21b))
+
 ## [2.0.0](https://github.com/quipucords/quipucords-ui/compare/26384921cab9bf1cdc63d939eded0fd655b315d6...69d4afe444d39a54d1b029b4efdbb9c35f8a8402) (2025-07-14)
 
 
