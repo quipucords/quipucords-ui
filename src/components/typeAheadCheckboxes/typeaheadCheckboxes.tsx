@@ -202,6 +202,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
               onClick={() => {
                 setInputValue('');
                 setSelected([]);
+                onChange([]);
                 textInputRef?.current?.focus();
               }}
               aria-label="Clear input value"
