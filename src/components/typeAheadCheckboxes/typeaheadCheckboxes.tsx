@@ -38,52 +38,52 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
-  const [selected, setSelected] = useState<string[]>(selectedOptions || []);
   const [selectOptions, setSelectOptions] = useState<SelectOptionProps[]>(options);
   const [focusedItemIndex, setFocusedItemIndex] = useState<number | null>(null);
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const [activePlaceholder, setActivePlaceholder] = useState(placeholder);
-  const textInputRef = useRef<HTMLInputElement>();
+  const textInputRef = useRef<HTMLInputElement>(null);
+  const justSelectedRef = useRef(false);
 
   useEffect(() => {
-    setSelectOptions(options);
-  }, [options]);
+    let filteredOptions = options;
 
-  useEffect(() => {
-    setSelected(selectedOptions);
-  }, [selectedOptions]);
-
-  useEffect(() => {
-    let newSelectOptions: SelectOptionProps[] = options;
-
-    // Filter menu items based on the text input value when one exists
     if (inputValue) {
-      newSelectOptions = options.filter(menuItem =>
-        String(menuItem.label).toLowerCase().includes(inputValue.toLowerCase())
-      );
+      filteredOptions = options.filter(option => option.label.toLowerCase().includes(inputValue.toLowerCase()));
 
-      // When no options are found after filtering, display 'No results found'
-      if (!newSelectOptions.length) {
-        newSelectOptions = [
+      if (!filteredOptions.length) {
+        setSelectOptions([
           {
             isDisabled: false,
             children: `No results found for "${inputValue}"`,
             value: 'no results'
           }
-        ];
+        ]);
+        return;
       }
 
-      // Open the menu when the input value changes and the new value is not empty
-      if (!isOpen) {
+      if (!isOpen && !justSelectedRef.current) {
         setIsOpen(true);
       }
     }
 
-    setSelectOptions(newSelectOptions);
+    const selectedOptionsSorted = filteredOptions.filter(option => selectedOptions.includes(option.value));
+    const unselectedOptions = filteredOptions
+      .filter(option => !selectedOptions.includes(option.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
+
+    const newOptions = [...selectedOptionsSorted, ...unselectedOptions];
+
+    setSelectOptions(prev => {
+      const prevValues = prev.map(opt => opt.value).join(',');
+      const nextValues = newOptions.map(opt => opt.value).join(',');
+      return prevValues !== nextValues ? newOptions : prev;
+    });
+
     setFocusedItemIndex(null);
     setActiveItem(null);
-  }, [inputValue, isOpen, options]);
-
+    justSelectedRef.current = false;
+  }, [inputValue, isOpen, options, selectedOptions]);
   const handleMenuArrowKeys = (key: string) => {
     let indexToFocus;
 
@@ -148,27 +148,36 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   };
 
   const onSelect = (value: string) => {
-    if (value && value !== 'no results') {
-      if (!selected.includes(value)) {
-        if (selected.length >= maxSelections) {
-          return;
-        }
-        const newSelected = [...selected, value];
-        onChange(newSelected);
-        setSelected(newSelected);
-      } else {
-        const newSelected = selected.filter(selection => selection !== value);
-        onChange(newSelected);
-        setSelected(newSelected);
-      }
+    if (!value || value === 'no results') {
+      return;
     }
 
+    let newSelected: string[];
+
+    if (!selectedOptions.includes(value)) {
+      if (selectedOptions.length >= maxSelections) {
+        return;
+      }
+      newSelected = [...selectedOptions, value];
+    } else {
+      newSelected = selectedOptions.filter(v => v !== value);
+    }
+
+    onChange(newSelected);
+
+    justSelectedRef.current = true;
+
+    if (maxSelections === 1 || newSelected.length >= maxSelections) {
+      setIsOpen(false);
+    }
+
+    setInputValue('');
     textInputRef.current?.focus();
   };
 
   useEffect(() => {
-    setActivePlaceholder(selected.length ? `${selected.length} items selected` : placeholder);
-  }, [selected, placeholder]);
+    setActivePlaceholder(selectedOptions.length ? `${selectedOptions.length} items selected` : placeholder);
+  }, [selectedOptions, placeholder]);
 
   const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
     <MenuToggle
@@ -196,12 +205,11 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
           data-ouia-component-id="credentials_list_input"
         />
         <TextInputGroupUtilities>
-          {selected.length > 0 && (
+          {selectedOptions.length > 0 && (
             <Button
               variant="plain"
               onClick={() => {
                 setInputValue('');
-                setSelected([]);
                 textInputRef?.current?.focus();
               }}
               aria-label="Clear input value"
@@ -220,7 +228,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
       role="menu"
       id="multi-typeahead-checkbox-select"
       isOpen={isOpen}
-      selected={selected}
+      selected={selectedOptions}
       onSelect={(ev, selection) => onSelect(selection as string)}
       onOpenChange={() => setIsOpen(false)}
       toggle={toggle}
@@ -229,7 +237,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
         {selectOptions.map((option, index) => (
           <SelectOption
             {...(!option.isDisabled && { hasCheckbox: true })}
-            isSelected={selected.includes(option.value)}
+            isSelected={selectedOptions.includes(option.value)}
             key={option.value || option.children}
             isFocused={focusedItemIndex === index}
             className={option.className}
