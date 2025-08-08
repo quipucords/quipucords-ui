@@ -1,6 +1,7 @@
 import React, { act } from 'react';
 import { render, renderHook } from '@testing-library/react';
 import { dotenv } from 'weldable';
+import '@testing-library/jest-dom';
 
 /**
  * Set dotenv params.
