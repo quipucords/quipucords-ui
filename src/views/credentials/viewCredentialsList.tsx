@@ -15,6 +15,7 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
+  Checkbox,
   EmptyState,
   EmptyStateActions,
   EmptyStateBody,
@@ -113,6 +114,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
+      selection: ' ',
       name: t('table.header', { context: 'name' }),
       type: t('table.header', { context: 'type' }),
       auth_type: t('table.header', { context: 'auth-type' }),
@@ -195,9 +197,21 @@ const CredentialsListView: React.FunctionComponent = () => {
     components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
   } = tableBatteries;
 
-  const hasSelectedCredentials = () => {
-    return Object.values(selectedItems).filter(val => val !== null).length > 0;
-  };
+  // View selection as an array (works if it's already an array OR a map)
+  const selectedArray: CredentialType[] = React.useMemo(() => {
+    return Array.isArray(selectedItems)
+      ? (selectedItems as CredentialType[])
+      : (Object.values((selectedItems as Record<number | string, CredentialType | null>) ?? {}).filter(
+          Boolean
+        ) as CredentialType[]);
+  }, [selectedItems]);
+
+  // Updated version that works for both shapes
+  const hasSelectedCredentials = () => selectedArray.length > 0;
+
+  // const hasSelectedCredentials = () => {
+  //   return Object.values(selectedItems).filter(val => val !== null).length > 0;
+  // };
 
   const renderAddCredsButton = () => (
     <SimpleDropdown
@@ -251,6 +265,33 @@ const CredentialsListView: React.FunctionComponent = () => {
       <Table aria-label="Example things table" variant="compact">
         <Thead>
           <Tr isHeaderRow>
+            <Th columnKey="selection">
+              <Checkbox
+                id="select-all-credentials"
+                aria-label={t('table.label', { context: 'select-all' })}
+                isDisabled={currentPageItems.length === 0}
+                isChecked={
+                  currentPageItems.length === 0
+                    ? false
+                    : currentPageItems.every(c => selectedArray.some(s => s.id === c.id))
+                      ? true
+                      : currentPageItems.some(c => selectedArray.some(s => s.id === c.id))
+                        ? null
+                        : false
+                }
+                onChange={(_e, checked) => {
+                  if (checked) {
+                    const byId = new Map(selectedArray.map(s => [s.id, s]));
+                    currentPageItems.forEach(c => byId.set(c.id, c));
+                    setSelectedItems(Array.from(byId.values()));
+                  } else {
+                    const pageIds = new Set(currentPageItems.map(c => c.id));
+                    setSelectedItems(selectedArray.filter(s => !pageIds.has(s.id)));
+                  }
+                }}
+              />
+            </Th>
+
             <Th columnKey="name" />
             <Th columnKey="type" />
             <Th columnKey="auth_type" />
