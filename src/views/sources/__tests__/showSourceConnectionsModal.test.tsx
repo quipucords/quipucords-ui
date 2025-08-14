@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -59,5 +60,17 @@ describe('ShowConnectionsModal', () => {
     await user.click(screen.getByLabelText('Close'));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reset expanded state on close', async () => {
+    const user = userEvent.setup();
+    const failedName = 'Amet';
+
+    await user.click(document.querySelector('button[id^=failed]')!);
+    expect(screen.getByText(failedName)).toBeVisible();
+    await user.click(screen.getByLabelText('Close'));
+
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(failedName)).not.toBeVisible();
   });
 });
