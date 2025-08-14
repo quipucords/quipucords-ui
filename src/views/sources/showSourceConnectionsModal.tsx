@@ -42,9 +42,19 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
       variant={ModalVariant.small}
       title={source?.name}
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={() => {
+        setExpanded([]);
+        return onClose();
+      }}
       actions={[
-        <Button key="cancel" variant="secondary" onClick={() => onClose()}>
+        <Button
+          key="cancel"
+          variant="secondary"
+          onClick={() => {
+            setExpanded([]);
+            return onClose();
+          }}
+        >
           Close
         </Button>
       ]}
