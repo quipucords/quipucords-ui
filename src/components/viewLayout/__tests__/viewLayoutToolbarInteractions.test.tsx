@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React, { act } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 jest.mock('../../../hooks/useStatusApi', () => ({
   useStatusApi: () => ({
@@ -47,8 +47,18 @@ describe('ViewToolbar interactions', () => {
       render(<ViewToolbar {...props} />);
     });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    await user.click(document.querySelector('button[data-ouia-component-id="help_menu_toggle"]')!);
-    await user.click(screen.getByText(/About/));
+
+    // Find the help button by looking for the QuestionCircleIcon
+    const helpButton = screen.getByRole('button', { name: /Toggle/i });
+    expect(helpButton).toBeInTheDocument();
+    await user.click(helpButton);
+
+    // Wait for the dropdown to open and then click on the About item
+    await waitFor(() => {
+      expect(screen.getByText('About')).toBeInTheDocument();
+    });
+    await user.click(screen.getByText('About'));
+
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Close Dialog' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -65,8 +75,18 @@ describe('ViewToolbar interactions', () => {
     await act(async () => {
       render(<ViewToolbar {...props} />);
     });
-    await user.click(document.querySelector('button[data-ouia-component-id="user_dropdown_button"]')!);
-    await user.click(screen.getByText(/Logout/));
+
+    // Find the user dropdown button by looking for the user name
+    const userButton = screen.getByRole('button', { name: /Dolor sit/i });
+    expect(userButton).toBeInTheDocument();
+    await user.click(userButton);
+
+    // Wait for the dropdown to open and then click on the Logout item
+    await waitFor(() => {
+      expect(screen.getByText('Logout')).toBeInTheDocument();
+    });
+    await user.click(screen.getByText('Logout'));
+
     expect(mockLogout).toHaveBeenCalledTimes(1);
   });
 });

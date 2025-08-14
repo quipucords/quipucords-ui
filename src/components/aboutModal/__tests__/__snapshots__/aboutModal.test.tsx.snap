@@ -15,74 +15,74 @@ exports[`AboutModal Component should attempt to display username, status data: u
   }
 ])"
 >
-  <TextContent
+  <Content
     className=""
   >
-    <TextList
+    <Content
       component="dl"
     >
       <React.Fragment>
-        <TextListItem
+        <Content
           component="dt"
         >
           t([
   "about.username"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           component="dd"
         >
           lorem ipsum
-        </TextListItem>
+        </Content>
       </React.Fragment>
       <React.Fragment>
-        <TextListItem
+        <Content
           component="dt"
         >
           t([
   "about.ui-version"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           component="dd"
         >
           0.0.0.0000000
-        </TextListItem>
+        </Content>
       </React.Fragment>
       <React.Fragment>
-        <TextListItem
+        <Content
           className=""
           component="dt"
         >
           t([
   "about.server-version"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           className=""
           component="dd"
         >
           0.0.0.12345678
-        </TextListItem>
+        </Content>
       </React.Fragment>
       <React.Fragment>
-        <TextListItem
+        <Content
           className=""
           component="dt"
         >
           t([
   "about.server-cpu-arch"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           className=""
           component="dd"
         >
           i386
-        </TextListItem>
+        </Content>
       </React.Fragment>
-    </TextList>
-  </TextContent>
+    </Content>
+  </Content>
 </AboutModal>
 `;
 
@@ -101,42 +101,42 @@ exports[`AboutModal Component should log on error: api error 1`] = `
   }
 ])"
 >
-  <TextContent
+  <Content
     className="fadein"
   >
-    <TextList
+    <Content
       component="dl"
     >
       <React.Fragment>
-        <TextListItem
+        <Content
           component="dt"
         >
           t([
   "about.username"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           component="dd"
         >
           lorem ipsum
-        </TextListItem>
+        </Content>
       </React.Fragment>
       <React.Fragment>
-        <TextListItem
+        <Content
           component="dt"
         >
           t([
   "about.ui-version"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           component="dd"
         >
           0.0.0.0000000
-        </TextListItem>
+        </Content>
       </React.Fragment>
-    </TextList>
-  </TextContent>
+    </Content>
+  </Content>
 </AboutModal>
 `;
 
@@ -155,27 +155,27 @@ exports[`AboutModal Component should render a basic component: basic 1`] = `
   }
 ])"
 >
-  <TextContent
+  <Content
     className="fadein"
   >
-    <TextList
+    <Content
       component="dl"
     >
       <React.Fragment>
-        <TextListItem
+        <Content
           component="dt"
         >
           t([
   "about.ui-version"
 ])
-        </TextListItem>
-        <TextListItem
+        </Content>
+        <Content
           component="dd"
         >
           0.0.0.0000000
-        </TextListItem>
+        </Content>
       </React.Fragment>
-    </TextList>
-  </TextContent>
+    </Content>
+  </Content>
 </AboutModal>
 `;

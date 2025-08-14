@@ -19,7 +19,7 @@ export const useTableWithBatteries = <
   const TableWithBatteries = useDeepCompareMemo(
     () =>
       React.forwardRef((props: Omit<TableProps, 'ref'>, ref: React.Ref<HTMLTableElement>) => (
-        <Table {...propHelpers.tableProps} innerRef={ref as React.MutableRefObject<HTMLTableElement>} {...props} />
+        <Table {...propHelpers.tableProps} ref={ref as React.MutableRefObject<HTMLTableElement>} {...props} />
       )),
     [propHelpers.tableProps]
   );

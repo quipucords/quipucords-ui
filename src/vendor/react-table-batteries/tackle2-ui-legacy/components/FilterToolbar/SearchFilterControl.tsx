@@ -33,8 +33,8 @@ export const SearchFilterControl = <TItem, TFilterCategoryKey extends string>({
   const inputId = `${id}-${category.key}-input`;
   return (
     <ToolbarFilter
-      chips={filterValue || []}
-      deleteChip={() => setFilterValue([])}
+      labels={filterValue || []}
+      deleteLabel={() => setFilterValue([])}
       categoryName={category.title}
       showToolbarItem={showToolbarItem}
     >
@@ -55,14 +55,14 @@ export const SearchFilterControl = <TItem, TFilterCategoryKey extends string>({
           }}
           isDisabled={isDisabled}
         />
-        <Button
+        <Button icon={<SearchIcon />}
           variant={ButtonVariant.control}
           id={`${id}-search-button`}
           aria-label="search button for search input"
           onClick={onFilterSubmit}
           isDisabled={isDisabled}
         >
-          <SearchIcon />
+          
         </Button>
       </InputGroup>
     </ToolbarFilter>

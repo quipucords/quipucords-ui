@@ -71,7 +71,7 @@ export const useTrWithBatteries = <
           return (
             <Tr
               {...propHelpers.getTrProps({ item, onRowClick })}
-              innerRef={ref as React.MutableRefObject<HTMLTableRowElement>}
+              ref={ref as React.MutableRefObject<HTMLTableRowElement>}
               {...otherProps}
             >
               {!builtInControls ? (

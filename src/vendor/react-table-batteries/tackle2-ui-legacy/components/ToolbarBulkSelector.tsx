@@ -131,8 +131,7 @@ export const ToolbarBulkSelector = <T,>({
               ref={toggleRef}
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Bulk selection menu toggle"
-              splitButtonOptions={{
-                items: [
+              splitButtonItems={[
                   <MenuToggleCheckbox
                     id="bulk-selected-items-checkbox"
                     key="bulk-select-checkbox"
@@ -148,8 +147,7 @@ export const ToolbarBulkSelector = <T,>({
                     }}
                     isChecked={getBulkSelectState()}
                   />
-                ]
-              }}
+                ]}
             />
           )}
         >

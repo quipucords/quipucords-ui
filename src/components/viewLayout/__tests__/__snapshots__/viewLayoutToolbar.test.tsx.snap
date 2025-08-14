@@ -1,21 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ViewToolbar should attempt to load and display a username: user 1`] = `
-<div
-  class="quipucords-toolbar__user-dropdown"
->
-  <span
-    class="pf-v5-c-avatar"
-  />
-  Dolor sit
-</div>
-`;
+exports[`ViewToolbar should attempt to load and display a username: user 1`] = `null`;
 
 exports[`ViewToolbar should render a basic component: basic 1`] = `
 <React.Fragment>
   <Toolbar
     id="toolbar"
-    isFullHeight={true}
     isStatic={true}
   >
     <ToolbarContent
@@ -25,19 +15,19 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
       <ForwardRef
         align={
           {
-            "default": "alignRight",
+            "default": "alignEnd",
           }
         }
-        spacer={
+        gap={
           {
-            "default": "spacerNone",
-            "md": "spacerMd",
+            "default": "gapNone",
+            "md": "gapMd",
           }
         }
-        variant="icon-button-group"
+        variant="action-group-plain"
       >
         <ForwardRef
-          variant="icon-button-group"
+          variant="action-group-plain"
           visibility={
             {
               "default": "hidden",

@@ -273,8 +273,7 @@ describe('SourceForm', () => {
     const sourceTypes = ['network', 'openshift', 'rhacs', 'ansible', 'satellite', 'vcenter'];
     for (const type of sourceTypes) {
       const component = await shallowComponent(<SourceForm sourceType={type} />);
-      const portFormGroup = component.querySelector('#source-port').closest('.pf-v5-c-form__group');
-      const portHelperText = portFormGroup.querySelector('.pf-v5-c-helper-text');
+      const portHelperText = component.querySelector('#source-port-helper-text');
       expect(portHelperText).toMatchSnapshot(`form, ${type}`);
     }
   });
