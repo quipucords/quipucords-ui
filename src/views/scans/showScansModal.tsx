@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Bullseye,
-  Button,
-  EmptyState,
-  EmptyStateHeader,
-  EmptyStateIcon,
-  Modal,
-  ModalVariant,
-  Spinner
-} from '@patternfly/react-core';
+import { Bullseye, Button, EmptyState, Spinner } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, type ThProps } from '@patternfly/react-table';
 import { helpers } from '../../helpers';
@@ -148,9 +140,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
         </React.Fragment>
       ) : (
         <Bullseye>
-          <EmptyState>
-            <EmptyStateHeader titleText="Loading scans" headingLevel="h2" icon={<EmptyStateIcon icon={Spinner} />} />
-          </EmptyState>
+          <EmptyState headingLevel="h2" icon={Spinner} titleText="Loading scans"></EmptyState>
         </Bullseye>
       )}
     </Modal>

@@ -22,7 +22,7 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
 
 exports[`AddSourceModal should have the correct title: title 1`] = `
 <span
-  class="pf-v5-c-modal-box__title-text"
+  class="pf-v6-c-modal-box__title-text"
 >
   Scan
 </span>

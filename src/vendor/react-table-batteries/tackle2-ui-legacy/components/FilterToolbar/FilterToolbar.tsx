@@ -8,7 +8,6 @@ import {
   ToolbarToggleGroup,
   ToolbarItem
 } from '@patternfly/react-core';
-import { SelectOptionProps } from '@patternfly/react-core/deprecated';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { FilterControl } from './FilterControl';
 
@@ -21,13 +20,15 @@ export enum FilterType {
 
 export type FilterValue = string[] | undefined | null;
 
-export interface OptionPropsWithKey extends SelectOptionProps {
+export interface OptionPropsWithKey {
   key: string;
+  value: string | number;
+  label?: string;
 }
 
 export interface BasicFilterCategory<
   TItem, // The actual API objects we're filtering
-  TFilterCategoryKey extends string // Unique identifiers for each filter category (inferred from key properties if possible)
+  TFilterCategoryKey extends string, // Unique identifiers for each filter category (inferred from key properties if possible)
 > {
   key: TFilterCategoryKey; // For use in the filterValues state object. Must be unique per category.
   title: string;
@@ -62,9 +63,9 @@ export type FilterCategory<TItem, TFilterCategoryKey extends string> =
 
 export type FilterValues<TFilterCategoryKey extends string> = Partial<Record<TFilterCategoryKey, FilterValue>>;
 
-export const getFilterLogicOperator = <TItem, TFilterCategoryKey extends string>(
+export const getFilterLogicOperator = <TItem, TFilterCategoryKey extends string,>(
   filterCategory?: FilterCategory<TItem, TFilterCategoryKey>,
-  defaultOperator: 'AND' | 'OR' = 'OR'
+  defaultOperator: 'AND' | 'OR' = 'OR',
 ) =>
   (filterCategory && (filterCategory as MultiselectFilterCategory<TItem, TFilterCategoryKey>).logicOperator) ||
   defaultOperator;
@@ -147,12 +148,7 @@ export const FilterToolbar = <TItem, TFilterCategoryKey extends string>({
 
   return (
     <React.Fragment>
-      <ToolbarToggleGroup
-        variant="filter-group"
-        toggleIcon={<FilterIcon />}
-        breakpoint="2xl"
-        spaceItems={showFiltersSideBySide ? { default: 'spaceItemsMd' } : undefined}
-      >
+      <ToolbarToggleGroup variant="filter-group" toggleIcon={<FilterIcon />} breakpoint="2xl">
         {!showFiltersSideBySide && (
           <ToolbarItem>
             <Dropdown

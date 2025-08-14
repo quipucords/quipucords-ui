@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AboutModal as PfAboutModal, TextContent, TextList, TextListItem } from '@patternfly/react-core';
+import { AboutModal as PfAboutModal, Content } from '@patternfly/react-core';
 import { detect } from 'detect-browser';
 import moment from 'moment/moment';
 import { helpers } from '../../helpers';
@@ -57,54 +57,54 @@ const AboutModal: React.FC<AboutModalProps> = ({
       onClose={() => onClose()}
       trademark={t('about.copyright', { year: currentYear })}
     >
-      <TextContent className={loadingClassName}>
-        <TextList component="dl">
+      <Content className={loadingClassName}>
+        <Content component="dl">
           {userName && (
             <React.Fragment>
-              <TextListItem component="dt">{t('about.username')}</TextListItem>
-              <TextListItem component="dd">{userName}</TextListItem>
+              <Content component="dt">{t('about.username')}</Content>
+              <Content component="dd">{userName}</Content>
             </React.Fragment>
           )}
           {browser && (
             <React.Fragment>
-              <TextListItem component="dt">{t('about.browser-version')}</TextListItem>
-              <TextListItem component="dd">{`${browser.name} ${browser.version}`}</TextListItem>
+              <Content component="dt">{t('about.browser-version')}</Content>
+              <Content component="dd">{`${browser.name} ${browser.version}`}</Content>
             </React.Fragment>
           )}
           {browser && (
             <React.Fragment>
-              <TextListItem component="dt">{t('about.browser-os')}</TextListItem>
-              <TextListItem component="dd">{browser.os || ''}</TextListItem>
+              <Content component="dt">{t('about.browser-os')}</Content>
+              <Content component="dd">{browser.os || ''}</Content>
             </React.Fragment>
           )}
           {uiVersion && (
             <React.Fragment>
-              <TextListItem component="dt">{t('about.ui-version')}</TextListItem>
-              <TextListItem component="dd">{uiVersion}</TextListItem>
+              <Content component="dt">{t('about.ui-version')}</Content>
+              <Content component="dd">{uiVersion}</Content>
             </React.Fragment>
           )}
           {stats?.server_version && (
             <React.Fragment>
-              <TextListItem className={loadingClassName} component="dt">
+              <Content className={loadingClassName} component="dt">
                 {t('about.server-version')}
-              </TextListItem>
-              <TextListItem className={loadingClassName} component="dd">
+              </Content>
+              <Content className={loadingClassName} component="dd">
                 {stats.server_version}
-              </TextListItem>
+              </Content>
             </React.Fragment>
           )}
           {stats?.platform.machine && (
             <React.Fragment>
-              <TextListItem className={loadingClassName} component="dt">
+              <Content className={loadingClassName} component="dt">
                 {t('about.server-cpu-arch')}
-              </TextListItem>
-              <TextListItem className={loadingClassName} component="dd">
+              </Content>
+              <Content className={loadingClassName} component="dd">
                 {stats.platform.machine}
-              </TextListItem>
+              </Content>
             </React.Fragment>
           )}
-        </TextList>
-      </TextContent>
+        </Content>
+      </Content>
     </PfAboutModal>
   );
 };
