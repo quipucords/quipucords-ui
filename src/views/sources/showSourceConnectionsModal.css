@@ -1,3 +1,4 @@
-.pf-v5-c-table {
-    --pf-v5-c-table__expandable-row-content--PaddingTop: 0;
+.pf-v6-c-table {
+    --pf-v6-c-table__expandable-row-content--PaddingBlockStart: 0;
+    --pf-v6-c-table__expandable-row-content--PaddingBlockEnd: 0;
 }

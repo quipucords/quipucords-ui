@@ -13,12 +13,11 @@ import {
   FormContextProvider,
   FormGroup,
   HelperText,
-  Modal,
-  ModalVariant,
   NumberInput,
   TextArea,
   TextInput
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { helpers } from '../../helpers';
 import { type Scan, type SourceType } from '../../types/types';
 
