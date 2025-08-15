@@ -13,6 +13,25 @@ describe('TypeaheadCheckboxes', () => {
     expect(component).toMatchSnapshot('basic');
   });
 
+  it('should clear selections and call onChange with [] when clear button is clicked', async () => {
+    const mockOnChange = jest.fn();
+    render(
+      <TypeaheadCheckboxes
+        options={[
+          { value: 'alpha', label: 'Alpha' },
+          { value: 'beta', label: 'Beta' }
+        ]}
+        selectedOptions={['alpha', 'beta']}
+        onChange={mockOnChange}
+      />
+    );
+
+    const clearButton = await screen.findByRole('button', { name: /clear input value/i });
+    await userEvent.click(clearButton);
+
+    expect(mockOnChange).toHaveBeenCalledWith([]);
+  });
+
   it('should filter options, select one, and close dropdown when maxSelections is 1', async () => {
     const onChange = jest.fn();
 

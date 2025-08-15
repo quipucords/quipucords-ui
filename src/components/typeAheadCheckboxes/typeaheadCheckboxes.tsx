@@ -67,22 +67,24 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
       }
     }
 
-    const selectedOptionsSorted = filteredOptions.filter(option => selectedOptions.includes(option.value));
+    const selectedOptionsFiltered = filteredOptions.filter(option => selectedOptions.includes(option.value));
     const unselectedOptions = filteredOptions
       .filter(option => !selectedOptions.includes(option.value))
       .sort((a, b) => a.label.localeCompare(b.label));
 
-    const newOptions = [...selectedOptionsSorted, ...unselectedOptions];
+    const newOptions = [...selectedOptionsFiltered, ...unselectedOptions];
 
     setSelectOptions(prev => {
-      const prevValues = prev.map(opt => opt.value).join(',');
-      const nextValues = newOptions.map(opt => opt.value).join(',');
-      return prevValues !== nextValues ? newOptions : prev;
+      // More efficient comparison - just check values in order
+      if (prev.length !== newOptions.length) {
+        return newOptions;
+      }
+      const hasChanged = prev.some((option, index) => option.value !== newOptions[index]?.value);
+      return hasChanged ? newOptions : prev;
     });
 
     setFocusedItemIndex(null);
     setActiveItem(null);
-    justSelectedRef.current = false;
   }, [inputValue, isOpen, options, selectedOptions]);
   const handleMenuArrowKeys = (key: string) => {
     let indexToFocus;
@@ -173,6 +175,8 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
 
     setInputValue('');
     textInputRef.current?.focus();
+
+    justSelectedRef.current = false;
   };
 
   useEffect(() => {
