@@ -83,7 +83,9 @@ export const ToolbarBulkSelector = <T,>({
   const dropdownItems = [
     <DropdownItem
       onClick={() => {
-        handleSelectAll(false);
+        // CUSTOM FIX: Call onSelectNone() directly instead of handleSelectAll(false)
+        // This fixes the "Select none" dropdown option not working properly
+        onSelectNone();
         setIsOpen(false);
       }}
       data-action="none"
