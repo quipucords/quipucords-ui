@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0](https://github.com/quipucords/quipucords-ui/compare/acf4633d1dab7cc3a280164c9a24ccc99b6d8d2f...71caf759b43fe294e54d75b27db4ffc35f108498) (2025-08-19)
+
+
+### Tests
+* **setup** add jest-dom matchers globally  ([8e79949](https://github.com/quipucords/quipucords-ui/commit/8e799494fc8a0dafd15f0ae9c5a4435ab9d0ab36))
+*  Revert "test  ds-767 lower coverage thresholds"  ([1b7e6d4](https://github.com/quipucords/quipucords-ui/commit/1b7e6d4e223390b3474d362b816321bfd09caaa4))
+* **useSourcesQuery** Improve unit test coverage  ([0821a4f](https://github.com/quipucords/quipucords-ui/commit/0821a4f9966620c1aa23c9657d449874de374386))
+*  Prevent strange stacktrace in test output  ([454b589](https://github.com/quipucords/quipucords-ui/commit/454b5894650c517e312d9017bad79a4e6cfd3e07))
+* **addCredentialModal** Improve unit test coverage  ([7a8589c](https://github.com/quipucords/quipucords-ui/commit/7a8589c709cb6bf14bd892b30d5528af4e6a1518))
+* **useCredentialsQuery** Improve unit test coverage  ([3fc7ecd](https://github.com/quipucords/quipucords-ui/commit/3fc7ecda6cf131a089aaa040630a61d1ec5b7864))
+* **viewLayout** Improve unit test coverage  ([9676b75](https://github.com/quipucords/quipucords-ui/commit/9676b75a0c6cb8ed5a04f73e3265ab91c57d53c3))
+* **viewLayout** Improve unit test coverage  ([2dedd65](https://github.com/quipucords/quipucords-ui/commit/2dedd652d62470ebd3cb4874fe176b9f1e143f02))
+* **refreshTimeButton** Improve unit test coverage  ([24962c4](https://github.com/quipucords/quipucords-ui/commit/24962c43023748bdac96edc65ad61f749cbe1bba))
+* **aboutModal** Improve unit test coverage  ([f97d18b](https://github.com/quipucords/quipucords-ui/commit/f97d18b5cb08b5e948c5c284830b792c526d05f4))
+* **contextIcon** Improve unit test coverage  ([bc2bca2](https://github.com/quipucords/quipucords-ui/commit/bc2bca2087ae4b25db12b8f759a818b82b2e94d2))
+
+### Features
+* **source** ds-433 add proxy support  ([ab050e3](https://github.com/quipucords/quipucords-ui/commit/ab050e31fa59e2dbd6c6227f5bfec09cffd3ed6f))
+*  Disable Delete action that would fail  ([de09069](https://github.com/quipucords/quipucords-ui/commit/de090698e8d2819d84bb5ac0d36d30c571bd3f40))
+
+### Code Refactoring
+*  remove update-konflux-pipeline target from Makefile  ([2bac3d2](https://github.com/quipucords/quipucords-ui/commit/2bac3d2af05897e877bdbeec09039cbe555e8702))
+* **source** switch bulk delete to use v2  ([41b41a2](https://github.com/quipucords/quipucords-ui/commit/41b41a20c7382bcd70cff88f9f54a5405e1560de))
+
+### Chores
+* **deps** replace react-table-batteries with its vendored version  ([f4635b3](https://github.com/quipucords/quipucords-ui/commit/f4635b3fb903dc640bae4e75f13e2104dc330a94))
+* **deps** vendor react-table-batteries  ([3ad194a](https://github.com/quipucords/quipucords-ui/commit/3ad194acf2d8f92552d37b691a278eff32e92647))
+*  remove the .noai file that marked this repo to refuse AI/LLM generated content  ([58ab650](https://github.com/quipucords/quipucords-ui/commit/58ab650816e41e33e86fd621190a201da18c9af5))
+
+### Builds
+*  make update-lockfiles  ([71caf75](https://github.com/quipucords/quipucords-ui/commit/71caf759b43fe294e54d75b27db4ffc35f108498))
+*  bump task-source-build-oci-ta to 0.3  ([e1f0321](https://github.com/quipucords/quipucords-ui/commit/e1f0321a19d9c7b5923dbf9d312117ab978d45b8))
+
+### Bug Fixes
+* **typeahead** prevent dropdown overlapping  ([eacb5d7](https://github.com/quipucords/quipucords-ui/commit/eacb5d723c917eeac5b3a0ca5bf86444d859552c))
+* **sourceConnection** reset state on close  ([e665b81](https://github.com/quipucords/quipucords-ui/commit/e665b819fcd2d45005dc12b6a3751a619065e22e))
+* **typeahead** close dropdown  on select  ([9e8b276](https://github.com/quipucords/quipucords-ui/commit/9e8b2769b84eef8f3eb75ca26a197c03abae7ded))
+* **useScanApi** increase page size on scan jobs API call  ([7b3fc45](https://github.com/quipucords/quipucords-ui/commit/7b3fc45be747e187aa02f9df1f88ff13ee2242af))
+* **deps** patch various vulnerabilities  ([6f50e1f](https://github.com/quipucords/quipucords-ui/commit/6f50e1fabf7a1cdf9215884193fe44e1119fa38a))
+* **en.json** strings files should not include function calls ([#644](https://github.com/quipucords/quipucords-ui/pull/644)) ([d22f7ad](https://github.com/quipucords/quipucords-ui/commit/d22f7ade64be4f6ee3163672d1f35636846ba095))
+
 ## [2.0.0](https://github.com/quipucords/quipucords-ui/compare/26384921cab9bf1cdc63d939eded0fd655b315d6...69d4afe444d39a54d1b029b4efdbb9c35f8a8402) (2025-07-14)
 
 
