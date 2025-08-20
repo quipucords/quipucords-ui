@@ -57,7 +57,7 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
           variant={variant}
           aria-label={ariaLabel}
           isDisabled={!dropdownItems || dropdownItems.length === 0}
-          data-ouia-component-id={menuToggleOuiaId}
+          ouiaId={menuToggleOuiaId}
         >
           {label}
         </MenuToggle>

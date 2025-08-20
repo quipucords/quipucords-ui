@@ -190,7 +190,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
       ref={toggleRef}
       isExpanded={isOpen}
       isFullWidth
-      data-ouia-component-id={menuToggleOuiaId}
+      ouiaId={menuToggleOuiaId}
     >
       <TextInputGroup isPlain>
         <TextInputGroupMain

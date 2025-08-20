@@ -49,7 +49,7 @@ const ActionMenu = <T,>({ item, actions, popperProps, size = 'default' }: Action
           size={size}
           onClick={() => setIsOpen(prev => !prev)}
           isExpanded={isOpen}
-          data-ouia-component-id="action_menu_toggle"
+          ouiaId="action_menu_toggle"
         >
           <EllipsisVIcon />
         </MenuToggle>
