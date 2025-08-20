@@ -107,8 +107,8 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
             toggle={[Function]}
           >
             <DropdownItem
-              data-ouia-component-id="logout"
               onClick={[Function]}
+              ouiaId="logout"
               value="logout"
             >
               Logout
@@ -136,8 +136,8 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
           toggle={[Function]}
         >
           <DropdownItem
-            data-ouia-component-id="logout"
             onClick={[Function]}
+            ouiaId="logout"
             value="logout"
           >
             Logout

@@ -130,7 +130,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                       variant="plain"
                       onClick={() => setHelpOpen(prev => !prev)}
                       isExpanded={helpOpen}
-                      data-ouia-component-id="help_menu_toggle"
+                      ouiaId="help_menu_toggle"
                     >
                       <QuestionCircleIcon />
                     </MenuToggle>
@@ -157,13 +157,13 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                     onClick={() => setKebabDropdownOpen(prev => !prev)}
                     isExpanded={kebabDropdownOpen}
                     style={{ width: 'auto' }}
-                    data-ouia-component-id="user_dropdown_button"
+                    ouiaId="user_dropdown_button"
                   >
                     <EllipsisVIcon />
                   </MenuToggle>
                 )}
               >
-                <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
+                <DropdownItem value="logout" onClick={onLogout} ouiaId="logout">
                   Logout
                 </DropdownItem>
               </Dropdown>
@@ -182,13 +182,13 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                   icon={<Avatar alt="User avatar" src={avatarImage} size="sm" />}
                   onClick={() => setUserDropdownOpen(prev => !prev)}
                   isExpanded={userDropdownOpen}
-                  data-ouia-component-id="user_dropdown_button"
+                  ouiaId="user_dropdown_button"
                 >
                   {userName}
                 </MenuToggle>
               )}
             >
-              <DropdownItem value="logout" onClick={onLogout} data-ouia-component-id="logout">
+              <DropdownItem value="logout" onClick={onLogout} ouiaId="logout">
                 Logout
               </DropdownItem>
             </Dropdown>
