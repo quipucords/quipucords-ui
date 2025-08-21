@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ToolbarFilter } from '@patternfly/react-core';
-import { Select, SelectOption, SelectOptionObject } from '@patternfly/react-core/deprecated';
+import { ToolbarFilter, Select, SelectList, SelectOption, MenuToggle } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
 import { FilterControlProps } from './FilterControl';
 import { SelectFilterCategory, OptionPropsWithKey } from './FilterToolbar';
@@ -22,10 +21,10 @@ export const SelectFilterControl = <TItem, TFilterCategoryKey extends string>({
 }: React.PropsWithChildren<SelectFilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = React.useState(false);
 
-  const getOptionKeyFromOptionValue = (optionValue: string | SelectOptionObject) =>
+  const getOptionKeyFromOptionValue = (optionValue: string | number) =>
     category.selectOptions.find(optionProps => optionProps.value === optionValue)?.key;
 
-  const getChipFromOptionValue = (optionValue: string | SelectOptionObject | undefined) =>
+  const getChipFromOptionValue = (optionValue: string | number | undefined) =>
     optionValue ? optionValue.toString() : '';
 
   const getOptionKeyFromChip = (chip: string) =>
@@ -34,10 +33,15 @@ export const SelectFilterControl = <TItem, TFilterCategoryKey extends string>({
   const getOptionValueFromOptionKey = (optionKey: string) =>
     category.selectOptions.find(optionProps => optionProps.key === optionKey)?.value;
 
-  const onFilterSelect = (value: string | SelectOptionObject) => {
-    const optionKey = getOptionKeyFromOptionValue(value);
-    setFilterValue(optionKey ? [optionKey] : null);
-    setIsFilterDropdownOpen(false);
+  const onFilterSelect = (
+    event: React.MouseEvent<Element, MouseEvent> | undefined,
+    value: string | number | undefined
+  ) => {
+    if (value !== undefined) {
+      const optionKey = getOptionKeyFromOptionValue(value);
+      setFilterValue(optionKey ? [optionKey] : null);
+      setIsFilterDropdownOpen(false);
+    }
   };
 
   const onFilterClear = (chip: string) => {
@@ -46,34 +50,53 @@ export const SelectFilterControl = <TItem, TFilterCategoryKey extends string>({
     setFilterValue(newValue.length > 0 ? newValue : null);
   };
 
-  // Select expects "selections" to be an array of the "value" props from the relevant optionProps
-  const selections = filterValue ? filterValue.map(getOptionValueFromOptionKey) : null;
+  const onToggleClick = () => {
+    setIsFilterDropdownOpen(!isFilterDropdownOpen);
+  };
 
-  const chips = selections ? selections.map(getChipFromOptionValue) : [];
+  // Select expects "selected" to be an array of the "value" props from the relevant optionProps
+  const selected = filterValue ? filterValue.map(getOptionValueFromOptionKey) : [];
+
+  const chips = selected.map(getChipFromOptionValue);
 
   const renderSelectOptions = (options: OptionPropsWithKey[]) =>
-    options.map(optionProps => <SelectOption {...optionProps} key={optionProps.key} />);
+    options.map(optionProps => (
+      <SelectOption key={optionProps.key} value={optionProps.value} isSelected={selected.includes(optionProps.value)}>
+        {optionProps.label || optionProps.value.toString()}
+      </SelectOption>
+    ));
+
+  const toggle = (toggleRef: React.RefObject<HTMLDivElement | HTMLButtonElement>) => (
+    <MenuToggle
+      ref={toggleRef}
+      onClick={onToggleClick}
+      aria-label={category.title}
+      aria-expanded={isFilterDropdownOpen}
+      aria-haspopup="listbox"
+      isDisabled={isDisabled || category.selectOptions.length === 0}
+      isExpanded={isFilterDropdownOpen}
+    >
+      {selected.length > 0 && selected[0] ? selected[0].toString() : 'Any'}
+    </MenuToggle>
+  );
 
   return (
     <ToolbarFilter
       id={`${id}-filter-control-${category.key}`}
-      chips={chips}
-      deleteChip={(_, chip) => onFilterClear(chip as string)}
+      labels={chips}
+      deleteLabel={(_, chip) => onFilterClear(chip as string)}
       categoryName={category.title}
       showToolbarItem={showToolbarItem}
     >
       <Select
         className={css(isScrollable && 'isScrollable')}
-        aria-label={category.title}
-        toggleId={`${id}-${category.key}-filter-value-select`}
-        onToggle={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
-        selections={selections || []}
-        onSelect={(_, value) => onFilterSelect(value)}
         isOpen={isFilterDropdownOpen}
-        placeholderText="Any"
-        isDisabled={isDisabled || category.selectOptions.length === 0}
+        selected={selected}
+        onSelect={onFilterSelect}
+        onOpenChange={setIsFilterDropdownOpen}
+        toggle={toggle}
       >
-        {renderSelectOptions(category.selectOptions)}
+        <SelectList>{renderSelectOptions(category.selectOptions)}</SelectList>
       </Select>
     </ToolbarFilter>
   );

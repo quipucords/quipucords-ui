@@ -29,9 +29,10 @@ interface ActionMenuProps<T = unknown> {
   item: T;
   actions: Action<T>[];
   popperProps?: Partial<PopperProps>;
+  size?: 'default' | 'sm';
 }
 
-const ActionMenu = <T,>({ item, actions, popperProps }: ActionMenuProps<T>) => {
+const ActionMenu = <T,>({ item, actions, popperProps, size = 'default' }: ActionMenuProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -45,9 +46,10 @@ const ActionMenu = <T,>({ item, actions, popperProps }: ActionMenuProps<T>) => {
           ref={toggleRef}
           aria-label="Action Menu Toggle"
           variant="plain"
+          size={size}
           onClick={() => setIsOpen(prev => !prev)}
           isExpanded={isOpen}
-          data-ouia-component-id="action_menu_toggle"
+          ouiaId="action_menu_toggle"
         >
           <EllipsisVIcon />
         </MenuToggle>

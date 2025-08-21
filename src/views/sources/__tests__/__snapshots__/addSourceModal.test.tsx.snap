@@ -17,7 +17,7 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
 
 exports[`AddSourceModal-network should have the correct title: title 1`] = `
 <span
-  class="pf-v5-c-modal-box__title-text"
+  class="pf-v6-c-modal-box__title-text"
 >
   Add Source: network
 </span>
@@ -132,7 +132,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 22
       </HelperText>
     </FormGroup>
@@ -243,7 +245,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         443
       </HelperText>
@@ -411,7 +415,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         443
       </HelperText>
@@ -579,7 +585,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         6443
       </HelperText>
@@ -747,7 +755,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         443
       </HelperText>
@@ -915,7 +925,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         443
       </HelperText>
@@ -1083,7 +1095,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         type="text"
         value=""
       />
-      <HelperText>
+      <HelperText
+        id="source-port-helper-text"
+      >
         Default port is 
         443
       </HelperText>
@@ -1182,7 +1196,8 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
 
 exports[`SourceForm should render specifics to different source types: form, ansible 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 
   443
@@ -1191,7 +1206,8 @@ exports[`SourceForm should render specifics to different source types: form, ans
 
 exports[`SourceForm should render specifics to different source types: form, network 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 22
 </div>
@@ -1199,7 +1215,8 @@ exports[`SourceForm should render specifics to different source types: form, net
 
 exports[`SourceForm should render specifics to different source types: form, openshift 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 
   6443
@@ -1208,7 +1225,8 @@ exports[`SourceForm should render specifics to different source types: form, ope
 
 exports[`SourceForm should render specifics to different source types: form, rhacs 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 
   443
@@ -1217,7 +1235,8 @@ exports[`SourceForm should render specifics to different source types: form, rha
 
 exports[`SourceForm should render specifics to different source types: form, satellite 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 
   443
@@ -1226,7 +1245,8 @@ exports[`SourceForm should render specifics to different source types: form, sat
 
 exports[`SourceForm should render specifics to different source types: form, vcenter 1`] = `
 <div
-  class="pf-v5-c-helper-text"
+  class="pf-v6-c-helper-text"
+  id="source-port-helper-text"
 >
   Default port is 
   443

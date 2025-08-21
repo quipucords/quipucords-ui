@@ -10,7 +10,7 @@ exports[`ShowScansModal should call onDownload with a report id when clicked: on
 
 exports[`ShowScansModal should have the correct title: title 1`] = `
 <span
-  class="pf-v5-c-modal-box__title-text"
+  class="pf-v6-c-modal-box__title-text"
 >
   t([
   "view.label",
@@ -48,17 +48,11 @@ exports[`ShowScansModal should render a basic component: basic 1`] = `
   variant="medium"
 >
   <Bullseye>
-    <EmptyState>
-      <EmptyStateHeader
-        headingLevel="h2"
-        icon={
-          <EmptyStateIcon
-            icon={[Function]}
-          />
-        }
-        titleText="Loading scans"
-      />
-    </EmptyState>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="Loading scans"
+    />
   </Bullseye>
 </Modal>
 `;

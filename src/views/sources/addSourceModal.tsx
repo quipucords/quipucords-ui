@@ -15,11 +15,10 @@ import {
   FormGroup,
   HelperText,
   HelperTextItem,
-  Modal,
-  ModalVariant,
   TextArea,
   TextInput
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
 import { helpers } from '../../helpers';
@@ -263,7 +262,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
-            <HelperText>Default port is 22</HelperText>
+            <HelperText id="source-port-helper-text">Default port is 22</HelperText>
           </FormGroup>
         </React.Fragment>
       ) : (
@@ -291,7 +290,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
-            <HelperText>Default port is {isOpenshift ? '6443' : '443'}</HelperText>
+            <HelperText id="source-port-helper-text">Default port is {isOpenshift ? '6443' : '443'}</HelperText>
           </FormGroup>
           <FormGroup label="Proxy URL" fieldId="proxy_url">
             <TextInput

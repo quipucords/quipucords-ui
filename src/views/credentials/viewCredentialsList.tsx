@@ -19,17 +19,14 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
   List,
   ListItem,
-  Modal,
-  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
@@ -246,7 +243,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   );
 
   return (
-    <PageSection variant="light">
+    <PageSection hasBodyWrapper={false}>
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
@@ -265,12 +262,11 @@ const CredentialsListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'credentials' })} />}
           noDataEmptyState={
-            <EmptyState>
-              <EmptyStateHeader
-                headingLevel="h4"
-                titleText={t('view.empty-state', { context: 'credentials_title' })}
-                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
-              />
+            <EmptyState
+              headingLevel="h4"
+              icon={PlusCircleIcon}
+              titleText={t('view.empty-state', { context: 'credentials_title' })}
+            >
               <EmptyStateBody>{t('view.empty-state', { context: 'credentials_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
@@ -285,9 +281,10 @@ const CredentialsListView: React.FunctionComponent = () => {
                 <Td columnKey="name">{credential.name}</Td>
                 <Td columnKey="type">{getTranslatedCredentialTypeLabel(credential.cred_type)}</Td>
                 <Td columnKey="auth_type">{helpers.getAuthType(credential)}</Td>
-                <Td columnKey="sources">
+                <Td hasAction columnKey="sources">
                   <Button
                     variant={ButtonVariant.link}
+                    size="sm"
                     onClick={() => {
                       if (credential.sources && credential.sources.length > 0) {
                         setSourcesSelected(credential.sources);
@@ -304,6 +301,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                   <ActionMenu<CredentialType>
                     popperProps={{ position: 'right' }}
                     item={credential}
+                    size="sm"
                     actions={[
                       {
                         label: t('table.label', { context: 'edit' }),

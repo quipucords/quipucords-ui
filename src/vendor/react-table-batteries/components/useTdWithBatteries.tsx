@@ -32,7 +32,7 @@ export const useTdWithBatteries = <
         ) => (
           <Td
             {...propHelpers.getTdProps({ columnKey })}
-            innerRef={ref as React.MutableRefObject<HTMLTableCellElement>}
+            ref={ref as React.MutableRefObject<HTMLTableCellElement>}
             {...props}
           />
         )

@@ -20,18 +20,15 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
   List,
   ListItem,
-  Modal,
-  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   Tooltip,
   getUniqueId
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
@@ -66,7 +63,10 @@ const ScansListView: React.FunctionComponent = () => {
   const [scanSelected, setScanSelected] = React.useState<Scan>();
   const [scanJobs, setScanJobs] = React.useState<ScanJobType[]>();
   const [pendingDeleteScan, setPendingDeleteScan] = React.useState<Scan>();
-  const [aggregateReport, setAggregateReport] = React.useState<{ id: number; report: ReportsAggregateResponse }>();
+  const [aggregateReport, setAggregateReport] = React.useState<{
+    id: number;
+    report: ReportsAggregateResponse;
+  }>();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteScans } = useDeleteScanApi(addAlert);
@@ -103,13 +103,19 @@ const ScansListView: React.FunctionComponent = () => {
           key: API_QUERY_TYPES.SEARCH_NAME,
           title: t('toolbar.label', { context: 'option_name' }),
           type: FilterType.search,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_by_name' })
+          placeholderText: t('toolbar.label', {
+            context: 'placeholder_filter_search_by_name'
+          })
         },
         {
           key: API_QUERY_TYPES.SEARCH_SOURCES_NAME,
-          title: t('toolbar.label', { context: 'option_search_sources_by_name' }),
+          title: t('toolbar.label', {
+            context: 'option_search_sources_by_name'
+          }),
           type: FilterType.search,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_search_sources_by_name' })
+          placeholderText: t('toolbar.label', {
+            context: 'placeholder_filter_search_sources_by_name'
+          })
         }
       ]
     },
@@ -122,7 +128,10 @@ const ScansListView: React.FunctionComponent = () => {
     selection: { isEnabled: true }
   });
 
-  const { isError, isLoading, data } = useScansQuery({ tableState, setRefreshTime });
+  const { isError, isLoading, data } = useScansQuery({
+    tableState,
+    setRefreshTime
+  });
 
   const tableBatteries = useTablePropHelpers({
     ...tableState,
@@ -171,6 +180,7 @@ const ScansListView: React.FunctionComponent = () => {
   const renderConnection = (scan: Scan) => (
     <Button
       variant={ButtonVariant.link}
+      size="sm"
       isDisabled={!scan.most_recent}
       onClick={() => {
         setScanSelected(scan);
@@ -194,7 +204,7 @@ const ScansListView: React.FunctionComponent = () => {
   );
 
   return (
-    <PageSection variant="light">
+    <PageSection hasBodyWrapper={false}>
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
@@ -211,12 +221,11 @@ const ScansListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'scans' })} />}
           noDataEmptyState={
-            <EmptyState>
-              <EmptyStateHeader
-                headingLevel="h4"
-                titleText={t('view.empty-state', { context: 'scans_title' })}
-                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
-              />
+            <EmptyState
+              headingLevel="h4"
+              icon={PlusCircleIcon}
+              titleText={t('view.empty-state', { context: 'scans_title' })}
+            >
               <EmptyStateBody>{t('view.empty-state', { context: 'scans_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>
@@ -233,10 +242,13 @@ const ScansListView: React.FunctionComponent = () => {
             {currentPageItems?.map((scan: Scan, rowIndex) => (
               <Tr key={scan.id} item={scan} rowIndex={rowIndex}>
                 <Td columnKey="name">{scan.name}</Td>
-                <Td columnKey="most_recent">{renderConnection(scan)}</Td>
-                <Td columnKey="sources">
+                <Td hasAction columnKey="most_recent">
+                  {renderConnection(scan)}
+                </Td>
+                <Td hasAction columnKey="sources">
                   <Button
                     variant={ButtonVariant.link}
+                    size="sm"
                     onClick={() => {
                       setScanSelectedForSources(scan);
                     }}
@@ -249,6 +261,7 @@ const ScansListView: React.FunctionComponent = () => {
                     <ActionMenu<Scan>
                       popperProps={{ position: 'right' }}
                       item={scan}
+                      size="sm"
                       actions={[
                         {
                           label: t('table.label', { context: 'summary' }),
@@ -275,7 +288,9 @@ const ScansListView: React.FunctionComponent = () => {
                           label: t('table.label', { context: 'rescan' }),
                           onClick: () => {
                             runScans(scan, true).finally(() => {
-                              queryClient.invalidateQueries({ queryKey: [API_SCANS_LIST_QUERY] });
+                              queryClient.invalidateQueries({
+                                queryKey: [API_SCANS_LIST_QUERY]
+                              });
                               setScanSelected(undefined);
                             });
                           },

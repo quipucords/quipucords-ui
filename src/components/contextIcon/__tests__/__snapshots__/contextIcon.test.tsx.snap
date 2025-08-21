@@ -17,15 +17,19 @@ exports[`ContextIcon Should render icon download 1`] = `<DownloadIcon />`;
 exports[`ContextIcon Should render icon error 1`] = `<UnknownIcon />`;
 
 exports[`ContextIcon Should render icon failed 1`] = `
-<ExclamationCircleIcon
-  color="#c9190b"
-/>
+<Icon
+  status="danger"
+>
+  <ExclamationCircleIcon />
+</Icon>
 `;
 
 exports[`ContextIcon Should render icon idCard 1`] = `
-<IdCardIcon
-  color="#151515"
-/>
+<Icon
+  --pf-v6-c-icon__content--Color="--pf-t--global--text--color--regular"
+>
+  <IdCardIcon />
+</Icon>
 `;
 
 exports[`ContextIcon Should render icon info 1`] = `<InfoCircleIcon />`;
@@ -41,9 +45,12 @@ exports[`ContextIcon Should render icon paused 1`] = `<UnknownIcon />`;
 exports[`ContextIcon Should render icon pencil 1`] = `<PencilAltIcon />`;
 
 exports[`ContextIcon Should render icon pending 1`] = `
-<Spinner
+<Icon
+  isInline={true}
   size="sm"
-/>
+>
+  <Spinner />
+</Icon>
 `;
 
 exports[`ContextIcon Should render icon running 1`] = `<UnknownIcon />`;
@@ -55,9 +62,11 @@ exports[`ContextIcon Should render icon scans 1`] = `<ClipboardCheckIcon />`;
 exports[`ContextIcon Should render icon sources 1`] = `<CrosshairsIcon />`;
 
 exports[`ContextIcon Should render icon success 1`] = `
-<CheckCircleIcon
-  color="#3e8635"
-/>
+<Icon
+  status="success"
+>
+  <CheckCircleIcon />
+</Icon>
 `;
 
 exports[`ContextIcon Should render icon trash 1`] = `<TrashIcon />`;
@@ -65,9 +74,11 @@ exports[`ContextIcon Should render icon trash 1`] = `<TrashIcon />`;
 exports[`ContextIcon Should render icon unknown 1`] = `<UnknownIcon />`;
 
 exports[`ContextIcon Should render icon unreachable 1`] = `
-<DisconnectedIcon
-  color="#c9190b"
-/>
+<Icon
+  status="danger"
+>
+  <DisconnectedIcon />
+</Icon>
 `;
 
 exports[`ContextIcon Should render icon user 1`] = `<UserIcon />`;
@@ -75,7 +86,9 @@ exports[`ContextIcon Should render icon user 1`] = `<UserIcon />`;
 exports[`ContextIcon Should render icon vcenter 1`] = `<PficonVcenterIcon />`;
 
 exports[`ContextIcon Should render icon warning 1`] = `
-<ExclamationTriangleIcon
-  color="#f0ab00"
-/>
+<Icon
+  status="warning"
+>
+  <ExclamationTriangleIcon />
+</Icon>
 `;

@@ -5,7 +5,7 @@
  * @module contextIcon
  */
 import * as React from 'react';
-import { Spinner } from '@patternfly/react-core';
+import { Icon, Spinner } from '@patternfly/react-core';
 import {
   AnsibleTowerIcon,
   CheckCircleIcon,
@@ -28,35 +28,6 @@ import {
   UnknownIcon,
   UserIcon
 } from '@patternfly/react-icons';
-import {
-  global_Color_dark_100 as gray,
-  global_success_color_100 as green,
-  global_warning_color_100 as yellow,
-  global_danger_color_100 as red
-} from '@patternfly/react-tokens';
-
-/**
- * Context icon colors, for consistency
- *
- * @type {{ red: object, gray: object, green: object, yellow: object }}
- */
-type colorToken = {
-  name: string;
-  value: string;
-  var: string;
-};
-
-const ContextIconColors: {
-  gray: colorToken;
-  green: colorToken;
-  yellow: colorToken;
-  red: colorToken;
-} = {
-  gray,
-  green,
-  yellow,
-  red
-};
 
 const ContextIconVariant: { [key: string]: string } = {
   completed: 'success',
@@ -99,9 +70,17 @@ const ContextIcon: React.FC<{
     case ContextIconVariant.download:
       return <DownloadIcon {...props} />;
     case ContextIconVariant.failed:
-      return <ExclamationCircleIcon {...{ ...{ color: red.value }, ...props }} />;
+      return (
+        <Icon status="danger">
+          <ExclamationCircleIcon {...props} />
+        </Icon>
+      );
     case ContextIconVariant.idCard:
-      return <IdCardIcon {...{ ...{ color: gray.value }, ...props }} />;
+      return (
+        <Icon {...{ '--pf-v6-c-icon__content--Color': '--pf-t--global--text--color--regular' }}>
+          <IdCardIcon {...props} />
+        </Icon>
+      );
     case ContextIconVariant.info:
       return <InfoCircleIcon {...props} />;
     case ContextIconVariant.network:
@@ -113,11 +92,19 @@ const ContextIcon: React.FC<{
     case ContextIconVariant.acs:
       return <CloudSecurityIcon {...props} />;
     case ContextIconVariant.warning:
-      return <ExclamationTriangleIcon {...{ ...{ color: yellow.value }, ...props }} />;
+      return (
+        <Icon status="warning">
+          <ExclamationTriangleIcon {...props} />
+        </Icon>
+      );
     case ContextIconVariant.pencil:
       return <PencilAltIcon {...props} />;
     case ContextIconVariant.pending:
-      return <Spinner size={size || 'sm'} {...props} />;
+      return (
+        <Icon size={size || 'sm'} isInline>
+          <Spinner />
+        </Icon>
+      );
     case ContextIconVariant.satellite:
       return <PficonSatelliteIcon {...props} />;
     case ContextIconVariant.scans:
@@ -125,11 +112,19 @@ const ContextIcon: React.FC<{
     case ContextIconVariant.sources:
       return <CrosshairsIcon {...props} />;
     case ContextIconVariant.success:
-      return <CheckCircleIcon {...{ ...{ color: green.value }, ...props }} />;
+      return (
+        <Icon status="success">
+          <CheckCircleIcon {...props} />
+        </Icon>
+      );
     case ContextIconVariant.trash:
       return <TrashIcon {...props} />;
     case ContextIconVariant.unreachable:
-      return <DisconnectedIcon {...{ ...{ color: red.value }, ...props }} />;
+      return (
+        <Icon status="danger">
+          <DisconnectedIcon {...props} />
+        </Icon>
+      );
     case ContextIconVariant.user:
       return <UserIcon {...props} />;
     case ContextIconVariant.vcenter:
@@ -140,4 +135,4 @@ const ContextIcon: React.FC<{
   }
 };
 
-export { ContextIcon as default, ContextIcon, ContextIconColors, ContextIconVariant };
+export { ContextIcon as default, ContextIcon, ContextIconVariant };

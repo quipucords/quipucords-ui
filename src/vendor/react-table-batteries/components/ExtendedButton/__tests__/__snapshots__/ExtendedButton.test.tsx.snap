@@ -3,14 +3,17 @@
 exports[`Matches expected default snapshot 1`] = `
 <DocumentFragment>
   <button
-    aria-disabled="false"
-    class="pf-v5-c-button pf-m-primary"
+    class="pf-v6-c-button pf-m-primary"
     data-ouia-component-id="ouiaId"
-    data-ouia-component-type="PF5/Button"
+    data-ouia-component-type="PF6/Button"
     data-ouia-safe="true"
     type="button"
   >
-    Test
+    <span
+      class="pf-v6-c-button__text"
+    >
+      Test
+    </span>
   </button>
 </DocumentFragment>
 `;

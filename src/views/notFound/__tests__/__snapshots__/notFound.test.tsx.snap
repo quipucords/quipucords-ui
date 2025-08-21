@@ -1,21 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotFound should render a basic component: basic 1`] = `
-<PageSection>
+<PageSection
+  hasBodyWrapper={false}
+>
   <EmptyState
-    variant="full"
-  >
-    <EmptyStateHeader
-      headingLevel="h1"
-      icon={
-        <EmptyStateIcon
-          icon={[Function]}
-        />
-      }
-      titleText="t([
+    headingLevel="h1"
+    icon={[Function]}
+    titleText="t([
   "view.empty-state_title_not-found"
 ])"
-    />
+    variant="full"
+  >
     <EmptyStateBody>
       t([
   "view.empty-state_description_not-found"

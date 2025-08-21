@@ -2,7 +2,7 @@
 
 exports[`ShowConnectionsModal should have the correct title: title 1`] = `
 <span
-  class="pf-v5-c-modal-box__title-text"
+  class="pf-v6-c-modal-box__title-text"
 >
   Lorem ipsum
 </span>
@@ -38,6 +38,8 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
 >
   <Table
     aria-label="Connections lists"
+    hasAnimations={true}
+    isExpandable={true}
   >
     <Tbody
       isExpanded={false}

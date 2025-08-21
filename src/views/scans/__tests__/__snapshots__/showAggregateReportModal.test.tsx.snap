@@ -3,7 +3,7 @@
 exports[`ShowAggregateReportModal should have a consistent content: content 1`] = `
 [
   <span
-    class="pf-v5-c-description-list__text"
+    class="pf-v6-c-description-list__text"
   >
     t([
   "modal.label",
@@ -13,7 +13,7 @@ exports[`ShowAggregateReportModal should have a consistent content: content 1`] 
 ])
   </span>,
   <span
-    class="pf-v5-c-description-list__text"
+    class="pf-v6-c-description-list__text"
   >
     t([
   "modal.label",
@@ -27,7 +27,7 @@ exports[`ShowAggregateReportModal should have a consistent content: content 1`] 
 
 exports[`ShowAggregateReportModal should have a consistent title: title 1`] = `
 <span
-  class="pf-v5-c-modal-box__title-text"
+  class="pf-v6-c-modal-box__title-text"
 >
   t([
   "modal.title",
@@ -63,7 +63,7 @@ exports[`ShowAggregateReportModal should render a basic component: basic 1`] = `
   variant="small"
 >
   <Title
-    className="pf-v5-u-mb-lg"
+    className="pf-v6-u-mb-lg"
     headingLevel="h2"
     size="md"
   >

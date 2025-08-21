@@ -5,37 +5,43 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
   defaultManagedSidebarIsOpen={true}
   getBreakpoint={[Function]}
   getVerticalBreakpoint={[Function]}
-  header={
+  isBreadcrumbWidthLimited={false}
+  isManagedSidebar={false}
+  isNotificationDrawerExpanded={false}
+  mainComponent="main"
+  mainContainerId="primary-app-container"
+  mainTabIndex={-1}
+  masthead={
     <Masthead>
-      <MastheadToggle>
-        <Button
-          aria-label="Global navigation"
-          onClick={[Function]}
-          ouiaId="global-navigation"
-          variant="plain"
-        >
-          <BarsIcon />
-        </Button>
-      </MastheadToggle>
       <MastheadMain>
+        <MastheadToggle>
+          <PageToggleButton
+            aria-label="Global navigation"
+            isHamburgerButton={true}
+            onSidebarToggle={[Function]}
+            ouiaId="global-navigation"
+          />
+        </MastheadToggle>
         <MastheadBrand>
-          <Brand
-            alt="t([
+          <MastheadLogo>
+            <Brand
+              alt="t([
   "view.alt-logo",
   {
     "name": "Quipucords"
   }
 ])"
-            heights={
-              {
-                "default": "36px",
+              heights={
+                {
+                  "default": "36px",
+                }
               }
-            }
-          >
-            <source
-              srcSet="title.svg"
-            />
-          </Brand>
+            >
+              <source
+                srcSet="title.svg"
+              />
+            </Brand>
+          </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
@@ -43,28 +49,17 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
       </MastheadContent>
     </Masthead>
   }
-  isBreadcrumbWidthLimited={false}
-  isManagedSidebar={false}
-  isNotificationDrawerExpanded={false}
-  mainComponent="main"
-  mainContainerId="primary-app-container"
-  mainTabIndex={-1}
   onNotificationDrawerExpand={[Function]}
   sidebar={
-    <PageSidebar
-      theme="dark"
-    >
+    <PageSidebar>
       <PageSidebarBody>
         <Nav
           id="nav-primary-simple"
           onSelect={[Function]}
           onToggle={[Function]}
           ouiaSafe={true}
-          theme="dark"
         >
           <NavList
-            ariaLeftScroll="Scroll left"
-            ariaRightScroll="Scroll right"
             backScrollAriaLabel="Scroll back"
             forwardScrollAriaLabel="Scroll forward"
             id="nav-list-simple"

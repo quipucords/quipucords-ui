@@ -19,17 +19,14 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
   List,
   ListItem,
-  Modal,
-  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
@@ -304,7 +301,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const renderConnection = (source: SourceType) => {
     if (!sourceHasConnection(source)) {
       return (
-        <Button variant={ButtonVariant.link} isDisabled={true}>
+        <Button variant={ButtonVariant.link} size="sm" isDisabled={true}>
           <ContextIcon symbol="off" /> {t('table.label_status_not_started', { context: 'sources' })}
         </Button>
       );
@@ -319,6 +316,7 @@ const SourcesListView: React.FunctionComponent = () => {
     return (
       <Button
         variant={ButtonVariant.link}
+        size="sm"
         onClick={() => {
           showConnections(source)
             .then(success => setConnectionsData(success))
@@ -337,7 +335,7 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   return (
-    <PageSection variant="light">
+    <PageSection hasBodyWrapper={false}>
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
@@ -356,12 +354,11 @@ const SourcesListView: React.FunctionComponent = () => {
           isNoData={currentPageItems.length === 0}
           errorEmptyState={<ErrorMessage title={t('view.error_title', { context: 'sources' })} />}
           noDataEmptyState={
-            <EmptyState>
-              <EmptyStateHeader
-                headingLevel="h4"
-                titleText={t('view.empty-state', { context: 'sources_title' })}
-                icon={<EmptyStateIcon icon={PlusCircleIcon} />}
-              />
+            <EmptyState
+              headingLevel="h4"
+              icon={PlusCircleIcon}
+              titleText={t('view.empty-state', { context: 'sources_title' })}
+            >
               <EmptyStateBody>{t('view.empty-state', { context: 'sources_description' })}</EmptyStateBody>
               <EmptyStateFooter>
                 <EmptyStateActions>{renderAddSourceButton()}</EmptyStateActions>
@@ -374,11 +371,14 @@ const SourcesListView: React.FunctionComponent = () => {
             {currentPageItems?.map((source: SourceType, rowIndex) => (
               <Tr key={source.id} item={source} rowIndex={rowIndex}>
                 <Td columnKey="name">{source.name}</Td>
-                <Td columnKey="connection">{renderConnection(source)}</Td>
+                <Td hasAction columnKey="connection">
+                  {renderConnection(source)}
+                </Td>
                 <Td columnKey="type">{getTranslatedSourceTypeLabel(source.source_type)}</Td>
-                <Td columnKey="credentials">
+                <Td hasAction columnKey="credentials">
                   <Button
                     variant={ButtonVariant.link}
+                    size="sm"
                     onClick={() => {
                       setCredentialsSelected(source.credentials);
                     }}
@@ -386,10 +386,11 @@ const SourcesListView: React.FunctionComponent = () => {
                     {source.credentials.length}
                   </Button>
                 </Td>
-                <Td isActionCell columnKey="scan">
+                <Td hasAction columnKey="scan">
                   <Button
                     isDisabled={source.connection?.status === 'pending'}
                     variant={ButtonVariant.link}
+                    size="sm"
                     onClick={() => onScanSource(source)}
                     ouiaId="scan_button"
                   >
@@ -400,6 +401,7 @@ const SourcesListView: React.FunctionComponent = () => {
                   <ActionMenu<SourceType>
                     popperProps={{ position: 'right' }}
                     item={source}
+                    size="sm"
                     actions={[
                       { label: t('table.label', { context: 'edit' }), onClick: onEditSource, ouiaId: 'edit-source' },
                       {

@@ -29,32 +29,39 @@ test('Passes inherited props to the returned component', () => {
 test('Renders as a primary button initially', () => {
   render(<ExtendedButton>Test</ExtendedButton>);
 
-  expect(screen.getByRole('button')).toHaveClass('pf-v5-c-button pf-m-primary', { exact: true });
-});
-
-test('Renders as a secondary button once it has been clicked once', () => {
-  render(<ExtendedButton>Test</ExtendedButton>);
-  const button = screen.getByRole('button');
-  userEvent.click(screen.getByRole('button'));
-
-  waitFor(() => {
-    expect(button).toHaveClass('pf-v5-c-button pf-m-secondary', { exact: true });
+  expect(screen.getByRole('button')).toHaveClass('pf-v6-c-button pf-m-primary', {
+    exact: true
   });
 });
 
-test('Renders as a tertiary button once it has been clicked twice', () => {
+test('Renders as a secondary button once it has been clicked once', async () => {
   render(<ExtendedButton>Test</ExtendedButton>);
 
   const button = screen.getByRole('button');
   userEvent.click(button);
-  userEvent.click(button);
 
-  waitFor(() => {
-    expect(button).toHaveClass('pf-v5-c-button pf-m-tertiary', { exact: true });
+  await waitFor(() => {
+    expect(button).toHaveClass('pf-v6-c-button pf-m-secondary', {
+      exact: true
+    });
   });
 });
 
-test('Loops back to rendering a primary button again after being clicked three times', () => {
+test('Renders as a tertiary button once it has been clicked twice', async () => {
+  render(<ExtendedButton>Test</ExtendedButton>);
+
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  userEvent.click(button);
+
+  await waitFor(() => {
+    expect(button).toHaveClass('pf-v6-c-button pf-m-tertiary', {
+      exact: true
+    });
+  });
+});
+
+test('Loops back to rendering a primary button again after being clicked three times', async () => {
   render(<ExtendedButton>Test</ExtendedButton>);
 
   const button = screen.getByRole('button');
@@ -62,7 +69,11 @@ test('Loops back to rendering a primary button again after being clicked three t
   userEvent.click(button);
   userEvent.click(button);
 
-  expect(button).toHaveClass('pf-v5-c-button pf-m-primary', { exact: true });
+  await waitFor(() => {
+    expect(button).toHaveClass('pf-v6-c-button pf-m-primary', {
+      exact: true
+    });
+  });
 });
 
 test('Matches expected default snapshot', () => {
