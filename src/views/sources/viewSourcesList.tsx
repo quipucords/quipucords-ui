@@ -174,32 +174,26 @@ const SourcesListView: React.FunctionComponent = () => {
           selectOptions: [
             {
               key: API_DATA_SOURCE_TYPES.ANSIBLE,
-              label: API_DATA_SOURCE_TYPES.ANSIBLE,
               value: t('dataSource.ansible')
             },
             {
               key: API_DATA_SOURCE_TYPES.NETWORK,
-              label: API_DATA_SOURCE_TYPES.NETWORK,
               value: t('dataSource.network')
             },
             {
               key: API_DATA_SOURCE_TYPES.OPENSHIFT,
-              label: API_DATA_SOURCE_TYPES.OPENSHIFT,
               value: t('dataSource.openshift')
             },
             {
               key: API_DATA_SOURCE_TYPES.RHACS,
-              label: API_DATA_SOURCE_TYPES.RHACS,
               value: t('dataSource.rhacs')
             },
             {
               key: API_DATA_SOURCE_TYPES.SATELLITE,
-              label: API_DATA_SOURCE_TYPES.SATELLITE,
               value: t('dataSource.satellite')
             },
             {
               key: API_DATA_SOURCE_TYPES.VCENTER,
-              label: API_DATA_SOURCE_TYPES.VCENTER,
               value: t('dataSource.vcenter')
             }
           ]
