@@ -80,15 +80,19 @@ const useLogoutApi = () => {
     []
   );
 
-  const callbackSuccess = useCallback(() => {
+  const callbackSuccess = useCallback((localStorageTheme?: string | null) => {
     cookies.remove(`${process.env.REACT_APP_AUTH_COOKIE}`);
     document.location.replace('./');
+    if (localStorageTheme) {
+      localStorage.setItem(`${process.env.REACT_APP_THEME_KEY}`, localStorageTheme);
+    }
     return;
   }, []);
 
   const callbackError = useCallback((error: AxiosError<ApiLoginErrorType>) => Promise.reject(error), []);
 
   const logout = useCallback(async () => {
+    const localStorageTheme = localStorage?.getItem(`${process.env.REACT_APP_THEME_KEY}`);
     try {
       await apiCall();
     } catch (error) {
@@ -99,7 +103,7 @@ const useLogoutApi = () => {
         console.error(error);
       }
     }
-    return callbackSuccess();
+    return callbackSuccess(localStorageTheme);
   }, [apiCall, callbackSuccess, callbackError]);
 
   return {
