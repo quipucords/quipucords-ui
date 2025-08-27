@@ -75,6 +75,8 @@ const useLoginApi = () => {
  * A logout API call
  */
 const useLogoutApi = () => {
+  const localStorageTheme = localStorage.getItem('discovery-ui-theme');
+
   const apiCall = useCallback(
     (): Promise<AxiosResponse> => axios.put(`${process.env.REACT_APP_USER_SERVICE_LOGOUT}`),
     []
@@ -83,6 +85,9 @@ const useLogoutApi = () => {
   const callbackSuccess = useCallback(() => {
     cookies.remove(`${process.env.REACT_APP_AUTH_COOKIE}`);
     document.location.replace('./');
+    if (localStorageTheme) {
+      localStorage.setItem('discovery-ui-theme', localStorageTheme);
+    }
     return;
   }, []);
 
