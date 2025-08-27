@@ -35,3 +35,8 @@ body,
 .pf-v6-theme-dark .pf-v6-c-about-modal-box {
   filter: invert(1.5) contrast(1.2);
 }
+
+/* Summary report table - give labels a bit more space to prevent line wrapping */
+body .pf-v6-c-description-list.pf-m-fluid {
+  --pf-v6-c-description-list--m-horizontal__term--width: fit-content(30ch);
+}
