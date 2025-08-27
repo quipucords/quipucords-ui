@@ -7,3 +7,12 @@ This directory contains vendored code from external packages that are no longer 
 ### react-table-batteries
 - **Fixed ToolbarBulkSelector "Select none" functionality** - See PR #668
   - File: `tackle2-ui-legacy/components/ToolbarBulkSelector.tsx`
+
+- **PatternFly v5 to v6 Upgrade Changes** - See PR #664
+  - **Component API updates**: Updated to use new PatternFly v6 component APIs
+    - Files: Multiple component files in `vendor/react-table-batteries/` directory
+  - **Import pattern changes**: Updated component imports to match v6 patterns
+  - **CSS class migrations**: Changed CSS class prefixes from `pf-v5-` to `pf-v6-`
+  - **Console statement line shifts**: Updated positions due to code changes
+    - `hooks/selection/useSelectionDerivedState.ts` (console.warn at line 154)
+    - `hooks/storage/useStorage.ts` (console.error at lines 14 and 40)
