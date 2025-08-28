@@ -46,6 +46,8 @@ import {
   useTablePropHelpers,
   useTableState
 } from '../../vendor/react-table-batteries';
+import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
+import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
 import AddSourceModal from './addSourceModal';
 import { AddSourcesScanModal } from './addSourcesScanModal';
 import { ShowConnectionsModal } from './showSourceConnectionsModal';
@@ -145,6 +147,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
+      selection: ' ',
       name: t('table.header', { context: 'name' }),
       connection: t('table.label', { context: 'status_completed_sources' }),
       type: t('table.header', { context: 'type' }),
@@ -232,11 +235,18 @@ const SourcesListView: React.FunctionComponent = () => {
     selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
-    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
+    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead }
   } = tableBatteries;
 
+  const ToolbarBulkSelector = useToolbarBulkSelectorWithBatteries(tableBatteries);
+
+  const TrWithBatteries = useTrWithBatteries(tableBatteries);
+
   const hasSelectedSources = () => {
-    return Object.values(selectedItems).filter(val => val !== null).length > 0;
+    if (Array.isArray(selectedItems)) {
+      return selectedItems.length > 0;
+    }
+    return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
   };
 
   const renderAddSourceButton = () => (
@@ -259,13 +269,20 @@ const SourcesListView: React.FunctionComponent = () => {
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
+        {/* Only show bulk selector when there are items to select */}
+        {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>{renderAddSourceButton()}</ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
-            isDisabled={Object.values(selectedItems).filter(val => val !== null).length <= 1}
-            onClick={() => onScanSources(selectedItems)}
+            isDisabled={!hasSelectedSources()}
+            onClick={() => {
+              const sourcesToScan = Array.isArray(selectedItems)
+                ? selectedItems
+                : (Object.values(selectedItems ?? {}).filter(Boolean) as SourceType[]);
+              onScanSources(sourcesToScan);
+            }}
           >
             {t('table.label', { context: 'scan' })}
           </Button>
@@ -335,14 +352,15 @@ const SourcesListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
-          <Tr isHeaderRow>
+          <TrWithBatteries isHeaderRow>
+            <Th columnKey="selection" />
             <Th columnKey="name" />
             <Th columnKey="connection" />
             <Th columnKey="type" />
             <Th columnKey="credentials" />
             <Th columnKey="scan" />
             <Th columnKey="actions" />
-          </Tr>
+          </TrWithBatteries>
         </Thead>
         <ConditionalTableBody
           isError={isError}
@@ -365,7 +383,7 @@ const SourcesListView: React.FunctionComponent = () => {
         >
           <Tbody>
             {currentPageItems?.map((source: SourceType, rowIndex) => (
-              <Tr key={source.id} item={source} rowIndex={rowIndex}>
+              <TrWithBatteries key={source.id} item={source} rowIndex={rowIndex}>
                 <Td columnKey="name">{source.name}</Td>
                 <Td hasAction columnKey="connection">
                   {renderConnection(source)}
@@ -412,7 +430,7 @@ const SourcesListView: React.FunctionComponent = () => {
                     ]}
                   />
                 </Td>
-              </Tr>
+              </TrWithBatteries>
             ))}
           </Tbody>
         </ConditionalTableBody>
