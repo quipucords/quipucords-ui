@@ -38,9 +38,9 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "views/credentials/viewCredentialsList.tsx:423:                console.error(err);",
   "views/scans/viewScansList.tsx:285:                                    console.error(err);",
   "views/sources/addSourceModal.tsx:138:          console.error(err);",
-  "views/sources/viewSourcesList.tsx:321:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:496:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:513:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:529:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:338:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:514:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:531:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:547:                console.error(err);",
 ]
 `;
