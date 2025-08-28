@@ -52,6 +52,8 @@ import {
   useTablePropHelpers,
   useTableState
 } from '../../vendor/react-table-batteries';
+import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
+import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
 import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
@@ -101,6 +103,7 @@ const ScansListView: React.FunctionComponent = () => {
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
+      selection: ' ',
       name: t('table.header', { context: 'name' }),
       most_recent: t('table.header', { context: 'last-scanned' }),
       sources: t('table.header', { context: 'sources' }),
@@ -155,17 +158,30 @@ const ScansListView: React.FunctionComponent = () => {
     selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
-    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
+    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead }
   } = tableBatteries;
+
+  const ToolbarBulkSelector = useToolbarBulkSelectorWithBatteries(tableBatteries);
+
+  const TrWithBatteries = useTrWithBatteries(tableBatteries);
+
+  const hasSelectedScans = () => {
+    if (Array.isArray(selectedItems)) {
+      return selectedItems.length > 0;
+    }
+    return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
+  };
 
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
+        {/* Only show bulk selector when there are items to select */}
+        {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
-            isDisabled={!selectedItems?.length}
+            isDisabled={!hasSelectedScans()}
             onClick={() =>
               deleteScans(selectedItems).finally(() => {
                 setPendingDeleteScan(undefined);
@@ -218,12 +234,13 @@ const ScansListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
-          <Tr isHeaderRow>
+          <TrWithBatteries isHeaderRow>
+            <Th columnKey="selection" />
             <Th columnKey="name" />
             <Th columnKey="most_recent" />
             <Th columnKey="sources" />
             <Th columnKey="actions" />
-          </Tr>
+          </TrWithBatteries>
         </Thead>
         <ConditionalTableBody
           isError={isError}
@@ -250,7 +267,7 @@ const ScansListView: React.FunctionComponent = () => {
         >
           <Tbody>
             {currentPageItems?.map((scan: Scan, rowIndex) => (
-              <Tr key={scan.id} item={scan} rowIndex={rowIndex}>
+              <TrWithBatteries key={scan.id} item={scan} rowIndex={rowIndex}>
                 <Td columnKey="name">{scan.name}</Td>
                 <Td hasAction columnKey="most_recent">
                   {renderConnection(scan)}
@@ -320,7 +337,7 @@ const ScansListView: React.FunctionComponent = () => {
                     />
                   </Tooltip>
                 </Td>
-              </Tr>
+              </TrWithBatteries>
             ))}
           </Tbody>
         </ConditionalTableBody>

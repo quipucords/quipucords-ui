@@ -13,7 +13,7 @@ import { type TableState } from '../../vendor/react-table-batteries';
 
 export const SCANS_LIST_QUERY = 'scansList';
 
-type ScansColumnKey = 'name' | 'most_recent' | 'sources' | 'actions';
+type ScansColumnKey = 'selection' | 'name' | 'most_recent' | 'sources' | 'actions';
 
 type ScansSortableColumnKey = 'name' | 'most_recent';
 
