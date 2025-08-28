@@ -11,7 +11,7 @@ import { useServiceQuery } from '../../helpers/queryHelpers';
 import { type CredentialType } from '../../types/types';
 import { type TableState } from '../../vendor/react-table-batteries';
 
-type CredentialsColumnKey = 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
+type CredentialsColumnKey = 'selection' | 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
 
 type CredentialsSortableColumnKey = 'name' | 'type';
 
