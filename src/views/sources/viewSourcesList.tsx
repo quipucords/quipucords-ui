@@ -107,10 +107,12 @@ const SourcesListView: React.FunctionComponent = () => {
 
   /**
    * Closes the connections view by resetting selected connections and clearing connection data.
+   * Ensures consistent state of list by forcing a refresh.
    */
   const onCloseConnections = () => {
     setConnectionsSelected(undefined);
     setConnectionsData(emptyConnectionData);
+    onRefresh();
   };
 
   /**

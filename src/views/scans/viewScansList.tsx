@@ -84,6 +84,16 @@ const ScansListView: React.FunctionComponent = () => {
   };
 
   /**
+   * Closes the scans view by resetting selected scans and clearing related data.
+   * Ensures consistent state of list by forcing a refresh.
+   */
+  const scansModalOnClose = () => {
+    setScanSelected(undefined);
+    setScanJobs(undefined);
+    onRefresh();
+  };
+
+  /**
    * Configures table state for scan results, with URL persistence. Includes columns for name, last scanned,
    * sources, and actions. Enables name-based filtering, sorting by ID or last scanned, pagination, and row selection.
    * Utilizes `useTableState` for setup.
@@ -344,19 +354,9 @@ const ScansListView: React.FunctionComponent = () => {
         scanJobs={scanJobs}
         isOpen={scanSelected !== undefined}
         onDownload={downloadReport}
-        onClose={() => {
-          setScanSelected(undefined);
-          setScanJobs(undefined);
-        }}
+        onClose={scansModalOnClose}
         actions={[
-          <Button
-            key="close"
-            variant="secondary"
-            onClick={() => {
-              setScanSelected(undefined); // Close the modal when this is clicked
-              setScanJobs(undefined);
-            }}
-          >
+          <Button key="close" variant="secondary" onClick={scansModalOnClose}>
             {t('table.label', { context: 'close' })}
           </Button>
         ]}

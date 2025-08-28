@@ -36,11 +36,11 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:40:    console.error(error);",
   "views/credentials/viewCredentialsList.tsx:391:                console.error(err);",
   "views/credentials/viewCredentialsList.tsx:408:                console.error(err);",
-  "views/scans/viewScansList.tsx:275:                                    console.error(err);",
+  "views/scans/viewScansList.tsx:285:                                    console.error(err);",
   "views/sources/addSourceModal.tsx:138:          console.error(err);",
-  "views/sources/viewSourcesList.tsx:319:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:494:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:511:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:527:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:321:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:496:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:513:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:529:                console.error(err);",
 ]
 `;
