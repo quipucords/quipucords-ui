@@ -40,6 +40,17 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
     [expanded]
   );
 
+  const additionalHostsToolTip = (numHosts: number): string => {
+    const additionalHosts: number = numHosts - MAX_HOSTS_PER_CATEGORY;
+    let toolTipContent: string = '';
+    if (additionalHosts === 1) {
+      toolTipContent = `There is ${additionalHosts} additional host not shown.`;
+    } else {
+      toolTipContent = `There are ${additionalHosts} additional hosts not shown.`;
+    }
+    return `${toolTipContent}`;
+  };
+
   return (
     <Modal
       variant={ModalVariant.small}
@@ -121,9 +132,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                       )}
                       {connections[obj.category]?.length > MAX_HOSTS_PER_CATEGORY && (
                         <ListItem key="more">
-                          <Tooltip
-                            content={`There are ${connections[obj.category].length - MAX_HOSTS_PER_CATEGORY} additional hosts not shown.`}
-                          >
+                          <Tooltip content={additionalHostsToolTip(connections[obj.category]?.length)}>
                             <span>...</span>
                           </Tooltip>
                         </ListItem>
