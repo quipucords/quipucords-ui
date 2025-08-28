@@ -7,7 +7,7 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
   "./build/362*js",
   "./build/397*js",
   "./build/820*js",
-  "./build/875*js",
+  "./build/955*js",
   "./build/app*css",
   "./build/app*js",
   "./build/favicon.ico",

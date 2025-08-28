@@ -44,6 +44,8 @@ import {
   useTablePropHelpers,
   useTableState
 } from '../../vendor/react-table-batteries';
+import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
+import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
 import { AddCredentialModal } from './addCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
@@ -110,6 +112,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   const tableState = useTableState({
     persistTo: 'urlParams',
     columnNames: {
+      selection: ' ',
       name: t('table.header', { context: 'name' }),
       type: t('table.header', { context: 'type' }),
       auth_type: t('table.header', { context: 'auth-type' }),
@@ -166,7 +169,9 @@ const CredentialsListView: React.FunctionComponent = () => {
       initialSort: { columnKey: 'name', direction: 'asc' }
     },
     pagination: { isEnabled: true },
-    selection: { isEnabled: true }
+    selection: {
+      isEnabled: true
+    }
   });
 
   const { isError, isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
@@ -183,11 +188,18 @@ const CredentialsListView: React.FunctionComponent = () => {
     selection: { selectedItems, setSelectedItems },
     currentPageItems,
     numRenderedColumns,
-    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead, Tr }
+    components: { Toolbar, FilterToolbar, PaginationToolbarItem, Pagination, Table, Tbody, Td, Th, Thead }
   } = tableBatteries;
 
+  const ToolbarBulkSelector = useToolbarBulkSelectorWithBatteries(tableBatteries);
+
+  const TrWithBatteries = useTrWithBatteries(tableBatteries);
+
   const hasSelectedCredentials = () => {
-    return Object.values(selectedItems).filter(val => val !== null).length > 0;
+    if (Array.isArray(selectedItems)) {
+      return selectedItems.length > 0;
+    }
+    return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
   };
 
   const renderAddCredsButton = () => (
@@ -210,6 +222,8 @@ const CredentialsListView: React.FunctionComponent = () => {
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
+        {/* Only show bulk selector when there are items to select */}
+        {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
         <ToolbarItem> {renderAddCredsButton()}</ToolbarItem>
         <ToolbarItem>
@@ -241,14 +255,15 @@ const CredentialsListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label="Example things table" variant="compact">
         <Thead>
-          <Tr isHeaderRow>
+          <TrWithBatteries isHeaderRow>
+            <Th columnKey="selection" />
             <Th columnKey="name" />
             <Th columnKey="type" />
             <Th columnKey="auth_type" />
             <Th columnKey="sources" />
             <Th columnKey="updated" />
             <Th columnKey="actions" />
-          </Tr>
+          </TrWithBatteries>
         </Thead>
         <ConditionalTableBody
           isError={isError}
@@ -271,7 +286,7 @@ const CredentialsListView: React.FunctionComponent = () => {
         >
           <Tbody>
             {currentPageItems?.map((credential: CredentialType, rowIndex) => (
-              <Tr key={credential.id} item={credential} rowIndex={rowIndex}>
+              <TrWithBatteries key={credential.id} item={credential} rowIndex={rowIndex}>
                 <Td columnKey="name">{credential.name}</Td>
                 <Td columnKey="type">{getTranslatedCredentialTypeLabel(credential.cred_type)}</Td>
                 <Td columnKey="auth_type">{helpers.getAuthType(credential)}</Td>
@@ -314,7 +329,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                     ]}
                   />
                 </Td>
-              </Tr>
+              </TrWithBatteries>
             ))}
           </Tbody>
         </ConditionalTableBody>
