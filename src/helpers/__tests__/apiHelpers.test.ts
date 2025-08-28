@@ -29,4 +29,76 @@ describe('apiHelpers', () => {
       })
     }).toMatchSnapshot('extractErrorMessage');
   });
+
+  describe('hasFieldValidationErrors', () => {
+    it('should detect field validation errors for any form', () => {
+      // Credential form fields
+      expect(apiHelpers.hasFieldValidationErrors({
+        name: ['This field is required'],
+        username: 'Username already exists'
+      })).toBe(true);
+
+      // Source form fields
+      expect(apiHelpers.hasFieldValidationErrors({
+        hosts: ['Invalid host format'],
+        port: 'Port must be a number'
+      })).toBe(true);
+
+      // Any custom form fields
+      expect(apiHelpers.hasFieldValidationErrors({
+        email: 'Invalid email format',
+        custom_field: ['Required field']
+      })).toBe(true);
+    });
+
+    it('should return false for system-level errors', () => {
+      expect(apiHelpers.hasFieldValidationErrors({
+        detail: 'Server error',
+        message: 'Network error'
+      })).toBe(false);
+
+      expect(apiHelpers.hasFieldValidationErrors({
+        error: 'Authentication failed',
+        status: 500
+      })).toBe(false);
+
+      expect(apiHelpers.hasFieldValidationErrors({
+        non_field_errors: ['General validation error']
+      })).toBe(false);
+    });
+
+    it('should handle mixed field and system errors', () => {
+      // If there are any field errors, should return true
+      expect(apiHelpers.hasFieldValidationErrors({
+        name: 'Required',           // field error
+        detail: 'Server error'      // system error
+      })).toBe(true);
+    });
+
+    it('should handle invalid input', () => {
+      expect(apiHelpers.hasFieldValidationErrors(null)).toBe(false);
+      expect(apiHelpers.hasFieldValidationErrors(undefined)).toBe(false);
+      expect(apiHelpers.hasFieldValidationErrors('string')).toBe(false);
+    });
+  });
+
+  describe('parseFieldErrors', () => {
+    it('should parse all field errors', () => {
+      expect(apiHelpers.parseFieldErrors({
+        name: ['This field is required'],
+        username: 'Username already exists',
+        hosts: ['Invalid format', 'Must not be empty']
+      })).toEqual({
+        name: 'This field is required',
+        username: 'Username already exists',
+        hosts: 'Invalid format, Must not be empty'
+      });
+    });
+
+    it('should handle empty/invalid input', () => {
+      expect(apiHelpers.parseFieldErrors(null)).toEqual({});
+      expect(apiHelpers.parseFieldErrors(undefined)).toEqual({});
+      expect(apiHelpers.parseFieldErrors({})).toEqual({});
+    });
+  });
 });
