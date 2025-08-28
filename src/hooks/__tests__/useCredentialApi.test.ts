@@ -4,7 +4,7 @@ import {
   useAddCredentialApi,
   useDeleteCredentialApi,
   useEditCredentialApi,
-  useGetCredentialsApi
+  useGetCredentialsApi,
 } from '../useCredentialApi';
 
 describe('useDeleteCredentialApi', () => {
