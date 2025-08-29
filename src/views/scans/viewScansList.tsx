@@ -303,7 +303,10 @@ const ScansListView: React.FunctionComponent = () => {
                                 });
                             }
                           },
-                          ouiaId: 'summary'
+                          ouiaId: 'summary',
+                          ...(!helpers.canAccessMostRecentReport(scan?.most_recent) && {
+                            tooltipProps: { content: t('table.label', { context: 'summary-disabled-tooltip' }) }
+                          })
                         },
                         {
                           label: t('table.label', { context: 'delete' }),
@@ -312,6 +315,7 @@ const ScansListView: React.FunctionComponent = () => {
                         },
                         {
                           label: t('table.label', { context: 'rescan' }),
+                          disabled: !helpers.canRequestRescan(scan?.most_recent),
                           onClick: () => {
                             runScans(scan, true).finally(() => {
                               queryClient.invalidateQueries({
@@ -320,7 +324,10 @@ const ScansListView: React.FunctionComponent = () => {
                               setScanSelected(undefined);
                             });
                           },
-                          ouiaId: 'rescan'
+                          ouiaId: 'rescan',
+                          ...(!helpers.canRequestRescan(scan?.most_recent) && {
+                            tooltipProps: { content: t('table.label', { context: 'rescan-disabled-tooltip' }) }
+                          })
                         },
                         {
                           label: t('table.label', { context: 'download' }),
@@ -330,7 +337,10 @@ const ScansListView: React.FunctionComponent = () => {
                               downloadReport(scan.most_recent.report_id);
                             }
                           },
-                          ouiaId: 'download'
+                          ouiaId: 'download',
+                          ...(!helpers.canAccessMostRecentReport(scan?.most_recent) && {
+                            tooltipProps: { content: t('table.label', { context: 'download-disabled-tooltip' }) }
+                          })
                         }
                       ]}
                     />

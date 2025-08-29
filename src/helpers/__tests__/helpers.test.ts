@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import moment from 'moment';
+import { scanJob } from '../../types/types';
 import { helpers } from '../helpers';
 
 describe('getTimeDisplayHowLongAgo', () => {
@@ -61,6 +62,64 @@ describe('getAuthType', () => {
       generateAuthType({ auth_type: 'lorem' }),
       generateAuthType({ auth_type: 'ipsum' })
     ]).toMatchSnapshot('credentialTypes');
+  });
+});
+
+describe('canAccessMostRecentReport', () => {
+  let scanJobTemplate: scanJob;
+
+  beforeEach(() => {
+    scanJobTemplate = {
+      id: 1,
+      report_id: 1,
+      status: 'created'
+    };
+  });
+
+  it.each([
+    ['created', false],
+    ['pending', false],
+    ['running', false],
+    ['paused', false],
+    ['canceled', false],
+    ['completed', true],
+    ['failed', false]
+  ])('status "%s" with report_id should return %s', (status, expected) => {
+    const scanJobInstance = { ...scanJobTemplate, status: status };
+    expect(helpers.canAccessMostRecentReport(scanJobInstance)).toBe(expected);
+  });
+
+  it('should return false on undefined', () => {
+    expect(helpers.canAccessMostRecentReport(undefined)).toBe(false);
+  });
+});
+
+describe('canRequestRescan', () => {
+  let scanJobTemplate: scanJob;
+
+  beforeEach(() => {
+    scanJobTemplate = {
+      id: 1,
+      report_id: 1,
+      status: 'created'
+    };
+  });
+
+  it.each([
+    ['created', true],
+    ['pending', false],
+    ['running', false],
+    ['paused', false],
+    ['canceled', true],
+    ['completed', true],
+    ['failed', true]
+  ])('status "%s" with report_id should return %s', (status, expected) => {
+    const scanJobInstance = { ...scanJobTemplate, status: status };
+    expect(helpers.canRequestRescan(scanJobInstance)).toBe(expected);
+  });
+
+  it('should return false on undefined', () => {
+    expect(helpers.canRequestRescan(undefined)).toBe(false);
   });
 });
 
