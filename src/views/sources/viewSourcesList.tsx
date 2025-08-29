@@ -353,7 +353,6 @@ const SourcesListView: React.FunctionComponent = () => {
       <Table aria-label="Example things table" variant="compact">
         <Thead>
           <TrWithBatteries isHeaderRow>
-            <Th columnKey="selection" />
             <Th columnKey="name" />
             <Th columnKey="connection" />
             <Th columnKey="type" />
