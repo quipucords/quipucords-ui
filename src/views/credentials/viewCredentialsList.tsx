@@ -322,7 +322,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                         onClick: setPendingDeleteCredential,
                         ouiaId: 'delete-credential',
                         ...(credentialHasSources(credential) && {
-                          tooltipProps: { content: t('table.label', { context: 'edit-disabled-credential' }) }
+                          tooltipProps: { content: t('table.label', { context: 'delete-disabled-tooltip-credential' }) }
                         })
                       }
                     ]}
