@@ -236,9 +236,19 @@ const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || title
 const canAccessMostRecentReport = (job?: scanJob | MostRecentScan) =>
   job?.status === 'completed' && job?.report_id !== undefined;
 
+/**
+ * Tell if a scan can be scanned again.
+ *
+ * @param {scanJob | MostRecentScan} job
+ * @returns {boolean}
+ */
+const canRequestRescan = (job?: scanJob | MostRecentScan) =>
+  ['created', 'canceled', 'completed', 'failed'].includes(job?.status || '');
+
 const helpers = {
   authType,
   canAccessMostRecentReport,
+  canRequestRescan,
   downloadData,
   noopTranslate,
   generateId,
