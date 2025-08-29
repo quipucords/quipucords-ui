@@ -56,16 +56,16 @@ export const useSelectionPropHelpers = <TItem>(
   React.useEffect(() => {
     setLastSelectedRowIndex(null);
   }, [paginationProps.page]);
-  const [isShiftKeyHeld, setIsShiftKeyHeld] = React.useState(false);
+  const isShiftKeyHeld = React.useRef(false);
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Shift') {
-        setIsShiftKeyHeld(true);
+        isShiftKeyHeld.current = true;
       }
     };
     const onKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'Shift') {
-        setIsShiftKeyHeld(false);
+        isShiftKeyHeld.current = false;
       }
     };
     document.addEventListener('keydown', onKeyDown);
@@ -99,7 +99,7 @@ export const useSelectionPropHelpers = <TItem>(
     select: {
       rowIndex,
       onSelect: (_event, isSelecting) => {
-        if (isShiftKeyHeld && lastSelectedRowIndex !== null) {
+        if (isShiftKeyHeld.current && lastSelectedRowIndex !== null) {
           const numberSelected = rowIndex - lastSelectedRowIndex;
           const intermediateIndexes =
             numberSelected > 0

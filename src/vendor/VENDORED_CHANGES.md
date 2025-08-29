@@ -16,3 +16,6 @@ This directory contains vendored code from external packages that are no longer 
   - **Console statement line shifts**: Updated positions due to code changes
     - `hooks/selection/useSelectionDerivedState.ts` (console.warn at line 154)
     - `hooks/storage/useStorage.ts` (console.error at lines 14 and 40)
+
+- **Ported isShiftKeyHeld from State to Ref** - See PR #676
+  - File: `hooks/selection/useSelectionPropHelpers.ts`
