@@ -423,7 +423,7 @@ const SourcesListView: React.FunctionComponent = () => {
                         onClick: setPendingDeleteSource,
                         ouiaId: 'delete-source',
                         ...(sourceHasConnection(source) && {
-                          tooltipProps: { content: t('table.label', { context: 'edit-disabled-source' }) }
+                          tooltipProps: { content: t('table.label', { context: 'delete-disabled-tooltip-source' }) }
                         })
                       }
                     ]}
