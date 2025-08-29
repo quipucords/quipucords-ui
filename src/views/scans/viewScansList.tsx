@@ -235,7 +235,6 @@ const ScansListView: React.FunctionComponent = () => {
       <Table aria-label="Example things table" variant="compact">
         <Thead>
           <TrWithBatteries isHeaderRow>
-            <Th columnKey="selection" />
             <Th columnKey="name" />
             <Th columnKey="most_recent" />
             <Th columnKey="sources" />
