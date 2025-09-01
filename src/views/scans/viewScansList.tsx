@@ -37,6 +37,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { API_QUERY_TYPES, API_SCANS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
+import { usePageTableResetter } from '../../hooks/usePageTableResetter';
 import {
   useDeleteScanApi,
   useDownloadReportApi,
@@ -140,6 +141,8 @@ const ScansListView: React.FunctionComponent = () => {
     pagination: { isEnabled: true },
     selection: { isEnabled: true }
   });
+
+  usePageTableResetter(tableState);
 
   const { isError, isLoading, data } = useScansQuery({
     tableState,

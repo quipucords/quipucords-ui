@@ -36,6 +36,7 @@ import { API_CREDS_LIST_QUERY, API_DATA_SOURCE_TYPES, API_QUERY_TYPES } from '..
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../../hooks/useCredentialApi';
+import { usePageTableResetter } from '../../hooks/usePageTableResetter';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type CredentialType, type SourceType } from '../../types/types';
 import {
@@ -173,6 +174,8 @@ const CredentialsListView: React.FunctionComponent = () => {
       isEnabled: true
     }
   });
+
+  usePageTableResetter(tableState);
 
   const { isError, isLoading, data } = useCredentialsQuery({ tableState, setRefreshTime });
 

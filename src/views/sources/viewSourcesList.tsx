@@ -36,6 +36,7 @@ import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { API_DATA_SOURCE_TYPES, API_QUERY_TYPES, API_SOURCES_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
+import { usePageTableResetter } from '../../hooks/usePageTableResetter';
 import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
 import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
@@ -213,6 +214,8 @@ const SourcesListView: React.FunctionComponent = () => {
     pagination: { isEnabled: true },
     selection: { isEnabled: true }
   });
+
+  usePageTableResetter(tableState);
 
   const { isError, isLoading, data } = useSourcesQuery({ tableState, setRefreshTime });
 
