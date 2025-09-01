@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { TableState, UseTableStateArgs } from '../types';
 import { mergeArgs } from '../utils';
 import { useActiveItemState } from './active-item';
@@ -28,6 +29,8 @@ export const useTableState = <
 >(
   args: UseTableStateArgs<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey, TPersistenceKeyPrefix>
 ): TableState<TItem, TColumnKey, TSortableColumnKey, TFilterCategoryKey, TPersistenceKeyPrefix> => {
+  const lastFilterAndSort = useRef<string>('');
+
   const state = {
     filter: useFilterState<TItem, TFilterCategoryKey, TPersistenceKeyPrefix>(args),
     sort: useSortState<TItem, TSortableColumnKey, TPersistenceKeyPrefix>(args),
@@ -41,6 +44,15 @@ export const useTableState = <
     sort: { activeSort },
     pagination: { pageNumber, itemsPerPage }
   } = state;
+
+  const currentFilterAndSort = JSON.stringify({ filterValues, activeSort });
+  const requiresPageReset = lastFilterAndSort.current !== currentFilterAndSort;
+
+  if (pageNumber > 1 && requiresPageReset) {
+    state.pagination.setPageNumber(1);
+  }
+
   const cacheKey = JSON.stringify({ filterValues, activeSort, pageNumber, itemsPerPage });
+  lastFilterAndSort.current = currentFilterAndSort;
   return { ...mergeArgs(args, state), cacheKey };
 };

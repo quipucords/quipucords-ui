@@ -19,3 +19,6 @@ This directory contains vendored code from external packages that are no longer 
 
 - **Ported isShiftKeyHeld from State to Ref** - See PR #676
   - File: `hooks/selection/useSelectionPropHelpers.ts`
+
+- **Reset table page back to 1 on sort or filter change** - See PR #678
+  - File: `src/vendor/react-table-batteries/hooks/useTableState.ts`
