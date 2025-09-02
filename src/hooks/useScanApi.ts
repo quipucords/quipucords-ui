@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { type AlertProps } from '@patternfly/react-core';
 import axios, { AxiosError, type AxiosResponse, isAxiosError, type AxiosRequestConfig } from 'axios';
@@ -10,7 +10,8 @@ import {
   type ScanJobsResponse,
   type SourceType,
   type Connections,
-  type ReportsAggregateResponse
+  type ReportsAggregateResponse,
+  simpleScanJob
 } from '../types/types';
 
 type ApiDeleteScanSuccessType = {
@@ -23,6 +24,22 @@ type ApiScanErrorType = {
   detail?: string;
   message: string;
 };
+
+interface InProgressState {
+  state: 'InProgress';
+}
+
+interface SuccessfulState {
+  state: 'Successful';
+  mergedReportId: number;
+}
+
+interface ErroredState {
+  state: 'Errored';
+  errorMessage: string;
+}
+
+type MergeProcessState = InProgressState | SuccessfulState | ErroredState;
 
 const useCreateScanApi = (
   onAddAlert: (alert: AlertProps) => void,
@@ -502,6 +519,91 @@ const useShowConnectionsApi = () => {
   };
 };
 
+const useMergeReportsApi = () => {
+  const [mergeProcessState, setMergeProcessState] = useState<MergeProcessState>({ state: 'InProgress' });
+  const { t } = useTranslation();
+  const [mergeJobId, setMergeJobId] = useState<number | undefined>(undefined);
+  const [mergePollAttempt, setMergePollAttempt] = useState<number>(0);
+
+  const waitInterval = process.env.REACT_APP_MERGE_POLL_INTERVAL
+    ? Number.parseInt(process.env.REACT_APP_MERGE_POLL_INTERVAL, 10)
+    : 1000;
+
+  const requestReportsMerge = useCallback(
+    async (report_ids: number[]) => {
+      let response: AxiosResponse;
+      try {
+        response = await axios.post(`${process.env.REACT_APP_REPORTS_SERVICE_MERGE}`, { reports: report_ids });
+        const jobId = response.data.job_id;
+        if (!jobId) {
+          throw new Error(t('merge.error', { context: 'no-jobid' }));
+        }
+        setMergeJobId(jobId);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          const errorMessage = [error.message, apiHelpers.extractErrorMessage(error.response?.data)].join(': ');
+          setMergeProcessState({ state: 'Errored', errorMessage: errorMessage });
+        } else if (error instanceof Error) {
+          setMergeProcessState({ state: 'Errored', errorMessage: error.message });
+        } else {
+          setMergeProcessState({ state: 'Errored', errorMessage: t('merge.error', { context: 'unknown' }) });
+        }
+      }
+    },
+    [t]
+  );
+
+  const cancelReportsMerge = useCallback((): void => {
+    setMergeProcessState({ state: 'InProgress' });
+    setMergeJobId(undefined);
+    setMergePollAttempt(0);
+  }, []);
+
+  useEffect(() => {
+    if (mergeJobId === undefined) {
+      return () => {};
+    }
+
+    let pollingTimer: NodeJS.Timeout;
+
+    axios
+      .get(`${process.env.REACT_APP_SCAN_JOBS_V2_SERVICE}${mergeJobId}/`)
+      .then((response: AxiosResponse<simpleScanJob>) => {
+        const status = response.data.status;
+
+        if (status === 'completed') {
+          setMergeProcessState({ state: 'Successful', mergedReportId: response.data.report_id });
+          return;
+        }
+
+        if (['failed', 'canceled'].includes(status)) {
+          setMergeProcessState({ state: 'Errored', errorMessage: response.data.status_message });
+          return;
+        }
+
+        pollingTimer = setTimeout(() => setMergePollAttempt(mergePollAttempt + 1), waitInterval);
+      })
+      .catch(error => {
+        if (isAxiosError(error)) {
+          const errorMessage = [error.message, apiHelpers.extractErrorMessage(error.response?.data)].join(': ');
+          setMergeProcessState({ state: 'Errored', errorMessage: errorMessage });
+        } else {
+          setMergeProcessState({ state: 'Errored', errorMessage: t('merge.error', { context: 'unknown' }) });
+        }
+      });
+
+    return () => {
+      clearTimeout(pollingTimer);
+    };
+  }, [mergeJobId, mergePollAttempt, waitInterval, t]);
+
+  return {
+    requestReportsMerge,
+    cancelReportsMerge,
+    mergeProcessState
+  };
+};
+
 export {
   useCreateScanApi,
   useRunScanApi,
@@ -509,5 +611,7 @@ export {
   useGetAggregateReportApi,
   useGetScanJobsApi,
   useDownloadReportApi,
-  useShowConnectionsApi
+  useShowConnectionsApi,
+  useMergeReportsApi,
+  MergeProcessState
 };

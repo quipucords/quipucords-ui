@@ -141,6 +141,17 @@
     "invalid": "Invalid login credentials.",
     "title": "Log in to your account"
   },
+  "merge": {
+    "modal_title": "Merge reports",
+    "modal_header-in-progress": "Merging reports",
+    "modal_body-in-progress": "This typically takes no more than 1 minute",
+    "modal_header-successful": "Merge completed",
+    "modal_body-successful": "Your download will start automatically",
+    "modal_header-errored": "Merge failed",
+    "modal_body-errored": "{{msg}}",
+    "error_no-jobid": "Server did not return job_id value",
+    "error_unknown": "Unknown error"
+  },
   "modal": {
     "title_scan-summary": "Scan summary",
     "subtitle_scan-id": "Scan ID: {{value}}",
@@ -200,6 +211,7 @@
     "label_rescan-disabled-tooltip": "Scan cannot be requested again while it is running",
     "label_download": "Download",
     "label_download-disabled-tooltip": "Only scans that completed successfully can be downloaded",
+    "label_merge-reports": "Merge reports",
     "label_scan": "Scan",
     "label_source": "Source",
     "label_source_other": "Sources",

@@ -329,7 +329,6 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | ~~REACT_APP_SCAN_JOBS_SERVICE_CONNECTION~~            | A legacy parameter. A static string reference to the API spec                                                             |
 | ~~REACT_APP_SCAN_JOBS_SERVICE_INSPECTION~~            | A legacy parameter. A static string reference to the API spec                                                             |
 | ~~REACT_APP_SCAN_JOBS_SERVICE_CANCEL~~                | A legacy parameter. A static string reference to the API spec                                                             |
-| ~~REACT_APP_SCAN_JOBS_SERVICE_MERGE~~                 | A legacy parameter. A static string reference to the API spec                                                             |
 | REACT_APP_SOURCES_SERVICE                             | A static string reference to the API spec                                                                                 |
 | REACT_APP_SOURCES_SERVICE_BULK_DELETE                 | A static string reference to the API spec                                                                                 |
 | REACT_APP_USER_SERVICE_AUTH_TOKEN                     | A static string reference to the API spec                                                                                 |

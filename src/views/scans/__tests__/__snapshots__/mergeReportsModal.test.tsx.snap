@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MergeReportsModal should render a basic component: basic 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "merge.modal",
+  {
+    "context": "title"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="t([
+  "merge.modal",
+  {
+    "context": "body-in-progress"
+  }
+])"
+    />
+  </Bullseye>
+</Modal>
+`;
+
+exports[`MergeReportsModal should render a component after merge failed: errored 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "merge.modal",
+  {
+    "context": "title"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="t([
+  "merge.modal",
+  {
+    "context": "header-errored"
+  }
+])"
+    >
+      <EmptyStateBody>
+        t([
+  "merge.modal",
+  {
+    "context": "body-errored",
+    "msg": "Lorem ipsum dolor sit"
+  }
+])
+      </EmptyStateBody>
+    </EmptyState>
+  </Bullseye>
+</Modal>
+`;
+
+exports[`MergeReportsModal should render a component after merge succeeded: success 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "merge.modal",
+  {
+    "context": "title"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="t([
+  "merge.modal",
+  {
+    "context": "header-successful"
+  }
+])"
+    >
+      <EmptyStateBody>
+        t([
+  "merge.modal",
+  {
+    "context": "body-successful"
+  }
+])
+      </EmptyStateBody>
+    </EmptyState>
+  </Bullseye>
+</Modal>
+`;

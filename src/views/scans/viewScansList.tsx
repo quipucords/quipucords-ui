@@ -54,6 +54,7 @@ import {
 } from '../../vendor/react-table-batteries';
 import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
+import { MergeReportsModal } from './mergeReportsModal';
 import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
@@ -69,6 +70,7 @@ const ScansListView: React.FunctionComponent = () => {
     id: number;
     report: ReportsAggregateResponse;
   }>();
+  const [reportIdsToMerge, setReportIdsToMerge] = React.useState<number[]>([]);
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteScans } = useDeleteScanApi(addAlert);
@@ -172,12 +174,34 @@ const ScansListView: React.FunctionComponent = () => {
     return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
   };
 
+  const canMergeReports = () => {
+    return selectedItems.filter(scan => scan.most_recent?.status === 'completed').length >= 2;
+  };
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
         {/* Only show bulk selector when there are items to select */}
         {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
+        {helpers.FEATURE_MERGE_BUTTON && (
+          <ToolbarItem>
+            <Tooltip content={t('table.tooltip', { context: 'merge-reports' })}>
+              <Button
+                variant={ButtonVariant.secondary}
+                isDisabled={!canMergeReports()}
+                onClick={() => {
+                  const reportIds = selectedItems
+                    .map(scan => scan.most_recent?.report_id)
+                    .filter(val => val !== undefined);
+                  setReportIdsToMerge(reportIds);
+                }}
+              >
+                {t('table.label', { context: 'merge-reports' })}
+              </Button>
+            </Tooltip>
+          </ToolbarItem>
+        )}
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
@@ -404,6 +428,17 @@ const ScansListView: React.FunctionComponent = () => {
             {t('table.label', { context: 'close' })}
           </Button>
         ]}
+      />
+      <MergeReportsModal
+        isOpen={reportIdsToMerge.length > 0}
+        reportIds={reportIdsToMerge}
+        onClose={() => {
+          setReportIdsToMerge([]);
+        }}
+        onSuccess={mergedReportId => {
+          downloadReport(mergedReportId);
+          setReportIdsToMerge([]);
+        }}
       />
       <Modal
         variant={ModalVariant.small}
