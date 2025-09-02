@@ -172,12 +172,39 @@ const ScansListView: React.FunctionComponent = () => {
     return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
   };
 
+  const canMergeReports = () => {
+    // this looks like a copy of hasSelectedScans, but is separate to allow
+    // expression of rules like "all selected scans are successfully completed"
+    // FIXME: when exactly should button be enabled? At least 2? At least 2 successful?
+    // What if I select 4, but 1 is failed (or running)? Should we even do anything, or
+    // just let backend fail and inform the user?
+    if (Array.isArray(selectedItems)) {
+      return selectedItems.length >= 2;
+    }
+    return Object.values(selectedItems ?? {}).filter(Boolean).length >= 2;
+  };
+
   const renderToolbar = () => (
     <Toolbar>
       <ToolbarContent>
         {/* Only show bulk selector when there are items to select */}
         {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
+        {helpers.FEATURE_MERGE_BUTTON && (
+          <ToolbarItem>
+            <Tooltip content={t('table.tooltip', { context: 'merge-reports' })}>
+              <Button
+                variant={ButtonVariant.secondary}
+                isDisabled={!canMergeReports()}
+                onClick={() => {
+                  return;
+                }}
+              >
+                {t('table.label', { context: 'merge-reports' })}
+              </Button>
+            </Tooltip>
+          </ToolbarItem>
+        )}
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
