@@ -488,6 +488,82 @@ const useShowConnectionsApi = () => {
   };
 };
 
+const useMergeReportsApi = () => {
+  const mergeReportsCall = useCallback((report_ids: number[]): Promise<AxiosResponse> => {
+    return axios.post(`${process.env.REACT_APP_REPORTS_SERVICE_MERGE}`, { reports: report_ids });
+  }, []);
+
+  const jobStatusCall = useCallback((job_id: number): Promise<AxiosResponse> => {
+    return axios.get(`/api/v2/jobs/${job_id}/`);
+  }, []);
+
+  // FIXME: on success return data / report_id, so we can request download
+  const callbackSuccess = useCallback((_response: AxiosResponse): boolean => true, []);
+
+  const callbackError = useCallback((error: AxiosError) => Promise.reject(error), []);
+
+  const pollJobStatusCall = useCallback(async (job_id: number): Promise<AxiosResponse> => {
+    // FIXME: recursive function with awaited timeout. Can we switch to setInterval?
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await jobStatusCall(job_id);
+      const response_data = response?.data; // FIXME: can we static type this?
+
+      // FIXME: other statuses?
+      if (response_data.status === 'completed') {
+        return response;
+      }
+
+      if (response_data.status === 'failed') {
+        // FIXME: error handling
+        const error = new Error('Job failed');
+        Object.assign(error, { isAxiosError: true, response: { data: { message: 'Job failed' } } });
+        throw error;
+      }
+
+      return pollJobStatusCall(job_id);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        return callbackError(error);
+      }
+      throw error;
+    }
+  }, []);
+
+  const mergeReports = useCallback(
+    async (report_ids: number[]) => {
+      let response;
+      try {
+        response = await mergeReportsCall(report_ids);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          return callbackError(error);
+        }
+      }
+      const job_id = response.data.job_id;
+      // FIXME: should we handle missing job_id?
+      // if (!jobId) {}
+      let pollResponse;
+      try {
+        pollResponse = await pollJobStatusCall(job_id);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          return callbackError(error);
+        }
+      }
+      return callbackSuccess(pollResponse);
+    },
+    [mergeReportsCall, callbackSuccess, callbackError]
+  );
+
+  return {
+    mergeReportsCall,
+    callbackError,
+    callbackSuccess,
+    mergeReports
+  };
+};
+
 export {
   useCreateScanApi,
   useRunScanApi,
@@ -495,5 +571,6 @@ export {
   useGetAggregateReportApi,
   useGetScanJobsApi,
   useDownloadReportApi,
-  useShowConnectionsApi
+  useShowConnectionsApi,
+  useMergeReportsApi
 };

@@ -42,6 +42,7 @@ import {
   useDownloadReportApi,
   useGetAggregateReportApi,
   useGetScanJobsApi,
+  useMergeReportsApi,
   useRunScanApi
 } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
@@ -76,6 +77,7 @@ const ScansListView: React.FunctionComponent = () => {
   const { getScanJobs } = useGetScanJobsApi(addAlert);
   const { downloadReport } = useDownloadReportApi(addAlert);
   const { getAggregateReport } = useGetAggregateReportApi(addAlert);
+  const { mergeReports } = useMergeReportsApi();
   const nav = useNavigate();
 
   /**
@@ -197,7 +199,10 @@ const ScansListView: React.FunctionComponent = () => {
                 variant={ButtonVariant.secondary}
                 isDisabled={!canMergeReports()}
                 onClick={() => {
-                  return;
+                  const reportIds = selectedItems
+                    .map(scan => scan.most_recent?.report_id)
+                    .filter(val => val !== undefined);
+                  mergeReports(reportIds);
                 }}
               >
                 {t('table.label', { context: 'merge-reports' })}

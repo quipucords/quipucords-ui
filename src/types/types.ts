@@ -74,6 +74,7 @@ export type ConnectionType = {
   };
 };
 
+// note: this is basically ScanJobSerializerV1
 export type ScanJobType = {
   id: number;
   scan: {
@@ -205,6 +206,17 @@ export type scanJob = {
   id: number;
   report_id: number;
   status: string;
+};
+
+// This is backend `SimpleScanJobSerializer`.
+// This is basically a ScanJob, but with fewer fields and with `id` renamed to `job_id`.
+export type simpleScanJob = {
+  job_id: number;
+  report_id: number;
+  scan_id: number;
+  scan_type: string;
+  status: string;
+  status_message: string;
 };
 
 export type StatusDetails = {
