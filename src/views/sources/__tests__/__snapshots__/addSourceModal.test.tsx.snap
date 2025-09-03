@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddSourceModal-network should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
-[
-  [
-    {
-      "credentials": [],
-      "hosts": [],
-      "name": "Test Source",
-      "port": "22",
-      "source_type": "network",
-      "use_paramiko": false,
-    },
+{
+  "credentials": [
+    1,
   ],
-]
+  "hosts": [
+    "10.0.0.1",
+  ],
+  "name": "Test Source",
+  "port": "22",
+  "source_type": "network",
+  "use_paramiko": false,
+}
 `;
 
 exports[`AddSourceModal-network should have the correct title: title 1`] = `
@@ -43,6 +43,7 @@ exports[`AddSourceModal-network should render a basic component: basic 1`] = `
   variant="small"
 >
   <SourceForm
+    onClearErrors={[Function]}
     onClose={[Function]}
     onSubmit={[Function]}
   />
@@ -50,23 +51,21 @@ exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 `;
 
 exports[`AddSourceModalWithProxy should update proxy_url and submit it: onSubmit with proxy_url 1`] = `
-[
-  [
-    {
-      "credentials": [],
-      "disable_ssl": false,
-      "hosts": [
-        "192.168.0.1",
-      ],
-      "name": "Test Source",
-      "port": "8443",
-      "proxy_url": "http://proxy.example.com:8888",
-      "source_type": "openshift",
-      "ssl_cert_verify": true,
-      "ssl_protocol": "SSLv23",
-    },
+{
+  "credentials": [
+    1,
   ],
-]
+  "disable_ssl": false,
+  "hosts": [
+    "192.168.0.1",
+  ],
+  "name": "Test Source",
+  "port": "8443",
+  "proxy_url": "http://proxy.example.com:8888",
+  "source_type": "openshift",
+  "ssl_cert_verify": true,
+  "ssl_protocol": "SSLv23",
+}
 `;
 
 exports[`SourceForm should not render proxy_url field for network sources: proxy_url presence, network 1`] = `
@@ -84,7 +83,12 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -98,6 +102,10 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       onChange={[Function]}
       options={[]}
       selectedOptions={[]}
+    />
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <React.Fragment>
@@ -113,11 +121,16 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
         name="hosts"
         onChange={[Function]}
         placeholder="Enter values separated by commas"
+        validated="error"
         value=""
       />
       <HelperText>
         Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for ranges.
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -159,6 +172,7 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
   </FormGroup>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -189,7 +203,12 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -211,6 +230,10 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -225,11 +248,16 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -329,6 +357,7 @@ exports[`SourceForm should render a basic component: basic 1`] = `
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -359,7 +388,12 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -381,6 +415,10 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -395,11 +433,16 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -499,6 +542,7 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -529,7 +573,12 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -551,6 +600,10 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -565,11 +618,16 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -669,6 +727,7 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -699,7 +758,12 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -721,6 +785,10 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -735,11 +803,16 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -839,6 +912,7 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -869,7 +943,12 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -891,6 +970,10 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -905,11 +988,16 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -1009,6 +1097,7 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
@@ -1039,7 +1128,12 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       ouiaId="name"
       placeholder="Enter a name for the source"
       type="text"
+      validated="error"
       value=""
+    />
+    <ErrorFragment
+      errorMessage="This field is required"
+      fieldTouched={false}
     />
   </FormGroup>
   <FormGroup
@@ -1061,6 +1155,10 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         Only one credential can be selected for this source type.
       </HelperTextItem>
     </HelperText>
+    <ErrorFragment
+      errorMessage="At least one credential is required"
+      fieldTouched={false}
+    />
   </FormGroup>
   <React.Fragment>
     <FormGroup
@@ -1075,11 +1173,16 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="hosts"
         onChange={[Function]}
         ouiaId="hosts_single"
+        validated="error"
         value=""
       />
       <HelperText>
         Enter an IP address or hostname
       </HelperText>
+      <ErrorFragment
+        errorMessage="This field is required"
+        fieldTouched={false}
+      />
     </FormGroup>
     <FormGroup
       fieldId="port"
@@ -1179,6 +1282,7 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   </React.Fragment>
   <ActionGroup>
     <Button
+      isDisabled={true}
       onClick={[Function]}
       variant="primary"
     >
