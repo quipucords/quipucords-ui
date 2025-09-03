@@ -140,7 +140,10 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
+const useAddSourceApi = (
+  onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void
+) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
@@ -158,24 +161,29 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'success'
       });
-      return;
+      return response;
     },
     [onAddAlert, t]
   );
 
   const callbackError = useCallback(
     (error: AxiosError<ApiSourceErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.title', {
-          context: 'add-source_hidden_error',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        onAddAlert({
+          title: t('toast-notifications.title', {
+            context: 'add-source_hidden_error',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const addSources = useCallback(
@@ -190,6 +198,7 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         if (!helpers.TEST_MODE) {
           console.error(error);
         }
+        throw error;
       }
       return callbackSuccess(response);
     },
@@ -204,7 +213,10 @@ const useAddSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
+const useEditSourceApi = (
+  onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void
+) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
@@ -222,24 +234,29 @@ const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'success'
       });
-      return;
+      return response;
     },
     [onAddAlert, t]
   );
 
   const callbackError = useCallback(
     (error: AxiosError<ApiSourceErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.title', {
-          context: 'add-source_hidden_error_edit',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        onAddAlert({
+          title: t('toast-notifications.title', {
+            context: 'add-source_hidden_error_edit',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const editSources = useCallback(
@@ -254,6 +271,7 @@ const useEditSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
         if (!helpers.TEST_MODE) {
           console.error(error);
         }
+        throw error;
       }
       return callbackSuccess(response);
     },

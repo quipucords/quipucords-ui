@@ -7,6 +7,7 @@
  * @module sourcesListView
  */
 import * as React from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
@@ -48,7 +49,7 @@ import {
 } from '../../vendor/react-table-batteries';
 import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
-import AddSourceModal from './addSourceModal';
+import { AddSourceModal, SourceErrorType } from './addSourceModal';
 import { AddSourcesScanModal } from './addSourcesScanModal';
 import { ShowConnectionsModal } from './showSourceConnectionsModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
@@ -61,14 +62,15 @@ const SourcesListView: React.FunctionComponent = () => {
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
+  const [sourceErrors, setSourceErrors] = React.useState<SourceErrorType | undefined>();
   const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
   const emptyConnectionData: Connections = { successful: [], failed: [], unreachable: [] };
   const [connectionsData, setConnectionsData] = React.useState<Connections>(emptyConnectionData);
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteSources } = useDeleteSourceApi(addAlert);
-  const { addSources } = useAddSourceApi(addAlert);
-  const { editSources } = useEditSourceApi(addAlert);
+  const { addSources } = useAddSourceApi(addAlert, setSourceErrors);
+  const { editSources } = useEditSourceApi(addAlert, setSourceErrors);
   const { showConnections } = useShowConnectionsApi();
   const { runScans } = useRunScanApi(addAlert);
 
@@ -99,15 +101,6 @@ const SourcesListView: React.FunctionComponent = () => {
   };
 
   /**
-   * Sets the source that is currently being edited.
-   *
-   * @param {SourceType} source - The source to be set as the one being edited.
-   */
-  const onEditSource = (source: SourceType) => {
-    setSourceBeingEdited(source);
-  };
-
-  /**
    * Closes the connections view by resetting selected connections and clearing connection data.
    * Ensures consistent state of list by forcing a refresh.
    */
@@ -133,6 +126,124 @@ const SourcesListView: React.FunctionComponent = () => {
    */
   const onScanSource = (source: SourceType) => {
     setScanSelected([source]);
+  };
+
+  /**
+   * Invalidates the sources query to refresh the list
+   */
+  const refreshSourcesList = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: [API_SOURCES_LIST_QUERY] });
+  }, [queryClient]);
+
+  /**
+   * Clears all form validation errors
+   */
+  const clearSourceErrors = useCallback(() => {
+    setSourceErrors(undefined);
+  }, []);
+
+  /**
+   * Opens the add source modal for a specific source type
+   */
+  const openAddSourceModal = useCallback((sourceType: string) => {
+    setAddSourceModal(sourceType);
+    setSourceErrors(undefined);
+  }, []);
+
+  /**
+   * Closes the add source modal
+   */
+  const closeAddSourceModal = useCallback(() => {
+    setAddSourceModal(undefined);
+    setSourceErrors(undefined);
+  }, []);
+
+  /**
+   * Opens the edit source modal for a specific source
+   */
+  const openEditSourceModal = useCallback((source: SourceType) => {
+    setSourceBeingEdited(source);
+    setSourceErrors(undefined);
+  }, []);
+
+  /**
+   * Closes the edit source modal
+   */
+  const closeEditSourceModal = useCallback(() => {
+    setSourceBeingEdited(undefined);
+    setSourceErrors(undefined);
+  }, []);
+
+  /**
+   * Handles adding a new source
+   */
+  const handleAddSourceSubmit = useCallback(
+    async (payload: SourceType) => {
+      try {
+        await addSources(payload);
+        refreshSourcesList();
+        closeAddSourceModal();
+      } catch (error) {
+        // Error is handled by the API hook via setSourceErrors callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Source submission failed, handled by API hook');
+      }
+    },
+    [addSources, refreshSourcesList, closeAddSourceModal]
+  );
+
+  /**
+   * Handles editing an existing source
+   */
+  const handleEditSourceSubmit = useCallback(
+    async (payload: SourceType) => {
+      try {
+        await editSources(payload);
+        refreshSourcesList();
+        closeEditSourceModal();
+      } catch (error) {
+        // Error is handled by the API hook via setSourceErrors callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Source edit failed, handled by API hook');
+      }
+    },
+    [editSources, refreshSourcesList, closeEditSourceModal]
+  );
+
+  /**
+   * Handles deleting sources (single or multiple)
+   */
+  const handleDeleteSources = useCallback(
+    async (source: SourceType | SourceType[]) => {
+      try {
+        await deleteSources(source);
+        refreshSourcesList();
+      } catch (error) {
+        // Error is handled by the API hook via addAlert callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Source deletion failed, handled by API hook');
+      }
+    },
+    [deleteSources, refreshSourcesList]
+  );
+
+  // Create form state objects for the modals
+  const addSourceForm = {
+    isOpen: addSourceModal !== undefined,
+    sourceType: addSourceModal,
+    onSubmit: handleAddSourceSubmit,
+    onClose: closeAddSourceModal,
+    errors: sourceErrors,
+    onClearErrors: clearSourceErrors
+  };
+
+  const editSourceForm = {
+    isOpen: sourceBeingEdited !== undefined,
+    source: sourceBeingEdited,
+    onSubmit: handleEditSourceSubmit,
+    onClose: closeEditSourceModal,
+    errors: sourceErrors,
+    onClearErrors: clearSourceErrors
   };
 
   /**
@@ -254,7 +365,7 @@ const SourcesListView: React.FunctionComponent = () => {
       label={t('view.empty-state_label_sources')}
       menuToggleOuiaId="add_source_button"
       variant="primary"
-      onSelect={item => setAddSourceModal(item)}
+      onSelect={openAddSourceModal}
       dropdownItems={[
         { item: t('dataSource.network'), ouiaId: 'network' },
         { item: t('dataSource.openshift'), ouiaId: 'openshift' },
@@ -292,9 +403,8 @@ const SourcesListView: React.FunctionComponent = () => {
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedSources()}
             onClick={() =>
-              deleteSources(selectedItems).finally(() => {
+              handleDeleteSources(selectedItems).finally(() => {
                 setSelectedItems([]);
-                onRefresh();
               })
             }
           >
@@ -416,7 +526,11 @@ const SourcesListView: React.FunctionComponent = () => {
                     item={source}
                     size="sm"
                     actions={[
-                      { label: t('table.label', { context: 'edit' }), onClick: onEditSource, ouiaId: 'edit-source' },
+                      {
+                        label: t('table.label', { context: 'edit' }),
+                        onClick: openEditSourceModal,
+                        ouiaId: 'edit-source'
+                      },
                       {
                         label: t('table.label', { context: 'delete' }),
                         disabled: sourceHasConnection(source),
@@ -478,9 +592,8 @@ const SourcesListView: React.FunctionComponent = () => {
             variant="danger"
             onClick={() => {
               if (pendingDeleteSource) {
-                deleteSources(pendingDeleteSource).finally(() => {
+                handleDeleteSources(pendingDeleteSource).finally(() => {
                   setPendingDeleteSource(undefined);
-                  onRefresh();
                 });
               }
             }}
@@ -499,38 +612,20 @@ const SourcesListView: React.FunctionComponent = () => {
       </Modal>
       {/* TODO: Simplify add/edit sources functionality * check PR #380 for details */}
       <AddSourceModal
-        isOpen={sourceBeingEdited !== undefined}
-        source={sourceBeingEdited}
-        onClose={() => setSourceBeingEdited(undefined)}
-        onSubmit={(payload: SourceType) =>
-          editSources(payload)
-            .then(() => {
-              queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-              setSourceBeingEdited(undefined);
-            })
-            .catch(err => {
-              if (!helpers.TEST_MODE) {
-                console.error(err);
-              }
-            })
-        }
+        isOpen={editSourceForm.isOpen}
+        source={editSourceForm.source}
+        errors={editSourceForm.errors}
+        onClose={editSourceForm.onClose}
+        onSubmit={editSourceForm.onSubmit}
+        onClearErrors={editSourceForm.onClearErrors}
       />
       <AddSourceModal
-        isOpen={addSourceModal !== undefined}
-        sourceType={addSourceModal}
-        onClose={() => setAddSourceModal(undefined)}
-        onSubmit={(payload: SourceType) =>
-          addSources(payload)
-            .then(() => {
-              queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
-              setAddSourceModal(undefined);
-            })
-            .catch(err => {
-              if (!helpers.TEST_MODE) {
-                console.error(err);
-              }
-            })
-        }
+        isOpen={addSourceForm.isOpen}
+        sourceType={addSourceForm.sourceType}
+        errors={addSourceForm.errors}
+        onClose={addSourceForm.onClose}
+        onSubmit={addSourceForm.onSubmit}
+        onClearErrors={addSourceForm.onClearErrors}
       />
       <AddSourcesScanModal
         isOpen={scanSelected !== undefined}
