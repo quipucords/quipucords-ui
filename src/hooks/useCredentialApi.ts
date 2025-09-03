@@ -158,7 +158,10 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
+const useAddCredentialApi = (
+  onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void
+) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
@@ -176,24 +179,32 @@ const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'success'
       });
-      return;
+      return response;
     },
     [onAddAlert, t]
   );
 
   const callbackError = useCallback(
     (error: AxiosError<ApiCredentialErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.description', {
-          context: 'add-credential_error',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      // Check if this is a field validation error
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        // Handle field-specific errors inline
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        // Show general error as toast
+        onAddAlert({
+          title: t('toast-notifications.description', {
+            context: 'add-credential_error',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const addCredentials = useCallback(
@@ -208,6 +219,7 @@ const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         if (!helpers.TEST_MODE) {
           console.error(error);
         }
+        throw error;
       }
       return callbackSuccess(response);
     },
@@ -222,7 +234,10 @@ const useAddCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   };
 };
 
-const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
+const useEditCredentialApi = (
+  onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void
+) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
@@ -240,24 +255,32 @@ const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         }),
         variant: 'success'
       });
-      return;
+      return response;
     },
     [onAddAlert, t]
   );
 
   const callbackError = useCallback(
     (error: AxiosError<ApiCredentialErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.description', {
-          context: 'credential_edit_error',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      // Check if this is a field validation error
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        // Handle field-specific errors inline
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        // Show general error as toast
+        onAddAlert({
+          title: t('toast-notifications.description', {
+            context: 'credential_edit_error',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const editCredentials = useCallback(
@@ -272,6 +295,7 @@ const useEditCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
         if (!helpers.TEST_MODE) {
           console.error(error);
         }
+        throw error;
       }
       return callbackSuccess(response);
     },

@@ -7,6 +7,7 @@
  *@module credentialsListView
  */
 import * as React from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
@@ -46,21 +47,140 @@ import {
 } from '../../vendor/react-table-batteries';
 import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
-import { AddCredentialModal } from './addCredentialModal';
+import { AddCredentialModal, CredentialErrorType } from './addCredentialModal';
 import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
-  const [addCredentialModal, setAddCredentialModal] = React.useState<string>();
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
-  const [credentialBeingEdited, setCredentialBeingEdited] = React.useState<CredentialType>();
   const { addAlert, alerts, removeAlert } = useAlerts();
-  const { deleteCredentials } = useDeleteCredentialApi(addAlert);
-  const { addCredentials } = useAddCredentialApi(addAlert);
-  const { editCredentials } = useEditCredentialApi(addAlert);
   const { queryClient } = useQueryClientConfig();
+  const [addCredentialModal, setAddCredentialModal] = useState<string>();
+  const [credentialBeingEdited, setCredentialBeingEdited] = useState<CredentialType>();
+  const [credentialErrors, setCredentialErrors] = useState<CredentialErrorType | undefined>();
+  const { deleteCredentials } = useDeleteCredentialApi(addAlert);
+  const { addCredentials } = useAddCredentialApi(addAlert, setCredentialErrors);
+  const { editCredentials } = useEditCredentialApi(addAlert, setCredentialErrors);
+
+  /**
+   * Invalidates the credentials query to refresh the list
+   */
+  const refreshCredentialsList = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
+  }, [queryClient]);
+
+  /**
+   * Clears all form validation errors
+   */
+  const clearCredentialErrors = useCallback(() => {
+    setCredentialErrors(undefined);
+  }, []);
+
+  /**
+   * Opens the add credential modal for a specific credential type
+   */
+  const openAddCredentialModal = useCallback((credentialType: string) => {
+    setAddCredentialModal(credentialType);
+    setCredentialErrors(undefined);
+  }, []);
+
+  /**
+   * Closes the add credential modal
+   */
+  const closeAddCredentialModal = useCallback(() => {
+    setAddCredentialModal(undefined);
+    setCredentialErrors(undefined);
+  }, []);
+
+  /**
+   * Opens the edit credential modal for a specific credential
+   */
+  const openEditCredentialModal = useCallback((credential: CredentialType) => {
+    setCredentialBeingEdited(credential);
+    setCredentialErrors(undefined);
+  }, []);
+
+  /**
+   * Closes the edit credential modal
+   */
+  const closeEditCredentialModal = useCallback(() => {
+    setCredentialBeingEdited(undefined);
+    setCredentialErrors(undefined);
+  }, []);
+
+  /**
+   * Handles adding a new credential
+   */
+  const handleAddCredentialSubmit = useCallback(
+    async (payload: CredentialType) => {
+      try {
+        await addCredentials(payload);
+        refreshCredentialsList();
+        closeAddCredentialModal();
+      } catch (error) {
+        // Error is handled by the API hook via setCredentialErrors callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Credential submission failed, handled by API hook');
+      }
+    },
+    [addCredentials, refreshCredentialsList, closeAddCredentialModal]
+  );
+
+  /**
+   * Handles editing an existing credential
+   */
+  const handleEditCredentialSubmit = useCallback(
+    async (payload: CredentialType) => {
+      try {
+        await editCredentials(payload);
+        refreshCredentialsList();
+        closeEditCredentialModal();
+      } catch (error) {
+        // Error is handled by the API hook via setCredentialErrors callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Credential edit failed, handled by API hook');
+      }
+    },
+    [editCredentials, refreshCredentialsList, closeEditCredentialModal]
+  );
+
+  /**
+   * Handles deleting credentials (single or multiple)
+   */
+  const handleDeleteCredentials = useCallback(
+    async (credential: CredentialType | CredentialType[]) => {
+      try {
+        await deleteCredentials(credential);
+        refreshCredentialsList();
+      } catch (error) {
+        // Error is handled by the API hook via addAlert callback
+        // This catch prevents unhandled promise rejection warnings
+        console.debug('Credential deletion failed, handled by API hook');
+      }
+    },
+    [deleteCredentials, refreshCredentialsList]
+  );
+
+  // Create form state objects for the modals
+  const addCredentialForm = {
+    isOpen: addCredentialModal !== undefined,
+    credentialType: addCredentialModal,
+    onSubmit: handleAddCredentialSubmit,
+    onClose: closeAddCredentialModal,
+    errors: credentialErrors,
+    onClearErrors: clearCredentialErrors
+  };
+
+  const editCredentialForm = {
+    isOpen: credentialBeingEdited !== undefined,
+    credential: credentialBeingEdited,
+    onSubmit: handleEditCredentialSubmit,
+    onClose: closeEditCredentialModal,
+    errors: credentialErrors,
+    onClearErrors: clearCredentialErrors
+  };
 
   /**
    * Fetches the translated label for a credential type.
@@ -85,16 +205,7 @@ const CredentialsListView: React.FunctionComponent = () => {
    * Invalidates the query cache for the creds list, triggering a refresh.
    */
   const onRefresh = () => {
-    queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-  };
-
-  /**
-   * Sets the credential that is being currently edited.
-   *
-   * @param {CredentialType} credential - The credential to be set as the one being edited.
-   */
-  const onEditCredential = (credential: CredentialType) => {
-    setCredentialBeingEdited(credential);
+    refreshCredentialsList();
   };
 
   /**
@@ -207,7 +318,7 @@ const CredentialsListView: React.FunctionComponent = () => {
       label={t('view.empty-state_label_credentials')}
       menuToggleOuiaId="add_credential_button"
       variant="primary"
-      onSelect={item => setAddCredentialModal(item)}
+      onSelect={openAddCredentialModal}
       dropdownItems={[
         { item: t('dataSource.network'), ouiaId: 'network' },
         { item: t('dataSource.openshift'), ouiaId: 'openshift' },
@@ -231,9 +342,8 @@ const CredentialsListView: React.FunctionComponent = () => {
             variant={ButtonVariant.secondary}
             isDisabled={!hasSelectedCredentials()}
             onClick={() =>
-              deleteCredentials(selectedItems).finally(() => {
+              handleDeleteCredentials(selectedItems).finally(() => {
                 setSelectedItems([]);
-                onRefresh();
               })
             }
           >
@@ -313,7 +423,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                     actions={[
                       {
                         label: t('table.label', { context: 'edit' }),
-                        onClick: onEditCredential,
+                        onClick: openEditCredentialModal,
                         ouiaId: 'edit-credential'
                       },
                       {
@@ -371,9 +481,8 @@ const CredentialsListView: React.FunctionComponent = () => {
             variant="danger"
             onClick={() => {
               if (pendingDeleteCredential) {
-                deleteCredentials(pendingDeleteCredential).finally(() => {
+                handleDeleteCredentials(pendingDeleteCredential).finally(() => {
                   setPendingDeleteCredential(undefined);
-                  onRefresh();
                 });
               }
             }}
@@ -391,38 +500,20 @@ const CredentialsListView: React.FunctionComponent = () => {
         })}
       </Modal>
       <AddCredentialModal
-        isOpen={credentialBeingEdited !== undefined}
-        credential={credentialBeingEdited}
-        onClose={() => setCredentialBeingEdited(undefined)}
-        onSubmit={(payload: CredentialType) =>
-          editCredentials(payload)
-            .then(() => {
-              queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-              setCredentialBeingEdited(undefined);
-            })
-            .catch(err => {
-              if (!helpers.TEST_MODE) {
-                console.error(err);
-              }
-            })
-        }
+        isOpen={editCredentialForm.isOpen}
+        credential={editCredentialForm.credential}
+        errors={editCredentialForm.errors}
+        onClose={editCredentialForm.onClose}
+        onSubmit={editCredentialForm.onSubmit}
+        onClearErrors={editCredentialForm.onClearErrors}
       />
       <AddCredentialModal
-        isOpen={addCredentialModal !== undefined}
-        credentialType={addCredentialModal}
-        onClose={() => setAddCredentialModal(undefined)}
-        onSubmit={(payload: CredentialType) =>
-          addCredentials(payload)
-            .then(() => {
-              queryClient.invalidateQueries({ queryKey: [API_CREDS_LIST_QUERY] });
-              setAddCredentialModal(undefined);
-            })
-            .catch(err => {
-              if (!helpers.TEST_MODE) {
-                console.error(err);
-              }
-            })
-        }
+        isOpen={addCredentialForm.isOpen}
+        credentialType={addCredentialForm.credentialType}
+        errors={addCredentialForm.errors}
+        onClose={addCredentialForm.onClose}
+        onSubmit={addCredentialForm.onSubmit}
+        onClearErrors={addCredentialForm.onClearErrors}
       />
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
