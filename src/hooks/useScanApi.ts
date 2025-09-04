@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { type AlertProps } from '@patternfly/react-core';
 import axios, { AxiosError, type AxiosResponse, isAxiosError, type AxiosRequestConfig } from 'axios';
@@ -23,6 +23,12 @@ type ApiScanErrorType = {
   detail?: string;
   message: string;
 };
+
+enum MergeProcessState {
+  InProgress,
+  Successful,
+  Errored
+}
 
 const useCreateScanApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
@@ -489,78 +495,93 @@ const useShowConnectionsApi = () => {
 };
 
 const useMergeReportsApi = () => {
-  const mergeReportsCall = useCallback((report_ids: number[]): Promise<AxiosResponse> => {
-    return axios.post(`${process.env.REACT_APP_REPORTS_SERVICE_MERGE}`, { reports: report_ids });
-  }, []);
+  const [mergeProcessState, setMergeProcessState] = useState<{
+    state: MergeProcessState;
+    mergedReportId: number | undefined;
+  }>({ state: MergeProcessState.InProgress, mergedReportId: undefined });
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [mergeJobId, setMergeJobId] = useState<number | undefined>(undefined);
+  const [mergePollAttempt, setMergePollAttempt] = useState<number>(0);
 
-  const jobStatusCall = useCallback((job_id: number): Promise<AxiosResponse> => {
-    return axios.get(`/api/v2/jobs/${job_id}/`);
-  }, []);
-
-  // FIXME: on success return data / report_id, so we can request download
-  const callbackSuccess = useCallback((_response: AxiosResponse): boolean => true, []);
-
-  const callbackError = useCallback((error: AxiosError) => Promise.reject(error), []);
-
-  const pollJobStatusCall = useCallback(async (job_id: number): Promise<AxiosResponse> => {
-    // FIXME: recursive function with awaited timeout. Can we switch to setInterval?
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  const requestReportsMerge = useCallback(async (report_ids: number[]) => {
+    let response: AxiosResponse;
     try {
-      const response = await jobStatusCall(job_id);
-      const response_data = response?.data; // FIXME: can we static type this?
-
-      // FIXME: other statuses?
-      if (response_data.status === 'completed') {
-        return response;
+      response = await axios.post(`${process.env.REACT_APP_REPORTS_SERVICE_MERGE}`, { reports: report_ids });
+      const jobId = response.data.job_id;
+      if (!jobId) {
+        // FIXME: translate
+        throw new Error('Server did not return job_id value');
       }
-
-      if (response_data.status === 'failed') {
-        // FIXME: error handling
-        const error = new Error('Job failed');
-        Object.assign(error, { isAxiosError: true, response: { data: { message: 'Job failed' } } });
-        throw error;
-      }
-
-      return pollJobStatusCall(job_id);
+      setMergeJobId(jobId);
     } catch (error) {
       if (isAxiosError(error)) {
-        return callbackError(error);
+        setErrorMessage(error.message);
+      } else if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        // FIXME: translate?
+        setErrorMessage('Unknown error');
       }
-      throw error;
     }
   }, []);
 
-  const mergeReports = useCallback(
-    async (report_ids: number[]) => {
-      let response;
-      try {
-        response = await mergeReportsCall(report_ids);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          return callbackError(error);
+  const cancelReportsMerge = useCallback((): void => {
+    setMergeProcessState({
+      state: MergeProcessState.InProgress,
+      mergedReportId: undefined
+    });
+    setErrorMessage(undefined);
+    setMergeJobId(undefined);
+    setMergePollAttempt(0);
+  }, []);
+
+  useEffect(() => {
+    if (mergeJobId === undefined) {
+      return;
+    }
+
+    axios
+      // FIXME: hardcoded URL
+      .get(`/api/v2/jobs/${mergeJobId}/`)
+      .then(response => {
+        const status = response.data.status;
+        // FIXME: support other statuses?
+        if (status === 'completed') {
+          setMergeProcessState({
+            state: MergeProcessState.Successful,
+            mergedReportId: response.data.report_id
+          });
+          return;
         }
-      }
-      const job_id = response.data.job_id;
-      // FIXME: should we handle missing job_id?
-      // if (!jobId) {}
-      let pollResponse;
-      try {
-        pollResponse = await pollJobStatusCall(job_id);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          return callbackError(error);
+
+        if (status === 'failed') {
+          setMergeProcessState({
+            state: MergeProcessState.Errored,
+            mergedReportId: undefined
+          });
+          // FIXME: translate?
+          setErrorMessage('Merge job failed');
+          return;
         }
-      }
-      return callbackSuccess(pollResponse);
-    },
-    [mergeReportsCall, callbackSuccess, callbackError]
-  );
+
+        // FIXME: hardcoded wait time
+        setTimeout(() => setMergePollAttempt(mergePollAttempt + 1), 1000);
+      })
+      .catch(error => {
+        if (isAxiosError(error)) {
+          setErrorMessage(error.message);
+        } else {
+          // FIXME: translate?
+          setErrorMessage('Unknown error');
+        }
+      });
+  }, [mergeJobId, mergePollAttempt]);
 
   return {
-    mergeReportsCall,
-    callbackError,
-    callbackSuccess,
-    mergeReports
+    requestReportsMerge,
+    cancelReportsMerge,
+    errorMessage,
+    mergeProcessState
   };
 };
 
@@ -572,5 +593,6 @@ export {
   useGetScanJobsApi,
   useDownloadReportApi,
   useShowConnectionsApi,
-  useMergeReportsApi
+  useMergeReportsApi,
+  MergeProcessState
 };

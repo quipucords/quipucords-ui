@@ -361,6 +361,7 @@
     "error_title_sources": "Sources is temporarily unavailable",
     "label_credentials": "Credentials",
     "label_scans-names": "Scans: {{name}}",
+    "label_merge": "Merge reports",
     "label_sources": "Sources",
     "label_not-found_home": "Take me home"
   },

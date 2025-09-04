@@ -42,7 +42,6 @@ import {
   useDownloadReportApi,
   useGetAggregateReportApi,
   useGetScanJobsApi,
-  useMergeReportsApi,
   useRunScanApi
 } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
@@ -55,6 +54,7 @@ import {
 } from '../../vendor/react-table-batteries';
 import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
+import { MergeReportsModal } from './mergeReportsModal';
 import { ShowAggregateReportModal } from './showAggregateReportModal';
 import { ShowScansModal } from './showScansModal';
 import { useScansQuery } from './useScansQuery';
@@ -70,6 +70,7 @@ const ScansListView: React.FunctionComponent = () => {
     id: number;
     report: ReportsAggregateResponse;
   }>();
+  const [reportIdsToMerge, setReportIdsToMerge] = React.useState<number[]>([]);
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { deleteScans } = useDeleteScanApi(addAlert);
@@ -77,7 +78,6 @@ const ScansListView: React.FunctionComponent = () => {
   const { getScanJobs } = useGetScanJobsApi(addAlert);
   const { downloadReport } = useDownloadReportApi(addAlert);
   const { getAggregateReport } = useGetAggregateReportApi(addAlert);
-  const { mergeReports } = useMergeReportsApi();
   const nav = useNavigate();
 
   /**
@@ -202,7 +202,7 @@ const ScansListView: React.FunctionComponent = () => {
                   const reportIds = selectedItems
                     .map(scan => scan.most_recent?.report_id)
                     .filter(val => val !== undefined);
-                  mergeReports(reportIds);
+                  setReportIdsToMerge(reportIds);
                 }}
               >
                 {t('table.label', { context: 'merge-reports' })}
@@ -436,6 +436,17 @@ const ScansListView: React.FunctionComponent = () => {
             {t('table.label', { context: 'close' })}
           </Button>
         ]}
+      />
+      <MergeReportsModal
+        isOpen={reportIdsToMerge.length > 0}
+        reportIds={reportIdsToMerge}
+        onClose={() => {
+          setReportIdsToMerge([]);
+        }}
+        onSuccess={mergedReportId => {
+          downloadReport(mergedReportId);
+          setReportIdsToMerge([]);
+        }}
       />
       <Modal
         variant={ModalVariant.small}
