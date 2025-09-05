@@ -90,6 +90,90 @@ exports[`useLogoutApi should handle errors while attempting to logout a user: lo
 }
 `;
 
+exports[`useLogoutApi should handle logout with theme preservation on API error: logout error - theme not preserved 1`] = `
+{
+  "localStorageInteractions": {
+    "getItemCalls": [
+      [
+        "discovery-ui-theme",
+      ],
+    ],
+    "setItemCalls": [],
+  },
+}
+`;
+
+exports[`useLogoutApi should handle logout with theme preservation on API error: logout error with theme preservation 1`] = `
+{
+  "isAxiosError": true,
+  "message": "Mock error",
+}
+`;
+
+exports[`useLogoutApi should handle logout with theme preservation when theme exists in localStorage: logout with dark theme preservation 1`] = `
+{
+  "cookieRemovalCalls": [
+    [
+      "user",
+    ],
+  ],
+  "localStorageInteractions": {
+    "getItemCalls": [
+      [
+        "discovery-ui-theme",
+      ],
+    ],
+    "setItemCalls": [
+      [
+        "discovery-ui-theme",
+        "dark",
+      ],
+    ],
+  },
+}
+`;
+
+exports[`useLogoutApi should handle logout with theme preservation when theme is light in localStorage: logout with light theme preservation 1`] = `
+{
+  "cookieRemovalCalls": [
+    [
+      "user",
+    ],
+  ],
+  "localStorageInteractions": {
+    "getItemCalls": [
+      [
+        "discovery-ui-theme",
+      ],
+    ],
+    "setItemCalls": [
+      [
+        "discovery-ui-theme",
+        "light",
+      ],
+    ],
+  },
+}
+`;
+
+exports[`useLogoutApi should handle logout without theme preservation when no theme in localStorage: logout without theme preservation 1`] = `
+{
+  "cookieRemovalCalls": [
+    [
+      "user",
+    ],
+  ],
+  "localStorageInteractions": {
+    "getItemCalls": [
+      [
+        "discovery-ui-theme",
+      ],
+    ],
+    "setItemCalls": [],
+  },
+}
+`;
+
 exports[`useLogoutApi should handle success while attempting to logout a user: logout, success 1`] = `undefined`;
 
 exports[`useLogoutApi should process an API error response: callbackError 1`] = `
@@ -99,6 +183,30 @@ exports[`useLogoutApi should process an API error response: callbackError 1`] = 
       "message": "Dolor sit",
     },
   },
+}
+`;
+
+exports[`useLogoutApi should process an API success response with theme preservation: callbackSuccess with theme preservation 1`] = `
+[
+  [
+    "user",
+  ],
+]
+`;
+
+exports[`useLogoutApi should process an API success response with theme preservation: theme preservation in callbackSuccess 1`] = `
+{
+  "cookieCalls": [
+    [
+      "user",
+    ],
+  ],
+  "localStorageCalls": [
+    [
+      "discovery-ui-theme",
+      "dark",
+    ],
+  ],
 }
 `;
 
