@@ -12,10 +12,11 @@ import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-ta
 import { type SourceType, type Connections } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
-export const MAX_HOSTS_PER_CATEGORY = 5;
+const MAX_HOSTS_PER_CATEGORY = 5;
 
 interface ShowConnectionsModalProps {
   isOpen: boolean;
+  maxHostsPerCategory?: number;
   source?: Pick<SourceType, 'name'>;
   onClose?: () => void;
   connections: Connections;
@@ -23,6 +24,7 @@ interface ShowConnectionsModalProps {
 
 const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
   isOpen,
+  maxHostsPerCategory = MAX_HOSTS_PER_CATEGORY,
   source,
   onClose = Function.prototype,
   connections
@@ -41,7 +43,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
   );
 
   const additionalHostsToolTip = (numHosts: number): string => {
-    const additionalHosts: number = numHosts - MAX_HOSTS_PER_CATEGORY;
+    const additionalHosts: number = numHosts - maxHostsPerCategory;
     let toolTipContent: string = '';
     if (additionalHosts === 1) {
       toolTipContent = `There is ${additionalHosts} additional host not shown.`;
@@ -126,11 +128,11 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                     <List isPlain>
                       {(connections[obj.category]?.length &&
                         connections[obj.category]
-                          .slice(0, MAX_HOSTS_PER_CATEGORY)
+                          .slice(0, maxHostsPerCategory)
                           .map(connection => <ListItem key={connection.name}>{connection.name}</ListItem>)) || (
                         <ListItem>N/A</ListItem>
                       )}
-                      {connections[obj.category]?.length > MAX_HOSTS_PER_CATEGORY && (
+                      {connections[obj.category]?.length > maxHostsPerCategory && (
                         <ListItem key="more">
                           <Tooltip content={additionalHostsToolTip(connections[obj.category]?.length)}>
                             <span>...</span>
