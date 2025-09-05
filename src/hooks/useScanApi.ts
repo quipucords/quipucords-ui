@@ -577,6 +577,18 @@ const useMergeReportsApi = () => {
       });
   }, [mergeJobId, mergePollAttempt]);
 
+  // FIXME: keep useEffect or do it explicitly in catch blocks?
+  useEffect(() => {
+    if (errorMessage === undefined) {
+      return;
+    }
+
+    setMergeProcessState({
+      state: MergeProcessState.Errored,
+      mergedReportId: undefined
+    });
+  }, [errorMessage]);
+
   return {
     requestReportsMerge,
     cancelReportsMerge,
