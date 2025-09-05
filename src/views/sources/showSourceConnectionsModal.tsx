@@ -5,15 +5,18 @@
  * @module connectionsModal
  */
 import React, { useCallback, useState } from 'react';
-import { Button, Icon, List, ListItem } from '@patternfly/react-core';
+import { Button, Icon, List, ListItem, Tooltip } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
 import { type SourceType, type Connections } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
+const MAX_HOSTS_PER_CATEGORY = 5;
+
 interface ShowConnectionsModalProps {
   isOpen: boolean;
+  maxHostsPerCategory?: number;
   source?: Pick<SourceType, 'name'>;
   onClose?: () => void;
   connections: Connections;
@@ -21,6 +24,7 @@ interface ShowConnectionsModalProps {
 
 const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
   isOpen,
+  maxHostsPerCategory = MAX_HOSTS_PER_CATEGORY,
   source,
   onClose = Function.prototype,
   connections
@@ -37,6 +41,17 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
     },
     [expanded]
   );
+
+  const additionalHostsToolTip = (numHosts: number): string => {
+    const additionalHosts: number = numHosts - maxHostsPerCategory;
+    let toolTipContent: string = '';
+    if (additionalHosts === 1) {
+      toolTipContent = `There is ${additionalHosts} additional host not shown.`;
+    } else {
+      toolTipContent = `There are ${additionalHosts} additional hosts not shown.`;
+    }
+    return `${toolTipContent}`;
+  };
 
   return (
     <Modal
@@ -112,9 +127,18 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                   <ExpandableRowContent>
                     <List isPlain>
                       {(connections[obj.category]?.length &&
-                        connections[obj.category].map(connection => (
-                          <ListItem key={connection.name}>{connection.name}</ListItem>
-                        ))) || <ListItem>N/A</ListItem>}
+                        connections[obj.category]
+                          .slice(0, maxHostsPerCategory)
+                          .map(connection => <ListItem key={connection.name}>{connection.name}</ListItem>)) || (
+                        <ListItem>N/A</ListItem>
+                      )}
+                      {connections[obj.category]?.length > maxHostsPerCategory && (
+                        <ListItem key="more">
+                          <Tooltip content={additionalHostsToolTip(connections[obj.category]?.length)}>
+                            <span>...</span>
+                          </Tooltip>
+                        </ListItem>
+                      )}
                     </List>
                   </ExpandableRowContent>
                 </Td>
