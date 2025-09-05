@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MergeReportsModal should render a basic component: basic 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "view.label",
+  {
+    "context": "merge"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="Merging reports"
+    />
+  </Bullseye>
+</Modal>
+`;
+
+exports[`MergeReportsModal should render a component after merge failed: errored 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "view.label",
+  {
+    "context": "merge"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="Something went wrong"
+    >
+      <EmptyStateBody>
+        Error would go here: 
+        Lorem ipsum dolor sit
+      </EmptyStateBody>
+    </EmptyState>
+  </Bullseye>
+</Modal>
+`;
+
+exports[`MergeReportsModal should render a component after merge succeeded: success 1`] = `
+<Modal
+  actions={[]}
+  appendTo={[Function]}
+  aria-describedby=""
+  aria-label=""
+  aria-labelledby=""
+  className=""
+  hasNoBodyWrapper={false}
+  isOpen={true}
+  onClose={[Function]}
+  ouiaSafe={true}
+  position="default"
+  showClose={true}
+  title="t([
+  "view.label",
+  {
+    "context": "merge"
+  }
+])"
+  titleIconVariant={null}
+  titleLabel=""
+  variant="medium"
+>
+  <Bullseye>
+    <EmptyState
+      headingLevel="h2"
+      icon={[Function]}
+      titleText="Success"
+    >
+      <EmptyStateBody>
+        Your download will start automatically
+      </EmptyStateBody>
+    </EmptyState>
+  </Bullseye>
+</Modal>
+`;

@@ -35,6 +35,7 @@ const MergeReportsModal: React.FC<MergeReportsModalProps> = ({
       requestReportsMerge(reportIds);
     } else {
       cancelReportsMerge();
+      initiatedDownload.current = false;
     }
   }, [isOpen, requestReportsMerge, cancelReportsMerge, reportIds]);
 
