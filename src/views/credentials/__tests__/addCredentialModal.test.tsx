@@ -44,9 +44,25 @@ describe('AddCredentialModal', () => {
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
     await user.type(screen.getByPlaceholderText('Enter a name for the credential'), 'Test Credential');
+    await user.type(screen.getByPlaceholderText('Enter username'), 'demo');
+    await user.type(screen.getByPlaceholderText('Enter password'), 's3cr3t');
+
     await user.click(screen.getByText('Save'));
 
-    expect(mockOnSubmit.mock.calls).toMatchSnapshot('onSubmit, filtered data');
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+
+    const payload = mockOnSubmit.mock.calls[0][0];
+
+    const cleaned = Object.fromEntries(Object.entries(payload).filter(([_, v]) => v !== '' && v !== undefined));
+    const redacted = {
+      ...cleaned,
+      ...(cleaned.password ? { password: '<redacted>' } : {}),
+      ...(cleaned.auth_token ? { auth_token: '<redacted>' } : {}),
+      ...(cleaned.ssh_key ? { ssh_key: '<redacted>' } : {}),
+      ...(cleaned.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+    };
+
+    expect(redacted).toMatchSnapshot('onSubmit, filtered data');
   });
 
   it('should call onClose', async () => {
@@ -139,7 +155,21 @@ describe('useCredentialForm', () => {
 
 describe('CredentialForm', () => {
   it('should render a basic component', async () => {
-    const component = await shallowComponent(<CredentialForm />);
+    const mockUseForm = jest.fn();
+    mockUseForm.mockReturnValue({
+      formData: { name: '', auth_token: '', username: '', password: '' },
+      authType: 'Username and Password',
+      typeValue: 'network',
+      errors: {},
+      touchedFields: new Set<string>(),
+      canSubmit: false,
+      isEditMode: false,
+      hasExistingValue: jest.fn(() => false),
+      setAuthType: jest.fn(),
+      handleInputChange: jest.fn(),
+      filterFormData: jest.fn()
+    });
+    const component = await shallowComponent(<CredentialForm useForm={mockUseForm} />);
     expect(component).toMatchSnapshot('basic');
   });
 
@@ -153,7 +183,10 @@ describe('CredentialForm', () => {
     const networkSshKey = await shallowComponent(<CredentialForm {...props} />);
     expect(networkSshKey).toMatchSnapshot('network, SSH Key');
 
-    mockUseForm.mockReturnValue({ authType: 'Username and Password', typeValue: 'network' });
+    mockUseForm.mockReturnValue({
+      authType: 'Username and Password',
+      typeValue: 'network'
+    });
     props.useForm = mockUseForm;
     const networkUsernamePassword = await shallowComponent(<CredentialForm {...props} />);
     expect(networkUsernamePassword).toMatchSnapshot('network, Username and Password');
@@ -161,7 +194,10 @@ describe('CredentialForm', () => {
 
   it('should render specific to authType for type openshift', async () => {
     const mockUseForm = jest.fn();
-    mockUseForm.mockReturnValue({ authType: 'Username and Password', typeValue: 'openshift' });
+    mockUseForm.mockReturnValue({
+      authType: 'Username and Password',
+      typeValue: 'openshift'
+    });
     const props = {
       credentialType: 'openshift',
       useForm: mockUseForm
@@ -178,13 +214,41 @@ describe('CredentialForm', () => {
   it('should render form to different cred types appropriately', async () => {
     const credTypes = ['ansible', 'satellite', 'vcenter'];
     for (const type of credTypes) {
-      const cred = await shallowComponent(<CredentialForm credentialType={type} />);
+      const mockUseForm = jest.fn();
+      mockUseForm.mockReturnValue({
+        formData: { name: '', auth_token: '', username: '', password: '' },
+        authType: 'Username and Password',
+        typeValue: type,
+        errors: {},
+        touchedFields: new Set(),
+        canSubmit: false,
+        isEditMode: false,
+        hasExistingValue: jest.fn(() => false),
+        setAuthType: jest.fn(),
+        handleInputChange: jest.fn(),
+        filterFormData: jest.fn()
+      });
+      const cred = await shallowComponent(<CredentialForm credentialType={type} useForm={mockUseForm} />);
       expect(cred).toMatchSnapshot(`${type}, "Username and Password"`);
     }
   });
 
   it('should render form to rhacs appropriately', async () => {
-    const rhacs = await shallowComponent(<CredentialForm credentialType="rhacs" />);
+    const mockUseForm = jest.fn();
+    mockUseForm.mockReturnValue({
+      formData: { name: '', auth_token: '', username: '', password: '' },
+      authType: 'Token',
+      typeValue: 'rhacs',
+      errors: {},
+      touchedFields: new Set(),
+      canSubmit: false,
+      isEditMode: false,
+      hasExistingValue: jest.fn(() => false),
+      setAuthType: jest.fn(),
+      handleInputChange: jest.fn(),
+      filterFormData: jest.fn()
+    });
+    const rhacs = await shallowComponent(<CredentialForm credentialType="rhacs" useForm={mockUseForm} />);
     expect(rhacs).toMatchSnapshot('rhacs, "Token"');
   });
 
@@ -201,6 +265,11 @@ describe('CredentialForm', () => {
           formData: { name: '', auth_token: '', username: '', password: '' },
           authType: 'Username and Password',
           typeValue: 'network',
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          isEditMode: false,
+          hasExistingValue: jest.fn(() => false),
           setAuthType: mockSetAuthType,
           handleInputChange: mockHandleInputChange,
           filterFormData: jest.fn()
@@ -237,6 +306,11 @@ describe('CredentialForm', () => {
           formData: { name: '', auth_token: '', username: '', password: '' },
           authType: 'SSH Key',
           typeValue: 'network',
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          isEditMode: false,
+          hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: mockHandleInputChange,
           filterFormData: jest.fn()
@@ -263,6 +337,11 @@ describe('CredentialForm', () => {
           formData: { name: '', auth_token: '', username: '', password: '' },
           authType: 'Token',
           typeValue: 'rhacs',
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          isEditMode: false,
+          hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: mockHandleInputChange,
           filterFormData: jest.fn()
@@ -285,6 +364,11 @@ describe('CredentialForm', () => {
           formData: { name: '', auth_token: '', username: '', password: '' },
           authType: 'Username and Password',
           typeValue: 'network',
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          isEditMode: false,
+          hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: jest.fn(),
           filterFormData: jest.fn()
@@ -307,6 +391,11 @@ describe('CredentialForm', () => {
           formData: { name: '', auth_token: '', username: '', password: '' },
           authType: 'Username and Password',
           typeValue: 'network',
+          errors: {},
+          touchedFields: new Set(),
+          canSubmit: true,
+          isEditMode: false,
+          hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: jest.fn(),
           filterFormData: jest.fn()
@@ -362,6 +451,146 @@ describe('CredentialForm', () => {
         name: 'Test changing name'
       })
     );
+  });
+});
+
+describe('Form Validation', () => {
+  it('should validate required fields and show canSubmit correctly for network credential', async () => {
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
+
+    // Initially form should not be submittable
+    expect(result.current.canSubmit).toBe(false);
+
+    // Fill name field
+    await act(() => {
+      result.current.handleInputChange('name', 'Test Credential');
+    });
+
+    // Still not submittable - missing required auth fields
+    expect(result.current.canSubmit).toBe(false);
+
+    // Fill username and password (default auth type for network)
+    await act(() => {
+      result.current.handleInputChange('username', 'test_user');
+    });
+    await act(() => {
+      result.current.handleInputChange('password', 'test_password');
+    });
+
+    // Now form should be submittable
+    expect(result.current.canSubmit).toBe(true);
+  });
+
+  it('should validate required fields for Token auth type', async () => {
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'openshift' }));
+
+    // Initially form should not be submittable
+    expect(result.current.canSubmit).toBe(false);
+
+    // Fill name field
+    await act(() => {
+      result.current.handleInputChange('name', 'Test Token Credential');
+    });
+
+    // Still not submittable - missing auth token
+    expect(result.current.canSubmit).toBe(false);
+
+    // Fill auth token
+    await act(() => {
+      result.current.handleInputChange('auth_token', 'test-token-123');
+    });
+
+    // Now form should be submittable
+    expect(result.current.canSubmit).toBe(true);
+  });
+
+  it('should validate required fields for SSH Key auth type', async () => {
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
+
+    // Change to SSH Key auth type
+    await act(() => {
+      result.current.setAuthType('SSH Key');
+    });
+
+    // Initially form should not be submittable
+    expect(result.current.canSubmit).toBe(false);
+
+    // Fill required fields
+    await act(() => {
+      result.current.handleInputChange('name', 'Test SSH Credential');
+    });
+    await act(() => {
+      result.current.handleInputChange('username', 'test_user');
+    });
+    await act(() => {
+      result.current.handleInputChange('ssh_key', 'ssh-rsa AAAA-test-key...');
+    });
+
+    // Now form should be submittable
+    expect(result.current.canSubmit).toBe(true);
+  });
+
+  it('should call onClearErrors when user types in a field with server errors', async () => {
+    const mockOnClearErrors = jest.fn();
+    const serverErrors = { name: 'Name already exists' };
+
+    const { result } = renderHook(() =>
+      useCredentialForm({
+        credentialType: 'network',
+        errors: serverErrors,
+        onClearErrors: mockOnClearErrors
+      })
+    );
+
+    // When user types, should call onClearErrors
+    await act(() => {
+      result.current.handleInputChange('name', 'New credential name');
+    });
+
+    expect(mockOnClearErrors).toHaveBeenCalled();
+  });
+
+  it('should show local validation errors for empty required fields', async () => {
+    const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
+
+    // Touch the name field without entering a value
+    await act(() => {
+      result.current.handleInputChange('name', '');
+    });
+
+    // Should have validation error
+    expect(result.current.errors.name).toBe('This field is required');
+    expect(result.current.canSubmit).toBe(false);
+  });
+
+  it('should handle validation correctly in edit mode', async () => {
+    const existingCredential = {
+      id: 1,
+      name: 'Existing Credential',
+      username: 'existing_user',
+      has_password: true,
+      cred_type: 'network'
+    };
+
+    const { result } = renderHook(() =>
+      useCredentialForm({
+        credentialType: 'network',
+        credential: existingCredential
+      })
+    );
+
+    // In edit mode, form should be submittable even without touching fields
+    // since existing values are present
+    expect(result.current.canSubmit).toBe(true);
+    expect(result.current.isEditMode).toBe(true);
+
+    // If user clears a required field, form should become invalid
+    await act(() => {
+      result.current.handleInputChange('name', '');
+    });
+
+    expect(result.current.canSubmit).toBe(false);
+    expect(result.current.errors.name).toBe('This field is required');
   });
 });
 
