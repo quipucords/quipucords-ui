@@ -38,7 +38,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
   const [kebabDropdownOpen, setKebabDropdownOpen] = useState<boolean>(false);
-  const localStorageTheme = localStorage?.getItem('discovery-ui-theme');
+  const localStorageTheme = localStorage?.getItem(`${process.env.REACT_APP_THEME_KEY}`);
   const [isDarkTheme, setIsDarkTheme] = useState(
     localStorageTheme
       ? localStorageTheme === 'dark'
@@ -55,10 +55,10 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
     if (htmlElement) {
       if (isDark) {
         htmlElement.classList.add('pf-v6-theme-dark');
-        localStorage?.setItem('discovery-ui-theme', 'dark');
+        localStorage?.setItem(`${process.env.REACT_APP_THEME_KEY}`, 'dark');
       } else {
         htmlElement.classList.remove('pf-v6-theme-dark');
-        localStorage?.setItem('discovery-ui-theme', 'light');
+        localStorage?.setItem(`${process.env.REACT_APP_THEME_KEY}`, 'light');
       }
     }
   };
