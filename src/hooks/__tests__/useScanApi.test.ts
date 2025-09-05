@@ -505,10 +505,13 @@ describe('useDownloadReportApi', () => {
     mockOnAddAlert = jest.fn();
     const hook = renderHook(() => useDownloadReportApi(mockOnAddAlert));
     hookResult = hook?.result?.current;
+    jest.useFakeTimers();
+    navigator.msSaveBlob = jest.fn();
   });
 
   afterEach(() => {
     jest.clearAllMocks();
+    jest.useRealTimers();
   });
 
   it('should attempt an API call to download a report', async () => {
@@ -524,6 +527,7 @@ describe('useDownloadReportApi', () => {
     jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
 
     await downloadReport(123);
+    jest.advanceTimersToNextTimer();
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('downloadReport, success');
   });
 
@@ -532,6 +536,7 @@ describe('useDownloadReportApi', () => {
     jest.spyOn(axios, 'get').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
     await downloadReport(123);
+    jest.advanceTimersToNextTimer();
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('downloadReport, error');
   });
 
@@ -539,6 +544,7 @@ describe('useDownloadReportApi', () => {
     const { callbackSuccess } = hookResult;
 
     callbackSuccess(new Blob(['mock report data'], { type: 'application/gzip' }), 123);
+    jest.advanceTimersToNextTimer();
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackSuccess');
   });
