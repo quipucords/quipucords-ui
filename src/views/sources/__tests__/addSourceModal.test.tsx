@@ -28,7 +28,7 @@ describe('AddSourceModal-network', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should render a basic component', async () => {
@@ -84,7 +84,7 @@ describe('AddSourceModal-openshift', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   const renderModal = async () => {
@@ -154,7 +154,7 @@ describe('AddSourceModalWithProxy', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should update proxy_url and submit it', async () => {
@@ -180,7 +180,7 @@ describe('useSourceForm', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should initialize formData correctly', async () => {
@@ -264,6 +264,14 @@ describe('useSourceForm', () => {
 });
 
 describe('SourceForm', () => {
+  beforeEach(async () => {
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should render a basic component', async () => {
     const component = await shallowComponent(<SourceForm />);
     expect(component).toMatchSnapshot('basic');
