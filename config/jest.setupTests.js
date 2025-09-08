@@ -23,9 +23,12 @@ jest.mock('i18next', () => {
 /**
  * Emulate for translation hook for snapshots
  */
+const stableT = (...args) => `t(${JSON.stringify(args, null, 2)})`;
 jest.mock('react-i18next', () => ({
   ...jest.requireActual('react-i18next'),
-  useTranslation: () => ({ t: (...args) => `t(${JSON.stringify(args, null, 2)})` })
+  useTranslation: () => ({
+    t: stableT
+  })
 }));
 
 /**

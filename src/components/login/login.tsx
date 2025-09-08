@@ -34,12 +34,12 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     setIsLoggedIn(isAuthorized);
   }, [isAuthorized]);
 
-  const onChangeUsername = (event: React.FormEvent<HTMLInputElement>, value: string) => {
+  const onChangeUsername = (_event: React.FormEvent<HTMLInputElement>, value: string) => {
     setIsValidUsername(value !== '');
     setUsername(value);
   };
 
-  const onChangePassword = (event: React.FormEvent<HTMLInputElement>, value: string) => {
+  const onChangePassword = (_event: React.FormEvent<HTMLInputElement>, value: string) => {
     setIsValidPassword(value !== '');
     setPassword(value);
   };
@@ -71,7 +71,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
           });
       }
     },
-    [isLoading, login]
+    [isLoading, login, t]
   );
 
   if (isLoggedIn) {
