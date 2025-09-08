@@ -19,12 +19,12 @@ describe('useShowConnectionsApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to show connections', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({});
 
     apiCall({ id: 123, connection: { id: 456 } });
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -89,12 +89,12 @@ describe('useDeleteScanApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to delete scans', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockResolvedValueOnce({});
 
     apiCall([456, 789]).catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -203,12 +203,12 @@ describe('useCreateScanApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to create a scan', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockResolvedValueOnce({});
 
     apiCall({ name: 'Lorem' });
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -271,12 +271,12 @@ describe('useGetScanJobsApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to retrieve a scanJob', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({});
 
     apiCall(1);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -346,12 +346,12 @@ describe('useRunScanApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an API call to run a scan', async () => {
     const { apiCall } = hookResult;
-    const spyAxiosRun = jest.spyOn(axios, 'post');
+    const spyAxiosRun = jest.spyOn(axios, 'post').mockResolvedValueOnce({});
 
     await apiCall(123);
     expect(spyAxiosRun.mock.calls).toMatchSnapshot('apiCall');
@@ -425,12 +425,12 @@ describe('useGetAggregateReportApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to show an aggregate report summary', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({});
 
     apiCall(123);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -510,13 +510,13 @@ describe('useDownloadReportApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
     jest.useRealTimers();
   });
 
   it('should attempt an API call to download a report', async () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({});
 
     await apiCall(123);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
