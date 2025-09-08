@@ -28,7 +28,7 @@ describe('AddCredentialModal', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should render a basic component', async () => {
@@ -63,7 +63,7 @@ describe('useCredentialForm', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should work without formData', async () => {
