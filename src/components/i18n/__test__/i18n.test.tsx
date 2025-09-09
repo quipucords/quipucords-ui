@@ -13,7 +13,7 @@ describe('I18n', () => {
   });
 
   it('should attempt to update locale', async () => {
-    const spyI18next = jest.spyOn(i18next, 'changeLanguage');
+    const spyI18next = jest.spyOn(i18next, 'changeLanguage').mockResolvedValue(jest.fn() as any);
     const props = {
       children: 'Lorem ipsum',
       locale: 'dolor-Sit'
@@ -21,6 +21,6 @@ describe('I18n', () => {
 
     await shallowComponent(<I18n {...props} />);
     expect(spyI18next.mock.calls).toMatchSnapshot('locale');
-    spyI18next.mockClear();
+    spyI18next.mockRestore();
   });
 });
