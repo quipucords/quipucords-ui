@@ -11,12 +11,12 @@ describe('useStatusApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to get a status', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall();
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
