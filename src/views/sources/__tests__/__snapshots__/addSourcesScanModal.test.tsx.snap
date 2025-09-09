@@ -6,15 +6,21 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
     {
       "name": "Test Scan",
       "options": {
+        "disabled_optional_products": {
+          "jboss_eap": false,
+          "jboss_fuse": false,
+          "jboss_ws": false,
+        },
         "enabled_extended_product_search": {
           "jboss_eap": false,
           "jboss_fuse": false,
           "jboss_ws": false,
-          "search_directories": undefined,
+          "search_directories": [],
         },
-        "max_concurrency": "25",
+        "max_concurrency": 25,
       },
-      "sources": undefined,
+      "scan_type": "inspect",
+      "sources": [],
     },
   ],
 ]
@@ -47,15 +53,10 @@ exports[`AddSourceModal should render a basic component: basic 1`] = `
   titleLabel=""
   variant="small"
 >
-  <FormContextProvider
-    initialValues={
-      {
-        "scan-max-concurrent": "25",
-        "scan-sources": "",
-      }
-    }
-  >
-    [Function]
-  </FormContextProvider>
+  <ScanForm
+    onClearErrors={[Function]}
+    onClose={[Function]}
+    onSubmit={[Function]}
+  />
 </Modal>
 `;

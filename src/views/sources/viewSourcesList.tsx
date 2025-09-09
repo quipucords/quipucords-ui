@@ -6,8 +6,7 @@
  *
  * @module sourcesListView
  */
-import * as React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
@@ -50,7 +49,7 @@ import {
 import { useToolbarBulkSelectorWithBatteries } from '../../vendor/react-table-batteries/components/useToolbarBulkSelectorWithBatteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
 import { AddSourceModal, SourceErrorType } from './addSourceModal';
-import { AddSourcesScanModal } from './addSourcesScanModal';
+import { AddSourcesScanModal, type ScanErrorType } from './addSourcesScanModal';
 import { ShowConnectionsModal } from './showSourceConnectionsModal';
 import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
@@ -62,6 +61,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
+  const [scanErrors, setScanErrors] = React.useState<ScanErrorType | undefined>();
   const [sourceErrors, setSourceErrors] = React.useState<SourceErrorType | undefined>();
   const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
   const emptyConnectionData: Connections = { successful: [], failed: [], unreachable: [] };
@@ -72,7 +72,7 @@ const SourcesListView: React.FunctionComponent = () => {
   const { addSources } = useAddSourceApi(addAlert, setSourceErrors);
   const { editSources } = useEditSourceApi(addAlert, setSourceErrors);
   const { showConnections } = useShowConnectionsApi();
-  const { runScans } = useRunScanApi(addAlert);
+  const { runScans } = useRunScanApi(addAlert, setScanErrors);
 
   /**
    * Fetches the translated label for a source type.
@@ -99,6 +99,10 @@ const SourcesListView: React.FunctionComponent = () => {
   const onRefresh = () => {
     queryClient.invalidateQueries({ queryKey: [API_SOURCES_LIST_QUERY] });
   };
+
+  const clearScanErrors = useCallback(() => {
+    setScanErrors(undefined);
+  }, []);
 
   /**
    * Closes the connections view by resetting selected connections and clearing connection data.
@@ -629,12 +633,16 @@ const SourcesListView: React.FunctionComponent = () => {
       />
       <AddSourcesScanModal
         isOpen={scanSelected !== undefined}
-        onClose={() => setScanSelected(undefined)}
-        onSubmit={(payload: Scan) =>
-          runScans(payload)
+        onClose={() => {
+          setScanSelected(undefined);
+          clearScanErrors();
+        }}
+        onSubmit={(payload: any) =>
+          runScans(payload as Scan)
             .then(() => {
               queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
               setScanSelected(undefined);
+              clearScanErrors();
             })
             .catch(err => {
               if (!helpers.TEST_MODE) {
@@ -643,6 +651,8 @@ const SourcesListView: React.FunctionComponent = () => {
             })
         }
         sources={scanSelected}
+        errors={scanErrors}
+        onClearErrors={clearScanErrors}
       />
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
