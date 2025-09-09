@@ -337,11 +337,11 @@ describe('useRunScanApi', () => {
 
   beforeEach(() => {
     mockOnAddAlert = jest.fn();
-    mockCreateScan = jest.fn().mockResolvedValue({ id: '123' });
+    mockCreateScan = jest.fn();
     const mockUseCreateScanApi = jest.fn().mockReturnValue({
       createScans: mockCreateScan
     });
-    const hook = renderHook(() => useRunScanApi(mockOnAddAlert, mockUseCreateScanApi));
+    const hook = renderHook(() => useRunScanApi(mockOnAddAlert, undefined, mockUseCreateScanApi));
     hookResult = hook?.result?.current;
   });
 
@@ -359,7 +359,8 @@ describe('useRunScanApi', () => {
 
   it('should handle success while attempting to run a scan', async () => {
     const { runScans } = hookResult;
-    jest.spyOn(axios, 'post').mockResolvedValue(Promise.resolve({}));
+    mockCreateScan.mockResolvedValue({ id: '123', name: 'Lorem' });
+    jest.spyOn(axios, 'post').mockResolvedValue({});
 
     await runScans({ name: 'Lorem' });
     await runScans({ id: '123', name: 'Lorem' }, true);
@@ -370,6 +371,7 @@ describe('useRunScanApi', () => {
 
   it('should handle errors while attempting to run a scan', async () => {
     const { runScans } = hookResult;
+    mockCreateScan.mockResolvedValue({ id: '123', name: 'Lorem' });
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
     await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, without id error');

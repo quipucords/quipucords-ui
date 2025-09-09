@@ -24,7 +24,10 @@ type ApiScanErrorType = {
   message: string;
 };
 
-const useCreateScanApi = (onAddAlert: (alert: AlertProps) => void) => {
+const useCreateScanApi = (
+  onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void
+) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
@@ -48,17 +51,22 @@ const useCreateScanApi = (onAddAlert: (alert: AlertProps) => void) => {
 
   const callbackError = useCallback(
     (error: AxiosError<ApiScanErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.description', {
-          context: 'scan-report_created_error',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        onAddAlert({
+          title: t('toast-notifications.description', {
+            context: 'scan-report_created_error',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const createScans = useCallback(
@@ -89,10 +97,11 @@ const useCreateScanApi = (onAddAlert: (alert: AlertProps) => void) => {
 
 const useRunScanApi = (
   onAddAlert: (alert: AlertProps) => void,
+  onFieldErrors?: (errors: { [key: string]: string }) => void,
   useCreateScan: typeof useCreateScanApi = useCreateScanApi
 ) => {
   const { t } = useTranslation();
-  const { createScans } = useCreateScan(onAddAlert);
+  const { createScans } = useCreateScan(onAddAlert, onFieldErrors);
 
   const apiCall = useCallback(
     (scanId: string): Promise<AxiosResponse<ScanJobType>> =>
@@ -116,17 +125,22 @@ const useRunScanApi = (
 
   const callbackError = useCallback(
     (error: AxiosError<ApiScanErrorType>, name: string) => {
-      onAddAlert({
-        title: t('toast-notifications.description', {
-          context: 'scan-report_play_error',
-          name: name,
-          message: apiHelpers.extractErrorMessage(error?.response?.data)
-        }),
-        variant: 'danger'
-      });
+      if (onFieldErrors && apiHelpers.hasFieldValidationErrors(error)) {
+        const fieldErrors = apiHelpers.parseFieldErrors(error.response?.data);
+        onFieldErrors(fieldErrors);
+      } else {
+        onAddAlert({
+          title: t('toast-notifications.description', {
+            context: 'scan-report_play_error',
+            name: name,
+            message: apiHelpers.extractErrorMessage(error?.response?.data)
+          }),
+          variant: 'danger'
+        });
+      }
       return Promise.reject(error);
     },
-    [onAddAlert, t]
+    [onAddAlert, onFieldErrors, t]
   );
 
   const runScans = useCallback(
