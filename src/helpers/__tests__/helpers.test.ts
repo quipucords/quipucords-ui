@@ -242,8 +242,8 @@ describe('downloadData', () => {
     mockCreateElement.click = mockElementClick;
     jest.spyOn(document, 'createElement').mockImplementation(() => mockCreateElement);
 
-    const appendChild = jest.spyOn(document.body, 'appendChild');
-    const removeChild = jest.spyOn(document.body, 'removeChild');
+    const appendChild = jest.spyOn(document.body, 'appendChild').mockImplementation(x => x);
+    const removeChild = jest.spyOn(document.body, 'removeChild').mockImplementation(x => x);
     const createObjectURLMock = jest.fn();
     const revokeObjectURLMock = jest.fn();
     window.URL.createObjectURL = createObjectURLMock;
@@ -255,5 +255,7 @@ describe('downloadData', () => {
     expect(removeChild).toHaveBeenCalledTimes(1);
     expect(mockElementClick).toHaveBeenCalledTimes(1);
     expect(revokeObjectURLMock).toHaveBeenCalledWith(expect.any(String));
+
+    jest.restoreAllMocks();
   });
 });
