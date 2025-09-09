@@ -13,12 +13,12 @@ describe('useDeleteSourceApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to delete sources', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall([456, 789]);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -155,12 +155,12 @@ describe('useAddSourceApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to add sources', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall({ name: 'Lorem' });
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -198,12 +198,12 @@ describe('useEditSourceApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to edit sources', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'put');
+    const spyAxios = jest.spyOn(axios, 'put').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall({ id: 123, name: 'Lorem' }).catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
