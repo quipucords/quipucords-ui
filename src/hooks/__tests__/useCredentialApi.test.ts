@@ -18,12 +18,12 @@ describe('useDeleteCredentialApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to delete credentials', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall([456, 789]);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -160,12 +160,12 @@ describe('useAddCredentialApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to add credentials', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall({ name: 'Lorem' });
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -227,12 +227,12 @@ describe('useEditCredentialApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to edit credentials', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'patch');
+    const spyAxios = jest.spyOn(axios, 'patch').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall({ id: 123, name: 'Lorem' }).catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -292,12 +292,12 @@ describe('useGetCredentialsApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to retrieve credentials', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall().catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
