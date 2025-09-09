@@ -9,18 +9,18 @@ describe('useLoginApi', () => {
   let hookResult;
 
   beforeEach(() => {
-    spyCookies = jest.spyOn(cookies, 'set');
+    spyCookies = jest.spyOn(cookies, 'set').mockReturnValue('123');
     const hook = renderHook(() => useLoginApi());
     hookResult = hook?.result?.current;
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to login', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'post');
+    const spyAxios = jest.spyOn(axios, 'post').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall({ username: 'lorem', password: '123456' });
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -70,18 +70,18 @@ describe('useLogoutApi', () => {
   let hookResult;
 
   beforeEach(() => {
-    spyCookies = jest.spyOn(cookies, 'remove');
+    spyCookies = jest.spyOn(cookies, 'remove').mockReturnValue('123');
     const hook = renderHook(() => useLogoutApi());
     hookResult = hook?.result?.current;
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to logout', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'put');
+    const spyAxios = jest.spyOn(axios, 'put').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall().catch(Function.prototype);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -132,12 +132,12 @@ describe('useUserApi', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should attempt an api call to get a user', () => {
     const { apiCall } = hookResult;
-    const spyAxios = jest.spyOn(axios, 'get');
+    const spyAxios = jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve({}));
 
     apiCall();
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
@@ -199,7 +199,7 @@ describe('useGetSetAuthApi', () => {
 
   it('should attempt a call to get a token', () => {
     const { getToken } = hookResult;
-    const spyCookie = jest.spyOn(cookies, 'get');
+    const spyCookie = jest.spyOn(cookies, 'get').mockImplementationOnce(() => Promise.resolve({}));
 
     getToken();
     expect(spyCookie.mock.calls).toMatchSnapshot('getToken');
@@ -222,7 +222,7 @@ describe('useGetSetAuthApi', () => {
   it('should process an interceptor response success', async () => {
     const { interceptorResponseSuccess } = hookResult;
 
-    await expect(interceptorResponseSuccess()).toMatchSnapshot('interceptorResponseSuccess');
+    expect(interceptorResponseSuccess()).toMatchSnapshot('interceptorResponseSuccess');
   });
 
   it('should process interceptor request errors', async () => {
