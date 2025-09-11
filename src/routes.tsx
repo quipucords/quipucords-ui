@@ -15,7 +15,7 @@ const Credentials = React.lazy(() => import('./views/credentials/viewCredentials
 interface IAppRoute {
   id: string;
   label?: string; // Excluding the label will exclude the route from the nav sidebar in appLayout
-  component: React.ReactNode;
+  Component: React.ElementType;
   path: string;
   title: string;
   routes?: undefined;
@@ -24,24 +24,10 @@ interface IAppRoute {
 const routes: IAppRoute[] = [
   {
     id: 'credentials',
-    component: <Credentials />,
+    Component: Credentials,
     label: 'Credentials',
     path: '/credentials',
     title: 'Credentials'
-  },
-  {
-    id: 'sources',
-    component: <Sources />,
-    label: 'Sources',
-    path: '/sources',
-    title: 'Sources'
-  },
-  {
-    id: 'scans',
-    component: <Scans />,
-    label: 'Scans',
-    path: '/scans',
-    title: 'Scans'
   }
 ];
 
@@ -53,8 +39,8 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
 const AppRoutes = () => (
   <React.Suspense fallback={<p> Loading...</p>}>
     <Routes>
-      {flattenedRoutes.map(route => (
-        <Route path={route.path} element={route.component} key={route.id} />
+      {flattenedRoutes.map(({ id, path, Component }) => (
+        <Route path={path} element={<Component />} key={id} />
       ))}
       <Route path="/" element={<Navigate to="/credentials" replace />} />
       <Route path="*" element={<NotFound />} />
