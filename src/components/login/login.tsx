@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { isAuthorized } = useGetSetAuth();
   const { login } = useLogin();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isAuthorized);
   const [loginError, setLoginError] = useState<string | undefined>();
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
@@ -74,34 +74,41 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     [isLoading, login, t]
   );
 
-  if (isLoggedIn) {
-    return children;
-  }
-
   return (
-    <LoginPage
-      className="fadein"
-      loginTitle={t('login.title')}
-      textContent={t('login.description')}
-      backgroundImgSrc={bgImage}
-    >
-      <LoginForm
-        style={{ opacity: (isLoading && 0.5) || 1 }}
-        showHelperText={loginError !== undefined}
-        helperText={loginError || t('login.invalid')}
-        helperTextIcon={<ExclamationCircleIcon />}
-        usernameLabel={t('login.label', { context: 'username' })}
-        usernameValue={username}
-        onChangeUsername={onChangeUsername}
-        isValidUsername={isValidUsername}
-        passwordLabel={t('login.label', { context: 'password' })}
-        passwordValue={password}
-        onChangePassword={onChangePassword}
-        isValidPassword={isValidPassword}
-        onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
-        loginButtonLabel={t('login.label', { context: 'login' })}
-      />
-    </LoginPage>
+    <React.Fragment>
+      {/* This wrapper keeps your app mounted at all times but hides it
+      when the user is logged out. `display: 'contents'` ensures it
+      doesn't interfere with your App's CSS layout (like flexbox or grid).
+    */}
+      <div style={{ display: isLoggedIn ? 'contents' : 'none' }}>{children}</div>
+
+      {/* This conditionally renders the LoginPage overlay only when needed */}
+      {!isLoggedIn && (
+        <LoginPage
+          className="fadein"
+          loginTitle={t('login.title')}
+          textContent={t('login.description')}
+          backgroundImgSrc={bgImage}
+        >
+          <LoginForm
+            style={{ opacity: (isLoading && 0.5) || 1 }}
+            showHelperText={loginError !== undefined}
+            helperText={loginError || t('login.invalid')}
+            helperTextIcon={<ExclamationCircleIcon />}
+            usernameLabel={t('login.label', { context: 'username' })}
+            usernameValue={username}
+            onChangeUsername={onChangeUsername}
+            isValidUsername={isValidUsername}
+            passwordLabel={t('login.label', { context: 'password' })}
+            passwordValue={password}
+            onChangePassword={onChangePassword}
+            isValidPassword={isValidPassword}
+            onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
+            loginButtonLabel={t('login.label', { context: 'login' })}
+          />
+        </LoginPage>
+      )}
+    </React.Fragment>
   );
 };
 
