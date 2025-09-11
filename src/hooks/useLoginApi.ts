@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
 import cookies from 'js-cookie';
 import helpers from '../helpers';
+import { hasInitialAuthToken } from '../services/axiosConfig';
 
 type ApiLoginPayloadType = {
   username: string;
@@ -151,85 +152,14 @@ const useUserApi = () => {
 /**
  * Get initial token. Apply and set token for all Axios request interceptors, global authorization
  */
-const useGetSetAuthApi = ({ useLogout = useLogoutApi }: { useLogout?: typeof useLogoutApi } = {}) => {
-  const { callbackSuccess: revokeToken } = useLogout();
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-
-  const getToken = useCallback(() => {
-    const token = cookies.get(`${process.env.REACT_APP_AUTH_COOKIE}`) || '';
-    let parsedToken;
-
-    try {
-      parsedToken = window.atob(token);
-    } catch (e) {
-      if (!helpers.TEST_MODE) {
-        console.error('Invalid token, unable to parse format');
-      }
-      parsedToken = '';
-    }
-
-    if (parsedToken) {
-      setIsAuthorized(true);
-    } else {
-      setIsAuthorized(false);
-    }
-
-    return parsedToken;
-  }, []);
-
-  const interceptorRequestSuccess = useCallback(
-    config => {
-      const headerToken = getToken();
-
-      const isTokenServiceBeingCalled = new RegExp(config.url || '').test(
-        `${process.env.REACT_APP_USER_SERVICE_AUTH_TOKEN}`
-      );
-
-      if (headerToken || isTokenServiceBeingCalled) {
-        config.headers.Authorization = (headerToken && `Token ${headerToken}`) || '';
-        return config;
-      }
-
-      return Promise.reject(new Error('Unauthorized, missing token'));
-    },
-    [getToken]
-  );
-
-  const interceptorRequestError = useCallback(error => Promise.reject(error), []);
-
-  const interceptorResponseSuccess = useCallback(config => config, []);
-
-  const interceptorResponseError = useCallback(
-    error => {
-      if (error?.response?.status === 401) {
-        setIsAuthorized(false);
-        return revokeToken();
-      }
-
-      return Promise.reject(error);
-    },
-    [revokeToken]
-  );
-
-  const setInterceptors = useCallback(() => {
-    axios.interceptors.request.use(interceptorRequestSuccess, interceptorRequestError);
-    axios.interceptors.response.use(interceptorResponseSuccess, interceptorResponseError);
-  }, [interceptorResponseError, interceptorResponseSuccess, interceptorRequestError, interceptorRequestSuccess]);
-
-  useEffect(() => {
-    setInterceptors();
-    getToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+/**
+ * Get initial token. Apply and set token for all Axios request interceptors, global authorization
+ */
+const useGetSetAuthApi = () => {
+  const [isAuthorized] = useState<boolean>(hasInitialAuthToken());
 
   return {
-    getToken,
-    isAuthorized,
-    interceptorResponseError,
-    interceptorResponseSuccess,
-    interceptorRequestError,
-    interceptorRequestSuccess,
-    setInterceptors
+    isAuthorized
   };
 };
 
