@@ -22,6 +22,8 @@ interface SimpleDropdownItemProps {
 
 interface SimpleDropdownProps {
   label: string;
+  isOpen: boolean;
+  onToggle: (isOpen: boolean) => void;
   menuToggleOuiaId?: number | string;
   dropdownItems?: SimpleDropdownItemProps[];
   ariaLabel?: string;
@@ -32,6 +34,8 @@ interface SimpleDropdownProps {
 
 const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   label,
+  isOpen,
+  onToggle,
   menuToggleOuiaId,
   dropdownItems,
   ariaLabel = 'Dropdown menu',
@@ -39,21 +43,19 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   variant,
   isFullWidth
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Dropdown
       isOpen={isOpen}
-      onOpenChange={isOpen => setIsOpen(isOpen)}
+      onOpenChange={isOpen => onToggle(isOpen)}
       onSelect={() => {
-        setIsOpen(false);
+        onToggle(false);
       }}
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
         <MenuToggle
           isFullWidth={isFullWidth}
           ref={toggleRef}
           isExpanded={isOpen}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => onToggle(!isOpen)}
           variant={variant}
           aria-label={ariaLabel}
           isDisabled={!dropdownItems || dropdownItems.length === 0}
