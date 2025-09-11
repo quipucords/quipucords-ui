@@ -559,20 +559,6 @@ const SourceForm: React.FC<SourceFormProps> = ({
       ) : (
         <React.Fragment>
           <FormGroup label="Connection" fieldId="connection">
-            <SimpleDropdown
-              isFullWidth
-              label={formData?.sslProtocol || 'Select protocol'}
-              menuToggleOuiaId="options_ssl_protocol"
-              variant={'default'}
-              onSelect={item => handleInputChange('sslProtocol', item)}
-              dropdownItems={[
-                { item: 'SSLv23', ouiaId: 'sslv23' },
-                { item: 'TLSv1', ouiaId: 'tlsv1' },
-                { item: 'TLSv1.1', ouiaId: 'tlsv11' },
-                { item: 'TLSv1.2', ouiaId: 'tlsv12' },
-                { item: 'Disable SSL', ouiaId: 'disable_ssl' }
-              ]}
-            />
           </FormGroup>
           <FormGroup label="" fieldId="ssl_verify">
             <Checkbox

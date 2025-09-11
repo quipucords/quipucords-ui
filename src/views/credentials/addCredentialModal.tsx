@@ -369,22 +369,6 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {/* Render Authentication Type dropdown only if needed based on the credential type */}
       {(typeValue === 'network' || typeValue === 'openshift') && (
         <FormGroup label="Authentication Type" fieldId="auth_type">
-          <SimpleDropdown
-            label={authType}
-            menuToggleOuiaId="auth_type"
-            variant="default"
-            isFullWidth
-            onSelect={item => setAuthType(item)}
-            dropdownItems={
-              (typeValue === 'network' && [
-                { item: 'Username and Password', ouiaId: 'password' },
-                { item: 'SSH Key', ouiaId: 'ssh_key' }
-              ]) || [
-                { item: 'Token', ouiaId: 'auth_token' },
-                { item: 'Username and Password', ouiaId: 'password' }
-              ]
-            }
-          />
         </FormGroup>
       )}
 
@@ -489,24 +473,6 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {typeValue === 'network' && (
         <React.Fragment>
           <FormGroup label="Become Method" fieldId="become_method">
-            <SimpleDropdown
-              label={formData?.become_method || 'Select option'}
-              menuToggleOuiaId="become_method"
-              variant="default"
-              isFullWidth
-              onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
-              dropdownItems={[
-                { item: 'Select option', ouiaId: 'default' },
-                { item: 'sudo', ouiaId: 'sudo' },
-                { item: 'su', ouiaId: 'su' },
-                { item: 'pbrun', ouiaId: 'pbrun' },
-                { item: 'pfexec', ouiaId: 'pfexec' },
-                { item: 'doas', ouiaId: 'doas' },
-                { item: 'dzdo', ouiaId: 'dzdo' },
-                { item: 'ksu', ouiaId: 'ksu' },
-                { item: 'runas', ouiaId: 'runas' }
-              ]}
-            />
           </FormGroup>
           <FormGroup label="Become User" fieldId="become_user">
             <TextInput

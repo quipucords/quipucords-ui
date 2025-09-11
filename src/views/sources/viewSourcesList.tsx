@@ -360,22 +360,6 @@ const SourcesListView: React.FunctionComponent = () => {
     return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
   };
 
-  const renderAddSourceButton = () => (
-    <SimpleDropdown
-      label={t('view.empty-state_label_sources')}
-      menuToggleOuiaId="add_source_button"
-      variant="primary"
-      onSelect={openAddSourceModal}
-      dropdownItems={[
-        { item: t('dataSource.network'), ouiaId: 'network' },
-        { item: t('dataSource.openshift'), ouiaId: 'openshift' },
-        { item: t('dataSource.rhacs'), ouiaId: 'rhacs' },
-        { item: t('dataSource.satellite'), ouiaId: 'satellite' },
-        { item: t('dataSource.vcenter'), ouiaId: 'vcenter' },
-        { item: t('dataSource.ansible'), ouiaId: 'ansible' }
-      ]}
-    />
-  );
 
   const renderToolbar = () => (
     <Toolbar>
@@ -383,7 +367,6 @@ const SourcesListView: React.FunctionComponent = () => {
         {/* Only show bulk selector when there are items to select */}
         {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
-        <ToolbarItem>{renderAddSourceButton()}</ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
@@ -484,7 +467,7 @@ const SourcesListView: React.FunctionComponent = () => {
             >
               <EmptyStateBody>{t('view.empty-state', { context: 'sources_description' })}</EmptyStateBody>
               <EmptyStateFooter>
-                <EmptyStateActions>{renderAddSourceButton()}</EmptyStateActions>
+                <EmptyStateActions />
               </EmptyStateFooter>
             </EmptyState>
           }
