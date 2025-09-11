@@ -7,7 +7,7 @@
  *@module credentialsListView
  */
 import * as React from 'react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
@@ -29,6 +29,7 @@ import {
 } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
+import type { TFunction } from 'i18next';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
@@ -52,6 +53,7 @@ import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
@@ -204,9 +206,9 @@ const CredentialsListView: React.FunctionComponent = () => {
   /**
    * Invalidates the query cache for the creds list, triggering a refresh.
    */
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     refreshCredentialsList();
-  };
+  }, [refreshCredentialsList]);
 
   /**
    * Initializes table state with URL persistence, including configurations for columns, filters, sorting, pagination,
@@ -306,14 +308,24 @@ const CredentialsListView: React.FunctionComponent = () => {
 
   const TrWithBatteries = useTrWithBatteries(tableBatteries);
 
-  const hasSelectedCredentials = () => {
+  const hasSelectedCredentials = useCallback(() => {
     if (Array.isArray(selectedItems)) {
       return selectedItems.length > 0;
     }
     return Object.values(selectedItems ?? {}).filter(Boolean).length > 0;
+  }, [selectedItems]);
+
+  const handleDropdownToggle = (nextIsOpen: boolean) => {
+    console.log(`Dropdown is attempting to change state to: ${nextIsOpen}`);
+    if (nextIsOpen === true) {
+      setTimeout(() => setIsDropdownOpen(true), 0);
+    } else {
+      // Closing can happen immediately.
+      setIsDropdownOpen(false);
+    }
   };
 
-  const renderAddCredsButton = () => (
+  const AddCredsButton = () => (
     <SimpleDropdown
       label={t('view.empty-state_label_credentials')}
       menuToggleOuiaId="add_credential_button"
@@ -327,42 +339,30 @@ const CredentialsListView: React.FunctionComponent = () => {
         { item: t('dataSource.vcenter'), ouiaId: 'vcenter' },
         { item: t('dataSource.ansible'), ouiaId: 'ansible' }
       ]}
+      // These props now correctly point to the state within CredentialsListView
+      isOpen={isDropdownOpen}
+      onToggle={handleDropdownToggle}
     />
-  );
-
-  const renderToolbar = () => (
-    <Toolbar>
-      <ToolbarContent>
-        {/* Only show bulk selector when there are items to select */}
-        {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
-        <FilterToolbar id="client-paginated-example-filters" />
-        <ToolbarItem> {renderAddCredsButton()}</ToolbarItem>
-        <ToolbarItem>
-          <Button
-            variant={ButtonVariant.secondary}
-            isDisabled={!hasSelectedCredentials()}
-            onClick={() =>
-              handleDeleteCredentials(selectedItems).finally(() => {
-                setSelectedItems([]);
-              })
-            }
-          >
-            {t('table.label', { context: 'delete' })}
-          </Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
-        </ToolbarItem>
-        <PaginationToolbarItem>
-          <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
-        </PaginationToolbarItem>
-      </ToolbarContent>
-    </Toolbar>
   );
 
   return (
     <PageSection hasBodyWrapper={false}>
-      {renderToolbar()}
+      <Toolbar>
+        <ToolbarContent>
+          {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
+          <FilterToolbar id="client-paginated-example-filters" />
+          <ToolbarItem>
+            {/* The AddCredsButton now needs the new props passed to it */}
+            <AddCredsButton />
+          </ToolbarItem>
+          <ToolbarItem>
+            <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
+          </ToolbarItem>
+          <PaginationToolbarItem>
+            <Pagination variant="top" isCompact widgetId="client-paginated-example-pagination" />
+          </PaginationToolbarItem>
+        </ToolbarContent>
+      </Toolbar>
       <Table aria-label="Example things table" variant="compact">
         <Thead>
           <TrWithBatteries isHeaderRow>
@@ -387,7 +387,7 @@ const CredentialsListView: React.FunctionComponent = () => {
             >
               <EmptyStateBody>{t('view.empty-state', { context: 'credentials_description' })}</EmptyStateBody>
               <EmptyStateFooter>
-                <EmptyStateActions>{renderAddCredsButton()}</EmptyStateActions>
+                <EmptyStateActions />
               </EmptyStateFooter>
             </EmptyState>
           }
