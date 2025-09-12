@@ -55,9 +55,6 @@ describe('ViewToolbar', () => {
 
     // Mock axios globally for this test suite
     jest.spyOn(require('axios'), 'get').mockImplementation(() => Promise.resolve({ data: { username: 'Test User' } }));
-
-    // Mock process.env.REACT_APP_THEME_KEY
-    process.env.REACT_APP_THEME_KEY = 'discovery-ui-theme';
   });
 
   afterEach(() => {
