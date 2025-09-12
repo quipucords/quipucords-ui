@@ -84,7 +84,11 @@ const useLogoutApi = () => {
     cookies.remove(`${process.env.REACT_APP_AUTH_COOKIE}`);
     document.location.replace('./');
     if (localStorageTheme) {
-      localStorage.setItem(`${process.env.REACT_APP_THEME_KEY}`, localStorageTheme);
+      try {
+        localStorage.setItem(`${process.env.REACT_APP_THEME_KEY}`, localStorageTheme);
+      } catch (error) {
+        console.error('Failed to set theme in localStorage:', error);
+      }
     }
     return;
   }, []);
