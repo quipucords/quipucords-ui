@@ -447,6 +447,14 @@ describe('SourceForm', () => {
 });
 
 describe('Form Validation', () => {
+  beforeEach(async () => {
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({}));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should validate required fields and show canSubmit correctly', async () => {
     const { result } = renderHook(() => useSourceForm({ sourceType: 'network' }));
 
