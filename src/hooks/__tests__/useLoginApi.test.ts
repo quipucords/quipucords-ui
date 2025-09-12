@@ -71,6 +71,10 @@ describe('useLogoutApi', () => {
 
   beforeEach(() => {
     spyCookies = jest.spyOn(cookies, 'remove').mockReturnValue('123');
+
+    // Mock process.env.REACT_APP_THEME_KEY
+    process.env.REACT_APP_THEME_KEY = 'discovery-ui-theme';
+
     const hook = renderHook(() => useLogoutApi());
     hookResult = hook?.result?.current;
   });
@@ -120,6 +124,111 @@ describe('useLogoutApi', () => {
         }
       })
     ).rejects.toMatchSnapshot('callbackError');
+  });
+
+  it('should preserve dark theme during logout using environment variable', () => {
+    // Test the theme preservation behavior by directly calling callbackSuccess
+    const spyLocalStorageSet = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
+
+    // Create a new hook instance to test theme preservation
+    const hook = renderHook(() => useLogoutApi());
+    const { callbackSuccess } = hook.result.current;
+
+    // Test callbackSuccess with dark theme parameter
+    callbackSuccess('dark');
+
+    expect(spyLocalStorageSet).toHaveBeenCalledWith('discovery-ui-theme', 'dark');
+    expect(spyCookies).toHaveBeenCalledWith('user');
+
+    // Snapshot the localStorage calls for theme preservation
+    expect({
+      localStorageSetCalls: spyLocalStorageSet.mock.calls,
+      cookieRemoveCalls: spyCookies.mock.calls
+    }).toMatchSnapshot('logout with dark theme preservation');
+
+    spyLocalStorageSet.mockRestore();
+  });
+
+  it('should preserve light theme during logout using environment variable', () => {
+    // Test the theme preservation behavior by directly calling callbackSuccess
+    const spyLocalStorageSet = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
+
+    // Create a new hook instance to test theme preservation
+    const hook = renderHook(() => useLogoutApi());
+    const { callbackSuccess } = hook.result.current;
+
+    // Test callbackSuccess with light theme parameter
+    callbackSuccess('light');
+
+    expect(spyLocalStorageSet).toHaveBeenCalledWith('discovery-ui-theme', 'light');
+    expect(spyCookies).toHaveBeenCalledWith('user');
+
+    // Snapshot the localStorage calls for theme preservation
+    expect({
+      localStorageSetCalls: spyLocalStorageSet.mock.calls,
+      cookieRemoveCalls: spyCookies.mock.calls
+    }).toMatchSnapshot('logout with light theme preservation');
+
+    spyLocalStorageSet.mockRestore();
+  });
+
+  it('should handle logout when no theme is stored using environment variable', () => {
+    // Test behavior when no theme is provided
+    const spyLocalStorageSet = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
+
+    // Create a new hook instance
+    const hook = renderHook(() => useLogoutApi());
+    const { callbackSuccess } = hook.result.current;
+
+    // Test callbackSuccess with no theme (null/undefined)
+    callbackSuccess(null);
+
+    // Should not call localStorage.setItem when no theme exists
+    expect(spyLocalStorageSet).not.toHaveBeenCalled();
+    expect(spyCookies).toHaveBeenCalledWith('user');
+
+    // Snapshot the behavior without theme preservation
+    expect({
+      localStorageSetCalls: spyLocalStorageSet.mock.calls,
+      cookieRemoveCalls: spyCookies.mock.calls
+    }).toMatchSnapshot('logout without theme preservation');
+
+    spyLocalStorageSet.mockRestore();
+  });
+
+  it('should read theme from localStorage using environment variable during logout', async () => {
+    // Mock localStorage.getItem to return 'dark' theme
+    const spyLocalStorageGet = jest.spyOn(Storage.prototype, 'getItem').mockReturnValue('dark');
+    const spyAxios = jest.spyOn(axios, 'put').mockImplementationOnce(() => Promise.resolve({}));
+    const spyLocalStorageSet = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
+
+    // Create a new hook instance to test the complete logout flow
+    const hook = renderHook(() => useLogoutApi());
+    const { logout } = hook.result.current;
+
+    // Execute logout which should read theme from localStorage
+    await logout();
+
+    // Verify that localStorage.getItem was called with the environment variable key
+    expect(spyLocalStorageGet).toHaveBeenCalledWith('discovery-ui-theme');
+
+    // Verify the complete logout flow including theme preservation
+    expect(spyAxios).toHaveBeenCalledWith('/api/v1/users/logout/');
+    expect(spyLocalStorageSet).toHaveBeenCalledWith('discovery-ui-theme', 'dark');
+
+    // Snapshot the complete logout flow with theme preservation
+    expect({
+      logoutFlow: {
+        localStorageGetCalls: spyLocalStorageGet.mock.calls,
+        axiosCalls: spyAxios.mock.calls,
+        localStorageSetCalls: spyLocalStorageSet.mock.calls,
+        cookieRemoveCalls: spyCookies.mock.calls
+      }
+    }).toMatchSnapshot('complete logout flow with theme preservation');
+
+    spyLocalStorageGet.mockRestore();
+    spyAxios.mockRestore();
+    spyLocalStorageSet.mockRestore();
   });
 });
 
