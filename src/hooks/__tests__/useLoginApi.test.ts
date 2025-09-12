@@ -71,10 +71,6 @@ describe('useLogoutApi', () => {
 
   beforeEach(() => {
     spyCookies = jest.spyOn(cookies, 'remove').mockReturnValue('123');
-
-    // Mock process.env.REACT_APP_THEME_KEY
-    process.env.REACT_APP_THEME_KEY = 'discovery-ui-theme';
-
     const hook = renderHook(() => useLogoutApi());
     hookResult = hook?.result?.current;
   });
