@@ -2,6 +2,601 @@
 
 exports[`ViewToolbar should attempt to load and display a username: user 1`] = `null`;
 
+exports[`ViewToolbar should fallback to system preference when localStorage is empty: system preference fallback 1`] = `
+<React.Fragment>
+  <Toolbar
+    id="toolbar"
+    isFullHeight={true}
+    isStatic={true}
+  >
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
+    >
+      <ForwardRef
+        align={
+          {
+            "default": "alignEnd",
+          }
+        }
+        gap={
+          {
+            "default": "gapNone",
+            "md": "gapMd",
+          }
+        }
+        variant="action-group-plain"
+      >
+        <ForwardRef
+          variant="action-group-plain"
+          visibility={
+            {
+              "default": "hidden",
+              "lg": "visible",
+            }
+          }
+        >
+          <ToolbarItem>
+            <ToggleGroup
+              aria-label="Dark theme toggle group"
+            >
+              <ToggleGroupItem
+                aria-label="light theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <SunIcon />
+                  </Icon>
+                }
+                isSelected={false}
+                onChange={[Function]}
+              />
+              <ToggleGroupItem
+                aria-label="dark theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <MoonIcon />
+                  </Icon>
+                }
+                isSelected={true}
+                onChange={[Function]}
+              />
+            </ToggleGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Dropdown
+              isOpen={false}
+              onOpenChange={[Function]}
+              onSelect={[Function]}
+              popperProps={
+                {
+                  "position": "right",
+                }
+              }
+              toggle={[Function]}
+            >
+              <DropdownItem
+                onClick={[Function]}
+                value="about"
+              >
+                About
+              </DropdownItem>
+            </Dropdown>
+          </ToolbarItem>
+        </ForwardRef>
+        <ToolbarItem
+          visibility={
+            {
+              "default": "visible",
+              "lg": "hidden",
+            }
+          }
+        >
+          <Dropdown
+            isOpen={false}
+            isPlain={true}
+            onOpenChange={[Function]}
+            onSelect={[Function]}
+            popperProps={
+              {
+                "position": "right",
+              }
+            }
+            toggle={[Function]}
+          >
+            <DropdownItem
+              onClick={[MockFunction]}
+              ouiaId="logout"
+              value="logout"
+            >
+              Logout
+            </DropdownItem>
+          </Dropdown>
+        </ToolbarItem>
+      </ForwardRef>
+      <ToolbarItem
+        visibility={
+          {
+            "default": "hidden",
+            "lg": "visible",
+          }
+        }
+      >
+        <Dropdown
+          isOpen={false}
+          onOpenChange={[Function]}
+          onSelect={[Function]}
+          popperProps={
+            {
+              "position": "right",
+            }
+          }
+          toggle={[Function]}
+        >
+          <DropdownItem
+            onClick={[MockFunction]}
+            ouiaId="logout"
+            value="logout"
+          >
+            Logout
+          </DropdownItem>
+        </Dropdown>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+  <AboutModal
+    isOpen={false}
+    onClose={[Function]}
+    useUser={
+      [MockFunction] {
+        "calls": [
+          [],
+          [],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`ViewToolbar should initialize dark theme from localStorage using environment variable: dark theme from localStorage 1`] = `
+<React.Fragment>
+  <Toolbar
+    id="toolbar"
+    isFullHeight={true}
+    isStatic={true}
+  >
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
+    >
+      <ForwardRef
+        align={
+          {
+            "default": "alignEnd",
+          }
+        }
+        gap={
+          {
+            "default": "gapNone",
+            "md": "gapMd",
+          }
+        }
+        variant="action-group-plain"
+      >
+        <ForwardRef
+          variant="action-group-plain"
+          visibility={
+            {
+              "default": "hidden",
+              "lg": "visible",
+            }
+          }
+        >
+          <ToolbarItem>
+            <ToggleGroup
+              aria-label="Dark theme toggle group"
+            >
+              <ToggleGroupItem
+                aria-label="light theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <SunIcon />
+                  </Icon>
+                }
+                isSelected={false}
+                onChange={[Function]}
+              />
+              <ToggleGroupItem
+                aria-label="dark theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <MoonIcon />
+                  </Icon>
+                }
+                isSelected={true}
+                onChange={[Function]}
+              />
+            </ToggleGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Dropdown
+              isOpen={false}
+              onOpenChange={[Function]}
+              onSelect={[Function]}
+              popperProps={
+                {
+                  "position": "right",
+                }
+              }
+              toggle={[Function]}
+            >
+              <DropdownItem
+                onClick={[Function]}
+                value="about"
+              >
+                About
+              </DropdownItem>
+            </Dropdown>
+          </ToolbarItem>
+        </ForwardRef>
+        <ToolbarItem
+          visibility={
+            {
+              "default": "visible",
+              "lg": "hidden",
+            }
+          }
+        >
+          <Dropdown
+            isOpen={false}
+            isPlain={true}
+            onOpenChange={[Function]}
+            onSelect={[Function]}
+            popperProps={
+              {
+                "position": "right",
+              }
+            }
+            toggle={[Function]}
+          >
+            <DropdownItem
+              onClick={[MockFunction]}
+              ouiaId="logout"
+              value="logout"
+            >
+              Logout
+            </DropdownItem>
+          </Dropdown>
+        </ToolbarItem>
+      </ForwardRef>
+      <ToolbarItem
+        visibility={
+          {
+            "default": "hidden",
+            "lg": "visible",
+          }
+        }
+      >
+        <Dropdown
+          isOpen={false}
+          onOpenChange={[Function]}
+          onSelect={[Function]}
+          popperProps={
+            {
+              "position": "right",
+            }
+          }
+          toggle={[Function]}
+        >
+          <DropdownItem
+            onClick={[MockFunction]}
+            ouiaId="logout"
+            value="logout"
+          >
+            Logout
+          </DropdownItem>
+        </Dropdown>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+  <AboutModal
+    isOpen={false}
+    onClose={[Function]}
+    useUser={
+      [MockFunction] {
+        "calls": [
+          [],
+          [],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`ViewToolbar should initialize light theme from localStorage using environment variable: light theme from localStorage 1`] = `
+<React.Fragment>
+  <Toolbar
+    id="toolbar"
+    isFullHeight={true}
+    isStatic={true}
+  >
+    <ToolbarContent
+      isExpanded={false}
+      showClearFiltersButton={false}
+    >
+      <ForwardRef
+        align={
+          {
+            "default": "alignEnd",
+          }
+        }
+        gap={
+          {
+            "default": "gapNone",
+            "md": "gapMd",
+          }
+        }
+        variant="action-group-plain"
+      >
+        <ForwardRef
+          variant="action-group-plain"
+          visibility={
+            {
+              "default": "hidden",
+              "lg": "visible",
+            }
+          }
+        >
+          <ToolbarItem>
+            <ToggleGroup
+              aria-label="Dark theme toggle group"
+            >
+              <ToggleGroupItem
+                aria-label="light theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <SunIcon />
+                  </Icon>
+                }
+                isSelected={true}
+                onChange={[Function]}
+              />
+              <ToggleGroupItem
+                aria-label="dark theme toggle"
+                icon={
+                  <Icon
+                    size="md"
+                  >
+                    <MoonIcon />
+                  </Icon>
+                }
+                isSelected={false}
+                onChange={[Function]}
+              />
+            </ToggleGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Dropdown
+              isOpen={false}
+              onOpenChange={[Function]}
+              onSelect={[Function]}
+              popperProps={
+                {
+                  "position": "right",
+                }
+              }
+              toggle={[Function]}
+            >
+              <DropdownItem
+                onClick={[Function]}
+                value="about"
+              >
+                About
+              </DropdownItem>
+            </Dropdown>
+          </ToolbarItem>
+        </ForwardRef>
+        <ToolbarItem
+          visibility={
+            {
+              "default": "visible",
+              "lg": "hidden",
+            }
+          }
+        >
+          <Dropdown
+            isOpen={false}
+            isPlain={true}
+            onOpenChange={[Function]}
+            onSelect={[Function]}
+            popperProps={
+              {
+                "position": "right",
+              }
+            }
+            toggle={[Function]}
+          >
+            <DropdownItem
+              onClick={[MockFunction]}
+              ouiaId="logout"
+              value="logout"
+            >
+              Logout
+            </DropdownItem>
+          </Dropdown>
+        </ToolbarItem>
+      </ForwardRef>
+      <ToolbarItem
+        visibility={
+          {
+            "default": "hidden",
+            "lg": "visible",
+          }
+        }
+      >
+        <Dropdown
+          isOpen={false}
+          onOpenChange={[Function]}
+          onSelect={[Function]}
+          popperProps={
+            {
+              "position": "right",
+            }
+          }
+          toggle={[Function]}
+        >
+          <DropdownItem
+            onClick={[MockFunction]}
+            ouiaId="logout"
+            value="logout"
+          >
+            Logout
+          </DropdownItem>
+        </Dropdown>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+  <AboutModal
+    isOpen={false}
+    onClose={[Function]}
+    useUser={
+      [MockFunction] {
+        "calls": [
+          [],
+          [],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+          {
+            "type": "return",
+            "value": {
+              "getUser": [MockFunction] {
+                "calls": [
+                  [],
+                ],
+                "results": [
+                  {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      }
+    }
+  />
+</React.Fragment>
+`;
+
+exports[`ViewToolbar should persist theme to localStorage with environment variable key: localStorage theme persistence with env key 1`] = `
+[
+  [
+    "discovery-ui-theme",
+    "light",
+  ],
+  [
+    "discovery-ui-theme",
+    "light",
+  ],
+]
+`;
+
 exports[`ViewToolbar should render a basic component: basic 1`] = `
 <React.Fragment>
   <Toolbar
@@ -61,6 +656,7 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
                     <MoonIcon />
                   </Icon>
                 }
+                isSelected={false}
                 onChange={[Function]}
               />
             </ToggleGroup>
