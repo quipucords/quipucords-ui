@@ -119,28 +119,6 @@ const normalizeCommaSeparated = (data?: string) =>
     ?.split(',')
     ?.filter(Boolean);
 
-/**
- * Normalizes a total count to a non-negative number less than a given modulus,
- * optionally based on development mode.
- *
- * @param {object} data - The data object containing a count property.
- * @param {number} [data.count] - The count to be normalized.
- * @param {boolean} [devMode] - Flag to normalize count based on development mode.
- * @param {number} [modulus] - The modulus to use for normalization. Defaults to 100.
- * @returns {number} - The normalized total count.
- */
-const normalizeTotal = (
-  data: { count?: number; [key: string]: unknown } | undefined,
-  devMode: boolean = DEV_MODE,
-  modulus: number = 100
-) => {
-  let totalResults: number = data?.count || 0;
-  if (devMode) {
-    totalResults = Math.abs(totalResults) % modulus;
-  }
-  return totalResults;
-};
-
 enum authType {
   UsernameAndPassword = 'Username and Password',
   Token = 'Token',
@@ -264,7 +242,6 @@ const helpers = {
   getTitleImg,
   formatDate,
   normalizeCommaSeparated,
-  normalizeTotal,
   DEV_MODE,
   PROD_MODE,
   TEST_MODE,
