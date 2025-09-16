@@ -2,6 +2,79 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/quipucords/quipucords-ui/compare/3b3ce52c2af3e83f16fff324c77c3b7022f8d9e3...12ad49adfdc36048fe95f034719c05f81e3d717a) (2025-09-16)
+
+
+### Tests
+* **theme** do not mock process.env.REACT_APP_THEME_KEY  ([253ec18](https://github.com/quipucords/quipucords-ui/commit/253ec18adec5815f7d7e1b8bea5016571d763776))
+* **theme** add snapshot test for theme persistence  ([a253b5a](https://github.com/quipucords/quipucords-ui/commit/a253b5ad972fb6a771e18c2ad3a08ac19fc01555))
+* **sources** isolate form validation tests  ([6fa1413](https://github.com/quipucords/quipucords-ui/commit/6fa1413a58638fe70d73f84cd20c3943ac971f92))
+* **helpers** Properly isolate helpers tests  ([f89a3e9](https://github.com/quipucords/quipucords-ui/commit/f89a3e9dd7d021b369f4b53022a28029cd263c43))
+* **i18n** Properly isolate i18n tests  ([734f616](https://github.com/quipucords/quipucords-ui/commit/734f616316af9f745c1da4d4c15e1531bb93b0ce))
+* **status** Properly isolate useStatusApi hooks tests  ([ddba9dc](https://github.com/quipucords/quipucords-ui/commit/ddba9dcdb47e759ff766574e56e625d7cdc0923e))
+* **login** Properly isolate useLoginApi hooks tests  ([7e39048](https://github.com/quipucords/quipucords-ui/commit/7e39048d9d6f0a04eb62beec062b275b676c1af0))
+* **sources** Properly isolate useSourceApi hooks tests  ([c84f72f](https://github.com/quipucords/quipucords-ui/commit/c84f72f325983f56458b70e038565ab368878d53))
+* **sources** Properly isolate addSourceModal tests  ([e5faf02](https://github.com/quipucords/quipucords-ui/commit/e5faf02d41a40a871f5d73ce29d31695ab841cb6))
+* **credentials** Properly isolate useCredentialApi hooks tests  ([e468a35](https://github.com/quipucords/quipucords-ui/commit/e468a35855c55738061718c7046fbd4b944ed67a))
+* **credentials** Properly isolate addCredentialModal tests  ([f05ad2c](https://github.com/quipucords/quipucords-ui/commit/f05ad2ce4ccb2826bb291509b94e1d1a83dd06f8))
+* **scans** Properly isolate useScanApi hooks tests  ([c72381b](https://github.com/quipucords/quipucords-ui/commit/c72381bc25e2f174d59671aa10412a0fbcb87347))
+*  Make `t` function stable  ([3f155ff](https://github.com/quipucords/quipucords-ui/commit/3f155ff8c212a38a0ee1ecc360bf8c40961c41b7))
+*  add unit tests for the SourceConnectionsModal connections limit  ([efa3573](https://github.com/quipucords/quipucords-ui/commit/efa3573e163df72568da4fb0d2fcf7749fdcb17b))
+* **scans** fix broken useDownloadReportApi tests  ([a61a7fc](https://github.com/quipucords/quipucords-ui/commit/a61a7fcd228ef817fd60406f7da0ae489753d4b3))
+*  Add changes necessary for end to end runs with Camayoc  ([a8124c4](https://github.com/quipucords/quipucords-ui/commit/a8124c453d8562e17066368048491872d89e1417))
+
+### Features
+* **scans** Add back Merge Reports feature  ([c307f89](https://github.com/quipucords/quipucords-ui/commit/c307f89e8be5ab58e61f88228869175ba03960d0))
+* **scans** add comprehensive form validation  ([719fdd3](https://github.com/quipucords/quipucords-ui/commit/719fdd38c5c00138a6b3cc42a185f564b7ae0bab))
+* **sources** add comprehensive form validation  ([f246c0f](https://github.com/quipucords/quipucords-ui/commit/f246c0fe260ac50d730ede4f233764c9e5af2d80))
+* **creds** add comprehensive form validation  ([f8555c6](https://github.com/quipucords/quipucords-ui/commit/f8555c60a5b97ba13bb1cef9e31627c70e67984c))
+* **helpers** add field validation utils  ([1f250db](https://github.com/quipucords/quipucords-ui/commit/1f250db0946ec5efbb8202af2f0ccb6af18aa54b))
+*  only show a number of hosts in the connection status modal  ([1da67b4](https://github.com/quipucords/quipucords-ui/commit/1da67b4c91afea05b1e92a7be01f30c25f223f41))
+* **scans** add all/none checkbox functionality  ([69a1e9a](https://github.com/quipucords/quipucords-ui/commit/69a1e9a3db60c65978b17ae1c6ae8cc897340f8f))
+* **sources** add all/none checkbox functionality  ([fd5bc17](https://github.com/quipucords/quipucords-ui/commit/fd5bc17f6971e038a0bef8e85f85898486064db0))
+* **creds** add all/none checkbox functionality  ([a4207f6](https://github.com/quipucords/quipucords-ui/commit/a4207f65b4fc9b1f8bde0a332425c9fb70e67901))
+* **pf6** upgrade UI to PatternFly 6  ([6a8b6a7](https://github.com/quipucords/quipucords-ui/commit/6a8b6a7e9b65cf5aeeda4e12789737dd4ae0e706))
+
+### Documentation
+* **vendor** add PFv5-v6 tracking for react-tables  ([12ce3a7](https://github.com/quipucords/quipucords-ui/commit/12ce3a7ebea85748ac638d632e0d9f39eae98d80))
+
+### Code Refactoring
+*  preferring to have MAX_HOSTS_PER_CATEGORY as a property  ([364b861](https://github.com/quipucords/quipucords-ui/commit/364b86194da33b81177da7d59254518f1e9263fb))
+*  change localization ids for disabled delete tooltip  ([57f3e69](https://github.com/quipucords/quipucords-ui/commit/57f3e69a3b6d83dbe85927cfeff08adaf8f274c2))
+
+### Chores
+* **deps** update konflux references  ([12ad49a](https://github.com/quipucords/quipucords-ui/commit/12ad49adfdc36048fe95f034719c05f81e3d717a))
+* **deps** update quay.io/konflux-ci/yq docker digest to 7ef2e2f  ([98d5104](https://github.com/quipucords/quipucords-ui/commit/98d5104192bb521b52c8a5321ee6dd71bb5401bc))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 1269033  ([5f18e6d](https://github.com/quipucords/quipucords-ui/commit/5f18e6dc7a5d6477d37ce33a0c3fe6fd3ddb8650))
+* **theme** handle possible errors when writing to localStorage  ([605d625](https://github.com/quipucords/quipucords-ui/commit/605d62536ba9a7a6b0d24d61fe47d873999f6006))
+* **theme** persist theme through logout with localStorage  ([4ff8bdb](https://github.com/quipucords/quipucords-ui/commit/4ff8bdbafbd545660771fde7abed99b5f5feac90))
+*  bump axios to make `npm audit` happy  ([51c2264](https://github.com/quipucords/quipucords-ui/commit/51c226490427d596c1c336ebdd4cf93b9ccec65a))
+* **deps** update konflux references  ([8665900](https://github.com/quipucords/quipucords-ui/commit/8665900c4911c20d305c31c8c92ff03dca79bb20))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to bc98821  ([00803d7](https://github.com/quipucords/quipucords-ui/commit/00803d7566efcececa1b2a99b2a341b05ccbd0ba))
+* **deps** update quay.io/konflux-ci/yq docker digest to 9b64058  ([9c1922a](https://github.com/quipucords/quipucords-ui/commit/9c1922a1c2c349d6cd70dcccf67b15f1c9a61bee))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 51459cf  ([a62c4ac](https://github.com/quipucords/quipucords-ui/commit/a62c4ac4002af25c67b4ecd3364788fb6d09bca7))
+* **deps** update quay.io/redhat-appstudio/build-trusted-artifacts latest docker digest to 9b18077  ([2d00f42](https://github.com/quipucords/quipucords-ui/commit/2d00f42f2c4495c5fe2c8c8b6bca654b38f6d98e))
+* **deps** update konflux references  ([96df172](https://github.com/quipucords/quipucords-ui/commit/96df1720fc4900ab2f30190debb8c3c0a4b7eebe))
+* **deps** update quay.io/konflux-ci/yq docker digest to 15d0238  ([aa31e65](https://github.com/quipucords/quipucords-ui/commit/aa31e657d544e69eeed5f92580951bfd04b5171b))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to cbcca47  ([99085b5](https://github.com/quipucords/quipucords-ui/commit/99085b57508fb8a2f31004410a99c7e48195ab92))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 8786576  ([2a6a8fe](https://github.com/quipucords/quipucords-ui/commit/2a6a8fef51f54717db3145f99c0186411bd57238))
+
+### Builds
+*  fix broken package-lock.json file  ([169ab6d](https://github.com/quipucords/quipucords-ui/commit/169ab6de85844f2e48ccb65e5a514c0e2ec9e3dc))
+
+### Bug Fixes
+* **build** Make Containerfile recognize feature flag  ([a2ddf2a](https://github.com/quipucords/quipucords-ui/commit/a2ddf2a9d40eb6e778c8ea46635d2f05c3288b02))
+* **build** apply yarn run jest --updateSnapshot  ([6021abd](https://github.com/quipucords/quipucords-ui/commit/6021abd8a21492438897d17ecd1d807c580cca4d))
+*  properly singularize the showSourceConnectionsModel tooltip.  ([c839c18](https://github.com/quipucords/quipucords-ui/commit/c839c184a7efc93248b060989deb7a7a97f4dea9))
+* **react-table-batteries** reset page table on sort or filter change  ([778f5bc](https://github.com/quipucords/quipucords-ui/commit/778f5bc638d0e64f84e548080ee26e66d4050af8))
+* **react-table-batteries** port shift key held status to Ref  ([83b1cdc](https://github.com/quipucords/quipucords-ui/commit/83b1cdca0d0a16ac72e0fd74e0e203008e16ebe6))
+* **rescan** disable action for running scans  ([0614c1c](https://github.com/quipucords/quipucords-ui/commit/0614c1c18f97a1470cb913b54589f0557bea6d15))
+* **views** Align number of cells in header and table  ([7a369d0](https://github.com/quipucords/quipucords-ui/commit/7a369d0a68f2048a971625aadcc0013698fd6caa))
+* **viewScansList** Refresh scan list when closing modal  ([baa357f](https://github.com/quipucords/quipucords-ui/commit/baa357fd07be45fd5b884da2e6ba03ddca61b5cd))
+* **react-table-batteries** Fix bulk selector  ([382df12](https://github.com/quipucords/quipucords-ui/commit/382df12ed4836e3c8ea81c4c48fea02cd3f6c77f))
+* **showAggregateReportModal** give labels more horizontal space  ([5c750de](https://github.com/quipucords/quipucords-ui/commit/5c750dee0002879b907a6a27c5cb96a1bbe41921))
+* **toolbar** fix filtering toolbar labels  ([4908c3b](https://github.com/quipucords/quipucords-ui/commit/4908c3be3cd41effbdaa508e20e50ec041f5ef4a))
+
 ## [2.1.0](https://github.com/quipucords/quipucords-ui/compare/acf4633d1dab7cc3a280164c9a24ccc99b6d8d2f...71caf759b43fe294e54d75b27db4ffc35f108498) (2025-08-19)
 
 
