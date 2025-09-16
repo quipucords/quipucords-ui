@@ -102,6 +102,12 @@ const useSourceForm = ({
   const [localErrors, setLocalErrors] = useState<SourceErrorType>({});
   const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
   const [canSubmit, setCanSubmit] = useState(false);
+  // Pagination state
+  const [hasMorePages, setHasMorePages] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  // Search state
+  const [isSearching, setIsSearching] = useState(false);
   const typeValue = source?.source_type || sourceType?.split(' ')?.shift()?.toLowerCase();
   const isNetwork = typeValue === 'network';
   const isOpenshift = typeValue === 'openshift';
@@ -275,14 +281,24 @@ const useSourceForm = ({
   }, [formData, touchedFields, serverErrors]);
 
   useEffect(() => {
+    // Reset pagination state when typeValue changes
+    setCurrentPage(1);
+    setCredOptions([]);
+    
     getCredentials({
       params: {
-        cred_type: typeValue
+        cred_type: typeValue,
+        page: 1,
+        page_size: 100
       }
     })
       .then(response => {
-        const updatedOptions = response?.data?.results?.map(({ name, id }) => ({ label: name, value: `${id}` }));
-        setCredOptions(updatedOptions || []);
+        const results = response?.data?.results || [];
+        const updatedOptions = results.map(({ name, id }) => ({ label: name, value: `${id}` }));
+        setCredOptions(updatedOptions);
+        
+        // Check if there are more pages for pagination
+        setHasMorePages(!!response?.data?.next);
       })
       .catch(err => {
         if (!helpers.TEST_MODE) {
@@ -290,6 +306,36 @@ const useSourceForm = ({
         }
       });
   }, [typeValue, getCredentials]);
+
+  // Load more credentials for infinite scroll
+  const loadMoreCredentials = useCallback(async () => {
+    if (isLoadingMore || !hasMorePages) return;
+    
+    setIsLoadingMore(true);
+    try {
+      const response = await getCredentials({
+        params: {
+          cred_type: typeValue,
+          page: currentPage + 1,
+          page_size: 100
+        }
+      });
+      
+      const results = response?.data?.results || [];
+      const newCredentials = results.map(({ name, id }) => ({ label: name, value: `${id}` }));
+      
+      // Append new credentials to existing ones
+      setCredOptions(prev => [...prev, ...newCredentials]);
+      setCurrentPage(prev => prev + 1);
+      setHasMorePages(!!response?.data?.next);
+    } catch (err) {
+      if (!helpers.TEST_MODE) {
+        console.error('Failed to load more credentials:', err);
+      }
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [getCredentials, typeValue, currentPage, isLoadingMore, hasMorePages]);
 
   const handleInputChange = useCallback(
     (field: string, value: unknown) => {
@@ -317,6 +363,35 @@ const useSourceForm = ({
       }));
     },
     [serverErrors, onClearErrors, validateField]
+  );
+
+  // Server-side search function for credentials
+  const searchCredentials = useCallback(
+    async (searchTerm: string): Promise<{ value: string; label: string }[]> => {
+      setIsSearching(true);
+      try {
+        const response = await getCredentials({
+          params: {
+            cred_type: typeValue,
+            search_by_name: searchTerm,
+            page_size: 100
+          }
+        });
+
+        const searchResults = response?.data?.results?.map(({ name, id }) => ({ 
+          label: name, 
+          value: `${id}` 
+        })) || [];
+
+        return searchResults;
+      } catch (error) {
+        console.error('Failed to search credentials:', error);
+        throw error;
+      } finally {
+        setIsSearching(false);
+      }
+    },
+    [getCredentials, typeValue]
   );
 
   const filterFormData = useCallback(
@@ -362,7 +437,14 @@ const useSourceForm = ({
     canSubmit,
     handleInputChange,
     filterFormData,
-    typeValue
+    typeValue,
+    // Search functionality
+    searchCredentials,
+    isSearching,
+    // Pagination functionality
+    loadMoreCredentials,
+    hasMorePages,
+    isLoadingMore
   };
 };
 
@@ -403,7 +485,14 @@ const SourceForm: React.FC<SourceFormProps> = ({
     touchedFields,
     canSubmit,
     handleInputChange,
-    filterFormData
+    filterFormData,
+    // Search functionality
+    searchCredentials,
+    isSearching,
+    // Pagination functionality
+    loadMoreCredentials,
+    hasMorePages,
+    isLoadingMore
   } = useForm({
     sourceType,
     source,
@@ -460,11 +549,26 @@ const SourceForm: React.FC<SourceFormProps> = ({
           options={credOptions}
           selectedOptions={formData?.credentials?.map(String) || []}
           menuToggleOuiaId="add_credentials_select"
-          maxSelections={isNetwork ? Infinity : 1} // Limit selection to 1 for non-network sources
+          maxSelections={isNetwork ? Infinity : 1}
+          // Search functionality
+          onSearch={searchCredentials}
+          isLoading={isSearching}
+          searchDelay={300}
+          // Pagination functionality
+          onLoadMore={loadMoreCredentials}
+          hasMorePages={hasMorePages}
+          isLoadingMore={isLoadingMore}
         />
         {!isNetwork && (
           <HelperText>
             <HelperTextItem variant="warning">Only one credential can be selected for this source type.</HelperTextItem>
+          </HelperText>
+        )}
+        {hasMorePages && (
+          <HelperText>
+            <HelperTextItem variant="default">
+              Scroll down to load more credentials, or type to search for specific ones.
+            </HelperTextItem>
           </HelperText>
         )}
         <ErrorFragment errorMessage={errors?.credentials} fieldTouched={touchedFields.has('credentials')} />
