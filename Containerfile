@@ -1,6 +1,7 @@
 FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:bc98821fd474e197d6a935964a0de14b7cd69ddcf67f7580a7b4c42e00fc0851 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 ARG REACT_APP_FEATURE_MERGE_BUTTON="true"
+ARG REACT_APP_FEATURE_OVERVIEW="false"
 # Become root before installing anything
 USER root
 # install dependencies in a separate layer to save dev time
