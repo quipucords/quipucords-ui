@@ -11,6 +11,10 @@ exports[`Routes should render a basic component: basic 1`] = `
   <Routes>
     <Route
       element={<UNDEFINED />}
+      path="/overview"
+    />
+    <Route
+      element={<UNDEFINED />}
       path="/credentials"
     />
     <Route

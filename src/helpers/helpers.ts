@@ -54,6 +54,12 @@ const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 const FEATURE_MERGE_BUTTON = process.env.REACT_APP_FEATURE_MERGE_BUTTON === 'true';
 
 /**
+ * Feature flag for including Overview page link in navigation.
+ * See dotenv config files for updating.
+ */
+const FEATURE_OVERVIEW = process.env.REACT_APP_FEATURE_OVERVIEW === 'true';
+
+/**
  * Generates a translation key for internationalization.
  *
  * @param {string | string[]} key - The translation key(s).
@@ -248,7 +254,8 @@ const helpers = {
   UI_BRAND,
   UI_NAME,
   UI_VERSION,
-  FEATURE_MERGE_BUTTON
+  FEATURE_MERGE_BUTTON,
+  FEATURE_OVERVIEW
 };
 
 export { helpers as default, helpers };
