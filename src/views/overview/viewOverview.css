@@ -1,0 +1,13 @@
+main {
+  .pf-v6-c-icon__content {
+    color: var(--pf-t--global--color--brand--default);
+  }
+
+  #faq {
+    overflow: visible;
+  }
+
+  .pf-v6-c-page__main-section .pf-v6-c-page__main-section {
+    padding-inline-start: 0;
+  }
+}

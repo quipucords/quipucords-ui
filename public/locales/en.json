@@ -373,7 +373,47 @@
     "label_credentials": "Credentials",
     "label_scans-names": "Scans: {{name}}",
     "label_sources": "Sources",
-    "label_not-found_home": "Take me home"
+    "label_not-found_home": "Take me home",
+    "overview": {
+      "title": "Overview",
+      "getting-started": {
+        "header": "Getting started resource",
+        "item1": {
+          "label": "About Discovery",
+          "content": "<0>Red Hat Discovery is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
+        },
+        "item2": {
+          "label": "Data privacy",
+          "content": "<0>All data collected by Discovery stays in your environment and is shared with Red Hat only if you choose. Credentials are encrypted and decrypted at scan time by using your local password, keeping sensitive details secure while giving you clear visibility into your use of Red Hat software.</0>"
+        },
+        "item3": {
+          "label": "Key process",
+          "content": "<0>To use Discovery, first configure credentials to securely access your systems. Then add sources, such as hostnames or IP ranges. With credentials and sources in place, you can run scans to collect system data and gain insights into your environment without sharing sensitive information unless you choose to.</0>"
+        }
+      },
+      "process": {
+        "header": "Get prepared before dive in"
+      },
+      "faq": {
+        "header": "Frequent Q&A",
+        "item1": {
+          "label": "What data is Discovery collecting?",
+          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+        },
+        "item2": {
+          "label": "How does Discovery store my credentials?",
+          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+        },
+        "item3": {
+          "label": "How long does a scan take to run?",
+          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+        },
+        "item4": {
+          "label": "How can I upload and read my report?",
+          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+        }
+      }
+    }
   },
   "dataSource": {
     "rhacs": "RHACS",
