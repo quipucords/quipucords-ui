@@ -19,7 +19,7 @@ import {
   ToolbarGroup,
   ToolbarItem
 } from '@patternfly/react-core';
-import { EllipsisVIcon, MoonIcon, QuestionCircleIcon, SunIcon } from '@patternfly/react-icons';
+import { EllipsisVIcon, MoonIcon, InfoCircleIcon, SunIcon } from '@patternfly/react-icons';
 import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import avatarImage from '../../images/imgAvatar.svg';
@@ -137,7 +137,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                       isExpanded={helpOpen}
                       ouiaId="help_menu_toggle"
                     >
-                      <QuestionCircleIcon />
+                      <InfoCircleIcon />
                     </MenuToggle>
                   )}
                 >
