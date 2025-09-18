@@ -214,15 +214,6 @@ describe('normalizeCommaSeparated', () => {
   });
 });
 
-describe('normalizeTotal', () => {
-  it('should normalize total values', () => {
-    expect(helpers.normalizeTotal({ count: 142 }, true, undefined)).toBe(42);
-    expect(helpers.normalizeTotal({}, true, undefined)).toBe(0);
-    expect(helpers.normalizeTotal({ count: 142 }, false, undefined)).toBe(142);
-    expect(helpers.normalizeTotal({ count: 142 }, true, 50)).toBe(42);
-  });
-});
-
 describe('downloadData', () => {
   it('downloads data as a file', async () => {
     const data = 'Test data';

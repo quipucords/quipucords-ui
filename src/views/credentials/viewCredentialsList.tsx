@@ -292,7 +292,7 @@ const CredentialsListView: React.FunctionComponent = () => {
     idProperty: 'id',
     isLoading,
     currentPageItems: data?.results || [],
-    totalItemCount: helpers.normalizeTotal(data)
+    totalItemCount: data?.count || 0
   });
 
   const {
