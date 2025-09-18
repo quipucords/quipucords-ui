@@ -392,7 +392,27 @@
         }
       },
       "process": {
-        "header": "Get prepared before dive in"
+        "header": "Get prepared before dive in",
+        "item1": {
+          "label": "Identify all the sources",
+          "content": "It’s likely you have multiple types of sources to add."
+        },
+        "item2": {
+          "label": "Gather and add credentials",
+          "content": "Prepare the credentials for each of your sources. Some of them may require more than one."
+        },
+        "item3": {
+          "label": "Add your sources",
+          "content": "You are ready to connect your source now with the credentials from the last steps."
+        },
+        "item4": {
+          "label": "Run scans, download reports",
+          "content": "After the sources and credentials are connected, run the scan. Download the report when the scan is completed."
+        },
+        "item5": {
+          "label": "Reports analysis",
+          "content": "You can either work with your Red Hat account team to help you understand your report, or upload the report to Red Hat Insights."
+        }
       },
       "faq": {
         "header": "Frequent Q&A",

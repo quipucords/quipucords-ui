@@ -20,6 +20,7 @@ import {
   CardHeader,
   Content,
   ContentVariants,
+  Flex,
   Icon,
   Split,
   SplitItem,
@@ -87,6 +88,29 @@ const OverviewView: React.FunctionComponent = () => {
     </Card>
   ];
 
+  const processItems = [
+    {
+      label: t('view.overview.process.item1.label'),
+      content: t('view.overview.process.item1.content')
+    },
+    {
+      label: t('view.overview.process.item2.label'),
+      content: t('view.overview.process.item2.content')
+    },
+    {
+      label: t('view.overview.process.item3.label'),
+      content: t('view.overview.process.item3.content')
+    },
+    {
+      label: t('view.overview.process.item4.label'),
+      content: t('view.overview.process.item4.content')
+    },
+    {
+      label: t('view.overview.process.item5.label'),
+      content: t('view.overview.process.item5.content')
+    }
+  ];
+
   const accordionItems = [
     {
       toggleLabel: t('view.overview.faq.item1.label'),
@@ -112,12 +136,20 @@ const OverviewView: React.FunctionComponent = () => {
       <MultiContentCard cards={gettingStartedCards} />
       <Card isFullHeight>
         <CardHeader className="pf-v6-u-font-weight-bold">{t('view.overview.process.header')}</CardHeader>
-        <CardBody>
-          <Content className="pf-v6-u-font-weight-bold pf-v6-u-mb-sm">This will be process overview</Content>
-          <Content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-          </Content>
+        <CardBody id="process">
+          <Flex
+            spaceItems={{ default: 'spaceItemsXl', lg: 'spaceItemsNone' }}
+            justifyContent={{ default: 'justifyContentSpaceBetween' }}
+          >
+            {processItems.map((itemDefinition, idx) => {
+              return (
+                <Card key={`process-${idx}`}>
+                  <CardHeader className="pf-v6-u-font-weight-bold">{itemDefinition.label}</CardHeader>
+                  <CardBody>{itemDefinition.content}</CardBody>
+                </Card>
+              );
+            })}
+          </Flex>
         </CardBody>
       </Card>
       <Split hasGutter>
