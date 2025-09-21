@@ -5,8 +5,8 @@ import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
 import { AddSourceModal, SourceForm, useSourceForm } from '../addSourceModal';
 
-jest.mock('../../../components/typeAheadCheckboxes/typeaheadCheckboxes', () => ({
-  TypeaheadCheckboxes: ({ onChange }: any) => (
+jest.mock('../../../components/typeAheadCheckboxes/typeaheadCheckboxesWithSearch', () => ({
+  TypeaheadCheckboxesWithSearch: ({ onChange }: any) => (
     <button type="button" data-testid="select-cred" onClick={() => onChange(['1'])}>
       Select Test Credential
     </button>
@@ -67,6 +67,7 @@ describe('AddSourceModal-network', () => {
         sourceType="network"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Test SSH',
             hosts: '192.168.1.1',
@@ -79,7 +80,6 @@ describe('AddSourceModal-network', () => {
           },
           isNetwork: true,
           isOpenshift: false,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,
@@ -168,6 +168,7 @@ describe('AddSourceModal-openshift', () => {
         sourceType="openshift"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Test HTTP',
             hosts: '192.168.1.1',
@@ -180,7 +181,6 @@ describe('AddSourceModal-openshift', () => {
           },
           isNetwork: false,
           isOpenshift: true,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,
@@ -221,6 +221,7 @@ describe('AddSourceModal-openshift', () => {
         sourceType="openshift"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Disable SSL',
             hosts: '192.168.1.1',
@@ -233,7 +234,6 @@ describe('AddSourceModal-openshift', () => {
           },
           isNetwork: false,
           isOpenshift: true,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,
