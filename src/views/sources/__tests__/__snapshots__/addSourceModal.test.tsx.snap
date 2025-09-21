@@ -96,10 +96,11 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="network"
+      initialSelectedCredentials={[]}
       maxSelections={Infinity}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <ErrorFragment
@@ -213,10 +214,10 @@ exports[`SourceForm should render a basic component: basic 1`] = `
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>
@@ -395,10 +396,11 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="ansible"
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>
@@ -577,10 +579,11 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="openshift"
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>
@@ -759,10 +762,11 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="rhacs"
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>
@@ -941,10 +945,11 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="satellite"
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>
@@ -1123,10 +1128,11 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     label="Credentials"
   >
     <TypeaheadCheckboxes
+      credentialType="vcenter"
+      initialSelectedCredentials={[]}
       maxSelections={1}
       menuToggleOuiaId="add_credentials_select"
       onChange={[Function]}
-      options={[]}
       selectedOptions={[]}
     />
     <HelperText>

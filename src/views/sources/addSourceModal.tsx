@@ -24,8 +24,7 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
 import { helpers } from '../../helpers';
-import { useGetCredentialsApi } from '../../hooks/useCredentialApi';
-import { type SourceType } from '../../types/types';
+import { type CredentialType, type SourceType, type CredentialOption } from '../../types/types';
 
 const SSL_PROTOCOL_LABELS_TO_VALUES: Record<string, string> = {
   SSLv23: 'SSLv23',
@@ -76,14 +75,12 @@ const useSourceForm = ({
   sourceType,
   source,
   errors: serverErrors,
-  onClearErrors,
-  useGetCredentials = useGetCredentialsApi
+  onClearErrors
 }: {
   sourceType?: string;
   source?: Partial<SourceType>;
   errors?: SourceErrorType;
   onClearErrors?: () => void;
-  useGetCredentials?: typeof useGetCredentialsApi;
 } = {}) => {
   const initialFormState: SourceFormType = {
     credentials: [],
@@ -96,8 +93,7 @@ const useSourceForm = ({
     proxy_url: ''
   };
 
-  const { getCredentials } = useGetCredentials();
-  const [credOptions, setCredOptions] = useState<{ value: string; label: string }[] | []>([]);
+  const [initialSelectedCredentials, setInitialSelectedCredentials] = useState<CredentialOption[]>([]);
   const [formData, setFormData] = useState<SourceFormType>(initialFormState);
   const [localErrors, setLocalErrors] = useState<SourceErrorType>({});
   const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
@@ -274,22 +270,22 @@ const useSourceForm = ({
     validateForm();
   }, [formData, touchedFields, serverErrors]);
 
+  // Helper function to convert source.credentials to CredentialOption[]
+  const convertToCredentialOptions = useCallback((credentials: CredentialType[]): CredentialOption[] => {
+    return credentials.map(cred => ({
+      value: cred.id.toString(),
+      label: cred.name,
+      credential: cred
+    }));
+  }, []);
+
+  // Initialize selected credentials for edit mode using existing data
   useEffect(() => {
-    getCredentials({
-      params: {
-        cred_type: typeValue
-      }
-    })
-      .then(response => {
-        const updatedOptions = response?.data?.results?.map(({ name, id }) => ({ label: name, value: `${id}` }));
-        setCredOptions(updatedOptions || []);
-      })
-      .catch(err => {
-        if (!helpers.TEST_MODE) {
-          console.error(err);
-        }
-      });
-  }, [typeValue, getCredentials]);
+    if (source?.credentials && source.credentials.length > 0) {
+      const credentialOptions = convertToCredentialOptions(source.credentials);
+      setInitialSelectedCredentials(credentialOptions);
+    }
+  }, [source, convertToCredentialOptions]);
 
   const handleInputChange = useCallback(
     (field: string, value: unknown) => {
@@ -353,7 +349,7 @@ const useSourceForm = ({
   );
 
   return {
-    credOptions,
+    initialSelectedCredentials,
     formData,
     isNetwork,
     isOpenshift,
@@ -398,12 +394,13 @@ const SourceForm: React.FC<SourceFormProps> = ({
     formData,
     isNetwork,
     isOpenshift,
-    credOptions,
+    initialSelectedCredentials,
     errors,
     touchedFields,
     canSubmit,
     handleInputChange,
-    filterFormData
+    filterFormData,
+    typeValue
   } = useForm({
     sourceType,
     source,
@@ -457,8 +454,9 @@ const SourceForm: React.FC<SourceFormProps> = ({
             const validIds = selections.map(Number).filter(id => !isNaN(id));
             handleInputChange('credentials', validIds);
           }}
-          options={credOptions}
           selectedOptions={formData?.credentials?.map(String) || []}
+          credentialType={typeValue}
+          initialSelectedCredentials={initialSelectedCredentials}
           menuToggleOuiaId="add_credentials_select"
           maxSelections={isNetwork ? Infinity : 1} // Limit selection to 1 for non-network sources
         />
