@@ -3,6 +3,7 @@
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
   "components/aboutModal/aboutModal.tsx:45:        error => console.error(\`About status error: \${error} \`)",
+  "components/typeAheadCheckboxes/typeaheadCheckboxes.tsx:153:            console.error('Error searching credentials:', error);",
   "helpers/queryHelpers.ts:75:        console.log(\`Query: \`, query);",
   "helpers/queryHelpers.ts:80:        console.error('Error during data fetching:', error);",
   "hooks/useCredentialApi.ts:81:          console.log(missingCredsMsg);",
@@ -36,7 +37,6 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:14:    console.error(error);",
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:40:    console.error(error);",
   "views/scans/viewScansList.tsx:325:                                    console.error(err);",
-  "views/sources/addSourceModal.tsx:289:          console.error(err);",
   "views/sources/viewSourcesList.tsx:452:                console.error(err);",
   "views/sources/viewSourcesList.tsx:649:                console.error(err);",
 ]

@@ -67,6 +67,7 @@ describe('AddSourceModal-network', () => {
         sourceType="network"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Test SSH',
             hosts: '192.168.1.1',
@@ -79,7 +80,6 @@ describe('AddSourceModal-network', () => {
           },
           isNetwork: true,
           isOpenshift: false,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,
@@ -168,6 +168,7 @@ describe('AddSourceModal-openshift', () => {
         sourceType="openshift"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Test HTTP',
             hosts: '192.168.1.1',
@@ -180,7 +181,6 @@ describe('AddSourceModal-openshift', () => {
           },
           isNetwork: false,
           isOpenshift: true,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,
@@ -221,6 +221,7 @@ describe('AddSourceModal-openshift', () => {
         sourceType="openshift"
         onSubmit={mockOnSubmit}
         useForm={() => ({
+          initialSelectedCredentials: [],
           formData: {
             name: 'Disable SSL',
             hosts: '192.168.1.1',
@@ -233,7 +234,6 @@ describe('AddSourceModal-openshift', () => {
           },
           isNetwork: false,
           isOpenshift: true,
-          credOptions: [{ value: '1', label: 'Test Credential 1' }],
           errors: {},
           touchedFields: new Set(),
           canSubmit: true,

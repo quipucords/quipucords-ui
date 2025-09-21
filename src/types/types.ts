@@ -26,6 +26,12 @@ export type CredentialType = {
   has_auth_token?: boolean;
 };
 
+export interface CredentialOption {
+  value: string;
+  label: string;
+  credential: CredentialType;
+}
+
 export type SourceConnectionType = {
   end_time: string;
   id: number;

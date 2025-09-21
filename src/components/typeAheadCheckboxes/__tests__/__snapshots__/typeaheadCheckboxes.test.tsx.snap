@@ -2,7 +2,7 @@
 
 exports[`TypeaheadCheckboxes should render a basic component: basic 1`] = `
 <Select
-  id="multi-typeahead-checkbox-select"
+  id="multi-typeahead-checkbox-select-with-search"
   isOpen={false}
   onOpenChange={[Function]}
   onSelect={[Function]}
@@ -11,18 +11,7 @@ exports[`TypeaheadCheckboxes should render a basic component: basic 1`] = `
   toggle={[Function]}
 >
   <SelectList
-    id="select-multi-typeahead-checkbox-listbox"
-  >
-    <SelectOption
-      hasCheckbox={true}
-      id="select-multi-typeahead-ipsum"
-      isFocused={false}
-      isSelected={false}
-      label="Lorem"
-      value="ipsum"
-    >
-      Lorem
-    </SelectOption>
-  </SelectList>
+    id="select-multi-typeahead-checkbox-listbox-with-search"
+  />
 </Select>
 `;

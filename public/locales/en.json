@@ -130,7 +130,12 @@
     "title_add-source_step_three": "Confirm",
     "title_create-credential": "Add credential",
     "title_create-credential_edit": "View credential",
-    "title_create-scan": "Scan"
+    "title_create-scan": "Scan",
+    "label_typeahead-no-results": "No results found for \"{{searchTerm}}\"",
+    "label_typeahead-search-hint": "Type to search for more credentials...",
+    "label_typeahead-clear": "Clear input value",
+    "label_typeahead-items-selected": "{{count}} items selected",
+    "label_typeahead-placeholder": "0 items selected"
   },
   "login": {
     "description": "Welcome! This inspection and reporting tool is designed to identify and report environment data, or facts, such as the number of physical and virtual systems on a network, their operating systems, and other configuration data.",
