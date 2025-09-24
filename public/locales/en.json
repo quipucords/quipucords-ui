@@ -377,14 +377,14 @@
     "overview": {
       "title": "Overview",
       "getting-started": {
-        "header": "Getting started resource",
+        "header": "Red Hat Discovery at a glance",
         "item1": {
           "label": "About Discovery",
           "content": "<0>Red Hat Discovery is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
         },
         "item2": {
           "label": "Data privacy",
-          "content": "<0>All data collected by Discovery stays in your environment and is shared with Red Hat only if you choose. Credentials are encrypted and decrypted at scan time by using your local password, keeping sensitive details secure while giving you clear visibility into your use of Red Hat software.</0>"
+          "content": "<0>All data collected by Discovery stays in your environment and is shared with Red Hat only if you choose. Credentials are encrypted by using your local password and decrypted only when performing scans, keeping sensitive details secure while giving you clear visibility into your use of Red Hat software.</0>"
         },
         "item3": {
           "label": "Key process",
@@ -392,7 +392,7 @@
         }
       },
       "process": {
-        "header": "Get prepared before dive in",
+        "header": "Understanding the workflow",
         "item1": {
           "label": "Identify all the sources",
           "content": "It’s likely you have multiple types of sources to add."
@@ -411,26 +411,26 @@
         },
         "item5": {
           "label": "Reports analysis",
-          "content": "You can either work with your Red Hat account team to help you understand your report, or upload the report to Red Hat Insights."
+          "content": "Work with your account team to help you understand your report, or upload the report to Red Hat Insights."
         }
       },
       "faq": {
-        "header": "Frequent Q&A",
+        "header": "FAQs",
         "item1": {
-          "label": "What data is Discovery collecting?",
-          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+          "label": "Where can I get support for Discovery?",
+          "content": "<p>Contact your Red Hat account team or open a <anchor>Red Hat support case</anchor> to receive support for any issues.</p>"
         },
         "item2": {
-          "label": "How does Discovery store my credentials?",
-          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+          "label": "Will Discovery have any impact on my systems?",
+          "content": "<0>Discovery is agentless and does not require any additional software to be installed on the systems that are being scanned. No changes are made to systems when they are scanned by Discovery.</0>"
         },
         "item3": {
-          "label": "How long does a scan take to run?",
-          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+          "label": "Does Discovery send any data directly to Red Hat?",
+          "content": "<0>No, Discovery does not automatically send any data to Red Hat. All data is stored locally and creates reports on the local file system.</0>"
         },
         "item4": {
-          "label": "How can I upload and read my report?",
-          "content": "<0>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</0>"
+          "label": "What should I do with the results from Discovery?",
+          "content": "<0>A Discovery scan produces a downloadable archive that contains several reports. These reports contain facts about Red Hat software installed in the scanned infrastructure. You can view this information to help understand your consumption of Red Hat software. You can also share that information with your Red Hat account team to help you make further purchasing decisions.</0>"
         }
       }
     }
