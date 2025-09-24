@@ -12,12 +12,6 @@ main {
       var(--pf-t--global--border--color--default) calc(50% + 1px),
       transparent 50%
     );
-    /* On CSS side, we can't know how many rows we have.
-     * The idea is that second number below is 1/n , where n is number
-     * of rows. So 50% for 2 rows, 33.33% for 3 rows etc. Then the line
-     * between items should be drawn for each row.
-     */
-    /*background-size: 100% 50%;*/
 
     .pf-v6-c-card {
       flex-basis: 18%; /* Forces 5 items to stay in a single row, with some gap between */
@@ -31,5 +25,9 @@ main {
 
   .pf-v6-c-page__main-section .pf-v6-c-page__main-section {
     padding-inline-start: 0;
+  }
+
+  #overview-image {
+    width: 80%;
   }
 }

@@ -28,6 +28,7 @@ import {
 } from '@patternfly/react-core';
 import { DataProcessorIcon, KeyIcon, OptimizeIcon } from '@patternfly/react-icons';
 import './viewOverview.css';
+import overviewSecuritySrc from '../../images/overviewSecurity.svg';
 
 const OverviewView: React.FunctionComponent = () => {
   const [expandedFaqItem, setExpandedFaqItem] = React.useState('faqAccordionItem0');
@@ -114,7 +115,17 @@ const OverviewView: React.FunctionComponent = () => {
   const accordionItems = [
     {
       toggleLabel: t('view.overview.faq.item1.label'),
-      contentChildren: <Trans i18nKey="view.overview.faq.item1.content" components={[<p key="p1" />]} />
+      contentChildren: (
+        <Trans
+          i18nKey="view.overview.faq.item1.content"
+          components={{
+            p: <p key="p1" />,
+            /* anchor does have content, but eslint doesn't know it should look inside translation file */
+            /* eslint-disable-next-line jsx-a11y/anchor-has-content */
+            anchor: <a key="p2" href="https://access.redhat.com/support" target="_blank" rel="noreferrer" />
+          }}
+        />
+      )
     },
     {
       toggleLabel: t('view.overview.faq.item2.label'),
@@ -153,17 +164,6 @@ const OverviewView: React.FunctionComponent = () => {
         </CardBody>
       </Card>
       <Split hasGutter>
-        <SplitItem>
-          <Card isFullHeight>
-            <CardHeader>Upload the scan report</CardHeader>
-            <CardBody>
-              <Content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </Content>
-            </CardBody>
-          </Card>
-        </SplitItem>
         <SplitItem isFilled>
           <Card isFullHeight id="faq">
             <CardHeader className="pf-v6-u-font-weight-bold">{t('view.overview.faq.header')}</CardHeader>
@@ -190,6 +190,9 @@ const OverviewView: React.FunctionComponent = () => {
               </Accordion>
             </CardBody>
           </Card>
+        </SplitItem>
+        <SplitItem>
+          <img id="overview-image" src={overviewSecuritySrc} alt="" />
         </SplitItem>
       </Split>
     </PageSection>
