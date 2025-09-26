@@ -22,10 +22,10 @@ import {
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
-import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
+import { TypeaheadCheckboxesWithSearch } from '../../components/typeAheadCheckboxes/typeaheadCheckboxesWithSearch';
 import { helpers } from '../../helpers';
 import { useGetCredentialsApi } from '../../hooks/useCredentialApi';
-import { type SourceType } from '../../types/types';
+import { type CredentialType, type SourceType } from '../../types/types';
 
 const SSL_PROTOCOL_LABELS_TO_VALUES: Record<string, string> = {
   SSLv23: 'SSLv23',
@@ -97,7 +97,7 @@ const useSourceForm = ({
   };
 
   const { getCredentials } = useGetCredentials();
-  const [credOptions, setCredOptions] = useState<{ value: string; label: string }[] | []>([]);
+  const [initialSelectedCredentials, setInitialSelectedCredentials] = useState<CredentialType[]>([]);
   const [formData, setFormData] = useState<SourceFormType>(initialFormState);
   const [localErrors, setLocalErrors] = useState<SourceErrorType>({});
   const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
@@ -274,22 +274,31 @@ const useSourceForm = ({
     validateForm();
   }, [formData, touchedFields, serverErrors]);
 
+  // Modified effect to load initial selected credentials for edit mode
   useEffect(() => {
-    getCredentials({
-      params: {
-        cred_type: typeValue
+    if (source?.credentials) {
+      // For edit mode, we need to fetch the selected credentials to show their names
+      const selectedCredentialIds = source.credentials.map(c => c.id);
+      if (selectedCredentialIds.length > 0) {
+        getCredentials({
+          params: {
+            cred_type: typeValue,
+            page_size: 1000 // Get a large page to find our selected credentials, potential tech debt here
+          }
+        })
+          .then(response => {
+            const allCredentials = response?.data?.results || [];
+            const selectedCreds = allCredentials.filter(cred => selectedCredentialIds.includes(cred.id));
+            setInitialSelectedCredentials(selectedCreds);
+          })
+          .catch(err => {
+            if (!helpers.TEST_MODE) {
+              console.error('Error loading selected credentials:', err);
+            }
+          });
       }
-    })
-      .then(response => {
-        const updatedOptions = response?.data?.results?.map(({ name, id }) => ({ label: name, value: `${id}` }));
-        setCredOptions(updatedOptions || []);
-      })
-      .catch(err => {
-        if (!helpers.TEST_MODE) {
-          console.error(err);
-        }
-      });
-  }, [typeValue, getCredentials]);
+    }
+  }, [source, typeValue, getCredentials]);
 
   const handleInputChange = useCallback(
     (field: string, value: unknown) => {
@@ -353,7 +362,7 @@ const useSourceForm = ({
   );
 
   return {
-    credOptions,
+    initialSelectedCredentials,
     formData,
     isNetwork,
     isOpenshift,
@@ -398,12 +407,13 @@ const SourceForm: React.FC<SourceFormProps> = ({
     formData,
     isNetwork,
     isOpenshift,
-    credOptions,
+    initialSelectedCredentials,
     errors,
     touchedFields,
     canSubmit,
     handleInputChange,
-    filterFormData
+    filterFormData,
+    typeValue
   } = useForm({
     sourceType,
     source,
@@ -452,13 +462,14 @@ const SourceForm: React.FC<SourceFormProps> = ({
         <ErrorFragment errorMessage={errors?.name} fieldTouched={touchedFields.has('name')} />
       </FormGroup>
       <FormGroup label="Credentials" fieldId="credentials" isRequired>
-        <TypeaheadCheckboxes
+        <TypeaheadCheckboxesWithSearch
           onChange={(selections: string[]) => {
             const validIds = selections.map(Number).filter(id => !isNaN(id));
             handleInputChange('credentials', validIds);
           }}
-          options={credOptions}
           selectedOptions={formData?.credentials?.map(String) || []}
+          credentialType={typeValue}
+          initialSelectedCredentials={initialSelectedCredentials}
           menuToggleOuiaId="add_credentials_select"
           maxSelections={isNetwork ? Infinity : 1} // Limit selection to 1 for non-network sources
         />
