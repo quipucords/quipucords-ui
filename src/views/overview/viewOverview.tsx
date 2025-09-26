@@ -20,10 +20,10 @@ import {
   CardHeader,
   Content,
   ContentVariants,
+  Grid,
+  GridItem,
   Flex,
   Icon,
-  Split,
-  SplitItem,
   PageSection
 } from '@patternfly/react-core';
 import { DataProcessorIcon, KeyIcon, OptimizeIcon } from '@patternfly/react-icons';
@@ -163,8 +163,8 @@ const OverviewView: React.FunctionComponent = () => {
           </Flex>
         </CardBody>
       </Card>
-      <Split hasGutter>
-        <SplitItem isFilled>
+      <Grid hasGutter>
+        <GridItem span={8}>
           <Card isFullHeight id="faq">
             <CardHeader className="pf-v6-u-font-weight-bold">{t('view.overview.faq.header')}</CardHeader>
             <CardBody>
@@ -190,11 +190,11 @@ const OverviewView: React.FunctionComponent = () => {
               </Accordion>
             </CardBody>
           </Card>
-        </SplitItem>
-        <SplitItem>
+        </GridItem>
+        <GridItem span={4}>
           <img id="overview-image" src={overviewSecuritySrc} alt="" />
-        </SplitItem>
-      </Split>
+        </GridItem>
+      </Grid>
     </PageSection>
   );
 };

@@ -20,6 +20,7 @@ main {
   }
 
   #faq {
+    --pf-v6-c-card--BorderWidth: 0;
     overflow: visible;
   }
 
@@ -28,6 +29,28 @@ main {
   }
 
   #overview-image {
-    width: 80%;
+    /* We want image to be the same size as text in FAQs section.
+     * The problem is that accordion unfolding changes row height, which makes image grow and shrink.
+     * So we need image to maintain static height close to height of accordion in default state.
+     * We assume default height will be card header, 4 questions (each taking single line) and 1 answer (also taking
+     * single line). Then some paddings and margins of PatternFly components.
+     * Since PatternFly components store everything in CSS variables defined at component level instead of globally,
+     * we have to use global variables that are default values of these component variables. Which means that these
+     * calculations will fall apart the moment we override component variable values or PatternFly changes default
+     * component variables values.
+     */
+    height: calc(
+      /* Card header text */
+      (1rem * var(--pf-v5-global--LineHeight--md, 1.5) + var(--pf-t--global--spacer--md) + var(--pf-t--global--spacer--lg)) +
+      /* 4 questions + 1 answer text*/
+      5 * (1rem * var(--pf-v5-global--LineHeight--md, 1.5) + var(--pf-t--global--spacer--sm) + var(--pf-t--global--spacer--sm)) +
+      /* Row gap between 4 questions */
+      3 * var(--pf-v6-c-accordion--RowGap, var(--pf-t--global--spacer--xs)) +
+      /* Answer has bottom margin */
+      var(--pf-v6-c-accordion__expandable-content--MarginInlineEnd, var(--pf-t--global--spacer--md))
+      /* Card also has a bottom padding, but things look better when we skip it */
+    );
+    width: 100%;
+    object-fit: contain;
   }
 }
