@@ -24,6 +24,7 @@ import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import avatarImage from '../../images/imgAvatar.svg';
 import AboutModal from '../aboutModal/aboutModal';
+import './viewLayoutToolbar.css';
 
 interface AppToolbarProps {
   useLogout?: typeof useLogoutApi;
@@ -132,7 +133,6 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                     <MenuToggle
                       aria-label="Toggle"
                       ref={toggleRef}
-                      variant="plain"
                       onClick={() => setHelpOpen(prev => !prev)}
                       isExpanded={helpOpen}
                       ouiaId="help_menu_toggle"
