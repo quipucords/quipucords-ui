@@ -1,0 +1,3 @@
+button[data-ouia-component-id="help_menu_toggle"] [class$=menu-toggle__controls] {
+  display: none;
+}
