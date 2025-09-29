@@ -6,7 +6,8 @@
  *
  * @module overview
  */
-import * as React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import MultiContentCard from '@patternfly/react-component-groups/dist/dynamic/MultiContentCard';
 import PageHeader from '@patternfly/react-component-groups/dist/dynamic/PageHeader';
@@ -28,11 +29,24 @@ import {
 } from '@patternfly/react-core';
 import { DataProcessorIcon, KeyIcon, OptimizeIcon } from '@patternfly/react-icons';
 import './viewOverview.css';
+import overviewSecurityDarkSrc from '../../images/overviewSecurity-dark.svg';
 import overviewSecuritySrc from '../../images/overviewSecurity.svg';
 
+const DARK_THEME_CLASS = 'pf-v6-theme-dark';
+
 const OverviewView: React.FunctionComponent = () => {
-  const [expandedFaqItem, setExpandedFaqItem] = React.useState('faqAccordionItem0');
   const { t } = useTranslation();
+  const [expandedFaqItem, setExpandedFaqItem] = useState('faqAccordionItem0');
+  const [isDarkTheme, setIsDarkTheme] = useState(() => document.documentElement.classList.contains(DARK_THEME_CLASS));
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDarkTheme(document.documentElement.classList.contains(DARK_THEME_CLASS));
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
 
   const onToggle = (id: string) => {
     if (id === expandedFaqItem) {
@@ -192,7 +206,7 @@ const OverviewView: React.FunctionComponent = () => {
           </Card>
         </GridItem>
         <GridItem span={4}>
-          <img id="overview-image" src={overviewSecuritySrc} alt="" />
+          <img id="overview-image" src={isDarkTheme ? overviewSecurityDarkSrc : overviewSecuritySrc} alt="" />
         </GridItem>
       </Grid>
     </PageSection>
