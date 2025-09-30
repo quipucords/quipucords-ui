@@ -377,18 +377,18 @@
     "overview": {
       "title": "Overview",
       "getting-started": {
-        "header": "Red Hat Discovery at a glance",
+        "header": "Red Hat {{appName}} at a glance",
         "item1": {
-          "label": "About Discovery",
-          "content": "<0>Red Hat Discovery is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
+          "label": "About {{appName}}",
+          "content": "<0>Red Hat {{appName}} is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
         },
         "item2": {
           "label": "Data privacy",
-          "content": "<0>All data collected by Discovery stays in your environment and is shared with Red Hat only if you choose. Credentials are encrypted by using your local password and decrypted only when performing scans, keeping sensitive details secure while giving you clear visibility into your use of Red Hat software.</0>"
+          "content": "<0>All data collected by {{appName}} stays in your environment and is shared with Red Hat only if you choose. Credentials are encrypted by using your local password and decrypted only when performing scans, keeping sensitive details secure while giving you clear visibility into your use of Red Hat software.</0>"
         },
         "item3": {
           "label": "Key process",
-          "content": "<0>To use Discovery, first configure credentials to securely access your systems. Then add sources, such as hostnames or IP ranges. With credentials and sources in place, you can run scans to collect system data and gain insights into your environment without sharing sensitive information unless you choose to.</0>"
+          "content": "<0>To use {{appName}}, first configure credentials to securely access your systems. Then add sources, such as hostnames or IP ranges. With credentials and sources in place, you can run scans to collect system data and gain insights into your environment without sharing sensitive information unless you choose to.</0>"
         }
       },
       "process": {
@@ -406,7 +406,7 @@
           "content": "You are ready to connect your source now with the credentials from the last steps."
         },
         "item4": {
-          "label": "Run scans, download reports",
+          "label": "Run scans and download reports",
           "content": "After the sources and credentials are connected, run the scan. Download the report when the scan is completed."
         },
         "item5": {
@@ -417,20 +417,20 @@
       "faq": {
         "header": "FAQs",
         "item1": {
-          "label": "Where can I get support for Discovery?",
+          "label": "Where can I get support for {{appName}}?",
           "content": "<p>Contact your Red Hat account team or open a <anchor>Red Hat support case</anchor> to receive support for any issues.</p>"
         },
         "item2": {
-          "label": "Will Discovery have any impact on my systems?",
-          "content": "<0>Discovery is agentless and does not require any additional software to be installed on the systems that are being scanned. No changes are made to systems when they are scanned by Discovery.</0>"
+          "label": "Will {{appName}} have any impact on my systems?",
+          "content": "<0>{{appName}} is agentless and does not require any additional software to be installed on the systems that are being scanned. No changes are made to systems when they are scanned by {{appName}}.</0>"
         },
         "item3": {
-          "label": "Does Discovery send any data directly to Red Hat?",
-          "content": "<0>No, Discovery does not automatically send any data to Red Hat. All data is stored locally and creates reports on the local file system.</0>"
+          "label": "Does {{appName}} send any data directly to Red Hat?",
+          "content": "<0>No, {{appName}} does not automatically send any data to Red Hat. All data is stored locally and creates reports on the local file system.</0>"
         },
         "item4": {
-          "label": "What should I do with the results from Discovery?",
-          "content": "<0>A Discovery scan produces a downloadable archive that contains several reports. These reports contain facts about Red Hat software installed in the scanned infrastructure. You can view this information to help understand your consumption of Red Hat software. You can also share that information with your Red Hat account team to help you make further purchasing decisions.</0>"
+          "label": "What should I do with the results from {{appName}}?",
+          "content": "<0>A {{appName}} scan produces a downloadable archive that contains several reports. These reports contain facts about Red Hat software installed in the scanned infrastructure. You can view this information to help understand your consumption of Red Hat software. You can also share that information with your Red Hat account team to help you make further purchasing decisions.</0>"
         }
       }
     }
