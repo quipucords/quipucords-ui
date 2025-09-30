@@ -28,6 +28,7 @@ import {
   PageSection
 } from '@patternfly/react-core';
 import { DataProcessorIcon, KeyIcon, OptimizeIcon } from '@patternfly/react-icons';
+import { helpers } from '../../helpers';
 import './viewOverview.css';
 import overviewSecurityDarkSrc from '../../images/overviewSecurity-dark.svg';
 import overviewSecuritySrc from '../../images/overviewSecurity.svg';
@@ -59,17 +60,23 @@ const OverviewView: React.FunctionComponent = () => {
   const gettingStartedCards = [
     <Card isFullHeight isPlain key="card-1">
       <CardHeader>
-        <Content component={ContentVariants.h4}>{t('view.overview.getting-started.header')}</Content>
+        <Content component={ContentVariants.h4}>
+          {t('view.overview.getting-started.header', { appName: helpers.UI_NAME })}
+        </Content>
       </CardHeader>
       <CardBody>
         <Content className="pf-v6-u-font-weight-bold pf-v6-u-mb-sm">
           <Icon size="md" className="pf-v6-u-pl-sm pf-v6-u-pr-md">
             <OptimizeIcon />
           </Icon>
-          {t('view.overview.getting-started.item1.label')}
+          {t('view.overview.getting-started.item1.label', { appName: helpers.UI_NAME })}
         </Content>
         <Content>
-          <Trans i18nKey="view.overview.getting-started.item1.content" components={[<p key="p1" />]} />
+          <Trans
+            i18nKey="view.overview.getting-started.item1.content"
+            components={[<p key="p1" />]}
+            values={{ appName: helpers.UI_NAME }}
+          />
         </Content>
       </CardBody>
     </Card>,
@@ -83,7 +90,11 @@ const OverviewView: React.FunctionComponent = () => {
           {t('view.overview.getting-started.item2.label')}
         </Content>
         <Content>
-          <Trans i18nKey="view.overview.getting-started.item2.content" components={[<p key="p1" />]} />
+          <Trans
+            i18nKey="view.overview.getting-started.item2.content"
+            components={[<p key="p1" />]}
+            values={{ appName: helpers.UI_NAME }}
+          />
         </Content>
       </CardBody>
     </Card>,
@@ -97,7 +108,11 @@ const OverviewView: React.FunctionComponent = () => {
           {t('view.overview.getting-started.item3.label')}
         </Content>
         <Content>
-          <Trans i18nKey="view.overview.getting-started.item3.content" components={[<p key="p1" />]} />
+          <Trans
+            i18nKey="view.overview.getting-started.item3.content"
+            components={[<p key="p1" />]}
+            values={{ appName: helpers.UI_NAME }}
+          />
         </Content>
       </CardBody>
     </Card>
@@ -128,7 +143,7 @@ const OverviewView: React.FunctionComponent = () => {
 
   const accordionItems = [
     {
-      toggleLabel: t('view.overview.faq.item1.label'),
+      toggleLabel: t('view.overview.faq.item1.label', { appName: helpers.UI_NAME }),
       contentChildren: (
         <Trans
           i18nKey="view.overview.faq.item1.content"
@@ -142,16 +157,34 @@ const OverviewView: React.FunctionComponent = () => {
       )
     },
     {
-      toggleLabel: t('view.overview.faq.item2.label'),
-      contentChildren: <Trans i18nKey="view.overview.faq.item2.content" components={[<p key="p1" />]} />
+      toggleLabel: t('view.overview.faq.item2.label', { appName: helpers.UI_NAME }),
+      contentChildren: (
+        <Trans
+          i18nKey="view.overview.faq.item2.content"
+          components={[<p key="p1" />]}
+          values={{ appName: helpers.UI_NAME }}
+        />
+      )
     },
     {
-      toggleLabel: t('view.overview.faq.item3.label'),
-      contentChildren: <Trans i18nKey="view.overview.faq.item3.content" components={[<p key="p1" />]} />
+      toggleLabel: t('view.overview.faq.item3.label', { appName: helpers.UI_NAME }),
+      contentChildren: (
+        <Trans
+          i18nKey="view.overview.faq.item3.content"
+          components={[<p key="p1" />]}
+          values={{ appName: helpers.UI_NAME }}
+        />
+      )
     },
     {
-      toggleLabel: t('view.overview.faq.item4.label'),
-      contentChildren: <Trans i18nKey="view.overview.faq.item4.content" components={[<p key="p1" />]} />
+      toggleLabel: t('view.overview.faq.item4.label', { appName: helpers.UI_NAME }),
+      contentChildren: (
+        <Trans
+          i18nKey="view.overview.faq.item4.content"
+          components={[<p key="p1" />]}
+          values={{ appName: helpers.UI_NAME }}
+        />
+      )
     }
   ];
 
