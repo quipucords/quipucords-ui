@@ -17,6 +17,7 @@ import {
 } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { SecretInput } from '../../components/secretInput/secretInput';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { helpers } from '../../helpers';
 import { type CredentialType } from '../../types/types';
@@ -46,6 +47,7 @@ interface CredentialErrorType {
 const getCleanedFormData = (
   formData: CredentialFormType,
   authType: string,
+  touchedFields: Set<string> = new Set(),
   maskedFields: string[] = ['password', 'ssh_key', 'ssh_passphrase', 'become_password', 'auth_token']
 ) => {
   const cleanedData = { ...formData };
@@ -65,7 +67,7 @@ const getCleanedFormData = (
       break;
   }
   Object.entries(cleanedData).forEach(([key, value]) => {
-    if (maskedFields.includes(key) && value === '') {
+    if (maskedFields.includes(key) && value === '' && !touchedFields.has(key)) {
       delete cleanedData[key];
     }
   });
@@ -242,6 +244,14 @@ const useCredentialForm = ({
     [serverErrors, onClearErrors]
   );
 
+  const ensureFieldWasTouched = useCallback((field: string) => {
+    setTouchedFields(prev => new Set([...prev, field]));
+  }, []);
+
+  const ensureFieldWasNotTouched = useCallback((field: string) => {
+    setTouchedFields(prev => new Set([...prev].filter(i => i !== field)));
+  }, []);
+
   const handleAuthTypeChange = useCallback((newAuthType: string) => {
     setAuthType(newAuthType);
     setTouchedFields(new Set(['name']));
@@ -256,9 +266,10 @@ const useCredentialForm = ({
           ...(!credential && { cred_type: typeValue }),
           ...(credential && { id: credential.id })
         },
-        authType
+        authType,
+        touchedFields
       ),
-    [authType, formData, credential, typeValue]
+    [authType, formData, credential, typeValue, touchedFields]
   );
 
   return {
@@ -272,6 +283,8 @@ const useCredentialForm = ({
     hasExistingValue,
     setAuthType: handleAuthTypeChange,
     handleInputChange,
+    ensureFieldWasTouched,
+    ensureFieldWasNotTouched,
     filterFormData
   };
 };
@@ -315,6 +328,8 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
     hasExistingValue,
     setAuthType,
     handleInputChange,
+    ensureFieldWasTouched,
+    ensureFieldWasNotTouched,
     filterFormData
   } = useForm({
     credentialType,
@@ -470,15 +485,20 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             <ErrorFragment errorMessage={errors?.ssh_key} fieldTouched={touchedFields.has('ssh_key')} />
           </FormGroup>
           <FormGroup label="SSH passphrase" fieldId="ssh_passphrase">
-            <TextInput
+            <SecretInput
               value={formData?.ssh_passphrase}
-              placeholder={credential?.has_ssh_passphrase ? '****' : 'Enter SSH passphrase (optional)'}
-              type="password"
+              placeholder='Enter SSH passphrase (optional)'
               id="ssh_passphrase"
               name="ssh_passphrase"
               validated={errors?.ssh_passphrase ? 'error' : 'default'}
-              onChange={event => handleInputChange('ssh_passphrase', (event.target as HTMLInputElement).value)}
               ouiaId="ssh_passphrase"
+              onChange={event => handleInputChange('ssh_passphrase', (event.target as HTMLInputElement).value)}
+              onEditBegin={() => ensureFieldWasTouched('ssh_passphrase')}
+              onUndo={() => {
+                handleInputChange('ssh_passphrase', '');
+                ensureFieldWasNotTouched('ssh_passphrase');
+              }}
+              hasSecret={credential?.has_ssh_passphrase}
             />
             <ErrorFragment errorMessage={errors?.ssh_passphrase} fieldTouched={touchedFields.has('ssh_passphrase')} />
           </FormGroup>
@@ -522,19 +542,19 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             <ErrorFragment errorMessage={errors?.become_user} fieldTouched={touchedFields.has('become_user')} />
           </FormGroup>
           <FormGroup label="Become Password" fieldId="become_password">
-            <TextInput
+            <SecretInput
               value={formData?.become_password}
-              placeholder={credential?.has_become_password ? '****' : 'Enter become password (optional)'}
-              type="password"
+              placeholder='Enter become password (optional)'
               id="become_password"
               name="become_password"
               validated={errors?.become_password ? 'error' : 'default'}
-              onFocus={e => {
-                if (e.target.value === '****') {
-                  handleInputChange('become_password', '');
-                }
-              }}
               onChange={event => handleInputChange('become_password', (event.target as HTMLInputElement).value)}
+              onEditBegin={() => ensureFieldWasTouched('become_password')}
+              onUndo={() => {
+                handleInputChange('become_password', '');
+                ensureFieldWasNotTouched('become_password');
+              }}
+              hasSecret={credential?.has_become_password}
               ouiaId="become_password"
             />
             <ErrorFragment errorMessage={errors?.become_password} fieldTouched={touchedFields.has('become_password')} />
