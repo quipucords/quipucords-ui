@@ -167,6 +167,8 @@ describe('CredentialForm', () => {
       hasExistingValue: jest.fn(() => false),
       setAuthType: jest.fn(),
       handleInputChange: jest.fn(),
+      ensureFieldWasTouched: jest.fn(),
+      ensureFieldWasNotTouched: jest.fn(),
       filterFormData: jest.fn()
     });
     const component = await shallowComponent(<CredentialForm useForm={mockUseForm} />);
@@ -226,6 +228,8 @@ describe('CredentialForm', () => {
         hasExistingValue: jest.fn(() => false),
         setAuthType: jest.fn(),
         handleInputChange: jest.fn(),
+        ensureFieldWasTouched: jest.fn(),
+        ensureFieldWasNotTouched: jest.fn(),
         filterFormData: jest.fn()
       });
       const cred = await shallowComponent(<CredentialForm credentialType={type} useForm={mockUseForm} />);
@@ -246,6 +250,8 @@ describe('CredentialForm', () => {
       hasExistingValue: jest.fn(() => false),
       setAuthType: jest.fn(),
       handleInputChange: jest.fn(),
+      ensureFieldWasTouched: jest.fn(),
+      ensureFieldWasNotTouched: jest.fn(),
       filterFormData: jest.fn()
     });
     const rhacs = await shallowComponent(<CredentialForm credentialType="rhacs" useForm={mockUseForm} />);
@@ -272,6 +278,8 @@ describe('CredentialForm', () => {
           hasExistingValue: jest.fn(() => false),
           setAuthType: mockSetAuthType,
           handleInputChange: mockHandleInputChange,
+          ensureFieldWasTouched: jest.fn(),
+          ensureFieldWasNotTouched: jest.fn(),
           filterFormData: jest.fn()
         })}
       />
@@ -313,6 +321,8 @@ describe('CredentialForm', () => {
           hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: mockHandleInputChange,
+          ensureFieldWasTouched: jest.fn(),
+          ensureFieldWasNotTouched: jest.fn(),
           filterFormData: jest.fn()
         })}
       />
@@ -344,6 +354,8 @@ describe('CredentialForm', () => {
           hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: mockHandleInputChange,
+          ensureFieldWasTouched: jest.fn(),
+          ensureFieldWasNotTouched: jest.fn(),
           filterFormData: jest.fn()
         })}
       />
@@ -371,6 +383,8 @@ describe('CredentialForm', () => {
           hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: jest.fn(),
+          ensureFieldWasTouched: jest.fn(),
+          ensureFieldWasNotTouched: jest.fn(),
           filterFormData: jest.fn()
         })}
       />
@@ -398,6 +412,8 @@ describe('CredentialForm', () => {
           hasExistingValue: jest.fn(() => false),
           setAuthType: jest.fn(),
           handleInputChange: jest.fn(),
+          ensureFieldWasTouched: jest.fn(),
+          ensureFieldWasNotTouched: jest.fn(),
           filterFormData: jest.fn()
         })}
       />

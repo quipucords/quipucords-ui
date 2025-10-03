@@ -181,6 +181,9 @@
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"
   },
+  "secret-input": {
+    "filled_placeholder": "<SECRET VALUE>"
+  },
   "table": {
     "header_name": "Name",
     "header_type": "Type",
