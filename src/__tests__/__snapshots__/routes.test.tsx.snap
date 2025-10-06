@@ -29,7 +29,7 @@ exports[`Routes should render a basic component: basic 1`] = `
       element={
         <Navigate
           replace={true}
-          to="/credentials"
+          to="/overview"
         />
       }
       path="/"
