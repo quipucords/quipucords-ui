@@ -151,6 +151,21 @@ describe('useCredentialForm', () => {
     );
     expect(result.current.formData).toMatchSnapshot('formData, edit');
   });
+
+  it('should allow caller to mark field as touched', async () => {
+    const fieldName = 'field1';
+    const { result } = renderHook(() => useCredentialForm());
+    act(() => result.current.ensureFieldWasTouched(fieldName));
+    expect(result.current.touchedFields).toContain(fieldName);
+  });
+
+  it('should allow caller to mark field as not touched', async () => {
+    const fieldName = 'field1';
+    const { result } = renderHook(() => useCredentialForm());
+    act(() => result.current.ensureFieldWasTouched(fieldName));
+    act(() => result.current.ensureFieldWasNotTouched(fieldName));
+    expect(result.current.touchedFields).not.toContain(fieldName);
+  });
 });
 
 describe('CredentialForm', () => {
@@ -470,6 +485,160 @@ describe('CredentialForm', () => {
   });
 });
 
+describe('CredentialForm - secret input field', () => {
+  const newCredential = (
+    cred_type: 'network' | 'vcenter' | 'satellite' | 'openshift' | 'ansible' | 'rhacs',
+    auth_type: 'auth_token' | 'password' | 'ssh_key'
+  ) => {
+    const template = {
+      id: 123,
+      sources: [],
+      auth_type: '',
+      has_auth_token: false,
+      has_password: false,
+      has_ssh_key: false,
+      has_ssh_passphrase: false,
+      has_become_password: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+      name: 'Old credential name',
+      cred_type: '',
+      username: 'discovery',
+      become_method: null,
+      become_user: null
+    };
+
+    const overrides = {
+      network_ssh_key: {
+        has_ssh_key: true,
+        become_method: 'sudo',
+        become_user: 'root'
+      },
+      network_password: {
+        has_password: true,
+        become_method: 'sudo',
+        become_user: 'root'
+      },
+      openshift_auth_token: {
+        has_password: true
+      },
+      openshift_password: {
+        has_auth_token: true
+      },
+      password: {
+        has_password: true
+      }
+    };
+
+    const override = overrides[`${cred_type}_${auth_type}`] || overrides['password'];
+    return {
+      ...template,
+      ...override,
+      cred_type: cred_type,
+      auth_type: auth_type
+    };
+  };
+
+  it('should display optional secret for credential without that secret', async () => {
+    const credential = {
+      ...newCredential('network', 'password'),
+      has_become_password: false,
+      become_password: ''
+    };
+
+    const component = await shallowComponent(<CredentialForm credential={credential} />);
+    expect(component).toMatchSnapshot('optional-existing-not-filled');
+  });
+
+  it('should display optional secret for credential with that secret', async () => {
+    const credential = {
+      ...newCredential('network', 'ssh_key'),
+      has_become_password: true,
+      become_password: 'secret',
+      has_ssh_passphrase: true,
+      ssh_passphrase: 'secret'
+    };
+
+    const component = await shallowComponent(<CredentialForm credential={credential} />);
+    expect(component).toMatchSnapshot('optional-existing-filled');
+  });
+
+  it('should allow to empty an optional secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('network', 'password'),
+      has_become_password: true,
+      become_password: 'secret'
+    };
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+    await user.click(screen.getByText('Save'));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: '' }));
+  });
+
+  it('should allow to change an optional secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('network', 'password'),
+      has_become_password: true,
+      become_password: 'secret'
+    };
+    const newBecomePassword = 'new secret password';
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+    await user.type(document.querySelector('#become_password')!, newBecomePassword);
+    await user.click(screen.getByText('Save'));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: newBecomePassword }));
+  });
+
+  it('should allow to cancel a change of an optional secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('network', 'password'),
+      has_become_password: true,
+      become_password: 'secret'
+    };
+    const newBecomePassword = 'new secret password';
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+    await user.type(document.querySelector('#become_password')!, newBecomePassword);
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-undo]'
+      )!
+    );
+    await user.click(screen.getByText('Save'));
+
+    expect(document.querySelector('#become_password')).toBeDisabled();
+    expect(document.querySelector('#become_password')).not.toHaveValue(newBecomePassword);
+    expect(mockOnSubmit.mock.lastCall).toBeDefined();
+    expect(mockOnSubmit.mock.lastCall).not.toHaveProperty('become_password');
+  });
+});
+
 describe('Form Validation', () => {
   it('should validate required fields and show canSubmit correctly for network credential', async () => {
     const { result } = renderHook(() => useCredentialForm({ credentialType: 'network' }));
@@ -626,5 +795,111 @@ describe('getCleanedFormData', () => {
       const cleanedData = getCleanedFormData(formData, type);
       expect(cleanedData).toMatchSnapshot(`${type}" auth cleanedData "`);
     }
+  });
+
+  it('should allow to switch authType Username and Password -> SSH Key', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      password: 'test_password',
+      ssh_key: 'test_ssh_key',
+      ssh_passphrase: 'test_passphrase'
+    };
+    const touchedFields = new Set(Object.keys(formData));
+    const cleanedData = getCleanedFormData(formData, 'SSH Key', touchedFields);
+    expect(cleanedData).not.toContain('password');
+    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).toEqual({
+      name: formData['name'],
+      username: formData['username'],
+      ssh_key: formData['ssh_key'],
+      ssh_passphrase: formData['ssh_passphrase']
+    });
+  });
+
+  it('should allow to switch authType SSH Key -> Username and Password', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      password: 'test_password',
+      ssh_key: 'test_ssh_key',
+      ssh_passphrase: 'test_passphrase'
+    };
+    const touchedFields = new Set(Object.keys(formData));
+    const cleanedData = getCleanedFormData(formData, 'Username and Password', touchedFields);
+    expect(cleanedData).not.toContain('ssh_key');
+    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).toEqual({
+      name: formData['name'],
+      username: formData['username'],
+      password: formData['password'],
+      ssh_passphrase: ''
+    });
+  });
+
+  it('should allow to switch authType Username and Password -> Token', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      password: 'test_password',
+      auth_token: 'test_token'
+    };
+    const touchedFields = new Set(Object.keys(formData));
+    const cleanedData = getCleanedFormData(formData, 'Token', touchedFields);
+    expect(cleanedData).not.toContain('password');
+    expect(cleanedData).toEqual({
+      name: formData['name'],
+      username: '',
+      auth_token: formData['auth_token']
+    });
+  });
+
+  it('should allow to switch authType Token -> Username and Password', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      password: 'test_password',
+      auth_token: 'test_token'
+    };
+    const touchedFields = new Set(Object.keys(formData));
+    const cleanedData = getCleanedFormData(formData, 'Username and Password', touchedFields);
+    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).toEqual({
+      name: formData['name'],
+      username: formData['username'],
+      password: formData['password']
+    });
+  });
+
+  it('should allow optional secrets to be set to empty values', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      ssh_key: 'test_ssh_key',
+      ssh_passphrase: '',
+      become_password: ''
+    };
+    const touchedFields = new Set(Object.keys(formData));
+    const cleanedData = getCleanedFormData(formData, 'SSH Key', touchedFields);
+    expect(cleanedData).toEqual(formData);
+  });
+
+  it('should ignore optional secrets that were not modified during session', () => {
+    const formData = {
+      name: 'Test Credential',
+      username: 'test_user',
+      ssh_key: 'test_ssh_key',
+      ssh_passphrase: '',
+      become_password: ''
+    };
+    const touchedFields = new Set(
+      Object.keys(formData).filter(f => !['ssh_passphrase', 'become_password'].includes(f))
+    );
+    const cleanedData = getCleanedFormData(formData, 'SSH Key', touchedFields);
+    expect(cleanedData).toEqual({
+      name: formData['name'],
+      username: formData['username'],
+      ssh_key: formData['ssh_key']
+    });
   });
 });
