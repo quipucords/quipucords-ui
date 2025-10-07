@@ -40,3 +40,10 @@ body,
 body .pf-v6-c-description-list.pf-m-fluid {
   --pf-v6-c-description-list--m-horizontal__term--width: fit-content(30ch);
 }
+
+/* TypeaheadCheckboxes - don't show "check" icon on the right, as we already have a standard checkbox
+ * on the left. Work around a PatternFly 6 bug. */
+.pf-v6-c-menu__item:has(input[type=checkbox]):is(:hover, :focus, .pf-m-selected) .pf-v6-c-menu__item-select-icon,
+.pf-v6-c-menu__item:has(input[type=checkbox]):is(:hover, :focus, .pf-m-selected) .pf-v6-c-menu__item-external-icon {
+  opacity: 0;
+}
