@@ -111,8 +111,18 @@ const AppLayout: React.FC<AppLayoutProps> = ({
     </SkipToContent>
   );
 
+  const currentRouteId = () => {
+    return routes.find(route => route.path === location.pathname)?.id || 'not-found';
+  };
+
   return (
-    <Page mainContainerId={pageId} masthead={Header} sidebar={sidebarOpen && Sidebar} skipToContent={PageSkipToContent}>
+    <Page
+      className={currentRouteId()}
+      mainContainerId={pageId}
+      masthead={Header}
+      sidebar={sidebarOpen && Sidebar}
+      skipToContent={PageSkipToContent}
+    >
       {children}
     </Page>
   );

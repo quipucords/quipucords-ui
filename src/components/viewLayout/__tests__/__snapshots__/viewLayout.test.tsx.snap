@@ -2,6 +2,7 @@
 
 exports[`ViewLayout should render a basic component: basic 1`] = `
 <Page
+  className="not-found"
   defaultManagedSidebarIsOpen={true}
   getBreakpoint={[Function]}
   getVerticalBreakpoint={[Function]}
