@@ -1,6 +1,6 @@
 main {
   .pf-v6-c-icon__content {
-    color: var(--pf-t--global--color--brand--default);
+    --pf-v6-c-icon__content--Color: var(--pf-t--global--color--brand--default);
   }
 
   #process .pf-v6-l-flex {
