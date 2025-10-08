@@ -439,7 +439,7 @@ const SourcesListView: React.FunctionComponent = () => {
       source.connection.status === 'running';
     const scanTime = (isPending && source.connection.start_time) || source.connection.end_time;
 
-    const statusString = t(`table.label_status_${source.connection.status}`, { context: 'sources' });
+    const statusString = t(`table.label_status_${source.connection.source_task_status}`, { context: 'sources' });
     return (
       <Button
         variant={ButtonVariant.link}
@@ -455,7 +455,7 @@ const SourcesListView: React.FunctionComponent = () => {
           setConnectionsSelected(source);
         }}
       >
-        <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
+        <ContextIcon symbol={ContextIconVariant[source.connection.source_task_status]} /> {statusString}{' '}
         {helpers.getTimeDisplayHowLongAgo(scanTime)}
       </Button>
     );
