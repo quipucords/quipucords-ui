@@ -542,8 +542,7 @@ describe('CredentialForm - secret input field', () => {
   it('should display optional secret for credential without that secret', async () => {
     const credential = {
       ...newCredential('network', 'password'),
-      has_become_password: false,
-      become_password: ''
+      has_become_password: false
     };
 
     const component = await shallowComponent(<CredentialForm credential={credential} />);
@@ -554,13 +553,32 @@ describe('CredentialForm - secret input field', () => {
     const credential = {
       ...newCredential('network', 'ssh_key'),
       has_become_password: true,
-      become_password: 'secret',
-      has_ssh_passphrase: true,
-      ssh_passphrase: 'secret'
+      has_ssh_passphrase: true
     };
 
     const component = await shallowComponent(<CredentialForm credential={credential} />);
     expect(component).toMatchSnapshot('optional-existing-filled');
+  });
+
+  it('should not allow to empty a mandatory secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('network', 'password'),
+      has_password: true
+    };
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#credential-password) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+
+    await user.click(screen.getByText('Save'));
+
+    expect(mockOnSubmit).toHaveBeenCalledTimes(0);
   });
 
   it('should allow to empty an optional secret', async () => {
@@ -568,8 +586,7 @@ describe('CredentialForm - secret input field', () => {
     const mockOnSubmit = jest.fn();
     const credential = {
       ...newCredential('network', 'password'),
-      has_become_password: true,
-      become_password: 'secret'
+      has_become_password: true
     };
 
     render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
@@ -584,13 +601,34 @@ describe('CredentialForm - secret input field', () => {
     expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: '' }));
   });
 
+  it('should allow to change a mandatory secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('openshift', 'auth_token'),
+      has_auth_token: true
+    };
+    const newAuthToken = 'new secret password';
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#credential-token) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+    await user.type(document.querySelector('#credential-token')!, newAuthToken);
+    await user.click(screen.getByText('Save'));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ auth_token: newAuthToken }));
+  });
+
   it('should allow to change an optional secret', async () => {
     const user = userEvent.setup();
     const mockOnSubmit = jest.fn();
     const credential = {
       ...newCredential('network', 'password'),
-      has_become_password: true,
-      become_password: 'secret'
+      has_become_password: true
     };
     const newBecomePassword = 'new secret password';
 
@@ -607,13 +645,42 @@ describe('CredentialForm - secret input field', () => {
     expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: newBecomePassword }));
   });
 
+  it('should allow to cancel a change of a mandatory secret', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    const credential = {
+      ...newCredential('satellite', 'password'),
+      has_password: true
+    };
+    const newPassword = 'new secret password';
+
+    render(<CredentialForm credential={credential} onSubmit={mockOnSubmit} />);
+
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#credential-password) button[data-ouia-component-id=secret-edit]'
+      )!
+    );
+    await user.type(document.querySelector('#credential-password')!, newPassword);
+    await user.click(
+      document.querySelector(
+        'div[class*=input-group]:has(#credential-password) button[data-ouia-component-id=secret-undo]'
+      )!
+    );
+    await user.click(screen.getByText('Save'));
+
+    expect(document.querySelector('#credential-password')).toBeDisabled();
+    expect(document.querySelector('#credential-password')).not.toHaveValue(newPassword);
+    expect(mockOnSubmit.mock.lastCall).toBeDefined();
+    expect(mockOnSubmit.mock.lastCall).not.toHaveProperty('password');
+  });
+
   it('should allow to cancel a change of an optional secret', async () => {
     const user = userEvent.setup();
     const mockOnSubmit = jest.fn();
     const credential = {
       ...newCredential('network', 'password'),
-      has_become_password: true,
-      become_password: 'secret'
+      has_become_password: true
     };
     const newBecomePassword = 'new secret password';
 
