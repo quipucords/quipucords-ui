@@ -409,15 +409,20 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {/* Conditional rendering for Token input */}
       {authType === 'Token' && (
         <FormGroup label="Token" isRequired fieldId="auth_token">
-          <TextInput
+          <SecretInput
             value={formData?.auth_token}
-            placeholder={credential?.has_auth_token ? '****' : 'Enter Token'}
+            placeholder="Enter Token"
             isRequired={!isEditMode || touchedFields.has('auth_token') || !hasExistingValue('auth_token')}
-            type="text"
             id="credential-token"
             name="auth_token"
             validated={errors?.auth_token ? 'error' : 'default'}
             onChange={event => handleInputChange('auth_token', (event.target as HTMLInputElement).value)}
+            onEditBegin={() => ensureFieldWasTouched('auth_token')}
+            onUndo={() => {
+              handleInputChange('auth_token', '');
+              ensureFieldWasNotTouched('auth_token');
+            }}
+            hasSecret={credential?.has_auth_token}
             ouiaId="auth_token"
           />
           <ErrorFragment errorMessage={errors?.auth_token} fieldTouched={touchedFields.has('auth_token')} />
@@ -441,15 +446,20 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             <ErrorFragment errorMessage={errors?.username} fieldTouched={touchedFields.has('username')} />
           </FormGroup>
           <FormGroup label="Password" isRequired fieldId="password">
-            <TextInput
+            <SecretInput
               value={formData?.password}
               isRequired={!isEditMode || touchedFields.has('password') || !hasExistingValue('password')}
-              placeholder={credential?.has_password ? '****' : 'Enter password'}
-              type="password"
+              placeholder="Enter password"
               id="credential-password"
               name="password"
               validated={errors?.password ? 'error' : 'default'}
               onChange={event => handleInputChange('password', (event.target as HTMLInputElement).value)}
+              onEditBegin={() => ensureFieldWasTouched('password')}
+              onUndo={() => {
+                handleInputChange('password', '');
+                ensureFieldWasNotTouched('password');
+              }}
+              hasSecret={credential?.has_password}
               ouiaId="password"
             />
             <ErrorFragment errorMessage={errors?.password} fieldTouched={touchedFields.has('password')} />
