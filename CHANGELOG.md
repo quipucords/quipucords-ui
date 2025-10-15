@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0](https://github.com/quipucords/quipucords-ui/compare/5ea378508c7e9ac5605754bfc6b047178ee24751...b7262d027dcb7eeab9dc7f0ec5c74bfb4d653694) (2025-10-15)
+
+
+### Features
+* **viewLayout** include current page id as a class  ([e7084e3](https://github.com/quipucords/quipucords-ui/commit/e7084e3206027e0e5908751e1033cc54432e1014))
+* **sources** implement server search for creds  ([9282552](https://github.com/quipucords/quipucords-ui/commit/928255241922b95ef3155cded57afa5be88c0a78))
+
+### Code Refactoring
+*  remove normalizeTotal helper function  ([e431974](https://github.com/quipucords/quipucords-ui/commit/e4319745250c9bebf1b962d545934328b0818b8d))
+
+### Chores
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to aa73fdb  ([b7262d0](https://github.com/quipucords/quipucords-ui/commit/b7262d027dcb7eeab9dc7f0ec5c74bfb4d653694))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 2fc0bcb  ([31f2126](https://github.com/quipucords/quipucords-ui/commit/31f21260e946b8c1edabb072a75fb2be357ae1f9))
+* **deps** update quay.io/konflux-ci/yq docker digest to e85a8a2  ([d011794](https://github.com/quipucords/quipucords-ui/commit/d011794c66f1a5c36ff70f81083375eccd0a3fee))
+* **deps** update konflux references  ([af87228](https://github.com/quipucords/quipucords-ui/commit/af87228ebb9cacaa854a86edd883bff7145ff808))
+* **merge** Enable merge button in downstream builds  ([80fa55b](https://github.com/quipucords/quipucords-ui/commit/80fa55bd06e47afbcb5d4ca89b4a7e9628db85d2))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to ad0725a  ([613d62b](https://github.com/quipucords/quipucords-ui/commit/613d62b55c090295e13c804756782ed9ddd6392f))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 7c1d717  ([f737836](https://github.com/quipucords/quipucords-ui/commit/f73783650f9c68ca424d066e2e5d72acf894c40c))
+* **deps** update quay.io/konflux-ci/yq docker digest to 24c8776  ([d7b2752](https://github.com/quipucords/quipucords-ui/commit/d7b2752bb16d68ccf79071612703dd6dbcb84223))
+* **deps** update konflux references  ([4a53957](https://github.com/quipucords/quipucords-ui/commit/4a539577b8a537731a38803041cd836a75a09dfd))
+
+### Bug Fixes
+* **overview** don't leak icon color change to other views  ([19bb6c7](https://github.com/quipucords/quipucords-ui/commit/19bb6c7e27d0d0203e2d411429aa5106eae68ed1))
+* **TypeaheadCheckboxes** don't show "check" twice  ([105e1f9](https://github.com/quipucords/quipucords-ui/commit/105e1f9b911557de99e689bf981d6dd7163943f0))
+
 ## [2.2.0](https://github.com/quipucords/quipucords-ui/compare/3b3ce52c2af3e83f16fff324c77c3b7022f8d9e3...12ad49adfdc36048fe95f034719c05f81e3d717a) (2025-09-16)
 
 
