@@ -382,6 +382,57 @@
     "label_scans-names": "Scans: {{name}}",
     "label_sources": "Sources",
     "label_not-found_home": "Take me home",
+    "credentials": {
+      "add-modal": {
+        "auth_type": {
+          "label": "Authentication Type"
+        },
+        "become_method": {
+          "label": "Become Method",
+          "default_value": "Select option"
+        },
+        "become_password": {
+          "label": "Become Password",
+          "placeholder": "Enter become password (optional)"
+        },
+        "become_user": {
+          "label": "Become User",
+          "placeholder": "Enter become user (optional)"
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter a name for the credential"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter password"
+        },
+        "ssh_key": {
+          "label": "SSH Key",
+          "placeholder": "Enter private SSH Key"
+        },
+        "ssh_passphrase": {
+          "label": "SSH passphrase",
+          "placeholder": "Enter SSH passphrase (optional)"
+        },
+        "token": {
+          "label": "Token",
+          "placeholder": "Enter Token"
+        },
+        "username": {
+          "label": "Username",
+          "placeholder": "Enter username"
+        },
+        "actions": {
+          "save": "Save",
+          "cancel": "Cancel"
+        }
+      },
+      "modal-title": {
+        "add": "Add credential: {{type}}",
+        "edit": "Edit credential: {{name}}"
+      }
+    },
     "overview": {
       "title": "Overview",
       "getting-started": {

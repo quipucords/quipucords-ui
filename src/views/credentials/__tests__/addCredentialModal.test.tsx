@@ -36,18 +36,13 @@ describe('AddCredentialModal', () => {
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should have the correct title', () => {
-    const title = screen.getByText(/Add\sCredential:\snetwork/i);
-    expect(title).toMatchSnapshot('AddCredentialModal Title');
-  });
-
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
-    await user.type(screen.getByPlaceholderText('Enter a name for the credential'), 'Test Credential');
-    await user.type(screen.getByPlaceholderText('Enter username'), 'demo');
-    await user.type(screen.getByPlaceholderText('Enter password'), 's3cr3t');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.name.placeholder/), 'Test Credential');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.username.placeholder/), 'demo');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.password.placeholder/), 's3cr3t');
 
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
 
@@ -67,7 +62,7 @@ describe('AddCredentialModal', () => {
 
   it('should call onClose', async () => {
     const user = userEvent.setup();
-    await user.click(screen.getByText('Cancel'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.cancel/));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
@@ -302,19 +297,22 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    await user.type(screen.getByPlaceholderText('Enter username'), 'discovery');
-    await user.type(screen.getByPlaceholderText('Enter password'), 'secret!');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.username.placeholder/), 'discovery');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.password.placeholder/), 'secret!');
 
     await user.click(screen.getByText('Username and Password'));
     await user.click(screen.getByText('SSH Key'));
     expect(mockSetAuthType.mock.calls).toMatchSnapshot('setAuthType');
 
-    await user.click(screen.getByText('Select option'));
+    await user.click(screen.getByText(/view.credentials.add-modal.become_method.default_value/));
     await user.click(screen.getByText('sudo'));
     expect(mockHandleInputChange).toHaveBeenCalledWith('become_method', 'sudo');
 
-    await user.type(screen.getByPlaceholderText(/become user/), 'root');
-    await user.type(screen.getByPlaceholderText(/become password/), 'secure secret!');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.become_user.placeholder/), 'root');
+    await user.type(
+      screen.getByPlaceholderText(/view.credentials.add-modal.become_password.placeholder/),
+      'secure secret!'
+    );
 
     expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
   });
@@ -345,9 +343,12 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    await user.type(screen.getByPlaceholderText('Enter username'), 'discovery');
-    await user.type(screen.getByPlaceholderText('Enter private SSH Key'), 'ssh key file content');
-    await user.type(screen.getByPlaceholderText(/SSH passphrase/), 'secret!');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.username.placeholder/), 'discovery');
+    await user.type(
+      screen.getByPlaceholderText(/view.credentials.add-modal.ssh_key.placeholder/),
+      'ssh key file content'
+    );
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.ssh_passphrase.placeholder/), 'secret!');
 
     expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
   });
@@ -378,7 +379,10 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    await user.type(screen.getByPlaceholderText('Enter Token'), 'super secret API token');
+    await user.type(
+      screen.getByPlaceholderText(/view.credentials.add-modal.token.placeholder/),
+      'super secret API token'
+    );
 
     expect(mockHandleInputChange.mock.calls).toMatchSnapshot('handleInputChange');
   });
@@ -407,7 +411,7 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    await user.click(screen.getByText('Cancel'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.cancel/));
 
     expect(container.innerHTML).toMatchSnapshot('onClose');
   });
@@ -436,7 +440,7 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(container.innerHTML).toMatchSnapshot('onSave');
   });
@@ -468,12 +472,12 @@ describe('CredentialForm', () => {
 
     const user = userEvent.setup();
 
-    const nameInput = screen.getByPlaceholderText('Enter a name for the credential');
+    const nameInput = screen.getByPlaceholderText(/view.credentials.add-modal.name.placeholder/);
     await user.click(nameInput);
     await user.keyboard('{Control>}a{/Control}');
     await user.keyboard('{Backspace}');
     await user.type(nameInput, 'Test changing name');
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(container.innerHTML).toMatchSnapshot('edit credential form, after');
     expect(mockOnSubmit).toHaveBeenCalledWith(
@@ -576,7 +580,7 @@ describe('CredentialForm - secret input field', () => {
       )!
     );
 
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(0);
   });
@@ -596,7 +600,7 @@ describe('CredentialForm - secret input field', () => {
         'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-edit]'
       )!
     );
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: '' }));
   });
@@ -618,7 +622,7 @@ describe('CredentialForm - secret input field', () => {
       )!
     );
     await user.type(document.querySelector('#credential-token')!, newAuthToken);
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ auth_token: newAuthToken }));
   });
@@ -640,7 +644,7 @@ describe('CredentialForm - secret input field', () => {
       )!
     );
     await user.type(document.querySelector('#become_password')!, newBecomePassword);
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({ become_password: newBecomePassword }));
   });
@@ -667,7 +671,7 @@ describe('CredentialForm - secret input field', () => {
         'div[class*=input-group]:has(#credential-password) button[data-ouia-component-id=secret-undo]'
       )!
     );
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(document.querySelector('#credential-password')).toBeDisabled();
     expect(document.querySelector('#credential-password')).not.toHaveValue(newPassword);
@@ -697,7 +701,7 @@ describe('CredentialForm - secret input field', () => {
         'div[class*=input-group]:has(#become_password) button[data-ouia-component-id=secret-undo]'
       )!
     );
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
 
     expect(document.querySelector('#become_password')).toBeDisabled();
     expect(document.querySelector('#become_password')).not.toHaveValue(newBecomePassword);

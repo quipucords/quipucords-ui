@@ -4,6 +4,7 @@
  * @module AddCredentialModal
  */
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActionGroup,
   Button,
@@ -320,6 +321,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
   onClearErrors = () => {},
   useForm = useCredentialForm
 }) => {
+  const { t } = useTranslation();
   const {
     formData,
     authType,
@@ -369,10 +371,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
 
   return (
     <Form>
-      <FormGroup label="Name" isRequired fieldId="name">
+      <FormGroup label={t('view.credentials.add-modal.name.label')} isRequired fieldId="name">
         <TextInput
           value={formData?.name}
-          placeholder="Enter a name for the credential"
+          placeholder={t('view.credentials.add-modal.name.placeholder')}
           isRequired
           type="text"
           id="credential-name"
@@ -386,7 +388,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
 
       {/* Render Authentication Type dropdown only if needed based on the credential type */}
       {(typeValue === 'network' || typeValue === 'openshift') && (
-        <FormGroup label="Authentication Type" fieldId="auth_type">
+        <FormGroup label={t('view.credentials.add-modal.auth_type.label')} fieldId="auth_type">
           <SimpleDropdown
             label={authType}
             menuToggleOuiaId="auth_type"
@@ -408,10 +410,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
 
       {/* Conditional rendering for Token input */}
       {authType === 'Token' && (
-        <FormGroup label="Token" isRequired fieldId="auth_token">
+        <FormGroup label={t('view.credentials.add-modal.token.label')} isRequired fieldId="auth_token">
           <SecretInput
             value={formData?.auth_token}
-            placeholder="Enter Token"
+            placeholder={t('view.credentials.add-modal.token.placeholder')}
             isRequired={!isEditMode || touchedFields.has('auth_token') || !hasExistingValue('auth_token')}
             id="credential-token"
             name="auth_token"
@@ -432,11 +434,11 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {/* Username and Password fields */}
       {authType === 'Username and Password' && (
         <React.Fragment>
-          <FormGroup label="Username" isRequired fieldId="username">
+          <FormGroup label={t('view.credentials.add-modal.username.label')} isRequired fieldId="username">
             <TextInput
               value={formData?.username}
               isRequired={!isEditMode || touchedFields.has('username') || !hasExistingValue('username')}
-              placeholder="Enter username"
+              placeholder={t('view.credentials.add-modal.username.placeholder')}
               id="credential-username"
               name="username"
               validated={errors?.username ? 'error' : 'default'}
@@ -445,11 +447,11 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             />
             <ErrorFragment errorMessage={errors?.username} fieldTouched={touchedFields.has('username')} />
           </FormGroup>
-          <FormGroup label="Password" isRequired fieldId="password">
+          <FormGroup label={t('view.credentials.add-modal.password.label')} isRequired fieldId="password">
             <SecretInput
               value={formData?.password}
               isRequired={!isEditMode || touchedFields.has('password') || !hasExistingValue('password')}
-              placeholder="Enter password"
+              placeholder={t('view.credentials.add-modal.password.placeholder')}
               id="credential-password"
               name="password"
               validated={errors?.password ? 'error' : 'default'}
@@ -470,11 +472,11 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {/* SSH Key input */}
       {authType === 'SSH Key' && (
         <React.Fragment>
-          <FormGroup label="Username" isRequired fieldId="username">
+          <FormGroup label={t('view.credentials.add-modal.username.label')} isRequired fieldId="username">
             <TextInput
               value={formData?.username}
               isRequired={!isEditMode || touchedFields.has('username') || !hasExistingValue('username')}
-              placeholder="Enter username"
+              placeholder={t('view.credentials.add-modal.username.placeholder')}
               id="credential-username"
               name="username"
               validated={errors?.username ? 'error' : 'default'}
@@ -483,10 +485,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             />
             <ErrorFragment errorMessage={errors?.username} fieldTouched={touchedFields.has('username')} />
           </FormGroup>
-          <FormGroup label="SSH Key" isRequired fieldId="ssh_key">
+          <FormGroup label={t('view.credentials.add-modal.ssh_key.label')} isRequired fieldId="ssh_key">
             <TextArea
               value={formData?.ssh_key}
-              placeholder={credential?.has_ssh_key ? '****' : 'Enter private SSH Key'}
+              placeholder={credential?.has_ssh_key ? '****' : t('view.credentials.add-modal.ssh_key.placeholder')}
               isRequired={!isEditMode || touchedFields.has('ssh_key') || !hasExistingValue('ssh_key')}
               id="credential-ssh-key"
               name="ssh_key"
@@ -497,10 +499,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             />
             <ErrorFragment errorMessage={errors?.ssh_key} fieldTouched={touchedFields.has('ssh_key')} />
           </FormGroup>
-          <FormGroup label="SSH passphrase" fieldId="ssh_passphrase">
+          <FormGroup label={t('view.credentials.add-modal.ssh_passphrase.label')} fieldId="ssh_passphrase">
             <SecretInput
               value={formData?.ssh_passphrase}
-              placeholder="Enter SSH passphrase (optional)"
+              placeholder={t('view.credentials.add-modal.ssh_passphrase.placeholder')}
               id="ssh_passphrase"
               name="ssh_passphrase"
               validated={errors?.ssh_passphrase ? 'error' : 'default'}
@@ -521,15 +523,20 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       {/* Render "Become" fields only if network is selected and authType is Username/Password or SSH Key */}
       {typeValue === 'network' && (
         <React.Fragment>
-          <FormGroup label="Become Method" fieldId="become_method">
+          <FormGroup label={t('view.credentials.add-modal.become_method.label')} fieldId="become_method">
             <SimpleDropdown
-              label={formData?.become_method || 'Select option'}
+              label={formData?.become_method || t('view.credentials.add-modal.become_method.default_value')}
               menuToggleOuiaId="become_method"
               variant="default"
               isFullWidth
-              onSelect={item => handleInputChange('become_method', (item !== 'Select option' && item) || '')}
+              onSelect={item =>
+                handleInputChange(
+                  'become_method',
+                  (item !== t('view.credentials.add-modal.become_method.default_value') && item) || ''
+                )
+              }
               dropdownItems={[
-                { item: 'Select option', ouiaId: 'default' },
+                { item: t('view.credentials.add-modal.become_method.default_value'), ouiaId: 'default' },
                 { item: 'sudo', ouiaId: 'sudo' },
                 { item: 'su', ouiaId: 'su' },
                 { item: 'pbrun', ouiaId: 'pbrun' },
@@ -541,10 +548,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
               ]}
             />
           </FormGroup>
-          <FormGroup label="Become User" fieldId="become_user">
+          <FormGroup label={t('view.credentials.add-modal.become_user.label')} fieldId="become_user">
             <TextInput
               value={formData?.become_user}
-              placeholder="Enter become user (optional)"
+              placeholder={t('view.credentials.add-modal.become_user.placeholder')}
               type="text"
               id="become_user"
               name="become_user"
@@ -554,10 +561,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             />
             <ErrorFragment errorMessage={errors?.become_user} fieldTouched={touchedFields.has('become_user')} />
           </FormGroup>
-          <FormGroup label="Become Password" fieldId="become_password">
+          <FormGroup label={t('view.credentials.add-modal.become_password.label')} fieldId="become_password">
             <SecretInput
               value={formData?.become_password}
-              placeholder="Enter become password (optional)"
+              placeholder={t('view.credentials.add-modal.become_password.placeholder')}
               id="become_password"
               name="become_password"
               validated={errors?.become_password ? 'error' : 'default'}
@@ -576,10 +583,10 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       )}
       <ActionGroup>
         <Button variant="primary" onClick={onAdd} isDisabled={!canSubmit}>
-          Save
+          {t('view.credentials.add-modal.actions.save')}
         </Button>
         <Button variant="link" onClick={() => onClose()}>
-          Cancel
+          {t('view.credentials.add-modal.actions.cancel')}
         </Button>
       </ActionGroup>
     </Form>
@@ -594,23 +601,29 @@ const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   onClose = () => {},
   onSubmit = () => {},
   onClearErrors = () => {}
-}) => (
-  <Modal
-    variant={ModalVariant.small}
-    title={(credential && `Edit credential: ${credential.name || ''}`) || `Add credential: ${credentialType || ''}`}
-    isOpen={isOpen}
-    onClose={() => onClose()}
-  >
-    <CredentialForm
-      credential={credential}
-      credentialType={credentialType}
-      errors={errors}
-      onClose={onClose}
-      onSubmit={onSubmit}
-      onClearErrors={onClearErrors}
-    />
-  </Modal>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Modal
+      variant={ModalVariant.small}
+      title={
+        (credential && t('view.credentials.modal-title.edit', { name: credential.name || '' })) ||
+        t('view.credentials.modal-title.add', { type: credentialType || '' })
+      }
+      isOpen={isOpen}
+      onClose={() => onClose()}
+    >
+      <CredentialForm
+        credential={credential}
+        credentialType={credentialType}
+        errors={errors}
+        onClose={onClose}
+        onSubmit={onSubmit}
+        onClearErrors={onClearErrors}
+      />
+    </Modal>
+  );
+};
 
 export {
   AddCredentialModal as default,
