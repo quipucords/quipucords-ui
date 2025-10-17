@@ -313,7 +313,6 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG          | A static string reference to the UI/application default locale language                                                   |
 | ~~REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG_DESC~~ | A legacy parameter. A static string reference to the UI/application default locale language                               |
 | REACT_APP_CONFIG_SERVICE_LOCALES                      | A static string reference to a JSON resource for available UI/application locales                                         |
-| REACT_APP_CONFIG_SERVICE_LOCALES_PATH                 | A static string reference to the JSON resources for available UI/application locale strings                               |
 | ~~REACT_APP_CONFIG_SERVICE_LOCALES_EXPIRE~~           | A legacy parameter. A static number reference to the milliseconds the UI/application locale strings/files expire          |
 | REACT_APP_CREDENTIALS_SERVICE                         | A static string reference to the API spec                                                                                 |
 | REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE             | A static string reference to the API spec                                                                                 |
