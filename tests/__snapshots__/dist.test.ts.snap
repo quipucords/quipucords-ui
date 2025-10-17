@@ -3,10 +3,12 @@
 exports[`Build distribution should match a specific file output: dist-output 1`] = `
 [
   "",
+  "./build/174*js",
   "./build/221*css",
   "./build/221*js",
   "./build/362*css",
   "./build/362*js",
+  "./build/364*js",
   "./build/638*js",
   "./build/786*js",
   "./build/820*js",
@@ -27,8 +29,6 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
   "./build/images/85109dad29f20063f735.svg",
   "./build/images/c0ce9e7676e8e8f83167.png",
   "./build/index.html",
-  "./build/locales/en.json",
-  "./build/locales/locales.json",
   "./build/manifest.json",
   "./build/runtime*js",
   "./build/vendor*css",

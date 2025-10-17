@@ -8,20 +8,18 @@
 import React, { useState, useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
-import XHR from 'i18next-http-backend';
+import resourcesToBackend from 'i18next-resources-to-backend';
 import { helpers } from '../../helpers';
 
 interface I18nProps {
   children: React.ReactNode;
   fallbackLng?: string;
-  loadPath?: string;
   locale?: string | null;
 }
 
 // ToDo: Prop locale should be replaced by a hook that attempts to use native browser locale instead
 const I18n: React.FC<I18nProps> = ({
   fallbackLng = process.env.REACT_APP_CONFIG_SERVICE_LOCALES_DEFAULT_LNG,
-  loadPath = process.env.REACT_APP_CONFIG_SERVICE_LOCALES_PATH,
   locale = null,
   children
 }) => {
@@ -32,12 +30,13 @@ const I18n: React.FC<I18nProps> = ({
    */
   useEffect(() => {
     i18next
-      .use(XHR)
+      .use(
+        resourcesToBackend((language: string, _namespace: string) => {
+          return import(`../../locales/${language}.json`);
+        })
+      )
       .use(initReactI18next)
       .init({
-        backend: {
-          loadPath
-        },
         fallbackLng,
         lng: undefined,
         debug: !helpers.PROD_MODE,
