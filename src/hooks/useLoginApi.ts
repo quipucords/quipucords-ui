@@ -80,23 +80,16 @@ const useLogoutApi = () => {
     []
   );
 
-  const callbackSuccess = useCallback((localStorageTheme?: string | null) => {
+  const callbackSuccess = useCallback(() => {
     cookies.remove(`${process.env.REACT_APP_AUTH_COOKIE}`);
+    localStorage.clear();
     document.location.replace('./');
-    if (localStorageTheme) {
-      try {
-        localStorage.setItem(`${process.env.REACT_APP_THEME_KEY}`, localStorageTheme);
-      } catch (error) {
-        console.error('Failed to set theme in localStorage:', error);
-      }
-    }
     return;
   }, []);
 
   const callbackError = useCallback((error: AxiosError<ApiLoginErrorType>) => Promise.reject(error), []);
 
   const logout = useCallback(async () => {
-    const localStorageTheme = localStorage?.getItem(`${process.env.REACT_APP_THEME_KEY}`);
     try {
       await apiCall();
     } catch (error) {
@@ -107,7 +100,7 @@ const useLogoutApi = () => {
         console.error(error);
       }
     }
-    return callbackSuccess(localStorageTheme);
+    return callbackSuccess();
   }, [apiCall, callbackSuccess, callbackError]);
 
   return {

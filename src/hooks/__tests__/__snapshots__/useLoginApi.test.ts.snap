@@ -90,50 +90,7 @@ exports[`useLogoutApi should handle errors while attempting to logout a user: lo
 }
 `;
 
-exports[`useLogoutApi should handle logout when no theme is stored using environment variable: logout without theme preservation 1`] = `
-{
-  "cookieRemoveCalls": [
-    [
-      "user",
-    ],
-  ],
-  "localStorageSetCalls": [],
-}
-`;
-
 exports[`useLogoutApi should handle success while attempting to logout a user: logout, success 1`] = `undefined`;
-
-exports[`useLogoutApi should preserve dark theme during logout using environment variable: logout with dark theme preservation 1`] = `
-{
-  "cookieRemoveCalls": [
-    [
-      "user",
-    ],
-  ],
-  "localStorageSetCalls": [
-    [
-      "discovery-ui-theme",
-      "dark",
-    ],
-  ],
-}
-`;
-
-exports[`useLogoutApi should preserve light theme during logout using environment variable: logout with light theme preservation 1`] = `
-{
-  "cookieRemoveCalls": [
-    [
-      "user",
-    ],
-  ],
-  "localStorageSetCalls": [
-    [
-      "discovery-ui-theme",
-      "light",
-    ],
-  ],
-}
-`;
 
 exports[`useLogoutApi should process an API error response: callbackError 1`] = `
 {
@@ -151,34 +108,6 @@ exports[`useLogoutApi should process an API success response: callbackSuccess 1`
     "user",
   ],
 ]
-`;
-
-exports[`useLogoutApi should read theme from localStorage using environment variable during logout: complete logout flow with theme preservation 1`] = `
-{
-  "logoutFlow": {
-    "axiosCalls": [
-      [
-        "/api/v1/users/logout/",
-      ],
-    ],
-    "cookieRemoveCalls": [
-      [
-        "user",
-      ],
-    ],
-    "localStorageGetCalls": [
-      [
-        "discovery-ui-theme",
-      ],
-    ],
-    "localStorageSetCalls": [
-      [
-        "discovery-ui-theme",
-        "dark",
-      ],
-    ],
-  },
-}
 `;
 
 exports[`useUserApi should attempt an api call to get a user: apiCall 1`] = `
