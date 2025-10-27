@@ -8,6 +8,9 @@
     "ui-version": "UI Version",
     "username": "Username"
   },
+  "action-menu": {
+    "aria-label": "Action Menu Toggle"
+  },
   "form-dialog": {
     "confirmation_heading_delete-scan": "Are you sure you want to delete the scan {{name}}?",
     "confirmation_heading_delete-credential": "Are you sure you want to delete the credential {{name}}?",
@@ -183,6 +186,9 @@
   },
   "secret-input": {
     "filled_placeholder": "<SECRET VALUE>"
+  },
+  "simple-dropdown": {
+    "aria-label": "Dropdown menu"
   },
   "table": {
     "header_name": "Name",
@@ -492,6 +498,15 @@
           "content": "<0>A {{appName}} scan produces a downloadable archive that contains several reports. These reports contain facts about Red Hat software installed in the scanned infrastructure. You can view this information to help understand your consumption of Red Hat software. You can also share that information with your Red Hat account team to help you make further purchasing decisions.</0>"
         }
       }
+    },
+    "toolbar": {
+      "aria-theme-toggle-group": "Dark theme toggle group",
+      "aria-light-theme-toggle": "light theme toggle",
+      "aria-dark-theme-toggle": "dark theme toggle",
+      "aria-menu-toggle": "Toggle",
+      "about": "About",
+      "logout": "Logout",
+      "avatar-alt": "User avatar"
     }
   },
   "dataSource": {

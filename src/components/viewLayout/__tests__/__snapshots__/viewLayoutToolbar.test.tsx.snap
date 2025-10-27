@@ -38,10 +38,14 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
         >
           <ToolbarItem>
             <ToggleGroup
-              aria-label="Dark theme toggle group"
+              aria-label="t([
+  "view.toolbar.aria-theme-toggle-group"
+])"
             >
               <ToggleGroupItem
-                aria-label="light theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-light-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -53,7 +57,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
                 onChange={[Function]}
               />
               <ToggleGroupItem
-                aria-label="dark theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-dark-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -82,7 +88,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
                 onClick={[Function]}
                 value="about"
               >
-                About
+                t([
+  "view.toolbar.about"
+])
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
@@ -112,7 +120,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
               ouiaId="logout"
               value="logout"
             >
-              Logout
+              t([
+  "view.toolbar.logout"
+])
             </DropdownItem>
           </Dropdown>
         </ToolbarItem>
@@ -141,7 +151,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
             ouiaId="logout"
             value="logout"
           >
-            Logout
+            t([
+  "view.toolbar.logout"
+])
           </DropdownItem>
         </Dropdown>
       </ToolbarItem>
@@ -232,10 +244,14 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
         >
           <ToolbarItem>
             <ToggleGroup
-              aria-label="Dark theme toggle group"
+              aria-label="t([
+  "view.toolbar.aria-theme-toggle-group"
+])"
             >
               <ToggleGroupItem
-                aria-label="light theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-light-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -247,7 +263,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
                 onChange={[Function]}
               />
               <ToggleGroupItem
-                aria-label="dark theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-dark-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -276,7 +294,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
                 onClick={[Function]}
                 value="about"
               >
-                About
+                t([
+  "view.toolbar.about"
+])
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
@@ -306,7 +326,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
               ouiaId="logout"
               value="logout"
             >
-              Logout
+              t([
+  "view.toolbar.logout"
+])
             </DropdownItem>
           </Dropdown>
         </ToolbarItem>
@@ -335,7 +357,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
             ouiaId="logout"
             value="logout"
           >
-            Logout
+            t([
+  "view.toolbar.logout"
+])
           </DropdownItem>
         </Dropdown>
       </ToolbarItem>
@@ -426,10 +450,14 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
         >
           <ToolbarItem>
             <ToggleGroup
-              aria-label="Dark theme toggle group"
+              aria-label="t([
+  "view.toolbar.aria-theme-toggle-group"
+])"
             >
               <ToggleGroupItem
-                aria-label="light theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-light-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -441,7 +469,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
                 onChange={[Function]}
               />
               <ToggleGroupItem
-                aria-label="dark theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-dark-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -470,7 +500,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
                 onClick={[Function]}
                 value="about"
               >
-                About
+                t([
+  "view.toolbar.about"
+])
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
@@ -500,7 +532,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
               ouiaId="logout"
               value="logout"
             >
-              Logout
+              t([
+  "view.toolbar.logout"
+])
             </DropdownItem>
           </Dropdown>
         </ToolbarItem>
@@ -529,7 +563,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
             ouiaId="logout"
             value="logout"
           >
-            Logout
+            t([
+  "view.toolbar.logout"
+])
           </DropdownItem>
         </Dropdown>
       </ToolbarItem>
@@ -633,10 +669,14 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
         >
           <ToolbarItem>
             <ToggleGroup
-              aria-label="Dark theme toggle group"
+              aria-label="t([
+  "view.toolbar.aria-theme-toggle-group"
+])"
             >
               <ToggleGroupItem
-                aria-label="light theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-light-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -648,7 +688,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
                 onChange={[Function]}
               />
               <ToggleGroupItem
-                aria-label="dark theme toggle"
+                aria-label="t([
+  "view.toolbar.aria-dark-theme-toggle"
+])"
                 icon={
                   <Icon
                     size="md"
@@ -677,7 +719,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
                 onClick={[Function]}
                 value="about"
               >
-                About
+                t([
+  "view.toolbar.about"
+])
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
@@ -707,7 +751,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
               ouiaId="logout"
               value="logout"
             >
-              Logout
+              t([
+  "view.toolbar.logout"
+])
             </DropdownItem>
           </Dropdown>
         </ToolbarItem>
@@ -736,7 +782,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
             ouiaId="logout"
             value="logout"
           >
-            Logout
+            t([
+  "view.toolbar.logout"
+])
           </DropdownItem>
         </Dropdown>
       </ToolbarItem>
