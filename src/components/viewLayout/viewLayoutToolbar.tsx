@@ -6,6 +6,7 @@
  * @module appToolbar
  */
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Avatar,
   Dropdown,
@@ -32,6 +33,7 @@ interface AppToolbarProps {
 }
 
 const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUser = useUserApi }) => {
+  const { t } = useTranslation();
   const { logout: onLogout } = useLogout();
   const { getUser } = useUser();
   const [userName, setUserName] = useState<string>();
@@ -94,9 +96,9 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
           >
             <ToolbarGroup variant="action-group-plain" visibility={{ default: 'hidden', lg: 'visible' }}>
               <ToolbarItem>
-                <ToggleGroup aria-label="Dark theme toggle group">
+                <ToggleGroup aria-label={t('view.toolbar.aria-theme-toggle-group')}>
                   <ToggleGroupItem
-                    aria-label="light theme toggle"
+                    aria-label={t('view.toolbar.aria-light-theme-toggle')}
                     icon={
                       <Icon size="md">
                         <SunIcon />
@@ -109,7 +111,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                     }}
                   />
                   <ToggleGroupItem
-                    aria-label="dark theme toggle"
+                    aria-label={t('view.toolbar.aria-dark-theme-toggle')}
                     icon={
                       <Icon size="md">
                         <MoonIcon />
@@ -131,7 +133,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                   isOpen={helpOpen}
                   toggle={toggleRef => (
                     <MenuToggle
-                      aria-label="Toggle"
+                      aria-label={t('view.toolbar.aria-menu-toggle')}
                       ref={toggleRef}
                       onClick={() => setHelpOpen(prev => !prev)}
                       isExpanded={helpOpen}
@@ -142,7 +144,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                   )}
                 >
                   <DropdownItem onClick={onAbout} value="about">
-                    About
+                    {t('view.toolbar.about')}
                   </DropdownItem>
                 </Dropdown>
               </ToolbarItem>
@@ -156,7 +158,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                 isOpen={kebabDropdownOpen}
                 toggle={toggleRef => (
                   <MenuToggle
-                    aria-label="Toggle"
+                    aria-label={t('view.toolbar.aria-menu-toggle')}
                     ref={toggleRef}
                     variant="plain"
                     onClick={() => setKebabDropdownOpen(prev => !prev)}
@@ -169,7 +171,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
                 )}
               >
                 <DropdownItem value="logout" onClick={onLogout} ouiaId="logout">
-                  Logout
+                  {t('view.toolbar.logout')}
                 </DropdownItem>
               </Dropdown>
             </ToolbarItem>
@@ -182,9 +184,9 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
               isOpen={userDropdownOpen}
               toggle={toggleRef => (
                 <MenuToggle
-                  aria-label="Toggle"
+                  aria-label={t('view.toolbar.aria-menu-toggle')}
                   ref={toggleRef}
-                  icon={<Avatar alt="User avatar" src={avatarImage} size="sm" />}
+                  icon={<Avatar alt={t('view.toolbar.avatar-alt')} src={avatarImage} size="sm" />}
                   onClick={() => setUserDropdownOpen(prev => !prev)}
                   isExpanded={userDropdownOpen}
                   ouiaId="user_dropdown_button"
@@ -194,7 +196,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
               )}
             >
               <DropdownItem value="logout" onClick={onLogout} ouiaId="logout">
-                Logout
+                {t('view.toolbar.logout')}
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>

@@ -6,6 +6,7 @@
  * @module simpleDropdown
  */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Dropdown,
   DropdownItem,
@@ -34,12 +35,14 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   label,
   menuToggleOuiaId,
   dropdownItems,
-  ariaLabel = 'Dropdown menu',
+  ariaLabel,
   onSelect = Function.prototype,
   variant,
   isFullWidth
 }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const actualAriaLabel = ariaLabel ?? t('simple-dropdown.aria-label');
 
   return (
     <Dropdown
@@ -55,7 +58,7 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
           isExpanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
           variant={variant}
-          aria-label={ariaLabel}
+          aria-label={actualAriaLabel}
           isDisabled={!dropdownItems || dropdownItems.length === 0}
           ouiaId={menuToggleOuiaId}
         >
