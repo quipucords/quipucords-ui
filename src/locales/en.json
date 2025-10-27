@@ -184,6 +184,24 @@
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"
   },
+  "routes": {
+    "overview": {
+      "label": "Overview",
+      "title": "Overview"
+    },
+    "credentials": {
+      "label": "Credentials",
+      "title": "Credentials"
+    },
+    "sources": {
+      "label": "Sources",
+      "title": "Sources"
+    },
+    "scans": {
+      "label": "Scans",
+      "title": "Scans"
+    }
+  },
   "secret-input": {
     "filled_placeholder": "<SECRET VALUE>"
   },

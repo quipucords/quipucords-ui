@@ -71,11 +71,14 @@ const AppLayout: React.FC<AppLayoutProps> = ({
 
   const location = useLocation();
 
-  const renderNavItem = (route: IAppRoute, index: number) => (
-    <NavItem key={`${route.label}-${index}`} id={`${route.label}-${index}`} isActive={route.path === location.pathname}>
-      <NavLink to={route.path}>{route.label}</NavLink>
-    </NavItem>
-  );
+  const renderNavItem = (route: IAppRoute, index: number) => {
+    const routeLabel = (route.label && t(route.label)) || '';
+    return (
+      <NavItem key={`${routeLabel}-${index}`} id={`${routeLabel}-${index}`} isActive={route.path === location.pathname}>
+        <NavLink to={route.path}>{routeLabel}</NavLink>
+      </NavItem>
+    );
+  };
 
   // FixMe: PF spelling bug in attr "forwardScrollAriaLabel"
   const Navigation = (
