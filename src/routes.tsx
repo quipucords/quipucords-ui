@@ -27,30 +27,30 @@ const routes: IAppRoute[] = [
   {
     id: 'overview',
     component: <Overview />,
-    label: 'Overview',
+    label: 'routes.overview.label',
     path: '/overview',
-    title: 'Overview'
+    title: 'routes.overview.title'
   },
   {
     id: 'credentials',
     component: <Credentials />,
-    label: 'Credentials',
+    label: 'routes.credentials.label',
     path: '/credentials',
-    title: 'Credentials'
+    title: 'routes.credentials.title'
   },
   {
     id: 'sources',
     component: <Sources />,
-    label: 'Sources',
+    label: 'routes.sources.label',
     path: '/sources',
-    title: 'Sources'
+    title: 'routes.sources.title'
   },
   {
     id: 'scans',
     component: <Scans />,
-    label: 'Scans',
+    label: 'routes.scans.label',
     path: '/scans',
-    title: 'Scans'
+    title: 'routes.scans.title'
   }
 ];
 
