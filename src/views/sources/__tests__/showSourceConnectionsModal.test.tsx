@@ -130,7 +130,10 @@ describe('ShowConnectionsModal', () => {
 
     fireEvent.mouseEnter(moreItems);
     await waitFor(() => {
-      expect(screen.getByText(`There are ${additionalHosts} additional hosts not shown.`)).toBeInTheDocument();
+      expect(screen.getByText(/view.sources.show-connections-modal.tooltip/)).toBeInTheDocument();
+      expect(screen.getByText(/view.sources.show-connections-modal.tooltip/)).toHaveTextContent(
+        `"count": ${additionalHosts}`
+      );
     });
   });
 

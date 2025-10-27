@@ -48,7 +48,9 @@ exports[`AddSourceModal should render a basic component: basic 1`] = `
   ouiaSafe={true}
   position="default"
   showClose={true}
-  title="Scan"
+  title="t([
+  "view.sources.modal-title.new-scan"
+])"
   titleIconVariant={null}
   titleLabel=""
   variant="small"

@@ -7,6 +7,7 @@
  * @module addSourceModal
  */
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActionGroup,
   Button,
@@ -93,6 +94,7 @@ const useSourceForm = ({
     proxy_url: ''
   };
 
+  const { t } = useTranslation();
   const [initialSelectedCredentials, setInitialSelectedCredentials] = useState<CredentialOption[]>([]);
   const [formData, setFormData] = useState<SourceFormType>(initialFormState);
   const [localErrors, setLocalErrors] = useState<SourceErrorType>({});
@@ -146,13 +148,13 @@ const useSourceForm = ({
       if (field === 'credentials') {
         const credentialsArray = Array.isArray(value) ? value : [];
         if (shouldValidateAsRequired && credentialsArray.length === 0) {
-          errors[field] = 'At least one credential is required';
+          errors[field] = t('view.sources.add-modal.error-cred-required');
         }
       } else {
         // Handle string fields
         const stringValue = String(value || '');
         if (shouldValidateAsRequired && (!stringValue || stringValue.trim() === '')) {
-          errors[field] = 'This field is required';
+          errors[field] = t('view.sources.add-modal.error-field-required');
         }
       }
 
@@ -408,6 +410,8 @@ const SourceForm: React.FC<SourceFormProps> = ({
     onClearErrors
   });
 
+  const { t } = useTranslation();
+
   const scrollToFirstError = useCallback(() => {
     const errorFields = Object.keys(errors);
     if (errorFields.length > 0) {
@@ -434,10 +438,10 @@ const SourceForm: React.FC<SourceFormProps> = ({
 
   return (
     <Form>
-      <FormGroup label="Name" isRequired fieldId="name">
+      <FormGroup label={t('view.sources.add-modal.name.label')} isRequired fieldId="name">
         <TextInput
           value={formData?.name}
-          placeholder="Enter a name for the source"
+          placeholder={t('view.sources.add-modal.name.placeholder')}
           isRequired
           type="text"
           id="source-name"
@@ -448,7 +452,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
         />
         <ErrorFragment errorMessage={errors?.name} fieldTouched={touchedFields.has('name')} />
       </FormGroup>
-      <FormGroup label="Credentials" fieldId="credentials" isRequired>
+      <FormGroup label={t('view.sources.add-modal.credentials.label')} fieldId="credentials" isRequired>
         <TypeaheadCheckboxes
           onChange={(selections: string[]) => {
             const validIds = selections.map(Number).filter(id => !isNaN(id));
@@ -462,16 +466,16 @@ const SourceForm: React.FC<SourceFormProps> = ({
         />
         {!isNetwork && (
           <HelperText>
-            <HelperTextItem variant="warning">Only one credential can be selected for this source type.</HelperTextItem>
+            <HelperTextItem variant="warning">{t('view.sources.add-modal.credentials.warning-many')}</HelperTextItem>
           </HelperText>
         )}
         <ErrorFragment errorMessage={errors?.credentials} fieldTouched={touchedFields.has('credentials')} />
       </FormGroup>
       {isNetwork ? (
         <React.Fragment>
-          <FormGroup label="Search addresses" isRequired fieldId="hosts">
+          <FormGroup label={t('view.sources.add-modal.hosts-network.label')} isRequired fieldId="hosts">
             <TextArea
-              placeholder="Enter values separated by commas"
+              placeholder={t('view.sources.add-modal.hosts-network.placeholder')}
               value={formData?.hosts}
               onChange={event => handleInputChange('hosts', event.target.value)}
               isRequired
@@ -480,28 +484,25 @@ const SourceForm: React.FC<SourceFormProps> = ({
               data-ouia-component-id="hosts_multiple"
               validated={errors?.hosts ? 'error' : 'default'}
             />
-            <HelperText>
-              Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for
-              ranges.
-            </HelperText>
+            <HelperText>{t('view.sources.add-modal.hosts-network.helper')}</HelperText>
             <ErrorFragment errorMessage={errors?.hosts} fieldTouched={touchedFields.has('hosts')} />
           </FormGroup>
-          <FormGroup label="Port" fieldId="port">
+          <FormGroup label={t('view.sources.add-modal.port-network.label')} fieldId="port">
             <TextInput
               value={formData?.port}
-              placeholder="Optional"
+              placeholder={t('view.sources.add-modal.port-network.placeholder')}
               type="text"
               id="source-port"
               name="port"
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
-            <HelperText id="source-port-helper-text">Default port is 22</HelperText>
+            <HelperText id="source-port-helper-text">{t('view.sources.add-modal.port-network.helper')}</HelperText>
           </FormGroup>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <FormGroup label="IP address or hostname" isRequired fieldId="hosts">
+          <FormGroup label={t('view.sources.add-modal.hosts-others.label')} isRequired fieldId="hosts">
             <TextInput
               value={formData?.hosts}
               onChange={event => handleInputChange('hosts', (event.target as HTMLInputElement).value)}
@@ -512,13 +513,13 @@ const SourceForm: React.FC<SourceFormProps> = ({
               ouiaId="hosts_single"
               validated={errors?.hosts ? 'error' : 'default'}
             />
-            <HelperText>Enter an IP address or hostname</HelperText>
+            <HelperText>{t('view.sources.add-modal.hosts-others.helper')}</HelperText>
             <ErrorFragment errorMessage={errors?.hosts} fieldTouched={touchedFields.has('hosts')} />
           </FormGroup>
-          <FormGroup label="Port" fieldId="port">
+          <FormGroup label={t('view.sources.add-modal.port-others.label')} fieldId="port">
             <TextInput
               value={formData?.port}
-              placeholder="Optional"
+              placeholder={t('view.sources.add-modal.port-others.placeholder')}
               type="text"
               id="source-port"
               data-testid="input-port"
@@ -526,12 +527,14 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('port', (event.target as HTMLInputElement).value)}
               ouiaId="port"
             />
-            <HelperText id="source-port-helper-text">Default port is {isOpenshift ? '6443' : '443'}</HelperText>
+            <HelperText id="source-port-helper-text">
+              {t('view.sources.add-modal.port-others.helper', { port: isOpenshift ? '6443' : '443' })}
+            </HelperText>
           </FormGroup>
-          <FormGroup label="Proxy URL" fieldId="proxy_url">
+          <FormGroup label={t('view.sources.add-modal.proxy.label')} fieldId="proxy_url">
             <TextInput
               value={formData?.proxy_url || ''}
-              placeholder="Optional"
+              placeholder={t('view.sources.add-modal.proxy.placeholder')}
               type="text"
               id="proxy-url"
               data-testid="input-proxy"
@@ -539,7 +542,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
               onChange={event => handleInputChange('proxy_url', (event.target as HTMLInputElement).value || undefined)}
               ouiaId="proxy_url"
             />
-            <HelperText>Specify a proxy in the format protocol://host:port (if required).</HelperText>
+            <HelperText>{t('view.sources.add-modal.proxy.helper')}</HelperText>
           </FormGroup>
         </React.Fragment>
       )}
@@ -547,7 +550,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
         <FormGroup label="" fieldId="paramiko">
           <Checkbox
             key="paramiko"
-            label="Connect using Paramiko instead of Open SSH"
+            label={t('view.sources.add-modal.paramiko.checkbox-label')}
             id="paramiko"
             isChecked={formData?.useParamiko}
             onChange={(_ev, checked) => handleInputChange('useParamiko', checked)}
@@ -556,10 +559,10 @@ const SourceForm: React.FC<SourceFormProps> = ({
         </FormGroup>
       ) : (
         <React.Fragment>
-          <FormGroup label="Connection" fieldId="connection">
+          <FormGroup label={t('view.sources.add-modal.connection.label')} fieldId="connection">
             <SimpleDropdown
               isFullWidth
-              label={formData?.sslProtocol || 'Select protocol'}
+              label={formData?.sslProtocol || t('view.sources.add-modal.connection.default_value')}
               menuToggleOuiaId="options_ssl_protocol"
               variant={'default'}
               onSelect={item => handleInputChange('sslProtocol', item)}
@@ -575,7 +578,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
           <FormGroup label="" fieldId="ssl_verify">
             <Checkbox
               key="ssl_verify"
-              label="Verify SSL certificate"
+              label={t('view.sources.add-modal.ssl-verify.checkbox-label')}
               id="ssl_verify"
               isDisabled={formData?.sslProtocol === 'Disable SSL'}
               isChecked={formData?.sslProtocol !== 'Disable SSL' && formData?.sslVerify}
@@ -587,10 +590,10 @@ const SourceForm: React.FC<SourceFormProps> = ({
       )}
       <ActionGroup>
         <Button variant="primary" onClick={onAdd} isDisabled={!canSubmit}>
-          Save
+          {t('view.sources.add-modal.actions.save')}
         </Button>
         <Button variant="link" onClick={() => onClose()}>
-          Cancel
+          {t('view.sources.add-modal.actions.cancel')}
         </Button>
       </ActionGroup>
     </Form>
@@ -605,23 +608,29 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
   onClearErrors = () => {},
   onClose = () => {},
   onSubmit = () => {}
-}) => (
-  <Modal
-    variant={ModalVariant.small}
-    title={(source && `Edit Source: ${source.name || ''}`) || `Add Source: ${sourceType || ''}`}
-    isOpen={isOpen}
-    onClose={() => onClose()}
-  >
-    <SourceForm
-      source={source}
-      sourceType={sourceType}
-      errors={errors}
-      onClearErrors={onClearErrors}
-      onClose={onClose}
-      onSubmit={onSubmit}
-    />
-  </Modal>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Modal
+      variant={ModalVariant.small}
+      title={
+        (source && t('view.sources.modal-title.edit', { name: source.name || '' })) ||
+        t('view.sources.modal-title.add', { type: sourceType || '' })
+      }
+      isOpen={isOpen}
+      onClose={() => onClose()}
+    >
+      <SourceForm
+        source={source}
+        sourceType={sourceType}
+        errors={errors}
+        onClearErrors={onClearErrors}
+        onClose={onClose}
+        onSubmit={onSubmit}
+      />
+    </Modal>
+  );
+};
 
 export {
   AddSourceModal as default,

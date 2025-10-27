@@ -517,6 +517,62 @@
         }
       }
     },
+    "sources": {
+      "add-modal": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter a name for the source"
+        },
+        "credentials": {
+          "label": "Credentials",
+          "warning-many": "Only one credential can be selected for this source type."
+        },
+        "hosts-network": {
+          "label": "Search addresses",
+          "placeholder": "Enter values separated by commas",
+          "helper": "Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for ranges."
+        },
+        "port-network": {
+          "label": "Port",
+          "placeholder": "Optional",
+          "helper": "Default port is 22"
+        },
+        "hosts-others": {
+          "label": "IP address or hostname",
+          "helper": "Enter an IP address or hostname"
+        },
+        "port-others": {
+          "label": "Port",
+          "placeholder": "Optional",
+          "helper": "Default port is {{port}}"
+        },
+        "proxy": {
+          "label": "Proxy URL",
+          "placeholder": "Optional",
+          "helper": "Specify a proxy in the format protocol://host:port (if required)."
+        },
+        "paramiko": {
+          "checkbox-label": "Connect using Paramiko instead of Open SSH"
+        },
+        "connection": {
+          "label": "Connection",
+          "default_value": "Select protocol"
+        },
+        "ssl-verify": {
+          "checkbox-label": "Verify SSL certificate"
+        },
+        "actions": {
+          "save": "Save",
+          "cancel": "Cancel"
+        },
+        "error-cred-required": "At least one credential is required",
+        "error-field-required": "This field is required"
+      },
+      "modal-title": {
+        "add": "Add Source: {{type}}",
+        "edit": "Edit Source: {{name}}"
+      }
+    },
     "toolbar": {
       "aria-theme-toggle-group": "Dark theme toggle group",
       "aria-light-theme-toggle": "light theme toggle",
