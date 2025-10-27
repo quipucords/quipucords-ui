@@ -8,7 +8,9 @@
 import React from 'react';
 import moment, { type MomentInput } from 'moment';
 import titleImg from '../images/title.svg';
-import titleImgBrand from '../images/titleBrand.svg';
+import titleBrandImg from '../images/titleBrand.svg';
+import titleLoginBrandImg from '../images/titleBrandLogin.svg';
+import titleLoginImg from '../images/titleLogin.svg';
 import { type CredentialType, type MostRecentScan, type scanJob } from '../types/types';
 
 /**
@@ -215,7 +217,15 @@ const getCurrentDate = () => (TEST_MODE && moment.utc('20241001').toDate()) || m
  * @param {boolean} isBrand
  * @returns {string}
  */
-const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleImgBrand) || titleImg) as string;
+const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleBrandImg) || titleImg) as string;
+
+/**
+ * Return application name as image, one that looks good on white background
+ *
+ * @param {boolean} isBrand
+ * @returns {string}
+ */
+const getLoginTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleLoginBrandImg) || titleLoginImg) as string;
 
 /**
  * Return if a report associated with given ScanJob can be downloaded, or a summary can be accessed.
@@ -246,6 +256,7 @@ const helpers = {
   getCurrentDate,
   getTimeDisplayHowLongAgo,
   getTitleImg,
+  getLoginTitleImg,
   formatDate,
   normalizeCommaSeparated,
   DEV_MODE,

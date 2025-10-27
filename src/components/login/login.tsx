@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { helpers } from '../../helpers';
 import apiHelpers from '../../helpers/apiHelpers';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
 import bgImage from '../../images/aboutBg.png';
@@ -81,6 +82,8 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   return (
     <LoginPage
       className="fadein"
+      brandImgSrc={helpers.getLoginTitleImg()}
+      brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
       loginTitle={t('login.title')}
       textContent={t('login.description')}
       backgroundImgSrc={bgImage}
