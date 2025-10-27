@@ -14,6 +14,13 @@ exports[`Login should attempt to use the login service: submit 1`] = `
 exports[`Login should render a basic component: basic 1`] = `
 <LoginPage
   backgroundImgSrc="aboutBg.png"
+  brandImgAlt="t([
+  "view.alt-logo",
+  {
+    "name": "Quipucords"
+  }
+])"
+  brandImgSrc="titleLogin.svg"
   className="fadein"
   loginTitle="t([
   "login.title"
