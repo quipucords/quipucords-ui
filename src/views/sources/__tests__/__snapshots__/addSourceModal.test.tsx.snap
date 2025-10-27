@@ -15,14 +15,6 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
 }
 `;
 
-exports[`AddSourceModal-network should have the correct title: title 1`] = `
-<span
-  class="pf-v6-c-modal-box__title-text"
->
-  Add Source: network
-</span>
-`;
-
 exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 <Modal
   actions={[]}
@@ -37,7 +29,12 @@ exports[`AddSourceModal-network should render a basic component: basic 1`] = `
   ouiaSafe={true}
   position="default"
   showClose={true}
-  title="Add Source: "
+  title="t([
+  "view.sources.modal-title.add",
+  {
+    "type": ""
+  }
+])"
   titleIconVariant={null}
   titleLabel=""
   variant="small"
@@ -73,7 +70,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -81,7 +80,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -93,7 +94,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="network"
@@ -111,7 +114,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="Search addresses"
+      label="t([
+  "view.sources.add-modal.hosts-network.label"
+])"
     >
       <TextArea
         data-ouia-component-id="hosts_multiple"
@@ -119,12 +124,16 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
         isRequired={true}
         name="hosts"
         onChange={[Function]}
-        placeholder="Enter values separated by commas"
+        placeholder="t([
+  "view.sources.add-modal.hosts-network.placeholder"
+])"
         validated="default"
         value=""
       />
       <HelperText>
-        Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for ranges.
+        t([
+  "view.sources.add-modal.hosts-network.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -132,21 +141,27 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-network.label"
+])"
     >
       <TextInput
         id="source-port"
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-network.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 22
+        t([
+  "view.sources.add-modal.port-network.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
@@ -162,7 +177,9 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       isLabelWrapped={false}
       isRequired={false}
       isValid={true}
-      label="Connect using Paramiko instead of Open SSH"
+      label="t([
+  "view.sources.add-modal.paramiko.checkbox-label"
+])"
       onChange={[Function]}
       ouiaId="options_paramiko"
       ouiaSafe={true}
@@ -174,13 +191,17 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -191,7 +212,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -199,7 +222,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -211,7 +236,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       initialSelectedCredentials={[]}
@@ -224,7 +251,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -235,7 +264,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -248,7 +279,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -256,7 +289,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -264,20 +299,28 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -285,19 +328,25 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -343,7 +392,9 @@ exports[`SourceForm should render a basic component: basic 1`] = `
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -356,13 +407,17 @@ exports[`SourceForm should render a basic component: basic 1`] = `
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -373,7 +428,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -381,7 +438,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -393,7 +452,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="ansible"
@@ -407,7 +468,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -418,7 +481,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -431,7 +496,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -439,7 +506,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -447,20 +516,28 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -468,19 +545,25 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -526,7 +609,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -539,13 +624,17 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -556,7 +645,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -564,7 +655,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -576,7 +669,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="openshift"
@@ -590,7 +685,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -601,7 +698,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -614,7 +713,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -622,7 +723,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -630,20 +733,28 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        6443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "6443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -651,19 +762,25 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -709,7 +826,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -722,13 +841,17 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -739,7 +862,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -747,7 +872,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -759,7 +886,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="rhacs"
@@ -773,7 +902,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -784,7 +915,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -797,7 +930,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -805,7 +940,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -813,20 +950,28 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -834,19 +979,25 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -892,7 +1043,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -905,13 +1058,17 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -922,7 +1079,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -930,7 +1089,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -942,7 +1103,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="satellite"
@@ -956,7 +1119,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -967,7 +1132,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -980,7 +1147,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -988,7 +1157,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -996,20 +1167,28 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -1017,19 +1196,25 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -1075,7 +1260,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -1088,13 +1275,17 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -1105,7 +1296,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="name"
     isRequired={true}
-    label="Name"
+    label="t([
+  "view.sources.add-modal.name.label"
+])"
   >
     <TextInput
       id="source-name"
@@ -1113,7 +1306,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       name="name"
       onChange={[Function]}
       ouiaId="name"
-      placeholder="Enter a name for the source"
+      placeholder="t([
+  "view.sources.add-modal.name.placeholder"
+])"
       type="text"
       validated="default"
       value=""
@@ -1125,7 +1320,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
   <FormGroup
     fieldId="credentials"
     isRequired={true}
-    label="Credentials"
+    label="t([
+  "view.sources.add-modal.credentials.label"
+])"
   >
     <TypeaheadCheckboxes
       credentialType="vcenter"
@@ -1139,7 +1336,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       <HelperTextItem
         variant="warning"
       >
-        Only one credential can be selected for this source type.
+        t([
+  "view.sources.add-modal.credentials.warning-many"
+])
       </HelperTextItem>
     </HelperText>
     <ErrorFragment
@@ -1150,7 +1349,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     <FormGroup
       fieldId="hosts"
       isRequired={true}
-      label="IP address or hostname"
+      label="t([
+  "view.sources.add-modal.hosts-others.label"
+])"
     >
       <TextInput
         data-testid="input-host"
@@ -1163,7 +1364,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         value=""
       />
       <HelperText>
-        Enter an IP address or hostname
+        t([
+  "view.sources.add-modal.hosts-others.helper"
+])
       </HelperText>
       <ErrorFragment
         fieldTouched={false}
@@ -1171,7 +1374,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
     </FormGroup>
     <FormGroup
       fieldId="port"
-      label="Port"
+      label="t([
+  "view.sources.add-modal.port-others.label"
+])"
     >
       <TextInput
         data-testid="input-port"
@@ -1179,20 +1384,28 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="port"
         onChange={[Function]}
         ouiaId="port"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.port-others.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText
         id="source-port-helper-text"
       >
-        Default port is 
-        443
+        t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
       </HelperText>
     </FormGroup>
     <FormGroup
       fieldId="proxy_url"
-      label="Proxy URL"
+      label="t([
+  "view.sources.add-modal.proxy.label"
+])"
     >
       <TextInput
         data-testid="input-proxy"
@@ -1200,19 +1413,25 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         name="proxy_url"
         onChange={[Function]}
         ouiaId="proxy_url"
-        placeholder="Optional"
+        placeholder="t([
+  "view.sources.add-modal.proxy.placeholder"
+])"
         type="text"
         value=""
       />
       <HelperText>
-        Specify a proxy in the format protocol://host:port (if required).
+        t([
+  "view.sources.add-modal.proxy.helper"
+])
       </HelperText>
     </FormGroup>
   </React.Fragment>
   <React.Fragment>
     <FormGroup
       fieldId="connection"
-      label="Connection"
+      label="t([
+  "view.sources.add-modal.connection.label"
+])"
     >
       <SimpleDropdown
         dropdownItems={
@@ -1258,7 +1477,9 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
         isLabelWrapped={false}
         isRequired={false}
         isValid={true}
-        label="Verify SSL certificate"
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
         onChange={[Function]}
         ouiaId="options_ssl_cert"
         ouiaSafe={true}
@@ -1271,13 +1492,17 @@ exports[`SourceForm should render proxy_url field for non-network sources: proxy
       onClick={[Function]}
       variant="primary"
     >
-      Save
+      t([
+  "view.sources.add-modal.actions.save"
+])
     </Button>
     <Button
       onClick={[Function]}
       variant="link"
     >
-      Cancel
+      t([
+  "view.sources.add-modal.actions.cancel"
+])
     </Button>
   </ActionGroup>
 </Form>
@@ -1288,8 +1513,12 @@ exports[`SourceForm should render specifics to different source types: form, ans
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 
-  443
+  t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
 </div>
 `;
 
@@ -1298,7 +1527,9 @@ exports[`SourceForm should render specifics to different source types: form, net
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 22
+  t([
+  "view.sources.add-modal.port-network.helper"
+])
 </div>
 `;
 
@@ -1307,8 +1538,12 @@ exports[`SourceForm should render specifics to different source types: form, ope
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 
-  6443
+  t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "6443"
+  }
+])
 </div>
 `;
 
@@ -1317,8 +1552,12 @@ exports[`SourceForm should render specifics to different source types: form, rha
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 
-  443
+  t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
 </div>
 `;
 
@@ -1327,8 +1566,12 @@ exports[`SourceForm should render specifics to different source types: form, sat
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 
-  443
+  t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
 </div>
 `;
 
@@ -1337,8 +1580,12 @@ exports[`SourceForm should render specifics to different source types: form, vce
   class="pf-v6-c-helper-text"
   id="source-port-helper-text"
 >
-  Default port is 
-  443
+  t([
+  "view.sources.add-modal.port-others.helper",
+  {
+    "port": "443"
+  }
+])
 </div>
 `;
 

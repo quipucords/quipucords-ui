@@ -85,7 +85,7 @@ describe('Form Validation', () => {
     });
 
     expect(result.current.touchedFields.has('name')).toBe(true);
-    expect(result.current.errors.name).toBe('This field is required');
+    expect(result.current.errors.name).toContain('view.sources.scan-modal.error-field-required');
   });
 
   it('should handle deep scan selections correctly', async () => {

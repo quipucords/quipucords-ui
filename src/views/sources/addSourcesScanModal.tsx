@@ -77,7 +77,7 @@ const useScanForm = ({
       if (field === 'name') {
         const stringValue = String(value || '');
         if (shouldValidateAsRequired && (!stringValue || stringValue.trim() === '')) {
-          errors[field] = 'This field is required';
+          errors[field] = t('view.sources.scan-modal.error-field-required');
         }
       }
 
@@ -259,10 +259,10 @@ const ScanForm: React.FC<ScanFormProps> = ({
 
   return (
     <Form>
-      <FormGroup label="Name" isRequired fieldId="name">
+      <FormGroup label={t('view.sources.scan-modal.name.label')} isRequired fieldId="name">
         <TextInput
           value={formData.name}
-          placeholder="Enter a name for the scan."
+          placeholder={t('view.sources.scan-modal.name.placeholder')}
           isRequired
           type="text"
           id="scan-name"
@@ -273,7 +273,7 @@ const ScanForm: React.FC<ScanFormProps> = ({
         />
         <ErrorFragment errorMessage={errors?.name} fieldTouched={touchedFields.has('name')} />
       </FormGroup>
-      <FormGroup label="Sources" isRequired fieldId="sources">
+      <FormGroup label={t('view.sources.scan-modal.sources.label')} isRequired fieldId="sources">
         <TextArea
           value={sources?.map(s => s.name).join(', ') || ''}
           isDisabled
@@ -284,7 +284,7 @@ const ScanForm: React.FC<ScanFormProps> = ({
         />
         <ErrorFragment errorMessage={errors?.sources} fieldTouched={true} />
       </FormGroup>
-      <FormGroup label="Maximum concurrent scans" fieldId="maxConcurrency">
+      <FormGroup label={t('view.sources.scan-modal.max-concurrency.label')} fieldId="maxConcurrency">
         <NumberInput
           value={formData.maxConcurrency}
           onMinus={() => handleInputChange('maxConcurrency', Math.max(1, formData.maxConcurrency - 1))}
@@ -296,17 +296,23 @@ const ScanForm: React.FC<ScanFormProps> = ({
           }
           onPlus={() => handleInputChange('maxConcurrency', Math.min(200, formData.maxConcurrency + 1))}
           inputName="input"
-          inputAriaLabel="number input"
-          minusBtnAriaLabel="minus"
-          plusBtnAriaLabel="plus"
+          inputAriaLabel={t('view.sources.scan-modal.max-concurrency.aria-input')}
+          minusBtnAriaLabel={t('view.sources.scan-modal.max-concurrency.aria-minus')}
+          plusBtnAriaLabel={t('view.sources.scan-modal.max-concurrency.aria-plus')}
           data-ouia-component-id="scan_concurrency"
         />
       </FormGroup>
-      <FormGroup label="Deep scan for these products" isStack fieldId="deepScans" hasNoPaddingTop role="group">
+      <FormGroup
+        label={t('view.sources.scan-modal.deep-scan.label')}
+        isStack
+        fieldId="deepScans"
+        hasNoPaddingTop
+        role="group"
+      >
         {[
-          { label: 'JBoss EAP', value: 'jboss_eap' },
-          { label: 'Fuse', value: 'jboss_fuse' },
-          { label: 'JBoss web server', value: 'jboss_ws' }
+          { label: t('view.sources.scan-modal.deep-scan.jboss_eap'), value: 'jboss_eap' },
+          { label: t('view.sources.scan-modal.deep-scan.jboss_fuse'), value: 'jboss_fuse' },
+          { label: t('view.sources.scan-modal.deep-scan.jboss_ws'), value: 'jboss_ws' }
         ].map(o => (
           <Checkbox
             key={`deep-scan-${o.value}`}
@@ -319,7 +325,7 @@ const ScanForm: React.FC<ScanFormProps> = ({
         ))}
       </FormGroup>
       {!!formData.deepScans.length && (
-        <FormGroup label="Scan alternate directories" fieldId="searchDirectories">
+        <FormGroup label={t('view.sources.scan-modal.search-dirs.label')} fieldId="searchDirectories">
           <TextArea
             value={formData.searchDirectories}
             onChange={(_ev, val) => handleInputChange('searchDirectories', val)}
@@ -327,15 +333,15 @@ const ScanForm: React.FC<ScanFormProps> = ({
             name="searchDirectories"
             data-ouia-component-id="scan_alt_dirs"
           />
-          <HelperText>Default: directories are /./opt./app./home/usr</HelperText>
+          <HelperText>{t('view.sources.scan-modal.search-dirs.helper')}</HelperText>
         </FormGroup>
       )}
       <ActionGroup>
         <Button variant="primary" onClick={onScan} isDisabled={!canSubmit}>
-          Save
+          {t('view.sources.scan-modal.actions.save')}
         </Button>
         <Button variant="link" onClick={() => onClose()}>
-          Cancel
+          {t('view.sources.scan-modal.actions.cancel')}
         </Button>
       </ActionGroup>
     </Form>
@@ -349,11 +355,19 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
   onClearErrors = () => {},
   onClose = () => {},
   onSubmit = async () => {}
-}) => (
-  <Modal variant={ModalVariant.small} title="Scan" isOpen={isOpen} onClose={() => onClose()}>
-    <ScanForm sources={sources} errors={errors} onClearErrors={onClearErrors} onClose={onClose} onSubmit={onSubmit} />
-  </Modal>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Modal
+      variant={ModalVariant.small}
+      title={t('view.sources.modal-title.new-scan')}
+      isOpen={isOpen}
+      onClose={() => onClose()}
+    >
+      <ScanForm sources={sources} errors={errors} onClearErrors={onClearErrors} onClose={onClose} onSubmit={onSubmit} />
+    </Modal>
+  );
+};
 
 export {
   AddSourcesScanModal as default,

@@ -44,13 +44,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
 
   const additionalHostsToolTip = (numHosts: number): string => {
     const additionalHosts: number = numHosts - maxHostsPerCategory;
-    let toolTipContent: string = '';
-    if (additionalHosts === 1) {
-      toolTipContent = `There is ${additionalHosts} additional host not shown.`;
-    } else {
-      toolTipContent = `There are ${additionalHosts} additional hosts not shown.`;
-    }
-    return `${toolTipContent}`;
+    return t('view.sources.show-connections-modal.tooltip', { count: additionalHosts });
   };
 
   return (
