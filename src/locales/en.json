@@ -568,9 +568,40 @@
         "error-cred-required": "At least one credential is required",
         "error-field-required": "This field is required"
       },
+      "scan-modal": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter a name for the scan."
+        },
+        "sources": {
+          "label": "Sources"
+        },
+        "max-concurrency": {
+          "label": "Maximum concurrent scans",
+          "aria-input": "number input",
+          "aria-minus": "minus",
+          "aria-plus": "plus"
+        },
+        "deep-scan": {
+          "label": "Deep scan for these products",
+          "jboss_eap": "JBoss EAP",
+          "jboss_fuse": "Fuse",
+          "jboss_ws": "JBoss web server"
+        },
+        "search-dirs": {
+          "label": "Scan alternate directories",
+          "helper": "Default: directories are /, /opt, /app, /home/usr"
+        },
+        "actions": {
+          "save": "Save",
+          "cancel": "Cancel"
+        },
+        "error-field-required": "This field is required"
+      },
       "modal-title": {
         "add": "Add Source: {{type}}",
-        "edit": "Edit Source: {{name}}"
+        "edit": "Edit Source: {{name}}",
+        "new-scan": "Scan"
       }
     },
     "toolbar": {

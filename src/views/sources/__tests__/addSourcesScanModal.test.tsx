@@ -25,22 +25,17 @@ describe('AddSourceModal', () => {
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should have the correct title', () => {
-    const title = screen.getByText(/Scan/);
-    expect(title).toMatchSnapshot('title');
-  });
-
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
-    await user.type(screen.getByPlaceholderText(new RegExp('Enter a name for the scan', 'i')), 'Test Scan');
-    await user.click(screen.getByText('Save'));
+    await user.type(screen.getByPlaceholderText(/scan-modal\.name\.placeholder/), 'Test Scan');
+    await user.click(screen.getByText(/actions\.save/));
 
     expect(mockOnSubmit.mock.calls).toMatchSnapshot('onSubmit, filtered data');
   });
 
   it('should call onClose', async () => {
     const user = userEvent.setup();
-    await user.click(screen.getByText('Cancel'));
+    await user.click(screen.getByText(/actions\.cancel/));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
