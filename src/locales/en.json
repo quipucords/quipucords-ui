@@ -598,6 +598,19 @@
         },
         "error-field-required": "This field is required"
       },
+      "show-connections-modal": {
+        "aria-list": "Connections lists",
+        "failed": "Failed connections",
+        "unreachable": "Unreachable systems",
+        "successful": "Successful connections",
+        "na": "N/A",
+        "more": "...",
+        "tooltip_one": "There is {{count}} additional host not shown.",
+        "tooltip_other": "There are {{count}} additional hosts not shown.",
+        "actions": {
+          "close": "Close"
+        }
+      },
       "modal-title": {
         "add": "Add Source: {{type}}",
         "edit": "Edit Source: {{name}}",
