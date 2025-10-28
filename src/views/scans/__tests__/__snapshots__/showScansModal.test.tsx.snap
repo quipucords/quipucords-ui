@@ -51,7 +51,9 @@ exports[`ShowScansModal should render a basic component: basic 1`] = `
     <EmptyState
       headingLevel="h2"
       icon={[Function]}
-      titleText="Loading scans"
+      titleText="t([
+  "view.scans.show-modal.loading"
+])"
     />
   </Bullseye>
 </Modal>
