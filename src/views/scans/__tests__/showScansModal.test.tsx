@@ -50,7 +50,7 @@ describe('ShowScansModal', () => {
 
   it('should call onDownload with a report id when clicked', async () => {
     const user = userEvent.setup();
-    await user.click(screen.getByText('Download'));
+    await user.click(screen.getByRole('button', { name: /show-modal\.scan-download/ }));
 
     expect(mockOnDownload.mock.calls).toMatchSnapshot('onDownload');
   });

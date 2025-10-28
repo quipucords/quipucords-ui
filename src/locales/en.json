@@ -517,6 +517,18 @@
         }
       }
     },
+    "scans": {
+      "show-modal": {
+        "aria-table": "Scan jobs table",
+        "scan-time": "Scan Time",
+        "scan-result": "Scan Result",
+        "scan-download-screenreader": "Download column",
+        "scan-download": "Download",
+        "loading": "Loading scans",
+        "title_one": "{{count}} scan has run",
+        "title_other": "{{count}} scans have run"
+      }
+    },
     "sources": {
       "add-modal": {
         "name": {
