@@ -272,7 +272,7 @@ exports[`useDownloadReportApi should handle errors while attempting to download 
       "title": "t([
   "toast-notifications.description",
   {
-    "context": "report_download_error",
+    "context": "report_downloaded_error",
     "name": 123,
     "message": "Unknown error"
   }
@@ -307,7 +307,7 @@ exports[`useDownloadReportApi should process an API error response: callbackErro
       "title": "t([
   "toast-notifications.description",
   {
-    "context": "report_download_error",
+    "context": "report_downloaded_error",
     "name": 123,
     "message": "Dolor sit"
   }

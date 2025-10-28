@@ -464,7 +464,7 @@ const SourcesListView: React.FunctionComponent = () => {
   return (
     <PageSection hasBodyWrapper={false}>
       {renderToolbar()}
-      <Table aria-label="Example things table" variant="compact">
+      <Table aria-label={t('table.label', { context: 'aria-sources' })} variant="compact">
         <Thead>
           <TrWithBatteries isHeaderRow>
             <Th columnKey="name" />

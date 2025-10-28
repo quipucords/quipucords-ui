@@ -437,7 +437,7 @@ const useDownloadReportApi = (onAddAlert: (alert: AlertProps) => void) => {
     (error: AxiosError<ApiScanErrorType>, reportId: number) => {
       onAddAlert({
         title: t('toast-notifications.description', {
-          context: 'report_download_error',
+          context: 'report_downloaded_error',
           name: reportId,
           message: apiHelpers.extractErrorMessage(error?.response?.data)
         }),
