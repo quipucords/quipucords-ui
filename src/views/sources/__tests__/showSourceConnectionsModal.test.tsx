@@ -75,7 +75,7 @@ describe('ShowConnectionsModal', () => {
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=succeeded]')!);
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory - 1}`)).toBeDefined();
-    expect(screen.queryByText(`...`)).toBeNull();
+    expect(screen.queryByText(/show-connections-modal\.more/)).toBeNull();
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory}`)).toBeNull();
   });
 
@@ -85,7 +85,7 @@ describe('ShowConnectionsModal', () => {
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=succeeded]')!);
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory}`)).toBeDefined();
-    expect(screen.queryByText(`...`)).toBeNull();
+    expect(screen.queryByText(/show-connections-modal\.more/)).toBeNull();
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory + 1}`)).toBeNull();
   });
 
@@ -95,7 +95,7 @@ describe('ShowConnectionsModal', () => {
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=succeeded]')!);
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory}`)).toBeDefined();
-    expect(screen.queryByText(`...`)).toBeDefined();
+    expect(screen.queryByText(/show-connections-modal\.more/)).toBeDefined();
     expect(screen.queryByText(`Dolor sit ${maxHostsPerCategory + 1}`)).toBeNull();
   });
 
@@ -105,7 +105,7 @@ describe('ShowConnectionsModal', () => {
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=failed]')!);
     expect(screen.queryByText(`Amet ${maxHostsPerCategory}`)).toBeDefined();
-    expect(screen.queryByText(`...`)).toBeDefined();
+    expect(screen.queryByText(/show-connections-modal\.more/)).toBeDefined();
     expect(screen.queryByText(`Amet ${maxHostsPerCategory + 1}`)).toBeNull();
   });
 
@@ -115,7 +115,7 @@ describe('ShowConnectionsModal', () => {
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=unreachable]')!);
     expect(screen.queryByText(`Lorem ipsum sit ${maxHostsPerCategory}`)).toBeDefined();
-    expect(screen.queryByText(`...`)).toBeDefined();
+    expect(screen.queryByText(/show-connections-modal\.more/)).toBeDefined();
     expect(screen.queryByText(`Lorem ipsum sit ${maxHostsPerCategory + 1}`)).toBeNull();
   });
 
@@ -125,7 +125,7 @@ describe('ShowConnectionsModal', () => {
 
     const user = userEvent.setup();
     await user.click(document.querySelector('button[id^=succeeded]')!);
-    const moreItems = screen.getByText('...');
+    const moreItems = screen.getByText(/show-connections-modal\.more/);
     expect(moreItems).toBeDefined();
 
     fireEvent.mouseEnter(moreItems);
@@ -152,7 +152,7 @@ describe('ShowConnectionsModal', () => {
 
   it('should call onClose', async () => {
     const user = userEvent.setup();
-    await user.click(screen.getByLabelText('Close'));
+    await user.click(screen.getByText(/show-connections-modal\.actions\.close/));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });

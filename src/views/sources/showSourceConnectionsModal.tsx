@@ -5,6 +5,7 @@
  * @module connectionsModal
  */
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Icon, List, ListItem, Tooltip } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@patternfly/react-icons';
@@ -29,6 +30,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
   onClose = Function.prototype,
   connections
 }) => {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState<string[]>([]);
   const onToggle = useCallback(
     section => {
@@ -65,11 +67,11 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
             return onClose();
           }}
         >
-          Close
+          {t('view.sources.show-connections-modal.actions.close')}
         </Button>
       ]}
     >
-      <Table aria-label={'Connections lists'} isExpandable hasAnimations>
+      <Table aria-label={t('view.sources.show-connections-modal.aria-list')} isExpandable hasAnimations>
         {[
           {
             category: 'failed',
@@ -78,7 +80,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                 <ExclamationCircleIcon />
               </Icon>
             ),
-            label: 'Failed connections'
+            label: t('view.sources.show-connections-modal.failed')
           },
           {
             category: 'unreachable',
@@ -87,7 +89,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                 <ExclamationTriangleIcon />
               </Icon>
             ),
-            label: 'Unreachable systems'
+            label: t('view.sources.show-connections-modal.unreachable')
           },
           {
             category: 'successful',
@@ -96,7 +98,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                 <CheckCircleIcon />
               </Icon>
             ),
-            label: 'Successful connections'
+            label: t('view.sources.show-connections-modal.successful')
           }
         ].map((obj, rowIndex) => {
           return (
@@ -124,12 +126,12 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
                         connections[obj.category]
                           .slice(0, maxHostsPerCategory)
                           .map(connection => <ListItem key={connection.name}>{connection.name}</ListItem>)) || (
-                        <ListItem>N/A</ListItem>
+                        <ListItem>{t('view.sources.show-connections-modal.na')}</ListItem>
                       )}
                       {connections[obj.category]?.length > maxHostsPerCategory && (
                         <ListItem key="more">
                           <Tooltip content={additionalHostsToolTip(connections[obj.category]?.length)}>
-                            <span>...</span>
+                            <span>{t('view.sources.show-connections-modal.more')}</span>
                           </Tooltip>
                         </ListItem>
                       )}
