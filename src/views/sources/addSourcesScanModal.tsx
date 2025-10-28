@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActionGroup,
   Button,
@@ -59,6 +60,7 @@ const useScanForm = ({
     searchDirectories: ''
   };
 
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<ScanFormType>(initialFormState);
   const [localErrors, setLocalErrors] = useState<ScanErrorType>({});
   const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
@@ -215,6 +217,7 @@ const ScanForm: React.FC<ScanFormProps> = ({
   onClearErrors = () => {},
   useForm = useScanForm
 }) => {
+  const { t } = useTranslation();
   const { formData, errors, touchedFields, canSubmit, handleInputChange, filterFormData } = useForm({
     sources,
     errors: serverErrors,
