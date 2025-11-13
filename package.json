@@ -89,7 +89,7 @@
     "changelog-light": "^3.0.0",
     "cspell": "^8.14.2",
     "eslint": "8.57.1",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-comment-length": "^1.7.3",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jest": "^28.8.3",
