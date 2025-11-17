@@ -147,8 +147,15 @@ exports[`SimpleDropdown should have dropdown items with ouia id: expanded_ouiaid
 exports[`SimpleDropdown should render a basic component: basic 1`] = `
 <Dropdown
   isOpen={false}
+  isScrollable={true}
+  maxMenuHeight="300px"
   onOpenChange={[Function]}
   onSelect={[Function]}
+  popperProps={
+    {
+      "enableFlip": true,
+    }
+  }
   toggle={[Function]}
 >
   <DropdownList />

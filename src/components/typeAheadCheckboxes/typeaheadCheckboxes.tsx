@@ -421,6 +421,10 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
     </MenuToggle>
   );
 
+  const popperProps = {
+    enableFlip: true
+  };
+
   return (
     <Select
       role="menu"
@@ -430,6 +434,9 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
       onSelect={(ev, selection) => onSelect(selection as string)}
       onOpenChange={() => setIsOpen(false)}
       toggle={toggle}
+      popperProps={popperProps}
+      maxMenuHeight="300px"
+      isScrollable
     >
       <SelectList id="select-multi-typeahead-checkbox-listbox-with-search">
         {selectOptions.map((option, index) => (
