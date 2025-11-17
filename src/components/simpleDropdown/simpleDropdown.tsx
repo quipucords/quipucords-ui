@@ -44,9 +44,16 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const actualAriaLabel = ariaLabel ?? t('simple-dropdown.aria-label');
 
+  const popperProps = {
+    enableFlip: true
+  };
+
   return (
     <Dropdown
       isOpen={isOpen}
+      popperProps={popperProps}
+      maxMenuHeight="300px"
+      isScrollable
       onOpenChange={isOpen => setIsOpen(isOpen)}
       onSelect={() => {
         setIsOpen(false);
