@@ -50,18 +50,6 @@ const UI_NAME = (UI_BRAND && process.env.REACT_APP_UI_BRAND_NAME) || `${process.
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
 /**
- * Feature flag for reports merge button.
- * See dotenv config files for updating.
- */
-const FEATURE_MERGE_BUTTON = process.env.REACT_APP_FEATURE_MERGE_BUTTON === 'true';
-
-/**
- * Feature flag for including Overview page link in navigation.
- * See dotenv config files for updating.
- */
-const FEATURE_OVERVIEW = process.env.REACT_APP_FEATURE_OVERVIEW === 'true';
-
-/**
  * Generates a translation key for internationalization.
  *
  * @param {string | string[]} key - The translation key(s).
@@ -168,7 +156,7 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
   new Promise((resolve, reject) => {
     try {
       const { document, navigator, URL } = window;
-      const blob = new Blob([data], { type: fileType });
+      const blob = new Blob([data as unknown as BlobPart], { type: fileType });
 
       if (navigator?.msSaveBlob) {
         navigator.msSaveBlob(blob, fileName);
@@ -264,9 +252,7 @@ const helpers = {
   TEST_MODE,
   UI_BRAND,
   UI_NAME,
-  UI_VERSION,
-  FEATURE_MERGE_BUTTON,
-  FEATURE_OVERVIEW
+  UI_VERSION
 };
 
 export { helpers as default, helpers };
