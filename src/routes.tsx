@@ -6,7 +6,6 @@
  */
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { helpers } from './helpers/helpers';
 import NotFound from './views/notFound/notFound';
 
 const Overview = React.lazy(() => import('./views/overview/viewOverview'));
@@ -59,15 +58,13 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
   [] as IAppRoute[]
 );
 
-const defaultPage = helpers.FEATURE_OVERVIEW ? '/overview' : '/credentials';
-
 const AppRoutes = () => (
   <React.Suspense fallback={<p> Loading...</p>}>
     <Routes>
       {flattenedRoutes.map(route => (
         <Route path={route.path} element={route.component} key={route.id} />
       ))}
-      <Route path="/" element={<Navigate to={defaultPage} replace />} />
+      <Route path="/" element={<Navigate to="/overview" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </React.Suspense>

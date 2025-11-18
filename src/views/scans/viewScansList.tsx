@@ -184,24 +184,22 @@ const ScansListView: React.FunctionComponent = () => {
         {/* Only show bulk selector when there are items to select */}
         {!isLoading && currentPageItems.length > 0 && <ToolbarBulkSelector />}
         <FilterToolbar id="client-paginated-example-filters" />
-        {helpers.FEATURE_MERGE_BUTTON && (
-          <ToolbarItem>
-            <Tooltip content={t('table.tooltip', { context: 'merge-reports' })}>
-              <Button
-                variant={ButtonVariant.secondary}
-                isDisabled={!canMergeReports()}
-                onClick={() => {
-                  const reportIds = selectedItems
-                    .map(scan => scan.most_recent?.report_id)
-                    .filter(val => val !== undefined);
-                  setReportIdsToMerge(reportIds);
-                }}
-              >
-                {t('table.label', { context: 'merge-reports' })}
-              </Button>
-            </Tooltip>
-          </ToolbarItem>
-        )}
+        <ToolbarItem>
+          <Tooltip content={t('table.tooltip', { context: 'merge-reports' })}>
+            <Button
+              variant={ButtonVariant.secondary}
+              isDisabled={!canMergeReports()}
+              onClick={() => {
+                const reportIds = selectedItems
+                  .map(scan => scan.most_recent?.report_id)
+                  .filter(val => val !== undefined);
+                setReportIdsToMerge(reportIds);
+              }}
+            >
+              {t('table.label', { context: 'merge-reports' })}
+            </Button>
+          </Tooltip>
+        </ToolbarItem>
         <ToolbarItem>
           <Button
             variant={ButtonVariant.secondary}
