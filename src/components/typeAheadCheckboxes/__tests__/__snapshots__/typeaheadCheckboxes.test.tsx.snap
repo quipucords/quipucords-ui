@@ -4,8 +4,15 @@ exports[`TypeaheadCheckboxes should render a basic component: basic 1`] = `
 <Select
   id="multi-typeahead-checkbox-select-with-search"
   isOpen={false}
+  isScrollable={true}
+  maxMenuHeight="300px"
   onOpenChange={[Function]}
   onSelect={[Function]}
+  popperProps={
+    {
+      "enableFlip": true,
+    }
+  }
   role="menu"
   selected={[]}
   toggle={[Function]}

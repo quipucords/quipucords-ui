@@ -14,7 +14,9 @@ exports[`ActionMenu should display items and allow click after toggle is clicked
 <DocumentFragment>
   <button
     aria-expanded="true"
-    aria-label="Action Menu Toggle"
+    aria-label="t([
+  "action-menu.aria-label"
+])"
     class="pf-v6-c-menu-toggle pf-m-expanded pf-m-plain"
     data-ouia-component-id="action_menu_toggle"
     data-ouia-component-type="PF6/MenuToggle"
@@ -47,7 +49,9 @@ exports[`ActionMenu should display tooltip: hover 1`] = `
   <div>
     <button
       aria-expanded="true"
-      aria-label="Action Menu Toggle"
+      aria-label="t([
+  "action-menu.aria-label"
+])"
       class="pf-v6-c-menu-toggle pf-m-expanded pf-m-plain"
       data-ouia-component-id="action_menu_toggle"
       data-ouia-component-type="PF6/MenuToggle"

@@ -6,6 +6,7 @@
  * @module actionMenu
  */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Dropdown,
   DropdownItem,
@@ -33,6 +34,7 @@ interface ActionMenuProps<T = unknown> {
 }
 
 const ActionMenu = <T,>({ item, actions, popperProps, size = 'default' }: ActionMenuProps<T>) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -44,7 +46,7 @@ const ActionMenu = <T,>({ item, actions, popperProps, size = 'default' }: Action
       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
         <MenuToggle
           ref={toggleRef}
-          aria-label="Action Menu Toggle"
+          aria-label={t('action-menu.aria-label')}
           variant="plain"
           size={size}
           onClick={() => setIsOpen(prev => !prev)}

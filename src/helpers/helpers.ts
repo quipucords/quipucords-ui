@@ -168,7 +168,7 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
   new Promise((resolve, reject) => {
     try {
       const { document, navigator, URL } = window;
-      const blob = new Blob([data], { type: fileType });
+      const blob = new Blob([data as unknown as BlobPart], { type: fileType });
 
       if (navigator?.msSaveBlob) {
         navigator.msSaveBlob(blob, fileName);

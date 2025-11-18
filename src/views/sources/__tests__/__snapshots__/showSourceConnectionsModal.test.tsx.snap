@@ -16,7 +16,9 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
         onClick={[Function]}
         variant="secondary"
       >
-        Close
+        t([
+  "view.sources.show-connections-modal.actions.close"
+])
       </Button>,
     ]
   }
@@ -37,7 +39,9 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
   variant="small"
 >
   <Table
-    aria-label="Connections lists"
+    aria-label="t([
+  "view.sources.show-connections-modal.aria-list"
+])"
     hasAnimations={true}
     isExpandable={true}
   >
@@ -68,7 +72,9 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
         <Td
           width={80}
         >
-          Failed connections
+          t([
+  "view.sources.show-connections-modal.failed"
+])
         </Td>
       </Tr>
       <Tr
@@ -116,7 +122,9 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
         <Td
           width={80}
         >
-          Unreachable systems
+          t([
+  "view.sources.show-connections-modal.unreachable"
+])
         </Td>
       </Tr>
       <Tr
@@ -164,7 +172,9 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
         <Td
           width={80}
         >
-          Successful connections
+          t([
+  "view.sources.show-connections-modal.successful"
+])
         </Td>
       </Tr>
       <Tr
