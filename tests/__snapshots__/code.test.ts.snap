@@ -35,7 +35,7 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "vendor/react-table-batteries/hooks/selection/useSelectionDerivedState.ts:154:        console.warn(",
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:14:    console.error(error);",
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:40:    console.error(error);",
-  "views/scans/viewScansList.tsx:325:                                    console.error(err);",
+  "views/scans/viewScansList.tsx:323:                                    console.error(err);",
   "views/sources/viewSourcesList.tsx:452:                console.error(err);",
   "views/sources/viewSourcesList.tsx:649:                console.error(err);",
 ]

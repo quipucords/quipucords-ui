@@ -50,5 +50,9 @@
     "touchspin",
     "vals",
     "valuetext"
+  ],
+  "ignorePaths": [
+    "**/__snapshots__/**",
+    "**/*.snap"
   ]
 }
