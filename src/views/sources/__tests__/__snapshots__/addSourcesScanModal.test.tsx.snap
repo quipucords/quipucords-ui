@@ -26,14 +26,6 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
 ]
 `;
 
-exports[`AddSourceModal should have the correct title: title 1`] = `
-<span
-  class="pf-v6-c-modal-box__title-text"
->
-  Scan
-</span>
-`;
-
 exports[`AddSourceModal should render a basic component: basic 1`] = `
 <Modal
   actions={[]}
@@ -48,7 +40,9 @@ exports[`AddSourceModal should render a basic component: basic 1`] = `
   ouiaSafe={true}
   position="default"
   showClose={true}
-  title="Scan"
+  title="t([
+  "view.sources.modal-title.new-scan"
+])"
   titleIconVariant={null}
   titleLabel=""
   variant="small"

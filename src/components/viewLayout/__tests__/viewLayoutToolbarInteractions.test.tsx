@@ -29,9 +29,9 @@ describe('ViewToolbar interactions', () => {
     });
 
     expect(document.documentElement).not.toHaveClass(/theme-dark/);
-    await user.click(screen.getByRole('button', { name: /dark theme/ }));
+    await user.click(screen.getByRole('button', { name: /dark-theme-toggle/ }));
     expect(document.documentElement).toHaveClass(/theme-dark/);
-    await user.click(screen.getByRole('button', { name: /light theme/ }));
+    await user.click(screen.getByRole('button', { name: /light-theme-toggle/ }));
     expect(document.documentElement).not.toHaveClass(/theme-dark/);
   });
 
@@ -56,9 +56,9 @@ describe('ViewToolbar interactions', () => {
 
     // Wait for the dropdown to open and then click on the About item
     await waitFor(() => {
-      expect(screen.getByText('About')).toBeInTheDocument();
+      expect(screen.getByText(/view.toolbar.about/)).toBeInTheDocument();
     });
-    await user.click(screen.getByText('About'));
+    await user.click(screen.getByText(/view.toolbar.about/));
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
 
@@ -90,9 +90,9 @@ describe('ViewToolbar interactions', () => {
 
     // Wait for the dropdown to open and then click on the Logout item
     await waitFor(() => {
-      expect(screen.getByText('Logout')).toBeInTheDocument();
+      expect(screen.getByText(/view.toolbar.logout/)).toBeInTheDocument();
     });
-    await user.click(screen.getByText('Logout'));
+    await user.click(screen.getByText(/view.toolbar.logout/));
 
     expect(mockLogout).toHaveBeenCalledTimes(1);
   });

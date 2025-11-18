@@ -4,7 +4,9 @@ exports[`SimpleDropdown should display items and allow selecting after toggle is
 <DocumentFragment>
   <button
     aria-expanded="true"
-    aria-label="Dropdown menu"
+    aria-label="t([
+  "simple-dropdown.aria-label"
+])"
     class="pf-v6-c-menu-toggle pf-m-expanded"
     data-ouia-component-id="OUIA-Generated-MenuToggle-4"
     data-ouia-component-type="PF6/MenuToggle"
@@ -60,7 +62,9 @@ exports[`SimpleDropdown should have a dropdown label: label 1`] = `
 exports[`SimpleDropdown should have a ouia id: button_ouiaid 1`] = `
 <button
   aria-expanded="false"
-  aria-label="Dropdown menu"
+  aria-label="t([
+  "simple-dropdown.aria-label"
+])"
   class="pf-v6-c-menu-toggle pf-m-disabled"
   data-ouia-component-id="lorem_ipsum"
   data-ouia-component-type="PF6/MenuToggle"
@@ -101,7 +105,9 @@ exports[`SimpleDropdown should have dropdown items with ouia id: expanded_ouiaid
 <DocumentFragment>
   <button
     aria-expanded="true"
-    aria-label="Dropdown menu"
+    aria-label="t([
+  "simple-dropdown.aria-label"
+])"
     class="pf-v6-c-menu-toggle pf-m-expanded"
     data-ouia-component-id="lorem_ipsum"
     data-ouia-component-type="PF6/MenuToggle"
@@ -141,8 +147,15 @@ exports[`SimpleDropdown should have dropdown items with ouia id: expanded_ouiaid
 exports[`SimpleDropdown should render a basic component: basic 1`] = `
 <Dropdown
   isOpen={false}
+  isScrollable={true}
+  maxMenuHeight="300px"
   onOpenChange={[Function]}
   onSelect={[Function]}
+  popperProps={
+    {
+      "enableFlip": true,
+    }
+  }
   toggle={[Function]}
 >
   <DropdownList />

@@ -105,31 +105,31 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
     >
       {sortedScanJobs.length ? (
         <React.Fragment>
-          <div>
-            {sortedScanJobs.length} scan{sortedScanJobs.length === 1 ? ' has' : 's have'} run
-          </div>
+          <div>{t('view.scans.show-modal.title', { count: sortedScanJobs.length })}</div>
           <br />
-          <Table aria-label="Scan jobs table" ouiaId="scan_jobs_table">
+          <Table aria-label={t('view.scans.show-modal.aria-table')} ouiaId="scan_jobs_table">
             <Thead>
               <Tr>
                 <Th sort={getSortParams(0)} data-ouia-component-id="header_scan_time">
-                  Scan Time
+                  {t('view.scans.show-modal.scan-time')}
                 </Th>
                 <Th sort={getSortParams(1)} data-ouia-component-id="header_scan_result">
-                  Scan Result
+                  {t('view.scans.show-modal.scan-result')}
                 </Th>
-                <Th screenReaderText="Download column"></Th>
+                <Th screenReaderText={t('view.scans.show-modal.scan-download-screenreader')}></Th>
               </Tr>
             </Thead>
             <Tbody>
               {sortedScanJobs.map(job => (
                 <Tr key={job.id}>
-                  <Td dataLabel="Scan Time">{helpers.formatDate(job.end_time || job.start_time)}</Td>
-                  <Td dataLabel="Scan Result">{job.status}</Td>
-                  <Td dataLabel="Download" isActionCell>
+                  <Td dataLabel={t('view.scans.show-modal.scan-time')}>
+                    {helpers.formatDate(job.end_time || job.start_time)}
+                  </Td>
+                  <Td dataLabel={t('view.scans.show-modal.scan-result')}>{job.status}</Td>
+                  <Td dataLabel={t('view.scans.show-modal.scan-download')} isActionCell>
                     {helpers.canAccessMostRecentReport(job) && (
                       <Button onClick={() => onDownload(job.report_id)} icon={<DownloadIcon />} variant="link">
-                        Download
+                        {t('view.scans.show-modal.scan-download')}
                       </Button>
                     )}
                   </Td>
@@ -140,7 +140,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
         </React.Fragment>
       ) : (
         <Bullseye>
-          <EmptyState headingLevel="h2" icon={Spinner} titleText="Loading scans"></EmptyState>
+          <EmptyState headingLevel="h2" icon={Spinner} titleText={t('view.scans.show-modal.loading')}></EmptyState>
         </Bullseye>
       )}
     </Modal>

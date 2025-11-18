@@ -8,133 +8,23 @@
     "ui-version": "UI Version",
     "username": "Username"
   },
+  "action-menu": {
+    "aria-label": "Action Menu Toggle"
+  },
   "form-dialog": {
-    "confirmation_heading_delete-scan": "Are you sure you want to delete the scan {{name}}?",
     "confirmation_heading_delete-credential": "Are you sure you want to delete the credential {{name}}?",
-    "confirmation_heading_delete-credential_other": "Are you sure you want to delete the following credentials?",
-    "confirmation_title_delete-credential": "Delete Credential",
-    "confirmation_title_delete-credential_other": "Delete Credentials",
-    "confirmation_title_delete-source": "Delete Source",
-    "confirmation_title_delete-source_other": "Delete Sources",
-    "confirmation_title_delete-scan": "Delete Scan",
     "confirmation_heading_delete-source": "Are you sure you want to delete the source {{name}}?",
-    "confirmation_heading_delete-source_other": "Are you sure you want to delete the following sources?",
+    "confirmation_heading_delete-scan": "Are you sure you want to delete the scan {{name}}?",
+    "confirmation_title_delete-credential": "Delete Credential",
+    "confirmation_title_delete-source": "Delete Source",
+    "confirmation_title_delete-scan": "Delete Scan",
     "label": "{{context}}",
-    "label_rhacs": "RHACS",
-    "label_add": "Add",
-    "label_add-credential": "Add a credential",
-    "label_auth-type_create-credential": "Authentication type",
-    "label_become-method": "Become method",
-    "label_become-password": "Become password",
-    "label_become-user": "Become user",
-    "label_deep-scan": "Deep scan for these products",
-    "label_fuse": "Fuse",
-    "label_fuse_full": "Red Hat Fuse",
-    "label_jboss": "JBoss EAP",
-    "label_jboss_full": "Red Hat JBoss Enterprise Application Platform",
-    "label_jboss-server": "JBoss Web Server",
-    "label_jboss-server_full": "Red Hat JBoss Web Server",
-    "label_name": "Name",
-    "label_name_add-source_error": "A source name is required",
-    "label_name_add-source_placeholder": "Enter a name for the source",
-    "label_name_add-source_placeholder_network": "Enter a name for the Network source",
-    "label_name_add-source_placeholder_openshift": "Enter a name for the OpenShift source",
-    "label_name_add-source_placeholder_satellite": "Enter a name for the Satellite source",
-    "label_name_add-source_placeholder_vcenter": "Enter a name for the vCenter source",
-    "label_name_add-source_placeholder_ansible": "Enter a name for the Ansible source",
-    "label_name_add-source_placeholder_rhacs": "Enter a name for the RHACS source",
-    "label_name_create-credential_error": "You must enter a credential name",
-    "label_name_create-credential_placeholder": "Enter a name for the credential",
-    "label_network": "Network",
-    "label_network-range": "Network Range",
-    "label_no": "No",
-    "label_openshift": "OpenShift",
-    "label_option_disableSsl": "Disable SSL",
-    "label_option_SSLv23": "SSLv23",
-    "label_option_TLSv1": "TLSv1",
-    "label_option_TLSv1_1": "TLSv1.1",
-    "label_option_TLSv1_2": "TLSv1.2",
-    "label_option_sshKey": "SSH Key",
-    "label_option_token": "Token",
-    "label_option_usernamePassword": "Username and Password",
-    "label_option_network": "Network",
-    "label_option_network_credential": "Network Credential",
-    "label_option_openshift": "OpenShift",
-    "label_option_openshift_credential": "OpenShift Credential",
-    "label_option_satellite": "Satellite",
-    "label_option_satellite_credential": "Satellite Credential",
-    "label_option_vcenter": "vCenter",
-    "label_option_vcenter_credential": "vCenter Credential",
-    "label_option_ansible": "Ansible",
-    "label_option_ansible_credential": "Ansible Credential",
-    "label_option_rhacs": "RHACS",
-    "label_option_rhacs_credential": "RHACS Credential",
-    "label_optional": "optional",
-    "label_placeholder_add-credential": "Add credential",
-    "label_placeholder_add-source_credential": "Select a credential",
-    "label_placeholder_add-source_credential_add": "Add a credential",
-    "label_placeholder_add-source_credential_multi": "Select one or more credentials",
-    "label_placeholder_add-source_credential_multi_add": "Add one or more credentials",
-    "label_paramiko": "Connect using Paramiko instead of Open <0>SSH</0>",
-    "label_password": "Password",
-    "label_password_error": "You must enter a password",
-    "label_password_placeholder": "Enter password",
-    "label_port": "Port",
-    "label_port_error": "Port must be valid",
-    "label_port_placeholder": "Default port is 22",
-    "label_satellite": "Satellite",
-    "label_search-address": "IP address or hostname",
-    "label_search-address_error": "A valid IP address or hostname is required",
-    "label_search-address_error_port": "Port must be valid",
-    "label_search-address_placeholder": "Enter an IP address or hostname (default port is 443)",
-    "label_search-addresses": "Search addresses",
-    "label_search-addresses_error": "A valid IP address or hostname is required",
-    "label_search-addresses_help": "IP addresses, IP ranges, DNS host names, and wildcards are valid. Use CIDR or Ansible notation for ranges.",
-    "label_search-addresses_placeholder": "Enter values separated by commas",
-    "label_scan-alt-directories": "Scan alternate directories",
-    "label_scan-alt-directories_error": "Directories must begin with a root reference (/)",
-    "label_scan-alt-directories_help": "Default directories are /, /opt, /app, /home, /usr",
-    "label_scan-alt-directories_placeholder": "Optional. Enter values separated by commas",
-    "label_scan-concurrency": "Maximum concurrent scans",
-    "label_scan-concurrency_help": "Minimum value 1, maximum value 200",
-    "label_scan-name": "Name",
-    "label_scan-name_error": "'A scan name is required",
-    "label_scan-name_placeholder": "Enter a name for the scan",
     "label_sources": "Sources",
-    "label_source-type": "Select source type",
-    "label_source-type_create-credential": "Source type",
-    "label_ssh": "Secure Shell",
-    "label_ssh-passphrase_create-credential": "Passphrase",
-    "label_ssl-certificate": "Verify SSL certificate",
-    "label_submit": "Submit",
-    "label_submit_edit": "Update",
-    "label_submit_add-source": "Save",
-    "label_submit_confirmation": "Confirm",
-    "label_submit_create-credential": "Save",
-    "label_submit_create-scan": "Scan",
-    "label_token_create-credential": "Token",
-    "label_token_create-credential_error": "You must enter a token",
-    "label_token_create-credential_placeholder": "Enter token",
-    "label_username": "Username",
-    "label_username_error": "You must enter a username",
-    "label_username_placeholder": "Enter username",
-    "label_vcenter": "vCenter",
-    "label_vcenter-server": "vCenter Server",
-    "label_ansible": "Ansible",
-    "label_ansible-server": "Ansible Controller",
-    "label_yes": "Yes",
-    "title_add-source": "Add Source",
-    "title_add-source_edit": "Edit Source",
-    "title_add-source_step": "Source Type",
-    "title_add-source_step_two": "Credentials",
-    "title_add-source_step_three": "Confirm",
-    "title_create-credential": "Add credential",
-    "title_create-credential_edit": "View credential",
-    "title_create-scan": "Scan",
     "label_typeahead-no-results": "No results found for \"{{searchTerm}}\"",
     "label_typeahead-search-hint": "Type to search for more credentials...",
     "label_typeahead-clear": "Clear input value",
-    "label_typeahead-items-selected": "{{count}} items selected",
+    "label_typeahead-items-selected": "{{count}} item selected",
+    "label_typeahead-items-selected_other": "{{count}} items selected",
     "label_typeahead-placeholder": "0 items selected"
   },
   "login": {
@@ -148,7 +38,6 @@
   },
   "merge": {
     "modal_title": "Merge reports",
-    "modal_header-in-progress": "Merging reports",
     "modal_body-in-progress": "This typically takes no more than 1 minute",
     "modal_header-successful": "Merge completed",
     "modal_body-successful": "Your download will start automatically",
@@ -181,106 +70,67 @@
     "refreshed": "Refreshed just now",
     "refreshed_load": "Refreshed {{refresh}}"
   },
+  "routes": {
+    "overview": {
+      "label": "Overview",
+      "title": "Overview"
+    },
+    "credentials": {
+      "label": "Credentials",
+      "title": "Credentials"
+    },
+    "sources": {
+      "label": "Sources",
+      "title": "Sources"
+    },
+    "scans": {
+      "label": "Scans",
+      "title": "Scans"
+    }
+  },
   "secret-input": {
     "filled_placeholder": "<SECRET VALUE>"
+  },
+  "simple-dropdown": {
+    "aria-label": "Dropdown menu"
   },
   "table": {
     "header_name": "Name",
     "header_type": "Type",
     "header_auth-type": "Authentication type",
     "header_credentials": "Credentials",
-    "header_failed": "Failed systems",
-    "header_failed_sources": "Failed hosts",
     "header_last-scanned": "Last scanned",
     "header_last-updated": "Last updated",
-    "header_scan": "Scan",
-    "header_scan-id": "Scan ID",
-    "header_scan-jobs": "Previous scans",
     "header_sources": "Sources",
-    "header_success": "Successful systems",
     "header_unreachable": "Unreachable systems",
-    "label_network-range": "Network Range",
     "label": "{{context}}",
-    "label_add": "Add",
-    "label_auth_cell": "Username and password",
-    "label_auth_cell_authToken": "Token",
-    "label_auth_cell_sshKey": "SSH Key",
-    "label_auth_tooltip": "Authentication type",
+    "label_aria-credentials": "Credentials table",
+    "label_aria-scans": "Scans table",
+    "label_aria-sources": "Sources table",
     "label_close": "Close",
     "label_delete": "Delete",
     "label_edit": "Edit",
     "label_delete-disabled-tooltip-credential": "Credential cannot be deleted because it is used by one or more sources",
     "label_delete-disabled-tooltip-source": "Source cannot be deleted because it is used by one or more scans",
-    "label_network": "Network",
-    "label_openshift": "OpenShift",
-    "label_satellite": "Satellite",
-    "label_rhacs": "RHACS",
     "label_rescan": "Rescan",
     "label_rescan-disabled-tooltip": "Scan cannot be requested again while it is running",
     "label_download": "Download",
     "label_download-disabled-tooltip": "Only scans that completed successfully can be downloaded",
     "label_merge-reports": "Merge reports",
     "label_scan": "Scan",
-    "label_source": "Source",
-    "label_source_other": "Sources",
-    "label_status": "{{context}}",
-    "label_status_cell": "<0/> <1>{{count}}</1>",
-    "label_status_scan": "Scan status",
     "label_status_scans": "Scan created",
-    "label_status_completed": "Last completed",
-    "label_status_failed": "Failed",
-    "label_status_canceled": "Canceled",
-    "label_status_cancelled": "Canceled",
-    "label_status_created": "In progress",
-    "label_status_pending": "In progress",
-    "label_status_running": "In progress",
-    "label_status_paused": "Paused",
     "label_status_not_started_sources": "Scan not started",
-    "label_status_completed_scan": "Completed",
     "label_status_completed_sources": "Last connected",
     "label_status_failed_sources": "Connection failed",
     "label_status_canceled_sources": "Connection canceled",
-    "label_status_cancelled_sources": "Connection canceled",
     "label_status_created_sources": "Connection in progress",
     "label_status_pending_sources": "Connection in progress",
     "label_status_running_sources": "Connection in progress",
     "label_status_paused_sources": "Connection paused",
     "label_status_completed_scans": "Last scanned",
     "label_status_failed_scans": "Scan failed",
-    "label_status_canceled_scans": "Scan canceled",
-    "label_status_cancelled_scans": "Scan canceled",
-    "label_status_created_scan": "Created",
-    "label_status_created_scans": "Scan in progress",
-    "label_status_pending_scan": "Pending",
-    "label_status_pending_scans": "Scan in progress",
-    "label_status_running_scan": "Running",
-    "label_status_running_scans": "Scan in progress",
-    "label_status_paused_scans": "Scan paused",
-    "label_status_success": "Successful",
-    "label_status_time_scan": "How long ago",
-    "label_status_tooltip": "{{count}}",
-    "label_status_tooltip_failed": "{{count}} Failed System",
-    "label_status_tooltip_failed_other": "{{count}} Failed Systems",
-    "label_status_tooltip_failed_sources": "{{count}} Failed Authentication",
-    "label_status_tooltip_failed_sources_other": "{{count}} Failed Authentications",
-    "label_status_tooltip_idCard": "{{count}} Credential",
-    "label_status_tooltip_idCard_other": "{{count}} Credentials",
-    "label_status_tooltip_scans": "{{count}} Previous scan",
-    "label_status_tooltip_scans_other": "{{count}} Previous scans",
-    "label_status_tooltip_sources": "{{count}} Source",
-    "label_status_tooltip_sources_other": "{{count}} Sources",
-    "label_status_tooltip_success": "{{count}} Successful System",
-    "label_status_tooltip_success_other": "{{count}} Successful Systems",
-    "label_status_tooltip_success_sources": "{{count}} Successful Authentication",
-    "label_status_tooltip_success_sources_other": "{{count}} Successful Authentications",
-    "label_status_tooltip_unreachable": "{{count}} Unreachable System",
-    "label_status_tooltip_unreachable_other": "{{count}} Unreachable Systems",
     "label_summary": "Scan summary",
     "label_summary-disabled-tooltip": "Summary reports exist only for scans that completed successfully",
-    "label_vcenter": "vCenter",
-    "label_ansible": "Ansible",
-    "label_view": "View",
-    "summary": "A generated table.",
     "tooltip_action_menu": "More options",
     "tooltip_merge-reports": "Merge selected scan results into a single report"
   },
@@ -288,11 +138,8 @@
     "description": "{{context}}",
     "description_add-source_hidden": "Source {{name}} was created.",
     "description_add-source_hidden_edit": "Source {{name}} was successfully updated.",
-    "description_add-source_hidden_error": "{{message}}",
-    "description_add-source_hidden_error_edit": "{{message}}",
     "description_add-credential": "Credential {{name}} was created.",
     "description_add-credential_error": "Error creating credential {{ name }}. {{ message }}",
-    "description_credential": "Credential was added",
     "description_credential_edit": "Credential {{name}} was updated",
     "description_credential_edit_error": "Error updating credential {{name}}. {{message}}",
     "description_deleted-credential_one": "Credential {{name}} was successfully deleted.",
@@ -311,10 +158,7 @@
     "description_deleted-source_other": "Sources {{name}} were successfully deleted.",
     "description_deleted-source_error": "Error removing source {{name}}. {{message}}",
     "description_deleted-source_error_other": "Error removing sources {{name}} and more. {{message}}",
-    "description_scan-report_canceled": "Scan <0>{{name}}</0> stopped",
     "description_scan-report_download": "Report <0>{{name}}</0> downloaded",
-    "description_scan-report_paused": "Scan <0>{{name}}</0> paused",
-    "description_scan-report_restart": "Scan <0>{{name}}</0> resumed",
     "description_scan-report_play": "Scan {{name}} started.",
     "description_scan-report_play_error": "There was an error while starting scan {{name}}: {{message}}.",
     "description_scan-report_created": "Scan {{name}} was created",
@@ -332,32 +176,16 @@
     "title_add-source_hidden_error_edit": "Error updating source {{ name }}. {{ message }}"
   },
   "toolbar": {
-    "label_chip": "{{context}}",
-    "label_chip_network": "Network",
-    "label_chip_openshift": "OpenShift",
-    "label_chip_rhacs": "RHACS",
-    "label_chip_satellite": "Satellite",
-    "label_chip_vcenter": "vCenter",
-    "label_chip_ansible": "Ansible",
-    "label_clear-filters": "Reset filters",
-    "label_option": "",
     "label_option_name": "Name",
     "label_option_cred_type": "Credential type",
-    "label_option_most_recent_connect_scan__start_time": "Most recent",
     "label_option_search_credentials_by_name": "Credential name",
-    "label_option_search_by_name": "Name",
     "label_option_search_sources_by_name": "Source name",
     "label_option_source_type": "Source type",
-    "label_placeholder_filter": "Filter by",
     "label_placeholder_filter_cred_type": "Filter by credential type",
     "label_placeholder_filter_search_credentials_by_name": "Filter by credential name",
     "label_placeholder_filter_search_by_name": "Filter by name",
     "label_placeholder_filter_search_sources_by_name": "Filter by source name",
-    "label_placeholder_filter_source_type": "Filter by source type",
-    "label_placeholder_sort": "Sort by",
-    "label_tooltip_sort": "Sort order",
-    "label_tooltip_sort_asc": "Sort ascending",
-    "label_tooltip_sort_dsc": "Sort descending"
+    "label_placeholder_filter_source_type": "Filter by source type"
   },
   "view": {
     "alt-logo": "{{name}} logo",
@@ -492,6 +320,127 @@
           "content": "<0>A {{appName}} scan produces a downloadable archive that contains several reports. These reports contain facts about Red Hat software installed in the scanned infrastructure. You can view this information to help understand your consumption of Red Hat software. You can also share that information with your Red Hat account team to help you make further purchasing decisions.</0>"
         }
       }
+    },
+    "scans": {
+      "show-modal": {
+        "aria-table": "Scan jobs table",
+        "scan-time": "Scan Time",
+        "scan-result": "Scan Result",
+        "scan-download-screenreader": "Download column",
+        "scan-download": "Download",
+        "loading": "Loading scans",
+        "title_one": "{{count}} scan has run",
+        "title_other": "{{count}} scans have run"
+      }
+    },
+    "sources": {
+      "add-modal": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter a name for the source"
+        },
+        "credentials": {
+          "label": "Credentials",
+          "warning-many": "Only one credential can be selected for this source type."
+        },
+        "hosts-network": {
+          "label": "Search addresses",
+          "placeholder": "Enter values separated by commas",
+          "helper": "Type IP addresses, IP ranges, and DNS host names. Wildcards are valid. Use CIDR or Ansible notation for ranges."
+        },
+        "port-network": {
+          "label": "Port",
+          "placeholder": "Optional",
+          "helper": "Default port is 22"
+        },
+        "hosts-others": {
+          "label": "IP address or hostname",
+          "helper": "Enter an IP address or hostname"
+        },
+        "port-others": {
+          "label": "Port",
+          "placeholder": "Optional",
+          "helper": "Default port is {{port}}"
+        },
+        "proxy": {
+          "label": "Proxy URL",
+          "placeholder": "Optional",
+          "helper": "Specify a proxy in the format protocol://host:port (if required)."
+        },
+        "paramiko": {
+          "checkbox-label": "Connect using Paramiko instead of Open SSH"
+        },
+        "connection": {
+          "label": "Connection",
+          "default_value": "Select protocol"
+        },
+        "ssl-verify": {
+          "checkbox-label": "Verify SSL certificate"
+        },
+        "actions": {
+          "save": "Save",
+          "cancel": "Cancel"
+        },
+        "error-cred-required": "At least one credential is required",
+        "error-field-required": "This field is required"
+      },
+      "scan-modal": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter a name for the scan."
+        },
+        "sources": {
+          "label": "Sources"
+        },
+        "max-concurrency": {
+          "label": "Maximum concurrent scans",
+          "aria-input": "number input",
+          "aria-minus": "minus",
+          "aria-plus": "plus"
+        },
+        "deep-scan": {
+          "label": "Deep scan for these products",
+          "jboss_eap": "JBoss EAP",
+          "jboss_fuse": "Fuse",
+          "jboss_ws": "JBoss web server"
+        },
+        "search-dirs": {
+          "label": "Scan alternate directories",
+          "helper": "Default: directories are /, /opt, /app, /home/usr"
+        },
+        "actions": {
+          "save": "Save",
+          "cancel": "Cancel"
+        },
+        "error-field-required": "This field is required"
+      },
+      "show-connections-modal": {
+        "aria-list": "Connections lists",
+        "failed": "Failed connections",
+        "unreachable": "Unreachable systems",
+        "successful": "Successful connections",
+        "na": "N/A",
+        "more": "...",
+        "tooltip_one": "There is {{count}} additional host not shown.",
+        "tooltip_other": "There are {{count}} additional hosts not shown.",
+        "actions": {
+          "close": "Close"
+        }
+      },
+      "modal-title": {
+        "add": "Add Source: {{type}}",
+        "edit": "Edit Source: {{name}}",
+        "new-scan": "Scan"
+      }
+    },
+    "toolbar": {
+      "aria-theme-toggle-group": "Dark theme toggle group",
+      "aria-light-theme-toggle": "light theme toggle",
+      "aria-dark-theme-toggle": "dark theme toggle",
+      "aria-menu-toggle": "Toggle",
+      "about": "About",
+      "logout": "Logout",
+      "avatar-alt": "User avatar"
     }
   },
   "dataSource": {

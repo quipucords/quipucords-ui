@@ -66,43 +66,59 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
             id="nav-list-simple"
           >
             <NavItem
-              id="Overview-0"
+              id="t([
+  "routes.overview.label"
+])-0"
               isActive={false}
             >
               <NavLink
                 to="/overview"
               >
-                Overview
+                t([
+  "routes.overview.label"
+])
               </NavLink>
             </NavItem>
             <NavItem
-              id="Credentials-1"
+              id="t([
+  "routes.credentials.label"
+])-1"
               isActive={false}
             >
               <NavLink
                 to="/credentials"
               >
-                Credentials
+                t([
+  "routes.credentials.label"
+])
               </NavLink>
             </NavItem>
             <NavItem
-              id="Sources-2"
+              id="t([
+  "routes.sources.label"
+])-2"
               isActive={false}
             >
               <NavLink
                 to="/sources"
               >
-                Sources
+                t([
+  "routes.sources.label"
+])
               </NavLink>
             </NavItem>
             <NavItem
-              id="Scans-3"
+              id="t([
+  "routes.scans.label"
+])-3"
               isActive={false}
             >
               <NavLink
                 to="/scans"
               >
-                Scans
+                t([
+  "routes.scans.label"
+])
               </NavLink>
             </NavItem>
           </NavList>

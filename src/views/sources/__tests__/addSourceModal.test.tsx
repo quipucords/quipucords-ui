@@ -53,11 +53,6 @@ describe('AddSourceModal-network', () => {
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('should have the correct title', () => {
-    const title = screen.getByText(/Add\sSource:\snetwork/i);
-    expect(title).toMatchSnapshot('title');
-  });
-
   it('submits correct data for a network source (with use_paramiko)', async () => {
     const testContainer = document.createElement('div');
     document.body.appendChild(testContainer);
@@ -99,7 +94,7 @@ describe('AddSourceModal-network', () => {
     );
 
     const user = userEvent.setup();
-    await user.click(customRender.getByText('Save'));
+    await user.click(customRender.getByText(/actions\.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -116,13 +111,13 @@ describe('AddSourceModal-network', () => {
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
 
-    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test Source');
+    await user.type(screen.getByPlaceholderText(/add-modal\.name\.placeholder/), 'Test Source');
 
-    await user.type(screen.getByPlaceholderText('Enter values separated by commas'), '10.0.0.1');
+    await user.type(screen.getByPlaceholderText(/add-modal\.hosts-network\.placeholder/), '10.0.0.1');
 
     await user.click(screen.getByTestId('select-cred'));
 
-    await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText(/actions\.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
 
@@ -135,7 +130,7 @@ describe('AddSourceModal-network', () => {
 
   it('should call onClose', async () => {
     const user = userEvent.setup();
-    await user.click(screen.getByText('Cancel'));
+    await user.click(screen.getByText(/actions\.cancel/));
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
@@ -201,7 +196,7 @@ describe('AddSourceModal-openshift', () => {
     );
 
     const user = userEvent.setup();
-    await user.click(customRender.getByText('Save'));
+    await user.click(customRender.getByText(/actions\.save/));
 
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -252,7 +247,7 @@ describe('AddSourceModal-openshift', () => {
     );
 
     const user = userEvent.setup();
-    await user.click(customRender.getByText('Save'));
+    await user.click(customRender.getByText(/actions\.save/));
 
     const submitted = mockOnSubmit.mock.calls[0][0];
     expect(submitted.name).toBe('Disable SSL');
@@ -290,14 +285,14 @@ describe('AddSourceModalWithProxy', () => {
   it('should update proxy_url and submit it', async () => {
     const user = userEvent.setup();
 
-    await user.type(screen.getByPlaceholderText('Enter a name for the source'), 'Test Source');
+    await user.type(screen.getByPlaceholderText(/add-modal\.name\.placeholder/), 'Test Source');
     await user.type(screen.getByTestId('input-host'), '192.168.0.1');
 
     await user.type(screen.getByTestId('input-port'), '8443');
     await user.type(screen.getByTestId('input-proxy'), 'http://proxy.example.com:8888');
     await user.click(screen.getByTestId('select-cred'));
 
-    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('button', { name: /actions\.save/ }));
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
 
@@ -432,7 +427,6 @@ describe('SourceForm', () => {
       const proxyInput = component.querySelector('#proxy-url');
 
       expect(proxyInput).toBeTruthy();
-      expect(proxyInput?.getAttribute('placeholder')).toBe('Optional');
       expect(component).toMatchSnapshot(`proxy_url presence, ${type}`);
     }
   });

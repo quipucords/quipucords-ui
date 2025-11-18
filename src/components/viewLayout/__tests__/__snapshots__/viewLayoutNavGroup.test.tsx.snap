@@ -66,21 +66,29 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
             id="nav-list-simple"
           >
             <NavItem
-              id="Credentials-0"
+              id="t([
+  "Credentials"
+])-0"
               isActive={false}
             >
               <NavLink
                 to="/credentials"
               >
-                Credentials
+                t([
+  "Credentials"
+])
               </NavLink>
             </NavItem>
             <NavItem
-              id="Scans-1"
+              id="t([
+  "Scans"
+])-1"
               isActive={false}
             >
               <NavLink>
-                Scans
+                t([
+  "Scans"
+])
               </NavLink>
             </NavItem>
           </NavList>
