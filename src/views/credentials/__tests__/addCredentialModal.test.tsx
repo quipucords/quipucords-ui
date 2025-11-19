@@ -3,6 +3,7 @@ import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
+import { type CredentialResponse } from '../../../types/types';
 import { AddCredentialModal, CredentialForm, getCleanedFormData, useCredentialForm } from '../addCredentialModal';
 
 describe('AddCredentialModal', () => {
@@ -139,9 +140,16 @@ describe('useCredentialForm', () => {
         credential: {
           id: 123,
           name: 'lorem',
-          auth_token: 'Ipsum',
-          cred_type: 'openshift'
-        }
+          has_auth_token: true,
+          cred_type: 'openshift',
+          username: '',
+          become_method: '',
+          become_user: '',
+          created_at: new Date(),
+          updated_at: new Date(),
+          sources: [],
+          auth_type: 'auth_token'
+        } as CredentialResponse
       })
     );
     expect(result.current.formData).toMatchSnapshot('formData, edit');
@@ -454,14 +462,13 @@ describe('CredentialForm', () => {
       updated_at: new Date(),
       cred_type: 'network',
       username: 'discovery',
-      password: '',
       has_password: true,
-      ssh_key: '',
-      auth_token: '',
-      ssh_passphrase: '',
+      has_ssh_key: false,
+      has_auth_token: false,
+      has_ssh_passphrase: false,
+      has_become_password: false,
       become_method: '',
       become_user: '',
-      become_password: '',
       sources: [],
       auth_type: 'password'
     };
@@ -508,8 +515,8 @@ describe('CredentialForm - secret input field', () => {
       name: 'Old credential name',
       cred_type: '',
       username: 'discovery',
-      become_method: null,
-      become_user: null
+      become_method: '',
+      become_user: ''
     };
 
     const overrides = {

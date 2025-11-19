@@ -15,7 +15,7 @@ import { type AlertProps } from '@patternfly/react-core';
 import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse, isAxiosError } from 'axios';
 import { helpers } from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
-import { type CredentialType } from '../types/types';
+import { type CredentialRequest, type CredentialResponse } from '../types/types';
 
 type ApiDeleteCredentialSuccessType = {
   message: string;
@@ -28,7 +28,7 @@ type ApiGetCredentialsSuccessType = {
   count?: number;
   next?: string | null;
   previous?: string | null;
-  results?: CredentialType[];
+  results?: CredentialResponse[];
 };
 
 type ApiCredentialErrorType = {
@@ -40,13 +40,13 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (ids: CredentialType['id'][]): Promise<AxiosResponse<ApiDeleteCredentialSuccessType>> =>
+    (ids: CredentialResponse['id'][]): Promise<AxiosResponse<ApiDeleteCredentialSuccessType>> =>
       axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE_BULK_DELETE}`, { ids }),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<ApiDeleteCredentialSuccessType>, updatedCredentials: CredentialType[]) => {
+    (response: AxiosResponse<ApiDeleteCredentialSuccessType>, updatedCredentials: CredentialResponse[]) => {
       const { data } = response;
 
       const deletedNames = data?.deleted
@@ -116,7 +116,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const callbackError = useCallback(
-    ({ message, response }: AxiosError<ApiCredentialErrorType>, updatedCredentials: CredentialType[]) => {
+    ({ message, response }: AxiosError<ApiCredentialErrorType>, updatedCredentials: CredentialResponse[]) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'deleted-credential_error',
@@ -132,7 +132,7 @@ const useDeleteCredentialApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const deleteCredentials = useCallback(
-    async (credential: CredentialType | CredentialType[]) => {
+    async (credential: CredentialResponse | CredentialResponse[]) => {
       const updatedCredentials = (Array.isArray(credential) && credential) || [credential];
       let response;
       try {
@@ -165,13 +165,13 @@ const useAddCredentialApi = (
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (payload: CredentialType): Promise<AxiosResponse<CredentialType>> =>
+    (payload: CredentialRequest): Promise<AxiosResponse<CredentialResponse>> =>
       axios.post(`${process.env.REACT_APP_CREDENTIALS_SERVICE}`, payload),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<CredentialType>) => {
+    (response: AxiosResponse<CredentialResponse>) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'add-credential',
@@ -208,7 +208,7 @@ const useAddCredentialApi = (
   );
 
   const addCredentials = useCallback(
-    async (payload: CredentialType) => {
+    async (payload: CredentialRequest) => {
       let response;
       try {
         response = await apiCall(payload);
@@ -241,13 +241,13 @@ const useEditCredentialApi = (
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (payload: CredentialType): Promise<AxiosResponse<CredentialType>> =>
+    (payload: CredentialRequest & { id: number }): Promise<AxiosResponse<CredentialResponse>> =>
       axios.patch(`${process.env.REACT_APP_CREDENTIALS_SERVICE}${payload.id}/`, payload),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<CredentialType>) => {
+    (response: AxiosResponse<CredentialResponse>) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'credential_edit',
@@ -284,7 +284,7 @@ const useEditCredentialApi = (
   );
 
   const editCredentials = useCallback(
-    async (payload: CredentialType) => {
+    async (payload: CredentialRequest & { id: number }) => {
       let response;
       try {
         response = await apiCall(payload);

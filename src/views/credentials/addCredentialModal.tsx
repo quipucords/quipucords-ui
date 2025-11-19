@@ -21,15 +21,15 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SecretInput } from '../../components/secretInput/secretInput';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { helpers } from '../../helpers';
-import { type CredentialType } from '../../types/types';
+import { type CredentialRequest, type CredentialResponse } from '../../types/types';
 
 interface AddCredentialModalProps {
   isOpen: boolean;
-  credential?: CredentialType;
+  credential?: CredentialResponse;
   credentialType?: string;
   errors?: CredentialErrorType;
   onClose?: () => void;
-  onSubmit?: (payload: any) => void;
+  onSubmit?: (payload: CredentialRequest) => void | Promise<void>;
   onClearErrors?: () => void;
 }
 
@@ -37,7 +37,7 @@ interface CredentialFormProps extends Omit<AddCredentialModalProps, 'isOpen'> {
   useForm?: typeof useCredentialForm;
 }
 
-interface CredentialFormType extends Partial<CredentialType> {
+interface CredentialFormType extends Partial<CredentialRequest> {
   authenticationType?: string;
 }
 
@@ -50,7 +50,7 @@ const getCleanedFormData = (
   authType: string,
   touchedFields: Set<string> = new Set(),
   maskedFields: string[] = ['password', 'ssh_key', 'ssh_passphrase', 'become_password', 'auth_token']
-) => {
+): CredentialRequest => {
   const cleanedData = { ...formData };
   const fieldsAllowedToBeEmpty = new Set(['ssh_passphrase', 'become_password']).intersection(touchedFields);
 
@@ -76,10 +76,10 @@ const getCleanedFormData = (
       }
     });
 
-  return cleanedData;
+  return cleanedData as CredentialRequest;
 };
 
-const deriveAuthType = (credential?: Partial<CredentialType>, typeValue?: string) => {
+const deriveAuthType = (credential?: Partial<CredentialResponse>, typeValue?: string) => {
   if (credential) {
     return helpers.getAuthType(credential);
   }
@@ -99,7 +99,7 @@ const useCredentialForm = ({
   onClearErrors
 }: {
   credentialType?: string;
-  credential?: Partial<CredentialType>;
+  credential?: Partial<CredentialResponse>;
   errors?: CredentialErrorType;
   onClearErrors?: () => void;
 } = {}) => {
