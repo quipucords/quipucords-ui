@@ -25,7 +25,7 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
 import { helpers } from '../../helpers';
-import { type CredentialType, type SourceType, type CredentialOption } from '../../types/types';
+import { type CredentialResponse, type SourceType, type CredentialOption } from '../../types/types';
 
 const SSL_PROTOCOL_LABELS_TO_VALUES: Record<string, string> = {
   SSLv23: 'SSLv23',
@@ -273,7 +273,7 @@ const useSourceForm = ({
   }, [formData, touchedFields, serverErrors]);
 
   // Helper function to convert source.credentials to CredentialOption[]
-  const convertToCredentialOptions = useCallback((credentials: CredentialType[]): CredentialOption[] => {
+  const convertToCredentialOptions = useCallback((credentials: CredentialResponse[]): CredentialOption[] => {
     return credentials.map(cred => ({
       value: cred.id.toString(),
       label: cred.name,

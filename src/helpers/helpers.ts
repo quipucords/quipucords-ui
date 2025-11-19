@@ -11,7 +11,7 @@ import titleImg from '../images/title.svg';
 import titleBrandImg from '../images/titleBrand.svg';
 import titleLoginBrandImg from '../images/titleBrandLogin.svg';
 import titleLoginImg from '../images/titleLogin.svg';
-import { type CredentialType, type MostRecentScan, type scanJob } from '../types/types';
+import { type CredentialResponse, type MostRecentScan, type scanJob } from '../types/types';
 
 /**
  * Is dev mode active.
@@ -124,12 +124,12 @@ enum authType {
 }
 
 /**
- * Determines the authentication type based on a CredentialType object.
+ * Determines the authentication type based on a CredentialResponse object.
  *
- * @param {CredentialType} credential - The CredentialType object representing authentication information.
+ * @param {CredentialResponse} credential - The CredentialResponse object representing authentication information.
  * @returns {string} - A string indicating the authentication type, e.g., "Username and Password".
  */
-const getAuthType = ({ auth_type }: Partial<CredentialType>): authType => {
+const getAuthType = ({ auth_type }: Partial<CredentialResponse>): authType => {
   switch (auth_type) {
     case 'password':
       return authType.UsernameAndPassword;

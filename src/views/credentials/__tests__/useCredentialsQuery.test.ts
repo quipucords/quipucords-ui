@@ -8,7 +8,7 @@ jest.mock('../../../helpers/queryHelpers', () => ({
   }))
 }));
 import { useServiceQuery } from '../../../helpers/queryHelpers';
-import { type CredentialType } from '../../../types/types';
+import { type CredentialResponse } from '../../../types/types';
 import { type TableState } from '../../../vendor/react-table-batteries';
 import {
   type CredentialsColumnKey,
@@ -19,7 +19,7 @@ import {
 describe('useCredentialsQuery', () => {
   it('should call useServiceQuery with correct parameters', () => {
     const mockSetRefreshTime = jest.fn();
-    const mockTableState = {} as TableState<CredentialType, CredentialsColumnKey, CredentialsSortableColumnKey>;
+    const mockTableState = {} as TableState<CredentialResponse, CredentialsColumnKey, CredentialsSortableColumnKey>;
 
     renderHook(() =>
       useCredentialsQuery({

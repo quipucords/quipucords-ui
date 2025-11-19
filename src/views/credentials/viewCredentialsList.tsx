@@ -38,7 +38,7 @@ import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type CredentialType, type SourceType } from '../../types/types';
+import { type CredentialRequest, type CredentialResponse, type SourceType } from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -54,11 +54,11 @@ const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
-  const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialType>();
+  const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialResponse>();
   const { addAlert, alerts, removeAlert } = useAlerts();
   const { queryClient } = useQueryClientConfig();
   const [addCredentialModal, setAddCredentialModal] = useState<string>();
-  const [credentialBeingEdited, setCredentialBeingEdited] = useState<CredentialType>();
+  const [credentialBeingEdited, setCredentialBeingEdited] = useState<CredentialResponse>();
   const [credentialErrors, setCredentialErrors] = useState<CredentialErrorType | undefined>();
   const { deleteCredentials } = useDeleteCredentialApi(addAlert);
   const { addCredentials } = useAddCredentialApi(addAlert, setCredentialErrors);
@@ -97,7 +97,7 @@ const CredentialsListView: React.FunctionComponent = () => {
   /**
    * Opens the edit credential modal for a specific credential
    */
-  const openEditCredentialModal = useCallback((credential: CredentialType) => {
+  const openEditCredentialModal = useCallback((credential: CredentialResponse) => {
     setCredentialBeingEdited(credential);
     setCredentialErrors(undefined);
   }, []);
@@ -114,7 +114,7 @@ const CredentialsListView: React.FunctionComponent = () => {
    * Handles adding a new credential
    */
   const handleAddCredentialSubmit = useCallback(
-    async (payload: CredentialType) => {
+    async (payload: CredentialRequest) => {
       try {
         await addCredentials(payload);
         refreshCredentialsList();
@@ -132,9 +132,13 @@ const CredentialsListView: React.FunctionComponent = () => {
    * Handles editing an existing credential
    */
   const handleEditCredentialSubmit = useCallback(
-    async (payload: CredentialType) => {
+    async (payload: CredentialRequest) => {
+      if (!payload.id) {
+        console.error('Edit credential requires an id');
+        return;
+      }
       try {
-        await editCredentials(payload);
+        await editCredentials(payload as CredentialRequest & { id: number });
         refreshCredentialsList();
         closeEditCredentialModal();
       } catch (error) {
@@ -150,7 +154,7 @@ const CredentialsListView: React.FunctionComponent = () => {
    * Handles deleting credentials (single or multiple)
    */
   const handleDeleteCredentials = useCallback(
-    async (credential: CredentialType | CredentialType[]) => {
+    async (credential: CredentialResponse | CredentialResponse[]) => {
       try {
         await deleteCredentials(credential);
         refreshCredentialsList();
@@ -196,10 +200,10 @@ const CredentialsListView: React.FunctionComponent = () => {
   /**
    * Indicates if credential has any associated sources or not.
    *
-   * @param {CredentialType} credential - The cred type identifier.
+   * @param {CredentialResponse} credential - The cred type identifier.
    * @returns {boolean} Translated label for the given source type.
    */
-  const credentialHasSources = (credential: CredentialType) => credential?.sources?.length;
+  const credentialHasSources = (credential: CredentialResponse) => credential?.sources?.length;
 
   /**
    * Invalidates the query cache for the creds list, triggering a refresh.
@@ -394,7 +398,7 @@ const CredentialsListView: React.FunctionComponent = () => {
           numRenderedColumns={numRenderedColumns}
         >
           <Tbody>
-            {currentPageItems?.map((credential: CredentialType, rowIndex) => (
+            {currentPageItems?.map((credential: CredentialResponse, rowIndex) => (
               <TrWithBatteries key={credential.id} item={credential} rowIndex={rowIndex}>
                 <Td columnKey="name">{credential.name}</Td>
                 <Td columnKey="type">{getTranslatedCredentialTypeLabel(credential.cred_type)}</Td>
@@ -416,7 +420,7 @@ const CredentialsListView: React.FunctionComponent = () => {
                 </Td>
                 <Td columnKey="updated">{helpers.getTimeDisplayHowLongAgo(credential.updated_at)}</Td>
                 <Td isActionCell columnKey="actions">
-                  <ActionMenu<CredentialType>
+                  <ActionMenu<CredentialResponse>
                     popperProps={{ position: 'right' }}
                     item={credential}
                     size="sm"
