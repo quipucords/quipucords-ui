@@ -1,7 +1,5 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:c8a0df4d374a0f41a3d796ac22dbd359d79e019cd11ff81c93816217d79a4f6c as npm_builder
+FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:f34e139a493588f03104e21fcd6b182d8884b7ae2cee7d91e56a8fff8a106b2f as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
-ARG REACT_APP_FEATURE_MERGE_BUTTON="true"
-ARG REACT_APP_FEATURE_OVERVIEW="true"
 # Become root before installing anything
 USER root
 # install dependencies in a separate layer to save dev time
@@ -14,7 +12,7 @@ RUN npm ci \
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-124@sha256:aa73fdb10af2bf24611ba714a412c2e65cec88a00eee628a0f2a75e564ec18f2
+FROM registry.access.redhat.com/ubi9/nginx-124@sha256:cd49f0b20c71ade4babf4212869f850645d9f151591fe031d48739d213edd7d4
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
 ARG K8S_NAME="quipucords/quipucords-ui"
