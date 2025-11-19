@@ -3,20 +3,37 @@
  * application. These types include detailed structures for data related to authentication credentials,
  * network sources and their connections, as well as comprehensive information about scans and their outcomes.
  */
-export type CredentialType = {
-  id: number;
+
+/**
+ * Base type containing fields shared between CredentialRequest and CredentialResponse
+ */
+export type CredentialBase = {
   name: string;
-  created_at: Date;
-  updated_at: Date;
   cred_type: string;
   username: string;
-  password: string;
-  ssh_key: string;
-  auth_token: string;
-  ssh_passphrase: string;
   become_method: string;
   become_user: string;
-  become_password: string;
+};
+
+/**
+ * Type representing credential data sent to the API (request payload)
+ */
+export type CredentialRequest = CredentialBase & {
+  password?: string;
+  ssh_key?: string;
+  auth_token?: string;
+  ssh_passphrase?: string;
+  become_password?: string;
+  id?: number;
+};
+
+/**
+ * Type representing credential data received from the API (response)
+ */
+export type CredentialResponse = CredentialBase & {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
   sources: SourceType[];
   auth_type: string;
   has_password?: boolean;
@@ -29,7 +46,7 @@ export type CredentialType = {
 export interface CredentialOption {
   value: string;
   label: string;
-  credential: CredentialType;
+  credential: CredentialResponse;
 }
 
 export type SourceConnectionType = {
@@ -57,7 +74,7 @@ export type SourceType = {
   source_type: string;
   hosts: string[];
   exclude_hosts: string[];
-  credentials: CredentialType[];
+  credentials: CredentialResponse[];
   connection: SourceConnectionType;
   ssl_protocol?: string;
   ssl_cert_verify: boolean;

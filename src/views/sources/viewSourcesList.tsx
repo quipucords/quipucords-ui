@@ -39,7 +39,7 @@ import { useAlerts } from '../../hooks/useAlerts';
 import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
 import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type Connections, type CredentialType, type Scan, type SourceType } from '../../types/types';
+import { type Connections, type CredentialResponse, type Scan, type SourceType } from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -56,7 +56,7 @@ import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialType[]>([]);
+  const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialResponse[]>([]);
   const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
   const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
   const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
