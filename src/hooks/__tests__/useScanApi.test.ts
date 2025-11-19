@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import axios from 'axios';
+import { type ScanRequest, type ScanResponse } from '../../types/types';
 import {
   MergeProcessState,
   useCreateScanApi,
@@ -11,6 +12,95 @@ import {
   useRunScanApi,
   useShowConnectionsApi
 } from '../useScanApi';
+
+// Test fixtures
+const mockScanRequest: ScanRequest = {
+  name: 'Lorem',
+  scan_type: 'inspect',
+  options: {
+    max_concurrency: 25,
+    disabled_optional_products: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false
+    },
+    enabled_extended_product_search: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false,
+      search_directories: []
+    }
+  },
+  sources: [1, 2]
+};
+
+const mockScanRequestWithId: ScanRequest = {
+  ...mockScanRequest,
+  id: 123
+};
+
+const mockScanResponse: ScanResponse = {
+  id: 123,
+  name: 'lorem ipsum dolor sit',
+  scan_type: 'inspect',
+  options: {
+    max_concurrency: 25,
+    disabled_optional_products: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false
+    },
+    enabled_extended_product_search: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false,
+      search_directories: []
+    }
+  },
+  sources: []
+};
+
+const mockScanResponse2: ScanResponse = {
+  id: 456,
+  name: 'lorem ipsum',
+  scan_type: 'inspect',
+  options: {
+    max_concurrency: 25,
+    disabled_optional_products: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false
+    },
+    enabled_extended_product_search: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false,
+      search_directories: []
+    }
+  },
+  sources: []
+};
+
+const mockScanResponse3: ScanResponse = {
+  id: 789,
+  name: 'dolor sit',
+  scan_type: 'inspect',
+  options: {
+    max_concurrency: 25,
+    disabled_optional_products: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false
+    },
+    enabled_extended_product_search: {
+      jboss_eap: false,
+      jboss_fuse: false,
+      jboss_ws: false,
+      search_directories: []
+    }
+  },
+  sources: []
+};
 
 describe('useShowConnectionsApi', () => {
   let hookResult;
@@ -106,11 +196,8 @@ describe('useDeleteScanApi', () => {
     const { deleteScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.resolve({}));
 
-    await deleteScans({ id: 123, name: 'lorem ipsum dolor sit' });
-    await deleteScans([
-      { id: 456, name: 'lorem ipsum' },
-      { id: 789, name: 'dolor sit' }
-    ]);
+    await deleteScans(mockScanResponse);
+    await deleteScans([mockScanResponse2, mockScanResponse3]);
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('deleteScans, success');
   });
 
@@ -118,11 +205,8 @@ describe('useDeleteScanApi', () => {
     const { deleteScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await deleteScans({ id: 123, name: 'lorem ipsum dolor sit' });
-    await deleteScans([
-      { id: 456, name: 'lorem ipsum' },
-      { id: 789, name: 'dolor sit' }
-    ]);
+    await deleteScans(mockScanResponse);
+    await deleteScans([mockScanResponse2, mockScanResponse3]);
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('deleteScans, error');
   });
 
@@ -136,8 +220,8 @@ describe('useDeleteScanApi', () => {
         }
       },
       [
-        { id: 123, name: 'Lorem' },
-        { id: 456, name: 'Ipsum' }
+        { ...mockScanResponse, id: 123, name: 'Lorem' },
+        { ...mockScanResponse2, id: 456, name: 'Ipsum' }
       ]
     );
 
@@ -156,8 +240,8 @@ describe('useDeleteScanApi', () => {
         }
       },
       [
-        { id: 123, name: 'Lorem' },
-        { id: 456, name: 'Ipsum' }
+        { ...mockScanResponse, id: 123, name: 'Lorem' },
+        { ...mockScanResponse2, id: 456, name: 'Ipsum' }
       ]
     );
 
@@ -170,8 +254,8 @@ describe('useDeleteScanApi', () => {
         }
       },
       [
-        { id: 123, name: 'Lorem' },
-        { id: 456, name: 'Ipsum' }
+        { ...mockScanResponse, id: 123, name: 'Lorem' },
+        { ...mockScanResponse2, id: 456, name: 'Ipsum' }
       ]
     );
 
@@ -180,14 +264,14 @@ describe('useDeleteScanApi', () => {
         message: 'Amet'
       },
       [
-        { id: 123, name: 'Lorem' },
-        { id: 456, name: 'Ipsum' }
+        { ...mockScanResponse, id: 123, name: 'Lorem' },
+        { ...mockScanResponse2, id: 456, name: 'Ipsum' }
       ]
     );
 
     callbackError({}, [
-      { id: 123, name: 'Lorem' },
-      { id: 456, name: 'Ipsum' }
+      { ...mockScanResponse, id: 123, name: 'Lorem' },
+      { ...mockScanResponse2, id: 456, name: 'Ipsum' }
     ]);
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackError');
@@ -212,7 +296,7 @@ describe('useCreateScanApi', () => {
     const { apiCall } = hookResult;
     const spyAxios = jest.spyOn(axios, 'post').mockResolvedValueOnce({});
 
-    apiCall({ name: 'Lorem' });
+    apiCall(mockScanRequest);
     expect(spyAxios.mock.calls).toMatchSnapshot('apiCall');
   });
 
@@ -220,7 +304,7 @@ describe('useCreateScanApi', () => {
     const { createScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.resolve({}));
 
-    await createScans({ name: 'Lorem' });
+    await createScans(mockScanRequest);
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('createScans, success');
   });
 
@@ -228,7 +312,7 @@ describe('useCreateScanApi', () => {
     const { createScans } = hookResult;
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await expect(createScans({ name: 'Lorem' })).rejects.toMatchSnapshot('createScans, error');
+    await expect(createScans(mockScanRequest)).rejects.toMatchSnapshot('createScans, error');
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('createScans, alert error');
   });
 
@@ -236,7 +320,7 @@ describe('useCreateScanApi', () => {
     const { callbackSuccess } = hookResult;
 
     callbackSuccess({
-      data: { name: 'Lorem' }
+      data: { ...mockScanResponse, name: 'Lorem' }
     });
 
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('callbackSuccess');
@@ -361,11 +445,11 @@ describe('useRunScanApi', () => {
 
   it('should handle success while attempting to run a scan', async () => {
     const { runScans } = hookResult;
-    mockCreateScan.mockResolvedValue({ id: '123', name: 'Lorem' });
+    mockCreateScan.mockResolvedValue({ ...mockScanResponse, id: 123, name: 'Lorem' });
     jest.spyOn(axios, 'post').mockResolvedValue({});
 
-    await runScans({ name: 'Lorem' });
-    await runScans({ id: '123', name: 'Lorem' }, true);
+    await runScans(mockScanRequest);
+    await runScans(mockScanRequestWithId, true);
 
     expect(mockCreateScan).toHaveBeenCalledTimes(1);
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, success');
@@ -373,11 +457,11 @@ describe('useRunScanApi', () => {
 
   it('should handle errors while attempting to run a scan', async () => {
     const { runScans } = hookResult;
-    mockCreateScan.mockResolvedValue({ id: '123', name: 'Lorem' });
+    mockCreateScan.mockResolvedValue({ ...mockScanResponse, id: 123, name: 'Lorem' });
     jest.spyOn(axios, 'post').mockImplementation(() => Promise.reject({ isAxiosError: true, message: 'Mock error' }));
 
-    await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, without id error');
-    await expect(runScans({ id: '123', name: 'Lorem' }, true)).rejects.toMatchSnapshot('runScans, with id error');
+    await expect(runScans(mockScanRequest)).rejects.toMatchSnapshot('runScans, without id error');
+    await expect(runScans(mockScanRequestWithId, true)).rejects.toMatchSnapshot('runScans, with id error');
 
     expect(mockCreateScan).toHaveBeenCalledTimes(1);
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, error alert');
@@ -411,9 +495,9 @@ describe('useRunScanApi', () => {
 
   it('should handle missing scan ID and trigger custom error', async () => {
     const { runScans } = hookResult;
-    mockCreateScan.mockResolvedValue({});
+    mockCreateScan.mockResolvedValue({} as ScanResponse);
 
-    await expect(runScans({ name: 'Lorem' })).rejects.toMatchSnapshot('runScans, no ID returned');
+    await expect(runScans(mockScanRequest)).rejects.toMatchSnapshot('runScans, no ID returned');
     expect(mockOnAddAlert.mock.calls).toMatchSnapshot('runScans, no ID returned, alert');
   });
 });

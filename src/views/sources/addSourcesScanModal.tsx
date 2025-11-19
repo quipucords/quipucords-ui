@@ -16,7 +16,7 @@ import {
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
-import { type SourceType } from '../../types/types';
+import { type ScanRequest, type SourceType } from '../../types/types';
 
 interface AddSourcesScanModalProps {
   isOpen: boolean;
@@ -155,7 +155,7 @@ const useScanForm = ({
   );
 
   const filterFormData = useCallback(
-    (data = formData) => {
+    (data = formData): ScanRequest => {
       const { name, sources, maxConcurrency, deepScans, searchDirectories } = data;
       return {
         name,

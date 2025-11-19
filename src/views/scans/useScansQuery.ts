@@ -8,7 +8,7 @@
  * @module useScansQuery
  */
 import { useServiceQuery } from '../../helpers/queryHelpers';
-import { type Scan } from '../../types/types';
+import { type ScanResponse } from '../../types/types';
 import { type TableState } from '../../vendor/react-table-batteries';
 
 export const SCANS_LIST_QUERY = 'scansList';
@@ -21,10 +21,10 @@ export const useScansQuery = ({
   tableState,
   setRefreshTime
 }: {
-  tableState: TableState<Scan, ScansColumnKey, ScansSortableColumnKey>;
+  tableState: TableState<ScanResponse, ScansColumnKey, ScansSortableColumnKey>;
   setRefreshTime: (date: Date) => void;
 }) =>
-  useServiceQuery<Scan, ScansColumnKey, ScansSortableColumnKey>({
+  useServiceQuery<ScanResponse, ScansColumnKey, ScansSortableColumnKey>({
     queryKey: [SCANS_LIST_QUERY],
     baseUrl: process.env.REACT_APP_SCANS_SERVICE,
     columnOrderMap: {
