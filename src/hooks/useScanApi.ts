@@ -5,7 +5,8 @@ import axios, { AxiosError, type AxiosResponse, isAxiosError, type AxiosRequestC
 import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
 import {
-  type Scan,
+  type ScanRequest,
+  type ScanResponse,
   type ScanJobType,
   type ScanJobsResponse,
   type SourceType,
@@ -48,12 +49,13 @@ const useCreateScanApi = (
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (payload: Scan): Promise<AxiosResponse<Scan>> => axios.post(`${process.env.REACT_APP_SCANS_SERVICE}`, payload),
+    (payload: ScanRequest): Promise<AxiosResponse<ScanResponse>> =>
+      axios.post(`${process.env.REACT_APP_SCANS_SERVICE}`, payload),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<Scan>) => {
+    (response: AxiosResponse<ScanResponse>) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'scan-report_created',
@@ -87,7 +89,7 @@ const useCreateScanApi = (
   );
 
   const createScans = useCallback(
-    async (payload: Scan) => {
+    async (payload: ScanRequest) => {
       let response;
       try {
         response = await apiCall(payload);
@@ -161,7 +163,7 @@ const useRunScanApi = (
   );
 
   const runScans = useCallback(
-    async (payload: Scan, isRescan = false) => {
+    async (payload: ScanRequest, isRescan = false) => {
       try {
         const scanId =
           (isRescan && payload?.id?.toString()) ||
@@ -212,13 +214,13 @@ const useDeleteScanApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (ids: Scan['id'][]): Promise<AxiosResponse<ApiDeleteScanSuccessType>> =>
+    (ids: ScanResponse['id'][]): Promise<AxiosResponse<ApiDeleteScanSuccessType>> =>
       axios.post(`${process.env.REACT_APP_SCANS_SERVICE_BULK_DELETE}`, { ids }),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<ApiDeleteScanSuccessType>, updatedScans: Scan[]) => {
+    (response: AxiosResponse<ApiDeleteScanSuccessType>, updatedScans: ScanResponse[]) => {
       const { data } = response;
 
       const missingNames = data?.missing
@@ -246,7 +248,7 @@ const useDeleteScanApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const callbackError = useCallback(
-    ({ message, response }: AxiosError<ApiScanErrorType>, updatedScans: Scan[]) => {
+    ({ message, response }: AxiosError<ApiScanErrorType>, updatedScans: ScanResponse[]) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'deleted-scan_error',
@@ -262,7 +264,7 @@ const useDeleteScanApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const deleteScans = useCallback(
-    async (scan: Scan | Scan[]) => {
+    async (scan: ScanResponse | ScanResponse[]) => {
       let response;
       const updatedScans = (Array.isArray(scan) && scan) || [scan];
       try {

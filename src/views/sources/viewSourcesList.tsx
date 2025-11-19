@@ -39,7 +39,7 @@ import { useAlerts } from '../../hooks/useAlerts';
 import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
 import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type Connections, type CredentialResponse, type Scan, type SourceType } from '../../types/types';
+import { type Connections, type CredentialResponse, type ScanRequest, type SourceType } from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -638,7 +638,7 @@ const SourcesListView: React.FunctionComponent = () => {
           clearScanErrors();
         }}
         onSubmit={(payload: any) =>
-          runScans(payload as Scan)
+          runScans(payload as ScanRequest)
             .then(() => {
               queryClient.invalidateQueries({ queryKey: [SOURCES_LIST_QUERY] });
               setScanSelected(undefined);

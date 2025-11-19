@@ -264,11 +264,28 @@ export type MostRecentScan = {
   status_details: StatusDetails;
 };
 
-export type Scan = {
-  id: number;
+/**
+ * Base type containing fields shared between ScanRequest and ScanResponse
+ */
+export type ScanBase = {
   name: string;
   scan_type: 'inspect' | 'connect';
   options: ScanOptions;
+};
+
+/**
+ * Type representing scan data sent to the API (request payload)
+ */
+export type ScanRequest = ScanBase & {
+  sources: number[];
+  id?: number;
+};
+
+/**
+ * Type representing scan data received from the API (response)
+ */
+export type ScanResponse = ScanBase & {
+  id: number;
   sources: SourceType[];
   jobs?: scanJob[];
   most_recent?: MostRecentScan;

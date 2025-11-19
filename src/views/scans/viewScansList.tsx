@@ -45,7 +45,7 @@ import {
   useRunScanApi
 } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type ReportsAggregateResponse, type Scan, type ScanJobType } from '../../types/types';
+import { type ReportsAggregateResponse, type ScanResponse, type ScanJobType } from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -62,10 +62,10 @@ import { useScansQuery } from './useScansQuery';
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  const [scanSelectedForSources, setScanSelectedForSources] = React.useState<Scan>();
-  const [scanSelected, setScanSelected] = React.useState<Scan>();
+  const [scanSelectedForSources, setScanSelectedForSources] = React.useState<ScanResponse>();
+  const [scanSelected, setScanSelected] = React.useState<ScanResponse>();
   const [scanJobs, setScanJobs] = React.useState<ScanJobType[]>();
-  const [pendingDeleteScan, setPendingDeleteScan] = React.useState<Scan>();
+  const [pendingDeleteScan, setPendingDeleteScan] = React.useState<ScanResponse>();
   const [aggregateReport, setAggregateReport] = React.useState<{
     id: number;
     report: ReportsAggregateResponse;
@@ -225,7 +225,7 @@ const ScansListView: React.FunctionComponent = () => {
     </Toolbar>
   );
 
-  const renderConnection = (scan: Scan) => (
+  const renderConnection = (scan: ScanResponse) => (
     <Button
       variant={ButtonVariant.link}
       size="sm"
@@ -287,7 +287,7 @@ const ScansListView: React.FunctionComponent = () => {
           numRenderedColumns={numRenderedColumns}
         >
           <Tbody>
-            {currentPageItems?.map((scan: Scan, rowIndex) => (
+            {currentPageItems?.map((scan: ScanResponse, rowIndex) => (
               <TrWithBatteries key={scan.id} item={scan} rowIndex={rowIndex}>
                 <Td columnKey="name">{scan.name}</Td>
                 <Td hasAction columnKey="most_recent">
@@ -306,7 +306,7 @@ const ScansListView: React.FunctionComponent = () => {
                 </Td>
                 <Td isActionCell columnKey="actions">
                   <Tooltip content={t('table.tooltip_action_menu')}>
-                    <ActionMenu<Scan>
+                    <ActionMenu<ScanResponse>
                       popperProps={{ position: 'right' }}
                       item={scan}
                       size="sm"
@@ -339,7 +339,16 @@ const ScansListView: React.FunctionComponent = () => {
                           label: t('table.label', { context: 'rescan' }),
                           disabled: !helpers.canRequestRescan(scan?.most_recent),
                           onClick: () => {
-                            runScans(scan, true).finally(() => {
+                            runScans(
+                              {
+                                name: scan.name,
+                                scan_type: scan.scan_type,
+                                options: scan.options,
+                                sources: scan.sources.map(s => s.id),
+                                id: scan.id
+                              },
+                              true
+                            ).finally(() => {
                               queryClient.invalidateQueries({
                                 queryKey: [API_SCANS_LIST_QUERY]
                               });
@@ -394,9 +403,7 @@ const ScansListView: React.FunctionComponent = () => {
         <List isPlain isBordered>
           {scanSelectedForSources?.sources
             .sort((a, b) => a.name.localeCompare(b.name))
-            .map(s => (
-              <ListItem key={s.id}>{s.name}</ListItem>
-            ))}
+            .map(s => <ListItem key={s.id}>{s.name}</ListItem>)}
         </List>
       </Modal>
       <ShowScansModal
