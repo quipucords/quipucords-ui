@@ -5,13 +5,13 @@ import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, type ThProps } from '@patternfly/react-table';
 import { helpers } from '../../helpers';
-import { type Scan, type ScanJobType } from '../../types/types';
+import { type ScanResponse, type ScanJobType } from '../../types/types';
 
 type PartialScanJob = Pick<ScanJobType, 'id' | 'start_time' | 'report_id' | 'status' | 'end_time'>;
 
 interface ShowScansModalProps {
   isOpen: boolean;
-  scan?: Pick<Scan, 'name'>;
+  scan?: Pick<ScanResponse, 'name'>;
   scanJobs?: PartialScanJob[];
   onDownload?: (report_id: number) => void;
   onClose?: () => void;

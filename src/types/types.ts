@@ -3,21 +3,38 @@
  * application. These types include detailed structures for data related to authentication credentials,
  * network sources and their connections, as well as comprehensive information about scans and their outcomes.
  */
-export type CredentialType = {
-  id: number;
+
+/**
+ * Base type containing fields shared between CredentialRequest and CredentialResponse
+ */
+export type CredentialBase = {
   name: string;
-  created_at: Date;
-  updated_at: Date;
   cred_type: string;
   username: string;
-  password: string;
-  ssh_key: string;
-  auth_token: string;
-  ssh_passphrase: string;
   become_method: string;
   become_user: string;
-  become_password: string;
-  sources: SourceType[];
+};
+
+/**
+ * Type representing credential data sent to the API (request payload)
+ */
+export type CredentialRequest = CredentialBase & {
+  password?: string;
+  ssh_key?: string;
+  auth_token?: string;
+  ssh_passphrase?: string;
+  become_password?: string;
+  id?: number;
+};
+
+/**
+ * Type representing credential data received from the API (response)
+ */
+export type CredentialResponse = CredentialBase & {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  sources: SourceResponse[];
   auth_type: string;
   has_password?: boolean;
   has_ssh_key?: boolean;
@@ -29,7 +46,7 @@ export type CredentialType = {
 export interface CredentialOption {
   value: string;
   label: string;
-  credential: CredentialType;
+  credential: CredentialResponse;
 }
 
 export type SourceConnectionType = {
@@ -50,20 +67,38 @@ export type SourceConnectionType = {
   systems_failed: number;
 };
 
-export type SourceType = {
-  id: number;
+/**
+ * Base type containing fields shared between SourceRequest and SourceResponse
+ */
+export type SourceBase = {
   name: string;
   port: number;
   source_type: string;
   hosts: string[];
-  exclude_hosts: string[];
-  credentials: CredentialType[];
-  connection: SourceConnectionType;
   ssl_protocol?: string;
   ssl_cert_verify: boolean;
   disable_ssl: boolean;
   use_paramiko?: boolean;
   proxy_url?: string;
+};
+
+/**
+ * Type representing source data sent to the API (request payload)
+ */
+export type SourceRequest = SourceBase & {
+  credentials: number[];
+  exclude_hosts?: string[];
+  id?: number;
+};
+
+/**
+ * Type representing source data received from the API (response)
+ */
+export type SourceResponse = SourceBase & {
+  id: number;
+  credentials: CredentialResponse[];
+  exclude_hosts: string[];
+  connection: SourceConnectionType;
 };
 
 export type ConnectionType = {
@@ -247,12 +282,29 @@ export type MostRecentScan = {
   status_details: StatusDetails;
 };
 
-export type Scan = {
-  id: number;
+/**
+ * Base type containing fields shared between ScanRequest and ScanResponse
+ */
+export type ScanBase = {
   name: string;
   scan_type: 'inspect' | 'connect';
   options: ScanOptions;
-  sources: SourceType[];
+};
+
+/**
+ * Type representing scan data sent to the API (request payload)
+ */
+export type ScanRequest = ScanBase & {
+  sources: number[];
+  id?: number;
+};
+
+/**
+ * Type representing scan data received from the API (response)
+ */
+export type ScanResponse = ScanBase & {
+  id: number;
+  sources: SourceResponse[];
   jobs?: scanJob[];
   most_recent?: MostRecentScan;
 };

@@ -8,14 +8,14 @@ jest.mock('../../../helpers/queryHelpers', () => ({
   }))
 }));
 import { useServiceQuery } from '../../../helpers/queryHelpers';
-import { type SourceType } from '../../../types/types';
+import { type SourceResponse } from '../../../types/types';
 import { type TableState } from '../../../vendor/react-table-batteries';
 import { type SourcesColumnKey, type SourcesSortableColumnKey, useSourcesQuery } from '../useSourcesQuery';
 
 describe('useSourcesQuery', () => {
   it('should call useServiceQuery with correct parameters', () => {
     const mockSetRefreshTime = jest.fn();
-    const mockTableState = {} as TableState<SourceType, SourcesColumnKey, SourcesSortableColumnKey>;
+    const mockTableState = {} as TableState<SourceResponse, SourcesColumnKey, SourcesSortableColumnKey>;
 
     renderHook(() =>
       useSourcesQuery({

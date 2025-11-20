@@ -4,7 +4,7 @@ import { type AlertProps } from '@patternfly/react-core';
 import axios, { type AxiosError, type AxiosResponse, isAxiosError } from 'axios';
 import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
-import { type SourceType } from '../types/types';
+import { type SourceRequest, type SourceResponse } from '../types/types';
 
 type ApiDeleteSourceSuccessType = {
   message: string;
@@ -22,13 +22,13 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (ids: SourceType['id'][]): Promise<AxiosResponse<ApiDeleteSourceSuccessType>> =>
+    (ids: SourceResponse['id'][]): Promise<AxiosResponse<ApiDeleteSourceSuccessType>> =>
       axios.post(`${process.env.REACT_APP_SOURCES_SERVICE_BULK_DELETE}`, { ids }),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<ApiDeleteSourceSuccessType>, updatedSources: SourceType[]) => {
+    (response: AxiosResponse<ApiDeleteSourceSuccessType>, updatedSources: SourceResponse[]) => {
       const { data } = response;
 
       const deletedNames = data?.deleted
@@ -98,7 +98,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const callbackError = useCallback(
-    ({ message, response }: AxiosError<ApiSourceErrorType>, updatedSources: SourceType[]) => {
+    ({ message, response }: AxiosError<ApiSourceErrorType>, updatedSources: SourceResponse[]) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'deleted-source_error',
@@ -114,7 +114,7 @@ const useDeleteSourceApi = (onAddAlert: (alert: AlertProps) => void) => {
   );
 
   const deleteSources = useCallback(
-    async (source: SourceType | SourceType[]) => {
+    async (source: SourceResponse | SourceResponse[]) => {
       const updatedSources = (Array.isArray(source) && source) || [source];
       let response;
       try {
@@ -147,13 +147,13 @@ const useAddSourceApi = (
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (payload: SourceType): Promise<AxiosResponse<SourceType>> =>
+    (payload: SourceRequest): Promise<AxiosResponse<SourceResponse>> =>
       axios.post(`${process.env.REACT_APP_SOURCES_SERVICE}`, payload),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<SourceType>) => {
+    (response: AxiosResponse<SourceResponse>) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'add-source_hidden',
@@ -187,7 +187,7 @@ const useAddSourceApi = (
   );
 
   const addSources = useCallback(
-    async (payload: SourceType) => {
+    async (payload: SourceRequest) => {
       let response;
       try {
         response = await apiCall(payload);
@@ -220,13 +220,13 @@ const useEditSourceApi = (
   const { t } = useTranslation();
 
   const apiCall = useCallback(
-    (payload: SourceType): Promise<AxiosResponse<SourceType>> =>
+    (payload: SourceRequest & { id: number }): Promise<AxiosResponse<SourceResponse>> =>
       axios.put(`${process.env.REACT_APP_SOURCES_SERVICE}${payload.id}/`, payload),
     []
   );
 
   const callbackSuccess = useCallback(
-    (response: AxiosResponse<SourceType>) => {
+    (response: AxiosResponse<SourceResponse>) => {
       onAddAlert({
         title: t('toast-notifications.description', {
           context: 'add-source_hidden_edit',
@@ -260,7 +260,7 @@ const useEditSourceApi = (
   );
 
   const editSources = useCallback(
-    async (payload: SourceType) => {
+    async (payload: SourceRequest & { id: number }) => {
       let response;
       try {
         response = await apiCall(payload);

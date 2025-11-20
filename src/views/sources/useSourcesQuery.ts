@@ -10,7 +10,7 @@
  * @module useSourcesQuery
  */
 import { useServiceQuery } from '../../helpers/queryHelpers';
-import { type SourceType } from '../../types/types';
+import { type SourceResponse } from '../../types/types';
 import { type TableState } from '../../vendor/react-table-batteries';
 
 export const SOURCES_LIST_QUERY = 'sourcesList';
@@ -31,10 +31,10 @@ const useSourcesQuery = ({
   tableState,
   setRefreshTime
 }: {
-  tableState: TableState<SourceType, SourcesColumnKey, SourcesSortableColumnKey>;
+  tableState: TableState<SourceResponse, SourcesColumnKey, SourcesSortableColumnKey>;
   setRefreshTime: (date: Date) => void;
 }) =>
-  useServiceQuery<SourceType, SourcesColumnKey, SourcesSortableColumnKey>({
+  useServiceQuery<SourceResponse, SourcesColumnKey, SourcesSortableColumnKey>({
     queryKey: [SOURCES_LIST_QUERY],
     baseUrl: process.env.REACT_APP_SOURCES_SERVICE,
     columnOrderMap: {

@@ -8,7 +8,7 @@
  */
 import { API_CREDS_LIST_QUERY } from '../../constants/apiConstants';
 import { useServiceQuery } from '../../helpers/queryHelpers';
-import { type CredentialType } from '../../types/types';
+import { type CredentialResponse } from '../../types/types';
 import { type TableState } from '../../vendor/react-table-batteries';
 
 type CredentialsColumnKey = 'selection' | 'name' | 'type' | 'auth_type' | 'sources' | 'updated' | 'actions';
@@ -20,10 +20,10 @@ const useCredentialsQuery = ({
   tableState,
   setRefreshTime
 }: {
-  tableState: TableState<CredentialType, CredentialsColumnKey, CredentialsSortableColumnKey>;
+  tableState: TableState<CredentialResponse, CredentialsColumnKey, CredentialsSortableColumnKey>;
   setRefreshTime: (date: Date) => void;
 }) =>
-  useServiceQuery<CredentialType, CredentialsColumnKey, CredentialsSortableColumnKey>({
+  useServiceQuery<CredentialResponse, CredentialsColumnKey, CredentialsSortableColumnKey>({
     queryKey: [API_CREDS_LIST_QUERY],
     baseUrl: process.env.REACT_APP_CREDENTIALS_SERVICE,
     columnOrderMap: {

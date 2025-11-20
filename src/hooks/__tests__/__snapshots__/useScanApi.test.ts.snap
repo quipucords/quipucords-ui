@@ -6,6 +6,25 @@ exports[`useCreateScanApi should attempt an api call to create a scan: apiCall 1
     "/api/v1/scans/",
     {
       "name": "Lorem",
+      "options": {
+        "disabled_optional_products": {
+          "jboss_eap": false,
+          "jboss_fuse": false,
+          "jboss_ws": false,
+        },
+        "enabled_extended_product_search": {
+          "jboss_eap": false,
+          "jboss_fuse": false,
+          "jboss_ws": false,
+          "search_directories": [],
+        },
+        "max_concurrency": 25,
+      },
+      "scan_type": "inspect",
+      "sources": [
+        1,
+        2,
+      ],
     },
   ],
 ]

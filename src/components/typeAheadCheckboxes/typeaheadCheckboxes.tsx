@@ -28,7 +28,7 @@ import {
 import { TimesIcon } from '@patternfly/react-icons/';
 import { helpers } from '../../helpers';
 import { useGetCredentialsApi } from '../../hooks/useCredentialApi';
-import { type CredentialType, type CredentialOption } from '../../types/types';
+import { type CredentialResponse, type CredentialOption } from '../../types/types';
 
 interface TypeaheadCheckboxesProps {
   onChange?: (selections: string[]) => void;
@@ -62,8 +62,8 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
   const [hasMorePages, setHasMorePages] = useState(false);
   const [displayedCredentials, setDisplayedCredentials] = useState<CredentialOption[]>([]);
   const [allCredentials, setAllCredentials] = useState<CredentialOption[]>([]); // For local filtering
-  const [selectedCredentialMap, setSelectedCredentialMap] = useState<Map<string, CredentialType>>(new Map());
-  const [credentialCache, setCredentialCache] = useState<Map<string, CredentialType>>(new Map());
+  const [selectedCredentialMap, setSelectedCredentialMap] = useState<Map<string, CredentialResponse>>(new Map());
+  const [credentialCache, setCredentialCache] = useState<Map<string, CredentialResponse>>(new Map());
 
   const textInputRef = useRef<HTMLInputElement>(null);
   const justSelectedRef = useRef(false);
@@ -76,8 +76,8 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
       return;
     }
 
-    const selectedMap = new Map<string, CredentialType>();
-    const cache = new Map<string, CredentialType>();
+    const selectedMap = new Map<string, CredentialResponse>();
+    const cache = new Map<string, CredentialResponse>();
 
     initialSelectedCredentials.forEach(credOption => {
       const idStr = credOption.value;
