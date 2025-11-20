@@ -34,7 +34,7 @@ export type CredentialResponse = CredentialBase & {
   id: number;
   created_at: Date;
   updated_at: Date;
-  sources: SourceType[];
+  sources: SourceResponse[];
   auth_type: string;
   has_password?: boolean;
   has_ssh_key?: boolean;
@@ -67,20 +67,38 @@ export type SourceConnectionType = {
   systems_failed: number;
 };
 
-export type SourceType = {
-  id: number;
+/**
+ * Base type containing fields shared between SourceRequest and SourceResponse
+ */
+export type SourceBase = {
   name: string;
   port: number;
   source_type: string;
   hosts: string[];
-  exclude_hosts: string[];
-  credentials: CredentialResponse[];
-  connection: SourceConnectionType;
   ssl_protocol?: string;
   ssl_cert_verify: boolean;
   disable_ssl: boolean;
   use_paramiko?: boolean;
   proxy_url?: string;
+};
+
+/**
+ * Type representing source data sent to the API (request payload)
+ */
+export type SourceRequest = SourceBase & {
+  credentials: number[];
+  exclude_hosts?: string[];
+  id?: number;
+};
+
+/**
+ * Type representing source data received from the API (response)
+ */
+export type SourceResponse = SourceBase & {
+  id: number;
+  credentials: CredentialResponse[];
+  exclude_hosts: string[];
+  connection: SourceConnectionType;
 };
 
 export type ConnectionType = {
@@ -286,7 +304,7 @@ export type ScanRequest = ScanBase & {
  */
 export type ScanResponse = ScanBase & {
   id: number;
-  sources: SourceType[];
+  sources: SourceResponse[];
   jobs?: scanJob[];
   most_recent?: MostRecentScan;
 };

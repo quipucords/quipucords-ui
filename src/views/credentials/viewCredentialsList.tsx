@@ -38,7 +38,7 @@ import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useAddCredentialApi, useDeleteCredentialApi, useEditCredentialApi } from '../../hooks/useCredentialApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type CredentialRequest, type CredentialResponse, type SourceType } from '../../types/types';
+import { type CredentialRequest, type CredentialResponse, type SourceResponse } from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -53,7 +53,7 @@ import { useCredentialsQuery } from './useCredentialsQuery';
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
-  const [sourcesSelected, setSourcesSelected] = React.useState<SourceType[]>([]);
+  const [sourcesSelected, setSourcesSelected] = React.useState<SourceResponse[]>([]);
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialResponse>();
   const { addAlert, alerts, removeAlert } = useAlerts();
   const { queryClient } = useQueryClientConfig();
