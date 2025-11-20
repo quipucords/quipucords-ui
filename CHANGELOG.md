@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0](https://github.com/quipucords/quipucords-ui/compare/c533d8890724f20638b8554e97103e9d9b54d064...04b7f45507c7f278979972be38e53a0261edac5f) (2025-11-20)
+
+
+### Tests
+* **credentials** Improve coverage of AddCredentialModal  ([f2db40f](https://github.com/quipucords/quipucords-ui/commit/f2db40fc175b287fcf33fc2d9ec7980092d2623c))
+
+### Features
+* **login** show logo on Login page  ([3515239](https://github.com/quipucords/quipucords-ui/commit/35152390624cdbb693ab60124175d4f1936bff16))
+* **credentials** use SecretInput for mandatory secrets  ([81db007](https://github.com/quipucords/quipucords-ui/commit/81db00719b3f026bf86b69033415b0489dc550b9))
+* **credentials** Introduce SecretInput component for optional secrets  ([bdc332e](https://github.com/quipucords/quipucords-ui/commit/bdc332e62ab8e4fb7aad18792060cc1a4d03e91a))
+
+### Code Refactoring
+* **feature-flags** remove merge/overview ff  ([012e29f](https://github.com/quipucords/quipucords-ui/commit/012e29fde993a12374e60172d7a68a19998ee296))
+* **cspell** exclude snapshots via config  ([ea1c285](https://github.com/quipucords/quipucords-ui/commit/ea1c285369cd5a79433e027a13f2b20eadb0e752))
+
+### Chores
+* **deps** update quay.io/konflux-ci/yq docker digest to e8bc7ee  ([3b5f90e](https://github.com/quipucords/quipucords-ui/commit/3b5f90e611ab4de4f956b69c99508698c58bf282))
+* **deps** update dependency eslint-plugin-react to v7.37.5  ([92e7fa1](https://github.com/quipucords/quipucords-ui/commit/92e7fa18b3b2ea6b5d3fe0768dbf3be61369483d))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to f34e139  ([8675a48](https://github.com/quipucords/quipucords-ui/commit/8675a48b0506b87db725f9a982cef04392e86ecb))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to cd49f0b  ([1c6ce10](https://github.com/quipucords/quipucords-ui/commit/1c6ce109fba01ab671c8906a35a81f8c6354552f))
+* **deps** update konflux references  ([3df49d7](https://github.com/quipucords/quipucords-ui/commit/3df49d78477cfb14395aacf88a28dfd3e1410022))
+* **deps** update dependency prettier to v3.6.2  ([472279a](https://github.com/quipucords/quipucords-ui/commit/472279a51a740282b0fb918e1725278bc444cc93))
+* **deps** update dependency ts-jest to v29.4.5  ([420a229](https://github.com/quipucords/quipucords-ui/commit/420a22914661f06e3b51f97b08a1b2b70847576e))
+* **deps** update dependency changelog-light to v3  ([3846e26](https://github.com/quipucords/quipucords-ui/commit/3846e26bdd583796d2957a09864e73b41224dfef))
+* **deps** update testing-library monorepo  ([3f05e04](https://github.com/quipucords/quipucords-ui/commit/3f05e04550cb02d692e5c84544e99f5927df92dd))
+* **deps** update dependency eslint-config-prettier to v9.1.2  ([5e1a855](https://github.com/quipucords/quipucords-ui/commit/5e1a855f0252b6b99cfce9f37ccdde5e3bae9f8f))
+* **deps** update dependency eslint to v8.57.1  ([0f5d456](https://github.com/quipucords/quipucords-ui/commit/0f5d4561ec8461bcab0530ab28c86b3b08f8752e))
+* **deps** update dependency changelog-light to v2.0.6  ([18a5074](https://github.com/quipucords/quipucords-ui/commit/18a507415f7e6e1f14feae017a1870320c55ffa5))
+* **deps** replace dependency eslint-plugin-node with eslint-plugin-n ^14.0.0  ([db477f7](https://github.com/quipucords/quipucords-ui/commit/db477f79581cbf1db185ef5601ca62b1e0504e05))
+*  Remove unused translations  ([ff12468](https://github.com/quipucords/quipucords-ui/commit/ff12468fcf8fc08f28a25aacfd695eb389ddcbbb))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to c8a0df4  ([bf7b5cf](https://github.com/quipucords/quipucords-ui/commit/bf7b5cf706c8830fab022270af197b0ec0060f1b))
+* **deps** update quay.io/konflux-ci/yq docker digest to af8bfbc  ([e8be587](https://github.com/quipucords/quipucords-ui/commit/e8be58786a4a46e9972f46a987024e6a2116cdcf))
+* **deps** update konflux references  ([3fa52b3](https://github.com/quipucords/quipucords-ui/commit/3fa52b32a4957464fc673c26571ae315784f393a))
+
+### Builds
+*  make update-lockfiles  ([c6300de](https://github.com/quipucords/quipucords-ui/commit/c6300de9ba559e40e839aeae4de40a7037272926))
+* **deps** bump actions/checkout from 4 to 5  ([8f36634](https://github.com/quipucords/quipucords-ui/commit/8f366345e857e1bbfaf0b7336a17a0059b81b136))
+* **deps** bump actions/setup-node from 4 to 6  ([94ba49a](https://github.com/quipucords/quipucords-ui/commit/94ba49a7ab3527cdc8be96a52ac5b710dbca62a5))
+* **audit** updated package*json files for audit updates  ([c9be9d0](https://github.com/quipucords/quipucords-ui/commit/c9be9d0263b63d3a9cb8ef5a846b3ca0c6e38734))
+
+### Bug Fixes
+* **deps** update various modules  ([04b7f45](https://github.com/quipucords/quipucords-ui/commit/04b7f45507c7f278979972be38e53a0261edac5f))
+* **build** fix running UI from source  ([b602bee](https://github.com/quipucords/quipucords-ui/commit/b602beefdc6d81e2c9ce25a90a6e5029a24c703a))
+* **build** Fix build error due to casting to Blob.  ([936dcac](https://github.com/quipucords/quipucords-ui/commit/936dcaced392e5782eefd082ac829fdd385cb959))
+* **dropdowns** add scrollbars to prevent cut down  ([1605d9c](https://github.com/quipucords/quipucords-ui/commit/1605d9ceeaa37e9f3bad3995644d33577306e71e))
+* **deps** update dependency @patternfly/react-table to v6.4.0  ([9fc1313](https://github.com/quipucords/quipucords-ui/commit/9fc1313fa485167a6caa67c0c24abbccc635f4b7))
+* **deps** update dependency react-router-dom to v6.30.1  ([b217897](https://github.com/quipucords/quipucords-ui/commit/b21789796c21a5285b7a9c2c7d2a05a6291760c0))
+* **deps** update dependency @patternfly/react-icons to v6.4.0  ([699fcfd](https://github.com/quipucords/quipucords-ui/commit/699fcfddd0bb4eed6cb976c419e432dd417256ec))
+* **deps** update dependency @patternfly/react-component-groups to v6.4.0  ([2e3552f](https://github.com/quipucords/quipucords-ui/commit/2e3552f7f5bf3a3f11a607bf4f58d9b592636531))
+* **deps** update dependency @tanstack/react-query to v5.90.8  ([d64a92d](https://github.com/quipucords/quipucords-ui/commit/d64a92d2bbf4c066defa41b0a79ad815ab2cc9dd))
+* **deps** update dependency react-i18next to v15.7.4  ([78341a4](https://github.com/quipucords/quipucords-ui/commit/78341a4b2ca7531167d08cc55e17cd04a071deba))
+* **deps** update dependency @patternfly/patternfly to v6.4.0  ([ecef93b](https://github.com/quipucords/quipucords-ui/commit/ecef93bd9ef7ffca6dd2eaacc7e7ab1222a13441))
+* **deps** update dependency axios to v1.13.2  ([1c5d803](https://github.com/quipucords/quipucords-ui/commit/1c5d8030ebeb984387b7a07539ceb63bb9393c3f))
+* **deps** replace dependency npm-run-all with npm-run-all2 ^5.0.0  ([f08f608](https://github.com/quipucords/quipucords-ui/commit/f08f6089175b692d1911f989593781430813c46e))
+*  Translate user-visible strings  ([b7e23ab](https://github.com/quipucords/quipucords-ui/commit/b7e23abd7c075e1fd85691df94beeb519201d0bb))
+* **scans** Translate user-visible strings  ([a0d39c3](https://github.com/quipucords/quipucords-ui/commit/a0d39c300b710c3baf747eac73c9d967eaafa4b2))
+* **sources** Translate user-visible strings  ([3dac846](https://github.com/quipucords/quipucords-ui/commit/3dac8467d36c36a14e606ef6b046db576e281966))
+* **sources** Translate user-visible strings  ([8dafd83](https://github.com/quipucords/quipucords-ui/commit/8dafd832ec1f28df399a5c36cfd96f8627fd0180))
+* **sources** Translate user-visible strings  ([d55c36d](https://github.com/quipucords/quipucords-ui/commit/d55c36dc0c3ca0da7eb584b9ca503b0e00629055))
+* **routes** Translate user-visible strings  ([2b62954](https://github.com/quipucords/quipucords-ui/commit/2b629548ad922bcfbd989e1545abc55ef3d5d5a3))
+* **components** Translate user-visible strings  ([c3d528b](https://github.com/quipucords/quipucords-ui/commit/c3d528b98231f01f98eaf9fef35269c6e36b3666))
+* **credentials** Translate user-visible strings  ([06eb74b](https://github.com/quipucords/quipucords-ui/commit/06eb74b31f02dd34fae0213428175cc9c5237039))
+* **i18n** chunk and hash locales  ([24a7138](https://github.com/quipucords/quipucords-ui/commit/24a7138083d82006a82c474002456317053bd628))
+* **login** don't preserve theme selection across logout  ([d1c4701](https://github.com/quipucords/quipucords-ui/commit/d1c47011ae8eca5389274bb39e1037a5819bafc3))
+
 ## [2.3.0](https://github.com/quipucords/quipucords-ui/compare/5ea378508c7e9ac5605754bfc6b047178ee24751...b7262d027dcb7eeab9dc7f0ec5c74bfb4d653694) (2025-10-15)
 
 
