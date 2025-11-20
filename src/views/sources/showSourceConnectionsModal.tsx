@@ -10,7 +10,7 @@ import { Button, Icon, List, ListItem, Tooltip } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import { Tbody, Tr, Td, Table, ExpandableRowContent } from '@patternfly/react-table';
-import { type SourceType, type Connections } from '../../types/types';
+import { type SourceResponse, type Connections } from '../../types/types';
 import './showSourceConnectionsModal.css';
 
 const MAX_HOSTS_PER_CATEGORY = 5;
@@ -18,7 +18,7 @@ const MAX_HOSTS_PER_CATEGORY = 5;
 interface ShowConnectionsModalProps {
   isOpen: boolean;
   maxHostsPerCategory?: number;
-  source?: Pick<SourceType, 'name'>;
+  source?: Pick<SourceResponse, 'name'>;
   onClose?: () => void;
   connections: Connections;
 }

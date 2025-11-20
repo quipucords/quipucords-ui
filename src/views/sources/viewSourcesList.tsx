@@ -39,7 +39,13 @@ import { useAlerts } from '../../hooks/useAlerts';
 import { useRunScanApi, useShowConnectionsApi } from '../../hooks/useScanApi';
 import { useDeleteSourceApi, useEditSourceApi, useAddSourceApi } from '../../hooks/useSourceApi';
 import useQueryClientConfig from '../../queryClientConfig';
-import { type Connections, type CredentialResponse, type ScanRequest, type SourceType } from '../../types/types';
+import {
+  type Connections,
+  type CredentialResponse,
+  type ScanRequest,
+  type SourceRequest,
+  type SourceResponse
+} from '../../types/types';
 import {
   ConditionalTableBody,
   FilterType,
@@ -57,13 +63,13 @@ const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialResponse[]>([]);
-  const [scanSelected, setScanSelected] = React.useState<SourceType[]>();
-  const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceType>();
-  const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceType>();
+  const [scanSelected, setScanSelected] = React.useState<SourceResponse[]>();
+  const [pendingDeleteSource, setPendingDeleteSource] = React.useState<SourceResponse>();
+  const [sourceBeingEdited, setSourceBeingEdited] = React.useState<SourceResponse>();
   const [addSourceModal, setAddSourceModal] = React.useState<string>();
   const [scanErrors, setScanErrors] = React.useState<ScanErrorType | undefined>();
   const [sourceErrors, setSourceErrors] = React.useState<SourceErrorType | undefined>();
-  const [connectionsSelected, setConnectionsSelected] = React.useState<SourceType>();
+  const [connectionsSelected, setConnectionsSelected] = React.useState<SourceResponse>();
   const emptyConnectionData: Connections = { successful: [], failed: [], unreachable: [] };
   const [connectionsData, setConnectionsData] = React.useState<Connections>(emptyConnectionData);
   const { queryClient } = useQueryClientConfig();
@@ -88,10 +94,10 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Indicates if source has any associated scans or not.
    *
-   * @param {SourceType} source - The cred type identifier.
+   * @param {SourceResponse} source - The cred type identifier.
    * @returns {boolean} Translated label for the given source type.
    */
-  const sourceHasConnection = (source: SourceType) => !!source?.connection;
+  const sourceHasConnection = (source: SourceResponse) => !!source?.connection;
 
   /**
    * Invalidates the query cache for the sources list, triggering a refresh.
@@ -117,18 +123,18 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Sets the selected sources for scanning.
    *
-   * @param {SourceType[]} sources - An array of source items to be selected for scanning.
+   * @param {SourceResponse[]} sources - An array of source items to be selected for scanning.
    */
-  const onScanSources = (sources: SourceType[]) => {
+  const onScanSources = (sources: SourceResponse[]) => {
     setScanSelected(sources);
   };
 
   /**
    * Sets a single source for scanning as the selected source.
    *
-   * @param {SourceType} source - The source to be selected for scanning.
+   * @param {SourceResponse} source - The source to be selected for scanning.
    */
-  const onScanSource = (source: SourceType) => {
+  const onScanSource = (source: SourceResponse) => {
     setScanSelected([source]);
   };
 
@@ -165,7 +171,7 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Opens the edit source modal for a specific source
    */
-  const openEditSourceModal = useCallback((source: SourceType) => {
+  const openEditSourceModal = useCallback((source: SourceResponse) => {
     setSourceBeingEdited(source);
     setSourceErrors(undefined);
   }, []);
@@ -182,7 +188,7 @@ const SourcesListView: React.FunctionComponent = () => {
    * Handles adding a new source
    */
   const handleAddSourceSubmit = useCallback(
-    async (payload: SourceType) => {
+    async (payload: SourceRequest) => {
       try {
         await addSources(payload);
         refreshSourcesList();
@@ -200,9 +206,13 @@ const SourcesListView: React.FunctionComponent = () => {
    * Handles editing an existing source
    */
   const handleEditSourceSubmit = useCallback(
-    async (payload: SourceType) => {
+    async (payload: SourceRequest) => {
+      if (!payload.id) {
+        console.error('Edit source requires an id');
+        return;
+      }
       try {
-        await editSources(payload);
+        await editSources(payload as SourceRequest & { id: number });
         refreshSourcesList();
         closeEditSourceModal();
       } catch (error) {
@@ -218,7 +228,7 @@ const SourcesListView: React.FunctionComponent = () => {
    * Handles deleting sources (single or multiple)
    */
   const handleDeleteSources = useCallback(
-    async (source: SourceType | SourceType[]) => {
+    async (source: SourceResponse | SourceResponse[]) => {
       try {
         await deleteSources(source);
         refreshSourcesList();
@@ -395,7 +405,7 @@ const SourcesListView: React.FunctionComponent = () => {
             onClick={() => {
               const sourcesToScan = Array.isArray(selectedItems)
                 ? selectedItems
-                : (Object.values(selectedItems ?? {}).filter(Boolean) as SourceType[]);
+                : (Object.values(selectedItems ?? {}).filter(Boolean) as SourceResponse[]);
               onScanSources(sourcesToScan);
             }}
           >
@@ -425,7 +435,7 @@ const SourcesListView: React.FunctionComponent = () => {
     </Toolbar>
   );
 
-  const renderConnection = (source: SourceType) => {
+  const renderConnection = (source: SourceResponse) => {
     if (!sourceHasConnection(source)) {
       return (
         <Button variant={ButtonVariant.link} size="sm" isDisabled={true}>
@@ -495,7 +505,7 @@ const SourcesListView: React.FunctionComponent = () => {
           numRenderedColumns={numRenderedColumns}
         >
           <Tbody>
-            {currentPageItems?.map((source: SourceType, rowIndex) => (
+            {currentPageItems?.map((source: SourceResponse, rowIndex) => (
               <TrWithBatteries key={source.id} item={source} rowIndex={rowIndex}>
                 <Td columnKey="name">{source.name}</Td>
                 <Td hasAction columnKey="connection">
@@ -525,7 +535,7 @@ const SourcesListView: React.FunctionComponent = () => {
                   </Button>
                 </Td>
                 <Td isActionCell columnKey="actions">
-                  <ActionMenu<SourceType>
+                  <ActionMenu<SourceResponse>
                     popperProps={{ position: 'right' }}
                     item={source}
                     size="sm"

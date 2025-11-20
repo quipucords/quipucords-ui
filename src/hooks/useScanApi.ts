@@ -9,7 +9,7 @@ import {
   type ScanResponse,
   type ScanJobType,
   type ScanJobsResponse,
-  type SourceType,
+  type SourceResponse,
   type Connections,
   type ReportsAggregateResponse,
   simpleScanJob
@@ -477,7 +477,7 @@ const useDownloadReportApi = (onAddAlert: (alert: AlertProps) => void) => {
 };
 
 const useShowConnectionsApi = () => {
-  const apiCall = useCallback((source: SourceType): Promise<AxiosResponse> => {
+  const apiCall = useCallback((source: SourceResponse): Promise<AxiosResponse> => {
     return axios.get(`${process.env.REACT_APP_SCAN_JOBS_SERVICE}${source.connection.id}/connection/`, {
       params: { page: 1, page_size: 1000, ordering: 'name', source_type: source.id }
     });
@@ -496,7 +496,7 @@ const useShowConnectionsApi = () => {
   const callbackError = useCallback((error: AxiosError) => Promise.reject(error), []);
 
   const showConnections = useCallback(
-    async (source: SourceType) => {
+    async (source: SourceResponse) => {
       let response;
       try {
         response = await apiCall(source);

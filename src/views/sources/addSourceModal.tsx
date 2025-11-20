@@ -25,7 +25,12 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
 import { helpers } from '../../helpers';
-import { type CredentialResponse, type SourceType, type CredentialOption } from '../../types/types';
+import {
+  type CredentialResponse,
+  type SourceRequest,
+  type SourceResponse,
+  type CredentialOption
+} from '../../types/types';
 
 const SSL_PROTOCOL_LABELS_TO_VALUES: Record<string, string> = {
   SSLv23: 'SSLv23',
@@ -45,12 +50,12 @@ const SSL_PROTOCOL_VALUES_TO_LABELS: Record<string, string> = {
 
 interface AddSourceModalProps {
   isOpen: boolean;
-  source?: SourceType;
+  source?: SourceResponse;
   sourceType?: string;
   errors?: SourceErrorType;
   onClearErrors?: () => void;
   onClose?: () => void;
-  onSubmit?: (payload: any) => void;
+  onSubmit?: (payload: SourceRequest) => void;
 }
 
 interface SourceFormProps extends Omit<AddSourceModalProps, 'isOpen'> {
@@ -79,7 +84,7 @@ const useSourceForm = ({
   onClearErrors
 }: {
   sourceType?: string;
-  source?: Partial<SourceType>;
+  source?: Partial<SourceResponse>;
   errors?: SourceErrorType;
   onClearErrors?: () => void;
 } = {}) => {
@@ -318,7 +323,7 @@ const useSourceForm = ({
   );
 
   const filterFormData = useCallback(
-    (data = formData) => {
+    (data = formData): SourceRequest => {
       const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
       const payload: any = {
         name,
@@ -345,7 +350,7 @@ const useSourceForm = ({
         payload.use_paramiko = useParamiko;
       }
 
-      return getCleanedSourceData(payload);
+      return getCleanedSourceData(payload) as SourceRequest;
     },
     [isNetwork, isOpenshift, formData, source, typeValue, getCleanedSourceData]
   );
