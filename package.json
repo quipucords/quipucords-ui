@@ -87,7 +87,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "changelog-light": "^3.0.0",
-    "cspell": "^8.14.2",
+    "cspell": "^9.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-comment-length": "^1.7.3",
