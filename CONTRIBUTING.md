@@ -1,6 +1,8 @@
 # Contributing
 Contributing encompasses repository specific requirements, and the global [Quipucords contribution guidelines](https://github.com/quipucords/quipucords/blob/main/CONTRIBUTING.md).
 
+**Note**: If you use AI tools to generate code, please review our [Policy for AI-Generated Code](AI_POLICY.md) for disclosure and quality requirements.
+
 ## Process
 <details>
 <summary><h3 style="display: inline-block">Using Git</h3></summary>
