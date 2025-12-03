@@ -251,6 +251,7 @@ const useSourceForm = ({
   // Edit props, reset state on unmount
   useEffect(() => {
     if (source) {
+      console.log(`Will useEffect on ${source}...`)
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
         useParamiko: source?.use_paramiko || false,
