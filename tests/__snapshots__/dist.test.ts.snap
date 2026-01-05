@@ -1,40 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Build distribution should match a specific file output: dist-output 1`] = `
 [
   "",
-  "./build/174*js",
-  "./build/221*css",
-  "./build/221*js",
-  "./build/362*css",
-  "./build/362*js",
-  "./build/364*js",
-  "./build/570*js",
-  "./build/638*js",
-  "./build/786*js",
-  "./build/955*js",
-  "./build/app*css",
-  "./build/app*js",
-  "./build/favicon.ico",
-  "./build/fonts/078865af129336cde269.woff2",
-  "./build/fonts/18ca482120faaa701d8b.woff2",
-  "./build/fonts/463d4ddeac4dae277fc4.woff2",
-  "./build/fonts/6e3027616d8de472723c.woff2",
-  "./build/fonts/813182e673c38ef5ee4b.woff2",
-  "./build/fonts/c33624692c8b41e36780.woff2",
-  "./build/fonts/e4faf134e53e0f37296b.woff2",
-  "./build/images/133911d429584887f5c7.svg",
-  "./build/images/3a2039b4d3f148174396.svg",
-  "./build/images/4ca682d556b7bf59f5c6.svg",
-  "./build/images/4fd5059469f0582e20a1.svg",
-  "./build/images/85109dad29f20063f735.svg",
-  "./build/images/b05c3116e7c14bc5da4d.svg",
-  "./build/images/c0ce9e7676e8e8f83167.png",
-  "./build/index.html",
-  "./build/manifest.json",
-  "./build/runtime*js",
-  "./build/vendor*css",
-  "./build/vendor*js",
-  "./build/vendor*txt",
 ]
 `;
