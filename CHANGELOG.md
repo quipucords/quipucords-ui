@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.1](https://github.com/quipucords/quipucords-ui/compare/c9d11754426750afe575021cd005d1fc3f0b9875...0c319cf0f30c64682b129327ab60a7d0513ffd6a) (2026-01-05)
+
+
+### Documentation
+*  add AI-generated code policy  ([7762e48](https://github.com/quipucords/quipucords-ui/commit/7762e48ce8cb12e65be0911fb029161e316de852))
+
+### Chores
+* **deps** update konflux references  ([4178c03](https://github.com/quipucords/quipucords-ui/commit/4178c039dfb0012e0f3193b67d1065ef4585a5c3))
+
+### Builds
+*  npm update  ([0c319cf](https://github.com/quipucords/quipucords-ui/commit/0c319cf0f30c64682b129327ab60a7d0513ffd6a))
+*  npm update  ([72dee03](https://github.com/quipucords/quipucords-ui/commit/72dee031ed981b8ddd2a195e29f8e27e354996a8))
+*  force "glob" to "^10.5.0" and npm update  ([c67df0c](https://github.com/quipucords/quipucords-ui/commit/c67df0c3673b0c3e57a8cbb0c20b4622e3600cf9))
+*  make update-lockfiles  ([5eae580](https://github.com/quipucords/quipucords-ui/commit/5eae580234716bf2a1adc027eb2e8862dbfb3fa1))
+*  npm update  ([bcd6783](https://github.com/quipucords/quipucords-ui/commit/bcd67839c98c461eb70229f829472004a0ad8db9))
+*  remove CACHI2_ARTIFACT for snyk_sast_check in konflux  ([614a072](https://github.com/quipucords/quipucords-ui/commit/614a0722c24532c4b0addfa99a8c2c64131d6f4d))
+
+### Bug Fixes
+*  minor reformat to make updated version of prettier happy again  ([ecfab46](https://github.com/quipucords/quipucords-ui/commit/ecfab46f581573f677b847162eaa9e4b5d01829f))
+
 ## [2.4.0](https://github.com/quipucords/quipucords-ui/compare/c533d8890724f20638b8554e97103e9d9b54d064...04b7f45507c7f278979972be38e53a0261edac5f) (2025-11-20)
 
 
