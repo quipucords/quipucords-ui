@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.2](https://github.com/quipucords/quipucords-ui/compare/aa0e15d89507cdbc3e6e8ae92d3e22c7ecd1be18...b59358cb5b337acf1f8596b36cdb917468e91564) (2026-01-08)
+
+
+### Builds
+*  make update-lockfiles  ([b59358c](https://github.com/quipucords/quipucords-ui/commit/b59358cb5b337acf1f8596b36cdb917468e91564))
+
 ## [2.4.1](https://github.com/quipucords/quipucords-ui/compare/c9d11754426750afe575021cd005d1fc3f0b9875...0c319cf0f30c64682b129327ab60a7d0513ffd6a) (2026-01-05)
 
 
