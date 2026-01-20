@@ -13,6 +13,7 @@ COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
 FROM registry.access.redhat.com/ubi9/nginx-124@sha256:a75f10d71969dd2451914df6539dea28f8e2c88506f691ea211768a0bd0746d1
+ARG CPE_NAME="cpe:/a:redhat:discovery:2::el9"
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
 ARG K8S_NAME="quipucords/quipucords-ui"
@@ -37,6 +38,7 @@ USER ${NGINX_USER}
 CMD ["/bin/bash", "/opt/app-root/entrypoint.sh"]
 
 LABEL com.redhat.component=${REDHAT_COMPONENT} \
+    cpe=${CPE_NAME} \
     description=${K8S_DESCRIPTION} \
     io.k8s.description=${K8S_DESCRIPTION} \
     io.k8s.display-name=${K8S_DISPLAY_NAME} \
