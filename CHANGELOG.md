@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.4](https://github.com/quipucords/quipucords-ui/compare/0d3dc1974b02c8b6277dd0e2a4ccb9c652c7f38c...77224ec27b43401d84c5b7a88d455a6b63134548) (2026-01-22)
+
+
+### Bug Fixes
+* **deps** patch various vulnerabilities  ([77224ec](https://github.com/quipucords/quipucords-ui/commit/77224ec27b43401d84c5b7a88d455a6b63134548))
+
 ## [2.4.3](https://github.com/quipucords/quipucords-ui/compare/4c4c66976a237cf64f876c74c904a4ebeccee99b...75e47f28c04c7f87127b5f039ed03f2e388807a0) (2026-01-08)
 
 
