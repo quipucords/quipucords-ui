@@ -84,7 +84,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({
   const Navigation = (
     <Nav id="nav-primary-simple">
       <NavList id="nav-list-simple" forwardScrollAriaLabel="Scroll forward">
-        {routes.map((route, idx) => route.label && renderNavItem(route, idx))}
+        {routes
+          .filter(route => !(route.id === 'reports') || helpers.FEATURE_REPORTS_VIEW)
+          .map((route, idx) => route.label && renderNavItem(route, idx))}
       </NavList>
     </Nav>
   );

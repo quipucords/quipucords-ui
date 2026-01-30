@@ -329,3 +329,18 @@ export type Connections = {
   failed: Pick<ConnectionType, 'name'>[];
   unreachable: Pick<ConnectionType, 'name'>[];
 };
+
+/**
+ * Type representing report data received from the API (response)
+ */
+export type ReportType = {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  report_version: string;
+  report_platform_id: string;
+  origin: 'local' | 'uploaded' | 'merged';
+  scan_id: number;
+  can_publish: boolean;
+  cannot_publish_reason: 'no_connection' | 'no_credentials' | 'auth_failed' | 'not_complete' | 'no_hosts' | null;
+};
