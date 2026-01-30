@@ -12,6 +12,7 @@ const Overview = React.lazy(() => import('./views/overview/viewOverview'));
 const Sources = React.lazy(() => import('./views/sources/viewSourcesList'));
 const Scans = React.lazy(() => import('./views/scans/viewScansList'));
 const Credentials = React.lazy(() => import('./views/credentials/viewCredentialsList'));
+const Reports = React.lazy(() => import('./views/reports/viewReportsList'));
 
 interface IAppRoute {
   id: string;
@@ -50,6 +51,13 @@ const routes: IAppRoute[] = [
     label: 'routes.scans.label',
     path: '/scans',
     title: 'routes.scans.title'
+  },
+  {
+    id: 'reports',
+    component: <Reports />,
+    label: 'routes.reports.label',
+    path: '/reports',
+    title: 'routes.reports.title'
   }
 ];
 

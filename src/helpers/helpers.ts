@@ -50,6 +50,12 @@ const UI_NAME = (UI_BRAND && process.env.REACT_APP_UI_BRAND_NAME) || `${process.
 const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 
 /**
+ * Feature flag for including Reports page link in navigation.
+ * See dotenv config files for updating.
+ */
+const FEATURE_REPORTS_VIEW = process.env.REACT_APP_FEATURE_REPORTS_VIEW === 'true';
+
+/**
  * Generates a translation key for internationalization.
  *
  * @param {string | string[]} key - The translation key(s).
@@ -252,7 +258,8 @@ const helpers = {
   TEST_MODE,
   UI_BRAND,
   UI_NAME,
-  UI_VERSION
+  UI_VERSION,
+  FEATURE_REPORTS_VIEW
 };
 
 export { helpers as default, helpers };
