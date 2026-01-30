@@ -22,3 +22,6 @@ This directory contains vendored code from external packages that are no longer 
 
 - **Reset table page back to 1 on sort or filter change** - See PR #678
   - File: `src/vendor/react-table-batteries/hooks/useTableState.ts`
+
+- **Respect `sort.initialSort` definition in tables** - See PR #834
+  - File: `src/vendor/react-table-batteries/hooks/sorting/useSortState.ts`
