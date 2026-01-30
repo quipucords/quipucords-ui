@@ -81,9 +81,9 @@ export const useSortState = <TItem, TSortableColumnKey extends string, TPersiste
   const persistTo = args.sort?.persistTo || args.persistTo || 'state';
 
   const sortableColumns = args.sort?.sortableColumns || [];
-  const initialSort: ActiveSort<TSortableColumnKey> | null = sortableColumns[0]
+  const initialSort: ActiveSort<TSortableColumnKey> | null = args.sort?.initialSort ?? (sortableColumns[0]
     ? { columnKey: sortableColumns[0], direction: 'asc' }
-    : null;
+    : null);
 
   // We won't need to pass the latter two type params here if TS adds support for partial inference.
   // See https://github.com/konveyor/tackle2-ui/issues/1456
