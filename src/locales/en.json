@@ -86,6 +86,10 @@
     "scans": {
       "label": "Scans",
       "title": "Scans"
+    },
+    "reports": {
+      "label": "Reports",
+      "title": "Reports"
     }
   },
   "secret-input": {
@@ -103,10 +107,15 @@
     "header_last-updated": "Last updated",
     "header_sources": "Sources",
     "header_unreachable": "Unreachable systems",
+    "header_id": "ID",
+    "header_origin": "Origin",
+    "header_created": "Created",
     "label": "{{context}}",
     "label_aria-credentials": "Credentials table",
     "label_aria-scans": "Scans table",
     "label_aria-sources": "Sources table",
+    "label_aria-reports": "Reports table",
+    "label_publish": "Publish",
     "label_close": "Close",
     "label_delete": "Delete",
     "label_edit": "Edit",
@@ -116,6 +125,18 @@
     "label_rescan-disabled-tooltip": "Scan cannot be requested again while it is running",
     "label_download": "Download",
     "label_download-disabled-tooltip": "Only scans that completed successfully can be downloaded",
+    "label_publish-disabled-tooltip-report-no_connection": "This is disconnected installation",
+    "label_publish-disabled-tooltip-report-no_credential": "Lightspeed credentials not provided",
+    "label_publish-disabled-tooltip-report-auth_failed": "Lightspeed authentication failed",
+    "label_publish-disabled-tooltip-report-not_complete": "Lightspeed report could not be created",
+    "label_publish-disabled-tooltip-report-no_hosts": "Lightspeed report was not generated because there were 0 valid hosts",
+    "label_publish-disabled-tooltip-report-null": "Report cannot be published for unknown reason",
+    "label_publish-disabled-tooltip-report": "Report cannot be published for unknown reason",
+    "label_download-disabled-tooltip-report": "DISCOVERY-1147 not implemented yet",
+    "label_origin-local": "Completed scan",
+    "label_origin-uploaded": "Manually uploaded report",
+    "label_origin-merged": "Merged reports",
+    "label_origin-unknown": "Unknown",
     "label_merge-reports": "Merge reports",
     "label_scan": "Scan",
     "label_status_scans": "Scan created",
@@ -181,7 +202,11 @@
     "label_option_search_credentials_by_name": "Credential name",
     "label_option_search_sources_by_name": "Source name",
     "label_option_source_type": "Source type",
+    "label_option_report_id": "Report ID",
+    "label_option_report_origin": "Origin",
     "label_placeholder_filter_cred_type": "Filter by credential type",
+    "label_placeholder_filter_report_id": "Filter by report ID",
+    "label_placeholder_filter_report_origin": "Filter by origin",
     "label_placeholder_filter_search_credentials_by_name": "Filter by credential name",
     "label_placeholder_filter_search_by_name": "Filter by name",
     "label_placeholder_filter_search_sources_by_name": "Filter by source name",
@@ -198,6 +223,8 @@
     "empty-state_credentials_description": "Begin by adding credentials. Credentials contain the authentication information required to access and scan a source. This includes a username, password, SSH key, or API token. The system can use these credentials either to connect via SSH or to authenticate directly with system APIs, enabling access to the necessary environments and systems.",
     "empty-state_sources_title": "No sources available",
     "empty-state_sources_description": "To add a source, ensure that the necessary credentials have been provided. A source contains key system information such as system management details, IP addresses, hostnames, and connection configurations, including SSL settings and options for tools like Paramiko or OpenSSH. The credentials you previously added will be used to authenticate and scan the source.",
+    "empty-state_reports_title": "No reports available",
+    "empty-state_reports_description": "Reports will appear here once scans are completed or reports are uploaded.",
     "empty-state_description_not-found": "Page not found",
     "error": "...",
     "error_debug": "View error",
@@ -206,6 +233,7 @@
     "error_title_credentials": "Credentials is temporarily unavailable",
     "error_title_scans": "Scans is temporarily unavailable",
     "error_title_sources": "Sources is temporarily unavailable",
+    "error_title_reports": "Reports is temporarily unavailable",
     "label_credentials": "Credentials",
     "label_scans-names": "Scans: {{name}}",
     "label_sources": "Sources",
@@ -450,5 +478,12 @@
     "openshift": "OpenShift",
     "satellite": "Satellite",
     "vcenter": "vCenter Server"
+  },
+  "report": {
+    "origin": {
+      "local": "Local",
+      "uploaded": "Uploaded",
+      "merged": "Merged"
+    }
   }
 }

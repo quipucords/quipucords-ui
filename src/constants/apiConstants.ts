@@ -19,6 +19,8 @@ const API_QUERY_TYPES = {
   SEARCH_CREDENTIALS_NAME: 'search_credentials_by_name',
   SEARCH_NAME: 'search_by_name',
   SEARCH_SOURCES_NAME: 'search_sources_by_name',
+  SEARCH_REPORT_ID: 'id',
+  REPORT_ORIGIN: 'origin',
   SOURCE_TYPE: 'source_type',
   SSH_KEYFILE: 'ssh_keyfile',
   SSH_PASSPHRASE: 'ssh_passphrase',
@@ -169,6 +171,7 @@ const API_SUBMIT_SOURCE_SOURCE_TYPE = 'source_type';
 const API_SOURCES_LIST_QUERY = 'sourcesList';
 const API_CREDS_LIST_QUERY = 'credentialsList';
 const API_SCANS_LIST_QUERY = 'scansList';
+const API_REPORTS_LIST_QUERY = 'reportsList';
 
 const apiTypes = {
   API_DATA_SOURCE_TYPES,
@@ -284,7 +287,8 @@ const apiTypes = {
   API_SUBMIT_SOURCE_SOURCE_TYPE,
   API_SOURCES_LIST_QUERY,
   API_CREDS_LIST_QUERY,
-  API_SCANS_LIST_QUERY
+  API_SCANS_LIST_QUERY,
+  API_REPORTS_LIST_QUERY
 };
 
 export {
@@ -403,5 +407,6 @@ export {
   API_SUBMIT_SOURCE_SOURCE_TYPE,
   API_SOURCES_LIST_QUERY,
   API_CREDS_LIST_QUERY,
-  API_SCANS_LIST_QUERY
+  API_SCANS_LIST_QUERY,
+  API_REPORTS_LIST_QUERY
 };
