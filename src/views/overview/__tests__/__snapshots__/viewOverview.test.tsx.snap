@@ -1,0 +1,419 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverviewView should render a basic component: basic 1`] = `
+<PageSection
+  hasBodyWrapper={false}
+>
+  <PageHeader
+    title="t([
+  "view.overview.title"
+])"
+  />
+  <MultiContentCard
+    cards={
+      [
+        <Card
+          isFullHeight={true}
+          isPlain={true}
+        >
+          <CardHeader>
+            <Content
+              component="h4"
+            >
+              t([
+  "view.overview.getting-started.header",
+  {
+    "appName": "Quipucords"
+  }
+])
+            </Content>
+          </CardHeader>
+          <CardBody>
+            <Content
+              className="pf-v6-u-font-weight-bold pf-v6-u-mb-sm"
+            >
+              <Icon
+                className="pf-v6-u-pl-sm pf-v6-u-pr-md"
+                size="md"
+              >
+                <OptimizeIcon />
+              </Icon>
+              t([
+  "view.overview.getting-started.item1.label",
+  {
+    "appName": "Quipucords"
+  }
+])
+            </Content>
+            <Content>
+              <Trans
+                components={
+                  [
+                    <p />,
+                  ]
+                }
+                i18nKey="view.overview.getting-started.item1.content"
+                values={
+                  {
+                    "appName": "Quipucords",
+                  }
+                }
+              />
+            </Content>
+          </CardBody>
+        </Card>,
+        <Card
+          isFullHeight={true}
+          isPlain={true}
+        >
+          <CardHeader
+            style={
+              {
+                "visibility": "hidden",
+              }
+            }
+          >
+            -
+          </CardHeader>
+          <CardBody>
+            <Content
+              className="pf-v6-u-font-weight-bold pf-v6-u-mb-sm"
+            >
+              <Icon
+                className="pf-v6-u-pl-sm pf-v6-u-pr-md"
+                size="md"
+              >
+                <KeyIcon />
+              </Icon>
+              t([
+  "view.overview.getting-started.item2.label"
+])
+            </Content>
+            <Content>
+              <Trans
+                components={
+                  [
+                    <p />,
+                  ]
+                }
+                i18nKey="view.overview.getting-started.item2.content"
+                values={
+                  {
+                    "appName": "Quipucords",
+                  }
+                }
+              />
+            </Content>
+          </CardBody>
+        </Card>,
+        <Card
+          isFullHeight={true}
+          isPlain={true}
+        >
+          <CardHeader
+            style={
+              {
+                "visibility": "hidden",
+              }
+            }
+          >
+            -
+          </CardHeader>
+          <CardBody>
+            <Content
+              className="pf-v6-u-font-weight-bold pf-v6-u-mb-sm"
+            >
+              <Icon
+                className="pf-v6-u-pl-sm pf-v6-u-pr-md"
+                size="md"
+              >
+                <DataProcessorIcon />
+              </Icon>
+              t([
+  "view.overview.getting-started.item3.label"
+])
+            </Content>
+            <Content>
+              <Trans
+                components={
+                  [
+                    <p />,
+                  ]
+                }
+                i18nKey="view.overview.getting-started.item3.content"
+                values={
+                  {
+                    "appName": "Quipucords",
+                  }
+                }
+              />
+            </Content>
+          </CardBody>
+        </Card>,
+      ]
+    }
+  />
+  <Card
+    isFullHeight={true}
+  >
+    <CardHeader
+      className="pf-v6-u-font-weight-bold"
+    >
+      t([
+  "view.overview.process.header"
+])
+    </CardHeader>
+    <CardBody
+      id="process"
+    >
+      <Flex
+        justifyContent={
+          {
+            "default": "justifyContentSpaceBetween",
+          }
+        }
+        spaceItems={
+          {
+            "default": "spaceItemsXl",
+            "lg": "spaceItemsNone",
+          }
+        }
+      >
+        <Card>
+          <CardHeader
+            className="pf-v6-u-font-weight-bold"
+          >
+            t([
+  "view.overview.process.item1.label"
+])
+          </CardHeader>
+          <CardBody>
+            t([
+  "view.overview.process.item1.content"
+])
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader
+            className="pf-v6-u-font-weight-bold"
+          >
+            t([
+  "view.overview.process.item2.label"
+])
+          </CardHeader>
+          <CardBody>
+            t([
+  "view.overview.process.item2.content"
+])
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader
+            className="pf-v6-u-font-weight-bold"
+          >
+            t([
+  "view.overview.process.item3.label"
+])
+          </CardHeader>
+          <CardBody>
+            t([
+  "view.overview.process.item3.content"
+])
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader
+            className="pf-v6-u-font-weight-bold"
+          >
+            t([
+  "view.overview.process.item4.label"
+])
+          </CardHeader>
+          <CardBody>
+            t([
+  "view.overview.process.item4.content"
+])
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader
+            className="pf-v6-u-font-weight-bold"
+          >
+            t([
+  "view.overview.process.item5.label"
+])
+          </CardHeader>
+          <CardBody>
+            t([
+  "view.overview.process.item5.content"
+])
+          </CardBody>
+        </Card>
+      </Flex>
+    </CardBody>
+  </Card>
+  <Grid
+    hasGutter={true}
+  >
+    <GridItem
+      span={8}
+    >
+      <Card
+        id="faq"
+        isFullHeight={true}
+      >
+        <CardHeader
+          className="pf-v6-u-font-weight-bold"
+        >
+          t([
+  "view.overview.faq.header"
+])
+        </CardHeader>
+        <CardBody>
+          <Accordion
+            asDefinitionList={true}
+          >
+            <AccordionItem
+              isExpanded={true}
+            >
+              <AccordionToggle
+                id="faqAccordionItem0"
+                onClick={[Function]}
+              >
+                t([
+  "view.overview.faq.item1.label",
+  {
+    "appName": "Quipucords"
+  }
+])
+              </AccordionToggle>
+              <AccordionContent
+                id="faqAccordionItemExpand0"
+              >
+                <Trans
+                  components={
+                    {
+                      "anchor": <a
+                        href="https://access.redhat.com/support"
+                        rel="noreferrer"
+                        target="_blank"
+                      />,
+                      "p": <p />,
+                    }
+                  }
+                  i18nKey="view.overview.faq.item1.content"
+                />
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem
+              isExpanded={false}
+            >
+              <AccordionToggle
+                id="faqAccordionItem1"
+                onClick={[Function]}
+              >
+                t([
+  "view.overview.faq.item2.label",
+  {
+    "appName": "Quipucords"
+  }
+])
+              </AccordionToggle>
+              <AccordionContent
+                id="faqAccordionItemExpand1"
+              >
+                <Trans
+                  components={
+                    [
+                      <p />,
+                    ]
+                  }
+                  i18nKey="view.overview.faq.item2.content"
+                  values={
+                    {
+                      "appName": "Quipucords",
+                    }
+                  }
+                />
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem
+              isExpanded={false}
+            >
+              <AccordionToggle
+                id="faqAccordionItem2"
+                onClick={[Function]}
+              >
+                t([
+  "view.overview.faq.item3.label",
+  {
+    "appName": "Quipucords"
+  }
+])
+              </AccordionToggle>
+              <AccordionContent
+                id="faqAccordionItemExpand2"
+              >
+                <Trans
+                  components={
+                    [
+                      <p />,
+                    ]
+                  }
+                  i18nKey="view.overview.faq.item3.content"
+                  values={
+                    {
+                      "appName": "Quipucords",
+                    }
+                  }
+                />
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem
+              isExpanded={false}
+            >
+              <AccordionToggle
+                id="faqAccordionItem3"
+                onClick={[Function]}
+              >
+                t([
+  "view.overview.faq.item4.label",
+  {
+    "appName": "Quipucords"
+  }
+])
+              </AccordionToggle>
+              <AccordionContent
+                id="faqAccordionItemExpand3"
+              >
+                <Trans
+                  components={
+                    [
+                      <p />,
+                    ]
+                  }
+                  i18nKey="view.overview.faq.item4.content"
+                  values={
+                    {
+                      "appName": "Quipucords",
+                    }
+                  }
+                />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </CardBody>
+      </Card>
+    </GridItem>
+    <GridItem
+      span={4}
+    >
+      <img
+        alt=""
+        id="overview-image"
+        src="overviewSecurity.svg"
+      />
+    </GridItem>
+  </Grid>
+</PageSection>
+`;
