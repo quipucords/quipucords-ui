@@ -12,6 +12,7 @@ import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { FilterControl } from './FilterControl';
 
 export enum FilterType {
+  date = 'date',
   select = 'select',
   multiselect = 'multiselect',
   search = 'search',
@@ -39,6 +40,9 @@ export interface BasicFilterCategory<
   getServerFilterValue?: (filterValue: FilterValue) => FilterValue; // For server-side filtering. Defaults to using the UI state's value if omitted.
 }
 
+export interface DateFilterCategory<TItem, TFilterCategoryKey extends string>
+  extends BasicFilterCategory<TItem, TFilterCategoryKey> {}
+
 export interface MultiselectFilterCategory<TItem, TFilterCategoryKey extends string>
   extends BasicFilterCategory<TItem, TFilterCategoryKey> {
   selectOptions: OptionPropsWithKey[];
@@ -57,6 +61,7 @@ export interface SearchFilterCategory<TItem, TFilterCategoryKey extends string>
 }
 
 export type FilterCategory<TItem, TFilterCategoryKey extends string> =
+  | DateFilterCategory<TItem, TFilterCategoryKey>
   | MultiselectFilterCategory<TItem, TFilterCategoryKey>
   | SelectFilterCategory<TItem, TFilterCategoryKey>
   | SearchFilterCategory<TItem, TFilterCategoryKey>;

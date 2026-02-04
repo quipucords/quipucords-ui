@@ -25,3 +25,6 @@ This directory contains vendored code from external packages that are no longer 
 
 - **Respect `sort.initialSort` definition in tables** - See PR #834
   - File: `src/vendor/react-table-batteries/hooks/sorting/useSortState.ts`
+
+- **Add DateFilter** - See PR #836
+  - Files: Multiple files in `vendor/react-table-batteries/tackle2-ui-legacy/components/FilterToolbar/`
