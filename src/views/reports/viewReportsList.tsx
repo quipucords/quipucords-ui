@@ -99,24 +99,36 @@ const ReportsListView: React.FunctionComponent = () => {
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_id' })
         },
         {
-          key: API_QUERY_TYPES.REPORT_ORIGIN,
+          key: API_QUERY_TYPES.SEARCH_REPORT_ORIGIN,
           title: t('toolbar.label', { context: 'option_report_origin' }),
           type: FilterType.select,
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_origin' }),
           selectOptions: [
             {
               key: 'local',
-              value: t('report.origin.local')
+              value: t('table.label', { context: 'origin-local' })
             },
             {
               key: 'uploaded',
-              value: t('report.origin.uploaded')
+              value: t('table.label', { context: 'origin-uploaded' })
             },
             {
               key: 'merged',
-              value: t('report.origin.merged')
+              value: t('table.label', { context: 'origin-merged' })
             }
           ]
+        },
+        {
+          key: API_QUERY_TYPES.SEARCH_REPORT_DATE_NEWER,
+          title: t('toolbar.label', { context: 'option_report_created_at__gte' }),
+          type: FilterType.date,
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__gte' })
+        },
+        {
+          key: API_QUERY_TYPES.SEARCH_REPORT_DATE_OLDER,
+          title: t('toolbar.label', { context: 'option_report_created_at__lte' }),
+          type: FilterType.date,
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__lte' })
         }
       ]
     },

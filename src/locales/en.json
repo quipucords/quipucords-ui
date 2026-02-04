@@ -204,13 +204,17 @@
     "label_option_source_type": "Source type",
     "label_option_report_id": "Report ID",
     "label_option_report_origin": "Origin",
+    "label_option_report_created_at__gte": "Created date newer than",
+    "label_option_report_created_at__lte": "Created date older than",
     "label_placeholder_filter_cred_type": "Filter by credential type",
     "label_placeholder_filter_report_id": "Filter by report ID",
     "label_placeholder_filter_report_origin": "Filter by origin",
     "label_placeholder_filter_search_credentials_by_name": "Filter by credential name",
     "label_placeholder_filter_search_by_name": "Filter by name",
     "label_placeholder_filter_search_sources_by_name": "Filter by source name",
-    "label_placeholder_filter_source_type": "Filter by source type"
+    "label_placeholder_filter_source_type": "Filter by source type",
+    "label_placeholder_filter_report_created_at__gte": "Filter by created date (newer than)",
+    "label_placeholder_filter_report_created_at__lte": "Filter by created date (older than)"
   },
   "view": {
     "alt-logo": "{{name}} logo",
@@ -478,12 +482,5 @@
     "openshift": "OpenShift",
     "satellite": "Satellite",
     "vcenter": "vCenter Server"
-  },
-  "report": {
-    "origin": {
-      "local": "Local",
-      "uploaded": "Uploaded",
-      "merged": "Merged"
-    }
   }
 }
