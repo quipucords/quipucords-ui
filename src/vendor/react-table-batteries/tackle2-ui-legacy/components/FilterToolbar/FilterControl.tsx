@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { DateFilterControl } from './DateFilterControl';
 import {
+  DateFilterCategory,
   FilterCategory,
   FilterValue,
   FilterType,
@@ -24,6 +26,9 @@ export const FilterControl = <TItem, TFilterCategoryKey extends string>({
   category,
   ...props
 }: React.PropsWithChildren<FilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+  if (category.type === FilterType.date) {
+    return <DateFilterControl category={category as DateFilterCategory<TItem, TFilterCategoryKey>} {...props} />;
+  }
   if (category.type === FilterType.select) {
     return (
       <SelectFilterControl
