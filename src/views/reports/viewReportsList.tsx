@@ -26,6 +26,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { API_QUERY_TYPES, API_REPORTS_LIST_QUERY } from '../../constants/apiConstants';
 import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
+import { useDownloadReportApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type ReportType } from '../../types/types';
 import {
@@ -41,8 +42,8 @@ const ReportsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const { queryClient } = useQueryClientConfig();
-  // TODO: uncomment `addAlert` once actions are properly implemented
-  const { alerts, /*addAlert,*/ removeAlert } = useAlerts();
+  const { alerts, addAlert, removeAlert } = useAlerts();
+  const { downloadReport } = useDownloadReportApi(addAlert);
 
   /**
    * Invalidates the query cache for the reports list, triggering a refresh.
@@ -59,7 +60,7 @@ const ReportsListView: React.FunctionComponent = () => {
   /**
    * Check if report can be downloaded.
    */
-  const reportCanDownload = (_report: ReportType): boolean => false;
+  const reportCanDownload = (report: ReportType): boolean => report.can_download;
 
   /**
    * Handles "publish" action.
@@ -72,7 +73,7 @@ const ReportsListView: React.FunctionComponent = () => {
    * Handles "download" action.
    */
   const handleDownload = useCallback((report: ReportType) => {
-    console.log(`Would attempt to download report with id ${report.id}`);
+    downloadReport(report.id);
   }, []);
 
   /**
@@ -239,7 +240,11 @@ const ReportsListView: React.FunctionComponent = () => {
                         onClick: handleDownload,
                         ouiaId: 'download-report',
                         ...(!reportCanDownload(report) && {
-                          tooltipProps: { content: t('table.label', { context: 'download-disabled-tooltip-report' }) }
+                          tooltipProps: {
+                            content: t('table.label', {
+                              context: `download-disabled-tooltip-report-${report.cannot_download_reason}`
+                            })
+                          }
                         })
                       }
                     ]}
