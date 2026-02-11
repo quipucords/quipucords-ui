@@ -29,7 +29,7 @@ spec:
     value:
     # reference of available instances/architectures https://url.corp.redhat.com/c01e9c0
     - linux/x86_64
-    - linux-mxlarge/arm64
+    - linux-m2xlarge/arm64
   - name: dockerfile
     value: Containerfile
   - name: path-context
