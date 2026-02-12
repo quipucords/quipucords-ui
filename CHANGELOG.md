@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.5](https://github.com/quipucords/quipucords-ui/compare/fb85143635e106118dbb6ac76b5a02d35de076f4...1d2ba7a1c3babc74a8452375dcfb0f1c34fe1e13) (2026-02-12)
+
+
+### Tests
+* **overview** Improve coverage of viewOverview  ([8f0387e](https://github.com/quipucords/quipucords-ui/commit/8f0387e221853423f6b107201d237cd6230383d3))
+
+### Features
+* **reports** Add filtering by report created date  ([d700726](https://github.com/quipucords/quipucords-ui/commit/d700726b03a64bafd1f94e62cfccecfcc6bbaa22))
+* **react-table-batteries** Add DateFilter  ([2a407db](https://github.com/quipucords/quipucords-ui/commit/2a407db7233e044e8c461f63a7fa95e39e25cef3))
+* **reports** Introduce Reports view  ([a844e21](https://github.com/quipucords/quipucords-ui/commit/a844e21bc986d852011e932771bce50de5d8ad8c))
+
+### Chores
+*  increase ARM64 build worker memory to 32GB  ([f7c7c35](https://github.com/quipucords/quipucords-ui/commit/f7c7c351275f60f87a7550a75a6a9e9061a5cec8))
+
+### Builds
+*  make update lockfiles  ([1d2ba7a](https://github.com/quipucords/quipucords-ui/commit/1d2ba7a1c3babc74a8452375dcfb0f1c34fe1e13))
+*  update several outdated konflux pipeline bundle references  ([86dce94](https://github.com/quipucords/quipucords-ui/commit/86dce945e9c6afaa997dc54eb498b2c6498f9927))
+*  npm update  ([e9836a2](https://github.com/quipucords/quipucords-ui/commit/e9836a216217e9125a024382339ba8d9260db414))
+*  define our cpe container label  ([0ca3b2d](https://github.com/quipucords/quipucords-ui/commit/0ca3b2d4245e02c6071fa396f911810b7efc3616))
+
+### Bug Fixes
+* **react-table-batteries** Respect `sort.initialSort`  ([72529d3](https://github.com/quipucords/quipucords-ui/commit/72529d30d1096c7b7e41a17446fe6df8c4055918))
+
 ## [2.4.4](https://github.com/quipucords/quipucords-ui/compare/0d3dc1974b02c8b6277dd0e2a4ccb9c652c7f38c...77224ec27b43401d84c5b7a88d455a6b63134548) (2026-01-22)
 
 
