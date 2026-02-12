@@ -74,7 +74,7 @@
     "react-router-dom": "^6.30.3",
     "use-deep-compare": "^1.3.0",
     "webpack": "^5.96.1",
-    "weldable": "^3.2.1"
+    "weldable": "^5.0.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
