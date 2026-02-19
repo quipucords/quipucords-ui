@@ -28,4 +28,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-modules
       - name: npm audit
-        run: npm audit --audit-level=high --only=prod
+        run: npm audit --audit-level=high --omit dev --omit peer
