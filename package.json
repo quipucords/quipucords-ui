@@ -93,7 +93,7 @@
     "eslint-plugin-comment-length": "^1.7.3",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jest": "^28.8.3",
-    "eslint-plugin-jsdoc": "^48.11.0",
+    "eslint-plugin-jsdoc": "^62.0.0",
     "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-n": "^14.0.0",
