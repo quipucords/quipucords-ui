@@ -1,0 +1,6 @@
+{
+  "extends": [
+    ":disableMajorUpdates",
+    "group:allNonMajor",
+  ]
+}
