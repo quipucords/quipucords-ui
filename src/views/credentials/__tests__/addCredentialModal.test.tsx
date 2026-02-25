@@ -885,8 +885,8 @@ describe('getCleanedFormData', () => {
     };
     const touchedFields = new Set(Object.keys(formData));
     const cleanedData = getCleanedFormData(formData, 'SSH Key', touchedFields);
-    expect(cleanedData).not.toContain('password');
-    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).not.toHaveProperty('password');
+    expect(cleanedData).not.toHaveProperty('auth_token');
     expect(cleanedData).toEqual({
       name: formData['name'],
       username: formData['username'],
@@ -905,8 +905,8 @@ describe('getCleanedFormData', () => {
     };
     const touchedFields = new Set(Object.keys(formData));
     const cleanedData = getCleanedFormData(formData, 'Username and Password', touchedFields);
-    expect(cleanedData).not.toContain('ssh_key');
-    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).not.toHaveProperty('ssh_key');
+    expect(cleanedData).not.toHaveProperty('auth_token');
     expect(cleanedData).toEqual({
       name: formData['name'],
       username: formData['username'],
@@ -924,7 +924,7 @@ describe('getCleanedFormData', () => {
     };
     const touchedFields = new Set(Object.keys(formData));
     const cleanedData = getCleanedFormData(formData, 'Token', touchedFields);
-    expect(cleanedData).not.toContain('password');
+    expect(cleanedData).not.toHaveProperty('password');
     expect(cleanedData).toEqual({
       name: formData['name'],
       username: '',
@@ -941,7 +941,7 @@ describe('getCleanedFormData', () => {
     };
     const touchedFields = new Set(Object.keys(formData));
     const cleanedData = getCleanedFormData(formData, 'Username and Password', touchedFields);
-    expect(cleanedData).not.toContain('auth_token');
+    expect(cleanedData).not.toHaveProperty('auth_token');
     expect(cleanedData).toEqual({
       name: formData['name'],
       username: formData['username'],
