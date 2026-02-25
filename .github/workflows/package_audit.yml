@@ -19,13 +19,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-      - name: Node.js modules cache
-        uses: actions/cache@v4
-        id: modules-cache
-        with:
-          path: ${{ github.workspace }}/node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-modules
       - name: npm audit
         run: npm audit --audit-level=high --omit dev --omit peer
