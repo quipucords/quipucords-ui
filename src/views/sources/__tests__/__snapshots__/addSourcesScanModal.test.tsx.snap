@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`AddSourceModal should call onSubmit with the correct filtered data when "Save" is clicked: onSubmit, filtered data 1`] = `
 [

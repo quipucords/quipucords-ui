@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SimpleDropdown should display items and allow selecting after toggle is clicked: expanded 1`] = `
 <DocumentFragment>
