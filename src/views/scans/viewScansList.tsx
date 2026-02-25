@@ -256,6 +256,7 @@ const ScansListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label={t('table.label', { context: 'aria-scans' })} variant="compact">
         <Thead>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="name" />
             <Th columnKey="most_recent" />

@@ -193,7 +193,7 @@ const SourcesListView: React.FunctionComponent = () => {
         await addSources(payload);
         refreshSourcesList();
         closeAddSourceModal();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via setSourceErrors callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Source submission failed, handled by API hook');
@@ -215,7 +215,7 @@ const SourcesListView: React.FunctionComponent = () => {
         await editSources(payload as SourceRequest & { id: number });
         refreshSourcesList();
         closeEditSourceModal();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via setSourceErrors callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Source edit failed, handled by API hook');
@@ -232,7 +232,7 @@ const SourcesListView: React.FunctionComponent = () => {
       try {
         await deleteSources(source);
         refreshSourcesList();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via addAlert callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Source deletion failed, handled by API hook');
@@ -476,6 +476,7 @@ const SourcesListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label={t('table.label', { context: 'aria-sources' })} variant="compact">
         <Thead>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="name" />
             <Th columnKey="connection" />

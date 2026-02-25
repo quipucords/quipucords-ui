@@ -64,8 +64,8 @@ const I18n: React.FC<I18nProps> = ({
     if (initialized && locale) {
       try {
         i18next.changeLanguage(locale);
-      } catch (e) {
-        //
+      } catch (_e) {
+        // FIXME :)
       }
     }
   }, [initialized, locale]);

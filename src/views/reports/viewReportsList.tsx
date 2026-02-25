@@ -72,9 +72,12 @@ const ReportsListView: React.FunctionComponent = () => {
   /**
    * Handles "download" action.
    */
-  const handleDownload = useCallback((report: ReportType) => {
-    downloadReport(report.id);
-  }, []);
+  const handleDownload = useCallback(
+    (report: ReportType) => {
+      downloadReport(report.id);
+    },
+    [downloadReport]
+  );
 
   /**
    * Configures table state for report results, with URL persistence. Includes columns for ID, origin,
@@ -180,7 +183,7 @@ const ReportsListView: React.FunctionComponent = () => {
   const formatReportDate = (dateString: string) => {
     try {
       return helpers.formatDate(new Date(dateString));
-    } catch (error) {
+    } catch (_error) {
       return dateString;
     }
   };
@@ -190,6 +193,7 @@ const ReportsListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label={t('table.label', { context: 'aria-reports' })} variant="compact">
         <Thead>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="id" />
             <Th columnKey="origin" />
