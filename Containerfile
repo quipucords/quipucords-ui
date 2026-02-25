@@ -6,7 +6,7 @@ USER root
 # install dependencies in a separate layer to save dev time
 WORKDIR /app
 COPY package.json package-lock.json .
-RUN SKIP_POSTINSTALL="true" npm ci \
+RUN npm ci \
     --no-audit \
     --omit=dev
 
