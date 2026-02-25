@@ -37,9 +37,9 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "vendor/react-table-batteries/hooks/storage/useStorage.ts:40:    console.error(error);",
   "views/credentials/viewCredentialsList.tsx:137:        console.error('Edit credential requires an id');",
   "views/reports/viewReportsList.tsx:69:    console.log(\`Would attempt to publish report with id \${report.id}\`);",
-  "views/scans/viewScansList.tsx:323:                                    console.error(err);",
+  "views/scans/viewScansList.tsx:324:                                    console.error(err);",
   "views/sources/viewSourcesList.tsx:211:        console.error('Edit source requires an id');",
   "views/sources/viewSourcesList.tsx:462:                console.error(err);",
-  "views/sources/viewSourcesList.tsx:659:                console.error(err);",
+  "views/sources/viewSourcesList.tsx:660:                console.error(err);",
 ]
 `;

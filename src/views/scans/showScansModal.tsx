@@ -77,6 +77,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
 
   useEffect(() => {
     if (scanJobs.length) {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect */
       setSortedScanJobs(sortByLatestTime(scanJobs));
     }
   }, [scanJobs]);

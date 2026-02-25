@@ -119,7 +119,7 @@ const CredentialsListView: React.FunctionComponent = () => {
         await addCredentials(payload);
         refreshCredentialsList();
         closeAddCredentialModal();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via setCredentialErrors callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Credential submission failed, handled by API hook');
@@ -141,7 +141,7 @@ const CredentialsListView: React.FunctionComponent = () => {
         await editCredentials(payload as CredentialRequest & { id: number });
         refreshCredentialsList();
         closeEditCredentialModal();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via setCredentialErrors callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Credential edit failed, handled by API hook');
@@ -158,7 +158,7 @@ const CredentialsListView: React.FunctionComponent = () => {
       try {
         await deleteCredentials(credential);
         refreshCredentialsList();
-      } catch (error) {
+      } catch (_error) {
         // Error is handled by the API hook via addAlert callback
         // This catch prevents unhandled promise rejection warnings
         console.debug('Credential deletion failed, handled by API hook');
@@ -369,6 +369,7 @@ const CredentialsListView: React.FunctionComponent = () => {
       {renderToolbar()}
       <Table aria-label={t('table.label', { context: 'aria-credentials' })} variant="compact">
         <Thead>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="name" />
             <Th columnKey="type" />

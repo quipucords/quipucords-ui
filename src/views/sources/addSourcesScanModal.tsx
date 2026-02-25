@@ -85,7 +85,7 @@ const useScanForm = ({
 
       return errors[field];
     },
-    [getRequiredFields, touchedFields]
+    [getRequiredFields, touchedFields, t]
   );
 
   const validateForm = useCallback(() => {
@@ -119,11 +119,13 @@ const useScanForm = ({
   const allErrors = { ...serverErrors, ...localErrors };
 
   useEffect(() => {
+    /* eslint-disable-next-line react-hooks/set-state-in-effect */
     validateForm();
   }, [formData, touchedFields, serverErrors, validateForm]);
 
   useEffect(() => {
     if (sources) {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect */
       setFormData({
         name: '',
         sources: sources,

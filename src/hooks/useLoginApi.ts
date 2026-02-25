@@ -162,7 +162,7 @@ const useGetSetAuthApi = ({ useLogout = useLogoutApi }: { useLogout?: typeof use
 
     try {
       parsedToken = window.atob(token);
-    } catch (e) {
+    } catch (_e) {
       if (!helpers.TEST_MODE) {
         console.error('Invalid token, unable to parse format');
       }

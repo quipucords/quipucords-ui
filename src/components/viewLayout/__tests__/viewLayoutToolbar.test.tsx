@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
 import { AppToolbar as ViewToolbar } from '../viewLayoutToolbar';
 
@@ -54,7 +55,7 @@ describe('ViewToolbar', () => {
     });
 
     // Mock axios globally for this test suite
-    jest.spyOn(require('axios'), 'get').mockImplementation(() => Promise.resolve({ data: { username: 'Test User' } }));
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({ data: { username: 'Test User' } }));
   });
 
   afterEach(() => {
