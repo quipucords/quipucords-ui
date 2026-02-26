@@ -72,7 +72,7 @@
     "react-router-dom": "^6.30.3",
     "use-deep-compare": "^1.3.0",
     "webpack": "^5.96.1",
-    "weldable": "5.0.10"
+    "weldable": "5.0.9"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.2",
