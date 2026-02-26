@@ -41,7 +41,7 @@
     "test:dev": "export NODE_ENV=test; run-s test:lint test:local",
     "test:integration": "jest --roots=./tests",
     "test:integration-dev": "jest --roots=./tests --watchAll",
-    "test:lint": "eslint ./src ./public",
+    "test:lint": "eslint ./src ./public ./*.js ./*.json",
     "test:lint-fix": "npm run test:lint -- --fix",
     "test:local": "jest --roots=./src --watch",
     "test:spell": "cspell './public/locales/**/en*json' './public/index.html' './src/**/*.ts*' '!./src/vendor/**' ./README.md ./config/README.md ./CONTRIBUTING.md './scripts/*.js' './config/*.js' './tests/*.ts*' --config ./config/cspell.config.json",
@@ -59,8 +59,6 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "8.56.1",
-    "@typescript-eslint/parser": "8.56.1",
     "axios": "^1.8.2",
     "detect-browser": "^5.3.0",
     "i18next": "^23.15.0",
@@ -88,7 +86,6 @@
     "changelog-light": "^3.0.0",
     "cspell": "^8.14.2",
     "eslint": "9.39.3",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-comment-length": "^2.3.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jest": "^29.15.0",
@@ -106,6 +103,7 @@
     "jest-watch-typeahead": "3.0.1",
     "prettier": "^3.3.3",
     "swagger-mock-api": "^1.6.0",
-    "ts-jest": "^29.2.5"
+    "ts-jest": "^29.2.5",
+    "typescript-eslint": "^8.56.1"
   }
 }
