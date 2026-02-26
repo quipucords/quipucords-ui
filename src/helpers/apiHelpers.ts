@@ -3,8 +3,8 @@ import { AxiosError } from 'axios';
 /**
  * Extracts and concatenates error messages from an object.
  *
- * @param { { [key: string]: unknown } | undefined } data - The data object that may contain error messages.
- * @returns {string} A string containing error messages, joined by newlines, or 'Unknown error' if none are found.
+ * @param data - The data object that may contain error messages.
+ * @returns A string containing error messages, joined by newlines, or 'Unknown error' if none are found.
  */
 const extractErrorMessage = (data: { [key: string]: unknown } | undefined): string => {
   if (!data) {

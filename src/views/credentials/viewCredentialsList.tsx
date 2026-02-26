@@ -189,8 +189,8 @@ const CredentialsListView: React.FunctionComponent = () => {
   /**
    * Fetches the translated label for a credential type.
    *
-   * @param {string} credentialType - The cred type identifier.
-   * @returns {string} Translated label for the given source type.
+   * @param credentialType - The cred type identifier.
+   * @returns Translated label for the given source type.
    */
   const getTranslatedCredentialTypeLabel = credentialType => {
     const labelKey = `dataSource.${credentialType}`;
@@ -200,8 +200,8 @@ const CredentialsListView: React.FunctionComponent = () => {
   /**
    * Indicates if credential has any associated sources or not.
    *
-   * @param {CredentialResponse} credential - The cred type identifier.
-   * @returns {boolean} Translated label for the given source type.
+   * @param credential - The cred type identifier.
+   * @returns Translated label for the given source type.
    */
   const credentialHasSources = (credential: CredentialResponse) => credential?.sources?.length;
 
