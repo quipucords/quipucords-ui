@@ -447,7 +447,6 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
             isFocused={focusedItemIndex === index}
             className={option.className}
             id={`select-multi-typeahead-with-search-${String(option.value).replace(' ', '-')}`}
-            // eslint-disable-next-line react/no-children-prop
             children={option.label || option.children}
             {...option}
             ref={null}

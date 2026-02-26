@@ -83,8 +83,8 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Fetches the translated label for a source type.
    *
-   * @param {string} sourceType - The source type identifier.
-   * @returns {string} Translated label for the given source type.
+   * @param sourceType - The source type identifier.
+   * @returns Translated label for the given source type.
    */
   const getTranslatedSourceTypeLabel = sourceType => {
     const labelKey = `dataSource.${sourceType}`;
@@ -94,8 +94,8 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Indicates if source has any associated scans or not.
    *
-   * @param {SourceResponse} source - The cred type identifier.
-   * @returns {boolean} Translated label for the given source type.
+   * @param source - The cred type identifier.
+   * @returns Translated label for the given source type.
    */
   const sourceHasConnection = (source: SourceResponse) => !!source?.connection;
 
@@ -123,7 +123,7 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Sets the selected sources for scanning.
    *
-   * @param {SourceResponse[]} sources - An array of source items to be selected for scanning.
+   * @param sources - An array of source items to be selected for scanning.
    */
   const onScanSources = (sources: SourceResponse[]) => {
     setScanSelected(sources);
@@ -132,7 +132,7 @@ const SourcesListView: React.FunctionComponent = () => {
   /**
    * Sets a single source for scanning as the selected source.
    *
-   * @param {SourceResponse} source - The source to be selected for scanning.
+   * @param source - The source to be selected for scanning.
    */
   const onScanSource = (source: SourceResponse) => {
     setScanSelected([source]);

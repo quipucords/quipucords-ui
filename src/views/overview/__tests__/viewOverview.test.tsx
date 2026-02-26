@@ -14,7 +14,7 @@ jest.mock('react-i18next', () => {
     useTranslation: () => ({
       t: stableT
     }),
-    // eslint-disable-next-line react/prop-types
+
     Trans: ({ i18nKey }) => {
       return React.createElement('div', {}, `t(${i18nKey})`);
     }

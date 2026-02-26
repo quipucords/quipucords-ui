@@ -58,11 +58,11 @@ const FEATURE_REPORTS_VIEW = process.env.REACT_APP_FEATURE_REPORTS_VIEW === 'tru
 /**
  * Generates a translation key for internationalization.
  *
- * @param {string | string[]} key - The translation key(s).
- * @param {string | string[]} value - The translation value(s).
- * @param {React.ReactElement[] | { [tagName: string]: React.ReactElement }} components - React components for
+ * @param key - The translation key(s).
+ * @param value - The translation value(s).
+ * @param components - React components for
  *     the translation.
- * @returns {string} - The translation key.
+ * @returns - The translation key.
  */
 const noopTranslate = (
   key: string | string[],
@@ -85,10 +85,10 @@ const noopTranslate = (
 /**
  * Calculates and returns a human-readable time difference from a given timestamp.
  *
- * @param {MomentInput} timestamp - The timestamp to calculate the difference from.
- * @param {object} options
- * @param {boolean} options.devMode
- * @returns {string} - A string representing the time difference, e.g., "2 hours ago".
+ * @param timestamp - The timestamp to calculate the difference from.
+ * @param options
+ * @param options.devMode
+ * @returns - A string representing the time difference, e.g., "2 hours ago".
  */
 const getTimeDisplayHowLongAgo = (timestamp: MomentInput, { devMode = DEV_MODE } = {}) => {
   if ((!timestamp || !moment.utc(timestamp).isValid()) && !devMode) {
@@ -101,9 +101,9 @@ const getTimeDisplayHowLongAgo = (timestamp: MomentInput, { devMode = DEV_MODE }
 /**
  * Formats the given date in UTC. By default uses 'DD MMMM Y, h:mm A z'.
  *
- * @param {Date} date - The date to format.
- * @param {string} format - moment format specifier
- * @returns {string} The formatted date string.
+ * @param date - The date to format.
+ * @param format - moment format specifier
+ * @returns The formatted date string.
  */
 const formatDate = (date: Date, format = 'DD MMMM Y, h:mm A z') => moment.utc(date).format(format);
 
@@ -111,7 +111,7 @@ const formatDate = (date: Date, format = 'DD MMMM Y, h:mm A z') => moment.utc(da
  * Normalizes comma-separated textarea content into array that can be submitted to backend.
  * Used by hosts and search_directories fields.
  *
- * @param {string} data - host textarea content.
+ * @param data - host textarea content.
  * @returns Array of host values which will be submitted to backend.
  */
 const normalizeCommaSeparated = (data?: string) =>
@@ -132,8 +132,8 @@ enum authType {
 /**
  * Determines the authentication type based on a CredentialResponse object.
  *
- * @param {CredentialResponse} credential - The CredentialResponse object representing authentication information.
- * @returns {string} - A string indicating the authentication type, e.g., "Username and Password".
+ * @param credential - The CredentialResponse object representing authentication information.
+ * @returns - A string indicating the authentication type, e.g., "Username and Password".
  */
 const getAuthType = ({ auth_type }: Partial<CredentialResponse>): authType => {
   switch (auth_type) {
@@ -192,8 +192,8 @@ const downloadData = (data: string | ArrayBuffer | ArrayBufferView | Blob, fileN
 /**
  * Generate a random ID.
  *
- * @param {string} prefix
- * @returns {string}
+ * @param prefix
+ * @returns
  */
 const generateId = (prefix = 'generatedid') =>
   `${prefix}-${(process.env.REACT_APP_ENV !== 'test' && Math.ceil(1e5 * Math.random())) || ''}`;
@@ -201,31 +201,31 @@ const generateId = (prefix = 'generatedid') =>
 /**
  * Return a consistent current date
  *
- * @returns {string|Date}
+ * @returns
  */
 const getCurrentDate = () => (TEST_MODE && moment.utc('20241001').toDate()) || moment.utc().toDate();
 
 /**
  * Return a consistent title image
  *
- * @param {boolean} isBrand
- * @returns {string}
+ * @param isBrand
+ * @returns
  */
 const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleBrandImg) || titleImg) as string;
 
 /**
  * Return application name as image, one that looks good on white background
  *
- * @param {boolean} isBrand
- * @returns {string}
+ * @param isBrand
+ * @returns
  */
 const getLoginTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleLoginBrandImg) || titleLoginImg) as string;
 
 /**
  * Return if a report associated with given ScanJob can be downloaded, or a summary can be accessed.
  *
- * @param {scanJob | MostRecentScan} job
- * @returns {boolean}
+ * @param job
+ * @returns
  */
 const canAccessMostRecentReport = (job?: scanJob | MostRecentScan) =>
   job?.status === 'completed' && job?.report_id !== undefined;
@@ -233,8 +233,8 @@ const canAccessMostRecentReport = (job?: scanJob | MostRecentScan) =>
 /**
  * Tell if a scan can be scanned again.
  *
- * @param {scanJob | MostRecentScan} job
- * @returns {boolean}
+ * @param job
+ * @returns
  */
 const canRequestRescan = (job?: scanJob | MostRecentScan) =>
   ['created', 'canceled', 'completed', 'failed'].includes(job?.status || '');

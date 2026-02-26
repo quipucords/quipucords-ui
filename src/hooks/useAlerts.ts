@@ -14,7 +14,7 @@ const useAlerts = () => {
   /**
    * Adds a new alert or multiple alerts to the list.
    *
-   * @param {AlertProps | AlertProps[]} options - The alert object or array of alert objects containing properties
+   * @param options - The alert object or array of alert objects containing properties
    *     like `id`, `title`, `variant`, etc.
    */
   const addAlert = (options: AlertProps | AlertProps[]) => {
@@ -31,7 +31,7 @@ const useAlerts = () => {
    *
    * This function removes the first alert matching the provided value in any property.
    *
-   * @param {unknown} value - The value to match in the alert's properties.
+   * @param value - The value to match in the alert's properties.
    */
   const removeAlert = (value: unknown) => {
     setAlerts(prevAlerts => [...prevAlerts.filter(alert => !Object.values(alert).includes(value))]);
