@@ -102,6 +102,7 @@ exports[`ActionMenu should display tooltip: hover 1`] = `
           role="none"
         >
           <button
+            aria-describedby="pf-tooltip-6"
             class="pf-v6-c-menu__item"
             role="menuitem"
             tabindex="0"
