@@ -18,7 +18,7 @@ export const SearchFilterControl = <TItem, TFilterCategoryKey extends string>({
   isNumeric,
   isDisabled = false,
   id
-}: React.PropsWithChildren<SearchFilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+}: React.PropsWithChildren<SearchFilterControlProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   // Keep internal copy of value until submitted by user
   const [inputValue, setInputValue] = React.useState(filterValue?.[0] || '');
   // Update it if it changes externally
@@ -62,7 +62,7 @@ export const SearchFilterControl = <TItem, TFilterCategoryKey extends string>({
           onClick={onFilterSubmit}
           isDisabled={isDisabled}
         >
-          
+
         </Button>
       </InputGroup>
     </ToolbarFilter>

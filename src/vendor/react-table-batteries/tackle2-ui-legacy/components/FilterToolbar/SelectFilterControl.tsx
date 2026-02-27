@@ -18,7 +18,7 @@ export const SelectFilterControl = <TItem, TFilterCategoryKey extends string>({
   isDisabled = false,
   isScrollable = false,
   id
-}: React.PropsWithChildren<SelectFilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+}: React.PropsWithChildren<SelectFilterControlProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = React.useState(false);
 
   const getOptionKeyFromOptionValue = (optionValue: string | number) =>

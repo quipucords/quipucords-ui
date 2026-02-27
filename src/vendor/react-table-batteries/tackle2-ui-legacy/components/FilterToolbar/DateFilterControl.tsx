@@ -15,7 +15,7 @@ export const DateFilterControl = <TItem, TFilterCategoryKey extends string>({
   showToolbarItem,
   isDisabled = false,
   id
-}: React.PropsWithChildren<DateFilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+}: React.PropsWithChildren<DateFilterControlProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   const onDateChange = (_event: React.FormEvent<HTMLInputElement>, _value: string, date?: Date | undefined) => {
     if (date !== undefined) {
       setFilterValue([date.toISOString()]);

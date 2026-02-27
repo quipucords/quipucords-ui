@@ -31,3 +31,7 @@ This directory contains vendored code from external packages that are no longer 
 
 - **Update URL in snapshot for jest 30 compatibility** - See PR #847
   - File: `src/vendor/react-table-batteries/components/ExtendedButton/__tests__/__snapshots__/ExtendedButton.test.tsx.snap`
+
+- **Update JSX typing** - See PR #858
+  - Files: `src/vendor/react-table-batteries/tackle2-ui-legacy/components/FilterToolbar/`,
+    `src/vendor/react-table-batteries/tackle2-ui-legacy/components/ToolbarBulkSelector.tsx`
