@@ -79,9 +79,9 @@ export interface FilterToolbarProps<TItem, TFilterCategoryKey extends string> {
   filterCategories: FilterCategory<TItem, TFilterCategoryKey>[];
   filterValues: FilterValues<TFilterCategoryKey>;
   setFilterValues: (values: FilterValues<TFilterCategoryKey>) => void;
-  beginToolbarItems?: JSX.Element;
-  endToolbarItems?: JSX.Element;
-  pagination?: JSX.Element;
+  beginToolbarItems?: React.JSX.Element;
+  endToolbarItems?: React.JSX.Element;
+  pagination?: React.JSX.Element;
   showFiltersSideBySide?: boolean;
   isDisabled?: boolean;
   id: string; // Unique per toolbar, prepended to ids on individual filter inputs
@@ -99,7 +99,7 @@ export const FilterToolbar = <TItem, TFilterCategoryKey extends string>({
   showFiltersSideBySide = false,
   isDisabled = false,
   id
-}: React.PropsWithChildren<FilterToolbarProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+}: React.PropsWithChildren<FilterToolbarProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = React.useState(false);
   const [currentFilterCategoryKey, setCurrentFilterCategoryKey] = React.useState(filterCategories[0]?.key);
 
