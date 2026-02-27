@@ -67,7 +67,7 @@ const TypeaheadCheckboxes: React.FC<TypeaheadCheckboxesProps> = ({
 
   const textInputRef = useRef<HTMLInputElement>(null);
   const justSelectedRef = useRef(false);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const { getCredentials } = useGetCredentialsApi();
 
   // Initialize selected credential map and cache from initial data
