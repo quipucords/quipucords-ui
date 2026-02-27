@@ -25,7 +25,7 @@ export interface FilterControlProps<TItem, TFilterCategoryKey extends string> {
 export const FilterControl = <TItem, TFilterCategoryKey extends string>({
   category,
   ...props
-}: React.PropsWithChildren<FilterControlProps<TItem, TFilterCategoryKey>>): JSX.Element | null => {
+}: React.PropsWithChildren<FilterControlProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   if (category.type === FilterType.date) {
     return <DateFilterControl category={category as DateFilterCategory<TItem, TFilterCategoryKey>} {...props} />;
   }
