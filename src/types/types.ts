@@ -65,6 +65,8 @@ export type SourceConnectionType = {
   systems_count: number;
   systems_scanned: number;
   systems_failed: number;
+  source_task_id: number;
+  source_task_status: string;
 };
 
 /**
