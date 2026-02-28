@@ -82,10 +82,6 @@ spec:
       name: dockerfile
       type: string
     - default: "false"
-      description: Force rebuild image
-      name: rebuild
-      type: string
-    - default: "false"
       description: Skip checks against built image
       name: skip-checks
       type: string
@@ -140,13 +136,6 @@ spec:
       value: $(tasks.clone-repository.results.commit)
     tasks:
     - name: init
-      params:
-      - name: image-url
-        value: $(params.output-image)
-      - name: rebuild
-        value: $(params.rebuild)
-      - name: skip-checks
-        value: $(params.skip-checks)
       taskRef:
         params:
         - name: name
