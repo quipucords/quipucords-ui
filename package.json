@@ -47,6 +47,9 @@
     "test:spell": "cspell './public/locales/**/en*json' './public/index.html' './src/**/*.ts*' '!./src/vendor/**' ./README.md ./config/README.md ./CONTRIBUTING.md './scripts/*.js' './config/*.js' './tests/*.ts*' --config ./config/cspell.config.json",
     "test:types": "tsc --noEmit"
   },
+  "overrides": {
+    "serialize-javascript": "^7.0.3"
+  },
   "dependencies": {
     "@patternfly/patternfly": "6.4.0",
     "@patternfly/react-component-groups": "6.4.0",
