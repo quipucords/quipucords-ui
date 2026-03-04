@@ -24,7 +24,6 @@ import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { API_QUERY_TYPES, API_REPORTS_LIST_QUERY } from '../../constants/apiConstants';
-import { helpers } from '../../helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useDownloadReportApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
@@ -36,6 +35,7 @@ import {
   useTableState
 } from '../../vendor/react-table-batteries';
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
+import { createNewerThanValidator, createOlderThanValidator, formatReportDate } from './reportUtils';
 import { useReportsQuery } from './useReportsQuery';
 
 const ReportsListView: React.FunctionComponent = () => {
@@ -126,13 +126,25 @@ const ReportsListView: React.FunctionComponent = () => {
           key: API_QUERY_TYPES.SEARCH_REPORT_DATE_NEWER,
           title: t('toolbar.label', { context: 'option_report_created_at__gte' }),
           type: FilterType.date,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__gte' })
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__gte' }),
+          validators: [
+            createNewerThanValidator(
+              API_QUERY_TYPES.SEARCH_REPORT_DATE_OLDER,
+              t('toolbar.label', { context: 'validation_date_newer_than_older' })
+            )
+          ]
         },
         {
           key: API_QUERY_TYPES.SEARCH_REPORT_DATE_OLDER,
           title: t('toolbar.label', { context: 'option_report_created_at__lte' }),
           type: FilterType.date,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__lte' })
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__lte' }),
+          validators: [
+            createOlderThanValidator(
+              API_QUERY_TYPES.SEARCH_REPORT_DATE_NEWER,
+              t('toolbar.label', { context: 'validation_date_older_than_newer' })
+            )
+          ]
         }
       ]
     },
@@ -179,14 +191,6 @@ const ReportsListView: React.FunctionComponent = () => {
       </ToolbarContent>
     </Toolbar>
   );
-
-  const formatReportDate = (dateString: string) => {
-    try {
-      return helpers.formatDate(new Date(dateString));
-    } catch (_error) {
-      return dateString;
-    }
-  };
 
   return (
     <PageSection hasBodyWrapper={false}>

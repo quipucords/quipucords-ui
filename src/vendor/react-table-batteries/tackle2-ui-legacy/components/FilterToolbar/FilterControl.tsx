@@ -4,6 +4,7 @@ import {
   DateFilterCategory,
   FilterCategory,
   FilterValue,
+  FilterValues,
   FilterType,
   SelectFilterCategory,
   SearchFilterCategory,
@@ -16,6 +17,7 @@ import { SelectFilterControl } from './SelectFilterControl';
 export interface FilterControlProps<TItem, TFilterCategoryKey extends string> {
   category: FilterCategory<TItem, TFilterCategoryKey>;
   filterValue: FilterValue;
+  filterValues: FilterValues<TFilterCategoryKey>;
   setFilterValue: (newValue: FilterValue) => void;
   showToolbarItem: boolean;
   isDisabled?: boolean;

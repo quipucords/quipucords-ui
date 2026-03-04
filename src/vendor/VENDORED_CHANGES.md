@@ -35,3 +35,11 @@ This directory contains vendored code from external packages that are no longer 
 - **Update JSX typing** - See PR #858
   - Files: `src/vendor/react-table-batteries/tackle2-ui-legacy/components/FilterToolbar/`,
     `src/vendor/react-table-batteries/tackle2-ui-legacy/components/ToolbarBulkSelector.tsx`
+
+- **Add cross-field date validation support** - See PR #875
+  - Moved `validators` from `DateFilterCategory` to `BasicFilterCategory` so all filter types can support validators
+  - Extended validator signature to receive `filterValues`, enabling cross-field validation (e.g. "newer than" must be before "older than")
+  - Passed `filterValues` through `FilterToolbar` → `FilterControl` → `DateFilterControl`
+  - Files: `tackle2-ui-legacy/components/FilterToolbar/FilterToolbar.tsx`,
+    `tackle2-ui-legacy/components/FilterToolbar/FilterControl.tsx`,
+    `tackle2-ui-legacy/components/FilterToolbar/DateFilterControl.tsx`
