@@ -4,9 +4,9 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
 [
   "",
   "./build/174*js",
-  "./build/193*js",
   "./build/221*css",
   "./build/221*js",
+  "./build/304*js",
   "./build/362*css",
   "./build/362*js",
   "./build/364*js",

@@ -218,7 +218,9 @@
     "label_placeholder_filter_search_sources_by_name": "Filter by source name",
     "label_placeholder_filter_source_type": "Filter by source type",
     "label_placeholder_filter_report_created_at__gte": "Filter by created date (newer than)",
-    "label_placeholder_filter_report_created_at__lte": "Filter by created date (older than)"
+    "label_placeholder_filter_report_created_at__lte": "Filter by created date (older than)",
+    "label_validation_date_newer_than_older": "\"Newer than\" date must be earlier than \"older than\" date",
+    "label_validation_date_older_than_newer": "\"Older than\" date must be later than \"newer than\" date"
   },
   "view": {
     "alt-logo": "{{name}} logo",

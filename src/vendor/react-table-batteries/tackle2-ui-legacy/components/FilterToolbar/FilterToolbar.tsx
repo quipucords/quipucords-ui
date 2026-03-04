@@ -38,6 +38,7 @@ export interface BasicFilterCategory<
   getItemValue?: (item: TItem) => string | boolean; // For client-side filtering
   serverFilterField?: string; // For server-side filtering, defaults to `key` if omitted. Does not need to be unique if the server supports joining repeated filters.
   getServerFilterValue?: (filterValue: FilterValue) => FilterValue; // For server-side filtering. Defaults to using the UI state's value if omitted.
+  validators?: ((date: Date, filterValues: FilterValues<TFilterCategoryKey>) => string)[];
 }
 
 export interface DateFilterCategory<TItem, TFilterCategoryKey extends string>
@@ -181,6 +182,7 @@ export const FilterToolbar = <TItem, TFilterCategoryKey extends string>({
             key={category.key}
             category={category}
             filterValue={filterValues[category.key]}
+            filterValues={filterValues}
             setFilterValue={newValue => setFilterValue(category, newValue)}
             showToolbarItem={showFiltersSideBySide || currentFilterCategory?.key === category.key}
             isDisabled={isDisabled}
