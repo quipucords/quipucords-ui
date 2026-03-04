@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { buildReport } from '../../../test-utils/factories';
-import ReportsListView from '../viewReportsList';
+import ReportsListView, { createNewerThanValidator, createOlderThanValidator } from '../viewReportsList';
 
 // Jest can't parse ESM imports from @patternfly/react-icons used by the react-table-batteries vendor code.
 // Mock them as no-op components to avoid SyntaxError during test runs.
@@ -125,5 +125,53 @@ describe('ReportsListView', () => {
 
     const downloadItem = await screen.findByText(new RegExp('download'));
     expect(downloadItem.closest('[aria-disabled="true"]')).toMatchSnapshot('download disabled');
+  });
+
+  describe('date range validators', () => {
+    const errorMsg = 'Date range is inverted';
+
+    describe('createNewerThanValidator', () => {
+      it('should return empty string when no older-than value is set', () => {
+        const validator = createNewerThanValidator(() => undefined, errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return empty string when newer-than date is before older-than date', () => {
+        const validator = createNewerThanValidator(() => '2025-12-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return empty string when dates are equal', () => {
+        const validator = createNewerThanValidator(() => '2025-06-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return error when newer-than date is after older-than date', () => {
+        const validator = createNewerThanValidator(() => '2025-01-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe(errorMsg);
+      });
+    });
+
+    describe('createOlderThanValidator', () => {
+      it('should return empty string when no newer-than value is set', () => {
+        const validator = createOlderThanValidator(() => undefined, errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return empty string when older-than date is after newer-than date', () => {
+        const validator = createOlderThanValidator(() => '2025-01-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return empty string when dates are equal', () => {
+        const validator = createOlderThanValidator(() => '2025-06-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe('');
+      });
+
+      it('should return error when older-than date is before newer-than date', () => {
+        const validator = createOlderThanValidator(() => '2025-12-01', errorMsg);
+        expect(validator(new Date('2025-06-01'))).toBe(errorMsg);
+      });
+    });
   });
 });

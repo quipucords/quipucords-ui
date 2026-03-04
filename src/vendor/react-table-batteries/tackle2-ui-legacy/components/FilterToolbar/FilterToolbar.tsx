@@ -41,7 +41,9 @@ export interface BasicFilterCategory<
 }
 
 export interface DateFilterCategory<TItem, TFilterCategoryKey extends string>
-  extends BasicFilterCategory<TItem, TFilterCategoryKey> {}
+  extends BasicFilterCategory<TItem, TFilterCategoryKey> {
+  validators?: ((date: Date) => string)[];
+}
 
 export interface MultiselectFilterCategory<TItem, TFilterCategoryKey extends string>
   extends BasicFilterCategory<TItem, TFilterCategoryKey> {
