@@ -276,7 +276,7 @@ exports[`useDeleteScanApi should process an API success response: callbackSucces
 exports[`useDownloadReportApi should attempt an API call to download a report: apiCall 1`] = `
 [
   [
-    "/api/v1/reports/123/",
+    "/api/v2/reports/123/download/",
     {
       "responseType": "blob",
     },
