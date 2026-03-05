@@ -108,6 +108,7 @@
     "prettier": "^3.3.3",
     "swagger-mock-api": "^1.6.0",
     "ts-jest": "^29.2.5",
-    "typescript-eslint": "^8.56.1"
+    "typescript-eslint": "^8.56.1",
+    "validator": ">=13.15.22"
   }
 }
