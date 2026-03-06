@@ -17,9 +17,13 @@ export const DateFilterControl = <TItem, TFilterCategoryKey extends string>({
   id
 }: React.PropsWithChildren<DateFilterControlProps<TItem, TFilterCategoryKey>>): React.JSX.Element | null => {
   const onDateChange = (_event: React.FormEvent<HTMLInputElement>, _value: string, date?: Date | undefined) => {
-    if (date !== undefined) {
-      setFilterValue([date.toISOString()]);
+    if (date === undefined) {
+      return;
     }
+    if (category.validators?.some(validator => validator(date) !== '')) {
+      return;
+    }
+    setFilterValue([date.toISOString()]);
   };
 
   const getChips = React.useCallback(() => {
@@ -43,7 +47,7 @@ export const DateFilterControl = <TItem, TFilterCategoryKey extends string>({
       categoryName={category.title}
       showToolbarItem={showToolbarItem}
     >
-      <DatePicker onChange={onDateChange} isDisabled={isDisabled} />
+      <DatePicker onChange={onDateChange} isDisabled={isDisabled} validators={category.validators} />
     </ToolbarFilter>
   );
 };

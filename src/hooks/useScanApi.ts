@@ -408,7 +408,7 @@ const useDownloadReportApi = (onAddAlert: (alert: AlertProps) => void) => {
 
   const apiCall = useCallback(
     (reportId: number, { responseType = 'blob' }: AxiosRequestConfig = {}): Promise<AxiosResponse<Blob>> =>
-      axios.get(`${process.env.REACT_APP_REPORTS_SERVICE}${reportId}/`, { responseType }),
+      axios.get(`${process.env.REACT_APP_REPORTS_SERVICE_LIST}${reportId}/download/`, { responseType }),
     []
   );
 

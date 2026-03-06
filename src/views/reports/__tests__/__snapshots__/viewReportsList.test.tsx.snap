@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ReportsListView should disable download for a non-downloadable report: download disabled 1`] = `
+<button
+  aria-disabled="true"
+  class="pf-v6-c-menu__item"
+  role="menuitem"
+  tabindex="-1"
+  type="button"
+>
+  <span
+    class="pf-v6-c-menu__item-main"
+  >
+    <span
+      class="pf-v6-c-menu__item-text"
+    >
+      t([
+  "table.label",
+  {
+    "context": "download"
+  }
+])
+    </span>
+  </span>
+</button>
+`;
+
+exports[`ReportsListView should show empty state when there are no reports: empty state description 1`] = `
+<div
+  class="pf-v6-c-empty-state__body"
+>
+  t([
+  "view.empty-state",
+  {
+    "context": "reports_description"
+  }
+])
+</div>
+`;
+
+exports[`ReportsListView should show empty state when there are no reports: empty state title 1`] = `
+<h4
+  class="pf-v6-c-empty-state__title-text"
+>
+  t([
+  "view.empty-state",
+  {
+    "context": "reports_title"
+  }
+])
+</h4>
+`;
+
+exports[`ReportsListView should show error state when the query fails: error state 1`] = `
+<h2
+  class="pf-v6-c-title pf-m-lg"
+  data-ouia-component-id="OUIA-Generated-Title-1"
+  data-ouia-component-type="PF6/Title"
+  data-ouia-safe="true"
+>
+  t([
+  "view.error_title",
+  {
+    "context": "reports"
+  }
+])
+</h2>
+`;
+
+exports[`ReportsListView should trigger download for a downloadable report: download called 1`] = `
+[
+  [
+    10,
+  ],
+]
+`;

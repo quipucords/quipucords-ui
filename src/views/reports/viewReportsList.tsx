@@ -38,6 +38,45 @@ import {
 import { useTrWithBatteries } from '../../vendor/react-table-batteries/components/useTrWithBatteries';
 import { useReportsQuery } from './useReportsQuery';
 
+/**
+ * Reads a filter value from URL search params where react-table-batteries
+ * persists them as a JSON object under the "filters" key.
+ */
+export const getFilterValueFromUrl = (filterKey: string): string | undefined => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const filters = JSON.parse(params.get('filters') || '{}');
+    return filters[filterKey]?.[0];
+  } catch {
+    return undefined;
+  }
+};
+
+/**
+ * Cross-field date validators for "newer than" / "older than" filter pairs.
+ * Return an error message when the date creates an inverted range,
+ * or empty string when valid (PatternFly DatePicker convention).
+ */
+export const createNewerThanValidator =
+  (getOlderThanValue: () => string | undefined, errorMessage: string) =>
+  (date: Date): string => {
+    const olderThan = getOlderThanValue();
+    if (olderThan && date > new Date(olderThan)) {
+      return errorMessage;
+    }
+    return '';
+  };
+
+export const createOlderThanValidator =
+  (getNewerThanValue: () => string | undefined, errorMessage: string) =>
+  (date: Date): string => {
+    const newerThan = getNewerThanValue();
+    if (newerThan && date < new Date(newerThan)) {
+      return errorMessage;
+    }
+    return '';
+  };
+
 const ReportsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
@@ -126,13 +165,25 @@ const ReportsListView: React.FunctionComponent = () => {
           key: API_QUERY_TYPES.SEARCH_REPORT_DATE_NEWER,
           title: t('toolbar.label', { context: 'option_report_created_at__gte' }),
           type: FilterType.date,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__gte' })
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__gte' }),
+          validators: [
+            createNewerThanValidator(
+              () => getFilterValueFromUrl(API_QUERY_TYPES.SEARCH_REPORT_DATE_OLDER),
+              t('toolbar.label', { context: 'validation_date_newer_than_older' })
+            )
+          ]
         },
         {
           key: API_QUERY_TYPES.SEARCH_REPORT_DATE_OLDER,
           title: t('toolbar.label', { context: 'option_report_created_at__lte' }),
           type: FilterType.date,
-          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__lte' })
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_created_at__lte' }),
+          validators: [
+            createOlderThanValidator(
+              () => getFilterValueFromUrl(API_QUERY_TYPES.SEARCH_REPORT_DATE_NEWER),
+              t('toolbar.label', { context: 'validation_date_older_than_newer' })
+            )
+          ]
         }
       ]
     },
