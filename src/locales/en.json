@@ -11,6 +11,24 @@
   "action-menu": {
     "aria-label": "Action Menu Toggle"
   },
+  "external-auth": {
+    "lightspeed": {
+      "flow_body-initiated": "Waiting for auth code",
+      "flow_header-awaiting-authorization": "Please authorize {{appName}} in Lightspeed",
+      "flow_body-awaiting-authorization": "Please click the button below to open Lightspeed web page and grant authorization to {{appName}}",
+      "flow_body-awaiting-authorization-button": "Grant access in Lightspeed",
+      "flow_header-successful": "Authentication successful",
+      "flow_body-successful": "You are now authenticated to Lightspeed. This modal will close automatically",
+      "flow_header-errored": "Authentication failed",
+      "flow_body-errored": "<0>{{msg}}</0><1>Please close the modal and try again. If the issue persist, contact support.</1>",
+      "error_no-uri": "{{appName}} server did not provide external authorization URL",
+      "error_expired": "Authorization token expired during authorization attempt",
+      "error_missing": "{{appName}} server canceled authorization attempt",
+      "error_unknown": "Unknown error",
+      "toolbar_action-not-logged-in": "Log in to Lightspeed",
+      "modal_title-not-logged-in": "Logging in to Lightspeed"
+    }
+  },
   "form-dialog": {
     "confirmation_heading_delete-credential": "Are you sure you want to delete the credential {{name}}?",
     "confirmation_heading_delete-source": "Are you sure you want to delete the source {{name}}?",

@@ -1,30 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
+import { setupLocalStorageMock } from '../../../helpers/testHelpers';
 import { AppToolbar as ViewToolbar } from '../viewLayoutToolbar';
 
 describe('ViewToolbar', () => {
-  let localStorageMock: { [key: string]: string };
+  let localStorageMockData: { [key: string]: string };
 
   beforeEach(() => {
-    // Mock localStorage
-    localStorageMock = {};
-
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: jest.fn((key: string) => localStorageMock[key] || null),
-        setItem: jest.fn((key: string, value: string) => {
-          localStorageMock[key] = value;
-        }),
-        removeItem: jest.fn((key: string) => {
-          delete localStorageMock[key];
-        }),
-        clear: jest.fn(() => {
-          localStorageMock = {};
-        })
-      },
-      writable: true
-    });
+    const { localStorageMockData: storage } = setupLocalStorageMock();
+    localStorageMockData = storage;
 
     // Mock matchMedia
     Object.defineProperty(window, 'matchMedia', {
@@ -81,7 +66,7 @@ describe('ViewToolbar', () => {
 
   it('should initialize dark theme from localStorage using environment variable', async () => {
     // Set up localStorage to return 'dark' theme using the env variable key
-    localStorageMock['discovery-ui-theme'] = 'dark';
+    localStorageMockData['discovery-ui-theme'] = 'dark';
 
     const mockGetUser = jest.fn().mockResolvedValue('Test User');
     const mockLogout = jest.fn().mockResolvedValue(undefined);
@@ -107,7 +92,7 @@ describe('ViewToolbar', () => {
 
   it('should initialize light theme from localStorage using environment variable', async () => {
     // Set up localStorage to return 'light' theme using the env variable key
-    localStorageMock['discovery-ui-theme'] = 'light';
+    localStorageMockData['discovery-ui-theme'] = 'light';
 
     const mockGetUser = jest.fn().mockResolvedValue('Test User');
     const mockLogout = jest.fn().mockResolvedValue(undefined);
@@ -133,7 +118,7 @@ describe('ViewToolbar', () => {
 
   it('should fallback to system preference when localStorage is empty', async () => {
     // Ensure localStorage is empty
-    localStorageMock = {};
+    localStorageMockData = {};
 
     // Mock system preference for dark mode
     window.matchMedia = jest.fn().mockImplementation(query => ({

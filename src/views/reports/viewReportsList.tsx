@@ -13,6 +13,8 @@ import {
   AlertActionCloseButton,
   AlertGroup,
   AlertVariant,
+  Button,
+  ButtonVariant,
   EmptyState,
   EmptyStateBody,
   PageSection,
@@ -20,11 +22,15 @@ import {
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
+import { LightspeedAuth } from '../../components/lightspeedAuth/lightspeedAuth';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { API_QUERY_TYPES, API_REPORTS_LIST_QUERY } from '../../constants/apiConstants';
+import { helpers } from '../../helpers/helpers';
 import { useAlerts } from '../../hooks/useAlerts';
+import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
 import { useDownloadReportApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type ReportType } from '../../types/types';
@@ -44,6 +50,8 @@ const ReportsListView: React.FunctionComponent = () => {
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { downloadReport } = useDownloadReportApi(addAlert);
+  const { cancelLightspeedAuth, requestLightspeedAuth, lightspeedAuthFlowState } = useLightspeedAuthApi();
+  const [lightspeedAuthModal, setLightspeedAuthModal] = React.useState<boolean>(false);
 
   /**
    * Invalidates the query cache for the reports list, triggering a refresh.
@@ -185,12 +193,33 @@ const ReportsListView: React.FunctionComponent = () => {
         <ToolbarItem>
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
+        <ToolbarItem>
+          <Button
+            variant={ButtonVariant.primary}
+            isDisabled={!helpers.isLightspeedAuthenticated()}
+            onClick={() => {
+              setLightspeedAuthModal(true);
+              requestLightspeedAuth();
+            }}
+          >
+            {t('external-auth.lightspeed.toolbar', { context: 'action-not-logged-in' })}
+          </Button>
+        </ToolbarItem>
         <PaginationToolbarItem>
           <Pagination variant="top" isCompact widgetId="reports-pagination" />
         </PaginationToolbarItem>
       </ToolbarContent>
     </Toolbar>
   );
+
+  // automatically close modal once we authenticated
+  React.useEffect(() => {
+    if (lightspeedAuthFlowState.state === 'Successful') {
+      setLightspeedAuthModal(false);
+      // more like "reset state" than a cancel
+      cancelLightspeedAuth();
+    }
+  }, [lightspeedAuthFlowState, cancelLightspeedAuth]);
 
   return (
     <PageSection hasBodyWrapper={false}>
@@ -264,6 +293,17 @@ const ReportsListView: React.FunctionComponent = () => {
         </ConditionalTableBody>
       </Table>
       <Pagination variant="bottom" widgetId="reports-pagination-bottom" />
+      <Modal
+        variant={ModalVariant.small}
+        title={t('external-auth.lightspeed.modal', { context: 'title-not-logged-in' })}
+        isOpen={lightspeedAuthModal}
+        onClose={() => {
+          setLightspeedAuthModal(false);
+          cancelLightspeedAuth();
+        }}
+      >
+        <LightspeedAuth lightspeedAuthFlowState={lightspeedAuthFlowState} />
+      </Modal>
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (
           <Alert

@@ -239,6 +239,27 @@ const canAccessMostRecentReport = (job?: scanJob | MostRecentScan) =>
 const canRequestRescan = (job?: scanJob | MostRecentScan) =>
   ['created', 'canceled', 'completed', 'failed'].includes(job?.status || '');
 
+/**
+ * Set or clear Lightspeed username
+ *
+ * @param username
+ */
+const setLightspeedUsername = (username?: string) => {
+  if (!username) {
+    localStorage?.removeItem(`${process.env.REACT_APP_AUTH_LIGHTSPEED_USERNAME_KEY}`);
+  } else {
+    localStorage?.setItem(`${process.env.REACT_APP_AUTH_LIGHTSPEED_USERNAME_KEY}`, username);
+  }
+};
+
+/**
+ * Tell if user has authenticated to Lightspeed.
+ *
+ * @returns
+ */
+const isLightspeedAuthenticated = () =>
+  localStorage?.getItem(`${process.env.REACT_APP_AUTH_LIGHTSPEED_USERNAME_KEY}`) !== null;
+
 const helpers = {
   authType,
   canAccessMostRecentReport,
@@ -253,6 +274,8 @@ const helpers = {
   getLoginTitleImg,
   formatDate,
   normalizeCommaSeparated,
+  setLightspeedUsername,
+  isLightspeedAuthenticated,
   DEV_MODE,
   PROD_MODE,
   TEST_MODE,

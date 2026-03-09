@@ -30,7 +30,7 @@ module.exports = ({ RELATIVE_DIRNAME, REACT_APP_UI_BRAND, REACT_APP_UI_BRAND_NAM
   updateTsConfig({
     filePath: path.resolve(RELATIVE_DIRNAME, 'tsconfig.json'),
     addConfiguration: {
-      exclude: ['**/*.test.ts', '**/*.test.tsx']
+      exclude: ['**/*.test.ts', '**/*.test.tsx', '**/testHelpers.ts']
     }
   });
 
