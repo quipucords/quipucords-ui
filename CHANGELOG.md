@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0](https://github.com/quipucords/quipucords-ui/compare/dc58c0704a313d37df2294b2302c04ebf2e7a912...64d8659b3c31b5aaecee2f91042c0d9766dc5beb) (2026-03-09)
+
+
+### Features
+* **reports** enable report downloading  ([8004771](https://github.com/quipucords/quipucords-ui/commit/80047714cfb6f14fe5c95d810cc3a08d5bfe7297))
+
+### Chores
+* **deps** lock file maintenance  ([3a55ced](https://github.com/quipucords/quipucords-ui/commit/3a55ced15edeeb480f8705b6891ad5d5c4b3e82a))
+* **deps** update konflux references  ([9a4387b](https://github.com/quipucords/quipucords-ui/commit/9a4387b376d4d1df6d08840d2bd84cbaeaa1ce07))
+* **deps** lock file maintenance  ([5ebc1d4](https://github.com/quipucords/quipucords-ui/commit/5ebc1d46ab98d1c2b4b3aa268189ccaae0fd8cf8))
+*  Revamp renovate.json  ([e3a5b0a](https://github.com/quipucords/quipucords-ui/commit/e3a5b0a0c4eb562d6407b359a9d0df94ce6143db))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 09b0ed7  ([6ad2180](https://github.com/quipucords/quipucords-ui/commit/6ad2180f68c04eecf4911ccd6aa37eb03f967b67))
+* **deps** lock file maintenance  ([300658f](https://github.com/quipucords/quipucords-ui/commit/300658fc4bf14f3ced6c0fb83705c8d273f42e61))
+* **deps** lock file maintenance  ([8f48c9a](https://github.com/quipucords/quipucords-ui/commit/8f48c9adb4e8d22bfcd5f1fe503ff17b269d3a17))
+*  re-add eslint-config-prettier  ([9b4b4a9](https://github.com/quipucords/quipucords-ui/commit/9b4b4a90dd4c4483e58e68c0ffaa7c81596693d3))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to c22b81d  ([4160067](https://github.com/quipucords/quipucords-ui/commit/416006721b31106bf3f29df841b3003811659c6c))
+* **deps** update quay.io/konflux-ci/yq docker digest to 466005c  ([0021168](https://github.com/quipucords/quipucords-ui/commit/00211689d20bdb25279712f1ead7847ff2d40002))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to 78f4182  ([b31099a](https://github.com/quipucords/quipucords-ui/commit/b31099a11784d36d95ebfb40ee9684af070eef5f))
+*  update dependencies to newer version  ([ba22b54](https://github.com/quipucords/quipucords-ui/commit/ba22b545ca15b037206287dd50147a073ed64a20))
+*  update typing  ([a2e2fec](https://github.com/quipucords/quipucords-ui/commit/a2e2fecbc99470bda5bfbe08d5ac41552703562a))
+*  update typing in react-table-batteries  ([64dc371](https://github.com/quipucords/quipucords-ui/commit/64dc371a169e2fe8bcff64c9cb10a929d69395e4))
+* **deps** Apply task-init 0.2 -> 0.3 migration to main  ([f60e4f8](https://github.com/quipucords/quipucords-ui/commit/f60e4f88f40b5e4f9bdd0be1b48eb6b380024bc5))
+* **deps** Apply task-init 0.2 -> 0.3 migration  ([b3b18e1](https://github.com/quipucords/quipucords-ui/commit/b3b18e15fcf29a1a0706710b83c791661d37e6e9))
+* **deps** update konflux references  ([ecd8aa0](https://github.com/quipucords/quipucords-ui/commit/ecd8aa0d1c9b3e80b37e1886613bc78a82873bf1))
+*  Force serialize-javascript 7.0.3 to make npm audit happy  ([6854021](https://github.com/quipucords/quipucords-ui/commit/6854021392be20d60d974d55fa90918d6b5e5972))
+*  Disable caching for audit task  ([6b9df6a](https://github.com/quipucords/quipucords-ui/commit/6b9df6ab665b370858472b7e8e31e5513efdb206))
+*  add CODEOWNERS file to satisfy IBM/Red Hat security requirements  ([974f690](https://github.com/quipucords/quipucords-ui/commit/974f690301658cdb443e99a9f21b398e05f29052))
+*  run eslint --fix  ([b5f7ac3](https://github.com/quipucords/quipucords-ui/commit/b5f7ac33e78afe86fbaf2f1924497738f9efc559))
+*  modernize eslint config  ([6859c3f](https://github.com/quipucords/quipucords-ui/commit/6859c3ff34468129ed6bf3a3a96ebb78d8d57ee7))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 04e9f30  ([fe903b2](https://github.com/quipucords/quipucords-ui/commit/fe903b21d770a8e3c97e27d721065358e460756e))
+* **deps** update registry.access.redhat.com/ubi9/nginx-124 docker digest to ece0c2d  ([5bd4869](https://github.com/quipucords/quipucords-ui/commit/5bd48698ad5f12be2858721476c92030e45d690b))
+*  Trust setup-node to do the caching  ([7513221](https://github.com/quipucords/quipucords-ui/commit/7513221562c4eb0146592c51ba1d0948bcf30899))
+*  Remove custom patches  ([e3fe792](https://github.com/quipucords/quipucords-ui/commit/e3fe79266e08890d2cd03f837a2ae16d7019daf4))
+* **react-table-batteries** jest 30 compatibility  ([d440e8c](https://github.com/quipucords/quipucords-ui/commit/d440e8c403c4b79cc847c3e6f455a19c5774e03a))
+* **eslint** eslint 9 compatibility fixes  ([13c5d6e](https://github.com/quipucords/quipucords-ui/commit/13c5d6e4f79bdb70e550ce2f26809db344ef7267))
+* **jest** Jest compatibility fixes  ([2275655](https://github.com/quipucords/quipucords-ui/commit/227565505aa97e528de5f4a1216473e7936d773d))
+*  Update dependencies  ([f1bb8ca](https://github.com/quipucords/quipucords-ui/commit/f1bb8ca90953182e64bcb92e4fbb56b88b6da6ed))
+*  Fix renovate.json syntax  ([de68387](https://github.com/quipucords/quipucords-ui/commit/de683876a3addfeee8b4a7adf112e3e42b64a4cf))
+*  Add renovate.json file  ([94263b3](https://github.com/quipucords/quipucords-ui/commit/94263b3fc4b967919a10472a43d1c4a083a009a6))
+*  make `npm audit` happy  ([fa2187a](https://github.com/quipucords/quipucords-ui/commit/fa2187a351ace42e998f7b6e2eb8d64824571026))
+* **konflux** update apply-tags task  ([8e581aa](https://github.com/quipucords/quipucords-ui/commit/8e581aa0170111e92019c6a939e37ab723757691))
+
+### Builds
+*  make update-lockfiles  ([64d8659](https://github.com/quipucords/quipucords-ui/commit/64d8659b3c31b5aaecee2f91042c0d9766dc5beb))
+*  npm update  ([16cc877](https://github.com/quipucords/quipucords-ui/commit/16cc87741ca538a6e91ef183ec59e495c2fd61a3))
+*  force validator to a newer version  ([d6ac476](https://github.com/quipucords/quipucords-ui/commit/d6ac4764976869553311c4412ae4f5e33762e479))
+*  npm update, make update-lockfiles  ([283d644](https://github.com/quipucords/quipucords-ui/commit/283d6447c2ac58dd19472d28a380ab56f1d95dc7))
+
+### Bug Fixes
+* **deps** update language dependencies  ([0843eff](https://github.com/quipucords/quipucords-ui/commit/0843eff99e8c95212cadbc78499c4300f13b0f6e))
+* **deps** manual fixes needed to update all non-major dependencies  ([8d4ec7a](https://github.com/quipucords/quipucords-ui/commit/8d4ec7a5e47f1c575add86211145e1ff86fc7f82))
+* **deps** update all non-major dependencies  ([eaba238](https://github.com/quipucords/quipucords-ui/commit/eaba2388bc2f9bf73125748278d5bbf0fd359d65))
+
 ## [2.4.5](https://github.com/quipucords/quipucords-ui/compare/fb85143635e106118dbb6ac76b5a02d35de076f4...1d2ba7a1c3babc74a8452375dcfb0f1c34fe1e13) (2026-02-12)
 
 
