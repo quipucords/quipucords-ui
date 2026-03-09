@@ -8,6 +8,7 @@ import React from 'react';
 import moment from 'moment';
 import { scanJob } from '../../types/types';
 import { helpers } from '../helpers';
+import { setupLocalStorageMock } from '../testHelpers';
 
 describe('getTimeDisplayHowLongAgo', () => {
   it(`should return a timestamp estimate`, () => {
@@ -248,5 +249,54 @@ describe('downloadData', () => {
     expect(revokeObjectURLMock).toHaveBeenCalledWith(expect.any(String));
 
     jest.restoreAllMocks();
+  });
+});
+
+describe('setLightspeedUsername', () => {
+  let localStorageMockData: { [key: string]: string };
+
+  beforeEach(() => {
+    const { localStorageMockData: storage } = setupLocalStorageMock();
+    localStorageMockData = storage;
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should set username', async () => {
+    const username = 'user';
+    helpers.setLightspeedUsername(username);
+    expect(localStorageMockData).toHaveProperty('lightspeed-username', username);
+  });
+
+  it('should clear username', async () => {
+    localStorageMockData['lightspeed-username'] = 'user';
+    helpers.setLightspeedUsername(undefined);
+    expect(localStorageMockData).not.toHaveProperty('lightspeed-username');
+  });
+});
+
+describe('isLightspeedAuthenticated', () => {
+  let localStorageMockData: { [key: string]: string };
+
+  beforeEach(() => {
+    const { localStorageMockData: storage } = setupLocalStorageMock();
+    localStorageMockData = storage;
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should return false when not authenticated', async () => {
+    const isAuthenticated = helpers.isLightspeedAuthenticated();
+    expect(isAuthenticated).toBe(false);
+  });
+
+  it('should return true when authenticated', async () => {
+    localStorageMockData['lightspeed-username'] = 'user';
+    const isAuthenticated = helpers.isLightspeedAuthenticated();
+    expect(isAuthenticated).toBe(true);
   });
 });

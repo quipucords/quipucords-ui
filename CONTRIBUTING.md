@@ -343,7 +343,7 @@ Since the migration to [konflux](https://konflux-ci.dev/docs/) as our downstream
 our Containerfile MUST have the sha256 digest explicitly set. As part of the routine to update dependencies,
 those digests must be updated as well.
 
-In general, Renovate/Minkmaker automatic PRs should be able to keep the base images on the Containerfile in sync.
+In general, Renovate/Mintmaker automatic PRs should be able to keep the base images on the Containerfile in sync.
 However, if a manual bump is required, there's a make target that shall take care of it. Just run
 
 `make lock-baseimages`

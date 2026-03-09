@@ -346,3 +346,32 @@ export type ReportType = {
   can_download: boolean;
   cannot_download_reason: 'no_deployment' | 'status_pending' | 'status_failed' | null;
 };
+
+type ExternalAuthStatus = 'pending' | 'valid' | 'failed' | 'expired' | 'missing';
+
+type ExternalAuthLightspeedMetadata = {
+  status: ExternalAuthStatus;
+  status_reason: string;
+  org_id: string;
+  account_number: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+};
+
+export type ExternalAuthLoginLightspeedResponseType = {
+  status: ExternalAuthStatus;
+  user_code: string;
+  verification_uri: string;
+  verification_uri_complete: string;
+};
+
+export type ExternalAuthStatusLightspeedResponseType = {
+  status: ExternalAuthStatus;
+  metadata: ExternalAuthLightspeedMetadata;
+};
+
+export type ExternalAuthParamsType = {
+  auth_type: 'lightspeed';
+};
