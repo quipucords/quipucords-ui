@@ -8,6 +8,7 @@ describe('useLightspeedAuthApi', () => {
   let spyPost;
   let spyGet;
   let spySetLightspeedUsername;
+  let spyIsLightspeedAuthenticated;
   // Must be consistent with src/helpers/apiHelpers.ts `if (!data)` value
   const defaultApiHelperErrorMessage = 'Unknown error';
   const defaultVerificationUriComplete = 'https://sso.redhat.com/device?user_code=ABCD-EFGH';
@@ -40,6 +41,7 @@ describe('useLightspeedAuthApi', () => {
     spyPost = jest.spyOn(axios, 'post');
     spyGet = jest.spyOn(axios, 'get');
     spySetLightspeedUsername = jest.spyOn(helpers, 'setLightspeedUsername');
+    spyIsLightspeedAuthenticated = jest.spyOn(helpers, 'isLightspeedAuthenticated');
   });
 
   afterEach(() => {
@@ -192,5 +194,19 @@ describe('useLightspeedAuthApi', () => {
     expect(spySetLightspeedUsername).toHaveBeenCalledWith(defaultUsername);
 
     jest.useRealTimers();
+  });
+
+  it('should log out of Lightspeed', async () => {
+    spyPost.mockResolvedValueOnce({});
+    spyIsLightspeedAuthenticated.mockReturnValueOnce(true);
+
+    const hook = renderHook(() => useLightspeedAuthApi());
+
+    expect(hook.result.current.lightspeedIsAuthenticated).toBe(true);
+
+    await act(async () => {
+      await hook.result.current.requestLightspeedAuthLogout();
+    });
+    expect(hook.result.current.lightspeedIsAuthenticated).toBe(false);
   });
 });

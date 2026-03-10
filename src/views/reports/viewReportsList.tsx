@@ -28,7 +28,6 @@ import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { LightspeedAuth } from '../../components/lightspeedAuth/lightspeedAuth';
 import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTimeButton';
 import { API_QUERY_TYPES, API_REPORTS_LIST_QUERY } from '../../constants/apiConstants';
-import { helpers } from '../../helpers/helpers';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
 import { useDownloadReportApi } from '../../hooks/useScanApi';
@@ -50,7 +49,13 @@ const ReportsListView: React.FunctionComponent = () => {
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
   const { downloadReport } = useDownloadReportApi(addAlert);
-  const { cancelLightspeedAuth, requestLightspeedAuth, lightspeedAuthFlowState } = useLightspeedAuthApi();
+  const {
+    cancelLightspeedAuth,
+    requestLightspeedAuth,
+    requestLightspeedAuthLogout,
+    lightspeedAuthFlowState,
+    lightspeedIsAuthenticated
+  } = useLightspeedAuthApi();
   const [lightspeedAuthModal, setLightspeedAuthModal] = React.useState<boolean>(false);
 
   /**
@@ -194,16 +199,26 @@ const ReportsListView: React.FunctionComponent = () => {
           <RefreshTimeButton lastRefresh={refreshTime?.getTime() ?? 0} onRefresh={onRefresh} />
         </ToolbarItem>
         <ToolbarItem>
-          <Button
-            variant={ButtonVariant.primary}
-            isDisabled={helpers.isLightspeedAuthenticated()}
-            onClick={() => {
-              setLightspeedAuthModal(true);
-              requestLightspeedAuth();
-            }}
-          >
-            {t('external-auth.lightspeed.toolbar', { context: 'action-not-logged-in' })}
-          </Button>
+          {(!lightspeedIsAuthenticated && (
+            <Button
+              variant={ButtonVariant.primary}
+              onClick={() => {
+                setLightspeedAuthModal(true);
+                requestLightspeedAuth();
+              }}
+            >
+              {t('external-auth.lightspeed.toolbar', { context: 'action-not-logged-in' })}
+            </Button>
+          )) || (
+            <Button
+              variant={ButtonVariant.primary}
+              onClick={() => {
+                requestLightspeedAuthLogout();
+              }}
+            >
+              {t('external-auth.lightspeed.toolbar', { context: 'action-logged-in' })}
+            </Button>
+          )}
         </ToolbarItem>
         <PaginationToolbarItem>
           <Pagination variant="top" isCompact widgetId="reports-pagination" />
