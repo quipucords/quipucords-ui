@@ -26,6 +26,7 @@
       "error_missing": "{{appName}} server canceled authorization attempt",
       "error_unknown": "Unknown error",
       "toolbar_action-not-logged-in": "Log in to Lightspeed",
+      "toolbar_action-logged-in": "Log out of Lightspeed",
       "modal_title-not-logged-in": "Logging in to Lightspeed"
     }
   },

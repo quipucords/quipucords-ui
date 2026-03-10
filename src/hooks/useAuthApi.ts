@@ -34,6 +34,9 @@ const useLightspeedAuthApi = () => {
   });
   const [lightspeedPollingTrigger, setLightspeedPollingTrigger] = useState<boolean>(false);
   const [lightspeedAuthPollAttempt, setLightspeedAuthPollAttempt] = useState<number>(0);
+  const [lightspeedIsAuthenticated, setLightspeedIsAuthenticated] = useState<boolean>(
+    helpers.isLightspeedAuthenticated()
+  );
   const { t } = useTranslation();
 
   const waitInterval = process.env.REACT_APP_EXTERNAL_AUTH_POLL_INTERVAL
@@ -69,6 +72,14 @@ const useLightspeedAuthApi = () => {
     setLightspeedAuthFlowState({ state: 'Initiated' });
     setLightspeedPollingTrigger(false);
     setLightspeedAuthPollAttempt(0);
+    setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
+  }, []);
+
+  const requestLightspeedAuthLogout = useCallback(async () => {
+    await axios.post(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGOUT}`).finally(() => {
+      helpers.setLightspeedUsername(undefined);
+      setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
+    });
   }, []);
 
   useEffect(() => {
@@ -86,6 +97,7 @@ const useLightspeedAuthApi = () => {
         if (status === 'valid') {
           setLightspeedAuthFlowState({ state: 'Successful' });
           helpers.setLightspeedUsername(response.data.metadata.username);
+          setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
           return;
         }
 
@@ -126,8 +138,10 @@ const useLightspeedAuthApi = () => {
 
   return {
     requestLightspeedAuth,
+    requestLightspeedAuthLogout,
     cancelLightspeedAuth,
-    lightspeedAuthFlowState
+    lightspeedAuthFlowState,
+    lightspeedIsAuthenticated
   };
 };
 
