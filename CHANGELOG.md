@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.1](https://github.com/quipucords/quipucords-ui/compare/8d87974ba93ba1576e52c6c09eccd6d99d497e39...feb0299a16d6874f2cc980f2ab6235e613216b94) (2026-03-11)
+
+
+### Chores
+*  renovate.json tweaks  ([723df26](https://github.com/quipucords/quipucords-ui/commit/723df26fdeb3999e2b32323c68a3ac3e77d1dec8))
+
+### Bug Fixes
+*  manually update bundle taskref because Konflux broke the old one  ([feb0299](https://github.com/quipucords/quipucords-ui/commit/feb0299a16d6874f2cc980f2ab6235e613216b94))
+
 ## [2.5.0](https://github.com/quipucords/quipucords-ui/compare/dc58c0704a313d37df2294b2302c04ebf2e7a912...64d8659b3c31b5aaecee2f91042c0d9766dc5beb) (2026-03-09)
 
 
