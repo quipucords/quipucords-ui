@@ -62,11 +62,7 @@ describe('useLightspeedAuthApi', () => {
       state: 'Successful'
     });
     expect(spyPost).toHaveBeenCalledTimes(1);
-    expect(spyPost).toHaveBeenCalledWith(
-      process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN,
-      {},
-      { params: { auth_type: 'lightspeed' } }
-    );
+    expect(spyPost).toHaveBeenCalledWith(process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN);
     expect(spyGet).toHaveBeenCalledTimes(1);
   });
 
@@ -190,11 +186,7 @@ describe('useLightspeedAuthApi', () => {
       state: 'Successful'
     });
     expect(spyPost).toHaveBeenCalledTimes(1);
-    expect(spyPost).toHaveBeenCalledWith(
-      process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN,
-      {},
-      { params: { auth_type: 'lightspeed' } }
-    );
+    expect(spyPost).toHaveBeenCalledWith(process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN);
     expect(spyGet).toHaveBeenCalledTimes(2);
     expect(spySetLightspeedUsername).toHaveBeenCalledTimes(1);
     expect(spySetLightspeedUsername).toHaveBeenCalledWith(defaultUsername);

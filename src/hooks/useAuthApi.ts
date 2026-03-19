@@ -5,8 +5,7 @@ import helpers from '../helpers';
 import apiHelpers from '../helpers/apiHelpers';
 import {
   type ExternalAuthLoginLightspeedResponseType,
-  type ExternalAuthStatusLightspeedResponseType,
-  type ExternalAuthParamsType
+  type ExternalAuthStatusLightspeedResponseType
 } from '../types/types';
 
 interface InitiatedState {
@@ -43,11 +42,8 @@ const useLightspeedAuthApi = () => {
 
   const requestLightspeedAuth = useCallback(async () => {
     let response: AxiosResponse<ExternalAuthLoginLightspeedResponseType>;
-    const config: { params: ExternalAuthParamsType } = {
-      params: { auth_type: 'lightspeed' }
-    };
     try {
-      response = await axios.post(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN}`, {}, config);
+      response = await axios.post(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_LOGIN}`);
       const verificationUri = response.data.verification_uri_complete;
       if (!verificationUri) {
         throw new Error(t('external-auth.lightspeed.error', { context: 'no-uri', appName: helpers.UI_NAME }));
@@ -82,12 +78,8 @@ const useLightspeedAuthApi = () => {
 
     let pollingTimer: NodeJS.Timeout;
 
-    const config: { params: ExternalAuthParamsType } = {
-      params: { auth_type: 'lightspeed' }
-    };
-
     axios
-      .get(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_STATUS}`, config)
+      .get(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_STATUS}`)
       .then((response: AxiosResponse<ExternalAuthStatusLightspeedResponseType>) => {
         const status = response.data.status;
 
