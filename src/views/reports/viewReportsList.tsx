@@ -196,7 +196,7 @@ const ReportsListView: React.FunctionComponent = () => {
         <ToolbarItem>
           <Button
             variant={ButtonVariant.primary}
-            isDisabled={!helpers.isLightspeedAuthenticated()}
+            isDisabled={helpers.isLightspeedAuthenticated()}
             onClick={() => {
               setLightspeedAuthModal(true);
               requestLightspeedAuth();

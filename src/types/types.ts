@@ -371,7 +371,3 @@ export type ExternalAuthStatusLightspeedResponseType = {
   status: ExternalAuthStatus;
   metadata: ExternalAuthLightspeedMetadata;
 };
-
-export type ExternalAuthParamsType = {
-  auth_type: 'lightspeed';
-};
