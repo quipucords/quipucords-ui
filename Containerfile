@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:172cdb4f236de35daa18e1273261392aa9b045b653f129b26ccdf6f5417a2e16 as npm_builder
+FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:779375d8e6cb7a6232213f799128ac3e9d9717afa75fc40c23a95917b68ffa79 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 ARG REACT_APP_FEATURE_REPORTS_VIEW="false"
 # Become root before installing anything
