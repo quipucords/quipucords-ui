@@ -27,6 +27,8 @@
       "error_unknown": "Unknown error",
       "toolbar_action-not-logged-in": "Log in to Lightspeed",
       "toolbar_action-logged-in": "Log out of Lightspeed",
+      "toolbar_status-not-logged-in": "Not connected to Lightspeed",
+      "toolbar_status-logged-in": "Connected to Lightspeed",
       "modal_title-not-logged-in": "Logging in to Lightspeed"
     }
   },
@@ -145,8 +147,10 @@
     "label_download": "Download",
     "label_download-disabled-tooltip": "Only scans that completed successfully can be downloaded",
     "label_publish-disabled-tooltip-report-no_connection": "This is disconnected installation",
-    "label_publish-disabled-tooltip-report-no_credential": "Lightspeed credentials not provided",
-    "label_publish-disabled-tooltip-report-auth_failed": "Lightspeed authentication failed",
+    "label_publish-disabled-tooltip-report-auth_pending": "Lightspeed authentication in progress. Please authorize the tool in console.redhat.com",
+    "label_publish-disabled-tooltip-report-auth_failed": "Lightspeed authentication failed. Please log in to Lightspeed again",
+    "label_publish-disabled-tooltip-report-auth_expired": "Lightspeed token expired. Please log in to Lightspeed again",
+    "label_publish-disabled-tooltip-report-auth_missing": "Please log in to Lightspeed first",
     "label_publish-disabled-tooltip-report-not_complete": "Lightspeed report could not be created",
     "label_publish-disabled-tooltip-report-no_hosts": "Lightspeed report was not generated because there were 0 valid hosts",
     "label_publish-disabled-tooltip-report-null": "Report cannot be published for unknown reason",
