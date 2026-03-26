@@ -342,7 +342,15 @@ export type ReportType = {
   origin: 'local' | 'uploaded' | 'merged';
   scan_id: number;
   can_publish: boolean;
-  cannot_publish_reason: 'no_connection' | 'no_credentials' | 'auth_failed' | 'not_complete' | 'no_hosts' | null;
+  cannot_publish_reason:
+    | 'no_connection'
+    | 'auth_pending'
+    | 'auth_failed'
+    | 'auth_expired'
+    | 'auth_missing'
+    | 'not_complete'
+    | 'no_hosts'
+    | null;
   can_download: boolean;
   cannot_download_reason: 'no_deployment' | 'status_pending' | 'status_failed' | null;
 };

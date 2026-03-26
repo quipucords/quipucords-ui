@@ -15,6 +15,7 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
+  Content,
   EmptyState,
   EmptyStateBody,
   PageSection,
@@ -23,6 +24,7 @@ import {
   getUniqueId
 } from '@patternfly/react-core';
 import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
+import { ConnectedIcon, DisconnectedIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
 import { LightspeedAuth } from '../../components/lightspeedAuth/lightspeedAuth';
@@ -61,9 +63,9 @@ const ReportsListView: React.FunctionComponent = () => {
   /**
    * Invalidates the query cache for the reports list, triggering a refresh.
    */
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     queryClient.invalidateQueries({ queryKey: [API_REPORTS_LIST_QUERY] });
-  };
+  }, [queryClient]);
 
   /**
    * Check if report can be published.
@@ -213,12 +215,19 @@ const ReportsListView: React.FunctionComponent = () => {
             <Button
               variant={ButtonVariant.primary}
               onClick={() => {
-                requestLightspeedAuthLogout();
+                requestLightspeedAuthLogout().then(() => onRefresh());
               }}
             >
               {t('external-auth.lightspeed.toolbar', { context: 'action-logged-in' })}
             </Button>
           )}
+        </ToolbarItem>
+        <ToolbarItem align={{ default: 'alignEnd' }} alignSelf="center">
+          <Content>
+            {(lightspeedIsAuthenticated && t('external-auth.lightspeed.toolbar', { context: 'status-logged-in' })) ||
+              t('external-auth.lightspeed.toolbar', { context: 'status-not-logged-in' })}
+          </Content>
+          <Content>{(lightspeedIsAuthenticated && <ConnectedIcon />) || <DisconnectedIcon />}</Content>
         </ToolbarItem>
         <PaginationToolbarItem>
           <Pagination variant="top" isCompact widgetId="reports-pagination" />
@@ -233,8 +242,9 @@ const ReportsListView: React.FunctionComponent = () => {
       setLightspeedAuthModal(false);
       // more like "reset state" than a cancel
       cancelLightspeedAuth();
+      onRefresh();
     }
-  }, [lightspeedAuthFlowState, cancelLightspeedAuth]);
+  }, [lightspeedAuthFlowState, cancelLightspeedAuth, onRefresh]);
 
   return (
     <PageSection hasBodyWrapper={false}>
