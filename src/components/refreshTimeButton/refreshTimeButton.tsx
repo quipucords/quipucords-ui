@@ -41,8 +41,8 @@ const RefreshTimeButton: React.FC<RefreshTimeButtonProps> = ({ lastRefresh = 0, 
     <Button variant="link" icon={<RebootingIcon />} onClick={onRefresh} ouiaId="refresh">
       <span className="last-refresh-time">
         {t('refresh-time-button.refreshed', {
-          context: lastRefresh && 'load',
-          refresh: lastRefresh && refresh
+          context: lastRefresh ? 'load' : undefined,
+          refresh: lastRefresh ? refresh : undefined
         })}
       </span>
     </Button>
