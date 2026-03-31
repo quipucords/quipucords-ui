@@ -33,10 +33,7 @@ exports[`RefreshTimeButton should render component without refresh time set: no 
   >
     t([
   "refresh-time-button.refreshed",
-  {
-    "context": 0,
-    "refresh": 0
-  }
+  {}
 ])
   </span>
 </Button>
