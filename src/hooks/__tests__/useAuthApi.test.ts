@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import axios from 'axios';
+import axios, { AxiosError, type AxiosResponse } from 'axios';
 import { helpers } from '../../helpers/helpers';
 import { ExternalAuthLoginLightspeedResponseType, ExternalAuthStatusLightspeedResponseType } from '../../types/types';
 import { LightspeedAuthFlowState, useLightspeedAuthApi } from '../useAuthApi';
@@ -13,7 +13,11 @@ describe('useLightspeedAuthApi', () => {
   const defaultApiHelperErrorMessage = 'Unknown error';
   const defaultVerificationUriComplete = 'https://sso.redhat.com/device?user_code=ABCD-EFGH';
   const defaultUsername = 'user';
-  const defaultLoginResponse: { data: ExternalAuthLoginLightspeedResponseType } = {
+  const defaultLoginResponse: AxiosResponse<ExternalAuthLoginLightspeedResponseType> = {
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+    config: {} as any,
     data: {
       status: 'pending',
       user_code: 'ABCD-EFGH',
@@ -21,7 +25,11 @@ describe('useLightspeedAuthApi', () => {
       verification_uri_complete: defaultVerificationUriComplete
     }
   };
-  const defaultStatusResponse: { data: ExternalAuthStatusLightspeedResponseType } = {
+  const defaultStatusResponse: AxiosResponse<ExternalAuthStatusLightspeedResponseType> = {
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+    config: {} as any,
     data: {
       status: 'valid',
       metadata: {
@@ -70,7 +78,7 @@ describe('useLightspeedAuthApi', () => {
 
   it('should handle login request failure', async () => {
     const errorMessage = 'Network error';
-    spyPost.mockRejectedValue({ isAxiosError: true, message: errorMessage });
+    spyPost.mockRejectedValueOnce(new AxiosError(errorMessage, 'ERR_NETWORK', {} as any, {}));
 
     const hook = renderHook(() => useLightspeedAuthApi());
 
@@ -108,7 +116,7 @@ describe('useLightspeedAuthApi', () => {
   it('should handle status poll failure', async () => {
     const errorMessage = 'Network error';
     spyPost.mockResolvedValueOnce(defaultLoginResponse);
-    spyGet.mockRejectedValue({ isAxiosError: true, message: errorMessage });
+    spyGet.mockRejectedValueOnce(new AxiosError(errorMessage, 'ERR_NETWORK', {} as any, {}));
 
     const hook = renderHook(() => useLightspeedAuthApi());
 
@@ -129,7 +137,19 @@ describe('useLightspeedAuthApi', () => {
   it('should handle status failure', async () => {
     spyPost.mockResolvedValueOnce(defaultLoginResponse);
     const errorMessage = 'Too many widgets';
-    spyGet.mockResolvedValueOnce({ data: { status: 'failed', metadata: { status_reason: errorMessage } } });
+    const response: AxiosResponse<ExternalAuthStatusLightspeedResponseType> = {
+      ...defaultStatusResponse,
+      data: {
+        ...defaultStatusResponse.data,
+        status: 'failed',
+        metadata: {
+          ...defaultStatusResponse.data.metadata,
+          status: 'failed',
+          status_reason: errorMessage
+        }
+      }
+    };
+    spyGet.mockResolvedValueOnce(response);
 
     const hook = renderHook(() => useLightspeedAuthApi());
 
@@ -142,6 +162,72 @@ describe('useLightspeedAuthApi', () => {
     expect(hook.result.current.lightspeedAuthFlowState).toStrictEqual<LightspeedAuthFlowState>({
       state: 'Errored',
       errorMessage: errorMessage
+    });
+    expect(spyPost).toHaveBeenCalledTimes(1);
+    expect(spyGet).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle status missing', async () => {
+    spyPost.mockResolvedValueOnce(defaultLoginResponse);
+    const errorMessage = 'Widget not created yet';
+    const response: AxiosResponse<ExternalAuthStatusLightspeedResponseType> = {
+      ...defaultStatusResponse,
+      data: {
+        ...defaultStatusResponse.data,
+        status: 'missing',
+        metadata: {
+          ...defaultStatusResponse.data.metadata,
+          status: 'missing',
+          status_reason: errorMessage
+        }
+      }
+    };
+    spyGet.mockResolvedValueOnce(response);
+
+    const hook = renderHook(() => useLightspeedAuthApi());
+
+    expect(hook.result.current.lightspeedAuthFlowState).toStrictEqual<LightspeedAuthFlowState>({ state: 'Initiated' });
+
+    await act(async () => {
+      await hook.result.current.requestLightspeedAuth();
+    });
+
+    expect(hook.result.current.lightspeedAuthFlowState).toEqual<LightspeedAuthFlowState>({
+      state: 'Errored',
+      errorMessage: expect.stringContaining('"context": "missing"')
+    });
+    expect(spyPost).toHaveBeenCalledTimes(1);
+    expect(spyGet).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle status expired', async () => {
+    spyPost.mockResolvedValueOnce(defaultLoginResponse);
+    const errorMessage = 'Widget is too old';
+    const response: AxiosResponse<ExternalAuthStatusLightspeedResponseType> = {
+      ...defaultStatusResponse,
+      data: {
+        ...defaultStatusResponse.data,
+        status: 'expired',
+        metadata: {
+          ...defaultStatusResponse.data.metadata,
+          status: 'expired',
+          status_reason: errorMessage
+        }
+      }
+    };
+    spyGet.mockResolvedValueOnce(response);
+
+    const hook = renderHook(() => useLightspeedAuthApi());
+
+    expect(hook.result.current.lightspeedAuthFlowState).toStrictEqual<LightspeedAuthFlowState>({ state: 'Initiated' });
+
+    await act(async () => {
+      await hook.result.current.requestLightspeedAuth();
+    });
+
+    expect(hook.result.current.lightspeedAuthFlowState).toEqual<LightspeedAuthFlowState>({
+      state: 'Errored',
+      errorMessage: expect.stringContaining('"context": "expired"')
     });
     expect(spyPost).toHaveBeenCalledTimes(1);
     expect(spyGet).toHaveBeenCalledTimes(1);
@@ -168,7 +254,18 @@ describe('useLightspeedAuthApi', () => {
   it('should poll a status endpoint', async () => {
     jest.useFakeTimers();
     spyPost.mockResolvedValueOnce(defaultLoginResponse);
-    spyGet.mockResolvedValueOnce({ data: { status: 'pending' } }).mockResolvedValueOnce(defaultStatusResponse);
+    const pendingResponse: AxiosResponse<ExternalAuthStatusLightspeedResponseType> = {
+      ...defaultStatusResponse,
+      data: {
+        ...defaultStatusResponse.data,
+        status: 'pending',
+        metadata: {
+          ...defaultStatusResponse.data.metadata,
+          status: 'pending'
+        }
+      }
+    };
+    spyGet.mockResolvedValueOnce(pendingResponse).mockResolvedValueOnce(defaultStatusResponse);
 
     const hook = renderHook(() => useLightspeedAuthApi());
 
@@ -178,8 +275,8 @@ describe('useLightspeedAuthApi', () => {
       await hook.result.current.requestLightspeedAuth();
     });
 
-    // useEffect(..., [mergeJobId, mergePollAttempt]) uses setTimeout, which is scheduled to run AFTER
-    // above await completes. So we need another one.
+    // useEffect(..., [lightspeedPollingTrigger, lightspeedAuthPollAttempt]) uses setTimeout,
+    // which is scheduled to run AFTER above await completes. So we need another one.
     await act(async () => {
       await jest.advanceTimersToNextTimer();
     });

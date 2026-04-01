@@ -123,6 +123,8 @@ const useLightspeedAuthApi = () => {
         if (isAxiosError(error)) {
           const errorMessage = [error.message, apiHelpers.extractErrorMessage(error.response?.data)].join(': ');
           setLightspeedAuthFlowState({ state: 'Errored', errorMessage: errorMessage });
+        } else if (error instanceof Error) {
+          setLightspeedAuthFlowState({ state: 'Errored', errorMessage: error.message });
         } else {
           setLightspeedAuthFlowState({
             state: 'Errored',
