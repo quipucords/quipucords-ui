@@ -49,8 +49,7 @@
     "test:types": "tsc --noEmit"
   },
   "overrides": {
-    "serialize-javascript": "^7.0.3",
-    "lodash": "4.17.23"
+    "serialize-javascript": "^7.0.3"
   },
   "dependencies": {
     "@patternfly/patternfly": "6.4.0",
