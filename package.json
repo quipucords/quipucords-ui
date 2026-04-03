@@ -75,7 +75,7 @@
     "react-router-dom": "^6.30.3",
     "use-deep-compare": "^1.3.0",
     "webpack": "^5.96.1",
-    "weldable": "5.0.11"
+    "weldable": "5.0.12"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.2",
@@ -103,8 +103,8 @@
     "express": "^5.2.0",
     "glob": "^13.0.6",
     "globals": "^17.3.0",
-    "jest": "30.2.0",
-    "jest-environment-jsdom": "30.2.0",
+    "jest": "30.3.0",
+    "jest-environment-jsdom": "30.3.0",
     "jest-watch-typeahead": "3.0.1",
     "prettier": "^3.3.3",
     "swagger-mock-api": "^1.6.0",
