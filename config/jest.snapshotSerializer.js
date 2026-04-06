@@ -4,16 +4,20 @@
  * expanded DOM or internal fiber structures
  */
 
-const reactElementSymbol = Symbol.for('react.transitional.element');
+const reactTransitionalElementSymbol = Symbol.for('react.transitional.element');
+const reactClassicElementSymbol = Symbol.for('react.element');
 
 module.exports = {
   test(value) {
     // Handle both direct React elements and our wrapper objects
     if (value && typeof value === 'object') {
-      if (value.$$typeof === reactElementSymbol) {
+      // Check for both transitional and classic React elements
+      if (value.$$typeof === reactTransitionalElementSymbol || value.$$typeof === reactClassicElementSymbol) {
         return true;
       }
-      if (value.$$reactElement && value.$$reactElement.$$typeof === reactElementSymbol) {
+      if (value.$$reactElement &&
+          (value.$$reactElement.$$typeof === reactTransitionalElementSymbol ||
+           value.$$reactElement.$$typeof === reactClassicElementSymbol)) {
         return true;
       }
     }
@@ -107,7 +111,7 @@ module.exports = {
           } else if (typeof value === 'boolean' && value) {
             return `\n  ${key}`;
           } else {
-            return `\n  ${key}={${printer(value, config, indentation + '  ', depth, refs)}}`;
+            return `\n  ${key}={${printer(value, config, indentation + '  ', depth + 1, refs)}}`;
           }
         })
         .join('');
@@ -121,7 +125,7 @@ module.exports = {
       const children = Array.isArray(props.children) ? props.children : [props.children];
       children.forEach(child => {
         if (child != null) {
-          result += `\n  ${printer(child, config, indentation + '  ', depth, refs)}`;
+          result += `\n  ${printer(child, config, indentation + '  ', depth + 1, refs)}`;
         }
       });
 
