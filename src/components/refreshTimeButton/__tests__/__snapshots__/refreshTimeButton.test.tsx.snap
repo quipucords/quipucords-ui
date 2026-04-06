@@ -2,39 +2,39 @@
 
 exports[`RefreshTimeButton should render a basic component: basic 1`] = `
 <Button
+  variant="link"
   icon={<RebootingIcon />}
   onClick={[Function]}
   ouiaId="refresh"
-  variant="link"
 >
   <span
-    className="last-refresh-time"
-  >
-    t([
+  className="last-refresh-time"
+>
+  "t([
   "refresh-time-button.refreshed",
   {
     "context": "load",
     "refresh": "7 days ago"
   }
-])
-  </span>
+])"
+</span>
 </Button>
 `;
 
 exports[`RefreshTimeButton should render component without refresh time set: no refresh set 1`] = `
 <Button
+  variant="link"
   icon={<RebootingIcon />}
   onClick={[Function]}
   ouiaId="refresh"
-  variant="link"
 >
   <span
-    className="last-refresh-time"
-  >
-    t([
+  className="last-refresh-time"
+>
+  "t([
   "refresh-time-button.refreshed",
   {}
-])
-  </span>
+])"
+</span>
 </Button>
 `;

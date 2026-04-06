@@ -3,108 +3,102 @@
 exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
 <Page
   className="not-found"
-  defaultManagedSidebarIsOpen={true}
-  getBreakpoint={[Function]}
-  getVerticalBreakpoint={[Function]}
-  isBreadcrumbWidthLimited={false}
-  isManagedSidebar={false}
-  isNotificationDrawerExpanded={false}
-  mainComponent="main"
   mainContainerId="primary-app-container"
-  mainTabIndex={-1}
-  masthead={
-    <Masthead>
-      <MastheadMain>
-        <MastheadToggle>
-          <PageToggleButton
-            aria-label="Global navigation"
-            isHamburgerButton={true}
-            onSidebarToggle={[Function]}
-            ouiaId="global-navigation"
-          />
-        </MastheadToggle>
-        <MastheadBrand>
-          <MastheadLogo>
-            <Brand
-              alt="t([
+  masthead={<Masthead>
+  <MastheadMain>
+  <MastheadToggle>
+  <PageToggleButton
+  isHamburgerButton
+  aria-label="Global navigation"
+  ouiaId="global-navigation"
+  onSidebarToggle={[Function]}
+ />
+</MastheadToggle>
+  <MastheadBrand>
+  <MastheadLogo>
+  <Brand
+  alt="t([
   "view.alt-logo",
   {
     "name": "Quipucords"
   }
 ])"
-              heights={
-                {
-                  "default": "36px",
-                }
-              }
-            >
-              <source
-                srcSet="title.svg"
-              />
-            </Brand>
-          </MastheadLogo>
-        </MastheadBrand>
-      </MastheadMain>
-      <MastheadContent>
-        <AppToolbar />
-      </MastheadContent>
-    </Masthead>
-  }
-  onNotificationDrawerExpand={[Function]}
-  sidebar={
-    <PageSidebar>
-      <PageSidebarBody>
-        <Nav
-          id="nav-primary-simple"
-          onSelect={[Function]}
-          onToggle={[Function]}
-          ouiaSafe={true}
-        >
-          <NavList
-            backScrollAriaLabel="Scroll back"
-            forwardScrollAriaLabel="Scroll forward"
-            id="nav-list-simple"
-          >
-            <NavItem
-              id="t([
+  heights={{
+              "default": "36px",
+            }}
+>
+  <source
+  srcSet="title.svg"
+ />
+</Brand>
+</MastheadLogo>
+</MastheadBrand>
+</MastheadMain>
+  <MastheadContent>
+  <AppToolbar />
+</MastheadContent>
+</Masthead>}
+  sidebar={<PageSidebar>
+  <PageSidebarBody>
+  <Nav
+  id="nav-primary-simple"
+  onSelect={[Function]}
+  onToggle={[Function]}
+  ouiaSafe
+>
+  <NavList
+  id="nav-list-simple"
+  forwardScrollAriaLabel="Scroll forward"
+  backScrollAriaLabel="Scroll back"
+>
+  <NavItem
+  id="t([
   "Credentials"
 ])-0"
-              isActive={false}
-            >
-              <NavLink
-                to="/credentials"
-              >
-                t([
+  isActive={false}
+>
+  <NavLink
+  to="/credentials"
+>
+  "t([
   "Credentials"
-])
-              </NavLink>
-            </NavItem>
-            <NavItem
-              id="t([
+])"
+</NavLink>
+</NavItem>
+  <NavItem
+  id="t([
   "Scans"
 ])-1"
-              isActive={false}
-            >
-              <NavLink>
-                t([
-  "Scans"
-])
-              </NavLink>
-            </NavItem>
-          </NavList>
-        </Nav>
-      </PageSidebarBody>
-    </PageSidebar>
-  }
-  skipToContent={
-    <SkipToContent
-      href="#primary-app-container"
-      onClick={[Function]}
-    >
-      Skip to Content
-    </SkipToContent>
-  }
+  isActive={false}
 >
-  Lorem ipsum
+  <NavLink
+  to={undefined}
+>
+  "t([
+  "Scans"
+])"
+</NavLink>
+</NavItem>
+</NavList>
+</Nav>
+</PageSidebarBody>
+</PageSidebar>}
+  skipToContent={<SkipToContent
+  onClick={[Function]}
+  href="#primary-app-container"
+>
+  "Skip to Content"
+</SkipToContent>}
+  isManagedSidebar={false}
+  isBreadcrumbWidthLimited={false}
+  defaultManagedSidebarIsOpen
+  mainTabIndex={-1}
+  isNotificationDrawerExpanded={false}
+  onNotificationDrawerExpand={[Function]}
+  mainComponent="main"
+  getBreakpoint={[Function]}
+  getVerticalBreakpoint={[Function]}
+>
+  "Lorem ipsum"
 </Page>
 `;

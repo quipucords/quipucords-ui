@@ -24,18 +24,7 @@ exports[`ShowScansModal should have the correct title: title 1`] = `
 
 exports[`ShowScansModal should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="medium"
   title="t([
   "view.label",
   {
@@ -43,19 +32,31 @@ exports[`ShowScansModal should render a basic component: basic 1`] = `
     "name": "Lorem ipsum"
   }
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="medium"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "view.scans.show-modal.loading"
 ])"
-    />
-  </Bullseye>
+ />
+</Bullseye>
 </Modal>
 `;
 

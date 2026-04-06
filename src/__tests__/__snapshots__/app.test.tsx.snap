@@ -3,11 +3,11 @@
 exports[`App should render a basic component: basic 1`] = `
 <I18n>
   <Login>
-    <BrowserRouter>
-      <AppLayout>
-        <AppRoutes />
-      </AppLayout>
-    </BrowserRouter>
-  </Login>
+  <BrowserRouter>
+  <AppLayout>
+  <AppRoutes />
+</AppLayout>
+</BrowserRouter>
+</Login>
 </I18n>
 `;

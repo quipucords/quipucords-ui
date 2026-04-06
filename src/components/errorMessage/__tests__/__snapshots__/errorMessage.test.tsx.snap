@@ -2,49 +2,45 @@
 
 exports[`ErrorMessage should allow a custom title and description: custom 1`] = `
 <EmptyState
+  titleText={<Title
+  headingLevel="h2"
+  size="lg"
+>
+  "Lorem ipsum"
+</Title>}
   icon={[Function]}
-  titleText={
-    <Title
-      headingLevel="h2"
-      size="lg"
-    >
-      Lorem ipsum
-    </Title>
-  }
   variant="full"
 >
   <EmptyStateBody>
-    Dolor sit
-  </EmptyStateBody>
+  "Dolor sit"
+</EmptyStateBody>
 </EmptyState>
 `;
 
 exports[`ErrorMessage should render a basic component: basic 1`] = `
 <EmptyState
-  icon={[Function]}
-  titleText={
-    <Title
-      headingLevel="h2"
-      size="lg"
-    >
-      t([
+  titleText={<Title
+  headingLevel="h2"
+  size="lg"
+>
+  "t([
   "view.error",
   {
     "context": "title",
     "appName": "Quipucords"
   }
-])
-    </Title>
-  }
+])"
+</Title>}
+  icon={[Function]}
   variant="full"
 >
   <EmptyStateBody>
-    t([
+  "t([
   "view.error",
   {
     "context": "description"
   }
-])
-  </EmptyStateBody>
+])"
+</EmptyStateBody>
 </EmptyState>
 `;

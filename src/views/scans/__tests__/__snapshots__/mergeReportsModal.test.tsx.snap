@@ -2,136 +2,145 @@
 
 exports[`MergeReportsModal should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="medium"
   title="t([
   "merge.modal",
   {
     "context": "title"
   }
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="medium"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "merge.modal",
   {
     "context": "body-in-progress"
   }
 ])"
-    />
-  </Bullseye>
+ />
+</Bullseye>
+  false
+  false
 </Modal>
 `;
 
 exports[`MergeReportsModal should render a component after merge failed: errored 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="medium"
   title="t([
   "merge.modal",
   {
     "context": "title"
   }
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="medium"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
+  false
+  false
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "merge.modal",
   {
     "context": "header-errored"
   }
 ])"
-    >
-      <EmptyStateBody>
-        t([
+>
+  <EmptyStateBody>
+  "t([
   "merge.modal",
   {
     "context": "body-errored",
     "msg": "Lorem ipsum dolor sit"
   }
-])
-      </EmptyStateBody>
-    </EmptyState>
-  </Bullseye>
+])"
+</EmptyStateBody>
+</EmptyState>
+</Bullseye>
 </Modal>
 `;
 
 exports[`MergeReportsModal should render a component after merge succeeded: success 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="medium"
   title="t([
   "merge.modal",
   {
     "context": "title"
   }
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="medium"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
+  false
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "merge.modal",
   {
     "context": "header-successful"
   }
 ])"
-    >
-      <EmptyStateBody>
-        t([
+>
+  <EmptyStateBody>
+  "t([
   "merge.modal",
   {
     "context": "body-successful"
   }
-])
-      </EmptyStateBody>
-    </EmptyState>
-  </Bullseye>
+])"
+</EmptyStateBody>
+</EmptyState>
+</Bullseye>
+  false
 </Modal>
 `;

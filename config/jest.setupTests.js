@@ -2,6 +2,13 @@ import React, { act } from 'react';
 import { render, renderHook } from '@testing-library/react';
 import { dotenv } from 'weldable';
 import '@testing-library/jest-dom';
+import { TextEncoder, TextDecoder } from 'util';
+
+/**
+ * Polyfill TextEncoder/TextDecoder for jsdom (required by react-router-dom v7)
+ */
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 
 /**
  * Set dotenv params.
@@ -37,18 +44,39 @@ jest.mock('react-i18next', () => ({
 global.URL.createObjectURL = jest.fn();
 
 /**
- * Emulate for router-dom hooks
+ * Emulate for router-dom hooks and components
+ * React Router v7 requires proper mocking for test environment
  */
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  NavLink: args => {
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    const MockNavLink = props => <a {...props} />;
-    return <MockNavLink {...args} />;
-  },
-  useLocation: () => ({ pathname: '/' }),
-  useNavigate: () => jest.fn()
-}));
+jest.mock('react-router-dom', () => {
+  const actual = jest.requireActual('react-router-dom');
+
+  const BrowserRouter = ({ children }) => children;
+  BrowserRouter.displayName = 'BrowserRouter';
+
+  const Routes = ({ children }) => children;
+  Routes.displayName = 'Routes';
+
+  const Route = (props) => React.createElement('Route', props);
+  Route.displayName = 'Route';
+
+  const Navigate = (props) => React.createElement('Navigate', props);
+  Navigate.displayName = 'Navigate';
+
+  return {
+    ...actual,
+    BrowserRouter,
+    Routes,
+    Route,
+    Navigate,
+    NavLink: args => {
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      const MockNavLink = props => <a {...props} />;
+      return <MockNavLink {...args} />;
+    },
+    useLocation: () => ({ pathname: '/' }),
+    useNavigate: () => jest.fn()
+  };
+});
 
 /**
  * Quick React function component and hook results testing. Based off of classic Enzyme testing,
@@ -64,6 +92,7 @@ jest.mock('react-router-dom', () => ({
  */
 export const shallowComponent = async testComponent => {
   const isOneOff = result => !result || typeof result === 'string' || typeof result === 'number';
+  const isReactElement = result => result && typeof result === 'object' && result.$$typeof === Symbol.for('react.transitional.element');
 
   const localRenderFC = async (component, updatedProps) => {
     if (typeof component?.type === 'function') {
@@ -122,6 +151,21 @@ export const shallowComponent = async testComponent => {
           updatedR.querySelectorAll = querySelectorAll;
           updatedR.setProps = setProps;
           return updatedR;
+        }
+
+        // If result is a React element, wrap it with helper methods
+        // The custom snapshot serializer will unwrap and format it properly
+        if (isReactElement(result.current)) {
+          // Create a wrapper that holds the element and provides helper methods
+          const wrapper = {
+            $$reactElement: result.current, // Mark this for the snapshot serializer
+            unmount,
+            getHTML,
+            querySelector,
+            querySelectorAll,
+            setProps
+          };
+          return wrapper;
         }
 
         return {

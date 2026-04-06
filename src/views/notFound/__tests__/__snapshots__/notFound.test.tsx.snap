@@ -5,27 +5,27 @@ exports[`NotFound should render a basic component: basic 1`] = `
   hasBodyWrapper={false}
 >
   <EmptyState
-    headingLevel="h1"
-    icon={[Function]}
-    titleText="t([
+  headingLevel="h1"
+  icon={[Function]}
+  titleText="t([
   "view.empty-state_title_not-found"
 ])"
-    variant="full"
-  >
-    <EmptyStateBody>
-      t([
+  variant="full"
+>
+  <EmptyStateBody>
+  "t([
   "view.empty-state_description_not-found"
-])
-    </EmptyStateBody>
-    <EmptyStateFooter>
-      <Button
-        onClick={[Function]}
-      >
-        t([
+])"
+</EmptyStateBody>
+  <EmptyStateFooter>
+  <Button
+  onClick={[Function]}
+>
+  "t([
   "view.label_not-found_home"
-])
-      </Button>
-    </EmptyStateFooter>
-  </EmptyState>
+])"
+</Button>
+</EmptyStateFooter>
+</EmptyState>
 </PageSection>
 `;

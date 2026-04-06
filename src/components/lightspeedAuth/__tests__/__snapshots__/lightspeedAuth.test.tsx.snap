@@ -3,125 +3,133 @@
 exports[`LightspeedAuth should render a basic component: basic 1`] = `
 <div>
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "external-auth.lightspeed.flow",
   {
     "context": "body-initiated"
   }
 ])"
-    />
-  </Bullseye>
+ />
+</Bullseye>
+  false
+  false
+  false
 </div>
 `;
 
 exports[`LightspeedAuth should render a component after authentication failed: errored 1`] = `
 <div>
+  false
+  false
+  false
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "external-auth.lightspeed.flow",
   {
     "context": "header-errored"
   }
 ])"
-    >
-      <EmptyStateBody>
-        <Trans
-          components={
-            [
-              <p />,
-              <p />,
-            ]
-          }
-          context="body-errored"
-          i18nKey="external-auth.lightspeed.flow"
-          values={
-            {
-              "msg": "Lorem ipsum dolor sit",
-            }
-          }
-        />
-      </EmptyStateBody>
-    </EmptyState>
-  </Bullseye>
+>
+  <EmptyStateBody>
+  <Trans
+  i18nKey="external-auth.lightspeed.flow"
+  context="body-errored"
+  components={[
+            <p />,
+            <p />,
+          ]}
+  values={{
+            "msg": "Lorem ipsum dolor sit",
+          }}
+ />
+</EmptyStateBody>
+</EmptyState>
+</Bullseye>
 </div>
 `;
 
 exports[`LightspeedAuth should render a component after authentication succeeded: success 1`] = `
 <div>
+  false
+  false
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "external-auth.lightspeed.flow",
   {
     "context": "header-successful"
   }
 ])"
-    >
-      <EmptyStateBody>
-        t([
+>
+  <EmptyStateBody>
+  "t([
   "external-auth.lightspeed.flow",
   {
     "context": "body-successful"
   }
-])
-      </EmptyStateBody>
-    </EmptyState>
-  </Bullseye>
+])"
+</EmptyStateBody>
+</EmptyState>
+</Bullseye>
+  false
 </div>
 `;
 
 exports[`LightspeedAuth should render component waiting for authorization: waiting-for-user 1`] = `
 <div>
+  false
   <Bullseye>
-    <EmptyState
-      headingLevel="h2"
-      icon={[Function]}
-      titleText="t([
+  <EmptyState
+  headingLevel="h2"
+  icon={[Function]}
+  titleText="t([
   "external-auth.lightspeed.flow",
   {
     "context": "header-awaiting-authorization",
     "appName": "Quipucords"
   }
 ])"
-    >
-      <EmptyStateBody>
-        <p>
-          t([
+>
+  <EmptyStateBody>
+  <p>
+  "t([
   "external-auth.lightspeed.flow",
   {
     "context": "body-awaiting-authorization",
     "appName": "Quipucords"
   }
-])
-        </p>
-        <p
-          className="pf-v6-u-mt-xl"
-        >
-          <Button
-            component="a"
-            href="https://sso.redhat.com/device?user_code=ABCD-EFGH"
-            size="lg"
-            target="_blank"
-            variant="primary"
-          >
-            t([
+])"
+</p>
+  <p
+  className="pf-v6-u-mt-xl"
+>
+  <Button
+  component="a"
+  href="https://sso.redhat.com/device?user_code=ABCD-EFGH"
+  target="_blank"
+  variant="primary"
+  size="lg"
+>
+  "t([
   "external-auth.lightspeed.flow",
   {
     "context": "body-awaiting-authorization-button"
   }
-])
-          </Button>
-        </p>
-      </EmptyStateBody>
-    </EmptyState>
-  </Bullseye>
+])"
+</Button>
+</p>
+</EmptyStateBody>
+</EmptyState>
+</Bullseye>
+  false
+  false
 </div>
 `;

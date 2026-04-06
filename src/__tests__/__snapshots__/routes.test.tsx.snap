@@ -2,46 +2,44 @@
 
 exports[`Routes should render a basic component: basic 1`] = `
 <React.Suspense
-  fallback={
-    <p>
-       Loading...
-    </p>
-  }
+  fallback={<p>
+  " Loading..."
+</p>}
 >
   <Routes>
-    <Route
-      element={<UNDEFINED />}
-      path="/overview"
-    />
-    <Route
-      element={<UNDEFINED />}
-      path="/credentials"
-    />
-    <Route
-      element={<UNDEFINED />}
-      path="/sources"
-    />
-    <Route
-      element={<UNDEFINED />}
-      path="/scans"
-    />
-    <Route
-      element={<UNDEFINED />}
-      path="/reports"
-    />
-    <Route
-      element={
-        <Navigate
-          replace={true}
-          to="/overview"
-        />
-      }
-      path="/"
-    />
-    <Route
-      element={<NotFound />}
-      path="*"
-    />
-  </Routes>
+  [
+      <Route
+  path="/overview"
+  element={<Lazy />}
+ />,
+      <Route
+  path="/credentials"
+  element={<Lazy />}
+ />,
+      <Route
+  path="/sources"
+  element={<Lazy />}
+ />,
+      <Route
+  path="/scans"
+  element={<Lazy />}
+ />,
+      <Route
+  path="/reports"
+  element={<Lazy />}
+ />,
+    ]
+  <Route
+  path="/"
+  element={<Navigate
+  to="/overview"
+  replace
+ />}
+ />
+  <Route
+  path="*"
+  element={<NotFound />}
+ />
+</Routes>
 </React.Suspense>
 `;
