@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.2](https://github.com/quipucords/quipucords-ui/compare/3b5697078a57598310dd7d44daf17a519f2b165c...7bb70f38b48786469ad6a46a78da3311c7aa4777) (2026-04-07)
+
+
+### Features
+* **reports** Add Lightspeed authentication status + gate publishing  ([9cd45dc](https://github.com/quipucords/quipucords-ui/commit/9cd45dcb887c3385fa7166b44cf9700db047b2e1))
+* **lightspeed** Add log out button  ([93a19cc](https://github.com/quipucords/quipucords-ui/commit/93a19cc5fbc65897d921494df87f60ae5c96fec3))
+* **lightspeed** change API endpoint URL  ([a02f7f0](https://github.com/quipucords/quipucords-ui/commit/a02f7f0fa93d451cba9392d476709689183fce4d))
+* **lightspeed** add a way to authenticate to Lightspeed  ([4ffb1a5](https://github.com/quipucords/quipucords-ui/commit/4ffb1a5873d008460cb9acf59643c5ce2a9b5f99))
+* **reports** date range validation for filters  ([e6b7fbf](https://github.com/quipucords/quipucords-ui/commit/e6b7fbfdb1d1c75b3f34fc9aa4268984e46a43e7))
+
+### Code Refactoring
+* **reports** migrate report download to v2  ([bc92c99](https://github.com/quipucords/quipucords-ui/commit/bc92c99a8e756c84c9e4eceab6c9f1e0e4528a66))
+
+### Chores
+* **deps** lock file maintenance  ([aece368](https://github.com/quipucords/quipucords-ui/commit/aece368716e4f1a61c872426f9d187b0567cfaa5))
+* **deps** lock file maintenance  ([7f14bbd](https://github.com/quipucords/quipucords-ui/commit/7f14bbd0ef0dcfeb5e3d4eba88db160374ce4311))
+* **deps** update konflux references  ([bb2db89](https://github.com/quipucords/quipucords-ui/commit/bb2db890f336faaca7a455d4ac4b715038482777))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 4d1828d  ([64befff](https://github.com/quipucords/quipucords-ui/commit/64befffcac83a2eee6e5c41d74b6296a4abe3fad))
+* **deps** update quay.io/konflux-ci/yq docker digest to 2e7d0e2  ([7fa9c56](https://github.com/quipucords/quipucords-ui/commit/7fa9c56b9152081bdd8dbd97d8420c19169c6d41))
+* **deps** update quay.io/konflux-ci/yq docker digest to 9264d52  ([9cafd1f](https://github.com/quipucords/quipucords-ui/commit/9cafd1f1d507c75ea9897e0659b43872a455b6d8))
+* **deps** update konflux references  ([4abec34](https://github.com/quipucords/quipucords-ui/commit/4abec34507b0975c8a1f6bc09e7bf1982f2a1f41))
+*  make `npm audit` happy  ([4f1c577](https://github.com/quipucords/quipucords-ui/commit/4f1c577bdf77bc09e0585440c3419aa037057afe))
+*  make `npm audit` happy  ([fb3d3be](https://github.com/quipucords/quipucords-ui/commit/fb3d3bea79fc4b562260e9c422e7474a09c51850))
+* **deps** update konflux references  ([afe4e07](https://github.com/quipucords/quipucords-ui/commit/afe4e07f2e3e201bfc2edac25d43a24e7464b23a))
+* **deps** update registry.access.redhat.com/ubi9/nodejs-22 docker digest to 779375d  ([bafdcc6](https://github.com/quipucords/quipucords-ui/commit/bafdcc6a3c982bb38ac649e73dfde23c8c52ef49))
+* **deps** update quay.io/konflux-ci/yq docker digest to f89dc33  ([b987b25](https://github.com/quipucords/quipucords-ui/commit/b987b2505a851787f644c2fc0b0dfdc64f997538))
+*  refresh lockfile  ([65a1ea1](https://github.com/quipucords/quipucords-ui/commit/65a1ea10c7b2d2df6aa233f4281212f9b7e17a38))
+* **deps** update containerfile  ([f72bdde](https://github.com/quipucords/quipucords-ui/commit/f72bdde25e75e889b5ce15422f209a5ec6ded084))
+* **deps** update quay.io/konflux-ci/yq docker digest to 0aabca8  ([ec0f8d4](https://github.com/quipucords/quipucords-ui/commit/ec0f8d488ee19d54acad65a56148a3baf521a164))
+*  Increase number of PRs renovate may open in an hour  ([ace42a7](https://github.com/quipucords/quipucords-ui/commit/ace42a7e5614895683a4e9a7ba514760c1de1d28))
+
+### Builds
+*  make update-lockfiles  ([d710d26](https://github.com/quipucords/quipucords-ui/commit/d710d267acb08056d572adee059fde599fa916d8))
+*  make update-lockfiles  ([2de3481](https://github.com/quipucords/quipucords-ui/commit/2de3481e01752c87cffbb42b44f162352e8dcf68))
+*  make update-lockfiles  ([ca38550](https://github.com/quipucords/quipucords-ui/commit/ca38550b2d0fdeac79d38a4f06622ae19154de6c))
+*  npm update  ([7ba5bb7](https://github.com/quipucords/quipucords-ui/commit/7ba5bb750cfde342996ac151bb8f4bb46b53c0c9))
+*  make update-lockfiles  ([d7c4478](https://github.com/quipucords/quipucords-ui/commit/d7c447807cf6fc8063fae53d48a3f69d08041a76))
+*  Ensure `build` always runs before `test integration`  ([7c5c2f4](https://github.com/quipucords/quipucords-ui/commit/7c5c2f4d627c04bfa582346337a242c9da79aa06))
+
+### Bug Fixes
+*  use newer lodash to make npm audit happy  ([9ef128b](https://github.com/quipucords/quipucords-ui/commit/9ef128b6c4d69b9a0f2ecfaaaed3ff4cdcd4fbb0))
+*  override lodash to 4.17.23 to resolve build failure  ([38387fe](https://github.com/quipucords/quipucords-ui/commit/38387fe6039a27305f8acfb5917c4e31b180196f))
+*  resolve TypeScript type error in RefreshTimeButton  ([469744b](https://github.com/quipucords/quipucords-ui/commit/469744b0b2790422a5d1ab4e5439498857e9ca7f))
+
 ## [2.5.1](https://github.com/quipucords/quipucords-ui/compare/8d87974ba93ba1576e52c6c09eccd6d99d497e39...feb0299a16d6874f2cc980f2ab6235e613216b94) (2026-03-11)
 
 
