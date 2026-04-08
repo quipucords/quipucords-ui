@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.3](https://github.com/quipucords/quipucords-ui/compare/e1ad3f04f9fd29f31f3480084a577c8b18d73bd8...2105333172a8cfc42ec56823c79cd44045130f31) (2026-04-08)
+
+
 ## [2.5.2](https://github.com/quipucords/quipucords-ui/compare/3b5697078a57598310dd7d44daf17a519f2b165c...7bb70f38b48786469ad6a46a78da3311c7aa4777) (2026-04-07)
 
 
