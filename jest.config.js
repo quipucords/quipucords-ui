@@ -28,6 +28,7 @@ module.exports = {
   resetMocks: true,
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   setupFilesAfterEnv: ['<rootDir>/config/jest.setupTests.js'],
+  snapshotSerializers: ['<rootDir>/config/jest.snapshotSerializer.js'],
   testMatch: ['<rootDir>/**/__tests__/**/*.{ts,tsx}', '<rootDir>/**/*.{spec,test}.{ts,tsx}'],
   testEnvironment: 'jsdom',
   transform: {

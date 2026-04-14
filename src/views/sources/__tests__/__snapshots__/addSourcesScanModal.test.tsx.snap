@@ -28,29 +28,32 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
 
 exports[`AddSourceModal should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="small"
   title="t([
   "view.sources.modal-title.new-scan"
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="small"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
   <ScanForm
-    onClearErrors={[Function]}
-    onClose={[Function]}
-    onSubmit={[Function]}
-  />
+  sources={undefined}
+  errors={undefined}
+  onClearErrors={[Function]}
+  onClose={[Function]}
+  onSubmit={[Function]}
+ />
 </Modal>
 `;

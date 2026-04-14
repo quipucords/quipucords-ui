@@ -17,33 +17,37 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
 
 exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
-  appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
-  isOpen={true}
-  onClose={[Function]}
-  ouiaSafe={true}
-  position="default"
-  showClose={true}
+  variant="small"
   title="t([
   "view.sources.modal-title.add",
   {
     "type": ""
   }
 ])"
+  isOpen
+  onClose={[Function]}
+  className=""
   titleIconVariant={null}
   titleLabel=""
-  variant="small"
+  aria-label=""
+  showClose
+  aria-describedby=""
+  aria-labelledby=""
+  id={undefined}
+  actions={[]}
+  hasNoBodyWrapper={false}
+  appendTo={[Function]}
+  ouiaSafe
+  position="default"
 >
   <SourceForm
-    onClearErrors={[Function]}
-    onClose={[Function]}
-    onSubmit={[Function]}
-  />
+  source={undefined}
+  sourceType={undefined}
+  errors={undefined}
+  onClearErrors={[Function]}
+  onClose={[Function]}
+  onSubmit={[Function]}
+ />
 </Modal>
 `;
 
@@ -68,1443 +72,1454 @@ exports[`AddSourceModalWithProxy should update proxy_url and submit it: onSubmit
 exports[`SourceForm should not render proxy_url field for network sources: proxy_url presence, network 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="network"
-      initialSelectedCredentials={[]}
-      maxSelections={Infinity}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="network"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={Infinity}
+ />
+  false
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-network.label"
 ])"
-    >
-      <TextArea
-        data-ouia-component-id="hosts_multiple"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        placeholder="t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextArea
+  placeholder="t([
   "view.sources.add-modal.hosts-network.placeholder"
 ])"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  name="hosts"
+  data-ouia-component-id="hosts_multiple"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-network.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-network.label"
 ])"
-    >
-      <TextInput
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-network.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-network.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <FormGroup
-    fieldId="paramiko"
-    label=""
-  >
-    <Checkbox
-      className=""
-      id="paramiko"
-      isChecked={false}
-      isDisabled={false}
-      isLabelWrapped={false}
-      isRequired={false}
-      isValid={true}
-      label="t([
+  label=""
+  fieldId="paramiko"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.paramiko.checkbox-label"
 ])"
-      onChange={[Function]}
-      ouiaId="options_paramiko"
-      ouiaSafe={true}
-    />
-  </FormGroup>
+  id="paramiko"
+  isChecked={false}
+  onChange={[Function]}
+  ouiaId="options_paramiko"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isDisabled={false}
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render a basic component: basic 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType={undefined}
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, ansible 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="ansible"
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="ansible"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, openshift 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="openshift"
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="openshift"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "6443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, rhacs 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="rhacs"
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="rhacs"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, satellite 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="satellite"
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="satellite"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 
 exports[`SourceForm should render proxy_url field for non-network sources: proxy_url presence, vcenter 1`] = `
 <Form>
   <FormGroup
-    fieldId="name"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.name.label"
 ])"
-  >
-    <TextInput
-      id="source-name"
-      isRequired={true}
-      name="name"
-      onChange={[Function]}
-      ouiaId="name"
-      placeholder="t([
+  isRequired
+  fieldId="name"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.name.placeholder"
 ])"
-      type="text"
-      validated="default"
-      value=""
-    />
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+  isRequired
+  type="text"
+  id="source-name"
+  name="name"
+  validated="default"
+  onChange={[Function]}
+  ouiaId="name"
+ />
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <FormGroup
-    fieldId="credentials"
-    isRequired={true}
-    label="t([
+  label="t([
   "view.sources.add-modal.credentials.label"
 ])"
-  >
-    <TypeaheadCheckboxes
-      credentialType="vcenter"
-      initialSelectedCredentials={[]}
-      maxSelections={1}
-      menuToggleOuiaId="add_credentials_select"
-      onChange={[Function]}
-      selectedOptions={[]}
-    />
-    <HelperText>
-      <HelperTextItem
-        variant="warning"
-      >
-        t([
+  fieldId="credentials"
+  isRequired
+>
+  <TypeaheadCheckboxes
+  onChange={[Function]}
+  selectedOptions={[]}
+  credentialType="vcenter"
+  initialSelectedCredentials={[]}
+  menuToggleOuiaId="add_credentials_select"
+  maxSelections={1}
+ />
+  <HelperText>
+  <HelperTextItem
+  variant="warning"
+>
+  "t([
   "view.sources.add-modal.credentials.warning-many"
-])
-      </HelperTextItem>
-    </HelperText>
-    <ErrorFragment
-      fieldTouched={false}
-    />
-  </FormGroup>
+])"
+</HelperTextItem>
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
   <React.Fragment>
-    <FormGroup
-      fieldId="hosts"
-      isRequired={true}
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.hosts-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-host"
-        id="source-hosts"
-        isRequired={true}
-        name="hosts"
-        onChange={[Function]}
-        ouiaId="hosts_single"
-        validated="default"
-        value=""
-      />
-      <HelperText>
-        t([
+  isRequired
+  fieldId="hosts"
+>
+  <TextInput
+  value=""
+  onChange={[Function]}
+  isRequired
+  id="source-hosts"
+  data-testid="input-host"
+  name="hosts"
+  ouiaId="hosts_single"
+  validated="default"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.hosts-others.helper"
-])
-      </HelperText>
-      <ErrorFragment
-        fieldTouched={false}
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="port"
-      label="t([
+])"
+</HelperText>
+  <ErrorFragment
+  errorMessage={undefined}
+  fieldTouched={false}
+ />
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.port-others.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-port"
-        id="source-port"
-        name="port"
-        onChange={[Function]}
-        ouiaId="port"
-        placeholder="t([
+  fieldId="port"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.port-others.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText
-        id="source-port-helper-text"
-      >
-        t([
+  type="text"
+  id="source-port"
+  data-testid="input-port"
+  name="port"
+  onChange={[Function]}
+  ouiaId="port"
+ />
+  <HelperText
+  id="source-port-helper-text"
+>
+  "t([
   "view.sources.add-modal.port-others.helper",
   {
     "port": "443"
   }
-])
-      </HelperText>
-    </FormGroup>
-    <FormGroup
-      fieldId="proxy_url"
-      label="t([
+])"
+</HelperText>
+</FormGroup>
+  <FormGroup
+  label="t([
   "view.sources.add-modal.proxy.label"
 ])"
-    >
-      <TextInput
-        data-testid="input-proxy"
-        id="proxy-url"
-        name="proxy_url"
-        onChange={[Function]}
-        ouiaId="proxy_url"
-        placeholder="t([
+  fieldId="proxy_url"
+>
+  <TextInput
+  value=""
+  placeholder="t([
   "view.sources.add-modal.proxy.placeholder"
 ])"
-        type="text"
-        value=""
-      />
-      <HelperText>
-        t([
+  type="text"
+  id="proxy-url"
+  data-testid="input-proxy"
+  name="proxy_url"
+  onChange={[Function]}
+  ouiaId="proxy_url"
+ />
+  <HelperText>
+  "t([
   "view.sources.add-modal.proxy.helper"
-])
-      </HelperText>
-    </FormGroup>
-  </React.Fragment>
+])"
+</HelperText>
+</FormGroup>
+</React.Fragment>
   <React.Fragment>
-    <FormGroup
-      fieldId="connection"
-      label="t([
+  <FormGroup
+  label="t([
   "view.sources.add-modal.connection.label"
 ])"
-    >
-      <SimpleDropdown
-        dropdownItems={
-          [
-            {
-              "item": "SSLv23",
-              "ouiaId": "sslv23",
-            },
-            {
-              "item": "TLSv1",
-              "ouiaId": "tlsv1",
-            },
-            {
-              "item": "TLSv1.1",
-              "ouiaId": "tlsv11",
-            },
-            {
-              "item": "TLSv1.2",
-              "ouiaId": "tlsv12",
-            },
-            {
-              "item": "Disable SSL",
-              "ouiaId": "disable_ssl",
-            },
-          ]
-        }
-        isFullWidth={true}
-        label="SSLv23"
-        menuToggleOuiaId="options_ssl_protocol"
-        onSelect={[Function]}
-        variant="default"
-      />
-    </FormGroup>
-    <FormGroup
-      fieldId="ssl_verify"
-      label=""
-    >
-      <Checkbox
-        className=""
-        id="ssl_verify"
-        isChecked={true}
-        isDisabled={false}
-        isLabelWrapped={false}
-        isRequired={false}
-        isValid={true}
-        label="t([
+  fieldId="connection"
+>
+  <SimpleDropdown
+  isFullWidth
+  label="SSLv23"
+  menuToggleOuiaId="options_ssl_protocol"
+  variant="default"
+  onSelect={[Function]}
+  dropdownItems={[
+          {
+            "item": "SSLv23",
+            "ouiaId": "sslv23",
+          },
+          {
+            "item": "TLSv1",
+            "ouiaId": "tlsv1",
+          },
+          {
+            "item": "TLSv1.1",
+            "ouiaId": "tlsv11",
+          },
+          {
+            "item": "TLSv1.2",
+            "ouiaId": "tlsv12",
+          },
+          {
+            "item": "Disable SSL",
+            "ouiaId": "disable_ssl",
+          },
+        ]}
+ />
+</FormGroup>
+  <FormGroup
+  label=""
+  fieldId="ssl_verify"
+>
+  <Checkbox
+  label="t([
   "view.sources.add-modal.ssl-verify.checkbox-label"
 ])"
-        onChange={[Function]}
-        ouiaId="options_ssl_cert"
-        ouiaSafe={true}
-      />
-    </FormGroup>
-  </React.Fragment>
+  id="ssl_verify"
+  isDisabled={false}
+  isChecked
+  onChange={[Function]}
+  ouiaId="options_ssl_cert"
+  className=""
+  isLabelWrapped={false}
+  isValid
+  isRequired={false}
+  ouiaSafe
+ />
+</FormGroup>
+</React.Fragment>
   <ActionGroup>
-    <Button
-      isDisabled={true}
-      onClick={[Function]}
-      variant="primary"
-    >
-      t([
+  <Button
+  variant="primary"
+  onClick={[Function]}
+  isDisabled
+>
+  "t([
   "view.sources.add-modal.actions.save"
-])
-    </Button>
-    <Button
-      onClick={[Function]}
-      variant="link"
-    >
-      t([
+])"
+</Button>
+  <Button
+  variant="link"
+  onClick={[Function]}
+>
+  "t([
   "view.sources.add-modal.actions.cancel"
-])
-    </Button>
-  </ActionGroup>
+])"
+</Button>
+</ActionGroup>
 </Form>
 `;
 

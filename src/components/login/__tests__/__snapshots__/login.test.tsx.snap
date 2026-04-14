@@ -13,59 +13,57 @@ exports[`Login should attempt to use the login service: submit 1`] = `
 
 exports[`Login should render a basic component: basic 1`] = `
 <LoginPage
-  backgroundImgSrc="aboutBg.png"
+  className="fadein"
+  brandImgSrc="titleLogin.svg"
   brandImgAlt="t([
   "view.alt-logo",
   {
     "name": "Quipucords"
   }
 ])"
-  brandImgSrc="titleLogin.svg"
-  className="fadein"
   loginTitle="t([
   "login.title"
 ])"
   textContent="t([
   "login.description"
 ])"
+  backgroundImgSrc="aboutBg.png"
 >
   <LoginForm
-    helperText="t([
+  style={{
+      "opacity": 1,
+    }}
+  showHelperText={false}
+  helperText="t([
   "login.invalid"
 ])"
-    helperTextIcon={<ExclamationCircleIcon />}
-    isValidPassword={true}
-    isValidUsername={true}
-    loginButtonLabel="t([
-  "login.label",
-  {
-    "context": "login"
-  }
-])"
-    onChangePassword={[Function]}
-    onChangeUsername={[Function]}
-    onLoginButtonClick={[Function]}
-    passwordLabel="t([
-  "login.label",
-  {
-    "context": "password"
-  }
-])"
-    passwordValue=""
-    showHelperText={false}
-    style={
-      {
-        "opacity": 1,
-      }
-    }
-    usernameLabel="t([
+  helperTextIcon={<ExclamationCircleIcon />}
+  usernameLabel="t([
   "login.label",
   {
     "context": "username"
   }
 ])"
-    usernameValue=""
-  />
+  usernameValue=""
+  onChangeUsername={[Function]}
+  isValidUsername
+  passwordLabel="t([
+  "login.label",
+  {
+    "context": "password"
+  }
+])"
+  passwordValue=""
+  onChangePassword={[Function]}
+  isValidPassword
+  onLoginButtonClick={[Function]}
+  loginButtonLabel="t([
+  "login.label",
+  {
+    "context": "login"
+  }
+])"
+ />
 </LoginPage>
 `;
 

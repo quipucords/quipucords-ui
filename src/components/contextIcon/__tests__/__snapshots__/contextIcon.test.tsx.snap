@@ -46,8 +46,8 @@ exports[`ContextIcon Should render icon pencil 1`] = `<PencilAltIcon />`;
 
 exports[`ContextIcon Should render icon pending 1`] = `
 <Icon
-  isInline={true}
   size="sm"
+  isInline
 >
   <Spinner />
 </Icon>

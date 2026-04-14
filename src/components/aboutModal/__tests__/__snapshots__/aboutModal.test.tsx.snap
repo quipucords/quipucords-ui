@@ -6,7 +6,7 @@ exports[`AboutModal Component should attempt to display username, status data: u
   backgroundImageSrc="aboutBg.png"
   brandImageAlt="Quipucords"
   brandImageSrc="title.svg"
-  isOpen={true}
+  isOpen
   onClose={[Function]}
   trademark="t([
   "about.copyright",
@@ -16,73 +16,73 @@ exports[`AboutModal Component should attempt to display username, status data: u
 ])"
 >
   <Content
-    className=""
-  >
-    <Content
-      component="dl"
-    >
-      <React.Fragment>
-        <Content
-          component="dt"
-        >
-          t([
+  className=""
+>
+  <Content
+  component="dl"
+>
+  <React.Fragment>
+  <Content
+  component="dt"
+>
+  "t([
   "about.username"
-])
-        </Content>
-        <Content
-          component="dd"
-        >
-          lorem ipsum
-        </Content>
-      </React.Fragment>
-      <React.Fragment>
-        <Content
-          component="dt"
-        >
-          t([
+])"
+</Content>
+  <Content
+  component="dd"
+>
+  "lorem ipsum"
+</Content>
+</React.Fragment>
+  <React.Fragment>
+  <Content
+  component="dt"
+>
+  "t([
   "about.ui-version"
-])
-        </Content>
-        <Content
-          component="dd"
-        >
-          0.0.0.0000000
-        </Content>
-      </React.Fragment>
-      <React.Fragment>
-        <Content
-          className=""
-          component="dt"
-        >
-          t([
+])"
+</Content>
+  <Content
+  component="dd"
+>
+  "0.0.0.0000000"
+</Content>
+</React.Fragment>
+  <React.Fragment>
+  <Content
+  className=""
+  component="dt"
+>
+  "t([
   "about.server-version"
-])
-        </Content>
-        <Content
-          className=""
-          component="dd"
-        >
-          0.0.0.12345678
-        </Content>
-      </React.Fragment>
-      <React.Fragment>
-        <Content
-          className=""
-          component="dt"
-        >
-          t([
+])"
+</Content>
+  <Content
+  className=""
+  component="dd"
+>
+  "0.0.0.12345678"
+</Content>
+</React.Fragment>
+  <React.Fragment>
+  <Content
+  className=""
+  component="dt"
+>
+  "t([
   "about.server-cpu-arch"
-])
-        </Content>
-        <Content
-          className=""
-          component="dd"
-        >
-          i386
-        </Content>
-      </React.Fragment>
-    </Content>
-  </Content>
+])"
+</Content>
+  <Content
+  className=""
+  component="dd"
+>
+  "i386"
+</Content>
+</React.Fragment>
+</Content>
+</Content>
 </AboutModal>
 `;
 
@@ -92,7 +92,7 @@ exports[`AboutModal Component should log on error: api error 1`] = `
   backgroundImageSrc="aboutBg.png"
   brandImageAlt="Quipucords"
   brandImageSrc="title.svg"
-  isOpen={true}
+  isOpen
   onClose={[Function]}
   trademark="t([
   "about.copyright",
@@ -102,41 +102,41 @@ exports[`AboutModal Component should log on error: api error 1`] = `
 ])"
 >
   <Content
-    className="fadein"
-  >
-    <Content
-      component="dl"
-    >
-      <React.Fragment>
-        <Content
-          component="dt"
-        >
-          t([
+  className="fadein"
+>
+  <Content
+  component="dl"
+>
+  <React.Fragment>
+  <Content
+  component="dt"
+>
+  "t([
   "about.username"
-])
-        </Content>
-        <Content
-          component="dd"
-        >
-          lorem ipsum
-        </Content>
-      </React.Fragment>
-      <React.Fragment>
-        <Content
-          component="dt"
-        >
-          t([
+])"
+</Content>
+  <Content
+  component="dd"
+>
+  "lorem ipsum"
+</Content>
+</React.Fragment>
+  <React.Fragment>
+  <Content
+  component="dt"
+>
+  "t([
   "about.ui-version"
-])
-        </Content>
-        <Content
-          component="dd"
-        >
-          0.0.0.0000000
-        </Content>
-      </React.Fragment>
-    </Content>
-  </Content>
+])"
+</Content>
+  <Content
+  component="dd"
+>
+  "0.0.0.0000000"
+</Content>
+</React.Fragment>
+</Content>
+</Content>
 </AboutModal>
 `;
 
@@ -156,26 +156,26 @@ exports[`AboutModal Component should render a basic component: basic 1`] = `
 ])"
 >
   <Content
-    className="fadein"
-  >
-    <Content
-      component="dl"
-    >
-      <React.Fragment>
-        <Content
-          component="dt"
-        >
-          t([
+  className="fadein"
+>
+  <Content
+  component="dl"
+>
+  <React.Fragment>
+  <Content
+  component="dt"
+>
+  "t([
   "about.ui-version"
-])
-        </Content>
-        <Content
-          component="dd"
-        >
-          0.0.0.0000000
-        </Content>
-      </React.Fragment>
-    </Content>
-  </Content>
+])"
+</Content>
+  <Content
+  component="dd"
+>
+  "0.0.0.0000000"
+</Content>
+</React.Fragment>
+</Content>
+</Content>
 </AboutModal>
 `;

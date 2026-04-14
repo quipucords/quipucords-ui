@@ -147,18 +147,22 @@ exports[`ActionMenu should display tooltip: hover 1`] = `
 exports[`ActionMenu should render a basic component: basic 1`] = `
 <Dropdown
   isOpen={false}
+  popperProps={undefined}
   onOpenChange={[Function]}
   onSelect={[Function]}
-  shouldFocusToggleOnSelect={true}
   toggle={[Function]}
+  shouldFocusToggleOnSelect
 >
   <DropdownList>
-    <DropdownItem
-      onClick={[Function]}
-      value="Lorem ipsum"
-    >
-      Lorem ipsum
-    </DropdownItem>
-  </DropdownList>
+  <DropdownItem
+  value="Lorem ipsum"
+  ouiaId={undefined}
+  onClick={[Function]}
+  isAriaDisabled={undefined}
+  tooltipProps={undefined}
+>
+  "Lorem ipsum"
+</DropdownItem>
+</DropdownList>
 </Dropdown>
 `;
