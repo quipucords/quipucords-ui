@@ -10,6 +10,7 @@ import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
 import apiHelpers from '../../helpers/apiHelpers';
+import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
 import bgImage from '../../images/aboutBg.png';
 
@@ -23,6 +24,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const { t } = useTranslation();
   const { isAuthorized } = useGetSetAuth();
   const { login } = useLogin();
+  const { requestLightspeedAuthStatus } = useLightspeedAuthApi();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<string | undefined>();
@@ -59,6 +61,9 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
           .then(
             () => {
               setIsLoggedIn(true);
+              if (helpers.FEATURE_REPORTS_VIEW) {
+                requestLightspeedAuthStatus();
+              }
             },
             error => {
               setLoginError(
@@ -72,7 +77,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
           });
       }
     },
-    [isLoading, login, t]
+    [isLoading, login, requestLightspeedAuthStatus, t]
   );
 
   if (isLoggedIn) {
