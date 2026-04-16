@@ -43,6 +43,12 @@ const useLightspeedAuthApi = () => {
     ? Number.parseInt(process.env.REACT_APP_EXTERNAL_AUTH_POLL_INTERVAL, 10)
     : 1000;
 
+  const currentLightspeedAuthStatus = useCallback(() => {
+    return axios
+      .get(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_STATUS}`)
+      .then((response: AxiosResponse<ExternalAuthStatusLightspeedResponseType>) => response.data);
+  }, []);
+
   const requestLightspeedAuth = useCallback(async () => {
     let response: AxiosResponse<ExternalAuthLoginLightspeedResponseType>;
     try {
@@ -82,6 +88,25 @@ const useLightspeedAuthApi = () => {
     });
   }, []);
 
+  const requestLightspeedAuthStatus = useCallback((): void => {
+    currentLightspeedAuthStatus()
+      .then(data => {
+        const status = data.status;
+
+        if (status === 'valid') {
+          helpers.setLightspeedUsername(data.metadata.username);
+          setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
+          return;
+        }
+
+        throw new Error('Lightspeed not authenticated');
+      })
+      .catch(_error => {
+        helpers.setLightspeedUsername();
+        setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
+      });
+  }, [currentLightspeedAuthStatus]);
+
   useEffect(() => {
     if (!lightspeedPollingTrigger) {
       return () => {};
@@ -89,20 +114,19 @@ const useLightspeedAuthApi = () => {
 
     let pollingTimer: NodeJS.Timeout;
 
-    axios
-      .get(`${process.env.REACT_APP_AUTH_SERVICE_EXTERNAL_STATUS}`)
-      .then((response: AxiosResponse<ExternalAuthStatusLightspeedResponseType>) => {
-        const status = response.data.status;
+    currentLightspeedAuthStatus()
+      .then(data => {
+        const status = data.status;
 
         if (status === 'valid') {
           setLightspeedAuthFlowState({ state: 'Successful' });
-          helpers.setLightspeedUsername(response.data.metadata.username);
+          helpers.setLightspeedUsername(data.metadata.username);
           setLightspeedIsAuthenticated(helpers.isLightspeedAuthenticated());
           return;
         }
 
         if (status === 'failed') {
-          setLightspeedAuthFlowState({ state: 'Errored', errorMessage: response.data.metadata.status_reason });
+          setLightspeedAuthFlowState({ state: 'Errored', errorMessage: data.metadata.status_reason });
           return;
         }
 
@@ -136,11 +160,12 @@ const useLightspeedAuthApi = () => {
     return () => {
       clearTimeout(pollingTimer);
     };
-  }, [lightspeedPollingTrigger, lightspeedAuthPollAttempt, waitInterval, t]);
+  }, [currentLightspeedAuthStatus, lightspeedPollingTrigger, lightspeedAuthPollAttempt, waitInterval, t]);
 
   return {
     requestLightspeedAuth,
     requestLightspeedAuthLogout,
+    requestLightspeedAuthStatus,
     cancelLightspeedAuth,
     lightspeedAuthFlowState,
     lightspeedIsAuthenticated
