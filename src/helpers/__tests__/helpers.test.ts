@@ -60,6 +60,7 @@ describe('getAuthType', () => {
       generateAuthType({ auth_type: 'auth_token' }),
       generateAuthType({ auth_type: 'ssh_key' }),
       generateAuthType({ auth_type: 'ssh_keyfile' }),
+      generateAuthType({ auth_type: 'vault_secret_path' }),
       generateAuthType({ auth_type: 'lorem' }),
       generateAuthType({ auth_type: 'ipsum' })
     ]).toMatchSnapshot('credentialTypes');
