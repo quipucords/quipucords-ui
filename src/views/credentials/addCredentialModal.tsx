@@ -21,6 +21,7 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SecretInput } from '../../components/secretInput/secretInput';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { helpers } from '../../helpers';
+import { useGetHashicorpVaultConfigApi } from '../../hooks/useGetHashicorpVaultConfigApi';
 import { type CredentialRequest, type CredentialResponse } from '../../types/types';
 
 interface AddCredentialModalProps {
@@ -45,6 +46,24 @@ interface CredentialErrorType {
   [key: string]: string | undefined;
 }
 
+/** Credential fields irrelevant to Vault auth — omit from payload when empty. */
+const VAULT_OMIT_WHEN_EMPTY = ['username', 'password', 'become_user', 'become_method', 'become_password'] as const;
+
+/**
+ * Deletes keys from `data` when their values are `''` or `undefined`.
+ *
+ * @param data - Object to mutate.
+ * @param keys - Keys to remove when empty.
+ */
+function deleteKeysIfEmptyOrUndefined(data: Record<string, unknown>, keys: readonly string[]): void {
+  keys.forEach(key => {
+    const v = data[key];
+    if (v === '' || v === undefined) {
+      delete data[key];
+    }
+  });
+}
+
 const getCleanedFormData = (
   formData: CredentialFormType,
   authType: string,
@@ -58,23 +77,45 @@ const getCleanedFormData = (
     case 'Token':
       cleanedData.password = '';
       cleanedData.username = '';
+      cleanedData.vault_secret_path = '';
+      cleanedData.vault_mount_point = '';
       break;
     case 'Username and Password':
       cleanedData.auth_token = '';
       cleanedData.ssh_key = '';
       cleanedData.ssh_passphrase = '';
+      cleanedData.vault_secret_path = '';
+      cleanedData.vault_mount_point = '';
       break;
     case 'SSH Key':
       cleanedData.password = '';
+      cleanedData.vault_secret_path = '';
+      cleanedData.vault_mount_point = '';
+      break;
+    case helpers.authType.VaultSecretPath:
+      cleanedData.password = '';
+      cleanedData.username = '';
+      cleanedData.auth_token = '';
+      cleanedData.ssh_key = '';
+      cleanedData.ssh_passphrase = '';
+      deleteKeysIfEmptyOrUndefined(cleanedData, VAULT_OMIT_WHEN_EMPTY);
+      if (!String(cleanedData.vault_mount_point ?? '').trim()) {
+        delete cleanedData.vault_mount_point;
+      }
+      break;
+    default:
       break;
   }
-  Object.entries(cleanedData)
-    .filter(([key, _value]) => !fieldsAllowedToBeEmpty.has(key))
-    .forEach(([key, value]) => {
-      if (maskedFields.includes(key) && value === '') {
-        delete cleanedData[key];
-      }
-    });
+
+  const maskedKeysEmpty = Object.keys(cleanedData).filter(
+    key => !fieldsAllowedToBeEmpty.has(key) && maskedFields.includes(key) && cleanedData[key] === ''
+  );
+  deleteKeysIfEmptyOrUndefined(cleanedData, maskedKeysEmpty);
+
+  if (authType !== helpers.authType.VaultSecretPath) {
+    delete cleanedData.vault_secret_path;
+    delete cleanedData.vault_mount_point;
+  }
 
   return cleanedData as CredentialRequest;
 };
@@ -88,7 +129,7 @@ const deriveAuthType = (credential?: Partial<CredentialResponse>, typeValue?: st
     case 'rhacs':
       return 'Token';
     default:
-      return 'Username and Password';
+      return helpers.authType.UsernameAndPassword;
   }
 };
 
@@ -113,7 +154,9 @@ const useCredentialForm = ({
     authenticationType: '',
     auth_token: '',
     become_method: '',
-    username: ''
+    username: '',
+    vault_secret_path: '',
+    vault_mount_point: ''
   };
 
   const [formData, setFormData] = useState<CredentialFormType>(initialFormState);
@@ -141,7 +184,9 @@ const useCredentialForm = ({
         username: !!credential?.username,
         name: !!credential?.name,
         become_user: !!credential?.become_user,
-        become_method: !!credential?.become_method
+        become_method: !!credential?.become_method,
+        vault_secret_path: !!(credential?.vault_secret_path && String(credential.vault_secret_path).trim()),
+        vault_mount_point: !!(credential?.vault_mount_point && String(credential.vault_mount_point).trim())
       };
 
       return existingValueChecks[field] || false;
@@ -158,6 +203,8 @@ const useCredentialForm = ({
         return [...baseFields, 'username', 'password'];
       case 'SSH Key':
         return [...baseFields, 'username', 'ssh_key'];
+      case helpers.authType.VaultSecretPath:
+        return [...baseFields, 'vault_secret_path'];
       default:
         return baseFields;
     }
@@ -217,7 +264,9 @@ const useCredentialForm = ({
         become_password: '',
         auth_token: '',
         become_method: credential?.become_method || '',
-        username: credential?.username || ''
+        username: credential?.username || '',
+        vault_secret_path: credential?.vault_secret_path || '',
+        vault_mount_point: credential?.vault_mount_point || ''
       });
     }
 
@@ -343,6 +392,45 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
     onClearErrors
   });
 
+  const { data: vaultConfigData } = useGetHashicorpVaultConfigApi(typeValue === 'openshift' || typeValue === 'ansible');
+  const vaultConfigured = vaultConfigData?.vaultConfigured === true;
+  const vaultDisabledTooltip = t('view.credentials.add-modal.auth_type.vault_disabled_tooltip');
+
+  const networkAuthDropdownItems = React.useMemo(
+    () => [
+      { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
+      { item: helpers.authType.SSHKey, ouiaId: 'ssh_key' }
+    ],
+    []
+  );
+
+  const openshiftAuthDropdownItems = React.useMemo(
+    () => [
+      { item: helpers.authType.Token, ouiaId: 'auth_token' },
+      { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
+      {
+        item: helpers.authType.VaultSecretPath,
+        ouiaId: 'vault_secret_path',
+        isDisabled: !vaultConfigured,
+        disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
+      }
+    ],
+    [vaultConfigured, vaultDisabledTooltip]
+  );
+
+  const ansibleAuthDropdownItems = React.useMemo(
+    () => [
+      { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
+      {
+        item: helpers.authType.VaultSecretPath,
+        ouiaId: 'vault_secret_path',
+        isDisabled: !vaultConfigured,
+        disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
+      }
+    ],
+    [vaultConfigured, vaultDisabledTooltip]
+  );
+
   const scrollToFirstError = useCallback(() => {
     const errorFields = Object.keys(errors);
     if (errorFields.length > 0) {
@@ -386,8 +474,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
         <ErrorFragment errorMessage={errors?.name} fieldTouched={touchedFields.has('name')} />
       </FormGroup>
 
-      {/* Render Authentication Type dropdown only if needed based on the credential type */}
-      {(typeValue === 'network' || typeValue === 'openshift') && (
+      {(typeValue === 'network' || typeValue === 'openshift' || typeValue === 'ansible') && (
         <FormGroup label={t('view.credentials.add-modal.auth_type.label')} fieldId="auth_type">
           <SimpleDropdown
             label={authType}
@@ -396,19 +483,56 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             isFullWidth
             onSelect={item => setAuthType(item)}
             dropdownItems={
-              (typeValue === 'network' && [
-                { item: 'Username and Password', ouiaId: 'password' },
-                { item: 'SSH Key', ouiaId: 'ssh_key' }
-              ]) || [
-                { item: 'Token', ouiaId: 'auth_token' },
-                { item: 'Username and Password', ouiaId: 'password' }
-              ]
+              (typeValue === 'network' && networkAuthDropdownItems) ||
+              (typeValue === 'openshift' && openshiftAuthDropdownItems) ||
+              ansibleAuthDropdownItems
             }
           />
         </FormGroup>
       )}
 
-      {/* Conditional rendering for Token input */}
+      {authType === helpers.authType.VaultSecretPath && (
+        <React.Fragment>
+          <FormGroup
+            label={t('view.credentials.add-modal.vault_secret_path.label')}
+            isRequired
+            fieldId="vault_secret_path"
+          >
+            <TextInput
+              value={formData?.vault_secret_path}
+              placeholder={t('view.credentials.add-modal.vault_secret_path.placeholder')}
+              isRequired
+              type="text"
+              id="credential-vault-secret-path"
+              name="vault_secret_path"
+              validated={errors?.vault_secret_path ? 'error' : 'default'}
+              onChange={event => handleInputChange('vault_secret_path', (event.target as HTMLInputElement).value)}
+              ouiaId="vault_secret_path"
+            />
+            <ErrorFragment
+              errorMessage={errors?.vault_secret_path}
+              fieldTouched={touchedFields.has('vault_secret_path')}
+            />
+          </FormGroup>
+          <FormGroup label={t('view.credentials.add-modal.vault_mount_point.label')} fieldId="vault_mount_point">
+            <TextInput
+              value={formData?.vault_mount_point}
+              placeholder={t('view.credentials.add-modal.vault_mount_point.placeholder')}
+              type="text"
+              id="credential-vault-mount-point"
+              name="vault_mount_point"
+              validated={errors?.vault_mount_point ? 'error' : 'default'}
+              onChange={event => handleInputChange('vault_mount_point', (event.target as HTMLInputElement).value)}
+              ouiaId="vault_mount_point"
+            />
+            <ErrorFragment
+              errorMessage={errors?.vault_mount_point}
+              fieldTouched={touchedFields.has('vault_mount_point')}
+            />
+          </FormGroup>
+        </React.Fragment>
+      )}
+
       {authType === 'Token' && (
         <FormGroup label={t('view.credentials.add-modal.token.label')} isRequired fieldId="auth_token">
           <SecretInput
@@ -432,7 +556,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       )}
 
       {/* Username and Password fields */}
-      {authType === 'Username and Password' && (
+      {authType === helpers.authType.UsernameAndPassword && (
         <React.Fragment>
           <FormGroup label={t('view.credentials.add-modal.username.label')} isRequired fieldId="username">
             <TextInput
@@ -470,7 +594,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
       )}
 
       {/* SSH Key input */}
-      {authType === 'SSH Key' && (
+      {authType === helpers.authType.SSHKey && (
         <React.Fragment>
           <FormGroup label={t('view.credentials.add-modal.username.label')} isRequired fieldId="username">
             <TextInput
