@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`useGetHashicorpVaultConfigApi should not call the API when disabled: apiCall, disabled 1`] = `[]`;
+
+exports[`useGetHashicorpVaultConfigApi should retrieve vault global config on success: apiCall 1`] = `
+[
+  [
+    "/api/v2/auth/hashicorp-vault/",
+  ],
+]
+`;
+
+exports[`useGetHashicorpVaultConfigApi should retrieve vault global config on success: getHashicorpVaultConfig, success 1`] = `
+{
+  "config": {
+    "address": "127.0.0.1",
+    "port": 8200,
+    "ssl_verify": false,
+  },
+  "vaultConfigured": true,
+}
+`;
+
+exports[`useGetHashicorpVaultConfigApi should return not configured on HTTP 404: getHashicorpVaultConfig, 404 1`] = `
+{
+  "vaultConfigured": false,
+}
+`;
+
+exports[`useGetHashicorpVaultConfigApi should return not configured on other HTTP errors: getHashicorpVaultConfig, error 1`] = `
+{
+  "vaultConfigured": false,
+}
+`;
