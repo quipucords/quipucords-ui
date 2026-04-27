@@ -3,8 +3,29 @@ import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { shallowComponent } from '../../../../config/jest.setupTests';
+import { helpers } from '../../../helpers';
 import { type CredentialResponse } from '../../../types/types';
 import { AddCredentialModal, CredentialForm, getCleanedFormData, useCredentialForm } from '../addCredentialModal';
+
+const mockVaultConfigQuery = jest.fn((_enabled: boolean) => ({
+  data: { vaultConfigured: true },
+  isPending: false,
+  isFetching: false,
+  isSuccess: true
+}));
+
+jest.mock('../../../hooks/useGetHashicorpVaultConfigApi', () => ({
+  useGetHashicorpVaultConfigApi: (enabled: boolean) => mockVaultConfigQuery(enabled)
+}));
+
+beforeEach(() => {
+  mockVaultConfigQuery.mockImplementation((_enabled: boolean) => ({
+    data: { vaultConfigured: true },
+    isPending: false,
+    isFetching: false,
+    isSuccess: true
+  }));
+});
 
 describe('AddCredentialModal', () => {
   let mockOnClose;
@@ -229,6 +250,11 @@ describe('CredentialForm', () => {
     props.useForm = mockUseForm;
     const openshiftToken = await shallowComponent(<CredentialForm {...props} />);
     expect(openshiftToken).toMatchSnapshot('openshift, "Token"');
+
+    mockUseForm.mockReturnValue({ authType: helpers.authType.VaultSecretPath, typeValue: 'openshift' });
+    props.useForm = mockUseForm;
+    const openshiftVault = await shallowComponent(<CredentialForm {...props} />);
+    expect(openshiftVault).toMatchSnapshot('openshift, "Vault secret path"');
   });
 
   it('should render form to different cred types appropriately', async () => {
@@ -493,6 +519,89 @@ describe('CredentialForm', () => {
         name: 'Test changing name'
       })
     );
+  });
+});
+
+describe('CredentialForm — Vault auth disabled without global Vault config', () => {
+  beforeEach(() => {
+    mockVaultConfigQuery.mockImplementation((_enabled: boolean) => ({
+      data: { vaultConfigured: false },
+      isPending: false,
+      isFetching: false,
+      isSuccess: true
+    }));
+  });
+
+  const openAuthTypeMenu = async (user: ReturnType<typeof userEvent.setup>) => {
+    const toggle = document.querySelector('[data-ouia-component-id="auth_type"]');
+    expect(toggle).toBeTruthy();
+    await user.click(toggle as Element);
+  };
+
+  it('should render OpenShift auth menu with Vault secret path disabled', async () => {
+    const user = userEvent.setup();
+    render(<CredentialForm isOpen credentialType="openshift" onSubmit={jest.fn()} />);
+
+    await openAuthTypeMenu(user);
+
+    // Dropdown list is portaled outside RTL `container`; snapshot the open menu only.
+    const menu = document.querySelector('[role="menu"]');
+    expect(menu).toBeTruthy();
+    expect((menu as Element).outerHTML).toMatchSnapshot('openshift, auth menu open, vault disabled');
+  });
+
+  it('should render Ansible auth menu with Vault secret path disabled', async () => {
+    const user = userEvent.setup();
+    render(<CredentialForm isOpen credentialType="ansible" onSubmit={jest.fn()} />);
+
+    await openAuthTypeMenu(user);
+
+    const menu = document.querySelector('[role="menu"]');
+    expect(menu).toBeTruthy();
+    expect((menu as Element).outerHTML).toMatchSnapshot('ansible, auth menu open, vault disabled');
+  });
+
+  it('should submit OpenShift Token credential when Vault is disabled', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    render(<CredentialForm isOpen credentialType="openshift" onSubmit={mockOnSubmit} />);
+
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.name.placeholder/), 'ocp-cred');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.token.placeholder/), 'my-token');
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
+
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+    const payload = mockOnSubmit.mock.calls[0][0];
+    const redacted = {
+      ...payload,
+      ...(payload.auth_token ? { auth_token: '<redacted>' } : {}),
+      ...(payload.password ? { password: '<redacted>' } : {}),
+      ...(payload.ssh_key ? { ssh_key: '<redacted>' } : {}),
+      ...(payload.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+    };
+    expect(redacted).toMatchSnapshot('openshift token submit, vault not configured');
+  });
+
+  it('should submit Ansible username and password when Vault is disabled', async () => {
+    const user = userEvent.setup();
+    const mockOnSubmit = jest.fn();
+    render(<CredentialForm isOpen credentialType="ansible" onSubmit={mockOnSubmit} />);
+
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.name.placeholder/), 'aap-cred');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.username.placeholder/), 'svc-user');
+    await user.type(screen.getByPlaceholderText(/view.credentials.add-modal.password.placeholder/), 'svc-pass');
+    await user.click(screen.getByText(/view.credentials.add-modal.actions.save/));
+
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+    const payload = mockOnSubmit.mock.calls[0][0];
+    const redacted = {
+      ...payload,
+      ...(payload.auth_token ? { auth_token: '<redacted>' } : {}),
+      ...(payload.password ? { password: '<redacted>' } : {}),
+      ...(payload.ssh_key ? { ssh_key: '<redacted>' } : {}),
+      ...(payload.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+    };
+    expect(redacted).toMatchSnapshot('ansible password submit, vault not configured');
   });
 });
 
@@ -978,6 +1087,38 @@ describe('getCleanedFormData', () => {
       name: formData['name'],
       username: formData['username'],
       ssh_key: formData['ssh_key']
+    });
+  });
+
+  it('should clean formData for Vault secret path auth', () => {
+    const fd = {
+      name: 'vault-cred',
+      vault_secret_path: 'ocp/prod',
+      vault_mount_point: '',
+      auth_token: 'should-clear',
+      username: 'u',
+      password: 'p',
+      ssh_key: 'k'
+    };
+    const cleanedData = getCleanedFormData(fd, helpers.authType.VaultSecretPath);
+    expect(cleanedData).toEqual({
+      name: 'vault-cred',
+      vault_secret_path: 'ocp/prod'
+    });
+  });
+
+  it('should keep vault mount point when set', () => {
+    const fd = {
+      name: 'vault-cred',
+      vault_secret_path: 'path',
+      vault_mount_point: 'custom-mount',
+      auth_token: 'x'
+    };
+    const cleanedData = getCleanedFormData(fd, helpers.authType.VaultSecretPath);
+    expect(cleanedData).toEqual({
+      name: 'vault-cred',
+      vault_secret_path: 'path',
+      vault_mount_point: 'custom-mount'
     });
   });
 });
