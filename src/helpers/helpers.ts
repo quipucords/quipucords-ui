@@ -126,6 +126,7 @@ enum authType {
   Token = 'Token',
   SSHKey = 'SSH Key',
   SSHKeyFile = 'SSH Key File',
+  VaultSecretPath = 'Vault secret path',
   Unknown = 'Unknown credential type'
 }
 
@@ -145,6 +146,8 @@ const getAuthType = ({ auth_type }: Partial<CredentialResponse>): authType => {
       return authType.SSHKey;
     case 'ssh_keyfile':
       return authType.SSHKeyFile;
+    case 'vault_secret_path':
+      return authType.VaultSecretPath;
     default:
       return authType.Unknown;
   }
