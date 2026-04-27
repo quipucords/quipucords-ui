@@ -274,7 +274,8 @@
     "credentials": {
       "add-modal": {
         "auth_type": {
-          "label": "Authentication Type"
+          "label": "Authentication Type",
+          "vault_disabled_tooltip": "To use Vault authentication, a HashiCorp Vault server must be configured first."
         },
         "become_method": {
           "label": "Become Method",
@@ -311,6 +312,14 @@
         "username": {
           "label": "Username",
           "placeholder": "Enter username"
+        },
+        "vault_secret_path": {
+          "label": "Secret path",
+          "placeholder": "e.g. ocp/prod/kv"
+        },
+        "vault_mount_point": {
+          "label": "Mount point",
+          "placeholder": "secret"
         },
         "actions": {
           "save": "Save",
