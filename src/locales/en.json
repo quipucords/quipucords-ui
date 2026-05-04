@@ -275,7 +275,7 @@
       "add-modal": {
         "auth_type": {
           "label": "Authentication Type",
-          "vault_disabled_tooltip": "To use Vault authentication, a HashiCorp Vault server must first be configured in the application settings."
+          "vault_disabled_tooltip": "To use Vault authentication, a HashiCorp Vault server must be configured first."
         },
         "become_method": {
           "label": "Become Method",
