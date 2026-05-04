@@ -544,7 +544,7 @@ describe('CredentialForm — Vault auth disabled without global Vault config', (
 
     await openAuthTypeMenu(user);
 
-    // Dropdown list is portaled outside RTL `container`; snapshot the open menu only.
+    // Dropdown list is portaled outside React Testing Library's `container`; snapshot the open menu only.
     const menu = document.querySelector('[role="menu"]');
     expect(menu).toBeTruthy();
     expect((menu as Element).outerHTML).toMatchSnapshot('openshift, auth menu open, vault disabled');
