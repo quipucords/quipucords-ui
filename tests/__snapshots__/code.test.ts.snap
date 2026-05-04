@@ -13,6 +13,7 @@ exports[`General code checks should only have specific console.[warn|log|info|er
   "hooks/useCredentialApi.ts:220:          console.error(error);",
   "hooks/useCredentialApi.ts:296:          console.error(error);",
   "hooks/useCredentialApi.ts:336:          console.error(error);",
+  "hooks/useGetHashicorpVaultConfigApi.ts:31:      console.error(error);",
   "hooks/useLoginApi.ts:58:          console.error(error);",
   "hooks/useLoginApi.ts:100:        console.error(error);",
   "hooks/useLoginApi.ts:138:        console.error(error);",

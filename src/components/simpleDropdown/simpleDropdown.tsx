@@ -19,6 +19,8 @@ import {
 interface SimpleDropdownItemProps {
   item: string;
   ouiaId?: number | string;
+  isDisabled?: boolean;
+  disabledTooltip?: string;
 }
 
 interface SimpleDropdownProps {
@@ -75,14 +77,28 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
     >
       <DropdownList>
         {Array.isArray(dropdownItems) &&
-          dropdownItems.map(({ item, ouiaId }) => (
-            <DropdownItem key={item} onClick={() => onSelect(item)} ouiaId={ouiaId}>
-              {item}
-            </DropdownItem>
-          ))}
+          dropdownItems.map(({ item, ouiaId, isDisabled, disabledTooltip }) => {
+            const useNativeDisabled = Boolean(isDisabled) && !disabledTooltip;
+            return (
+              <DropdownItem
+                key={item}
+                isDisabled={useNativeDisabled}
+                isAriaDisabled={isDisabled}
+                onClick={() => {
+                  if (!isDisabled) {
+                    onSelect(item);
+                  }
+                }}
+                ouiaId={ouiaId}
+                tooltipProps={isDisabled && disabledTooltip ? { content: disabledTooltip } : undefined}
+              >
+                {item}
+              </DropdownItem>
+            );
+          })}
       </DropdownList>
     </Dropdown>
   );
 };
 
-export { SimpleDropdown as default, SimpleDropdown, type SimpleDropdownProps };
+export { SimpleDropdown as default, SimpleDropdown, type SimpleDropdownProps, type SimpleDropdownItemProps };
