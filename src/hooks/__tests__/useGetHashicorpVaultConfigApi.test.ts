@@ -24,7 +24,7 @@ describe('useGetHashicorpVaultConfigApi', () => {
   });
 
   it('should retrieve vault global config on success', async () => {
-    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValue({
+    const spyAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { address: '127.0.0.1', port: 8200, ssl_verify: false }
     });
     const { result } = renderHook(() => useGetHashicorpVaultConfigApi(true), { wrapper: createWrapper() });
@@ -34,7 +34,7 @@ describe('useGetHashicorpVaultConfigApi', () => {
   });
 
   it('should return not configured on HTTP 404', async () => {
-    jest.spyOn(axios, 'get').mockRejectedValue({
+    jest.spyOn(axios, 'get').mockRejectedValueOnce({
       isAxiosError: true,
       response: { status: 404, data: { detail: 'HashiCorp Vault server definition not found.' } }
     });
@@ -44,7 +44,7 @@ describe('useGetHashicorpVaultConfigApi', () => {
   });
 
   it('should return not configured on other HTTP errors', async () => {
-    jest.spyOn(axios, 'get').mockRejectedValue({
+    jest.spyOn(axios, 'get').mockRejectedValueOnce({
       isAxiosError: true,
       response: { status: 503, data: {} }
     });
