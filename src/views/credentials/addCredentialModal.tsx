@@ -187,7 +187,8 @@ const useCredentialForm = ({
         name: !!credential?.name,
         become_user: !!credential?.become_user,
         become_method: !!credential?.become_method,
-        vault_secret_path: !!(credential?.vault_secret_path && String(credential.vault_secret_path).trim())
+        vault_secret_path: !!(credential?.vault_secret_path && String(credential.vault_secret_path).trim()),
+        vault_mount_point: !!(credential?.vault_mount_point && String(credential.vault_mount_point).trim())
       };
 
       return existingValueChecks[field] || false;
