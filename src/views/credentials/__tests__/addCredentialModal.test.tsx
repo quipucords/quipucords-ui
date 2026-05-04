@@ -73,10 +73,7 @@ describe('AddCredentialModal', () => {
     const cleaned = Object.fromEntries(Object.entries(payload).filter(([_, v]) => v !== '' && v !== undefined));
     const redacted = {
       ...cleaned,
-      ...(cleaned.password ? { password: '<redacted>' } : {}),
-      ...(cleaned.auth_token ? { auth_token: '<redacted>' } : {}),
-      ...(cleaned.ssh_key ? { ssh_key: '<redacted>' } : {}),
-      ...(cleaned.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+      password: '<redacted>'
     };
 
     expect(redacted).toMatchSnapshot('onSubmit, filtered data');
@@ -574,10 +571,7 @@ describe('CredentialForm — Vault auth disabled without global Vault config', (
     const payload = mockOnSubmit.mock.calls[0][0];
     const redacted = {
       ...payload,
-      ...(payload.auth_token ? { auth_token: '<redacted>' } : {}),
-      ...(payload.password ? { password: '<redacted>' } : {}),
-      ...(payload.ssh_key ? { ssh_key: '<redacted>' } : {}),
-      ...(payload.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+      auth_token: '<redacted>'
     };
     expect(redacted).toMatchSnapshot('openshift token submit, vault not configured');
   });
@@ -596,10 +590,7 @@ describe('CredentialForm — Vault auth disabled without global Vault config', (
     const payload = mockOnSubmit.mock.calls[0][0];
     const redacted = {
       ...payload,
-      ...(payload.auth_token ? { auth_token: '<redacted>' } : {}),
-      ...(payload.password ? { password: '<redacted>' } : {}),
-      ...(payload.ssh_key ? { ssh_key: '<redacted>' } : {}),
-      ...(payload.ssh_passphrase ? { ssh_passphrase: '<redacted>' } : {})
+      password: '<redacted>'
     };
     expect(redacted).toMatchSnapshot('ansible password submit, vault not configured');
   });
