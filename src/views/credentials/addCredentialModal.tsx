@@ -401,6 +401,14 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
   const vaultConfigured = vaultConfigData?.vaultConfigured === true;
   const vaultDisabledTooltip = t('view.credentials.add-modal.auth_type.vault_disabled_tooltip');
 
+  const networkAuthDropdownItems = React.useMemo(
+    () => [
+      { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
+      { item: helpers.authType.SSHKey, ouiaId: 'ssh_key' }
+    ],
+    []
+  );
+
   const openshiftAuthDropdownItems = React.useMemo(
     () => [
       { item: helpers.authType.Token, ouiaId: 'auth_token' },
@@ -480,10 +488,7 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
             isFullWidth
             onSelect={item => setAuthType(item)}
             dropdownItems={
-              (typeValue === 'network' && [
-                { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
-                { item: helpers.authType.SSHKey, ouiaId: 'ssh_key' }
-              ]) ||
+              (typeValue === 'network' && networkAuthDropdownItems) ||
               (typeValue === 'openshift' && openshiftAuthDropdownItems) ||
               ansibleAuthDropdownItems
             }
