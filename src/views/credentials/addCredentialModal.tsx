@@ -130,8 +130,6 @@ const deriveAuthType = (credential?: Partial<CredentialResponse>, typeValue?: st
     case 'openshift':
     case 'rhacs':
       return 'Token';
-    case 'ansible':
-      return helpers.authType.UsernameAndPassword;
     default:
       return helpers.authType.UsernameAndPassword;
   }
