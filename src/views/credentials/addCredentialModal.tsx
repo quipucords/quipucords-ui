@@ -47,6 +47,24 @@ interface CredentialErrorType {
   [key: string]: string | undefined;
 }
 
+/** Credential fields irrelevant to Vault auth — omit from payload when empty. */
+const VAULT_OMIT_WHEN_EMPTY = ['username', 'password', 'become_user', 'become_method', 'become_password'] as const;
+
+/**
+ * Deletes keys from `data` when their values are `''` or `undefined`.
+ *
+ * @param data - Object to mutate.
+ * @param keys - Keys to remove when empty.
+ */
+function deleteKeysIfEmptyOrUndefined(data: Record<string, unknown>, keys: readonly string[]): void {
+  keys.forEach(key => {
+    const v = data[key];
+    if (v === '' || v === undefined) {
+      delete data[key];
+    }
+  });
+}
+
 const getCleanedFormData = (
   formData: CredentialFormType,
   authType: string,
@@ -85,24 +103,17 @@ const getCleanedFormData = (
     default:
       break;
   }
-  Object.entries(cleanedData)
-    .filter(([key, _value]) => !fieldsAllowedToBeEmpty.has(key))
-    .forEach(([key, value]) => {
-      if (maskedFields.includes(key) && value === '') {
-        delete cleanedData[key];
-      }
-    });
+
+  const maskedKeysEmpty = Object.keys(cleanedData).filter(
+    key => !fieldsAllowedToBeEmpty.has(key) && maskedFields.includes(key) && cleanedData[key] === ''
+  );
+  deleteKeysIfEmptyOrUndefined(cleanedData, maskedKeysEmpty);
 
   if (authType === helpers.authType.VaultSecretPath) {
     if (!String(cleanedData.vault_mount_point ?? '').trim()) {
       delete cleanedData.vault_mount_point;
     }
-    (['username', 'password', 'become_user', 'become_method', 'become_password'] as const).forEach(key => {
-      const v = cleanedData[key];
-      if (v === '' || v === undefined) {
-        delete cleanedData[key];
-      }
-    });
+    deleteKeysIfEmptyOrUndefined(cleanedData, VAULT_OMIT_WHEN_EMPTY);
   } else {
     delete cleanedData.vault_secret_path;
     delete cleanedData.vault_mount_point;
