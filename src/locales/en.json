@@ -219,6 +219,8 @@
     "description_report_aggregate_error": "Failed to display report {{name}} scan summary: {{message}}",
     "description_report_downloaded": "Report {{name}} downloaded successfully.",
     "description_report_downloaded_error": "Failed to download report {{name}}: {{message}}",
+    "description_report_published": "Report {{id}} submitted to Lightspeed.",
+    "description_report_published_error": "Failed to submit report {{id}} to Lightspeed: {{message}}",
     "description_scan-report_start": "Scan {{name}} started.",
     "title_add-source_hidden_error": "Error creating source {{ name }}. {{ message }}",
     "title_add-source_hidden_error_edit": "Error updating source {{ name }}. {{ message }}"

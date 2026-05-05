@@ -32,6 +32,7 @@ import { RefreshTimeButton } from '../../components/refreshTimeButton/refreshTim
 import { API_QUERY_TYPES, API_REPORTS_LIST_QUERY } from '../../constants/apiConstants';
 import { useAlerts } from '../../hooks/useAlerts';
 import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
+import { useReportPublishApi } from '../../hooks/useReportApi';
 import { useDownloadReportApi } from '../../hooks/useScanApi';
 import useQueryClientConfig from '../../queryClientConfig';
 import { type ReportType } from '../../types/types';
@@ -67,6 +68,10 @@ const ReportsListView: React.FunctionComponent = () => {
     queryClient.invalidateQueries({ queryKey: [API_REPORTS_LIST_QUERY] });
   }, [queryClient]);
 
+  const { requestPublish } = useReportPublishApi(addAlert, async () => {
+    requestLightspeedAuthLogout().then(() => onRefresh());
+  });
+
   /**
    * Check if report can be published.
    */
@@ -80,9 +85,12 @@ const ReportsListView: React.FunctionComponent = () => {
   /**
    * Handles "publish" action.
    */
-  const handlePublish = useCallback((report: ReportType) => {
-    console.log(`Would attempt to publish report with id ${report.id}`);
-  }, []);
+  const handlePublish = useCallback(
+    (report: ReportType) => {
+      requestPublish(report.id);
+    },
+    [requestPublish]
+  );
 
   /**
    * Handles "download" action.
