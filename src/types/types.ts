@@ -335,6 +335,35 @@ export type Connections = {
 };
 
 /**
+ * Type representing data received in response to reports publish POST
+ */
+export type ReportPublishStatusSuccessResponse = {
+  report_id: number;
+  status: 'pending' | 'sent' | 'failed';
+  error_code: '' | 'expired_token' | 'network_unreachable' | 'invalid_report' | 'server_error';
+  error_message: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ReportPublishFailureResponse = {
+  code: 'invalid_report' | 'already_pending';
+  message: string;
+};
+
+export type ReportPublishResponse = ReportPublishStatusSuccessResponse | ReportPublishFailureResponse;
+
+/**
+ * Type representing data received in response to reports publish GET
+ */
+
+export type ReportPublishStatusFailureResponse = {
+  detail: string;
+};
+
+export type ReportPublishStatusResponse = ReportPublishStatusSuccessResponse | ReportPublishStatusFailureResponse;
+
+/**
  * Type representing report data received from the API (response)
  */
 export type ReportType = {

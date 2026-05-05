@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`useReportPublishApi should handle publish responding with already pending: publish - already pending 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published_error",
+    "id": 11,
+    "message": "A publish is already in progress for this report."
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useReportPublishApi should handle publish responding with not publishable: publish - not publishable 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published_error",
+    "id": 11,
+    "message": "Report cannot be published: 11"
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useReportPublishApi should handle publish settling on status failed: status - expired token 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published_error",
+    "id": 11,
+    "message": "token is expired"
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useReportPublishApi should handle status check failure: status - rejected 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published_error",
+    "id": 11,
+    "message": "No publish request found for this report."
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useReportPublishApi should not call onTokenExpired when error_code is something else: status - no network 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published_error",
+    "id": 11,
+    "message": "this is disconnected installation"
+  }
+])",
+      "variant": "danger",
+    },
+  ],
+]
+`;
+
+exports[`useReportPublishApi should succeed at publishing report: success 1`] = `
+[
+  [
+    {
+      "title": "t([
+  "toast-notifications.description",
+  {
+    "context": "report_published",
+    "id": 11
+  }
+])",
+      "variant": "success",
+    },
+  ],
+]
+`;
