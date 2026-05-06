@@ -7,7 +7,7 @@ module.exports = {
     '!src/constants/*.ts',
     '!src/vendor/**',
     '!src/views/credentials/view*.{ts,tsx}',
-    '!src/views/credentials/view*.{ts,tsx}',
+    '!src/views/reports/view*.{ts,tsx}',
     '!src/views/scans/view*.{ts,tsx}',
     '!src/views/sources/view*.{ts,tsx}'
   ],
