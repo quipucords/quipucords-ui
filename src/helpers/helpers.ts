@@ -56,6 +56,12 @@ const UI_VERSION = process.env.REACT_APP_UI_VERSION;
 const FEATURE_REPORTS_VIEW = process.env.REACT_APP_FEATURE_REPORTS_VIEW === 'true';
 
 /**
+ * Feature flag for HashiCorp Vault credential authentication.
+ * See dotenv config files for updating.
+ */
+const FEATURE_VAULT_AUTH = process.env.REACT_APP_FEATURE_VAULT_AUTH === 'true';
+
+/**
  * Generates a translation key for internationalization.
  *
  * @param key - The translation key(s).
@@ -285,7 +291,8 @@ const helpers = {
   UI_BRAND,
   UI_NAME,
   UI_VERSION,
-  FEATURE_REPORTS_VIEW
+  FEATURE_REPORTS_VIEW,
+  FEATURE_VAULT_AUTH
 };
 
 export { helpers as default, helpers };
