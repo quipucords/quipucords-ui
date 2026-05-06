@@ -138,27 +138,22 @@ quipucords-ui uses GitHub releases, and our GitHub automation automatically buil
 
 To create a new release, use `npm` to update version details, and open a PR to merge those changes to `main` using the following process.
 
-1. Within the repo, confirm you're on a new branch from the latest `main` updates, and use `npm` to update the version:
+1. Within the repo, confirm you're on a new branch from the latest `main` updates, and bump the version:
    ```
-   $ npm install                                # to ensure that packages are installed
-   $ npm run release -- --dry-run               # to review the changes before committing them
-   $ npm run release                            # to generate and commit the changes
+   $ npm version X.X.X --no-git-tag-version    # updates package.json and package-lock.json
    ```
-
-   > If you disagree with automatic generated version number, you may override it with the > optional `--override` argument:
-   > ```
-   > $ npm run release -- --override X.X.X
-   > ```
-2. You still need to confirm you now have a release commit with the format `chore(release): X.X.X` that includes changes to:
+2. Create a release commit:
+   ```
+   $ git add package.json package-lock.json
+   $ git commit -m "chore(release): X.X.X"
+   ```
+3. Confirm the commit includes changes only to:
    - [`package.json`](./package.json)
    - [`package-lock.json`](./package-lock.json)
-   - [`CHANGELOG.md`](./CHANGELOG.md)
 
    If there are issues with the file updates, squash or amend any fixes into the single `chore(release): X.X.X` commit.
-3. Then push the **SINGLE** commit and open a PR in GitHub for your branch to merge into `main`. Get necessary approvals, and merge.
-   
-   > The git hash for the linking inside CHANGELOG.md does NOT require the git hash of the release commit.
-4. Using the [GitHub releases page](https://github.com/RedHatInsights/quipucords-ui/releases):
+4. Push the **SINGLE** commit and open a PR in GitHub for your branch to merge into `main`. Get necessary approvals, and merge.
+5. Using the [GitHub releases page](https://github.com/quipucords/quipucords-ui/releases):
    1. Draft a new release from `main`, and confirm it references your latest `chore(release): X.X.X` commit hash.
    2. Create the new tag using the **SAME** semver version created by the release commit, i.e. `X.X.X`.
 
