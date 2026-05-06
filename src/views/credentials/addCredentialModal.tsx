@@ -392,7 +392,9 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
     onClearErrors
   });
 
-  const { data: vaultConfigData } = useGetHashicorpVaultConfigApi(typeValue === 'openshift' || typeValue === 'ansible');
+  const { data: vaultConfigData } = useGetHashicorpVaultConfigApi(
+    helpers.FEATURE_VAULT_AUTH && (typeValue === 'openshift' || typeValue === 'ansible')
+  );
   const vaultConfigured = vaultConfigData?.vaultConfigured === true;
   const vaultDisabledTooltip = t('view.credentials.add-modal.auth_type.vault_disabled_tooltip');
 
@@ -408,12 +410,15 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
     () => [
       { item: helpers.authType.Token, ouiaId: 'auth_token' },
       { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
-      {
-        item: helpers.authType.VaultSecretPath,
-        ouiaId: 'vault_secret_path',
-        isDisabled: !vaultConfigured,
-        disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
-      }
+      ...((helpers.FEATURE_VAULT_AUTH && [
+        {
+          item: helpers.authType.VaultSecretPath,
+          ouiaId: 'vault_secret_path',
+          isDisabled: !vaultConfigured,
+          disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
+        }
+      ]) ||
+        [])
     ],
     [vaultConfigured, vaultDisabledTooltip]
   );
@@ -421,12 +426,15 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
   const ansibleAuthDropdownItems = React.useMemo(
     () => [
       { item: helpers.authType.UsernameAndPassword, ouiaId: 'password' },
-      {
-        item: helpers.authType.VaultSecretPath,
-        ouiaId: 'vault_secret_path',
-        isDisabled: !vaultConfigured,
-        disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
-      }
+      ...((helpers.FEATURE_VAULT_AUTH && [
+        {
+          item: helpers.authType.VaultSecretPath,
+          ouiaId: 'vault_secret_path',
+          isDisabled: !vaultConfigured,
+          disabledTooltip: !vaultConfigured ? vaultDisabledTooltip : undefined
+        }
+      ]) ||
+        [])
     ],
     [vaultConfigured, vaultDisabledTooltip]
   );
