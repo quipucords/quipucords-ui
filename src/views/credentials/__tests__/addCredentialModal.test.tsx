@@ -1084,6 +1084,7 @@ describe('getCleanedFormData', () => {
   it('should clean formData for Vault secret path auth', () => {
     const fd = {
       name: 'vault-cred',
+      vault_secret_key: 'auth_token',
       vault_secret_path: 'ocp/prod',
       vault_mount_point: '',
       auth_token: 'should-clear',
@@ -1093,6 +1094,7 @@ describe('getCleanedFormData', () => {
     };
     const cleanedData = getCleanedFormData(fd, helpers.authType.VaultSecretPath);
     expect(cleanedData).toEqual({
+      vault_secret_key: 'auth_token',
       name: 'vault-cred',
       vault_secret_path: 'ocp/prod'
     });
@@ -1101,6 +1103,7 @@ describe('getCleanedFormData', () => {
   it('should keep vault mount point when set', () => {
     const fd = {
       name: 'vault-cred',
+      vault_secret_key: 'auth_token',
       vault_secret_path: 'path',
       vault_mount_point: 'custom-mount',
       auth_token: 'x'
@@ -1108,6 +1111,7 @@ describe('getCleanedFormData', () => {
     const cleanedData = getCleanedFormData(fd, helpers.authType.VaultSecretPath);
     expect(cleanedData).toEqual({
       name: 'vault-cred',
+      vault_secret_key: 'auth_token',
       vault_secret_path: 'path',
       vault_mount_point: 'custom-mount'
     });
