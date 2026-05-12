@@ -77,6 +77,7 @@ const getCleanedFormData = (
     case 'Token':
       cleanedData.password = '';
       cleanedData.username = '';
+      cleanedData.vault_secret_key = '';
       cleanedData.vault_secret_path = '';
       cleanedData.vault_mount_point = '';
       break;
@@ -84,11 +85,13 @@ const getCleanedFormData = (
       cleanedData.auth_token = '';
       cleanedData.ssh_key = '';
       cleanedData.ssh_passphrase = '';
+      cleanedData.vault_secret_key = '';
       cleanedData.vault_secret_path = '';
       cleanedData.vault_mount_point = '';
       break;
     case 'SSH Key':
       cleanedData.password = '';
+      cleanedData.vault_secret_key = '';
       cleanedData.vault_secret_path = '';
       cleanedData.vault_mount_point = '';
       break;
@@ -113,6 +116,7 @@ const getCleanedFormData = (
   deleteKeysIfEmptyOrUndefined(cleanedData, maskedKeysEmpty);
 
   if (authType !== helpers.authType.VaultSecretPath) {
+    delete cleanedData.vault_secret_key;
     delete cleanedData.vault_secret_path;
     delete cleanedData.vault_mount_point;
   }
@@ -155,6 +159,7 @@ const useCredentialForm = ({
     auth_token: '',
     become_method: '',
     username: '',
+    vault_secret_key: '',
     vault_secret_path: '',
     vault_mount_point: ''
   };
@@ -185,6 +190,7 @@ const useCredentialForm = ({
         name: !!credential?.name,
         become_user: !!credential?.become_user,
         become_method: !!credential?.become_method,
+        vault_secret_key: !!(credential?.vault_secret_key && String(credential.vault_secret_key).trim()),
         vault_secret_path: !!(credential?.vault_secret_path && String(credential.vault_secret_path).trim()),
         vault_mount_point: !!(credential?.vault_mount_point && String(credential.vault_mount_point).trim())
       };
@@ -204,7 +210,7 @@ const useCredentialForm = ({
       case 'SSH Key':
         return [...baseFields, 'username', 'ssh_key'];
       case helpers.authType.VaultSecretPath:
-        return [...baseFields, 'vault_secret_path'];
+        return [...baseFields, 'vault_secret_path', 'vault_secret_key'];
       default:
         return baseFields;
     }
@@ -265,6 +271,7 @@ const useCredentialForm = ({
         auth_token: '',
         become_method: credential?.become_method || '',
         username: credential?.username || '',
+        vault_secret_key: credential?.vault_secret_key || '',
         vault_secret_path: credential?.vault_secret_path || '',
         vault_mount_point: credential?.vault_mount_point || ''
       });
@@ -521,6 +528,20 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
               errorMessage={errors?.vault_secret_path}
               fieldTouched={touchedFields.has('vault_secret_path')}
             />
+          </FormGroup>
+          <FormGroup label={t('view.credentials.add-modal.vault_secret_key.label')} isRequired fieldId="vault_secret_key">
+            <TextInput
+              value={formData?.vault_secret_key}
+              placeholder={t('view.credentials.add-modal.vault_secret_key.placeholder')}
+              isRequired
+              type="text"
+              id="credential-vault-key"
+              name="vault_secret_key"
+              validated={errors?.vault_secret_key ? 'error' : 'default'}
+              onChange={event => handleInputChange('vault_secret_key', (event.target as HTMLInputElement).value)}
+              ouiaId="vault_secret_key"
+            />
+            <ErrorFragment errorMessage={errors?.vault_secret_key} fieldTouched={touchedFields.has('vault_secret_key')} />
           </FormGroup>
           <FormGroup label={t('view.credentials.add-modal.vault_mount_point.label')} fieldId="vault_mount_point">
             <TextInput

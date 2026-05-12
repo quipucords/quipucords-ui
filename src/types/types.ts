@@ -24,6 +24,7 @@ export type CredentialRequest = CredentialBase & {
   auth_token?: string;
   ssh_passphrase?: string;
   become_password?: string;
+  vault_secret_key?: string;
   vault_secret_path?: string;
   vault_mount_point?: string;
   id?: number;
@@ -43,6 +44,7 @@ export type CredentialResponse = CredentialBase & {
   has_ssh_passphrase?: boolean;
   has_become_password?: boolean;
   has_auth_token?: boolean;
+  vault_secret_key?: string | null;
   vault_secret_path?: string | null;
   vault_mount_point?: string | null;
 };
