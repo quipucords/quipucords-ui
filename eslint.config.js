@@ -23,7 +23,7 @@ const globals = require('globals');
  */
 
 module.exports = defineConfig([
-  globalIgnores(['**/package.json', '**/package-lock.json', 'src/vendor/**']),
+  globalIgnores(['**/package.json', '**/package-lock.json', 'src/vendor/**', 'tsconfig.json']),
   commentLengthPlugin.configs['flat/recommended'],
   jsxA11YPlugin.flatConfigs.recommended,
   typescriptPlugin.configs.recommended,
