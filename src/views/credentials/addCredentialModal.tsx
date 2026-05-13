@@ -508,6 +508,22 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
 
       {authType === helpers.authType.VaultSecretPath && (
         <React.Fragment>
+          <FormGroup label={t('view.credentials.add-modal.vault_mount_point.label')} fieldId="vault_mount_point">
+            <TextInput
+              value={formData?.vault_mount_point}
+              placeholder={t('view.credentials.add-modal.vault_mount_point.placeholder')}
+              type="text"
+              id="credential-vault-mount-point"
+              name="vault_mount_point"
+              validated={errors?.vault_mount_point ? 'error' : 'default'}
+              onChange={event => handleInputChange('vault_mount_point', (event.target as HTMLInputElement).value)}
+              ouiaId="vault_mount_point"
+            />
+            <ErrorFragment
+              errorMessage={errors?.vault_mount_point}
+              fieldTouched={touchedFields.has('vault_mount_point')}
+            />
+          </FormGroup>
           <FormGroup
             label={t('view.credentials.add-modal.vault_secret_path.label')}
             isRequired
@@ -529,7 +545,11 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
               fieldTouched={touchedFields.has('vault_secret_path')}
             />
           </FormGroup>
-          <FormGroup label={t('view.credentials.add-modal.vault_secret_key.label')} isRequired fieldId="vault_secret_key">
+          <FormGroup
+            label={t('view.credentials.add-modal.vault_secret_key.label')}
+            isRequired
+            fieldId="vault_secret_key"
+          >
             <TextInput
               value={formData?.vault_secret_key}
               placeholder={t('view.credentials.add-modal.vault_secret_key.placeholder')}
@@ -541,22 +561,9 @@ const CredentialForm: React.FC<CredentialFormProps> = ({
               onChange={event => handleInputChange('vault_secret_key', (event.target as HTMLInputElement).value)}
               ouiaId="vault_secret_key"
             />
-            <ErrorFragment errorMessage={errors?.vault_secret_key} fieldTouched={touchedFields.has('vault_secret_key')} />
-          </FormGroup>
-          <FormGroup label={t('view.credentials.add-modal.vault_mount_point.label')} fieldId="vault_mount_point">
-            <TextInput
-              value={formData?.vault_mount_point}
-              placeholder={t('view.credentials.add-modal.vault_mount_point.placeholder')}
-              type="text"
-              id="credential-vault-mount-point"
-              name="vault_mount_point"
-              validated={errors?.vault_mount_point ? 'error' : 'default'}
-              onChange={event => handleInputChange('vault_mount_point', (event.target as HTMLInputElement).value)}
-              ouiaId="vault_mount_point"
-            />
             <ErrorFragment
-              errorMessage={errors?.vault_mount_point}
-              fieldTouched={touchedFields.has('vault_mount_point')}
+              errorMessage={errors?.vault_secret_key}
+              fieldTouched={touchedFields.has('vault_secret_key')}
             />
           </FormGroup>
         </React.Fragment>
