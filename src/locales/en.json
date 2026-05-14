@@ -315,6 +315,10 @@
           "label": "Username",
           "placeholder": "Enter username"
         },
+        "vault_secret_key": {
+          "label": "Secret key",
+          "placeholder": "e.g. auth_token"
+        },
         "vault_secret_path": {
           "label": "Secret path",
           "placeholder": "e.g. ocp/prod/kv"
