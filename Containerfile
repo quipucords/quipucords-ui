@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:62368234c8545a55c3a4900016c96585c8eff46fa56eff7eb58db4616f531407 as npm_builder
+FROM registry.access.redhat.com/ubi10/nodejs-22@sha256:11cb113000c9bf315fbda26d2cdd817396bb17eaf57abff922680441ce7f80b0 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 ARG REACT_APP_FEATURE_REPORTS_VIEW="false"
 ARG REACT_APP_FEATURE_VAULT_AUTH="false"
@@ -14,8 +14,8 @@ RUN npm ci \
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-124@sha256:fc907a8104722582eaf58968a54aac349bcbb9c2ca69cd930999de7ec317449c
-ARG CPE_NAME="cpe:/a:redhat:discovery:2::el9"
+FROM registry.access.redhat.com/ubi10/nginx-126@sha256:8e4d913f3adc58517787c4691c86b84f74545f48765c50a4614f9ffa0ebe81ce
+ARG CPE_NAME="cpe:/a:redhat:discovery:2::el10"
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
 ARG K8S_NAME="quipucords/quipucords-ui"
@@ -23,7 +23,7 @@ ARG OCP_TAGS="quipucords"
 ARG REDHAT_COMPONENT="quipucords-ui-container"
 
 # original NGINX user; update if the number ever change
-# https://github.com/sclorg/nginx-container/blob/e7d8db9bc5299a4c4e254f8a82e917c7c136468b/1.22/Dockerfile.rhel9#L84
+# https://github.com/sclorg/nginx-container/blob/2cfa51b1f452bb212b8f3d797e18303641022dec/1.26/Dockerfile.rhel10#L85
 ENV NGINX_USER=1001
 # temporarily switch to root user
 USER root
