@@ -226,6 +226,9 @@ const ScanForm: React.FC<ScanFormProps> = ({
     onClearErrors
   });
 
+  // Check if at least one network source is being scanned
+  const hasNetworkSource = sources?.some(s => s.source_type === 'network') ?? false;
+
   const scrollToFirstError = useCallback(() => {
     const errorFields = Object.keys(errors);
     if (errorFields.length > 0) {
@@ -307,29 +310,31 @@ const ScanForm: React.FC<ScanFormProps> = ({
           data-ouia-component-id="scan_concurrency"
         />
       </FormGroup>
-      <FormGroup
-        label={t('view.sources.scan-modal.deep-scan.label')}
-        isStack
-        fieldId="deepScans"
-        hasNoPaddingTop
-        role="group"
-      >
-        {[
-          { label: t('view.sources.scan-modal.deep-scan.jboss_eap'), value: 'jboss_eap' },
-          { label: t('view.sources.scan-modal.deep-scan.jboss_fuse'), value: 'jboss_fuse' },
-          { label: t('view.sources.scan-modal.deep-scan.jboss_ws'), value: 'jboss_ws' }
-        ].map(o => (
-          <Checkbox
-            key={`deep-scan-${o.value}`}
-            label={o.label}
-            id={`deep-scan-${o.value}`}
-            isChecked={formData.deepScans.includes(o.value)}
-            onChange={(_ev, ch) => onDeepScanChange(o.value, ch)}
-            ouiaId={`options_${o.value}`}
-          />
-        ))}
-      </FormGroup>
-      {!!formData.deepScans.length && (
+      {hasNetworkSource && (
+        <FormGroup
+          label={t('view.sources.scan-modal.deep-scan.label')}
+          isStack
+          fieldId="deepScans"
+          hasNoPaddingTop
+          role="group"
+        >
+          {[
+            { label: t('view.sources.scan-modal.deep-scan.jboss_eap'), value: 'jboss_eap' },
+            { label: t('view.sources.scan-modal.deep-scan.jboss_fuse'), value: 'jboss_fuse' },
+            { label: t('view.sources.scan-modal.deep-scan.jboss_ws'), value: 'jboss_ws' }
+          ].map(o => (
+            <Checkbox
+              key={`deep-scan-${o.value}`}
+              label={o.label}
+              id={`deep-scan-${o.value}`}
+              isChecked={formData.deepScans.includes(o.value)}
+              onChange={(_ev, ch) => onDeepScanChange(o.value, ch)}
+              ouiaId={`options_${o.value}`}
+            />
+          ))}
+        </FormGroup>
+      )}
+      {hasNetworkSource && !!formData.deepScans.length && (
         <FormGroup label={t('view.sources.scan-modal.search-dirs.label')} fieldId="searchDirectories">
           <TextArea
             value={formData.searchDirectories}

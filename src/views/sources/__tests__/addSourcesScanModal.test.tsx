@@ -41,6 +41,186 @@ describe('AddSourceModal', () => {
   });
 });
 
+describe('Conditional Deep Scan Display', () => {
+  const mockConnection = {
+    end_time: '2023-01-01T00:00:00Z',
+    id: 1,
+    report_id: 1,
+    source_systems_count: 1,
+    source_systems_failed: 0,
+    source_systems_scanned: 1,
+    source_systems_unreachable: 0,
+    start_time: '2023-01-01T00:00:00Z',
+    status: 'completed',
+    status_details: { job_status_message: 'Success' },
+    systems_count: 1,
+    systems_scanned: 1,
+    systems_failed: 0
+  };
+
+  it('should show deep scan options when scanning a network source', async () => {
+    const networkSources = [
+      {
+        id: 1,
+        name: 'Network Source',
+        port: 22,
+        source_type: 'network',
+        hosts: ['host1'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: mockConnection,
+        ssl_cert_verify: false,
+        disable_ssl: false
+      }
+    ];
+
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={networkSources} />);
+    });
+
+    expect(screen.getByText(/deep-scan\.label/)).toBeInTheDocument();
+    expect(screen.getByText(/deep-scan\.jboss_eap/)).toBeInTheDocument();
+    expect(screen.getByText(/deep-scan\.jboss_fuse/)).toBeInTheDocument();
+    expect(screen.getByText(/deep-scan\.jboss_ws/)).toBeInTheDocument();
+  });
+
+  it('should NOT show deep scan options when scanning a non-network source', async () => {
+    const satelliteSources = [
+      {
+        id: 1,
+        name: 'Satellite Source',
+        port: 443,
+        source_type: 'satellite',
+        hosts: ['satellite.example.com'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: mockConnection,
+        ssl_cert_verify: true,
+        disable_ssl: false
+      }
+    ];
+
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={satelliteSources} />);
+    });
+
+    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/deep-scan\.jboss_eap/)).not.toBeInTheDocument();
+  });
+
+  it('should show deep scan options when scanning mixed source types including network', async () => {
+    const mixedSources = [
+      {
+        id: 1,
+        name: 'Network Source',
+        port: 22,
+        source_type: 'network',
+        hosts: ['host1'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: mockConnection,
+        ssl_cert_verify: false,
+        disable_ssl: false
+      },
+      {
+        id: 2,
+        name: 'Satellite Source',
+        port: 443,
+        source_type: 'satellite',
+        hosts: ['satellite.example.com'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: { ...mockConnection, id: 2 },
+        ssl_cert_verify: true,
+        disable_ssl: false
+      }
+    ];
+
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={mixedSources} />);
+    });
+
+    expect(screen.getByText(/deep-scan\.label/)).toBeInTheDocument();
+    expect(screen.getByText(/deep-scan\.jboss_eap/)).toBeInTheDocument();
+  });
+
+  it('should NOT show deep scan options when scanning multiple non-network sources', async () => {
+    const nonNetworkSources = [
+      {
+        id: 1,
+        name: 'Satellite Source',
+        port: 443,
+        source_type: 'satellite',
+        hosts: ['satellite.example.com'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: mockConnection,
+        ssl_cert_verify: true,
+        disable_ssl: false
+      },
+      {
+        id: 2,
+        name: 'vCenter Source',
+        port: 443,
+        source_type: 'vcenter',
+        hosts: ['vcenter.example.com'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: { ...mockConnection, id: 2 },
+        ssl_cert_verify: true,
+        disable_ssl: false
+      }
+    ];
+
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={nonNetworkSources} />);
+    });
+
+    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
+  });
+
+  it('should show search directories field when deep scan is checked and source is network', async () => {
+    const networkSources = [
+      {
+        id: 1,
+        name: 'Network Source',
+        port: 22,
+        source_type: 'network',
+        hosts: ['host1'],
+        exclude_hosts: [],
+        credentials: [],
+        connection: mockConnection,
+        ssl_cert_verify: false,
+        disable_ssl: false
+      }
+    ];
+
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={networkSources} />);
+    });
+
+    // Initially, search directories field should not be visible
+    expect(screen.queryByText(/search-dirs\.label/)).not.toBeInTheDocument();
+
+    // Click a deep scan checkbox
+    const user = userEvent.setup();
+    const jbossEapCheckbox = screen.getByLabelText(/deep-scan\.jboss_eap/);
+    await user.click(jbossEapCheckbox);
+
+    // Now search directories field should appear
+    expect(screen.getByText(/search-dirs\.label/)).toBeInTheDocument();
+  });
+
+  it('should NOT show search directories field for non-network sources even if sources prop is undefined', async () => {
+    await act(async () => {
+      await render(<AddSourcesScanModal isOpen={true} sources={undefined} />);
+    });
+
+    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/search-dirs\.label/)).not.toBeInTheDocument();
+  });
+});
+
 describe('Form Validation', () => {
   it('should validate required fields and show canSubmit correctly', async () => {
     const { result } = renderHook(() => useScanForm());
