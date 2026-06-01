@@ -54,3 +54,2419 @@ exports[`AddSourceModal should render a basic component: basic 1`] = `
   />
 </Modal>
 `;
+
+exports[`Conditional Deep Scan Display should NOT show deep scan options when scanning a non-network source: non-network source without deep scan options 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-7"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-6"
+        aria-labelledby="pf-modal-part-5"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-5"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-4"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-5-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-5"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-6"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  >
+                    Satellite Source
+                  </textarea>
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-9"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-10"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-10"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-5"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-5"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Conditional Deep Scan Display should NOT show deep scan options when scanning multiple non-network sources: multiple non-network sources without deep scan options 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-9"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-8"
+        aria-labelledby="pf-modal-part-7"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-7"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-6"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-7-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-7"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-8"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  >
+                    Satellite Source, vCenter Source
+                  </textarea>
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-13"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-14"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-14"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-7"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-7"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Conditional Deep Scan Display should NOT show search directories field for non-network sources even if sources prop is undefined: undefined sources without deep scan options 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-11"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-10"
+        aria-labelledby="pf-modal-part-9"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-9"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-8"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-9-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-9"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-10"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-17"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-18"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-18"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-9"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-9"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Conditional Deep Scan Display should show deep scan options when scanning a network source: network source with deep scan options 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-6"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-5"
+        aria-labelledby="pf-modal-part-4"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-4"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-3"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-4-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-4"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-5"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  >
+                    Network Source
+                  </textarea>
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-7"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-8"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-8"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              aria-labelledby="deepScans-legend"
+              class="pf-v6-c-form__group"
+              role="group"
+            >
+              <div
+                class="pf-v6-c-form__group-label pf-m-no-padding-top"
+                id="deepScans-legend"
+              >
+                <span
+                  class="pf-v6-c-form__label"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.label"
+])
+                  </span>
+                </span>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control pf-m-stack"
+              >
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_eap"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_eap"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_eap"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_eap"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_fuse"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_fuse"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_fuse"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_fuse"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_ws"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_ws"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_ws"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_ws"
+])
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-4"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-4"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Conditional Deep Scan Display should show deep scan options when scanning mixed source types including network: mixed sources with deep scan options 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-8"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-7"
+        aria-labelledby="pf-modal-part-6"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-6"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-5"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-6-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-6"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-7"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  >
+                    Network Source, Satellite Source
+                  </textarea>
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-11"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-12"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-12"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              aria-labelledby="deepScans-legend"
+              class="pf-v6-c-form__group"
+              role="group"
+            >
+              <div
+                class="pf-v6-c-form__group-label pf-m-no-padding-top"
+                id="deepScans-legend"
+              >
+                <span
+                  class="pf-v6-c-form__label"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.label"
+])
+                  </span>
+                </span>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control pf-m-stack"
+              >
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_eap"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_eap"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_eap"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_eap"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_fuse"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_fuse"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_fuse"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_fuse"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_ws"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_ws"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_ws"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_ws"
+])
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-6"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-6"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Conditional Deep Scan Display should show search directories field when deep scan is checked and source is network: network source with search directories after deep scan check 1`] = `
+<body
+  class="pf-v6-c-backdrop__open"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    class="pf-v6-c-backdrop"
+    id="pf-modal-part-10"
+  >
+    <div
+      class="pf-v6-l-bullseye"
+    >
+      <div
+        aria-describedby="pf-modal-part-9"
+        aria-labelledby="pf-modal-part-8"
+        aria-modal="true"
+        class="pf-v6-c-modal-box pf-m-sm"
+        data-ouia-component-id="OUIA-Generated-Modal-small-8"
+        data-ouia-component-type="PF6/ModalContent"
+        data-ouia-safe="true"
+        id="pf-modal-part-7"
+        role="dialog"
+      >
+        <div
+          class="pf-v6-c-modal-box__close"
+        >
+          <button
+            aria-label="Close"
+            class="pf-v6-c-button pf-m-plain"
+            data-ouia-component-id="OUIA-Generated-Modal-small-8-ModalBoxCloseButton"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="pf-v6-svg"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <header
+          class="pf-v6-c-modal-box__header"
+        >
+          <h1
+            class="pf-v6-c-modal-box__title"
+            id="pf-modal-part-8"
+          >
+            <span
+              class="pf-v6-c-modal-box__title-text"
+            >
+              t([
+  "view.sources.modal-title.new-scan"
+])
+            </span>
+          </h1>
+        </header>
+        <div
+          class="pf-v6-c-modal-box__body"
+          id="pf-modal-part-9"
+        >
+          <form
+            class="pf-v6-c-form"
+            novalidate=""
+          >
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="name"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.name.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control"
+                >
+                  <input
+                    aria-invalid="false"
+                    data-ouia-component-id="name"
+                    data-ouia-component-type="PF6/TextInput"
+                    data-ouia-safe="true"
+                    id="scan-name"
+                    name="name"
+                    placeholder="t([
+  "view.sources.scan-modal.name.placeholder"
+])"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="sources"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.sources.label"
+])
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="pf-v6-c-form__label-required"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both pf-m-disabled"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    disabled=""
+                    id="scan-sources"
+                    name="sources"
+                    required=""
+                  >
+                    Network Source
+                  </textarea>
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="maxConcurrency"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.max-concurrency.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-number-input"
+                  data-ouia-component-id="scan_concurrency"
+                >
+                  <div
+                    class="pf-v6-c-input-group"
+                  >
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-minus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-15"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <span
+                        class="pf-v6-c-form-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-input"
+])"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-16"
+                          data-ouia-component-type="PF6/TextInput"
+                          data-ouia-safe="true"
+                          name="input"
+                          type="number"
+                          value="25"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="pf-v6-c-input-group__item"
+                    >
+                      <button
+                        aria-label="t([
+  "view.sources.scan-modal.max-concurrency.aria-plus"
+])"
+                        class="pf-v6-c-button pf-m-control"
+                        data-ouia-component-id="OUIA-Generated-Button-control-16"
+                        data-ouia-component-type="PF6/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-v6-c-button__icon"
+                        >
+                          <span
+                            class="pf-v6-c-number-input__icon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="pf-v6-svg"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              aria-labelledby="deepScans-legend"
+              class="pf-v6-c-form__group"
+              role="group"
+            >
+              <div
+                class="pf-v6-c-form__group-label pf-m-no-padding-top"
+                id="deepScans-legend"
+              >
+                <span
+                  class="pf-v6-c-form__label"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.label"
+])
+                  </span>
+                </span>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control pf-m-stack"
+              >
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_eap"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_eap"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_eap"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_eap"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_fuse"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_fuse"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_fuse"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_fuse"
+])
+                  </label>
+                </div>
+                <div
+                  class="pf-v6-c-check"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="pf-v6-c-check__input"
+                    data-ouia-component-id="options_jboss_ws"
+                    data-ouia-component-type="PF6/Checkbox"
+                    data-ouia-safe="true"
+                    id="deep-scan-jboss_ws"
+                    type="checkbox"
+                  />
+                  <label
+                    class="pf-v6-c-check__label"
+                    for="deep-scan-jboss_ws"
+                  >
+                    t([
+  "view.sources.scan-modal.deep-scan.jboss_ws"
+])
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group"
+            >
+              <div
+                class="pf-v6-c-form__group-label"
+              >
+                <label
+                  class="pf-v6-c-form__label"
+                  for="searchDirectories"
+                >
+                  <span
+                    class="pf-v6-c-form__label-text"
+                  >
+                    t([
+  "view.sources.scan-modal.search-dirs.label"
+])
+                  </span>
+                </label>
+                  
+              </div>
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <span
+                  class="pf-v6-c-form-control pf-m-textarea pf-m-resize-both"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    data-ouia-component-id="scan_alt_dirs"
+                    id="scan-alt-scan"
+                    name="searchDirectories"
+                  />
+                </span>
+                <div
+                  class="pf-v6-c-helper-text"
+                >
+                  t([
+  "view.sources.scan-modal.search-dirs.helper"
+])
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-v6-c-form__group pf-m-action"
+            >
+              <div
+                class="pf-v6-c-form__group-control"
+              >
+                <div
+                  class="pf-v6-c-form__actions"
+                >
+                  <button
+                    class="pf-v6-c-button pf-m-primary"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-8"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.save"
+])
+                    </span>
+                  </button>
+                  <button
+                    class="pf-v6-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-8"
+                    data-ouia-component-type="PF6/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    <span
+                      class="pf-v6-c-button__text"
+                    >
+                      t([
+  "view.sources.scan-modal.actions.cancel"
+])
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
