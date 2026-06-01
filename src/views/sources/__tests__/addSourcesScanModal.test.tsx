@@ -42,22 +42,6 @@ describe('AddSourceModal', () => {
 });
 
 describe('Conditional Deep Scan Display', () => {
-  const mockConnection = {
-    end_time: '2023-01-01T00:00:00Z',
-    id: 1,
-    report_id: 1,
-    source_systems_count: 1,
-    source_systems_failed: 0,
-    source_systems_scanned: 1,
-    source_systems_unreachable: 0,
-    start_time: '2023-01-01T00:00:00Z',
-    status: 'completed',
-    status_details: { job_status_message: 'Success' },
-    systems_count: 1,
-    systems_scanned: 1,
-    systems_failed: 0
-  };
-
   it('should show deep scan options when scanning a network source', async () => {
     const networkSources = [
       {
@@ -68,7 +52,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['host1'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: false,
         disable_ssl: false
       }
@@ -94,7 +77,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['satellite.example.com'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: true,
         disable_ssl: false
       }
@@ -118,7 +100,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['host1'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: false,
         disable_ssl: false
       },
@@ -130,7 +111,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['satellite.example.com'],
         exclude_hosts: [],
         credentials: [],
-        connection: { ...mockConnection, id: 2 },
         ssl_cert_verify: true,
         disable_ssl: false
       }
@@ -154,7 +134,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['satellite.example.com'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: true,
         disable_ssl: false
       },
@@ -166,7 +145,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['vcenter.example.com'],
         exclude_hosts: [],
         credentials: [],
-        connection: { ...mockConnection, id: 2 },
         ssl_cert_verify: true,
         disable_ssl: false
       }
@@ -189,7 +167,6 @@ describe('Conditional Deep Scan Display', () => {
         hosts: ['host1'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: false,
         disable_ssl: false
       }
@@ -294,22 +271,6 @@ describe('Form Validation', () => {
   });
 
   it('should filter form data correctly for API submission', async () => {
-    const mockConnection = {
-      end_time: '2023-01-01T00:00:00Z',
-      id: 1,
-      report_id: 1,
-      source_systems_count: 1,
-      source_systems_failed: 0,
-      source_systems_scanned: 1,
-      source_systems_unreachable: 0,
-      start_time: '2023-01-01T00:00:00Z',
-      status: 'completed',
-      status_details: { job_status_message: 'Success' },
-      systems_count: 1,
-      systems_scanned: 1,
-      systems_failed: 0
-    };
-
     const sources = [
       {
         id: 1,
@@ -319,7 +280,6 @@ describe('Form Validation', () => {
         hosts: ['host1'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: false,
         disable_ssl: false
       },
@@ -331,7 +291,6 @@ describe('Form Validation', () => {
         hosts: ['host2'],
         exclude_hosts: [],
         credentials: [],
-        connection: { ...mockConnection, id: 2 },
         ssl_cert_verify: false,
         disable_ssl: false
       }
@@ -381,22 +340,6 @@ describe('Form Validation', () => {
   });
 
   it('should reset form when sources change', async () => {
-    const mockConnection = {
-      end_time: '2023-01-01T00:00:00Z',
-      id: 1,
-      report_id: 1,
-      source_systems_count: 1,
-      source_systems_failed: 0,
-      source_systems_scanned: 1,
-      source_systems_unreachable: 0,
-      start_time: '2023-01-01T00:00:00Z',
-      status: 'completed',
-      status_details: { job_status_message: 'Success' },
-      systems_count: 1,
-      systems_scanned: 1,
-      systems_failed: 0
-    };
-
     const initialSources = [
       {
         id: 1,
@@ -406,7 +349,6 @@ describe('Form Validation', () => {
         hosts: ['host1'],
         exclude_hosts: [],
         credentials: [],
-        connection: mockConnection,
         ssl_cert_verify: false,
         disable_ssl: false
       }
@@ -430,7 +372,6 @@ describe('Form Validation', () => {
         hosts: ['host2'],
         exclude_hosts: [],
         credentials: [],
-        connection: { ...mockConnection, id: 2 },
         ssl_cert_verify: false,
         disable_ssl: false
       }

@@ -443,13 +443,13 @@ const SourcesListView: React.FunctionComponent = () => {
         </Button>
       );
     }
+    // At this point, we know source.connection exists due to the guard above
+    const connection = source.connection!;
     const isPending =
-      source.connection.status === 'created' ||
-      source.connection.status === 'pending' ||
-      source.connection.status === 'running';
-    const scanTime = (isPending && source.connection.start_time) || source.connection.end_time;
+      connection.status === 'created' || connection.status === 'pending' || connection.status === 'running';
+    const scanTime = (isPending && connection.start_time) || connection.end_time;
 
-    const statusString = t(`table.label_status_${source.connection.status}`, { context: 'sources' });
+    const statusString = t(`table.label_status_${connection.status}`, { context: 'sources' });
     return (
       <Button
         variant={ButtonVariant.link}
@@ -465,7 +465,7 @@ const SourcesListView: React.FunctionComponent = () => {
           setConnectionsSelected(source);
         }}
       >
-        <ContextIcon symbol={ContextIconVariant[source.connection.status]} /> {statusString}{' '}
+        <ContextIcon symbol={ContextIconVariant[connection.status]} /> {statusString}{' '}
         {helpers.getTimeDisplayHowLongAgo(scanTime)}
       </Button>
     );

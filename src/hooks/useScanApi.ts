@@ -478,7 +478,7 @@ const useDownloadReportApi = (onAddAlert: (alert: AlertProps) => void) => {
 
 const useShowConnectionsApi = () => {
   const apiCall = useCallback((source: SourceResponse): Promise<AxiosResponse> => {
-    return axios.get(`${process.env.REACT_APP_SCAN_JOBS_SERVICE}${source.connection.id}/connection/`, {
+    return axios.get(`${process.env.REACT_APP_SCAN_JOBS_SERVICE}${source.connection?.id}/connection/`, {
       params: { page: 1, page_size: 1000, ordering: 'name', source_type: source.id }
     });
   }, []);

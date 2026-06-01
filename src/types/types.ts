@@ -104,7 +104,7 @@ export type SourceResponse = SourceBase & {
   id: number;
   credentials: CredentialResponse[];
   exclude_hosts: string[];
-  connection: SourceConnectionType;
+  connection?: SourceConnectionType;
 };
 
 export type ConnectionType = {
