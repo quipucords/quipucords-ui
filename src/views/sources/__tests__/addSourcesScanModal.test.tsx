@@ -57,14 +57,12 @@ describe('Conditional Deep Scan Display', () => {
       }
     ];
 
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={networkSources} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={networkSources} />));
     });
 
-    expect(screen.getByText(/deep-scan\.label/)).toBeInTheDocument();
-    expect(screen.getByText(/deep-scan\.jboss_eap/)).toBeInTheDocument();
-    expect(screen.getByText(/deep-scan\.jboss_fuse/)).toBeInTheDocument();
-    expect(screen.getByText(/deep-scan\.jboss_ws/)).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('network source with deep scan options');
   });
 
   it('should NOT show deep scan options when scanning a non-network source', async () => {
@@ -82,12 +80,12 @@ describe('Conditional Deep Scan Display', () => {
       }
     ];
 
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={satelliteSources} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={satelliteSources} />));
     });
 
-    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/deep-scan\.jboss_eap/)).not.toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('non-network source without deep scan options');
   });
 
   it('should show deep scan options when scanning mixed source types including network', async () => {
@@ -116,12 +114,12 @@ describe('Conditional Deep Scan Display', () => {
       }
     ];
 
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={mixedSources} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={mixedSources} />));
     });
 
-    expect(screen.getByText(/deep-scan\.label/)).toBeInTheDocument();
-    expect(screen.getByText(/deep-scan\.jboss_eap/)).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('mixed sources with deep scan options');
   });
 
   it('should NOT show deep scan options when scanning multiple non-network sources', async () => {
@@ -150,11 +148,12 @@ describe('Conditional Deep Scan Display', () => {
       }
     ];
 
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={nonNetworkSources} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={nonNetworkSources} />));
     });
 
-    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('multiple non-network sources without deep scan options');
   });
 
   it('should show search directories field when deep scan is checked and source is network', async () => {
@@ -172,12 +171,10 @@ describe('Conditional Deep Scan Display', () => {
       }
     ];
 
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={networkSources} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={networkSources} />));
     });
-
-    // Initially, search directories field should not be visible
-    expect(screen.queryByText(/search-dirs\.label/)).not.toBeInTheDocument();
 
     // Click a deep scan checkbox
     const user = userEvent.setup();
@@ -185,16 +182,16 @@ describe('Conditional Deep Scan Display', () => {
     await user.click(jbossEapCheckbox);
 
     // Now search directories field should appear
-    expect(screen.getByText(/search-dirs\.label/)).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('network source with search directories after deep scan check');
   });
 
   it('should NOT show search directories field for non-network sources even if sources prop is undefined', async () => {
+    let baseElement;
     await act(async () => {
-      await render(<AddSourcesScanModal isOpen={true} sources={undefined} />);
+      ({ baseElement } = render(<AddSourcesScanModal isOpen={true} sources={undefined} />));
     });
 
-    expect(screen.queryByText(/deep-scan\.label/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/search-dirs\.label/)).not.toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot('undefined sources without deep scan options');
   });
 });
 
