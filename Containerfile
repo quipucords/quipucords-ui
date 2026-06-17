@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:950304888b4f085e27f763940c0fa93c92dc81298fad0193774d5ea77dddec79 as npm_builder
+FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:85f5588bf48b08cc671c60ebab562c4030da019191a603ed3cd15e8619559dea as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 ARG REACT_APP_FEATURE_REPORTS_VIEW="false"
 ARG REACT_APP_FEATURE_VAULT_AUTH="false"
@@ -14,7 +14,7 @@ RUN npm ci \
 COPY . .
 RUN export UI_BRAND=${QUIPUCORDS_BRANDED}; npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-124@sha256:19d549defb6f6085c511ae3fda163870d66c9208bad12e30300b30b177c2ca82
+FROM registry.access.redhat.com/ubi9/nginx-124@sha256:a2a3c55c74ac243b8c19171bbfc0390983c8e11e7eb9989fa07d5947154e60d3
 ARG CPE_NAME="cpe:/a:redhat:discovery:2::el9"
 ARG K8S_DESCRIPTION="Quipucords UI"
 ARG K8S_DISPLAY_NAME="quipucords-ui"
