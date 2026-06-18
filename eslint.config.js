@@ -250,6 +250,7 @@ module.exports = defineConfig([
       'react/jsx-no-useless-fragment': 'warn',
       'react/require-default-props': 'off',
       'react/state-in-constructor': ['warn', 'never'],
+      'react-hooks/set-state-in-effect': 'warn',
       'space-before-function-paren': 'off'
     }
   },
