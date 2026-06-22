@@ -28,6 +28,8 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
   "./build/images/3a2039b4d3f148174396.svg",
   "./build/images/4ca682d556b7bf59f5c6.svg",
   "./build/images/4fd5059469f0582e20a1.svg",
+  "./build/images/5ac07188880038c2ef13.svg",
+  "./build/images/626a0a2c291238b85c36.svg",
   "./build/images/85109dad29f20063f735.svg",
   "./build/images/b05c3116e7c14bc5da4d.svg",
   "./build/images/c0ce9e7676e8e8f83167.png",
