@@ -2,7 +2,11 @@
 
 exports[`RefreshTimeButton should render a basic component: basic 1`] = `
 <Button
-  icon={<RebootingIcon />}
+  icon={
+    <RebootingIcon
+      noDefaultStyle={false}
+    />
+  }
   onClick={[Function]}
   ouiaId="refresh"
   variant="link"
@@ -23,7 +27,11 @@ exports[`RefreshTimeButton should render a basic component: basic 1`] = `
 
 exports[`RefreshTimeButton should render component without refresh time set: no refresh set 1`] = `
 <Button
-  icon={<RebootingIcon />}
+  icon={
+    <RebootingIcon
+      noDefaultStyle={false}
+    />
+  }
   onClick={[Function]}
   ouiaId="refresh"
   variant="link"

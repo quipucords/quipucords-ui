@@ -3,6 +3,12 @@ import { render, renderHook } from '@testing-library/react';
 import { dotenv } from 'weldable';
 import '@testing-library/jest-dom';
 
+// react-router v7 server runtime uses TextEncoder at module init time, which
+// jsdom doesn't expose on global. Polyfill from Node's util module.
+const { TextEncoder: NodeTextEncoder, TextDecoder: NodeTextDecoder } = require('util');
+if (!global.TextEncoder) global.TextEncoder = NodeTextEncoder;
+if (!global.TextDecoder) global.TextDecoder = NodeTextDecoder;
+
 /**
  * Set dotenv params.
  */

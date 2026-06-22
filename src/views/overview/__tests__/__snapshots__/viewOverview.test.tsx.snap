@@ -36,7 +36,9 @@ exports[`OverviewView should render a basic component: basic 1`] = `
                 className="pf-v6-u-pl-sm pf-v6-u-pr-md"
                 size="md"
               >
-                <OptimizeIcon />
+                <OptimizeIcon
+                  noDefaultStyle={false}
+                />
               </Icon>
               t([
   "view.overview.getting-started.item1.label",
@@ -83,7 +85,9 @@ exports[`OverviewView should render a basic component: basic 1`] = `
                 className="pf-v6-u-pl-sm pf-v6-u-pr-md"
                 size="md"
               >
-                <KeyIcon />
+                <KeyIcon
+                  noDefaultStyle={false}
+                />
               </Icon>
               t([
   "view.overview.getting-started.item2.label"
@@ -127,7 +131,9 @@ exports[`OverviewView should render a basic component: basic 1`] = `
                 className="pf-v6-u-pl-sm pf-v6-u-pr-md"
                 size="md"
               >
-                <DataProcessorIcon />
+                <DataProcessorIcon
+                  noDefaultStyle={false}
+                />
               </Icon>
               t([
   "view.overview.getting-started.item3.label"
