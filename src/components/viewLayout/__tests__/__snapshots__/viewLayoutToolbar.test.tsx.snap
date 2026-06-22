@@ -50,7 +50,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
                   <Icon
                     size="md"
                   >
-                    <SunIcon />
+                    <SunIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={false}
@@ -64,7 +66,9 @@ exports[`ViewToolbar should fallback to system preference when localStorage is e
                   <Icon
                     size="md"
                   >
-                    <MoonIcon />
+                    <MoonIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={true}
@@ -256,7 +260,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
                   <Icon
                     size="md"
                   >
-                    <SunIcon />
+                    <SunIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={false}
@@ -270,7 +276,9 @@ exports[`ViewToolbar should initialize dark theme from localStorage using enviro
                   <Icon
                     size="md"
                   >
-                    <MoonIcon />
+                    <MoonIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={true}
@@ -462,7 +470,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
                   <Icon
                     size="md"
                   >
-                    <SunIcon />
+                    <SunIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={true}
@@ -476,7 +486,9 @@ exports[`ViewToolbar should initialize light theme from localStorage using envir
                   <Icon
                     size="md"
                   >
-                    <MoonIcon />
+                    <MoonIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={false}
@@ -681,7 +693,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
                   <Icon
                     size="md"
                   >
-                    <SunIcon />
+                    <SunIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={true}
@@ -695,7 +709,9 @@ exports[`ViewToolbar should render a basic component: basic 1`] = `
                   <Icon
                     size="md"
                   >
-                    <MoonIcon />
+                    <MoonIcon
+                      noDefaultStyle={false}
+                    />
                   </Icon>
                 }
                 isSelected={false}

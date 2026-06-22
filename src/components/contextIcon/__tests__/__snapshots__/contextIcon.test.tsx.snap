@@ -1,26 +1,60 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`ContextIcon Should render icon acs 1`] = `<CloudSecurityIcon />`;
+exports[`ContextIcon Should render icon acs 1`] = `
+<CloudSecurityIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon ansible 1`] = `<AnsibleTowerIcon />`;
+exports[`ContextIcon Should render icon ansible 1`] = `
+<AnsibleTowerIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon canceled 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon canceled 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon cancelled 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon cancelled 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon completed 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon completed 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon created 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon created 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon download 1`] = `<DownloadIcon />`;
+exports[`ContextIcon Should render icon download 1`] = `
+<DownloadIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon error 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon error 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
 exports[`ContextIcon Should render icon failed 1`] = `
 <Icon
   status="danger"
 >
-  <ExclamationCircleIcon />
+  <ExclamationCircleIcon
+    noDefaultStyle={false}
+  />
 </Icon>
 `;
 
@@ -28,21 +62,47 @@ exports[`ContextIcon Should render icon idCard 1`] = `
 <Icon
   --pf-v6-c-icon__content--Color="--pf-t--global--text--color--regular"
 >
-  <IdCardIcon />
+  <IdCardIcon
+    noDefaultStyle={false}
+  />
 </Icon>
 `;
 
-exports[`ContextIcon Should render icon info 1`] = `<InfoCircleIcon />`;
+exports[`ContextIcon Should render icon info 1`] = `
+<InfoCircleIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon network 1`] = `<PficonNetworkRangeIcon />`;
+exports[`ContextIcon Should render icon network 1`] = `
+<PficonNetworkRangeIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon off 1`] = `<OffIcon />`;
+exports[`ContextIcon Should render icon off 1`] = `
+<OffIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon openshift 1`] = `<OpenshiftIcon />`;
+exports[`ContextIcon Should render icon openshift 1`] = `
+<OpenshiftIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon paused 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon paused 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon pencil 1`] = `<PencilAltIcon />`;
+exports[`ContextIcon Should render icon pencil 1`] = `
+<PencilAltIcon
+  noDefaultStyle={false}
+/>
+`;
 
 exports[`ContextIcon Should render icon pending 1`] = `
 <Icon
@@ -53,42 +113,80 @@ exports[`ContextIcon Should render icon pending 1`] = `
 </Icon>
 `;
 
-exports[`ContextIcon Should render icon running 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon running 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon satellite 1`] = `<PficonSatelliteIcon />`;
+exports[`ContextIcon Should render icon satellite 1`] = `
+<PficonSatelliteIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon scans 1`] = `<ClipboardCheckIcon />`;
+exports[`ContextIcon Should render icon scans 1`] = `
+<ClipboardCheckIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon sources 1`] = `<CrosshairsIcon />`;
+exports[`ContextIcon Should render icon sources 1`] = `
+<CrosshairsIcon
+  noDefaultStyle={false}
+/>
+`;
 
 exports[`ContextIcon Should render icon success 1`] = `
 <Icon
   status="success"
 >
-  <CheckCircleIcon />
+  <CheckCircleIcon
+    noDefaultStyle={false}
+  />
 </Icon>
 `;
 
-exports[`ContextIcon Should render icon trash 1`] = `<TrashIcon />`;
+exports[`ContextIcon Should render icon trash 1`] = `
+<TrashIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon unknown 1`] = `<UnknownIcon />`;
+exports[`ContextIcon Should render icon unknown 1`] = `
+<UnknownIcon
+  noDefaultStyle={false}
+/>
+`;
 
 exports[`ContextIcon Should render icon unreachable 1`] = `
 <Icon
   status="danger"
 >
-  <DisconnectedIcon />
+  <DisconnectedIcon
+    noDefaultStyle={false}
+  />
 </Icon>
 `;
 
-exports[`ContextIcon Should render icon user 1`] = `<UserIcon />`;
+exports[`ContextIcon Should render icon user 1`] = `
+<UserIcon
+  noDefaultStyle={false}
+/>
+`;
 
-exports[`ContextIcon Should render icon vcenter 1`] = `<PficonVcenterIcon />`;
+exports[`ContextIcon Should render icon vcenter 1`] = `
+<PficonVcenterIcon
+  noDefaultStyle={false}
+/>
+`;
 
 exports[`ContextIcon Should render icon warning 1`] = `
 <Icon
   status="warning"
 >
-  <ExclamationTriangleIcon />
+  <ExclamationTriangleIcon
+    noDefaultStyle={false}
+  />
 </Icon>
 `;

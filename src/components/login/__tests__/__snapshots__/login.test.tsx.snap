@@ -33,7 +33,11 @@ exports[`Login should render a basic component: basic 1`] = `
     helperText="t([
   "login.invalid"
 ])"
-    helperTextIcon={<ExclamationCircleIcon />}
+    helperTextIcon={
+      <ExclamationCircleIcon
+        noDefaultStyle={false}
+      />
+    }
     isValidPassword={true}
     isValidUsername={true}
     loginButtonLabel="t([

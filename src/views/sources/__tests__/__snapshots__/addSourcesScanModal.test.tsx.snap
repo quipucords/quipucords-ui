@@ -74,7 +74,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         aria-labelledby="pf-modal-part-5"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-5"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_20_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-4"
@@ -86,7 +86,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-5-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_20_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -100,11 +100,11 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -155,7 +155,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -205,7 +205,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -267,7 +267,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-9"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_27_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -284,12 +284,24 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -306,7 +318,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-10"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_29_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -323,7 +335,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-10"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2a_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -340,12 +352,24 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -366,7 +390,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-5"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_2b_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -382,7 +406,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-5"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_2c_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -425,7 +449,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         aria-labelledby="pf-modal-part-7"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-7"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_33_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-6"
@@ -437,7 +461,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-7-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_33_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -451,11 +475,11 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -506,7 +530,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -556,7 +580,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -618,7 +642,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-13"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3a_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -635,12 +659,24 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -657,7 +693,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-14"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_3c_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -674,7 +710,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-14"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3d_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -691,12 +727,24 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -717,7 +765,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-7"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_3e_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -733,7 +781,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-7"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_3f_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -776,7 +824,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
         aria-labelledby="pf-modal-part-9"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-9"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_47_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-8"
@@ -788,7 +836,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-9-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_47_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -802,11 +850,11 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -857,7 +905,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -907,7 +955,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -967,7 +1015,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-17"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4e_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -984,12 +1032,24 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1006,7 +1066,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-18"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_4g_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1023,7 +1083,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-18"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4h_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1040,12 +1100,24 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1066,7 +1138,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-9"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_4i_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -1082,7 +1154,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-9"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_4j_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -1125,7 +1197,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         aria-labelledby="pf-modal-part-4"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-4"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_1b_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-3"
@@ -1137,7 +1209,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-4-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_1b_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -1151,11 +1223,11 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -1206,7 +1278,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -1256,7 +1328,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -1318,7 +1390,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-7"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1i_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1335,12 +1407,24 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1357,7 +1441,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-8"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_1k_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1374,7 +1458,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-8"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1l_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1391,12 +1475,24 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1507,7 +1603,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-4"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_1t_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -1523,7 +1619,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-4"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_1u_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -1566,7 +1662,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         aria-labelledby="pf-modal-part-6"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-6"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_2e_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-5"
@@ -1578,7 +1674,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-6-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_2e_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -1592,11 +1688,11 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -1647,7 +1743,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -1697,7 +1793,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -1759,7 +1855,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-11"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2l_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1776,12 +1872,24 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1798,7 +1906,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-12"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_2n_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1815,7 +1923,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-12"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2o_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1832,12 +1940,24 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -1948,7 +2068,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-6"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_30_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -1964,7 +2084,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-6"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_31_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -2007,7 +2127,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
         aria-labelledby="pf-modal-part-8"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-8"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_3h_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-7"
@@ -2019,7 +2139,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-8-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_3h_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -2033,11 +2153,11 @@ exports[`Conditional Deep Scan Display should show search directories field when
                 fill="currentColor"
                 height="1em"
                 role="img"
-                viewBox="0 0 352 512"
+                viewBox="0 0 20 20"
                 width="1em"
               >
                 <path
-                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  d="M17.8 16.2 11.59 10l6.21-6.21c.42-.46.39-1.17-.07-1.59-.43-.4-1.09-.4-1.52 0l-6.2 6.2-6.22-6.19c-.44-.44-1.15-.44-1.59 0-.44.44-.44 1.15 0 1.59l6.2 6.21-6.2 6.2c-.42.46-.39 1.17.07 1.59.43.4 1.09.4 1.52 0L10 11.59l6.2 6.2c.44.44 1.15.44 1.59 0 .44-.45.44-1.16 0-1.6Z"
                 />
               </svg>
             </span>
@@ -2088,7 +2208,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -2138,7 +2258,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                     aria-hidden="true"
                     class="pf-v6-c-form__label-required"
                   >
-                     
+                     
                     *
                   </span>
                 </label>
@@ -2200,7 +2320,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-15"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3o_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -2217,12 +2337,24 @@ exports[`Conditional Deep Scan Display should show search directories field when
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 17H3a1 1 0 0 1 0-2h26a1 1 0 0 1 0 2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -2239,7 +2371,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-16"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_3q_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -2256,7 +2388,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-16"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3r_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -2273,12 +2405,24 @@ exports[`Conditional Deep Scan Display should show search directories field when
                               fill="currentColor"
                               height="1em"
                               role="img"
-                              viewBox="0 0 448 512"
                               width="1em"
                             >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              />
+                              <svg
+                                class="pf-v6-icon-default"
+                                viewBox="0 0 448 512"
+                              >
+                                <path
+                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                />
+                              </svg>
+                              <svg
+                                class="pf-v6-icon-rh-ui"
+                                viewBox="0 0 32 32"
+                              >
+                                <path
+                                  d="M29 15H17V3a1 1 0 0 0-2 0v12H3a1 1 0 0 0 0 2h12v12a1 1 0 0 0 2 0V17h12a1 1 0 0 0 0-2Z"
+                                />
+                              </svg>
                             </svg>
                           </span>
                         </span>
@@ -2431,7 +2575,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-8"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_43_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -2447,7 +2591,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-8"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_44_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
