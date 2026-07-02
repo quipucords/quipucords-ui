@@ -107,7 +107,7 @@
     "jest": "30.4.2",
     "jest-environment-jsdom": "30.4.1",
     "jest-watch-typeahead": "3.0.1",
-    "prettier": "3.8.5",
+    "prettier": "3.9.3",
     "swagger-mock-api": "^1.6.0",
     "ts-jest": "^29.2.5",
     "typescript-eslint": "^8.62.0",
