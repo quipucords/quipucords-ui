@@ -31,7 +31,7 @@ module.exports = {
   testMatch: ['<rootDir>/**/__tests__/**/*.{ts,tsx}', '<rootDir>/**/*.{spec,test}.{ts,tsx}'],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/ts-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': ['<rootDir>/node_modules/ts-jest', { tsconfig: { types: ['jest'] } }],
     '^.+\\.css$': '<rootDir>/config/jest.transform.style.js',
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest.transform.file.js'
   },
