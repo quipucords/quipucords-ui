@@ -29,6 +29,8 @@ describe('useReportsQuery', () => {
       baseUrl: process.env.REACT_APP_REPORTS_SERVICE_LIST,
       columnOrderMap: {
         id: 'id',
+        scan_id: 'scan_id',
+        scan_name: 'scan_name',
         origin: 'origin',
         created: 'created_at'
       },
