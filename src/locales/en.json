@@ -129,6 +129,8 @@
     "header_sources": "Sources",
     "header_unreachable": "Unreachable systems",
     "header_id": "ID",
+    "header_scan-id": "Scan ID",
+    "header_scan-name": "Scan",
     "header_origin": "Origin",
     "header_created": "Created",
     "label": "{{context}}",
