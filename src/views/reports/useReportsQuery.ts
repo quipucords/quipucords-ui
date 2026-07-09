@@ -12,7 +12,7 @@ import { useServiceQuery } from '../../helpers/queryHelpers';
 import { type ReportType } from '../../types/types';
 import { type TableState } from '../../vendor/react-table-batteries';
 
-type ReportsColumnKey = 'selection' | 'id' | 'origin' | 'created' | 'actions';
+type ReportsColumnKey = 'selection' | 'id' | 'scan_id' | 'scan_name' | 'origin' | 'created' | 'actions';
 
 type ReportsSortableColumnKey = 'id' | 'origin' | 'created';
 

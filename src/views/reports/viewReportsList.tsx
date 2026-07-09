@@ -112,6 +112,8 @@ const ReportsListView: React.FunctionComponent = () => {
     columnNames: {
       selection: ' ',
       id: t('table.header', { context: 'id' }),
+      scan_id: t('table.header', { context: 'scan-id' }),
+      scan_name: t('table.header', { context: 'scan-name' }),
       origin: t('table.header', { context: 'origin' }),
       created: t('table.header', { context: 'created' }),
       actions: ' '
@@ -262,6 +264,8 @@ const ReportsListView: React.FunctionComponent = () => {
           {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="id" />
+            <Th columnKey="scan_id" />
+            <Th columnKey="scan_name" />
             <Th columnKey="origin" />
             <Th columnKey="created" />
             <Th columnKey="actions" />
@@ -283,6 +287,8 @@ const ReportsListView: React.FunctionComponent = () => {
             {currentPageItems?.map((report: ReportType, rowIndex) => (
               <TrWithBatteries key={report.id} item={report} rowIndex={rowIndex}>
                 <Td columnKey="id">{report.id}</Td>
+                <Td columnKey="scan_id">{report.scan_id ?? '—'}</Td>
+                <Td columnKey="scan_name">{report.scan_name || '—'}</Td>
                 <Td columnKey="origin">{t('table.label', { context: `origin-${report.origin || 'unknown'}` })}</Td>
                 <Td columnKey="created">{formatReportDate(report.created_at)}</Td>
                 <Td isActionCell columnKey="actions">

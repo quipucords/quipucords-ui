@@ -375,7 +375,8 @@ export type ReportType = {
   report_version: string;
   report_platform_id: string;
   origin: 'local' | 'uploaded' | 'merged';
-  scan_id: number;
+  scan_id?: number | null;
+  scan_name?: string | null;
   can_publish: boolean;
   cannot_publish_reason:
     | 'no_connection'
