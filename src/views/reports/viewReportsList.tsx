@@ -264,7 +264,7 @@ const ReportsListView: React.FunctionComponent = () => {
           {/* eslint-disable-next-line react-hooks/static-components */}
           <TrWithBatteries isHeaderRow>
             <Th columnKey="id" />
-            <Th columnKey="scan_id" />
+            <Th columnKey="scan_id" modifier="nowrap" />
             <Th columnKey="scan_name" />
             <Th columnKey="origin" />
             <Th columnKey="created" />
