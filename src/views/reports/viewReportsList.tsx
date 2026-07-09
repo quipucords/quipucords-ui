@@ -175,7 +175,7 @@ const ReportsListView: React.FunctionComponent = () => {
     },
     sort: {
       isEnabled: true,
-      sortableColumns: ['id', 'origin', 'created'],
+      sortableColumns: ['id', 'scan_id', 'scan_name', 'origin', 'created'],
       initialSort: { columnKey: 'created', direction: 'desc' }
     },
     pagination: { isEnabled: true },

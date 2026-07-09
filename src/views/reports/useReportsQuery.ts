@@ -14,7 +14,7 @@ import { type TableState } from '../../vendor/react-table-batteries';
 
 type ReportsColumnKey = 'selection' | 'id' | 'scan_id' | 'scan_name' | 'origin' | 'created' | 'actions';
 
-type ReportsSortableColumnKey = 'id' | 'origin' | 'created';
+type ReportsSortableColumnKey = 'id' | 'scan_id' | 'scan_name' | 'origin' | 'created';
 
 const useReportsQuery = ({
   tableState,
@@ -28,6 +28,8 @@ const useReportsQuery = ({
     baseUrl: process.env.REACT_APP_REPORTS_SERVICE_LIST,
     columnOrderMap: {
       id: 'id',
+      scan_id: 'scan_id',
+      scan_name: 'scan_name',
       origin: 'origin',
       created: 'created_at'
     },
