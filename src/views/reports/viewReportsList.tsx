@@ -294,7 +294,7 @@ const ReportsListView: React.FunctionComponent = () => {
               <TrWithBatteries key={report.id} item={report} rowIndex={rowIndex}>
                 <Td columnKey="id">{report.id}</Td>
                 <Td columnKey="scan_id">{report.scan_id ?? '—'}</Td>
-                <Td columnKey="scan_name">{report.scan_name || '—'}</Td>
+                <Td columnKey="scan_name">{report.scan_name ?? '—'}</Td>
                 <Td columnKey="origin">{t('table.label', { context: `origin-${report.origin || 'unknown'}` })}</Td>
                 <Td columnKey="created">{formatReportDate(report.created_at)}</Td>
                 <Td isActionCell columnKey="actions">
