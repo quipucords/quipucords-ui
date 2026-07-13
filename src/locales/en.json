@@ -165,6 +165,7 @@
     "label_origin-local": "Completed scan",
     "label_origin-uploaded": "Manually uploaded report",
     "label_origin-merged": "Merged reports",
+    "label_not-available": "—",
     "label_origin-unknown": "Unknown",
     "label_merge-reports": "Merge reports",
     "label_scan": "Scan",
