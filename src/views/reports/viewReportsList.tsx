@@ -134,6 +134,12 @@ const ReportsListView: React.FunctionComponent = () => {
           placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_scan_id' })
         },
         {
+          key: API_QUERY_TYPES.SEARCH_REPORT_SCAN_NAME,
+          title: t('toolbar.label', { context: 'option_report_scan_name' }),
+          type: FilterType.search,
+          placeholderText: t('toolbar.label', { context: 'placeholder_filter_report_scan_name' })
+        },
+        {
           key: API_QUERY_TYPES.SEARCH_REPORT_ORIGIN,
           title: t('toolbar.label', { context: 'option_report_origin' }),
           type: FilterType.select,
