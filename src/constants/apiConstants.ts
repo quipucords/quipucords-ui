@@ -21,6 +21,7 @@ const API_QUERY_TYPES = {
   SEARCH_SOURCES_NAME: 'search_sources_by_name',
   SEARCH_REPORT_ID: 'id',
   SEARCH_REPORT_SCAN_ID: 'scan_id',
+  SEARCH_REPORT_SCAN_NAME: 'search_by_scan_name',
   SEARCH_REPORT_ORIGIN: 'origin',
   SEARCH_REPORT_DATE_NEWER: 'created_at__gte',
   SEARCH_REPORT_DATE_OLDER: 'created_at__lte',
