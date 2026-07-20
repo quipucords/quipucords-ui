@@ -121,6 +121,20 @@ exports[`ViewLayout should render a basic component: basic 1`] = `
 ])
               </NavLink>
             </NavItem>
+            <NavItem
+              id="t([
+  "routes.reports.label"
+])-4"
+              isActive={false}
+            >
+              <NavLink
+                to="/reports"
+              >
+                t([
+  "routes.reports.label"
+])
+              </NavLink>
+            </NavItem>
           </NavList>
         </Nav>
       </PageSidebarBody>
