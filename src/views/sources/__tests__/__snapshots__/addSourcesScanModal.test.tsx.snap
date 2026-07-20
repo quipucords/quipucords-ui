@@ -28,30 +28,27 @@ exports[`AddSourceModal should call onSubmit with the correct filtered data when
 
 exports[`AddSourceModal should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
   appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
+  aria-labelledby="_r_f_"
   isOpen={true}
   onClose={[Function]}
   ouiaSafe={true}
   position="default"
-  showClose={true}
-  title="t([
-  "view.sources.modal-title.new-scan"
-])"
-  titleIconVariant={null}
-  titleLabel=""
   variant="small"
 >
-  <ScanForm
-    onClearErrors={[Function]}
-    onClose={[Function]}
-    onSubmit={[Function]}
+  <ModalHeader
+    labelId="_r_f_"
+    title="t([
+  "view.sources.modal-title.new-scan"
+])"
   />
+  <ModalBody>
+    <ScanForm
+      onClearErrors={[Function]}
+      onClose={[Function]}
+      onSubmit={[Function]}
+    />
+  </ModalBody>
 </Modal>
 `;
 
@@ -64,17 +61,16 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-7"
+    id="pf-modal-part-5"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-6"
-        aria-labelledby="pf-modal-part-5"
+        aria-labelledby="_r_24_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_20_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_26_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-4"
@@ -86,7 +82,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_20_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_26_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -115,7 +111,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-5"
+            id="_r_24_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -128,7 +124,6 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-6"
         >
           <form
             class="pf-v6-c-form"
@@ -267,7 +262,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_27_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2d_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -318,7 +313,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_29_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_2f_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -335,7 +330,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2a_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2g_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -390,7 +385,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_2b_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_2h_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -406,7 +401,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_2c_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_2i_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -439,17 +434,16 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-9"
+    id="pf-modal-part-7"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-8"
-        aria-labelledby="pf-modal-part-7"
+        aria-labelledby="_r_39_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_33_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_3b_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-6"
@@ -461,7 +455,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_33_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_3b_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -490,7 +484,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-7"
+            id="_r_39_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -503,7 +497,6 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-8"
         >
           <form
             class="pf-v6-c-form"
@@ -642,7 +635,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3a_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3i_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -693,7 +686,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_3c_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_3k_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -710,7 +703,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3d_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3l_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -765,7 +758,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_3e_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_3m_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -781,7 +774,7 @@ exports[`Conditional Deep Scan Display should NOT show deep scan options when sc
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_3f_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_3n_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -814,17 +807,16 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-11"
+    id="pf-modal-part-9"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-10"
-        aria-labelledby="pf-modal-part-9"
+        aria-labelledby="_r_4f_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_47_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_4h_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-8"
@@ -836,7 +828,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_47_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_4h_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -865,7 +857,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-9"
+            id="_r_4f_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -878,7 +870,6 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-10"
         >
           <form
             class="pf-v6-c-form"
@@ -1015,7 +1006,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4e_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4o_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1066,7 +1057,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_4g_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_4q_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1083,7 +1074,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4h_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_4r_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1138,7 +1129,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_4i_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_4s_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -1154,7 +1145,7 @@ exports[`Conditional Deep Scan Display should NOT show search directories field 
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_4j_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_4t_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -1187,17 +1178,16 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-6"
+    id="pf-modal-part-4"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-5"
-        aria-labelledby="pf-modal-part-4"
+        aria-labelledby="_r_1e_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_1b_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_1g_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-3"
@@ -1209,7 +1199,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_1b_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_1g_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -1238,7 +1228,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-4"
+            id="_r_1e_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -1251,7 +1241,6 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-5"
         >
           <form
             class="pf-v6-c-form"
@@ -1390,7 +1379,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1i_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1n_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1441,7 +1430,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_1k_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_1p_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1458,7 +1447,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1l_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_1q_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1603,7 +1592,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_1t_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_22_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -1619,7 +1608,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_1u_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_23_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -1652,17 +1641,16 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-8"
+    id="pf-modal-part-6"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-7"
-        aria-labelledby="pf-modal-part-6"
+        aria-labelledby="_r_2j_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_2e_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_2l_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-5"
@@ -1674,7 +1662,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_2e_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_2l_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -1703,7 +1691,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-6"
+            id="_r_2j_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -1716,7 +1704,6 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-7"
         >
           <form
             class="pf-v6-c-form"
@@ -1855,7 +1842,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2l_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2s_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -1906,7 +1893,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_2n_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_2u_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -1923,7 +1910,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2o_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_2v_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -2068,7 +2055,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_30_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_37_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -2084,7 +2071,7 @@ exports[`Conditional Deep Scan Display should show deep scan options when scanni
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_31_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_38_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -2117,17 +2104,16 @@ exports[`Conditional Deep Scan Display should show search directories field when
   />
   <div
     class="pf-v6-c-backdrop"
-    id="pf-modal-part-10"
+    id="pf-modal-part-8"
   >
     <div
       class="pf-v6-l-bullseye"
     >
       <div
-        aria-describedby="pf-modal-part-9"
-        aria-labelledby="pf-modal-part-8"
+        aria-labelledby="_r_3o_"
         aria-modal="true"
         class="pf-v6-c-modal-box pf-m-sm"
-        data-ouia-component-id="OUIA-Generated-Modal-small-_r_3h_"
+        data-ouia-component-id="OUIA-Generated-Modal-small-_r_3q_"
         data-ouia-component-type="PF6/ModalContent"
         data-ouia-safe="true"
         id="pf-modal-part-7"
@@ -2139,7 +2125,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
           <button
             aria-label="Close"
             class="pf-v6-c-button pf-m-plain"
-            data-ouia-component-id="OUIA-Generated-Modal-small-_r_3h_-ModalBoxCloseButton"
+            data-ouia-component-id="OUIA-Generated-Modal-small-_r_3q_-ModalBoxCloseButton"
             data-ouia-component-type="PF6/Button"
             data-ouia-safe="true"
             type="button"
@@ -2168,7 +2154,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
         >
           <h1
             class="pf-v6-c-modal-box__title"
-            id="pf-modal-part-8"
+            id="_r_3o_"
           >
             <span
               class="pf-v6-c-modal-box__title-text"
@@ -2181,7 +2167,6 @@ exports[`Conditional Deep Scan Display should show search directories field when
         </header>
         <div
           class="pf-v6-c-modal-box__body"
-          id="pf-modal-part-9"
         >
           <form
             class="pf-v6-c-form"
@@ -2320,7 +2305,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
   "view.sources.scan-modal.max-concurrency.aria-minus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3o_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_41_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -2371,7 +2356,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                           aria-label="t([
   "view.sources.scan-modal.max-concurrency.aria-input"
 ])"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_3q_"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-_r_43_"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           name="input"
@@ -2388,7 +2373,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
   "view.sources.scan-modal.max-concurrency.aria-plus"
 ])"
                         class="pf-v6-c-button pf-m-control"
-                        data-ouia-component-id="OUIA-Generated-Button-control-_r_3r_"
+                        data-ouia-component-id="OUIA-Generated-Button-control-_r_44_"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -2575,7 +2560,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                 >
                   <button
                     class="pf-v6-c-button pf-m-primary"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_43_"
+                    data-ouia-component-id="OUIA-Generated-Button-primary-_r_4c_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     disabled=""
@@ -2591,7 +2576,7 @@ exports[`Conditional Deep Scan Display should show search directories field when
                   </button>
                   <button
                     class="pf-v6-c-button pf-m-link"
-                    data-ouia-component-id="OUIA-Generated-Button-link-_r_44_"
+                    data-ouia-component-id="OUIA-Generated-Button-link-_r_4d_"
                     data-ouia-component-type="PF6/Button"
                     data-ouia-safe="true"
                     type="button"

@@ -2,12 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   DescriptionList,
-  DescriptionListTerm,
   DescriptionListDescription,
   DescriptionListGroup,
+  DescriptionListTerm,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalVariant,
   Title
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { helpers } from '../../helpers';
 import { type ReportAggregateDiagnosticsType, type ReportAggregateResultsType } from '../../types/types';
 
@@ -81,29 +85,28 @@ const ShowAggregateReportModal: React.FC<ShowAggregateReportModalProps> = ({
   actions
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   const stats = formatSortFilterReportStats(report?.report);
 
   return (
-    <Modal
-      variant={ModalVariant.small}
-      title={t('modal.title', { context: 'scan-summary' })}
-      isOpen={isOpen}
-      onClose={() => onClose()}
-      {...(actions && { actions })}
-    >
-      <Title className="pf-v6-u-mb-lg" headingLevel="h2" size="md">
-        {t('modal.subtitle', { context: 'scan-id', value: report?.id })}
-      </Title>
-      <DescriptionList isHorizontal isFluid isCompact>
-        {stats.map(([key, value]) => {
-          return (
-            <DescriptionListGroup data-ouia-component-id={key} key={key}>
-              <DescriptionListTerm>{t('modal.label', { context: key })}</DescriptionListTerm>
-              <DescriptionListDescription>{value}</DescriptionListDescription>
-            </DescriptionListGroup>
-          );
-        })}
-      </DescriptionList>
+    <Modal variant={ModalVariant.small} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader title={t('modal.title', { context: 'scan-summary' })} labelId={titleId} />
+      <ModalBody>
+        <Title className="pf-v6-u-mb-lg" headingLevel="h2" size="md">
+          {t('modal.subtitle', { context: 'scan-id', value: report?.id })}
+        </Title>
+        <DescriptionList isHorizontal isFluid isCompact>
+          {stats.map(([key, value]) => {
+            return (
+              <DescriptionListGroup data-ouia-component-id={key} key={key}>
+                <DescriptionListTerm>{t('modal.label', { context: key })}</DescriptionListTerm>
+                <DescriptionListDescription>{value}</DescriptionListDescription>
+              </DescriptionListGroup>
+            );
+          })}
+        </DescriptionList>
+      </ModalBody>
+      {actions && <ModalFooter>{actions}</ModalFooter>}
     </Modal>
   );
 };

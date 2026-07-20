@@ -9,11 +9,14 @@ import {
   FormHelperText,
   HelperText,
   HelperTextItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalVariant,
   NumberInput,
   TextArea,
   TextInput
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
 import { type ScanRequest, type SourceResponse } from '../../types/types';
@@ -367,14 +370,19 @@ const AddSourcesScanModal: React.FC<AddSourcesScanModalProps> = ({
   onSubmit = async () => {}
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   return (
-    <Modal
-      variant={ModalVariant.small}
-      title={t('view.sources.modal-title.new-scan')}
-      isOpen={isOpen}
-      onClose={() => onClose()}
-    >
-      <ScanForm sources={sources} errors={errors} onClearErrors={onClearErrors} onClose={onClose} onSubmit={onSubmit} />
+    <Modal variant={ModalVariant.small} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader title={t('view.sources.modal-title.new-scan')} labelId={titleId} />
+      <ModalBody>
+        <ScanForm
+          sources={sources}
+          errors={errors}
+          onClearErrors={onClearErrors}
+          onClose={onClose}
+          onSubmit={onSubmit}
+        />
+      </ModalBody>
     </Modal>
   );
 };

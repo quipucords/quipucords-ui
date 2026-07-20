@@ -10,197 +10,193 @@ exports[`ShowConnectionsModal should have the correct title: title 1`] = `
 
 exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
 <Modal
-  actions={
-    [
-      <Button
-        onClick={[Function]}
-        variant="secondary"
-      >
-        t([
-  "view.sources.show-connections-modal.actions.close"
-])
-      </Button>,
-    ]
-  }
   appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
+  aria-labelledby="_r_f_"
   isOpen={true}
   onClose={[Function]}
   ouiaSafe={true}
   position="default"
-  showClose={true}
-  title="Lorem ipsum"
-  titleIconVariant={null}
-  titleLabel=""
   variant="small"
 >
-  <Table
-    aria-label="t([
+  <ModalHeader
+    labelId="_r_f_"
+    title="Lorem ipsum"
+  />
+  <ModalBody>
+    <Table
+      aria-label="t([
   "view.sources.show-connections-modal.aria-list"
 ])"
-    hasAnimations={true}
-    isExpandable={true}
-  >
-    <Tbody
-      isExpanded={false}
+      hasAnimations={true}
+      isExpandable={true}
     >
-      <Tr>
-        <Td
-          expand={
-            {
-              "expandId": "failed-expandable",
-              "isExpanded": false,
-              "onToggle": [Function],
-              "rowIndex": 0,
+      <Tbody
+        isExpanded={false}
+      >
+        <Tr>
+          <Td
+            expand={
+              {
+                "expandId": "failed-expandable",
+                "isExpanded": false,
+                "onToggle": [Function],
+                "rowIndex": 0,
+              }
             }
-          }
-          width={10}
-        />
-        <Td
-          width={10}
-        >
-          <Icon
-            status="danger"
+            width={10}
+          />
+          <Td
+            width={10}
           >
-            <ExclamationCircleIcon
-              noDefaultStyle={false}
-            />
-          </Icon>
-        </Td>
-        <Td
-          width={80}
-        >
-          t([
+            <Icon
+              status="danger"
+            >
+              <ExclamationCircleIcon
+                noDefaultStyle={false}
+              />
+            </Icon>
+          </Td>
+          <Td
+            width={80}
+          >
+            t([
   "view.sources.show-connections-modal.failed"
 ])
-        </Td>
-      </Tr>
-      <Tr
+          </Td>
+        </Tr>
+        <Tr
+          isExpanded={false}
+        >
+          <Td />
+          <Td />
+          <Td>
+            <ExpandableRowContent>
+              <List
+                isPlain={true}
+              >
+                <ListItem>
+                  Amet
+                </ListItem>
+              </List>
+            </ExpandableRowContent>
+          </Td>
+        </Tr>
+      </Tbody>
+      <Tbody
         isExpanded={false}
       >
-        <Td />
-        <Td />
-        <Td>
-          <ExpandableRowContent>
-            <List
-              isPlain={true}
-            >
-              <ListItem>
-                Amet
-              </ListItem>
-            </List>
-          </ExpandableRowContent>
-        </Td>
-      </Tr>
-    </Tbody>
-    <Tbody
-      isExpanded={false}
-    >
-      <Tr>
-        <Td
-          expand={
-            {
-              "expandId": "unreachable-expandable",
-              "isExpanded": false,
-              "onToggle": [Function],
-              "rowIndex": 1,
+        <Tr>
+          <Td
+            expand={
+              {
+                "expandId": "unreachable-expandable",
+                "isExpanded": false,
+                "onToggle": [Function],
+                "rowIndex": 1,
+              }
             }
-          }
-          width={10}
-        />
-        <Td
-          width={10}
-        >
-          <Icon
-            status="warning"
+            width={10}
+          />
+          <Td
+            width={10}
           >
-            <ExclamationTriangleIcon
-              noDefaultStyle={false}
-            />
-          </Icon>
-        </Td>
-        <Td
-          width={80}
-        >
-          t([
+            <Icon
+              status="warning"
+            >
+              <ExclamationTriangleIcon
+                noDefaultStyle={false}
+              />
+            </Icon>
+          </Td>
+          <Td
+            width={80}
+          >
+            t([
   "view.sources.show-connections-modal.unreachable"
 ])
-        </Td>
-      </Tr>
-      <Tr
+          </Td>
+        </Tr>
+        <Tr
+          isExpanded={false}
+        >
+          <Td />
+          <Td />
+          <Td>
+            <ExpandableRowContent>
+              <List
+                isPlain={true}
+              >
+                <ListItem>
+                  Ipsum
+                </ListItem>
+              </List>
+            </ExpandableRowContent>
+          </Td>
+        </Tr>
+      </Tbody>
+      <Tbody
         isExpanded={false}
       >
-        <Td />
-        <Td />
-        <Td>
-          <ExpandableRowContent>
-            <List
-              isPlain={true}
-            >
-              <ListItem>
-                Ipsum
-              </ListItem>
-            </List>
-          </ExpandableRowContent>
-        </Td>
-      </Tr>
-    </Tbody>
-    <Tbody
-      isExpanded={false}
-    >
-      <Tr>
-        <Td
-          expand={
-            {
-              "expandId": "successful-expandable",
-              "isExpanded": false,
-              "onToggle": [Function],
-              "rowIndex": 2,
+        <Tr>
+          <Td
+            expand={
+              {
+                "expandId": "successful-expandable",
+                "isExpanded": false,
+                "onToggle": [Function],
+                "rowIndex": 2,
+              }
             }
-          }
-          width={10}
-        />
-        <Td
-          width={10}
-        >
-          <Icon
-            status="success"
+            width={10}
+          />
+          <Td
+            width={10}
           >
-            <CheckCircleIcon
-              noDefaultStyle={false}
-            />
-          </Icon>
-        </Td>
-        <Td
-          width={80}
-        >
-          t([
+            <Icon
+              status="success"
+            >
+              <CheckCircleIcon
+                noDefaultStyle={false}
+              />
+            </Icon>
+          </Td>
+          <Td
+            width={80}
+          >
+            t([
   "view.sources.show-connections-modal.successful"
 ])
-        </Td>
-      </Tr>
-      <Tr
-        isExpanded={false}
-      >
-        <Td />
-        <Td />
-        <Td>
-          <ExpandableRowContent>
-            <List
-              isPlain={true}
-            >
-              <ListItem>
-                Dolor sit
-              </ListItem>
-            </List>
-          </ExpandableRowContent>
-        </Td>
-      </Tr>
-    </Tbody>
-  </Table>
+          </Td>
+        </Tr>
+        <Tr
+          isExpanded={false}
+        >
+          <Td />
+          <Td />
+          <Td>
+            <ExpandableRowContent>
+              <List
+                isPlain={true}
+              >
+                <ListItem>
+                  Dolor sit
+                </ListItem>
+              </List>
+            </ExpandableRowContent>
+          </Td>
+        </Tr>
+      </Tbody>
+    </Table>
+  </ModalBody>
+  <ModalFooter>
+    <Button
+      onClick={[Function]}
+      variant="secondary"
+    >
+      t([
+  "view.sources.show-connections-modal.actions.close"
+])
+    </Button>
+  </ModalFooter>
 </Modal>
 `;

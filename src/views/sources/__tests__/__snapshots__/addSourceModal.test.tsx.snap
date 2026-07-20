@@ -17,33 +17,30 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
 
 exports[`AddSourceModal-network should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
   appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
+  aria-labelledby="_r_h_"
   isOpen={true}
   onClose={[Function]}
   ouiaSafe={true}
   position="default"
-  showClose={true}
-  title="t([
+  variant="small"
+>
+  <ModalHeader
+    labelId="_r_h_"
+    title="t([
   "view.sources.modal-title.add",
   {
     "type": ""
   }
 ])"
-  titleIconVariant={null}
-  titleLabel=""
-  variant="small"
->
-  <SourceForm
-    onClearErrors={[Function]}
-    onClose={[Function]}
-    onSubmit={[Function]}
   />
+  <ModalBody>
+    <SourceForm
+      onClearErrors={[Function]}
+      onClose={[Function]}
+      onSubmit={[Function]}
+    />
+  </ModalBody>
 </Modal>
 `;
 

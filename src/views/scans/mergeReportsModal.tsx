@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bullseye, EmptyState, EmptyStateBody, Spinner } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
+import {
+  Bullseye,
+  EmptyState,
+  EmptyStateBody,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalVariant,
+  Spinner
+} from '@patternfly/react-core';
 import { ExclamationCircleIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import { useMergeReportsApi } from '../../hooks/useScanApi';
 
@@ -19,6 +27,7 @@ const MergeReportsModal: React.FC<MergeReportsModalProps> = ({
   onSuccess = Function.prototype
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   const { requestReportsMerge, cancelReportsMerge, mergeProcessState } = useMergeReportsApi();
   // Workaround the following problem:
   // 1. onSuccess is called. This causes report to download and sets reportIdsToMerge to []
@@ -47,48 +56,46 @@ const MergeReportsModal: React.FC<MergeReportsModalProps> = ({
   }, [mergeProcessState, onSuccess]);
 
   return (
-    <Modal
-      variant={ModalVariant.medium}
-      title={t('merge.modal', { context: 'title' })}
-      isOpen={isOpen}
-      onClose={() => onClose()}
-    >
-      {mergeProcessState.state === 'InProgress' && (
-        <Bullseye>
-          <EmptyState
-            headingLevel="h2"
-            icon={Spinner}
-            titleText={t('merge.modal', { context: 'body-in-progress' })}
-          ></EmptyState>
-        </Bullseye>
-      )}
-      {mergeProcessState.state === 'Successful' && (
-        <Bullseye>
-          <EmptyState
-            headingLevel="h2"
-            icon={CheckCircleIcon}
-            titleText={t('merge.modal', { context: 'header-successful' })}
-          >
-            <EmptyStateBody>{t('merge.modal', { context: 'body-successful' })}</EmptyStateBody>
-          </EmptyState>
-        </Bullseye>
-      )}
-      {mergeProcessState.state === 'Errored' && (
-        <Bullseye>
-          <EmptyState
-            headingLevel="h2"
-            icon={ExclamationCircleIcon}
-            titleText={t('merge.modal', { context: 'header-errored' })}
-          >
-            <EmptyStateBody>
-              {t('merge.modal', {
-                context: 'body-errored',
-                msg: mergeProcessState.errorMessage
-              })}
-            </EmptyStateBody>
-          </EmptyState>
-        </Bullseye>
-      )}
+    <Modal variant={ModalVariant.medium} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader title={t('merge.modal', { context: 'title' })} labelId={titleId} />
+      <ModalBody>
+        {mergeProcessState.state === 'InProgress' && (
+          <Bullseye>
+            <EmptyState
+              headingLevel="h2"
+              icon={Spinner}
+              titleText={t('merge.modal', { context: 'body-in-progress' })}
+            ></EmptyState>
+          </Bullseye>
+        )}
+        {mergeProcessState.state === 'Successful' && (
+          <Bullseye>
+            <EmptyState
+              headingLevel="h2"
+              icon={CheckCircleIcon}
+              titleText={t('merge.modal', { context: 'header-successful' })}
+            >
+              <EmptyStateBody>{t('merge.modal', { context: 'body-successful' })}</EmptyStateBody>
+            </EmptyState>
+          </Bullseye>
+        )}
+        {mergeProcessState.state === 'Errored' && (
+          <Bullseye>
+            <EmptyState
+              headingLevel="h2"
+              icon={ExclamationCircleIcon}
+              titleText={t('merge.modal', { context: 'header-errored' })}
+            >
+              <EmptyStateBody>
+                {t('merge.modal', {
+                  context: 'body-errored',
+                  msg: mergeProcessState.errorMessage
+                })}
+              </EmptyStateBody>
+            </EmptyState>
+          </Bullseye>
+        )}
+      </ModalBody>
     </Modal>
   );
 };

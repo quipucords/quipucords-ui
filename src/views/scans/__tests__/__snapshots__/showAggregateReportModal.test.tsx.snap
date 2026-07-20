@@ -40,45 +40,42 @@ exports[`ShowAggregateReportModal should have a consistent title: title 1`] = `
 
 exports[`ShowAggregateReportModal should render a basic component: basic 1`] = `
 <Modal
-  actions={[]}
   appendTo={[Function]}
-  aria-describedby=""
-  aria-label=""
-  aria-labelledby=""
-  className=""
-  hasNoBodyWrapper={false}
+  aria-labelledby="_r_5_"
   isOpen={true}
   onClose={[Function]}
   ouiaSafe={true}
   position="default"
-  showClose={true}
-  title="t([
+  variant="small"
+>
+  <ModalHeader
+    labelId="_r_5_"
+    title="t([
   "modal.title",
   {
     "context": "scan-summary"
   }
 ])"
-  titleIconVariant={null}
-  titleLabel=""
-  variant="small"
->
-  <Title
-    className="pf-v6-u-mb-lg"
-    headingLevel="h2"
-    size="md"
-  >
-    t([
+  />
+  <ModalBody>
+    <Title
+      className="pf-v6-u-mb-lg"
+      headingLevel="h2"
+      size="md"
+    >
+      t([
   "modal.subtitle",
   {
     "context": "scan-id"
   }
 ])
-  </Title>
-  <DescriptionList
-    isCompact={true}
-    isFluid={true}
-    isHorizontal={true}
-  />
+    </Title>
+    <DescriptionList
+      isCompact={true}
+      isFluid={true}
+      isHorizontal={true}
+    />
+  </ModalBody>
 </Modal>
 `;
 

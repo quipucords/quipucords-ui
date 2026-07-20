@@ -18,12 +18,15 @@ import {
   Content,
   EmptyState,
   EmptyStateBody,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ConnectedIcon, DisconnectedIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
@@ -48,6 +51,7 @@ import { useReportsQuery } from './useReportsQuery';
 
 const ReportsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const lightspeedModalTitleId = React.useId();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const { queryClient } = useQueryClientConfig();
   const { alerts, addAlert, removeAlert } = useAlerts();
@@ -346,14 +350,20 @@ const ReportsListView: React.FunctionComponent = () => {
       <Pagination variant="bottom" widgetId="reports-pagination-bottom" />
       <Modal
         variant={ModalVariant.small}
-        title={t('external-auth.lightspeed.modal', { context: 'title-not-logged-in' })}
         isOpen={lightspeedAuthModal}
+        aria-labelledby={lightspeedModalTitleId}
         onClose={() => {
           setLightspeedAuthModal(false);
           cancelLightspeedAuth();
         }}
       >
-        <LightspeedAuth lightspeedAuthFlowState={lightspeedAuthFlowState} />
+        <ModalHeader
+          title={t('external-auth.lightspeed.modal', { context: 'title-not-logged-in' })}
+          labelId={lightspeedModalTitleId}
+        />
+        <ModalBody>
+          <LightspeedAuth lightspeedAuthFlowState={lightspeedAuthFlowState} />
+        </ModalBody>
       </Modal>
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (

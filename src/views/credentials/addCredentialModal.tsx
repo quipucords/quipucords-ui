@@ -11,12 +11,15 @@ import {
   Form,
   FormGroup,
   FormHelperText,
-  TextArea,
-  TextInput,
   HelperText,
-  HelperTextItem
+  HelperTextItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalVariant,
+  TextArea,
+  TextInput
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SecretInput } from '../../components/secretInput/secretInput';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
@@ -763,24 +766,26 @@ const AddCredentialModal: React.FC<AddCredentialModalProps> = ({
   onClearErrors = () => {}
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   return (
-    <Modal
-      variant={ModalVariant.small}
-      title={
-        (credential && t('view.credentials.modal-title.edit', { name: credential.name || '' })) ||
-        t('view.credentials.modal-title.add', { type: credentialType || '' })
-      }
-      isOpen={isOpen}
-      onClose={() => onClose()}
-    >
-      <CredentialForm
-        credential={credential}
-        credentialType={credentialType}
-        errors={errors}
-        onClose={onClose}
-        onSubmit={onSubmit}
-        onClearErrors={onClearErrors}
+    <Modal variant={ModalVariant.small} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader
+        title={
+          (credential && t('view.credentials.modal-title.edit', { name: credential.name || '' })) ||
+          t('view.credentials.modal-title.add', { type: credentialType || '' })
+        }
+        labelId={titleId}
       />
+      <ModalBody>
+        <CredentialForm
+          credential={credential}
+          credentialType={credentialType}
+          errors={errors}
+          onClose={onClose}
+          onSubmit={onSubmit}
+          onClearErrors={onClearErrors}
+        />
+      </ModalBody>
     </Modal>
   );
 };

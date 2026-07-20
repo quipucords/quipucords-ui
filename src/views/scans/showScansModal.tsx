@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bullseye, Button, EmptyState, Spinner } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
+import {
+  Bullseye,
+  Button,
+  EmptyState,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalVariant,
+  Spinner
+} from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
 import { Table, Thead, Tr, Th, Tbody, Td, type ThProps } from '@patternfly/react-table';
 import { helpers } from '../../helpers';
@@ -71,6 +80,7 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
   actions
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   const [activeSortIndex, setActiveSortIndex] = useState<number | undefined>();
   const [activeSortDirection, setActiveSortDirection] = useState<'asc' | 'desc' | undefined>();
   const [sortedScanJobs, setSortedScanJobs] = useState<PartialScanJob[]>([]);
@@ -97,53 +107,51 @@ const ShowScansModal: React.FC<ShowScansModalProps> = ({
   });
 
   return (
-    <Modal
-      variant={ModalVariant.medium}
-      title={t('view.label', { context: 'scans-names', name: scan?.name })}
-      isOpen={isOpen}
-      onClose={() => onClose()}
-      {...(actions && { actions })}
-    >
-      {sortedScanJobs.length ? (
-        <React.Fragment>
-          <div>{t('view.scans.show-modal.title', { count: sortedScanJobs.length })}</div>
-          <br />
-          <Table aria-label={t('view.scans.show-modal.aria-table')} ouiaId="scan_jobs_table">
-            <Thead>
-              <Tr>
-                <Th sort={getSortParams(0)} data-ouia-component-id="header_scan_time">
-                  {t('view.scans.show-modal.scan-time')}
-                </Th>
-                <Th sort={getSortParams(1)} data-ouia-component-id="header_scan_result">
-                  {t('view.scans.show-modal.scan-result')}
-                </Th>
-                <Th screenReaderText={t('view.scans.show-modal.scan-download-screenreader')}></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {sortedScanJobs.map(job => (
-                <Tr key={job.id}>
-                  <Td dataLabel={t('view.scans.show-modal.scan-time')}>
-                    {helpers.formatDate(job.end_time || job.start_time)}
-                  </Td>
-                  <Td dataLabel={t('view.scans.show-modal.scan-result')}>{job.status}</Td>
-                  <Td dataLabel={t('view.scans.show-modal.scan-download')} isActionCell>
-                    {helpers.canAccessMostRecentReport(job) && (
-                      <Button onClick={() => onDownload(job.report_id)} icon={<DownloadIcon />} variant="link">
-                        {t('view.scans.show-modal.scan-download')}
-                      </Button>
-                    )}
-                  </Td>
+    <Modal variant={ModalVariant.medium} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader title={t('view.label', { context: 'scans-names', name: scan?.name })} labelId={titleId} />
+      <ModalBody>
+        {sortedScanJobs.length ? (
+          <React.Fragment>
+            <div>{t('view.scans.show-modal.title', { count: sortedScanJobs.length })}</div>
+            <br />
+            <Table aria-label={t('view.scans.show-modal.aria-table')} ouiaId="scan_jobs_table">
+              <Thead>
+                <Tr>
+                  <Th sort={getSortParams(0)} data-ouia-component-id="header_scan_time">
+                    {t('view.scans.show-modal.scan-time')}
+                  </Th>
+                  <Th sort={getSortParams(1)} data-ouia-component-id="header_scan_result">
+                    {t('view.scans.show-modal.scan-result')}
+                  </Th>
+                  <Th screenReaderText={t('view.scans.show-modal.scan-download-screenreader')}></Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </React.Fragment>
-      ) : (
-        <Bullseye>
-          <EmptyState headingLevel="h2" icon={Spinner} titleText={t('view.scans.show-modal.loading')}></EmptyState>
-        </Bullseye>
-      )}
+              </Thead>
+              <Tbody>
+                {sortedScanJobs.map(job => (
+                  <Tr key={job.id}>
+                    <Td dataLabel={t('view.scans.show-modal.scan-time')}>
+                      {helpers.formatDate(job.end_time || job.start_time)}
+                    </Td>
+                    <Td dataLabel={t('view.scans.show-modal.scan-result')}>{job.status}</Td>
+                    <Td dataLabel={t('view.scans.show-modal.scan-download')} isActionCell>
+                      {helpers.canAccessMostRecentReport(job) && (
+                        <Button onClick={() => onDownload(job.report_id)} icon={<DownloadIcon />} variant="link">
+                          {t('view.scans.show-modal.scan-download')}
+                        </Button>
+                      )}
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </React.Fragment>
+        ) : (
+          <Bullseye>
+            <EmptyState headingLevel="h2" icon={Spinner} titleText={t('view.scans.show-modal.loading')}></EmptyState>
+          </Bullseye>
+        )}
+      </ModalBody>
+      {actions && <ModalFooter>{actions}</ModalFooter>}
     </Modal>
   );
 };

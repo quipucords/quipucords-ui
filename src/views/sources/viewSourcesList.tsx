@@ -21,12 +21,16 @@ import {
   EmptyStateFooter,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
@@ -61,6 +65,8 @@ import { SOURCES_LIST_QUERY, useSourcesQuery } from './useSourcesQuery';
 
 const SourcesListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const credentialsModalTitleId = React.useId();
+  const deleteModalTitleId = React.useId();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [credentialsSelected, setCredentialsSelected] = React.useState<CredentialResponse[]>([]);
   const [scanSelected, setScanSelected] = React.useState<SourceResponse[]>();
@@ -566,10 +572,22 @@ const SourcesListView: React.FunctionComponent = () => {
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
       <Modal
         variant={ModalVariant.small}
-        title={t('view.label', { context: 'credentials' })}
         isOpen={credentialsSelected.length > 0}
+        aria-labelledby={credentialsModalTitleId}
         onClose={() => setCredentialsSelected([])}
-        actions={[
+      >
+        <ModalHeader title={t('view.label', { context: 'credentials' })} labelId={credentialsModalTitleId} />
+        <ModalBody>
+          <List isPlain isBordered>
+            {credentialsSelected
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(c => (
+                <ListItem key={c.name}>{c.name}</ListItem>
+              ))}
+          </List>
+          {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="secondary"
@@ -579,16 +597,7 @@ const SourcesListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'close' })}
           </Button>
-        ]}
-      >
-        <List isPlain isBordered>
-          {credentialsSelected
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map(c => (
-              <ListItem key={c.name}>{c.name}</ListItem>
-            ))}
-        </List>
-        {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalFooter>
       </Modal>
       <ShowConnectionsModal
         isOpen={connectionsSelected !== undefined}
@@ -598,10 +607,21 @@ const SourcesListView: React.FunctionComponent = () => {
       />
       <Modal
         variant={ModalVariant.small}
-        title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
         isOpen={pendingDeleteSource !== undefined}
+        aria-labelledby={deleteModalTitleId}
         onClose={() => setPendingDeleteSource(undefined)}
-        actions={[
+      >
+        <ModalHeader
+          title={t('form-dialog.confirmation', { context: 'title_delete-source' })}
+          labelId={deleteModalTitleId}
+        />
+        <ModalBody>
+          {t('form-dialog.confirmation_heading', {
+            context: 'delete-source',
+            name: pendingDeleteSource?.name
+          })}
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="danger"
@@ -614,16 +634,11 @@ const SourcesListView: React.FunctionComponent = () => {
             }}
           >
             {t('table.label', { context: 'delete' })}
-          </Button>,
+          </Button>
           <Button key="cancel" variant="link" onClick={() => setPendingDeleteSource(undefined)}>
             {t('form-dialog.label', { context: 'cancel' })}
           </Button>
-        ]}
-      >
-        {t('form-dialog.confirmation_heading', {
-          context: 'delete-source',
-          name: pendingDeleteSource?.name
-        })}
+        </ModalFooter>
       </Modal>
       {/* TODO: Simplify add/edit sources functionality * check PR #380 for details */}
       <AddSourceModal

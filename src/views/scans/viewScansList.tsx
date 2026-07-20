@@ -22,13 +22,17 @@ import {
   EmptyStateFooter,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   Tooltip,
   getUniqueId
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ContextIcon, ContextIconVariant } from '../../components/contextIcon/contextIcon';
@@ -61,6 +65,8 @@ import { useScansQuery } from './useScansQuery';
 
 const ScansListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const sourcesModalTitleId = React.useId();
+  const deleteModalTitleId = React.useId();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [scanSelectedForSources, setScanSelectedForSources] = React.useState<ScanResponse>();
   const [scanSelected, setScanSelected] = React.useState<ScanResponse>();
@@ -386,10 +392,21 @@ const ScansListView: React.FunctionComponent = () => {
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
       <Modal
         variant={ModalVariant.small}
-        title={t('view.label', { context: 'sources' })}
         isOpen={scanSelectedForSources !== undefined}
+        aria-labelledby={sourcesModalTitleId}
         onClose={() => setScanSelectedForSources(undefined)}
-        actions={[
+      >
+        <ModalHeader title={t('view.label', { context: 'sources' })} labelId={sourcesModalTitleId} />
+        <ModalBody>
+          <List isPlain isBordered>
+            {scanSelectedForSources?.sources
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(s => (
+                <ListItem key={s.id}>{s.name}</ListItem>
+              ))}
+          </List>
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="secondary"
@@ -399,15 +416,7 @@ const ScansListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'close' })}
           </Button>
-        ]}
-      >
-        <List isPlain isBordered>
-          {scanSelectedForSources?.sources
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map(s => (
-              <ListItem key={s.id}>{s.name}</ListItem>
-            ))}
-        </List>
+        </ModalFooter>
       </Modal>
       <ShowScansModal
         scan={scanSelected}
@@ -452,10 +461,22 @@ const ScansListView: React.FunctionComponent = () => {
       />
       <Modal
         variant={ModalVariant.small}
-        title={t('form-dialog.confirmation', { context: 'title_delete-scan' })}
         isOpen={pendingDeleteScan !== undefined}
+        aria-labelledby={deleteModalTitleId}
         onClose={() => setPendingDeleteScan(undefined)}
-        actions={[
+      >
+        <ModalHeader
+          title={t('form-dialog.confirmation', { context: 'title_delete-scan' })}
+          labelId={deleteModalTitleId}
+        />
+        <ModalBody>
+          {t('form-dialog.confirmation_heading', {
+            context: 'delete-scan',
+            name: pendingDeleteScan?.name
+          })}
+          {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="danger"
@@ -469,17 +490,11 @@ const ScansListView: React.FunctionComponent = () => {
             }}
           >
             {t('table.label', { context: 'delete' })}
-          </Button>,
+          </Button>
           <Button key="cancel" variant="link" onClick={() => setPendingDeleteScan(undefined)}>
             {t('form-dialog.label', { context: 'cancel' })}
           </Button>
-        ]}
-      >
-        {t('form-dialog.confirmation_heading', {
-          context: 'delete-scan',
-          name: pendingDeleteScan?.name
-        })}
-        {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalFooter>
       </Modal>
       <AlertGroup isToast isLiveRegion>
         {alerts.map(({ id, variant, title }) => (

@@ -22,12 +22,16 @@ import {
   EmptyStateFooter,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalVariant,
   PageSection,
   ToolbarContent,
   ToolbarItem,
   getUniqueId
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import ActionMenu from '../../components/actionMenu/actionMenu';
 import { ErrorMessage } from '../../components/errorMessage/errorMessage';
@@ -52,6 +56,8 @@ import { useCredentialsQuery } from './useCredentialsQuery';
 
 const CredentialsListView: React.FunctionComponent = () => {
   const { t } = useTranslation();
+  const sourcesModalTitleId = React.useId();
+  const deleteModalTitleId = React.useId();
   const [refreshTime, setRefreshTime] = React.useState<Date | null>();
   const [sourcesSelected, setSourcesSelected] = React.useState<SourceResponse[]>([]);
   const [pendingDeleteCredential, setPendingDeleteCredential] = React.useState<CredentialResponse>();
@@ -451,10 +457,22 @@ const CredentialsListView: React.FunctionComponent = () => {
       <Pagination variant="bottom" widgetId="server-paginated-example-pagination" />
       <Modal
         variant={ModalVariant.small}
-        title={t('form-dialog.label', { context: 'sources' })}
         isOpen={sourcesSelected.length > 0}
+        aria-labelledby={sourcesModalTitleId}
         onClose={() => setSourcesSelected([])}
-        actions={[
+      >
+        <ModalHeader title={t('form-dialog.label', { context: 'sources' })} labelId={sourcesModalTitleId} />
+        <ModalBody>
+          <List isPlain isBordered>
+            {sourcesSelected
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(c => (
+                <ListItem key={c.name}>{c.name}</ListItem>
+              ))}
+          </List>
+          {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="secondary"
@@ -464,23 +482,25 @@ const CredentialsListView: React.FunctionComponent = () => {
           >
             {t('table.label', { context: 'close' })}
           </Button>
-        ]}
-      >
-        <List isPlain isBordered>
-          {sourcesSelected
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map(c => (
-              <ListItem key={c.name}>{c.name}</ListItem>
-            ))}
-        </List>
-        {/* TODO: his modal should go on a list of getting it's own component * check PR #381 for details */}
+        </ModalFooter>
       </Modal>
       <Modal
         variant={ModalVariant.small}
-        title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
         isOpen={pendingDeleteCredential !== undefined}
+        aria-labelledby={deleteModalTitleId}
         onClose={() => setPendingDeleteCredential(undefined)}
-        actions={[
+      >
+        <ModalHeader
+          title={t('form-dialog.confirmation', { context: 'title_delete-credential' })}
+          labelId={deleteModalTitleId}
+        />
+        <ModalBody>
+          {t('form-dialog.confirmation_heading', {
+            context: 'delete-credential',
+            name: pendingDeleteCredential?.name
+          })}
+        </ModalBody>
+        <ModalFooter>
           <Button
             key="confirm"
             variant="danger"
@@ -493,16 +513,11 @@ const CredentialsListView: React.FunctionComponent = () => {
             }}
           >
             {t('table.label', { context: 'delete' })}
-          </Button>,
+          </Button>
           <Button key="cancel" variant="link" onClick={() => setPendingDeleteCredential(undefined)}>
             {t('form-dialog.label', { context: 'cancel' })}
           </Button>
-        ]}
-      >
-        {t('form-dialog.confirmation_heading', {
-          context: 'delete-credential',
-          name: pendingDeleteCredential?.name
-        })}
+        </ModalFooter>
       </Modal>
       <AddCredentialModal
         isOpen={editCredentialForm.isOpen}

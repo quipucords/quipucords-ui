@@ -17,10 +17,13 @@ import {
   FormHelperText,
   HelperText,
   HelperTextItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalVariant,
   TextArea,
   TextInput
 } from '@patternfly/react-core';
-import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { SimpleDropdown } from '../../components/simpleDropdown/simpleDropdown';
 import { TypeaheadCheckboxes } from '../../components/typeAheadCheckboxes/typeaheadCheckboxes';
@@ -615,24 +618,26 @@ const AddSourceModal: React.FC<AddSourceModalProps> = ({
   onSubmit = () => {}
 }) => {
   const { t } = useTranslation();
+  const titleId = React.useId();
   return (
-    <Modal
-      variant={ModalVariant.small}
-      title={
-        (source && t('view.sources.modal-title.edit', { name: source.name || '' })) ||
-        t('view.sources.modal-title.add', { type: sourceType || '' })
-      }
-      isOpen={isOpen}
-      onClose={() => onClose()}
-    >
-      <SourceForm
-        source={source}
-        sourceType={sourceType}
-        errors={errors}
-        onClearErrors={onClearErrors}
-        onClose={onClose}
-        onSubmit={onSubmit}
+    <Modal variant={ModalVariant.small} isOpen={isOpen} aria-labelledby={titleId} onClose={() => onClose()}>
+      <ModalHeader
+        title={
+          (source && t('view.sources.modal-title.edit', { name: source.name || '' })) ||
+          t('view.sources.modal-title.add', { type: sourceType || '' })
+        }
+        labelId={titleId}
       />
+      <ModalBody>
+        <SourceForm
+          source={source}
+          sourceType={sourceType}
+          errors={errors}
+          onClearErrors={onClearErrors}
+          onClose={onClose}
+          onSubmit={onSubmit}
+        />
+      </ModalBody>
     </Modal>
   );
 };
