@@ -31,7 +31,7 @@ jobs:
 
       - name: Build amd64 image
         id: build-image-amd64
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: amd64
@@ -46,7 +46,7 @@ jobs:
 
       - name: Push amd64 To quay.io
         id: push-image-amd64
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.build-image-amd64.outputs.tags }}
@@ -66,7 +66,7 @@ jobs:
 
       - name: Build arm64 image
         id: build-image-arm64
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           archs: arm64
@@ -81,7 +81,7 @@ jobs:
 
       - name: Push arm64 To quay.io
         id: push-image-arm64
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.build-image-arm64.outputs.tags }}
@@ -120,7 +120,7 @@ jobs:
 
       - name: Push Manifest
         id: push-manifest
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
@@ -141,7 +141,7 @@ jobs:
       - name: Push Release Manifest
         id: push-release-manifest
         if: contains( env.RELEASE_TAG, '.' )
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.RELEASE_TAG }}
