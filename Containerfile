@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:de0ec3cba702e28f2ea3c232e8e1b53aa0acee4d25f5acfb458afe22a7b66709 as npm_builder
+FROM registry.access.redhat.com/ubi9/nodejs-22@sha256:2c3bb588fae7d9d1e5acd1afd77a61cc8cbae2d0d3f85bb7ec03bb3275ba2420 as npm_builder
 ARG QUIPUCORDS_BRANDED="false"
 ARG REACT_APP_FEATURE_REPORTS_VIEW="true"
 ARG REACT_APP_FEATURE_VAULT_AUTH="true"
