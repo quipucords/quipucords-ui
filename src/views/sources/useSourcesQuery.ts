@@ -16,14 +16,7 @@ import { type TableState } from '../../vendor/react-table-batteries';
 export const SOURCES_LIST_QUERY = 'sourcesList';
 
 type SourcesColumnKey =
-  | 'selection'
-  | 'name'
-  | 'connection'
-  | 'type'
-  | 'actions'
-  | 'credentials'
-  | 'unreachableSystems'
-  | 'scan';
+  'selection' | 'name' | 'connection' | 'type' | 'actions' | 'credentials' | 'unreachableSystems' | 'scan';
 
 type SourcesSortableColumnKey = 'name' | 'connection' | 'type';
 
