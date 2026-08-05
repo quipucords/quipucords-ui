@@ -36,7 +36,7 @@ module.exports = {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest.transform.file.js'
   },
   transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+    '[/\\\\]node_modules[/\\\\](?!(react-router)[/\\\\]).+\\.(js|jsx|mjs|cjs|ts|tsx)$',
     '^.+\\.module\\.(css|sass|scss)$'
   ],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname']
