@@ -5,7 +5,7 @@
  * @module routes
  */
 import * as React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 import NotFound from './views/notFound/notFound';
 
 const Overview = React.lazy(() => import('./views/overview/viewOverview'));
