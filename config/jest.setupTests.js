@@ -43,7 +43,13 @@ jest.mock('react-i18next', () => ({
 global.URL.createObjectURL = jest.fn();
 
 /**
- * Emulate for router hooks
+ * Emulate for router hooks.
+ * NOTE: jest.requireActual('react-router') is intentionally NOT used here.
+ * react-router v8's production build contains `import.meta.hot` (ESM/HMR
+ * syntax) in a transitively required file. ts-jest compiling to CommonJS
+ * cannot parse import.meta, so requireActual would crash with:
+ *   SyntaxError: Cannot use 'import.meta' outside a module
+ * All needed exports are listed explicitly below instead.
  */
 const mockNavigate = jest.fn();
 jest.mock('react-router', () => ({
