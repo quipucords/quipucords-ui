@@ -43,17 +43,22 @@ jest.mock('react-i18next', () => ({
 global.URL.createObjectURL = jest.fn();
 
 /**
- * Emulate for router-dom hooks
+ * Emulate for router hooks
  */
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  NavLink: args => {
+const mockNavigate = jest.fn();
+jest.mock('react-router', () => ({
+  NavLink: ({ to, ...args }) => {
+    const href = typeof to === 'string' ? to : to?.pathname;
     // eslint-disable-next-line jsx-a11y/anchor-has-content
-    const MockNavLink = props => <a {...props} />;
+    const MockNavLink = props => <a href={href} {...props} />;
     return <MockNavLink {...args} />;
   },
   useLocation: () => ({ pathname: '/' }),
-  useNavigate: () => jest.fn()
+  useNavigate: () => mockNavigate,
+  Routes: ({ children }) => <>{children}</>,
+  Route: ({ element }) => <>{element}</>,
+  Navigate: () => null,
+  BrowserRouter: ({ children }) => <>{children}</>
 }));
 
 /**
