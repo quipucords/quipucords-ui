@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const express = require('express');
-const yaml = require('js-yaml');
+const yaml = require('yaml');
 
 /**
  * Basic colors for console output
@@ -89,16 +89,64 @@ const resolveRef = (spec, obj) => {
     for (const part of parts) {
       result = result?.[part];
     }
-    return resolveRef(spec, result);
+    return result;
   }
-  if (Array.isArray(obj)) {
-    return obj.map(item => resolveRef(spec, item));
+  return obj;
+};
+
+/**
+ * Generate a mock value from a Swagger 2.0 schema node, using property-level
+ * examples where present and type-appropriate defaults elsewhere.
+ *
+ * @param {object} spec - full parsed spec (for $ref resolution)
+ * @param {object} schema - the schema node to generate from
+ * @param {Set<string>} [_visited] - tracks $refs already being resolved (prevents cycles)
+ * @returns {*}
+ */
+const generateFromSchema = (spec, schema, _visited = new Set()) => {
+  if (!schema) return null;
+
+  // Resolve $ref, guarding against cycles
+  if (schema.$ref) {
+    if (_visited.has(schema.$ref)) return {};
+    const visited = new Set(_visited).add(schema.$ref);
+    const resolved = resolveRef(spec, schema);
+    return generateFromSchema(spec, resolved, visited);
   }
-  const resolved = {};
-  for (const [key, value] of Object.entries(obj)) {
-    resolved[key] = resolveRef(spec, value);
+
+  // Merge allOf entries
+  if (schema.allOf) {
+    return schema.allOf.reduce((acc, sub) => {
+      const resolved = resolveRef(spec, sub);
+      const generated = generateFromSchema(spec, resolved, _visited);
+      return typeof generated === 'object' && generated !== null ? { ...acc, ...generated } : acc;
+    }, {});
   }
-  return resolved;
+
+  // Use the schema-level example if present
+  if (schema.example !== undefined) return schema.example;
+
+  switch (schema.type) {
+    case 'object':
+    case undefined: {
+      const obj = {};
+      for (const [key, propSchema] of Object.entries(schema.properties || {})) {
+        obj[key] = generateFromSchema(spec, resolveRef(spec, propSchema), _visited);
+      }
+      return obj;
+    }
+    case 'array':
+      return schema.items ? [generateFromSchema(spec, resolveRef(spec, schema.items), _visited)] : [];
+    case 'string':
+      return schema.enum ? schema.enum[0] : '';
+    case 'integer':
+    case 'number':
+      return 0;
+    case 'boolean':
+      return false;
+    default:
+      return null;
+  }
 };
 
 /**
@@ -114,20 +162,19 @@ const getMockResponse = (spec, operation) => {
   const response = resolveRef(spec, responses[statusCode]);
   const status = parseInt(statusCode, 10) || 200;
 
-  if (!response) return { body: {}, status };
+  if (!response) return { body: null, status };
 
-  // Swagger 2.0: examples object keyed by MIME type
+  // Swagger 2.0: response-level examples keyed by MIME type
   if (response.examples?.['application/json'] !== undefined) {
     return { body: response.examples['application/json'], status };
   }
 
-  // Schema-level example
-  const schema = resolveRef(spec, response.schema);
-  if (schema?.example !== undefined) {
-    return { body: schema.example, status };
+  // Generate from response schema
+  if (response.schema) {
+    return { body: generateFromSchema(spec, response.schema), status };
   }
 
-  return { body: {}, status };
+  return { body: null, status };
 };
 
 /**
@@ -152,7 +199,11 @@ const buildMockMiddleware = spec => {
       const { body, status } = getMockResponse(spec, operation);
 
       router[lowerMethod](expressPath, (_req, res) => {
-        res.status(status).json(body);
+        if (body === null) {
+          res.status(status).end();
+        } else {
+          res.status(status).json(body);
+        }
       });
     }
   }
@@ -174,7 +225,7 @@ const startMockServer = (resource, port) => {
     return;
   }
 
-  const spec = yaml.load(readFileSync(swaggerFile, 'utf8'));
+  const spec = yaml.parse(readFileSync(swaggerFile, 'utf8'));
   const app = express();
 
   app.use((req, _res, next) => {
