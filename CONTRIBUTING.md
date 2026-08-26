@@ -264,6 +264,19 @@ After installing `make`, put the updated version earlier on your `PATH` or alway
 PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 ```
 
+If you are building the container image locally on macOS, you may need to adjust the podman machine settings. We've seen the webpack build process being killed by the OOM killer when the podman VM only has 2GB of memory. Check your settings using `podman machine inspect`, and update its settings if necessary.
+
+```sh
+# Stop the machine
+podman machine stop
+
+# Update it with more memory (e.g. 4GB)
+podman machine set --memory 4096
+
+# Start it back up
+podman machine start
+```
+
 #### NodeJS and NPM
 The build attempts to align to the current NodeJS LTS version. It is possible to test future versions of NodeJS LTS. See CI Testing for more detail.
 
