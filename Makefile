@@ -33,7 +33,7 @@ build-container:
 .PHONY: lock-baseimages
 lock-baseimages:
 	separator="================================================================"; \
-	baseimages=($$(grep '^FROM ' Containerfile | sed 's/FROM\s*\(.*\)@.*/\1/g' | sort -u)); \
+	baseimages=($$(grep '^FROM ' Containerfile | $(SED) 's/FROM\s*\(.*\)@.*/\1/g' | sort -u)); \
 	for image in $${baseimages[@]}; do \
 		echo "$${separator}"; \
 		echo "updating $${image}..."; \
