@@ -17,6 +17,7 @@ else
 endif
 
 
+.PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of:"
 	@echo "  help                          to show this message"
@@ -24,8 +25,10 @@ help:
 	@echo "  lock-baseimages               update the digests of base images on the Containerfile"
 	@echo "  update-lockfiles       	   update all (but package-lock.json) lockfiles"
 
+.PHONY: all
 all: help
 
+.PHONY: build-container
 build-container:
 	podman build \
 		-t $(QUIPUCORDS_UI_CONTAINER_TAG) --ulimit nofile=4096:4096 .
@@ -46,4 +49,5 @@ lock-baseimages:
 	done; \
 	echo "$${separator}"
 
-update-lockfiles: lock-baseimages
+.PHONY: update-lockfiles
+update-lockfiles: lock-baseimages update-requirements
