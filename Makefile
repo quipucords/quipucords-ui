@@ -24,6 +24,7 @@ help:
 	@echo "  build-container               to build the container image for the quipucords UI"
 	@echo "  lock-baseimages               to update the digests of base images on the Containerfile"
 	@echo "  update-lockfiles              to update all (but package-lock.json) lockfiles"
+	@echo "  bump-version                  to bump the project version (VERSION=x.y.z or SEGMENT=major|minor|patch)"
 
 .PHONY: all
 all: help
@@ -51,3 +52,19 @@ lock-baseimages:
 
 .PHONY: update-lockfiles
 update-lockfiles: lock-baseimages update-requirements
+
+.PHONY: bump-version
+bump-version:
+ifdef VERSION
+ifdef SEGMENT
+	$(error Specify either VERSION or SEGMENT, not both)
+endif
+	npm version $(VERSION) --no-git-tag-version
+else ifdef SEGMENT
+ifneq ($(filter $(SEGMENT),major minor patch),$(SEGMENT))
+	$(error SEGMENT must be 'major', 'minor', or 'patch', got '$(SEGMENT)')
+endif
+	npm version $(SEGMENT) --no-git-tag-version
+else
+	$(error Specify either SEGMENT=<major|minor|patch> or VERSION=<x.y.z>)
+endif
