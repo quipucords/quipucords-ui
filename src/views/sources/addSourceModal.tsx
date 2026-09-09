@@ -64,7 +64,6 @@ interface SourceFormProps extends Omit<AddSourceModalProps, 'isOpen'> {
 
 interface SourceFormType {
   credentials?: number[];
-  useParamiko?: boolean;
   sslVerify?: boolean;
   sslProtocol: string;
   name?: string;
@@ -90,7 +89,6 @@ const useSourceForm = ({
 } = {}) => {
   const initialFormState: SourceFormType = {
     credentials: [],
-    useParamiko: false,
     sslVerify: true,
     sslProtocol: 'SSLv23',
     name: '',
@@ -125,8 +123,7 @@ const useSourceForm = ({
         credentials: !!(source?.credentials && source.credentials.length > 0),
         ssl_protocol: !!source?.ssl_protocol,
         ssl_cert_verify: source?.ssl_cert_verify !== undefined,
-        disable_ssl: source?.disable_ssl !== undefined,
-        use_paramiko: source?.use_paramiko !== undefined
+        disable_ssl: source?.disable_ssl !== undefined
       };
 
       return existingValueChecks[field] || false;
@@ -253,7 +250,6 @@ const useSourceForm = ({
     if (source) {
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
-        useParamiko: source?.use_paramiko || false,
         sslVerify: source?.ssl_cert_verify ?? true,
         sslProtocol: source?.disable_ssl
           ? 'Disable SSL'
@@ -324,7 +320,7 @@ const useSourceForm = ({
 
   const filterFormData = useCallback(
     (data = formData): SourceRequest => {
-      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
+      const { credentials, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
       const payload: any = {
         name,
         credentials: credentials?.map(c => Number(c)),
@@ -346,8 +342,6 @@ const useSourceForm = ({
         if (proxy_url) {
           payload.proxy_url = proxy_url;
         }
-      } else {
-        payload.use_paramiko = useParamiko;
       }
 
       return getCleanedSourceData(payload) as SourceRequest;
@@ -551,18 +545,7 @@ const SourceForm: React.FC<SourceFormProps> = ({
           </FormGroup>
         </React.Fragment>
       )}
-      {isNetwork ? (
-        <FormGroup label="" fieldId="paramiko">
-          <Checkbox
-            key="paramiko"
-            label={t('view.sources.add-modal.paramiko.checkbox-label')}
-            id="paramiko"
-            isChecked={formData?.useParamiko}
-            onChange={(_ev, checked) => handleInputChange('useParamiko', checked)}
-            ouiaId="options_paramiko"
-          />
-        </FormGroup>
-      ) : (
+      {!isNetwork && (
         <React.Fragment>
           <FormGroup label={t('view.sources.add-modal.connection.label')} fieldId="connection">
             <SimpleDropdown

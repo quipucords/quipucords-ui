@@ -11,7 +11,6 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
   "name": "Test Source",
   "port": "22",
   "source_type": "network",
-  "use_paramiko": false,
 }
 `;
 
@@ -165,26 +164,6 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       </HelperText>
     </FormGroup>
   </React.Fragment>
-  <FormGroup
-    fieldId="paramiko"
-    label=""
-  >
-    <Checkbox
-      className=""
-      id="paramiko"
-      isChecked={false}
-      isDisabled={false}
-      isLabelWrapped={false}
-      isRequired={false}
-      isValid={true}
-      label="t([
-  "view.sources.add-modal.paramiko.checkbox-label"
-])"
-      onChange={[Function]}
-      ouiaId="options_paramiko"
-      ouiaSafe={true}
-    />
-  </FormGroup>
   <ActionGroup>
     <Button
       isDisabled={true}
@@ -1611,6 +1590,5 @@ exports[`useSourceForm should initialize formData correctly: formData 1`] = `
   "proxy_url": "",
   "sslProtocol": "SSLv23",
   "sslVerify": true,
-  "useParamiko": false,
 }
 `;
