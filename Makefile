@@ -22,8 +22,8 @@ help:
 	@echo "Please use 'make <target>' where <target> is one of:"
 	@echo "  help                          to show this message"
 	@echo "  build-container               to build the container image for the quipucords UI"
-	@echo "  lock-baseimages               update the digests of base images on the Containerfile"
-	@echo "  update-lockfiles       	   update all (but package-lock.json) lockfiles"
+	@echo "  lock-baseimages               to update the digests of base images on the Containerfile"
+	@echo "  update-lockfiles              to update all (but package-lock.json) lockfiles"
 
 .PHONY: all
 all: help
