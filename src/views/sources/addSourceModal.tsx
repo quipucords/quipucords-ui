@@ -64,7 +64,6 @@ interface SourceFormProps extends Omit<AddSourceModalProps, 'isOpen'> {
 
 interface SourceFormType {
   credentials?: number[];
-  useParamiko?: boolean;
   sslVerify?: boolean;
   sslProtocol: string;
   name?: string;
@@ -90,7 +89,6 @@ const useSourceForm = ({
 } = {}) => {
   const initialFormState: SourceFormType = {
     credentials: [],
-    useParamiko: false,
     sslVerify: true,
     sslProtocol: 'SSLv23',
     name: '',
@@ -125,8 +123,7 @@ const useSourceForm = ({
         credentials: !!(source?.credentials && source.credentials.length > 0),
         ssl_protocol: !!source?.ssl_protocol,
         ssl_cert_verify: source?.ssl_cert_verify !== undefined,
-        disable_ssl: source?.disable_ssl !== undefined,
-        use_paramiko: source?.use_paramiko !== undefined
+        disable_ssl: source?.disable_ssl !== undefined
       };
 
       return existingValueChecks[field] || false;
@@ -253,7 +250,6 @@ const useSourceForm = ({
     if (source) {
       setFormData({
         credentials: source?.credentials?.map(c => c.id) || [],
-        useParamiko: source?.use_paramiko || false,
         sslVerify: source?.ssl_cert_verify ?? true,
         sslProtocol: source?.disable_ssl
           ? 'Disable SSL'
@@ -324,7 +320,7 @@ const useSourceForm = ({
 
   const filterFormData = useCallback(
     (data = formData): SourceRequest => {
-      const { credentials, useParamiko, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
+      const { credentials, sslVerify, sslProtocol, name, hosts, port, proxy_url } = data;
       const payload: any = {
         name,
         credentials: credentials?.map(c => Number(c)),
@@ -346,8 +342,6 @@ const useSourceForm = ({
         if (proxy_url) {
           payload.proxy_url = proxy_url;
         }
-      } else {
-        payload.use_paramiko = useParamiko;
       }
 
       return getCleanedSourceData(payload) as SourceRequest;
@@ -551,48 +545,35 @@ const SourceForm: React.FC<SourceFormProps> = ({
           </FormGroup>
         </React.Fragment>
       )}
-      {isNetwork ? (
-        <FormGroup label="" fieldId="paramiko">
-          <Checkbox
-            key="paramiko"
-            label={t('view.sources.add-modal.paramiko.checkbox-label')}
-            id="paramiko"
-            isChecked={formData?.useParamiko}
-            onChange={(_ev, checked) => handleInputChange('useParamiko', checked)}
-            ouiaId="options_paramiko"
+      <React.Fragment>
+        <FormGroup label={t('view.sources.add-modal.connection.label')} fieldId="connection">
+          <SimpleDropdown
+            isFullWidth
+            label={formData?.sslProtocol || t('view.sources.add-modal.connection.default_value')}
+            menuToggleOuiaId="options_ssl_protocol"
+            variant={'default'}
+            onSelect={item => handleInputChange('sslProtocol', item)}
+            dropdownItems={[
+              { item: 'SSLv23', ouiaId: 'sslv23' },
+              { item: 'TLSv1', ouiaId: 'tlsv1' },
+              { item: 'TLSv1.1', ouiaId: 'tlsv11' },
+              { item: 'TLSv1.2', ouiaId: 'tlsv12' },
+              { item: 'Disable SSL', ouiaId: 'disable_ssl' }
+            ]}
           />
         </FormGroup>
-      ) : (
-        <React.Fragment>
-          <FormGroup label={t('view.sources.add-modal.connection.label')} fieldId="connection">
-            <SimpleDropdown
-              isFullWidth
-              label={formData?.sslProtocol || t('view.sources.add-modal.connection.default_value')}
-              menuToggleOuiaId="options_ssl_protocol"
-              variant={'default'}
-              onSelect={item => handleInputChange('sslProtocol', item)}
-              dropdownItems={[
-                { item: 'SSLv23', ouiaId: 'sslv23' },
-                { item: 'TLSv1', ouiaId: 'tlsv1' },
-                { item: 'TLSv1.1', ouiaId: 'tlsv11' },
-                { item: 'TLSv1.2', ouiaId: 'tlsv12' },
-                { item: 'Disable SSL', ouiaId: 'disable_ssl' }
-              ]}
-            />
-          </FormGroup>
-          <FormGroup label="" fieldId="ssl_verify">
-            <Checkbox
-              key="ssl_verify"
-              label={t('view.sources.add-modal.ssl-verify.checkbox-label')}
-              id="ssl_verify"
-              isDisabled={formData?.sslProtocol === 'Disable SSL'}
-              isChecked={formData?.sslProtocol !== 'Disable SSL' && formData?.sslVerify}
-              onChange={(_ev, checked) => handleInputChange('sslVerify', checked)}
-              ouiaId="options_ssl_cert"
-            />
-          </FormGroup>
-        </React.Fragment>
-      )}
+        <FormGroup label="" fieldId="ssl_verify">
+          <Checkbox
+            key="ssl_verify"
+            label={t('view.sources.add-modal.ssl-verify.checkbox-label')}
+            id="ssl_verify"
+            isDisabled={formData?.sslProtocol === 'Disable SSL'}
+            isChecked={formData?.sslProtocol !== 'Disable SSL' && formData?.sslVerify}
+            onChange={(_ev, checked) => handleInputChange('sslVerify', checked)}
+            ouiaId="options_ssl_cert"
+          />
+        </FormGroup>
+      </React.Fragment>
       <ActionGroup>
         <Button variant="primary" onClick={onAdd} isDisabled={!canSubmit}>
           {t('view.sources.add-modal.actions.save')}
