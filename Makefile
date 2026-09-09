@@ -17,15 +17,19 @@ else
 endif
 
 
+.PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of:"
 	@echo "  help                          to show this message"
 	@echo "  build-container               to build the container image for the quipucords UI"
-	@echo "  lock-baseimages               update the digests of base images on the Containerfile"
-	@echo "  update-lockfiles       	   update all (but package-lock.json) lockfiles"
+	@echo "  lock-baseimages               to update the digests of base images on the Containerfile"
+	@echo "  update-requirements           to update the NPM package-lock.json"
+	@echo "  update-lockfiles              to update all lockfiles"
 
+.PHONY: all
 all: help
 
+.PHONY: build-container
 build-container:
 	podman build \
 		-t $(QUIPUCORDS_UI_CONTAINER_TAG) --ulimit nofile=4096:4096 .
@@ -33,7 +37,7 @@ build-container:
 .PHONY: lock-baseimages
 lock-baseimages:
 	separator="================================================================"; \
-	baseimages=($$(grep '^FROM ' Containerfile | sed 's/FROM\s*\(.*\)@.*/\1/g' | sort -u)); \
+	baseimages=($$(grep '^FROM ' Containerfile | $(SED) 's/FROM\s*\(.*\)@.*/\1/g' | sort -u)); \
 	for image in $${baseimages[@]}; do \
 		echo "$${separator}"; \
 		echo "updating $${image}..."; \
@@ -46,4 +50,9 @@ lock-baseimages:
 	done; \
 	echo "$${separator}"
 
-update-lockfiles: lock-baseimages
+.PHONY: update-requirements
+update-requirements:
+	npm update
+
+.PHONY: update-lockfiles
+update-lockfiles: lock-baseimages update-requirements
