@@ -23,7 +23,8 @@ help:
 	@echo "  help                          to show this message"
 	@echo "  build-container               to build the container image for the quipucords UI"
 	@echo "  lock-baseimages               to update the digests of base images on the Containerfile"
-	@echo "  update-lockfiles              to update all (but package-lock.json) lockfiles"
+	@echo "  update-requirements           to update the NPM package-lock.json"
+	@echo "  update-lockfiles              to update all lockfiles"
 
 .PHONY: all
 all: help
@@ -48,6 +49,10 @@ lock-baseimages:
 		$(SED) -i "s/^\(FROM $${escaped_img}@sha256:\)[[:alnum:]]*/\1$${updated_sha}/g" Containerfile; \
 	done; \
 	echo "$${separator}"
+
+.PHONY: update-requirements
+update-requirements:
+	npm update
 
 .PHONY: update-lockfiles
 update-lockfiles: lock-baseimages update-requirements
