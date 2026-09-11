@@ -11,7 +11,6 @@ exports[`AddSourceModal-network should call onSubmit with the correct filtered d
   "name": "Test Source",
   "port": "22",
   "source_type": "network",
-  "use_paramiko": false,
 }
 `;
 
@@ -165,26 +164,66 @@ exports[`SourceForm should not render proxy_url field for network sources: proxy
       </HelperText>
     </FormGroup>
   </React.Fragment>
-  <FormGroup
-    fieldId="paramiko"
-    label=""
-  >
-    <Checkbox
-      className=""
-      id="paramiko"
-      isChecked={false}
-      isDisabled={false}
-      isLabelWrapped={false}
-      isRequired={false}
-      isValid={true}
+  <React.Fragment>
+    <FormGroup
+      fieldId="connection"
       label="t([
-  "view.sources.add-modal.paramiko.checkbox-label"
+  "view.sources.add-modal.connection.label"
 ])"
-      onChange={[Function]}
-      ouiaId="options_paramiko"
-      ouiaSafe={true}
-    />
-  </FormGroup>
+    >
+      <SimpleDropdown
+        dropdownItems={
+          [
+            {
+              "item": "SSLv23",
+              "ouiaId": "sslv23",
+            },
+            {
+              "item": "TLSv1",
+              "ouiaId": "tlsv1",
+            },
+            {
+              "item": "TLSv1.1",
+              "ouiaId": "tlsv11",
+            },
+            {
+              "item": "TLSv1.2",
+              "ouiaId": "tlsv12",
+            },
+            {
+              "item": "Disable SSL",
+              "ouiaId": "disable_ssl",
+            },
+          ]
+        }
+        isFullWidth={true}
+        label="SSLv23"
+        menuToggleOuiaId="options_ssl_protocol"
+        onSelect={[Function]}
+        variant="default"
+      />
+    </FormGroup>
+    <FormGroup
+      fieldId="ssl_verify"
+      label=""
+    >
+      <Checkbox
+        className=""
+        id="ssl_verify"
+        isChecked={true}
+        isDisabled={false}
+        isLabelWrapped={false}
+        isRequired={false}
+        isValid={true}
+        label="t([
+  "view.sources.add-modal.ssl-verify.checkbox-label"
+])"
+        onChange={[Function]}
+        ouiaId="options_ssl_cert"
+        ouiaSafe={true}
+      />
+    </FormGroup>
+  </React.Fragment>
   <ActionGroup>
     <Button
       isDisabled={true}
@@ -1611,6 +1650,5 @@ exports[`useSourceForm should initialize formData correctly: formData 1`] = `
   "proxy_url": "",
   "sslProtocol": "SSLv23",
   "sslVerify": true,
-  "useParamiko": false,
 }
 `;

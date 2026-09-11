@@ -53,61 +53,6 @@ describe('AddSourceModal-network', () => {
     expect(component).toMatchSnapshot('basic');
   });
 
-  it('submits correct data for a network source (with use_paramiko)', async () => {
-    const testContainer = document.createElement('div');
-    document.body.appendChild(testContainer);
-
-    const customRender = render(
-      <SourceForm
-        sourceType="network"
-        onSubmit={mockOnSubmit}
-        useForm={() => ({
-          initialSelectedCredentials: [],
-          formData: {
-            name: 'Test SSH',
-            hosts: '192.168.1.1',
-            port: '22',
-            credentials: [1],
-            useParamiko: true,
-            sslVerify: true,
-            sslProtocol: 'SSLv23',
-            proxy_url: ''
-          },
-          isNetwork: true,
-          isOpenshift: false,
-          errors: {},
-          touchedFields: new Set(),
-          canSubmit: true,
-          handleInputChange: jest.fn(),
-          filterFormData: jest.fn().mockReturnValue({
-            name: 'Test SSH',
-            use_paramiko: true,
-            port: '22',
-            source_type: 'network',
-            credentials: [1],
-            hosts: ['192.168.1.1']
-          }),
-          typeValue: 'network'
-        })}
-      />,
-      { container: testContainer }
-    );
-
-    const user = userEvent.setup();
-    await user.click(customRender.getByText(/actions\.save/));
-
-    expect(mockOnSubmit).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'Test SSH',
-        use_paramiko: true,
-        port: '22',
-        source_type: 'network'
-      })
-    );
-
-    document.body.removeChild(testContainer);
-  });
-
   it('should call onSubmit with the correct filtered data when "Save" is clicked', async () => {
     const user = userEvent.setup();
 
@@ -169,7 +114,6 @@ describe('AddSourceModal-openshift', () => {
             hosts: '192.168.1.1',
             port: '6443',
             credentials: [1],
-            useParamiko: false,
             sslVerify: false,
             sslProtocol: 'TLSv1.2',
             proxy_url: ''
@@ -222,7 +166,6 @@ describe('AddSourceModal-openshift', () => {
             hosts: '192.168.1.1',
             port: '6443',
             credentials: [1],
-            useParamiko: false,
             sslVerify: true,
             sslProtocol: 'Disable SSL',
             proxy_url: ''
@@ -331,8 +274,7 @@ describe('useSourceForm', () => {
           source_type: 'openshift',
           ssl_cert_verify: true,
           ssl_protocol: 'TLSv1_1',
-          disable_ssl: false,
-          use_paramiko: false
+          disable_ssl: false
         }
       })
     );
@@ -354,7 +296,6 @@ describe('useSourceForm', () => {
 
     const filteredData = result.current.filterFormData();
     expect(filteredData.name).toBe(mockValue);
-    expect(filteredData.use_paramiko).toBe(false);
   });
 
   it('correctly maps sslProtocol label to API value', async () => {
