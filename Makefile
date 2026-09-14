@@ -27,6 +27,7 @@ help:
 	@echo "  update-lockfiles              to update all lockfiles"
 	@echo "  bump-version                  to bump the project version (VERSION=x.y.z or SEGMENT=major|minor|patch)"
 	@echo "  test                          to run unit tests"
+	@echo "  lint                          to run code linter"
 
 .PHONY: all
 all: help
@@ -78,3 +79,7 @@ endif
 .PHONY: test
 test:
 	npm run test
+
+.PHONY: lint
+lint:
+	npm run test:ci-lint
