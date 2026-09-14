@@ -50,9 +50,6 @@ lock-baseimages:
 	done; \
 	echo "$${separator}"
 
-.PHONY: update-lockfiles
-update-lockfiles: lock-baseimages update-requirements
-
 .PHONY: bump-version
 bump-version:
 ifdef VERSION

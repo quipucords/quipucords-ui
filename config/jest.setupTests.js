@@ -38,6 +38,20 @@ jest.mock('react-i18next', () => ({
 }));
 
 /**
+ * Suppress React warning for `inert=""` from PatternFly's deprecated Modal.
+ * PatternFly sets the attribute as an empty string; React 19+ expects a boolean.
+ * A proper long-term fix would be migrating to PatternFly's non-deprecated Modal API
+ */
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  const msg = args.map(a => (typeof a === 'string' ? a : '')).join(' ');
+  if (msg.includes('boolean attribute') && msg.includes('inert')) {
+    return;
+  }
+  originalConsoleError(...args);
+};
+
+/**
  * Emulate global for URL. A part of downloading files.
  */
 global.URL.createObjectURL = jest.fn();
