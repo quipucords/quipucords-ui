@@ -1,0 +1,58 @@
+language: en-US
+
+reviews:
+  profile: "chill"
+  auto_review:
+    enabled: true
+    drafts: false
+    ignore_title_keywords:
+      - "chore(deps)"
+      - "update konflux"
+    ignore_usernames:
+      - "konflux-internal-p02[bot]"
+      - "mintmaker[bot]"
+      - "dependabot[bot]"
+
+  path_filters:
+    - "!package-lock.json"
+    - "!**/__snapshots__/**"
+    - "!**/vendor/**"
+    - "!.tekton/**"
+
+  instructions: |
+    - All user-visible strings must go through t() from react-i18next. Never hardcode English text in JSX.
+    - Never use "any" in TypeScript. Use "unknown" and narrow, or define a proper type.
+    - Components should not exceed 150 lines. Flag if they do.
+    - Never swallow errors inside queryFn. Let React Query manage error state.
+    - Use PatternFly 6 components. Never build custom buttons, modals, or dropdowns.
+    - No inline styles. Use PatternFly utility classes (pf-v6-u-*) or co-located CSS.
+    - Every interactive element must have an aria-label or visible label.
+    - Every module must have a JSDoc block with @module (enforced by ESLint).
+
+  path_instructions:
+    - path: "src/views/**"
+      instructions: |
+        - Views should be thin orchestrators composing smaller components.
+        - Check for loading, error, and empty states in data-driven components.
+        - No more than 5 useState calls per component.
+    - path: "src/hooks/**"
+      instructions: |
+        - Query hooks must not catch and swallow errors inside queryFn.
+        - Verify query key constants are defined and exported.
+        - Mutations should invalidate relevant queries after success.
+    - path: "src/**/*.test.*"
+      instructions: |
+        - Use mockResolvedValueOnce, not mockResolvedValue.
+        - No conditional logic in tests with static data.
+        - Query by role, label, or text - not by CSS class or test ID.
+        - Use userEvent.setup() for interactions, not fireEvent.
+    - path: "src/components/**"
+      instructions: |
+        - Components must be reusable and not tied to a specific view.
+        - Props interface must be defined and exported.
+        - Must be keyboard accessible.
+    - path: "src/helpers/**"
+      instructions: |
+        - Helpers must be pure utility functions with no side effects.
+        - No React imports or hook usage - those belong in src/hooks/.
+        - Must be unit testable in isolation.
