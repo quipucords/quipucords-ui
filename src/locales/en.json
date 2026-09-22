@@ -347,10 +347,10 @@
     "overview": {
       "title": "Overview",
       "getting-started": {
-        "header": "Red Hat {{appName}} at a glance",
+        "header": "{{appName}} at a glance",
         "item1": {
           "label": "About {{appName}}",
-          "content": "<0>Red Hat {{appName}} is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
+          "content": "<0>{{appName}} is a tool that inspects your environment to identify physical and virtual hosts, operating systems, and configuration data. It helps you understand your Red Hat subscription usage across your entire infrastructure.</0>"
         },
         "item2": {
           "label": "Data privacy",
