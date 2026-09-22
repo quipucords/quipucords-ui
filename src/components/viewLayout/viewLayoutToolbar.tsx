@@ -21,9 +21,11 @@ import {
   ToolbarItem
 } from '@patternfly/react-core';
 import { EllipsisVIcon, MoonIcon, InfoCircleIcon, SunIcon } from '@patternfly/react-icons';
+import { helpers } from '../../helpers';
 import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import avatarImage from '../../images/imgAvatar.svg';
+import mastheadSecondaryLogoImg from '../../images/mastheadSecondaryLogo.svg';
 import AboutModal from '../aboutModal/aboutModal';
 import './viewLayoutToolbar.css';
 
@@ -200,6 +202,11 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
               </DropdownItem>
             </Dropdown>
           </ToolbarItem>
+          {helpers.UI_BRAND && (
+            <ToolbarItem>
+              <img alt="" src={mastheadSecondaryLogoImg} style={{ height: '36px' }} />
+            </ToolbarItem>
+          )}
         </ToolbarContent>
       </Toolbar>
       <AboutModal isOpen={aboutOpen} onClose={onAboutClose} useUser={useUser} />
