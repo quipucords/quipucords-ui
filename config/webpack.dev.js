@@ -27,7 +27,16 @@ module.exports = ({
           target: `${PROTOCOL}://${HOST}:${MOCK_PORT}`,
           secure: false
         }
-      ]
+      ],
+      setupMiddlewares: (middlewares, devServer) => {
+        if (REACT_APP_UI_BRAND === 'true') {
+          const path = require('path');
+          devServer.app.get('/favicon.ico', (_req, res) => {
+            res.sendFile(path.resolve(__dirname, '../public/faviconBrand.ico'));
+          });
+        }
+        return middlewares;
+      }
     }
   };
 };
