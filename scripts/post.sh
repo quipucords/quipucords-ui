@@ -17,8 +17,26 @@ cleanTsConfig()
 }
 #
 #
+# Copy branded favicon into build output, overwriting the unbranded one
+#
+brandFavicon()
+{
+  if [ "${UI_BRAND}" = "true" ]; then
+    local SRC="$(pwd)/public/faviconBrand.ico"
+    local DEST="$(pwd)/build/favicon.ico"
+    if [ -f "$SRC" ]; then
+      cp "$SRC" "$DEST"
+      echo "Brand favicon... copied faviconBrand.ico -> build/favicon.ico"
+    else
+      echo "Brand favicon... faviconBrand.ico not found, skipping"
+    fi
+  fi
+}
+#
+#
 # main()
 #
 {
   cleanTsConfig
+  brandFavicon
 }
