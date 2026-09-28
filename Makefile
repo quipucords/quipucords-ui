@@ -28,6 +28,7 @@ help:
 	@echo "  bump-version                  to bump the project version (VERSION=x.y.z or SEGMENT=major|minor|patch)"
 	@echo "  test                          to run unit tests"
 	@echo "  lint                          to run code linter"
+	@echo "  auto-fix                      to run linter auto-fix and audit fix commands"
 
 .PHONY: all
 all: help
@@ -83,3 +84,9 @@ test:
 .PHONY: lint
 lint:
 	npm run test:ci-lint
+
+.PHONY: auto-fix
+auto-fix:
+	npm run test:lint-fix; lint_status=$$?; \
+	npm audit fix --audit-level=high --omit dev --omit peer; audit_status=$$?; \
+	exit $$(( lint_status != 0 ? lint_status : audit_status ))
