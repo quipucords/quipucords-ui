@@ -57,7 +57,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
         </MastheadToggle>
         <MastheadBrand>
           <MastheadLogo>
-            <Brand alt={t('view.alt-logo', { name: uiName })} heights={{ default: '36px' }}>
+            <Brand src={titleImg} alt={t('view.alt-logo', { name: uiName })} heights={{ default: '36px' }}>
               <source srcSet={titleImg} />
             </Brand>
           </MastheadLogo>
