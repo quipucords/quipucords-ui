@@ -37,6 +37,7 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
                   "default": "36px",
                 }
               }
+              src="title.svg"
             >
               <source
                 srcSet="title.svg"
