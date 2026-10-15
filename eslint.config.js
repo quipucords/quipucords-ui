@@ -1,10 +1,9 @@
-const tsParser = require('@typescript-eslint/parser');
-const { defineConfig, globalIgnores } = require('eslint/config');
-const typescriptPlugin = require('typescript-eslint');
 const js = require('@eslint/js');
 const json = require('@eslint/json').default;
+const tsParser = require('@typescript-eslint/parser');
+const { defineConfig, globalIgnores } = require('eslint/config');
 const commentLengthPlugin = require('eslint-plugin-comment-length');
-const importPlugin = require('eslint-plugin-import');
+const importPlugin = require('eslint-plugin-import-x');
 const jestPlugin = require('eslint-plugin-jest');
 const jsDocPlugin = require('eslint-plugin-jsdoc');
 const jsxA11YPlugin = require('eslint-plugin-jsx-a11y');
@@ -12,6 +11,7 @@ const prettierPlugin = require('eslint-plugin-prettier/recommended');
 const reactPlugin = require('eslint-plugin-react');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const globals = require('globals');
+const typescriptPlugin = require('typescript-eslint');
 
 /* Note on order. TL;DR: it's a mess.
  * Some plugins want to provide configuration early, as they set the stage.
@@ -57,8 +57,8 @@ module.exports = defineConfig([
     ],
 
     settings: {
-      'import/external-module-folders': ['public'],
-      'import/resolver': {
+      'import-x/external-module-folders': ['public'],
+      'import-x/resolver': {
         node: {
           extensions: ['.js', '.jsx', '.ts', '.tsx']
         }
@@ -99,24 +99,24 @@ module.exports = defineConfig([
       ],
       'consistent-return': 'warn',
       'default-param-last': 'off',
-      'import/extensions': [
+      'import-x/extensions': [
         'error',
         {
           json: 'always'
         }
       ],
-      'import/first': 'off',
-      'import/newline-after-import': 'off',
-      'import/no-extraneous-dependencies': [
+      'import-x/first': 'off',
+      'import-x/newline-after-import': 'off',
+      'import-x/no-extraneous-dependencies': [
         'error',
         {
           devDependencies: true
         }
       ],
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
-      'import/no-unresolved': ['error', { ignore: ['react-router'] }],
-      'import/order': [
+      'import-x/no-named-as-default': 'off',
+      'import-x/no-named-as-default-member': 'off',
+      'import-x/no-unresolved': ['error', { ignore: ['react-router'] }],
+      'import-x/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
