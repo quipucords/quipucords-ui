@@ -1,54 +1,16 @@
+# Configure all relevant Dependabot "package-ecosystem"s never to open pull requests.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 3
-    target-branch: "main"
-    versioning-strategy: increase
-    allow:
-      - dependency-type: direct
-    ignore:
-      - dependency-name: "*patternfly*"
-    labels:
-      - "build"
-    commit-message:
-      prefix: "build"
-      include: "scope"
-    groups:
-      dev-deps:
-        dependency-type: "development"
-        update-types:
-          - "minor"
-          - "patch"
-      dev-deps-major:
-        dependency-type: "development"
-        update-types:
-          - "major"
-      deps-patch:
-        dependency-type: "production"
-        update-types:
-          - "patch"
-      deps-minor:
-        dependency-type: "production"
-        update-types:
-          - "minor"
-      deps-major:
-        dependency-type: "production"
-        update-types:
-          - "major"
-
-  - package-ecosystem: github-actions
-    directory: /
+      interval: "weekly"
+    open-pull-requests-limit: 0
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: monthly
-      day: monday
-    open-pull-requests-limit: 2
-    target-branch: "main"
-    labels:
-      - "build"
-    commit-message:
-      prefix: "build"
-      include: "scope"
+      interval: "weekly"
+    open-pull-requests-limit: 0
