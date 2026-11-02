@@ -36,6 +36,29 @@ body,
   filter: invert(1.5) contrast(1.2);
 }
 
+/* Match OpenShift console login background colors */
+.pf-v6-c-background-image {
+  background-color: var(--pf-t--color--gray--10);
+}
+
+.pf-v6-theme-dark .pf-v6-c-background-image {
+  background-color: var(--pf-t--color--gray--95);
+}
+
+/* Login page brand image - fixed height for consistency across branded/unbranded variants */
+.pf-v6-c-login__header .pf-v6-c-brand {
+  height: 60px;
+}
+
+/* Login title logo theming — dark SVG inverted for light theme, rendered as-is for dark theme */
+.pf-v6-c-login__header img.pf-v6-c-brand {
+  filter: invert(1) brightness(1.2);
+}
+
+.pf-v6-theme-dark .pf-v6-c-login__header img.pf-v6-c-brand {
+  filter: none;
+}
+
 /* Brand login background image sizing */
 .pf-v6-c-background-image.asset-discovery-login-brand {
   background-size: 75%;

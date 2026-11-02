@@ -36,6 +36,16 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     setIsLoggedIn(isAuthorized);
   }, [isAuthorized]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const applyOsTheme = (e: MediaQueryListEvent | MediaQueryList) => {
+      document.documentElement.classList.toggle('pf-v6-theme-dark', e.matches);
+    };
+    applyOsTheme(mediaQuery);
+    mediaQuery.addEventListener('change', applyOsTheme);
+    return () => mediaQuery.removeEventListener('change', applyOsTheme);
+  }, []);
+
   const onChangeUsername = (_event: React.FormEvent<HTMLInputElement>, value: string) => {
     setIsValidUsername(value !== '');
     setUsername(value);
@@ -91,7 +101,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
       />
       <LoginPage
         className="fadein"
-        brandImgSrc={helpers.getLoginTitleImg()}
+        brandImgSrc={helpers.getLoginTitleImg(helpers.UI_BRAND)}
         brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
         loginTitle={t('login.title')}
         textContent={t('login.description')}
