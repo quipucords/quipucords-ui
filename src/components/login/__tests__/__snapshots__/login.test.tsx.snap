@@ -41,6 +41,7 @@ exports[`Login should render a basic component: basic 1`] = `
           noDefaultStyle={false}
         />
       }
+      isLoginButtonDisabled={true}
       isValidPassword={true}
       isValidUsername={true}
       loginButtonLabel="t([

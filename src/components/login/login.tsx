@@ -124,6 +124,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
           passwordValue={password}
           onChangePassword={onChangePassword}
           isValidPassword={isValidPassword}
+          isLoginButtonDisabled={!username || !password}
           onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
           loginButtonLabel={t('login.label', { context: 'login' })}
         />
