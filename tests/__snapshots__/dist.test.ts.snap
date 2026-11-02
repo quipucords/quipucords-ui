@@ -33,6 +33,7 @@ exports[`Build distribution should match a specific file output: dist-output 1`]
   "./build/images/841045277746be45fe5c.svg",
   "./build/images/85109dad29f20063f735.svg",
   "./build/images/c0ce9e7676e8e8f83167.png",
+  "./build/images/c5329539c8debedc8fdb.svg",
   "./build/images/e5d2f27a4871e6c20eaf.svg",
   "./build/index.html",
   "./build/manifest.json",

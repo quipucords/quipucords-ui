@@ -31,6 +31,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(isAuthorized);
@@ -40,6 +41,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const applyOsTheme = (e: MediaQueryListEvent | MediaQueryList) => {
       document.documentElement.classList.toggle('pf-v6-theme-dark', e.matches);
+      setIsDarkTheme(e.matches);
     };
     applyOsTheme(mediaQuery);
     mediaQuery.addEventListener('change', applyOsTheme);
@@ -93,12 +95,15 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     return children;
   }
 
+  const rhLogoSrc = helpers.getLoginRhLogo(helpers.UI_BRAND, isDarkTheme);
+
   return (
     <React.Fragment>
       <BackgroundImage
         src={helpers.getLoginBgImg()}
         className={helpers.UI_BRAND ? 'asset-discovery-login-brand' : undefined}
       />
+      {rhLogoSrc && <img src={rhLogoSrc} alt="Red Hat" className="login-rh-logo" />}
       <LoginPage
         className="fadein"
         brandImgSrc={helpers.getLoginTitleImg(helpers.UI_BRAND)}
