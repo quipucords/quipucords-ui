@@ -6,13 +6,12 @@
  */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LoginForm, LoginPage } from '@patternfly/react-core';
+import { BackgroundImage, LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
 import apiHelpers from '../../helpers/apiHelpers';
 import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
-import bgImage from '../../images/aboutBg.png';
 
 interface LoginProps {
   children: React.ReactNode;
@@ -85,31 +84,36 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   }
 
   return (
-    <LoginPage
-      className="fadein"
-      brandImgSrc={helpers.getLoginTitleImg()}
-      brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
-      loginTitle={t('login.title')}
-      textContent={t('login.description')}
-      backgroundImgSrc={bgImage}
-    >
-      <LoginForm
-        style={{ opacity: (isLoading && 0.5) || 1 }}
-        showHelperText={loginError !== undefined}
-        helperText={loginError || t('login.invalid')}
-        helperTextIcon={<ExclamationCircleIcon />}
-        usernameLabel={t('login.label', { context: 'username' })}
-        usernameValue={username}
-        onChangeUsername={onChangeUsername}
-        isValidUsername={isValidUsername}
-        passwordLabel={t('login.label', { context: 'password' })}
-        passwordValue={password}
-        onChangePassword={onChangePassword}
-        isValidPassword={isValidPassword}
-        onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
-        loginButtonLabel={t('login.label', { context: 'login' })}
+    <React.Fragment>
+      <BackgroundImage
+        src={helpers.getLoginBgImg()}
+        className={helpers.UI_BRAND ? 'asset-discovery-login-brand' : undefined}
       />
-    </LoginPage>
+      <LoginPage
+        className="fadein"
+        brandImgSrc={helpers.getLoginTitleImg()}
+        brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
+        loginTitle={t('login.title')}
+        textContent={t('login.description')}
+      >
+        <LoginForm
+          style={{ opacity: (isLoading && 0.5) || 1 }}
+          showHelperText={loginError !== undefined}
+          helperText={loginError || t('login.invalid')}
+          helperTextIcon={<ExclamationCircleIcon />}
+          usernameLabel={t('login.label', { context: 'username' })}
+          usernameValue={username}
+          onChangeUsername={onChangeUsername}
+          isValidUsername={isValidUsername}
+          passwordLabel={t('login.label', { context: 'password' })}
+          passwordValue={password}
+          onChangePassword={onChangePassword}
+          isValidPassword={isValidPassword}
+          onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
+          loginButtonLabel={t('login.label', { context: 'login' })}
+        />
+      </LoginPage>
+    </React.Fragment>
   );
 };
 
