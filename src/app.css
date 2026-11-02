@@ -13,14 +13,14 @@ body,
 @keyframes fadein { 0%{opacity:0} 100%{opacity:1} }
 
 /* Logo theming for PatternFly 6 - consolidated approach */
-.pf-v6-c-masthead__brand .pf-v6-c-brand img, 
+.pf-v6-c-masthead__brand .pf-v6-c-brand img,
 .pf-v6-c-about-modal-box__brand-image,
 .pf-v6-c-brand.pf-m-picture img {
   filter: invert(1) brightness(1.2);
 }
 
 /* Dark theme logo adjustment - consolidated approach */
-.pf-v6-theme-dark .pf-v6-c-masthead__brand .pf-v6-c-brand img, 
+.pf-v6-theme-dark .pf-v6-c-masthead__brand .pf-v6-c-brand img,
 .pf-v6-theme-dark .pf-v6-c-about-modal-box__brand-image,
 .pf-v6-theme-dark .pf-v6-c-brand.pf-m-picture img {
   filter: none;
@@ -34,6 +34,13 @@ body,
 /* Dark theme background image adjustment - invert the modal with background-image */
 .pf-v6-theme-dark .pf-v6-c-about-modal-box {
   filter: invert(1.5) contrast(1.2);
+}
+
+/* Brand login background image sizing */
+.pf-v6-c-background-image.asset-discovery-login-brand {
+  background-size: 75%;
+  background-position: 100% 70%;
+  background-repeat: no-repeat;
 }
 
 /* Summary report table - give labels a bit more space to prevent line wrapping */
