@@ -25,7 +25,8 @@ import { helpers } from '../../helpers';
 import { useLogoutApi, useUserApi } from '../../hooks/useLoginApi';
 import '@patternfly/react-styles/css/components/Avatar/avatar.css';
 import avatarImage from '../../images/imgAvatar.svg';
-import mastheadSecondaryLogoImg from '../../images/mastheadSecondaryLogo.svg';
+import rhLogoDarkImg from '../../images/rhLogoDark.svg';
+import rhLogoLightImg from '../../images/rhLogoLight.svg';
 import AboutModal from '../aboutModal/aboutModal';
 import './viewLayoutToolbar.css';
 
@@ -204,7 +205,7 @@ const AppToolbar: React.FC<AppToolbarProps> = ({ useLogout = useLogoutApi, useUs
           </ToolbarItem>
           {helpers.UI_BRAND && (
             <ToolbarItem>
-              <img alt="" src={mastheadSecondaryLogoImg} style={{ height: '36px' }} />
+              <img alt="" src={isDarkTheme ? rhLogoDarkImg : rhLogoLightImg} style={{ height: '36px' }} />
             </ToolbarItem>
           )}
         </ToolbarContent>
