@@ -24,7 +24,9 @@ exports[`ViewLayout should render a basic component with NavGroup: basic 1`] = `
           />
         </MastheadToggle>
         <MastheadBrand>
-          <MastheadLogo>
+          <MastheadLogo
+            className="masthead-logo--descender"
+          >
             <Brand
               alt="t([
   "view.alt-logo",
