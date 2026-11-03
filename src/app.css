@@ -12,6 +12,17 @@ body,
 
 @keyframes fadein { 0%{opacity:0} 100%{opacity:1} }
 
+/* Fix wide logo aspect ratio — pin height, let width scale */
+.pf-v6-c-masthead__logo {
+  --pf-v6-c-masthead__logo--Width: auto;
+  height: 2.1rem;
+}
+
+/* Shift logotype down to visually center cap-height; both logos have descenders ('p', 'y') */
+.masthead-logo--descender {
+  padding-top: 8px;
+}
+
 /* Logo theming for PatternFly 6 - consolidated approach */
 .pf-v6-c-masthead__brand .pf-v6-c-brand img,
 .pf-v6-c-about-modal-box__brand-image,
