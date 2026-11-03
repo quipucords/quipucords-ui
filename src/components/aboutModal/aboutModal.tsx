@@ -6,9 +6,8 @@ import moment from 'moment/moment';
 import { helpers } from '../../helpers';
 import { useUserApi } from '../../hooks/useLoginApi';
 import { useStatusApi, type ApiStatusSuccessType } from '../../hooks/useStatusApi';
-import backgroundImageSrc from '../../images/aboutBg.png';
-
 interface AboutModalProps {
+  backgroundImageSrc?: string;
   currentYear?: string;
   isOpen?: boolean;
   onClose?: () => void;
@@ -20,6 +19,7 @@ interface AboutModalProps {
 }
 
 const AboutModal: React.FC<AboutModalProps> = ({
+  backgroundImageSrc = helpers.getLoginBgImg(),
   currentYear = moment.utc(helpers.getCurrentDate()).format('YYYY'),
   isOpen = false,
   onClose = Function.prototype,

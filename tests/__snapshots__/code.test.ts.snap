@@ -2,7 +2,7 @@
 
 exports[`General code checks should only have specific console.[warn|log|info|error] methods: console methods 1`] = `
 [
-  "app.css:50:/* Match OpenShift console login background colors */",
+  "app.css:41:/* Match OpenShift console login background colors */",
   "components/aboutModal/aboutModal.tsx:45:        error => console.error(\`About status error: \${error} \`)",
   "components/typeAheadCheckboxes/typeaheadCheckboxes.tsx:153:            console.error('Error searching credentials:', error);",
   "helpers/queryHelpers.ts:75:        console.log(\`Query: \`, query);",
