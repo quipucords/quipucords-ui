@@ -311,9 +311,7 @@ The dotenv files are structured to cascade each additional dotenv file settings 
 | DIST_DIR                                              | A relative path string reference used by the webpack build to reference where webpack should place it's compiled output   |
 | REACT_APP_UI_VERSION                                  | A dynamic string reference to the build populated package.json version reference                                          |
 | REACT_APP_UI_NAME                                     | A static string reference similar to the application name                                                                 |
-| REACT_APP_UI_SHORT_NAME                               | A static string reference to a shortened display version of the application name                                          |
 | REACT_APP_UI_BRAND_NAME                               | A static string reference similar to the official application name                                                        |
-| REACT_APP_UI_BRAND_SHORT_NAME                         | A static string reference to a shortened official display version of the application name                                 |
 | REACT_APP_UI_BRAND                                    | A dynamic boolean reference used in building the official brand version of Quipucords-UI                                  |
 | REACT_APP_TEMPLATE_UI_NAME                            | A dynamic string reference used in building the official brand version of Quipucords-UI. Applies the HTML title attribute |
 | REACT_APP_AUTH_COOKIE                                 | A static string reference to the UI/application authentication cookie name                                                |
