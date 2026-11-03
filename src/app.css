@@ -12,28 +12,77 @@ body,
 
 @keyframes fadein { 0%{opacity:0} 100%{opacity:1} }
 
+/* Fix wide logo aspect ratio — pin height, let width scale */
+.pf-v6-c-masthead__logo {
+  --pf-v6-c-masthead__logo--Width: auto;
+  height: 2.1rem;
+}
+
+/* Shift logotype down to visually center cap-height; both logos have descenders ('p', 'y') */
+.masthead-logo--descender {
+  padding-top: 8px;
+}
+
 /* Logo theming for PatternFly 6 - consolidated approach */
-.pf-v6-c-masthead__brand .pf-v6-c-brand img, 
+.pf-v6-c-masthead__brand .pf-v6-c-brand img,
 .pf-v6-c-about-modal-box__brand-image,
 .pf-v6-c-brand.pf-m-picture img {
   filter: invert(1) brightness(1.2);
 }
 
 /* Dark theme logo adjustment - consolidated approach */
-.pf-v6-theme-dark .pf-v6-c-masthead__brand .pf-v6-c-brand img, 
+.pf-v6-theme-dark .pf-v6-c-masthead__brand .pf-v6-c-brand img,
 .pf-v6-theme-dark .pf-v6-c-about-modal-box__brand-image,
 .pf-v6-theme-dark .pf-v6-c-brand.pf-m-picture img {
   filter: none;
 }
 
-/* About modal background image theming for PatternFly 6 */
-.pf-v6-c-about-modal-box {
+
+/* Match OpenShift console login background colors */
+.pf-v6-c-background-image {
+  background-color: var(--pf-t--color--gray--10);
+}
+
+.pf-v6-theme-dark .pf-v6-c-background-image {
+  background-color: var(--pf-t--color--gray--95);
+}
+
+/* Login page brand image - fixed height for consistency across branded/unbranded variants */
+.pf-v6-c-login__header .pf-v6-c-brand {
+  height: 60px;
+}
+
+/* Login title logo theming — dark SVG inverted for light theme, rendered as-is for dark theme */
+.pf-v6-c-login__header img.pf-v6-c-brand {
+  filter: invert(1) brightness(1.2);
+}
+
+.pf-v6-theme-dark .pf-v6-c-login__header img.pf-v6-c-brand {
   filter: none;
 }
 
-/* Dark theme background image adjustment - invert the modal with background-image */
-.pf-v6-theme-dark .pf-v6-c-about-modal-box {
-  filter: invert(1.5) contrast(1.2);
+/* Brand login background image sizing */
+.pf-v6-c-background-image.asset-discovery-login-brand {
+  background-size: 75%;
+  background-position: 100% 70%;
+  background-repeat: no-repeat;
+}
+
+/* Red Hat corporate logo — top-right corner of login page, brand builds only */
+.login-rh-logo {
+  display: none;
+}
+
+@media (min-width: 36rem) {
+  .login-rh-logo {
+    display: block;
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    height: 36px;
+    width: auto;
+    z-index: 100;
+  }
 }
 
 /* Summary report table - give labels a bit more space to prevent line wrapping */

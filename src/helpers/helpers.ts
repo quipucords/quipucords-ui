@@ -7,10 +7,16 @@
  */
 import React from 'react';
 import moment, { type MomentInput } from 'moment';
+import loginBgImg from '../images/aboutBg.png';
+import _loginBrandBgImg from '../images/aboutBrandBg.svg';
+import rhLogoDarkImg from '../images/rhLogoDark.svg';
+import rhLogoLightImg from '../images/rhLogoLight.svg';
 import titleImg from '../images/title.svg';
 import titleBrandImg from '../images/titleBrand.svg';
 import titleLoginBrandImg from '../images/titleBrandLogin.svg';
 import titleLoginImg from '../images/titleLogin.svg';
+// mini-svg-data-uri leaves spaces and single quotes unencoded; both break CSS url() parsing
+const loginBrandBgImg = (_loginBrandBgImg as string).replace(/ /g, '%20').replace(/'/g, '%27');
 import { type CredentialResponse, type MostRecentScan, type scanJob } from '../types/types';
 
 /**
@@ -231,6 +237,17 @@ const getTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleBrandImg) || title
 const getLoginTitleImg = (isBrand = UI_BRAND) => ((isBrand && titleLoginBrandImg) || titleLoginImg) as string;
 
 /**
+ * Return login page background image, brand-aware.
+ *
+ * @param isBrand
+ * @returns
+ */
+const getLoginBgImg = (isBrand = UI_BRAND) => ((isBrand && loginBrandBgImg) || loginBgImg) as string;
+
+const getLoginRhLogo = (isBrand = UI_BRAND, isDark = false) =>
+  isBrand ? ((isDark ? rhLogoDarkImg : rhLogoLightImg) as string) : undefined;
+
+/**
  * Return if a report associated with given ScanJob can be downloaded, or a summary can be accessed.
  *
  * @param job
@@ -281,6 +298,8 @@ const helpers = {
   getTimeDisplayHowLongAgo,
   getTitleImg,
   getLoginTitleImg,
+  getLoginBgImg,
+  getLoginRhLogo,
   formatDate,
   normalizeCommaSeparated,
   setLightspeedUsername,

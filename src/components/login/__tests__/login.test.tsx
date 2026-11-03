@@ -4,6 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { shallowComponent } from '../../../../config/jest.setupTests';
 import { Login } from '../login';
 
+beforeEach(() => {
+  window.matchMedia = jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn()
+  }));
+});
+
 describe('Login', () => {
   it('should render a basic component', async () => {
     const props = {

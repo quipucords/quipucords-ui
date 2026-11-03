@@ -6,13 +6,12 @@
  */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LoginForm, LoginPage } from '@patternfly/react-core';
+import { BackgroundImage, LoginForm, LoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { helpers } from '../../helpers';
 import apiHelpers from '../../helpers/apiHelpers';
 import { useLightspeedAuthApi } from '../../hooks/useAuthApi';
 import { useLoginApi, useGetSetAuthApi } from '../../hooks/useLoginApi';
-import bgImage from '../../images/aboutBg.png';
 
 interface LoginProps {
   children: React.ReactNode;
@@ -32,10 +31,22 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(isAuthorized);
   }, [isAuthorized]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const applyOsTheme = (e: MediaQueryListEvent | MediaQueryList) => {
+      document.documentElement.classList.toggle('pf-v6-theme-dark', e.matches);
+      setIsDarkTheme(e.matches);
+    };
+    applyOsTheme(mediaQuery);
+    mediaQuery.addEventListener('change', applyOsTheme);
+    return () => mediaQuery.removeEventListener('change', applyOsTheme);
+  }, []);
 
   const onChangeUsername = (_event: React.FormEvent<HTMLInputElement>, value: string) => {
     setIsValidUsername(value !== '');
@@ -84,32 +95,41 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     return children;
   }
 
+  const rhLogoSrc = helpers.getLoginRhLogo(helpers.UI_BRAND, isDarkTheme);
+
   return (
-    <LoginPage
-      className="fadein"
-      brandImgSrc={helpers.getLoginTitleImg()}
-      brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
-      loginTitle={t('login.title')}
-      textContent={t('login.description')}
-      backgroundImgSrc={bgImage}
-    >
-      <LoginForm
-        style={{ opacity: (isLoading && 0.5) || 1 }}
-        showHelperText={loginError !== undefined}
-        helperText={loginError || t('login.invalid')}
-        helperTextIcon={<ExclamationCircleIcon />}
-        usernameLabel={t('login.label', { context: 'username' })}
-        usernameValue={username}
-        onChangeUsername={onChangeUsername}
-        isValidUsername={isValidUsername}
-        passwordLabel={t('login.label', { context: 'password' })}
-        passwordValue={password}
-        onChangePassword={onChangePassword}
-        isValidPassword={isValidPassword}
-        onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
-        loginButtonLabel={t('login.label', { context: 'login' })}
+    <React.Fragment>
+      <BackgroundImage
+        src={helpers.getLoginBgImg()}
+        className={helpers.UI_BRAND ? 'asset-discovery-login-brand' : undefined}
       />
-    </LoginPage>
+      {rhLogoSrc && <img src={rhLogoSrc} alt="Red Hat" className="login-rh-logo" />}
+      <LoginPage
+        className="fadein"
+        brandImgSrc={helpers.getLoginTitleImg(helpers.UI_BRAND)}
+        brandImgAlt={t('view.alt-logo', { name: helpers.UI_NAME })}
+        loginTitle={t('login.title')}
+        textContent={t('login.description')}
+      >
+        <LoginForm
+          style={{ opacity: (isLoading && 0.5) || 1 }}
+          showHelperText={loginError !== undefined}
+          helperText={loginError || t('login.invalid')}
+          helperTextIcon={<ExclamationCircleIcon />}
+          usernameLabel={t('login.label', { context: 'username' })}
+          usernameValue={username}
+          onChangeUsername={onChangeUsername}
+          isValidUsername={isValidUsername}
+          passwordLabel={t('login.label', { context: 'password' })}
+          passwordValue={password}
+          onChangePassword={onChangePassword}
+          isValidPassword={isValidPassword}
+          isLoginButtonDisabled={!username || !password}
+          onLoginButtonClick={event => onLoginButtonClick(event, { username, password })}
+          loginButtonLabel={t('login.label', { context: 'login' })}
+        />
+      </LoginPage>
+    </React.Fragment>
   );
 };
 

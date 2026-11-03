@@ -12,65 +12,70 @@ exports[`Login should attempt to use the login service: submit 1`] = `
 `;
 
 exports[`Login should render a basic component: basic 1`] = `
-<LoginPage
-  backgroundImgSrc="aboutBg.png"
-  brandImgAlt="t([
+<React.Fragment>
+  <BackgroundImage
+    src="aboutBg.png"
+  />
+  <LoginPage
+    brandImgAlt="t([
   "view.alt-logo",
   {
     "name": "Quipucords"
   }
 ])"
-  brandImgSrc="titleLogin.svg"
-  className="fadein"
-  loginTitle="t([
+    brandImgSrc="titleLogin.svg"
+    className="fadein"
+    loginTitle="t([
   "login.title"
 ])"
-  textContent="t([
+    textContent="t([
   "login.description"
 ])"
->
-  <LoginForm
-    helperText="t([
+  >
+    <LoginForm
+      helperText="t([
   "login.invalid"
 ])"
-    helperTextIcon={
-      <ExclamationCircleIcon
-        noDefaultStyle={false}
-      />
-    }
-    isValidPassword={true}
-    isValidUsername={true}
-    loginButtonLabel="t([
+      helperTextIcon={
+        <ExclamationCircleIcon
+          noDefaultStyle={false}
+        />
+      }
+      isLoginButtonDisabled={true}
+      isValidPassword={true}
+      isValidUsername={true}
+      loginButtonLabel="t([
   "login.label",
   {
     "context": "login"
   }
 ])"
-    onChangePassword={[Function]}
-    onChangeUsername={[Function]}
-    onLoginButtonClick={[Function]}
-    passwordLabel="t([
+      onChangePassword={[Function]}
+      onChangeUsername={[Function]}
+      onLoginButtonClick={[Function]}
+      passwordLabel="t([
   "login.label",
   {
     "context": "password"
   }
 ])"
-    passwordValue=""
-    showHelperText={false}
-    style={
-      {
-        "opacity": 1,
+      passwordValue=""
+      showHelperText={false}
+      style={
+        {
+          "opacity": 1,
+        }
       }
-    }
-    usernameLabel="t([
+      usernameLabel="t([
   "login.label",
   {
     "context": "username"
   }
 ])"
-    usernameValue=""
-  />
-</LoginPage>
+      usernameValue=""
+    />
+  </LoginPage>
+</React.Fragment>
 `;
 
 exports[`Login should render authorized children: logged in 1`] = `"Lorem ipsum"`;
