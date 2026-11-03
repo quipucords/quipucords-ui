@@ -37,15 +37,6 @@ body,
   filter: none;
 }
 
-/* About modal background image theming for PatternFly 6 */
-.pf-v6-c-about-modal-box {
-  filter: none;
-}
-
-/* Dark theme background image adjustment - invert the modal with background-image */
-.pf-v6-theme-dark .pf-v6-c-about-modal-box {
-  filter: invert(1.5) contrast(1.2);
-}
 
 /* Match OpenShift console login background colors */
 .pf-v6-c-background-image {
