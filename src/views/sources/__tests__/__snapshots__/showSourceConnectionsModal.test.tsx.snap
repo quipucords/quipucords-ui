@@ -42,7 +42,6 @@ exports[`ShowConnectionsModal should render a basic component: basic 1`] = `
     aria-label="t([
   "view.sources.show-connections-modal.aria-list"
 ])"
-    hasAnimations={true}
     isExpandable={true}
   >
     <Tbody
