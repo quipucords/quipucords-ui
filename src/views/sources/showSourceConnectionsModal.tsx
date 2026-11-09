@@ -71,7 +71,7 @@ const ShowConnectionsModal: React.FC<ShowConnectionsModalProps> = ({
         </Button>
       ]}
     >
-      <Table aria-label={t('view.sources.show-connections-modal.aria-list')} isExpandable hasAnimations>
+      <Table aria-label={t('view.sources.show-connections-modal.aria-list')} isExpandable>
         {[
           {
             category: 'failed',
