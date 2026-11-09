@@ -23,10 +23,15 @@ brandFavicon()
 {
   if [ "${UI_BRAND}" = "true" ]; then
     local SRC="$(pwd)/public/faviconBrand.ico"
-    local DEST="$(pwd)/build/favicon.ico"
+    local DIST="${DIST_DIR:-./build}"
+    local DEST="$(pwd)/${DIST#./}/favicon.ico"
     if [ -f "$SRC" ]; then
-      cp "$SRC" "$DEST"
-      echo "Brand favicon... copied faviconBrand.ico -> build/favicon.ico"
+      if cp "$SRC" "$DEST"; then
+        echo "Brand favicon... copied faviconBrand.ico -> ${DIST}/favicon.ico"
+      else
+        echo "Brand favicon... ERROR: failed to copy faviconBrand.ico -> ${DIST}/favicon.ico" >&2
+        exit 1
+      fi
     else
       echo "Brand favicon... faviconBrand.ico not found, skipping"
     fi
