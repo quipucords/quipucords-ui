@@ -38,6 +38,9 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
   }, [isAuthorized]);
 
   useEffect(() => {
+    if (isLoggedIn) {
+      return;
+    }
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const applyOsTheme = (e: MediaQueryListEvent | MediaQueryList) => {
       document.documentElement.classList.toggle('pf-v6-theme-dark', e.matches);
@@ -46,7 +49,7 @@ const Login: React.FC<LoginProps> = ({ children, useGetSetAuth = useGetSetAuthAp
     applyOsTheme(mediaQuery);
     mediaQuery.addEventListener('change', applyOsTheme);
     return () => mediaQuery.removeEventListener('change', applyOsTheme);
-  }, []);
+  }, [isLoggedIn]);
 
   const onChangeUsername = (_event: React.FormEvent<HTMLInputElement>, value: string) => {
     setIsValidUsername(value !== '');
