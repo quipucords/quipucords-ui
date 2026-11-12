@@ -103,7 +103,7 @@
     "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-react-hooks": "^7.0.1",
     "express": "^5.2.0",
-    "glob": "^13.0.6",
+    "glob": "^14.0.0",
     "globals": "^17.3.0",
     "jest": "30.5.0",
     "jest-environment-jsdom": "30.5.0",
