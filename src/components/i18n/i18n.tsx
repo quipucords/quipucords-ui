@@ -42,6 +42,9 @@ const I18n: React.FC<I18nProps> = ({
         debug: !helpers.PROD_MODE,
         ns: ['default'],
         defaultNS: 'default',
+        interpolation: {
+          escapeValue: false
+        },
         react: {
           useSuspense: false
         }
