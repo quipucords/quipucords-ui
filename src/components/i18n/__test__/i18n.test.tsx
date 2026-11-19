@@ -4,6 +4,15 @@ import { shallowComponent } from '../../../../config/jest.setupTests';
 import { I18n } from '../i18n';
 
 describe('I18n', () => {
+  it('should initialize i18next with escapeValue false to prevent HTML-encoding interpolated values', async () => {
+    const spyInit = jest.spyOn(i18next, 'init').mockResolvedValue(jest.fn() as any);
+    const props = { children: 'Lorem ipsum' };
+    await shallowComponent(<I18n {...props} />);
+    const initOptions = spyInit.mock.calls[0]?.[0] as Record<string, unknown>;
+    expect((initOptions?.interpolation as Record<string, unknown>)?.escapeValue).toBe(false);
+    spyInit.mockRestore();
+  });
+
   it('should render a basic component', async () => {
     const props = {
       children: 'Lorem ipsum'
