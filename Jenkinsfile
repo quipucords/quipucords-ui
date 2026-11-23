@@ -1,6 +1,6 @@
 @Library("discovery-lib@main") _
 
-node("aws && x86_64 && discovery_ci && fedora") {
+node("x86_64 && discovery_ci && fedora") {
   withEnv(["DYNACONF_camayoc__use_uiv2=True"]) {
     timestamps {
       stage("[fedora] Setup test environment") {
