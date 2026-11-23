@@ -1,4 +1,4 @@
-@Library("smqe-shared-lib@master") _
+@Library("discovery-lib@main") _
 
 node("aws && x86_64 && discovery_ci && fedora") {
   withEnv(["DYNACONF_camayoc__use_uiv2=True"]) {
