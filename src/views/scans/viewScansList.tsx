@@ -137,7 +137,7 @@ const ScansListView: React.FunctionComponent = () => {
     sort: {
       isEnabled: true,
       sortableColumns: ['name', 'most_recent'],
-      initialSort: { columnKey: 'name', direction: 'asc' }
+      initialSort: { columnKey: 'most_recent', direction: 'desc' }
     },
     pagination: { isEnabled: true },
     selection: { isEnabled: true }
