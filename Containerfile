@@ -27,6 +27,7 @@ ARG REDHAT_COMPONENT="quipucords-ui-container"
 ENV NGINX_USER=1001
 # temporarily switch to root user
 USER root
+RUN dnf -y update && dnf clean all
 # konflux requires licenses in this folder
 RUN mkdir /licenses
 COPY --from=npm_builder /app/LICENSE /licenses/LICENSE
